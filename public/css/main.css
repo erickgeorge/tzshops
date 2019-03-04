@@ -1,0 +1,102 @@
+html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .full-height {
+                height: 100vh;
+            }
+
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .position-ref {
+                position: relative;
+            }
+
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .title {
+                font-size: 84px;
+            }
+
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+
+.top-dropdown{
+	background-color: #676464;
+}
+
+
+.dropdown-item:hover{
+	background-color: #423e3e;
+}
+
+.navbar-nav > .nav-item > .nav-link:hover{
+	color: white;
+}
+
+#login-view{
+    background-color: rgba(66, 62, 62, 0.79);
+	border-radius: 10px;
+	padding: 20px;
+	color: white;
+    position: absolute;
+    right: 33%;
+	bottom: 25%;
+}
+
+#login-viewold{
+	background-color: #423e3e;
+	padding: 20px;
+	color: white;
+	position: absolute;
+	right: 33%;
+	bottom: 25%;
+	border-radius: 10px;
+}
+
+.estate-title{
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    font-size: 50px;
+}
+
+
+hr {
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 5px solid rgb(169,169,169);
+}
+
+.welcome-body{
+    background-image: url('/meeting.jpg');
+}
