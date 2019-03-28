@@ -35,28 +35,32 @@ work orders
 
   <tbody>
    
-    <?php 
-$i=0;  ?>
+    <?php $i=0;  ?>
     @foreach($wo as $work)
     <?php $i++ ?>
     <tr>
       <th scope="row">{{ $i }}</th>
       <td>{{ $work->details }}</td>
       <td>{{ $work->problem_type }}</td>
-      <td>{{ $work->client_id }}</td>
+      <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
       <td><span class="badge badge-warning">new</span></td>
       <td>{{ $work->created_at }}</td>
-      <td>{{ $work->room_id }}</td>
+      <td>{{ $work['room']['block']->location_of_block }}</td>
       <td>
       @if(strpos(auth()->user()->type, "HOS") !== false)
         @if($work->status == -1)
-          <a href="#"><span class="badge badge-success">Accept</span></a>&nbsp;
-          <a href=""><span class="badge badge-danger">Reject</span></a>
+            <form method="POST" id="{{ 'accept'.$work->id }}" action="{{ route('workorder.accept', [$work->id]) }}">
+              @csrf
+              <a href="#" onclick="document.getElementById('{{ 'accept'.$work->id }}').submit()"><span class="badge badge-success">Accept</span></a>
+            </form>
+          <form method="POST" id="{{ 'reject'.$work->id }}" action="{{ route('workorder.reject', [$work->id]) }}">
+            @csrf
+            <a href="#" onclick="document.getElementById('{{ 'reject'.$work->id }}').submit()"><span class="badge badge-danger">Reject</span></a>
+          </form>
         @else
-            <a href="" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>&nbsp;
-            <a style="color: green;" href=""  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
-            <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>&nbsp;
-            <a style="color: red;" href="" data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></a>
+            {{--<a href="{{ url('view/work_order', [$work->id]) }}" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>&nbsp;--}}
+            <a style="color: green;" href="{{ url('view/work_order', [$work->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+            <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>
         @endif
       @else
           @if($work->status == -1)

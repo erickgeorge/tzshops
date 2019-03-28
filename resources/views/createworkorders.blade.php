@@ -10,7 +10,7 @@ Create Work Orders
 <br>
 <div class="row">
 	<div class="col-md-8">
-		<h2>Create New Workorder</h2>
+		<h2>Create new work order</h2>
 	</div>
 </div>
 <hr>
@@ -30,8 +30,8 @@ Create Work Orders
 	</ul>
 </div>
 @endif
+<p style="color: red">All fields are compulsory</p>
 </br>
-
 <form method="POST" action="{{ route('workorder.create') }}">
 	@csrf
 	<div class="input-group mb-3">
@@ -57,40 +57,37 @@ use App\Location;
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Location</label>
 	  </div>
-	  <select class="custom-select" id="inputGroupSelect01" name="location">
+	  <select class="custom-select" id="location" name="location" onclick="getAreas()">
 	    <option required selected>Choose...</option>
 
 	    @foreach($location as $loc)
-	    
-
-	    <option value="1">{{ $loc->name }}</option>
+	    <option value="{{ $loc->id }}">{{ $loc->name }}</option>
 	    @endforeach
 	   
 	  </select>
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label class="input-group-text" for="inputGroupSelect01">Area</label>
+	    <label class="input-group-text" for="area">Area</label>
 	  </div>
-	  <select class="custom-select" id="inputGroupSelect01" name="area">
+	  <select class="custom-select" id="area" name="area" onclick="getBlocks()">
 	    <option selected>Choose...</option>
 	  </select>
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label class="input-group-text" for="inputGroupSelect01">Block</label>
+	    <label class="input-group-text" for="block">Block</label>
 	  </div>
-	  <select class="custom-select" id="inputGroupSelect02" name="block">
+	  <select class="custom-select" id="block" name="block" onclick="getRooms()">
 	    <option selected>Choose...</option>
-	    <option value="0">Others</option>
 	  </select>
 	</div>
 
     <div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label class="input-group-text" for="inputGroupSelect01">Room</label>
+	    <label class="input-group-text" for="room">Room</label>
 	  </div>
-	  <select class="custom-select" id="inputGroupSelect02" name="room">
+	  <select class="custom-select" id="room" name="room">
 	    <option selected>Choose...</option>
 	  </select>
       </div> 

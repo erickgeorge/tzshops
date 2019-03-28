@@ -100,3 +100,51 @@ hr {
 .welcome-body{
     background-image: url('/meeting.jpg');
 }
+
+
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+}
+
+.tab-group{
+    border-bottom: 1px solid #cccccc;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    outline: none;
+    cursor: pointer;
+    width: 240px;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: #cccccc;
+    border: none;
+    font-weight: bold;
+    font-size: small;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    color: black;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    color: black;
+    border-bottom: 2px solid #cccccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    margin-top: 50px;
+}
+
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}

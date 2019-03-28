@@ -62,7 +62,7 @@ else {
      
       <td>
         <div class="row">
-        <a style="color: green;" href=""  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+        <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
          
 
          <form  method="POST" action="{{ route('user.delete', [$user->id]) }}" >
@@ -86,15 +86,11 @@ else {
 <script>
 $(document).ready(function(){
 
-
-
-
   $('[data-toggle="tooltip"]').tooltip();   
 });
 
 
 function warning (){
-
   alert("Are you sure you want to delete this?");
 }
 </script>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
+use App\Block;
+use App\Room;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserRole;
@@ -15,6 +18,7 @@ class UserController extends Controller
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
+            'section' => 'required',
             'name' => 'required|unique:users',
             'phone' => 'required|max:15|min:10',
             'email' => 'required|unique:users'
@@ -35,6 +39,7 @@ class UserController extends Controller
     	$user->phone = $request['phone'];
     	$user->email = $request['email'];
         $user->type = $request['user_type'];
+        $user->section_id = $request['section'];
     	$user->password = bcrypt($request['password']);
     	$user->save();
 
@@ -44,9 +49,13 @@ class UserController extends Controller
         $role->save();
 
 		$users = User::get();
+        $departments = Department::where('directorate_id', 1)->get();
+        $sections = Section::where('department_id', 1)->get();
         return redirect()->route('createUserView')->with([
             'message' => 'User created successfully',
-            'directorates' => Directorate::all()
+            'directorates' => Directorate::all(),
+            'sections' => $sections,
+            'departments' => $departments, 'role' => $role
         ]);
     }
 
@@ -55,12 +64,10 @@ class UserController extends Controller
         User::where('id', $id)->delete();
         $users = User::all();
         return redirect()->route('users.view')->with([
-            'message' => 'User deleted successfully', 
+            'message' => 'User deleted successfully',
             'display_users'=> $users
         ]);
     }
-
-
 
 
  public function destroy($id){
@@ -74,10 +81,69 @@ class UserController extends Controller
     }
 
 
+    public function getAreas(Request $request){
+        return response()->json(['areas' => Area::where('location_id', $request->get('id'))->get()]);
+    }
+
+
+    public function getBlocks(Request $request){
+        return response()->json(['blocks' => Block::where('area_id', $request->get('id'))->get()]);
+    }
+
+
+    public function getRooms(Request $request){
+        return response()->json(['rooms' => Room::where('block_id', $request->get('id'))->get()]);
+    }
+
+
     public function getSections(Request $request){
         return response()->json(['sections' => Section::where('department_id', $request->get('id'))->get()]);
     }
 
+    public function editUserView($id){
+        $role = User::where('id',auth()->user()->id)->with('user_role')->first();
+        $departments = Department::where('directorate_id', 1)->get();
+        $sections = Section::where('department_id', 1)->get();
+        return view('edit_user', [
+            'user' => User::where('id', $id)->first(),
+            'directorates' => Directorate::all(),
+            'sections' => $sections,
+            'departments' => $departments, 'role' => $role
+        ]);
+    }
 
+    public function editUser(Request $request, $id){
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'name' => 'required',
+            'section' => 'required',
+            'phone' => 'required|max:15|min:10',
+            'email' => 'required'
+        ]);
+
+        if ($request['role'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Role name required'])->with(['directorates' => Directorate::all()]);
+        }
+
+        if ($request['user_type'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Type of user required'])->with(['directorates' => Directorate::all()]);
+        }
+
+        $user = User::where('id', $id)->first();
+        $user->fname = $request['fname'];
+        $user->lname = $request['lname'];
+        $user->name = $request['name'];
+        $user->phone = $request['phone'];
+        $user->email = $request['email'];
+        $user->section_id = $request['section'];
+        $user->type = $request['user_type'];
+        $user->save();
+
+        $role = new UserRole();
+        $role->user_id = $user->id;
+        $role->role_id = $request['role'];
+        $role->save();
+    }
 
 }

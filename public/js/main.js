@@ -49,3 +49,85 @@ function getSections(){
 		}
 	});
 }
+
+var selectedLoc = null;
+var selectedArea = null;
+var selectedBlock = null;
+function getAreas() {
+    selectedLoc = document.getElementById('location').value;
+
+    $.ajax({
+        method: 'GET',
+        url: 'areas/',
+        data: {id: selectedLoc}
+    })
+        .done(function(msg){
+            var object = JSON.parse(JSON.stringify(msg['areas']));
+            $('#area').empty();
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].name_of_area;
+                option.value = object[i].id;
+                document.getElementById('area').appendChild(option);
+            }
+        });
+}
+function getBlocks() {
+    selectedArea = document.getElementById('area').value;
+
+    $.ajax({
+        method: 'GET',
+        url: 'blocks/',
+        data: {id: selectedArea}
+    })
+        .done(function(msg){
+            var object = JSON.parse(JSON.stringify(msg['blocks']));
+            $('#block').empty();
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].name_of_block;
+                option.value = object[i].id;
+                document.getElementById('block').appendChild(option);
+            }
+        });
+}
+function getRooms() {
+    selectedBlock = document.getElementById('block').value;
+
+    $.ajax({
+        method: 'GET',
+        url: 'rooms/',
+        data: {id: selectedBlock}
+    })
+        .done(function(msg){
+			var object = JSON.parse(JSON.stringify(msg['rooms']));
+            $('#room').empty();
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].name_of_room;
+                option.value = object[i].id;
+                document.getElementById('room').appendChild(option);
+            }
+        });
+}
+
+function openTab(evt, stepName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(stepName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
