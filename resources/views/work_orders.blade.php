@@ -18,7 +18,16 @@ work orders
 </div>
 <br>
 <hr>
-<a href="{{url('createworkorders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new work order</button></a>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <a href="{{url('createworkorders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new work order</button></a>
+    </div>
+    <div class="col-md-4">
+      <a href="{{url('deleted/work/orders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-danger">View deleted Work Orders</button></a>
+    </div>
+  </div>
+</div>
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
@@ -53,10 +62,7 @@ work orders
               @csrf
               <a href="#" onclick="document.getElementById('{{ 'accept'.$work->id }}').submit()"><span class="badge badge-success">Accept</span></a>
             </form>
-          <form method="POST" id="{{ 'reject'.$work->id }}" action="{{ route('workorder.reject', [$work->id]) }}">
-            @csrf
-            <a href="#" onclick="document.getElementById('{{ 'reject'.$work->id }}').submit()"><span class="badge badge-danger">Reject</span></a>
-          </form>
+            <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="badge badge-danger">Reject</span></a>
         @else
             {{--<a href="{{ url('view/work_order', [$work->id]) }}" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>&nbsp;--}}
             <a style="color: green;" href="{{ url('view/work_order', [$work->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
@@ -75,6 +81,32 @@ work orders
     @endforeach
   </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rejecting work order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Please provide reason as to why you want to reject this work order.</p>
+        <form method="POST" action="{{ route('workorder.reject', [$work->id]) }}">
+          @csrf
+          <textarea name="reason" required maxlength="100" class="form-control"  rows="5" id="reason"></textarea>
+          <br>
+          <button type="submit" class="btn btn-danger">Reject</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();   

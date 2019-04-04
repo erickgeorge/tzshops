@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Technician;
 use App\User;
 use App\WorkOrderInspectionForm;
 use Illuminate\Http\Request;
@@ -32,10 +33,11 @@ class WorkOrderController extends Controller
     	return redirect()->route('work_order')->with(['message' => 'Work order successfully created']);
     }
 
-    public function rejectWO($id){
+    public function rejectWO(Request $request, $id){
         $wO = WorkOrder::where('id', $id)->first();
         $wO->staff_id = auth()->user()->id;
         $wO->status = 0;
+        $wO->reason = $request['reason'];
         $wO->save();
 
 //        return response()->json('success');
@@ -61,7 +63,7 @@ class WorkOrderController extends Controller
     public function viewWO($id){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 //        return response()->json(WorkOrder::where('id', $id)->first());
-        return view('view_work_order',['role' => $role, 'wo' => WorkOrder::where('id', $id)->first()]);
+        return view('view_work_order',['techs' => Technician::all(),'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()]);
     }
 
     public function editWO(Request $request, $id){
@@ -96,13 +98,13 @@ class WorkOrderController extends Controller
         if ($mForm){
             $mForm->status = $request['status'];
             $mForm->description = $request['details'];
-            $mForm->nameOfTechnician = $request['name_tech'];
+            $mForm->technician_id = $request['technician'];
             $mForm->save();
         }else{
             $form = new WorkOrderInspectionForm();
             $form->status = $request['status'];
             $form->description = $request['details'];
-            $form->nameOfTechnician = $request['name_tech'];
+            $form->technician_id = $request['technician'];
             $form->work_order_id = $id;
             $form->save();
         }
@@ -112,5 +114,13 @@ class WorkOrderController extends Controller
             'message' => 'Inspection from successfully updated',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
+    }
+
+    public function deletedWOView(){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        if (strpos(auth()->user()->type, "HOS") !== false) {
+            return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get()]);
+        }
+        return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', 0)->get()]);
     }
 }

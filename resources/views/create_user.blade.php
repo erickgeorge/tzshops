@@ -61,6 +61,7 @@ User Registrartion
 	    <label class="input-group-text" for="directorate">Directorate/College</label>
 	  </div>
 	  <select class="custom-select" name="college" id="directorate" onclick="getDepartments()">
+		  <option selected>Choose...</option>
 	    @foreach($directorates as $directorate)
 	    <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
 	    @endforeach
@@ -71,9 +72,7 @@ User Registrartion
 	    <label class="input-group-text" for="department">Department</label>
 	  </div>
 	  <select class="custom-select" name="department" id="department" onclick="getSections()">
-	  	@foreach($departments as $department)
-	    <option value="{{ $department->id }}">{{ $department->name }}</option>
-	    @endforeach
+		  <option selected>Choose...</option>
 	  </select>
 	</div>
 	<div class="input-group mb-3">
@@ -81,9 +80,7 @@ User Registrartion
 	    <label class="input-group-text" for="section">Section</label>
 	  </div>
 	  <select class="custom-select" name="section" id="section">
-	  	@foreach($sections as $section)
-	    <option value="{{ $section->id }}">{{ $section->section_name }}</option>
-	    @endforeach
+		  <option selected>Choose...</option>
 	  </select>
 	</div>
 	<div class="input-group mb-3">

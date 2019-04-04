@@ -31,4 +31,8 @@ class User extends Authenticatable
     public function user_role(){
         return $this->hasOne('App\UserRole');
     }
+
+    public function section(){
+        return $this->belongsTo('App\Section');
+    }
 }

@@ -19,8 +19,11 @@
             </ul>
         </div>
     @endif
-    <h4>This work order is from <span style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h4>
-    <h4>Has been submitted on <span style="color: green">{{ $wo->created_at }}</span></h4>
+    <h5>This work order is from <span style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h5>
+    <h5>Has been submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+    <h3 style="color: black">Contacts:</h3>
+    <h5>{{ $wo['user']->phone }}</h5>
+    <h5>{{ $wo['user']->email }}</h5>
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -123,14 +126,13 @@
                         <textarea name="details" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
                     </div>
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" name="name_tech" required placeholder="First name of technician" type="text">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="name_tech" required placeholder="Last name of technician" type="text">
-                            </div>
-                        </div>
+                        <label>Select Technician</label>
+                        <select class="custom-select" required name="technician">
+                            <option selected>Choose...</option>
+                            @foreach($techs as $tech)
+                                <option value="{{ $tech->id }}">{{ $tech->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-outline-success">Save Inspections</button>
                 </div>

@@ -73,3 +73,4 @@ Route::post('edit/user/{id}', 'UserController@editUser')->name('user.edit');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView');

@@ -57,8 +57,8 @@ else {
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->phone }}</td>
-      <td>COICT</td>
-      <td>CEIT</td>
+      <td>{{ $user['section']['department']->name }}</td>
+      <td>{{ $user['section']->section_name }}</td>
      
       <td>
         <div class="row">
