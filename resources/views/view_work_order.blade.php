@@ -130,7 +130,7 @@
                         <select class="custom-select" required name="technician">
                             <option selected>Choose...</option>
                             @foreach($techs as $tech)
-                                <option value="{{ $tech->id }}">{{ $tech->name }}</option>
+                                <option value="{{ $tech->id }}">{{ $tech->fname.' '.$tech->lname }}</option>
                             @endforeach
                         </select>
                     </div>

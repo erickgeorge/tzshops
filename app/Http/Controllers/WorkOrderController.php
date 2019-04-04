@@ -123,4 +123,30 @@ class WorkOrderController extends Controller
         }
         return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', 0)->get()]);
     }
+
+    public function addTechView(){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('add_tech', ['role' => $role]);
+    }
+
+    public function createTech(Request $request){
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'phone' => 'required|max:15|min:10',
+            'email' => 'required|unique:users'
+        ]);
+
+        $user = new Technician();
+        $user->fname = $request['fname'];
+        $user->lname = $request['lname'];
+        $user->phone = $request['phone'];
+        $user->email = $request['email'];
+        $user->added_by = auth()->user()->id;
+        $user->save();
+
+        return redirect()->route('tech.add')->with([
+            'message' => 'Technician created successfully',
+        ]);
+    }
 }

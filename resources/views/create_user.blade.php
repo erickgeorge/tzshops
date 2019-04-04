@@ -128,5 +128,4 @@ User Registrartion
 
 </div>
 <br>
-  
 @endSection
