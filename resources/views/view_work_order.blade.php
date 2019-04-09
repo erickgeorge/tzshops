@@ -66,91 +66,49 @@
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
-    <h4>Fill the details below to complete the work order.</h4>
-    <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
-        @csrf
-        <div class="form-group ">
-            {{--<p>Is this work order emergency?</p>--}}
-            @if($wo->emergency == 1)
-                <input type="checkbox" name="emergency" checked> This work order is emergency.
-            @else
-                <input type="checkbox" name="emergency"> This work order is emergency.
-            @endif
-        </div>
-        <div class="form-group ">
-            {{--<p>Does this work order needs labourer?</p>--}}
-            @if($wo->needs_laboured == 1)
-                <input type="checkbox" name="labour" checked> This work order needs labourer.
-            @else
-                <input type="checkbox" name="labour"> This work order needs labourer.
-            @endif
-        </div>
-        <div class="form-group ">
-            {{--<p>Does this work order needs contractor?</p>--}}
-            @if($wo->needs_contractor == 1)
-                <input type="checkbox" name="contractor" checked> This work order needs contractor.
-            @else
-                <input type="checkbox" name="contractor"> This work order needs contractor.
-            @endif
-        </div>
-        <button type="submit" class="btn btn-success">Save changes</button>
-    </form>
-    <br>
-    <h4>Work order forms.</h4>
-    {{-- tabs --}}
-    <div class="col-md-8 payment-section-margin">
-        <div class="tab">
-            <div class="container-fluid">
-                <div class="tab-group row">
-                    <button class="tablinks col-md-4" onclick="openTab(event, 'customer')">INSPECTION FORM</button>
-                    <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">MATERIAL DETAILS</button>
-                    <button class="tablinks col-md-4" onclick="openTab(event, 'payment')">TRANSPORTATION FORM
-                    </button>
-                </div>
-            </div>
-
-            {{-- INSPECTION tab--}}
-            <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+    <div class="row">
+        <div>
+            <form method="POST" action="{{ route('workorder.accept', [$wo->id]) }}">
                 @csrf
-                <div id="customer" class="tabcontent">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>Work order status</p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Status" name="status" type="text" required>
-                    </div>
-                    <p>Inspection description</p>
-                    <div class="form-group">
-                        <textarea name="details" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Select Technician</label>
-                        <select class="custom-select" required name="technician">
-                            <option selected>Choose...</option>
-                            @foreach($techs as $tech)
-                                <option value="{{ $tech->id }}">{{ $tech->fname.' '.$tech->lname }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-outline-success">Save Inspections</button>
-                </div>
+                <button type="submit" class="btn btn-success">Accept</button>
             </form>
-            {{-- end inspection --}}
-
-            {{-- materials tab --}}
-            <div id="delivery" class="tabcontent">
-                <h4>Material Form</h4>
-                <p>To be populated.</p>
-            </div>
-
-            {{-- transportation tab --}}
-            <div id="payment" class="tabcontent">
-                <h4>Transportation Form</h4>
-                <p>To be populated.</p>
-            </div>
+        </div>
+        <p> &nbsp;&nbsp;</p>
+        <div>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Reject</button>
         </div>
     </div>
     <br>
+    <h4>Wrong problem type?</h4>
+    <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
+        @csrf
+        <button type="submit" class="btn btn-warning">Send to secretary</button>
+    </form>
+    <br>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rejecting work order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please provide reason as to why you want to reject this work order.</p>
+                    <form method="POST" action="{{ route('workorder.reject', ['']) }}">
+                        @csrf
+                        <textarea name="reason" required maxlength="100" class="form-control"  rows="5" id="reason"></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
     @endSection

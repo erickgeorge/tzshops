@@ -51,9 +51,11 @@ Route::get('/create_user', 'HomeController@createUserView')->name('createUserVie
 Route::post('workorder/create', 'WorkOrderController@create')->name('workorder.create');
 Route::post('workorder/reject/{id}', 'WorkOrderController@rejectWO')->name('workorder.reject');
 Route::post('workorder/accept/{id}', 'WorkOrderController@acceptWO')->name('workorder.accept');
+Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name('workOrder.edit.view');
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
+Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
 
 Auth::routes();
 

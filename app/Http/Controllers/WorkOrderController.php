@@ -56,14 +56,24 @@ class WorkOrderController extends Controller
 
         $role = User::where('id',auth()->user()->id)->with('user_role')->first();
 
-        return redirect()->route('work_order')->with(['role' => $role, 'wo' => WorkOrder::where('problem_type',
-            substr(strstr( auth()->user()->type, " "), 1))->where('status', '<>' ,0)->get()]);
+        return redirect()->route('workOrder.edit.view', [$wO->id])->with([
+            'role' => $role,
+            'techs' => User::where('type', 'TECHNICIAN')->get(),
+            'message' => 'Work order accepted successfully, You can now edit it!',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+
+    public function editWOView($id){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+//        return response()->json(WorkOrder::where('id', $id)->first());
+        return view('edit_work_order',['techs' => User::where('type', 'TECHNICIAN')->get(),'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()]);
     }
 
     public function viewWO($id){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 //        return response()->json(WorkOrder::where('id', $id)->first());
-        return view('view_work_order',['techs' => User::where('type', 'TECHNICIAN')->get(),'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()]);
+        return view('view_work_order',['role' => $role, 'wo' => WorkOrder::where('id', $id)->first()]);
     }
 
     public function editWO(Request $request, $id){
@@ -85,7 +95,7 @@ class WorkOrderController extends Controller
             $wo->needs_contractor = 0;
         }
         $wo->save();
-        return redirect()->route('workOrder.view', [$id])->with([
+        return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'message' => 'changes saved successfully',
             'wo' => WorkOrder::where('id', $id)->first()
@@ -122,5 +132,17 @@ class WorkOrderController extends Controller
             return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get()]);
         }
         return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', 0)->get()]);
+    }
+
+    public function redirectToSecretary($id){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $wo = WorkOrder::where('id', $id)->first();
+        $wo->problem_type = 'Others';
+        $wo->save();
+        return redirect()->route('work_order')->with([
+            'role' => $role,
+            'message' => 'Work order successfully sent to Secretary',
+            'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()
+        ]);
     }
 }
