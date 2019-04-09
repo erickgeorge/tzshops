@@ -46,6 +46,8 @@ class HomeController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         if (strpos(auth()->user()->type, "HOS") !== false) {
             return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()]);
+        }else if (auth()->user()->type == "SECRETARY"){
+            return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', 'Others')->get()]);
         }
         return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->get()]);
     }

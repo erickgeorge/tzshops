@@ -63,7 +63,7 @@ class WorkOrderController extends Controller
     public function viewWO($id){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 //        return response()->json(WorkOrder::where('id', $id)->first());
-        return view('view_work_order',['techs' => Technician::all(),'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()]);
+        return view('view_work_order',['techs' => User::where('type', 'TECHNICIAN')->get(),'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()]);
     }
 
     public function editWO(Request $request, $id){
@@ -122,31 +122,5 @@ class WorkOrderController extends Controller
             return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get()]);
         }
         return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', 0)->get()]);
-    }
-
-    public function addTechView(){
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('add_tech', ['role' => $role]);
-    }
-
-    public function createTech(Request $request){
-        $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-            'phone' => 'required|max:15|min:10',
-            'email' => 'required|unique:users'
-        ]);
-
-        $user = new Technician();
-        $user->fname = $request['fname'];
-        $user->lname = $request['lname'];
-        $user->phone = $request['phone'];
-        $user->email = $request['email'];
-        $user->added_by = auth()->user()->id;
-        $user->save();
-
-        return redirect()->route('tech.add')->with([
-            'message' => 'Technician created successfully',
-        ]);
     }
 }

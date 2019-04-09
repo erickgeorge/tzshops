@@ -101,9 +101,15 @@ User Registrartion
 	  <select class="custom-select" id="inputGroupSelect02" name="user_type">
 	    <option selected>Choose...</option>
 	    <option value="HOS ELECTRICAL">HOS ELECTRICAL</option>
-	    <option value="MC">Maintenence Coordinator</option>
+	    <option value="HOS ELECTRICAL">HOS PLUMBING</option>
+	    <option value="HOS ELECTRICAL">HOS CARPENTRY</option>
+	    <option value="MC">MAINTENANCE COORDINATOR</option>
 	    <option value="DVC">DVC</option>
 	    <option value="STORE">STORE MANAGER</option>
+	    <option value="STORE">SECRETARY</option>
+	    <option value="STORE">TECHNICIAN</option>
+	    <option value="STORE">ESTATES DIRECTOR</option>
+	    <option value="STORE">INSPECTOR OF WORK</option>
 	  </select>
 	</div>
 

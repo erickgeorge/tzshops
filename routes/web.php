@@ -74,5 +74,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView');
-Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
-Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');
+/*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
+Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/

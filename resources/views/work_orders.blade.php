@@ -21,7 +21,6 @@ work orders
 <div class="row">
   <div class="col-md-8">
     <a href="{{url('createworkorders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new work order</button></a>
-    <a href="{{url('add/technician')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-warning">Add technician</button></a>
   </div>
   <div class="col-md-4">
     <a href="{{url('deleted/work/orders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-danger">View deleted Work Orders</button></a>
