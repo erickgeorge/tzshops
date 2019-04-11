@@ -4,6 +4,7 @@
 work orders
 @endSection
 @section('body')
+  
 <br>
 <div class="row container-fluid">
   <div class="col-md-8">
@@ -33,17 +34,17 @@ work orders
     <a href="{{url('deleted/work/orders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-danger">View deleted Work Orders</button></a>
   </div>
 </div>
-<table class="table table-striped">
+<table class="table table-striped" id="myTable">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Details</th>
-      <th scope="col">Type</th>
-      <th scope="col">From</th>
-      <th scope="col">Status</th>
-      <th scope="col">Created date</th>
-      <th scope="col">Location</th>
-      <th scope="col">Actions</th>
+      <th >#</th>
+      <th >Details</th>
+      <th >Type</th>
+      <th >From</th>
+      <th >Status</th>
+      <th >Created date</th>
+      <th >Location</th>
+      <th >Actions</th>
     </tr>
   </thead>
 
