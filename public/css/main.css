@@ -84,7 +84,7 @@ html, body {
 
 .estate-title{
     position: absolute;
-    right: 10%;
+    right: 6%;
     top: 10%;
     font-size: 50px;
 }
@@ -98,7 +98,7 @@ hr {
 }
 
 .welcome-body{
-    background-image: url('/meeting.jpg');
+    background-image: url('/meeeting.jpg');
 }
 
 

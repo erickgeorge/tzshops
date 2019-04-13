@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/css/main.css">
     </head>
     <body style="background-color: #e1e8f0" class="welcome-body">
-            <p class="estate-title"> Estate Services Management Information System </p>
+            <p class="estate-title"> Estates Services Management Information System </p>
         <div class="container col-md-4"  id="login-view" >
             @guest
             <form method="POST" action="{{ route('login') }}">

@@ -8,7 +8,7 @@ work orders
 <br>
 <div class="row container-fluid">
   <div class="col-md-8">
-    <h3>Work orders list</h3>
+    <h3><b>Work orders list </b></h3>
   </div>
   <div class="col-md-4">
     <form class="form-inline my-2 my-lg-0">
@@ -26,14 +26,17 @@ work orders
     </ul>
   </div>
 @endif
-<div class="row">
-  <div class="col-md-8">
-    <a href="{{url('createworkorders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new work order</button></a>
+<div class="row ">
+  <div class="col-md-3">
+    <a href="{{url('createworkorders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button></a>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-3">
     <a href="{{url('deleted/work/orders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-danger">View deleted Work Orders</button></a>
   </div>
 </div>
+    <div class="container " >
 <table class="table table-striped" id="myTable">
   <thead class="thead-dark">
     <tr>
@@ -82,7 +85,7 @@ work orders
     @endforeach
   </tbody>
 </table>
-
+</div>
 <script>
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();   

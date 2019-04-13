@@ -10,9 +10,10 @@ User Registrartion
 	<div class="col-md-8">
 		<h2>Create New user</h2>
 	</div>
-	<div class="col-md-4">
+
+	<!-- <div class="col-md-4">
 		<a href="{{ url('viewusers') }}" > <button type="" class="btn btn-primary">View all users</button></a>
-	</div>
+	</div> -->
 </div>
 <br>
 <hr>
@@ -33,6 +34,10 @@ User Registrartion
 </div>
 @endif
 <div class="col-md-6">
+<p style="color: red">All fields are compulsory</p>
+
+
+
 <form method="POST" action="{{ route('user.create') }}">
                         @csrf
 
@@ -49,7 +54,7 @@ User Registrartion
 	    <label for="phone">Phone number</label>
 	    <input  required type="text"     name="phone"  value="{{ old('phone') }}"
 	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-           maxlength = "13"  minlength = "2"
+           maxlength = "13"  minlength = "10"
 	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
 	</div>
 	<div class="form-group ">
@@ -60,10 +65,10 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="directorate">Directorate/College</label>
 	  </div>
-	  <select class="custom-select" name="college" id="directorate" onclick="getDepartments()">
-		  <option selected>Choose...</option>
+	  <select required class="custom-select" name="college" id="directorate" onclick="getDepartments()">
+		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
-	    <option value="{{ $directorate->id }}">{{ $directorate->name }}</option>
+	    <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
 	    @endforeach
 	  </select>
 	</div>
@@ -71,26 +76,26 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="department">Department</label>
 	  </div>
-	  <select class="custom-select" name="department" id="department" onclick="getSections()">
-		  <option selected>Choose...</option>
+	  <select required class="custom-select" name="department" id="department" onclick="getSections()">
+		  
 	  </select>
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label class="input-group-text" for="section">Section</label>
+	    <label  class="input-group-text" for="section">Section</label>
 	  </div>
-	  <select class="custom-select" name="section" id="section">
-		  <option selected>Choose...</option>
+	  <select required class="custom-select" name="section" id="section">
+		 
 	  </select>
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Role</label>
 	  </div>
-	  <select class="custom-select" name="role" id="inputGroupSelect02">
-	    <option selected>Choose...</option>
+	  <select required class="custom-select" name="role" id="inputGroupSelect02">
+	    <option value="" selected>Choose...</option>
 	    <option value="1">Admin</option>
-	    <option value="2">staff</option>
+	    <option value="2">Staff</option>
 	  </select>
 	</div>
 
@@ -98,18 +103,21 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Type of User</label>
 	  </div>
-	  <select class="custom-select" id="inputGroupSelect02" name="user_type">
-	    <option selected>Choose...</option>
-	    <option value="HOS ELECTRICAL">HOS ELECTRICAL</option>
-	    <option value="HOS ELECTRICAL">HOS PLUMBING</option>
-	    <option value="HOS ELECTRICAL">HOS CARPENTRY</option>
-	    <option value="MC">MAINTENANCE COORDINATOR</option>
-	    <option value="DVC">DVC</option>
-	    <option value="STORE">STORE MANAGER</option>
-	    <option value="STORE">SECRETARY</option>
-	    <option value="STORE">TECHNICIAN</option>
-	    <option value="STORE">ESTATES DIRECTOR</option>
-	    <option value="STORE">INSPECTOR OF WORK</option>
+	  <select required class="custom-select" id="inputGroupSelect02" name="user_type">
+	    <option value="" selected>Choose...</option>
+	    <option value="HOS Electrical">HOS Electrical</option>
+	    <option value="HOS Plumbing">HOS Plumbing</option>
+	    <option value="HOS Carpentry/Painting">HOS Carpentry/Painting</option>
+	    <option value="HOS Mechanical">HOS Mechanical</option>
+	    <option value="HOS Masonry/Road">HOS Masonry/Road</option>
+
+	    <option value="Maintenance Coordinator">Maintenance Coordinator</option>
+	    <option value="DVC Admin">DVC Admin</option>
+	    <option value="Store Manager">Store Manager</option>
+	    <option value="Secretary">Secretary</option>
+	    <option value="Technician">Technician</option>
+	    <option value="Estates Director">Estates Director</option>
+	    <option value="Inspector Of Works">Inspector Of Works</option>
 	  </select>
 	</div>
 
@@ -130,6 +138,7 @@ User Registrartion
 	</div>
 
 	<button type="submit" class="btn btn-success">Create User</button>
+	<a class="btn btn-info" href="/viewusers" role="button">Cancel Changes</a>
     </form>
 
 </div>

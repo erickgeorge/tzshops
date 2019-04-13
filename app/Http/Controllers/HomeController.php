@@ -70,7 +70,9 @@ class HomeController extends Controller
 
     public function usersView()
     {
-        $users = User::with('section.department')->where('id', '<>', auth()->user()->id)->paginate(5);
+        $users = User::with('section.department.directorate')->where('id', '<>', auth()->user()->id)->paginate(5);
+
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 //        return response()->json($users);
         return view('viewusers', ['display_users' => $users, 'role' => $role]);

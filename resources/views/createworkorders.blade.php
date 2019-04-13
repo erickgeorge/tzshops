@@ -39,10 +39,12 @@ Create Work Orders
 	    <label class="input-group-text" for="inputGroupSelect01">Type of problem</label>
 	  </div>
 	  <select required class="custom-select" id="inputGroupSelect01" name="p_type">
-	    <option selected>Choose...</option>
+	    <option selected value="">Choose...</option>
 	    <option value="Electrical">Electrical</option>
 	    <option value="Plumbing">Plumbing</option>
-	    <option value="Furniture">Furniture</option>
+	    <option value="Masonry/Road">Masonry/Road</option>
+	     <option value="Mechanical">Mechanical</option>
+	     <option value="Carpentry/Painting">Carpentry/Painting</option>
 	     <option value="Others">Others</option>
 	     
 	  </select>
@@ -57,8 +59,8 @@ use App\Location;
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Location</label>
 	  </div>
-	  <select class="custom-select" id="location" name="location" onclick="getAreas()">
-	    <option required selected>Choose...</option>
+	  <select required class="custom-select" id="location" name="location" onclick="getAreas()">
+	    <option value="" selected>Choose...</option>
 
 	    @foreach($location as $loc)
 	    <option value="{{ $loc->id }}">{{ $loc->name }}</option>
@@ -70,16 +72,16 @@ use App\Location;
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="area">Area</label>
 	  </div>
-	  <select class="custom-select" id="area" name="area" onclick="getBlocks()">
-	    <option selected>Choose...</option>
+	  <select required class="custom-select" id="area" name="area" onclick="getBlocks()">
+	    <!-- <option selected>Choose...</option> -->
 	  </select>
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="block">Block</label>
 	  </div>
-	  <select class="custom-select" id="block" name="block" onclick="getRooms()">
-	    <option selected>Choose...</option>
+	  <select required class="custom-select" id="block" name="block" onclick="getRooms()">
+	    <!-- <option selected>Choose...</option> -->
 	  </select>
 	</div>
 
@@ -88,7 +90,7 @@ use App\Location;
 	    <label class="input-group-text" for="room">Room</label>
 	  </div>
 	  <select class="custom-select" id="room" name="room">
-	    <option selected>Choose...</option>
+	    <!-- <option selected>Choose...</option> -->
 	  </select>
       </div> 
 
@@ -97,6 +99,9 @@ use App\Location;
   <textarea name="details" value="{{ old('details') }}" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
     </div>
 <button type="submit" class="btn btn-success">Create Workorder</button>
+
+<a class="btn btn-info" href="/work_order" role="button">Cancel Changes</a>
+
 	</div>
 </form>
 

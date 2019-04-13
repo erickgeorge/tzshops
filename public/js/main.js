@@ -21,9 +21,16 @@ function getDepartments(){
 	.done(function(msg){
 		var object = JSON.parse(JSON.stringify(msg['departments']));
 		$('#department').empty();
+		
+		
+		var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('department').appendChild(option);
+		
 		for (var i = 0; i < object.length; i++) {
 			var option = document.createElement('option');
-			option.innerHTML = object[i].name;
+			option.innerHTML = object[i].description;
 			option.value = object[i].id;
 			document.getElementById('department').appendChild(option);
 		}
@@ -41,6 +48,10 @@ function getSections(){
 		var object = JSON.parse(JSON.stringify(msg['sections']));
 		console.log(object);
 		$('#section').empty();
+		var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('section').appendChild(option);
 		for (var i = 0; i < object.length; i++) {
 			var option = document.createElement('option');
 			option.innerHTML = object[i].section_name;
@@ -64,6 +75,17 @@ function getAreas() {
         .done(function(msg){
             var object = JSON.parse(JSON.stringify(msg['areas']));
             $('#area').empty();
+			
+			
+			var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('area').appendChild(option);
+			
+			
+			
+			
+			
             for (var i = 0; i < object.length; i++) {
                 var option = document.createElement('option');
                 option.innerHTML = object[i].name_of_area;
@@ -83,6 +105,16 @@ function getBlocks() {
         .done(function(msg){
             var object = JSON.parse(JSON.stringify(msg['blocks']));
             $('#block').empty();
+			
+			
+			
+			var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('block').appendChild(option);
+			
+			
+			
             for (var i = 0; i < object.length; i++) {
                 var option = document.createElement('option');
                 option.innerHTML = object[i].name_of_block;
@@ -102,6 +134,15 @@ function getRooms() {
         .done(function(msg){
 			var object = JSON.parse(JSON.stringify(msg['rooms']));
             $('#room').empty();
+			
+			
+			
+			var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('room').appendChild(option);
+			
+			
             for (var i = 0; i < object.length; i++) {
                 var option = document.createElement('option');
                 option.innerHTML = object[i].name_of_room;

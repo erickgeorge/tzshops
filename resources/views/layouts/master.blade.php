@@ -26,8 +26,8 @@
 </head>
 <body>
 
-  <br>
-  <div class="container">
+ 
+  <div >
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">ESMIS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -38,39 +38,41 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('dashboard')}}">Dashboard <span class="sr-only">(current)</span></a>
+               <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span class="sr-only">(current)</span></a> </b>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('work_order')}}">Work order</a>
+                <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work order</a>
             </li>
 
             @if($role['user_role']['role_id'] == 1)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('viewusers')}}">Users</a>
+                    <a class="nav-link" style="color:white" href="{{ url('viewusers')}}">Manage Users</a>
                 </li>
             @endif
 
             @if(auth()->user()->type == 'STORE')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('stores')}}">Store</a>
+                    <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
                 </li>
             @endif
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('notification') }}">Notifications <span
+                <a class="nav-link" style="color:white" href="{{ url('notification') }}">Notifications <span
                             class="badge badge-light">4</span></a>
             </li>
         </ul>
         <span class="navbar-text">
       <ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
           {{ Auth::user()->name }}
         </a>
         <div class="dropdown-menu top-dropdown" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ url('settings')}}">Settings</a>
-          <a class="dropdown-item" href="{{ url('password')}}">Change Password</a>
+           <!--SETTING AND CHANGE PASSWORD 
+          <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>
+          <a class="dropdown-item" href="{{ url('password')}}">Change Password</a> 
+          -->
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}"
              onclick="event.preventDefault();
