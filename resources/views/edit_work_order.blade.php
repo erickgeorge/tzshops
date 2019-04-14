@@ -29,40 +29,40 @@
         <div class="input-group-prepend">
             <label class="input-group-text">Type of a problem</label>
         </div>
-        <input type="text" required class="form-control" placeholder="problem" name="problem"
+        <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
-        <input type="text" required class="form-control" placeholder="location not defined" name="location"
+        <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
                aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Area</label>
         </div>
-        <input type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
+        <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
                value="{{ $wo->room_id }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
-        <input type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
+        <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
                value="{{ $wo['room']['block']->name_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Room</label>
         </div>
-        <input type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
+        <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
                value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
     <div class="form-group ">
         <label for="">Details:</label>
-        <textarea name="details" required maxlength="100" class="form-control" rows="5"
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
@@ -94,6 +94,7 @@
                 @endif
             </div>
             <button type="submit" class="btn btn-success">Save changes</button>
+            <a href="/home" class="btn btn-dark">Cancel Editing</a>
         </form>
         <br>
         <h4>Work order forms.</h4>
@@ -123,7 +124,7 @@
                         </div>
                         <p>Inspection description</p>
                         <div class="form-group">
-                            <textarea name="details" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
+                            <textarea  style="color: black" name="details" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Select Technician</label>
