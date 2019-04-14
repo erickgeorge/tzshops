@@ -43,7 +43,7 @@ User Registrartion
 
 	<div class="form-group ">
 	    <label for="fname">First name</label>
-	    <input type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}">
+	    <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}">
 	 </div>
 	<div class="form-group ">
 	    <label for="lname">Last name</label>
@@ -51,14 +51,14 @@ User Registrartion
 	</div>
 	<div class="form-group ">
 	    <label for="phone">Phone number</label>
-	    <input  required type="text"     name="phone"  value="{{ old('phone') }}"
+	    <input style="color: black"  required type="text"     name="phone"  value="{{ old('phone') }}"
 	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
 	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
 	</div>
 	<div class="form-group ">
 	    <label for="email">Email Address</label>
-	    <input required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+	    <input style="color: black" required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
@@ -124,13 +124,13 @@ User Registrartion
 
 	<div class="form-group ">
 	    <label for="uname">Username</label>
-	     <input required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+	     <input style="color: black" required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
 	 </div>
 	<div class="form-group ">
 	    <label for="pass">Password</label>
 	    <div class="row">
 	    	<div class="col-md-8">
-	    <input required maxlength="15"  minlength="6"  type="text" class="form-control" id="pass" aria-describedby="emailHelp" name="password" placeholder="Should have 6 characters minimum">
+	    <input style="color: black" required maxlength="15"  minlength="6"  type="text" class="form-control" id="pass" aria-describedby="emailHelp" name="password" placeholder="Should have 6 characters minimum">
 	    	</div>
 	    <button type="button" onclick="generatePass()" class="btn btn-danger">Generate Password</button>
 	    </div>

@@ -11,7 +11,9 @@
             <h2>Edit user</h2>
         </div>
         <div class="col-md-4">
-            <a href="{{ url('viewusers') }}" > <button type="" class="btn btn-primary">View all users</button></a>
+            <a href="{{ url('viewusers') }}">
+                <button type="" class="btn btn-primary">View all users</button>
+            </a>
         </div>
     </div>
     <br>
@@ -38,36 +40,41 @@
 
             <div class="form-group ">
                 <label for="fname">First name</label>
-                <input type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name"
+                <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
+                       name="fname" placeholder="Enter first name"
                        onkeypress="return  event.charCode > 57 " value="{{ $user->fname }}">
             </div>
             <div class="form-group ">
                 <label for="lname">Last name</label>
-                <input type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ $user->lname }}">
+                <input style="color: black" type="text" required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp"
+                       name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 "
+                       value="{{ $user->lname }}">
             </div>
             <div class="form-group ">
                 <label for="phone">Phone number</label>
-                <input  required type="text"     name="phone"  value="{{ $user->phone }}"
-                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                        maxlength = "13"  minlength = "2"
-                        class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
+                <input style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
+                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       maxlength="13" minlength="2"
+                       class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number"
+                       onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 ">
             </div>
             <div class="form-group ">
                 <label for="email">Email Address</label>
-                <input required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ $user->email }}">
+                <input style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
+                       name="email" placeholder="Enter email address" value="{{ $user->email }}">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="directorate">Directorate/College</label>
                 </div>
                 <select class="custom-select" name="college" id="directorate" onclick="getDepartments()">
-                   @foreach($directorates as $directorate)
-                        <option @if(($user['section']['department']['directorate']->name) ==$directorate->name)         
-                        selected="selected"  
-                    @else
-      
-@endif
-                        value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
+                    @foreach($directorates as $directorate)
+                        <option @if(($user['section']['department']['directorate']->name) ==$directorate->name)
+                                selected="selected"
+                                @else
+
+                                @endif
+                                value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
                     @endforeach
 
                 </select>
@@ -78,13 +85,13 @@
                 </div>
                 <select class="custom-select" name="department" id="department" onclick="getSections()">
                     @foreach($departments as $department)
-                        <option 
-@if(($user['section']['department']->name) ==$department->name)         
-     selected="selected"  
-@else
-      
-@endif
-                        value="{{ $department->id }}">{{ $department->name }}</option>
+                        <option
+                                @if(($user['section']['department']->name) ==$department->name)
+                                selected="selected"
+                                @else
+
+                                @endif
+                                value="{{ $department->id }}">{{ $department->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -94,15 +101,15 @@
                 </div>
                 <select class="custom-select" name="section" id="section">
                     @foreach($sections as $section)
-                        <option 
+                        <option
 
-@if(($user['section']->name) ==$section->name)         
-     selected="selected"  
-@else
-      
-@endif
+                                @if(($user['section']->name) ==$section->name)
+                                selected="selected"
+                                @else
 
-                        value="{{ $section->id }}">{{ $section->section_name }}</option>
+                                @endif
+
+                                value="{{ $section->id }}">{{ $section->section_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -111,22 +118,24 @@
                     <label class="input-group-text" for="inputGroupSelect01">Role</label>
                 </div>
                 <select class="custom-select" name="role" id="inputGroupSelect02">
-                    
+
                     <option
 
-@if(($trole['user_role']['role_id']) =="1")         
-     selected="selected"  
-@else
- 
-@endif
-            value="1">Admin</option>
-<option
-@if(($trole['user_role']['role_id']) =="2")         
-     selected="selected"  
-@else
- 
-@endif
-                     value="2">Staff</option>
+                            @if(($trole['user_role']['role_id']) =="1")
+                            selected="selected"
+                            @else
+
+                            @endif
+                            value="1">Admin
+                    </option>
+                    <option
+                            @if(($trole['user_role']['role_id']) =="2")
+                            selected="selected"
+                            @else
+
+                            @endif
+                            value="2">Staff
+                    </option>
                 </select>
             </div>
 
@@ -135,89 +144,100 @@
                     <label class="input-group-text" for="inputGroupSelect01">Type of User</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect02" name="user_type">
-                    
-        <option
-        @if(($user->type) =="HOS Electrical")         
-     selected="selected" 
-@endif
-         value="HOS Electrical">HOS Electrical</option>
-        <option
-@if(($user->type) =="HOS Plumbing")         
-     selected="selected" 
-@endif
-         value="HOS Plumbing">HOS Plumbing</option>
 
-<option
-@if(($user->type) =="HOS Carpentry/Painting")         
-     selected="selected" 
-@endif
-         value="HOS Carpentry/Painting">HOS Carpentry/Painting</option>
+                    <option
+                            @if(($user->type) =="HOS Electrical")
+                            selected="selected"
+                            @endif
+                            value="HOS Electrical">HOS Electrical
+                    </option>
+                    <option
+                            @if(($user->type) =="HOS Plumbing")
+                            selected="selected"
+                            @endif
+                            value="HOS Plumbing">HOS Plumbing
+                    </option>
 
-
-         <option
-@if(($user->type) =="HOS Mechanical")         
-     selected="selected" 
-@endif
-         value="HOS Mechanical">HOS Mechanical</option>
+                    <option
+                            @if(($user->type) =="HOS Carpentry/Painting")
+                            selected="selected"
+                            @endif
+                            value="HOS Carpentry/Painting">HOS Carpentry/Painting
+                    </option>
 
 
+                    <option
+                            @if(($user->type) =="HOS Mechanical")
+                            selected="selected"
+                            @endif
+                            value="HOS Mechanical">HOS Mechanical
+                    </option>
 
-        <option
-@if(($user->type) =="HOS Masonry/Road")         
-     selected="selected" 
-@endif
-         value="HOS Masonry/Road">HOS Masonry/Road</option>
-        <option
-@if(($user->type) =="Maintenance Coordinator")         
-     selected="selected" 
-@endif
-         value="Maintenance Coordinator">Maintenance Coordinator</option>
-        <option
-@if(($user->type) =="DVC Admin")         
-     selected="selected" 
-@endif
-         value="DVC Admin">DVC Admin</option>
-        <option
-@if(($user->type) =="Store Manager")         
-     selected="selected" 
-@endif
-         value="Store Manager">Store Manager</option>
-        <option
-@if(($user->type) =="Secretary")         
-     selected="selected" 
-@endif
-         value="Secretary">Secretary</option>
-        <option
-@if(($user->type) =="Technician")         
-     selected="selected" 
-@endif
-         value="Technician">Technician</option>
-        <option
-@if(($user->type) =="Estates Director")         
-     selected="selected" 
-@endif
-         value="Estates Director">Estates Director</option>
-        <option
-@if(($user->type) =="Inspector Of Works")         
-     selected="selected" 
-@endif
-         value="Inspector Of Works">Inspector Of Works</option>
-      
+
+                    <option
+                            @if(($user->type) =="HOS Masonry/Road")
+                            selected="selected"
+                            @endif
+                            value="HOS Masonry/Road">HOS Masonry/Road
+                    </option>
+                    <option
+                            @if(($user->type) =="Maintenance Coordinator")
+                            selected="selected"
+                            @endif
+                            value="Maintenance Coordinator">Maintenance Coordinator
+                    </option>
+                    <option
+                            @if(($user->type) =="DVC Admin")
+                            selected="selected"
+                            @endif
+                            value="DVC Admin">DVC Admin
+                    </option>
+                    <option
+                            @if(($user->type) =="Store Manager")
+                            selected="selected"
+                            @endif
+                            value="Store Manager">Store Manager
+                    </option>
+                    <option
+                            @if(($user->type) =="Secretary")
+                            selected="selected"
+                            @endif
+                            value="Secretary">Secretary
+                    </option>
+                    <option
+                            @if(($user->type) =="Technician")
+                            selected="selected"
+                            @endif
+                            value="Technician">Technician
+                    </option>
+                    <option
+                            @if(($user->type) =="Estates Director")
+                            selected="selected"
+                            @endif
+                            value="Estates Director">Estates Director
+                    </option>
+                    <option
+                            @if(($user->type) =="Inspector Of Works")
+                            selected="selected"
+                            @endif
+                            value="Inspector Of Works">Inspector Of Works
+                    </option>
+
                 </select>
             </div>
 
 
-
             <div class="form-group ">
                 <label for="uname">Username</label>
-                <input required  maxlength="20" type="text" class="form-control" 
-                id="uname" name="uname" aria-describedby="emailHelp" 
-                       placeholder="Enter username" value="{{ $user->name }}" disabled  data-toggle="tooltip" title="Cannot edit username">
+                <input style="color: black" required maxlength="20" type="text" class="form-control"
+                       id="uname" name="uname" aria-describedby="emailHelp"
+                       placeholder="Enter username" value="{{ $user->name }}" disabled data-toggle="tooltip"
+                       title="Cannot edit username">
             </div>
 
             <button type="submit" class="btn btn-success">Save changes</button>
             <a class="btn btn-info" href="/viewusers" role="button">Cancel Changes</a>
-           
+
         </form>
 
     </div>
@@ -225,7 +245,7 @@
 
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
