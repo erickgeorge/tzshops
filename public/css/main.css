@@ -155,3 +155,13 @@ div.tab button.active {
 padding: 20px 60px;
    text-align: right;
 }
+
+#wo-details{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /*line-height: 16px;     !* fallback *!*/
+    /*max-height: 32px;      !* fallback *!*/
+    -webkit-line-clamp: 3; /* number of lines to show */
+}

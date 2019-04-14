@@ -41,7 +41,6 @@ User Registrartion
 <form method="POST" action="{{ route('user.create') }}">
                         @csrf
 
-
 	<div class="form-group ">
 	    <label for="fname">First name</label>
 	    <input type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}">

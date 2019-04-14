@@ -63,15 +63,15 @@ else {
       <td>
         <div class="row">
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
-         
+
 
          <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')" action="{{ route('user.delete', [$user->id]) }}" >
           {{csrf_field()}}
-          
+
 
         <button type="submit" data-toggle="tooltip" title="Delete"   > <a style="color: red;" href=""  data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
 
-         
+
        </button>
      </form>
    </div>

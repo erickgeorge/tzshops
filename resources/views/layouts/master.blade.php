@@ -70,9 +70,8 @@
         </a>
         <div class="dropdown-menu top-dropdown" aria-labelledby="navbarDropdown">
            <!--SETTING AND CHANGE PASSWORD 
-          <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>
-          <a class="dropdown-item" href="{{ url('password')}}">Change Password</a> 
-          -->
+          <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
+          <a class="dropdown-item" href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}"
              onclick="event.preventDefault();

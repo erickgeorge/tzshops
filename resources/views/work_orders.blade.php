@@ -58,10 +58,14 @@ work orders
     <?php $i++ ?>
     <tr>
       <th scope="row">{{ $i }}</th>
-      <td>{{ $work->details }}</td>
+      <td id="wo-details">{{ $work->details }}</td>
       <td>{{ $work->problem_type }}</td>
       <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
+      @if($work->status == -1)
       <td><span class="badge badge-warning">new</span></td>
+      @else
+        <td><span class="badge badge-success">accepted</span></td>
+        @endif
       <td>{{ $work->created_at }}</td>
       <td>{{ $work['room']['block']->location_of_block }}</td>
       <td>

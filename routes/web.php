@@ -72,6 +72,7 @@ Route::get('rooms', 'UserController@getRooms')->name('rooms.view');
 Route::get('sections', 'UserController@getSections')->name('departments.view');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view');
 Route::post('edit/user/{id}', 'UserController@editUser')->name('user.edit');
+Route::post('password/change', 'UserController@changePassword')->name('password.change');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

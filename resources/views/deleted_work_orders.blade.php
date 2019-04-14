@@ -35,7 +35,7 @@
                 <td>{{ $work->details }}</td>
                 <td>{{ $work->problem_type }}</td>
                 <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                <td><span class="badge badge-warning">new</span></td>
+                <td><span class="badge badge-danger">deleted</span></td>
                 <td>{{ $work->created_at }}</td>
                 <td>{{ $work['room']['block']->location_of_block }}</td>
                 <td>

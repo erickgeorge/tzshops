@@ -97,5 +97,10 @@ class HomeController extends Controller
         return view('notification', ['role' => $role]);
     }
 
+    public function passwordView(){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('changepassword', ['role' => $role]);
+    }
+
 
 }
