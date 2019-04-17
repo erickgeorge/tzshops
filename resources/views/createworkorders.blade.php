@@ -59,7 +59,7 @@ use App\Location;
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Location</label>
 	  </div>
-	  <select required class="custom-select" id="location" name="location" onclick="getAreas()">
+	  <select required class="custom-select" id="location" name="location" onchange="getAreas()">
 	    <option value="" selected>Choose...</option>
 
 	    @foreach($location as $loc)
@@ -72,7 +72,7 @@ use App\Location;
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="area">Area</label>
 	  </div>
-	  <select required class="custom-select" id="area" name="area" onclick="getBlocks()">
+	  <select required class="custom-select" id="area" name="area" onchange="getBlocks()">
 	    <!-- <option selected>Choose...</option> -->
 	  </select>
 	</div>
@@ -80,7 +80,7 @@ use App\Location;
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="block">Block</label>
 	  </div>
-	  <select required class="custom-select" id="block" name="block" onclick="getRooms()">
+	  <select required class="custom-select" id="block" name="block" onchange="getRooms()">
 	    <!-- <option selected>Choose...</option> -->
 	  </select>
 	</div>

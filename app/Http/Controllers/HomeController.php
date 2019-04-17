@@ -31,11 +31,15 @@ class HomeController extends Controller
     public function index()
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        // return response()->json($role);
-        if (strpos(auth()->user()->type, "HOS") !== false) {
-            return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->get()]);
-        } elseif (auth()->user()->type == 'STORE') {
-            return view('stores', ['role' => $role]);
+//         return response()->json($role);
+        if ($role['user_role']->role_id == 1){
+            return view('work_orders', ['role' => $role, 'wo' => WorkOrder::all()]);
+        }else{
+            if (strpos(auth()->user()->type, "HOS") !== false) {
+                return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->get()]);
+            } elseif (auth()->user()->type == 'STORE') {
+                return view('stores', ['role' => $role]);
+            }
         }
         return view('dashboard', ['role' => $role]);
     }

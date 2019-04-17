@@ -64,7 +64,7 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="directorate">Directorate/College</label>
 	  </div>
-	  <select required class="custom-select" name="college" id="directorate" onclick="getDepartments()">
+	  <select required class="custom-select" name="college" id="directorate" onchange="getDepartments()">
 		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
 	    <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
@@ -75,8 +75,7 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="department">Department</label>
 	  </div>
-	  <select required class="custom-select" name="department" id="department" onclick="getSections()">
-		  
+	  <select required class="custom-select" name="department" id="department" onchange="getSections()">
 	  </select>
 	</div>
 	<div class="input-group mb-3">
