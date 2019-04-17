@@ -10,12 +10,12 @@ work orders
   <div class="col-md-8">
     <h3><b>Work orders list </b></h3>
   </div>
-  <div class="col-md-4">
+  {{--<div class="col-md-4">
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search by type, status and name" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-  </div>
+  </div>--}}
 </div>
 <br>
 <hr>

@@ -10,11 +10,11 @@
         <div class="col-md-8">
             <h2>Edit user</h2>
         </div>
-        <div class="col-md-4">
+        {{--<div class="col-md-4">
             <a href="{{ url('viewusers') }}">
                 <button type="" class="btn btn-primary">View all users</button>
             </a>
-        </div>
+        </div>--}}
     </div>
     <br>
     <hr>
@@ -67,9 +67,9 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="directorate">Directorate/College</label>
                 </div>
-                <select class="custom-select" name="college" id="directorate" onclick="getDepartments()">
+                <select class="custom-select" name="college" id="directorate" onchange="getDepartments()">
                     @foreach($directorates as $directorate)
-                        <option @if(($user['section']['department']['directorate']->name) ==$directorate->name)
+                        <option @if(($user['section']['department']['directorate']->name) == $directorate->name)
                                 selected="selected"
                                 @else
 
@@ -83,16 +83,8 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="department">Department</label>
                 </div>
-                <select class="custom-select" name="department" id="department" onclick="getSections()">
-                    @foreach($departments as $department)
-                        <option
-                                @if(($user['section']['department']->name) ==$department->name)
-                                selected="selected"
-                                @else
-
-                                @endif
-                                value="{{ $department->id }}">{{ $department->name }}</option>
-                    @endforeach
+                <select class="custom-select" name="department" id="department" onchange="getSections()">
+                    <option value="{{ $user['section']['department']->id }}">{{ $user['section']['department']->description }}</option>
                 </select>
             </div>
             <div class="input-group mb-3">
@@ -100,17 +92,7 @@
                     <label class="input-group-text" for="section">Section</label>
                 </div>
                 <select class="custom-select" name="section" id="section">
-                    @foreach($sections as $section)
-                        <option
-
-                                @if(($user['section']->name) ==$section->name)
-                                selected="selected"
-                                @else
-
-                                @endif
-
-                                value="{{ $section->id }}">{{ $section->section_name }}</option>
-                    @endforeach
+                    <option value="{{ $user['section']->id }}">{{ $user['section']->section_name }}</option>
                 </select>
             </div>
             <div class="input-group mb-3">

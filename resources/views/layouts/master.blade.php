@@ -49,6 +49,9 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('viewusers')}}">Manage Users</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('manage_departments')}}">Manage Directorates</a>
+                </li>
             @endif
 
             @if(auth()->user()->type == 'STORE')

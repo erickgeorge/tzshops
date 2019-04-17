@@ -13,7 +13,6 @@ class WorkOrderController extends Controller
     public function create(Request $request){
     	$request->validate([
             'details' => 'required',
-         
         ]);
 
         if ($request['p_type'] == 'Choose...') {

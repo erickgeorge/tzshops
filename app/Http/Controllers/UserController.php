@@ -120,16 +120,13 @@ class UserController extends Controller
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $trole = User::where('id', $id)->with('user_role')->first();
-        $departments = Department::all();
-        $sections = Section::all();
 
 
+//        return response()->json(User::with('section.department.directorate')->where('id', $id)->first());
         return view('edit_user', [
 
             'user' => User::with('section.department.directorate')->where('id', $id)->first(),
             'directorates' => Directorate::all(),
-            'sections' => $sections,
-            'departments' => $departments,
             'role' => $role,
             'nrole' => $role,
             'trole' => $trole
@@ -190,6 +187,11 @@ class UserController extends Controller
             return redirect()->back()->with(['message' => 'Password changed successfully']);
         }
         return redirect()->back()->withErrors(['message' => 'Wrong old password']);
+    }
+
+    public function departmentsView(){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('manage_dep', ['role' => $role, 'directorates' => Directorate::all()]);
     }
 
 }

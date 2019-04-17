@@ -67,7 +67,7 @@ User Registrartion
 	  <select required class="custom-select" name="college" id="directorate" onchange="getDepartments()">
 		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
-	    <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
+	    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
 	    @endforeach
 	  </select>
 	</div>

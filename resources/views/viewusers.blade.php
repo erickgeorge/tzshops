@@ -9,12 +9,12 @@ view users
   <div class="col-md-7">
     <h3>Available Users</h3>
   </div>
-  <div class="col-md-5">
+  {{--<div class="col-md-5">
     <form class="form-inline my-2 my-lg-0">
       <input style="width:220px;" class="form-control mr-sm-2" type="search" placeholder="Search by Fullname, email" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-  </div>
+  </div>--}}
 </div>
   @if(Session::has('message'))
     <br>

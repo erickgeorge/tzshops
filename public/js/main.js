@@ -22,7 +22,6 @@ function getDepartments(){
 		var object = JSON.parse(JSON.stringify(msg['departments']));
 		$('#department').empty();
 		
-		
 		var option = document.createElement('option');
 			option.innerHTML = 'Choose...';
 			option.value = '';

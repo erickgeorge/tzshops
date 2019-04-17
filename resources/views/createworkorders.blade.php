@@ -89,7 +89,7 @@ use App\Location;
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="room">Room</label>
 	  </div>
-	  <select class="custom-select" id="room" name="room">
+	  <select required class="custom-select" id="room" name="room">
 	    <!-- <option selected>Choose...</option> -->
 	  </select>
       </div> 
