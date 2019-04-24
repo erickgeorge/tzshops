@@ -3,6 +3,7 @@
 @section('title')
 work orders
 @endSection
+
 @section('body')
   
 <br>
@@ -33,7 +34,7 @@ work orders
   <div class="col-md-6">
   </div>
   <div class="col-md-3">
-    <a href="{{url('deleted/work/orders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-danger">View deleted Work Orders</button></a>
+    <a href="{{url('deleted/work/orders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-danger">View rejected Work Orders</button></a>
   </div>
 </div>
     <div class="container " >

@@ -50,7 +50,7 @@
                     <a class="nav-link" style="color:white" href="{{ url('viewusers')}}">Manage Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('manage_departments')}}">Manage Directorates</a>
+                    <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Manage Directorates</a>
                 </li>
             @endif
 

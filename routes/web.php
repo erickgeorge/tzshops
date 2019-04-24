@@ -71,9 +71,14 @@ Route::get('blocks', 'UserController@getBlocks')->name('blocks.view');
 Route::get('rooms', 'UserController@getRooms')->name('rooms.view');
 Route::get('sections', 'UserController@getSections')->name('departments.view');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view');
-Route::get('manage_departments', 'UserController@departmentsView')->name('dep.manage');
+Route::get('manage_directorates', 'DirectorateController@departmentsView')->name('dir.manage');
 Route::post('edit/user/{id}', 'UserController@editUser')->name('user.edit');
 Route::post('password/change', 'UserController@changePassword')->name('password.change');
+
+
+Route::post('save/directorate', 'DirectorateController@createDirectorate')->name('directorate.save');
+Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');
+Route::post('save/section', 'DirectorateController@createSection')->name('section.save');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

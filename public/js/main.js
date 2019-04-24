@@ -13,12 +13,14 @@ var selectedsection = null;
 function getDepartments(){
 	selecteddep = document.getElementById('directorate').value;
 
+    console.log('ID: '+selecteddep);
 	$.ajax({
 		method: 'GET',
 		url: 'departments/',
 		data: {id: selecteddep}
 	})
 	.done(function(msg){
+        console.log(msg['departments']);
 		var object = JSON.parse(JSON.stringify(msg['departments']));
 		$('#department').empty();
 		

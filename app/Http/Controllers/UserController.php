@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use App\Block;
+use App\Location;
 use App\Room;
 use Illuminate\Http\Request;
 use App\User;
@@ -187,11 +188,6 @@ class UserController extends Controller
             return redirect()->back()->with(['message' => 'Password changed successfully']);
         }
         return redirect()->back()->withErrors(['message' => 'Wrong old password']);
-    }
-
-    public function departmentsView(){
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('manage_dep', ['role' => $role, 'directorates' => Directorate::all()]);
     }
 
 }
