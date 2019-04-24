@@ -6,6 +6,42 @@ html, body {
                 height: 100vh;
                 margin: 0;
             }
+			
+			.form-control{
+				
+				
+				font-weight: bold;
+			}
+			
+			
+			.custom-select{
+				
+				
+				font-weight: bold;
+			}
+			
+			custom-select
+			
+			input,select{
+				
+				color:black;
+background-color:black; 
+font-weight:bold;
+
+	
+}
+			
+			.dataTables_filter {
+     
+	 padding: 0;
+	      margin: 0px;
+		  width:999px;
+		   align-items: right;
+                
+}
+			
+			
+			
 
             .full-height {
                 height: 100vh;
@@ -165,3 +201,22 @@ padding: 20px 60px;
     /*max-height: 32px;      !* fallback *!*/
     -webkit-line-clamp: 3; /* number of lines to show */
 }
+
+
+
+
+
+
+tr {
+ width:12px;
+}
+
+table{
+     // Firefox Bad Effect
+}
+tr{
+          
+   
+
+}
+

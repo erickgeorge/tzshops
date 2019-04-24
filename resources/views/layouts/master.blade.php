@@ -17,8 +17,18 @@
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
  <!-- code mpya -->
 
+
+
+
+
+
+
+
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" >
+ 
  <!-- code mpya -->
 
     <link rel="stylesheet" href="/css/main.css">
@@ -74,6 +84,8 @@
         <div class="dropdown-menu top-dropdown" aria-labelledby="navbarDropdown">
            <!--SETTING AND CHANGE PASSWORD 
           <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
+		  
+		  <a class="dropdown-item" style="color:white" href="{{ url('changeprofile')}}">Change Profile</a>
           <a class="dropdown-item" href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}"

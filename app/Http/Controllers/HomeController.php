@@ -78,7 +78,7 @@ class HomeController extends Controller
 
     public function usersView()
     {
-        $users = User::with('section.department.directorate')->where('id', '<>', auth()->user()->id)->paginate(5);
+        $users = User::with('section.department.directorate')->where('id', '<>', auth()->user()->id)->where('status', '=', 1)->get();
 
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -109,6 +109,9 @@ class HomeController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('changepassword', ['role' => $role]);
     }
-
+public function profileView(){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('changeprofile', ['role' => $role]);
+    }
 
 }

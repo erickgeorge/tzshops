@@ -8,6 +8,47 @@ function generatePass(){
 	document.getElementById('pass').value = password;
 }
 
+ $(function () {
+        $("#checkdiv").click(function () {
+            if ($(this).is(":checked")) {
+				$("#location").removeAttr('required'); 
+				$("#area").removeAttr('required'); 
+				$("#block").removeAttr('required'); 
+				$("#room").removeAttr('required');
+				
+				
+				$("#manual").attr('required', '');
+				
+				
+				
+				
+				
+                $("#divmanual").show();
+				$("#locationdiv").hide();
+            } else {
+				$("#location").attr('required', '');
+				$("#area").attr('required', '');
+				$("#block").attr('required', '');
+				$("#room").attr('required', '');
+				
+				$("#manual").removeAttr('required');
+				
+				
+				
+				
+                 $("#divmanual").hide();
+				$("#locationdiv").show();
+            }
+        });
+    });
+	
+function ShowwHideDiv(checkdiv) {
+        var dvPassport = document.getElementById("locationdiv");
+        locationdiv.style.display = checkdiv.checked ? "block" : "none";
+    }
+
+
+
 var selecteddep = null;
 var selectedsection = null;
 function getDepartments(){

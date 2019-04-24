@@ -55,6 +55,31 @@ Create Work Orders
 use App\Location;
  $location = Location::get();
 ?>
+
+
+
+
+<div class="checkbox">
+      <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">  Enter Location manually</label>
+    </div>
+
+
+<div  id="divmanual">
+
+	<div class="input-group mb-3">
+	  <div class="input-group-prepend">
+	    <label class="input-group-text" for="inputGroupSelect01">Enter Location in text</label>
+	  </div>
+	 <input style="color: black" required type="text"   maxlength="35" class="form-control" id="manual" aria-describedby="emailHelp" name="manual" placeholder="Type Location Address" ">
+	
+	</div>
+	
+	</div>
+
+
+
+<div  id="locationdiv">
+
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Location</label>
@@ -93,7 +118,7 @@ use App\Location;
 	    <!-- <option selected>Choose...</option> -->
 	  </select>
       </div> 
-
+</div> 
 <div class="form-group">
   <label for="comment">Details:</label>
   <textarea name="details" value="{{ old('details') }}" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
@@ -107,6 +132,8 @@ use App\Location;
 
 <br>
   <script type="text/javascript">	
+  
+  $("#divmanual").hide();
   	$("input:checkbox").on('click', function() {
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
