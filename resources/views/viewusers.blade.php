@@ -23,7 +23,7 @@ view users
 <br>
 <hr>
 <a href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
-<table class="table table-striped">
+<table class="table table-striped" id="myTable"">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -49,6 +49,8 @@ if ($_GET['page']==1){
 else {
  $i=1;
 }
+ $i=1;
+
    ?>
     @foreach($display_users as $user)
     <tr>
@@ -82,11 +84,43 @@ else {
 
  
 </table>
- {{ $display_users->links() }}
+
 <script>
 $(document).ready(function(){
 
   $('[data-toggle="tooltip"]').tooltip();   
+  
+ 
+
+$('#myTable').DataTable({
+   "drawCallback": function ( settings ) {
+
+    /*show pager if only necessary
+    console.log(this.fnSettings());*/
+    if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) > 1) {
+        $('#dataTable_ListeUser_paginate').css("display", "block");     
+    } else {                
+        $('#dataTable_ListeUser_paginate').css("display", "none");
+    }
+
+    }
+});
+  
+  
+  jQuery('#myTable').DataTable({
+    fnDrawCallback: function(oSettings) {
+        var totalPages = this.api().page.info().pages;
+        if(totalPages == 1){ 
+            jQuery('.dataTables_paginate').hide(); 
+        }
+        else { 
+            jQuery('.dataTables_paginate').show(); 
+        }
+    }
+});
+  
+  
+  
 });
 
 

@@ -15,6 +15,8 @@ class WorkOrderController extends Controller
             'details' => 'required',
         ]);
 
+
+
         if ($request['p_type'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Problem Type required ']);
         }
@@ -23,7 +25,24 @@ class WorkOrderController extends Controller
             return redirect()->back()->withErrors(['message' => 'Location required required ']);
         }
     	$work_order = new WorkOrder();
+		
+		
+		
+		
+		if($request['checkdiv'] == 'yesmanual') {
+			
+    	$work_order->location = $request['manual'];
+		
+		} else {
+			
     	$work_order->room_id = $request['room'];
+		
+		}
+		
+		
+		
+		
+		
     	$work_order->client_id = auth()->user()->id;
     	$work_order->problem_type = $request['p_type'];
     	$work_order->details = $request['details'];
@@ -34,7 +53,7 @@ class WorkOrderController extends Controller
 
     public function rejectWO(Request $request, $id){
         $wO = WorkOrder::where('id', $id)->first();
-        $wO->staff_id = auth()->user()->id;
+       // $wO->staff_id = auth()->user()->id;
         $wO->status = 0;
         $wO->reason = $request['reason'];
         $wO->save();
@@ -127,6 +146,11 @@ class WorkOrderController extends Controller
 
     public function deletedWOView(){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+		
+		if ($role['user_role']['role_id'] == 1){
+			            return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::all()]);
+		}
+		else
         if (strpos(auth()->user()->type, "HOS") !== false) {
             return view('deleted_work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get()]);
         }

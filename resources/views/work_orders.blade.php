@@ -37,7 +37,7 @@ work orders
   </div>
 </div>
     <div class="container " >
-<table class="table table-striped" id="myTable">
+<table class="table table-striped display" id="myTable"  style="width:100%">
   <thead class="thead-dark">
     <tr>
       <th >#</th>
@@ -55,6 +55,8 @@ work orders
    
     <?php $i=0;  ?>
     @foreach($wo as $work)
+	
+	@if($work->status !== 0)
     <?php $i++ ?>
     <tr>
       <th scope="row">{{ $i }}</th>
@@ -67,12 +69,21 @@ work orders
         <td><span class="badge badge-success">accepted</span></td>
         @endif
       <td>{{ $work->created_at }}</td>
-      <td>{{ $work['room']['block']->location_of_block }}</td>
+      <td>
+	  
+	  @if($work->location ==null)
+	  {{ $work['room']['block']->location_of_block }}</td>
+   @else
+	   
+   {{ $work->location }}
+   @endif
       <td>
       @if(strpos(auth()->user()->type, "HOS") !== false)
+		  
         @if($work->status == -1)
             <a href=" {{ route('workOrder.view', [$work->id]) }} "><span class="badge badge-success">View</span></a>
         @else
+
             <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
             <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>
         @endif
@@ -84,6 +95,8 @@ work orders
             <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>&nbsp;
         @endif
       @endif
+	  
+	   @endif
       </td>
     </tr>
     @endforeach
@@ -91,8 +104,18 @@ work orders
 </table>
 </div>
 <script>
+
 $(document).ready(function(){
+	
+	
   $('[data-toggle="tooltip"]').tooltip();   
+  
+ $('#myTable').dataTable({
+   "dom": '<"top"i>rt<"bottom"flp><"clear">'
+});
+  
+  
+
 });
 </script>
 @endSection

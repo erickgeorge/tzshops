@@ -47,7 +47,7 @@ User Registrartion
 	 </div>
 	<div class="form-group ">
 	    <label for="lname">Last name</label>
-	    <input type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
+	    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
 	</div>
 	<div class="form-group ">
 	    <label for="phone">Phone number</label>
@@ -58,13 +58,13 @@ User Registrartion
 	</div>
 	<div class="form-group ">
 	    <label for="email">Email Address</label>
-	    <input style="color: black" required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+	    <input style="color: black" required type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="directorate">Directorate/College</label>
 	  </div>
-	  <select required class="custom-select" name="college" id="directorate" onchange="getDepartments()">
+	  <select style="color: black" required class="custom-select" name="college" id="directorate" onchange="getDepartments()">
 		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
 	    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
@@ -75,14 +75,14 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="department">Department</label>
 	  </div>
-	  <select required class="custom-select" name="department" id="department" onchange="getSections()">
+	  <select style="color: black" required class="custom-select" name="department" id="department" onchange="getSections()">
 	  </select>
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label  class="input-group-text" for="section">Section</label>
 	  </div>
-	  <select required class="custom-select" name="section" id="section">
+	  <select style="color: black" required class="custom-select" name="section" id="section">
 		 
 	  </select>
 	</div>
@@ -90,7 +90,7 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Role</label>
 	  </div>
-	  <select required class="custom-select" name="role" id="inputGroupSelect02">
+	  <select style="color: black" required class="custom-select" name="role" id="inputGroupSelect02">
 	    <option value="" selected>Choose...</option>
 	    <option value="1">Admin</option>
 	    <option value="2">Staff</option>
@@ -101,7 +101,7 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label class="input-group-text" for="inputGroupSelect01">Type of User</label>
 	  </div>
-	  <select required class="custom-select" id="inputGroupSelect02" name="user_type">
+	  <select style="color: black" required class="custom-select" id="inputGroupSelect02" name="user_type">
 	    <option value="" selected>Choose...</option>
 	    <option value="HOS Electrical">HOS Electrical</option>
 	    <option value="HOS Plumbing">HOS Plumbing</option>
@@ -123,10 +123,10 @@ User Registrartion
 
 	<div class="form-group ">
 	    <label for="uname">Username</label>
-	     <input style="color: black" required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+	     <input style="color: black" style="color: black" required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
 	 </div>
 	<div class="form-group ">
-	    <label for="pass">Password</label>
+	    <label style="color: black" for="pass">Password</label>
 	    <div class="row">
 	    	<div class="col-md-8">
 	    <input style="color: black" required maxlength="15"  minlength="6"  type="text" class="form-control" id="pass" aria-describedby="emailHelp" name="password" placeholder="Should have 6 characters minimum">

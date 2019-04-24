@@ -99,7 +99,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Please provide reason as to why you want to reject this work order.</p>
-                    <form method="POST" action="{{ route('workorder.reject', ['']) }}">
+                    <form method="POST" action="{{ route('workorder.reject',['id'=>$wo->id]) }}">
                         @csrf
                         <textarea name="reason" required maxlength="100" class="form-control"  rows="5" id="reason"></textarea>
                         <br>

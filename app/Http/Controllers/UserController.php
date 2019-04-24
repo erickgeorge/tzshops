@@ -71,8 +71,11 @@ class UserController extends Controller
     public function deleteUser($id)
     {
 
-        User::where('id', $id)->delete();
-        $users = User::all();
+        $user=User::where('id', $id)->first();
+		$user->status='0';
+		  $user->save();
+$dd=1;
+        $users = User::where('status', 1)->get();
         return redirect()->route('users.view')->with([
             'message' => 'User deleted successfully',
             'display_users' => $users
@@ -188,6 +191,25 @@ class UserController extends Controller
         }
         return redirect()->back()->withErrors(['message' => 'Wrong old password']);
     }
+	
+	
+		 public function changeProfile(Request $request){
+        $request->validate([
+            'email' => 'required',
+            'phone' => 'required',
+            
+        ]);
+        $user = User::find(auth()->user()->id);
+        
+		 $user->email = $request['email'];
+		  $user->phone = $request['phone'];
+            $user->save();
+            return redirect()->back()->with(['message' => 'Profile has changed successfully']);
+        }
+	
+	
+	
+	
 
     public function departmentsView(){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();

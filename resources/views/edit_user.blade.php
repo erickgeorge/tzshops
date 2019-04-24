@@ -208,7 +208,7 @@
                 </select>
             </div>
 
-
+ <!-- 
             <div class="form-group ">
                 <label for="uname">Username</label>
                 <input style="color: black" required maxlength="20" type="text" class="form-control"
@@ -216,9 +216,12 @@
                        placeholder="Enter username" value="{{ $user->name }}" disabled data-toggle="tooltip"
                        title="Cannot edit username">
             </div>
+			
+			-->
+		
 
-            <button type="submit" class="btn btn-success">Save changes</button>
-            <a class="btn btn-info" href="/viewusers" role="button">Cancel Changes</a>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a class="btn btn-info" href="/viewusers" role="button">Cancel</a>
 
         </form>
 

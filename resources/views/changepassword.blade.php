@@ -49,8 +49,8 @@
                 <input type="password" required class="form-control" id="confirm-pass" name="confirm-pass"
                        placeholder="Confirm password" value="{{ old('confirm-pass') }}">
             </div>
-            <button type="submit" class="btn btn-success">Change password</button>
-            <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
+            <button type="submit" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Change password</button>
+            <a href="{{ route('home') }}" style="background-color:#F9B100;border-color:#F9B100;" class="btn btn-danger">Cancel</a>
         </form>
     </div>
     @endSection

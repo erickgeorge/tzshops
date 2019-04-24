@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Route::get('/notification', 'HomeController@notificationView');
 
-Route::get('/password','HomeController@passwordView' );
+Route::get('password','HomeController@passwordView' );
+Route::get('/changeprofile','HomeController@profileView' );
 
 Route::get('/dashboard', 'HomeController@dashboardView');
 
@@ -73,7 +74,9 @@ Route::get('sections', 'UserController@getSections')->name('departments.view');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view');
 Route::get('manage_departments', 'UserController@departmentsView')->name('dep.manage');
 Route::post('edit/user/{id}', 'UserController@editUser')->name('user.edit');
-Route::post('password/change', 'UserController@changePassword')->name('password.change');
+Route::post('', 'UserController@changePassword')->name('password.change');
+
+Route::post('', 'UserController@changeProfile')->name('profile.change');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
