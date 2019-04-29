@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Material;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -107,7 +108,7 @@ class HomeController extends Controller
     public function storesView()
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('stores', ['role' => $role]);
+        return view('stores', ['role' => $role, 'items' => Material::all()]);
     }
 
     public function usersView()
