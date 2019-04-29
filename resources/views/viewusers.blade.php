@@ -23,6 +23,8 @@ view users
 <br>
 <hr>
 <a href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
+
+	@if(!$display_users->isEmpty())
 <table class="table table-striped" id="myTable"">
   <thead class="thead-dark">
     <tr>
@@ -84,7 +86,7 @@ else {
 
  
 </table>
-
+  @endif
 <script>
 $(document).ready(function(){
 

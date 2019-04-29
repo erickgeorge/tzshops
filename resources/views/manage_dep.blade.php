@@ -41,7 +41,7 @@
             <div id="customer" class="tabcontent">
                 <a href="#new_dir" style="margin-bottom: 20px; background-color: coral; color: white"
                    class="btn btn-primary">Add new directorate</a>
-                <table class="table table-striped">
+                <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -102,7 +102,7 @@
             <div id="delivery" class="tabcontent">
                 <a href="#new_dep" style="margin-bottom: 20px; background-color: coral; color: white"
                    class="btn btn-primary">Add new department</a>
-                <table class="table table-striped">
+                <table id="myTablee" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -139,8 +139,10 @@
                     @endforeach
                     </tbody>
                 </table>
+				
+				
                 <div class="text-center">
-                    {{ $deps->links() }}
+                   
                 </div>
                 <br>
                 <h4 id="new_dep">Add new department</h4>
@@ -180,7 +182,7 @@
             <div id="payment" class="tabcontent">
                 <a href="#new_sec" style="margin-bottom: 20px; background-color: coral; color: white"
                    class="btn btn-primary">Add new section</a>
-                <table class="table table-striped">
+                <table id="myTableee" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -217,8 +219,11 @@
                     @endforeach
                     </tbody>
                 </table>
+				
+				
+				
                 <div class="text-center">
-                    {{ $secs->links() }}
+                   
                 </div>
                 <br>
                 <h4 id="new_sec">Add new section</h4>
@@ -263,3 +268,34 @@
         </div>
     </div>
     @endSection
+	
+	
+	<script>
+
+$(document).ready(function(){
+	
+	
+  $('[data-toggle="tooltip"]').tooltip();   
+  
+ $('#myTable').dataTable({
+   "dom": '<"top"i>rt<"bottom"flp><"clear">'
+});
+  
+   $('#myTablee').DataTable();
+ $('#myTableee').DataTable();
+});
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+</script>

@@ -11,6 +11,7 @@
         </div>
     </div>
     <hr>
+		@if(!$wo->isEmpty())
     <table class="table table-hover table-striped table-condensed table-scrollable"   id="myTable" >
         <thead class="thead-dark">
         <tr>
@@ -30,6 +31,11 @@
         <?php $i=0;  ?>
         @foreach($wo as $work)
             <?php $i++ ?>
+			
+			<?php if ($work->status==0)
+				{
+					?>
+			
             <tr>
                 <th scope="row">{{ $i }}</th>
                 <td id="wo-details" >{{ $work->details }}</td>
@@ -46,13 +52,14 @@
    @endif
 				</td>
                 <td>
-                    <a href="#"><span data-toggle="modal" data-target="#viewReason" class="badge badge-success">View reason</span></a>
+                    <a onclick="myfunc('{{ $work->reason }}')"><span data-toggle="modal" data-target="#viewReason" class="badge badge-success">View reason</span></a>
                 </td>
             </tr>
+				<?php }  ?>
         @endforeach
         </tbody>
     </table>
-
+@endif
 
     <!-- Modal -->
     <div class="modal fade" id="viewReason" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,6 +67,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Reason for rejecting work order</h5>
+					<div>  </div>
 					
 					
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -67,6 +75,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
+				
+				 <h3 id="reason" ><b>   </b> </h3> 
                     <p id="w_r_reason">...</p>
                 </div>
                 <div class="modal-footer">
@@ -88,5 +98,9 @@ $(document).ready(function(){
   
 
 });
+
+function myfunc(x) {
+	document.getElementById("reason").innerHTML = x;
+	}
 </script>
     @endSection

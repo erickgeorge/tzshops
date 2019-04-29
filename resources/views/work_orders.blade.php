@@ -8,9 +8,30 @@ work orders
   
 <br>
 <div class="row container-fluid">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <h3><b>Work orders list </b></h3>
   </div>
+  
+  
+  
+    <div class="col-md-6">
+	<form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
+      <input name="start" value="<?php
+		   if(request()->has('start')) { 
+		 echo $_GET['start']; } ?>" required class="form-control mr-sm-2" type="month" placeholder="Start Month" >
+	  <input value="<?php
+		   if(request()->has('end')) { 
+		 echo $_GET['end']; } ?>" 
+	  name="end" required class="form-control mr-sm-2" type="month" placeholder="End Month" >
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
+    </form>
+	
+	
+	
+  </div>
+  
+  
+  
   {{--<div class="col-md-4">
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search by type, status and name" aria-label="Search">
@@ -37,7 +58,10 @@ work orders
     <a href="{{url('deleted/work/orders')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-danger">View rejected Work Orders</button></a>
   </div>
 </div>
-    <div class="container " >
+    <div class="container" >
+	
+	
+	@if(!$wo->isEmpty())
 <table class="table table-striped display" id="myTable"  style="width:100%">
   <thead class="thead-dark">
     <tr>
@@ -102,7 +126,9 @@ work orders
     </tr>
     @endforeach
   </tbody>
+  
 </table>
+ @endif
 </div>
 <script>
 

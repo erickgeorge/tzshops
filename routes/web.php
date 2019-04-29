@@ -82,7 +82,6 @@ Route::post('save/directorate', 'DirectorateController@createDirectorate')->name
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');
 Route::post('save/section', 'DirectorateController@createSection')->name('section.save');
 
-Route::post('password/change', 'UserController@changePassword')->name('password.change');
 
 Route::post('', 'UserController@changeProfile')->name('profile.change');
 

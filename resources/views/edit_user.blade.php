@@ -69,13 +69,11 @@
                 </div>
                 <select class="custom-select" name="college" id="directorate" onchange="getDepartments()">
                     @foreach($directorates as $directorate)
-                        <option @if(($user['section']['department']['directorate']->name) == $directorate->name)
+                        <option <?php if(($user['section']['department']['directorate']->name) == $directorate->name) {?>
                                 selected="selected"
-                                @else
-
-                                @endif
-                                value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
-                    @endforeach
+								<?php } ?>
+                                value="{{ $directorate->id }}" > {{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+                    @endforeach 
 
                 </select>
             </div>
@@ -233,5 +231,8 @@
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
+		
+		
+		
     </script>
     @endSection

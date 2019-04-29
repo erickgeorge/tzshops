@@ -43,22 +43,22 @@ User Registrartion
 
 	<div class="form-group ">
 	    <label for="fname">First name</label>
-	    <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}">
+	    <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " >
 	 </div>
 	<div class="form-group ">
 	    <label for="lname">Last name</label>
-	    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
+	    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 ">
 	</div>
 	<div class="form-group ">
 	    <label for="phone">Phone number</label>
-	    <input style="color: black"  required type="text"     name="phone"  value="{{ old('phone') }}"
+	    <input style="color: black"  required type="text"     name="phone"  
 	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
 	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
 	</div>
 	<div class="form-group ">
 	    <label for="email">Email Address</label>
-	    <input style="color: black" required type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+	    <input style="color: black" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" >
 	</div>
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
@@ -136,7 +136,7 @@ User Registrartion
 	</div>
 
 	<button type="submit" class="btn btn-success">Create User</button>
-	<a class="btn btn-info" href="/viewusers" role="button">Cancel Changes</a>
+	<a class="btn btn-info" href="/viewusers" role="button">Cancel </a>
     </form>
 
 </div>

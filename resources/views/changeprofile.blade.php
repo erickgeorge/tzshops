@@ -34,7 +34,31 @@
 
         <form action="{{ route('profile.change') }}" method="POST">
             @csrf
-            <div class="form-group ">
+         
+	
+	
+	
+	  <div class="form-group ">
+               
+	    <label for="fname">	First Name</label>
+	    <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->fname }}"
+	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           maxlength = "13"  minlength = "10"
+	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
+	</div>
+	
+	
+	
+	  <div class="form-group ">
+               
+	    <label for="phone">Last Name</label>
+	    <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->lname }}"
+	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           maxlength = "13"  minlength = "10"
+	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
+	</div>
+	
+	   <div class="form-group ">
                
 	    <label for="phone">Phone number</label>
 	    <input style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->phone }}"
@@ -42,6 +66,10 @@
            maxlength = "13"  minlength = "10"
 	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
 	</div>
+	
+	
+	
+	
 	<div class="form-group ">
 	    <label for="email">Email Address</label>
 	    <input style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
