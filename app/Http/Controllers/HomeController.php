@@ -55,7 +55,40 @@ class HomeController extends Controller
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 //        return response()->json(WorkOrder::with('user')->with('room.block')->where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get());
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+     
+	
+	if(request()->has('start'))  {
+		
+		
+		$from=request('start').'-01';
+		$to=request('end').'-31';
+		
+		if(request('start')>request('end')){
+			$to=request('start').'-01';
+		$from=request('end').'-01';
+		}
+		
+		
+		
+		
+		 $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        if ($role['user_role']->role_id == 1){
+            return view('work_orders', ['role' => $role, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->get()]);
+        }else{
+            if (strpos(auth()->user()->type, "HOS") !== false) {
+                return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->whereBetween('created_at', [$from, $to])->where('status', '<>', 0)->get()]);
+            }else if (auth()->user()->type == "SECRETARY"){
+                return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('problem_type', 'Others')->whereBetween('created_at', [$from, $to])->get()]);
+            }
+        }
+        return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereBetween('created_at', [$from, $to])->get()]);
+   
+		
+		
+	}
+		else {
+	
+	 $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         if ($role['user_role']->role_id == 1){
             return view('work_orders', ['role' => $role, 'wo' => WorkOrder::all(), 'notifications' => $notifications]);
         }else{
@@ -71,6 +104,7 @@ class HomeController extends Controller
         }
         return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->get(), 'notifications' => $notifications]);
     }
+	}
 
     public function createUserView()
     {

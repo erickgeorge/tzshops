@@ -99,7 +99,7 @@
            <!--SETTING AND CHANGE PASSWORD 
           <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
 		  
-		  <a class="dropdown-item" style="color:white" href="{{ url('changeprofile')}}">Change Profile</a>
+		  <a class="dropdown-item" style="color:white" href="{{ url('changeprofile')}}">Update Profile</a>
           <a class="dropdown-item" href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}"
@@ -149,7 +149,8 @@
     <script>
        
                 $('#myTable').DataTable();
-     
+				 $('#myTablee').DataTable();
+				  $('#myTableee').DataTable();
     </script>
 
 </body>
