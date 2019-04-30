@@ -36,8 +36,13 @@
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
+        @if(empty($wo->room_id))
         <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
-               aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}" disabled>
+               aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
+            @else
+            <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
+                   aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}" disabled>
+            @endif
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -50,15 +55,25 @@
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
+        @if(empty($wo->room_id))
         <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
-               value="{{ $wo['room']['block']->name_of_block }}" disabled>
+               value="{{ $wo->location }}" disabled>
+            @else
+            <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
+                   value="{{ $wo['room']['block']->name_of_block }}" disabled>
+            @endif
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Room</label>
         </div>
+        @if(empty($wo->room_id))
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
-               value="{{ $wo['room']->name_of_room }}" disabled>
+               value="{{ $wo->location }}" disabled>
+            @else
+            <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
+                   value="{{ $wo['room']->name_of_room }}" disabled>
+            @endif
     </div>
     <div class="form-group ">
         <label for="">Details:</label>

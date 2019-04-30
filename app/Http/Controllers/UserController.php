@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Block;
 use App\Location;
+use App\Notification;
 use App\Room;
 use Illuminate\Http\Request;
 use App\User;
@@ -71,11 +72,9 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
-
         $user=User::where('id', $id)->first();
 		$user->status='0';
-		  $user->save();
-$dd=1;
+        $user->save();
         $users = User::where('status', 1)->get();
         return redirect()->route('users.view')->with([
             'message' => 'User deleted successfully',
@@ -90,30 +89,25 @@ $dd=1;
         $user->delete();
     }
 
-
     public function getDepartments(Request $request)
     {
         return response()->json(['departments' => Department::where('directorate_id', $request->get('id'))->get()]);
     }
-
 
     public function getAreas(Request $request)
     {
         return response()->json(['areas' => Area::where('location_id', $request->get('id'))->get()]);
     }
 
-
     public function getBlocks(Request $request)
     {
         return response()->json(['blocks' => Block::where('area_id', $request->get('id'))->get()]);
     }
 
-
     public function getRooms(Request $request)
     {
         return response()->json(['rooms' => Room::where('block_id', $request->get('id'))->get()]);
     }
-
 
     public function getSections(Request $request)
     {
@@ -124,6 +118,7 @@ $dd=1;
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $trole = User::where('id', $id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
 
 //        return response()->json(User::with('section.department.directorate')->where('id', $id)->first());
@@ -133,6 +128,7 @@ $dd=1;
             'directorates' => Directorate::all(),
             'role' => $role,
             'nrole' => $role,
+            'notifications' => $notifications,
             'trole' => $trole
 
         ]);
@@ -207,9 +203,4 @@ $dd=1;
             $user->save();
             return redirect()->back()->with(['message' => 'Profile has changed successfully']);
         }
-	
-	
-	
-	
-
 }

@@ -51,9 +51,16 @@
                <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span class="sr-only">(current)</span></a> </b>
             </li>
 
+            @if(auth()->user()->type == 'STORE')
             <li class="nav-item">
-                <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work order</a>
+                <a class="nav-link" style="color:white" href="">Work orders <span
+                            class="badge badge-light">10</span></a>
             </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders</a>
+                </li>
+            @endif
 
             @if($role['user_role']['role_id'] == 1)
                 <li class="nav-item">
@@ -69,9 +76,16 @@
                     <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
                 </li>
             @endif
-            <li class="nav-item">
-                <a class="nav-link" style="color:white" href="{{ url('notification') }}">Notifications <span
-                            class="badge badge-light">4</span></a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Notifications <span class="badge badge-light">{{ count($notifications) }}</span></a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @foreach($notifications as $notification)
+                    <a class="dropdown-item" href="#">{{ $notification->message }}</a>
+                    @endforeach
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Clear notifications</a>
+                </div>
             </li>
         </ul>
         <span class="navbar-text">

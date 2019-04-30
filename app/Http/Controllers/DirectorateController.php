@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Directorate;
 use App\Location;
+use App\Notification;
 use App\Section;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,9 +18,11 @@ class DirectorateController extends Controller
     }
 
     public function departmentsView(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('manage_dep', [
             'role' => $role,
+            'notifications' => $notifications,
             'directorates' => Directorate::all(),
             'deps' => Department::with('directorate')->paginate(10),
             'secs' => Section::with('department')->paginate(10)
