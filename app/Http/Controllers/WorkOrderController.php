@@ -49,7 +49,7 @@ class WorkOrderController extends Controller
         $notify = new Notification();
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $wO->client_id;
-        $notify->type = 'workorder';
+        $notify->type = 'wo_rejected';
         $notify->message = 'Your work order of '.$wO->created_at.' about '.$wO->problem_type.' has been rejected.';
         $notify->save();
 
@@ -76,7 +76,8 @@ class WorkOrderController extends Controller
         $notify = new Notification();
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $wO->client_id;
-        $notify->type = 'workorder';
+        $notify->type = 'wo_accepted';
+        $notify->status = 1;
         $notify->message = 'Your work order of '.$wO->created_at.' about '.$wO->problem_type.' has been accepted.';
         $notify->save();
 
@@ -170,7 +171,7 @@ class WorkOrderController extends Controller
 
     public function deletedWOView(){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 		
 		if ($role['user_role']['role_id'] == 1){
 			            return view('deleted_work_orders', [

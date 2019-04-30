@@ -118,7 +118,7 @@ class UserController extends Controller
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $trole = User::where('id', $id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
 
 //        return response()->json(User::with('section.department.directorate')->where('id', $id)->first());

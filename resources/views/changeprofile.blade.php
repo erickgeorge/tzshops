@@ -73,7 +73,7 @@
 	<div class="form-group ">
 	    <label for="email">Email Address</label>
 	    <input style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
-	</div>  </div>
+	</div>
             <button type="submit" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Change profile</button>
             <a href="{{ route('home') }}" style="background-color:#F9B100;border-color:#F9B100;" class="btn btn-danger">Cancel</a>
         </form>

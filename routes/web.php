@@ -88,6 +88,7 @@ Route::post('', 'UserController@changeProfile')->name('profile.change');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView');
+Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView')->name('rejected.view.wo');
+Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read');
 /*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
 Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/

@@ -139,10 +139,10 @@
                     @endforeach
                     </tbody>
                 </table>
-				
-				
+
+
                 <div class="text-center">
-                   
+
                 </div>
                 <br>
                 <h4 id="new_dep">Add new department</h4>
@@ -219,11 +219,10 @@
                     @endforeach
                     </tbody>
                 </table>
-				
-				
-				
+
+
                 <div class="text-center">
-                   
+
                 </div>
                 <br>
                 <h4 id="new_sec">Add new section</h4>
@@ -268,34 +267,22 @@
         </div>
     </div>
     @endSection
-	
-	
-	<script>
-
-$(document).ready(function(){
-	
-	
-  $('[data-toggle="tooltip"]').tooltip();   
-  
- $('#myTable').dataTable({
-   "dom": '<"top"i>rt<"bottom"flp><"clear">'
-});
-  
-   $('#myTablee').DataTable();
- $('#myTableee').DataTable();
-});
 
 
+    <script>
+
+        $(document).ready(function () {
 
 
- 
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#myTable').dataTable({
+                "dom": '<"top"i>rt<"bottom"flp><"clear">'
+            });
+
+            $('#myTablee').DataTable();
+            $('#myTableee').DataTable();
+        });
 
 
-
-
-
-
-
-
-
-</script>
+    </script>

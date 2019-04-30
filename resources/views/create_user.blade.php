@@ -135,8 +135,8 @@ User Registrartion
 	    </div>
 	</div>
 
-	<button type="submit" class="btn btn-success">Create User</button>
-	<a class="btn btn-info" href="/viewusers" role="button">Cancel </a>
+	<button style="background-color:#2E77BB;border-color:#2E77BB;" type="submit" class="btn btn-success">Create User</button>
+	<a class="btn btn-info" href="/viewusers" style="background-color:#F9B100;border-color:#F9B100;" role="button">Cancel </a>
     </form>
 
 </div>
