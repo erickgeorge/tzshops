@@ -81,6 +81,7 @@
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
+    @if(strpos(auth()->user()->type, "HOS") !== false)
     <div class="row">
         <div>
             <form method="POST" action="{{ route('workorder.accept', [$wo->id]) }}">
@@ -99,6 +100,7 @@
         @csrf
         <button type="submit" class="btn btn-warning">Send to Receptionist</button>
     </form>
+    @endif
     <br>
 
 

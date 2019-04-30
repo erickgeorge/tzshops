@@ -54,6 +54,7 @@ Route::post('workorder/reject/{id}', 'WorkOrderController@rejectWO')->name('work
 Route::post('workorder/accept/{id}', 'WorkOrderController@acceptWO')->name('workorder.accept');
 Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name('workOrder.edit.view');
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
+Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
@@ -89,6 +90,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView')->name('rejected.view.wo');
+Route::post('close/work/order/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrder')->name('workorder.close');
 Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read');
 /*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
 Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/

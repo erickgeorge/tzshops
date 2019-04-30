@@ -13,23 +13,23 @@
         </div>
 
         @if(count($wo) > 0)
-        <div class="col-md-6">
-            <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
-                <div class="row">
-                    <input name="start" value="<?php
-                    if (request()->has('start')) {
-                        echo $_GET['start'];
-                    } ?>" required class="form-control mr-sm-2" type="month" placeholder="Start Month">
-                    <input value="<?php
-                    if (request()->has('end')) {
-                        echo $_GET['end'];
-                    } ?>"
-                           name="end" required class="form-control mr-sm-2" type="month" placeholder="End Month">
-                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
-                </div>
-            </form>
-        </div>
-            @endif
+            <div class="col-md-6">
+                <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
+                    <div class="row">
+                        <input name="start" value="<?php
+                        if (request()->has('start')) {
+                            echo $_GET['start'];
+                        } ?>" required class="form-control mr-sm-2" type="month" placeholder="Start Month">
+                        <input value="<?php
+                        if (request()->has('end')) {
+                            echo $_GET['end'];
+                        } ?>"
+                               name="end" required class="form-control mr-sm-2" type="month" placeholder="End Month">
+                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
+                    </div>
+                </form>
+            </div>
+        @endif
 
     </div>
     <br>
@@ -87,9 +87,15 @@
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
-                                <td><span class="badge badge-warning">new</span></td>
-                            @else
+                                @if(strpos(auth()->user()->type, "HOS") !== false)
+                                    <td><span class="badge badge-warning">new</span></td>
+                                @else
+                                    <td><span class="badge badge-warning">waiting...</span></td>
+                                @endif
+                            @elseif($work->status == 1)
                                 <td><span class="badge badge-success">accepted</span></td>
+                            @else
+                                <td><span class="badge badge-danger">closed</span></td>
                             @endif
                             <td>{{ $work->created_at }}</td>
                             <td>
@@ -110,16 +116,20 @@
 
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
-                                        <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i
+                                        <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}"
+                                           data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                     @endif
                                 @else
                                     @if($work->status == -1)
-                                        <a href="#"><span class="badge badge-success">Waiting...</span></a>
+                                        <a href="{{ route('workOrder.view', [$work->id]) }}" data-toggle="tooltip"
+                                           title="View"><i class="fas fa-eye"></i></a>
                                     @else
-                                        <a href="" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('workOrder.view', [$work->id]) }}" data-toggle="tooltip"
+                                           title="View"><i class="fas fa-eye"></i></a>
                                         &nbsp;
-                                        <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i
+                                        <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}"
+                                           data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>&nbsp;
                                     @endif
                                 @endif
@@ -131,7 +141,7 @@
                 </tbody>
 
             </table>
-            @else
+        @else
             <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
         @endif
     </div>

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailNotify;
 use App\Notification;
 use App\Technician;
 use App\User;
 use App\WorkOrderInspectionForm;
+use App\WorkOrderProgress;
 use Illuminate\Http\Request;
 use App\WorkOrder;
+use Illuminate\Support\Facades\Mail;
 
 class WorkOrderController extends Controller
 {
@@ -41,10 +44,16 @@ class WorkOrderController extends Controller
 
     public function rejectWO(Request $request, $id){
         $wO = WorkOrder::where('id', $id)->first();
-       // $wO->staff_id = auth()->user()->id;
+        $wO->staff_id = auth()->user()->id;
         $wO->status = 0;
         $wO->reason = $request['reason'];
         $wO->save();
+
+        $progress = new WorkOrderProgress();
+        $progress->work_order_id = $id;
+        $progress->status = "rejected";
+        $progress->updated_by = auth()->user()->id;
+        $progress->save();
 
         $notify = new Notification();
         $notify->sender_id = auth()->user()->id;
@@ -57,10 +66,22 @@ class WorkOrderController extends Controller
         $role = User::where('id',auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
+        $emailReceiver = User::where('id', $wO->client_id)->first();
+
+        $toEmail = $emailReceiver->email;
+        Mail::to($toEmail)->send(new MailNotify(auth()->user()));
+
+        $email_status = '';
+        if (Mail::failures()) {
+            $email_status = 'but Failed to send email';
+        }else{
+            $email_status = 'and Email sent successfully';
+        }
+
         return redirect()->route('work_order')->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order has been rejected',
+            'message' => 'Work order has been rejected '.$email_status,
             'wo' => WorkOrder::where('problem_type',
             substr(strstr( auth()->user()->type, " "), 1))->where('status', '<>' ,0)->get()
         ]);
@@ -73,22 +94,40 @@ class WorkOrderController extends Controller
         $wO->status = 1;
         $wO->save();
 
+        $progress = new WorkOrderProgress();
+        $progress->work_order_id = $id;
+        $progress->status = "accepted";
+        $progress->updated_by = auth()->user()->id;
+        $progress->save();
+
         $notify = new Notification();
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_accepted';
-        $notify->status = 1;
+        $notify->status = 0;
         $notify->message = 'Your work order of '.$wO->created_at.' about '.$wO->problem_type.' has been accepted.';
         $notify->save();
 
         $role = User::where('id',auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
+        $emailReceiver = User::where('id', $wO->client_id)->first();
+
+        $toEmail = $emailReceiver->email;
+        Mail::to($toEmail)->send(new MailNotify(auth()->user()));
+
+        $email_status = '';
+        if (Mail::failures()) {
+            $email_status = 'but Failed to send email';
+        }else{
+            $email_status = 'and Email sent successfully';
+        }
+
         return redirect()->route('workOrder.edit.view', [$wO->id])->with([
             'role' => $role,
             'notifications' => $notifications,
             'techs' => User::where('type', 'TECHNICIAN')->get(),
-            'message' => 'Work order accepted successfully, You can now edit it!',
+            'message' => 'Work order accepted '. $email_status .'. You can now edit it!',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
@@ -106,7 +145,7 @@ class WorkOrderController extends Controller
 
     public function viewWO($id){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //        return response()->json(WorkOrder::where('id', $id)->first());
         return view('view_work_order',[
             'role' => $role,
@@ -206,6 +245,40 @@ class WorkOrderController extends Controller
             'notifications' => $notifications,
             'message' => 'Work order successfully sent to Secretary',
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()
+        ]);
+    }
+
+    public function trackWO($id){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+//        return response()->json(WorkOrderProgress::with('user')->with('work_order.room.block')->where('work_order_id', $id)->first());
+        return view('track_work_order',[
+            'role' => $role,
+            'notifications' => $notifications,
+            'wo' => WorkOrderProgress::where('work_order_id', $id)->first()
+        ]);
+    }
+
+    public function closeWorkOrder($id, $receiver_id){
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        $wo = WorkOrder::find($id);
+        $wo->status = 2;
+        $wo->save();
+
+        $notify = new Notification();
+        $notify->sender_id = auth()->user()->id;
+        $notify->receiver_id = $receiver_id;
+        $notify->type = 'wo_closed';
+        $notify->message = 'Your work order of '.$wo->created_at.' about '.$wo->problem_type.' has been closed!.';
+        $notify->save();
+
+        return redirect()->route('workOrder.track', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Work order has been closed successfully',
+            'wo' => WorkOrderProgress::where('work_order_id', $id)->first()
         ]);
     }
 }
