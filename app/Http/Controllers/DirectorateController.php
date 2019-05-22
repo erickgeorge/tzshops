@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Directorate;
 use App\Location;
+use App\Notification;
 use App\Section;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,9 +18,11 @@ class DirectorateController extends Controller
     }
 
     public function departmentsView(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('manage_dep', [
             'role' => $role,
+            'notifications' => $notifications,
             'directorates' => Directorate::all(),
             'deps' => Department::with('directorate')->get(),
             'secs' => Section::with('department')->get()
@@ -49,11 +52,7 @@ class DirectorateController extends Controller
 
         return redirect()->route('dir.manage')->with(['message' => 'Directorate added successfully']);
     }
-	
-	
-	
-	
-	
+
 	public function editDirectorate(Request $request)
     {
        $p=$request['edirid'];
@@ -70,9 +69,7 @@ class DirectorateController extends Controller
         return redirect()->route('dir.manage')->with(['message' => 'Directorate Edited successfully']);
     }
 	
-	
-	
-	
+
 	public function deleteDirectorate($id)
     {
 
@@ -86,12 +83,6 @@ class DirectorateController extends Controller
 
       
     }
-	
-	
-	
-	
-	
-	
 
     public function createDepartment(Request $request)
     {
@@ -176,11 +167,7 @@ class DirectorateController extends Controller
         return redirect()->route('dir.manage')->with(['message' => 'Department added successfully']);
     }
 	
-	
-	
-	
-	
-	
+
 	public function editSection(Request $request)
     {
        $p=$request['esecid'];
@@ -197,8 +184,7 @@ class DirectorateController extends Controller
         return redirect()->route('dir.manage')->with(['message' => 'Section Edited successfully']);
     }
 	
-	
-	
+
 	public function deleteSection($id)
     {
 
@@ -212,18 +198,5 @@ class DirectorateController extends Controller
 
       
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

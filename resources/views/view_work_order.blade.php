@@ -76,6 +76,7 @@
         <p> &nbsp;&nbsp;</p>
         <div>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Reject</button>
+            <a class="btn btn-info" href="/home" role="button">Cancel</a>
         </div>
     </div>
     <br>

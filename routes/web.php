@@ -99,10 +99,12 @@ Route::post('save/section', 'DirectorateController@createSection')->name('sectio
 
 
 Route::post('', 'UserController@changeProfile')->name('profile.change');
+Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');
+Route::post('close/work/order/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrder')->name('workorder.close');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView');
+Route::get('rejected/work/orders', 'WorkOrderController@deletedWOView');
 /*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
 Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/
