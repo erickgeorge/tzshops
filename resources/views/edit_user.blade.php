@@ -218,8 +218,8 @@
 			-->
 		
 
-            <button type="submit" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Save</button>
-            <a class="btn btn-info" style="background-color:#F9B100;border-color:#F9B100" href="/viewusers" role="button">Cancel</a>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a class="btn btn-info" href="/viewusers" role="button">Cancel</a>
 
         </form>
 

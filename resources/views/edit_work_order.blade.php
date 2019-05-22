@@ -93,8 +93,8 @@
                     <input type="checkbox" name="contractor"> This work order needs contractor.
                 @endif
             </div>
-            <button type="submit" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Save changes</button>
-            <a href="/home" style="background-color:#F9B100;border-color:#F9B100" class="btn btn-dark">Cancel</a>
+            <button type="submit" class="btn btn-success">Save changes</button>
+            <a href="/home" class="btn btn-dark">Cancel Editing</a>
         </form>
         <br>
         <h4>Work order forms.</h4>

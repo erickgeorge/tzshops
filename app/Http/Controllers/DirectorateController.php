@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Directorate;
 use App\Location;
-use App\Notification;
 use App\Section;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,14 +17,12 @@ class DirectorateController extends Controller
     }
 
     public function departmentsView(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('manage_dep', [
             'role' => $role,
-            'notifications' => $notifications,
             'directorates' => Directorate::all(),
-            'deps' => Department::with('directorate')->paginate(10),
-            'secs' => Section::with('department')->paginate(10)
+            'deps' => Department::with('directorate')->get(),
+            'secs' => Section::with('department')->get()
         ]);
     }
 
@@ -52,6 +49,49 @@ class DirectorateController extends Controller
 
         return redirect()->route('dir.manage')->with(['message' => 'Directorate added successfully']);
     }
+	
+	
+	
+	
+	
+	public function editDirectorate(Request $request)
+    {
+       $p=$request['edirid'];
+        
+		
+        $directoratee = Directorate::where('id',$p)->first();
+		
+		$directoratee->name = $request['edirabb'];
+        $directoratee->directorate_description = $request['edirname'];
+        
+        $directoratee->campus_id = 1;
+        $directoratee->save();
+
+        return redirect()->route('dir.manage')->with(['message' => 'Directorate Edited successfully']);
+    }
+	
+	
+	
+	
+	public function deleteDirectorate($id)
+    {
+
+        $directorate=Directorate::where('id', $id)->first();
+		
+		  $directorate->delete();
+		  
+		  
+		  return redirect()->route('dir.manage')->with(['message' => 'Directorate Deleted successfully']);
+  
+
+      
+    }
+	
+	
+	
+	
+	
+	
 
     public function createDepartment(Request $request)
     {
@@ -64,7 +104,7 @@ class DirectorateController extends Controller
             return redirect()->back()->withErrors(['message' => 'Directorate is required']);
         }
 
-        if (Department::where('description',$request['dep_name'])->first() || Department::where('name',$request['dep_ab'])->first()){
+        if (!empty(Department::where('description',$request['dep_name'])->where('name',$request['dep_ab'])->first())){
             return redirect()->back()->withErrors(['message' => 'Department already exist']);
         }
 
@@ -76,6 +116,41 @@ class DirectorateController extends Controller
 
         return redirect()->route('dir.manage')->with(['message' => 'Department added successfully']);
     }
+	
+	
+	public function editDepartment(Request $request)
+    {
+       $p=$request['edepid'];
+        
+		
+        $dep = Department::where('id',$p)->first();
+		
+		$dep->name = $request['edepname'];
+        $dep->description = $request['edepdesc'];
+        
+        //$directoratee->campus_id = 1;
+        $dep->save();
+
+        return redirect()->route('dir.manage')->with(['message' => 'Department Edited successfully']);
+    }
+	
+	
+	
+	public function deleteDepartment($id)
+    {
+
+        $dep=Department::where('id', $id)->first();
+		
+		  $dep->delete();
+		  
+		  
+		  return redirect()->route('dir.manage')->with(['message' => 'Department Deleted successfully']);
+  
+
+      
+    }
+	
+	
 
     public function createSection(Request $request)
     {
@@ -100,4 +175,55 @@ class DirectorateController extends Controller
 
         return redirect()->route('dir.manage')->with(['message' => 'Department added successfully']);
     }
+	
+	
+	
+	
+	
+	
+	public function editSection(Request $request)
+    {
+       $p=$request['esecid'];
+        
+		
+        $sec = Section::where('id',$p)->first();
+		
+		$sec->section_name = $request['esecname'];
+        $sec->description = $request['esecdesc'];
+        
+        //$directoratee->campus_id = 1;
+        $sec->save();
+
+        return redirect()->route('dir.manage')->with(['message' => 'Section Edited successfully']);
+    }
+	
+	
+	
+	public function deleteSection($id)
+    {
+
+        $sec=Section::where('id', $id)->first();
+		
+		  $sec->delete();
+		  
+		  
+		  return redirect()->route('dir.manage')->with(['message' => 'Section Deleted successfully']);
+  
+
+      
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

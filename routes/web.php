@@ -19,6 +19,7 @@ Route::get('/notification', 'HomeController@notificationView');
 
 Route::get('password','HomeController@passwordView' );
 Route::get('/changeprofile','HomeController@profileView' );
+Route::get('/myprofile','HomeController@myprofileView' );
 
 Route::get('/dashboard', 'HomeController@dashboardView');
 
@@ -54,7 +55,6 @@ Route::post('workorder/reject/{id}', 'WorkOrderController@rejectWO')->name('work
 Route::post('workorder/accept/{id}', 'WorkOrderController@acceptWO')->name('workorder.accept');
 Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name('workOrder.edit.view');
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
-Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
@@ -80,6 +80,20 @@ Route::post('password/change', 'UserController@changePassword')->name('password.
 
 
 Route::post('save/directorate', 'DirectorateController@createDirectorate')->name('directorate.save');
+
+Route::POST('edit/directorate', 'DirectorateController@editDirectorate')->name('directorate.edit');
+Route::post('delete/directorate/{id}', 'DirectorateController@deleteDirectorate')->name('directorate.delete');
+
+
+Route::POST('edit/department', 'DirectorateController@editDepartment')->name('department.edit');
+Route::post('delete/department/{id}', 'DirectorateController@deleteDepartment')->name('department.delete');
+
+
+
+Route::POST('edit/section', 'DirectorateController@editSection')->name('section.edit');
+Route::post('delete/section/{id}', 'DirectorateController@deleteSection')->name('section.delete');
+
+
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');
 Route::post('save/section', 'DirectorateController@createSection')->name('section.save');
 
@@ -89,8 +103,6 @@ Route::post('', 'UserController@changeProfile')->name('profile.change');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView')->name('rejected.view.wo');
-Route::post('close/work/order/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrder')->name('workorder.close');
-Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read');
+Route::get('deleted/work/orders', 'WorkOrderController@deletedWOView');
 /*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
 Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/

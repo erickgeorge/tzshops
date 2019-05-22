@@ -36,13 +36,8 @@
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
-        @if(empty($wo->room_id))
         <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
-               aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
-            @else
-            <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
-                   aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}" disabled>
-            @endif
+               aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -55,25 +50,15 @@
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
-        @if(empty($wo->room_id))
         <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
-               value="{{ $wo->location }}" disabled>
-            @else
-            <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
-                   value="{{ $wo['room']['block']->name_of_block }}" disabled>
-            @endif
+               value="{{ $wo['room']['block']->name_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Room</label>
         </div>
-        @if(empty($wo->room_id))
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
-               value="{{ $wo->location }}" disabled>
-            @else
-            <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
-                   value="{{ $wo['room']->name_of_room }}" disabled>
-            @endif
+               value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
     <div class="form-group ">
         <label for="">Details:</label>
@@ -81,7 +66,6 @@
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
-    @if(strpos(auth()->user()->type, "HOS") !== false)
     <div class="row">
         <div>
             <form method="POST" action="{{ route('workorder.accept', [$wo->id]) }}">
@@ -100,7 +84,6 @@
         @csrf
         <button type="submit" class="btn btn-warning">Send to Receptionist</button>
     </form>
-    @endif
     <br>
 
 
