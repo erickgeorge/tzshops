@@ -28,7 +28,9 @@
         <div class="tab">
             <div class="container-fluid">
                 <div class="tab-group row">
-                    <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'customer')">DIRECTORATES</button>
+                    <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'customer')">
+                        DIRECTORATES
+                    </button>
                     <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">
                         DEPARTMENTS
                     </button>
@@ -60,44 +62,34 @@
                             <td>{{ $directorate->directorate_description }}</td>
                             <td>{{ $directorate->name }}</td>
                             <td>{{ $directorate->created_at }}</td>
-                            
-							
-							
-							
-							
-							
-							
-							 <td>
-        <div class="row">
-		
-		
-        <a style="color: green;"   onclick="myfunc('{{ $directorate->id }}','{{ $directorate->name }}','{{ $directorate->directorate_description }}','{{$directorate->directorate_description}}')"     data-toggle="modal" data-target="#editDirectorate"  title="Edit"><i class="fas fa-edit"></i></a>
 
 
-         <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this Directorate Completely?')" action="{{ route('directorate.delete', [$directorate->id]) }}" >
-          {{csrf_field()}}
+                            <td>
+                                <div class="row">
 
 
-        <button style="width:20px;height:20px;padding:0px;color:red" type="submit" data-toggle="tooltip" title="Delete"   > <a style="color: red;"   data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
+                                    <a style="color: green;"
+                                       onclick="myfunc('{{ $directorate->id }}','{{ $directorate->name }}','{{ $directorate->directorate_description }}','{{$directorate->directorate_description}}')"
+                                       data-toggle="modal" data-target="#editDirectorate" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
 
 
-       </button>
-     </form>
-   </div>
-      </td>
-							
-							
-						
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Directorate Completely? All of its departments and sections under those department will be deleted')"
+                                          action="{{ route('directorate.delete', [$directorate->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+
+
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -151,12 +143,17 @@
                             <td>{{ $dep->created_at }}</td>
                             <td>
                                 <div class="row">
-                                    <a style="color: green;" onclick="myfunc1('{{ $dep->id }}','{{ $dep->name }}','{{ $dep->description }}')"     data-toggle="modal" data-target="#editDepartment"  title="Edit"><i
+                                    <a style="color: green;"
+                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->name }}','{{ $dep->description }}')"
+                                       data-toggle="modal" data-target="#editDepartment" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
-                                    <form method="POST"  onsubmit="return confirm('Are you sure you want to delete this Department Completely?')" action="{{ route('department.delete', [$dep->id]) }}" >
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Department Completely?')"
+                                          action="{{ route('department.delete', [$dep->id]) }}">
                                         {{csrf_field()}}
-                                        <button style="width:20px;height:20px;padding:0px;color:red"  type="submit" title="Delete" style="color: red;"  data-toggle="tooltip"><i
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                title="Delete" style="color: red;" data-toggle="tooltip"><i
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
@@ -165,10 +162,10 @@
                     @endforeach
                     </tbody>
                 </table>
-				
-				
+
+
                 <div class="text-center">
-                   
+
                 </div>
                 <br>
                 <h4 id="new_dep">Add new department</h4>
@@ -231,12 +228,17 @@
                             <td>{{ $sec->created_at }}</td>
                             <td>
                                 <div class="row">
-                                    <a style="color: green;" onclick="myfunc2('{{ $sec->id }}','{{ $sec->section_name }}','{{ $sec->description }}')"     data-toggle="modal" data-target="#editSection"  title="Edit"><i
+                                    <a style="color: green;"
+                                       onclick="myfunc2('{{ $sec->id }}','{{ $sec->section_name }}','{{ $sec->description }}')"
+                                       data-toggle="modal" data-target="#editSection" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
-                                    <form method="POST"  onsubmit="return confirm('Are you sure you want to delete this Section Completely?')" action="{{ route('section.delete', [$sec->id]) }}" >
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Section Completely?')"
+                                          action="{{ route('section.delete', [$sec->id]) }}">
                                         {{csrf_field()}}
-                                        <button style="width:20px;height:20px;padding:0px;color:red"  type="submit" title="Delete" style="color: red;"  data-toggle="tooltip"><i
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                title="Delete" style="color: red;" data-toggle="tooltip"><i
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
@@ -245,11 +247,10 @@
                     @endforeach
                     </tbody>
                 </table>
-				
-				
-				
+
+
                 <div class="text-center">
-                   
+
                 </div>
                 <br>
                 <h4 id="new_sec">Add new section</h4>
@@ -293,247 +294,207 @@
             </div>
         </div>
     </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="modal fade" id="editDirectorate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="editDirectorate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Directorate</h5>
-					
-					
-					
-                   
+
+
                 </div>
-				
-				<form method="POST" action="edit/directorate" class="col-md-6">
-                <div class="modal-body">
-				
-                
-                    @csrf
-                    <div class="form-group">
-                        <label for="edirname">Directorate name</label>
-                        <input style="color: black;width:350px" type="text" required class="form-control" id="edirname"
-                               name="edirname" placeholder="Enter Directorate name">
-							   
-							   
-							   
+
+                <form method="POST" action="edit/directorate" class="col-md-6">
+                    <div class="modal-body">
+
+                        @csrf
+                        <div class="form-group">
+                            <label for="edirname">Directorate name</label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edirabb"
+                                   name="edirabb" placeholder="Enter Directorate name">
+                            <input id="edirid" name="edirid" hidden>
+
+                        </div>
+                        <div class="form-group ">
+                            <label for="edirabb">Directorate abbreviation</label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edirname"
+                                   name="edirname" placeholder="Enter Directorate abbreviation">
+                        </div>
+
+                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
+                            directorate
+                        </button>
+
                     </div>
-                    <div class="form-group ">
-                        <label for="edirabb">Directorate abbreviation</label>
-                        <input style="color: black;width:350px" type="text" required class="form-control" id="edirabb"
-                               name="edirabb" placeholder="Enter Directorate abbreviation">
-							   <input  id="edirid" name="edirid" hidden>
-                    </div>
-					
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
-                        directorate
-                    </button>
-					
-                </div>
                 </form>
-				
-				
+
+
                 <div class="modal-footer">
                 </div>
             </div>
         </div>
     </div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="modal fade" id="editDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+
+
+
+
+    <div class="modal fade" id="editDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Department</h5>
-					
-					
-					
-                   
+
+
                 </div>
-				
-				<form method="POST" action="edit/department" class="col-md-6">
-                <div class="modal-body">
-				
-                
-                    @csrf
-                    <div class="form-group">
-                        <label for="edirname">Department name</label>
-                        <input style="color: black;width:350px" type="text" required class="form-control" id="edepname"
-                               name="edepname" placeholder="Enter Department name">
-							   
-							   
-							   
+
+                <form method="POST" action="edit/department" class="col-md-6">
+                    <div class="modal-body">
+
+
+                        @csrf
+                        <div class="form-group">
+                            <label for="edirname">Department name</label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edepname"
+                                   name="edepname" placeholder="Enter Department name">
+
+
+                        </div>
+                        <div class="form-group ">
+                            <label for="edirabb">Department abbreviation</label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edepdesc"
+                                   name="edepdesc" placeholder="Enter Department abbreviation">
+                            <input id="edepid" name="edepid" hidden>
+                        </div>
+
+                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
+                            department
+                        </button>
+
                     </div>
-                    <div class="form-group ">
-                        <label for="edirabb">Department abbreviation</label>
-                        <input style="color: black;width:350px" type="text" required class="form-control" id="edepdesc"
-                               name="edepdesc" placeholder="Enter Department abbreviation">
-							   <input  id="edepid" name="edepid" hidden>
-                    </div>
-					
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
-                        department
-                    </button>
-					
-                </div>
                 </form>
-				
-				
+
+
                 <div class="modal-footer">
                 </div>
             </div>
         </div>
     </div>
-	
-	
-	
-	
-	
-	
-	<div class="modal fade" id="editSection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+
+
+
+    <div class="modal fade" id="editSection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Section Info.</h5>
-					
-					
-					
-                   
+
+
                 </div>
-				
-				<form method="POST" action="edit/section" class="col-md-6">
-                <div class="modal-body">
-				
-                
-                    @csrf
-                    <div class="form-group">
-                        <label for="edirname">Section name</label>
-                        <input style="color: black;width:350px" type="text" required class="form-control" id="esecname"
-                               name="esecname" placeholder="Enter Section name">
-							   
-							   
-							   
+
+                <form method="POST" action="edit/section" class="col-md-6">
+                    <div class="modal-body">
+
+
+                        @csrf
+                        <div class="form-group">
+                            <label for="edirname">Section name</label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="esecname"
+                                   name="esecname" placeholder="Enter Section name">
+
+
+                        </div>
+                        <div class="form-group ">
+                            <label for="esecabb">Section abbreviation</label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="esecdesc"
+                                   name="esecdesc" placeholder="Enter Section abbreviation">
+                            <input id="esecid" name="esecid" hidden>
+                        </div>
+
+                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
+                            section
+                        </button>
+
                     </div>
-                    <div class="form-group ">
-                        <label for="esecabb">Section abbreviation</label>
-                        <input style="color: black;width:350px" type="text" required class="form-control" id="esecdesc"
-                               name="esecdesc" placeholder="Enter Section abbreviation">
-							   <input  id="esecid" name="esecid" hidden>
-                    </div>
-					
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
-                        section
-                    </button>
-					
-                </div>
                 </form>
-				
-				
+
+
                 <div class="modal-footer">
                 </div>
             </div>
         </div>
     </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
     @endSection
-	
-	
-	<script>
 
 
+    <script>
+        window.onload = function () {
+            //write your function code here.
 
-window.onload = function(){
- //write your function code here.
+            document.getElementById("modal").click();
+        };
 
-document.getElementById("modal").click();
-}
-
-
-$(document).ready(function(){
-	
-	 
-  $('[data-toggle="tooltip"]').tooltip();   
-  
- $('#myTable').dataTable({
-   "dom": '<"top"i>rt<"bottom"flp><"clear">'
-});
-  
-   $('#myTablee').DataTable();
- $('#myTableee').DataTable();
- 
- 
-});
+        $(document).ready(function () {
 
 
-function myfunc(x,y,z) {
-	document.getElementById("edirid").value = x;
-	document.getElementById("edirname").value = y;
-	
-	document.getElementById("edirabb").value = z;
-	}
+            $('[data-toggle="tooltip"]').tooltip();
 
- 
+            $('#myTable').dataTable({
+                "dom": '<"top"i>rt<"bottom"flp><"clear">'
+            });
 
-function myfunc1(x,y,z) {
-	document.getElementById("edepid").value = x;
-	document.getElementById("edepname").value = y;
-	
-	document.getElementById("edepdesc").value = z;
-	}
-	
-	
-	function myfunc2(x,y,z) {
-	document.getElementById("esecid").value = x;
-	document.getElementById("esecname").value = y;
-	
-	document.getElementById("esecdesc").value = z;
-	}
+            $('#myTablee').DataTable();
+            $('#myTableee').DataTable();
 
 
+        });
 
 
+        function myfunc(x, y, z) {
+            document.getElementById("edirid").value = x;
+            document.getElementById("edirname").value = y;
+
+            document.getElementById("edirabb").value = z;
+        }
 
 
+        function myfunc1(x, y, z) {
+            document.getElementById("edepid").value = x;
+            document.getElementById("edepname").value = y;
 
-</script>
+            document.getElementById("edepdesc").value = z;
+        }
+
+
+        function myfunc2(x, y, z) {
+            document.getElementById("esecid").value = x;
+            document.getElementById("esecname").value = y;
+
+            document.getElementById("esecdesc").value = z;
+        }
+
+
+    </script>

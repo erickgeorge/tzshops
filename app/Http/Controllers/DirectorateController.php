@@ -60,8 +60,8 @@ class DirectorateController extends Controller
 		
         $directoratee = Directorate::where('id',$p)->first();
 		
-		$directoratee->name = $request['edirabb'];
-        $directoratee->directorate_description = $request['edirname'];
+		$directoratee->name = $request['edirname'];
+        $directoratee->directorate_description = $request['edirabb'];
         
         $directoratee->campus_id = 1;
         $directoratee->save();
@@ -74,11 +74,21 @@ class DirectorateController extends Controller
     {
 
         $directorate=Directorate::where('id', $id)->first();
-		
-		  $directorate->delete();
+        $deps = Department::where('directorate_id', $directorate->id)->get();
+
+        $deps_id = Department::select('id')->where('directorate_id', $directorate->id)->get();
+        $secs = Section::whereIn('department_id', $deps_id)->get();
+
+        foreach ($secs as $sec){
+            $sec->delete();
+        }
+        foreach ($deps as $dep){
+            $dep->delete();
+        }
+        $directorate->delete();
 		  
 		  
-		  return redirect()->route('dir.manage')->with(['message' => 'Directorate Deleted successfully']);
+        return redirect()->route('dir.manage')->with(['message' => 'Directorate and its children Deleted successfully']);
   
 
       

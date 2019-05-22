@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Mail;
 
 class WorkOrderController extends Controller
 {
-    public function create(Request $request){
-    	$request->validate([
+    public function create(Request $request)
+    {
+        $request->validate([
             'details' => 'required',
         ]);
-
 
 
         if ($request['p_type'] == 'Choose...') {
@@ -28,34 +28,30 @@ class WorkOrderController extends Controller
         if ($request['location'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Location required required ']);
         }
-    	$work_order = new WorkOrder();
-		
-		
-		
-		
-		if($request['checkdiv'] == 'yesmanual') {
-			
-    	$work_order->location = $request['manual'];
-		
-		} else {
-			
-    	$work_order->room_id = $request['room'];
-		
-		}
-		
-		
-		
-		
-		
-    	$work_order->client_id = auth()->user()->id;
-    	$work_order->problem_type = $request['p_type'];
-    	$work_order->details = $request['details'];
-    	$work_order->save();
+        $work_order = new WorkOrder();
 
-    	return redirect()->route('work_order')->with(['message' => 'Work order successfully created']);
+
+        if ($request['checkdiv'] == 'yesmanual') {
+
+            $work_order->location = $request['manual'];
+
+        } else {
+
+            $work_order->room_id = $request['room'];
+
+        }
+
+
+        $work_order->client_id = auth()->user()->id;
+        $work_order->problem_type = $request['p_type'];
+        $work_order->details = $request['details'];
+        $work_order->save();
+
+        return redirect()->route('work_order')->with(['message' => 'Work order successfully created']);
     }
 
-    public function rejectWO(Request $request, $id){
+    public function rejectWO(Request $request, $id)
+    {
         $wO = WorkOrder::where('id', $id)->first();
         $wO->staff_id = auth()->user()->id;
         $wO->status = 0;
@@ -72,11 +68,11 @@ class WorkOrderController extends Controller
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_rejected';
-        $notify->message = 'Your work order of '.$wO->created_at.' about '.$wO->problem_type.' has been rejected.';
+        $notify->message = 'Your work order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been rejected.';
         $notify->save();
 
 //        return response()->json('success');
-        $role = User::where('id',auth()->user()->id)->with('user_role')->first();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
         $emailReceiver = User::where('id', $wO->client_id)->first();
@@ -87,18 +83,19 @@ class WorkOrderController extends Controller
         $email_status = '';
         if (Mail::failures()) {
             $email_status = 'but Failed to send email';
-        }else{
+        } else {
             $email_status = 'and Email sent successfully';
         }
 
         return redirect()->route('work_order')->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order has been rejected '.$email_status,
-            'wo' => WorkOrder::where('problem_type', substr(strstr( auth()->user()->type, " "), 1))->where('status', '<>' ,0)->get()]);
+            'message' => 'Work order has been rejected ' . $email_status,
+            'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()]);
     }
 
-    public function acceptWO($id){
+    public function acceptWO($id)
+    {
 //        return response()->json($id);
         $wO = WorkOrder::where('id', $id)->first();
         $wO->staff_id = auth()->user()->id;
@@ -116,10 +113,10 @@ class WorkOrderController extends Controller
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_accepted';
         $notify->status = 0;
-        $notify->message = 'Your work order of '.$wO->created_at.' about '.$wO->problem_type.' has been accepted.';
+        $notify->message = 'Your work order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been accepted.';
         $notify->save();
 
-        $role = User::where('id',auth()->user()->id)->with('user_role')->first();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
         $emailReceiver = User::where('id', $wO->client_id)->first();
@@ -130,7 +127,7 @@ class WorkOrderController extends Controller
         $email_status = '';
         if (Mail::failures()) {
             $email_status = 'but Failed to send email';
-        }else{
+        } else {
             $email_status = 'and Email sent successfully';
         }
 
@@ -138,50 +135,53 @@ class WorkOrderController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'techs' => User::where('type', 'TECHNICIAN')->get(),
-            'message' => 'Work order accepted '. $email_status .'. You can now edit it!',
+            'message' => 'Work order accepted ' . $email_status . '. You can now edit it!',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
 
-    public function editWOView($id){
+    public function editWOView($id)
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 //        return response()->json(WorkOrder::where('id', $id)->first());
-        return view('edit_work_order',[
+        return view('edit_work_order', [
             'techs' => User::where('type', 'TECHNICIAN')->get(),
             'notifications' => $notifications,
             'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
 
-    public function viewWO($id){
+    public function viewWO($id)
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //        return response()->json(WorkOrder::where('id', $id)->first());
-        return view('view_work_order',[
+        return view('view_work_order', [
             'role' => $role,
             'notifications' => $notifications,
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
 
-    public function editWO(Request $request, $id){
+    public function editWO(Request $request, $id)
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
-        if (isset($request['emergency'])){
+        if (isset($request['emergency'])) {
             $wo->emergency = 1;
-        }else{
+        } else {
             $wo->emergency = 0;
         }
-        if (isset($request['labour'])){
+        if (isset($request['labour'])) {
             $wo->needs_laboured = 1;
-        }else{
+        } else {
             $wo->needs_laboured = 0;
         }
-        if (isset($request['contractor'])){
+        if (isset($request['contractor'])) {
             $wo->needs_contractor = 1;
-        }else{
+        } else {
             $wo->needs_contractor = 0;
         }
         $wo->save();
@@ -193,16 +193,17 @@ class WorkOrderController extends Controller
         ]);
     }
 
-    public function fillInspectionForm(Request $request, $id){
+    public function fillInspectionForm(Request $request, $id)
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $mForm = WorkOrderInspectionForm::where('work_order_id', $id)->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        if ($mForm){
+        if ($mForm) {
             $mForm->status = $request['status'];
             $mForm->description = $request['details'];
             $mForm->technician_id = $request['technician'];
             $mForm->save();
-        }else{
+        } else {
             $form = new WorkOrderInspectionForm();
             $form->status = $request['status'];
             $form->description = $request['details'];
@@ -219,25 +220,25 @@ class WorkOrderController extends Controller
         ]);
     }
 
-    public function deletedWOView(){
+    public function deletedWOView()
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
-		if ($role['user_role']['role_id'] == 1){
-			            return view('deleted_work_orders', [
-			                'role' => $role,
-                            'notifications' => $notifications,
-                            'wo' => WorkOrder::where('status', 0)->get()
-                        ]);
-		}
-		else
-        if (strpos(auth()->user()->type, "HOS") !== false) {
+        if ($role['user_role']['role_id'] == 1) {
             return view('deleted_work_orders', [
                 'role' => $role,
                 'notifications' => $notifications,
-                'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get()
+                'wo' => WorkOrder::where('status', 0)->get()
             ]);
-        }
+        } else
+            if (strpos(auth()->user()->type, "HOS") !== false) {
+                return view('deleted_work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get()
+                ]);
+            }
         return view('deleted_work_orders', [
             'role' => $role,
             'notifications' => $notifications,
@@ -245,7 +246,8 @@ class WorkOrderController extends Controller
         ]);
     }
 
-    public function redirectToSecretary($id){
+    public function redirectToSecretary($id)
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
@@ -259,18 +261,20 @@ class WorkOrderController extends Controller
         ]);
     }
 
-    public function trackWO($id){
+    public function trackWO($id)
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //        return response()->json(WorkOrderProgress::with('user')->with('work_order.room.block')->where('work_order_id', $id)->first());
-        return view('track_work_order',[
+        return view('track_work_order', [
             'role' => $role,
             'notifications' => $notifications,
             'wo' => WorkOrderProgress::where('work_order_id', $id)->first()
         ]);
     }
 
-    public function closeWorkOrder($id, $receiver_id){
+    public function closeWorkOrder($id, $receiver_id)
+    {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
@@ -282,7 +286,7 @@ class WorkOrderController extends Controller
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $receiver_id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of '.$wo->created_at.' about '.$wo->problem_type.' has been closed!.';
+        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
         $notify->save();
 
         return redirect()->route('workOrder.track', [$id])->with([
