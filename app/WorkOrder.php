@@ -12,6 +12,9 @@ class WorkOrder extends Model
     public function room(){
         return $this->belongsTo('App\Room');
     }
+    public function inspectionForm(){
+        return $this->hasOne('App\WorkOrderInspectionForm');
+    }
 
 }
 

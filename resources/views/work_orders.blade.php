@@ -14,12 +14,12 @@
 
         <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
-                Start : <input name="start" value="<?php
+                From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];
                 } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
                                max="<?php echo date('Y-m-d'); ?>">
-                End : <input value="<?php
+                To <input value="<?php
                 if (request()->has('end')) {
                     echo $_GET['end'];
                 } ?>"
@@ -121,9 +121,9 @@
                                     @if($work->status == -1)
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
                                     @else
-                                        <a href="" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
+                                        {{--<a href="{{ route('workOrder.view', [$work->id]) }}" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>--}}
                                         &nbsp;
-                                        <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i
+                                        <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>&nbsp;
                                     @endif
                                 @endif

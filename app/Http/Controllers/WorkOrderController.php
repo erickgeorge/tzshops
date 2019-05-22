@@ -195,6 +195,11 @@ class WorkOrderController extends Controller
 
     public function fillInspectionForm(Request $request, $id)
     {
+
+        if ($request['technician'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Technician required']);
+        }
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $mForm = WorkOrderInspectionForm::where('work_order_id', $id)->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -212,7 +217,7 @@ class WorkOrderController extends Controller
             $form->save();
         }
 
-        return redirect()->route('workOrder.view', [$id])->with([
+        return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
             'message' => 'Inspection from successfully updated',

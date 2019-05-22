@@ -371,17 +371,17 @@
                         <div class="form-group">
                             <label for="edirname">Department name</label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edepname"
-                                   name="edepname" placeholder="Enter Department name">
+                                   id="edepdesc"
+                                   name="edepdesc" placeholder="Enter Department name">
+                            <input id="edepid" name="edepid" hidden>
 
 
                         </div>
                         <div class="form-group ">
                             <label for="edirabb">Department abbreviation</label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edepdesc"
-                                   name="edepdesc" placeholder="Enter Department abbreviation">
-                            <input id="edepid" name="edepid" hidden>
+                                   id="edepname"
+                                   name="edepname" placeholder="Enter Department abbreviation">
                         </div>
 
                         <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit

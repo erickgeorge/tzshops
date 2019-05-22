@@ -12,6 +12,15 @@
         </div>
     </div>
     <hr>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -120,11 +129,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="Status" name="status" type="text" required>
+                            <input class="form-control" placeholder="Status" name="status" type="text" required value="{{ $wo['inspectionForm']->status }}">
                         </div>
                         <p>Inspection description</p>
                         <div class="form-group">
-                            <textarea  style="color: black" name="details" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
+                            <textarea  style="color: black" name="details" required maxlength="100" class="form-control"  rows="5" id="comment">{{ $wo['inspectionForm']->description }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Select Technician</label>
@@ -135,7 +144,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-outline-success">Save Inspections</button>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Inspections</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>
                 {{-- end inspection --}}

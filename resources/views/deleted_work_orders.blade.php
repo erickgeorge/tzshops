@@ -74,7 +74,7 @@
                 <div class="modal-body">
 
                     <h3 id="reason"><b> </b></h3>
-\                </div>
+              </div>
                 <div class="modal-footer">
                 </div>
             </div>
