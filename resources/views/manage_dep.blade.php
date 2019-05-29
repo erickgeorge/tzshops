@@ -253,8 +253,16 @@
 
                 </div>
                 <br>
-                <h4 id="new_sec">Add new section</h4>
+				
+				<h4 style="color:red;" id="new_sec">NOT YET IMPLEMENTED</h4>
+				
+				 <h4 id="new_sec">Add new section</h4>
+				<!--
+			 IN PROGRESS
+               
                 <hr>
+				
+				  
                 <form method="POST" action="{{ route('section.save') }}" class="col-md-6">
                     @csrf
                     <div class="input-group mb-3">
@@ -291,6 +299,7 @@
                         section
                     </button>
                 </form>
+			 -->
             </div>
         </div>
     </div>

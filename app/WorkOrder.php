@@ -13,5 +13,9 @@ class WorkOrder extends Model
         return $this->belongsTo('App\Room');
     }
 
+public function work_order_progress(){
+        return $this->hasOne('App\WorkOrderProgress');
+    }
+
 }
 

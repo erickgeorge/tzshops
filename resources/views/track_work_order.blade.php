@@ -32,20 +32,20 @@
             <label class="input-group-text">Type of a problem</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
-               aria-describedby="emailHelp" value="{{ $wo['work_order']->problem_type }}" disabled>
+               aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
-        @if(empty($wo['work_order']->room_id))
+        @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
                    name="location"
-                   aria-describedby="emailHelp" value="{{ $wo['work_order']->location }}" disabled>
+                   aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
         @else
             <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
                    name="location"
-                   aria-describedby="emailHelp" value="{{ $wo['work_order']['room']['block']->location_of_block }}"
+                   aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}"
                    disabled>
         @endif
     </div>
@@ -55,40 +55,40 @@
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area"
                aria-describedby="emailHelp"
-               value="{{ $wo['work_order']->room_id }}" disabled>
+               value="{{ $wo->room_id }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
-        @if(empty($wo['work_order']->room_id))
+        @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="block" name="block"
                    aria-describedby="emailHelp"
-                   value="{{ $wo['work_order']->location }}" disabled>
+                   value="{{ $wo->location }}" disabled>
         @else
             <input style="color: black" type="text" required class="form-control" placeholder="block" name="block"
                    aria-describedby="emailHelp"
-                   value="{{ $wo['work_order']['room']['block']->name_of_block }}" disabled>
+                   value="{{ $wo['room']['block']->name_of_block }}" disabled>
         @endif
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Room</label>
         </div>
-        @if(empty($wo['work_order']->room_id))
+        @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="room" name="room"
                    aria-describedby="emailHelp"
-                   value="{{ $wo['work_order']->location }}" disabled>
+                   value="{{ $wo->location }}" disabled>
         @else
             <input style="color: black" type="text" required class="form-control" placeholder="room" name="room"
                    aria-describedby="emailHelp"
-                   value="{{ $wo['work_order']['room']->name_of_room }}" disabled>
+                   value="{{ $wo['room']->name_of_room }}" disabled>
         @endif
     </div>
     <div class="form-group ">
         <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
-                  id="comment" disabled>{{ $wo['work_order']->details }}</textarea>
+                  id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
     <h4>Inspection Description:</h4>
@@ -100,13 +100,13 @@
     <br>
     <hr>
     @if(strpos(auth()->user()->type, "HOS") !== false)
-        @if($wo['work_order']->status == 2)
+        @if($wo->status == 2)
             <div>
                 <span class="badge badge-warning" style="padding: 20px">Work order closed!</span>
             </div>
         @else
             <div>
-                <form method="POST" action="{{ route('workorder.close', [$wo['work_order']->id, $wo['work_order']->client_id]) }}">
+                <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
                     @csrf
                     <button type="submit" class="btn btn-danger">Close work order</button>
                 </form>
@@ -116,13 +116,13 @@
         <div class="row">
             <div>
                 {{-- status of 2 means work order has been closed --}}
-                @if($wo['work_order']->status == 2)
+                @if($wo->status == 2)
                     <form method="POST" action="">
                         @csrf
                         <button type="submit" class="btn btn-success">Im satisfied!</button>
                     </form>
                 @else
-                    <form method="POST" action="{{ route('workorder.close', [$wo['work_order']->id, $wo->updated_by]) }}">
+                    <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->updated_by]) }}">
                         @csrf
                         <button type="submit" class="btn btn-success">Close work order</button>
                     </form>

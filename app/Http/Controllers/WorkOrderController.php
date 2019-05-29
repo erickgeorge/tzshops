@@ -269,7 +269,7 @@ class WorkOrderController extends Controller
         return view('track_work_order', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => WorkOrderProgress::where('work_order_id', $id)->first()
+            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }
 
@@ -293,7 +293,7 @@ class WorkOrderController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'message' => 'Work order has been closed successfully',
-            'wo' => WorkOrderProgress::where('work_order_id', $id)->first()
+            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }
 }
