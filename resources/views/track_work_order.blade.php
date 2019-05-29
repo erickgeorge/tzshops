@@ -132,7 +132,7 @@
             <div>
                 <form method="POST" action="">
                     @csrf
-                    <button type="submit" class="btn btn-danger">File a complaint</button>
+                    {{--<button type="submit" class="btn btn-danger">File a complaint</button>--}}
                 </form>
             </div>
         </div>

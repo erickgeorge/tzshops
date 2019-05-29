@@ -106,5 +106,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('rejected/work/orders', 'WorkOrderController@deletedWOView');
+Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read');
 /*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
 Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/
