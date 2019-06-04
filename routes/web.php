@@ -36,6 +36,14 @@ Route::get('/viewusers', 'HomeController@usersView')->name('users.view');
 
 Route::get('/createworkorders', 'HomeController@createWOView');
 
+
+
+Route::get('/addmaterial', 'HomeController@AddMaterialVO');
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -107,5 +115,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('rejected/work/orders', 'WorkOrderController@deletedWOView');
 Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read');
+
+Route::post('/myprofile', 'UserController@update_avatar');
+
+
 /*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
 Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/

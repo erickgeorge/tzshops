@@ -29,7 +29,7 @@
     @endif
     <div class="row ">
         <div class="col-md-3">
-            <a href=""><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
+            <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
         </div>
         <div class="col-md-6">
         </div>

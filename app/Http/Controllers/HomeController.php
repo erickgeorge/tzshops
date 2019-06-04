@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Material;
 use App\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 use App\Directorate;
@@ -183,13 +184,22 @@ class HomeController extends Controller
 public function profileView(){
     $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('changeprofile', ['role' => $role,'notifications' => $notifications]);
+         $user = Auth::user();
+        return view('changeprofile', ['role' => $role,'notifications' => $notifications,'user' => $user]);
     }
 	
 	public function myprofileView(){
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('myprofile', ['role' => $role,'notifications' => $notifications]);
+        $user = Auth::user();
+        return view('myprofile', ['role' => $role,'notifications' => $notifications,'user' => $user]);
     }
+   
+   public function AddMaterialVO(){
 
+     $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('addmaterial', ['role' => $role,'notifications' => $notifications]);
+   }
+    
 }

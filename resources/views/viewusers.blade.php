@@ -63,7 +63,6 @@ else {
       <td>{{ $user->phone }}</td>
       <td>{{ $user['section']['department']->name }}</td>
       <td>{{ $user['section']->section_name }}</td>
-     
       <td>
         <div class="row">
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
