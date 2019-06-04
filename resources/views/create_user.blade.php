@@ -129,7 +129,7 @@ User Registrartion
 	    <label style="color: black" for="pass">Password</label>
 	    <div class="row">
 	    	<div class="col-md-8">
-	    <input style="color: black" required maxlength="15"  minlength="6"  type="text" class="form-control" id="pass" aria-describedby="emailHelp" name="password" placeholder="Should have 6 characters minimum">
+	    <input style="color: black" required maxlength="15"  minlength="8"  type="text" class="form-control" id="pass" aria-describedby="emailHelp" name="password" placeholder="Should have 8 characters minimum">
 	    	</div>
 	    <button type="button" onclick="generatePass()" class="btn btn-danger">Generate Password</button>
 	    </div>

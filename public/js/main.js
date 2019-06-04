@@ -1,7 +1,7 @@
 function generatePass(){
 	var alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890.@"
 	var password = "";
-	for (var i = 0; i < 7; i++) {
+	for (var i = 0; i < 9; i++) {
 		password += alphabets.charAt(Math.floor(Math.random() * alphabets.length));
 	}
 
@@ -69,6 +69,9 @@ function getDepartments(){
 			option.innerHTML = 'Choose...';
 			option.value = '';
 			document.getElementById('department').appendChild(option);
+			
+			
+			
 		
 		for (var i = 0; i < object.length; i++) {
 			var option = document.createElement('option');

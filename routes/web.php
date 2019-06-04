@@ -57,6 +57,11 @@ Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name(
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
+
+Route::post('assigntech/work_order/{id}', 'WorkOrderController@assigntechnicianforwork')->name('work.assigntechnician');
+Route::post('transportrequest/work_order/{id}', 'WorkOrderController@transportforwork')->name('work.transport');
+
+Route::post('materialadd/work_order/{id}', 'WorkOrderController@materialaddforwork')->name('work.materialadd');
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
 
 Auth::routes();
@@ -109,3 +114,27 @@ Route::get('rejected/work/orders', 'WorkOrderController@deletedWOView');
 Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read');
 /*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
 Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/
+
+
+Route::post('/myprofile', 'UserController@update_avatar');
+
+Route::get('/addmaterial', 'StoreController@addmaterialView')->name('add_material');
+
+Route::post('newmaterial', 'StoreController@addnewmaterail')->name('material.create');
+Route::get('/incrementmaterial/{id}', 'StoreController@incrementmaterialView')->name('storeIncrement.view');
+
+
+Route::post('incrementmaterial', 'StoreController@incrementmaterial')->name('material.increment');
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,9 +7,13 @@ use App\Notification;
 use App\Technician;
 use App\User;
 use App\WorkOrderInspectionForm;
+use App\WorkOrderStaff;
+use App\WorkOrderTransport;
 use App\WorkOrderProgress;
+use App\WorkOrderMaterial;
 use Illuminate\Http\Request;
 use App\WorkOrder;
+use App\Material;
 use Illuminate\Support\Facades\Mail;
 
 class WorkOrderController extends Controller
@@ -200,22 +204,35 @@ class WorkOrderController extends Controller
             return redirect()->back()->withErrors(['message' => 'Technician required']);
         }
 
+
+		 if ($request['status'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Status of Inspection form required required']);
+        }
+		
+		else if ($request['status'] == 'Report Before Work') {
+           $statusfield=5;
+        }
+		else  { 
+			 $statusfield=6;
+		}
+		
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $mForm = WorkOrderInspectionForm::where('work_order_id', $id)->first();
+        $mForm = WorkOrder::where('id', $id)->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        if ($mForm) {
-            $mForm->status = $request['status'];
-            $mForm->description = $request['details'];
-            $mForm->technician_id = $request['technician'];
-            $mForm->save();
-        } else {
+   
+             $mForm->status = $statusfield;
+			
+             $mForm->save();
+ 
             $form = new WorkOrderInspectionForm();
             $form->status = $request['status'];
-            $form->description = $request['details'];
+			
+			 $form->description = $request['details'];
             $form->technician_id = $request['technician'];
             $form->work_order_id = $id;
             $form->save();
-        }
+        
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
@@ -224,6 +241,120 @@ class WorkOrderController extends Controller
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
+	
+	
+	
+	
+	public function transportforwork(Request $request, $id)
+    {
+
+      
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $transport = new WorkOrderTransport();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+            $transport->time = $request['date'].' '.$request['time'];
+            $transport->status = 0;
+            $transport->work_order_id = $id;
+			 $transport->requestor_id = auth()->user()->id;
+			
+            $transport->save();
+       
+	     $mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status =4;
+			
+             $mForm->save();
+       
+
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Transport form request successfully sent',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+	
+	
+	
+	
+    public function assigntechnicianforwork(Request $request, $id)
+    {
+
+        if ($request['technician_work'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Technician for work order is required']);
+        }
+
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $work_order_staff = new  WorkOrderStaff();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+            $work_order_staff->staff_id = $request['technician_work'];
+             $work_order_staff->work_order_id = $id;
+            $work_order_staff->save();
+			
+			
+			$mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status =3;
+			
+             $mForm->save();
+       
+        
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Technician assigned successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+	
+	
+	
+	
+	public function materialaddforwork(Request $request,$id)
+    {
+	$materialreq=Material::where('id',$request['mname'])->first();
+	$limit=$materialreq->stock;
+        if ($request['mquantity'] > $limit) {
+            return redirect()->back()->withErrors(['message' => 'MATERIAL LIMIT EXCEEDED IN STOCK ,MAXIMUM LIMIT : '.$limit]);
+        }
+
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $work_order_material = new  WorkOrderMaterial();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+            $work_order_material->work_order_id = $id;
+             $work_order_material->material_id = $request['mname'];
+			 $work_order_material->quantity = $request['mquantity'];
+			 $work_order_material->status = 0;
+			 $work_order_material->status_updater_id = auth()->user()->id;
+            $work_order_material->save();
+        
+			$mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status =7;
+			
+             $mForm->save();
+       
+		
+		
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Material request for Work order is submitted successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
     public function deletedWOView()
     {
@@ -274,7 +405,7 @@ class WorkOrderController extends Controller
         return view('track_work_order', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
+            'wo' => WorkOrder::where('id', $id)->with('work_order_inspection')->first()
         ]);
     }
 

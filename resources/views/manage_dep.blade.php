@@ -144,7 +144,7 @@
                             <td>
                                 <div class="row">
                                     <a style="color: green;"
-                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->name }}','{{ $dep->description }}')"
+                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->name }}','{{ $dep->description }}','{{ $dep['directorate']->id }}')"
                                        data-toggle="modal" data-target="#editDepartment" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
@@ -257,7 +257,7 @@
 				<h4 style="color:red;" id="new_sec">NOT YET IMPLEMENTED</h4>
 				
 				 <h4 id="new_sec">Add new section</h4>
-				<!--
+				
 			 IN PROGRESS
                
                 <hr>
@@ -299,7 +299,7 @@
                         section
                     </button>
                 </form>
-			 -->
+			
             </div>
         </div>
     </div>
@@ -377,6 +377,22 @@
 
 
                         @csrf
+						
+						
+						
+						<div class="form-group">
+                       
+                            <label for="directorate">Directorate/College</label>
+                       
+                        <select  style="color: black;width:350px"  required class="form-control" name="editdirectoratefdep" id="editdirectoratefdep">
+                            <option value="">Choose...</option>
+                            @foreach($directorates as $directorate)
+                                <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+						
                         <div class="form-group">
                             <label for="edirname">Department name</label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
@@ -427,6 +443,10 @@
 
 
                         @csrf
+						
+						
+						
+						
                         <div class="form-group">
                             <label for="edirname">Section name</label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
@@ -490,11 +510,22 @@
         }
 
 
-        function myfunc1(x, y, z) {
+        function myfunc1(x, y, z,p) {
+			
+			
             document.getElementById("edepid").value = x;
             document.getElementById("edepname").value = y;
 
             document.getElementById("edepdesc").value = z;
+			
+			
+			 for(var i = 0;i < document.getElementById("editdirectoratefdep").length;i++){
+            if(document.getElementById("editdirectoratefdep").options[i].value == p ){
+               document.getElementById("editdirectoratefdep").selectedIndex = i;
+            }
+        }
+			
+			
         }
 
 
@@ -504,6 +535,41 @@
 
             document.getElementById("esecdesc").value = z;
         }
+		
+		
+		
+		
+		var selecteddep = null;
+var selectedsection = null;
+function getDepartments(){
+	selecteddep = document.getElementById('directoratte').value;
+
+    console.log('ID: '+selecteddep);
+	$.ajax({
+		method: 'GET',
+		url: 'departments/',
+		data: {id: selecteddep}
+	})
+	.done(function(msg){
+        console.log(msg['departments']);
+		var object = JSON.parse(JSON.stringify(msg['departments']));
+		$('#department').empty();
+		
+		var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('department').appendChild(option);
+			
+			
+		
+		for (var i = 0; i < object.length; i++) {
+			var option = document.createElement('option');
+			option.innerHTML = object[i].description;
+			option.value = object[i].id;
+			document.getElementById('department').appendChild(option);
+		}
+	});
+}
 
 
     </script>

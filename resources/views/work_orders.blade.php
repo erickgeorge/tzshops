@@ -92,8 +92,23 @@
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
                                 <td><span class="badge badge-warning">new</span></td>
-                            @else
+                            @elseif($work->status == 1)
                                 <td><span class="badge badge-success">accepted</span></td>
+								
+							@elseif($work->status == 2)
+                                <td><span class="badge badge-success">CLOSED</span></td>
+							@elseif($work->status == 3)
+                                <td><span class="badge badge-info">technician assigned</span></td>
+							@elseif($work->status == 4)
+                                <td><span class="badge badge-info">transportation stage</span></td>
+							@elseif($work->status == 5)
+															<td><span class="badge badge-info">pre-implementation</span></td>
+							@elseif($work->status == 6)
+															<td><span class="badge badge-info">post=implementation</span></td>
+							@elseif($work->status == 7)
+															<td><span class="badge badge-info">material requested</span></td>
+							@else
+                                <td><span class="badge badge-success">procurement stage</span></td>								
                             @endif
                             <td>{{ $work->created_at }}</td>
                             <td>

@@ -128,6 +128,7 @@ class DirectorateController extends Controller
 		
 		$dep->name = $request['edepname'];
         $dep->description = $request['edepdesc'];
+		 $dep->directorate_id = $request['editdirectoratefdep'];
         
         //$directoratee->campus_id = 1;
         $dep->save();

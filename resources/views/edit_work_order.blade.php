@@ -112,12 +112,58 @@
             <div class="tab">
                 <div class="container-fluid">
                     <div class="tab-group row">
-                        <button class="tablinks col-md-4" onclick="openTab(event, 'customer')">INSPECTION FORM</button>
-                        <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">MATERIAL DETAILS</button>
-                        <button class="tablinks col-md-4" onclick="openTab(event, 'payment')">TRANSPORTATION FORM
+						<button class="tablinks col-md-4" onclick="openTab(event, 'assigntechnician')">ASSIGN TECHNICIAN FOR WORK</button>
+						<button class="tablinks col-md-4" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
+						<button class="tablinks col-md-4" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
+                        
+                        <button class="tablinks col-md-4" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
+						 <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">PROCUREMENT OF MATERIAL FORM</button>
+                        
                     </div>
                 </div>
+
+
+
+
+
+			{{-- ASSIGN TECHNICIAN tab--}}
+                <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
+                    @csrf
+                    <div id="assigntechnician" class="tabcontent">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Assign Technician for this work-order</p>
+                            </div>
+                        </div>
+						
+						
+						
+                        <div class="form-group">
+                           
+                            <select  required class="custom-select"  name="technician_work">
+                                <option  selected value="" >Choose...</option>
+                                @foreach($techs as $tech)
+                                    <option value="{{ $tech->id }}">{{ $tech->fname.' '.$tech->lname }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Technician</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </div>
+                </form>
+                {{-- end ASSIGN TECHNICIAN  --}}
+
+				
+				
+				
+
+
+
+
+
+
+
 
                 {{-- INSPECTION tab--}}
                 <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
@@ -128,17 +174,31 @@
                                 <p>Work order status</p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Status" name="status" type="text" required value="{{ $wo['inspectionForm']->status }}">
+						
+						
+						 <div class="form-group">
+                            
+							<select class="custom-select" required name="status">
+                                <option selected value="" >Choose...</option>
+                               
+                                    <option value="Report Before Work">Report Before Work</option>
+									   <option value="Report After Work">Report After Work</option>
+                              
+                            </select>
+							
                         </div>
+					
+						
+						
+						
                         <p>Inspection description</p>
                         <div class="form-group">
-                            <textarea  style="color: black" name="details" required maxlength="100" class="form-control"  rows="5" id="comment">{{ $wo['inspectionForm']->description }}</textarea>
+                            <textarea  style="color: black" name="details" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Select Technician</label>
-                            <select class="custom-select" required name="technician">
-                                <option selected>Choose...</option>
+                            <label>Select Technician on Duty</label>
+                            <select  required class="custom-select"  name="technician">
+                                <option  selected value="" >Choose...</option>
                                 @foreach($techs as $tech)
                                     <option value="{{ $tech->id }}">{{ $tech->fname.' '.$tech->lname }}</option>
                                 @endforeach
@@ -149,6 +209,84 @@
                     </div>
                 </form>
                 {{-- end inspection --}}
+				
+				
+				
+				 {{-- request_transport form--}}
+                <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
+                    @csrf
+                    <div id="request_transport" class="tabcontent">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Work order Transport Request Form</p>
+                            </div>
+                        </div>
+				</br>
+                        <p>Transport timdatee</p>
+                        <div class="form-group">
+                            <input type="date" style="color: black" name="date" required class="form-control"  rows="5" id="date"></input>
+                        </div>
+						
+						  <p>Transport time</p>
+                        <div class="form-group">
+                            <input type="time" style="color: black" name="time" required class="form-control"  rows="5" id="time"></input>
+                        </div>
+                       
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Transport Request</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </div>
+                </form>
+                {{-- end request_transport form --}}
+				
+				
+				
+				
+				{{-- material_request tab--}}
+                <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
+                    @csrf
+                    <div id="material_request" class="tabcontent">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Select material for work-order</p>
+                            </div>
+                        </div>
+						
+						<?php
+						
+						use App\Material;
+						$materials= Material::get();
+						
+						?>
+						
+						
+						
+						
+                        <div class="form-group">
+                           
+                            <select onchange="stock();" required class="custom-select"  id="mname" name="mname">
+                                <option   selected value="" >Choose...</option>
+                                @foreach($materials as $material)
+                                    <option value="{{ $material->id }}">{{ $material->name.' '.$material->description }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+						
+						
+						 <p>Quantity</p>
+                        <div class="form-group">
+                            <input type="number" min="1"  style="color: black" name="mquantity" required class="form-control"  rows="5" id="mquantity"></input>
+                        </div>
+						
+						
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </div>
+                </form>
+                {{-- end material_request  --}}
+				
+				
+				
+				
 
                 {{-- materials tab --}}
                 <div id="delivery" class="tabcontent">
@@ -160,8 +298,14 @@
                 <div id="payment" class="tabcontent">
                     <h4>Transportation Form</h4>
                     <p>To be populated.</p>
+					
                 </div>
             </div>
         </div>
     <br>
-    @endSection
+	 @endSection
+	
+	
+	
+	
+	

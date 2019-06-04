@@ -5,6 +5,12 @@
     @endSection
 
 @section('body')
+<?php use App\WorkOrderInspectionForm;
+		use App\WorkOrderTransport;
+		use App\WorkOrderStaff;
+		use App\WorkOrderMaterial;
+
+ ?>
     <br>
     <div class="row container-fluid">
         <div class="col-md-8">
@@ -90,14 +96,158 @@
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
-    <br>
-    <h4>Inspection Description:</h4>
-    @if(empty($wo->remarks))
-        <p style="color: red">Not inspected yet</p>
+	
+	<br>
+    <h4><b>Transport Description: </b></h4>
+	@if(empty($wo['work_order_transport']->work_order_id))
+        <p style="color: red">No Transport form</p>
     @else
-        <p>{{ $wo->remarks }}</p>
+		<?php
+	
+	$idwo=$wo->id;
+	$tforms = WorkOrderTransport::where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>DATE</th>
+    <th>TIME</th> 
+	<th>STATUS</th> 
+    <th>DATE REQUESTED</th>
+  </tr>
+    @foreach($tforms as $tform)
+	
+	
+  <tr>
+    <td>{{ date('F d Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td> 
+    <td>@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
+	 <td>{{ 
+	 $tform->created_at }}</td>
+  </tr>
+  
+	@endforeach
+	</table>
     @endif
     <br>
+	
+	
+	
+	
+	<br>
+    <h4><b>Technician assigned: </b></h4>
+@if(empty($wo['work_order_staff']->id))
+        <p style="color: red">No Technician assigned yet</p>
+    @else
+		<?php
+	
+	$idwo=$wo->id;
+	$techforms = WorkOrderStaff::where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>Staff Full Name</th>
+    <th>DATE Assigned</th>
+  </tr>
+    @foreach($techforms as $techform)
+	
+	
+  <tr>
+    <td>{{$techform['technician']->lname.' '.$techform['technician']->fname }}</td>
+    <td>{{ 
+	 $tform->created_at }}</td>
+  </tr>
+  
+	@endforeach
+	</table>
+    @endif
+    <br>
+    
+	<br>
+    <h4><b>Material Requests: </b></h4>
+	@if(empty($wo['work_order_material']->id))
+        <p style="color: red">No Material have been requested yet</p>
+    @else
+		<?php
+	
+	$idwo=$wo->id;
+	$matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>Material Name</th>
+    <th>Material Description</th>
+	<th>Type</th>
+	 <th>Quantity</th>
+	  <th>Status</th>
+	   <th>Date Requested</th>
+	    <th>Date Approved</th>
+  </tr>
+    @foreach($matforms as $matform)
+	
+	
+  <tr>
+    <td>{{$matform['material']->name }}</td>
+   <td>{{$matform['material']->description }}</td>
+    <td>{{$matform['material']->type }}</td>
+	 <td>{{$matform->quantity }}</td>
+	 <td>@if($matform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
+	
+	
+	 <td>{{$matform->created_at }}</td>
+	 <td>{{$matform->updated_at }}</td>
+  </tr>
+  
+	@endforeach
+	</table>
+    @endif
+    <br>
+	
+	<br>
+    <h4><b>Procurement Requests: </b></h4>
+	
+	
+    <br>
+    <h4><b>Inspection Description: </b></h4>
+    @if(empty($wo['work_order_inspection']->status))
+        <p style="color: red">Not inspected yet</p>
+    @else
+		<?php
+	
+	$idwo=$wo->id;
+	$iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>STATUS</th>
+    <th>DESCRIPTION</th> 
+	<th>TECHNICIAN RESPONSIBLE</th> 
+    <th>DATE</th>
+  </tr>
+    @foreach($iforms as $iform)
+	
+	
+  <tr>
+    <td>{{ $iform->status }}</td>
+    <td>{{ $iform->description }}</td> 
+    <td>{{ $iform->created_at }}</td>
+	 <td>{{ 
+	 
+	 $iform['user']->lname.' '.$iform['user']->fname }}</td>
+  </tr>
+  
+	@endforeach
+	</table>
+    @endif
+    <br>
+	
+	
+	
+	
+	
     <hr>
     @if(strpos(auth()->user()->type, "HOS") !== false)
         @if($wo->status == 2)

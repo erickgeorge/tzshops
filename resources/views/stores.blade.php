@@ -29,7 +29,7 @@
     @endif
     <div class="row ">
         <div class="col-md-3">
-            <a href=""><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
+            <a href="/addmaterial"><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
         </div>
         <div class="col-md-6">
         </div>
@@ -64,10 +64,10 @@
                     <td id="wo-details">{{ $item->description }}</td>
                     <td>{{ $item->type }}</td>
                     <td>{{ $item->stock }}</td>
-                    <td>{{ $work->created_at }}</td>
-                    <td>{{ $work->updated_at }}</td>
+                    <td>{{ $item->created_at }}</td>
+                    <td>{{ $item->updated_at }}</td>
                     <td>
-                        <a style="color: green;" href=""  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+                        <a style="color: green;" href="{{ route('storeIncrement.view', [$item->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
                         <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>
                         </td>
                     </tr>
