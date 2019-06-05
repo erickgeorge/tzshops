@@ -216,7 +216,11 @@ class UserController extends Controller
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+<<<<<<< HEAD
      $user = Auth::user();
+=======
+        $user = Auth::user();
+>>>>>>> 5443e4ce70776566af968bcee9ac098f2c21d691
 
         $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
 
