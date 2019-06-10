@@ -64,6 +64,12 @@
                     </li>
                 @endif
 
+                @if(strpos(auth()->user()->type, "HOS") !== false)
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Manage Technicians</a>
+                    </li>
+                @endif
+
                 @if(auth()->user()->type == 'STORE')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>

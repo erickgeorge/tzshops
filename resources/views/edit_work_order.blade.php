@@ -108,17 +108,17 @@
         <br>
         <h4>Work order forms.</h4>
         {{-- tabs --}}
-        <div class="col-md-8 payment-section-margin">
+        <div class="payment-section-margin">
             <div class="tab">
                 <div class="container-fluid">
                     <div class="tab-group row">
-						<button class="tablinks col-md-4" onclick="openTab(event, 'assigntechnician')">ASSIGN TECHNICIAN FOR WORK</button>
-						<button class="tablinks col-md-4" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
+						<button class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')">ASSIGN TECHNICIAN FOR WORK</button>
+						<button class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
-						<button class="tablinks col-md-4" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
+						<button class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
                         
-                        <button class="tablinks col-md-4" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
-						 <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">PROCUREMENT OF MATERIAL FORM</button>
+                        <button class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
+						 <button class="tablinks col-md-3" onclick="openTab(event, 'delivery')" id="defaultOpen">PROCUREMENT OF MATERIAL FORM</button>
                         
                     </div>
                 </div>

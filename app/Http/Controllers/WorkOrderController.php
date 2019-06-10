@@ -150,7 +150,7 @@ class WorkOrderController extends Controller
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 //        return response()->json(WorkOrder::where('id', $id)->first());
         return view('edit_work_order', [
-            'techs' => User::where('type', 'TECHNICIAN')->get(),
+            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
             'notifications' => $notifications,
             'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()
         ]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Material;
 use App\Notification;
+use App\Technician;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -200,6 +201,17 @@ public function profileView(){
      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('addmaterial', ['role' => $role,'notifications' => $notifications]);
+   }
+
+   public function techniciansView(){
+
+     $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('technicians', [
+            'role' => $role,
+            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
+            'notifications' => $notifications
+        ]);
    }
     
 }

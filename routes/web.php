@@ -124,8 +124,11 @@ Route::post('read/notification/{id}/{type}', 'NotificationController@readNotific
 Route::post('/myprofile', 'UserController@update_avatar');
 
 
-/*Route::get('add/technician', 'WorkOrderController@addTechView')->name('tech.add');
-Route::post('create/technician', 'WorkOrderController@createTech')->name('tech.create');*/
+Route::get('add/technician', 'TechnicianController@techView')->name('techs.view');
+Route::post('create/technician', 'TechnicianController@createTech')->name('tech.create');
+Route::get('edit/technician/{id}', 'TechnicianController@editTechView')->name('tech.edit.view');
+Route::post('edit/technician/{id}', 'TechnicianController@editTech')->name('tech.edit');
+Route::post('delete/technician/{id}', 'TechnicianController@deleteTech')->name('tech.delete');
 
 
 Route::post('/myprofile', 'UserController@update_avatar');
@@ -137,6 +140,8 @@ Route::get('/incrementmaterial/{id}', 'StoreController@incrementmaterialView')->
 
 
 Route::post('incrementmaterial', 'StoreController@incrementmaterial')->name('material.increment');
+
+Route::get('technicians', 'HomeController@techniciansView');
 
 
 
