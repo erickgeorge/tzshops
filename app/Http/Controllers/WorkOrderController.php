@@ -329,7 +329,7 @@ class WorkOrderController extends Controller
              $work_order_material->material_id = $request['mname'];
 			 $work_order_material->quantity = $request['mquantity'];
 			 $work_order_material->status = 0;
-			 $work_order_material->status_updater_id = auth()->user()->id;
+			 $work_order_material->hos_id = auth()->user()->id;
             $work_order_material->save();
         
 			$mForm = WorkOrder::where('id', $id)->first();
@@ -432,4 +432,10 @@ class WorkOrderController extends Controller
             'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }
+	
+	
+	
+	
+	
+	
 }

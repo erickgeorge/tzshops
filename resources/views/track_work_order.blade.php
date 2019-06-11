@@ -183,7 +183,7 @@
 	 <th>Quantity</th>
 	  <th>Status</th>
 	   <th>Date Requested</th>
-	    <th>Date Approved</th>
+	    <th>Date Updated</th>
   </tr>
     @foreach($matforms as $matform)
 	
@@ -193,7 +193,7 @@
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
 	 <td>{{$matform->quantity }}</td>
-	 <td>@if($matform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
+	 <td>@if($matform->status==0) WAITING   @elseif($matform->status== 1) APPROVED @else REJECTED   @endif</td>
 	
 	
 	 <td>{{$matform->created_at }}</td>

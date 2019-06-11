@@ -116,6 +116,7 @@ User Registrartion
 	    <option value="Technician">Technician</option>
 	    <option value="Estates Director">Estates Director</option>
 	    <option value="Inspector Of Works">Inspector Of Works</option>
+		<option value="Transport Officer">Transport Officer</option>
 	  </select>
 	</div>
 

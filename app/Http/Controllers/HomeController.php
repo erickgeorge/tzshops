@@ -13,6 +13,8 @@ use App\Directorate;
 use App\WorkOrder;
 use App\Department;
 use App\Section;
+use App\WorkOrderMaterial;
+use App\WorkOrderTransport;
 
 
 class HomeController extends Controller
@@ -213,5 +215,30 @@ public function profileView(){
             'notifications' => $notifications
         ]);
    }
+   
+   
+    public function workOrderNeedMaterialView()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('womaterialneeded', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 0)->get(),'notifications' => $notifications]);
+    }
+	
+	
+	
+	public function workOrderApprovedMaterialView()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('womaterialapproved', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 1)->get(),'notifications' => $notifications]);
+    }
+	
     
+	
+	public function transport_request_View()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_trasport_request', ['role' => $role, 'items' => WorkOrderTransport::where('status', 0)->get(),'notifications' => $notifications]);
+    }
 }

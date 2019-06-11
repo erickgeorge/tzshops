@@ -43,16 +43,48 @@
                     <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span
                                     class="sr-only">(current)</span></a> </b>
                 </li>
-
-                @if(auth()->user()->type == 'STORE')
+<?php 
+				use App\WorkOrderMaterial;
+				use App\WorkOrderTransport;
+				$wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
+				
+				$wo_material_approved = WorkOrderMaterial::where('status',1)->get();
+				
+				$wo_transport = WorkOrderTransport::where('status',0)->get();
+				
+				
+				?>
+				
+				 @if(auth()->user()->type == 'Transport Officer')
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="">Materials needed <span
-                                    class="badge badge-light">10</span></a>
+                        <a class="nav-link" style="color:white" href="{{ url('wo_transport_request')}}">Transport Requests <span
+                                    class="badge badge-light">{{ count($wo_transport) }}</span></a>
+                    </li>
+					
+					<li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">All Requests </a>
                     </li>
                 @endif
+				
+                @if(auth()->user()->type == 'STORE')
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
+                                    class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
+                    </li>
+                @endif
+				
+				   @if(auth()->user()->type == 'Inspector Of Works')
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">WO that needs material <span
+                                    class="badge badge-light">{{ count($wo_material_needed) }}</span></a>
+                    </li>
+                @endif
+				
+				 @if(auth()->user()->type != 'STORE')
                 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work order</a>
                 </li>
+				@ENDIF
 
                 @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">

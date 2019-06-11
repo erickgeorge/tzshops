@@ -148,6 +148,19 @@ Route::get('technicians', 'HomeController@techniciansView');
 
 
 
+Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneeded');
+
+
+Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMaterialView')->name('work_order_approved_material');
+
+
+Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('store.materialaccept');
+Route::get('reject/material/{id}', 'StoreController@rejectMaterial')->name('store.materialreject');
+
+Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('store.materialrelease');
+
+Route::get('wo_transport_request', 'HomeController@transport_request_View')->name('wo_transport_request');
+
 
 
 
