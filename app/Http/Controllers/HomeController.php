@@ -241,4 +241,112 @@ public function profileView(){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_trasport_request', ['role' => $role, 'items' => WorkOrderTransport::where('status', 0)->get(),'notifications' => $notifications]);
     }
+	
+	
+	public function woTransportAcceptedView()
+    {
+		if(request()->has('start') && request()->has('end') )  {
+		
+		
+		$from=request('start');
+		$to=request('end');
+		
+		if(request('start')>request('end')){
+			$to=request('start').'-01';
+		$from=request('end').'-01';
+		}
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_trasport_accept', ['role' => $role, 'items' => WorkOrderTransport::where('status', 1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+    
+		}
+		
+		
+		
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_trasport_accept', ['role' => $role, 'items' => WorkOrderTransport::where('status', 1)->get(),'notifications' => $notifications]);
+    }
+	
+	public function woTransportRejectedView()
+    {
+		
+		if(request()->has('start') && request()->has('end') )  {
+		
+		
+		$from=request('start');
+		$to=request('end');
+		
+		if(request('start')>request('end')){
+			$to=request('start').'-01';
+		$from=request('end').'-01';
+		}
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_trasport_accept', ['role' => $role, 'items' => WorkOrderTransport::where('status', -1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+    
+		}
+		
+		
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_trasport_accept', ['role' => $role, 'items' => WorkOrderTransport::where('status', -1)->get(),'notifications' => $notifications]);
+    }
+	
+	
+	
+	public function woMaterialAcceptedView()
+    {
+		
+		if(request()->has('start') && request()->has('end') )  {
+		
+		
+		$from=request('start');
+		$to=request('end');
+		
+		if(request('start')>request('end')){
+			$to=request('start').'-01';
+		$from=request('end').'-01';
+		}
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+ 
+		}
+		
+		
+		
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 1)->get(),'notifications' => $notifications]);
+   }
+   
+   
+   
+   
+   public function woMaterialRejectedView()
+    {
+		
+		if(request()->has('start') && request()->has('end') )  {
+		
+		
+		$from=request('start');
+		$to=request('end');
+		
+		if(request('start')>request('end')){
+			$to=request('start').'-01';
+		$from=request('end').'-01';
+		}
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status',-1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+ 
+		}
+		
+		
+		
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status', -1)->get(),'notifications' => $notifications]);
+   }
 }

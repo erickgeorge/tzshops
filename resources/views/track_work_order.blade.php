@@ -121,7 +121,7 @@
   <tr>
     <td>{{ date('F d Y', strtotime($tform->time))  }}</td>
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td> 
-    <td>@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
+    <td style="color:red">@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
 	 <td>{{ 
 	 $tform->created_at }}</td>
   </tr>
@@ -153,8 +153,10 @@
     @foreach($techforms as $techform)
 	
 	
+
+
   <tr>
-    <td>{{$techform['technician']->lname.' '.$techform['technician']->fname }}</td>
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname }}</td>
     <td>{{ 
 	 $tform->created_at }}</td>
   </tr>
@@ -193,7 +195,7 @@
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
 	 <td>{{$matform->quantity }}</td>
-	 <td>@if($matform->status==0) WAITING   @elseif($matform->status== 1) APPROVED @else REJECTED   @endif</td>
+	 <td style="color:red">@if($matform->status==0) WAITING   @elseif($matform->status== 1) APPROVED @elseif($matform->status== 2) RELEASED FROM STORE @else REJECTED   @endif</td>
 	
 	
 	 <td>{{$matform->created_at }}</td>
@@ -231,7 +233,7 @@
 	
 	
   <tr>
-    <td>{{ $iform->status }}</td>
+    <td style="color:red" >{{ $iform->status }}</td>
     <td>{{ $iform->description }}</td> 
     <td>{{ $iform->created_at }}</td>
 	 <td>{{ 

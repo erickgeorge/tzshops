@@ -1,22 +1,36 @@
 @extends('layouts.master')
 
 @section('title')
-    store
+    work orders
     @endSection
 
 @section('body')
 
     <br>
     <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3><b>All transport Requests</b></h3>
+        <div class="col-md-6">
+            <h3><b>Accepted Transport Visit</b></h3>
         </div>
-        {{--<div class="col-md-4">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by type, status and name" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>--}}
+
+        <div class="col-md-6">
+            <form method="GET" action="wo_transport_request_accepted" class="form-inline my-2 my-lg-0">
+                From <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
+            </form>
+        </div>
+
+
+       
     </div>
     <br>
     <hr>
@@ -28,6 +42,7 @@
         </div>
     @endif
    
+   
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
@@ -38,7 +53,7 @@
 				<th >Date</th>
 				<th >Time</th>
 				
-				<th >Action</th>
+				<th >Status</th>
 				
             </tr>
             </thead>
@@ -71,10 +86,7 @@
 					
 					<td>{{ date('h:m:s a', strtotime($item->time)) }}</td>
 					 
-					 <td>
-					 <a class="btn btn-success btn-sm" href="{{ route('transportrequest.accept', [$item->id]) }}" role="button">Accept</a>
-					  &nbsp &nbsp 
-					<a class="btn btn-danger btn-sm" href="{{ route('transportrequest.reject', [$item->id]) }}" role="button">Reject</a> </td>
+					 <td>ACCEPTED </td>
                     </tr>
                     @endforeach
             </tbody>

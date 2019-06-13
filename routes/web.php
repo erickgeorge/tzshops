@@ -162,9 +162,18 @@ Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('st
 Route::get('wo_transport_request', 'HomeController@transport_request_View')->name('wo_transport_request');
 
 
+Route::get('transport_request/accept/{id}','WorkOrderController@transport_request_accept')->name('transportrequest.accept');
+Route::get('transport_request/reject/{id}','WorkOrderController@transport_request_reject')->name('transportrequest.reject');
 
 
 
 
+Route::get('work_order_material_accepted', 'HomeController@woMaterialAcceptedView')->name('woMaterialAccepted');
 
+
+Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedView')->name('woMaterialRejected');
+
+Route::get('wo_transport_request_accepted', 'HomeController@woTransportAcceptedView')->name('woTransportAccepted');
+
+Route::get('wo_transport_request_rejected', 'HomeController@woTransportRejectedView')->name('woTransportRejected');
 

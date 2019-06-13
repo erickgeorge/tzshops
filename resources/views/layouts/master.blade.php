@@ -61,15 +61,24 @@
                                     class="badge badge-light">{{ count($wo_transport) }}</span></a>
                     </li>
 					
-					<li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">All Requests </a>
+					 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('wo_transport_request_accepted')}}">Accepted Transports</a>
                     </li>
+				 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('wo_transport_request_rejected')}}">Rejected Transports</a>
+                    </li>	
+					
+					
                 @endif
 				
                 @if(auth()->user()->type == 'STORE')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
                                     class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
+                    </li>
+					
+					<li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">All Requests </a>
                     </li>
                 @endif
 				
@@ -78,6 +87,17 @@
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">WO that needs material <span
                                     class="badge badge-light">{{ count($wo_material_needed) }}</span></a>
                     </li>
+					
+					<li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_accepted')}}">Accepted Work Orders</a>
+                    </li>
+					
+					<li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_rejected')}}">Rejected Work Orders</a>
+                    </li>
+					
+					
+					
                 @endif
 				
 				 @if(auth()->user()->type != 'STORE')

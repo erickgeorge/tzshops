@@ -125,8 +125,11 @@
                                     @if($work->status == -1)
                                         <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a>
-                                    @else
-
+                                    @elseif($work->status == 2)
+										 <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
+                                                    class="fas fa-tasks"></i></a>
+													
+									@else
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i

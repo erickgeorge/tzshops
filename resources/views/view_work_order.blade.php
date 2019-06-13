@@ -32,6 +32,22 @@
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
     </div>
+	
+	 @if(empty($wo->room_id))
+		 
+	  <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Location</label>
+        </div>
+        <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
+               aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
+    </div>
+           
+		  
+        @else
+            
+   
+	
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
@@ -60,6 +76,8 @@
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
                value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
+	
+	     @endif
     <div class="form-group ">
         <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"

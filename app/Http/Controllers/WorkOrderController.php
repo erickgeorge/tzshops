@@ -432,7 +432,33 @@ class WorkOrderController extends Controller
             'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }
+
+
+
+	public function transport_request_accept($id)
+    {
+       
+        $wo_transport =WorkOrderTransport::where('id', $id)->first();
+
+		
+		 $wo_transport->status = 1;
+        $wo_transport->save();
+        
+        return redirect()->route('wo_transport_request')->with(['message' => 'Transport Request Accepted successfully ']);
+    }	
 	
+	
+	public function transport_request_reject($id)
+    {
+       
+        $wo_transport =WorkOrderTransport::where('id', $id)->first();
+
+		
+		 $wo_transport->status = -1;
+        $wo_transport->save();
+        
+        return redirect()->route('wo_transport_request')->with(['message' => 'Transport Request Rejected successfully ']);
+    }	
 	
 	
 	

@@ -85,7 +85,6 @@ class StoreController extends Controller
 
         return redirect()->route('add_material')->with(['message' => 'New material successfully added']);
     }
-	
 
 	public function acceptMaterial($id)
     {
