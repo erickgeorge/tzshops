@@ -25,7 +25,7 @@
             </ul>
         </div>
     @endif
-    <h5>This work order has been {{ $wo->status }} by <span
+    <h5>This work order has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
                 style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h5>
     <h5>Has been {{ $wo->status }} on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span>
     </h5>
@@ -142,7 +142,7 @@
 		<?php
 	
 	$idwo=$wo->id;
-	$techforms = WorkOrderStaff::where('work_order_id',$idwo)->get();
+	$techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
 ?>
 
 <table style="width:100%">
@@ -156,7 +156,11 @@
 
 
   <tr>
-    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname }}</td>
+      @if($techform['technician_assigned'] != null)
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
+          @else
+          <td style="color: red">No technician assigned yet</td>
+      @endif
     <td>{{ 
 	 $tform->created_at }}</td>
   </tr>
@@ -234,11 +238,11 @@
 	
   <tr>
     <td style="color:red" >{{ $iform->status }}</td>
-    <td>{{ $iform->description }}</td> 
+    <td>{{ $iform->description }}</td>
+      <td>{{
+
+	 $iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ $iform->created_at }}</td>
-	 <td>{{ 
-	 
-	 $iform['user']->lname.' '.$iform['user']->fname }}</td>
   </tr>
   
 	@endforeach
