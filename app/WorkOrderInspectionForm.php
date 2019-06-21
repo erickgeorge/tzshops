@@ -8,8 +8,12 @@ class WorkOrderInspectionForm extends Model
 {
 	
 	
-	 public function user(){
-        return $this->belongsTo('App\Technician', 'technician_id');
+
+
+
+	 public function technician(){
+        return $this->belongsTo('App\Technician');
+
     }
 	
 	 public function work_order(){

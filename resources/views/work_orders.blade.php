@@ -80,6 +80,7 @@
 
                 <tbody>
 
+                {{-- CREATE A CLASS WITH DEFINED W.O STASTUS FROM 1-7 THAT WILL CHECK HE STATUS NUMBER AND RETURN STATUS WORDS --}}
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
