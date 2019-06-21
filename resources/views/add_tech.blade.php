@@ -49,6 +49,37 @@
                 <label for="email">Email Address</label>
                 <input required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
             </div>
+			
+			 <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Type of technician</label>
+            </div>
+			<?php 
+		use App\UserRole;
+			$role=UserRole::where('user_id',auth()->user()->id)->first();
+			$roleofuser=$role->role_id;
+			?>
+			
+			 <input hidden  type="number"  class="form-control" id="role" name="role"  value="{{ $roleofuser }}">
+     
+			 @if($roleofuser == 1 )
+			 
+            <select  class="custom-select" id="typetechadmin" name="typetechadmin">
+                
+                <option value="Electrical">Electrical</option>
+                <option value="Plumbing">Plumbing</option>
+                <option value="Masonry/Road">Masonry/Road</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Carpentry/Painting">Carpentry/Painting</option>
+                
+            </select>
+			
+			@else
+				 <input readonly  type="text"  class="form-control" id="typetechhos" name="typetechhos"  value="{{ substr(strstr(auth()->user()->type, " "), 1) }}">
+         @endif
+        </div>
+
+			
 
             <button type="submit" class="btn btn-success">Add technician</button>
             <a class="btn btn-info" href="/technicians" role="button">Cancel </a>

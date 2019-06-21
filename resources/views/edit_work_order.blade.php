@@ -5,6 +5,11 @@
     @endSection
 
 @section('body')
+
+<script>
+var total=5;
+
+</script>
     <br>
     <div class="row container-fluid">
         <div class="col-md-8">
@@ -128,7 +133,7 @@
 
 
 			{{-- ASSIGN TECHNICIAN tab--}}
-                <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
+               
                     @csrf
                     <div id="assigntechnician" class="tabcontent">
                         <div class="row">
@@ -136,22 +141,27 @@
                                 <p>Assign Technician for this work-order</p>
                             </div>
                         </div>
+						<div >
+						<p id="alltechdetails">hapa  </p>
 						
+						
+						
+						</div>
 						
 						
                         <div class="form-group">
                            
-                            <select  required class="custom-select"  name="technician_work">
-                                <option  selected value="" >Choose...</option>
+                            <select  id="techid" required class="custom-select"  name="techuser">
+                               
                                 @foreach($techs as $tech)
                                     <option value="{{ $tech->id }}">{{ $tech->fname.' '.$tech->lname }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Technician</button>
+                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()" style="background-color: darkgreen; color: white" type="button" class="btn btn-success">Save Technician</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
-                </form>
+               
                 {{-- end ASSIGN TECHNICIAN  --}}
 
 				
@@ -222,7 +232,7 @@
                             </div>
                         </div>
 				</br>
-                        <p>Transport timdatee</p>
+                        <p>Transport date</p>
                         <div class="form-group">
                             <input type="date" style="color: black" name="date" required class="form-control"  rows="5" id="date"></input>
                         </div>
@@ -303,9 +313,71 @@
             </div>
         </div>
     <br>
+	
+	
+	{{-- TECHNICIAN DETAILS FORM  --}}
+	 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Technician details form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+				
+				<p id="detail" >
+				ok
+				</p>
+				<h2> This technician has been assigned Following Number Of Work orders : </h2>
+				
+				<h3  id="totalwork" style="color:red">
+				</h3>
+				
+				
+				
+				
+                  
+                    <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
+                        @csrf
+                         <br>
+						 <input name="technician_work" id="technician_work"  type="text" hidden> </input>  
+                        <button type="submit" class="btn btn-danger">Assign Technician</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 	 @endSection
 	
-	
+	<script>
+	async function getTechnician(){
+		var detail;
+		var techid;
+		var id = document.getElementById("techid").value;
+	var response = await fetch('/gettechniciandetails/'+id).then(function(response){
+		return response.json();
+		})
+	.then(data => {
+		total=data["workorderstaff"].length;
+		detail='Full name : '+data["technician"].lname+data["technician"].fname+'  Type is : '+data["technician"].type+'  \r    Phone : '+data["technician"].phone+'  Email is : '+data["technician"].email ;
+		techid=data["technician"].id;
+		//h=data[0].work_order_id;
+		//console.log(data[0].work_order_id);
+		
+	});
+		
+		
+		document.getElementById("detail").innerHTML=detail;
+		document.getElementById("totalwork").innerHTML=total;
+		document.getElementById("technician_work").value=techid;
+		
+      }
+	// getTechnician(5);
+	</script>
 	
 	
 	

@@ -54,8 +54,8 @@
                     <td>{{ $item['requester']->fname.'  '.$item['requester']->lname  }}</td>
                     @if(empty($item['workorder']->location))
                     <td>{{ 
-				$item['workorder']['room']['block']->location_of_block
-
+				$item['workorder']['room']['block']->location_of_block  
+				
 				}}</td>
 				
 				@else
@@ -70,14 +70,66 @@
 					<td>{{ date('F d Y', strtotime($item->time)) }}</td>
 					
 					<td>{{ date('h:m:s a', strtotime($item->time)) }}</td>
+					<?php
+					$idt=$item->id;
+
+					 ?>
 					 
+					
 					 <td>
-					 <a class="btn btn-success btn-sm" href="{{ route('transportrequest.accept', [$item->id]) }}" role="button">Accept</a>
-					  &nbsp &nbsp 
-					<a class="btn btn-danger btn-sm" href="{{ route('transportrequest.reject', [$item->id]) }}" role="button">Reject</a> </td>
-                    </tr>
+					  @if(($item->time)>Carbon\Carbon::now())
+					<a class="btn btn-success btn-sm" href="{{ route('transportrequest.accept',[$idt]) }}" role="button">Accept</a> 
+						  &nbsp &nbsp 
+					<a class="btn btn-danger btn-sm" href="{{ route('transportrequest.reject',[$idt]) }}" role="button">Reject</a> </td>
+						
+						@else
+				 EXPIRED REQUEST 
+						@endif
+				   </tr>
                     @endforeach
             </tbody>
         </table>
+	
     </div>
+	
+	  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Transport form details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please fill details of your transport form.</p>
+                    <form method="POST" action="" role="button">
+					
+					  &nbsp &nbsp 
+					   @csrf
+					   
+					   <input   id="transportid" name="transportid"   type="number"  />
+                        <textarea name="details" required maxlength="100" class="form-control"  rows="5" id="details"></textarea>
+                        <br>
+						
+					
+                        <button type="submit" class="btn btn-danger">Submit</button>
+						
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+	<p id="n" > j </p> 
+	
     @endSection
+	
+	
+	<script>
+	
+	
+	
+	
+	</script>

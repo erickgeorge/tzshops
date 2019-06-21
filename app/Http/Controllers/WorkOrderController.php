@@ -284,13 +284,22 @@ class WorkOrderController extends Controller
         if ($request['technician_work'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Technician for work order is required']);
         }
-
+		
+		$checkstaff = WorkOrderStaff::where('staff_id', $request['technician_work'])->where('work_order_id', $id)->first();
+		
+		
+		if (empty($checkstaff)) {
+           
+        
+		
+		
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $work_order_staff = new  WorkOrderStaff();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         
             $work_order_staff->staff_id = $request['technician_work'];
+			 $work_order_staff->status =0;
              $work_order_staff->work_order_id = $id;
             $work_order_staff->save();
 			
@@ -307,7 +316,10 @@ class WorkOrderController extends Controller
             'message' => 'Technician assigned successfully',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
-    }
+    
+	
+		}  else { return redirect()->back()->withErrors(['message' => 'Technician Selected has already been assigned for this  work order,You can not assign him repeatedly']);}
+	}
 	
 	
 	
@@ -438,14 +450,15 @@ class WorkOrderController extends Controller
 	public function transport_request_accept($id)
     {
        
-        $wo_transport =WorkOrderTransport::where('id', $id)->first();
+	 
+        $wo_transport =WorkOrderTransport::where('id',$id )->first();
 
-		
+		 // $wo_transport->details = $request['details'];
 		 $wo_transport->status = 1;
         $wo_transport->save();
-        
-        return redirect()->route('wo_transport_request')->with(['message' => 'Transport Request Accepted successfully ']);
-    }	
+        return redirect()->back()->with(['message' => 'Transport Request Accepted successfully ']);
+       
+           }	
 	
 	
 	public function transport_request_reject($id)
@@ -461,6 +474,16 @@ class WorkOrderController extends Controller
     }	
 	
 	
+	public function woTechnicianComplete($id)
+    {
+       
+        $wo_staff =WorkOrderStaff::where('id', $id)->first();
+
+		
+		 $wo_staff->status = 1;
+        $wo_staff->save();
+         return redirect()->back()->with(['message' => 'STATUS OF TECHNICIAN IS CHANGED SUCCESSFULLY']);
+         }	
 	
 	
 	

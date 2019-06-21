@@ -38,7 +38,7 @@ User Registrartion
 
 
 
-<form method="POST" action="{{ route('user.create') }}">
+<form method="POST" action="{{ route('user.create') }}"  enctype="multipart/form-data">
                         @csrf
 
 	<div class="form-group ">
@@ -135,7 +135,12 @@ User Registrartion
 	    <button type="button" onclick="generatePass()" class="btn btn-danger">Generate Password</button>
 	    </div>
 	</div>
-
+	 
+                <div class="form-group">
+                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+                </div>
+               
 	<button type="submit" class="btn btn-success">Create User</button>
 	<a class="btn btn-info" href="/viewusers" role="button">Cancel </a>
     </form>

@@ -78,7 +78,7 @@
                     </li>
 					
 					<li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">All Requests </a>
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
                     </li>
                 @endif
 				

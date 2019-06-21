@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Material;
 use App\Notification;
 use App\Technician;
@@ -233,13 +233,24 @@ public function profileView(){
         return view('womaterialapproved', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 1)->get(),'notifications' => $notifications]);
     }
 	
+	
+	
+	
+	public function workOrderReleasedMaterialView()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('womaterialreleased', ['role' => $role, 'items' => WorkOrderMaterial::where('status',2 )->get(),'notifications' => $notifications]);
+    }
+	
+	
     
 	
 	public function transport_request_View()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('wo_trasport_request', ['role' => $role, 'items' => WorkOrderTransport::where('status', 0)->get(),'notifications' => $notifications]);
+        return view('wo_trasport_request', ['role' => $role, 'items' => WorkOrderTransport::where('status', 0)->orderBy(DB::raw('ABS(DATEDIFF(time, NOW()))'))->get(),'notifications' => $notifications]);
     }
 	
 	

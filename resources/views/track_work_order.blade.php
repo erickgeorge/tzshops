@@ -148,7 +148,10 @@
 <table style="width:100%">
   <tr>
     <th>Staff Full Name</th>
+	<th>Status</th>
     <th>DATE Assigned</th>
+	<th>Complete work</th>
+	
   </tr>
     @foreach($techforms as $techform)
 	
@@ -157,8 +160,16 @@
 
   <tr>
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname }}</td>
+	
+	 <td style="color:red">@if($techform->status==1) COMPLETED   @else  OnPROGRESS   @endif</td>
     <td>{{ 
-	 $tform->created_at }}</td>
+	 $techform->created_at }}</td>
+	 @if($techform->status!=1)
+	 <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
+                                                    class="fas fa-clipboard-check large"></i></a></td>
+													
+		</td>
+@endif		
   </tr>
   
 	@endforeach

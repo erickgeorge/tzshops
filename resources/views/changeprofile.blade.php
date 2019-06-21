@@ -81,7 +81,7 @@ padding: 20 20 20 20;
     <div class="col-md-6">
         <p style="color: red">Edit your profile email and phone</p>
 
-        <form action="{{ route('profile.change') }}" method="POST">
+        <form action="{{ route('profile.change') }}" method="POST"  enctype="multipart/form-data" >
             @csrf
          
 	

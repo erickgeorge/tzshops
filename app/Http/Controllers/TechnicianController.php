@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notification;
 use App\Technician;
+use App\WorkOrderStaff;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,15 @@ class TechnicianController extends Controller
         $tech->lname = $request['lname'];
         $tech->phone = $request['phone'];
         $tech->email = $request['email'];
-        $tech->type = substr(strstr(auth()->user()->type, " "), 1);
+		$rolee=$request['role'];
+		if($request['role']==1){
+        $type = $request['typetechadmin'];
+		}
+		else {
+			
+			 $type = $request['typetechhos'];
+		}
+		$tech->type=$type;
         $tech->save();
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -82,4 +91,18 @@ class TechnicianController extends Controller
         Technician::find($id)->delete();
         return redirect()->back()->with(['message', 'Technician deleted']);
     }
+	
+	
+	
+	 public function getTechnicianDetails($id){
+      
+      $status=0;
+        $tech = WorkOrderStaff::where('staff_id',($id))->where('status',($status))->get()->toArray();
+		
+		$user= Technician::where('id',($id))->first()->toArray();
+	
+		 return response()->json(array('workorderstaff'=>$tech,'technician'=>$user));
+	 }
+	
+	
 }

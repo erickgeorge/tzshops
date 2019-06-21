@@ -104,7 +104,7 @@
 							@elseif($work->status == 5)
 															<td><span class="badge badge-info">pre-implementation</span></td>
 							@elseif($work->status == 6)
-															<td><span class="badge badge-info">post=implementation</span></td>
+															<td><span class="badge badge-info">post implementation</span></td>
 							@elseif($work->status == 7)
 															<td><span class="badge badge-info">material requested</span></td>
 							@else

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Area;
 use App\Block;
 use App\Location;
@@ -20,13 +20,35 @@ class UserController extends Controller
 {
     public function create(Request $request)
     {
+		
+		
+		
+		$users =  User::all();
+	
+	 foreach ($users as $userinf) {
+   $idsel=$userinf->id;
+}
+		
+       
+		
+		$idsel=$idsel+1;
+        $avatarName = $idsel.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+
+        $request->avatar->storeAs('avatars',$avatarName);
+
+        
+       
+		
+		
+		
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
             'section' => 'required',
             'name' => 'required|unique:users',
             'phone' => 'required|max:15|min:10',
-            'email' => 'required|unique:users'
+            'email' => 'required|unique:users',
+			'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         if ($request['role'] == 'Choose...') {
@@ -46,6 +68,7 @@ class UserController extends Controller
         $user->type = $request['user_type'];
         $user->section_id = $request['section'];
         $user->password = bcrypt($request['password']);
+		$user->avatar = $avatarName;
         $user->save();
 
         $role = new UserRole();
@@ -218,8 +241,7 @@ class UserController extends Controller
 
      $user = Auth::user();
 
-        $user = Auth::user();
-
+        
         $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
 
         $request->avatar->storeAs('avatars',$avatarName);
