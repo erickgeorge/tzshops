@@ -15,6 +15,10 @@ use App\Department;
 use App\Section;
 use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
+use App\Note;
+
+use Redirect;
+use PDF;
 
 
 class HomeController extends Controller
@@ -35,7 +39,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {  
+     $data['wo'] = Workorder::paginate(10);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //         return response()->json($role);

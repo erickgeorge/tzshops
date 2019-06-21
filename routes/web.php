@@ -186,3 +186,6 @@ Route::get('wo_transport_request_rejected', 'HomeController@woTransportRejectedV
 Route::get('gettechniciandetails/{id}', 'TechnicianController@getTechnicianDetails');
 
 Route::get('work_order_technician_complete/{id}', 'WorkOrderController@woTechnicianComplete')->name('workOrder.technicianComplete');
+
+
+ Route::get('pdf', 'NotesController@pdf');

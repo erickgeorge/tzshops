@@ -59,6 +59,7 @@
                 <button style="margin-bottom: 20px" type="button" class="btn btn-danger">View rejected Work Orders
                 </button>
             </a>
+             <a href="{{ url('pdf') }}" class="btn btn-success mb-2">Export PDF</a>
         </div>
     </div>
 
