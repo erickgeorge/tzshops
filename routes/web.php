@@ -153,6 +153,9 @@ Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialVi
 
 Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMaterialView')->name('work_order_approved_material');
 
+Route::get('wo_material_view/{id}', 'HomeController@wo_materialView')->name('store.materialview');
+
+
 Route::get('work_order_released_material', 'HomeController@workOrderReleasedMaterialView')->name('work_order_released_material');
 
 
@@ -166,7 +169,10 @@ Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('st
 Route::get('wo_transport_request', 'HomeController@transport_request_View')->name('wo_transport_request');
 
 
-Route::get('transport_request/accept/{id}','WorkOrderController@transport_request_accept')->name('transportrequest.accept');
+//Route::get('transport_request/accept/{id}','WorkOrderController@transport_request_accept')->name('transportrequest.accept');
+Route::post('transport_request/accept','WorkOrderController@transport_request_accept')->name('transportrequest.accept');
+
+
 Route::get('transport_request/reject/{id}','WorkOrderController@transport_request_reject')->name('transportrequest.reject');
 
 
@@ -186,6 +192,23 @@ Route::get('wo_transport_request_rejected', 'HomeController@woTransportRejectedV
 Route::get('gettechniciandetails/{id}', 'TechnicianController@getTechnicianDetails');
 
 Route::get('work_order_technician_complete/{id}', 'WorkOrderController@woTechnicianComplete')->name('workOrder.technicianComplete');
+
+
+
+Route::get('/unattended_work_orders', 'HomeController@unattendedWorkOrdersView')->name('unattended_work_orders');
+
+Route::get('/completed_work_orders', 'HomeController@completedWorkOrdersView')->name('completed_work_orders');
+
+
+
+Route::get('/roomreport', 'HomeController@roomreportView')->name('roomreport');
+
+Route::get('/woduration', 'HomeController@woduration')->name('woduration');
+
+Route::get('/hoscount', 'HomeController@hoscount')->name('hoscount');
+Route::get('work_order_change_type/{id}', 'WorkOrderController@woChangeTypeView')->name('workOrder.changetype');
+
+Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_wo_ptype');
 
 
  Route::get('pdf', 'NotesController@pdf');

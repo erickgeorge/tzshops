@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Notification;
@@ -115,18 +116,36 @@ class StoreController extends Controller
 	public function releaseMaterial($id)
     {
        
-        $wo_material =WorkOrderMaterial::where('id', $id)->first();
+        $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 1)->get();
+		
+		$wo_materials = WorkOrderMaterial::
+                     select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
+                     ->where('status',1)
+					 ->where('work_order_id',$id)
+                     ->groupBy('material_id')
+					 ->groupBy('work_order_id')
+                     ->get();
+		   foreach($wo_materials as $wo_material){
+		   
 		$material_id=$wo_material->material_id;
 		$material_quantity=$wo_material->quantity;
 		$material=Material::where('id', $material_id)->first();
 		$stock=$material->stock;
 		$rem=$stock-$material_quantity;
 		$material->stock=$rem;
-		$wo_material->status=2;
+		 $material->save();
+			}
+			
 		
+		foreach($wochange_status as $wochange_state){
+			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
+		$wochange->status=2;
+		$wochange->save();
 		
-        $wo_material->save();
-		  $material->save();
+		}
+		
+		 
+		 
         
         return redirect()->route('work_order_approved_material')->with(['message' => 'Material has been released successfully ']);
     }

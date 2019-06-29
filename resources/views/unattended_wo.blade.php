@@ -1,15 +1,5 @@
 @extends('layouts.master')
-<style type="text/css" media="print">
-        
-        #exclude1{
-            display:none;
-        }
-		
-		#exclude2{
-            display:none;
-        }
-		
-    </style>
+
 @section('title')
     work orders
     @endSection
@@ -19,11 +9,11 @@
     <br>
     <div class="row container-fluid">
         <div class="col-md-6">
-            <h3><b>Work orders list </b></h3>
+            <h3><b>Un Attended Work orders list </b></h3>
         </div>
 
         <div class="col-md-6">
-            <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
+            <form method="GET" action="unattended_work_orders" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];
@@ -56,27 +46,10 @@
             </ul>
         </div>
     @endif
-    <div class="row ">
-        <div class="col-md-3">
-            <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button>
-            </a>
-        </div>
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-3">
-            <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">View rejected Work Orders
-                </button>
-            </a>
-             <a href="{{ url('pdf') }}" class="btn btn-success mb-2">Export PDF</a>
-        </div>
-		    </div>
 
-    <div id="div_print" class="container">
-	
 	<input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
-
+   
+    <div  id="div_print" class="container">
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
@@ -88,7 +61,7 @@
                     <th>Status</th>
                     <th>Created date</th>
                     <th>Location</th>
-                    <th id="exclude1">Actions</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
 
@@ -98,21 +71,14 @@
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
-                    @if($work->status !== 0)
+                  
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-details">{{ $work->details }}</td>
-                            <td>{{ $work->problem_type }}  
-							
-							  @if($work->emergency == 1)
-								<span class="badge badge-danger"> EMERGENCE</span>
-							@endif
-							
-							</td>
+                            <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                          
-						  @if($work->status == -1)
+                            @if($work->status == -1)
                                 <td><span class="badge badge-warning">new</span></td>
                             @elseif($work->status == 1)
                                 <td><span class="badge badge-success">accepted</span></td>
@@ -132,6 +98,7 @@
 							@else
                                 <td><span class="badge badge-success">procurement stage</span></td>								
                             @endif
+							
                             <td>{{ $work->created_at }}</td>
                             <td>
 
@@ -141,12 +108,9 @@
 
                                 {{ $work->location }}
                             @endif
-                            <td id="exclude2">
+                            <td>
 							
-									
-								@if(auth()->user()->type== "SECRETARY")							
-									<a href="{{ route('workOrder.changetype', [$work->id]) }}"><span class="badge badge-success">Change Problem Type...</span></a>
-								@elseif(strpos(auth()->user()->type, "HOS") !== false)
+                                @if(strpos(auth()->user()->type, "HOS") !== false)
 
                                     @if($work->status == -1)
                                         <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
@@ -162,9 +126,6 @@
                                                     class="fas fa-tasks"></i></a>
                                     @endif
                                 @else
-									
-								
-									
                                     @if($work->status == -1)
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
                                     @else
@@ -173,7 +134,7 @@
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>&nbsp;
                                     @endif
-                                @endif
+                              
 
                                 @endif
                             </td>
@@ -200,10 +161,9 @@
         });
 		
 		
-		
-function printdiv(printpage)
+		function printdiv(printpage)
 {
-var headstr = "<html><head><title></title></head><body><h1> WORK ORDER LIST </h1>";
+var headstr = "<html><head><title></title></head><body><h1> UN-ATTENDED WORK ORDER LIST </h1>";
 var footstr = "</body>";
 var newstr = document.all.item(printpage).innerHTML;
 //var exclude = document.getElementByid('exclude').innerHTML;

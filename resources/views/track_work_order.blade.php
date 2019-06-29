@@ -26,8 +26,8 @@
         </div>
     @endif
     <h5>This work order has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
-                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h5>
-    <h5>Has been {{ $wo->status }} on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span>
+                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
+    <h5>It Has been created on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span>
     </h5>
     <h3 style="color: black">Contacts:</h3>
     <h5>{{ $wo['user']->phone }}</h5>
@@ -112,7 +112,9 @@
   <tr>
     <th>DATE</th>
     <th>TIME</th> 
-	<th>STATUS</th> 
+	<th>STATUS</th>
+	<th>DETAILS</th>
+	
     <th>DATE REQUESTED</th>
   </tr>
     @foreach($tforms as $tform)
@@ -122,7 +124,11 @@
     <td>{{ date('F d Y', strtotime($tform->time))  }}</td>
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td> 
     <td style="color:red">@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
-	 <td>{{ 
+	
+<td>{{ 
+	 $tform->details }}</td>
+
+	<td>{{ 
 	 $tform->created_at }}</td>
   </tr>
   
@@ -159,17 +165,17 @@
 
 
   <tr>
-<<<<<<< HEAD
+
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname }}</td>
 	
 	 <td style="color:red">@if($techform->status==1) COMPLETED   @else  OnPROGRESS   @endif</td>
-=======
+
       @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
           @else
           <td style="color: red">No technician assigned yet</td>
       @endif
->>>>>>> 97058f281c3be5b39eee44bdba2921d14414f738
+
     <td>{{ 
 	 $techform->created_at }}</td>
 	 @if($techform->status!=1)
@@ -287,12 +293,8 @@
         <div class="row">
             <div>
                 {{-- status of 2 means work order has been closed --}}
-                @if($wo->status == 2)
-                    <form method="POST" action="">
-                        @csrf
-                        <button type="submit" class="btn btn-success">Im satisfied!</button>
-                    </form>
-                @else
+                @if($wo->status != 2)
+                    
                     <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->updated_by]) }}">
                         @csrf
                         <button type="submit" class="btn btn-success">Close work order</button>
@@ -300,11 +302,13 @@
                 @endif
             </div>
             <p>&nbsp;</p>
-            <div>
+             {{--
+			<div>
                 <form method="POST" action="">
                     @csrf
-                    {{--<button type="submit" class="btn btn-danger">File a complaint</button>--}}
+               <button type="submit" class="btn btn-danger">File a complaint</button>
                 </form>
+				--}}
             </div>
         </div>
     @endif

@@ -447,17 +447,22 @@ class WorkOrderController extends Controller
 
 
 
-	public function transport_request_accept($id)
+	public function transport_request_accept(Request $request)
     {
        
 	 
-        $wo_transport =WorkOrderTransport::where('id',$id )->first();
+        $wo_transport =WorkOrderTransport::where('id',$request['transportid'] )->first();
 
-		 // $wo_transport->details = $request['details'];
-		 $wo_transport->status = 1;
+		  $wo_transport->details = $request['details'];
+		 $wo_transport->status = $request['status'];
         $wo_transport->save();
+		if($request['status']==1){
         return redirect()->back()->with(['message' => 'Transport Request Accepted successfully ']);
-       
+		}
+		else{
+			return redirect()->back()->with(['message' => 'Transport Request is Rejected successfully ']);
+		
+		}
            }	
 	
 	
@@ -484,6 +489,34 @@ class WorkOrderController extends Controller
         $wo_staff->save();
          return redirect()->back()->with(['message' => 'STATUS OF TECHNICIAN IS CHANGED SUCCESSFULLY']);
          }	
+		 
+		 
+		 
+	public function woChangeTypeView($id)
+    {
+       
+        $wo =WorkOrder::where('id', $id)->first();
+
+				
+		 $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('changewotype', ['role' => $role, 'wo' =>$wo ,'notifications' => $notifications]);
+         }	
+		 
+		 
+		 
+		 public function changewoType(Request $request)
+    {
+		$id=$request['wo_id'];
+		$idp=intval($id);
+       
+        $work =WorkOrder::where('id', $idp)->first();
+		 $work->problem_type = $request['p_type'];
+		 
+        $work->save();
+         return redirect()->back()->with(['message' => 'STATUS OF WORK-ORDER IS CHANGED SUCCESSFULLY']);
+         }	
+		 
 	
 	
 	

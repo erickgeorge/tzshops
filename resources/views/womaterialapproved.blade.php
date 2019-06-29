@@ -32,13 +32,12 @@
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
-                <th >#</th>
-                <th >HOS name</th>
+                
+				
+                
+				<th >Work-Order ID </th>
 				<th >Workorder Detail</th>
-				<th >Material Name</th>
-				<th >Material Description</th>
-				<th >Type</th>
-				<th >Quantity</th>
+				
 				<th >Action</th>
 				
             </tr>
@@ -46,22 +45,18 @@
 
             <tbody>
 
-            <?php $i=0;  ?>
+           
             @foreach($items as $item)
 
-                <?php $i++ ?>
+               
                 <tr>
-                    <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['usermaterial']->fname.'  '.$item['usermaterial']->lname  }}</td>
-                   
+                    
+                      <td>{{ $item->work_order_id }}</td>
                     <td>{{ $item['workorder']->details }}</td>
-                    <td>{{$item['material']->name }}</td>
-                    <td>{{ $item['material']->description }}</td>
-                    <td>{{ $item['material']->type }}</td>
-					  <td>{{ $item->quantity }}</td>
+                    
                     <td>
 					
-					 <a class="btn btn-primary btn-sm" href="{{ route('store.materialrelease', [$item->id]) }}" role="button">Release</a></td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('store.materialview', [$item->work_order_id]) }}" role="button">View</a></td>
                   
                        </td>
                     </tr>

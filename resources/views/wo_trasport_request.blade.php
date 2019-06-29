@@ -78,9 +78,9 @@
 					
 					 <td>
 					  @if(($item->time)>Carbon\Carbon::now())
-					<a class="btn btn-success btn-sm" href="{{ route('transportrequest.accept',[$idt]) }}" role="button">Accept</a> 
+					<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','1');" href="#" role="button">Accept</a> 
 						  &nbsp &nbsp 
-					<a class="btn btn-danger btn-sm" href="{{ route('transportrequest.reject',[$idt]) }}" role="button">Reject</a> </td>
+					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','-1');" href="#" role="button">Reject</a> </td>
 						
 						@else
 				 EXPIRED REQUEST 
@@ -103,12 +103,14 @@
                 </div>
                 <div class="modal-body">
                     <p>Please fill details of your transport form.</p>
-                    <form method="POST" action="" role="button">
+                    <form method="POST" action="transport_request/accept">
 					
 					  &nbsp &nbsp 
 					   @csrf
 					   
-					   <input   id="transportid" name="transportid"   type="number"  />
+					   <input   id="transportid" name="transportid"  hidden  />
+					    <input   id="status" name="status"  hidden  />
+                      
                         <textarea name="details" required maxlength="100" class="form-control"  rows="5" id="details"></textarea>
                         <br>
 						
@@ -127,9 +129,10 @@
     @endSection
 	
 	
-	<script>
-	
-	
-	
-	
-	</script>
+	<script type="text/javascript">
+    function transportrequest (id,status) {
+		document.getElementById('transportid').value=id;
+		document.getElementById('status').value=status;
+        // return true or false, depending on whether you want to allow the `href` property to follow through or not
+    }
+</script>

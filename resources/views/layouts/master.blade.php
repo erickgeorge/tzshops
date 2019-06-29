@@ -55,6 +55,30 @@
 				
 				?>
 				
+				@if(auth()->user()->type == 'Estates Director')
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('unattended_work_orders')}}">Unattended Work-orders</a>
+                    </li>
+					
+					
+					 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('completed_work_orders')}}">Completed Work-orders</a>
+                    </li>
+					
+					 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room report</a>
+                    </li>
+					
+					<li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
+                    </li>
+					
+					<li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
+                    </li>
+					
+                @endif
+				
 				 @if(auth()->user()->type == 'Transport Officer')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request')}}">Transport Requests <span

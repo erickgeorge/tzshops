@@ -234,7 +234,7 @@ var total=5;
 				</br>
                         <p>Transport date</p>
                         <div class="form-group">
-                            <input type="date" style="color: black" name="date" required class="form-control"  rows="5" id="date"></input>
+                            <input type="date" style="color: black" name="date" required class="form-control"  rows="5" id="date"  min="<?php echo date('Y-m-d'); ?>" ></input>
                         </div>
 						
 						  <p>Transport time</p>
