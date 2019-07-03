@@ -36,7 +36,7 @@
 		
 		
 		
-		 <div id="divmanual">
+		 <div >
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Material Name</label>
@@ -48,7 +48,7 @@
 		
 		
 		
-		 <div id="divmanual">
+		 <div >
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Material Description</label>
@@ -76,7 +76,7 @@
 
        
 
-        <div id="divmanual">
+        <div >
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Quantity</label>

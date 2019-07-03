@@ -33,13 +33,13 @@
             <label class="input-group-text">Type of a problem</label>
         </div>
       <select required class="custom-select" id="inputGroupSelect01" name="p_type">
-                <option selected value="">Choose...</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Plumbing">Plumbing</option>
-                <option value="Masonry/Road">Masonry/Road</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
-                <option value="Others">Others</option>
+                <option selected value="" >Choose...</option>
+                <option value="Electrical" >Electrical</option>
+                <option value="Plumbing" >Plumbing</option>
+                <option value="Masonry/Road" >Masonry/Road</option>
+                <option value="Mechanical" >Mechanical</option>
+                <option value="Carpentry/Painting" >Carpentry/Painting</option>
+                <option value="Others" >Others</option>
             </select>
 			<input required class="form-control" name="wo_id"
             value="{{ $wo->id }}" hidden>
