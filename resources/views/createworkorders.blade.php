@@ -61,9 +61,9 @@
         <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Enter Location in text</label>
+                    <label  class="input-group-text" for="inputGroupSelect01">Enter Location in text</label>
                 </div>
-                <input style="color: black" required type="text" maxlength="35" class="form-control" id="manual"
+                <input   style="color: black" required type="text" maxlength="35" class="form-control" id="manual"
                        aria-describedby="emailHelp" name="manual" placeholder="Type Location Address">
             </div>
         </div>

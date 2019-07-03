@@ -7,7 +7,7 @@ function generatePass(){
 
 	document.getElementById('pass').value = password;
 }
-
+ $("#divmanual").hide();
  $(function () {
         $("#checkdiv").click(function () {
             if ($(this).is(":checked")) {

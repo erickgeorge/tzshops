@@ -5,7 +5,12 @@ Dashboard
 @endSection
 
 @section('body')
-<h1>dashboard<h1>
 
+<div class='container'>
+</br>
+</br>
+<h1 style='color:black'>WELCOME , PLEASE NAVIGATE THROUGH THE UP MENUS TO USE THE SYSTEM. <h1>
+<h3>  Thank you. </h3>
+</div>
 
 @endSection

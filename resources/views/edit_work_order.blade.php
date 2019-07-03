@@ -7,7 +7,7 @@
 @section('body')
 
 <script>
-var total=5;
+var total=2;
 
 </script>
     <br>
@@ -234,7 +234,7 @@ var total=5;
 				</br>
                         <p>Transport date</p>
                         <div class="form-group">
-                            <input type="date" style="color: black" name="date" required class="form-control"  rows="5" id="date"  min="<?php echo date('Y-m-d'); ?>" ></input>
+                            <input type="date" style="color: black" name="date" required class="form-control"  rows="5" id="date"></input>
                         </div>
 						
 						  <p>Transport time</p>
@@ -252,9 +252,11 @@ var total=5;
 				
 				
 				{{-- material_request tab--}}
+				
+				 <div id="material_request" class="tabcontent">
                 <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
                     @csrf
-                    <div id="material_request" class="tabcontent">
+                   
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Select material for work-order</p>
@@ -273,7 +275,7 @@ var total=5;
 						
                         <div class="form-group">
                            
-                            <select onchange="stock();" required class="custom-select"  id="mname" name="mname">
+                            <select onchange="stock();" required class="custom-select"  id="mname" name="1">
                                 <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.' '.$material->description }}</option>
@@ -284,14 +286,23 @@ var total=5;
 						
 						 <p>Quantity</p>
                         <div class="form-group">
-                            <input type="number" min="1"  style="color: black" name="mquantity" required class="form-control"  rows="5" id="mquantity"></input>
+                            <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
 						
 						
+						<div id="newmaterial" >
+						
+						
+						</div>
+					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
+                      
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
-                    </div>
+                   
                 </form>
+					<button style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">New Material</button>
+                       
+				 </div>
                 {{-- end material_request  --}}
 				
 				
@@ -352,6 +363,23 @@ var total=5;
         </div>
     </div>
 	 @endSection
+	 
+	 <?php	
+						$mat= Material::get();
+						$matvalue= Material::get();
+						?>
+	 <script type="text/javascript" language="javascript">
+    var array = new Array();
+	 var arrayvalue = new Array();
+    <?php foreach($mat as $key){ ?>
+        array.push('<?php echo $key->name." ".$key->description ; ?>');
+    <?php } ?>
+	
+	
+	<?php foreach($mat as $key ){ ?>
+        arrayvalue.push('<?php echo $key->id ; ?>');
+    <?php } ?>
+</script>
 	
 	<script>
 	async function getTechnician(){
@@ -376,6 +404,84 @@ var total=5;
 		document.getElementById("technician_work").value=techid;
 		
       }
+	  
+	  
+	  
+	  
+	 function newmaterial(){
+		 
+		 total=total+1;
+		
+		 
+		 var myDiv = document.getElementById("newmaterial");
+		 
+		 
+		 var node = document.createElement("label");
+  var textnode = document.createTextNode("Material");
+  node.appendChild(textnode);
+myDiv.appendChild(node);
+		 
+		 
+		 
+
+//Create array of options to be added
+//var array = ["Volvo","Saab","Mercades","Audi"];
+
+//Create and append select list
+var selectList = document.createElement("select");
+ selectList.className = "custom-select";
+selectList.required = true;
+selectList.name = total;
+
+myDiv.appendChild(selectList);
+
+//Create and append the options
+ var option = document.createElement("option");
+   
+    option.text = 'Choose ...';
+	 option.value = '';
+    selectList.appendChild(option);
+	
+for (var i = 0; i < array.length; i++) {
+    var option = document.createElement("option");
+    option.value = arrayvalue[i];
+    option.text = array[i];
+    selectList.appendChild(option);
+}
+
+ var node = document.createElement("label");
+  var textnode = document.createTextNode("Quantity");
+  node.appendChild(textnode);
+myDiv.appendChild(node);
+
+
+ var input = document.createElement("input");
+		 input.setAttribute('type', 'number');
+		 input.min=1;
+		 input.required = true;
+		 
+		 total=total+1;
+		
+		 input.name = total;
+		 input.className = "form-control";
+		 var parent = document.getElementById("newmaterial");
+		 
+		 
+		parent.appendChild(input);
+		 
+		 
+		 
+		 var node = document.createElement("br");
+
+myDiv.appendChild(node);
+
+document.getElementById("totalmaterials").value=total;
+		 
+		 
+	 }
+	  
+	  
+	  
 	// getTechnician(5);
 	</script>
 	

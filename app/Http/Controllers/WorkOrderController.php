@@ -326,24 +326,51 @@ class WorkOrderController extends Controller
 	
 	public function materialaddforwork(Request $request,$id)
     {
-	$materialreq=Material::where('id',$request['mname'])->first();
+		$y=1;
+		$totmat=$request['totalmaterials']/2;
+		for ($x = 1; $x <= $totmat; $x++) {
+   
+   $materialreq=Material::where('id',$request[$y])->first();
 	$limit=$materialreq->stock;
-        if ($request['mquantity'] > $limit) {
-            return redirect()->back()->withErrors(['message' => 'MATERIAL LIMIT EXCEEDED IN STOCK ,MAXIMUM LIMIT : '.$limit]);
+	$mname=$materialreq->name;
+	$mdesc=$materialreq->description;
+	
+	$y=$y+1;
+        if ($request[$y] > $limit) {
+			
+			
+            return redirect()->back()->withErrors(['message' => 'MATERIAL LIMIT EXCEEDED IN STOCK '.$mname.' ,   '.$mdesc.'   ,MAXIMUM LIMIT : '.$limit]);
         }
+		$y=$y+1;
+   
+		} 
+		
+		
+	
 
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $work_order_material = new  WorkOrderMaterial();
+        
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         
+			$z=1;
+			for ($x = 1; $x <= $totmat; $x++) {
+				
+			$work_order_material = new  WorkOrderMaterial();
             $work_order_material->work_order_id = $id;
-             $work_order_material->material_id = $request['mname'];
-			 $work_order_material->quantity = $request['mquantity'];
+             $work_order_material->material_id = $request[$z];
+			 $z=$z+1;
+			 $work_order_material->quantity = $request[$z];
+			 $z=$z+1;
 			 $work_order_material->status = 0;
 			 $work_order_material->hos_id = auth()->user()->id;
             $work_order_material->save();
-        
+} 
+			
+			
+			
+			
+        //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
              $mForm->status =7;
 			
@@ -358,6 +385,9 @@ class WorkOrderController extends Controller
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
+	
+	
+	
 	
 	
 	
