@@ -8,6 +8,7 @@ use App\Technician;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\WorkOrderStaff;
 
 use App\Directorate;
 use App\WorkOrder;
@@ -515,6 +516,145 @@ public function profileView(){
         return view('woduration', ['role' => $role, 'wo' => WorkOrder::where('status',2)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
    }
    
+
+
+
+
+
+
+
+ public function techniciancount()
+    {
+        
+        
+        $wo_technician_count = WorkOrderStaff::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',0)
+                     ->groupBy('staff_id')
+                     
+                     ->get();
+        
+        if(request()->has('start') && request()->has('end') )  {
+        
+        
+        $from=request('start');
+        $to=request('end');
+        
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }
+        
+        $wo_technician_count = WorkOrderStaff::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',1)
+                     ->whereBetween('created_at', [$from, $to])
+                     ->groupBy('staff_id')
+                     
+                     ->get();
+                     
+                    
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('techniciancount', ['role' => $role, 'wo' => $wo_technician_count,'notifications' => $notifications]);
+ 
+        }
+        
+        
+        
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('techniciancount', ['role' => $role, 'wo' =>$wo_technician_count ,'notifications' => $notifications]);
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function techniciancountcomp()
+    {
+        
+        
+        $wo_technician_count = WorkOrderStaff::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',1)
+                     ->groupBy('staff_id')
+                     
+                     ->get();
+        
+        if(request()->has('start') && request()->has('end') )  {
+        
+        
+        $from=request('start');
+        $to=request('end');
+        
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }
+        
+        $wo_technician_count = WorkOrderStaff::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',1)
+                     ->whereBetween('created_at', [$from, $to])
+                     ->groupBy('staff_id')
+                     
+                     ->get();
+                     
+                    
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('techniciancountcomp', ['role' => $role, 'wo' => $wo_technician_count,'notifications' => $notifications]);
+ 
+        }
+        
+        
+        
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('techniciancountcomp', ['role' => $role, 'wo' =>$wo_technician_count ,'notifications' => $notifications]);
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
     public function hoscount()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\session;
 use App\Mail\MailNotify;
 use App\Notification;
 use App\Technician;
@@ -75,6 +76,30 @@ class WorkOrderController extends Controller
         $notify->message = 'Your work order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been rejected.';
         $notify->save();
 
+
+
+
+
+
+
+         $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
+$client = new \Nexmo\Client($basic);
+
+$message = $client->message()->send([
+    'to' => '255762391602',
+    'from' => 'ESTATE STAFF',
+    'text' => ' Your workorder have been rejected successfully'
+]);
+
+session::flash('message', ' Your workorder have been rejected successfully ');
+
+
+
+
+
+
+
+
 //        return response()->json('success');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
@@ -120,6 +145,28 @@ class WorkOrderController extends Controller
         $notify->message = 'Your work order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been accepted.';
         $notify->save();
 
+
+
+
+
+         $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
+$client = new \Nexmo\Client($basic);
+
+$message = $client->message()->send([
+    'to' => '255762391602',
+    'from' => 'ESTATE STAFF',
+    'text' => ' Your workorder have been accepted successfully'
+]);
+
+session::flash('message', ' Your workorder have been accepted successfully ');
+
+
+
+
+
+
+
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
@@ -134,6 +181,8 @@ class WorkOrderController extends Controller
         } else {
             $email_status = 'and Email sent successfully';
         }
+
+
 
         return redirect()->route('workOrder.edit.view', [$wO->id])->with([
             'role' => $role,
@@ -466,6 +515,22 @@ class WorkOrderController extends Controller
         $notify->type = 'wo_closed';
         $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
         $notify->save();
+
+
+
+         $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
+$client = new \Nexmo\Client($basic);
+
+$message = $client->message()->send([
+    'to' => '255762391602',
+    'from' => 'ESTATE STAFF',
+    'text' => ' Your workorder have been closed successfully'
+]);
+
+session::flash('message', ' Your workorder have been closed successfully');
+
+
+
 
         return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,

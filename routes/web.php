@@ -206,9 +206,15 @@ Route::get('/roomreport', 'HomeController@roomreportView')->name('roomreport');
 Route::get('/woduration', 'HomeController@woduration')->name('woduration');
 
 Route::get('/hoscount', 'HomeController@hoscount')->name('hoscount');
+
+Route::get('/techniciancount', 'HomeController@techniciancount')->name('techniciancount');
+Route::get('/techniciancountcomp', 'HomeController@techniciancountcomp')->name('techniciancountcomp');
+
 Route::get('work_order_change_type/{id}', 'WorkOrderController@woChangeTypeView')->name('workOrder.changetype');
 
 Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_wo_ptype');
 
 
  Route::get('pdf', 'NotesController@pdf');
+
+ Route::get('sms', 'SmsController@sendSms');

@@ -44,91 +44,104 @@
                                     class="sr-only">(current)</span></a> </b>
                 </li>
 <?php 
-				use App\WorkOrderMaterial;
-				use App\WorkOrderTransport;
-				$wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
-				
-				$wo_material_approved = WorkOrderMaterial::where('status',1)->get();
-				
-				$wo_transport = WorkOrderTransport::where('status',0)->get();
-				
-				
-				?>
-				
-				@if(auth()->user()->type == 'Estates Director')
+                use App\WorkOrderMaterial;
+                use App\WorkOrderTransport;
+                $wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
+                
+                $wo_material_approved = WorkOrderMaterial::where('status',1)->get();
+                
+                $wo_transport = WorkOrderTransport::where('status',0)->get();
+                
+                
+                ?>
+                
+                @if(auth()->user()->type == 'Estates Director')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('unattended_work_orders')}}">Unattended Work-orders</a>
                     </li>
-					
-					
-					 <li class="nav-item">
+                    
+                    
+                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('completed_work_orders')}}">Completed Work-orders</a>
                     </li>
-					
-					 <li class="nav-item">
+                    
+                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room report</a>
                     </li>
-					
-					<li class="nav-item">
+                    
+                    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
                     </li>
-					
-					<li class="nav-item">
+                    
+                    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
                     </li>
-					
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('techniciancount')}}">Technician on progress count</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician completed count</a>
+                    </li>
+                    
                 @endif
-				
-				 @if(auth()->user()->type == 'Transport Officer')
+                
+                 @if(auth()->user()->type == 'Transport Officer')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request')}}">Transport Requests <span
                                     class="badge badge-light">{{ count($wo_transport) }}</span></a>
                     </li>
-					
-					 <li class="nav-item">
+                    
+                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request_accepted')}}">Accepted Transports</a>
                     </li>
-				 <li class="nav-item">
+                 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request_rejected')}}">Rejected Transports</a>
-                    </li>	
-					
-					
+                    </li>   
+                    
+                    
                 @endif
-				
+                
                 @if(auth()->user()->type == 'STORE')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
                                     class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
                     </li>
-					
-					<li class="nav-item">
+                    
+                    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
                     </li>
                 @endif
-				
-				   @if(auth()->user()->type == 'Inspector Of Works')
+                
+                   @if(auth()->user()->type == 'Inspector Of Works')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">WO that needs material <span
                                     class="badge badge-light">{{ count($wo_material_needed) }}</span></a>
                     </li>
-					
-					<li class="nav-item">
+                    
+                    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_accepted')}}">Accepted Work Orders</a>
                     </li>
-					
-					<li class="nav-item">
+                    
+                    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_rejected')}}">Rejected Work Orders</a>
                     </li>
-					
-					
-					
+                    
+                    
+                    
                 @endif
-				
-				 @if(auth()->user()->type != 'STORE')
+                
+                @if(auth()->user()->type != 'STORE')
+                @if(auth()->user()->type != 'Transport Officer')
+                @if(auth()->user()->type != 'Inspector Of Works')
                 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work order</a>
                 </li>
-				@ENDIF
+                @ENDIF
+                
+                @ENDIF
+                @ENDIF
+
 
                 @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
@@ -137,6 +150,9 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Manage
                             Directorates</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
                     </li>
                 @endif
 
