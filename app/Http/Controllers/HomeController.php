@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\WorkOrderStaff;
-
+use App\PurchasingOrder;
 use App\Directorate;
 use App\WorkOrder;
 use App\Department;
@@ -166,6 +166,16 @@ class HomeController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('stores', ['role' => $role, 'items' => Material::all(),'notifications' => $notifications]);
     }
+	
+	
+	
+	 public function storeshosView()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('storeshos', ['role' => $role, 'items' => Material::all(),'notifications' => $notifications]);
+    }
+	
 
     public function usersView()
     {
@@ -265,6 +275,73 @@ public function profileView(){
 			
 			
         return view('womaterialapproved', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+	
+	
+	
+	
+	public function work_order_purchasing_requestView()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+		
+		$wo_material= 	PurchasingOrder::
+                     select(DB::raw('work_order_id'))
+                     ->where('status',0)
+					
+                     ->groupBy('work_order_id')
+					 
+                     ->get();
+			
+			
+		
+			
+			
+        return view('wo_purchasing_request', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+	
+	
+	
+	
+	
+	
+	public function wo_release_grn()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+		
+		$wo_material= 	PurchasingOrder::
+                     select(DB::raw('work_order_id'))
+                     ->where('status',2)
+					
+                     ->groupBy('work_order_id')
+					 
+                     ->get();
+			
+			
+		
+			
+			
+        return view('wo_release_grn', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+	public function workOrdergrnView()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+		
+		$wo_material= 	PurchasingOrder::
+                     select(DB::raw('work_order_id'))
+                     ->where('status',1)
+					
+                     ->groupBy('work_order_id')
+					 
+                     ->get();
+			
+			
+		
+			
+			
+        return view('wo_grn', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
 	
 	
@@ -723,6 +800,73 @@ public function techniciancountcomp()
 	
    
    
+   
+    public function wo_purchasing_orderView($id)
+   
+    {
+		
+		
+		
+		$wo_material = PurchasingOrder::
+                     select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
+                     ->where('status',0)
+					 ->where('work_order_id',$id)
+                     ->groupBy('material_list_id')
+					 ->groupBy('work_order_id')
+					 
+                     ->get();
+		
+		
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('purchasingOrderView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+   
+   
+   
+     public function wo_grn_listView($id)
+   
+    {
+		
+		
+		
+		$wo_material = PurchasingOrder::
+                     select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
+                     ->where('status',1)
+					 ->where('work_order_id',$id)
+                     ->groupBy('material_list_id')
+					 ->groupBy('work_order_id')
+					 
+                     ->get();
+		
+		
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('grnProcurementlist', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+   
+   
+   
+    public function wo_procurement_orderView($id)
+   
+    {
+		
+		
+		
+		$wo_material = PurchasingOrder::
+                     select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
+                     ->where('status',1)
+					 ->where('work_order_id',$id)
+                     ->groupBy('material_list_id')
+					 ->groupBy('work_order_id')
+					 
+                     ->get();
+		
+		
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('procurementOrderView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
    
 }
    

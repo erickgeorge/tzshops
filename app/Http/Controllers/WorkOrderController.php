@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\session;
 use App\Mail\MailNotify;
 use App\Notification;
@@ -14,8 +17,10 @@ use App\WorkOrderProgress;
 use App\WorkOrderMaterial;
 use Illuminate\Http\Request;
 use App\WorkOrder;
+use App\PurchasingOrder;
 use App\Material;
 use Illuminate\Support\Facades\Mail;
+
 
 class WorkOrderController extends Controller
 {
@@ -443,6 +448,71 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 	
 	
 	
+	public function purchasingorder(Request $request,$id)
+    {
+		$y=1;
+		$totmat=$request['totalmaterials']/2;
+		
+		
+	
+
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+			$z=1;
+			for ($x = 1; $x <= $totmat; $x++) {
+				
+			$purchasing_order = new  PurchasingOrder();
+            $purchasing_order->work_order_id = $id;
+             $purchasing_order->material_list_id = $request[$z];
+			 $z=$z+1;
+			 $purchasing_order->quantity = $request[$z];
+			 $z=$z+1;
+			 $purchasing_order->status = 0;
+			 
+            $purchasing_order->save();
+} 
+			
+			
+			
+			
+        //status field of work order
+			$mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status =8;
+			
+             $mForm->save();
+       
+		
+		
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Purchasing Order is create Successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -610,7 +680,9 @@ session::flash('message', ' Your workorder have been closed successfully');
 		 
         $work->save();
          return redirect()->back()->with(['message' => 'STATUS OF WORK-ORDER IS CHANGED SUCCESSFULLY']);
-         }	
+         }
+
+ 
 		 
 	
 	

@@ -45,10 +45,13 @@
                 </li>
 <?php 
                 use App\WorkOrderMaterial;
+				use App\PurchasingOrder;
                 use App\WorkOrderTransport;
                 $wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
                 
                 $wo_material_approved = WorkOrderMaterial::where('status',1)->get();
+				$procurement_request = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                	$procurement_request_acceptedbyiow = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
                 $wo_transport = WorkOrderTransport::where('status',0)->get();
                 
@@ -111,12 +114,31 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
                     </li>
+					
+					 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
+                    </li>
+					
+					 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
+                    </li>
                 @endif
-                
+				
+				
+				
+				   @if(auth()->user()->type == 'Procurement and Supplies Officer')
+					   <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_procurement_request')}}">Procurement Requests <span
+                                    class="badge badge-light">{{ count($procurement_request_acceptedbyiow) }}</span></a>
+                    </li>   
+				   
+				   
+				   
+                 @endif
                    @if(auth()->user()->type == 'Inspector Of Works')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">WO that needs material <span
-                                    class="badge badge-light">{{ count($wo_material_needed) }}</span></a>
+                                    class="badge badge-light">{{ count($procurement_request) }}</span></a>
                     </li>
                     
                     <li class="nav-item">
@@ -127,6 +149,10 @@
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_rejected')}}">Rejected Work Orders</a>
                     </li>
                     
+					 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_purchasing_request')}}">Procurement Requests <span
+                                    class="badge badge-light">{{ count($procurement_request) }}</span></a>
+                    </li>
                     
                     
                 @endif
@@ -160,6 +186,12 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Manage Technicians</a>
                     </li>
+					
+					@if($role['user_role']['role_id'] != 1)
+					 <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('storeshos')}}">Current Store</a>
+                    </li>
+					@endif
                 @endif
 
                 @if(auth()->user()->type == 'STORE')

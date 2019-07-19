@@ -117,6 +117,7 @@ User Registrartion
 	    <option value="Estates Director">Estates Director</option>
 	    <option value="Inspector Of Works">Inspector Of Works</option>
 		<option value="Transport Officer">Transport Officer</option>
+		<option value="Procurement and Supplies Officer">Procurement and Supplies Officer</option>
 	  </select>
 	</div>
 
@@ -137,7 +138,7 @@ User Registrartion
 	</div>
 	 
                 <div class="form-group">
-                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                    <input required type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
                 </div>
                

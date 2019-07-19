@@ -109,6 +109,8 @@ var total=2;
             </div>
             <button type="submit" class="btn btn-success">Save changes</button>
             <a href="/home" class="btn btn-dark">Cancel Editing</a>
+			
+			 <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a>
         </form>
         <br>
         <h4>Work order forms.</h4>
@@ -123,8 +125,8 @@ var total=2;
 						<button class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
                         
                         <button class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
-						 <button class="tablinks col-md-3" onclick="openTab(event, 'delivery')" id="defaultOpen">PROCUREMENT OF MATERIAL FORM</button>
-                        
+						
+						
                     </div>
                 </div>
 
@@ -309,10 +311,42 @@ var total=2;
 				
 				
 
-                {{-- materials tab --}}
-                <div id="delivery" class="tabcontent">
-                    <h4>Material Form</h4>
-                    <p>To be populated.</p>
+                {{-- Purchasing order tab --}}
+                
+				<div id="purchasingorder" class="tabcontent">
+                <form method="POST"  action="{{ route('work.purchasingorder', [$wo->id]) }}" >
+                    @csrf
+                    <h4>Purchasing Order Request</h4>
+                   <div class="form-group">
+                           
+                            <select onchange="stock();" required class="custom-select"  id="mname" name="1">
+                                <option   selected value="" >Choose...</option>
+                                @foreach($materials as $material)
+                                    <option value="{{ $material->id }}">{{ $material->name.' '.$material->description }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+						
+						
+						 <p>Quantity</p>
+                        <div class="form-group">
+                            <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
+                        </div>
+						
+						
+						<div id="newmaterialproc" >
+						
+						
+						</div>
+					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
+                      
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                   
+                </form>
+					<button style="background-color: blue; color: white" onclick="newmaterialproc()" class="btn btn-success">New Material</button>
+                       
+				 
                 </div>
 
                 {{-- transportation tab --}}
@@ -408,7 +442,17 @@ var total=2;
 	  
 	  
 	  
-	 function newmaterial(){
+	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	  function newmaterial(){
 		 
 		 total=total+1;
 		
@@ -479,6 +523,9 @@ document.getElementById("totalmaterials").value=total;
 		 
 		 
 	 }
+	  
+	  
+	  
 	  
 	  
 	  

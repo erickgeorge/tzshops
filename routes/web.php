@@ -30,6 +30,10 @@ Route::get('/settings', 'HomeController@settingsView');
 
 
 Route::get('/stores', 'HomeController@storesView');
+
+Route::get('/storeshos', 'HomeController@storeshosView');
+
+
 Route::get('/work_order', 'HomeController@WorkorderView')->name('work_order');
 
 Route::get('/viewusers', 'HomeController@usersView')->name('users.view');
@@ -70,6 +74,15 @@ Route::post('assigntech/work_order/{id}', 'WorkOrderController@assigntechnicianf
 Route::post('transportrequest/work_order/{id}', 'WorkOrderController@transportforwork')->name('work.transport');
 
 Route::post('materialadd/work_order/{id}', 'WorkOrderController@materialaddforwork')->name('work.materialadd');
+
+Route::post('purchasing_order/work_order/{id}', 'WorkOrderController@purchasingorder')->name('work.purchasingorder');
+
+Route::post('procurement/grn/{id}', 'PurchasingOrderController@signGRN')->name('procurement.grn');
+
+
+
+
+
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
 
 Auth::routes();
@@ -156,7 +169,34 @@ Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMate
 Route::get('wo_material_view/{id}', 'HomeController@wo_materialView')->name('store.materialview');
 
 
+Route::get('work_order_purchasing_request', 'HomeController@work_order_purchasing_requestView')->name('work_order_purchasing_request');
+
+Route::get('workorder/procurement', 'PurchasingOrderController@procurematerial')->name('procurematerial');
+
+
+Route::get('wo_purchasing_order/{id}', 'HomeController@wo_purchasing_orderView')->name('procurementorder.view');
+Route::get('grn_procurement/{id}', 'HomeController@wo_grn_listView')->name('procurement.grn.view');
+
+Route::get('wo_procurement_order/{id}', 'HomeController@wo_procurement_orderView')->name('procurementorder.view');
+
+
+Route::get('po/accept/{id}', 'PurchasingOrderController@purchasingOrderAccept')->name('po.accept');
+
+Route::get('po/reject/{id}', 'PurchasingOrderController@purchasingOrderReject')->name('po.reject');
+Route::get('work_order_procurement_request', 'PurchasingOrderController@work_order_procurement_requestView')->name('work_order_procurement_request');
+Route::get('grn_release/{id}', 'PurchasingOrderController@grn_releaseView')->name('grn_release.view');
+
+
+
 Route::get('work_order_released_material', 'HomeController@workOrderReleasedMaterialView')->name('work_order_released_material');
+
+Route::get('work_order_grn', 'HomeController@workOrdergrnView')->name('work_order_grn');
+
+Route::get('wo_release_grn', 'HomeController@wo_release_grn')->name('wo_release_grn');
+Route::get('grn_release_list/{id}', 'PurchasingOrderController@grn_release_list')->name('grn_release_list');
+Route::get('procurement_release/{id}', 'PurchasingOrderController@procurement_release')->name('procurement.release');
+
+
 
 
 
@@ -165,6 +205,8 @@ Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('stor
 Route::get('reject/material/{id}', 'StoreController@rejectMaterial')->name('store.materialreject');
 
 Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('store.materialrelease');
+
+
 
 Route::get('wo_transport_request', 'HomeController@transport_request_View')->name('wo_transport_request');
 
