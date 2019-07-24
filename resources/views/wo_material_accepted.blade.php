@@ -46,18 +46,7 @@
             </ul>
         </div>
     @endif
-    <div class="row ">
-      
-        <div class="col-md-9">
-        </div>
-        <div class="col-md-3">
-            <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">View rejected Work Orders
-                </button>
-            </a>
-        </div>
-    </div>
-
+   
     <div class="container">
         @if(count($items) > 0)
              
@@ -65,7 +54,7 @@
             <thead class="thead-dark">
             <tr>
                 <th >#</th>
-                <th >HOS name</th>
+                <th >WO ID</th>
 				<th >Workorder Detail</th>
 				<th >Material Name</th>
 				<th >Material Description</th>
@@ -84,7 +73,7 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['usermaterial']->fname.'  '.$item['usermaterial']->lname  }}</td>
+                    <td>WO {{ $item->work_order_id  }}</td>
                    
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>
@@ -92,8 +81,9 @@
                     <td>{{ $item['material']->type }}</td>
 					  <td>{{ $item->quantity }}</td>
                     <td>
-                       ACCEPTED </td>
+                       ACCEPTED</td>
                     </tr>
+			
                     @endforeach
             </tbody>
         </table>

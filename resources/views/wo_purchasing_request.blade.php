@@ -59,7 +59,7 @@
                     
                     <td>
 					
-					 <a class="btn btn-primary btn-sm" href="{{ route('purchasingorder.view', [$item->work_order_id]) }}" role="button">View</a></td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('procureiow_list.view', [$item->work_order_id]) }}" role="button">View</a></td>
                   
                        </td>
                     </tr>

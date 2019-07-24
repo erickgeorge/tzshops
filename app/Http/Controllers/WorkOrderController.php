@@ -85,15 +85,20 @@ class WorkOrderController extends Controller
 
 
 
+  $work = WorkOrder::where('id', $id)->first();
+  $cfirstname= $work['user']->fname;
+  $clastname=$work['user']->lname;
+  $cmobile=$work['user']->phone;
+ 
+	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been REJECTED .  Thanks   Directorate of Estates.';
 
-
-         $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
+         $basic  = new \Nexmo\Client\Credentials\Basic('69bcac69', 'MIx4WJn5ToJrHS77');
 $client = new \Nexmo\Client($basic);
 
 $message = $client->message()->send([
-    'to' => '255762391602',
+    'to' => '+255654146210',
     'from' => 'ESTATE STAFF',
-    'text' => ' Your workorder have been rejected successfully'
+    'text' => $msg
 ]);
 
 session::flash('message', ' Your workorder have been rejected successfully ');
@@ -110,10 +115,11 @@ session::flash('message', ' Your workorder have been rejected successfully ');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
         $emailReceiver = User::where('id', $wO->client_id)->first();
-
+	
         $toEmail = $emailReceiver->email;
+		$tata="heeeeeeeeeeeeeeeeeeee";
         Mail::to($toEmail)->send(new MailNotify(auth()->user()));
-
+		
         $email_status = '';
         if (Mail::failures()) {
             $email_status = 'but Failed to send email';
@@ -152,17 +158,22 @@ session::flash('message', ' Your workorder have been rejected successfully ');
 
 
 
+ $work = WorkOrder::where('id', $id)->first();
+  $cfirstname= $work['user']->fname;
+  $clastname=$work['user']->lname;
+  $cmobile=$work['user']->phone;
+ 
+	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No: WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been ACCEPTED .				 Thanks   Directorate of Estates.';
 
 
-         $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
+         $basic  = new \Nexmo\Client\Credentials\Basic('69bcac69', 'MIx4WJn5ToJrHS77');
 $client = new \Nexmo\Client($basic);
 
 $message = $client->message()->send([
-    'to' => '255762391602',
+    'to' => '+255654146210',
     'from' => 'ESTATE STAFF',
-    'text' => ' Your workorder have been accepted successfully'
+    'text' => $msg
 ]);
-
 session::flash('message', ' Your workorder have been accepted successfully ');
 
 
@@ -203,9 +214,15 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 //        return response()->json(WorkOrder::where('id', $id)->first());
+
+
+		$staff=WorkOrderStaff::where('work_order_id', $id)->get();
+		
+		
         return view('edit_work_order', [
             'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
             'notifications' => $notifications,
+			'staff' => $staff,
             'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
@@ -281,6 +298,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
  
             $form = new WorkOrderInspectionForm();
             $form->status = $request['status'];
+			$form->date_inspected = $request['inspectiondate'];
 			
 			 $form->description = $request['details'];
             $form->technician_id = $request['technician'];
@@ -382,6 +400,8 @@ session::flash('message', ' Your workorder have been accepted successfully ');
     {
 		$y=1;
 		$totmat=$request['totalmaterials']/2;
+		
+		/*
 		for ($x = 1; $x <= $totmat; $x++) {
    
    $materialreq=Material::where('id',$request[$y])->first();
@@ -400,7 +420,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 		} 
 		
 		
-	
+	*/
 
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -586,7 +606,23 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
         $notify->save();
 
-
+	
+	
+	
+	
+	$work = WorkOrder::where('id', $id)->first();
+  $cfirstname= $work['user']->fname;
+  $clastname=$work['user']->lname;
+  $cmobile=$work['user']->phone;
+ 
+	$msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type' . $wO->problem_type . 'about '.$wO->details.' has been Closed. 
+ Please Visit the system for more informations.	Thanks   
+	
+	Directorate of Estates.';
+	
+	
+	
+	
 
          $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
 $client = new \Nexmo\Client($basic);
@@ -609,6 +645,78 @@ session::flash('message', ' Your workorder have been closed successfully');
             'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public function closeWOSatisfied($id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        $wo = WorkOrder::find($id);
+        $wo->status = 9;
+		$p_type= $wo->problem_type;
+        $wo->save();
+		
+		$notuser='HOS '.$p_type;
+		 $us=User::where('type',$notuser)->first();
+		
+        $notify = new Notification();
+        $notify->sender_id = auth()->user()->id;
+        $notify->receiver_id = $us->id;
+        $notify->type = 'wo_closed';
+        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' is satisfied by client!.';
+        $notify->save();
+
+	
+	
+	
+	
+	
+
+
+        return redirect()->route('workOrder.track', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Work order Status is Changed to Satisfied Successfully',
+            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
+        ]);
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

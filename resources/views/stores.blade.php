@@ -35,9 +35,9 @@
         </div>
         <div class="col-md-6">
         </div>
-        <div class="col-md-3">
+       <!-- <div class="col-md-3">
             <a href=""><button style="margin-bottom: 20px" type="button" class="btn btn-warning">View needed materials (10)</button></a>
-        </div>
+        </div>  -->
     </div>
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">

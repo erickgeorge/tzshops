@@ -27,7 +27,7 @@
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
-                <th >#</th>
+                <th> </th>
                 <th >WO ID</th>
 				<th >Workorder Detail</th>
 				<th >Material Name</th>
@@ -52,8 +52,8 @@
 				$t= $item->work_order_id;
 				?>
                 <tr>
-                    <th scope="row">{{ $i }}</th>
-                    <td>  @if($t==$c)  @else  {{ $item->work_order_id  }} @endif </td>
+                    <th scope="row"></th>
+                    <td>  @if($t==$c)  @else  WO-{{ $item->work_order_id  }} @endif </td>
                    
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>

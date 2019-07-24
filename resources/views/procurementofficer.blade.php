@@ -59,12 +59,9 @@
                     </tr>
                     @endforeach
             </tbody>
-		
+		<?php  $wo_id=$item->work_order_id;   ?>
         </table>
 		
 		
-
-    </div>
-	
 	
     @endSection

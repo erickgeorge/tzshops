@@ -46,19 +46,41 @@ var total=2;
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
     </div>
+	
+	@if(empty($wo->room_id) )
+		
+	
+	 <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Location</label>
+        </div>
+		
+		
+        <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
+               aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
+    </div>
+	
+	
+	
+	
+	@else
+		
+	
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
-               aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}" disabled>
+		
+		
+        <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
+               aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']['location']->name }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Area</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
-               value="{{ $wo->room_id }}" disabled>
+               value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -74,6 +96,10 @@ var total=2;
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
                value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
+	
+	@endif
+	
+	
     <div class="form-group ">
         <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
@@ -110,8 +136,9 @@ var total=2;
             <button type="submit" class="btn btn-success">Save changes</button>
             <a href="/home" class="btn btn-dark">Cancel Editing</a>
 			
-			 <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a>
-        </form>
+			    </form>
+				<!-- <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a> -->
+    
         <br>
         <h4>Work order forms.</h4>
         {{-- tabs --}}
@@ -119,12 +146,14 @@ var total=2;
             <div class="tab">
                 <div class="container-fluid">
                     <div class="tab-group row">
-						<button class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')">ASSIGN TECHNICIAN FOR WORK</button>
-						<button class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
+						<button class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:red">ASSIGN TECHNICIAN FOR WORK</b></button>
+						<button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
-						<button class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
+						<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
                         
-                        <button class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
+						<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>
+                        
+                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
 						
 						
                     </div>
@@ -144,7 +173,7 @@ var total=2;
                             </div>
                         </div>
 						<div >
-						<p id="alltechdetails">hapa  </p>
+						<p id="alltechdetails">  </p>
 						
 						
 						
@@ -153,11 +182,72 @@ var total=2;
 						
                         <div class="form-group">
                            
-                            <select  id="techid" required class="custom-select"  name="techuser">
+                            <select   id="techid" required class="custom-select"  name="techuser">
                                
+							   
+							   
+							   
+							   
+							   
+							   <?php 			
+				use App\WorkOrderStaff;
+				$p=-1;
+      ?>
+							   
                                 @foreach($techs as $tech)
-                                    <option value="{{ $tech->id }}">{{ $tech->fname.' '.$tech->lname }}</option>
+								<?php
+								
+								$wo_technician_count = WorkOrderStaff::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',0)
+					 ->where('staff_id',$tech->id)
+                     ->groupBy('staff_id')
+					 ->first();
+					 
+							   ?>
+							   @if(empty($wo_technician_count->total_wo))
+								   <?php $t=0;?>
+							   
+							   @else
+								    <?php $t=$wo_technician_count->total_wo;?>
+								
+								@endif
+							   
+							  <?php
+							 $p++;
+							  $name[$p]=$tech->fname.' '.$tech->lname;
+							  $ident[$p]=$tech->id;
+							  $cwo[$p]=$t;
+							  
+							  ?>
+							  
+							  
+							  
+                                    
                                 @endforeach
+								<?php
+								for($i=0;$i<=$p-1;$i++){
+									for($j=$i+1 ;$j<=$p;$j++){
+										if($cwo[$i]>$cwo[$j]){
+											$t1=$name[$i];
+											$t2=$ident[$i];
+											$t3=$cwo[$i];
+											
+											$name[$i]=$name[$j];
+											$ident[$i]=$ident[$j];
+											$cwo[$i]=$cwo[$j];
+											
+											
+											$name[$j]=$t1;
+											$ident[$j]=$t2;
+											$cwo[$j]=$t3;
+								}}}
+								
+									for($x=0;$x<=$p;$x++){		
+									?><option value="{{ $ident[$x] }}"> {{$name[$x].'        '.$cwo[$x]}} </option>
+									<?php }  ?>
+											
+								
                             </select>
                         </div>
                         <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()" style="background-color: darkgreen; color: white" type="button" class="btn btn-success">Save Technician</button>
@@ -205,14 +295,27 @@ var total=2;
 						
                         <p>Inspection description</p>
                         <div class="form-group">
-                            <textarea  style="color: black" name="details" required maxlength="100" class="form-control"  rows="5" id="comment"></textarea>
+                            <textarea  style="color: black" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+						
+						</br>
+                        <p>Inspection date</p>
+                        <div class="form-group">
+                            <input type="date" style="color: black" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
                             <label>Select Technician on Duty</label>
                             <select  required class="custom-select"  name="technician">
                                 <option  selected value="" >Choose...</option>
-                                @foreach($techs as $tech)
-                                    <option value="{{ $tech->id }}">{{ $tech->fname.' '.$tech->lname }}</option>
+								
+								
+								
+								
+								
+								
+								
+                                @foreach($staff as $tech)
+                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -236,7 +339,7 @@ var total=2;
 				</br>
                         <p>Transport date</p>
                         <div class="form-group">
-                            <input type="date" style="color: black" name="date" required class="form-control"  rows="5" id="date"></input>
+                            <input type="date" style="color: black" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
                         </div>
 						
 						  <p>Transport time</p>
@@ -310,6 +413,103 @@ var total=2;
 				
 				
 				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					{{-- material_request from store--}}
+				
+				 <div id="material_request_store" class="tabcontent">
+                
+						<?php
+						
+						use App\WorkOrderMaterial;
+						$wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',1)->get();
+						
+						?>
+						 @if(COUNT($wo_materials)!=0)
+						<table class="table table-striped" style="width:100%">
+  <tr>
+    <th>Material Name</th>
+    <th>Material Description</th>
+	<th>Type</th>
+	 <th>Quantity Requested</th>
+	  <th>Quantity to request in Store</th>
+	   <th>Material to be Procured</th>
+	   
+  </tr>
+    @foreach($wo_materials as $matform)
+	
+	
+  <tr>
+    <td>{{$matform['material']->name }}</td>
+	 <td>{{$matform['material']->description }}</td>
+    <td>{{$matform['material']->type }}</td>
+	 <td>{{$matform->quantity }}</td>
+	 
+	 @if(($matform['material']->stock)>=($matform->quantity))
+		  <td>{{$matform->quantity }}</td>
+	   <?php $procured=0; ?>
+	  @else
+	  <?php $procured=$matform->quantity-$matform['material']->stock; ?>
+		 <td>{{$matform['material']->stock }}</td>
+	 @endif
+	 
+	  <td>{{$procured }}</td>
+						
+			</tr>	
+			@endforeach
+</table>			
+                   
+					<button style="background-color: maroon; color: white"  class="btn btn-alert"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >REQUEST MATERIAL FROM STORE </a></button>
+                        @endif
+				 </div>
+                {{-- end material_request  --}}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
                 {{-- Purchasing order tab --}}
                 
@@ -373,7 +573,7 @@ var total=2;
                 <div class="modal-body">
 				
 				<p id="detail" >
-				ok
+				
 				</p>
 				<h2> This technician has been assigned Following Number Of Work orders : </h2>
 				

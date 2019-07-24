@@ -8,6 +8,9 @@ use App\Role;
 use App\Notification;
 use App\User;
 use App\Material;
+use App\WorkOrderStaff;
+use App\Technician;
+use App\WorkOrder;
 
 use App\WorkOrderMaterial;
 
@@ -90,37 +93,76 @@ class StoreController extends Controller
 	public function acceptMaterial($id)
     {
        
-        $wo_material =WorkOrderMaterial::where('id', $id)->first();
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->get();
 
-		
-		 $wo_material->status = 1;
-        $wo_material->save();
-        
+		 foreach($wo_materials as $wo_material) {
+		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m->status = 1;
+		  $wo_m->save();
+		 }
+		 
         return redirect()->route('wo.materialneeded')->with(['message' => 'Material Accepted successfully ']);
     }
 	
 	public function rejectMaterial($id)
     {
        
-        $wo_material =WorkOrderMaterial::where('id', $id)->first();
+          $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->get();
 
-		
-		 $wo_material->status = -1;
-        $wo_material->save();
+		 foreach($wo_materials as $wo_material) {
+		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m->status = -1;
+		  $wo_m->save();
+		 }
+		 
         
         return redirect()->route('wo.materialneeded')->with(['message' => 'Material Rejected successfully ']);
     }
 	
 	
 	
+	
+	
+	
+		public function material_request_hos($id)
+    {
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+	
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+          $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get();
+
+		 foreach($wo_materials as $wo_material) {
+		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m->status = 3;
+		  $wo_m->save();
+		 }
+		 
+       $staff=WorkOrderStaff::where('work_order_id', $id)->get();
+		
+		
+        return redirect()->route('home')->with(['message' => 'Material is Requested from Store Successfully.']);
+ 
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public function releaseMaterial($id)
     {
        
-        $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 1)->get();
+        $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 3)->get();
 		
 		$wo_materials = WorkOrderMaterial::
                      select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
-                     ->where('status',1)
+                     ->where('status',3)
 					 ->where('work_order_id',$id)
                      ->groupBy('material_id')
 					 ->groupBy('work_order_id')

@@ -7,6 +7,25 @@ function generatePass(){
 
 	document.getElementById('pass').value = password;
 }
+
+
+
+function printdiv(printpage)
+{
+var headstr = "<html><head><title></title></head><body><h1> WORK ORDER LIST </h1>";
+var footstr = "</body>";
+var newstr = document.all.item(printpage).innerHTML;
+//var exclude = document.getElementByid('exclude').innerHTML;
+var oldstr = document.body.innerHTML;
+document.body.innerHTML = headstr+newstr+footstr;
+
+window.print();
+document.body.innerHTML = oldstr;
+return false;
+}
+
+
+
  $("#divmanual").hide();
  $(function () {
         $("#checkdiv").click(function () {

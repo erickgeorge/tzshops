@@ -47,9 +47,15 @@
                 use App\WorkOrderMaterial;
 				use App\PurchasingOrder;
                 use App\WorkOrderTransport;
+				
+				
+				$material_requests = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                
+				
+				
                 $wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
                 
-                $wo_material_approved = WorkOrderMaterial::where('status',1)->get();
+                $wo_material_approved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();;
 				$procurement_request = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
                 	$procurement_request_acceptedbyiow = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
@@ -114,7 +120,7 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
                     </li>
-					
+					 <!--
 					 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
                     </li>
@@ -122,6 +128,8 @@
 					 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
                     </li>
+					-->
+				
                 @endif
 				
 				
@@ -138,7 +146,7 @@
                    @if(auth()->user()->type == 'Inspector Of Works')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">WO that needs material <span
-                                    class="badge badge-light">{{ count($procurement_request) }}</span></a>
+                                    class="badge badge-light">{{ count($material_requests) }}</span></a>
                     </li>
                     
                     <li class="nav-item">
@@ -148,12 +156,12 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_rejected')}}">Rejected Work Orders</a>
                     </li>
-                    
+                    <!--
 					 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_purchasing_request')}}">Procurement Requests <span
                                     class="badge badge-light">{{ count($procurement_request) }}</span></a>
                     </li>
-                    
+                    -->
                     
                 @endif
                 

@@ -117,7 +117,9 @@ User Registrartion
 	    <option value="Estates Director">Estates Director</option>
 	    <option value="Inspector Of Works">Inspector Of Works</option>
 		<option value="Transport Officer">Transport Officer</option>
-		<option value="Procurement and Supplies Officer">Procurement and Supplies Officer</option>
+		
+		<option value="CLIENT">CLIENT</option>
+		<option value="UDSM STAFF">UDSM STAFF</option>
 	  </select>
 	</div>
 

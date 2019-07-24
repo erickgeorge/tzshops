@@ -32,7 +32,11 @@
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
-				<th >Quantity</th>
+				<th >Quantity Requested</th>
+				<th >Quantity Available on Store</th>
+				<th >Balance after release</th>
+
+
 				
 				
 				
@@ -53,8 +57,9 @@
                     <td>{{ $item['material']->type }}</td>
 					  <td>{{ $item->quantity }}</td>
 					 
-                    
-					<?php $wo_id=$item->work_order_id; ?>
+                    			 <td>{{ $item['material']->stock }}</td>
+ 					<td>{{ $item['material']->stock - $item->quantity}}</td>
+					
 				
                     </tr>
                     @endforeach
@@ -62,7 +67,7 @@
         </table>
 		
 		<h2> RELEASE ALL MATERIALS </h2>
-		 <a class="btn btn-primary btn-sm" href="{{ route('store.materialrelease', [$wo_id]) }}" role="button">Release</a></td>
+		 <a class="btn btn-primary btn-sm" href="{{ route('store.materialrelease', [$item->work_order_id]) }}" role="button">Release</a></td>
                   
     </div>
 	

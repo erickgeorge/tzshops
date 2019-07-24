@@ -33,7 +33,7 @@ public function __construct()
    
    public function purchasingOrderAccept($id){
          
-		$wo_procurement = PurchasingOrder::where('id', $id)
+		$wo_procurement = PurchasingOrder::where('work_order_id', $id)
                      ->where('status',0)->get();
 		     
 					 
@@ -94,7 +94,7 @@ public function __construct()
 	
 	 public function purchasingOrderReject($id){
          
-		$wo_procurement = PurchasingOrder::where('id', $id)
+		$wo_procurement = PurchasingOrder::where('work_order_id', $id)
                      ->where('status',0)->get();
 		     
 					 

@@ -128,6 +128,12 @@ Route::post('', 'UserController@changeProfile')->name('profile.change');
 Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');
 Route::post('close/work/order/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrder')->name('workorder.close');
 
+Route::post('close/satisfied/{id}', 'WorkOrderController@closeWOSatisfied')->name('workorder.satisfied');
+Route::post('close/notsatisfied/{id}', 'WorkOrderController@closeWONotSatisfied')->name('workorder.notsatisfied');
+
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -162,6 +168,8 @@ Route::get('technicians', 'HomeController@techniciansView');
 
 
 Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneeded');
+Route::get('work_order_material_iow/{id}', 'HomeController@workOrderMaterialInspectionView')->name('material.inspection.view');
+
 
 
 Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMaterialView')->name('work_order_approved_material');
@@ -179,7 +187,7 @@ Route::get('grn_procurement/{id}', 'HomeController@wo_grn_listView')->name('proc
 
 Route::get('wo_procurement_order/{id}', 'HomeController@wo_procurement_orderView')->name('procurementorder.view');
 
-
+Route::get('wo_procurement_order/{id}', 'HomeController@procureiow_list')->name('procureiow_list.view');
 Route::get('po/accept/{id}', 'PurchasingOrderController@purchasingOrderAccept')->name('po.accept');
 
 Route::get('po/reject/{id}', 'PurchasingOrderController@purchasingOrderReject')->name('po.reject');
@@ -204,6 +212,10 @@ Route::get('procurement_release/{id}', 'PurchasingOrderController@procurement_re
 Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('store.materialaccept');
 Route::get('reject/material/{id}', 'StoreController@rejectMaterial')->name('store.materialreject');
 
+Route::get('store/material_request/{id}','StoreController@material_request_hos')->name('material_request_hos');
+
+
+
 Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('store.materialrelease');
 
 
@@ -224,6 +236,15 @@ Route::get('work_order_material_accepted', 'HomeController@woMaterialAcceptedVie
 
 
 Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedView')->name('woMaterialRejected');
+
+
+
+
+
+
+
+
+
 
 Route::get('wo_transport_request_accepted', 'HomeController@woTransportAcceptedView')->name('woTransportAccepted');
 

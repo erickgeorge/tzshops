@@ -16,7 +16,28 @@
         <div class="col-md-8">
             <h3>Work order details</h3>
         </div>
-    </div>
+		
+		 @if(auth()->user()->type=='CLIENT')
+        @if($wo->status == 2)
+		 <div class="col-md-2">
+           
+                    <form method="POST" action="{{ route('workorder.satisfied', [$wo->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-success">SATISFIED</button>
+                    </form>
+					</div>
+					
+		 <div class="col-md-2">
+           
+                    <form method="POST" action="{{ route('workorder.notsatisfied', [$wo->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">NOT SATISFIED</button>
+                    </form>
+					</div>
+                @endif
+				  @endif
+        </div>
+  
     <hr>
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -165,25 +186,43 @@
 
 
   <tr>
-
-    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname }}</td>
 	
+	 @if($techform['technician_assigned'] != null)
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
 	 <td style="color:red">@if($techform->status==1) COMPLETED   @else  OnPROGRESS   @endif</td>
 
-      @if($techform['technician_assigned'] != null)
-    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-          @else
-          <td style="color: red">No technician assigned yet</td>
-      @endif
+     
 
     <td>{{ 
 	 $techform->created_at }}</td>
+	 
+	  @if($techform->created_at ==  $techform->updated_at)
+	 
+	 
+	  <td> NOT COMPLETED</td>
+	  @else
+	  <td>{{ 
+	 $techform->updated_at }}</td>
+	  @endif
+	  
 	 @if($techform->status!=1)
 	 <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
                                                     class="fas fa-clipboard-check large"></i></a></td>
 													
 		</td>
-@endif		
+	@endif	
+
+	
+	
+
+
+
+          @else
+          <td style="color: red">No technician assigned yet</td>
+      @endif
+	
+	
+ 	
   </tr>
   
 	@endforeach
@@ -220,7 +259,7 @@
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
 	 <td>{{$matform->quantity }}</td>
-	 <td style="color:red">@if($matform->status==0) WAITING   @elseif($matform->status== 1) APPROVED @elseif($matform->status== 2) RELEASED FROM STORE @else REJECTED   @endif</td>
+	 <td style="color:red">@if($matform->status==0) WAITING FOR IOW APPROVAL  @elseif($matform->status== 1) APPROVED BY IOW @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3) REQUESTED FROM STORE @else REJECTED BY IOW   @endif</td>
 	
 	
 	 <td>{{$matform->created_at }}</td>
@@ -252,7 +291,7 @@
     <th>STATUS</th>
     <th>DESCRIPTION</th> 
 	<th>TECHNICIAN RESPONSIBLE</th> 
-    <th>DATE</th>
+    <th>DATE INSPECTED</th>
   </tr>
     @foreach($iforms as $iform)
 	
@@ -263,7 +302,7 @@
       <td>{{
 
 	 $iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ $iform->created_at }}</td>
+    <td>{{ $iform->date_inspected }}</td>
   </tr>
   
 	@endforeach

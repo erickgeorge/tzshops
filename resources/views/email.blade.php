@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>About your work order</title>
+    <title>Work-Order Details</title>
 </head>
 <body>
-
-<h1>An action has been taken into your work order. PLease log into the system to view.</h1>
+<h2>Dear Sir/Madam;  </h2>
+<h2>Your Work-Order sent to Directorate of Estates Department has been processed. PLease log into the system to view more details.</h2>
+<p>Directorate of Estates.</p>
+<p>Head-of-Section.</p>
 <p>Thank you.</p>
+
+	
 
 </body>
 </html>

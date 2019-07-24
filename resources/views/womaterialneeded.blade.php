@@ -33,12 +33,9 @@
             <thead class="thead-dark">
             <tr>
                 <th >#</th>
-                <th >HOS name</th>
-				<th >Workorder Detail</th>
-				<th >Material Name</th>
-				<th >Material Description</th>
-				<th >Type</th>
-				<th >Quantity</th>
+              
+				<th >Workorder ID</th>
+				<th >HOS name</th>
 				<th >Action</th>
 				
             </tr>
@@ -52,16 +49,13 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['usermaterial']->fname.'  '.$item['usermaterial']->lname  }}</td>
                    
-                    <td>{{ $item['workorder']->details }}</td>
-                    <td>{{$item['material']->name }}</td>
-                    <td>{{ $item['material']->description }}</td>
-                    <td>{{ $item['material']->type }}</td>
-					  <td>{{ $item->quantity }}</td>
-                    <td>
-                        <a style="color: green;" href="{{ route('store.materialaccept', [$item->id]) }}"  data-toggle="tooltip" title="Accept"><i class="far fa-check-circle"></i></a>&nbsp;
-                        <a style="color: black;" href="{{ route('store.materialreject', [$item->id]) }}" data-toggle="tooltip" title="Reject"><i class="far fa-window-close"></i></a>
+                    <td>WO-{{ $item->work_order_id }}</td>
+                   
+                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+					
+                 
+                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">View material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach

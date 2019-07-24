@@ -16,6 +16,7 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
+		<th scope="col">WO ID</th>
                 <th scope="col">Details</th>
                 <th scope="col">Type</th>
                 <th scope="col">From</th>
@@ -34,6 +35,7 @@
 
                 <tr>
                     <th scope="row">{{ $i }}</th>
+		   <th scope="row">WO-{{ $work->id }}</th>
                     <td id="wo-details">{{ $work->details }}</td>
                     <td>{{ $work->problem_type }}</td>
                     <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
