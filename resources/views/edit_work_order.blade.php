@@ -311,7 +311,8 @@ var total=2;
 								
 								
 								
-								
+								$staff= WorkOrderStaff::where('work_order_id',$wo->id)->where('status',1)->get();
+						
 								
 								
                                 @foreach($staff as $tech)

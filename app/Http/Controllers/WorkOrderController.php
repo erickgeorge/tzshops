@@ -114,25 +114,53 @@ session::flash('message', ' Your workorder have been rejected successfully ');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
-        $emailReceiver = User::where('id', $wO->client_id)->first();
-	
+         $emailReceiver = User::where('id', $wO->client_id)->first();
+
         $toEmail = $emailReceiver->email;
-		$tata="heeeeeeeeeeeeeeeeeeee";
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+
+
+        /*
         Mail::to($toEmail)->send(new MailNotify(auth()->user()));
-		
+
         $email_status = '';
         if (Mail::failures()) {
             $email_status = 'but Failed to send email';
         } else {
             $email_status = 'and Email sent successfully';
-        }
+      }
+
+ */ 
+
+
+     $data = array('name'=>$userName, "body" => "Your Work-Order No : WO-$wO->id sent to Directorate of Estates on : $wO->created_at, of  Problem Type : $wO->problem_type has been REJECTED.Please login in the system for further information .",
+
+                    "footer"=>"Thanks","footer1"=>"Directorate  of Estates"
+                );
+    
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+       
+       $message->to($toEmail,$userName)
+            ->subject('WORK ORDER ACCEPTANCE.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
 
         return redirect()->route('work_order')->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order has been rejected ' . $email_status,
+            'message' => 'Work order has been rejected ' ,
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()]);
     }
+
+
+
+
 
     public function acceptWO($id)
     {
@@ -186,9 +214,25 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
-        $emailReceiver = User::where('id', $wO->client_id)->first();
+        
+		
+		
+		
+		
+		
+		 $emailReceiver = User::where('id', $wO->client_id)->first();
 
         $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+
+
+        /*
         Mail::to($toEmail)->send(new MailNotify(auth()->user()));
 
         $email_status = '';
@@ -196,15 +240,34 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $email_status = 'but Failed to send email';
         } else {
             $email_status = 'and Email sent successfully';
-        }
+      }
 
+ */ 
+
+
+     $data = array('name'=>$userName, "body" => "Your Work-Order No : WO-$wO->id sent to Directorate of Estates on : $wO->created_at, of  Problem Type : $wO->problem_type has been ACCEPTED.Please login in the system for further information .",
+
+                    "footer"=>"Thanks","footer1"=>"Directorate  of Estates"
+                );
+    
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+       
+       $message->to($toEmail,$userName)
+            ->subject('WORK ORDER ACCEPTANCE.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+		
+		
+		
+		
+		
 
 
         return redirect()->route('workOrder.edit.view', [$wO->id])->with([
             'role' => $role,
             'notifications' => $notifications,
             'techs' => User::where('type', 'TECHNICIAN')->get(),
-            'message' => 'Work order accepted ' . $email_status . '. You can now edit it!',
+            'message' => 'Work order accepted . You can now edit it!',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
