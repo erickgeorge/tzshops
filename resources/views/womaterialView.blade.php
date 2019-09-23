@@ -35,10 +35,7 @@
 				<th >Quantity Requested</th>
 				<th >Quantity Available on Store</th>
 				<th >Balance after release</th>
-
-
-				
-				
+	
 				
             </tr>
             </thead>
@@ -55,12 +52,9 @@
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
-					  <td>{{ $item->quantity }}</td>
-					 
-                    			 <td>{{ $item['material']->stock }}</td>
+				    <td>{{ $item->quantity }}</td>
+					<td>{{ $item['material']->stock }}</td>
  					<td>{{ $item['material']->stock - $item->quantity}}</td>
-					
-				
                     </tr>
                     @endforeach
             </tbody>

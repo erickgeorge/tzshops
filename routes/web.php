@@ -305,6 +305,13 @@ Route::POST('edit/Hall', 'AssetsController@editHall')->name('hall.edit');
 
 
 
+
 Route::post('CampusRegistration', 'AssetsController@RegisteCampus')->name('campus.save');
+
+Route::POST('edit/Campus', 'AssetsController@editcampus')->name('campus.edit');
+
+Route::post('delete/Campus/{id}', 'AssetsController@deletecampus')->name('campus.delete');
+
+
 
 

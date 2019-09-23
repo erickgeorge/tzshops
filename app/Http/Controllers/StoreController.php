@@ -178,13 +178,20 @@ class StoreController extends Controller
 		 $material->save();
 			}
 			
-		
+
+
+
 		foreach($wochange_status as $wochange_state){
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
 		$wochange->status=2;
 		$wochange->save();
 		
 		}
+       
+
+
+
+
 		
 		 
 		 

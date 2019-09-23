@@ -23,7 +23,7 @@
 
 
                    <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'campuses')">
-                        REGISTER CAMPUSE
+                        REGISTER CAMPUS
                     </button>
 
                     <button class="tablinks col-md-4" onclick="openTab(event, 'staffhouse')" id="defaultOpen">
@@ -86,14 +86,14 @@
 
 
                                     <a style="color: green;"
-                                       onclick="myfunc('{{ $campus->id }}','{{ $campus->campus_name }}','{{ $campus->location }}',' )"
+                                       onclick="myfunc2('{{ $campus->id }}','{{ $campus->campus_name }}','{{ $campus->location }}',' )"
                                        data-toggle="modal" data-target="#editCampus" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this House Completely? ')"
-                                          action="{{ route('house.delete', [$campus->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to delete this Campus Completely? ')"
+                                          action="{{ route('campus.delete', [$campus->id]) }}">
                                         {{csrf_field()}}
 
 
@@ -131,7 +131,6 @@
                                name="location" placeholder="Enter Campus Location ">
                     </div>
 
-                    
                     <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
                         New Campus
                     </button>
@@ -141,24 +140,24 @@
 
 
 
-               <div class="modal fade" id="editDirectorate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+               <div class="modal fade" id="editCampus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit House Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Campus Details</h5>
                 </div>
 
-                <form method="POST" action="edit/House" class="col-md-6">
+                <form method="POST" action="edit/Campus" class="col-md-6">
                     <div class="modal-body">
 
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">House Name </label>
+                            <label for="name_of_house">Campus Name </label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_name"
-                                   name="name_of_house" placeholder="Enter House name">
-                            <input id="edit_id" name="edit_id" hidden>
+                                   id="edit_campname"
+                                   name="name_of_campus" placeholder="Enter Campus Name">
+                            <input id="edit_cid" name="edit_cid" hidden>
                         </div>
 
 
@@ -167,28 +166,12 @@
                         <div class="form-group ">
                             <label for="editlocation">Location</label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_location"
-                                   name="location" placeholder="Enter House Location">
+                                   id="edit_loc"
+                                   name="location" placeholder="Enter Campus Location">
                         </div>
                        
 
                     
-                        <div class="form-group ">
-                            <label for="editlocation">Type</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_type"
-                                   name="type" placeholder="Enter House Type">
-                        </div>
-                       
-
-                         <div class="form-group ">
-                            <label for="editlocation">No of Rooms</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_room"
-                                   name="no_room" placeholder="Enter Number of Rooms">
-                        </div>
-
-
 
                        
                         <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit Room Details
@@ -244,7 +227,7 @@
 
                                     <a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->name_of_house }}','{{ $house->location }}','{{$house->type}}','{{$house->no_room}}' )"
-                                       data-toggle="modal" data-target="#editDirectorate" title="Edit"><i
+                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
 
 
@@ -307,7 +290,7 @@
 
 
 
-               <div class="modal fade" id="editDirectorate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+               <div class="modal fade" id="editHouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -594,7 +577,7 @@
 
                                     <a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->name_of_house }}','{{ $house->location }}','{{$house->type}}','{{$house->no_room}}' )"
-                                       data-toggle="modal" data-target="#editDirectorate" title="Edit"><i
+                                       data-toggle="modal" data-target="#editstaffHouse" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
 
 
@@ -667,7 +650,7 @@
 
 
 
-               <div class="modal fade" id="editDirectorate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+               <div class="modal fade" id="editstaffHouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -764,9 +747,9 @@
 
             document.getElementById("edit_name").value = W;
 
-           document.getElementById("edit_type").value = X;
+           document.getElementById("edit_location").value = X;
            
-           document.getElementById("edit_location").value = Y;
+           document.getElementById("edit_type").value = Y;
 
            document.getElementById("edit_room").value = Z;
        }
@@ -787,6 +770,16 @@
            document.getElementById("edit_type1").value = Y;
 
            document.getElementById("edit_location1").value = Z;
+       }
+
+
+        function myfunc2(U, V, W) {
+
+             document.getElementById("edit_cid").value = U;
+
+            document.getElementById("edit_campname").value = V;
+
+            document.getElementById("edit_loc").value = W;
        }
 
 

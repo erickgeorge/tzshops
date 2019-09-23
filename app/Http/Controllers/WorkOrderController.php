@@ -92,11 +92,11 @@ class WorkOrderController extends Controller
  
 	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been REJECTED .  Thanks   Directorate of Estates.';
 
-         $basic  = new \Nexmo\Client\Credentials\Basic('69bcac69', 'MIx4WJn5ToJrHS77');
+         $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');
 $client = new \Nexmo\Client($basic);
 
 $message = $client->message()->send([
-    'to' => '+255654146210',
+    'to' => '255745909129',
     'from' => 'ESTATE STAFF',
     'text' => $msg
 ]);
@@ -194,11 +194,11 @@ session::flash('message', ' Your workorder have been rejected successfully ');
 	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No: WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been ACCEPTED .				 Thanks   Directorate of Estates.';
 
 
-         $basic  = new \Nexmo\Client\Credentials\Basic('69bcac69', 'MIx4WJn5ToJrHS77');
+         $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');      
 $client = new \Nexmo\Client($basic);
 
 $message = $client->message()->send([
-    'to' => '+255654146210',
+    'to' => '255745909129',
     'from' => 'ESTATE STAFF',
     'text' => $msg
 ]);

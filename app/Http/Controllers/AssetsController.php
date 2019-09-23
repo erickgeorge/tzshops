@@ -132,6 +132,26 @@ class AssetsController extends Controller
     }
 
 
+            public function editcampus(Request $request)
+    {
+           $p=$request['edit_cid'];
+           $campuses = Campus::where('id',$p)->first();
+           $campuses->campus_name = $request['campus_name'];
+           $campuses->location = $request['location'];
+           $campuses->save();
+  
+        return redirect()->route('register.house')->with(['message' => 'Respective campus Edited successfully']);
+    }
+  
+
+
+    public function deletecampus($id)
+       {
+           $HallofRes=Campus::where('id', $id)->first();
+           $HallofRes->delete();
+           return redirect()->route('register.house')->with(['message' => 'Respective campus is deleted successfully']);
+       }
+
 
 
 }
