@@ -284,7 +284,7 @@
 	
 	$idwo=$wo->id;
 	$iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
-?>
+        ?>
 
 <table style="width:100%">
   <tr>

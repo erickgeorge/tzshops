@@ -281,3 +281,30 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
  Route::get('pdf', 'NotesController@pdf');
 
  Route::get('sms', 'SmsController@sendSms');
+
+
+
+
+ Route::get('manage_Houses', 'AssetsController@HousesView')->name('register.house');
+
+ 
+ Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save');
+
+ Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete');
+
+ Route::POST('edit/House', 'AssetsController@editHouse')->name('house.edit');
+
+
+
+
+Route::post('HallRegistration', 'AssetsController@RegisterHalls')->name('hall.save');
+
+Route::post('delete/Hall/{id}', 'AssetsController@deleteHall')->name('hall.delete');
+
+Route::POST('edit/Hall', 'AssetsController@editHall')->name('hall.edit');
+
+
+
+Route::post('CampusRegistration', 'AssetsController@RegisteCampus')->name('campus.save');
+
+

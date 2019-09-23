@@ -1,4 +1,4 @@
-<!doctype html>
+    <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -185,6 +185,20 @@
                         <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Manage
                             Directorates</a>
                     </li>
+
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Manage
+                            Assets</a>
+                    </li>
+
+
+
+
+
+
+
+
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
                     </li>
