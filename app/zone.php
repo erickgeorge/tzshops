@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class hall extends Model
+class zone extends Model
 {
 	
 	
@@ -13,6 +13,5 @@ class hall extends Model
     }
     	
 
-	
-    //
+
 }

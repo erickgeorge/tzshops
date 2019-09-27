@@ -314,4 +314,17 @@ Route::post('delete/Campus/{id}', 'AssetsController@deletecampus')->name('campus
 
 
 
+Route::post('ZoneRegistration', 'AssetsController@RegisterZone')->name('zone.save');
+Route::post('delete/zone/{id}', 'AssetsController@deletezone')->name('zone.delete');
+Route::POST('edit/zone', 'AssetsController@editzone')->name('zone.edit');
+
+
+
+Route::post('CleaningAreaRegistration', 'AssetsController@RegisterCleaningArea')->name('area.save');
+Route::post('delete/cleanarea/{id}', 'AssetsController@deletecleanarea')->name('cleanarea.delete');
+Route::POST('edit/cleaningarea', 'AssetsController@editcleanarea')->name('cleanarea.edit');
+
+
+
+
 

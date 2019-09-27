@@ -8,6 +8,9 @@ use App\Hall;
 use App\notification;
 use App\user;
 use App\Campus;
+use App\zone;
+use App\cleaningarea;
+
 class AssetsController extends Controller
 {
     //
@@ -15,11 +18,18 @@ class AssetsController extends Controller
      public function RegisterHouse(Request $request)
     {
        
+
+        if ($request['campus'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'campus is required']);
+        }
+
+
         $staffhouse = new House();
         $staffhouse->name_of_house = $request['name_of_house'];
         $staffhouse->location = $request['location'];
         $staffhouse->type = $request['type'];
         $staffhouse->no_room = $request['no_room'];
+        $staffhouse->campus_id = $request['campus'];
         $staffhouse->save();
         return redirect()->route('register.house')->with(['message' => 'New house is registered successfully']);
     }
@@ -36,6 +46,9 @@ class AssetsController extends Controller
             'staffhouses' => House::all(),
             'HallofResdence' => Hall::all(),
              'campuses' => Campus::all(),
+               'newzone' => zone::all(),
+               'cleanarea' => cleaningarea::all(),
+             
           
           
           ]);
@@ -57,17 +70,18 @@ class AssetsController extends Controller
     {
            $p=$request['edit_id'];
            $House = House::where('id',$p)->first();
-		   $House->name_of_house = $request['name_of_house'];
-		   $House->type = $request['type'];
-		   $House->location = $request['location'];
-		   $House->type = $request['type'];
-		   $House->no_room = $request['no_room'];
+       $House->name_of_house = $request['name_of_house'];
+       
+       $House->location = $request['location'];
+       $House->type = $request['type'];
+       $House->no_room = $request['no_room'];
+       $House->campus_id = $request['campus'];
            $House->save();
   
         return redirect()->route('register.house')->with(['message' => 'House Edited successfully']);
     }
-	
-	
+  
+  
 
 
 
@@ -80,7 +94,7 @@ class AssetsController extends Controller
       
         $HallofResdence = new Hall();
         $HallofResdence->hall_name = $request['hall_name'];
-        $HallofResdence->campus_id = $request['campus_id'];
+        $HallofResdence->campus_id = $request['campus'];
         $HallofResdence->area_name = $request['area_name'];
         $HallofResdence->type = $request['type'];
         $HallofResdence->location = $request['location'];
@@ -105,23 +119,23 @@ class AssetsController extends Controller
 
             public function editHall(Request $request)
     {
-           $p=$request['edit_hallid'];
-           $hall = Hall::where('id',$p)->first();
-		   $hall->hall_name = $request['hall_name'];
-		   $hall->campus_id = $request['campus_id'];
-		   $hall->area_name = $request['area_name'];
-		   $hall->type = $request['type'];
-		   $hall->location = $request['location'];
-           $hall->save();
+       $p=$request['edit_hallid'];
+       $hall = Hall::where('id',$p)->first();
+       $hall->hall_name = $request['hall_name'];
+       $hall->campus_id = $request['campus'];
+       $hall->area_name = $request['area_name'];
+       $hall->type = $request['type'];
+       $hall->location = $request['location'];
+       $hall->save();
   
         return redirect()->route('register.house')->with(['message' => 'Respective Hall Edited successfully']);
     }
-	
-	
+  
+  
 
 
 
-	   public function RegisteCampus(Request $request)
+     public function RegisteCampus(Request $request)
     {
       
         $campuses = new Campus();
@@ -132,20 +146,19 @@ class AssetsController extends Controller
     }
 
 
-            public function editcampus(Request $request)
+     public function editcampus(Request $request)
     {
            $p=$request['edit_cid'];
-           $campuses = Campus::where('id',$p)->first();
-           $campuses->campus_name = $request['campus_name'];
-           $campuses->location = $request['location'];
-           $campuses->save();
+           $campus = Campus::where('id',$p)->first();
+           $campus->campus_name = $request['campus_name'];
+           $campus->location = $request['location'];
+           $campus->save();
   
         return redirect()->route('register.house')->with(['message' => 'Respective campus Edited successfully']);
     }
   
 
-
-    public function deletecampus($id)
+      public function deletecampus($id)
        {
            $HallofRes=Campus::where('id', $id)->first();
            $HallofRes->delete();
@@ -154,4 +167,72 @@ class AssetsController extends Controller
 
 
 
+       public function Registerzone(Request $request)
+    {
+      
+        $newzone = new zone();
+        $newzone->zone_name = $request['zone_name'];
+        $newzone->campus_id = $request['campus'];
+        $newzone->type = $request['type'];
+        $newzone->save();
+        return redirect()->route('register.house')->with(['message' => 'New Zones is registered successfully']);
+    }
+
+
+      public function deletezone($id)
+       {
+           $newzone=zone::where('id', $id)->first();
+           $newzone->delete();
+           return redirect()->route('register.house')->with(['message' => 'Respective Zone is deleted successfully']);
+       }
+
+
+      public function editzone(Request $request)
+    {
+        $p=$request['editzone_id'];
+        $editnewzone = zone::where('id',$p)->first();
+        $editnewzone->zone_name = $request['zone_name'];
+        $editnewzone->campus_id = $request['campus'];
+        $editnewzone->type = $request['type'];
+        $editnewzone->save();
+  
+        return redirect()->route('register.house')->with(['message' => 'Respective zone Edited successfully']);
+    }
+  
+
+
+  public function RegisterCleaningArea(Request $request)
+    {
+        $cleanarea = new cleaningarea();
+        $cleanarea->cleaning_name = $request['cleaning_name'];
+        $cleanarea->zone_id = $request['zone'];
+       
+        $cleanarea->save();
+        return redirect()->route('register.house')->with(['message' => 'New Cleaning Area is registered successfully']);
+    }
+
+
+
+public function deletecleanarea($id)
+       {
+           $cleanareaa=cleaningarea::where('id', $id)->first();
+           $cleanareaa->delete();
+           return redirect()->route('register.house')->with(['message' => 'Respective Clean Area is deleted successfully']);
+       }
+
+
+  public function editcleanarea(Request $request)
+    {
+        $p=$request['editarea_id'];
+        $editcleanarea = cleaningarea::where('id',$p)->first();
+        $editcleanarea->cleaning_name = $request['cleaning_name'];
+        $editcleanarea->zone_id = $request['zone'];
+        $editcleanarea->save();
+        return redirect()->route('register.house')->with(['message' => 'Respective Clean Area Edited successfully']);
+    }
+
+
+
+
 }
+ 
