@@ -130,6 +130,26 @@
                     </li>
 					-->
 				
+                @endif  
+
+
+                 @if(auth()->user()->type == 'Head Procurement')
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white">Materials to be purchased <span
+                                    class="badge badge-light"></span></a>
+                    </li>
+                    
+                    
+                     <!--
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
+                    </li>
+                    
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
+                    </li>
+                    -->
+                
                 @endif
 				
 				

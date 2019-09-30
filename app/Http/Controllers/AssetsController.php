@@ -7,7 +7,7 @@ use App\House;
 use App\Hall;
 use App\notification;
 use App\user;
-use App\Campus;
+use App\campus;
 use App\zone;
 use App\cleaningarea;
 
@@ -230,9 +230,64 @@ public function deletecleanarea($id)
         $editcleanarea->save();
         return redirect()->route('register.house')->with(['message' => 'Respective Clean Area Edited successfully']);
     }
+ 
+
+   public function Registercampusview(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('registercampus', [
+            'role' => $role,
+            'notifications' => $notifications,
+          ]);
+     }
+
+   public function Registerstaffhouseview(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('registerstaffhouse', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'campuses' => Campus::all(),
+          ]);
+     }
 
 
 
 
+   public function Registerhallview(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('registerhall', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'campuses' => Campus::all(),
+          ]);
+     }
+
+
+
+ public function Registercleanzoneview(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('registercleaningzone', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'campuses' => Campus::all(),
+          ]);
+     }
+
+
+
+
+ public function Registercleaningareaview(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('registercleaningarea', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'campuses' => Campus::all(),
+                'newzone' => zone::all(),
+          ]);
+     }
 }
  

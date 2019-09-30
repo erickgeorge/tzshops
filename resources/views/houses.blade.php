@@ -23,34 +23,34 @@
 
 
                    <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'campuses')">
-                        REGISTER CAMPUS
+                        MANAGE CAMPUSES
                     </button>
 
                     <button class="tablinks col-md-4" onclick="openTab(event, 'staffhouse')" id="defaultOpen">
-                        REGISTER STAFF HOUSE
+                        MANAGE STAFF HOUSES
                     </button>
 
-                    <button class="tablinks col-md-4" onclick="openTab(event, 'Hallofresdence')">REGISTER HALL OF RESDENCE
+                    <button class="tablinks col-md-4" onclick="openTab(event, 'Hallofresdence')">MANAGE HALL OF RESDENCES
                     </button>
 
                    <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'cleaningzone')">
-                        REGISTER CLEANING ZONE
+                        MANAGE CLEANING ZONES
                     </button>
 
                     <button class="tablinks col-md-4" onclick="openTab(event, 'cleaningarea')" id="defaultOpen">
-                        REGISTER CLEANING AREA
+                        MANAGE CLEANING AREAS
                     </button>
 
                     <button class="tablinks col-md-4" onclick="openTab(event, 'buildingasset')">
-                        REGISTER NON BUILDING ASSET
+                        MANAGE NON-BUILDING ASSETS
                     </button>
 
                    <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'customer')">
-                        REGISTER CLEANING COMPANY
+                        MANAGE CLEANING COMPANIES
                     </button>
 
                     <button class="tablinks col-md-4" onclick="openTab(event, 'accademicarea')" id="defaultOpen">
-                        REGISTER ACADEMIC AREA
+                        MANAGE ACADEMIC AREAS
                     </button>
 
                     
@@ -63,8 +63,11 @@
         {{-- Cleaningarea --}}
 
          <div id="cleaningarea" class="tabcontent">
-                <a href="#Add New Cleaning Area" style="margin-bottom: 20px; background-color: coral; color: white"
+              <h3><b>Available Cleaning Areas </b></h3>
+              <hr>
+                <a href="{{ route('Registercleaningarea') }}"style="background-color: green; color: white"
                    class="btn btn-primary">Add New CLeaning Area</a>
+                   <br><br>
 
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
@@ -111,8 +114,6 @@
                                                 data-toggle="tooltip" title="Delete"><a style="color: red;"
                                                                                         data-toggle="tooltip"><i
                                                         class="fas fa-trash-alt"></i></a>
-
-
                                         </button>
                                     </form>
                                 </div>
@@ -129,40 +130,7 @@
                     
                 </table>
                 <br>
-                <h4 id="Add New Cleaning Area">Add New Cleaning Area</h4>
-                <hr>
-                <form method="POST" action="{{ route('area.save') }}" class="col-md-6">
-                    @csrf
-
-
-
-                        <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            
-                            <label class="input-group-text" for="directorate">Zone Name</label>
-                        </div>
-                        <select required class="custom-select" name="zone" id="zone">
-                            <option value="">Choose...</option>
-                            @foreach($newzone as $zone)
-                                <option value="{{ $zone->id }}">{{ $zone->Zone_name }}</option>
-                            @endforeach
-
-                        </select>
-                    </div> 
-
-               
-
-
-                    <div class="form-group ">
-                        <label for="dir_name">Cleaning Area Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="Housename"
-                               name="cleaning_name" placeholder="Enter Cleaning Area Name">
-                    </div>
-
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
-                        New Cleaning Area
-                    </button>
-                </form>
+                
             </div>
             
 
@@ -202,19 +170,28 @@
 
                         </select>
                     </div> 
-
-
                        
+                        
+                
+                                               <div style="width:600px;">
+                                                <div style="float: left; width: 130px"> 
+                                                      
+                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        </button>
+                  
+                                                       
+                                               </div>
+                                               <div style="float: right; width: 290px"> 
+                                                     
+                                                        
+                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                     
+                                                       </div>
+                                            </div>
+                                                </div>
+      
 
-
-
-
-                       
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit Cleaning Area Details
-                        </button>
-
-                    </div>
-                </form>
+              </form>
 
 
                 <div class="modal-footer">
@@ -225,29 +202,18 @@
 
 
 
- 
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
 
               {{-- Cleaningzone --}}
 
          <div id="cleaningzone" class="tabcontent">
-                <a href="#Add New cleaningzone" style="margin-bottom: 20px; background-color: coral; color: white"
+              <h3><b>Available Cleaning Zones </b></h3>
+              <hr>
+                <a href="{{ route('registercleaningzone') }}" style="background-color: green; color: white"
                    class="btn btn-primary">Add New CLeaning Zone</a>
 
-                <table id="myTable" id="myTable" class="table table-striped">
+                   <br><br>
+
+                <table id="myTable5" id="myTable5" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -301,44 +267,7 @@
                     </tbody>
                     
                 </table>
-                <br>
-                <h4 id="Add New cleaningzone">Add New Cleaning Zone</h4>
-                <hr>
-                <form method="POST" action="{{ route('zone.save') }}" class="col-md-6">
-                    @csrf
-                    <div class="form-group ">
-                        <label for="dir_name">Zone Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="Housename"
-                               name="zone_name" placeholder="Enter Zone Name">
-                    </div>
-
-
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            
-                            <label class="input-group-text" for="directorate">Campus Name</label>
-                        </div>
-                        <select required class="custom-select" name="campus" id="campus">
-                            <option value="">Choose...</option>
-                            @foreach($campuses as $campus)
-                                <option value="{{ $campus->id }}">{{ $campus->campus_name }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>   
-
-
-                     <div class="form-group ">
-                        <label for="dir_name">Zone Type</label>
-                        <input style="color: black" type="text" required class="form-control" id="type"
-                               name="type" placeholder="Enter Zone Type">
-                    </div>
-
-
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
-                        New Zone
-                    </button>
-                </form>
+                
             </div>
             
 
@@ -379,9 +308,6 @@
                         </select>
                     </div>   
 
-
-
-
                         <div class="form-group ">
                             <label for="editlocation">Type</label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
@@ -389,10 +315,22 @@
                                    name="type" placeholder="Enter Zone Type">
                         </div>
                        
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit Zone Details
-                        </button>
-
-                    </div>
+                         <div style="width:600px;">
+                                                <div style="float: left; width: 130px"> 
+                                                      
+                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        </button>
+                  
+                                                       
+                                               </div>
+                                               <div style="float: right; width: 290px"> 
+                                                     
+                                                        
+                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                     
+                                                       </div>
+                                            </div>
+                                                </div>
                 </form>
 
 
@@ -409,8 +347,16 @@
             {{-- Campus --}}
 
          <div id="campuses" class="tabcontent">
-                <a href="#Add New campus" style="margin-bottom: 20px; background-color: coral; color: white"
+            <h3><b>Available Campuses </b></h3>
+            <hr>
+                <a href="{{ route('registercampus') }}" style="background-color: green; color: white"
                    class="btn btn-primary">Add New Campus</a>
+             
+                     <div class="col-md-6">
+                         <br>
+            
+                    </div>
+               
 
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
@@ -468,26 +414,7 @@
                     
                 </table>
                 <br>
-                <h4 id="Add New campus">Add New Campus</h4>
-                <hr>
-                <form method="POST" action="{{ route('campus.save') }}" class="col-md-6">
-                    @csrf
-                    <div class="form-group ">
-                        <label for="dir_name">Campus Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="Housename"
-                               name="campus_name" placeholder="Enter Campus Name">
-                    </div>
-
-                    <div class="form-group ">
-                        <label for="dir_abb">Campus Location</label>
-                        <input style="color: black" type="text" required class="form-control" id="houselocation"
-                               name="location" placeholder="Enter Campus Location ">
-                    </div>
-
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
-                        New Campus
-                    </button>
-                </form>
+              
             </div>
             
 
@@ -520,10 +447,22 @@
                                    name="location" placeholder="Enter Campus Location">
                         </div>
                        
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit Room Details
-                        </button>
-
-                    </div>
+                        <div style="width:600px;">
+                                                <div style="float: left; width: 130px"> 
+                                                      
+                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        </button>
+                  
+                                                       
+                                               </div>
+                                               <div style="float: right; width: 290px"> 
+                                                     
+                                                        
+                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                     
+                                                       </div>
+                                            </div>
+                                                </div>
                 </form>
 
 
@@ -537,11 +476,17 @@
 
 
 
-            <div id="staffhouse" class="tabcontent active">
-                <a href="#Add New House" style="margin-bottom: 20px; background-color: coral; color: white"
-                   class="btn btn-primary">Add New Staff House</a>
+ {{-- staffhouse --}}
 
+            <div id="staffhouse" class="tabcontent active">
+                  <h3><b>Available Staff Houses </b></h3>
+                  <hr>
+                <a href="{{ route('registerstaffhouse') }}"style="background-color: green; color: white"
+                   class="btn btn-primary">Add New Staff House</a>
+                   <br> <br> 
+    
                 <table id="myTableee" id="myTable" class="table table-striped">
+                      
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -565,7 +510,7 @@
                             <td>{{ $house->location }}</td>
                             <td>{{ $house->type}}</td>
                             <td>{{ $house->no_room }}</td>
-                            <td>{{ $house['campus']->campus_name }}</td>
+                            <td>{{ $house['campus']->campus_name }}</td> 
                             
                             <td>
 
@@ -600,52 +545,7 @@
                     
                 </table>
                 <br>
-                <h4 id="Add New House">Add New House</h4>
-                <hr>
-                <form method="POST" action="{{ route('house.save') }}" class="col-md-6">
-                    @csrf
-                    <div class="form-group ">
-                        <label for="dir_name">House Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="Housename"
-                               name="name_of_house" placeholder="Enter House Name">
-                    </div>
 
-                    <div class="form-group ">
-                        <label for="dir_abb">House Location</label>
-                        <input style="color: black" type="text" required class="form-control" id="houselocation"
-                               name="location" placeholder="Enter House Location ">
-                    </div>
-                    <div class="form-group ">
-                        <label for="dir_name">Type of House</label>
-                        <input style="color: black" type="text" required class="form-control" id="type"
-                               name="type" placeholder="Enter House Type">
-                    </div>
-
-
-                    <div class="form-group ">
-                        <label for="dir_name">No of Rooms</label>
-                        <input style="color: black" type="text" required class="form-control" id="no_room"
-                               name="no_room" placeholder="Enter No of Rooms"    onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) ">
-                    </div>
-
-
-                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            
-                            <label class="input-group-text" for="directorate">Campus Name</label>
-                        </div>
-                        <select required class="custom-select" name="campus" id="campus">
-                            <option value="">Choose...</option>
-                            @foreach($campuses as $campus)
-                                <option value="{{ $campus->id }}">{{ $campus->campus_name }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>   
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
-                        New House
-                    </button>
-                </form>
             </div>
             
 
@@ -717,10 +617,22 @@
 
 
                        
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit Room Details
-                        </button>
-
-                    </div>
+                         <div style="width:600px;">
+                                                <div style="float: left; width: 130px"> 
+                                                      
+                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        </button>
+                  
+                                                       
+                                               </div>
+                                               <div style="float: right; width: 290px"> 
+                                                     
+                                                        
+                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                     
+                                                       </div>
+                                            </div>
+                                                </div>
                 </form>
 
 
@@ -735,8 +647,11 @@
     {{-- Hall of Residence--}}
 
      <div id="Hallofresdence" class="tabcontent">
-                <a href="#Add New House Hall of Residence" style="margin-bottom: 20px; background-color: coral; color: white"
+        <h3><b>Available Hall of Resdences </b></h3>
+                  <hr>
+                <a href="{{ route('registerhall') }}" style="background-color: green; color: white"
                    class="btn btn-primary">Add New Hall of Resdence</a>
+                   <br><br>
 
                 <table id="myTablee" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
@@ -798,56 +713,7 @@
                     
                 </table>
                 <br>
-                <h4 id="Add New House Hall of Residence">Add New Hall of Resdence</h4>
-                <hr>
-                <form method="POST" action="{{ route('hall.save') }}" class="col-md-6">
-                    @csrf
-                    <div class="form-group ">
-                        <label for="dir_name">Hall Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="Housename"
-                               name="hall_name" placeholder="Enter House Name">
-                    </div>
-
-                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            
-                          <label class="input-group-text" for="directorate">Campus Name</label>
-                        </div>
-                        <select required class="custom-select" name="campus" id="campus">
-                            <option value="">Choose...</option>
-                            @foreach($campuses as $campus)
-                                <option value="{{ $campus->id }}">{{ $campus->campus_name }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>
-
-
-
-                    <div class="form-group ">
-                        <label for="dir_name">Area</label>
-                        <input style="color: black" type="text" required class="form-control" id="type"
-                               name="area_name" placeholder="Enter House Type">
-                    </div>
-
-
-                    <div class="form-group ">
-                        <label for="dir_name">Type</label>
-                        <input style="color: black" type="text" required class="form-control" id="no_room"
-                               name="type" placeholder="Enter Hall Type">
-                    </div>
-
-                    <div class="form-group ">
-                        <label for="dir_name">Location</label>
-                        <input style="color: black" type="text" required class="form-control" id="no_room"
-                               name="location" placeholder="Enter Hall Location">
-                    </div>
-                    
-                    
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
-                        New Hall
-                    </button>
-                </form>
+                
 
 
                     
@@ -913,11 +779,22 @@
                                    id="edit_location1"
                                    name="location" placeholder="Enter Number of Rooms">
                         </div>
-                       
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit Hall Details
-                        </button>
-
-                    </div>
+                        <div style="width:600px;">
+                                                <div style="float: left; width: 130px"> 
+                                                      
+                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        </button>
+                  
+                                                       
+                                               </div>
+                                               <div style="float: right; width: 290px"> 
+                                                     
+                                                        
+                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                     
+                                                       </div>
+                                            </div>
+                                                </div>
                 </form>
 
              <div class="modal-footer">
@@ -1091,8 +968,9 @@
 
 
                        
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit Room Details
+                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
                         </button>
+                        <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
 
                     </div>
                 </form>
@@ -1126,7 +1004,8 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();                                             
+            $('#myTableee').DataTable();     
+                $('#myTable5').DataTable();                                            
  
 
         });

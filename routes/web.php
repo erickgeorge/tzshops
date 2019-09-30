@@ -288,41 +288,40 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
  Route::get('manage_Houses', 'AssetsController@HousesView')->name('register.house');
 
  
- Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save');
-
- Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete');
-
- Route::POST('edit/House', 'AssetsController@editHouse')->name('house.edit');
+Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save');
+Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete');
+Route::POST('edit/House', 'AssetsController@editHouse')->name('house.edit');
+Route::get('Register_Staffhouse', 'AssetsController@Registerstaffhouseview')->name('registerstaffhouse');
 
 
 
 
 Route::post('HallRegistration', 'AssetsController@RegisterHalls')->name('hall.save');
-
 Route::post('delete/Hall/{id}', 'AssetsController@deleteHall')->name('hall.delete');
-
 Route::POST('edit/Hall', 'AssetsController@editHall')->name('hall.edit');
+Route::get('Register_hall', 'AssetsController@Registerhallview')->name('registerhall');
 
 
 
 
 Route::post('CampusRegistration', 'AssetsController@RegisteCampus')->name('campus.save');
-
 Route::POST('edit/Campus', 'AssetsController@editcampus')->name('campus.edit');
-
 Route::post('delete/Campus/{id}', 'AssetsController@deletecampus')->name('campus.delete');
+Route::get('Register_Campus', 'AssetsController@Registercampusview')->name('registercampus');
 
 
 
 Route::post('ZoneRegistration', 'AssetsController@RegisterZone')->name('zone.save');
 Route::post('delete/zone/{id}', 'AssetsController@deletezone')->name('zone.delete');
 Route::POST('edit/zone', 'AssetsController@editzone')->name('zone.edit');
+Route::get('Register_Zone', 'AssetsController@Registercleanzoneview')->name('registercleaningzone');
 
 
 
 Route::post('CleaningAreaRegistration', 'AssetsController@RegisterCleaningArea')->name('area.save');
 Route::post('delete/cleanarea/{id}', 'AssetsController@deletecleanarea')->name('cleanarea.delete');
 Route::POST('edit/cleaningarea', 'AssetsController@editcleanarea')->name('cleanarea.edit');
+Route::get('Register_Cleaningarea', 'AssetsController@Registercleaningareaview')->name('Registercleaningarea');
 
 
 
