@@ -5,7 +5,7 @@
     @endSection
 @section('body')
     <br>
-    <div class="row container-fluid">
+    <div class="row container-fluid"  style="margin-left:2%; margin-right:2%; margin-top: 6%;">
         <div class="col-md-8">
             <h3>Rejected work orders</h3>
         </div>
@@ -43,11 +43,12 @@
                     <td>{{ $work->created_at }}</td>
                     <td>
                         @if($work->location ==null)
-                            {{ $work['room']['block']->location_of_block }}</td>
+                            {{ $work['room']['block']->location_of_block }}
                     @else
-                        <td>
-                            {{ $work->location }}</td>
+                       
+                            {{ $work->location }}
                     @endif
+                    </td>
                     <td>
                         <a onclick="myfunc('{{ $work->reason }}')"><span data-toggle="modal" data-target="#viewReason"
                                                                          class="badge badge-success">View reason</span></a>

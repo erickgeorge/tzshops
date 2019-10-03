@@ -7,9 +7,9 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3><b>Purchasing Order Requests</b></h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center"><b>Purchasing Order Requests</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -23,6 +23,7 @@
     </div>
     <br>
     <hr>
+    <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -67,4 +68,5 @@
             </tbody>
         </table>
     </div>
+</div>
     @endSection

@@ -17,9 +17,9 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-6">
-            <h3><b>HOS COUNT ON WORK ORDERS </b></h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center"><b>HOS COUNT ON WORK ORDERS </b></h3>
         </div>
 
         <div class="col-md-6">
@@ -53,7 +53,7 @@
     @endif
    
 
-    <div id="div_print" class="container">
+    <div id="div_print" class="container" align="center">
 	
 	<input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
 

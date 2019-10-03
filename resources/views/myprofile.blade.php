@@ -38,9 +38,9 @@ padding: 20 20 20 20;
 
     <br>
 
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3>Your Profile Details</h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center">Profile Details</h3>
         </div>
     </div>
     <hr>
@@ -63,7 +63,7 @@ padding: 20 20 20 20;
  
  
 
-    <div class="col-md-6">
+    <div class="col-lg-12">
         <p style="color: red"></p>
 
         <form action="{{ route('profile.change') }}" method="POST">
@@ -72,9 +72,9 @@ padding: 20 20 20 20;
 	
 	
 	 
-  <div id="content">
+  <div id="content" align="center">
      <div id="package_update">
-	  <div class="form-group ">
+	  <div class="form-group col-lg-6" >
                
 	    <label for="fname">	First Name</label>
 	    <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->fname }}"
@@ -84,7 +84,7 @@ padding: 20 20 20 20;
 	</div>
 	
 	
-	  <div class="form-group ">
+	  <div class="form-group col-lg-6">
                
 	    <label for="phone">Last Name</label>
 	    <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->lname }}"
@@ -94,7 +94,7 @@ padding: 20 20 20 20;
 	</div>
 
 	
-	   <div class="form-group ">
+	   <div class="form-group col-lg-6">
                
 	    <label for="phone">Phone number</label>
 	    <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->phone }}"
@@ -106,7 +106,7 @@ padding: 20 20 20 20;
 	
 	
 	
-	<div class="form-group ">
+	<div class="form-group col-lg-6">
 	    <label for="email">Email Address</label>
 	    <input disabled style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
 	</div>  <div>

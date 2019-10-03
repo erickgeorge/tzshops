@@ -6,8 +6,8 @@
 
 @section('body')
     <br>
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
+        <div class="col-lg-12" align="center">
             <h2>Edit user</h2>
         </div>
         {{--<div class="col-md-4">
@@ -34,23 +34,28 @@
             </ul>
         </div>
     @endif
-    <div class="col-md-6">
+    <div class="col-lg-12">
         <form method="POST" action="{{ route('user.edit', [$user->id]) }}">
             @csrf
-
-            <div class="form-group ">
+<div class="row">
+    <div class="col">
+        <div class="form-group ">
                 <label for="fname">First name</label>
                 <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
                        name="fname" placeholder="Enter first name"
                        onkeypress="return  event.charCode > 57 " value="{{ $user->fname }}">
             </div>
-            <div class="form-group ">
+    </div>
+    <div class="col">
+        <div class="form-group ">
                 <label for="lname">Last name</label>
                 <input style="color: black" type="text" required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp"
                        name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 "
                        value="{{ $user->lname }}">
             </div>
-            <div class="form-group ">
+    </div>
+    <div class="col">
+        <div class="form-group ">
                 <label for="phone">Phone number</label>
                 <input style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -58,12 +63,20 @@
                        class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number"
                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 ">
             </div>
-            <div class="form-group ">
-                <label for="email">Email Address</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+         <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="email">Email</label>
+                </div>
                 <input style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
                        name="email" placeholder="Enter email address" value="{{ $user->email }}">
             </div>
-            <div class="input-group mb-3">
+    </div>
+    <div class="col">
+        <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="directorate">Directorate/College</label>
                 </div>
@@ -71,13 +84,15 @@
                     @foreach($directorates as $directorate)
                         <option <?php if(($user['section']['department']['directorate']->name) == $directorate->name) {?>
                                 selected="selected"
-								<?php } ?>
+                                <?php } ?>
                                 value="{{ $directorate->id }}" > {{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
                     @endforeach 
 
                 </select>
             </div>
-            <div class="input-group mb-3">
+    </div>
+    <div class="col">
+        <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="department">Department</label>
                 </div>
@@ -85,7 +100,11 @@
                     <option value="{{ $user['section']['department']->id }}">{{ $user['section']['department']->description }}</option>
                 </select>
             </div>
-            <div class="input-group mb-3">
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="section">Section</label>
                 </div>
@@ -93,7 +112,9 @@
                     <option value="{{ $user['section']->id }}">{{ $user['section']->section_name }}</option>
                 </select>
             </div>
-            <div class="input-group mb-3">
+    </div>
+    <div class="col">
+        <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Role</label>
                 </div>
@@ -118,6 +139,8 @@
                     </option>
                 </select>
             </div>
+    </div>
+    <div class="col">
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -205,6 +228,17 @@
 
                 </select>
             </div>
+    </div>
+</div>
+            
+            
+            
+            
+            
+            
+            
+            
+
 
  <!-- 
             <div class="form-group ">
@@ -217,9 +251,10 @@
 			
 			-->
 		
-
+<div align="center">
             <button type="submit" class="btn btn-success">Save</button>
             <a class="btn btn-info" href="/viewusers" role="button">Cancel</a>
+            </div>
 
         </form>
 

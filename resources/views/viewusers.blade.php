@@ -5,10 +5,11 @@ view users
 @endSection
 @section('body')
 <br>
-<div class="row container-fluid">
-  <div class="col-md-7">
+<div class="row container-fluid" style="margin-top: 6%;">
+  <div class="col-lg-4">
     <h3>Available Users</h3>
   </div>
+ 
   {{--<div class="col-md-5">
     <form class="form-inline my-2 my-lg-0">
       <input style="width:220px;" class="form-control mr-sm-2" type="search" placeholder="Search by Fullname, email" aria-label="Search">
@@ -22,16 +23,24 @@ view users
   @endif
 <br>
 <hr>
-<a href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
 
-	@if(!$display_users->isEmpty())
-		
-	
-	
+  @if(!$display_users->isEmpty())
+    
+  
+  
     <div id="div_print" class="container">
-	
-	<input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
-<table class="table table-striped" id="myTable"">
+  
+  
+  <div class="row">
+     <div class="col-md-5">
+    <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
+  </div>
+  <div class="col-md-5" align="right">
+ <input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
+</div>
+  </div>
+  
+<table class="table table-striped" id="myTable">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -39,7 +48,7 @@ view users
       <th scope="col">Username</th>
       <th scope="col">Email</th>
       <th title="phone" scope="col">Phone</th>
-	  <th scope="col">Directorate</th>
+    <th scope="col">Directorate</th>
       <th scope="col">Department</th>
       <th scope="col">Section</th>
       <th scope="col">Actions</th>
@@ -68,7 +77,7 @@ else {
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->phone }}</td>
-	      <td>{{ $user['section']['department']['directorate']->name }}</td>
+        <td>{{ $user['section']['department']['directorate']->name }}</td>
       <td>{{ $user['section']['department']->name }}</td>
       <td>{{ $user['section']->section_name }}</td>
       <td>

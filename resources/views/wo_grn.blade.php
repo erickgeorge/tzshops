@@ -7,9 +7,9 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3><b>Purchasing Order Requests</b></h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center"><b>Purchasing Order Requests</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -28,7 +28,7 @@
         </div>
     @endif
    
-    <div class="container " >
+    <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>

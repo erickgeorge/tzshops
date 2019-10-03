@@ -11,34 +11,42 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/fontawesome/css/all.css') }}">
     <!-- code mpya -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+   
 
     <!-- code mpya -->
 
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
 
 </head>
 <body>
+<style type="text/css">
+    .nav-item:hover{
+        background-color:#0acb;
+    }
 
+        .tablinks:hover{
+            background-color:#4d6788;
+        }
+    </style>
 
 <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ESMIS</a>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom: #fff 2px solid;">
+        <div class="col-lg-2 col-md-3 col-6">
+            <div class="logo">
+                <a class="navbar-brand" href="#">ESMIS</a>
+            </div>
+        </div>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto text-center">
                 <li class="nav-item">
                     <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span
                                     class="sr-only">(current)</span></a> </b>
@@ -189,7 +197,7 @@
                 @if(auth()->user()->type != 'Transport Officer')
                 @if(auth()->user()->type != 'Inspector Of Works')
                 <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work order</a>
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders</a>
                 </li>
                 @ENDIF
                 
@@ -199,17 +207,15 @@
 
                 @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('viewusers')}}">Manage Users</a>
+                        <a class="nav-link" style="color:white" href="{{ url('viewusers')}}">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Manage
-                            Directorates</a>
+                        <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Directorates</a>
                     </li>
 
 
                      <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Manage
-                            Assets</a>
+                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
                     </li>
 
 
@@ -226,7 +232,7 @@
 
                 @if(strpos(auth()->user()->type, "HOS") !== false)
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Manage Technicians</a>
+                        <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
                     </li>
 					
 					@if($role['user_role']['role_id'] != 1)
@@ -241,11 +247,16 @@
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
                     </li>
                 @endif
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+                
+            </ul>
+            <span class="navbar-text">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color:white;" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Notifications <span class="badge badge-light">{{ count($notifications) }}</span></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <i class="fa fa-bell"></i>
+                         <span class="badge badge-light">{{ count($notifications) }}</span></a>
+                    <div class="dropdown-menu dropdown-menu-right" style="background-color: #676464; color:#212529;" aria-labelledby="navbarDropdown">
                         @foreach($notifications as $notification)
                             @if($notification->type == 'wo_rejected')
                                 <a class="dropdown-item"
@@ -280,16 +291,13 @@
                         @endif
                     </div>
                 </li>
-            </ul>
-            <span class="navbar-text">
-      <ul class="navbar-nav">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
+           aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
           {{ Auth::user()->name }}
         </a>
-        <div class="dropdown-menu top-dropdown" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
            <!--SETTING AND CHANGE PASSWORD 
           <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
 
@@ -309,7 +317,6 @@
 
         </div>
       </li>
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     </ul>
     </span>
             <!-- <form class="form-inline my-2 my-lg-0">
@@ -318,10 +325,14 @@
             </form> -->
         </div>
     </nav>
-    <div class="container">
+    <div>
         @yield('body')
     </div>
-</div>
+</div><!--  
+<footer class="py-3 bg-dark" style="margin-bottom: 0;">
+    <div class="container">
+    <p class="m-0 text-center text-white"> ESMIS &copy; <?php echo date('Y'); ?>, All rights reserved</div>
+</footer>-->
 <script
         src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

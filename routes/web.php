@@ -324,6 +324,8 @@ Route::POST('edit/cleaningarea', 'AssetsController@editcleanarea')->name('cleana
 Route::get('Register_Cleaningarea', 'AssetsController@Registercleaningareaview')->name('Registercleaningarea');
 
 
-
+Route::get('work_order_material_missing', 'HomeController@workOrderMissingMaterialView')->name('wo.materialneeded');
+Route::get('work_order_material_missing/{id}', 'HomeController@workOrderMaterialMissingInspectionView')->name('material.missing.inspection.view');
+Route::get('insufficient/material/{id}', 'StoreController@insufficientMaterial')->name('store.insufficientmaterial');
 
 

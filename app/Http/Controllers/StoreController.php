@@ -57,7 +57,7 @@ class StoreController extends Controller
 		 $material->stock = $request['tstock'];
         $material->save();
 
-        return redirect()->route('storeIncrement.view', $request['nameid'])->with(['message' => 'Material is incremented']);
+        return redirect()->route('storeIncrement.view', $request['nameid'])->with(['message' => 'Material is added succesfully']);
     }
 	
 	 public function addnewmaterail(Request $request)
@@ -197,6 +197,34 @@ class StoreController extends Controller
 		 
         
         return redirect()->route('work_order_approved_material')->with(['message' => 'Material has been released successfully ']);
+    }
+
+
+
+    public function insufficientmaterial($id)
+    {
+       
+        $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 3)->get();
+			
+
+
+
+		foreach($wochange_status as $wochange_state){
+			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
+		$wochange->status=10;
+		$wochange->save();
+		
+		}
+       
+
+
+
+
+		
+		 
+		 
+        
+        return redirect()->route('work_order_approved_material')->with(['message' => 'Message has been sent successfully ']);
     }
 	
 	

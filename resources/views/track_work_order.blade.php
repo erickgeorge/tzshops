@@ -12,14 +12,15 @@
 
  ?>
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3>Work order details</h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center">Work order details</h3>
         </div>
 		
 		 @if(auth()->user()->type=='CLIENT')
         @if($wo->status == 2)
-		 <div class="col-md-2">
+        <div class="row">
+		 <div class="col">
            
                     <form method="POST" action="{{ route('workorder.satisfied', [$wo->id]) }}">
                         @csrf
@@ -27,7 +28,7 @@
                     </form>
 					</div>
 					
-		 <div class="col-md-2">
+		 <div class="col">
            
                     <form method="POST" action="{{ route('workorder.notsatisfied', [$wo->id]) }}">
                         @csrf
@@ -37,8 +38,10 @@
                 @endif
 				  @endif
         </div>
+    </div>
   
     <hr>
+    <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -380,4 +383,5 @@
             </div>
         </div>
     </div>
+</div>
     @endSection

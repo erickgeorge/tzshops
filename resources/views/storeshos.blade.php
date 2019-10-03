@@ -7,8 +7,8 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12" align="center">
             <h3><b>Available materials </b></h3>
         </div>
         {{--<div class="col-md-4">
@@ -28,7 +28,7 @@
         </div>
     @endif
     <div class="row ">
-        <div class="col-md-3">
+        <div class="col-md-3" align="right">
 
              <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
 
@@ -37,7 +37,7 @@
         </div>
         
     </div>
-    <div class="container " >
+    <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>

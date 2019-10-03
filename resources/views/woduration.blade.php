@@ -17,12 +17,12 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-6">
-            <h3><b>Work orders Duration list </b></h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center"><b>Work orders Duration list </b></h3>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" align="left">
             <form method="GET" action="woduration" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -44,6 +44,7 @@
     </div>
     <br>
     <hr>
+    <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -124,6 +125,7 @@
         @else
             <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
         @endif
+    </div>
     </div>
     <script>
 

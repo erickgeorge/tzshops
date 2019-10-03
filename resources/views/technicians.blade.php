@@ -5,9 +5,9 @@
     @endSection
 @section('body')
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-7">
-            <h3>Available Technicians</h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center">Available Technicians</h3>
         </div>
     </div>
     @if(Session::has('message'))
@@ -16,10 +16,10 @@
     @endif
     <br>
     <hr>
-    <a href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>
+    <a style="margin-left: 2%;" href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>
 
     @if(!$techs->isEmpty())
-        <table class="table table-striped" id="myTable">
+        <table class="table table-striped" id="myTable" style="margin-left: 2%; margin-right: 2%;">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>

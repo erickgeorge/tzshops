@@ -7,9 +7,9 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3><b>PROCUREMENT REQUEST OF WORK ORDER</b></h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center"><b>PROCUREMENT REQUEST OF WORK ORDER</b></h3>
         </div>
        
     </div>
@@ -23,7 +23,7 @@
         </div>
     @endif
    
-    <div class="container " >
+    <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
@@ -64,8 +64,6 @@
 		 <td>
 					
 					 <a class="btn btn-info btn-lg active" role="button" aria-pressed="true" role="button" data-toggle="modal" data-target="#exampleModal">ISSUE GRN</a></td>
-                  
-                       </td>
 		
                   
     </div>
@@ -93,7 +91,7 @@
                         @csrf
 <label>   SUPPLIER </label>
 
-                        <input required name="supplier" required maxlength="20" class="form-control"  rows="5" id="supplier"></input>
+                        <input required name="supplier" required maxlength="20" class="form-control"  rows="5" id="supplier"/>
 </br>
 <label> Date received   </label>
 <input required type="date" data-provide="datepicker" name="date" id="date"  max="<?php echo date('Y-m-d'); ?>" />

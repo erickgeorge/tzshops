@@ -5,9 +5,9 @@
     @endSection
 @section('body')
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3>Add new technician</h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center">Add new technician</h3>
         </div>
     </div>
     <hr>
@@ -27,43 +27,56 @@
             </ul>
         </div>
     @endif
-    <div class="col-md-6">
+    <div class="col-lg-12">
         <form method="POST" action="{{ route('tech.create') }}">
             @csrf
-            <div class="form-group ">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group ">
                 <label for="fname">First name</label>
                 <input type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}">
             </div>
-            <div class="form-group ">
+                </div>
+                <div class="col">
+                    <div class="form-group ">
                 <label for="lname">Last name</label>
                 <input type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
             </div>
-            <div class="form-group ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group ">
                 <label for="phone">Phone number</label>
                 <input  required type="text"     name="phone"  value="{{ old('phone') }}"
                         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                         maxlength = "13"  minlength = "2"
                         class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
             </div>
-            <div class="form-group ">
+                </div>
+                <div class="col">
+                    <div class="form-group ">
                 <label for="email">Email Address</label>
                 <input required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
             </div>
-			
-			 <div class="input-group mb-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Type of technician</label>
             </div>
-			<?php 
-		use App\UserRole;
-			$role=UserRole::where('user_id',auth()->user()->id)->first();
-			$roleofuser=$role->role_id;
-			?>
-			
-			 <input hidden  type="number"  class="form-control" id="role" name="role"  value="{{ $roleofuser }}">
+            <?php 
+        use App\UserRole;
+            $role=UserRole::where('user_id',auth()->user()->id)->first();
+            $roleofuser=$role->role_id;
+            ?>
+            
+             <input hidden  type="number"  class="form-control" id="role" name="role"  value="{{ $roleofuser }}">
      
-			 @if($roleofuser == 1 )
-			 
+             @if($roleofuser == 1 )
+             
             <select  class="custom-select" id="typetechadmin" name="typetechadmin">
                 
                 <option value="Electrical">Electrical</option>
@@ -73,16 +86,20 @@
                 <option value="Carpentry/Painting">Carpentry/Painting</option>
                 
             </select>
-			
-			@else
-				 <input readonly  type="text"  class="form-control" id="typetechhos" name="typetechhos"  value="{{ substr(strstr(auth()->user()->type, " "), 1) }}">
+            
+            @else
+                 <input readonly  type="text"  class="form-control" id="typetechhos" name="typetechhos"  value="{{ substr(strstr(auth()->user()->type, " "), 1) }}">
          @endif
         </div>
-
-			
+                </div>
+            </div>
+            
+            
+         <div align="center">
 
             <button type="submit" class="btn btn-success">Add technician</button>
             <a class="btn btn-info" href="/technicians" role="button">Cancel </a>
+        </div>
         </form>
     </div>
     <br>

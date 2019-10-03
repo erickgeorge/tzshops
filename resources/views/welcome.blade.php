@@ -12,8 +12,9 @@
 <link rel="stylesheet" href="/css/main.css">
     </head>
     <body style="background-color: #e1e8f0" class="welcome-body">
-            <p class="estate-title"> Estates Services Management Information System </p>
-        <div class="container col-md-4"  id="login-view" >
+            <p align="center" class="estate-title"> Estates Services Management Information System </p>
+            <div style="width: 100%;">
+        <div class="container col-md-4"  id="login-view" style="width: 50%;" align="center" >
             @guest
             <form method="POST" action="{{ route('login') }}">
                         @csrf

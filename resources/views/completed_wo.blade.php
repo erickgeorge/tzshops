@@ -7,7 +7,7 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
+    <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-md-6">
             <h3><b>Completed Work orders list </b></h3>
         </div>
@@ -47,9 +47,9 @@
         </div>
     @endif
 
-	<input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
+    <input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
    
-    <div  id="div_print" class="container">
+    <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
@@ -67,7 +67,7 @@
 
                 <tbody>
 
-                {{-- CREATE A CLASS WITH DEFINED W.O STASTUS FROM 1-7 THAT WILL CHECK HE STATUS NUMBER AND RETURN STATUS WORDS --}}
+                {{-- CREATE A CLASS WITH DEFINED W.O STASTUS FROM 1-7 THAT WILL CHECK THE STATUS NUMBER AND RETURN STATUS WORDS --}}
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
@@ -82,23 +82,23 @@
                                 <td><span class="badge badge-warning">new</span></td>
                             @elseif($work->status == 1)
                                 <td><span class="badge badge-success">accepted</span></td>
-								
-							@elseif($work->status == 2)
+                                
+                            @elseif($work->status == 2)
                                 <td><span class="badge badge-success">CLOSED</span></td>
-							@elseif($work->status == 3)
+                            @elseif($work->status == 3)
                                 <td><span class="badge badge-info">technician assigned</span></td>
-							@elseif($work->status == 4)
+                            @elseif($work->status == 4)
                                 <td><span class="badge badge-info">transportation stage</span></td>
-							@elseif($work->status == 5)
-															<td><span class="badge badge-info">pre-implementation</span></td>
-							@elseif($work->status == 6)
-															<td><span class="badge badge-info">post implementation</span></td>
-							@elseif($work->status == 7)
-															<td><span class="badge badge-info">material requested</span></td>
-							@else
-                                <td><span class="badge badge-success">procurement stage</span></td>								
+                            @elseif($work->status == 5)
+                                                            <td><span class="badge badge-info">pre-implementation</span></td>
+                            @elseif($work->status == 6)
+                                                            <td><span class="badge badge-info">post implementation</span></td>
+                            @elseif($work->status == 7)
+                                                            <td><span class="badge badge-info">material requested</span></td>
+                            @else
+                                <td><span class="badge badge-success">procurement stage</span></td>                             
                             @endif
-							
+                            
                             <td>{{ $work->created_at }}</td>
                             <td>
 
@@ -109,17 +109,17 @@
                                 {{ $work->location }}
                             @endif
                             <td>
-							
+                            
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
                                     @if($work->status == -1)
                                         <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a>
                                     @elseif($work->status == 2)
-										 <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
+                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
-													
-									@else
+                                                    
+                                    @else
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
@@ -159,9 +159,9 @@
 
 
         });
-		
-		
-		function printdiv(printpage)
+        
+        
+        function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1> Completed Work orders list </h1>";
 var footstr = "</body>";

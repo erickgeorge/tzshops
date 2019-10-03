@@ -28,15 +28,15 @@ $id=$_GET["id"];
 						?>
 
 							
-				          <div id="material_request" >
+				          <div id="material_request" class="col-lg-12">
                 <form method="POST"  action="{{ route('work.purchasingorder', [$id]) }}" >
         
            
                     @csrf
                    
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Select material for work-order</p>
+                        <div class="row" style="margin-top: 6%">
+                            <div >
+                                <p align="center">Select material for work-order</p>
                             </div>
                         </div>
 						
@@ -50,7 +50,7 @@ $id=$_GET["id"];
 						
 						
 						
-                        <div class="form-group">
+                        <div class="form-group col-lg-6">
                            
                             <select onchange="stock();" required class="custom-select"  id="mname" name="1">
                                 <option   selected value="" >Choose...</option>
@@ -62,7 +62,7 @@ $id=$_GET["id"];
 						
 						
 						 <p>Quantity</p>
-                        <div class="form-group">
+                        <div class="form-group col-lg-6">
                             <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
 						

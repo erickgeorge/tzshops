@@ -6,7 +6,7 @@
 
 @section('body')
     <br>
-    <div class="row">
+    <div class="row" style="margin-top: 6%; margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
             <h2>Create new work order</h2>
         </div>
@@ -31,7 +31,7 @@
 
     <p style="color: red">All fields are compulsory</p>
     </br>
-    <form method="POST" action="{{ route('workorder.create') }}">
+    <form method="POST" action="{{ route('workorder.create') }}"  style="margin-left:2%; margin-right:2%;">
         @csrf
         <div class="input-group mb-3">
             <div class="input-group-prepend">

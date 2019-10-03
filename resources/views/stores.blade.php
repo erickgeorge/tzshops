@@ -7,16 +7,11 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12" align="center">
             <h3><b>Available materials </b></h3>
         </div>
-        {{--<div class="col-md-4">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by type, status and name" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>--}}
+        
     </div>
     <br>
     <hr>
@@ -27,13 +22,17 @@
             </ul>
         </div>
     @endif
-    <div class="row ">
-        <div class="col-md-3">
+    <div class="row " align="center">
+        <div class="col">
 
              <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
 
         </div>
-        <div class="col-md-6">
+        <div class="col" align="right">
+            <a href="{{ url('work_order_material_missing') }}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Material requests <b style="color:red; background-color: grey; padding: 4px; border-radius: 5px;">90</b></button></a>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary">print</button>
         </div>
        <!-- <div class="col-md-3">
             <a href=""><button style="margin-bottom: 20px" type="button" class="btn btn-warning">View needed materials (10)</button></a>

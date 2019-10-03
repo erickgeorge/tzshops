@@ -11,9 +11,9 @@ var total=2;
 
 </script>
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3>Work order details</h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center">Work order details</h3>
         </div>
     </div>
     <hr>
@@ -33,11 +33,9 @@ var total=2;
             </ul>
         </div>
     @endif
-    <h5>This work order is from <span style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h5>
-    <h5>Has been submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
-    <h3 style="color: black">Contacts:</h3>
-    <h5>{{ $wo['user']->phone }}</h5>
-    <h5>{{ $wo['user']->email }}</h5>
+    <div style="margin-right: 2%; margin-left: 2%;">
+    <h5>This work order is from <span style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> &nbsp;Has been submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+    <h5 style="color: black">Contacts: {{ $wo['user']->phone }} ,&nbsp;{{ $wo['user']->email }}</h5>
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -420,26 +418,6 @@ var total=2;
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 					{{-- material_request from store--}}
 				
 				 <div id="material_request_store" class="tabcontent">
@@ -597,6 +575,7 @@ var total=2;
             </div>
         </div>
     </div>
+</div>
 	 @endSection
 	 
 	 <?php	

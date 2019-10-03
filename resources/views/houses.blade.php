@@ -18,7 +18,7 @@
     {{-- tabs --}}
     <div class="payment-section-margin">
         <div class="tab">
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top: 6%;">
                 <div class="tab-group row">
 
 

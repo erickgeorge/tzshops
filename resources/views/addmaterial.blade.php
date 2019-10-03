@@ -6,9 +6,9 @@
 
 @section('body')
     <br>
-    <div class="row">
-        <div class="col-md-8">
-            <h2>Add new Material</h2>
+    <div class="row" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h2 align="center">Add new Material</h2>
         </div>
     </div>
     <hr>
@@ -31,35 +31,34 @@
 
     <p style="color: red">All fields are compulsory</p>
     </br>
-    <form method="POST" action="{{ route('material.create') }}"   style="width:500px;">
+    <form method="POST" action="{{ route('material.create') }}">
         @csrf
 		
+		<div align="center" class="col-lg-12">
 		
 		
-		 <div >
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Material Name</label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="name"
                        aria-describedby="emailHelp" name="name" placeholder="Material Name">
             </div>
-        </div>
 		
 		
 		
-		 <div >
-            <div class="input-group mb-3">
+		 
+            <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Material Description</label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="description"
                        aria-describedby="emailHelp" name="description" placeholder="Material Description">
             </div>
-        </div>
+        
 		
 		
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 col-lg-6">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Material Type</label>
             </div>
@@ -76,18 +75,19 @@
 
        
 
-        <div >
-            <div class="input-group mb-3">
+        
+            <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Quantity</label>
                 </div>
                 <input style="color: black" required type="number"  class="form-control" id="stock"
                        aria-describedby="emailHelp" name="stock" placeholder="Current Stock">
             </div>
-        </div>
+        
         <button type="submit" class="btn btn-success">Add Material</button>
 
         <a class="btn btn-info" href="/home" role="button">Cancel Changes</a>
+    </div>
 
         </div>
     </form>

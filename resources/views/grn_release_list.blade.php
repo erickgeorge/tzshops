@@ -7,9 +7,9 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3><b>PROCUREMENT REQUEST OF WORK ORDER</b></h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center"><b>PROCUREMENT REQUEST OF WORK ORDER</b></h3>
         </div>
        
     </div>
@@ -23,8 +23,8 @@
         </div>
     @endif
    
-    <div class="container " >
-        <table class="table table-striped display" id="myTable"  style="width:100%">
+    <div class="container " style="margin-right: 2%; margin-left: 2%;" >
+        <table class="table table-striped display" id="myTable"  >
             <thead class="thead-dark">
             <tr>
                 <th >#</th>
@@ -64,8 +64,6 @@
 		 <td>
 					
 					 <a class="btn btn-info btn-lg active"  href="{{ route('procurement.release', [$item->work_order_id]) }}"  role="button" aria-pressed="true" role="button" >RELEASE MATERIAL</a></td>
-                  
-                       </td>
 		
                   
     </div>

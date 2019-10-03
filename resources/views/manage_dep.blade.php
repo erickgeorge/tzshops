@@ -6,6 +6,7 @@
 
 @section('body')
     <br>
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -24,7 +25,7 @@
     @endif
 
     {{-- tabs --}}
-    <div class="payment-section-margin">
+    <div class="payment-section-margin" style="margin-top: 6%;">
         <div class="tab">
             <div class="container-fluid">
                 <div class="tab-group row">
@@ -329,7 +330,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="edirname">Directorate name</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <input style="color: black;" type="text" required class="form-control"
                                    id="edirabb"
                                    name="edirabb" placeholder="Enter Directorate name">
                             <input id="edirid" name="edirid" hidden>
@@ -337,14 +338,14 @@
                         </div>
                         <div class="form-group ">
                             <label for="edirabb">Directorate abbreviation</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <input style="color: black;" type="text" required class="form-control"
                                    id="edirname"
                                    name="edirname" placeholder="Enter Directorate abbreviation">
                         </div>
 
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
-                            directorate
+                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save
                         </button>
+                        <button type='submit' value="cancel" class="btn btn-warning">Cancel</button>
 
                     </div>
                 </form>
@@ -384,7 +385,7 @@
                        
                             <label for="directorate">Directorate/College</label>
                        
-                        <select  style="color: black;width:350px"  required class="form-control" name="editdirectoratefdep" id="editdirectoratefdep">
+                        <select  style="color: black;"  required class="form-control" name="editdirectoratefdep" id="editdirectoratefdep">
                             <option value="">Choose...</option>
                             @foreach($directorates as $directorate)
                                 <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
@@ -395,7 +396,7 @@
 						
                         <div class="form-group">
                             <label for="edirname">Department name</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <input style="color: black;" type="text" required class="form-control"
                                    id="edepdesc"
                                    name="edepdesc" placeholder="Enter Department name">
                             <input id="edepid" name="edepid" hidden>
@@ -404,14 +405,14 @@
                         </div>
                         <div class="form-group ">
                             <label for="edirabb">Department abbreviation</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <input style="color: black;" type="text" required class="form-control"
                                    id="edepname"
                                    name="edepname" placeholder="Enter Department abbreviation">
                         </div>
 
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
-                            department
+                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">save
                         </button>
+                        <button type='submit' value="cancel" class="btn btn-warning">Cancel</button>
 
                     </div>
                 </form>
@@ -449,7 +450,7 @@
 						
                         <div class="form-group">
                             <label for="edirname">Section name</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <input style="color: black;" type="text" required class="form-control"
                                    id="esecname"
                                    name="esecname" placeholder="Enter Section name">
 
@@ -457,15 +458,15 @@
                         </div>
                         <div class="form-group ">
                             <label for="esecabb">Section abbreviation</label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <input style="color: black;" type="text" required class="form-control"
                                    id="esecdesc"
                                    name="esecdesc" placeholder="Enter Section abbreviation">
                             <input id="esecid" name="esecid" hidden>
                         </div>
 
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Edit
-                            section
+                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">save
                         </button>
+                        <button type='submit' value="cancel" class="btn btn-warning">Cancel</button>
 
                     </div>
                 </form>

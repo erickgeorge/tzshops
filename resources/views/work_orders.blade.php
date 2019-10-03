@@ -7,7 +7,7 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
+    <div class="row container-fluid" style="margin-top: 6%; margin-left: 2%; margin-right: 2%;">
         <div class="col-md-6">
             <h3><b>Work orders list </b></h3>
         </div>
@@ -30,12 +30,7 @@
         </div>
 
 
-        {{--<div class="col-md-4">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by type, status and name" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>--}}
+       
     </div>
     <br>
     <hr>
@@ -46,7 +41,7 @@
             </ul>
         </div>
     @endif
-    <div class="row ">
+    <div class="row " style=" margin-left: 2%; margin-right: 2%;">
         <div class="col-md-3">
             <a href="{{url('createworkorders')}} ">
                 <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button>

@@ -7,9 +7,9 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-8">
-            <h3>CHANGE PROBLEM TYPE :</h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center">CHANGE PROBLEM TYPE :</h3>
         </div>
     </div>
     <hr>
@@ -28,7 +28,8 @@
 	
 	 <form method="POST" action="/changewoType" >
         @csrf
-    <div class="input-group mb-3">
+        <div align="center" class="col-lg-12">
+    <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
             <label class="input-group-text">Type of a problem</label>
         </div>
@@ -58,7 +59,7 @@
     <h5>{{ $wo['user']->email }}</h5>
     <br>
 
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
@@ -73,7 +74,7 @@
                    disabled>
         @endif
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
             <label class="input-group-text">Area</label>
         </div>
@@ -81,7 +82,7 @@
                aria-describedby="emailHelp"
                value="{{ $wo->room_id }}" disabled>
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
@@ -95,7 +96,7 @@
                    value="{{ $wo['room']['block']->name_of_block }}" disabled>
         @endif
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
             <label class="input-group-text">Room</label>
         </div>
@@ -109,7 +110,7 @@
                    value="{{ $wo['room']->name_of_room }}" disabled>
         @endif
     </div>
-    <div class="form-group ">
+    <div class="form-group col-lg-6">
         <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>

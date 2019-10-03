@@ -7,12 +7,12 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid">
-        <div class="col-md-6">
-            <h3><b>Work order whose material are accepted </b></h3>
+    <div class="row container-fluid" style="margin-top: 6%;">
+        <div class="col-lg-12">
+            <h3 align="center"><b>Work order whose material are accepted </b></h3>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" align="right">
             <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -39,6 +39,7 @@
     </div>
     <br>
     <hr>
+    <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -93,7 +94,7 @@
             <h1 class="text-center" style="margin-top: 150px">You have no work oder Accepted</h1>
         @endif
     </div>
-	
+	</div>
 	
 
     <script>
