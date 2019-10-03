@@ -11,6 +11,7 @@
         </div>
     </div>
     <hr>
+    <div class="container" 
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

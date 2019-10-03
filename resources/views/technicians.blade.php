@@ -16,10 +16,11 @@
     @endif
     <br>
     <hr>
+    <div class="container">
     <a style="margin-left: 2%;" href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>
 
     @if(!$techs->isEmpty())
-        <table class="table table-striped" id="myTable" style="margin-left: 2%; margin-right: 2%;">
+        <table class="table table-striped" id="myTable">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -71,6 +72,7 @@
 
 
         </table>
+    </div>
     @endif
     <script>
         $(document).ready(function(){

@@ -29,7 +29,7 @@
         </div>
     @endif
 
-    <p style="color: red">All fields are compulsory</p>
+    <p align="center" style="color: red">All fields are compulsory</p>
     </br>
     <form method="POST" action="{{ route('material.create') }}">
         @csrf

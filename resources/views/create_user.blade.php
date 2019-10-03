@@ -17,6 +17,7 @@ User Registrartion
 </div>
 <br>
 <hr>
+<div class="container" 
 @if ($errors->any())
 <div class="alert alert-danger">
 	<ul>

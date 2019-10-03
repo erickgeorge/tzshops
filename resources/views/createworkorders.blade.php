@@ -28,12 +28,14 @@
             </ul>
         </div>
     @endif
-
+<div class="container">
     <p style="color: red">All fields are compulsory</p>
     </br>
     <form method="POST" action="{{ route('workorder.create') }}"  style="margin-left:2%; margin-right:2%;">
         @csrf
-        <div class="input-group mb-3">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Type of problem</label>
             </div>
@@ -47,16 +49,15 @@
                 <option value="Others">Others</option>
             </select>
         </div>
-
+            </div>
+            <div class="col">
+                
         <?php
         use App\Location;
         $location = Location::get();
         ?>
 
-        <div class="checkbox">
-            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
-                Enter Location manually</label>
-        </div>
+       
 
         <div id="divmanual">
             <div class="input-group mb-3">
@@ -67,9 +68,21 @@
                        aria-describedby="emailHelp" name="manual" placeholder="Type Location Address">
             </div>
         </div>
+            </div>
 
-        <div id="locationdiv">
-            <div class="input-group mb-3">
+        </div>
+        <div class="row">
+            <div class="col">
+                 <div class="checkbox">
+            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+                Enter Location manually</label>
+        </div>
+            </div>
+        </div>
+
+        <div id="locationdiv"><div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Location</label>
                 </div>
@@ -82,7 +95,9 @@
 
                 </select>
             </div>
-            <div class="input-group mb-3">
+            </div>
+            <div class="col">
+                <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="area">Area</label>
                 </div>
@@ -90,7 +105,11 @@
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
-            <div class="input-group mb-3">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="block">Block</label>
                 </div>
@@ -98,8 +117,9 @@
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
-
-            <div class="input-group mb-3">
+            </div>
+            <div class="col">
+                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="room">Room</label>
                 </div>
@@ -107,16 +127,20 @@
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
+            </div>
         </div>
+    </div>
+        
         <div class="form-group">
             <label for="comment">Details:</label>
             <textarea name="details" value="{{ old('details') }}" required maxlength="100" class="form-control" rows="5"
                       id="comment"></textarea>
         </div>
+        <div align="center">
         <button type="submit" class="btn btn-success">Create Workorder</button>
 
         <a class="btn btn-info" href="/work_order" role="button">Cancel Changes</a>
-
+</div>
         </div>
     </form>
 

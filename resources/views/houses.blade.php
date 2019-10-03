@@ -14,7 +14,7 @@
             </ul>
         </div>
     @endif
-
+<div class="container">
     {{-- tabs --}}
     <div class="payment-section-margin">
         <div class="tab">

@@ -28,7 +28,7 @@ view users
     
   
   
-    <div id="div_print" class="container">
+    <div id="div_print" style="margin-left: 2%; margin-right: 2%;">
   
   
   <div class="row">

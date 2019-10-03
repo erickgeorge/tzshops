@@ -7,7 +7,7 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%; margin-left: 2%; margin-right: 2%;">
+    <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
             <h3><b>Work orders list </b></h3>
         </div>
@@ -41,7 +41,10 @@
             </ul>
         </div>
     @endif
-    <div class="row " style=" margin-left: 2%; margin-right: 2%;">
+    
+
+    <div class="container">
+        <div class="row ">
         <div class="col-md-3">
             <a href="{{url('createworkorders')}} ">
                 <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button>
@@ -56,8 +59,6 @@
             </a>
         </div>
     </div>
-
-    <div class="container">
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">

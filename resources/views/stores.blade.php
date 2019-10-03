@@ -22,23 +22,24 @@
             </ul>
         </div>
     @endif
-    <div class="row " align="center">
+    
+    <div class="container " >
+        <div class="row ">
         <div class="col">
 
              <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
 
         </div>
-        <div class="col" align="right">
+       <!-- <div class="col" align="right">
             <a href="{{ url('work_order_material_missing') }}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Material requests <b style="color:red; background-color: grey; padding: 4px; border-radius: 5px;">90</b></button></a>
-        </div>
-        <div class="col">
+        </div> -->
+        <div class="col" align="right">
             <button class="btn btn-primary">print</button>
         </div>
        <!-- <div class="col-md-3">
             <a href=""><button style="margin-bottom: 20px" type="button" class="btn btn-warning">View needed materials (10)</button></a>
         </div>  -->
     </div>
-    <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>

@@ -49,22 +49,33 @@
             </ul>
         </div>
     @endif
-    <h5>This work order has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
+    <div class="row">
+        <div class="col">
+            <h5>This work order has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
                 style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
     <h5>It Has been created on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span>
     </h5>
-    <h3 style="color: black">Contacts:</h3>
-    <h5>{{ $wo['user']->phone }}</h5>
-    <h5>{{ $wo['user']->email }}</h5>
+        </div>
+        <div class="col">
+             <h5 style="color: black">Contacts:{{ $wo['user']->phone }}, {{ $wo['user']->email }}</h5>
+        </div>
+    </div>
+    
+   
     <br>
-    <div class="input-group mb-3">
+
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Type of a problem</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
     </div>
-    <div class="input-group mb-3">
+    </div>
+    <div class="col">
+        <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
@@ -79,7 +90,11 @@
                    disabled>
         @endif
     </div>
-    <div class="input-group mb-3">
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Area</label>
         </div>
@@ -87,7 +102,9 @@
                aria-describedby="emailHelp"
                value="{{ $wo->room_id }}" disabled>
     </div>
-    <div class="input-group mb-3">
+    </div>
+    <div class="col">
+        <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
@@ -101,7 +118,9 @@
                    value="{{ $wo['room']['block']->name_of_block }}" disabled>
         @endif
     </div>
-    <div class="input-group mb-3">
+    </div>
+    <div class="col">
+        <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Room</label>
         </div>
@@ -115,6 +134,10 @@
                    value="{{ $wo['room']->name_of_room }}" disabled>
         @endif
     </div>
+    </div>
+</div>
+
+    
     <div class="form-group ">
         <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
