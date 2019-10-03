@@ -632,6 +632,28 @@ public function profileView(){
    }
    
    
+      public function storereportView()
+    {
+        
+         
+             $tottal_item = Material::
+                     select(DB::raw('type,sum(stock) as stock ,count(*) as totalstock'))
+                     ->groupBy('type')
+                     ->get();
+
+     
+
+
+       
+                     
+        
+        
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('storereport', ['role' => $role, 'items' => $tottal_item,'notifications' => $notifications, ]);
+   }
+
+   
    
     public function woduration()
     {

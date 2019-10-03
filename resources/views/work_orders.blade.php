@@ -43,7 +43,7 @@
     @endif
     
 
-    <div class="container">
+    <div id="div_print" class="container">
         <div class="row ">
         <div class="col-md-3">
             <a href="{{url('createworkorders')}} ">
@@ -57,6 +57,7 @@
                 <button style="margin-bottom: 20px" type="button" class="btn btn-danger">View rejected Work Orders
                 </button>
             </a>
+            <button   name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');"  style="font-size:24px ">Export to pdf <i class="fa fa-file-pdf-o" style="color:red"></i></button>
         </div>
     </div>
         @if(count($wo) > 0)

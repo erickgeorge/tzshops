@@ -20,6 +20,9 @@
 
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 <style type="text/css">
@@ -94,12 +97,17 @@
                         <a class="nav-link" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
                     </li>
 
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('techniciancount')}}">Technician on progress count</a>
-                    </li>
+                  
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician completed count</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('store_report')}}">Available Store</a>
+                    </li> 
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('technician_report')}}">Technician</a>
+                    </li> 
                     
                 @endif
                 

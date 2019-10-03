@@ -36,6 +36,24 @@ class AssetsController extends Controller
 
 
 
+ public function TecnicianView(Request $request)
+    {
+
+       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+
+       
+       return view('technicianreport', [
+            'role' => $role,
+            'notifications' => $notifications,
+           
+          
+          
+          ]);
+    }
+
+
 
        public function HousesView(){
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();

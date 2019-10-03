@@ -5,6 +5,7 @@
     @endSection
 
 @section('body')
+<div class="container">
     <br>
     <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
         <div class="col-lg-12" align="center">
@@ -140,94 +141,105 @@
                 </select>
             </div>
     </div>
-    <div class="col">
+   <DIV>
+         <div class="col">
+        <div class="input-group mb-3">
+           <div >
+        <label>Type of User</label>
+      </div>
+     
+    </div>
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Electrical"> HOS Electrical </label>
+         
 
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Type of User</label>
-                </div>
-                <select class="custom-select" id="inputGroupSelect02" name="user_type">
-
-                    <option
-                            @if(($user->type) =="HOS Electrical")
-                            selected="selected"
-                            @endif
-                            value="HOS Electrical">HOS Electrical
-                    </option>
-                    <option
-                            @if(($user->type) =="HOS Plumbing")
-                            selected="selected"
-                            @endif
-                            value="HOS Plumbing">HOS Plumbing
-                    </option>
-
-                    <option
-                            @if(($user->type) =="HOS Carpentry/Painting")
-                            selected="selected"
-                            @endif
-                            value="HOS Carpentry/Painting">HOS Carpentry/Painting
-                    </option>
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Plumbing"> HOS Plumbing </label>
+      
+             
+          
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Carpentry/Painting"> HOS Carpentry/Painting </label>
+          
+           
 
 
-                    <option
-                            @if(($user->type) =="HOS Mechanical")
-                            selected="selected"
-                            @endif
-                            value="HOS Mechanical">HOS Mechanical
-                    </option>
+      
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Mechanical"> HOS Mechanical</label>
+  
 
 
-                    <option
-                            @if(($user->type) =="HOS Masonry/Road")
-                            selected="selected"
-                            @endif
-                            value="HOS Masonry/Road">HOS Masonry/Road
-                    </option>
-                    <option
-                            @if(($user->type) =="Maintenance Coordinator")
-                            selected="selected"
-                            @endif
-                            value="Maintenance Coordinator">Maintenance Coordinator
-                    </option>
-                    <option
-                            @if(($user->type) =="DVC Admin")
-                            selected="selected"
-                            @endif
-                            value="DVC Admin">DVC Admin
-                    </option>
-                    <option
-                            @if(($user->type) =="Store Manager")
-                            selected="selected"
-                            @endif
-                            value="Store Manager">Store Manager
-                    </option>
-                    <option
-                            @if(($user->type) =="Secretary")
-                            selected="selected"
-                            @endif
-                            value="Secretary">Secretary
-                    </option>
-                    <option
-                            @if(($user->type) =="Technician")
-                            selected="selected"
-                            @endif
-                            value="Technician">Technician
-                    </option>
-                    <option
-                            @if(($user->type) =="Estates Director")
-                            selected="selected"
-                            @endif
-                            value="Estates Director">Estates Director
-                    </option>
-                    <option
-                            @if(($user->type) =="Inspector Of Works")
-                            selected="selected"
-                            @endif
-                            value="Inspector Of Works">Inspector Of Works
-                    </option>
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Masonry/Road"> HOS Masonry/Road </label>
+       
 
-                </select>
-            </div>
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Maintenance Coordinator"> Maintenance Coordinator </label>
+     
+
+          
+                <label> 
+                 <input type="checkbox" name="type[]" value="DVC Admin"> DVC Admin</label>
+    
+                   
+
+
+       
+                <label> 
+                 <input type="checkbox" name="type[]" value="Secretary"> Secretary </label>
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Technician"> Technician </label>
+      
+        
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Estates Director"> Estates Director </label>
+  
+
+
+
+            
+                <label> 
+                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
+   
+    
+                <label> 
+                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
+            
+
+
+          
+                <label> 
+                 <input type="checkbox" name="type[]" value="Transport Officer"> Transport Officer </label>
+     
+
+              
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Head Procurement"> Head Procurement </label>
+     
+
+
+               <div class="checkbox">
+                <label> 
+                 <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
+        
+
+
+
+             
+                <label> 
+                 <input type="checkbox" name="type[]" value="UDSM STAFF"> UDSM STAFF </label>
+            
+</DIV>
+
     </div>
 </div>
             

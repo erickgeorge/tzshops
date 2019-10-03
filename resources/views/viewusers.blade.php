@@ -36,7 +36,9 @@ view users
     <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
   </div>
   <div class="col-md-5" align="right">
- <input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
+
+
+ <button   name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');"  style="font-size:24px ">Export to pdf <i class="fa fa-file-pdf-o" style="color:red"></i></button>
 </div>
   </div>
   
@@ -48,6 +50,7 @@ view users
       <th scope="col">Username</th>
       <th scope="col">Email</th>
       <th title="phone" scope="col">Phone</th>
+      <th scope="col">Type</th>
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
       <th scope="col">Section</th>
@@ -77,6 +80,7 @@ else {
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->phone }}</td>
+      <td>{{ $user->type }}</td>
         <td>{{ $user['section']['department']['directorate']->name }}</td>
       <td>{{ $user['section']['department']->name }}</td>
       <td>{{ $user['section']->section_name }}</td>

@@ -65,7 +65,7 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];
-        $user->type = $request['user_type'];
+         $user->type  = implode(",", $request->type);
         $user->section_id = $request['section'];
         $user->password = bcrypt($request['password']);
 		$user->avatar = $avatarName;

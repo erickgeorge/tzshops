@@ -119,35 +119,110 @@ User Registrartion
 	  </select>
 	</div>
 	</div>
-	<div class="col">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label class="input-group-text" for="inputGroupSelect01">Type of User</label>
-	  </div>
-	  <select style="color: black" required class="custom-select" id="inputGroupSelect02" name="user_type">
-	    <option value="" selected>Choose...</option>
-	    <option value="HOS Electrical">HOS Electrical</option>
-	    <option value="HOS Plumbing">HOS Plumbing</option>
-	    <option value="HOS Carpentry/Painting">HOS Carpentry/Painting</option>
-	    <option value="HOS Mechanical">HOS Mechanical</option>
-	    <option value="HOS Masonry/Road">HOS Masonry/Road</option>
+	
+     
 
-	    <option value="Maintenance Coordinator">Maintenance Coordinator</option>
-	    <option value="DVC Admin">DVC Admin</option>
-	    <option value="Store Manager">Store Manager</option>
-	    <option value="Secretary">Secretary</option>
-	    <option value="Technician">Technician</option>
-	    <option value="Estates Director">Estates Director</option>
-	    <option value="Inspector Of Works">Inspector Of Works</option>
-		<option value="Transport Officer">Transport Officer</option>
-		<option value="Head Procurement">Head Procurement</option>
-		
-		<option value="CLIENT">CLIENT</option>
-		<option value="UDSM STAFF">UDSM STAFF</option>
-	  </select>
+<DIV>
+         <div class="col">
+		<div class="input-group mb-3">
+	 	   <div >
+	    <label>Type of User</label>
+	  </div>
+     
 	</div>
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Electrical"> HOS Electrical </label>
+         
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Plumbing"> HOS Plumbing </label>
+      
+             
+          
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Carpentry/Painting"> HOS Carpentry/Painting </label>
+          
+           
+
+
+      
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Mechanical"> HOS Mechanical</label>
+  
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="HOS Masonry/Road"> HOS Masonry/Road </label>
+       
+
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Maintenance Coordinator"> Maintenance Coordinator </label>
+     
+
+          
+                <label> 
+                 <input type="checkbox" name="type[]" value="DVC Admin"> DVC Admin</label>
+    
+                   
+
+
+       
+                <label> 
+                 <input type="checkbox" name="type[]" value="Secretary"> Secretary </label>
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Technician"> Technician </label>
+      
+        
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Estates Director"> Estates Director </label>
+  
+
+
+
+            
+                <label> 
+                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
+   
+    
+                <label> 
+                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
+            
+
+
+          
+                <label> 
+                 <input type="checkbox" name="type[]" value="Transport Officer"> Transport Officer </label>
+     
+
+              
+
+
+                <label> 
+                 <input type="checkbox" name="type[]" value="Head Procurement"> Head Procurement </label>
+     
+
+
+               <div class="checkbox">
+                <label> 
+                 <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
+        
+
+
+
+             
+                <label> 
+                 <input type="checkbox" name="type[]" value="UDSM STAFF"> UDSM STAFF </label>
+            
+</DIV>
+
 	</div>
-</div>
+
 	
 <div class="row">
 	<div class="col">

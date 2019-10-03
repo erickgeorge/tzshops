@@ -11,33 +11,22 @@
 		
     </style>
 @section('title')
-    work orders vs hos count 
+    work orders vs Technician count 
     @endSection
 
 @section('body')
+<div class="container">
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid " style="margin-top: 6%;">
         <div class="col-lg-12">
             <h3 align="center"><b>TECHNICIAN COMPLETED COUNT ON WORK ORDERS </b></h3>
         </div>
+             
+  <div>
+                        <h3><a  href="{{ url('techniciancount')}}">Technician on progress</a></h2>
+                    </div>
 
-        <div class="col-md-6" align="left">
-            <form method="GET" action="techniciancountcomp" class="form-inline my-2 my-lg-0">
-                From <input name="start" value="<?php
-                if (request()->has('start')) {
-                    echo $_GET['start'];
-                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php echo date('Y-m-d'); ?>">
-                To <input value="<?php
-                if (request()->has('end')) {
-                    echo $_GET['end'];
-                } ?>"
-                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
-            </form>
-        </div>
 
 
        
@@ -55,7 +44,11 @@
 
     <div id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
 	
-	<input align="right" name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
+	 <div class="container">
+
+
+ <button   name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');"  style="font-size:24px ">Export to pdf <i class="fa fa-file-pdf-o" style="color:red"></i></button>
+</div>
 
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">

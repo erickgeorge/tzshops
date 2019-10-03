@@ -265,6 +265,7 @@ Route::get('/completed_work_orders', 'HomeController@completedWorkOrdersView')->
 
 
 Route::get('/roomreport', 'HomeController@roomreportView')->name('roomreport');
+Route::get('/store_report', 'HomeController@storereportView')->name('store_report');
 
 Route::get('/woduration', 'HomeController@woduration')->name('woduration');
 
@@ -329,3 +330,6 @@ Route::get('work_order_material_missing/{id}', 'HomeController@workOrderMaterial
 Route::get('insufficient/material/{id}', 'StoreController@insufficientMaterial')->name('store.insufficientmaterial');
 
 
+
+
+ Route::get('technician_report', 'AssetsController@TecnicianView')->name('view.report');
