@@ -15,17 +15,15 @@
     @endSection
 
 @section('body')
-<div class="container">
+
 
     <br>
     <div class="row container-fluid " style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>TECHNICIAN COMPLETED COUNT ON WORK ORDERS </b></h3>
+            <h3 class="container"><b>Available Technician Completed their works order</b></h3>
         </div>
              
-  <div>
-                        <h3><a  href="{{ url('techniciancount')}}">Technician on progress</a></h2>
-                    </div>
+  
 
 
 
@@ -33,6 +31,8 @@
     </div>
     <br>
     <hr>
+
+    <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -42,12 +42,12 @@
     @endif
    
 
-    <div id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
+    
 	
 	 <div class="container">
 
 
- <button   name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');"  style="font-size:24px ">Export to pdf <i class="fa fa-file-pdf-o" style="color:red"></i></button>
+ 
 </div>
 
         @if(count($wo) > 0)
@@ -87,7 +87,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no Technician completed Work order</h1>
         @endif
     </div>
     <script>

@@ -46,7 +46,7 @@ padding: 20 20 20 20;
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach

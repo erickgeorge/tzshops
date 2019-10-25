@@ -13,7 +13,7 @@
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -51,8 +51,8 @@
                 <input required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ $tech->email }}">
             </div>
 
-            <button type="submit" class="btn btn-success">Submit changes</button>
-            <a class="btn btn-info" href="/technicians" role="button">Cancel </a>
+            <button type="submit" class="btn btn-primary">save</button>
+            <a class="btn btn-danger" href="/technicians" role="button">Cancel </a>
         </div>
         </form>
     </div>

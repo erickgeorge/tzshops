@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    add tech
+    Add Technician
     @endSection
 @section('body')
     <br>
@@ -14,7 +14,7 @@
     <div class="container" 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -66,7 +66,7 @@
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Type of technician</label>
+                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of technician</label>
             </div>
             <?php 
         use App\UserRole;
@@ -78,13 +78,14 @@
      
              @if($roleofuser == 1 )
              
-            <select  class="custom-select" id="typetechadmin" name="typetechadmin">
+            <select  style="width: 380px" class="custom-select" id="typetechadmin" name="typetechadmin">
                 
+                <option value="Carpentry/Painting">Carpentry/Painting</option>
                 <option value="Electrical">Electrical</option>
-                <option value="Plumbing">Plumbing</option>
                 <option value="Masonry/Road">Masonry/Road</option>
                 <option value="Mechanical">Mechanical</option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
+                <option value="Plumbing">Plumbing</option>
+                
                 
             </select>
             
@@ -98,8 +99,8 @@
             
          <div align="center">
 
-            <button type="submit" class="btn btn-success">Add technician</button>
-            <a class="btn btn-info" href="/technicians" role="button">Cancel </a>
+            <button type="submit" class="btn btn-primary">Add technician</button>
+            <a class="btn btn-danger" href="/technicians" role="button">Cancel </a>
         </div>
         </form>
     </div>

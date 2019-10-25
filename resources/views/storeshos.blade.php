@@ -43,7 +43,8 @@
             <tr>
                 <th >#</th>
                 <th >Name</th>
-                <th >Description</th>
+                <th >Brand Name</th>
+                <th >Value/Capacity</th>
                 <th >Type</th>
                 <th >Stock</th>
                 <th >Created date</th>

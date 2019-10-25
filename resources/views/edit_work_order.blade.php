@@ -5,7 +5,6 @@
     @endSection
 
 @section('body')
-
 <script>
 var total=2;
 
@@ -19,7 +18,7 @@ var total=2;
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+            <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -131,8 +130,8 @@ var total=2;
                     <input type="checkbox" name="contractor"> This work order needs contractor.
                 @endif
             </div>
-            <button type="submit" class="btn btn-success">Save changes</button>
-            <a href="/home" class="btn btn-dark">Cancel Editing</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/home" class="btn btn-danger">Cancel</a>
 			
 			    </form>
 				<!-- <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a> -->
@@ -144,7 +143,7 @@ var total=2;
             <div class="tab">
                 <div class="container-fluid">
                     <div class="tab-group row">
-						<button class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:red">ASSIGN TECHNICIAN FOR WORK</b></button>
+						<button class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:black">ASSIGN TECHNICIAN FOR WORK</b></button>
 						<button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
 						<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
@@ -180,7 +179,7 @@ var total=2;
 						
                         <div class="form-group">
                            
-                            <select   id="techid" required class="custom-select"  name="techuser">
+                            <select   id="techid" required class="custom-select"  name="techuser" style="width: 700px;">
                                
 							   
 							   
@@ -299,7 +298,7 @@ var total=2;
 						</br>
                         <p>Inspection date</p>
                         <div class="form-group">
-                            <input type="date" style="color: black" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
+                            <input type="date" style="color: black; width:  700px;" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
                             <label>Select Technician on Duty</label>
@@ -338,12 +337,12 @@ var total=2;
 				</br>
                         <p>Transport date</p>
                         <div class="form-group">
-                            <input type="date" style="color: black" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
+                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
                         </div>
 						
 						  <p>Transport time</p>
                         <div class="form-group">
-                            <input type="time" style="color: black" name="time" required class="form-control"  rows="5" id="time"></input>
+                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  rows="5" id="time"></input>
                         </div>
                        
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Transport Request</button>
@@ -374,15 +373,12 @@ var total=2;
 						
 						?>
 						
-						
-						
-						
                         <div class="form-group">
                            
-                            <select onchange="stock();" required class="custom-select"  id="mname" name="1">
+                            <select  required class="custom-select"  id="materialreq" name="1" style="width: 700px">
                                 <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
-                                    <option value="{{ $material->id }}">{{ $material->name.' '.$material->description }}</option>
+                                    <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -390,7 +386,7 @@ var total=2;
 						
 						 <p>Quantity</p>
                         <div class="form-group">
-                            <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
+                            <input type="number" min="1"  style="color: black; width: 700px" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
 						
 						
@@ -418,75 +414,92 @@ var total=2;
 				
 				
 				
-					{{-- material_request from store--}}
-				
-				 <div id="material_request_store" class="tabcontent">
+     {{-- material_request from store--}}
                 
-						<?php
-						
-						use App\WorkOrderMaterial;
-						$wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',1)->get();
-						
-						?>
-						 @if(COUNT($wo_materials)!=0)
-						<table class="table table-striped" style="width:100%">
+                 <div id="material_request_store" class="tabcontent">
+                
+                        <?php
+                        
+                        use App\WorkOrderMaterial;
+                        $wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',1)->get();
+                        
+                        ?>
+                         @if(COUNT($wo_materials)!=0)
+                        <table class="table table-striped" style="width:100%">
   <tr>
     <th>Material Name</th>
-    <th>Material Description</th>
-	<th>Type</th>
-	 <th>Quantity Requested</th>
-	  <th>Quantity to request in Store</th>
-	   <th>Material to be Procured</th>
-	   
+    <th>Brand Name</th>
+    <th>Type</th>
+     <th>Quantity Requested</th>
+      <th>Quantity in Store</th>
+      <th>Quantity to Reserve</th>
+       <th>Material to be Procured</th>
+       
   </tr>
+
+  <?php $i=0; 
+  $p= array("t");
+
+  ?>
     @foreach($wo_materials as $matform)
-	
-	
+    
   <tr>
     <td>{{$matform['material']->name }}</td>
-	 <td>{{$matform['material']->description }}</td>
+     <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
-	 <td>{{$matform->quantity }}</td>
-	 
-	 @if(($matform['material']->stock)>=($matform->quantity))
-		  <td>{{$matform->quantity }}</td>
-	   <?php $procured=0; ?>
-	  @else
-	  <?php $procured=$matform->quantity-$matform['material']->stock; ?>
-		 <td>{{$matform['material']->stock }}</td>
-	 @endif
-	 
-	  <td>{{$procured }}</td>
-						
-			</tr>	
-			@endforeach
-</table>			
-                   
-					<button style="background-color: maroon; color: white"  class="btn btn-alert"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >REQUEST MATERIAL FROM STORE </a></button>
+     <td>{{$matform->quantity }}</td>
+    <?php  $x=$matform['material']->stock - $matform['material']->quantity_reserved; ?>
+     @if($x<=0)
+      <td>0</td>
+      @else
+      <td>{{$matform['material']->stock  - $matform['material']->quantity_reserved }}</td>
+      @endif
+     
+
+
+     @if(($matform['material']->stock- $matform['material']->quantity_reserved)>=($matform->quantity))
+          <td>{{$matform->quantity }}</td>
+       <?php $procured=0;
+       $p[$i]= "no";
+       $i++;
+       ?>
+
+
+       @else
+      <?php 
+       $p[$i]= "yes";
+       $i++;
+       ?>
+
+      <?php $procured=$matform->quantity- $matform['material']->stock +  $matform['material']->quantity_reserved; ?>
+         <td style="color:red">{{$matform['material']->stock-  $matform['material']->quantity_reserved}}</td>
+      @endif
+      
+      <td>{{$procured }}</td>
+                        
+            </tr>   
+            @endforeach
+</table>            
+                    
+                    @if(in_array("yes", $p))
+
+
+                     <button style="background-color: darkblue;" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > RESERVE AND SEND PURCHASING ORDER </a></button>  
+                    @else
+                     
+
+                      <button style="background-color:darkblue;"  class="btn btn-warning"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >REQUEST MATERIAL FROM STORE </a></button>
                         @endif
-				 </div>
+                         @endif
+                 </div>
                 {{-- end material_request  --}}
+                
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
+
+                
 				
 				
 
@@ -498,7 +511,7 @@ var total=2;
                     <h4>Purchasing Order Request</h4>
                    <div class="form-group">
                            
-                            <select onchange="stock();" required class="custom-select"  id="mname" name="1">
+                            <select onchange="stock();" required class="custom-select"  id="materialreq" name="1">
                                 <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.' '.$material->description }}</option>
@@ -576,6 +589,13 @@ var total=2;
         </div>
     </div>
 </div>
+
+   
+
+
+
+
+    
 	 @endSection
 	 
 	 <?php	
@@ -586,7 +606,7 @@ var total=2;
     var array = new Array();
 	 var arrayvalue = new Array();
     <?php foreach($mat as $key){ ?>
-        array.push('<?php echo $key->name." ".$key->description ; ?>');
+        array.push('<?php echo $key->name.', Brand:('.$key->description.') ,Value:( '.$key->brand.' ) ,Type:( '.$key->type.' )' ; ?>');
     <?php } ?>
 	
 	
@@ -620,17 +640,6 @@ var total=2;
       }
 	  
 	  
-	  
-	  
-	
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 	  function newmaterial(){
 		 
@@ -653,8 +662,10 @@ myDiv.appendChild(node);
 
 //Create and append select list
 var selectList = document.createElement("select");
- selectList.className = "custom-select";
+selectList.className = "custom-select";
 selectList.required = true;
+
+
 selectList.name = total;
 
 myDiv.appendChild(selectList);
@@ -664,6 +675,7 @@ myDiv.appendChild(selectList);
    
     option.text = 'Choose ...';
 	 option.value = '';
+     
     selectList.appendChild(option);
 	
 for (var i = 0; i < array.length; i++) {
@@ -711,6 +723,7 @@ document.getElementById("totalmaterials").value=total;
 	  
 	// getTechnician(5);
 	</script>
-	
+
+
 	
 	

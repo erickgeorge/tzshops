@@ -11,39 +11,41 @@
 		
     </style>
 @section('title')
-    work orders vs hos count 
+    HOS Completed Work order
     @endSection
 
 @section('body')
 
-    <br>
+
+
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>HOS COUNT ON WORK ORDERS </b></h3>
+            <h3 class="container"><b>Number of Head of Sections Completed their Works orders  </b></h3>
         </div>
 
-        <div class="col-md-6">
+       <!-- <div class="col-md-6">
             <form method="GET" action="hoscount" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
-                if (request()->has('start')) {
-                    echo $_GET['start'];
-                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php echo date('Y-m-d'); ?>">
+               // if (request()->has('start')) {
+                   // echo $_GET['start'];
+                //} ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php //echo date('Y-m-d'); ?>">
                 To <input value="<?php
-                if (request()->has('end')) {
-                    echo $_GET['end'];
-                } ?>"
+               // if (request()->has('end')) {
+                   //echo $_GET['end'];
+               // } ?>"
                              name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
+                             max="<?php //echo date('Y-m-d'); ?>">
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
             </form>
-        </div>
+        </div>-->
 
 
        
     </div>
     <br>
     <hr>
+    <div class="container"> 
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -53,9 +55,10 @@
     @endif
    
 
-    <div id="div_print" class="container" align="center">
+    <!--<div id="div_print" class="container" align="center">-->
 	
-	<input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
+	
+
 
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
@@ -63,7 +66,7 @@
                 <tr>
                    
 					<th>HOS name</th>
-                    <th>Total Work orders</th>
+                    <th>Total Works orders Completed</th>
                    
                 </tr>
                 </thead>
@@ -72,29 +75,15 @@
 
              
                 @foreach($wo as $work)
-						
-						
-						
-                    
-                       
                         <tr>
-                            
-                           
-							
-							
-					
-							
-							
-                            <td>{{ $work['hos']->fname.' '.$work['hos']->lname }}</td>
+                             <td>{{ $work['hos']->fname.' '.$work['hos']->lname }}</td>
 							<td>{{ $work->total_wo }}  </td>
-							
-						  
                         </tr>
                         @endforeach
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no available Head of Section completed the work order.</h1>
         @endif
     </div>
     <script>
@@ -128,4 +117,5 @@ return false;
 }
 
     </script>
+    </div>
     @endSection

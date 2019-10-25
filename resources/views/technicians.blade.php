@@ -52,7 +52,17 @@
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
                 <td>{{ $tech->email }}</td>
-                <td>{{ $tech->phone }}</td>
+                <td>
+
+      <?php $phonenumber = $tech->phone;
+        if(substr($phonenumber,0,1) == '0'){
+
+          $phonreplaced = ltrim($phonenumber,'0');
+          echo '+255'.$phonreplaced;
+          
+        }else { echo $tech->phone;}
+
+      ?></td>
                 <td>{{ $tech->type }}</td>
                 <td>
                     <div class="row">

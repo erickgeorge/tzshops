@@ -23,22 +23,6 @@ class UserController extends Controller
 		
 		
 		
-		$users =  User::all();
-	
-	 foreach ($users as $userinf) {
-   $idsel=$userinf->id;
-}
-		
-       
-		
-		$idsel=$idsel+1;
-        $avatarName = $idsel.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
-
-        $request->avatar->storeAs('avatars',$avatarName);
-
-        
-       
-		
 		
 		
         $request->validate([
@@ -48,7 +32,7 @@ class UserController extends Controller
             'name' => 'required|unique:users',
             'phone' => 'required|max:15|min:10',
             'email' => 'required|unique:users',
-			'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+			
         ]);
 
         if ($request['role'] == 'Choose...') {
@@ -67,8 +51,8 @@ class UserController extends Controller
         $user->email = $request['email'];
          $user->type  = implode(",", $request->type);
         $user->section_id = $request['section'];
-        $user->password = bcrypt($request['password']);
-		$user->avatar = $avatarName;
+        $user->password = bcrypt($request['name'].'@esmis');
+	   
         $user->save();
 
         $role = new UserRole();
@@ -116,31 +100,31 @@ class UserController extends Controller
 
     public function getDepartments(Request $request)
     {
-        return response()->json(['departments' => Department::where('directorate_id', $request->get('id'))->get()]);
+        return response()->json(['departments' => Department::where('directorate_id', $request->get('id'))->orderby('name','ASC')->get()]);
     }
 
 
     public function getAreas(Request $request)
     {
-        return response()->json(['areas' => Area::where('location_id', $request->get('id'))->get()]);
+        return response()->json(['areas' => Area::where('location_id', $request->get('id'))->orderby('name_of_area','ASC')->get()]);
     }
 
 
     public function getBlocks(Request $request)
     {
-        return response()->json(['blocks' => Block::where('area_id', $request->get('id'))->get()]);
+        return response()->json(['blocks' => Block::where('area_id', $request->get('id'))->orderby('name_of_block','ASC')->get()]);
     }
 
 
     public function getRooms(Request $request)
     {
-        return response()->json(['rooms' => Room::where('block_id', $request->get('id'))->get()]);
+        return response()->json(['rooms' => Room::where('block_id', $request->get('id'))->orderby('name_of_room','ASC')->get()]);
     }
 
 
     public function getSections(Request $request)
     {
-        return response()->json(['sections' => Section::where('department_id', $request->get('id'))->get()]);
+        return response()->json(['sections' => Section::where('department_id', $request->get('id'))->orderby('section_name','ASC')->get()]);
     }
 
     public function editUserView($id)
@@ -189,7 +173,7 @@ class UserController extends Controller
         $user->phone = $request['phone'];
         $user->email = $request['email'];
         $user->section_id = $request['section'];
-        $user->type = $request['user_type'];
+       $user->type  = implode(",", $request->type);
         $user->save();
 
         $role = UserRole::where('user_id', $id)->first();
@@ -204,18 +188,45 @@ class UserController extends Controller
     }
 
     public function changePassword(Request $request){
-        $request->validate([
+
+        
+      $rules=[
+
             'old-pass' => 'required',
             'new-pass' => 'required',
             'confirm-pass' => 'required|same:new-pass'
-        ]);
+
+            
+          
+        ];
+        $error_messages=[
+            
+            'confirm-pass.same'=>'New password and Confirm password must match please enter the password again',
+
+
+        ];
+        $validator=  validator($request->all(), $rules, $error_messages);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+       }
+
+
+
+
+
+
+
+        
         $user = User::find(auth()->user()->id);
         if (Hash::check($request['old-pass'], Auth::User()->password)){
             $user->password = bcrypt($request['new-pass']);
+            $user->change_password = \Carbon\Carbon::now();
             $user->save();
             return redirect()->back()->with(['message' => 'Password changed successfully']);
         }
-        return redirect()->back()->withErrors(['message' => 'Wrong old password']);
+        return redirect()->back()->withErrors(['message' => 'You entered the wrong old password']);
     }
 	
 	

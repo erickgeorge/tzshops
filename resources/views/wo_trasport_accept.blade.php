@@ -25,7 +25,7 @@
                 } ?>"
                              name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
                              max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
             </form>
         </div>
 

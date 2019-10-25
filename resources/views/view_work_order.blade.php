@@ -102,7 +102,7 @@
     <h4>Wrong problem type?</h4>
     <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
         @csrf
-        <button type="submit" class="btn btn-warning">Send to Receptionist</button>
+        <button type="submit" class="btn btn-warning">Send to Secretary</button>
     </form>
     <br>
 

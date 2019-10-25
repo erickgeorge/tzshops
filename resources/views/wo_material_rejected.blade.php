@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work order whose material are accepted </b></h3>
+            <h3 align="center"><b>Work order whose material are rejected </b></h3>
         </div>
 
         <div class="col-md-6" align="left">
@@ -25,7 +25,7 @@
                 } ?>"
                              name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
                              max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
             </form>
         </div>
 
@@ -62,6 +62,7 @@
 				<th >Material Description</th>
 				<th >Type</th>
 				<th >Quantity</th>
+                <th >Reason</th>
 				<th >Status</th>
 				
             </tr>
@@ -81,9 +82,11 @@
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
-					  <td>{{ $item->quantity }}</td>
-                    <td>
-                       ACCEPTED</td>
+					<td>{{ $item->quantity }}</td>
+                    <td><a onclick="myfunc('{{ $item->reason }}')"><span data-toggle="modal" data-target="#viewReason"
+                                                                         class="badge badge-success">View reason</span></a></td>
+                    <td style="color: red">
+                       REJECTED</td>
                     </tr>
                     @endforeach
             </tbody>
@@ -93,6 +96,29 @@
         @else
             <h1 class="text-center" style="margin-top: 150px">You have no work oder Accepted</h1>
         @endif
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="viewReason" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Inspector of Work Rejecting Material Request.</h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 id="reason"><b> </b></h3>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -108,5 +134,11 @@
 
 
         });
+    
+   
+
+         function myfunc(x) {
+            document.getElementById("reason").innerHTML = x;
+        }
     </script>
     @endSection

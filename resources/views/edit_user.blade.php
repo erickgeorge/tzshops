@@ -21,7 +21,7 @@
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -147,96 +147,104 @@
            <div >
         <label>Type of User</label>
       </div>
-     
+
+    <?php $string = $user->type;
+     $str_array = preg_split("/\,/", $string);
+     ?>
+
     </div>
                 <label> 
-                 <input type="checkbox" name="type[]" value="HOS Electrical"> HOS Electrical </label>
+                 <input type="checkbox" name="type[]" @if (in_array('HOS Electrical',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Electrical"> HOS Electrical </label>
          
 
                 <label> 
-                 <input type="checkbox" name="type[]" value="HOS Plumbing"> HOS Plumbing </label>
+                 <input type="checkbox" name="type[]" @if (in_array('HOS Plumbing',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Plumbing"> HOS Plumbing </label>
       
              
           
                 <label> 
-                 <input type="checkbox" name="type[]" value="HOS Carpentry/Painting"> HOS Carpentry/Painting </label>
+                 <input type="checkbox" name="type[]" @if (in_array('HOS Carpentry/Painting',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Carpentry/Painting"> HOS Carpentry/Painting </label>
           
            
 
 
       
                 <label> 
-                 <input type="checkbox" name="type[]" value="HOS Mechanical"> HOS Mechanical</label>
+                 <input type="checkbox" name="type[]" @if (in_array('HOS Mechanical',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Mechanical"> HOS Mechanical</label>
   
 
 
                 <label> 
-                 <input type="checkbox" name="type[]" value="HOS Masonry/Road"> HOS Masonry/Road </label>
+                 <input type="checkbox" name="type[]" @if (in_array('HOS Masonry/Road',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Masonry/Road"> HOS Masonry/Road </label>
        
 
 
 
                 <label> 
-                 <input type="checkbox" name="type[]" value="Maintenance Coordinator"> Maintenance Coordinator </label>
+                 <input type="checkbox" name="type[]" @if (in_array('Maintenance Coordinator',$str_array)) { checked = 'checked' } @else{} @endif value="Maintenance Coordinator"> Maintenance Coordinator </label>
      
 
           
                 <label> 
-                 <input type="checkbox" name="type[]" value="DVC Admin"> DVC Admin</label>
+                 <input type="checkbox" name="type[]" @if (in_array('DVC Admin',$str_array)) { checked = 'checked' } @else{} @endif value="DVC Admin"> DVC Admin</label>
     
                    
 
 
        
                 <label> 
-                 <input type="checkbox" name="type[]" value="Secretary"> Secretary </label>
+                 <input type="checkbox" name="type[]" @if (in_array('Secretary',$str_array)) { checked = 'checked' } @else{} @endif value="Secretary"> Secretary </label>
 
 
                 <label> 
-                 <input type="checkbox" name="type[]" value="Technician"> Technician </label>
+                 <input type="checkbox" name="type[]" @if (in_array('Technician',$str_array)) { checked = 'checked' } @else{} @endif value="Technician"> Technician </label>
+
+
+
+                 label> 
+                 <input type="checkbox" name="type[]" @if (in_array('STORE',$str_array)) { checked = 'checked' } @else{} @endif value="STORE"> Store Manager </label>
+      
       
         
 
 
                 <label> 
-                 <input type="checkbox" name="type[]" value="Estates Director"> Estates Director </label>
+                 <input type="checkbox" name="type[]" @if (in_array('Estates Director',$str_array)) { checked = 'checked' } @else{} @endif value="Estates Director"> Estates Director </label>
   
 
 
-
-            
-                <label> 
-                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
-   
     
                 <label> 
-                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
+                 <input type="checkbox" name="type[]" @if (in_array('Inspector Of Works',$str_array)) { checked = 'checked' } @else{} @endif value="Inspector Of Works"> Inspector Of Works </label>
             
 
 
           
                 <label> 
-                 <input type="checkbox" name="type[]" value="Transport Officer"> Transport Officer </label>
+                 <input type="checkbox" name="type[]" @if (in_array('Transport Officer',$str_array)) { checked = 'checked' } @else{} @endif value="Transport Officer"> Transport Officer </label>
      
 
               
 
 
                 <label> 
-                 <input type="checkbox" name="type[]" value="Head Procurement"> Head Procurement </label>
+                 <input type="checkbox" name="type[]" @if (in_array('Head Procurement',$str_array)) { checked = 'checked' } @else{} @endif value="Head Procurement"> Head Procurement </label>
      
 
 
                <div class="checkbox">
                 <label> 
-                 <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
+                 <input type="checkbox" name="type[]" @if (in_array('CLIENT',$str_array)) { checked = 'checked' } @else{} @endif value="CLIENT"> CLIENT </label>
         
 
 
 
              
                 <label> 
-                 <input type="checkbox" name="type[]" value="UDSM STAFF"> UDSM STAFF </label>
+                 <input type="checkbox" name="type[]" @if (in_array('UDSM STAFF',$str_array)) { checked = 'checked' } @else{} @endif value="UDSM STAFF"> UDSM STAFF </label>
+            
+
+
             
 </DIV>
 
@@ -264,8 +272,8 @@
 			-->
 		
 <div align="center">
-            <button type="submit" class="btn btn-success">Save</button>
-            <a class="btn btn-info" href="/viewusers" role="button">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-danger" href="/viewusers" role="button">Cancel</a>
             </div>
 
         </form>

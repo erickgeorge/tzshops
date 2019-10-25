@@ -22,5 +22,9 @@ class WorkOrderMaterial extends Model
 	public function usermaterial(){
         return $this->belongsTo('App\User','hos_id');
     }
+
+    public function staff(){
+        return $this->belongsTo('App\User','staff_id');
+    }
     //
 }

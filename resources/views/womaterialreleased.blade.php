@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Material released to work-orders</b></h3>
+            <h3 align="center"><b>Material released to work orders</b></h3>
         </div>
        
     </div>
@@ -29,7 +29,7 @@
             <thead class="thead-dark">
             <tr>
                 <th> </th>
-                <th >WO ID</th>
+                <th >ID</th>
 				<th >Workorder Detail</th>
 				<th >Material Name</th>
 				<th >Material Description</th>
@@ -54,7 +54,7 @@
 				?>
                 <tr>
                     <th scope="row"></th>
-                    <td>  @if($t==$c)  @else  WO-{{ $item->work_order_id  }} @endif </td>
+                    <td>  @if($t==$c)  @else  00{{ $item->work_order_id  }} @endif </td>
                    
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>

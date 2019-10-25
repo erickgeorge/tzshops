@@ -1,19 +1,25 @@
 @extends('layouts.master')
 
 @section('title')
-    Completed work orders
+    Unattended work orders
     @endSection
 
 @section('body')
-
+<?php
+use App\User;
+use App\Directorate;
+use App\Department;
+use App\Section;
+use App\WorkOrder;
+ ?>
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b>Completed Work orders list </b></h3>
+            <h3><b>Unattended Work orders</b></h3>
         </div>
 
         <div class="col-md-6">
-            <form method="GET" action="completed_work_orders" class="form-inline my-2 my-lg-0">
+            <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];
@@ -30,15 +36,12 @@
         </div>
 
 
-        {{--<div class="col-md-4">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by type, status and name" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>--}}
+       
     </div>
     <br>
     <hr>
+    <div class="container">
+        
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -47,9 +50,116 @@
         </div>
     @endif
 
-    <input name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
+    
    
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
+      <!-- SOMETHING STRANGE HERE -->
+                <div class="col" align="right">
+           <button data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </button>
+        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="GET" action="{{ url('unattendedwopdf') }}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Filter your data</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="name" class="form-control mr-sm-2">
+                    <option selected="selected" value="">name</option>
+                    <?php
+////////////WADUDUUUUUUUUUUUU
+
+  $userwithid = WorkOrder::select('staff_id')->Where('status','-1')->distinct()->get();
+   foreach($userwithid as $userwithin){
+      $userinid = User::get();
+
+      foreach ($userinid as $usedid) {
+        if ($userwithin->staff_id == $usedid['id']) {
+
+              $user = User::Where('id',$usedid['id'])->get();
+          foreach ($user as $userwith) 
+          {
+            
+              $sectionised = Section::Where('id',$userwith->section_id)->get();
+
+              foreach ($sectionised as $sectioner) {
+                if ($sectioner->id == $userwith->section_id) 
+                {
+                  $departmentid = Department::Where('id',$sectioner->department_id)->get();
+                  foreach ($departmentid as $departmentised) 
+                  {
+                    if ($departmentised->id == $sectioner->department_id ) 
+                    {
+                      $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
+                      foreach ($directorate as $directory) {
+                        if ($directory->id == $departmentised->directorate_id ) {
+                          echo "<option value='".$userwith->id."'>".$userwith->fname." ".$userwith->lname." (".$directory->name."-".$departmentised->name.")</option>";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            
+          }  }
+      }
+       }
+
+//WADUDUUUUUUUUUUUUUUUUUUUUUUU
+
+      ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="problem_type" class="form-control mr-sm-2">
+                    <option value="" selected="selected">Problem type</option>
+                    <?php
+                    $type = WorkOrder::select('problem_type')->distinct()->Where('status','-1')->get();
+                    foreach ($type as $typo) {
+                        echo "<option value='".$typo->problem_type."'>".$typo->problem_type."</option>";
+                    }
+                     ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="location" class="form-control mr-sm-2">
+                    <option value="" selected="selected">Location</option>
+                    <?php
+                    $location = WorkOrder::select('location')->distinct()->Where('status','-1')->get();
+                    foreach ($location as $located) {
+                        echo "<option value='".$located->location."'>".$located->location."</option>";
+                    }
+
+                     ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Export</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+          <!-- ---------------------- -->
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
@@ -99,7 +209,7 @@
                                 <td><span class="badge badge-success">procurement stage</span></td>                             
                             @endif
                             
-                            <td>{{ $work->created_at }}</td>
+                            <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                             <td>
 
                                 @if($work->location ==null)
@@ -143,7 +253,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no available unattended work order</h1>
         @endif
     </div>
     <script>
@@ -176,4 +286,5 @@ return false;
 }
 
     </script>
+    </div>
     @endSection

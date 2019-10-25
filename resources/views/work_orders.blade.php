@@ -25,7 +25,7 @@
                 } ?>"
                              name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
                              max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Filter</button>
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
             </form>
         </div>
 
@@ -45,27 +45,202 @@
 
     <div id="div_print" class="container">
         <div class="row ">
-        <div class="col-md-3">
+        <div class="col">
             <a href="{{url('createworkorders')}} ">
                 <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button>
             </a>
         </div>
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-3">
+            <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">View rejected Work Orders
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected Work Orders
                 </button>
             </a>
-            <button   name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');"  style="font-size:24px ">Export to pdf <i class="fa fa-file-pdf-o" style="color:red"></i></button>
         </div>
+
+            @if(strpos(auth()->user()->type, "HOS") !== false)
+          <div class="col">     
+            <a href="{{ url('rejected/materials')}}">
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected materials
+                </button>
+            </a>
+        </div>
+            @endif
+           
+         <?php
+use App\User;
+use App\Directorate;
+use App\Department;
+use App\Section;
+use App\WorkOrder;
+ ?>
+<!-- SOMETHING STRANGE HERE -->
+          <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+  <i class="fa fa-file-pdf-o"></i> PDF
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="GET" action="{{ url('pdf') }}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Filter your data</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      <div class="row">
+
+         <div class="col">From <input name="start" value="<?php
+                if (request()->has('start')) {   echo $_GET['start'];   } ?>" class="form-control mr-sm-2" type="date" placeholder="Start Month"   max="<?php echo date('Y-m-d'); ?>">
+            </div>
+            <div class="col">   To <input value="<?php  if (request()->has('end')) {  echo $_GET['end'];   } ?>"   name="end" class="form-control mr--2" type="date" placeholder="End Month"   max="<?php echo date('Y-m-d'); ?>">
+             </div>  
+      </div>
+      
+      </div>
+      <div class="modal-body">
+        
+      <div class="row">
+        <div class="col">
+            <select name="problem_type" class="form-control mr-sm-2">
+                <option value="" selected="selected">Select Problem Type</option>
+                <?php
+                  $prob = WorkOrder::select('problem_type')->distinct()->get();
+                  foreach ($prob as $problem) {
+                    echo "<option value='".$problem->problem_type."'>".$problem->problem_type."</option>";
+                  }
+                 ?>
+            </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col">
+          <select name="location" class="form-control mr-sm-2">
+                <option value="" selected="selected">Select Location</option>
+                <?php
+                  $loca = WorkOrder::select('location')->Where('location','<>',null)->distinct()->get();
+                  foreach ($loca as $location) {
+                    echo "<option value='".$location->location."'>".$location->location."</option>";
+                  }
+                 ?>
+            </select>
+      </div>
+      </div>
+  </div>
+
+  <div class="modal-body">
+      <div class="row">
+          <div class="col">
+            <select name="userid" class="form-control mr-sm-2">
+              <option value="">Select name</option>
+
+  <?php
+////////////WADUDUUUUUUUUUUUU
+
+  $userwithid = WorkOrder::select('staff_id')->distinct()->get();
+   foreach($userwithid as $userwithin){
+      $userinid = User::get();
+
+      foreach ($userinid as $usedid) {
+        if ($userwithin->staff_id == $usedid['id']) {
+
+              $user = User::Where('id',$usedid['id'])->get();
+          foreach ($user as $userwith) 
+          {
+            
+              $sectionised = Section::Where('id',$userwith->section_id)->get();
+
+              foreach ($sectionised as $sectioner) {
+                if ($sectioner->id == $userwith->section_id) 
+                {
+                  $departmentid = Department::Where('id',$sectioner->department_id)->get();
+                  foreach ($departmentid as $departmentised) 
+                  {
+                    if ($departmentised->id == $sectioner->department_id ) 
+                    {
+                      $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
+                      foreach ($directorate as $directory) {
+                        if ($directory->id == $departmentised->directorate_id ) {
+                          echo "<option value='".$userwith->id."'>".$userwith->fname." ".$userwith->lname." (".$directory->name."-".$departmentised->name.")</option>";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            
+          }  }
+      }
+       }
+
+//WADUDUUUUUUUUUUUUUUUUUUUUUUU
+
+      ?>
+   
+            </select>
+          </div>
+      </div>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+          <div class="col">
+              <select name="status" class="form-control mr-sm-2">
+                <option value='' selected="selected">Select status</option>
+    <?php $statusago = WorkOrder::select('status')->distinct()->get();
+    foreach ($statusago as $statusname) {
+
+     if($statusname->status == -1)
+      { echo "<option value='".$statusname->status."'>New</option>";}
+     elseif($statusname->status == 1)
+      {echo "<option value='".$statusname->status."'>Accepted</option>";}
+     elseif($statusname->status == 0)
+      {echo"<option value='".$statusname->status."'>Rejected</option>";}
+     elseif($statusname->status == 2)
+      {echo"<option value='".$statusname->status."'>Closed</option>";}
+     elseif($statusname->status == 3)
+      {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
+     elseif($statusname->status == 4)
+      {echo"<option value='".$statusname->status."'>Transportation stage</option>";}
+     elseif($statusname->status == 5)
+      {echo"<option value='".$statusname->status."'>Pre-implementation</option>";}
+     elseif($statusname->status == 6)
+      {echo"<option value='".$statusname->status."'>Post implementation</option>";}
+     elseif($statusname->status == 7)
+      {echo"<option value='".$statusname->status."'>Material requested</option>";}
+     elseif($statusname->status == 8)
+      {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
+     elseif($statusname->status == 9)
+      {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
+     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}   
+ }
+     ?>
+              </select>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Export</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+          <!-- ---------------------- -->
+          
+
     </div>
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-					<th>WO ID</th>
+					<th>WorkOrder ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
@@ -86,7 +261,7 @@
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-							<td id="wo-id">WO-{{ $work->id }}</td>
+							<td id="wo-id">00{{ $work->id }}</td>
                             <td id="wo-details">{{ $work->details }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
@@ -113,11 +288,17 @@
 															<td><span class="badge badge-info">procurement stage</span></td>
 							@elseif($work->status == 9)
 															<td><span class="badge badge-info">Closed SATISFIED BY CLIENT</span></td>
+                            @elseif($work->status == 15)
+                                                            <td><span class="badge badge-info">Material Accepted by IoW</span></td>
+
+                            @elseif($work->status == 16)
+                                                            <td><span class="badge badge-danger">Material rejected by IoW</span></td>
+                                                            
 															
 							@else
                                 <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>								
                             @endif
-                            <td>{{ $work->created_at }}</td>
+                            <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
                             <td>
 
                                 @if($work->location ==null)
@@ -129,6 +310,7 @@
                             <td>
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
+
                                     @if($work->status == -1)
 										
                                         <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
@@ -137,8 +319,18 @@
 									
 										 <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
+                                                        @elseif($work->status == 12)
+                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+                                        <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
+                                                    class="fas fa-tasks"></i></a>
+                                                    <a onclick="myfunc('{{ $work->unsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
+                                                                         class="badge badge-success">View reason</span></a>
+
+
 													
 									@else
+
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
@@ -147,6 +339,13 @@
                                 @else
                                     @if($work->status == -1)
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
+
+
+                                                @elseif($work->status == 12)
+                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
+                                                    class="fas fa-tasks"></i></a>
+                                                    <a onclick="myfunc('{{ $work->unsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
+                                                                         class="badge badge-success">View reason</span></a>
                                     @else
                                         {{--<a href="{{ route('workOrder.view', [$work->id]) }}" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>--}}
                                         &nbsp;
@@ -165,7 +364,32 @@
             <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
         @endif
     </div>
+
+     <!-- Modal -->
+    <div class="modal fade" id="viewReason" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended work order.</h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 id="unsatisfiedreason"><b> </b></h3>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
+
+        
 
         $(document).ready(function () {
 
@@ -178,5 +402,9 @@
 
 
         });
+
+         function myfunc(x) {
+            document.getElementById("unsatisfiedreason").innerHTML = x;
+        }
     </script>
     @endSection

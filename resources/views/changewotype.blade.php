@@ -44,12 +44,12 @@
             </select>
 			<input required class="form-control" name="wo_id"
             value="{{ $wo->id }}" hidden>
-			 <button type="submit" class="btn btn-success">Change Ptype</button>
+			 <button type="submit" class="btn btn-success">Change type</button>
 
      
     </div>
 	</form>
-	   <a class="btn btn-info" href="/work_order" role="button">Cancel Changes</a>
+	   <a class="btn btn-danger" href="/work_order" role="button">Cancel</a>
     <h5>This work order has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
                 style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
     <h5>It Has been created on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span>

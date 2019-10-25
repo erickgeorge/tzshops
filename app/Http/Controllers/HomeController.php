@@ -41,6 +41,20 @@ class HomeController extends Controller
      */
     public function index()
     {  
+
+           if ((Auth::user()->change_password == null)) {
+                   $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('changepassword2', ['role' => $role,'notifications' => $notifications]);
+        }
+        else{
+             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('dashboard', ['role' => $role, 'notifications' => $notifications]);   
+        }
+
+
+
      $data['wo'] = Workorder::OrderBy('created_at', 'DESC')->paginate(10);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -59,6 +73,13 @@ class HomeController extends Controller
             }
         }
         return view('dashboard', ['role' => $role, 'items' => Material::all(), 'notifications' => $notifications]);
+              
+
+               
+
+
+
+
     }
 
     public function WorkorderView()
@@ -67,7 +88,7 @@ class HomeController extends Controller
 //        return response()->json(WorkOrder::with('user')->with('room.block')->where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get());
      
     
-    if(request()->has('start'))  {
+    if(request()->has('start'))  { //date filter
         
         
         $from=request('start');
@@ -80,21 +101,27 @@ class HomeController extends Controller
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
-        }
+        }// start> end
         
-        
-        
-        
-        
-        
-         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         if ($role['user_role']->role_id == 1){
             return view('work_orders', [
                 'role' => $role,
                 'notifications' => $notifications,
                 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
             ]);
-        }else{
+        }//if role=1
+
+        else { //role role not 1
+
+
+
+                $type=explode(",",auth()->user()->type);
+                $length=count($type);
+
+
+                   if($length==1){
+
             if (strpos(auth()->user()->type, "HOS") !== false) {
                 return view('work_orders', [
                     'role' => $role,
@@ -111,15 +138,10 @@ class HomeController extends Controller
             
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
-            }
+            }  else
             
-            
-            
-            
-            
-            
-            
-        }
+        {// HOS and their work order type 
+
         return view('work_orders', [
             'role' => $role,
             'notifications' => $notifications,
@@ -128,13 +150,80 @@ class HomeController extends Controller
    
         
         
-    }
-        else {
+    }//
+
+}
+
+
+ //lenght not 1
+
+ else if($length==2){
+
+
+
+
+$v1=$type[0];
+$v2=$type[1];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->whereBetween('created_at', [$from, $to])->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', $v2)->whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+                else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type',$v1)->orwhere('problem_type', $v2)->whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+}
+
+
+
+ }
+}
+
+
+ 
+//lenght
+// end start 
+        else {//dtsrt fdate
     
      $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+
         if ($role['user_role']->role_id == 1){
             return view('work_orders', ['role' => $role, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET(),'notifications' => $notifications]);
         }else{
+
+
+             $type=explode(",",auth()->user()->type);
+                $length=count($type);
+
+
+                   if($length==1){
+
             if (strpos(auth()->user()->type, "HOS") !== false) {
                 return view('work_orders', ['role' => $role, 'notifications' => $notifications,'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()]);
             }else if (auth()->user()->type == "SECRETARY"){
@@ -143,21 +232,75 @@ class HomeController extends Controller
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
             }
-            
-            
-            
-            
-        }
+            else{
+                
         return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()]);
+            }
+   }
+
+ else if($length==2){
+
+
+
+
+$v1=$type[0];
+$v2=$type[1];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', $v2)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+                else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false){
+                return view('work_orders',[
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type',$v1)->orwhere('problem_type', $v2)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+}
+
+
+
+
     }
-    }
+}
+
+
+
+}
+
+
+
+
+    
 
     public function createUserView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $directorate = Directorate::all();
+        $directorate = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get();
         $departments = Department::where('directorate_id', 1)->get();
         $sections = Section::where('department_id', 1)->get();
         return view('create_user', [
@@ -172,8 +315,9 @@ class HomeController extends Controller
     public function storesView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('stores', ['role' => $role, 'items' => Material::all(),'notifications' => $notifications]);
+           $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('stores', ['role' => $role, 'items' => Material::where('stock','>=',1)->orderBy('name','ASC')->get(),'notifications' => $notifications]);
+
     }
     
     
@@ -224,6 +368,14 @@ class HomeController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('changepassword', ['role' => $role,'notifications' => $notifications]);
     }
+
+
+    public function passwordView2(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('changepassword2', ['role' => $role,'notifications' => $notifications]);
+    }
+
 public function profileView(){
     $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -249,10 +401,12 @@ public function profileView(){
 
      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('technicians', [
+  
+    return view('technicians', [
             'role' => $role,
-            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
+            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->orderBy('fname','ASC')->get(),
             'notifications' => $notifications
+
         ]);
    }
    
@@ -336,14 +490,30 @@ public function profileView(){
                      
                      ->get();
             
-            
-        
-            
-            
         return view('womaterialapproved', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
     
+
+
+
+       public function workorderwithmissingmaterial()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+        $wo_material=   WorkOrderMaterial::
+                     select(DB::raw('work_order_id'))
+                     ->where('status',5)
+                    
+                     ->groupBy('work_order_id')
+                     
+                     ->get();
+               
+        return view('womaterialtoprocure', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
     
+
+
     
     
     public function work_order_purchasing_requestView()
@@ -523,7 +693,11 @@ public function profileView(){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 1)->get(),'notifications' => $notifications]);
    }
-   
+       
+     
+
+
+
    
    
    
@@ -542,7 +716,7 @@ public function profileView(){
         }
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status',-1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+        return view('wo_material_rejected', ['role' => $role, 'items' => WorkOrderMaterial::where('status',-1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
  
         }
         
@@ -550,7 +724,7 @@ public function profileView(){
         
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status', -1)->get(),'notifications' => $notifications]);
+        return view('wo_material_rejected', ['role' => $role, 'items' => WorkOrderMaterial::where('status', -1)->get(),'notifications' => $notifications]);
    }
    
    
@@ -572,7 +746,7 @@ public function profileView(){
         }
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',-1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+        return view('completed_wo', ['role' => $role, 'wo' => WorkOrder::where('status',-1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
  
         }
         
@@ -580,7 +754,7 @@ public function profileView(){
         
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',-1)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
+        return view('completed_wo', ['role' => $role, 'wo' => WorkOrder::where('status',-1)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
    }
    
    
@@ -635,18 +809,15 @@ public function profileView(){
       public function storereportView()
     {
         
-         
+  
+
+
              $tottal_item = Material::
-                     select(DB::raw('type,sum(stock) as stock ,count(*) as totalstock'))
+                     select(DB::raw('name,sum(stock) as stock ,count(*) as totalstock,type,description'))
+                     ->groupBy('name')
                      ->groupBy('type')
+                      ->groupBy('description')
                      ->get();
-
-     
-
-
-       
-                     
-        
         
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -824,7 +995,6 @@ public function techniciancountcomp()
     public function hoscount()
     {
         
-        
         $wo_hos_count = WorkOrder::
                      select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
                      ->where('status',2)
@@ -868,9 +1038,7 @@ public function techniciancountcomp()
    public function wo_materialView($id)
    
     {
-        
-        
-        
+    
         $wo_material = WorkOrderMaterial::
                      select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
                      ->where('status',3)
@@ -885,16 +1053,80 @@ public function techniciancountcomp()
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('womaterialView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
+
+
+
    
+     public function wo_material_to_purchaseView($id)
+   
+    {
+    
+        $wo_material = WorkOrderMaterial::
+                     select(DB::raw('work_order_id,staff_id,material_id,sum(quantity) as quantity'))
+                     ->where('status',5) //status for material to procure
+                     ->where('work_order_id',$id)
+                     ->groupBy('material_id')
+                     ->groupBy('work_order_id') 
+                     ->groupBy('staff_id')      
+                     
+                     ->get();
+        
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('womaterialtoprocureview', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+
+
+
+  
+     public function wo_material_to_purchaseViewbystore(request $id)
+   
+    {
+    
+        $wo_material = WorkOrderMaterial::where('status', 5)
+                   
+                     ->get();
+        
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('womaterialtoprocureviewbystore', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+
+
+        
+
+
+
+
+
+    
+      public function wo_materialmissingView($id)
+   
+    {
+        
+          $wo_material = WorkOrderMaterial::
+                     select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
+                     ->where('status',4)
+                     ->where('work_order_id',$id)
+                     ->groupBy('material_id')
+                     ->groupBy('work_order_id')
+                     
+                     ->get();
+        
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('womaterialView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+    
    
    
     public function wo_purchasing_orderView($id)
    
     {
-        
-        
-        
+         
         $wo_material = PurchasingOrder::
                      select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
                      ->where('status',1)
@@ -911,13 +1143,13 @@ public function techniciancountcomp()
     }
    
    
+
    
      public function wo_grn_listView($id)
    
     {
         
-        
-        
+     
         $wo_material = PurchasingOrder::
                      select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
                      ->where('status',1)
@@ -934,12 +1166,12 @@ public function techniciancountcomp()
     }
    
    
+
+
    
     public function procureiow_list($id)
    
     {
-        
-        
         
         $wo_material = PurchasingOrder::
                      select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
@@ -979,6 +1211,19 @@ public function techniciancountcomp()
         return view('procurementOrderView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
    
+
+         public function WorkorderReportView()
+    {
+        
+         
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('workorderreport', ['role' => $role,'notifications' => $notifications, ]);
+   }
+
+
+
+
 }
    
    

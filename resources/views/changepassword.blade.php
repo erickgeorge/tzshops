@@ -14,7 +14,7 @@
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -51,7 +51,7 @@
                 <input type="password" required class="form-control" id="confirm-pass" name="confirm-pass"
                        placeholder="Confirm password" value="{{ old('confirm-pass') }}">
             </div>
-            <button type="submit" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Change password</button>
+            <button type="submit" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-primary">Change password</button>
             <a href="{{ route('home') }}" style="background-color:#F9B100;border-color:#F9B100;" class="btn btn-danger">Cancel</a>
 
         </form>

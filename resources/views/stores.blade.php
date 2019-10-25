@@ -33,24 +33,88 @@
        <!-- <div class="col" align="right">
             <a href="{{ url('work_order_material_missing') }}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Material requests <b style="color:red; background-color: grey; padding: 4px; border-radius: 5px;">90</b></button></a>
         </div> -->
-        <div class="col" align="right">
-            <button class="btn btn-primary">print</button>
-        </div>
+        
        <!-- <div class="col-md-3">
             <a href=""><button style="margin-bottom: 20px" type="button" class="btn btn-warning">View needed materials (10)</button></a>
         </div>  -->
+        <!-- SOMETHING STRANGE HERE -->
+             <?php
+use App\Material;?>   <div class="col" align="right">
+           <a href="" data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
+        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="GET" action="{{ url('materialpdf') }}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Filter your data</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="name" class="form-control mr-sm-2">
+                    <option selected="selected" value="">name</option>
+                    <?php $name = Material::select('name')->distinct()->get();
+                    foreach ($name as $named) {
+                     echo"   <option value='".$named->name."'>".$named->name."</option>";
+                    } ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="brand" class="form-control mr-sm-2">
+                    <option selected="selected" value="">brand</option>
+                    <?php $brand = Material::select('description')->distinct()->get();
+                    foreach ($brand as $branded) {
+                     echo"   <option value='".$branded->description."'>".$branded->description."</option>";
+                    } ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="type" class="form-control mr-sm-2">
+                    <option value="">type</option>
+                    <?php $type = Material::select('type')->distinct()->get();
+                    foreach ($type as $typed) {
+                     echo"   <option value='".$typed->type."'>".$typed->type."</option>";
+                    } ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Export</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+          <!-- ---------------------- -->
     </div>
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
-                <th >#</th>
+               <th >#</th>
                 <th >Name</th>
-                <th >Description</th>
+                <th >Brand Name</th>
+                <th >Value/Capacity</th>
                 <th >Type</th>
                 <th >Stock</th>
                 <th >Created date</th>
                 <th >Stock updated at</th>
-                <th >Actions</th>
+                <th >action</th>
             </tr>
             </thead>
 
@@ -64,13 +128,17 @@
                     <th scope="row">{{ $i }}</th>
                     <td>{{ $item->name }}</td>
                     <td id="wo-details">{{ $item->description }}</td>
+                     <td>{{ $item->brand }}</td>
                     <td>{{ $item->type }}</td>
+                   
+
                     <td>{{ $item->stock }}</td>
-                    <td>{{ $item->created_at }}</td>
-                    <td>{{ $item->updated_at }}</td>
+                    <td><?php $time = strtotime($item->created_at); echo date('d/m/Y',$time);  ?> </td>
+                    <td><?php $time = strtotime($item->updated_at); echo date('d/m/Y',$time);  ?> </td>
                     <td>
+                        &nbsp;&nbsp;&nbsp;
                         <a style="color: green;" href="{{ route('storeIncrement.view', [$item->id]) }}"  data-toggle="tooltip" title="Increment material"><i class="fas fa-plus"></i></a>&nbsp;
-                        <a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>
+                        <!--<a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>-->
                         </td>
                     </tr>
                     @endforeach

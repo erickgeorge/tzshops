@@ -17,26 +17,7 @@
             <h3 align="center">Work order details</h3>
         </div>
 		
-		 @if(auth()->user()->type=='CLIENT')
-        @if($wo->status == 2)
-        <div class="row">
-		 <div class="col">
-           
-                    <form method="POST" action="{{ route('workorder.satisfied', [$wo->id]) }}">
-                        @csrf
-                        <button type="submit" class="btn btn-success">SATISFIED</button>
-                    </form>
-					</div>
-					
-		 <div class="col">
-           
-                    <form method="POST" action="{{ route('workorder.notsatisfied', [$wo->id]) }}">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">NOT SATISFIED</button>
-                    </form>
-					</div>
-                @endif
-				  @endif
+	
         </div>
     </div>
   
@@ -250,8 +231,7 @@
 	
  	
   </tr>
-  
-	@endforeach
+  	@endforeach
 	</table>
     @endif
     <br>
@@ -285,9 +265,15 @@
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
 	 <td>{{$matform->quantity }}</td>
-	 <td style="color:red">@if($matform->status==0) WAITING FOR IOW APPROVAL  @elseif($matform->status== 1) APPROVED BY IOW @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3) REQUESTED FROM STORE @else REJECTED BY IOW   @endif</td>
-	
-	
+	 <td style="color:red">@if($matform->status==0) WAITING FOR IOW APPROVAL  @elseif($matform->status== 1) APPROVED BY IOW @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3) REQUESTED FROM STORE @elseif($matform->status == -1)
+      @if(auth()->user()->type != 'CLIENT') 
+      REJECTED BY IOW
+      @else 
+       MATERIAL REQUESTED ON PROGRESS PLEASE WAIT!
+      @endif
+
+     
+      @endif</td>
 	 <td>{{$matform->created_at }}</td>
 	 <td>{{$matform->updated_at }}</td>
   </tr>
@@ -360,10 +346,10 @@
                 {{-- status of 2 means work order has been closed --}}
                 @if($wo->status != 2)
                     
-                    <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->updated_by]) }}">
+                    <!--<form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->updated_by]) }}">
                         @csrf
                         <button type="submit" class="btn btn-success">Close work order</button>
-                    </form>
+                    </form>-->
                 @endif
             </div>
             <p>&nbsp;</p>
@@ -377,7 +363,7 @@
             </div>
         </div>
     @endif
-    <br>
+    
 
 
     <!-- Modal -->
@@ -407,4 +393,66 @@
         </div>
     </div>
 </div>
+
+
+
+         <div class="modal fade" id="exampleModalu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Not satisfied Work order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please provide reason as to why you are not satisfied with your work order.</p>
+                    <form method="POST" action="{{ route('workorder.notsatisfied', [$wo->id]) }}">
+                        @csrf
+                        <textarea name="unsatisfiedreason" required maxlength="400" class="form-control"  rows="5" id="unsatisfiedreason"></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-primary">submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        
+
+
+    </script>
+
+        @if(auth()->user()->type=='CLIENT')
+        @if($wo->status == 2)
+        <div style="padding-left:  800px;">
+        <div class="row">
+                 <div class="row">
+                    <form method="POST" action="{{ route('workorder.satisfied', [$wo->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-success">SATISFIED</button>
+                    </form>
+                     </div> 
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="col">
+                     <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalu">NOT SATISFIED</button>
+                 
+                        </div>   
+                        </div>  
+       </div>
+
+                @endif
+                  @endif
+
+                  <br>
+                   <br>
+                    <br>
+
+
+
+ 
+
     @endSection

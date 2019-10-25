@@ -23,6 +23,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+
 </head>
 <body>
 <style type="text/css">
@@ -68,47 +71,81 @@
                 
                 $wo_material_approved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();;
 				$procurement_request = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-                	$procurement_request_acceptedbyiow = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
+                $procurement_request_acceptedbyiow = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
                 $wo_transport = WorkOrderTransport::where('status',0)->get();
-                
-                
+                 
                 ?>
                 
                 @if(auth()->user()->type == 'Estates Director')
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('unattended_work_orders')}}">Unattended Work-orders</a>
-                    </li>
                     
                     
-                     <li class="nav-item">
+                    
+                 <!--    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('completed_work_orders')}}">Completed Work-orders</a>
                     </li>
                     
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room report</a>
-                    </li>
+                
                     
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
                     </li>
+                    -->
+                  
                     
-                    <li class="nav-item">
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Technician Reports 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('/techniciancountcomp')}}">Technician Completed Work</a>
+          <a  style="color:white" class="dropdown-item" href="{{ url('/techniciancount')}}">Technician on Progress</a>
+          
+
+        </div>
+       </li> 
+
+
+
+
+
+
+                    
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          WorkOrder Reports 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('/unattended_work_orders')}}">Unattended Work Orders</a>
+          <a  style="color:white" class="dropdown-item" href="{{ url('/completed_work_orders')}}">Completed Work Orders</a>
+           <a style="color:white" class="dropdown-item" href="{{ url('/woduration')}}">Work Orders Duration</a>
+            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">WorkOrders</a>
+
+        </div>
+       </li> 
+                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
                     </li>
 
                   
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician completed count</a>
-                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician Report</a>
+                    </li>-->
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('store_report')}}">Available Store</a>
                     </li> 
+                         <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
+                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('technician_report')}}">Technician</a>
-                    </li> 
                     
+            
                 @endif
                 
                  @if(auth()->user()->type == 'Transport Officer')
@@ -136,6 +173,10 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved_checked_by_store') }}" >Reserved Materials </a>
+                    </li>
 					 <!--
 					 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
@@ -145,11 +186,19 @@
                         <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
                     </li>
 					-->
-				
                 @endif  
 
 
                  @if(auth()->user()->type == 'Head Procurement')
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Materials to purchase <span
+                                    class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
+                    </li>
+
+                @endif
+
+
+                 @if(auth()->user()->type == 'Head Procurement4')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white">Materials to be purchased <span
                                     class="badge badge-light"></span></a>
@@ -211,26 +260,21 @@
                 
                 @ENDIF
                 @ENDIF
+                
 
 
                 @if($role['user_role']['role_id'] == 1)
+                  <!--  <li class="nav-item">
+                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
+                    </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('viewusers')}}">Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Directorates</a>
+                        <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Colleges</a>
                     </li>
 
 
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
                     </li>
-
-
-
-
-
-
 
 
                      <li class="nav-item">
@@ -244,21 +288,32 @@
                     </li>
 					
 					@if($role['user_role']['role_id'] != 1)
-					 <li class="nav-item">
+					 <!--<li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('storeshos')}}">Current Store</a>
-                    </li>
+                    </li>-->
 					@endif
                 @endif
 
                 @if(auth()->user()->type == 'STORE')
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
+                        <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store</a>
                     </li>
                 @endif
+
+
+
                 
             </ul>
             <span class="navbar-text">
+
       <ul class="navbar-nav mr-auto">
+        <li>
+         @if($role['user_role']['role_id'] == 1)
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
+                    </li>
+               @endif
+               </li>
         <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color:white;" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -361,6 +416,116 @@
     $('#myTable').DataTable();
     $('#myTablee').DataTable();
     $('#myTableee').DataTable();
+</script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<script type="text/javascript">
+
+      $("#nameid").select2({
+            placeholder: "Choose type of problem...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#area").select2({
+            placeholder: "Choose Area...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#location").select2({
+            placeholder: "Choose Location...",
+            allowClear: true
+        });
+</script>
+
+
+<script type="text/javascript">
+
+      $("#block").select2({
+            placeholder: "Choose Block...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#room").select2({
+            placeholder: "Choose Room...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#materialreq").select2({
+            placeholder: "Choose material...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#totalmaterials").select2({
+            placeholder: "Choose material...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#directorate").select2({
+            placeholder: "Choose College...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#section").select2({
+            placeholder: "Choose Section...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#department").select2({
+            placeholder: "Choose Department...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#role").select2({
+            placeholder: "Choose role...",
+            allowClear: true
+        });
+</script>
+
+
+<script type="text/javascript">
+
+      $("#techid").select2({
+            placeholder: "Choose Technician...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#typetechadmin").select2({
+            placeholder: "Choose Technician...",
+            allowClear: true
+        });
 </script>
 
 </body>

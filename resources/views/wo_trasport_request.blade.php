@@ -125,7 +125,7 @@
             </div>
         </div>
     </div>
-	<p id="n" > j </p> 
+	<p id="n" > </p> 
 </div>
 	
     @endSection

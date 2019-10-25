@@ -1,10 +1,32 @@
-<h1> Report generated for all work orders</h1>
+<div style="margin-top: -20px" align="center">
+    <img src="{{ public_path('/images/index.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+    <p><h2>University of Dar es salaam</h2> <h4>Director of Estates Services</h4></p><p><b>All Work orders report</b></p>
+</div><br>
 
 
 
 
-<table class="table table-striped display" id="myTable" >
- <thead class="thead-dark">
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+#footer{position:fixed; right:0px; bottom:10px; text-align:center; border-top:1px solid black; }
+#footer .page:after{content:counter(page, decimal);}
+@page {margin:20px 30px 40px 50px;}
+</style>
+<table>
+ <thead class="thead-dark" align="center">
     
     <tr>
                     <th>#</th>
@@ -12,13 +34,13 @@
                     <th>Type</th>
                     <th>From</th>
                     <th>Status</th>
-                    <th>Created date</th>
+               
                     <th>Location</th>
                     
         
     </tr>
  </thead>
- <tbody>
+ <tbody align="center">
 
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
@@ -50,35 +72,22 @@
               @else
                                 <td><span class="badge badge-success">procurement stage</span></td>               
                             @endif
-                            <td>{{ $work->created_at }}</td>
+                       
                             <td>
 
                                 @if($work->location ==null)
-                                    {{ $work['room']['block']->location_of_block }}</td>
+                                    {{ $work['room']['block']->location_of_block }}
                             @else
 
                                 {{ $work->location }}
                             @endif
-                            <td>
-                                @if(strpos(auth()->user()->type, "HOS") !== false)
-
-                                    @if($work->status == -1)
-                                        
-                                    @else
-
-                                       
-                                    @endif
-                                @else
-                                    @if($work->status == -1)
-                                      
-                                    @else
-                                     
-                                    @endif
-                                @endif
-
-                                @endif
                             </td>
+                               
+                                @endif
                         </tr>
                         @endforeach
                 </tbody>
 </table>
+<div id='footer'>
+    <p class="page">page</p>
+</div>

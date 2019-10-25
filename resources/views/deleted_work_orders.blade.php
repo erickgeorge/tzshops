@@ -16,7 +16,7 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-		<th scope="col">WO ID</th>
+		<th scope="col">ID</th>
                 <th scope="col">Details</th>
                 <th scope="col">Type</th>
                 <th scope="col">From</th>
@@ -35,12 +35,12 @@
 
                 <tr>
                     <th scope="row">{{ $i }}</th>
-		   <th scope="row">WO-{{ $work->id }}</th>
+		   <th scope="row">00{{ $work->id }}</th>
                     <td id="wo-details">{{ $work->details }}</td>
                     <td>{{ $work->problem_type }}</td>
                     <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                     <td><span class="badge badge-danger">rejected</span></td>
-                    <td>{{ $work->created_at }}</td>
+                    <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                     <td>
                         @if($work->location ==null)
                             {{ $work['room']['block']->location_of_block }}

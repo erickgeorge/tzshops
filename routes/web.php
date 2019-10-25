@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('/notification', 'HomeController@notificationView');
 
 Route::get('password','HomeController@passwordView' );
+Route::get('firstloginpassword','HomeController@passwordView2' );
+
 Route::get('/changeprofile','HomeController@profileView' );
 Route::get('/myprofile','HomeController@myprofileView' );
 
@@ -138,6 +140,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('rejected/work/orders', 'WorkOrderController@deletedWOView');
+Route::get('rejected/materials', 'WorkOrderController@rejectedmaterialview');
+
+
+
 Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read');
 
 Route::post('/myprofile', 'UserController@update_avatar');
@@ -167,14 +173,23 @@ Route::get('technicians', 'HomeController@techniciansView');
 
 
 
-Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneeded');
+Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneededy');
 Route::get('work_order_material_iow/{id}', 'HomeController@workOrderMaterialInspectionView')->name('material.inspection.view');
 
 
 
 Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMaterialView')->name('work_order_approved_material');
 
-Route::get('wo_material_view/{id}', 'HomeController@wo_materialView')->name('store.materialview');
+Route::get('work_order_with_missing_material', 'HomeController@workorderwithmissingmaterial')->name('work_order_with_missing_material');
+
+
+
+
+Route::get('wo_material/{id}', 'HomeController@wo_materialView')->name('store.materialview');
+
+Route::get('wo_material_to_procure/{id}', 'HomeController@wo_material_to_purchaseView')->name('store.material_to_procure_view');
+
+Route::get('/wo_material_reserved_checked_by_store', 'HomeController@wo_material_to_purchaseViewbystore');
 
 
 Route::get('work_order_purchasing_request', 'HomeController@work_order_purchasing_requestView')->name('work_order_purchasing_request');
@@ -210,13 +225,20 @@ Route::get('procurement_release/{id}', 'PurchasingOrderController@procurement_re
 
 
 Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('store.materialaccept');
-Route::get('reject/material/{id}', 'StoreController@rejectMaterial')->name('store.materialreject');
+Route::get('accept/material/independently/{id}', 'StoreController@acceptMaterialonebyone')->name('store.materialacceptonebyone');
+
+Route::post('reject/material/{id}', 'StoreController@rejectMaterial')->name('store.materialreject');
+Route::post('reject/material/independent/{id}', 'StoreController@rejectMaterialonebyone')->name('store.materialrejectonebyone');
 
 Route::get('store/material_request/{id}','StoreController@material_request_hos')->name('material_request_hos');
+
+Route::get('store/material_reserve/{id}','StoreController@ReserveMaterial')->name('ReserveMaterial');
 
 
 
 Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('store.materialrelease');
+
+Route::get('notify/store/material/{id}', 'StoreController@releaseMaterialafterpurchased')->name('store.materialafterpurchase');
 
 
 
@@ -240,7 +262,12 @@ Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedVie
 
 
 
-
+ Route::get('wowithdurationpdf','NotesController@wowithdurationpdf');
+ Route::get('roomreportpdf','NotesController@roomreportpdf');
+ Route::get('techniciancompleteworkpdf','NotesController@techniciancompleteworkpdf');
+ Route::get('hosCountpdf','NotesController@hosCountpdf');
+ Route::get('unattendedwopdf','NotesController@unattendedwopdf');
+ Route::get('completewopdf','NotesController@completewopdf'); 
 
 
 
@@ -280,6 +307,11 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
 
 
  Route::get('pdf', 'NotesController@pdf');
+
+ Route::get('userpdf', 'NotesController@userspdf');
+ Route::get('materialpdf', 'NotesController@storespdf'); 
+ Route::get('unatendedwopdf', 'NotesController@unatendedpdf');               
+
 
  Route::get('sms', 'SmsController@sendSms');
 
@@ -326,10 +358,16 @@ Route::get('Register_Cleaningarea', 'AssetsController@Registercleaningareaview')
 
 
 Route::get('work_order_material_missing', 'HomeController@workOrderMissingMaterialView')->name('wo.materialneeded');
+
 Route::get('work_order_material_missing/{id}', 'HomeController@workOrderMaterialMissingInspectionView')->name('material.missing.inspection.view');
 Route::get('insufficient/material/{id}', 'StoreController@insufficientMaterial')->name('store.insufficientmaterial');
 
 
 
 
- Route::get('technician_report', 'AssetsController@TecnicianView')->name('view.report');
+ Route::get('/technician_report', 'AssetsController@TecnicianView')->name('view.report');
+
+ Route::get('/workorder_report', 'HomeController@WorkorderReportView');
+
+ Route::get('htmlpdf58','PDFController@htmlPDF58');
+Route::get('generatePDF58','PDFController@generatePDF58');

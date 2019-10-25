@@ -14,7 +14,7 @@
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -44,16 +44,24 @@
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="name"
                        aria-describedby="emailHelp" name="name" placeholder="Material Name">
             </div>
-		
+		         
+
+             <div class="input-group mb-3 col-lg-6">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Brand Name</label>
+                </div>
+                <input style="color: black" required type="text" maxlength="35" class="form-control" id="description"
+                       aria-describedby="emailHelp" name="description" placeholder="Material Brand Name">
+            </div>
 		
 		
 		 
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Material Description</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Value/Capacity</label>
                 </div>
-                <input style="color: black" required type="text" maxlength="35" class="form-control" id="description"
-                       aria-describedby="emailHelp" name="description" placeholder="Material Description">
+                <input style="color: black" required type="text" maxlength="35" class="form-control" id="brand"
+                       aria-describedby="emailHelp" name="brand" placeholder="Material Value/Capacity">
             </div>
         
 		
@@ -81,12 +89,12 @@
                     <label class="input-group-text" for="inputGroupSelect01">Quantity</label>
                 </div>
                 <input style="color: black" required type="number"  class="form-control" id="stock"
-                       aria-describedby="emailHelp" name="stock" placeholder="Current Stock">
+                       aria-describedby="emailHelp" name="stock" placeholder="Enter Quantity of material">
             </div>
         
-        <button type="submit" class="btn btn-success">Add Material</button>
+        <button type="submit" class="btn btn-primary">Add Material</button>
 
-        <a class="btn btn-info" href="/home" role="button">Cancel Changes</a>
+        <a class="btn btn-danger" href="/home" role="button">Cancel</a>
     </div>
 
         </div>

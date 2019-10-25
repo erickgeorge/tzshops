@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    manage directorates
+    manage collegies
     @endSection
 
 @section('body')
@@ -30,7 +30,7 @@
             <div class="container-fluid">
                 <div class="tab-group row">
                     <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'customer')">
-                        DIRECTORATES
+                        COLLEGE
                     </button>
                     <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">
                         DEPARTMENTS
@@ -43,7 +43,7 @@
             {{-- directorate tab--}}
             <div id="customer" class="tabcontent active">
                 <a href="#new_dir" style="margin-bottom: 20px; background-color: coral; color: white"
-                   class="btn btn-primary">Add new directorate</a>
+                   class="btn btn-primary">Add new College</a>
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -62,7 +62,8 @@
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $directorate->directorate_description }}</td>
                             <td>{{ $directorate->name }}</td>
-                            <td>{{ $directorate->created_at }}</td>
+                            <td><?php $time = strtotime($directorate->created_at); echo date('d/m/Y',$time);  ?></td>
+
 
 
                             <td>
@@ -76,7 +77,7 @@
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Directorate Completely? All of its departments and sections under those department will be deleted')"
+                                          onsubmit="return confirm('Are you sure you want to delete this college Completely? All of its departments and sections under those college will be deleted')"
                                           action="{{ route('directorate.delete', [$directorate->id]) }}">
                                         {{csrf_field()}}
 
@@ -96,22 +97,21 @@
                     </tbody>
                 </table>
                 <br>
-                <h4 id="new_dir">Add new directorate</h4>
+                <h4 id="new_dir">Add new college</h4>
                 <hr>
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf
                     <div class="form-group ">
-                        <label for="dir_name">Directorate name</label>
+                        <label for="dir_name">college name</label>
                         <input style="color: black" type="text" required class="form-control" id="dir_name"
-                               name="dir_name" placeholder="Enter Directorate name">
+                               name="dir_name" placeholder="Enter college name">
                     </div>
                     <div class="form-group ">
-                        <label for="dir_abb">Directorate abbreviation</label>
+                        <label for="dir_abb">college abbreviation</label>
                         <input style="color: black" type="text" required class="form-control" id="dir_abb"
-                               name="dir_abb" placeholder="Enter Directorate abbreviation">
+                               name="dir_abb" placeholder="Enter College abbreviation">
                     </div>
                     <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save
-                        directorate
                     </button>
                 </form>
             </div>
@@ -127,7 +127,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Abbreviation</th>
-                        <th scope="col">Directorate</th>
+                        <th scope="col">College</th>
                         <th scope="col">Added on</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -141,7 +141,8 @@
                             <td>{{ $dep->description }}</td>
                             <td>{{ $dep->name }}</td>
                             <td>{{ $dep['directorate']->name }}</td>
-                            <td>{{ $dep->created_at }}</td>
+                            <td><?php $time = strtotime($dep->created_at); echo date('d/m/Y',$time);  ?></td>
+
                             <td>
                                 <div class="row">
                                     <a style="color: green;"
@@ -177,7 +178,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="directorate">Directorate/College</label>
                         </div>
-                        <select required class="custom-select" name="directorate" id="directorate">
+                        <select required class="custom-select" name="directorate" id="directoratee">
                             <option value="">Choose...</option>
                             @foreach($directorates as $directorate)
                                 <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
@@ -195,7 +196,7 @@
                         <input style="color: black" type="text" required maxlength="8" class="form-control" id="dep_ab"
                                name="dep_ab" placeholder="Enter department abbreviation">
                     </div>
-                    <p style="color: red">You must select a directorate/college to which you are adding a department</p>
+                    <p style="color: red">You must select a college to which you are adding a department</p>
                     <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save
                         department
                     </button>
@@ -226,7 +227,8 @@
                             <td>{{ $sec->section_name }}</td>
                             <td>{{ $sec->description }}</td>
                             <td>{{ $sec['department']->name }}</td>
-                            <td>{{ $sec->created_at }}</td>
+                            <td><?php $time = strtotime($sec->created_at); echo date('d/m/Y',$time);  ?></td>
+                            
                             <td>
                                 <div class="row">
                                     <a style="color: green;"
@@ -270,7 +272,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="directorate">Directorate/College</label>
                         </div>
-                        <select required class="custom-select" name="college" id="directorate"
+                        <select required class="custom-select" name="college" id="directoratee"
                                 onchange="getDepartments()">
                             <option selected value="">Choose...</option>
                             @foreach($directorates as $directorate)
@@ -282,7 +284,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="department">Department</label>
                         </div>
-                        <select required class="custom-select" name="department" id="department">
+                        <select required class="custom-select" name="department" id="departiment">
                         </select>
                     </div>
                     <div class="form-group ">

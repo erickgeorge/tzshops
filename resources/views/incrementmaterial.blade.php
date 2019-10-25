@@ -6,6 +6,7 @@
 
 @section('body')
     <br>
+    <div class="container">
     <div class="row" style="margin-top: 6%;">
         <div class="col-lg-12" align="center">
             <h2>Add Material in Store</h2>
@@ -89,7 +90,7 @@
                     <label class="input-group-text" for="inputGroupSelect01">Add Quantity</label>
                 </div>
                 <input  oninput="totalitem()" style="color: black" required type="number" min="1"  class="form-control" id="istock"
-                       aria-describedby="emailHelp" name="istock" placeholder="Current Stock">
+                       aria-describedby="emailHelp" name="istock" placeholder="Add Material in Quantity">
             </div>
         </div>
         
@@ -113,9 +114,9 @@
       
 		
 		
-        <button type="submit" class="btn btn-success">Add Material</button>
+        <button type="submit" class="btn btn-primary">Add Material</button>
 
-        <a class="btn btn-info" href="/home" role="button">Cancel Changes</a>
+        <a class="btn btn-danger" href="/home" role="button">Cancel</a>
 
         </div>
     </form>
@@ -130,5 +131,6 @@ function totalitem() {
   document.getElementById("tstock").innerHTML = z;
 }
 </script>
+</div>
 	
     @endSection

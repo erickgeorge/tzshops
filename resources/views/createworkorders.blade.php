@@ -14,7 +14,7 @@
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -37,24 +37,24 @@
             <div class="col">
                 <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Type of problem</label>
+                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
             </div>
-            <select required class="custom-select" id="inputGroupSelect01" name="p_type">
+            <select required style="width: 300px;min-width: 150px;" id="nameid" name="p_type">
                 <option selected value="">Choose...</option>
+                <option value="Carpentry/Painting">Carpentry/Painting</option>
                 <option value="Electrical">Electrical</option>
-                <option value="Plumbing">Plumbing</option>
                 <option value="Masonry/Road">Masonry/Road</option>
                 <option value="Mechanical">Mechanical</option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
                 <option value="Others">Others</option>
+                <option value="Plumbing">Plumbing</option>
             </select>
-        </div>
+             </div>
             </div>
-            <div class="col">
+        <div class="col">
                 
         <?php
         use App\Location;
-        $location = Location::get();
+        $location = Location::where('name','<>',null)->orderby('name')->get();
         ?>
 
        
@@ -64,7 +64,7 @@
                 <div class="input-group-prepend">
                     <label  class="input-group-text" for="inputGroupSelect01">Enter Location in text</label>
                 </div>
-                <input   style="color: black" required type="text" maxlength="35" class="form-control" id="manual"
+                <input   style="color: black" type="text" maxlength="35" class="form-control" id="manual"
                        aria-describedby="emailHelp" name="manual" placeholder="Type Location Address">
             </div>
         </div>
@@ -84,7 +84,7 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Location</label>
+                    <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Location</label>
                 </div>
                 <select required class="custom-select" id="location" name="location" onchange="getAreas()">
                     <option value="" selected>Choose...</option>
@@ -99,9 +99,9 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="area">Area</label>
+                    <label style="height: 28px" class="input-group-text" for="area">Area</label>
                 </div>
-                <select required class="custom-select" id="area" name="area" onchange="getBlocks()">
+                <select style="width: 455px" required class="custom-select" id="area" name="area" onchange="getBlocks()">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -111,9 +111,9 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="block">Block</label>
+                    <label  style="height: 28px" class="input-group-text" for="block">Block</label>
                 </div>
-                <select required class="custom-select" id="block" name="block" onchange="getRooms()">
+                <select style="width: 452px" required class="custom-select" id="block" name="block" onchange="getRooms()">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -121,9 +121,9 @@
             <div class="col">
                  <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="room">Room</label>
+                    <label   style="height: 28px" class="input-group-text" for="room">Room</label>
                 </div>
-                <select required class="custom-select" id="room" name="room">
+                <select style="width: 445px" required class="custom-select" id="room" name="room">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -137,9 +137,9 @@
                       id="comment"></textarea>
         </div>
         <div align="center">
-        <button type="submit" class="btn btn-success">Create Workorder</button>
+        <button type="submit" class="btn btn-primary">Save</button>
 
-        <a class="btn btn-info" href="/work_order" role="button">Cancel Changes</a>
+        <a class="btn btn-danger" href="/work_order" role="button">Cancel</a>
 </div>
         </div>
     </form>

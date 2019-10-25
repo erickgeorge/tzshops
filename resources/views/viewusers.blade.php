@@ -4,6 +4,13 @@
 view users
 @endSection
 @section('body')
+<?php
+use App\Technician;
+use App\User;
+use App\Directorate;
+use App\Department;
+use App\Section;
+ ?>
 <br>
 <div class="row container-fluid" style="margin-top: 6%;">
   <div class="col-lg-4">
@@ -38,8 +45,85 @@ view users
   <div class="col-md-5" align="right">
 
 
- <button   name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');"  style="font-size:24px ">Export to pdf <i class="fa fa-file-pdf-o" style="color:red"></i></button>
 </div>
+
+<!-- SOMETHING STRANGE HERE -->
+                <div class="col" align="right">
+           <a href="" data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
+        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="GET" action="{{ url('userpdf') }}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Filter your data</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="college" class="form-control mr-sm-2">
+                    <option selected="selected" value="">name</option>
+        <?php 
+          $user = User::get();
+          foreach ($user as $userwith) 
+          {
+            
+              $sectionised = Section::Where('id',$userwith->section_id)->get();
+
+              foreach ($sectionised as $sectioner) {
+                if ($sectioner->id == $userwith->section_id) 
+                {
+                  $departmentid = Department::Where('id',$sectioner->department_id)->get();
+                  foreach ($departmentid as $departmentised) 
+                  {
+                    if ($departmentised->id == $sectioner->department_id ) 
+                    {
+                      $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
+                      foreach ($directorate as $directory) {
+                        if ($directory->id == $departmentised->directorate_id ) {
+                          echo "<option value='".$userwith->id."'>".$userwith->fname." ".$userwith->lname." (".$directory->name."-".$departmentised->name.")</option>";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            
+          }
+        ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="type" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Type</option>
+                    <?php
+                      $type = User::select('type')->distinct()->get();
+                      foreach ($type as $typed) {
+                        echo " <option  value='".$typed->type."'>".$typed->type."</option>";
+                      }
+                     ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Export</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+          <!-- ---------------------- -->
   </div>
   
 <table class="table table-striped" id="myTable">
@@ -79,8 +163,18 @@ else {
       <td>{{ $user->fname . ' ' . $user->lname }}</td>
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
-      <td>{{ $user->phone }}</td>
-      <td>{{ $user->type }}</td>
+      <td>
+
+      <?php $phonenumber = $user->phone;
+        if(substr($phonenumber,0,1) == '0'){
+
+          $phonreplaced = ltrim($phonenumber,'0');
+          echo '+255'.$phonreplaced;
+          
+        }else { echo $user->phone;}
+
+      ?></td>
+      <td style="text-transform: lowercase;">{{ $user->type }}</td>
         <td>{{ $user['section']['department']['directorate']->name }}</td>
       <td>{{ $user['section']['department']->name }}</td>
       <td>{{ $user['section']->section_name }}</td>

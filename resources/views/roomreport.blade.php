@@ -5,7 +5,7 @@
     @endSection
 
 @section('body')
-
+<div class="container">
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
@@ -24,7 +24,7 @@
         </div>
     @endif
 
-	<input align="right" name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">
+	<!--<input align="right" name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">-->
    
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         @if(count($wo) > 0)
@@ -82,9 +82,11 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no room reported for work order.</h1>
         @endif
     </div>
+    </div>
+
     <script>
 
         $(document).ready(function () {
