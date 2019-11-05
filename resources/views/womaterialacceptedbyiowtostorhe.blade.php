@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    store
+    Work order that needs material
     @endSection
 
 @section('body')
@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work Orders that need material </b></h3>
+            <h3 align="center"><b>Work order with material accepted by Inspector of Work</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -33,31 +33,32 @@
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
-                <th >#</th>
-              
-				<th >Workorder ID</th>
-				<th >HOS name</th>
+                
+				
+                <th > No </th>
+				<th >Workorder ID </th>
+				<th >Workorder Detail</th>
+				
 				<th >Action</th>
 				
             </tr>
             </thead>
 
-            <tbody>
+          <tbody>                    
 
-            <?php $i=0;  ?>
+           <?php $i= 1; ?>
             @foreach($items as $item)
 
-                <?php $i++ ?>
-                <tr>
-                    <th scope="row">{{ $i }}</th>
-                   
+               
+                <tr> <td>{{$i++}}</td>
                     <td>00{{ $item->work_order_id }}</td>
-                   
-                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{ $item['workorder']->details }}</td>
+                    
+                    <td>
 					
-                 
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">View material</a>&nbsp;
-                        </td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View material accepted by IoW</a></td>
+                  
+                       </td>
                     </tr>
                     @endforeach
             </tbody>

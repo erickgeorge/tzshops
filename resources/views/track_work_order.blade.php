@@ -249,37 +249,47 @@
 
 <table style="width:100%">
   <tr>
+     @if(auth()->user()->type == 'CLIENT')
+     <th>Status</th>
+     @else
     <th>Material Name</th>
     <th>Material Description</th>
-	<th>Type</th>
-	 <th>Quantity</th>
-	  <th>Status</th>
-	   <th>Date Requested</th>
-	    <th>Date Updated</th>
+  <th>Type</th>
+   <th>Quantity</th>
+    <th>Status</th>
+     <th>Date Requested</th>
+      <th>Date Updated</th>
+      @endif
   </tr>
     @foreach($matforms as $matform)
-	
-	
   <tr>
+     @if(auth()->user()->type == 'CLIENT')
+     @else
     <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
-	 <td>{{$matform->quantity }}</td>
-	 <td style="color:red">@if($matform->status==0) WAITING FOR IOW APPROVAL  @elseif($matform->status== 1) APPROVED BY IOW @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3) REQUESTED FROM STORE @elseif($matform->status == -1)
+   <td>{{$matform->quantity }}</td>
+   <td style="color:red">@if($matform->status==0) WAITING FOR IOW APPROVAL  @elseif($matform->status== 1) APPROVED BY IOW @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3) REQUESTED FROM STORE @elseif($matform->status == -1)
+    @endif
       @if(auth()->user()->type != 'CLIENT') 
       REJECTED BY IOW
       @else 
-       MATERIAL REQUESTED ON PROGRESS PLEASE WAIT!
+       Material Requested on progress
       @endif
-
-     
       @endif</td>
-	 <td>{{$matform->created_at }}</td>
-	 <td>{{$matform->updated_at }}</td>
+       @if(auth()->user()->type == 'CLIENT')
+       @else
+   <td>{{$matform->created_at }}</td>
+   <td>{{$matform->updated_at }}</td>
+   @endif
   </tr>
   
-	@endforeach
-	</table>
+  @endforeach
+   @if(auth()->user()->type == 'CLIENT')
+       <td style="color:blue;"> Material Requested on progress</td>
+       @else
+       @endif
+  </table>
     @endif
     <br>
 	

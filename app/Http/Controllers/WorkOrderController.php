@@ -483,7 +483,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 		
 	*/
 
-
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -497,7 +496,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 			$z=$z+1;
 			$work_order_material->quantity = $request[$z];
 			$z=$z+1;
-			$work_order_material->status = 0;
+			$work_order_material->status = 20; //status for HOS to view material before sent to IoW
 			$work_order_material->hos_id = auth()->user()->id;
             $work_order_material->staff_id = auth()->user()->id;
             $work_order_material->save();
@@ -505,40 +504,65 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 			
 			
 			
-			
-        //status field of work order
-			$mForm = WorkOrder::where('id', $id)->first();
-             $mForm->status =7;
-			
-             $mForm->save();
+		
        
 		
 		
         return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Material request for Work order is submitted successfully',
+          'message' => 'Material request for Work order is submitted, Please crosscheck the list if successfully then send again to Store Manager. ',
+
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
 	
 	
-	
-	
-	
-	
-	
-	
-	
+        Public function editmaterialforwork(request $request, $id){
+            
+           $mat = material::find($id);
+           $mat->quantity = $request['quantity'];
+           $mat->status = 0 ;
+           $mat->save();
+  
+        return redirect()->route('register.house')->with(['message' => 'Material Sent again successfully']);
+
+        }   
+
+  
+            public function editmaterial(Request $request, $id )
+    {
+       $p=$request['edit_mat'];
+       $matir = WorkOrderMaterial::where('id',$p)->first();
+       $matir->material_id = $request['material'];
+       $matir->quantity = $request['quantity'];
+       $matir->status = 23; //status for material where HoS will send material again to store
+       $matir->save();
+  
+        return redirect()->bacK()->with(['message' => 'Respective material edited successifully, Please edit all materials and send back to Inspector of work']);
+    }
+
+
+
+
+           public function editmaterialhos(Request $request, $id )
+    {
+       $p=$request['edit_mat'];
+       $matir = WorkOrderMaterial::where('id',$p)->first();
+       $matir->material_id = $request['material'];
+       $matir->quantity = $request['quantity'];
+       $matir->status = 20;
+       $matir->save();
+  
+        return redirect()->bacK()->with(['message' => 'Respective material edited successfully']);
+    }
+  
+
 	public function purchasingorder(Request $request,$id)
     {
 		$y=1;
 		$totmat=$request['totalmaterials']/2;
-		
-		
 	
-
-
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -577,28 +601,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
     }
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
     public function deletedWOView()
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -627,7 +629,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
 
-       public function rejectedmaterialview()
+       public function rejectedmaterialview($id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -636,14 +638,42 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             return view('rejected_materials_view', [
                 'role' => $role,
                 'notifications' => $notifications,
-                'items' => WorkOrderMaterial::where('status', -1)->get()
+                   'wo' => WorkOrder::where('id', $id)->first(),
+                'items' =>WorkOrderMaterial::
+                    
+                     where('work_order_id',$id)->where('status',-1)
+                     
+            
+                     ->get()
             ]);
         } else
            
         return view('rejected_materials_view', [
             'role' => $role,
+            'wo' => WorkOrder::where('id', $id)->first(),
             'notifications' => $notifications,
             'items' => WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', -1)->get()
+        ]);
+    }
+
+
+            public function receivedmaterialview()
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        if ($role['user_role']['role_id'] == 1) {
+            return view('received_materials_view', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'items' => WorkOrderMaterial::where('status', 3)->get()
+            ]);
+        } else
+           
+        return view('received_materials_view', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'items' => WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', 3)->get()
         ]);
     }
 
@@ -661,7 +691,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         return redirect()->route('work_order')->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order successfully sent to Secretary',
+            'message' => 'Work order successfully sent to Maintenance coordinator',
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()
         ]);
     }

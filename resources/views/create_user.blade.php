@@ -170,7 +170,7 @@ User Registrartion
 
        
                 <label> 
-                 <input type="checkbox" name="type[]" value="Secretary"> Secretary </label>
+                 <input type="checkbox" name="type[]" value="SECRETARY"> Secretary </label>
 
 
                 <label> 

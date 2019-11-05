@@ -88,12 +88,12 @@ class AssetsController extends Controller
     {
            $p=$request['edit_id'];
            $House = House::where('id',$p)->first();
-       $House->name_of_house = $request['name_of_house'];
+           $House->name_of_house = $request['name_of_house'];
        
-       $House->location = $request['location'];
-       $House->type = $request['type'];
-       $House->no_room = $request['no_room'];
-       $House->campus_id = $request['campus'];
+           $House->location = $request['location'];
+           $House->type = $request['type'];
+           $House->no_room = $request['no_room'];
+           $House->campus_id = $request['campus'];
            $House->save();
   
         return redirect()->route('register.house')->with(['message' => 'House Edited successfully']);

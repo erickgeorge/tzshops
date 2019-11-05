@@ -148,7 +148,8 @@ var total=2;
                         </button>
 						<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
                         
-						<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>
+						<!--<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>-->
+                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'crosscheck_material_requested')" id="defaultOpen">CROSS CHECK MATERIAL REQUESTED</button>
                         
                         <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
 						
@@ -370,6 +371,7 @@ var total=2;
 						
 						use App\Material;
 						$materials= Material::get();
+                        
 						
 						?>
 						
@@ -409,96 +411,159 @@ var total=2;
 				
 				
 				
-				
-				
-				
-				
-				
-     {{-- material_request from store--}}
+
+
+            
                 
-                 <div id="material_request_store" class="tabcontent">
+     {{-- crosscheck material--}}
+                <div class="container">
+                 <div id="crosscheck_material_requested" class="tabcontent">
                 
                         <?php
                         
                         use App\WorkOrderMaterial;
-                        $wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',1)->get();
+                        $wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',20)->get();
                         
                         ?>
                          @if(COUNT($wo_materials)!=0)
                         <table class="table table-striped" style="width:100%">
   <tr>
+     <th>No</th>
     <th>Material Name</th>
     <th>Brand Name</th>
     <th>Type</th>
      <th>Quantity Requested</th>
-      <th>Quantity in Store</th>
-      <th>Quantity to Reserve</th>
-       <th>Material to be Procured</th>
-       
+      <th>Action</th>
+
   </tr>
 
-  <?php $i=0; 
-  $p= array("t");
+  <?php $i=1; 
+ 
 
   ?>
     @foreach($wo_materials as $matform)
     
   <tr>
+    <td>{{$i++}}</td>
     <td>{{$matform['material']->name }}</td>
      <td>{{$matform['material']->description }}</td>
-    <td>{{$matform['material']->type }}</td>
+     <td>{{$matform['material']->type }}</td>
      <td>{{$matform->quantity }}</td>
-    <?php  $x=$matform['material']->stock - $matform['material']->quantity_reserved; ?>
-     @if($x<=0)
-      <td>0</td>
-      @else
-      <td>{{$matform['material']->stock  - $matform['material']->quantity_reserved }}</td>
-      @endif
-     
+      <td>
 
 
-     @if(($matform['material']->stock- $matform['material']->quantity_reserved)>=($matform->quantity))
-          <td>{{$matform->quantity }}</td>
-       <?php $procured=0;
-       $p[$i]= "no";
-       $i++;
-       ?>
+                            <div class="row">
 
 
-       @else
-      <?php 
-       $p[$i]= "yes";
-       $i++;
-       ?>
+                                    <a style="color: green;"
+                                       onclick="myfunc1( '{{ $matform->id }}','{{ $matform->quantity }}', '{{$matform->name}}')"
+                                       data-toggle="modal" data-target="#exampleModali" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
 
-      <?php $procured=$matform->quantity- $matform['material']->stock +  $matform['material']->quantity_reserved; ?>
-         <td style="color:red">{{$matform['material']->stock-  $matform['material']->quantity_reserved}}</td>
-      @endif
-      
-      <td>{{$procured }}</td>
+
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Material from the list? ')"
+                                          action="{{ route('material.delete', [$matform->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form>
+                                </div>
+
+                         </td>
+  </tr>   
+    @endforeach
+</table>   
+    <button class="btn btn-success" style="color: white" > <a  href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button> 
+
+
+</div>
+
+</div>
+
+<!--modal for edit --->
+     <div class="modal fade" id="exampleModali" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div >
+         <div class="modal-dialog" style="padding-right: 655px; background-color: white" role="document">
+         <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-left:600px; ">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                   
+                    <div class="modal-header ">
+                     <div>
+                        <h5  style="width: 600px;" id="exampleModalLabel">Edit Material</h5>
+                        <hr>
+                    </div>  
+                  </div>
+                <div class="modal-body">
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+
+
+
+                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col-md-6">
+                        @csrf
+                       
+
+
+                        <div class="form-group">
+                            <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
+                                <option   selected value="" >Choose...</option>
+                                @foreach($materials as $material)
+                                   <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         
-            </tr>   
-            @endforeach
-</table>            
                     
-                    @if(in_array("yes", $p))
+                         <div class="form-group">
+                            <label for="name_of_house">Quantity </label>
+                            <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
+                                   name="quantity" placeholder="Enter quantity again">
+                            <input id="edit_mat" name="edit_mat" hidden>
+                         </div>
+                                                    <div> 
+                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       </button>
+                                                    </div>
+                                         
+                                            </form>
+                  
+                                                       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
-                     <button style="background-color: darkblue;" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > RESERVE AND SEND PURCHASING ORDER </a></button>  
-                    @else
-                     
+     <script type="text/javascript">
 
-                      <button style="background-color:darkblue;"  class="btn btn-warning"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >REQUEST MATERIAL FROM STORE </a></button>
-                        @endif
-                         @endif
-                 </div>
+      $("#materialedit").select2({
+            placeholder: "Choose materia..",
+            allowClear: true
+        });
+     </script>
+
+   
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+     @endif
+
+    <!--end modal for edit --->
+
+
+
                 {{-- end material_request  --}}
-                
-				
-				
-				
-
-
                 
 				
 				
@@ -589,14 +654,7 @@ var total=2;
         </div>
     </div>
 </div>
-
-   
-
-
-
-
-    
-	 @endSection
+  @endSection
 	 
 	 <?php	
 						$mat= Material::get();
@@ -722,6 +780,19 @@ document.getElementById("totalmaterials").value=total;
 	  
 	  
 	// getTechnician(5);
+
+
+
+       function myfunc1(U, V, W) {
+
+
+            document.getElementById("edit_mat").value = U;
+
+            document.getElementById("editmaterial").value = V;
+
+             document.getElementById("material").value = W;
+
+       }
 	</script>
 
 

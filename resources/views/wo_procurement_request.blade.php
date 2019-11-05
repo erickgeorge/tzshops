@@ -33,12 +33,8 @@
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
-                
-				
-                
 				<th >Work-Order ID </th>
 				<th >Workorder Detail</th>
-				
 				<th >Action</th>
 				
             </tr>

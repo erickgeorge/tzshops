@@ -59,6 +59,8 @@ class StoreController extends Controller
 
         return redirect()->route('storeIncrement.view', $request['nameid'])->with(['message' => 'Material is added succesfully']);
     }
+
+
 	
 	 public function addnewmaterail(Request $request)
     {
@@ -96,20 +98,37 @@ class StoreController extends Controller
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		 $wo_m->status = 1;
 		  $wo_m->save();
 		 }
 		 
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
-             $mForm->status =15;
+             $mForm->status = 15;
 			
              $mForm->save();
-
-
-        return redirect()->route('wo.materialneededy')->with(['message' => 'Material Accepted successfully ']);
+       return redirect()->route('wo.materialneededy')->with(['message' => 'Material Accepted successfully ']);
     }
+
+
+
+             public function MaterialrequestView($id){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('requestedmaterialinstore', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'wo_materials' =>WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get(),
+            'wo' => WorkOrder::where('id', $id)->first()
+            
+              
+           
+          ]);
+     }
+
+
 
 
 
@@ -129,6 +148,8 @@ class StoreController extends Controller
 
         return redirect()->route('wo.materialneededy')->with(['message' => 'Respective material Accepted successfully ']);
     }
+
+
 
 
 	
@@ -157,20 +178,29 @@ class StoreController extends Controller
 	public function rejectMaterialonebyone(request $request, $id)
     {
        
-          $wo_materials =WorkOrderMaterial::where('material_id', $id)->where('status',0)->get();
+        $wo_materials =WorkOrderMaterial::where('material_id', $id)->where('status',0)->get();
 
-		 foreach($wo_materials as $wo_material) {
+		foreach($wo_materials as $wo_material) {
 		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		$wo_m->status = -1;
 		$wo_m->reason = $request['reason'];
 		$wo_m->save();
 		 }  
 
+
 		 //status field of work order
-			
+		
         return redirect()->route('wo.materialneededy')->with(['message' => 'Respective material Rejected successfully ']);
     }
 	
+    
+
+    
+
+
+
+
+
 	
 	
 	
@@ -183,18 +213,51 @@ class StoreController extends Controller
           $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
-		 $wo_m->status = 3;//status for material available in store
+		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		  $wo_m->status = 3;//status for material available in store
 		  $wo_m->save();
 		 }
+
+		 foreach($wo_materials as $wo_material){
+		   
+		$material_id=$wo_material->material_id;
+		$material_quantity=$wo_material->quantity;
+		$material=Material::where('id', $material_id)->first();
+		$stock=$material->stock;
+		$rem=$stock-$material_quantity;
+		$material->stock=$rem;
+		 $material->save();
+			}  
+       
+
+         foreach($wo_materials as $wo_material){
+        $item = WorkOrderMaterial::where('id', $wo_material->id)->first();
+		$notify = new Notification();
+		$u = auth()->user();;
+        $notify->sender_id = $u->id;
+        $notify->receiver_id = $item->staff_id;
+        $notify->type = 'mat_received';
+        $notify->status = 5;
+        $notify->message = 'Your material named:' . $item['material']->name . ' requested for Workorder No:00' . $item->work_order_id . ' with quantity of: ' . $item->quantity. ' has been released by Store Manager named:' . $u->fname.' '.$u->lname . '' ;
+        $notify->save();
+
+        }
+
+		     $mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status = 18;  //material available in store then status change for workorder
+			 $mForm->save();
+
 		 
-       $staff=WorkOrderStaff::where('work_order_id', $id)->get();
-		
-		
-        return redirect()->route('workOrder.edit.view', [$id])->with(['message' => 'Material is Requested from Store Successfully.']);
+         $staff=WorkOrderStaff::where('work_order_id', $id)->get();
+         return redirect()->route('wo_material_accepted_by_iow')->with([
+         		
+         	'message' => 'Material Released from store to HoS and Notication sent successfully to HoS.' 
+         
+         ]);
  
 		}
 	
+
 
 		public function ReserveMaterial($id)
     {
@@ -208,15 +271,20 @@ class StoreController extends Controller
 		 $wo_m->status = 5; //status for material missing
 		  $wo_m->save();
 		 }
-		 
-       $staff=WorkOrderStaff::where('work_order_id', $id)->get();
-		
-		
-        return redirect()->route('workOrder.edit.view', [$id])->with(['message' => 'Material reserved and  sent to be purchased Successfully.']);
 
- 
+       
+
+       $mForm = WorkOrder::where('id', $id)->first();
+       $mForm->status = 19;  //material missing in store then status change for workorder
+	   $mForm->save();
+
+       $staff=WorkOrderStaff::where('work_order_id', $id)->get();
+		 return redirect()->route('wo_material_accepted_by_iow')->with(['message' => 'Material reserved and  sent to Director of Estate be purchased Successfully.']);
+
 		}
 	
+
+
 	
 
 	public function releaseMaterial($id)
@@ -271,11 +339,12 @@ class StoreController extends Controller
 		foreach($wochange_status as $wochange_state){
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
 		     $wochange->status=15; //status after release material from head of procurement
+		     $wochange->sender_id = auth()->user()->id;
 		     $wochange->save();
 		
 		}
        
-        return redirect()->route('work_order_approved_material')->with(['message' => 'notification sent to Store Manager so as to add material in store ']);
+        return redirect()->route('work_order_with_missing_material')->with(['message' => 'notification sent to Store Manager so as to assign Good Receiving Note ']);
     }
 
 
@@ -294,21 +363,71 @@ class StoreController extends Controller
 		$wochange->save();
 		
 		}
-       
-
-
-
-
-		
-		 
-		 
         
         return redirect()->route('work_order_approved_material')->with(['message' => 'Message has been sent successfully ']);
     }
 	
+
+
+public function deletematerial($id)
+       {
+           $matrialdelete=WorkOrderMaterial::where('id', $id)->first();
+           $matrialdelete->delete();
+           return redirect()->back()->with(['message' => 'Respective Material is deleted successfully']);
+       }
+
+
+
+       	public function materialaddagain($id)
+    {
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 	
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',20)->get();
+
+		 foreach($wo_materials as $wo_material) {
+		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m->status = 0; //status for material correct sent again to IoW
+		  $wo_m->save();
+		 }
+
+       
+
+       $mForm = WorkOrder::where('id', $id)->first();
+       $mForm->status = 7;  //material requested status
+	   $mForm->save();
+
+       
+		 return redirect()->back()->with(['message' => 'Materials sent successfully to Inspector of Work']);
+
+		
+}
+
+
+
+
+
+       	public function materialrejectedaddagain($id)
+    {
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 	
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',23)->get();
+
+		 foreach($wo_materials as $wo_material) {
+		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m->status = 0; //status for material correct sent again to IoW
+		  $wo_m->save();
+		 }
+
+       
+
+       $mForm = WorkOrder::where('id', $id)->first();
+       $mForm->status = 7;  //material requested status
+	   $mForm->save();
+
+       
+		 return redirect()->back()->with(['message' => 'Materials sent again successfully to Inspector of Work']);
 	
-	
-	
+}
 }

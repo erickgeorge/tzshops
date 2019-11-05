@@ -173,7 +173,7 @@ class UserController extends Controller
         $user->phone = $request['phone'];
         $user->email = $request['email'];
         $user->section_id = $request['section'];
-       $user->type  = implode(",", $request->type);
+        $user->type  = implode(",", $request->type);
         $user->save();
 
         $role = UserRole::where('user_id', $id)->first();

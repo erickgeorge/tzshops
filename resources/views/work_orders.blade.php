@@ -57,14 +57,7 @@
             </a>
         </div>
 
-            @if(strpos(auth()->user()->type, "HOS") !== false)
-          <div class="col">     
-            <a href="{{ url('rejected/materials')}}">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected materials
-                </button>
-            </a>
-        </div>
-            @endif
+          
            
          <?php
 use App\User;
@@ -74,9 +67,12 @@ use App\Section;
 use App\WorkOrder;
  ?>
 <!-- SOMETHING STRANGE HERE -->
+          @if(auth()->user()->type == 'CLIENT')
+       @else
           <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
   <i class="fa fa-file-pdf-o"></i> PDF
 </button>
+@endif
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,7 +136,7 @@ use App\WorkOrder;
               <option value="">Select name</option>
 
   <?php
-////////////WADUDUUUUUUUUUUUU
+//
 
   $userwithid = WorkOrder::select('staff_id')->distinct()->get();
    foreach($userwithid as $userwithin){
@@ -178,7 +174,7 @@ use App\WorkOrder;
       }
        }
 
-//WADUDUUUUUUUUUUUUUUUUUUUUUUU
+//
 
       ?>
    
@@ -282,20 +278,49 @@ use App\WorkOrder;
 															<td><span class="badge badge-info">pre-implementation</span></td>
 							@elseif($work->status == 6)
 															<td><span class="badge badge-info">post implementation</span></td>
-							@elseif($work->status == 7)
-															<td><span class="badge badge-info">material requested</span></td>
-							@elseif($work->status == 8)
+						@elseif($work->status == 7)
+              @if(auth()->user()->type == 'CLIENT')
+       <td><span class="badge badge-warning">  Material requested on progress</span></td>
+       @else
+                              <td><span class="badge badge-info">material requested</span></td>
+
+       @endif
+              @elseif($work->status == 8)
+               @if(auth()->user()->type == 'CLIENT')
+       <td><span class="badge badge-warning">  Material requested on progress</span></td>
+       @else
 															<td><span class="badge badge-info">procurement stage</span></td>
+                              @endif
 							@elseif($work->status == 9)
 															<td><span class="badge badge-info">Closed SATISFIED BY CLIENT</span></td>
+
+              @elseif($work->status == 18)
+                              @if(auth()->user()->type != 'CLIENT')
+
+                               <td><span class="badge badge-info">Please correct your material</span></td>
+                               @else
+                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span></td>
+                                                             @endif
+
+              @elseif($work->status == 19)
+                               @if(auth()->user()->type != 'CLIENT')
+                              <td><span class="badge badge-info">Material missing in store also DES notified</span></td>
+                              @else
+                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span></td>
+                                                             @endif
                             @elseif($work->status == 15)
                                                             <td><span class="badge badge-info">Material Accepted by IoW</span></td>
 
                             @elseif($work->status == 16)
+                                                          @if(auth()->user()->type != 'CLIENT')
                                                             <td><span class="badge badge-danger">Material rejected by IoW</span></td>
+                                                            @else
+                                                             <td><span class="badge badge-warning">  Material requested on progress please wait!</span></td>
+                                                             @endif
+
                                                             
 															
-							@else
+						                	@else
                                 <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>								
                             @endif
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>

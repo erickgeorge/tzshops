@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work Orders that need material </b></h3>
+            <h3 align="center"><b>Work Orders with Material Rejected</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -19,7 +19,7 @@
         </div>--}}
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -30,6 +30,7 @@
     @endif
    
     <div class="container " >
+        @if(count($items) > 0)
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
@@ -56,12 +57,15 @@
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 					
                  
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">View material</a>&nbsp;
+                      <td>  <a style="color: green;" href="rejected/materials/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">View material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach
             </tbody>
         </table>
+        @else
+            <h1 class="text-center" style="margin-top: 150px">You have no Workorder with material rejected by Inspector of Work</h1>
+        @endif
     </div>
 </div>
     @endSection

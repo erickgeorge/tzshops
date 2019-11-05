@@ -61,9 +61,32 @@
                 use App\WorkOrderMaterial;
 				use App\PurchasingOrder;
                 use App\WorkOrderTransport;
+                use App\Material;
+                use App\WorkOrder;
 				
+                $w = WorkOrder::select(DB::raw('id'))->get();
+                
+                $m = Material::select(DB::raw('name'))->get();
 				
-				$material_requests = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                $wo_material_reservedd = WorkOrderMaterial::select(DB::raw('material_id'))->where('status',5)->groupBy('material_id')->get();
+                
+
+                $wo_material_procured_by_iow = WorkOrderMaterial::select(DB::raw('material_id'))->where('status',15)->groupBy('material_id')->get();
+                
+
+
+                $material_to_estatedirector = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->groupBy('work_order_id')->get();
+
+                $material_to_purchased = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',15)->groupBy('work_order_id')->get();
+                
+
+                
+
+                
+                $material_requests = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                
+
+				$wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
 				
 				
@@ -76,6 +99,8 @@
                 $wo_transport = WorkOrderTransport::where('status',0)->get();
                  
                 ?>
+
+
                 
                 @if(auth()->user()->type == 'Estates Director')
                     
@@ -91,6 +116,13 @@
                         <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
                     </li>
                     -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Materials to purchase <span
+                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
+                    </li>  
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
+                    </li> 
                   
                     
         <li class="nav-item dropdown">
@@ -108,12 +140,9 @@
         </div>
        </li> 
 
+    
 
-
-
-
-
-                    
+         
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
@@ -125,7 +154,8 @@
                <a class="dropdown-item" style="color:white" href="{{ url('/unattended_work_orders')}}">Unattended Work Orders</a>
           <a  style="color:white" class="dropdown-item" href="{{ url('/completed_work_orders')}}">Completed Work Orders</a>
            <a style="color:white" class="dropdown-item" href="{{ url('/woduration')}}">Work Orders Duration</a>
-            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">WorkOrders</a>
+            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">WorkOrders <span
+                                    class="badge badge-light">{{ count($w) }}</span></a>
 
         </div>
        </li> 
@@ -165,18 +195,42 @@
                 @endif
                 
                 @if(auth()->user()->type == 'STORE')
-                    <li class="nav-item">
+                   <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
                                     class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
-                    </li>
+                    </li>-->
                     
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved_checked_by_store') }}" >Reserved Materials </a>
+                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved_checked_by_store') }}" >Reserved Materials <span
+                                    class="badge badge-light">{{ count($wo_material_reservedd) }}</span></a>
                     </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted_by_iow')}}">Material requests<span
+                                    class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span></a>
+                    </li>
+
+
+
+                    <!--<li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_purchased_by_head_of_procurement') }}" >Material Purchased <span
+                                    class="badge badge-light">{{ count($wo_material_procured_by_iow) }}</span></a>
+                    </li>-->
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('work_order_material_purchased') }}" >Material Purchased <span
+                                    class="badge badge-light">{{ count($material_to_purchased) }}</span></a>
+                    </li>
+
+
+                    
+                    
+
 					 <!--
 					 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
@@ -192,7 +246,14 @@
                  @if(auth()->user()->type == 'Head Procurement')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Materials to purchase <span
-                                    class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
+                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
                     </li>
 
                 @endif
@@ -230,10 +291,11 @@
                  @endif
                    @if(auth()->user()->type == 'Inspector Of Works')
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">WO that needs material <span
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">Work order that needs material <span
                                     class="badge badge-light">{{ count($material_requests) }}</span></a>
                     </li>
-                    
+
+
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_accepted')}}">Accepted Work Orders</a>
                     </li>
@@ -254,7 +316,8 @@
                 @if(auth()->user()->type != 'Transport Officer')
                 @if(auth()->user()->type != 'Inspector Of Works')
                 <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders</a>
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  <span
+                                    class="badge badge-light">{{ count($w) }}</span></a>
                 </li>
                 @ENDIF
                 
@@ -270,6 +333,9 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Colleges</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
+                    </li>
 
 
                      <li class="nav-item">
@@ -278,7 +344,8 @@
 
 
                      <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
+                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
+                                    class="badge badge-light">{{ count($m) }}</span></a>
                     </li>
                 @endif
 
@@ -294,9 +361,30 @@
 					@endif
                 @endif
 
+
+                @if(strpos(auth()->user()->type, "HOS") !== false)
+
+              
+             <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Material Update 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('received/materials/from_store')}}">Received Material from Store</a>
+          
+
+        </div>
+       </li> 
+       @endif
+
                 @if(auth()->user()->type == 'STORE')
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store</a>
+                        <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
+                                    class="badge badge-light">{{ count($m) }}</span></a>
                     </li>
                 @endif
 
@@ -470,6 +558,9 @@
             allowClear: true
         });
 </script>
+
+
+
 
 <script type="text/javascript">
 

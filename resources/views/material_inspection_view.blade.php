@@ -71,8 +71,8 @@
 
                 </br>
 
-                    <div> <h5> ACCEPT  <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Accept"><i class="far fa-check-circle"></i></a>
-                   </span>  &nbsp;&nbsp;&nbsp;&nbsp;  REJECT <span> <a style="color: black;" title="Reject" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
+                    <div> <h5> Accept all  <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Accept"><i class="far fa-check-circle"></i></a>
+                   </span>  &nbsp;&nbsp;&nbsp;&nbsp;  Reject all <span> <a style="color: black;" title="Reject" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
                 </span> </h5> </div> 
             </tbody>
         </table>

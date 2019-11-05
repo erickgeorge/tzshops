@@ -47,9 +47,6 @@ Route::get('/createworkorders', 'HomeController@createWOView');
 Route::get('/addmaterial', 'HomeController@AddMaterialVO');
 
 
-
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -83,7 +80,13 @@ Route::post('procurement/grn/{id}', 'PurchasingOrderController@signGRN')->name('
 
 
 
-
+///////////////////////////////////////////////////////////////
+Route::get('minutesheets','MinuteController@minutesheets')->name('minutesheets');
+Route::get('minutesheet/{id}','MinuteController@minutesheet')->name('minutesheet');
+Route::post('newsheets','MinuteController@newsheet')->name('newsheet');
+Route::get('conversation','MinuteController@conversation')->name('conversation');
+Route::post('addconv','MinuteController@addconv')->name('addconv');
+///////////////////////////////////////////////////////////////
 
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
 
@@ -139,8 +142,12 @@ Route::post('close/notsatisfied/{id}', 'WorkOrderController@closeWONotSatisfied'
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('rejected/work/orders', 'WorkOrderController@deletedWOView');
-Route::get('rejected/materials', 'WorkOrderController@rejectedmaterialview');
+
+
+Route::get('received/materials/from_store', 'WorkOrderController@receivedmaterialview')->name('material.received');
+
 
 
 
@@ -169,16 +176,32 @@ Route::post('incrementmaterial', 'StoreController@incrementmaterial')->name('mat
 Route::get('technicians', 'HomeController@techniciansView');
 
 
-
-
-
-
 Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneededy');
+
+
+Route::get('material_rejected_with_workorder', 'HomeController@workOrderMaterialRejected');
+
+
+Route::get('rejected/materials/{id}', 'WorkOrderController@rejectedmaterialview')->name('material.rejected');
+
+
+
+
+
+
+Route::get('work_order_material_purchased', 'HomeController@MaterialpurchasedView')->name('wo.materialneededy');
+
+
 Route::get('work_order_material_iow/{id}', 'HomeController@workOrderMaterialInspectionView')->name('material.inspection.view');
+
+Route::get('work_order_material_purchased/{id}', 'HomeController@workOrderMaterialpurchased')->name('material.inspection.view1');
+
 
 
 
 Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMaterialView')->name('work_order_approved_material');
+
+
 
 Route::get('work_order_with_missing_material', 'HomeController@workorderwithmissingmaterial')->name('work_order_with_missing_material');
 
@@ -190,6 +213,8 @@ Route::get('wo_material/{id}', 'HomeController@wo_materialView')->name('store.ma
 Route::get('wo_material_to_procure/{id}', 'HomeController@wo_material_to_purchaseView')->name('store.material_to_procure_view');
 
 Route::get('/wo_material_reserved_checked_by_store', 'HomeController@wo_material_to_purchaseViewbystore');
+
+Route::get('/wo_material_purchased_by_head_of_procurement', 'HomeController@wo_material_purchasedViewbyheadprocurement');
 
 
 Route::get('work_order_purchasing_request', 'HomeController@work_order_purchasing_requestView')->name('work_order_purchasing_request');
@@ -234,6 +259,14 @@ Route::get('store/material_request/{id}','StoreController@material_request_hos')
 
 Route::get('store/material_reserve/{id}','StoreController@ReserveMaterial')->name('ReserveMaterial');
 
+Route::get('send/material_again/{id}','StoreController@materialaddagain')->name('SendMaterialAgain');
+
+
+Route::get('send/material_rejected_again/{id}','StoreController@materialrejectedaddagain')->name('SendMaterialrejectedAgain');
+
+
+
+
 
 
 Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('store.materialrelease');
@@ -268,10 +301,7 @@ Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedVie
  Route::get('hosCountpdf','NotesController@hosCountpdf');
  Route::get('unattendedwopdf','NotesController@unattendedwopdf');
  Route::get('completewopdf','NotesController@completewopdf'); 
-
-
-
-
+ Route::get('work_order_material_purchased/grnpdf/{id}','NotesController@grnotepdf'); 
 
 Route::get('wo_transport_request_accepted', 'HomeController@woTransportAcceptedView')->name('woTransportAccepted');
 
@@ -371,3 +401,22 @@ Route::get('insufficient/material/{id}', 'StoreController@insufficientMaterial')
 
  Route::get('htmlpdf58','PDFController@htmlPDF58');
 Route::get('generatePDF58','PDFController@generatePDF58');
+
+
+Route::POST('editmaterialrequest', 'WorkOrderController@editmaterialforwork')->name('requestagain.save');
+
+Route::POST('rejected/materials/edit/Material/{id}', 'WorkOrderController@editmaterial')->name('material.edit');
+
+Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@editmaterialhos')->name('material.edit');
+
+
+
+ //Route::get('requested/material/{id}', 'StoreController@MaterialrequestView')->name('store.materialaccept');
+
+ Route::get('wo_material_accepted_by_iow', 'HomeController@materialacceptedbyiow')->name('wo_material_accepted_by_iow');  //after material accepted by iow then flow to store
+
+ Route::get('wo_material_accepted_by_iow/{id}', 'HomeController@wo_material_acceptedbyIOWView')->name('store.materia_accepte_by_iow'); //material accepted by iow view
+
+
+
+ Route::post('delete/material/{id}', 'StoreController@deletematerial')->name('material.delete');

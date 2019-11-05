@@ -20,12 +20,12 @@ class WorkOrder extends Model
         return $this->hasOne('App\WorkOrderInspectionForm');
     }
 
-public function work_order_progress(){
+      public function work_order_progress(){
         return $this->hasOne('App\WorkOrderProgress');
     }
 	
 	
-public function work_order_inspection(){
+    public function work_order_inspection(){
         return $this->hasOne('App\WorkOrderInspectionForm');
     }	
 

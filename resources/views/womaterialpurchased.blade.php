@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work Orders that need material </b></h3>
+            <h3 align="center"><b>Material Purchased for the Work order </b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -19,7 +19,7 @@
         </div>--}}
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -33,7 +33,7 @@
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
-                <th >#</th>
+                <th >No</th>
               
 				<th >Workorder ID</th>
 				<th >HOS name</th>
@@ -56,7 +56,7 @@
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 					
                  
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">View material</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_purchased/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">View material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach

@@ -10,6 +10,7 @@ use App\WorkOrder;
 use App\User;
 use App\Notification;
 use App\Material;
+use App\WorkOrderMaterial;
    
 class NotesController extends Controller
 {
@@ -727,5 +728,16 @@ public function unattendedwopdf(){
          $pdf = PDF::loadView('roomreportpdf', $data);
    
      return $pdf->download('Wo with duration.pdf');
+    }
+
+
+      public function grnotepdf($id){
+
+          
+         $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',15)
+                    ->get()];
+         $pdf = PDF::loadView('grnpdf', $data);
+   
+     return $pdf->download('Goods received Note.pdf');
     }
 }
