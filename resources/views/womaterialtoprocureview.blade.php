@@ -74,9 +74,15 @@
                     @endforeach
             </tbody>
         </table>
+        
+         @if(auth()->user()->type == 'Head Procurement')
 
         <h4  style="     color: #c9a8a5;"> Notify Store Manager to assign Good Receiving Note about material purchased.</h4>
+
+       
          <a class="btn btn-primary btn-sm" href="{{ route('store.materialafterpurchase', [$item->work_order_id]) }}" role="button">Notify Store Manager</a>
+         @endif
+
          <a class="btn btn-success btn-sm" href="#" role="button" data-toggle="modal" data-target="#exampleModal">Create Minute Sheet</a>
                  
         
@@ -120,7 +126,7 @@ use App\User;
                 <option value="" selected="selected">Send To</option>
           <?php $user = User::get();
           foreach ($user as $used) {
-            if(($used['id']!=auth()->user()->id)&&($used['type'] == 'Head Procurement') || ($used['type'] == 'STORE' )){
+            if(($used['id']!=auth()->user()->id)&&($used['type'] == 'Head Procurement') || ($used['type'] == 'Auditor' ) || ($used['type'] == 'Estates Director') ){
               echo "<option value='".$used['id']."'>".$used['fname']." ".$used['lname']." - ".$used['type']."</option>";
             }
           }

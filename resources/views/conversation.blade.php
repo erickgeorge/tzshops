@@ -86,6 +86,7 @@ use App\MinuteConversation;
 
 
 </style>
+<div class="container">
 <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
@@ -212,7 +213,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
                 <option value="" selected="selected">Send To</option>
           <?php $user = User::get();
           foreach ($user as $used) {
-            if(($used['id']!=auth()->user()->id)&&($used['type'] == 'Head Procurement') || ($used['type'] == 'STORE' )){
+            if(($used['id']!=auth()->user()->id)&&($used['type'] == 'Head Procurement') || ($used['type'] == 'Auditor' )  || ($used['type'] == 'Estates Director' )){
               echo "<option value='".$used['id']."'>".$used['fname']." ".$used['lname']." - ".$used['type']."</option>";
             }
           }
@@ -232,6 +233,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
 
 </div>
  
+</div>
 </div>
 @endif
 @endforeach

@@ -48,20 +48,20 @@
 
              <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Brand Name</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Description</label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="description"
-                       aria-describedby="emailHelp" name="description" placeholder="Material Brand Name">
+                       aria-describedby="emailHelp" name="description" placeholder="Material Description">
             </div>
 		
 		
 		 
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Value/Capacity</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Unit Measure</label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="brand"
-                       aria-describedby="emailHelp" name="brand" placeholder="Material Value/Capacity">
+                       aria-describedby="emailHelp" name="brand" placeholder="Unit Measure">
             </div>
         
 		

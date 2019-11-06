@@ -193,21 +193,18 @@ User Registrartion
                 <label> 
                  <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
             
-
-
-          
                 <label> 
                  <input type="checkbox" name="type[]" value="Transport Officer"> Transport Officer </label>
      
 
               
-
-
                 <label> 
                  <input type="checkbox" name="type[]" value="Head Procurement"> Head Procurement </label>
+
+
+                   <label> 
+                 <input type="checkbox" name="type[]" value="Auditor"> Auditor </label>
      
-
-
                <div class="checkbox">
                 <label> 
                  <input type="checkbox" name="type[]" value="College Maintainance Cordinator"> College Maintainance Cordinator </label>

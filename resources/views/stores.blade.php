@@ -108,10 +108,10 @@ use App\Material;?>   <div class="col" align="right">
             <tr>
                <th >#</th>
                 <th >Name</th>
-                <th >Brand Name</th>
-                <th >Value/Capacity</th>
+                <th >Description</th>
+                <th >Unit Measure</th>
                 <th >Type</th>
-                <th >Stock</th>
+                <th >Current Stock</th>
                 <th >Created date</th>
                 <th >Stock updated at</th>
                 <th >action</th>

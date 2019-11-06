@@ -193,6 +193,12 @@
                     
                     
                 @endif
+
+                @if(auth()->user()->type == 'Auditor')
+                <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
+                    </li>
+                @endif
                 
                 @if(auth()->user()->type == 'STORE')
                    <!-- <li class="nav-item">
@@ -311,18 +317,19 @@
                     -->
                     
                 @endif
-                
+
+                @if(auth()->user()->type != 'Auditor')
                 @if(auth()->user()->type != 'STORE')
                 @if(auth()->user()->type != 'Transport Officer')
                 @if(auth()->user()->type != 'Inspector Of Works')
                 <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  <span
-                                    class="badge badge-light">{{ count($w) }}</span></a>
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
                 </li>
                 @ENDIF
                 
                 @ENDIF
                 @ENDIF
+                   @ENDIF
                 
 
 
@@ -333,9 +340,7 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Colleges</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
-                    </li>
+                   
 
 
                      <li class="nav-item">
