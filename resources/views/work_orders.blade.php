@@ -279,12 +279,10 @@ use App\WorkOrder;
 							@elseif($work->status == 6)
 															<td><span class="badge badge-info">post implementation</span></td>
 						@elseif($work->status == 7)
-              @if(auth()->user()->type == 'CLIENT')
-       <td><span class="badge badge-warning">  Material requested on progress</span></td>
-       @else
+            
                               <td><span class="badge badge-info">material requested</span></td>
 
-       @endif
+      
               @elseif($work->status == 8)
                @if(auth()->user()->type == 'CLIENT')
        <td><span class="badge badge-warning">  Material requested on progress</span></td>
@@ -299,7 +297,7 @@ use App\WorkOrder;
 
                                <td><span class="badge badge-info">Please correct your material</span></td>
                                @else
-                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span></td>
+                               <td><span class="badge badge-primary">  Material received from store!</span></td>
                                                              @endif
 
               @elseif($work->status == 19)

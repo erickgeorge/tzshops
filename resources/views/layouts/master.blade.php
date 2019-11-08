@@ -79,6 +79,7 @@
 
                 $material_to_purchased = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',15)->groupBy('work_order_id')->get();
                 
+                 $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
 
                 
 
@@ -194,7 +195,7 @@
                     
                 @endif
 
-                @if(auth()->user()->type == 'Auditor')
+                @if(auth()->user()->type == 'Acountant')
                 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
                     </li>
@@ -206,9 +207,19 @@
                                     class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
                     </li>-->
                     
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
+                    </li>-->
+
+                       <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('material_received_with_workorder')}}" >Material Taken From Store <span
+                                    class="badge badge-light">{{ count($material_used) }}</span></a>
                     </li>
+
+
+
+
+
 
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved_checked_by_store') }}" >Reserved Materials <span
@@ -232,6 +243,14 @@
                         <a class="nav-link" style="color:white"  href="{{ url('work_order_material_purchased') }}" >Material Purchased <span
                                     class="badge badge-light">{{ count($material_to_purchased) }}</span></a>
                     </li>
+
+
+                   
+
+
+
+                    
+
 
 
                     
@@ -318,7 +337,7 @@
                     
                 @endif
 
-                @if(auth()->user()->type != 'Auditor')
+                @if(auth()->user()->type != 'Acountant')
                 @if(auth()->user()->type != 'STORE')
                 @if(auth()->user()->type != 'Transport Officer')
                 @if(auth()->user()->type != 'Inspector Of Works')
@@ -379,7 +398,7 @@
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
                <a class="dropdown-item" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('received/materials/from_store')}}">Received Material from Store</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('material_received_with_workorder')}}">Received Material from Store</a>
           
 
         </div>

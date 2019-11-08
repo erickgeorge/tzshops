@@ -72,7 +72,7 @@
         </table>
         
          <h4  style="     color: #c9a8a5;"> Please assign Good Receiving Note for received material then add material in Store.</h4>
-         <a class="btn btn-primary btn-sm"  href="grnpdf/{{$item->work_order_id}}" role="button">Assign GRN</a></td>  
+         <a class="btn btn-primary btn-sm"  href="grnpdf/{{$item->work_order_id}}" role="button">Assign GRN</a>
        
                   
     </div>

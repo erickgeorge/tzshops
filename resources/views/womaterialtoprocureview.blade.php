@@ -126,7 +126,7 @@ use App\User;
                 <option value="" selected="selected">Send To</option>
           <?php $user = User::get();
           foreach ($user as $used) {
-            if(($used['id']!=auth()->user()->id)&&($used['type'] == 'Head Procurement') || ($used['type'] == 'Auditor' ) || ($used['type'] == 'Estates Director') ){
+            if(($used['id']!=auth()->user()->id)&&($used['type'] == 'Head Procurement') || ($used['type'] == 'Acountant' ) || ($used['type'] == 'Estates Director') ){
               echo "<option value='".$used['id']."'>".$used['fname']." ".$used['lname']." - ".$used['type']."</option>";
             }
           }

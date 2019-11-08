@@ -158,7 +158,7 @@ User Registrartion
 
 
                 <label> 
-                 <input type="checkbox" name="type[]" value="Maintenance Coordinator"> Maintenance Coordinator </label>
+                 <input type="checkbox" name="type[]" value="Maintenance coordinator"> Maintenance Coordinator </label>
      
 
           
@@ -204,10 +204,14 @@ User Registrartion
 
                    <label> 
                  <input type="checkbox" name="type[]" value="Auditor"> Auditor </label>
+
+                    <label> 
+                 <input type="checkbox" name="type[]" value="Acountant"> Acountant </label>
+     
      
                <div class="checkbox">
                 <label> 
-                 <input type="checkbox" name="type[]" value="College Maintainance Cordinator"> College Maintainance Cordinator </label>
+                 <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
         
 
 

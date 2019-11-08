@@ -11,15 +11,17 @@
 		use App\WorkOrderMaterial;
 
  ?>
+ <div class="container">
+
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div  style="margin-top: 6%;">
         <div class="col-lg-12">
             <h3 align="center">Work order details</h3>
         </div>
 		
 	
         </div>
-    </div>
+
   
     <hr>
     <div style="margin-right: 2%; margin-left: 2%;">
@@ -249,9 +251,7 @@
 
 <table style="width:100%">
   <tr>
-     @if(auth()->user()->type == 'CLIENT')
-     <th>Status</th>
-     @else
+     
     <th>Material Name</th>
     <th>Material Description</th>
   <th>Type</th>
@@ -259,42 +259,68 @@
     <th>Status</th>
      <th>Date Requested</th>
       <th>Date Updated</th>
-      @endif
+  
   </tr>
     @foreach($matforms as $matform)
   <tr>
-     @if(auth()->user()->type == 'CLIENT')
-     @else
+    
     <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td style="color:red">@if($matform->status==0) WAITING FOR IOW APPROVAL  @elseif($matform->status== 1) APPROVED BY IOW @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3) REQUESTED FROM STORE @elseif($matform->status == -1)
-    @endif
-      @if(auth()->user()->type != 'CLIENT') 
+   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)
+
+     
       REJECTED BY IOW
-      @else 
-       Material Requested on progress
-      @endif
+      
       @endif</td>
-       @if(auth()->user()->type == 'CLIENT')
-       @else
+      
    <td>{{$matform->created_at }}</td>
    <td>{{$matform->updated_at }}</td>
-   @endif
+   
   </tr>
   
   @endforeach
-   @if(auth()->user()->type == 'CLIENT')
-       <td style="color:blue;"> Material Requested on progress</td>
-       @else
-       @endif
+  
   </table>
     @endif
     <br>
 	
 	<br>
-    <h4><b>Procurement Requests: </b></h4>
+
+     <h4><b>Material Used: </b></h4>
+     
+  @if(empty($wo['work_order_material']->id))
+        <p style="color: red">No Material Used for this Workorder</p>
+    @else
+    <?php
+  
+  $idw=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+     
+    <th>Material Name</th>
+    <th>Material Description</th>
+     <th>Type</th>
+     <th>Quantity</th>  
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+   <td>{{$matform['material']->name }}</td>
+   <td>{{$matform['material']->description }}</td>
+   <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+  </tr>
+  
+  @endforeach
+   
+       
+  </table>
+    @endif
+    <br>
 	
 	
     <br>
@@ -462,7 +488,6 @@
                     <br>
 
 
-
- 
+</div>
 
     @endSection

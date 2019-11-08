@@ -116,7 +116,7 @@
 		
         <button type="submit" class="btn btn-primary">Add Material</button>
 
-        <a class="btn btn-danger" href="/home" role="button">Cancel</a>
+        <a class="btn btn-danger" href="/stores" role="button">Cancel</a>
 
         </div>
     </form>

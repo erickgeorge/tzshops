@@ -38,8 +38,8 @@
                 <th >#</th>
                 <th >HoS Name</th>
                 <th >Material Name</th>
-                <th >Brand Name</th>
-                <th >Value/Capacity</th>
+                <th >Description</th>
+                <th >Unit Measure</th>
                 <th >Type</th>
                 <th >Quantity Requested</th>
                 <th >Quantity Reserved</th>

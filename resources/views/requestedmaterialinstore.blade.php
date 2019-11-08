@@ -92,7 +92,7 @@
                     @else
                      
 
-                      <button   class="btn btn-warning"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >RELEASE MATERIAL TO HoS </a></button>
+                      <button   class="btn btn-warning"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >NOTIFY HoS TO TAKE MATERIAL </a></button>
 
 
                         @endif

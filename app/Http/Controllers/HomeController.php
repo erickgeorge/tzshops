@@ -445,6 +445,23 @@ public function profileView(){
         return view('rejectedmaterialwith_wo', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
 
+      public function MaterialReceivewithWo()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+        $wo_material=   WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'receiver_id')
+                     ->where('status',3)
+                     ->groupBy('work_order_id')
+                     ->groupBy('receiver_id')
+                     ->get();
+        
+        
+        return view('receivedmaterialwith_wo', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+
+
 
     public function MaterialpurchasedView()
     {

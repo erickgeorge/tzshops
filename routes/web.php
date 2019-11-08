@@ -146,7 +146,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('rejected/work/orders', 'WorkOrderController@deletedWOView');
 
 
-Route::get('received/materials/from_store', 'WorkOrderController@receivedmaterialview')->name('material.received');
+Route::get('received/materials/from_store/{id}', 'WorkOrderController@receivedmaterialview')->name('material.received');
 
 
 
@@ -180,6 +180,8 @@ Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialVi
 
 
 Route::get('material_rejected_with_workorder', 'HomeController@workOrderMaterialRejected');
+
+Route::get('material_received_with_workorder', 'HomeController@MaterialReceivewithWo');
 
 
 Route::get('rejected/materials/{id}', 'WorkOrderController@rejectedmaterialview')->name('material.rejected');
@@ -301,7 +303,9 @@ Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedVie
  Route::get('hosCountpdf','NotesController@hosCountpdf');
  Route::get('unattendedwopdf','NotesController@unattendedwopdf');
  Route::get('completewopdf','NotesController@completewopdf'); 
- Route::get('work_order_material_purchased/grnpdf/{id}','NotesController@grnotepdf'); 
+ Route::get('work_order_material_purchased/grnpdf/{id}','NotesController@grnotepdf');
+ Route::get('received/materials/from_store/issuenotepdf/{id}','NotesController@issuenotepdf');
+
 
 Route::get('wo_transport_request_accepted', 'HomeController@woTransportAcceptedView')->name('woTransportAccepted');
 

@@ -5,6 +5,7 @@
     @endSection
 
 @section('body')
+<div class="container">
 <script>
 var total=2;
 

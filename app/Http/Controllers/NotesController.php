@@ -740,4 +740,16 @@ public function unattendedwopdf(){
    
      return $pdf->download('Goods received Note.pdf');
     }
+
+    public function issuenotepdf($id){
+
+          
+         $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',3)
+                    ->get()];
+         $pdf = PDF::loadView('issuenotepdf', $data);
+   
+     return $pdf->download('Issue Note.pdf');
+    }
+
+
 }

@@ -31,6 +31,10 @@ class WorkOrderMaterial extends Model
         return $this->belongsTo('App\User','sender_id');
     }
 
+       public function userreceiver(){
+        return $this->belongsTo('App\User','receiver_id');
+    }
+
     
 
     

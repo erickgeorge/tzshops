@@ -9,7 +9,11 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Material Released by Store Manager for the work order  </b></h3>
+            @if(auth()->user()->type == 'STORE')
+            <h3 align="center"><b>List of material taken from Store</b></h3>
+            @else
+            <h3 align="center"><b>Material Received from Store </b></h3>
+            @endif
         </div>
 
       <!--<div class="col-md-6" align="left">
@@ -50,18 +54,23 @@
   
 
     <div class="container">
-        @if(count($items) > 0)
+  
              
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
         <th >No</th>
-        <th >WorkOrder ID</th>
-				<th >Workorder Detail</th>
+
+				<th >Workorder Details</th>
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
-				<th >Quantity Released</th>
+                @if(auth()->user()->type =='STORE')
+                <th>Quantity Taken</th>
+                @else
+                <th >Quantity Received</th>
+                @endif
+				
         <th >Status</th>
 				
             </tr>
@@ -75,27 +84,37 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   <td>00{{ $item->work_order_id }}</td>
-                   
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
-					          <td>{{ $item->quantity }}</td>
+				    <td>{{ $item->quantity }}</td>
                   
-                                          
-                    <td style="color: blue">
-                       RELEASED</td>
+                       @if(auth()->user()->type == 'STORE')
+                       <td style="color: blue"><span class="badge badge-info">  TAKEN</span>
+                      </td>
+                       @else
+                       <td style="color: blue"><span class="badge badge-info">  RECEIVED</span>
+                      </td>
+                       @endif                   
+                    
                     </tr>
                     @endforeach
             </tbody>
         </table>
     </div>
-    
+         
+        
    
-        @else
-            <h1 class="text-center" style="margin-top: 150px">You have no material released  by Store Manager</h1>
-        @endif
+      
+            
+       @if(auth()->user()->type !='STORE')
+
+          <h4  style="     color: #c9a8a5;"> Please assign Issue Note for received material from Store Manager.</h4>
+         <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>
+         @endif
+
+       
     </div>
      
    

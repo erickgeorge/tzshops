@@ -215,6 +215,7 @@ class StoreController extends Controller
 		 foreach($wo_materials as $wo_material) {
 		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		  $wo_m->status = 3;//status for material available in store
+		  $wo_m->receiver_id = auth()->User()->id;
 		  $wo_m->save();
 		 }
 

@@ -657,7 +657,9 @@ session::flash('message', ' Your workorder have been accepted successfully ');
     }
 
 
-            public function receivedmaterialview()
+
+
+     public function receivedmaterialview($id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -666,9 +668,18 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             return view('received_materials_view', [
                 'role' => $role,
                 'notifications' => $notifications,
-                'items' => WorkOrderMaterial::where('status', 3)->get()
+                'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 3)->get()
             ]);
-        } else
+        } elseif(auth()->user()->type == 'STORE'){
+
+             return view('received_materials_view', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 3)->get()
+            ]);
+
+
+        }
            
         return view('received_materials_view', [
             'role' => $role,
@@ -676,7 +687,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'items' => WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', 3)->get()
         ]);
     }
-
 
 
 
