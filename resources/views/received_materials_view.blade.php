@@ -94,7 +94,7 @@
                        <td style="color: blue"><span class="badge badge-info">  TAKEN</span>
                       </td>
                        @else
-                       <td style="color: blue"><span class="badge badge-info">  RECEIVED</span>
+                       <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span>
                       </td>
                        @endif                   
                     
@@ -110,7 +110,7 @@
             
        @if(auth()->user()->type !='STORE')
 
-          <h4  style="     color: #c9a8a5;"> Please assign Issue Note for received material from Store Manager.</h4>
+          <h4  style="     color: #c9a8a5;"> Please assign Issue Note for materials you requested from store.</h4>
          <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>
          @endif
 

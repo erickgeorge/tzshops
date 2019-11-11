@@ -63,7 +63,6 @@ tr:nth-child(even) {
             <tr>
         <th >No</th>
 
-        <th >Workorder Details</th>
         <th >Material Name</th>
         <th >Material Description</th>
         <th >Type</th>
@@ -81,7 +80,7 @@ tr:nth-child(even) {
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['workorder']->details }}</td>
+                  
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
@@ -109,10 +108,10 @@ tr:nth-child(even) {
 
 
    <div class="container-name">
-     <div  class="div1" >  Signature:      ............................................................</div>
+     <div  class="div1" >  Signature:      .........................................</div>
 
 
-      <div  class="div2" >  Signature:      ............................................................</div>
+      <div  class="div2" >  Signature:      ........................................</div>
 
 
     </div>
@@ -129,10 +128,14 @@ tr:nth-child(even) {
     </div>
 
 
-      <br>
+     <div  class="div1" > WorkOrder Details:<u style="padding-left: 60px; width: 45px"> {{ $item['workorder']->details }}</u> </div>
 
-      <div>
-          <div> Remark </div><br>
+
+
+      <br>  
+
+     
+          <div> Remark </div><br>  
 
         <div> ..................................................................................................................................................................................
           </div>

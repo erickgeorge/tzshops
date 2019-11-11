@@ -247,4 +247,7 @@ function closeTab() {
         tabcontent[i].style.display = "none";
     }
 
+
+    
+
 }

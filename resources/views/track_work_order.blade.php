@@ -268,12 +268,9 @@
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) RELEASED FROM STORE  @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)
-
-     
-      REJECTED BY IOW
-      
-      @endif</td>
+   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) RELEASED FROM STORE @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)
+    REJECTED BY IOW
+       @endif</td>
       
    <td>{{$matform->created_at }}</td>
    <td>{{$matform->updated_at }}</td>
