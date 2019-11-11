@@ -12,7 +12,7 @@ Dashboard
     display: none;
 }</style>
 
-<div class='container'>
+<!--<div class='container'>
 </br>
 </br>
 <div id="tabs">
@@ -89,7 +89,7 @@ Dashboard
         }
     });
 });
-</script>
+</script>-->
 
 
 
