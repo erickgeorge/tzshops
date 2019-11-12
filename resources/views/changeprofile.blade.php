@@ -128,7 +128,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
         <label for="email">Email Address</label>
-        <input style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+        <input style="color: black" required value="{{ auth()->user()->email }}" type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
     </div> 
     </div>
 </div>
@@ -140,8 +140,8 @@ padding: 20 20 20 20;
 	
 	 
      <div>
-            <button type="submit" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Save changes</button>
-            <a href="{{ route('home') }}" style="background-color:#F9B100;border-color:#F9B100;" class="btn btn-danger">Cancel</a>
+            <button type="submit"  class="btn btn-success">Submit</button>
+            <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </div>
         </form>
     
@@ -150,10 +150,10 @@ padding: 20 20 20 20;
             <form action="/myprofile" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group" >
-                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp" accept="image/*">
                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
                 </div>
-                <button type="submit" class="btn btn-primary" style="background-color:#2E77BB;border-color:#2E77BB;">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         
     

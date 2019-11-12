@@ -3,7 +3,9 @@
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Director of Estates Services</h4></p><p><b>All Work orders report</b></p>
+    <p><h2>University of Dar es salaam</h2> <h4>Director of Estates Services</h4></p><p><b><?php
+     echo $header; 
+     ?></b></p>
 </div><br>
 
 

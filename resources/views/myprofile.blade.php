@@ -120,9 +120,9 @@ padding: 20 20 20 20;
 
 	
 	 <div>
-			<a href="/changeprofile" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Update profile</a>
+			<a href="/changeprofile" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Edit profile</a>
             
-            <a href="{{ route('home') }}" style="background-color:#F9B100;border-color:#F9B100;" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </form>
         </div>
     

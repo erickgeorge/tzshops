@@ -106,7 +106,7 @@ use App\User;
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form method="POST" action="{{ url('newsheets') }}">
+    <form method="POST" action="{{ url('newsheets') }}"  id="mySign">
         @csrf
     <div class="modal-content">
       <div class="modal-header">
@@ -145,9 +145,16 @@ use App\User;
       </div>
       </div>
   </div>
+  <label class="label" style="margin:5px;"> Signature :</label>
+  <div class="modal-body" class="border-dark" style="border:1px solid;">
+
+    <canvas></canvas>
+  </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
         <button type="submit" class="btn btn-primary">Create</button>
+        <input type="button" class="btn btn-warning" value="Clear" onclick="mySign()">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -157,7 +164,15 @@ use App\User;
   
                
     </div>
-
-
+<script>
+function mySign() {
+  document.getElementById("mySign").reset();
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script>
+  var canvas = document.querySelector("canvas");
+  var signaturePad = new SignaturePad(canvas);
+</script>
     
     @endSection

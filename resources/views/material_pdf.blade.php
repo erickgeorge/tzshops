@@ -1,7 +1,9 @@
 
 <div style="margin-top: -20px" align="center">
     <img src="{{ public_path('/images/index.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h4>Director of Estates Services</h4></p><p><b>Material stock report</b></p>
+    <p><h2>University of Dar es salaam</h2> <h4>Director of Estates Services</h4></p><p><b><?php
+     echo $header; 
+     ?></b></p>
 </div><br>
 <style>
 table {
