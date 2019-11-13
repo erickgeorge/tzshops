@@ -39,7 +39,7 @@ var total=2;
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem</label>
+            <label class="input-group-text">Type of a problem <sup style="color: red;">*</sup></label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
@@ -50,7 +50,7 @@ var total=2;
 	
 	 <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location</label>
+            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
         </div>
 		
 		
@@ -66,7 +66,7 @@ var total=2;
 	
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location</label>
+            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
         </div>
 		
 		
@@ -75,21 +75,21 @@ var total=2;
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Area</label>
+            <label class="input-group-text">Area <sup style="color: red;">*</sup></label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
                value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Block</label>
+            <label class="input-group-text">Block <sup style="color: red;">*</sup></label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
                value="{{ $wo['room']['block']->name_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Room</label>
+            <label class="input-group-text">Room <sup style="color: red;">*</sup></label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
                value="{{ $wo['room']->name_of_room }}" disabled>
@@ -99,7 +99,7 @@ var total=2;
 	
 	
     <div class="form-group ">
-        <label for="">Details:</label>
+        <label for="">Details: <sup style="color: red;">*</sup></label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
@@ -249,8 +249,8 @@ var total=2;
 								
                             </select>
                         </div>
-                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()" style="background-color: darkgreen; color: white" type="button" class="btn btn-success">Save Technician</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()"  type="button" class="btn btn-primary">Save Technician</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
                     </div>
                
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -303,7 +303,7 @@ var total=2;
                             <input type="date" style="color: black; width:  700px;" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
-                            <label>Select Technician on Duty</label>
+                            <label>Select Technician on Duty <sup style="color: red;">*</sup></label>
                             <select  required class="custom-select"  name="technician">
                                 <option  selected value="" >Choose...</option>
 								
@@ -319,8 +319,8 @@ var total=2;
                                 @endforeach
                             </select>
                         </div>
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Inspections</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary">Save Inspections</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
                 {{-- end inspection --}}
@@ -337,18 +337,18 @@ var total=2;
                             </div>
                         </div>
 				</br>
-                        <p>Transport date</p>
+                        <p>Transport date <sup style="color: red;">*</sup></p>
                         <div class="form-group">
                             <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
                         </div>
-						
-						  <p>Transport time</p>
+						 
+						  <p>Transport time <sup style="color: red;">*</sup></p>
                         <div class="form-group">
                             <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  rows="5" id="time"></input>
                         </div>
                        
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Transport Request</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary">Save Transport Request</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
                 {{-- end request_transport form --}}
@@ -379,7 +379,7 @@ var total=2;
                         <div class="form-group">
                            
                             <select  required class="custom-select"  id="materialreq" name="1" style="width: 700px">
-                                <option   selected value="" >Choose...</option>
+                                <option   selected value="" >Choose Material... <sup style="color: red;">*</sup></option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
@@ -387,7 +387,7 @@ var total=2;
                         </div>
 						
 						
-						 <p>Quantity</p>
+						 <p>Quantity <sup style="color: red;">*</sup></p>
                         <div class="form-group">
                             <input type="number" min="1"  style="color: black; width: 700px" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
@@ -399,11 +399,12 @@ var total=2;
 						</div>
 					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
                       
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary
+                        ">Save Material</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
                    
                 </form>
-					<button style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">New Material</button>
+					<button onclick="newmaterial()" class="btn btn-primary">New Material</button>
                        
 				 </div>
                 {{-- end material_request  --}}
@@ -480,7 +481,7 @@ var total=2;
   </tr>   
     @endforeach
 </table>   
-    <button class="btn btn-success" style="color: white" > <a  href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button> 
+    <button class="btn btn-primary" > <a  href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button> 
 
 
 </div>
@@ -517,7 +518,7 @@ var total=2;
 
                         <div class="form-group">
                             <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
-                                <option   selected value="" >Choose...</option>
+                                <option   selected value="" >Choose Material... <sup style="color: red;">*</sup></option>
                                 @foreach($materials as $material)
                                    <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
@@ -526,13 +527,13 @@ var total=2;
                         
                     
                          <div class="form-group">
-                            <label for="name_of_house">Quantity </label>
+                            <label for="name_of_house">Quantity <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
                                    name="quantity" placeholder="Enter quantity again">
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div> 
-                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       <button style=" width: 205px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
                                          
@@ -578,7 +579,7 @@ var total=2;
                    <div class="form-group">
                            
                             <select onchange="stock();" required class="custom-select"  id="materialreq" name="1">
-                                <option   selected value="" >Choose...</option>
+                                <option   selected value="" >Choose Material...<sup style="color: red;">*</sup></option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.' '.$material->description }}</option>
                                 @endforeach
@@ -586,7 +587,7 @@ var total=2;
                         </div>
 						
 						
-						 <p>Quantity</p>
+						 <p>Quantity <sup style="color: red;">*</sup></p>
                         <div class="form-group">
                             <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
@@ -597,12 +598,12 @@ var total=2;
 						
 						</div>
 					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                      
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                      <button onclick="newmaterialproc()" class="btn btn-primary">New Material</button>
+                        <button type="submit" class="btn btn-primary">Save Material</button><br>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
                    
                 </form>
-					<button style="background-color: blue; color: white" onclick="newmaterialproc()" class="btn btn-success">New Material</button>
+					
                        
 				 
                 </div>

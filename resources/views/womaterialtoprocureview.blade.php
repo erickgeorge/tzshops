@@ -123,7 +123,7 @@ use App\User;
       <div class="row">
         <div class="col">
             <select name="_to" class="form-control mr-sm-2" required="">
-                <option value="" selected="selected">Send To</option>
+                <option value="" selected="selected">Send To <sup style="color: red;">*</sup></option>
           <?php $user = User::get();
           foreach ($user as $used) {
             if(($used['id']!=auth()->user()->id)&&($used['type'] == 'Head Procurement') || ($used['type'] == 'Acountant' ) || ($used['type'] == 'Estates Director') ){

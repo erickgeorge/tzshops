@@ -17,6 +17,7 @@ class NotesController extends Controller
     public function pdf(){
       
      $data['title'] = 'Notes List';
+     $data['header'] = '';
   
     /////////////////////////////////////////
      $username = '';
@@ -528,7 +529,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
 
      $pdf = PDF::loadView('notes_pdf',$data);
    
-     return $pdf->download('workorder.pdf');
+     return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     // return $pdf->inline('workorder.pdf');
     }
     
@@ -570,7 +571,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
  
      $pdf = PDF::loadView('users_pdf', $data);
    
-     return $pdf->download('users.pdf');
+      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
 
 
@@ -620,7 +621,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
  
      $pdf = PDF::loadView('material_pdf', $data);
    
-     return $pdf->download('materials.pdf');
+      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
 
     public function unatendedpdf(){
@@ -646,7 +647,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
  
      $pdf = PDF::loadView('unatended_pdf', ['wo' => $wo ,'tittle' =>$title]);
    
-     return $pdf->download('unattended_workorder.pdf');
+      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
  
  
@@ -696,7 +697,7 @@ public function unattendedwopdf(){
  
      $pdf = PDF::loadView('unattendedwopdf', $data);
    
-     return $pdf->download('unattended WO.pdf');
+     return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
 
     public function completewopdf(){
@@ -743,7 +744,7 @@ public function unattendedwopdf(){
  
      $pdf = PDF::loadView('completewopdf', $data);
    
-     return $pdf->download('completed WO.pdf');
+      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
         public function wowithdurationpdf(){
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
@@ -789,7 +790,7 @@ public function unattendedwopdf(){
  
      $pdf = PDF::loadView('wowithdurationpdf', $data);
    
-     return $pdf->download('completed WO duration.pdf');
+      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
 
     public function roomreportpdf(){
@@ -801,6 +802,6 @@ public function unattendedwopdf(){
         }
          $pdf = PDF::loadView('roomreportpdf', $data);
    
-     return $pdf->download('Wo with duration.pdf');
+      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
 }

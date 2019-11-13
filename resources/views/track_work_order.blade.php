@@ -51,7 +51,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem</label>
+            <label class="input-group-text">Type of a problem <sup style="color: red;">*</sup></label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
@@ -60,7 +60,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location</label>
+            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
@@ -79,7 +79,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Area</label>
+            <label class="input-group-text">Area <sup style="color: red;">*</sup></label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area"
                aria-describedby="emailHelp"
@@ -89,7 +89,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Block</label>
+            <label class="input-group-text">Block <sup style="color: red;">*</sup></label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="block" name="block"
@@ -105,7 +105,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Room</label>
+            <label class="input-group-text">Room <sup style="color: red;">*</sup></label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="room" name="room"
@@ -122,7 +122,7 @@
 
     
     <div class="form-group ">
-        <label for="">Details:</label>
+        <label for="">Details: <sup style="color: red;">*</sup></label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>

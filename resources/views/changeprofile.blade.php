@@ -95,7 +95,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
                
-        <label for="fname"> First Name</label>
+        <label for="fname"> First Name <sup style="color: red;">*</sup></label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->fname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -105,7 +105,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
                
-        <label for="phone">Last Name</label>
+        <label for="phone">Last Name <sup style="color: red;">*</sup></label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->lname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -118,7 +118,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
                
-        <label for="phone">Phone number</label>
+        <label for="phone">Phone number <sup style="color: red;">*</sup></label>
         <input style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->phone }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -127,7 +127,7 @@ padding: 20 20 20 20;
     </div>
     <div class="col">
         <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="email">Email Address <sup style="color: red;">*</sup></label>
         <input style="color: black" required value="{{ auth()->user()->email }}" type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
     </div> 
     </div>
@@ -139,21 +139,19 @@ padding: 20 20 20 20;
 
 	
 	 
-     <div>
+     
+
+      <div class="form-group">
+           
+                    <label for="Image" align="left">Profile Picture</label>
+                <div class="form-group" >
+                    <input type="file" class="form-control-file" name="Image" id="avatarFile" aria-describedby="fileHelp" accept="image/*">
+                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+                </div>
+                <div>
             <button type="submit"  class="btn btn-success">Submit</button>
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </div>
-        </form>
-    
-      <br>
-      <div class="form-group">
-            <form action="/myprofile" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group" >
-                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp" accept="image/*">
-                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         
     

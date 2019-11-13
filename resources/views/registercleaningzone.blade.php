@@ -36,7 +36,7 @@ Cleaningzone Registration
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name</label>
+                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -47,7 +47,7 @@ Cleaningzone Registration
                         </select>
                     </div> 
                     <div class="form-group col-lg-6">
-                        <label for="dir_name">Zone Name</label>
+                        <label for="dir_name">Zone Name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="zone_name" placeholder="Enter Zone Name">
                     </div>
@@ -57,16 +57,16 @@ Cleaningzone Registration
 
 
                      <div class="form-group col-lg-6">
-                        <label for="dir_name">Zone Type</label>
+                        <label for="dir_name">Zone Type <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="type" placeholder="Enter Zone Type">
                     </div>
 
 
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
+                    <button type="submit" class="btn btn-primary">Register
                         New Zone
                     </button>
-                     <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                     <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                  </div>
                 </form>
             </div>

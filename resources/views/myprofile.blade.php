@@ -80,7 +80,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group" >
                
-        <label for="fname"> First Name</label>
+        <label for="fname"> First Name <sup style="color: red;">*</sup></label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->fname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -90,7 +90,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
                
-        <label for="phone">Last Name</label>
+        <label for="phone">Last Name <sup style="color: red;">*</sup></label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->lname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -102,7 +102,7 @@ padding: 20 20 20 20;
     <div class="col">
        <div class="form-group">
                
-        <label for="phone">Phone number</label>
+        <label for="phone">Phone number <sup style="color: red;">*</sup></label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->phone }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -111,7 +111,7 @@ padding: 20 20 20 20;
     </div>
     <div class="col">
         <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="email">Email Address <sup style="color: red;">*</sup></label>
         <input disabled style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
     </div> 
     </div>
@@ -120,7 +120,7 @@ padding: 20 20 20 20;
 
 	
 	 <div>
-			<a href="/changeprofile" style="background-color:#2E77BB;border-color:#2E77BB;" class="btn btn-success">Edit profile</a>
+			<a href="/changeprofile"  class="btn btn-primary">Edit profile</a>
             
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </form>
@@ -133,6 +133,7 @@ padding: 20 20 20 20;
      <div class="row justify-content-center">
      <div class="profile-header-container">
                 <div class="profile-header-img">
+
                     <img class="rounded-circle" src="/storage/avatars/{{ $user->avatar }}" />
                     <!-- badge -->
                   

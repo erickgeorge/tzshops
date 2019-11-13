@@ -22,7 +22,7 @@ Route::get('firstloginpassword','HomeController@passwordView2' );
 
 Route::get('/changeprofile','HomeController@profileView' );
 Route::get('/myprofile','HomeController@myprofileView' );
-
+Route::get('/myprofile','HomeController@myprofileView' )->name('myprofile');
 Route::get('/dashboard', 'HomeController@dashboardView');
 
 

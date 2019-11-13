@@ -31,21 +31,21 @@ Campus Registration
                     @csrf
                     <div  align='center'>
                     <div class="form-group col-lg-6">
-                        <label for="dir_name">Campus Name</label>
+                        <label for="dir_name">Campus Name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="campus_name" placeholder="Enter Campus Name">
                     </div>
 
                     <div class="form-group col-lg-6">
-                        <label for="dir_abb">Campus Location</label>
+                        <label for="dir_abb">Campus Location <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="houselocation"
                                name="location" placeholder="Enter Campus Location ">
                     </div>
 
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
+                    <button  type="submit" class="btn btn-primary">Register
                         New Campus
                     </button>
-                        <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                        <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                     </div>
                 </form>
             </div>

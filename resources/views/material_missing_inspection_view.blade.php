@@ -68,9 +68,9 @@
                     
             </tbody>
         </table><br>
-        <div><a style="color: green;" href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-success'> Go To Store  <span> </button></a> 
+        <div><a href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-primary'> Go To Store  <span> </button></a> 
 
-        <a style="color: green;" href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-success'> Proceed  <span> </button></a> 
+        <a href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-warning'> Proceed  <span> </button></a> 
         </div> 
     </div>
     @endSection

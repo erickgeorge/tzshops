@@ -65,7 +65,7 @@
          <div id="cleaningarea" class="tabcontent">
               <h3><b>Available Cleaning Areas </b></h3>
               <hr>
-                <a href="{{ route('Registercleaningarea') }}"style="background-color: green; color: white"
+                <a href="{{ route('Registercleaningarea') }}"
                    class="btn btn-primary">Add New CLeaning Area</a>
                    <br><br>
 
@@ -148,7 +148,7 @@
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">Cleaning Area Name </label>
+                            <label for="name_of_house">Cleaning Area Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_carea"
                                    name="cleaning_name" placeholder="Enter Cleaning Area Name">
@@ -160,7 +160,7 @@
                          <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Zone Name</label>
+                            <label class="input-group-text" for="directorate">Zone Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="zone" id="zone">
                             <option value="">Choose...</option>
@@ -176,7 +176,7 @@
                                                <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
                                                       
-                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
                   
                                                        
@@ -184,7 +184,7 @@
                                                <div style="float: right; width: 290px"> 
                                                      
                                                         
-                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                  <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                                                      
                                                        </div>
                                             </div>
@@ -208,7 +208,7 @@
          <div id="cleaningzone" class="tabcontent">
               <h3><b>Available Cleaning Zones </b></h3>
               <hr>
-                <a href="{{ route('registercleaningzone') }}" style="background-color: green; color: white"
+                <a href="{{ route('registercleaningzone') }}" 
                    class="btn btn-primary">Add New CLeaning Zone</a>
 
                    <br><br>
@@ -285,7 +285,7 @@
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">Zone Name </label>
+                            <label for="name_of_house">Zone Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_zone"
                                    name="zone_name" placeholder="Enter Zone Name">
@@ -297,7 +297,7 @@
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name</label>
+                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -309,7 +309,7 @@
                     </div>   
 
                         <div class="form-group ">
-                            <label for="editlocation">Type</label>
+                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type"
                                    name="type" placeholder="Enter Zone Type">
@@ -318,7 +318,7 @@
                          <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
                                                       
-                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
                   
                                                        
@@ -326,7 +326,7 @@
                                                <div style="float: right; width: 290px"> 
                                                      
                                                         
-                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                  <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                                                      
                                                        </div>
                                             </div>
@@ -349,7 +349,7 @@
          <div id="campuses" class="tabcontent">
             <h3><b>Available Campuses </b></h3>
             <hr>
-                <a href="{{ route('registercampus') }}" style="background-color: green; color: white"
+                <a href="{{ route('registercampus') }}" 
                    class="btn btn-primary">Add New Campus</a>
              
                      <div class="col-md-6">
@@ -432,7 +432,7 @@
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">Campus Name </label>
+                            <label for="name_of_house">Campus Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_campname"
                                    name="campus_name" placeholder="Enter Campus Name">
@@ -441,7 +441,7 @@
 
 
                         <div class="form-group ">
-                            <label for="editlocation">Location</label>
+                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_location"
                                    name="location" placeholder="Enter Campus Location">
@@ -450,7 +450,7 @@
                         <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
                                                       
-                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
                   
                                                        
@@ -458,7 +458,7 @@
                                                <div style="float: right; width: 290px"> 
                                                      
                                                         
-                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                  <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                                                      
                                                        </div>
                                             </div>
@@ -481,7 +481,7 @@
             <div id="staffhouse" class="tabcontent active">
                   <h3><b>Available Staff Houses </b></h3>
                   <hr>
-                <a href="{{ route('registerstaffhouse') }}"style="background-color: green; color: white"
+                <a href="{{ route('registerstaffhouse') }}"
                    class="btn btn-primary">Add New Staff House</a>
                    <br> <br> 
     
@@ -564,7 +564,7 @@
 
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">House Name </label>
+                            <label for="name_of_house">House Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_name"
                                    name="name_of_house" placeholder="Enter House name">
@@ -575,7 +575,7 @@
 
 
                         <div class="form-group ">
-                            <label for="editlocation">Location</label>
+                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_location"
                                    name="location" placeholder="Enter House Location">
@@ -584,7 +584,7 @@
 
                     
                         <div class="form-group ">
-                            <label for="editlocation">Type</label>
+                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type"
                                    name="type" placeholder="Enter House Type">
@@ -592,7 +592,7 @@
                        
 
                          <div class="form-group ">
-                            <label for="editlocation">No of Rooms</label>
+                            <label for="editlocation">No of Rooms <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_room"
                                    name="no_room" placeholder="Enter Number of Rooms">
@@ -603,7 +603,7 @@
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name</label>
+                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -620,7 +620,7 @@
                          <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
                                                       
-                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
                   
                                                        
@@ -628,7 +628,7 @@
                                                <div style="float: right; width: 290px"> 
                                                      
                                                         
-                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                  <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                                                      
                                                        </div>
                                             </div>
@@ -649,7 +649,7 @@
      <div id="Hallofresdence" class="tabcontent">
         <h3><b>Available Hall of Resdences </b></h3>
                   <hr>
-                <a href="{{ route('registerhall') }}" style="background-color: green; color: white"
+                <a href="{{ route('registerhall') }}" 
                    class="btn btn-primary">Add New Hall of Resdence</a>
                    <br><br>
 
@@ -732,7 +732,7 @@
 
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">Hall Name </label>
+                            <label for="name_of_house">Hall Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_hname"
                                    name="hall_name" placeholder="Enter Hall name">
@@ -744,7 +744,7 @@
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name</label>
+                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -758,7 +758,7 @@
 
                     
                         <div class="form-group ">
-                            <label for="editlocation">Area</label>
+                            <label for="editlocation">Area <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_area"
                                    name="area_name" placeholder="Enter House Type">
@@ -766,7 +766,7 @@
                        
 
                          <div class="form-group ">
-                            <label for="editlocation">Type</label>
+                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type1"
                                    name="type" placeholder="Enter Number of Rooms">
@@ -774,7 +774,7 @@
 
 
                          <div class="form-group ">
-                            <label for="editlocation">Location</label>
+                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_location1"
                                    name="location" placeholder="Enter Number of Rooms">
@@ -782,7 +782,7 @@
                         <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
                                                       
-                                                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
                   
                                                        
@@ -790,7 +790,7 @@
                                                <div style="float: right; width: 290px"> 
                                                      
                                                         
-                                                  <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                                                  <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                                                      
                                                        </div>
                                             </div>
@@ -809,7 +809,7 @@
 {{-- staffHouse--}}
 
      <div id="staffhouse" class="tabcontent">
-                <a href="#Add New House" style="margin-bottom: 20px; background-color: coral; color: white"
+                <a href="#Add New House" 
                    class="btn btn-primary">Add New Staff House</a>
 
                 <table id="myTable" id="myTable" class="table table-striped">
@@ -878,13 +878,13 @@
                 <form method="POST" action="{{ route('house.save') }}" class="col-md-6">
                     @csrf
                     <div class="form-group ">
-                        <label for="dir_name">House Name</label>
+                        <label for="dir_name">House Name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="name_of_house" placeholder="Enter House Name">
                     </div>
-
+ 
                     <div class="form-group ">
-                        <label for="dir_abb">House Location</label>
+                        <label for="dir_abb">House Location <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="houselocation"
                                name="location" placeholder="Enter House Location ">
                     </div>
@@ -893,14 +893,14 @@
 
 
                     <div class="form-group ">
-                        <label for="dir_name">Type of House</label>
+                        <label for="dir_name">Type of House <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="type" placeholder="Enter House Type">
                     </div>
 
-
+ 
                     <div class="form-group ">
-                        <label for="dir_name">No of Rooms</label>
+                        <label for="dir_name">No of Rooms <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="no_room" placeholder="Enter No of Rooms"    onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) ">
 
@@ -909,7 +909,7 @@
 
                     </div>
                     
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
+                    <button  type="submit" class="btn btn-primary">Register
                         New House
                     </button>
                 </form>
@@ -931,7 +931,7 @@
 
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">House Name </label>
+                            <label for="name_of_house">House Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_name"
                                    name="name_of_house" placeholder="Enter House name">
@@ -942,7 +942,7 @@
 
 
                         <div class="form-group ">
-                            <label for="editlocation">Location</label>
+                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_location"
                                    name="location" placeholder="Enter House Location">
@@ -951,15 +951,15 @@
 
                     
                         <div class="form-group ">
-                            <label for="editlocation">Type</label>
+                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type"
                                    name="type" placeholder="Enter House Type">
                         </div>
                        
-
+ 
                          <div class="form-group ">
-                            <label for="editlocation">No of Rooms</label>
+                            <label for="editlocation">No of Rooms <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_room"
                                    name="no_room" placeholder="Enter Number of Rooms">
@@ -968,9 +968,9 @@
 
 
                        
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save Changes
+                        <button  type="submit" class="btn btn-primary">Save Changes
                         </button>
-                        <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                        <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
 
                     </div>
                 </form>

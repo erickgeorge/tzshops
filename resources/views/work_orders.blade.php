@@ -47,7 +47,7 @@
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button>
+                <button style="margin-bottom: 20px" type="button" class="btn btn-primary">Create new Work Order</button>
             </a>
         </div>
             <div class="col">

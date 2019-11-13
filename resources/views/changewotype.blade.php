@@ -31,7 +31,7 @@
         <div align="center" class="col-lg-12">
     <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem</label>
+            <label class="input-group-text">Type of a problem <sup style="color: red;">*</sup></label>
         </div>
       <select required class="custom-select" id="inputGroupSelect01" name="p_type">
                 <option selected value="" >Choose...</option>
@@ -61,7 +61,7 @@
 
     <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location</label>
+            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
@@ -76,7 +76,7 @@
     </div>
     <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
-            <label class="input-group-text">Area</label>
+            <label class="input-group-text">Area <sup style="color: red;">*</sup></label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area"
                aria-describedby="emailHelp"
@@ -84,7 +84,7 @@
     </div>
     <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
-            <label class="input-group-text">Block</label>
+            <label class="input-group-text">Block <sup style="color: red;">*</sup></label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="block" name="block"
@@ -98,7 +98,7 @@
     </div>
     <div class="input-group mb-3 col-lg-6">
         <div class="input-group-prepend">
-            <label class="input-group-text">Room</label>
+            <label class="input-group-text">Room <sup style="color: red;">*</sup></label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="room" name="room"

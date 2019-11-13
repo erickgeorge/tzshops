@@ -39,7 +39,7 @@
 		
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Material Name</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Material Name <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="name"
                        aria-describedby="emailHelp" name="name" placeholder="Material Name">
@@ -48,7 +48,7 @@
 
              <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Description</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Description <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="description"
                        aria-describedby="emailHelp" name="description" placeholder="Material Description">
@@ -58,7 +58,7 @@
 		 
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Unit Measure</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Unit Measure <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="brand"
                        aria-describedby="emailHelp" name="brand" placeholder="Unit Measure">
@@ -68,7 +68,7 @@
 		
         <div class="input-group mb-3 col-lg-6">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Material Type</label>
+                <label class="input-group-text" for="inputGroupSelect01">Material Type <sup style="color: red;">*</sup></label>
             </div>
             <select required class="custom-select" id="inputGroupSelect01" name="m_type">
                 <option selected value="">Choose...</option>
@@ -86,7 +86,7 @@
         
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Quantity</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Quantity <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="number"  class="form-control" id="stock"
                        aria-describedby="emailHelp" name="stock" placeholder="Enter Quantity of material">

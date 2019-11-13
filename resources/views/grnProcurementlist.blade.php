@@ -63,7 +63,7 @@
         </table>
 		 <td>
 					
-					 <a class="btn btn-info btn-lg active" role="button" aria-pressed="true" role="button" data-toggle="modal" data-target="#exampleModal">ISSUE GRN</a></td>
+					 <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" role="button" data-toggle="modal" data-target="#exampleModal">ISSUE GRN</a></td>
 		
                   
     </div>
@@ -89,14 +89,14 @@
                     <p>By signing this note you prove that Material for this procurement are received</p>
                     <form method="POST" action="{{ route('procurement.grn',['id'=>$item->work_order_id]) }}">
                         @csrf
-<label>   SUPPLIER </label>
+<label>   Supplier <sup style="color: red;">*</sup></label>
 
                         <input required name="supplier" required maxlength="20" class="form-control"  rows="5" id="supplier"/>
 </br>
-<label> Date received   </label>
+<label> Date received   <sup style="color: red;">*</sup></label>
 <input required type="date" data-provide="datepicker" name="date" id="date"  max="<?php echo date('Y-m-d'); ?>" />
                         <br>
-                        <button type="submit" class="btn btn-danger">Sign GRN</button>
+                        <button type="submit" class="btn btn-primary">Sign GRN</button>
                     </form>
                 </div>
                 <div class="modal-footer">

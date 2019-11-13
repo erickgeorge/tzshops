@@ -98,7 +98,14 @@
                 ?>
 
 
-                
+                 @if(($role['user_role']['role_id'] == 1))
+                  <!--  <li class="nav-item">
+                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Settings</a>
+                    </li>
+                    @endif
                 @if(auth()->user()->type == 'Estates Director')
                     
                     
@@ -352,9 +359,7 @@
                   <!--  <li class="nav-item">
                         <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
                     </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Colleges</a>
-                    </li>
+                   
                    
 
 

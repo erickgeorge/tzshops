@@ -79,7 +79,7 @@
 					
 					 <td>
 					  @if(($item->time)>Carbon\Carbon::now())
-					<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','1');" href="#" role="button">Accept</a> 
+					<a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','1');" href="#" role="button">Accept</a> 
 						  &nbsp &nbsp 
 					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','-1');" href="#" role="button">Reject</a> </td>
 						
@@ -116,7 +116,7 @@
                         <br>
 						
 					
-                        <button type="submit" class="btn btn-danger">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
 						
                     </form>
                 </div>

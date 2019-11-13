@@ -285,13 +285,13 @@
                         
                     
                          <div class="form-group">
-                            <label for="name_of_house">Quantity </label>
+                            <label for="name_of_house">Quantity <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
                                    name="quantity" placeholder="Enter quantity again">
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div> 
-                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Request Material again
+                                                       <button style=" width: 205px;" type="submit" class="btn btn-primary">Request Material again
                                                        </button>
                                                     </div>
                                          
@@ -405,7 +405,7 @@
   </tr>   
     @endforeach                                      
 </table>   
-    <button class="btn btn-success"  > <a  href="/send/material_rejected_again/{{$wo->id}}"   ><b style="color: white"> REQUEST MATERIAL AGAIN </b></a></button> 
+    <button class="btn btn-primary"  > <a  href="/send/material_rejected_again/{{$wo->id}}"   > REQUEST MATERIAL AGAIN</a></button> 
 
 
 </div>

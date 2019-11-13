@@ -61,7 +61,7 @@ $id=$_GET["id"];
                         </div>
 						
 						
-						 <p>Quantity</p>
+						 <p>Quantity <sup style="color: red;">*</sup></p>
                         <div class="form-group col-lg-6">
                             <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
@@ -73,11 +73,13 @@ $id=$_GET["id"];
 						</div>
 					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
                       
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                       
+                        <button  onclick="newmaterial()" class="btn btn-primary">New Material</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
+                         <button type="submit" class="btn btn-primary">Save Material</button>
                    
                 </form>
-					<button style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">New Material</button>
+					
                        
 				 </div>
                 {{-- end material_request  --}}

@@ -88,7 +88,7 @@
                     @if(in_array("yes", $p))
 
 
-                     <button class="btn btn-success" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > RESERVE AND SEND PURCHASING ORDER TO DES </a></button>  
+                     <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > RESERVE AND SEND PURCHASING ORDER TO DES </a></button>  
                     @else
                      
 

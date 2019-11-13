@@ -37,7 +37,7 @@ StaffHouse Registrartion
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name</label>
+                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -48,35 +48,35 @@ StaffHouse Registrartion
                         </select>
                     </div> 
                     <div class="form-group col-lg-6 ">
-                        <label for="dir_name">House Name</label>
+                        <label for="dir_name">House Name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="name_of_house" placeholder="Enter House Name">
                     </div>
 
                     <div class="form-group col-lg-6">
-                        <label for="dir_abb">House Location</label>
+                        <label for="dir_abb">House Location <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="houselocation"
                                name="location" placeholder="Enter House Location ">
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="dir_name">Type of House</label>
+                        <label for="dir_name">Type of House <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="type" placeholder="Enter House Type">
                     </div>
 
 
                     <div class="form-group col-lg-6">
-                        <label for="dir_name">No of Rooms</label>
+                        <label for="dir_name">No of Rooms <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="no_room" placeholder="Enter No of Rooms"    onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) ">
                     </div>
 
 
                        
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
+                    <button type="submit" class="btn btn-primary">Register
                         New House
                     </button>
-                    <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                    <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                 </div>
                 </form>
             </div>

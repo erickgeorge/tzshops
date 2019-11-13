@@ -41,7 +41,7 @@
                  <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Material Name</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Material Name <sup style="color: red;">*</sup></label>
                 </div>
                 <input value="{{$item->name}}" style="color: black" required type="text" maxlength="35" class="form-control" id="name"
                        aria-describedby="emailHelp" name="name" placeholder="{{$item->name}}">
@@ -58,7 +58,7 @@
                 <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Material Description</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Material Description <sup style="color: red;">*</sup></label>
                 </div>
                 <input disabled value="{{$item->description}}" style="color: black" required type="text" maxlength="35" class="form-control" id="description"
                        aria-describedby="emailHelp" name="description" placeholder="{{$item->description}}">
@@ -73,7 +73,7 @@
         <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Current Quantity</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Current Quantity <sup style="color: red;">*</sup></label>
                 </div>
                 <input disabled value="{{$item->stock}}" style="color: black" required type="number"  id="stock"  class="form-control" 
                        aria-describedby="emailHelp" name="istock" placeholder="{{$item->stock}}">
@@ -87,7 +87,7 @@
         <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Add Quantity</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Add Quantity <sup style="color: red;">*</sup></label>
                 </div>
                 <input  oninput="totalitem()" style="color: black" required type="number" min="1"  class="form-control" id="istock"
                        aria-describedby="emailHelp" name="istock" placeholder="Add Material in Quantity">

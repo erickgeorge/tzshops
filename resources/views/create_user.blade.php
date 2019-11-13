@@ -44,19 +44,19 @@ User Registrartion
 <div class="row">
 	<div class="col">
 		<div class="form-group ">
-	    <label for="fname">First name</label>
+	    <label for="fname">First name <sup style="color: red;">*</sup></label>
 	    <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}" >
 	 </div>
 	</div>
 	<div class="col">
 		<div class="form-group ">
-	    <label for="lname">Last name</label>
+	    <label for="lname">Last name <sup style="color: red;">*</sup></label>
 	    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
 	</div>
 	</div>
 	<div class="col">
 		<div class="form-group ">
-	    <label for="phone">Phone number</label>
+	    <label for="phone">Phone number <sup style="color: red;">*</sup></label>
 	    <input style="color: black"  required type="text"     name="phone"  
 	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -68,7 +68,7 @@ User Registrartion
 	<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label style="height:28px;" class="input-group-text" for="Email">Email</label>
+	    <label style="height:28px;" class="input-group-text" for="Email">Email <sup style="color: red;">*</sup></label>
 	  </div>
 	    <input style="color: black; height: 28px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
 	</div>
@@ -76,7 +76,7 @@ User Registrartion
 	<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="directorate">College</label>
+	    <label style="height: 28px" class="input-group-text" for="directorate">College <sup style="color: red;">*</sup></label>
 	  </div>
 	  <select style="color: black; width: 270px;" required class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
 		  <option selected value="" >Choose...</option>
@@ -89,7 +89,7 @@ User Registrartion
 	<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="department">Department</label>
+	    <label style="height: 28px" class="input-group-text" for="department">Department <sup style="color: red;">*</sup></label>
 	  </div>
 	  <select style="color: black" required class="custom-select" name="department" id="department" onchange="getSections()" value="{{ old('department') }}">
 	  </select>
@@ -100,7 +100,7 @@ User Registrartion
 	<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="section">Section</label>
+	    <label style="height: 28px" class="input-group-text" for="section">Section <sup style="color: red;">*</sup></label>
 	  </div>
 	  <select style="color: black; width: 270px;"  class="custom-select" name="section" id="section" value="{{ old('section') }}">
 		 
@@ -229,7 +229,7 @@ User Registrartion
 	<div class="align-content-center">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label   class="input-group-text" for="username">Username</label>
+	    <label   class="input-group-text" for="username">Username <sup style="color: red;">*</sup></label>
 	  </div>
 	     <input style="color: black; width:200px; " style="color: black" required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
 	 </div>

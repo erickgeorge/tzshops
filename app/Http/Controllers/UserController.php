@@ -234,6 +234,7 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required',
             'phone' => 'required',
+            'Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
         $user = User::find(auth()->user()->id);
@@ -241,29 +242,23 @@ class UserController extends Controller
 		 $user->email = $request['email'];
 		  $user->phone = $request['phone'];
             $user->save();
-            return redirect()->back()->with(['message' => 'Profile has changed successfully']);
-        }
-	
-	public function update_avatar(Request $request){
-
-        $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+            
+             
 
      $user = Auth::user();
 
         
-        $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+        $ImageName = $user->id.'_Image'.time().'.'.request()->Image->getClientOriginalExtension();
 
-        $request->avatar->storeAs('avatars',$avatarName);
+        $request->Image->storeAs('avatars',$ImageName);
 
-        $user->avatar = $avatarName;
+        $user->avatar = $ImageName;
         $user->save();
 
-        return back()
-            ->with('success','You have successfully upload image.');
 
-    }
+return redirect()->route('myprofile')->with(['message' => 'Profile has changed successfully']);
+        }
+	
 	
 	
 

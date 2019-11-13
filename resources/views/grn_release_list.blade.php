@@ -63,7 +63,7 @@
         </table>
 		 <td>
 					
-					 <a class="btn btn-info btn-lg active"  href="{{ route('procurement.release', [$item->work_order_id]) }}"  role="button" aria-pressed="true" role="button" >RELEASE MATERIAL</a></td>
+					 <a class="btn btn-primary btn-lg active"  href="{{ route('procurement.release', [$item->work_order_id]) }}"  role="button" aria-pressed="true" role="button" >RELEASE MATERIAL</a></td>
 		
                   
     </div>

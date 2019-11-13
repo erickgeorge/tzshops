@@ -7,7 +7,11 @@
 @section('body')
     <br>
 
-    @if ($errors->any())
+   
+
+    {{-- tabs --}}
+    <div class="payment-section-margin" style="margin-top: 6%;">
+         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -23,9 +27,6 @@
             </ul>
         </div>
     @endif
-
-    {{-- tabs --}}
-    <div class="payment-section-margin" style="margin-top: 6%;">
         <div class="tab">
             <div class="container-fluid">
                 <div class="tab-group row">
@@ -42,7 +43,7 @@
 
             {{-- directorate tab--}}
             <div id="customer" class="tabcontent active">
-                <a href="#new_dir" style="margin-bottom: 20px; background-color: coral; color: white"
+                <a href="#new_dir" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new College</a>
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
@@ -102,16 +103,16 @@
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf
                     <div class="form-group ">
-                        <label for="dir_name">college name</label>
+                        <label for="dir_name">college name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="dir_name"
                                name="dir_name" placeholder="Enter college name">
                     </div>
                     <div class="form-group ">
-                        <label for="dir_abb">college abbreviation</label>
+                        <label for="dir_abb">college abbreviation <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="dir_abb"
                                name="dir_abb" placeholder="Enter College abbreviation">
                     </div>
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save
+                    <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
                 </form>
             </div>
@@ -119,7 +120,7 @@
 
             {{-- department tab --}}
             <div id="delivery" class="tabcontent">
-                <a href="#new_dep" style="margin-bottom: 20px; background-color: coral; color: white"
+                <a href="#new_dep" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new department</a>
                 <table id="myTablee" class="table table-striped">
                     <thead class="thead-dark">
@@ -176,7 +177,7 @@
                     @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="directorate">Directorate/College</label>
+                            <label class="input-group-text" for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="directorate" id="directoratee">
                             <option value="">Choose...</option>
@@ -187,25 +188,24 @@
                         </select>
                     </div>
                     <div class="form-group ">
-                        <label for="dep_name">Department name</label>
+                        <label for="dep_name">Department name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="dep_name"
                                name="dep_name" placeholder="Enter department name">
                     </div>
                     <div class="form-group ">
-                        <label for="dep_ab">Department abbreviation</label>
+                        <label for="dep_ab">Department abbreviation <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required maxlength="8" class="form-control" id="dep_ab"
                                name="dep_ab" placeholder="Enter department abbreviation">
                     </div>
-                    <p style="color: red">You must select a college to which you are adding a department</p>
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save
-                        department
+                    
+                    <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
                 </form>
             </div>
 
             {{-- section tab --}}
             <div id="payment" class="tabcontent">
-                <a href="#new_sec" style="margin-bottom: 20px; background-color: coral; color: white"
+                <a href="#new_sec" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new section</a>
                 <table id="myTableee" class="table table-striped">
                     <thead class="thead-dark">
@@ -270,7 +270,7 @@
                     @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="directorate">Directorate/College</label>
+                            <label class="input-group-text" for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="college" id="directoratee"
                                 onchange="getDepartments()">
@@ -282,24 +282,23 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="department">Department</label>
+                            <label class="input-group-text" for="department">Department <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="department" id="departiment">
                         </select>
                     </div>
                     <div class="form-group ">
-                        <label for="sec_name">Section name</label>
+                        <label for="sec_name">Section name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="sec_name"
                                name="sec_name" placeholder="Enter section name">
                     </div>
                     <div class="form-group ">
-                        <label for="sec_ab">Section abbreviation</label>
+                        <label for="sec_ab">Section abbreviation <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required maxlength="8" class="form-control" id="sec_ab"
                                name="sec_ab" placeholder="Enter section abbreviation">
                     </div>
-                    <p style="color: red">You must select a department to which you are adding a section</p>
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save
-                        section
+                    
+                    <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
                 </form>
 			
@@ -321,17 +320,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Directorate</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Directorate/College/School/Institute</h5>
 
 
                 </div>
 
-                <form method="POST" action="edit/directorate" class="col-md-6">
+                <form method="POST" action="edit/directorate" class="col">
                     <div class="modal-body">
 
                         @csrf
                         <div class="form-group">
-                            <label for="edirname">Directorate name</label>
+                            <label for="edirname">Directorate name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
                                    id="edirabb"
                                    name="edirabb" placeholder="Enter Directorate name">
@@ -339,15 +338,15 @@
 
                         </div>
                         <div class="form-group ">
-                            <label for="edirabb">Directorate abbreviation</label>
+                            <label for="edirabb">Directorate abbreviation <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
                                    id="edirname"
                                    name="edirname" placeholder="Enter Directorate abbreviation">
                         </div>
 
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">Save
+                        <button type="submit" class="btn bg-primary btn-primary">Save
                         </button>
-                        <button type='submit' value="cancel" class="btn btn-warning">Cancel</button>
+                        <button type='submit' value="cancel" class="btn btn-danger">Cancel</button>
 
                     </div>
                 </form>
@@ -375,7 +374,7 @@
 
                 </div>
 
-                <form method="POST" action="edit/department" class="col-md-6">
+                <form method="POST" action="edit/department" class="col">
                     <div class="modal-body">
 
 
@@ -385,7 +384,7 @@
 						
 						<div class="form-group">
                        
-                            <label for="directorate">Directorate/College</label>
+                            <label for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
                        
                         <select  style="color: black;"  required class="form-control" name="editdirectoratefdep" id="editdirectoratefdep">
                             <option value="">Choose...</option>
@@ -397,7 +396,7 @@
                     </div>
 						
                         <div class="form-group">
-                            <label for="edirname">Department name</label>
+                            <label for="edirname">Department name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
                                    id="edepdesc"
                                    name="edepdesc" placeholder="Enter Department name">
@@ -406,15 +405,15 @@
 
                         </div>
                         <div class="form-group ">
-                            <label for="edirabb">Department abbreviation</label>
+                            <label for="edirabb">Department abbreviation <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
                                    id="edepname"
                                    name="edepname" placeholder="Enter Department abbreviation">
                         </div>
 
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">save
+                        <button type="submit" class="btn btn-primary">save
                         </button>
-                        <button type='submit' value="cancel" class="btn btn-warning">Cancel</button>
+                        <button type='submit' value="cancel" class="btn btn-danger">Cancel</button>
 
                     </div>
                 </form>
@@ -441,7 +440,7 @@
 
                 </div>
 
-                <form method="POST" action="edit/section" class="col-md-6">
+                <form method="POST" action="edit/section" class="col">
                     <div class="modal-body">
 
 
@@ -451,7 +450,7 @@
 						
 						
                         <div class="form-group">
-                            <label for="edirname">Section name</label>
+                            <label for="edirname">Section name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
                                    id="esecname"
                                    name="esecname" placeholder="Enter Section name">
@@ -459,16 +458,16 @@
 
                         </div>
                         <div class="form-group ">
-                            <label for="esecabb">Section abbreviation</label>
+                            <label for="esecabb">Section abbreviation <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
                                    id="esecdesc"
                                    name="esecdesc" placeholder="Enter Section abbreviation">
                             <input id="esecid" name="esecid" hidden>
                         </div>
 
-                        <button style="background-color: green; color: white" type="submit" class="btn btn-success">save
+                        <button type="submit" class="btn btn-primary">save
                         </button>
-                        <button type='submit' value="cancel" class="btn btn-warning">Cancel</button>
+                        <button type='submit' value="cancel" class="btn btn-danger">Cancel</button>
 
                     </div>
                 </form>

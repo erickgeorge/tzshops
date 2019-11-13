@@ -37,7 +37,7 @@ Campus Registration
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label class="input-group-text" for="directorate">Campus Name</label>
+                          <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -50,7 +50,7 @@ Campus Registration
 
 
                     <div class="form-group col-lg-6 ">
-                        <label for="dir_name">Hall Name</label>
+                        <label for="dir_name">Hall Name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="hall_name" placeholder="Enter Hall Name">
                     </div>
@@ -59,30 +59,30 @@ Campus Registration
 
 
                     <div class="form-group col-lg-6">
-                        <label for="dir_name">Area</label>
+                        <label for="dir_name">Area <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="area_name" placeholder="Enter Hall Area">
                     </div>
 
 
                     <div class="form-group col-lg-6">
-                        <label for="dir_name">Type</label>
+                        <label for="dir_name">Type <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="type" placeholder="Enter Hall Type">
                     </div>
 
                     <div class="form-group col-lg-6 ">
-                        <label for="dir_name">Location</label>
+                        <label for="dir_name">Location <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="location" placeholder="Enter Hall Location">
                     </div>
                    
                     
                     
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
+                    <button type="submit" class="btn btn-primary">Register
                         New Hall
                     </button>
-                    <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                    <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                 </div>
                 </form>
 @endSection

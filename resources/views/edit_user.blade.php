@@ -41,7 +41,7 @@
 <div class="row">
     <div class="col">
         <div class="form-group ">
-                <label for="fname">First name</label>
+                <label for="fname">First name <sup style="color: red;">*</sup></label>
                 <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
                        name="fname" placeholder="Enter first name"
                        onkeypress="return  event.charCode > 57 " value="{{ $user->fname }}">
@@ -49,7 +49,7 @@
     </div>
     <div class="col">
         <div class="form-group ">
-                <label for="lname">Last name</label>
+                <label for="lname">Last name <sup style="color: red;">*</sup></label>
                 <input style="color: black" type="text" required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp"
                        name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 "
                        value="{{ $user->lname }}">
@@ -57,7 +57,7 @@
     </div>
     <div class="col">
         <div class="form-group ">
-                <label for="phone">Phone number</label>
+                <label for="phone">Phone number <sup style="color: red;">*</sup></label>
                 <input style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                        maxlength="13" minlength="2"
@@ -70,7 +70,7 @@
     <div class="col">
          <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="email">Email</label>
+                    <label class="input-group-text" for="email">Email <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
                        name="email" placeholder="Enter email address" value="{{ $user->email }}">
@@ -79,7 +79,7 @@
     <div class="col">
         <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="directorate">Directorate/College</label>
+                    <label class="input-group-text" for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
                 </div>
                 <select class="custom-select" name="college" id="directorate" onchange="getDepartments()">
                     @foreach($directorates as $directorate)

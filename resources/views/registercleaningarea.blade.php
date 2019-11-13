@@ -38,7 +38,7 @@ StaffHouse Registrartion
                         <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Zone Name</label>
+                            <label class="input-group-text" for="directorate">Zone Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="zone" id="zone">
                             <option value="">Choose...</option>
@@ -50,15 +50,15 @@ StaffHouse Registrartion
                     </div> 
 
                 <div class="form-group col-lg-6">
-                        <label for="dir_name">Cleaning Area Name</label>
+                        <label for="dir_name">Cleaning Area Name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="cleaning_name" placeholder="Enter Cleaning Area Name">
                     </div>
 
-                    <button style="background-color: green; color: white" type="submit" class="btn btn-success">Register
+                    <button type="submit" class="btn btn-primary">Register
                         New Cleaning Area
                     </button>
-                      <a class="btn btn-info" href="/manage_Houses" role="button">Cancel </a>
+                      <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
                   </div>
                 </form>
                   

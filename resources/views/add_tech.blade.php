@@ -34,13 +34,13 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group ">
-                <label for="fname">First name</label>
+                <label for="fname">First name <sup style="color: red;">*</sup></label>
                 <input type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}">
             </div>
                 </div>
                 <div class="col">
                     <div class="form-group ">
-                <label for="lname">Last name</label>
+                <label for="lname">Last name <sup style="color: red;">*</sup></label>
                 <input type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
             </div>
                 </div>
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group ">
-                <label for="phone">Phone number</label>
+                <label for="phone">Phone number <sup style="color: red;">*</sup></label>
                 <input  required type="text"     name="phone"  value="{{ old('phone') }}"
                         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                         maxlength = "13"  minlength = "2"
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col">
                     <div class="form-group ">
-                <label for="email">Email Address</label>
+                <label for="email">Email Address <sup style="color: red;">*</sup></label>
                 <input required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
             </div>
                 </div>

@@ -27,7 +27,7 @@
         <div class="row ">
         <div class="col">
 
-             <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new material</button></a>
+             <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new material</button></a>
 
         </div>
        <!-- <div class="col" align="right">
