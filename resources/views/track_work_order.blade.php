@@ -6,9 +6,10 @@
 
 @section('body')
 <?php use App\WorkOrderInspectionForm;
-		use App\WorkOrderTransport;
-		use App\WorkOrderStaff;
-		use App\WorkOrderMaterial;
+    use App\WorkOrderTransport;
+    use App\WorkOrderStaff;
+    use App\WorkOrderMaterial;
+ 
 
  ?>
  <div class="container">
@@ -18,8 +19,8 @@
         <div class="col-lg-12">
             <h3 align="center">Work order details</h3>
         </div>
-		
-	
+    
+  
         </div>
 
   
@@ -34,7 +35,8 @@
     @endif
     <div class="row">
         <div class="col">
-            <h5>This work order has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
+            <h5>This work order is submitted by  <span
+                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>  also has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
                 style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
     <h5>It Has been created on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span>
     </h5>
@@ -51,7 +53,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Type of a problem</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
@@ -60,7 +62,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Location</label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
@@ -79,17 +81,26 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Area <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Area</label>
         </div>
+         @if(empty($wo->room_id))
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area"
                aria-describedby="emailHelp"
                value="{{ $wo->room_id }}" disabled>
+
+                @else
+            <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
+                   name="area"
+                   aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']->name_of_area }}"
+                   disabled>
+                @endif
+
     </div>
     </div>
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Block <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Block</label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="block" name="block"
@@ -105,7 +116,7 @@
     <div class="col">
         <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Room <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Room</label>
         </div>
         @if(empty($wo->room_id))
             <input style="color: black" type="text" required class="form-control" placeholder="room" name="room"
@@ -122,131 +133,142 @@
 
     
     <div class="form-group ">
-        <label for="">Details: <sup style="color: red;">*</sup></label>
+        <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
-	
-	<br>
+  
+  <br>
+ @if($wo->emergency == 1)
+   <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
+ @endif
+
+
+  <br>
     <h4><b>Transport Description: </b></h4>
-	@if(empty($wo['work_order_transport']->work_order_id))
+  @if(empty($wo['work_order_transport']->work_order_id))
         <p style="color: red">No Transport form</p>
     @else
-		<?php
-	
-	$idwo=$wo->id;
-	$tforms = WorkOrderTransport::where('work_order_id',$idwo)->get();
+    <?php
+  
+  $idwo=$wo->id;
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->get();
 ?>
 
 <table style="width:100%">
   <tr>
     <th>DATE</th>
     <th>TIME</th> 
-	<th>STATUS</th>
-	<th>DETAILS</th>
-	
+    <th>DETAILS</th> 
+  <th>STATUS</th>
+  <th>MESSAGE</th>
+  
     <th>DATE REQUESTED</th>
   </tr>
     @foreach($tforms as $tform)
-	
-	
+  
+  
   <tr>
     <td>{{ date('F d Y', strtotime($tform->time))  }}</td>
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td> 
+     <td> <a onclick="myfunc('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
+                                                                         class="badge badge-success">View Details</span></a></td>
     <td style="color:red">@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
-	
-<td>{{ 
-	 $tform->details }}</td>
+  
 
-	<td>{{ 
-	 $tform->created_at }}</td>
+
+     <td> <a onclick="myfunc2('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
+                                                                         class="badge badge-success">View Message</span></a></td>
+
+  <td>{{ 
+   $tform->created_at }}</td>
   </tr>
   
-	@endforeach
-	</table>
+  @endforeach
+  </table>
     @endif
     <br>
-	
-	
-	
-	
-	<br>
+  
+  
+  
+  
+  <br>
     <h4><b>Technician assigned: </b></h4>
 @if(empty($wo['work_order_staff']->id))
         <p style="color: red">No Technician assigned yet</p>
     @else
-		<?php
-	
-	$idwo=$wo->id;
-	$techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
+    <?php
+  
+  $idwo=$wo->id;
+  $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
 ?>
 
 <table style="width:100%">
   <tr>
     <th>Staff Full Name</th>
-	<th>Status</th>
+  <th>Status</th>
     <th>DATE Assigned</th>
-	<th>Complete work</th>
-	
+  <th>Complete work</th>
+  
   </tr>
     @foreach($techforms as $techform)
-	
-	
+  
+  
 
 
   <tr>
-	
-	 @if($techform['technician_assigned'] != null)
+  
+   @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-	 <td style="color:red">@if($techform->status==1) COMPLETED   @else  OnPROGRESS   @endif</td>
+   <td style="color:red">@if($techform->status==1) COMPLETED   @else  OnPROGRESS   @endif</td>
 
      
 
     <td>{{ 
-	 $techform->created_at }}</td>
-	 
-	  @if($techform->created_at ==  $techform->updated_at)
-	 
-	 
-	  <td> NOT COMPLETED</td>
-	  @else
-	  <td>{{ 
-	 $techform->updated_at }}</td>
-	  @endif
-	  
-	 @if($techform->status!=1)
-	 <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
+   $techform->created_at }}</td>
+   
+    @if($techform->created_at ==  $techform->updated_at)
+   
+   
+    <td> NOT COMPLETED</td>
+    @else
+    <td>{{ 
+   $techform->updated_at }}</td>
+    @endif
+    
+   @if($techform->status!=1)
+   <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
                                                     class="fas fa-clipboard-check large"></i></a></td>
-													
-		</td>
-	@endif	
+                          
+    </td>
+  @endif  
 
-	
-	
+  
+  
 
 
 
           @else
           <td style="color: red">No technician assigned yet</td>
       @endif
-	
-	
- 	
+  
+  
+  
   </tr>
-  	@endforeach
-	</table>
+    @endforeach
+  </table>
     @endif
     <br>
     
-	<br>
+  <br>
     <h4><b>Material Requests: </b></h4>
-	@if(empty($wo['work_order_material']->id))
+  @if(empty($wo['work_order_material']->id))
         <p style="color: red">No Material have been requested yet</p>
     @else
-		<?php
-	
-	$idwo=$wo->id;
-	$matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+    <?php
+  
+  $idwo=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
 ?>
 
 <table style="width:100%">
@@ -282,8 +304,8 @@
   </table>
     @endif
     <br>
-	
-	<br>
+  
+  <br>
 
      <h4><b>Material Used: </b></h4>
      
@@ -318,61 +340,70 @@
   </table>
     @endif
     <br>
-	
-	
+  
+  
     <br>
     <h4><b>Inspection Description: </b></h4>
     @if(empty($wo['work_order_inspection']->status))
         <p style="color: red">Not inspected yet</p>
     @else
-		<?php
-	
-	$idwo=$wo->id;
-	$iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
+    <?php
+  
+  $idwo=$wo->id;
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
         ?>
 
 <table style="width:100%">
   <tr>
     <th>STATUS</th>
     <th>DESCRIPTION</th> 
-	<th>TECHNICIAN RESPONSIBLE</th> 
+  <th>TECHNICIAN RESPONSIBLE</th> 
     <th>DATE INSPECTED</th>
   </tr>
     @foreach($iforms as $iform)
-	
-	
+  
+  
   <tr>
     <td style="color:red" >{{ $iform->status }}</td>
     <td>{{ $iform->description }}</td>
       <td>{{
 
-	 $iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+   $iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ $iform->date_inspected }}</td>
   </tr>
   
-	@endforeach
-	</table>
+  @endforeach
+  </table>
     @endif
     <br>
-	
-	
-	
-	
-	
     <hr>
     @if(strpos(auth()->user()->type, "HOS") !== false)
-        @if($wo->status == 2)
+         
+          @if($wo->status == 30)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Work order closed!</span>
+                <span class="badge badge-warning" style="padding: 20px">Work order completely closed!</span>
+            </div>
+
+        @elseif($wo->status == 2)
+            <div>
+                <span class="badge badge-warning" style="padding: 20px">Work order tempolary closed!</span>
+            </div>
+        @elseif($wo->status == 9)
+              <div>
+                <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Close work order completely</button>
+                </form>
             </div>
         @else
             <div>
                 <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Close work order</button>
+                    <button type="submit" class="btn btn-warning">Close work order temporalily</button>
                 </form>
             </div>
         @endif
+
     @else
         <div class="row">
             <div>
@@ -387,12 +418,12 @@
             </div>
             <p>&nbsp;</p>
              {{--
-			<div>
+      <div>
                 <form method="POST" action="">
                     @csrf
                <button type="submit" class="btn btn-danger">File a complaint</button>
                 </form>
-				--}}
+        --}}
             </div>
         </div>
     @endif
@@ -453,6 +484,56 @@
         </div>
     </div>
 
+
+    <!-- Modal for view Details -->
+    <div class="modal fade" id="viewMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: black"><b></b> Details you sent to Transport Officer.</b></h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 id="comments"><b> </b></h3>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Modal for view Message -->
+    <div class="modal fade" id="viewdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: black"><b></b> Message From Transport Officer.</b></h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 id="details"><b> </b></h3>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script type="text/javascript">
         
 
@@ -460,7 +541,11 @@
     </script>
 
         @if(auth()->user()->type=='CLIENT')
-        @if($wo->status == 2)
+         @if($wo->status == 30)
+            <div class="container" style="padding-left: 55px;">
+                <span class="badge badge-warning" style="padding: 15px">Work order completely closed!</span>
+            </div>
+        @elseif($wo->status == 2)
         <div style="padding-left:  800px;">
         <div class="row">
                  <div class="row">
@@ -486,5 +571,16 @@
 
 
 </div>
+
+<script type="text/javascript">
+  
+   function myfunc(x) {
+            document.getElementById("comments").innerHTML = x;
+        }
+
+         function myfunc2(x) {
+            document.getElementById("details").innerHTML = x;
+  }
+</script>
 
     @endSection

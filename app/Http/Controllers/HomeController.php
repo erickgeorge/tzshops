@@ -225,9 +225,9 @@ $v2=$type[1];
                    if($length==1){
 
             if (strpos(auth()->user()->type, "HOS") !== false) {
-                return view('work_orders', ['role' => $role, 'notifications' => $notifications,'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()]);
+                return view('work_orders', ['role' => $role, 'notifications' => $notifications,'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->orwhere('client_id', auth()->user()->id, " ")->OrderBy('created_at', 'DESC')->get()]);
             }else if (auth()->user()->type == "Maintenance coordinator"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('problem_type', 'Others')->OrderBy('created_at', 'DESC')->get()]);
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('problem_type', 'Others')->orwhere('client_id', auth()->user()->id, " ")->OrderBy('created_at', 'DESC')->get()]);
             }
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);

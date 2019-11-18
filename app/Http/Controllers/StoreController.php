@@ -47,19 +47,23 @@ class StoreController extends Controller
     }
 	
 	
-	
 	public function incrementmaterial(Request $request)
     {
- 
+            
+    	   $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+           $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $material =Material::where('id', $request['nameid'])->first();;
 
 		
 		 $material->stock = $request['tstock'];
         $material->save();
 
-        return redirect()->route('storeIncrement.view', $request['nameid'])->with(['message' => 'Material is added succesfully']);
+         return redirect()->route('store')->with(['role' => $role, 'notifications' => $notifications,
+            'notifications' => $notifications,'role' => $role,
+			 'message' => 'Materials succesfully'] );    
+           
     }
-
 
 	
 	 public function addnewmaterail(Request $request)

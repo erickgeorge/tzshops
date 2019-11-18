@@ -377,8 +377,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 	
 	
 	
-	
-	public function transportforwork(Request $request, $id)
+public function transportforwork(Request $request, $id)
     {
 
       
@@ -389,25 +388,25 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         
             $transport->time = $request['date'].' '.$request['time'];
             $transport->status = 0;
+            $transport->coments = $request['coments'];
             $transport->work_order_id = $id;
-			 $transport->requestor_id = auth()->user()->id;
-			
+             $transport->requestor_id = auth()->user()->id;
+            
             $transport->save();
        
-	     $mForm = WorkOrder::where('id', $id)->first();
+         $mForm = WorkOrder::where('id', $id)->first();
              $mForm->status =4;
-			
+            
              $mForm->save();
        
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Transport form request successfully sent',
+            'message' => 'Request for Transport sent successfully',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
-	
 	
 	
 	
@@ -691,7 +690,38 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
 
-    public function redirectToSecretary($id)
+                public function tickmaterial($id)
+    {
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',3)->get();
+
+         foreach($wo_materials as $wo_material) {
+        $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();    
+         $wo_m->status = 3; //status for material ticked after placing sign for both sides
+         $wo_m->secondstatus = 1;
+          $wo_m->save();
+         }
+
+       
+
+       $mForm = WorkOrder::where('id', $id)->first();
+       $mForm->status = 40;  //status for Hos approval for receiving material
+       $mForm->save();
+
+       
+         return redirect()->back()->with(['message' => 'Material Approved and  Received Successfully From Store']);
+
+        
+}
+
+
+
+
+
+
+     public function redirectToSecretary($id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -705,6 +735,22 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()
         ]);
     }
+
+
+    public function redirectToHoS(request $request, $id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $wo = WorkOrder::where('id', $id)->first();
+        $wo->problem_type = $request['p_type'];
+        $wo->save(); 
+        return redirect()->back()->with([
+           
+            'message' => 'Work order successfully sent to Respective Head of Section'
+        ]);
+    }
+
+
 
     public function trackWO($id)
     {
@@ -724,7 +770,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $wo = WorkOrder::find($id);
-        $wo->status = 2;
+        $wo->status = 2; //tempolary closed
         $wo->save();
 
         $notify = new Notification();
@@ -734,23 +780,23 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
         $notify->save();
 
-	
-	
-	
-	
-	$work = WorkOrder::where('id', $id)->first();
+    
+    
+    
+    
+    $work = WorkOrder::where('id', $id)->first();
   $cfirstname= $work['user']->fname;
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
  
-	$msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $wo->created_at . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed. 
- Please Visit the system for more informations.	Thanks   
-	
-	Directorate of Estates.';
-	
-	
-	
-	
+    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $wo->created_at . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed. 
+ Please Visit the system for more informations. Thanks   
+    
+    Directorate of Estates.';
+    
+    
+    
+    
 
       /*   $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
 $client = new \Nexmo\Client($basic);
@@ -769,14 +815,72 @@ session::flash('message', ' Your workorder have been closed successfully');
         return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order has been closed successfully',
+            'message' => 'Work order is tempolarally closed successfully',
             'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }
 	
-	
-	
-	
+    public function closeWorkOrdercomplete($id, $receiver_id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        $wo = WorkOrder::find($id);
+        $wo->status = 30; // complete closed
+        $wo->save();
+
+        $notify = new Notification();
+        $notify->sender_id = auth()->user()->id;
+        $notify->receiver_id = $receiver_id;
+        $notify->type = 'wo_closed';
+        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
+        $notify->save();
+
+    
+    
+    
+    
+    $work = WorkOrder::where('id', $id)->first();
+  $cfirstname= $work['user']->fname;
+  $clastname=$work['user']->lname;
+  $cmobile=$work['user']->phone;
+ 
+    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $wo->created_at . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed. 
+ Please Visit the system for more informations. Thanks   
+    
+    Directorate of Estates.';
+    
+    
+    
+    
+
+      /*   $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
+$client = new \Nexmo\Client($basic);
+
+$message = $client->message()->send([
+    'to' => '255762391602',
+    'from' => 'ESTATE STAFF',
+    'text' => ' Your workorder have been closed successfully'
+]);
+
+session::flash('message', ' Your workorder have been closed successfully');
+
+
+*/
+
+        return redirect()->route('workOrder.track', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Work order is completely closed successfully',
+            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
+        ]);
+    }
+    
+    
+    
+    
+    
+    
 	
 	
 	

@@ -10,6 +10,7 @@ use App\WorkOrder;
 use App\User;
 use App\Notification;
 use App\Material;
+use App\workorderMaterial;
    
 class NotesController extends Controller
 {
@@ -846,4 +847,25 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
     }
 ///////////////////////////////////////////////////    
     }
+
+
+    public function grnotepdf($id){
+
+           $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',15)
+                    ->get()];
+         $pdf = PDF::loadView('grnpdf', $data);
+   
+     return $pdf->download('Goods received Note.pdf');
+    }
+
+    public function issuenotepdf($id){
+
+          
+         $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',3)
+                    ->get()];
+         $pdf = PDF::loadView('issuenotepdf', $data);
+   
+     return $pdf->download('Issue Note.pdf');
+    }
+
 }

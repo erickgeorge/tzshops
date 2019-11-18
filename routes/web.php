@@ -23,6 +23,8 @@ Route::get('firstloginpassword','HomeController@passwordView2' );
 Route::get('/changeprofile','HomeController@profileView' );
 Route::get('/myprofile','HomeController@myprofileView' );
 Route::get('/myprofile','HomeController@myprofileView' )->name('myprofile');
+
+
 Route::get('/dashboard', 'HomeController@dashboardView');
 
 
@@ -31,7 +33,7 @@ Route::get('/settings', 'HomeController@settingsView');
 // Route::get('/create_user', 'HomeController@createUserView')->name('view.create.user');
 
 
-Route::get('/stores', 'HomeController@storesView');
+Route::get('/stores', 'HomeController@storesView')->name('store');
 
 Route::get('/storeshos', 'HomeController@storeshosView');
 
@@ -89,6 +91,7 @@ Route::post('addconv','MinuteController@addconv')->name('addconv');
 ///////////////////////////////////////////////////////////////
 
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
+Route::post('redirect/workorder_to_hos/{id}', 'WorkOrderController@redirectToHoS')->name('to.HoS.workorder');
 
 Auth::routes();
 
@@ -132,6 +135,7 @@ Route::post('save/section', 'DirectorateController@createSection')->name('sectio
 Route::post('', 'UserController@changeProfile')->name('profile.change');
 Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');
 Route::post('close/work/order/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrder')->name('workorder.close');
+Route::post('close/work/order/complete/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrdercomplete')->name('workorder.close.complete');
 
 Route::post('close/satisfied/{id}', 'WorkOrderController@closeWOSatisfied')->name('workorder.satisfied');
 Route::post('close/notsatisfied/{id}', 'WorkOrderController@closeWONotSatisfied')->name('workorder.notsatisfied');
@@ -174,7 +178,6 @@ Route::get('/incrementmaterial/{id}', 'StoreController@incrementmaterialView')->
 Route::post('incrementmaterial', 'StoreController@incrementmaterial')->name('material.increment');
 
 Route::get('technicians', 'HomeController@techniciansView');
-Route::get('technicians', 'HomeController@techniciansView')->name('technicians');
 
 
 Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneededy');
@@ -263,6 +266,8 @@ Route::get('store/material_request/{id}','StoreController@material_request_hos')
 Route::get('store/material_reserve/{id}','StoreController@ReserveMaterial')->name('ReserveMaterial');
 
 Route::get('send/material_again/{id}','StoreController@materialaddagain')->name('SendMaterialAgain');
+
+Route::get('received/materials/from_store/tick/material_received/{id}','WorkOrderController@tickmaterial');
 
 
 Route::get('send/material_rejected_again/{id}','StoreController@materialrejectedaddagain')->name('SendMaterialrejectedAgain');

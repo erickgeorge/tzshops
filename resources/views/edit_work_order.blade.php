@@ -5,6 +5,11 @@
     @endSection
 
 @section('body')
+<style type="text/css">
+.label{
+    width: 700px;
+}
+</style>
 <div class="container">
 <script>
 var total=2;
@@ -34,72 +39,74 @@ var total=2;
         </div>
     @endif
     <div style="margin-right: 2%; margin-left: 2%;">
-    <h5>This work order is from <span style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> &nbsp;Has been submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+    <h5>This work order is submitted by  <span
+                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>  also has been processed by  <span
+                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span> &nbsp;<br>It Has been submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
     <h5 style="color: black">Contacts: {{ $wo['user']->phone }} ,&nbsp;{{ $wo['user']->email }}</h5>
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Type of a problem</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
     </div>
-	
-	@if(empty($wo->room_id) )
-		
-	
-	 <div class="input-group mb-3">
+    
+    @if(empty($wo->room_id) )
+        
+    
+     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Location</label>
         </div>
-		
-		
+        
+        
         <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
                aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
     </div>
-	
-	
-	
-	
-	@else
-		
-	
+    
+    
+    
+    
+    @else
+        
+    
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Location</label>
         </div>
-		
-		
+        
+        
         <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
                aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']['location']->name }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Area <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Area</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
                value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Block <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Block</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
                value="{{ $wo['room']['block']->name_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Room <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Room</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
                value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
-	
-	@endif
-	
-	
+    
+    @endif
+    
+    
     <div class="form-group ">
-        <label for="">Details: <sup style="color: red;">*</sup></label>
+        <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
@@ -115,7 +122,7 @@ var total=2;
                     <input type="checkbox" name="emergency"> This work order is emergency.
                 @endif
             </div>
-            <div class="form-group ">
+            <!--<div class="form-group ">
                 {{--<p>Does this work order needs labourer?</p>--}}
                 @if($wo->needs_laboured == 1)
                     <input type="checkbox" name="labour" checked> This work order needs labourer.
@@ -130,12 +137,12 @@ var total=2;
                 @else
                     <input type="checkbox" name="contractor"> This work order needs contractor.
                 @endif
-            </div>
-            <button type="submit" class="btn btn-primary bg-primary">Save</button>
-            <a href="/home" class="btn btn-danger bg-danger">Cancel</a>
-			
-			    </form>
-				<!-- <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a> -->
+            </div>-->
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/home" class="btn btn-danger">Cancel</a>
+            
+                </form>
+                <!-- <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a> -->
     
         <br>
         <h4>Work order forms.</h4>
@@ -144,17 +151,17 @@ var total=2;
             <div class="tab">
                 <div class="container-fluid">
                     <div class="tab-group row">
-						<button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:black">ASSIGN TECHNICIAN FOR WORK</b></button>
-						<button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
+                        <button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:black">ASSIGN TECHNICIAN FOR WORK</b></button>
+                        <button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
-						<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
+                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
                         
-						<!--<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>-->
+                        <!--<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>-->
                         <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'crosscheck_material_requested')" id="defaultOpen">CROSS CHECK MATERIAL REQUESTED</button>
                         
                         <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
-						
-						
+                        
+                        
                     </div>
                 </div>
 
@@ -162,108 +169,102 @@ var total=2;
 
 
 
-			{{-- ASSIGN TECHNICIAN tab--}}
+            {{-- ASSIGN TECHNICIAN tab--}}
                
                     @csrf
                     <div id="assigntechnician" class="tabcontent">
                         <div class="row">
                             <div class="col-md-6">
-                                <p style="color: #000;">Assign Technician for this work-order</p>
+                                <p>Assign Technician for this work-order</p>
                             </div>
                         </div>
-						<div >
-						<p id="alltechdetails">  </p>
-						
-						
-						
-						</div>
-						
-						
+                        <div >
+                        <p id="alltechdetails">  </p>
+                        
+                        
+                        
+                        </div>
+                        
+                        
                         <div class="form-group">
                            
                             <select   id="techid" required class="custom-select"  name="techuser" style="width: 700px;">
                                
-							   
-							   
-							   
-							   
-							   
-							   <?php 			
-				use App\WorkOrderStaff;
-                
-				$p=-1;
+                               
+                               
+                               
+                               
+                               
+                               <?php            
+                use App\WorkOrderStaff;
+                $p=-1;
       ?>
-							   
+                               
                                 @foreach($techs as $tech)
-								<?php
-								
-								$wo_technician_count = WorkOrderStaff::
+                                <?php
+                                
+                                $wo_technician_count = WorkOrderStaff::
                      select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
                      ->where('status',0)
-					 ->where('staff_id',$tech->id)
+                     ->where('staff_id',$tech->id)
                      ->groupBy('staff_id')
-					 ->first();
-					 
-							   ?>
-							   @if(empty($wo_technician_count->total_wo))
-								   <?php $t=0;?>
-							   
-							   @else
-								    <?php $t=$wo_technician_count->total_wo;?>
-								
-								@endif
-							   
-							  <?php
-							 $p++;
-							  $name[$p]=$tech->fname.' '.$tech->lname;
-							  $ident[$p]=$tech->id;
-							  $cwo[$p]=$t;
-							  
-							  ?>
-							  
-							  
-							  
+                     ->first();
+                     
+                               ?>
+                               @if(empty($wo_technician_count->total_wo))
+                                   <?php $t=0;?>
+                               
+                               @else
+                                    <?php $t=$wo_technician_count->total_wo;?>
+                                
+                                @endif
+                               
+                              <?php
+                             $p++;
+                              $name[$p]=$tech->fname.' '.$tech->lname;
+                              $ident[$p]=$tech->id;
+                              $cwo[$p]=$t;
+                              
+                              ?>
+                              
+                              
+                              
                                     
                                 @endforeach
-								<?php
-								for($i=0;$i<=$p-1;$i++){
-									for($j=$i+1 ;$j<=$p;$j++){
-										if($cwo[$i]>$cwo[$j]){
-											$t1=$name[$i];
-											$t2=$ident[$i];
-											$t3=$cwo[$i];
-											
-											$name[$i]=$name[$j];
-											$ident[$i]=$ident[$j];
-											$cwo[$i]=$cwo[$j];
-											
-											
-											$name[$j]=$t1;
-											$ident[$j]=$t2;
-											$cwo[$j]=$t3;
-								}}}
-								
-									for($x=0;$x<=$p;$x++){		
-									?><option value="{{ $ident[$x] }}"> {{$name[$x].'        - has '.$cwo[$x].' Works'}} </option>
-									<?php }  ?>
-											
-								
+                                <?php
+                                for($i=0;$i<=$p-1;$i++){
+                                    for($j=$i+1 ;$j<=$p;$j++){
+                                        if($cwo[$i]>$cwo[$j]){
+                                            $t1=$name[$i];
+                                            $t2=$ident[$i];
+                                            $t3=$cwo[$i];
+                                            
+                                            $name[$i]=$name[$j];
+                                            $ident[$i]=$ident[$j];
+                                            $cwo[$i]=$cwo[$j];
+                                            
+                                            
+                                            $name[$j]=$t1;
+                                            $ident[$j]=$t2;
+                                            $cwo[$j]=$t3;
+                                }}}
+                                
+                                    for($x=0;$x<=$p;$x++){      
+                                    ?><option value="{{ $ident[$x] }}"> {{$name[$x].'        '.$cwo[$x]}} </option>
+                                    <?php }  ?>
+                                            
+                                
                             </select>
                         </div>
-                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()"  type="button" class="btn bg-primary btn-primary">Assign</button>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
+                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()" style="background-color: darkgreen; color: white" type="button" class="btn btn-success">Save Technician</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                
                 {{-- end ASSIGN TECHNICIAN  --}}
 
-				
-				
-				
-
-
-
-
-
+                
+                
+                
 
 
 
@@ -276,59 +277,59 @@ var total=2;
                                 <p>Work order status</p>
                             </div>
                         </div>
-						
-						
-						 <div class="form-group">
+                        
+                        
+                         <div class="form-group">
                             
-							<select class="custom-select" required name="status">
+                            <select class="custom-select" required name="status">
                                 <option selected value="" >Choose...</option>
                                
                                     <option value="Report Before Work">Report Before Work</option>
-									   <option value="Report After Work">Report After Work</option>
+                                       <option value="Report After Work">Report After Work</option>
                               
                             </select>
-							
+                            
                         </div>
-					
-						
-						
-						
+                    
+                        
+                        
+                        
                         <p>Inspection description</p>
                         <div class="form-group">
                             <textarea  style="color: black" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
                         </div>
-						
-						</br>
+                        
+                        </br>
                         <p>Inspection date</p>
                         <div class="form-group">
                             <input type="date" style="color: black; width:  700px;" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
-                            <label>Select Technician on Duty <sup style="color: red;">*</sup></label>
+                            <label>Select Technician on Duty</label>
                             <select  required class="custom-select"  name="technician">
                                 <option  selected value="" >Choose...</option>
-								
-								
-								
-								
-								$staff= WorkOrderStaff::where('work_order_id',$wo->id)->where('status',1)->get();
-						
-								
-								
+                                
+                                
+                                
+                                
+                                $staff= WorkOrderStaff::where('work_order_id',$wo->id)->where('status',1)->get();
+                        
+                                
+                                
                                 @foreach($staff as $tech)
                                     <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save Inspections</button>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn bg-danger btn-danger">Cancel</button></a>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Inspections</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>
                 {{-- end inspection --}}
-				
-				
-				
-				 {{-- request_transport form--}}
+                
+                
+                
+                 {{-- request_transport form--}}
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div id="request_transport" class="tabcontent">
@@ -337,29 +338,36 @@ var total=2;
                                 <p>Work order Transport Request Form</p>
                             </div>
                         </div>
-				</br>
-                        <p>Transport date <sup style="color: red;">*</sup></p>
+                </br>
+                        <p>Transport date</p>
                         <div class="form-group">
                             <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
                         </div>
-						 
-						  <p>Transport time <sup style="color: red;">*</sup></p>
+                        
+                          <p>Transport time</p>
                         <div class="form-group">
                             <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  rows="5" id="time"></input>
                         </div>
+
+                         <p>Transport Details</p>
+                        <div class="form-group">
+                            <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+                        <br>
+
                        
-                        <button type="submit" class="btn btn-primary bg-primary">Save Transport Request</button>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Send Transport Request</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>
                 {{-- end request_transport form --}}
-				
-				
-				
-				
-				{{-- material_request tab--}}
-				
-				 <div id="material_request" class="tabcontent">
+                
+                
+                
+                
+                {{-- material_request tab--}}
+                
+                 <div id="material_request" class="tabcontent">
                 <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
                     @csrf
                    
@@ -368,53 +376,52 @@ var total=2;
                                 <p>Select material for work-order</p>
                             </div>
                         </div>
-						
-						<?php
-						
-						use App\Material;
-						$materials= Material::get();
                         
-						
-						?>
-						
+                        <?php
+                        
+                        use App\Material;
+                        $materials= Material::get();
+                        
+                        
+                        ?>
+                        
                         <div class="form-group">
                            
                             <select  required class="custom-select"  id="materialreq" name="1" style="width: 700px">
-                                <option   selected value="" >Choose Material... <sup style="color: red;">*</sup></option>
+                                <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
                             </select>
                         </div>
-						
-						
-						 <p>Quantity <sup style="color: red;">*</sup></p>
+                        
+                        
+                         <p>Quantity</p>
                         <div class="form-group">
                             <input type="number" min="1"  style="color: black; width: 700px" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
-						
-						
-						<div id="newmaterial" >
-						
-						
-						</div>
-					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                      <button onclick="newmaterial()" class="btn bg-info btn-primary">New Material</button>
-                        <button type="submit" class="btn bg-primary btn-primary
-                        ">Save Material</button>
-                        <br><br>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
-                   
-                </form>
-					
+                        
+                        
+                        <div id="newmaterial" style="width: 700px">
+
+                        </div>
+                       <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
+                         <button style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">New Material</button>
+                         <br> <br>
+                      
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </form>
+                    
+
                        
-				 </div>
+                 </div>
                 {{-- end material_request  --}}
-				
-				
-				
-				
-				
+                
+                
+                
+                
+                
 
 
             
@@ -465,13 +472,16 @@ var total=2;
                                                 class="fas fa-edit"></i></a>
 
 
-<form method="POST"  onsubmit="return confirm('Are you sure you want to delete this Material from the list? ')" action="{{ route('material.delete', [$matform->id]) }}">
- {{csrf_field()}}
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Material from the list? ')"
+                                          action="{{ route('material.delete', [$matform->id]) }}">
+                                        {{csrf_field()}}
 
 
-<button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-data-toggle="tooltip" title="Delete"><a style="color: red;"
- data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
                                         </button>
                                     </form>
                                 </div>
@@ -480,7 +490,7 @@ data-toggle="tooltip" title="Delete"><a style="color: red;"
   </tr>   
     @endforeach
 </table>   
-    <button class="btn btn-primary" > <a  href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button> 
+    <button class="btn btn-success" style="color: white" > <a  href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button> 
 
 
 </div>
@@ -510,21 +520,14 @@ data-toggle="tooltip" title="Delete"><a style="color: red;"
 
 
 
-                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col">
+                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col-md-6">
                         @csrf
                        
 
 
-                         <?php 
-                        $materials = Material::get(); 
-$items = WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', -1)->get()
-                        ?>
-
-
                         <div class="form-group">
                             <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
-                                <option   selected value=" @foreach($items as $item)
-  {{ $item['material']->id }}"> {{$item['material']->name }}, Brand: ({{ $item['material']->description }}), Value: ({{ $item['material']->brand }}), Type: ({{ $item['material']->type }})@endforeach</option>
+                                <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
                                    <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
@@ -533,17 +536,19 @@ $items = WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status
                         
                     
                          <div class="form-group">
-                            <label for="name_of_house">Quantity <sup style="color: red;">*</sup></label>
+                            <label for="name_of_house">Quantity </label>
                             <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
                                    name="quantity" placeholder="Enter quantity again">
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
-                                                    
+                                                    <div> 
+                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       </button>
+                                                    </div>
                                          
-                                            
+                                            </form>
                   
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
@@ -557,11 +562,8 @@ $items = WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status
 
    
                 </div>
-                <div class="modal-footer" style="padding-left: 200px;">
-<button type="button" class="btn btn-danger bg-danger" data-dismiss="modal">Close</button>
-<button type="submit" class="btn btn-primary bg-primary">Save</button>
+                <div class="modal-footer">
                 </div>
-                </form>
             </div>
         </div>
         </div>
@@ -574,60 +576,60 @@ $items = WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status
 
                 {{-- end material_request  --}}
                 
-				
-				
+                
+                
 
                 {{-- Purchasing order tab --}}
                 
-				<div id="purchasingorder" class="tabcontent">
+                <div id="purchasingorder" class="tabcontent">
                 <form method="POST"  action="{{ route('work.purchasingorder', [$wo->id]) }}" >
                     @csrf
                     <h4>Purchasing Order Request</h4>
                    <div class="form-group">
                            
                             <select onchange="stock();" required class="custom-select"  id="materialreq" name="1">
-                                <option   selected value="" >Choose Material...<sup style="color: red;">*</sup></option>
+                                <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.' '.$material->description }}</option>
                                 @endforeach
                             </select>
                         </div>
-						
-						
-						 <p>Quantity <sup style="color: red;">*</sup></p>
+                        
+                        
+                         <p>Quantity</p>
                         <div class="form-group">
                             <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
-						
-						
-						<div id="newmaterialproc" >
-						
-						
-						</div>
-					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                      <button onclick="newmaterialproc()" class="btn btn-primary">New Material</button>
-                        <button type="submit" class="btn btn-primary bg-primary">Save Material</button><br>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
+                        
+                        
+                        <div id="newmaterialproc" >
+                        
+                        
+                        </div>
+                    <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
+                      
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                    
                 </form>
-					
+                    <button style="background-color: blue; color: white" onclick="newmaterialproc()" class="btn btn-success">New Material</button>
                        
-				 
+                 
                 </div>
 
                 {{-- transportation tab --}}
                 <div id="payment" class="tabcontent">
                     <h4>Transportation Form</h4>
                     <p>To be populated.</p>
-					
+                    
                 </div>
             </div>
         </div>
     <br>
-	
-	
-	{{-- TECHNICIAN DETAILS FORM  --}}
-	 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    
+    {{-- TECHNICIAN DETAILS FORM  --}}
+     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -637,24 +639,24 @@ $items = WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status
                     </button>
                 </div>
                 <div class="modal-body">
-				
-				<p id="detail" >
-				
-				</p>
-				<h2> This technician has been assigned Following Number Of Work orders : </h2>
-				
-				<h3  id="totalwork" style="color:red">
-				</h3>
-				
-				
-				
-				
+                
+                <p id="detail" >
+                
+                </p>
+                <h2> This technician has been assigned Following Number Of Work orders : </h2>
+                
+                <h3  id="totalwork" style="color:red">
+                </h3>
+                
+                
+                
+                
                   
                     <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
                         @csrf
                          <br>
-						 <input name="technician_work" id="technician_work"  type="text" hidden> </input>  
-                        <button type="submit" class="btn btn-danger bg-danger">Assign Technician</button>
+                         <input name="technician_work" id="technician_work"  type="text" hidden> </input>  
+                        <button type="submit" class="btn btn-danger">Assign Technician</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -664,65 +666,65 @@ $items = WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status
     </div>
 </div>
   @endSection
-	 
-	 <?php	
-						$mat= Material::get();
-						$matvalue= Material::get();
-						?>
-	 <script type="text/javascript" language="javascript">
+     
+     <?php  
+                        $mat= Material::get();
+                        $matvalue= Material::get();
+                        ?>
+     <script type="text/javascript" language="javascript">
     var array = new Array();
-	 var arrayvalue = new Array();
+     var arrayvalue = new Array();
     <?php foreach($mat as $key){ ?>
         array.push('<?php echo $key->name.', Brand:('.$key->description.') ,Value:( '.$key->brand.' ) ,Type:( '.$key->type.' )' ; ?>');
     <?php } ?>
-	
-	
-	<?php foreach($mat as $key ){ ?>
+    
+    
+    <?php foreach($mat as $key ){ ?>
         arrayvalue.push('<?php echo $key->id ; ?>');
     <?php } ?>
 </script>
-	
-	<script>
-	async function getTechnician(){
-		var detail;
-		var techid;
-		var id = document.getElementById("techid").value;
-	var response = await fetch('/gettechniciandetails/'+id).then(function(response){
-		return response.json();
-		})
-	.then(data => {
-		total=data["workorderstaff"].length;
-		detail='Full name : '+data["technician"].lname+data["technician"].fname+'  Type is : '+data["technician"].type+'  \r    Phone : '+data["technician"].phone+'  Email is : '+data["technician"].email ;
-		techid=data["technician"].id;
-		//h=data[0].work_order_id;
-		//console.log(data[0].work_order_id);
-		
-	});
-		
-		
-		document.getElementById("detail").innerHTML=detail;
-		document.getElementById("totalwork").innerHTML=total;
-		document.getElementById("technician_work").value=techid;
-		
+    
+    <script>
+    async function getTechnician(){
+        var detail;
+        var techid;
+        var id = document.getElementById("techid").value;
+    var response = await fetch('/gettechniciandetails/'+id).then(function(response){
+        return response.json();
+        })
+    .then(data => {
+        total=data["workorderstaff"].length;
+        detail='Full name : '+data["technician"].lname+data["technician"].fname+'  Type is : '+data["technician"].type+'  \r    Phone : '+data["technician"].phone+'  Email is : '+data["technician"].email ;
+        techid=data["technician"].id;
+        //h=data[0].work_order_id;
+        //console.log(data[0].work_order_id);
+        
+    });
+        
+        
+        document.getElementById("detail").innerHTML=detail;
+        document.getElementById("totalwork").innerHTML=total;
+        document.getElementById("technician_work").value=techid;
+        
       }
-	  
-	  
-	 
-	  function newmaterial(){
-		 
-		 total=total+1;
-		
-		 
-		 var myDiv = document.getElementById("newmaterial");
-		 
-		 
-		 var node = document.createElement("label");
+      
+      
+     
+      function newmaterial(){
+         
+         total=total+1;
+        
+         
+         var myDiv = document.getElementById("newmaterial");
+         
+         
+         var node = document.createElement("label");
   var textnode = document.createTextNode("Material");
   node.appendChild(textnode);
 myDiv.appendChild(node);
-		 
-		 
-		 
+         
+         
+         
 
 //Create array of options to be added
 //var array = ["Volvo","Saab","Mercades","Audi"];
@@ -741,10 +743,10 @@ myDiv.appendChild(selectList);
  var option = document.createElement("option");
    
     option.text = 'Choose ...';
-	 option.value = '';
+     option.value = '';
      
     selectList.appendChild(option);
-	
+    
 for (var i = 0; i < array.length; i++) {
     var option = document.createElement("option");
     option.value = arrayvalue[i];
@@ -755,40 +757,40 @@ for (var i = 0; i < array.length; i++) {
  var node = document.createElement("label");
   var textnode = document.createTextNode("Quantity");
   node.appendChild(textnode);
-myDiv.appendChild(node);
+  myDiv.appendChild(node);
 
 
  var input = document.createElement("input");
-		 input.setAttribute('type', 'number');
-		 input.min=1;
-		 input.required = true;
-		 
-		 total=total+1;
-		
-		 input.name = total;
-		 input.className = "form-control";
-		 var parent = document.getElementById("newmaterial");
-		 
-		 
-		parent.appendChild(input);
-		 
-		 
-		 
-		 var node = document.createElement("br");
+         input.setAttribute('type', 'number');
+         input.min=1;
+         input.required = true;
+         
+         total=total+1;
+        
+         input.name = total;
+         input.className = "form-control";
+         var parent = document.getElementById("newmaterial");
+         
+         
+        parent.appendChild(input);
+         
+         
+         
+         var node = document.createElement("br");
 
 myDiv.appendChild(node);
 
 document.getElementById("totalmaterials").value=total;
-		 
-		 
-	 }
-	  
-	  
-	  
-	  
-	  
-	  
-	// getTechnician(5);
+         
+         
+     }
+      
+      
+      
+      
+      
+      
+    // getTechnician(5);
 
 
 
@@ -802,8 +804,16 @@ document.getElementById("totalmaterials").value=total;
              document.getElementById("material").value = W;
 
        }
-	</script>
+    </script>
+
+    <script type="text/javascript">
+
+      $("#newmaterial").select2({
+            placeholder: "Choose Technician...",
+            allowClear: true
+        });
+    </script>
 
 
-	
-	
+    
+    

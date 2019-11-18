@@ -6,6 +6,7 @@
 
 @section('body')
     <br>
+    <div class="container">
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
             <h3 align="center">Work order details</h3>
@@ -28,27 +29,27 @@
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Type of a problem</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
     </div>
-	
-	 @if(empty($wo->room_id))
-		 
-	  <div class="input-group mb-3">
+    
+     @if(empty($wo->room_id))
+         
+      <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Location <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Location</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
                aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
     </div>
            
-		  
+          
         @else
             
    
-	
+    
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
@@ -58,29 +59,29 @@
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Area <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Area</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
-               value="{{ $wo->room_id }}" disabled>
+               value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Block <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Block</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
                value="{{ $wo['room']['block']->name_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Room <sup style="color: red;">*</sup></label>
+            <label class="input-group-text">Room</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
                value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
-	
-	     @endif
+    
+         @endif
     <div class="form-group ">
-        <label for="">Details: <sup style="color: red;">*</sup></label>
+        <label for="">Details:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
@@ -89,7 +90,7 @@
         <div>
             <form method="POST" action="{{ route('workorder.accept', [$wo->id]) }}">
                 @csrf
-                <button type="submit" class="btn btn-primary">Accept</button>
+                <button type="submit" class="btn btn-success">Accept</button>
             </form>
         </div>
         <p> &nbsp;&nbsp;</p>
@@ -102,7 +103,7 @@
     <h4>Wrong problem type?</h4>
     <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
         @csrf
-        <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
+        <button type="submit" class="btn btn-warning">Send to Maintenance Coordinator</button>
     </form>
     <br>
 
@@ -131,5 +132,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
     @endSection

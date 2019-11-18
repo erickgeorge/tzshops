@@ -10,9 +10,9 @@
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
             @if(auth()->user()->type == 'STORE')
-            <h3 align="center"><b>List of material taken from Store</b></h3>
+            <h3 align="center"><b>List of Available Material required by Head of Section</b></h3>
             @else
-            <h3 align="center"><b>Material Received from Store </b></h3>
+            <h3 align="center"><b>Available Material you requested  from Store </b></h3>
             @endif
         </div>
 
@@ -61,18 +61,19 @@
             <tr>
         <th >No</th>
 
-				<th >Workorder Details</th>
-				<th >Material Name</th>
-				<th >Material Description</th>
-				<th >Type</th>
+        <th >Workorder Details</th>
+        <th >Material Name</th>
+        <th >Material Description</th>
+        <th >Type</th>
                 @if(auth()->user()->type =='STORE')
-                <th>Quantity Taken</th>
+                <th>Available Quantity</th>
                 @else
-                <th >Quantity Received</th>
+                <th >Available Quantity</th>
                 @endif
-				
+        
         <th >Status</th>
-				
+        <th >HoS Approval</th>
+        
             </tr>
             </thead>
 
@@ -88,15 +89,23 @@
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
-				    <td>{{ $item->quantity }}</td>
+            <td>{{ $item->quantity }}</td>
                   
                        @if(auth()->user()->type == 'STORE')
-                       <td style="color: blue"><span class="badge badge-info">  TAKEN</span>
+                       <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span>
                       </td>
                        @else
                        <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span>
                       </td>
-                       @endif                   
+                       @endif  
+
+                       @if( $item->secondstatus == null)
+
+                       <td><span class="badge badge-danger">  NOT APPROVED</span></td> 
+                        @else
+                       <td><span class="badge badge-success">  APPROVED</span></td> 
+                       @endif
+
                     
                     </tr>
                     @endforeach
@@ -108,14 +117,23 @@
    
       
             
-       @if(auth()->user()->type !='STORE')
+       @if(auth()->user()->type =='STORE')
 
-          <h4  style="     color: #c9a8a5;"> Please assign Issue Note for materials you requested from store.</h4>
+          <br>
+
+          <h4  style="     color: #733703;"><b> Please assign Issue Note for materials requested so as Head of Section to Sign.</b></h4>
          <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>
+         @else
+         <h4  style="     color: #733703;"><b>  Please Approve if you have received Material.</b></h4>
+         <a class="btn btn-primary btn-sm"  href="tick/material_received/{{$item->work_order_id}}" role="button">Approve (&#10004;)</a>
+
          @endif
 
        
     </div>
+
+
+    
      
    
 
