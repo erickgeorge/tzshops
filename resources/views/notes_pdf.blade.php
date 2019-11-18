@@ -1,9 +1,9 @@
-<div style="margin-top: -20px" align="center">
+<div style="margin-top: 20px" align="center">
     <img src="{{ public_path('/images/index.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Director of Estates Services</h4></p><p><b><?php
+    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b><?php
      echo $header; 
      ?></b></p>
 </div><br>

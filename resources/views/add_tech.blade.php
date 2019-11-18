@@ -58,7 +58,7 @@
                 <div class="col">
                     <div class="form-group ">
                 <label for="email">Email Address <sup style="color: red;">*</sup></label>
-                <input required type="email"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+                <input required  type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
             </div>
                 </div>
             </div>
@@ -72,6 +72,13 @@
         use App\UserRole;
             $role=UserRole::where('user_id',auth()->user()->id)->first();
             $roleofuser=$role->role_id;
+
+            /////////////////////////////
+             use App\User;
+        $usersec = User::Where('id',auth()->user()->id)->first();
+        $secuser = $usersec->type;
+
+            /////////////////////////////
             ?>
             
              <input hidden  type="number"  class="form-control" id="role" name="role"  value="{{ $roleofuser }}">
@@ -80,12 +87,12 @@
              
             <select  style="width: 380px" class="custom-select" id="typetechadmin" name="typetechadmin">
                 
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Masonry/Road">Masonry/Road</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Plumbing">Plumbing</option>
-                
+                @if(($secuser == 'HOS Carpentry/Painting')||($secuser == 'HOS CARPENTRY/PAINTING'))<option value="Carpentry/Painting">Carpentry/Painting Technician</option>
+               @elseif(($secuser == 'HOS Electrical')||($secuser == 'HOS ELECTRICAL'))<option value="Electrical">Electrical Technician</option>
+                @elseif(($secuser == 'HOS Masonry/Road')||($secuser == 'HOS MASONRY/ROAD'))<option value="Masonry/Road">Masonry/Road Technician</option>
+                @elseif(($secuser == 'HOS Mechanical')||($secuser == 'HOS MECHANICAL'))<option value="Mechanical">Mechanical Technician</option>
+                @elseif(($secuser == 'HOS Plumbing')||($secuser == 'HOS PLUMBING'))<option value="Plumbing">Plumbing Technician</option>
+                @endif
                 
             </select>
             

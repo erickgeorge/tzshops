@@ -131,8 +131,8 @@ var total=2;
                     <input type="checkbox" name="contractor"> This work order needs contractor.
                 @endif
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a href="/home" class="btn btn-danger">Cancel</a>
+            <button type="submit" class="btn btn-primary bg-primary">Save</button>
+            <a href="/home" class="btn btn-danger bg-danger">Cancel</a>
 			
 			    </form>
 				<!-- <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a> -->
@@ -168,7 +168,7 @@ var total=2;
                     <div id="assigntechnician" class="tabcontent">
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign Technician for this work-order</p>
+                                <p style="color: #000;">Assign Technician for this work-order</p>
                             </div>
                         </div>
 						<div >
@@ -190,6 +190,7 @@ var total=2;
 							   
 							   <?php 			
 				use App\WorkOrderStaff;
+                
 				$p=-1;
       ?>
 							   
@@ -243,14 +244,14 @@ var total=2;
 								}}}
 								
 									for($x=0;$x<=$p;$x++){		
-									?><option value="{{ $ident[$x] }}"> {{$name[$x].'        '.$cwo[$x]}} </option>
+									?><option value="{{ $ident[$x] }}"> {{$name[$x].'        - has '.$cwo[$x].' Works'}} </option>
 									<?php }  ?>
 											
 								
                             </select>
                         </div>
-                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()"  type="button" class="btn btn-primary">Save Technician</button>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
+                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()"  type="button" class="btn bg-primary btn-primary">Assign</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
                     </div>
                
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -320,7 +321,7 @@ var total=2;
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Inspections</button>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn bg-danger btn-danger">Cancel</button></a>
                     </div>
                 </form>
                 {{-- end inspection --}}
@@ -347,8 +348,8 @@ var total=2;
                             <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  rows="5" id="time"></input>
                         </div>
                        
-                        <button type="submit" class="btn btn-primary">Save Transport Request</button>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary bg-primary">Save Transport Request</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
                     </div>
                 </form>
                 {{-- end request_transport form --}}
@@ -398,13 +399,14 @@ var total=2;
 						
 						</div>
 					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                      
-                        <button type="submit" class="btn btn-primary
+                      <button onclick="newmaterial()" class="btn bg-info btn-primary">New Material</button>
+                        <button type="submit" class="btn bg-primary btn-primary
                         ">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
+                        <br><br>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
                    
                 </form>
-					<button onclick="newmaterial()" class="btn btn-primary">New Material</button>
+					
                        
 				 </div>
                 {{-- end material_request  --}}
@@ -463,16 +465,13 @@ var total=2;
                                                 class="fas fa-edit"></i></a>
 
 
-                                    <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Material from the list? ')"
-                                          action="{{ route('material.delete', [$matform->id]) }}">
-                                        {{csrf_field()}}
+<form method="POST"  onsubmit="return confirm('Are you sure you want to delete this Material from the list? ')" action="{{ route('material.delete', [$matform->id]) }}">
+ {{csrf_field()}}
 
 
-                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
-                                                                                        data-toggle="tooltip"><i
-                                                        class="fas fa-trash-alt"></i></a>
+<button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+data-toggle="tooltip" title="Delete"><a style="color: red;"
+ data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
                                         </button>
                                     </form>
                                 </div>
@@ -511,14 +510,21 @@ var total=2;
 
 
 
-                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col-md-6">
+                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col">
                         @csrf
                        
 
 
+                         <?php 
+                        $materials = Material::get(); 
+$items = WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', -1)->get()
+                        ?>
+
+
                         <div class="form-group">
                             <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
-                                <option   selected value="" >Choose Material... <sup style="color: red;">*</sup></option>
+                                <option   selected value=" @foreach($items as $item)
+  {{ $item['material']->id }}"> {{$item['material']->name }}, Brand: ({{ $item['material']->description }}), Value: ({{ $item['material']->brand }}), Type: ({{ $item['material']->type }})@endforeach</option>
                                 @foreach($materials as $material)
                                    <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
@@ -532,14 +538,12 @@ var total=2;
                                    name="quantity" placeholder="Enter quantity again">
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
-                                                    <div> 
-                                                       <button style=" width: 205px;" type="submit" class="btn btn-primary">Save
-                                                       </button>
-                                                    </div>
+                                                    
                                          
-                                            </form>
+                                            
                   
-                                                       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
@@ -553,8 +557,11 @@ var total=2;
 
    
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="padding-left: 200px;">
+<button type="button" class="btn btn-danger bg-danger" data-dismiss="modal">Close</button>
+<button type="submit" class="btn btn-primary bg-primary">Save</button>
                 </div>
+                </form>
             </div>
         </div>
         </div>
@@ -599,8 +606,8 @@ var total=2;
 						</div>
 					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
                       <button onclick="newmaterialproc()" class="btn btn-primary">New Material</button>
-                        <button type="submit" class="btn btn-primary">Save Material</button><br>
-                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary bg-primary">Save Material</button><br>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger bg-danger">Cancel</button></a>
                    
                 </form>
 					
@@ -647,7 +654,7 @@ var total=2;
                         @csrf
                          <br>
 						 <input name="technician_work" id="technician_work"  type="text" hidden> </input>  
-                        <button type="submit" class="btn btn-danger">Assign Technician</button>
+                        <button type="submit" class="btn btn-danger bg-danger">Assign Technician</button>
                     </form>
                 </div>
                 <div class="modal-footer">

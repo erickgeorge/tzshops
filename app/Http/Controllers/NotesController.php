@@ -525,13 +525,18 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
     elseif(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
           $data['wo'] =  Workorder::get(); 
 }
-
-
-     $pdf = PDF::loadView('notes_pdf',$data);
-   
-     return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+////////////////////////////////////////////////////
+        if($data['wo'] ->isEmpty()){
+return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
+     
     // return $pdf->inline('workorder.pdf');
+
+    }else{
+$pdf = PDF::loadView('notes_pdf',$data);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
     }
+///////////////////////////////////////////////////////
+}
     
 
     public function userspdf(){
@@ -567,11 +572,17 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
          Where('id',$_GET['college'])->
          Where('type',$_GET['type'])->get();
      }
+  //////////////////////////////////////////////   
+ if($data['display_users'] ->isEmpty()){
+
+ return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);   
      
- 
-     $pdf = PDF::loadView('users_pdf', $data);
-   
-      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+}else{
+       
+$pdf = PDF::loadView('users_pdf', $data);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+ //////////////////////////////////////////////   
     }
 
 
@@ -617,11 +628,16 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
      if (($_GET['name']=='')&&($_GET['brand']=='')&&($_GET['type']=='')) {
           $data['items'] =  material::get();
      }
-    
- 
-     $pdf = PDF::loadView('material_pdf', $data);
-   
-      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+ ///////////////////////////////////////////////   
+ if($data['items'] ->isEmpty()){
+    return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
+     
+
+}else{
+$pdf = PDF::loadView('material_pdf', $data);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+  ////////////////////////////////////////////////////  
     }
 
     public function unatendedpdf(){
@@ -644,10 +660,16 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
      $wo =  WorkOrder::where('status',2)->whereBetween('updated_at', [$_GET['userid'], $to])->get();
 
      $wo =  WorkOrder::where('status',2)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get();
- 
-     $pdf = PDF::loadView('unatended_pdf', ['wo' => $wo ,'tittle' =>$title]);
-   
-      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+///////////////////////////////////////////////
+     if($wo ->isEmpty()){
+    
+return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
+     
+}else{
+$pdf = PDF::loadView('unatended_pdf', ['wo' => $wo ,'tittle' =>$title]);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+/////////////////////////////////////////////////  
     }
  
  
@@ -692,12 +714,16 @@ public function unattendedwopdf(){
        if(($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']=='')){
             $data['unattended_work'] =  WorkOrder::Where('status','-1')->get();
        }   
-    
-     
+//////////////////////////////////////////////////////// 
+     if($data['unattended_work'] ->isEmpty()){
  
-     $pdf = PDF::loadView('unattendedwopdf', $data);
-   
-     return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
+}else{
+        
+ $pdf = PDF::loadView('unattendedwopdf', $data);
+ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+///////////////////////////////////////////////////////////// 
     }
 
     public function completewopdf(){
@@ -740,11 +766,15 @@ public function unattendedwopdf(){
             $data['unattended_work'] =  WorkOrder::Where('status','2')->get();
        }   
     
+//////////////////////////////////////////////  
+ if($data['unattended_work'] ->isEmpty()){
+return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
      
- 
-     $pdf = PDF::loadView('completewopdf', $data);
-   
-      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+}else{
+$pdf = PDF::loadView('completewopdf', $data);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+////////////////////////////////////////////////    
     }
         public function wowithdurationpdf(){
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
@@ -786,11 +816,16 @@ public function unattendedwopdf(){
             $data['unattended_work'] =  WorkOrder::Where('status','2')->get();
        }   
     
-     
- 
-     $pdf = PDF::loadView('wowithdurationpdf', $data);
-   
-      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+/////////////////////////////////////////////////  
+ if($data['unattended_work'] ->isEmpty()){
+return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
+    
+}else{
+       
+$pdf = PDF::loadView('wowithdurationpdf', $data);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+////////////////////////////////////////////////////    
     }
 
     public function roomreportpdf(){
@@ -800,8 +835,15 @@ public function unattendedwopdf(){
         if ($_GET['location']=='') {
            $data['local'] = WorkOrder::select('location')->distinct()->get();
         }
-         $pdf = PDF::loadView('roomreportpdf', $data);
-   
-      return $pdf->download(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+///////////////////////////////////////////////
+       if($data['local'] ->isEmpty()){
+     
+return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);         
+}else{
+        
+$pdf = PDF::loadView('roomreportpdf', $data);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+///////////////////////////////////////////////////    
     }
 }

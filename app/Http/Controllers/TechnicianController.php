@@ -45,7 +45,7 @@ class TechnicianController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return redirect()->route('techs.view')->with([
+        return redirect()->route('technicians')->with([
             'role' => $role,
             'message' => 'Technician Created Successfully',
             'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
@@ -67,7 +67,7 @@ class TechnicianController extends Controller
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
-            'phone' => 'required|max:15|min:10',
+            'phone' => 'required|max:13|min:10',
             'email' => 'required'
         ]);
 
@@ -80,7 +80,7 @@ class TechnicianController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return redirect()->route('tech.edit', $id)->with([
+        return redirect()->route('technicians', $id)->with([
             'role' => $role,
             'message' => 'Technician Edited Successfully',
             'notifications' => $notifications

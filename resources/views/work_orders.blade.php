@@ -41,7 +41,15 @@
             </ul>
         </div>
     @endif
-    
+    @if ($errors->any())
+        <div class="alert alert-danger">
+             <ul class="alert alert-danger" style="list-style: none;">
+                @foreach ($errors->all() as $error)
+                    <li><?php echo $error; ?></li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <div id="div_print" class="container">
         <div class="row ">
@@ -65,6 +73,7 @@ use App\Directorate;
 use App\Department;
 use App\Section;
 use App\WorkOrder;
+use Carbon\Carbon;
  ?>
 <!-- SOMETHING STRANGE HERE -->
           @if(auth()->user()->type == 'CLIENT')
@@ -236,13 +245,14 @@ use App\WorkOrder;
                 <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-					<th>WorkOrder ID</th>
+					<th>WorkOrderID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
                     <th>Status</th>
                     <th>Created date</th>
                     <th>Location</th>
+                    <th>Duration</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -258,7 +268,7 @@ use App\WorkOrder;
                         <tr>
                             <th scope="row">{{ $i }}</th>
 							<td id="wo-id">00{{ $work->id }}</td>
-                            <td id="wo-details">{{ $work->details }}</td>
+                            <td id="wo-details">{{ str_limit($work->details, 10) }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
@@ -330,6 +340,18 @@ use App\WorkOrder;
 
                                 {{ $work->location }}
                             @endif
+                            <td>
+                             @if($work->status == 2) 
+                             <?php $date = Carbon::parse($work->created_at);
+$now = Carbon::parse($work->updated_at);
+
+$diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
+                             @else <?php $date = Carbon::parse($work->created_at);
+$now = Carbon::now();
+
+$diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
+                             @endif
+                            </td>
                             <td>
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 

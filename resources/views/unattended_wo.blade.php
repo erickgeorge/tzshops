@@ -184,7 +184,7 @@ use App\WorkOrder;
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td id="wo-details">{{ $work->details }}</td>
+                            <td id="wo-details">{{str_limit($work->details, 10) }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)

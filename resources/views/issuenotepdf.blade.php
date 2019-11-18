@@ -1,4 +1,4 @@
-<div style="margin-top: -7px" align="center">
+<div style="margin-top: 20px" align="center">
     <img src="{{ public_path('/images/index.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
     <p><h2>University of Dar es salaam</h2> <h5>DIRECTORATE OF ESTATE SERVICES</h5></p>
     <p><b><u>ISSUE NOTE</u></b></p>
