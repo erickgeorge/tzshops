@@ -319,7 +319,7 @@
                  @endif
                    @if(auth()->user()->type == 'Inspector Of Works')
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">Work order that needs material <span
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">Work order needs material <span
                                     class="badge badge-light">{{ count($material_requests) }}</span></a>
                     </li>
 

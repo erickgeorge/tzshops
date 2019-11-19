@@ -174,7 +174,7 @@ class StoreController extends Controller
              $mForm->status = 16;
 			
              $mForm->save();
-        return redirect()->route('wo.materialneededy')->with(['message' => 'Material Rejected successfully ']);
+        return redirect()->back()->with(['message' => 'Material Rejected successfully ']);
     }
 	
 	
@@ -194,7 +194,7 @@ class StoreController extends Controller
 
 		 //status field of work order
 		
-        return redirect()->route('wo.materialneededy')->with(['message' => 'Respective material Rejected successfully ']);
+        return redirect()->back()->with(['message' => 'Respective material Rejected successfully ']);
     }
 	
     

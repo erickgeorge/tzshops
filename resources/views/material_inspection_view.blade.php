@@ -5,11 +5,12 @@
     @endSection
 
 @section('body')
+@if(count($items) > 0)   
 <div class="container">
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work Orders that need material </b></h3>
+            <h3 align="center"><b>Materials needed by Work order </b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -27,6 +28,7 @@
             </ul>
         </div>
     @endif
+
    
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
@@ -62,24 +64,20 @@
                     <td>   <span> <a style="color: black;" title="Reject" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModal"><i class="fas fa-times-circle" style="color: red"></i></a>
                 </span> </td>
                     </tr>
-
-
-
                     @endforeach
+                </tbody>
+                   </table>
 
 
                 </br>
 
-                    <div> <h5> Accept all  <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Accept"><i class="far fa-check-circle"></i></a>
+                    <div> <h5> Send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
                    </span>  
 
                 
-                 &nbsp;&nbsp;&nbsp;&nbsp;  Reject all <span> <a style="color: black;" title="Reject" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
-                </span> </h5> </div> 
-            </tbody>
-        </table>
-    </div>
-    </div>
+                 &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
+                </span> </h5> </div>
+ 
 
 
   <div class="modal fade" id="exampleModalu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,7 +90,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Please provide reason as to why you want to reject material requested by Head of Section.</p>
+                    <p>Please provide reason as to why you want to reject all material requested by Head of Section.</p>
                     <form method="POST"  action ="{{ route('store.materialreject', [$item->work_order_id]) }}"  >
                         @csrf
                         <textarea name="reason" required maxlength="400" class="form-control"  rows="5" id="reason"></textarea>
@@ -140,5 +138,14 @@
 
 
     </script>
+
+    @else       
+               <div class="container" align="center">
+                
+                   <br><div> <h2 style="padding-top: 300px;">No Material needed by Work order</h2></div>
+                
+            </div>
+                   @endif
+
 
     @endSection

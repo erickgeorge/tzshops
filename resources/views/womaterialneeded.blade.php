@@ -5,11 +5,12 @@
     @endSection
 
 @section('body')
+@if(count($items) > 0)
 
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work Orders that need material </b></h3>
+            <h3 align="center"><b>Work orders that need material </b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -64,4 +65,11 @@
         </table>
     </div>
 </div>
+ @else       
+               <div class="container" align="center">
+                
+                   <br><div> <h2 style="padding-top: 300px;">No work order needs Material</h2></div>
+                
+            </div>
+                   @endif
     @endSection
