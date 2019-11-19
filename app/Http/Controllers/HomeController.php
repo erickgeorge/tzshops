@@ -1340,7 +1340,29 @@ public function wo_material_acceptedbyIOWView($id)
         return view('workorderreport', ['role' => $role,'notifications' => $notifications, ]);
    }
 
+   public function allhos(){
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $all = User::where('type','like','%HOS%')->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $head = 'All HOS Details';
+        return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
 
+   }
+   public function alltechnicians(){
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $all = User::where('type','like','%Technician%')->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $head = 'All Technicians Details';
+        return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
+   }
+
+   public function alliow(){
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $all = User::where('type','like','%Inspector%')->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $head = 'All Inspectors of work Details';
+        return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
+   }
 
 
 }

@@ -121,7 +121,7 @@
                     </li>
                     -->
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Materials to purchase <span
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Purchase <span
                                     class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
                     </li>  
                     <li class="nav-item">
@@ -158,7 +158,7 @@
                <a class="dropdown-item" style="color:white" href="{{ url('/unattended_work_orders')}}">Unattended Work Orders</a>
           <a  style="color:white" class="dropdown-item" href="{{ url('/completed_work_orders')}}">Completed Work Orders</a>
            <a style="color:white" class="dropdown-item" href="{{ url('/woduration')}}">Work Orders Duration</a>
-            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">WorkOrders <span
+            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">All WorkOrders <span
                                     class="badge badge-light">{{ count($w) }}</span></a>
 
         </div>
@@ -287,7 +287,7 @@
                 @endif
 
 
-                 @if(auth()->user()->type == 'Head Procurement4')
+                 @if(auth()->user()->type == 'Head Procurement')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white">Materials to be purchased <span
                                     class="badge badge-light"></span></a>
@@ -344,17 +344,33 @@
                 @if(auth()->user()->type != 'STORE')
                 @if(auth()->user()->type != 'Transport Officer')
                 @if(auth()->user()->type != 'Inspector Of Works')
+                @if(auth()->user()->type != 'Estates Director')
                 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
                 </li>
+                @endif
                 @ENDIF
                 
                 @ENDIF
                 @ENDIF
                    @ENDIF
-                
+  @if(auth()->user()->type == 'Estates Director')               
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+         Others 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
+               <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">Head of sections</a>
+          <a  style="color:white" class="dropdown-item" href="{{ url('/alltechnicians')}}">Technicians</a>
+           <a style="color:white" class="dropdown-item" href="{{ url('/alliow')}}">Inspectors of work</a>
+           
 
+        </div>
+       </li> 
+@endif
                 @if($role['user_role']['role_id'] == 1)
                   <!--  <li class="nav-item">
                         <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>

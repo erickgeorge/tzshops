@@ -122,7 +122,11 @@ Route::post('delete/directorate/{id}', 'DirectorateController@deleteDirectorate'
 Route::POST('edit/department', 'DirectorateController@editDepartment')->name('department.edit');
 Route::post('delete/department/{id}', 'DirectorateController@deleteDepartment')->name('department.delete');
 
-
+//////////////////////////////////////////
+Route::get('/allhos','HomeController@allhos')->name('allhos');
+Route::get('/alltechnicians','HomeController@alltechnicians')->name('alltechnicians');
+Route::get('/alliow','HomeController@alliow')->name('alliow');
+//////////////////////////////////////////
 
 Route::POST('edit/section', 'DirectorateController@editSection')->name('section.edit');
 Route::post('delete/section/{id}', 'DirectorateController@deleteSection')->name('section.delete');

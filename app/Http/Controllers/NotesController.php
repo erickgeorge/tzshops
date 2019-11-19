@@ -855,7 +855,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
                     ->get()];
          $pdf = PDF::loadView('grnpdf', $data);
    
-     return $pdf->download('Goods received Note.pdf');
+     return $pdf->stream('Goods received Note - '.$id.'-'.date('d-m-Y').'.pdf');
     }
 
     public function issuenotepdf($id){
@@ -865,7 +865,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
                     ->get()];
          $pdf = PDF::loadView('issuenotepdf', $data);
    
-     return $pdf->download('Issue Note.pdf');
+     return $pdf->stream('Issue Note- '.$id.'-'.date('d-m-Y').'.pdf');
     }
 
 }

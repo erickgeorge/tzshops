@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-    technicians
+    {{ $head }}
     @endSection
 @section('body')
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center">Available Technicians</h3>
+            <h3 align="center">{{ $head }}</h3>
         </div>
     </div>
     @if(Session::has('message'))
@@ -17,9 +17,8 @@
     <br>
     <hr>
     <div class="container">
-    <a style="margin-left: 2%;" href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>
 
-    @if(!$techs->isEmpty())
+
         <table class="table table-striped" id="myTable">
         <thead class="thead-dark">
         <tr>
@@ -28,7 +27,6 @@
             <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
             <th scope="col">Section</th>
-            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -47,7 +45,7 @@
         $i=1;
 
         ?>
-        @foreach($techs as $tech)
+        @foreach($rle as $tech)
             <tr>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
@@ -64,16 +62,7 @@
 
       ?></td>
                 <td>{{ $tech->type }}</td>
-                <td>
-                    <div class="row">
-                        <a style="color: green;" href="{{ route('tech.edit.view', [$tech->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
-
-                        <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this Technician?')" action="{{ route('tech.delete', $tech->id) }}" >
-                            {{csrf_field()}}
-                            <button type="submit" data-toggle="tooltip" title="Delete"> <a style="color: red;" href="" data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a></button>
-                        </form>
-                    </div>
-                </td>
+                
             </tr>
         @endforeach
         </tbody>
@@ -81,7 +70,8 @@
 
         </table>
     </div>
-    @endif
+   
+
     <script>
         $(document).ready(function(){
 

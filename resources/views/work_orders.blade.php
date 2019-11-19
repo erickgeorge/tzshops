@@ -81,6 +81,9 @@ use Carbon\Carbon;
  ?>
 <!-- SOMETHING STRANGE HERE -->
           @if(auth()->user()->type == 'CLIENT')
+          <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+  <i class="fa fa-file-pdf-o"></i> PDF
+</button>
        @else
           <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
   <i class="fa fa-file-pdf-o"></i> PDF
@@ -148,6 +151,10 @@ use Carbon\Carbon;
             <select name="userid" class="form-control mr-sm-2">
               <option value="">Select name</option>
 
+ @if(auth()->user()->type == 'CLIENT')
+              <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
+              @else
+
   <?php
 //
 
@@ -190,7 +197,7 @@ use Carbon\Carbon;
 //
 
       ?>
-   
+   @endif
             </select>
           </div>
       </div>
