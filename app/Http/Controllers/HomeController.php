@@ -1350,7 +1350,7 @@ public function wo_material_acceptedbyIOWView($id)
    }
    public function alltechnicians(){
     $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
-    $all = User::where('type','like','%Technician%')->get();
+    $all = Technician::get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     $head = 'All Technicians Details';
         return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);

@@ -306,7 +306,7 @@ Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedVie
 
 
 
-
+Route::get('allpdf','NotesController@allpdf')->name('allpdf');
  Route::get('wowithdurationpdf','NotesController@wowithdurationpdf');
  Route::get('roomreportpdf','NotesController@roomreportpdf');
  Route::get('techniciancompleteworkpdf','NotesController@techniciancompleteworkpdf');

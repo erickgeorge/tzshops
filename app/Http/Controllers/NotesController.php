@@ -10,6 +10,7 @@ use App\WorkOrder;
 use App\User;
 use App\Notification;
 use App\Material;
+use App\Technician;
 use App\workorderMaterial;
    
 class NotesController extends Controller
@@ -847,7 +848,89 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
     }
 ///////////////////////////////////////////////////    
     }
+///////////////// prints from hos \/ below /////////////////////
+    public function allpdf()
 
+    {
+        $data['header']='';
+        if (($_GET['name']!='')&&($_GET['type']!='')) {
+            if ($_GET['change']=='hos') 
+            {
+                 $data['fetch'] = user::where('type','like','%HOS%')->get();
+ $data['header'] = 'All Heads of Section Details';
+            }elseif($_GET['change']=='iow')
+            {
+                 $data['fetch'] = user::where('type','like','%Inspector%')->get();
+ $data['header'] = 'All Inspectors of work Details';
+            }else
+            {
+                 $data['fetch'] = Technician::where('type',$_GET['type'])->get();
+             $data['header'] = 'All Technicians Details';    
+            }
+        }
+        if (($_GET['name']=='')&&($_GET['type']!='')) 
+        {
+          if ($_GET['change']=='hos') 
+          {
+                 $data['fetch'] = user::where('type',$_GET['type'])->get();
+                $data['header'] = 'All '.$_GET['type'].' Head of Section Details';
+            }elseif($_GET['change']=='iow')
+            {
+                 $data['fetch'] = user::where('type',$_GET['type'])->get();
+                $data['header'] = 'All '.$_GET['type'].' Inspector of work Details';
+            }else
+            {
+                 $data['fetch'] = Technician::where('type',$_GET['type'])->get();
+                $data['header'] = 'All '.$_GET['type'].'  Technicians Details';     
+            }
+        }
+        if (($_GET['name']!='')&&($_GET['type']=='')) 
+        {
+             if ($_GET['change']=='hos') 
+             {
+                 $data['fetch'] = user::where('type','like','%HOS%')->where('id',$_GET['name'])->get();
+                $data['header'] = 'Head of Section Details';
+            }elseif($_GET['change']=='iow')
+            {
+                 $data['fetch'] = user::where('type','like','%Inspector%')->where('id',$_GET['name'])->get();
+                $data['header'] = 'Inspector of work Details';
+            }else
+            {
+                 $data['fetch'] = Technician::where('id',$_GET['name'])->get();
+                 $data['header'] = 'Technician Details';    
+            }
+        }
+        if (($_GET['name']=='')&&($_GET['type']=='')) 
+        {
+            if ($_GET['change']=='hos') 
+            {
+                 $data['fetch'] = user::where('type','like','%HOS%')->get();
+ $data['header'] = 'All Heads of Section Details';
+            }elseif($_GET['change']=='iow')
+            {
+                 $data['fetch'] = user::where('type','like','%Inspector%')->get();
+ $data['header'] = 'All Inspectors of work Details';
+            }else
+            {
+                 $data['fetch'] = Technician::get();
+             $data['header'] = 'All Technician Details';    
+            }
+        }
+
+
+///////////////////////////////////////////////
+       if($data['fetch'] ->isEmpty()){
+     
+return redirect()->back()->withErrors(['message' => 'No data Found Matching your search ']);         
+}else{
+        
+$pdf = PDF::loadView('allreport', $data);
+return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+    }
+/////////////////////////////////////////////////// 
+
+    }
+///////////////// prints from hos /\ up ////////////////////////
 
     public function grnotepdf($id){
 
