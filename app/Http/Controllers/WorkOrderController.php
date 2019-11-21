@@ -535,7 +535,7 @@ public function transportforwork(Request $request, $id)
        $matir = WorkOrderMaterial::where('id',$p)->first();
        $matir->material_id = $request['material'];
        $matir->quantity = $request['quantity'];
-       $matir->status = 23; //status for material where HoS will send material again to store
+       $matir->status = 44; //status for material where HoS will send material again to store
        $matir->save();
   
         return redirect()->bacK()->with(['message' => 'Respective material edited successifully, Please edit all materials and send back to Inspector of work']);
@@ -637,13 +637,15 @@ public function transportforwork(Request $request, $id)
             return view('rejected_materials_view', [
                 'role' => $role,
                 'notifications' => $notifications,
-                   'wo' => WorkOrder::where('id', $id)->first(),
+                'wo' => WorkOrder::where('id', $id)->first(),
                 'items' =>WorkOrderMaterial::
-                    
-                     where('work_order_id',$id)->where('status',-1)
+
+                where('work_order_id',$id)->where('status',-1)->orwhere('work_order_id',$id)->where('status',17)->orwhere('work_order_id',$id)->where('status',44)
                      
-            
-                     ->get()
+                ->get()
+
+
+
             ]);
         } else
            
@@ -651,7 +653,7 @@ public function transportforwork(Request $request, $id)
             'role' => $role,
             'wo' => WorkOrder::where('id', $id)->first(),
             'notifications' => $notifications,
-            'items' => WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', -1)->get()
+            'items' => WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', -1)->orwhere('work_order_id',$id)->where('status',17)->get()
         ]);
     }
 

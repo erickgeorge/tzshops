@@ -437,6 +437,7 @@ public function profileView(){
         $wo_material=   WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',-1)
+                     ->orwhere('status',17)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
@@ -502,16 +503,17 @@ public function profileView(){
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+       
         $wo_material=   WorkOrderMaterial::
                     
-                     where('work_order_id',$id)->where('status',0)
+                     where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
                      
             
                      ->get();
+                     
         
         
-        return view('material_inspection_view', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+        return view('material_inspection_view', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications ,  'wo' => WorkOrder::where('id', $id)->first(),]);
     }
 
 

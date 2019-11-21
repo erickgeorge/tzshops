@@ -181,10 +181,10 @@ Route::get('/incrementmaterial/{id}', 'StoreController@incrementmaterialView')->
 
 Route::post('incrementmaterial', 'StoreController@incrementmaterial')->name('material.increment');
 
-Route::get('technicians', 'HomeController@techniciansView');
+Route::get('technicians', 'HomeController@techniciansView')->name('technicians');
 
 
-Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneededy');
+Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneededyi');
 
 
 Route::get('material_rejected_with_workorder', 'HomeController@workOrderMaterialRejected');
@@ -193,9 +193,6 @@ Route::get('material_received_with_workorder', 'HomeController@MaterialReceivewi
 
 
 Route::get('rejected/materials/{id}', 'WorkOrderController@rejectedmaterialview')->name('material.rejected');
-
-
-
 
 
 
@@ -258,8 +255,16 @@ Route::get('procurement_release/{id}', 'PurchasingOrderController@procurement_re
 
 
 
-
 Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('store.materialaccept');
+
+Route::get('accept/material/with/rejected/{id}', 'StoreController@Materialacceptedwithrejected')->name('store.materialaccept.reject');
+
+
+
+
+Route::get('return/material/{id}', 'StoreController@returnMaterialHOS')->name('store.materialreturn');
+
+
 Route::get('accept/material/independently/{id}', 'StoreController@acceptMaterialonebyone')->name('store.materialacceptonebyone');
 
 Route::post('reject/material/{id}', 'StoreController@rejectMaterial')->name('store.materialreject');
@@ -420,6 +425,9 @@ Route::get('generatePDF58','PDFController@generatePDF58');
 Route::POST('editmaterialrequest', 'WorkOrderController@editmaterialforwork')->name('requestagain.save');
 
 Route::POST('rejected/materials/edit/Material/{id}', 'WorkOrderController@editmaterial')->name('material.edit');
+
+Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@materialrejectonebyone');
+
 
 Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@editmaterialhos')->name('material.edit');
 
