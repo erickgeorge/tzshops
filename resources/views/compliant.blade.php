@@ -68,7 +68,7 @@
                             <td>{{ $work->message }}</td>
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
-                            <td><a class="badge badge-info" href="{{ url('complian'.$work->id) }}"><i class="fa fa-eye"></i>view</a></td>
+                            <td><a class="badge badge-info" href="{{ url('complian/'.$work->id) }}"><i class="fa fa-eye"></i>view</a></td>
                         </tr>
                         @endforeach
                     </tbody>

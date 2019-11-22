@@ -956,8 +956,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
     $data['wo'] = WorkOrder::where('id', $id)->with('work_order_inspection')->first();
     $data['header'] = 'Work Order Details (WO#'.$id.')';
 ///////////////////////////////////////////////
-      
-        
+     
 $pdf = PDF::loadView('trackworkreport', $data);
 return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
 /////////////////////////////////////////////////// 

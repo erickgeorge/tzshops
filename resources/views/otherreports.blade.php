@@ -54,7 +54,6 @@ use Carbon\Carbon;
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="GET" action="{{ url('allpdf') }}">
-        @csrf
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
@@ -82,11 +81,11 @@ use Carbon\Carbon;
                 <option value='' selected="selected">Type/section</option>
                
 @if($head == 'All HOS Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); ?>
+<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 @elseif($head == 'All Technicians Details')
-<?php $to = Technician::select('type')->distinct()->get(); ?>
+<?php $to = Technician::select('type')->distinct()->get(); $v='technician';?>
 @elseif($head == 'All Inspectors of work Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); ?>
+<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
 @endif
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ $too->type }}</option>
@@ -96,10 +95,8 @@ use Carbon\Carbon;
       </div>
       </div>
       
-      <input type="text" name="change" value="@if($head == 'All HOS Details')hos 
-      @elseif($head == 'All Technicians Details')technician
-      @elseif($head == 'All Inspectors of work Details')iow
-      @endif" hidden>
+      <input type="text" name="change"
+      value="<?php echo $v; ?>" hidden>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
