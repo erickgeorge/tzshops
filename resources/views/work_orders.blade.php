@@ -461,8 +461,55 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
                                         @if($diff > 2)
                                         @if( $work['user']->id==Auth::user()->id)
-                                        <a href="#" class="badge badge-warning">Complaint</a>
-                                        @endif
+                                        <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal{{ $work->id }}">Complaint</a>
+
+         
+<!-- SOMETHING STRANGE HERE -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{ $work->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="POST" action="{{ url('Complaint') }}">
+      @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Send Complaint Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+      <div class="row">
+          <div class="col">
+            <select name="name" class="form-control mr-sm-2" required="">
+              <option selected="selected" value=""> Send To :</option>
+             <?php $mtu = user::where('type','like','%Maintenance Coordinator%')->orWhere('type','like','%Director%')->get(); ?>
+             @foreach($mtu as $mt)
+             <option value="{{ $mt->id }}">{{ $mt->fname }} {{ $mt->lname }} - {{ $mt->type }}</option>
+             @endforeach
+            </select>
+          </div>
+      </div>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+          <div class="col">
+ <div class="input-group">
+  <textarea class="form-control" name="message" aria-label="With textarea" required="">Message</textarea>
+</div> 
+          </div>
+      </div>
+      </div>
+      <input type="text" name="work" hidden value="{{ $work->id }}">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+          <!-- ---------------------- -->                                        @endif
                                         @endif
                                         <br>
                                           @if(auth()->user()->type == 'Maintenance coordinator')

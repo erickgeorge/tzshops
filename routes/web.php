@@ -304,8 +304,8 @@ Route::get('work_order_material_accepted', 'HomeController@woMaterialAcceptedVie
 
 Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedView')->name('woMaterialRejected');
 
-
-
+Route::get('comp','UserController@comp')->name('comp');
+Route::post('Complaint','UserController@Complaint')->name('Complaint');
 Route::get('allpdf','NotesController@allpdf')->name('allpdf');
  Route::get('wowithdurationpdf','NotesController@wowithdurationpdf');
  Route::get('roomreportpdf','NotesController@roomreportpdf');

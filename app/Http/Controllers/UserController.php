@@ -13,6 +13,8 @@ use App\UserRole;
 use App\Directorate;
 use App\Department;
 use App\Section;
+use App\Complaint;
+use App\WorkOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -258,8 +260,36 @@ class UserController extends Controller
 
 return redirect()->route('myprofile')->with(['message' => 'Profile has changed successfully']);
         }
-	
-	
-	
 
+
+
+
+//////////////////////////////////////////////////////////////
+public function Complaint(Request $request)
+        {
+            $request->validate([
+            'name' => 'required',
+            'message' => 'required',
+            
+        ]);
+
+        $compliant = new Complaint();
+
+        $compliant->sender = auth()->user()->id;
+        $compliant->receiver = $request['name'];
+        $compliant->work = $request['work'];
+        $compliant->message = $request['message'];
+       
+        $compliant->save();
+
+return redirect()->route('work_order')->with(['message' => 'Compliant sent successfully']);
+}
+public function comp()
+{
+$role = User::where('id', auth()->user()->id)->with('user_role')->first();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+$compliant = Complaint::where('receiver',auth()->user()->id)->orderby('created_at','Desc')->get();
+return view('compliant', ['role' => $role,'compliant' => $compliant,'notifications' => $notifications
+        ]);
+}
 }
