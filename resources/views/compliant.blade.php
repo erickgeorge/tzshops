@@ -62,13 +62,13 @@
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                             <td><a href="{{ url('/track/work_order/'.$work->work) }}">{{ $work->work }}</a></td>
+                             <td><a href="{{ url('complian/'.$work->id) }}">{{ $work->work }}</a></td>
                             <td><?php $sender = user::where('id',$work->sender)->get();
                             foreach($sender as $send){echo $send->fname." ".$send->lname;} ?></td>
                             <td>{{ $work->message }}</td>
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
-                            <td><a class="badge badge-info" href="{{ url('/track/work_order/'.$work->work) }}"><i class="fa fa-eye"></i>view</a></td>
+                            <td><a class="badge badge-info" href="{{ url('complian'.$work->id) }}"><i class="fa fa-eye"></i>view</a></td>
                         </tr>
                         @endforeach
                     </tbody>

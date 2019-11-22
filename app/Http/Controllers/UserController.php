@@ -292,4 +292,11 @@ $compliant = Complaint::where('receiver',auth()->user()->id)->orderby('created_a
 return view('compliant', ['role' => $role,'compliant' => $compliant,'notifications' => $notifications
         ]);
 }
+public function complian(request $request, $id){
+$role = User::where('id', auth()->user()->id)->with('user_role')->first();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get(); 
+$single = Complaint::where('id',$id)->get();
+return view('complaint', ['role' => $role,'compliant' => $single,'notifications' => $notifications
+        ]);
+}
 }
