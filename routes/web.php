@@ -447,3 +447,4 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
 
 
  Route::post('delete/material/{id}', 'StoreController@deletematerial')->name('material.delete');
+ Route::get('trackreport/{id}','NotesController@trackreport')->name('trackreport');

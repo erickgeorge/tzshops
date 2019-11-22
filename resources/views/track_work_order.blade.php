@@ -366,9 +366,7 @@
   <tr>
     <td style="color:red" >{{ $iform->status }}</td>
     <td>{{ $iform->description }}</td>
-      <td>{{
-
-   $iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ $iform->date_inspected }}</td>
   </tr>
   
@@ -377,6 +375,11 @@
     @endif
     <br>
     <hr>
+    <div>
+  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+    Print report
+  </button></a>
+</div>
     @if(strpos(auth()->user()->type, "HOS") !== false)
          
           @if($wo->status == 30)
@@ -571,6 +574,7 @@
 
 
 </div>
+
 
 <script type="text/javascript">
   
