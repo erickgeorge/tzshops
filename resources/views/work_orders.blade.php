@@ -149,11 +149,12 @@ use Carbon\Carbon;
       <div class="row">
           <div class="col">
             <select name="userid" class="form-control mr-sm-2">
-              <option value="">Select name</option>
-
- @if(auth()->user()->type == 'CLIENT')
+              @if(auth()->user()->type == 'CLIENT')
               <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
               @else
+              <option value="">Select name</option>
+
+ 
 
   <?php
 //
@@ -458,6 +459,11 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                 @else
                                     @if($work->status == -1)
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
+                                        @if($diff > 2)
+                                        @if( $work['user']->id==Auth::user()->id)
+                                        <a href="#" class="badge badge-warning">Complaint</a>
+                                        @endif
+                                        @endif
                                         <br>
                                           @if(auth()->user()->type == 'Maintenance coordinator')
                                  <a href="#"><span data-toggle="modal" data-target="#redirect"
