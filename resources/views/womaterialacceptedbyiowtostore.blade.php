@@ -19,7 +19,7 @@
         </div>--}}
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">

@@ -95,10 +95,65 @@ class StoreController extends Controller
 
         return redirect()->route('add_material')->with(['message' => 'New material successfully added']);
     }
+   
+
+
+
+
+
+     public function Materialacceptedwithrejected($id)
+    {
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('status',9)->get();
+
+		 foreach($wo_materials as $wo_material) {
+		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m->status = 17;
+		  $wo_m->save();
+		 }
+		 
+		 //status field of work order
+			$mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status = 15;
+			
+             $mForm->save();
+       return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Rejected successfully with others Accepted']);
+    }
+
+
+
+
+
+
+
+
+
+
+
+ 	public function materialnotreserve($id)
+    {
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get();
+
+		 foreach($wo_materials as $wo_material) {
+		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m->status = 56;
+		  $wo_m->save();
+		 }
+		 
+		 //status field of work order
+			$mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status = 15;
+			
+             $mForm->save();
+       return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Accepted successfully ']);
+    }
+
+
+
+
+
 
 	public function acceptMaterial($id)
     {
-       
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->get();
 
 		 foreach($wo_materials as $wo_material) {
@@ -112,8 +167,10 @@ class StoreController extends Controller
              $mForm->status = 15;
 			
              $mForm->save();
-       return redirect()->route('wo.materialneededy')->with(['message' => 'Material Accepted successfully ']);
+       return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Accepted successfully ']);
     }
+
+
 
 
 
@@ -136,23 +193,7 @@ class StoreController extends Controller
 
 
 
-	public function acceptMaterialonebyone($id)
-    {
-       
-        $wo_materials =WorkOrderMaterial::where('material_id', $id)->where('status',0)->get();
-
-		 foreach($wo_materials as $wo_material) {
-		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
-		 $wo_m->status = 1;
-		 $wo_m->save();
-		 }
-		 
-		 //status field of work order
-			
-
-        return redirect()->route('wo.materialneededy')->with(['message' => 'Respective material Accepted successfully ']);
-    }
-
+	
 
 
 
@@ -160,7 +201,7 @@ class StoreController extends Controller
 	public function rejectMaterial(request $request, $id)
     {
        
-          $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->get();
+          $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('work_order_id', $id)->where('status',9)->get();
 
 		 foreach($wo_materials as $wo_material) {
 		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
@@ -174,40 +215,30 @@ class StoreController extends Controller
              $mForm->status = 16;
 			
              $mForm->save();
-        return redirect()->back()->with(['message' => 'Material Rejected successfully ']);
+        return redirect()->route('wo.materialneededyi')->with(['message' => 'All materials Rejected successfully ']);
     }
 	
 	
 
-	public function rejectMaterialonebyone(request $request, $id)
+	
+
+
+
+
+      public function materialrejectonebyone(Request $request, $id )
     {
-       
-        $wo_materials =WorkOrderMaterial::where('material_id', $id)->where('status',0)->get();
-
-		foreach($wo_materials as $wo_material) {
-		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
-		$wo_m->status = -1;
-		$wo_m->reason = $request['reason'];
-		$wo_m->save();
-		 }  
-
-
-		 //status field of work order
-		
+       $p=$request['edit_mat'];
+       $matir = WorkOrderMaterial::where('id',$p)->first();
+      
+       $matir->reason = $request['reason'];
+       $matir->status = 9; 
+       $matir->save();
+  
         return redirect()->back()->with(['message' => 'Respective material Rejected successfully ']);
     }
-	
-    
-
-    
-
-
-
-
 
 	
-	
-	
+ 
 	
 		public function material_request_hos($id)
     {
@@ -417,7 +448,7 @@ public function deletematerial($id)
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 	
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',23)->get();
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',-1)->orwhere('work_order_id', $id)->where('status',44)->orwhere('work_order_id', $id)->where('status',17)->get();
 
 		 foreach($wo_materials as $wo_material) {
 		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 

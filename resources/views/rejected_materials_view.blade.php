@@ -67,6 +67,7 @@
 				<th >Workorder Detail</th>
 				<th >Material Name</th>
 				<th >Material Description</th>
+        <th>Unit Measure</th>
 				<th >Type</th>
 				<th >Quantity</th>
                 <th >Reason</th>
@@ -89,17 +90,21 @@
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
+                     <td>{{ $item['material']->brand }}</td>
                     <td>{{ $item['material']->type }}</td>
 					       <td>{{ $item->quantity }}</td>
+                 @if($item->reason == NULL)
+                 <td><span class="badge badge-info">No Reason</span></td>
+                 @else
                    <td>
-
-
-
-
                       <a onclick="myfunc('{{ $item->reason }}')"><span data-toggle="modal" data-target="#viewReason"
-                                                                         class="badge badge-success">View reason</span></a></td>
-                   <td>
+                                                                         class="badge badge-success">View Reason</span></a>  </td>
+                                                                             @endif
 
+                  @if($item->reason == NULL)
+                  <td><span class="badge badge-warning">Approved</span></td>
+                  @else
+                    <td>
                           <div class="row">
 
                              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<a style="color: green;"
@@ -120,10 +125,15 @@
                                     </form>
                       </div>
                     </td>
+                    @endif
                   
-                                                                       
-                    <td style="color: red">
-                       REJECTED</td>
+                       @if($item->reason == NULL)
+                       <td><span class="badge badge-success">Accepted</span></td>
+                       @elseif($item->status == 44)                                               
+                       <td><span class="badge badge-warning">Edited..</span></td>
+                       @else
+                       <td><span class="badge badge-danger">Rejected</span></td>
+                       @endif
                     </tr>
                     @endforeach
             </tbody>
@@ -131,6 +141,12 @@
     </div>
      <!--<div class="container">    <button  type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalu">Send Material request again</button>
         </div>-->
+
+        <br>
+        <br>
+
+           <div style="color: black; "> <h5> Request Material  again to inspector of work <span> <a style="color: green;" href="/send/material_rejected_again/{{$item->work_order_id}}"  data-toggle="tooltip" title="Request back to inspector of work"><i class="far fa-check-circle"></i></a>
+                   </span> </h5></div> 
 
    
         
@@ -291,7 +307,7 @@
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div> 
-                                                       <button style=" width: 205px;" type="submit" class="btn btn-primary">Request Material again
+                                                       <button style=" width: 205px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
                                          
@@ -314,20 +330,25 @@
 
    
                 </div>
+
+
+
                 <div class="modal-footer">
                 </div>
             </div>
         </div>
         </div>
-
-
-
-
     </div>
+
+
+
+
     @else
             <h1 class="text-center" style="margin-top: 150px">You have no material rejected by Inspector of Work</h1>
         @endif
     <!-- End Modals-->
+
+
 
 
 <!--end of material -->
@@ -358,12 +379,12 @@
     
        
   
-        <div>
+      <!--  <div>
             <label>
                 <input type="checkbox" name="colorCheckbox"
                     value="C"> <b>List of Edited Materials</b></label>
           
-        </div>
+        </div>-->
         <div class="C selectt">
 
 
@@ -382,7 +403,8 @@
   <tr>
      <th>No</th>
     <th>Material Name</th>
-    <th>Brand Name</th>
+    <th>Material Description</th>
+    <th>Unit Measure</th>
     <th>Type</th>
      <th>Quantity Requested</th>
    
@@ -399,6 +421,7 @@
     <td>{{$i++}}</td>
     <td>{{$matform['material']->name }}</td>
      <td>{{$matform['material']->description }}</td>
+      <td>{{$matform['material']->brand }}</td>
      <td>{{$matform['material']->type }}</td>
      <td>{{$matform->quantity }}</td>
      
