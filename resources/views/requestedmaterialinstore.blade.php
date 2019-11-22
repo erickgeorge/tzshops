@@ -31,7 +31,7 @@
       <th>Quantity to Reserve</th>
       
        <th>Material to be Purchased</th>
-       <th>Action</th>
+       <!--<th>Action</th>--->
        
        
   </tr>
@@ -79,12 +79,12 @@
       @endif
       <td>{{$procured }}</td>
 
-      @if(in_array("yes", $p))
+     <!-- @if(in_array("yes", $p))
       <td><span class="badge badge-warning">Reserve..</span> </td>
       @else
       <td>Send to HoS<span> <a style="color: green;" href="{{ route('store.materialtohos', [$matform->work_order_id]) }}"  data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
                    </span> </td>
-      @endif
+      @endif -->
 
       </tr>
       @endforeach

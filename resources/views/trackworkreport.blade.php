@@ -1,4 +1,4 @@
-
+<title><?php echo $header; ?></title>
 <?php use App\WorkOrderInspectionForm;
     use App\WorkOrderTransport;
     use App\WorkOrderStaff;
@@ -70,7 +70,7 @@
   <hr>
   <br>
  @if($wo->emergency == 1)
-   <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
+   <h6 align="center" style="color: red;"><b> This Workorder is Emergency </b></h6>
  @endif
 
 
@@ -314,19 +314,9 @@
                 <span class="badge badge-warning" style="padding: 20px">Work order tempolary closed!</span>
             </div>
         @elseif($wo->status == 9)
-              <div>
-                <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Close work order completely</button>
-                </form>
-            </div>
+              
         @else
-            <div>
-                <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-warning">Close work order temporalily</button>
-                </form>
-            </div>
+            
         @endif
 
     @else

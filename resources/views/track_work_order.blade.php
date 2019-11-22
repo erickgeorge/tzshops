@@ -376,9 +376,7 @@
     <br>
     <hr>
     <div>
-  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
-    Print report
-  </button></a>
+ 
 </div>
     @if(strpos(auth()->user()->type, "HOS") !== false)
          
@@ -406,6 +404,11 @@
                 </form>
             </div>
         @endif
+        <div style="padding: 1em;">
+         <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+    Print report
+  </button></a>
+</div>
 
     @else
         <div class="row">
