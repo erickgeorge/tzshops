@@ -31,6 +31,8 @@
       <th>Quantity to Reserve</th>
       
        <th>Material to be Purchased</th>
+       <th>Action</th>
+       
        
   </tr>
 </thead>
@@ -75,8 +77,15 @@
       <?php $procured=$matform->quantity- $matform['material']->stock +  $matform['material']->quantity_reserved; ?>
          <td style="color:red">{{$matform['material']->stock-  $matform['material']->quantity_reserved}}</td>
       @endif
-      
       <td>{{$procured }}</td>
+
+      @if(in_array("yes", $p))
+      <td><span class="badge badge-warning">Reserve..</span> </td>
+      @else
+      <td>Send to HoS<span> <a style="color: green;" href="{{ route('store.materialtohos', [$matform->work_order_id]) }}"  data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
+                   </span> </td>
+      @endif
+
       </tr>
       @endforeach
       </tbody>            
