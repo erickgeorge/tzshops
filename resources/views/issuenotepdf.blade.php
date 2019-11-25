@@ -101,8 +101,8 @@ tr:nth-child(even) {
      
     <div class="container-name">
    
-    <div class="div1"> Material Received By:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}  </u> </div>
-    <div class="div2"> Store Manager:  <u style="padding-left: 12px;"> {{ $item['userreceiver']->fname.' '.$item['userreceiver']->lname }}</u></div>
+    <div class="div1"> Material Received By:<u style="padding-left: 40px;"> {{ $item['userreceiver']->fname.' '.$item['userreceiver']->lname }} </u> </div>
+    <div class="div2"> Store Manager:  <u style="padding-left: 12px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }} </u></div>
    </div>
    <br>
 

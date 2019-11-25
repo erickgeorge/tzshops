@@ -56,7 +56,8 @@
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 					
                  
-                      <td>  <a style="color: green;" href="work_order_material_purchased/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">View material</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_purchased/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">
+                      Material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach

@@ -129,25 +129,27 @@ class StoreController extends Controller
 
 
 
- 	public function materialnotreserve($id)
+ 	public function materialnotreserve( $id )
     {
-        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get();
 
-		 foreach($wo_materials as $wo_material) {
-		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
-		 $wo_m->status = 56;
-		  $wo_m->save();
-		 }
-		 
-		 //status field of work order
-			$mForm = WorkOrder::where('id', $id)->first();
-             $mForm->status = 15;
-			
-             $mForm->save();
-       return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Accepted successfully ']);
+			$mat = WorkOrderMaterial::where('id', $id)->first();
+            $mat->status = 3;
+
+            $material_id=$mat->material_id;
+		    $material_quantity=$mat->quantity;
+		    $material=Material::where('id', $material_id)->first();
+		    $stock=$material->stock;
+		    $rem=$stock-$material_quantity;
+		    $material->stock=$rem;
+		    $material->save();
+            $mat->save();
+
+
+       return redirect()->back()->with(['message' => 'Material Sent  successfully to Head of Section']);
     }
 
-
+ 
+  
 
 
 
@@ -250,7 +252,7 @@ class StoreController extends Controller
 		 foreach($wo_materials as $wo_material) {
 		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		  $wo_m->status = 3;//status for material available in store
-		  $wo_m->receiver_id = auth()->User()->id;
+		 
 		  $wo_m->save();
 		 }
 
@@ -424,6 +426,7 @@ public function deletematerial($id)
 		 foreach($wo_materials as $wo_material) {
 		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		 $wo_m->status = 0; //status for material correct sent again to IoW
+		  $wo_m->receiver_id = auth()->User()->id;
 		  $wo_m->save();
 		 }
 

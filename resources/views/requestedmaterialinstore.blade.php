@@ -6,10 +6,21 @@
 
 @section('body')
 
+
 <br>
 <br>
 <br>
 <br>
+@if(COUNT($wo_materials)>0)
+<div class="container">
+ @if(Session::has('message'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+    @endif
+</div>
   
 <div class="container">
 
@@ -18,7 +29,7 @@
 <br>  
 <hr>
 
-                         @if(COUNT($wo_materials)!=0)
+                         
                          <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
   <tr>
@@ -31,7 +42,7 @@
       <th>Quantity to Reserve</th>
       
        <th>Material to be Purchased</th>
-       <!--<th>Action</th>--->
+       <th>Action</th>
        
        
   </tr>
@@ -79,12 +90,12 @@
       @endif
       <td>{{$procured }}</td>
 
-     <!-- @if(in_array("yes", $p))
+      @if(($matform['material']->stock- $matform['material']->quantity_reserved)<($matform->quantity))
       <td><span class="badge badge-warning">Reserve..</span> </td>
       @else
-      <td>Send to HoS<span> <a style="color: green;" href="{{ route('store.materialtohos', [$matform->work_order_id]) }}"  data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
+      <td>Send to HoS<span> <a style="color: green;"  href="{{ route('store.materialtohos', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
                    </span> </td>
-      @endif -->
+      @endif
 
       </tr>
       @endforeach
@@ -105,6 +116,16 @@
 
 
                         @endif
+
+                        <br><br><br><br><br><br><br>
+                        @else
+<br>
+<br>
+<br>
+<br>
+<div align="center"> <h1>No Workorder Material accepted by Inspector of Work</h1></div>
+
+
                          @endif
 
                          </div>

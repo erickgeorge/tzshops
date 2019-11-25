@@ -70,7 +70,7 @@
 
                         &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id }}','{{ $item->reason }}')"
-                                       data-toggle="modal" data-target="#exampleModali" title="Edit"><i
+                                       data-toggle="modal" data-target="#exampleModali" title="Reject"><i
                                                 class="fas fa-times-circle" style="color: red"></i></a>
 
 

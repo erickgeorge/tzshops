@@ -6,7 +6,8 @@
 
 @section('body')
 
-    <br>
+
+ <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
             <h3 align="center"><b>Work order with material accepted by Inspector of Work</b></h3>
@@ -58,11 +59,12 @@
 					
 					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View material accepted by IoW</a></td>
                   
-                       </td>
+                       
                     </tr>
                     @endforeach
             </tbody>
         </table>
     </div>
 </div>
+
     @endSection

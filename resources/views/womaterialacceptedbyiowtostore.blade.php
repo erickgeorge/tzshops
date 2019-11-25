@@ -5,6 +5,7 @@
     @endSection
 
 @section('body')
+@if(count($items)>0)
 
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
@@ -58,11 +59,18 @@
 					
 					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View material accepted by IoW</a></td>
                   
-                       </td>
+                       
                     </tr>
                     @endforeach
             </tbody>
         </table>
     </div>
 </div>
+<br><br><br>
+
+@else
+
+<div style="padding-top: 300px;" align="center"><h1> No Workorder Material accepted by Inspector of Work </h1></div>
+
+@endif
     @endSection
