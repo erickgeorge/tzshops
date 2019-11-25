@@ -5,24 +5,26 @@
     @endSection
 
 @section('body')
+@if(count($items)>0)
 
 
     <br>
     <br>
 
 <br>
-<br>
+<br>   <br>
 
     <div>
         <div>
-            <h3 class="container"><b>Material Reserved by Works Orders</b></h3>
+            <h3 align="center" class="container"><b>Material Reserved by Works Orders</b></h3>
         </div>
        
     </div>
 
 
     <br>
-    <hr>
+
+    <hr class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -36,7 +38,7 @@
             <thead class="thead-dark">
             <tr>
                 <th >#</th>
-                <th >HoS Name</th>
+       
                 <th >Material Name</th>
                 <th >Description</th>
                 <th >Unit Measure</th>
@@ -57,18 +59,14 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['staff']->fname.' '.$item['staff']->lname }}</td>
+                   
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <?php $m = 0 -$item['material']->stock + $item->quantity ?>
-                       @if($m < 0 )
-                       <td style="color: red">{{ $item['material']->stock = $item->quantity  }} </td>
-                       @else 
-                       <td style="color: red">  {{ $item['material']->stock }}</td>
-                       @endif
+                    <td style="color: blue;">{{ $item->reserved_material }}</td>
+                   
 
                     </tr>
                     @endforeach
@@ -78,6 +76,15 @@
         
                   
     </div>
+    @else
+        <div style="padding-top: 300px;">
+        <div>
+            <h3 align="center">No available Material Reserved by Works Orders</h3>
+        </div>
+       
+    </div>
+
+    @endif
     
     
     @endSection

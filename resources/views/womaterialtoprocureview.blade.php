@@ -15,14 +15,15 @@
 
     <div>
         <div>
-            <h3 class="container"><b>Work order  with material to be purchased </b></h3>
+            <h3 align="center"><b>Work order  with material to be purchased </b></h3>
         </div>
        
     </div>
 
 
     <br>
-    <hr>
+    <hr class="container">
+    <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -30,13 +31,14 @@
             </ul>
         </div>
     @endif
+    </div>
    
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
                 <th >#</th>
-                <th >HoS Name</th>
+               
                 <th >Material Name</th>
                 <th >Brand Name</th>
                 <th >Value/Capacity</th>
@@ -55,21 +57,15 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['staff']->fname.' '.$item['staff']->lname }}</td>
+                  
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <?php $m = 0 -$item['material']->stock + $item->quantity ?>
-                       @if($m < 0 )
-                       <td style="color: red">{{ $item['material']->stock = $item->quantity  }} </td>
-                       @else 
-                       <td style="color: red">  {{ $item['material']->stock }}</td>
-                       @endif
+                    <td>{{ $item->reserved_material }}</td>
 
-
-                    <td style="color: blue"> {{ (0 -($item['material']->stock - $item->quantity) )}}</td>
+                    <td style="color: blue"> {{ $item->quantity- $item->reserved_material  }}</td>
                     </tr>
                     @endforeach
             </tbody>

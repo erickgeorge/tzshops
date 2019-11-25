@@ -19,7 +19,7 @@
         </div>--}}
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -37,6 +37,7 @@
 				
                 <th > # </th>
 				<th > ID </th>
+                <th>HoS Name</th>
 				<th >Workorder Detail</th>
 				
 				<th >Action</th>
@@ -52,11 +53,12 @@
                
                 <tr> <td>{{$i++}}</td>
                     <td>00{{ $item->work_order_id }}</td>
+                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     <td>{{ $item['workorder']->details }}</td>
                     
                     <td>
 					
-					 <a class="btn btn-primary btn-sm" href="{{ route('store.material_to_procure_view', [$item->work_order_id]) }}" role="button">View material to purchase</a></td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('store.material_to_procure_view', [$item->work_order_id]) }}" role="button">View Material</a></td>
                   
                        </td>
                     </tr>

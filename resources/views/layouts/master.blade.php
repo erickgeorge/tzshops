@@ -225,7 +225,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved_checked_by_store') }}" >Reserved Materials <span
+                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved') }}" >Reserved Materials <span
                                     class="badge badge-light">{{ count($wo_material_reservedd) }}</span></a>
                     </li>
 
@@ -233,6 +233,7 @@
                         <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted_by_iow')}}">Material requests<span
                                     class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span></a>
                     </li>
+
 
 
 
@@ -288,10 +289,10 @@
 
 
                  @if(auth()->user()->type == 'Head Procurement')
-                    <li class="nav-item">
+                   <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white">Materials to be purchased <span
                                     class="badge badge-light"></span></a>
-                    </li>
+                    </li>-->
                     
                     
                      <!--

@@ -15,7 +15,7 @@
 
     <div>
         <div>
-            <h3 class="container"><b>Material Purchased from Head of Procurement </b></h3>
+            <h3 align="center"><b>Material Purchased from Head of Procurement </b></h3>
 
         </div>
        
@@ -23,7 +23,7 @@
 
 
     <br>
-    <hr>
+    <hr class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -64,7 +64,7 @@
                     <td>{{ $item['material']->brand }}</td>
                     <td>{{ $item['material']->type }}</td>
                  
-                   <td style="color: blue"> {{ (0 -($item['material']->stock - $item->quantity) )}}</td>
+                   <td style="color: blue"> {{ $item->quantity - $item->reserved_material}}</td>
 
                     </tr>
                     @endforeach

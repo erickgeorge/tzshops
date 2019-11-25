@@ -5,12 +5,12 @@
     @endSection
 
 @section('body')
+@if(count($items)>0)
 
-
- <br>
+    <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work order with material accepted by Inspector of Work</b></h3>
+            <h3 align="center"><b>Work order with material reserved</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -20,7 +20,7 @@
         </div>--}}
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -38,6 +38,7 @@
 				
                 <th > No </th>
 				<th >Workorder ID </th>
+                <th >HoS Name </th>
 				<th >Workorder Detail</th>
 				
 				<th >Action</th>
@@ -53,11 +54,13 @@
                
                 <tr> <td>{{$i++}}</td>
                     <td>00{{ $item->work_order_id }}</td>
+                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    
                     <td>{{ $item['workorder']->details }}</td>
                     
                     <td>
 					
-					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View Material</a></td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('wo.reserved.material', [$item->work_order_id]) }}" role="button">View Material</a></td>
                   
                        
                     </tr>
@@ -66,5 +69,11 @@
         </table>
     </div>
 </div>
+<br><br><br>
 
+@else
+
+<div style="padding-top: 300px;" align="center"><h1> No Workorder Material accepted by Inspector of Work </h1></div>
+
+@endif
     @endSection

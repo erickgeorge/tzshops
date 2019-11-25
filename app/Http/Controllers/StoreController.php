@@ -130,17 +130,20 @@ class StoreController extends Controller
             $mat->status = 5 ;
 
             $material_id=$mat->material_id;
-		    $material_quantity=$mat->quantity;
+		
 		    $material=Material::where('id', $material_id)->first();
-		    $stock=$material->stock;
-		    $rem=$stock-$material_quantity;
-		    $material->stock=$rem;
+		    $mat->reserved_material = $material->stock;
+		   
+		    $material->stock= 0;
 		    $material->save();
             $mat->save();
 
 
        return redirect()->back()->with(['message' => 'Material Sent  successfully to Head of Section']);
     }
+
+
+
 
 
 

@@ -82,7 +82,7 @@ tr:nth-child(even) {
                     <td>{{ $item['material']->brand }}</td>
                     <td>{{ $item['material']->type }}</td>
 
-                   <td style="color: blue"> {{ (0 -($item['material']->stock - $item->quantity) )}}</td>
+                   <td style="color: blue"> {{ $item->quantity - $item->reserved_material }}</td>
 
                     </tr>
                     
@@ -99,7 +99,7 @@ tr:nth-child(even) {
     <div class="container-name">
      <div class="div1">Material Purchased By: <u style="padding-left: 12px;"> {{ $item['user']->fname.' '.$item['user']->lname }}</u></div>
     <div class="div2"> Store Manager:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}  </u> </div>
-  </div>
+   </div>
 
      
      <div class="container-name">

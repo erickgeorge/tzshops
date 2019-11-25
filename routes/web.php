@@ -219,7 +219,7 @@ Route::get('wo_material/{id}', 'HomeController@wo_materialView')->name('store.ma
 
 Route::get('wo_material_to_procure/{id}', 'HomeController@wo_material_to_purchaseView')->name('store.material_to_procure_view');
 
-Route::get('/wo_material_reserved_checked_by_store', 'HomeController@wo_material_to_purchaseViewbystore');
+Route::get('/wo_material_reserved_from_store/{id}', 'HomeController@wo_material_to_purchaseViewbystore')->name('wo.reserved.material');
 
 Route::get('/wo_material_purchased_by_head_of_procurement', 'HomeController@wo_material_purchasedViewbyheadprocurement');
 
@@ -439,6 +439,7 @@ Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@mat
 Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@editmaterialhos')->name('material.edit');
 
 
+ Route::get('wo_material_reserved', 'HomeController@material_reserved');
 
  //Route::get('requested/material/{id}', 'StoreController@MaterialrequestView')->name('store.materialaccept');
 

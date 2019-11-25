@@ -35,13 +35,13 @@
   <tr>
     <th>No</th>
     <th>Material Name</th>
-    <th>Brand Name</th>
+    <th>Material Description</th>
     <th>Type</th>
      <th>Quantity Requested</th>
       <th>Quantity in Store</th>
       <th>Quantity to Reserve</th>
       
-       <th>Material to be Purchased</th>
+       <th>Quantity to be Purchased</th>
        <th>Action</th>
        
        

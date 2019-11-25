@@ -572,10 +572,11 @@ public function profileView(){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
         $wo_material=   WorkOrderMaterial::
-                     select(DB::raw('work_order_id'))
+                     select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',5)
                     
                      ->groupBy('work_order_id')
+                      ->groupBy('hos_id')
                      
                      ->get();
                
@@ -589,14 +590,34 @@ public function profileView(){
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
         $wo_material=   WorkOrderMaterial::
-                     select(DB::raw('work_order_id'))
+                     select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',1)
                     
                      ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
                      
                      ->get();
                
         return view('womaterialacceptedbyiowtostore', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+    
+
+           public function material_reserved()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+        $wo_material=   WorkOrderMaterial::
+                     select(DB::raw('work_order_id'),'hos_id')
+                     ->where('status',5)
+                    
+                     ->groupBy('work_order_id')
+                      ->groupBy('hos_id')
+                     
+                     
+                     ->get();
+               
+        return view('womaterialreserved', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
     
 
@@ -1149,13 +1170,9 @@ public function techniciancountcomp()
     {
     
         $wo_material = WorkOrderMaterial::
-                     select(DB::raw('work_order_id,staff_id,material_id,sum(quantity) as quantity'))
-                     ->where('status',5) //status for material to procure
-                     ->where('work_order_id',$id)
-                     ->groupBy('material_id')
-                     ->groupBy('work_order_id') 
-                     ->groupBy('staff_id')      
                      
+                     where('status',5) //status for material to procure
+                    
                      ->get();
         
         

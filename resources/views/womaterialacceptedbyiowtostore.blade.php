@@ -38,6 +38,7 @@
 				
                 <th > No </th>
 				<th >Workorder ID </th>
+                <th >HoS Name </th>
 				<th >Workorder Detail</th>
 				
 				<th >Action</th>
@@ -53,11 +54,12 @@
                
                 <tr> <td>{{$i++}}</td>
                     <td>00{{ $item->work_order_id }}</td>
+                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     <td>{{ $item['workorder']->details }}</td>
                     
                     <td>
 					
-					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View material accepted by IoW</a></td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View material</a></td>
                   
                        
                     </tr>
