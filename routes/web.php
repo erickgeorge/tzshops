@@ -256,6 +256,8 @@ Route::get('procurement_release/{id}', 'PurchasingOrderController@procurement_re
 
 Route::get('material/not/material/{id}', 'StoreController@materialnotreserve')->name('store.materialtohos');
 
+Route::get('material/material/{id}', 'StoreController@materialtoreserveonebyone')->name('store.material.reserve');
+
 Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('store.materialaccept');
 
 Route::get('accept/material/with/rejected/{id}', 'StoreController@Materialacceptedwithrejected')->name('store.materialaccept.reject');

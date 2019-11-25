@@ -121,9 +121,26 @@ class StoreController extends Controller
 
 
 
+    
+
+    public function materialtoreserveonebyone( $id )
+    {
+
+			$mat = WorkOrderMaterial::where('id', $id)->first();
+            $mat->status = 5 ;
+
+            $material_id=$mat->material_id;
+		    $material_quantity=$mat->quantity;
+		    $material=Material::where('id', $material_id)->first();
+		    $stock=$material->stock;
+		    $rem=$stock-$material_quantity;
+		    $material->stock=$rem;
+		    $material->save();
+            $mat->save();
 
 
-
+       return redirect()->back()->with(['message' => 'Material Sent  successfully to Head of Section']);
+    }
 
 
 
@@ -424,8 +441,8 @@ public function deletematerial($id)
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',20)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
-		 $wo_m->status = 0; //status for material correct sent again to IoW
+		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		  $wo_m->status = 0; //status for material correct sent again to IoW
 		  $wo_m->receiver_id = auth()->User()->id;
 		  $wo_m->save();
 		 }

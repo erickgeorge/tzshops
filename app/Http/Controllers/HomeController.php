@@ -316,7 +316,7 @@ $v2=$type[1];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('stores', ['role' => $role, 'items' => Material::where('stock','>=',1)->orderBy('name','ASC')->get(),'notifications' => $notifications]);
+        return view('stores', ['role' => $role, 'items' => Material::where('stock','>=',0)->orderBy('name','ASC')->get(),'notifications' => $notifications]);
 
     }
     
