@@ -15,7 +15,7 @@
 
     <div>
         <div>
-            <h3 align="center"><b>Material Purchased from Head of Procurement </b></h3>
+            <h3 align="center"><b>Material Purchased by Head of Procurement </b></h3>
 
         </div>
        
@@ -44,6 +44,7 @@
                 <th >Type</th>
                 
                 <th >Quantity Purchased</th>
+                <th>Action</th>
                
     
                 
@@ -65,6 +66,16 @@
                     <td>{{ $item['material']->type }}</td>
                  
                    <td style="color: blue"> {{ $item->quantity - $item->reserved_material}}</td>
+
+                   @if($item['material']->stock == 0)
+                      <td>
+                        &nbsp;&nbsp;&nbsp;
+                        <a style="color: green;" href="{{ route('storeIncrement.view', [$item->material_id]) }}"  data-toggle="tooltip" title="Increment material"><i class="fas fa-plus"></i></a>&nbsp;
+                        <!--<a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>-->
+                        </td>
+                    @else
+                    <td><span class="badge badge-info">sccesifully added</span></td>
+                    @endif
 
                     </tr>
                     @endforeach

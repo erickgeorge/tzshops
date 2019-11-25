@@ -15,6 +15,7 @@
     </div>
     <br>
     <hr>
+    <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -22,6 +23,7 @@
             </ul>
         </div>
     @endif
+    </div>
     
     <div class="container " >
         <div class="row ">

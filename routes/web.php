@@ -214,7 +214,6 @@ Route::get('work_order_with_missing_material', 'HomeController@workorderwithmiss
 
 
 
-
 Route::get('wo_material/{id}', 'HomeController@wo_materialView')->name('store.materialview');
 
 Route::get('wo_material_to_procure/{id}', 'HomeController@wo_material_to_purchaseView')->name('store.material_to_procure_view');

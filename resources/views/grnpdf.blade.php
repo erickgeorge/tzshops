@@ -101,6 +101,13 @@ tr:nth-child(even) {
     <div class="div2"> Store Manager:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}  </u> </div>
    </div>
 
+   <div class="container-name">
+    <div class="div1">Signature  <u style="padding-left: 85px; width: 55px"> </u>  .................................</div>
+    <div class="div2">Signature  <u style="padding-left: 65px; width: 55px"> </u>         .................................</div>
+     
+
+   </div>
+
      
      <div class="container-name">
      <div  class="div1" > WorkOrder No:<u style="padding-left: 65px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
@@ -120,9 +127,7 @@ tr:nth-child(even) {
       </div>
       <br>
       <br>  
-      <div style="padding-left: 400px"> 
-      Signature:      ............................................................</div>
-
+     
 
         <!--<br>
          <br>

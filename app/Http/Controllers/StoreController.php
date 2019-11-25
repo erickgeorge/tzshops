@@ -59,9 +59,9 @@ class StoreController extends Controller
 		 $material->stock = $request['tstock'];
         $material->save();
 
-         return redirect()->route('store')->with(['role' => $role, 'notifications' => $notifications,
+         return redirect()->back()->with(['role' => $role, 'notifications' => $notifications,
             'notifications' => $notifications,'role' => $role,
-			 'message' => 'Materials succesfully'] );    
+			 'message' => 'Materials succesfully added in Store'] );    
            
     }
 
