@@ -22,6 +22,7 @@
     <br>
     <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
+        <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -29,6 +30,7 @@
             </ul>
         </div>
     @endif
+      </div>
    
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">

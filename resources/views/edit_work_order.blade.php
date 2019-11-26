@@ -281,7 +281,7 @@ var total=2;
                         
                          <div class="form-group">
                             
-                            <select class="custom-select" required name="status">
+                            <select class="custom-select" required name="status" style="color: black; width:  700px;">
                                 <option selected value="" >Choose...</option>
                                
                                     <option value="Report Before Work">Report Before Work</option>
@@ -296,7 +296,7 @@ var total=2;
                         
                         <p>Inspection description</p>
                         <div class="form-group">
-                            <textarea  style="color: black" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
                         </div>
                         
                         </br>
@@ -306,7 +306,8 @@ var total=2;
                         </div>
                         <div class="form-group">
                             <label>Select Technician on Duty</label>
-                            <select  required class="custom-select"  name="technician">
+                            <br>
+                            <select style="color: black; width:  700px;" required class="custom-select"  name="technician">
                                 <option  selected value="" >Choose...</option>
                                 
                                 
@@ -356,7 +357,7 @@ var total=2;
                         <br>
 
                        
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Send Transport Request</button>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>

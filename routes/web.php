@@ -252,8 +252,11 @@ Route::get('procurement_release/{id}', 'PurchasingOrderController@procurement_re
 
 
 
-
 Route::get('material/not/material/{id}', 'StoreController@materialnotreserve')->name('store.materialtohos');
+
+
+Route::get('material/afterpurchase/{id}', 'StoreController@materialafterpurchase')->name('store.material.afterpurchase');
+
 
 Route::get('material/material/{id}', 'StoreController@materialtoreserveonebyone')->name('store.material.reserve');
 
@@ -431,6 +434,9 @@ Route::get('generatePDF58','PDFController@generatePDF58');
 Route::POST('editmaterialrequest', 'WorkOrderController@editmaterialforwork')->name('requestagain.save');
 
 Route::POST('rejected/materials/edit/Material/{id}', 'WorkOrderController@editmaterial')->name('material.edit');
+
+Route::POST('work_order_material_purchased/edit/Material/{id}', 'StoreController@incrementmaterialmodal');
+
 
 Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@materialrejectonebyone');
 

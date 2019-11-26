@@ -89,10 +89,10 @@
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
-            <td>{{ $item->quantity }}</td>
+                    <td>{{ $item->quantity }}</td>
                   
-                       @if(auth()->user()->type == 'STORE')
-                       <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span>
+                       @if($item->checkreserve == 1)
+                       <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span> <br><span class="badge badge-light">purchased</span>
                       </td>
                        @else
                        <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span>
