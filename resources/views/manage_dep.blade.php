@@ -45,6 +45,20 @@
             <div id="customer" class="tabcontent active">
                 <a href="#new_dir" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new College</a>
+                <form method="GET" action="manage_directorates" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
+                From:  <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To: <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-primary bg-primary" style="width: 70px" type="submit">Filter</button>
+            </form>
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -122,6 +136,20 @@
             <div id="delivery" class="tabcontent">
                 <a href="#new_dep" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new department</a>
+                   <form method="GET" action="manage_directorates" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
+                From:  <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To: <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-primary bg-primary" style="width: 70px;" type="submit">Filter</button>
+            </form>
                 <table id="myTablee" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -205,8 +233,22 @@
 
             {{-- section tab --}}
             <div id="payment" class="tabcontent">
-                <a href="#new_sec" style="margin-bottom: 20px;"
+                <a href="#new_sec" style="margin-bottom: 20px; "
                    class="btn btn-primary">Add new section</a>
+                   <form method="GET" action="manage_directorates" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
+                From:  <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To: <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-primary bg-primary" style="width: 70px" type="submit">Filter</button>
+            </form>
                 <table id="myTableee" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -257,11 +299,11 @@
                 </div>
                 <br>
 				
-				<h4 style="color:red;" id="new_sec">NOT YET IMPLEMENTED</h4>
+				<!--<h4 style="color:red;" id="new_sec">NOT YET IMPLEMENTED</h4> -->
 				
 				 <h4 id="new_sec">Add new section</h4>
 				
-			 IN PROGRESS
+			<!-- IN PROGRESS -->
                
                 <hr>
 				

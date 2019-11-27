@@ -71,8 +71,13 @@ foreach ($hoos as $hous) {
           <select name="name" class="form-control mr-sm-2">
                 <option value="" selected="selected">Name</option>
 @foreach($rle as $tech)
+ @if(($role['user_role']['role_id'] == 1))
+ <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
+ @else
 @if($tech->type == $placed)
+
 <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
+@endif
 @endif
 @endforeach
             </select>
@@ -85,7 +90,22 @@ foreach ($hoos as $hous) {
           <div class="col">
               <select name="type" class="form-control mr-sm-2">
             
-               
+ @if(($role['user_role']['role_id'] == 1))
+<option selected="">All</option>
+ @if($head == 'All HOS Details')
+<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
+@elseif($head == 'All Technicians Details')
+<?php $to = Technician::select('type')->distinct()->get(); $v='technician';
+
+?>
+@elseif($head == 'All Inspectors of work Details')
+<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
+@endif
+@foreach($to as $too)
+<option value="{{ $too->type }}">{{ $too->type }}</option>
+
+@endforeach
+ @else             
 @if($head == 'All HOS Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 @elseif($head == 'All Technicians Details')
@@ -99,7 +119,7 @@ foreach ($hoos as $hous) {
 <option selected="selected" value="{{ $too->type }}">{{ $too->type }}</option>
 
 @endforeach
-              </select>
+@endif          </select>
           </div>
       </div>
       </div>
