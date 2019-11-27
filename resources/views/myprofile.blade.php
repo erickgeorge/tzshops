@@ -125,6 +125,20 @@ padding: 20 20 20 20;
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </form>
         </div>
+        <div class="row">
+    <div class="col">
+        <div class="form-group">
+        <img src="{{ auth()->user()->signature_ }}" alt="signature" style="height: 100px;">
+    </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+        <a href="{{ url('s-minutesheet') }}" class="btn btn-primary">Change/add signature</a>
+    </div>
+    </div>
+</div>
     
 </div>
 

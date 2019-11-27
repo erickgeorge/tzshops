@@ -88,6 +88,9 @@ Route::get('minutesheet/{id}','MinuteController@minutesheet')->name('minutesheet
 Route::post('newsheets','MinuteController@newsheet')->name('newsheet');
 Route::get('conversation','MinuteController@conversation')->name('conversation');
 Route::post('addconv','MinuteController@addconv')->name('addconv');
+
+Route::get('/s-minutesheet','MinuteController@sminutesheet')->name('s-minutesheet');
+Route::get('/savesign','UserController@savesign')->name('savesign');
 ///////////////////////////////////////////////////////////////
 
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');

@@ -105,6 +105,16 @@ $last = MinuteSheet::where('Woid',$request['id'])->OrderBy('id','DESC')->Limit(1
        
     }
 
+
+    
+public function sminutesheet(){
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+    return view('minutesheetsignature',['notifications' => $notifications,
+'role' => $role]);
+    }
+
     }
 
 
