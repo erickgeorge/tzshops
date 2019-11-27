@@ -10,12 +10,14 @@
             <h3 align="center">Available Technicians</h3>
         </div>
     </div>
+    <div class="container">
     @if(Session::has('message'))
         <br>
         <p class="alert alert-success">{{ Session::get('message') }}</p>
     @endif
+    </div>
     <br>
-    <hr>
+    <hr class="container">
     <div class="container">
     <a style="margin-left: 2%;" href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>    <?php
 use App\User;

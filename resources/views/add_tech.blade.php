@@ -10,8 +10,8 @@
             <h3 align="center">Add new technician</h3>
         </div>
     </div>
-    <hr>
-    <div class="container" 
+    <hr class="container">
+    <div class="container" >
     @if ($errors->any())
         <div class="alert alert-danger">
              <ul class="alert alert-danger">
@@ -28,6 +28,8 @@
             </ul>
         </div>
     @endif
+</div>
+<div class="container">
     <div class="col-lg-12">
         <form method="POST" action="{{ route('tech.create') }}">
             @csrf
@@ -51,14 +53,14 @@
                 <label for="phone">Phone number <sup style="color: red;">*</sup></label>
                 <input  required type="text"     name="phone"  value="{{ old('phone') }}"
                         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                        maxlength = "13"  minlength = "2"
+                        maxlength = "10"  minlength = "2"
                         class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
             </div>
                 </div>
                 <div class="col">
                     <div class="form-group ">
                 <label for="email">Email Address <sup style="color: red;">*</sup></label>
-                <input required  type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+                <input style="color: black; height: 28px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
             </div>
                 </div>
             </div>
@@ -106,7 +108,7 @@
             
          <div align="center">
 
-            <button type="submit" class="btn btn-primary">Add technician</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-danger" href="/technicians" role="button">Cancel </a>
         </div>
         </form>
