@@ -319,7 +319,7 @@ fwrite( $fp, $unencodedData);
 fclose( $fp );
 
         $user = User::where('id', auth()->user()->id)->first();
-        $user->signature_ = $_GET["img"];
+        $user->signature_ = $imageName;
         $user->save();
 
        return redirect()->route('myprofile')->with(['message' => 'Signature saved succesfully']);
