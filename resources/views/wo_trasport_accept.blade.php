@@ -6,13 +6,13 @@
 
 @section('body')
 
-    <br>
+  <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12" align="center">
-            <h3><b>Accepted Transport Visit</b></h3>
+            <h3><b>Accepted Requested Transport </b></h3>
         </div>
 
-        <div class="col-md-6" align="left">
+        <div class="container" style="padding-left: 620px;">
             <form method="GET" action="wo_transport_request_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -33,7 +33,7 @@
        
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -51,10 +51,12 @@
                 <th >#</th>
                 <th >HOS name</th>
 				<th >Location</th>
+                <th>Detail</th>
 				<th >Date</th>
 				<th >Time</th>
-				
+				<th>Message</th>
 				<th >Status</th>
+
 				
             </tr>
             </thead>
@@ -81,14 +83,15 @@
 				}}</td>
 				
 				@endif
+                <td>{{$item->coments}}</td>
 				
 				
 					<td>{{ date('F d Y', strtotime($item->time)) }}</td>
 					
 					<td>{{ date('h:m:s a', strtotime($item->time)) }}</td>
+                      <td>{{$item->details}}</td>
 					 
-					 <td>ACCEPTED </td>
-                    </tr>
+					<td><span class="badge badge-primary"> ACCEPTED </span> </td>
                     @endforeach
             </tbody>
         </table>

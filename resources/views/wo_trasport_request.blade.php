@@ -19,8 +19,9 @@
         </div>--}}
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
+        <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -28,6 +29,7 @@
             </ul>
         </div>
     @endif
+    </div>
    
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
@@ -36,6 +38,7 @@
                 <th >#</th>
                 <th >HOS name</th>
 				<th >Location</th>
+                <th >Details</th>
 				<th >Date</th>
 				<th >Time</th>
 				
@@ -57,15 +60,17 @@
                     <td>{{ 
 				$item['workorder']['room']['block']->location_of_block  
 				
-				}}</td>
+				      }}</td>
 				
-				@else
-				<td>{{ 
-				$item['workorder']->location
+				    @else
+				    <td>{{ 
+				          $item['workorder']->location
 
-				}}</td>
+				                                 }}</td>
 				
 				@endif
+
+                <td>{{$item->coments}}</td>
 				
 				
 					<td>{{ date('F d Y', strtotime($item->time)) }}</td>
@@ -116,7 +121,7 @@
                         <br>
 						
 					
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
 						
                     </form>
                 </div>

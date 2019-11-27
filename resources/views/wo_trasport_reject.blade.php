@@ -9,11 +9,11 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12" align="center">
-            <h3><b>Rejected Transport Request</b></h3>
+            <h3><b>Rejected Requested Transport </b></h3>
         </div>
 
         <div class="container" style="padding-left: 620px;">
-            <form method="GET" action="wo_transport_request_accepted" class="form-inline my-2 my-lg-0">
+            <form method="GET" action="wo_transport_request_rejected" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];
@@ -51,9 +51,11 @@
                 <th >#</th>
                 <th >HOS name</th>
 				<th >Location</th>
+                <th >Details</th>
 				<th >Date</th>
 				<th >Time</th>
-				<th >Details</th>
+                <th >Message</th>
+				
 				<th >Status</th>
 				
             </tr>
@@ -81,14 +83,16 @@
 				}}</td>
 				
 				@endif
+
+                <td>{{ $item->coments}}</td>
 				
 				
 					<td>{{ date('F d Y', strtotime($item->time)) }}</td>
 					
 					<td>{{ date('h:m:s a', strtotime($item->time)) }}</td>
 					  
-                    <td>{{ $item->coments}}</td>
-					 <td>ACCEPTED </td>
+                    <td>{{ $item->details}}</td>
+					 <td><span class="badge badge-danger"> REJECTED </span> </td>
                     </tr>
                     @endforeach
             </tbody>

@@ -82,7 +82,7 @@ foreach ($hoos as $hous) {
       <div class="row">
           <div class="col">
               <select name="type" class="form-control mr-sm-2">
-              <option value='' selected="selected">Type/section</option>
+            
                
 @if($head == 'All HOS Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
@@ -94,7 +94,8 @@ foreach ($hoos as $hous) {
 <?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
 @endif
 @foreach($to as $too)
-<option value="{{ $too->type }}">{{ $too->type }}</option>
+<option selected="selected" value="{{ $too->type }}">{{ $too->type }}</option>
+
 @endforeach
               </select>
           </div>
