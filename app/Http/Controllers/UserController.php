@@ -233,10 +233,13 @@ class UserController extends Controller
 	
 	
 		 public function changeProfile(Request $request){
+            if ($request->Image!='') {
+        $request->validate(['Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
+            }
         $request->validate([
             'email' => 'required',
             'phone' => 'required',
-            'Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
             
         ]);
         $user = User::find(auth()->user()->id);
@@ -248,7 +251,7 @@ class UserController extends Controller
              
 
      $user = Auth::user();
-
+if ($request->Image!='') {
         
         $ImageName = $user->id.'_Image'.time().'.'.request()->Image->getClientOriginalExtension();
 
@@ -256,7 +259,7 @@ class UserController extends Controller
 
         $user->avatar = $ImageName;
         $user->save();
-
+}
 
 return redirect()->route('myprofile')->with(['message' => 'Profile has changed successfully']);
         }
