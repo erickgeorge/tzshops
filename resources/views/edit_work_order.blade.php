@@ -173,6 +173,31 @@ var total=2;
                
                     @csrf
                     <div id="assigntechnician" class="tabcontent">
+                        <?php
+                        use App\WorkOrderStaff;
+                        use App\Technician;
+                        $checktech = WorkOrderStaff::where('work_order_id',$wo->id)->get();
+                        $i = 1;
+                         ?>
+                         @if($checktech)
+
+                         <?php $named = Technician::get(); ?>
+                         <div class="row">
+                            <div class="col-lg-12" style="font-weight: bold; color: black;">
+                            Technicians Assigned for this work order:
+                            </div><br><br>
+                         @foreach($checktech as $fetchtech)
+                         @foreach($named as $names)
+                         @if($fetchtech->staff_id == $names->id)
+                         <div class="col-lg-12"><b style="font-weight: bold; color: black;">{{ $i }}. {{ $names->fname }} {{ $names->lname }}<?php $i++; ?></b></div>
+                         <br>
+                         @endif
+                         @endforeach
+                         @endforeach
+                     </div><br><br>
+
+                         @else
+                         @endif
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Assign Technician for this work-order</p>
@@ -186,17 +211,19 @@ var total=2;
                         </div>
                         
                         
-                        <div class="form-group">
-                           
-                            <select   id="techid" required class="custom-select"  name="techuser" style="width: 700px;">
+                       
+                        <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
+                        @csrf
+                          <div class="form-group">
+                          <!-- <input  id="technician_work"  type="text" hidden> </input>  -->
+                            <select   id="techid" required class="custom-select"  name="technician_work" style="width: 700px;">
                                
                                
                                
                                
                                
                                
-                               <?php            
-                use App\WorkOrderStaff;
+                               <?php 
                 $p=-1;
       ?>
                                
@@ -250,14 +277,18 @@ var total=2;
                                 }}}
                                 
                                     for($x=0;$x<=$p;$x++){      
-                                    ?><option value="{{ $ident[$x] }}"> {{$name[$x].'        '.$cwo[$x]}} </option>
+                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Workorders'}} </option>
                                     <?php }  ?>
                                             
                                 
                             </select>
                         </div>
-                        <button data-toggle="modal" data-target="#exampleModal"  onclick="getTechnician()" style="background-color: darkgreen; color: white" type="button" class="btn btn-success">Save Technician</button>
+                         
+                        <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </form>
+                        
+                        
                     </div>
                
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -630,41 +661,7 @@ var total=2;
     
     
     {{-- TECHNICIAN DETAILS FORM  --}}
-     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Technician details form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                
-                <p id="detail" >
-                
-                </p>
-                <h2> This technician has been assigned Following Number Of Work orders : </h2>
-                
-                <h3  id="totalwork" style="color:red">
-                </h3>
-                
-                
-                
-                
-                  
-                    <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
-                        @csrf
-                         <br>
-                         <input name="technician_work" id="technician_work"  type="text" hidden> </input>  
-                        <button type="submit" class="btn btn-danger">Assign Technician</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
   @endSection
      
