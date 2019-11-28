@@ -6,6 +6,8 @@
 
 @section('body')
 
+@if(count($items)> 0)
+
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
@@ -21,6 +23,7 @@
     <br>
     <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
+        <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -28,6 +31,7 @@
             </ul>
         </div>
     @endif
+      </div>
    
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
@@ -60,11 +64,17 @@
 					
 					 <a class="btn btn-primary btn-sm" href="{{ route('store.material_to_procure_view', [$item->work_order_id]) }}" role="button">View Material</a></td>
                   
-                       </td>
+                      
                     </tr>
                     @endforeach
             </tbody>
         </table>
     </div>
 </div>
+
+@else
+
+<div style="padding-top: 300px;" align="center"><h1> No Work order with material to be purchased.</h1></div>
+
+@endif
     @endSection

@@ -50,7 +50,6 @@
 
   <?php $i=1; 
   $p= array("t");
-
   ?>
 
   <tbody>
@@ -90,6 +89,7 @@
       @endif
       <td>{{$procured }}</td>
 
+
       @if(($matform['material']->stock- $matform['material']->quantity_reserved)<($matform->quantity))
       <td style="color: blue;">Reserve<span> <a style="color: blue;"  href="{{ route('store.material.reserve', [$matform->id]) }}" data-toggle="tooltip" title="Reserve Material"><i class="fas fa-retweet"></i></a>
                    </span> </td>
@@ -97,6 +97,8 @@
       <td>Send to HoS<span> <a style="color: green;"  href="{{ route('store.materialtohos', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
                    </span> </td>
       @endif
+
+      
 
       </tr>
       @endforeach

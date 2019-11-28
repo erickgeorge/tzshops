@@ -60,47 +60,67 @@
                 <div class="col">
                     <div class="form-group ">
                 <label for="email">Email Address <sup style="color: red;">*</sup></label>
-                <input style="color: black; height: 28px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+                <input style="color: black;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" value="{{ old('email') }}">
             </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of technician</label>
-            </div>
+               
+            
             <?php 
-        use App\UserRole;
+            use App\UserRole;
             $role=UserRole::where('user_id',auth()->user()->id)->first();
             $roleofuser=$role->role_id;
-
+if(auth()->user()->type == 'Maintenance coordinator'){
+$roleofuser =1;
+}
             /////////////////////////////
              use App\User;
-        $usersec = User::Where('id',auth()->user()->id)->first();
-        $secuser = $usersec->type;
+             $usersec = User::Where('id',auth()->user()->id)->first();
+             $secuser = $usersec->type;
 
             /////////////////////////////
             ?>
             
              <input hidden  type="number"  class="form-control" id="role" name="role"  value="{{ $roleofuser }}">
-     
+      <div class="col-lg-6">
+                   
              @if($roleofuser == 1 )
+              <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Section</label>
+             </div>
              
-            <select  style="width: 380px" class="custom-select" id="typetechadmin" name="typetechadmin">
-                
-                @if(($secuser == 'HOS Carpentry/Painting')||($secuser == 'HOS CARPENTRY/PAINTING'))<option value="Carpentry/Painting">Carpentry/Painting Technician</option>
-               @elseif(($secuser == 'HOS Electrical')||($secuser == 'HOS ELECTRICAL'))<option value="Electrical">Electrical Technician</option>
-                @elseif(($secuser == 'HOS Masonry/Road')||($secuser == 'HOS MASONRY/ROAD'))<option value="Masonry/Road">Masonry/Road Technician</option>
-                @elseif(($secuser == 'HOS Mechanical')||($secuser == 'HOS MECHANICAL'))<option value="Mechanical">Mechanical Technician</option>
-                @elseif(($secuser == 'HOS Plumbing')||($secuser == 'HOS PLUMBING'))<option value="Plumbing">Plumbing Technician</option>
-                @endif
-                
+            <select  style="width: 290px" class="custom-select" id="typetechadmin" name="typetechadmin">
+                <option value="Carpentry/Painting">Carpentry/Painting Technician</option>
+               <option value="Electrical">Electrical Technician</option>
+               <option value="Masonry/Road">Masonry/Road Technician</option>
+               <option value="Mechanical">Mechanical Technician</option>
+               <option value="Plumbing">Plumbing Technician</option>
+                   
             </select>
-            
+            @elseif(auth()->user()->type == 'Maintenance coordinator')
+            <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Section</label>
+             </div>
+             
+            <select  style="width: 290px" class="custom-select" id="typetechadmin" name="typetechadmin">
+                <option value="Carpentry/Painting">Carpentry/Painting Technician</option>
+               <option value="Electrical">Electrical Technician</option>
+               <option value="Masonry/Road">Masonry/Road Technician</option>
+               <option value="Mechanical">Mechanical Technician</option>
+               <option value="Plumbing">Plumbing Technician</option>
+                   
+            </select>
             @else
+
+            <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Section</label>
+            </div>
                  <input readonly  type="text"  class="form-control" id="typetechhos" name="typetechhos"  value="{{ substr(strstr(auth()->user()->type, " "), 1) }}">
-         @endif
+            @endif
         </div>
                 </div>
             </div>

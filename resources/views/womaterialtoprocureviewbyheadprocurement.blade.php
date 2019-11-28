@@ -19,6 +19,7 @@
 <br>
 <br>
 
+
     <div>
         <div>
             <h3 align="center"><b>Material Purchased by Head of Procurement </b></h3>
@@ -93,7 +94,7 @@
                     <td>
   
                            &nbsp; &nbsp;&nbsp;<a style="color: green;"
-                                       onclick="myfunc1( '{{ $item->reserved_material}}','{{ $item->newstock }}' )"
+                                       onclick="myfunc1( '{{ $item->id}}','{{ $item->reserved_material}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
                                        data-toggle="modal" data-target="#exampleModali" title="Increment Material"><i
                                                 class="fas fa-plus"></i></a>
                         </td>
@@ -144,30 +145,56 @@
 
                    
 
-                      <form method="POST" action="edit/Material/{{ $item->material_id }}" >
+                      <form method="POST" action="edit/Material/{{ $item->id}}" >
                         @csrf
                        
 
-                       
 
-              <input hidden value="{{$item->id}}"  id="nameid"
-                      name="nameid" >
-            
-          <label style="width: 777px;" >Material Description </label>           
+           
+
+
+           <?php
+                  
+                   $a=array("1"=>"true","NULL"=>"false");
+
+                   $a = $item->checkreserve
+                
+            ?>
+
+             
+            @if($item->checkreserve == 1 )
+         
+             <?php ;
+             $a[$i]= "no";
+             $i++;
+             ?>
+
+             @else
+              <?php 
+              $a[$i]= "yes";
+              $i++;
+               ?>
+
+             @endif
+
+
+
+         
+           @if(array_search("true", $a))
+         
+
+              <label style="width: 777px;" >Material Description </label>           
           <div class="input-group mb-3">  
                 <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
-                       aria-describedby="emailHelp" name="description" placeholder=" {{$item['material']->description}}">
+                       aria-describedby="emailHelp" name="description"  >
           </div>
-            
-
-            @if($item->checkreserve == 1 )
 
              <div>
             <label style="width: 777px;" >Current added material after <br> purchased </label>
 
             <div class="input-group mb-3">   
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
-                       id="stock"  >     
+                       id="tstock"  >     
             </div>
             </div>
 
@@ -192,20 +219,27 @@
               
             @else
 
+              <label style="width: 777px;" >Material Description </label>           
+          <div class="input-group mb-3">  
+                <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
+                       aria-describedby="emailHelp" name="description"  >
+          </div>
+
             <div>
             <label style="width: 777px;" >Current Reserved Material </label>
 
             <div class="input-group mb-3">   
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
-                       id="istock" >     
+                       id="stock" > 
+                       <input hidden id="istock" name="istock">    
             </div>
             </div>
 
-              <div>
+            <div>
              <label style="width: 777px;" >Add Material in Quantity</label>    
             <div class="input-group mb-3">   
                 <input style="width: 565px;" oninput="totalitem()" style="color: black" required type="number" min="1"  class="form-control"
-                       aria-describedby="emailHelp" id="stock"  placeholder="Add Material in Quantity" >        
+                       aria-describedby="emailHelp" id="kstock"  placeholder="Add Material in Quantity" >        
             </div>
             </div>
 
@@ -245,25 +279,27 @@
     
      <script type="text/javascript">
 
-          function myfunc1( U , V   ) {
+          function myfunc1( U , V , W , X  ) {
 
 
             
             document.getElementById("istock").value = U;
 
             document.getElementById("stock").value = V;
-           
+
+            document.getElementById("tstock").value = W;
 
 
+            document.getElementById("description").value = X;
             
        }
 
      </script>
 
-     <script>
+    <script>
 
    function totalitem() {
-         var x = document.getElementById("istock").value;
+         var x = document.getElementById("kstock").value;
          var y = document.getElementById("stock").value;
          var z  = parseInt(x) + parseInt(y);
          document.getElementById("tstock").value=z;
@@ -291,6 +327,9 @@
         </div>
         </div>
     </div>
+
+
+            
 
 
     @else

@@ -55,24 +55,17 @@ class StoreController extends Controller
 
        
 
-       $p=$request['nameid'];
+       $p=$request['istock'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
-       
-       $matir->newstock = $request['tstock'];
        $matir->checkreserve = 1;
+       $matir->newstock = $request['tstock'];
+       
 
-       $mat = material::where('id', $p)->first();
+       $mat = material::where('id', $id)->first();
       
       
 
-        if ($matir->newstock > $matir->quantity ) {
-            return redirect()->back()->withErrors(['message' => 'Tottal number of  '. $mat->name.' requested is:    '.$matir->quantity.'.please add only up to requested '. $mat->name.' .   If'. $mat->name.' purchased is more than requested '. $mat->name.' just go to store and increment '. $mat->name.'. Thanks ']);
-
-        }
-
-
-
-        else{
+        
 
      $matir->save(); 
         	return redirect()->back()->with(['message' => 'Respective Material added succefully in store']);
@@ -80,8 +73,7 @@ class StoreController extends Controller
   
        
     
- }
-
+ 
 
 
 

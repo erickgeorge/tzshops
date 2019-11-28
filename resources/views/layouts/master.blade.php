@@ -364,11 +364,17 @@
      <a href="{{ url('comp') }}" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
  </li>
  @endif
- @if(auth()->user()->type == 'Maintenance Coordinator')
+ @if(auth()->user()->type == 'Maintenance coordinator')
  <li class="nav-item">
      <a href="{{ url('comp') }}" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
  </li>
- @endif
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
+                    </li>
+  @endif
+
+
   @if(auth()->user()->type == 'Estates Director')               
 <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
@@ -662,7 +668,7 @@
 <script type="text/javascript">
 
       $("#techid").select2({
-            placeholder: "Choose Technician...",
+            placeholder: "Choose Section...",
             allowClear: true
         });
 </script>
@@ -670,7 +676,7 @@
 <script type="text/javascript">
 
       $("#typetechadmin").select2({
-            placeholder: "Choose Technician...",
+            placeholder: "Choose Section...",
             allowClear: true
         });
 </script>

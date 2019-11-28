@@ -401,13 +401,25 @@ public function profileView(){
 
      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        if(($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Maintenance coordinator')) {
+
+             return view('technicians', [
+            'role' => $role,
+            'techs' => Technician::get(),
+            'notifications' => $notifications
+
+        ]);
+        } else{
   
-    return view('technicians', [
+        return view('technicians', [
             'role' => $role,
             'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->orderBy('fname','ASC')->get(),
             'notifications' => $notifications
 
         ]);
+   }
+
    }
    
    

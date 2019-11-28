@@ -43,7 +43,8 @@ padding: 20 20 20 20;
             <h3 align="center">Change Profile</h3>
         </div>
     </div>
-    <hr>
+    <hr class="container">
+    <div class="container">
     @if ($errors->any())
         <div class="alert alert-danger">
              <ul class="alert alert-danger">
@@ -60,6 +61,7 @@ padding: 20 20 20 20;
             </ul>
         </div>
     @endif
+    </div>
  
     <div class="row">
             @if ($message = Session::get('success'))

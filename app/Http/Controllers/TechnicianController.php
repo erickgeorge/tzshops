@@ -36,6 +36,7 @@ class TechnicianController extends Controller
 		if($request['role']==1){
         $type = $request['typetechadmin'];
 		}
+        
 		else {
 			
 			 $type = $request['typetechhos'];

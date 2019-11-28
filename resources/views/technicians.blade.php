@@ -56,12 +56,16 @@ $head = 'All Technicians Details';
         </button>
       </div>
       <?php
+      $maintenance_coordinator = '';
 $hoos = user::select('type')->where('id',auth()->user()->id)->get();
 foreach ($hoos as $hous) {
    $hotype = $hous->type;
         if(substr($hotype,0,4) == 'HOS '){
 
           $placed = ltrim($hotype,'HOS ');
+          }
+          elseif($hotype == 'Maintenance coordinator'){
+            $maintenance_coordinator = 1;
           }
 }
 ?>
@@ -73,6 +77,8 @@ foreach ($hoos as $hous) {
 @foreach($rle as $tech)
  @if(($role['user_role']['role_id'] == 1))
  <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
+ @elseif($maintenance_coordinator == 1)
+  <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
  @else
 @if($tech->type == $placed)
 
@@ -91,7 +97,23 @@ foreach ($hoos as $hous) {
               <select name="type" class="form-control mr-sm-2">
             
  @if(($role['user_role']['role_id'] == 1))
+ 
 <option selected="">All</option>
+ @if($head == 'All HOS Details')
+<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
+@elseif($head == 'All Technicians Details')
+<?php $to = Technician::select('type')->distinct()->get(); $v='technician';
+
+?>
+@elseif($head == 'All Inspectors of work Details')
+<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
+@endif
+@foreach($to as $too)
+<option value="{{ $too->type }}">{{ $too->type }}</option>
+
+@endforeach
+ @elseif($maintenance_coordinator == 1)
+  <option selected="">All</option>
  @if($head == 'All HOS Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 @elseif($head == 'All Technicians Details')

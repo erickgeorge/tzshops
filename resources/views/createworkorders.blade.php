@@ -123,7 +123,7 @@
                 <div class="input-group-prepend">
                     <label   style="height: 28px" class="input-group-text" for="room">Room <sup style="color: red;">*</sup></label>
                 </div>
-                <select style="width: 445px" required class="custom-select" id="room" name="room">
+                <select style="width: 385px" required class="custom-select" id="room" name="room">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>

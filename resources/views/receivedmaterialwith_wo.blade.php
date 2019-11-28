@@ -5,6 +5,7 @@
     @endSection
 
 @section('body')
+   @if(count($items) > 0)
 
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
@@ -35,7 +36,7 @@
     @endif
    
     <div class="container " >
-        @if(count($items) > 0)
+     
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
@@ -68,8 +69,11 @@
                     @endforeach
             </tbody>
         </table>
+        @elseif(auth()->user()->type =='STORE')
+            <h1 class="text-center" style="margin-top: 350px">You have no Workorder with material taken from store</h1>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no Workorder with material rejected by Inspector of Work</h1>
+
+         <h1 class="text-center" style="margin-top: 350px">You have no Workorder with material rejected by Inspector of Work</h1>
         @endif
 
 
