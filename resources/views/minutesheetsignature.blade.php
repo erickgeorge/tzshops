@@ -40,11 +40,16 @@
 <div class="container">
 	<center>
     <div class="all-content-wrapper" style="margin-top: 100px;">
-    	<h1>Sign below</h1>
+    	<h1>Sign below</h1><br><br>
+      <div id = 'msg' class="bg-success">
+     
+      </div>
     	<div class="row">
     		<div class="col">
 <div class="wrapper">
+@csrf
   <canvas id="signature-pad" class="signature-pad" style="border:1px #000 solid; " width=400 height=200></canvas>
+
 </div>
 </div>
 </div>
@@ -92,8 +97,32 @@ document.getElementById('save-png').addEventListener('click', function () {
   if (signaturePad.isEmpty()) {
     return alert("Please provide a signature first.");
   }
- var data = signaturePad.toDataURL('image/jpeg'); 
- window.location.href = "{{ url('savesign') }}?img=" + data;
+ var data = signaturePad.toDataURL('image/jpeg');
+
+//var dataString = 'signature'+data;
+// Returns successful data submission message when the entered information is stored in database.
+if(data=='')
+{
+}
+else
+{
+// AJAX Code To Submit Form.
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+$.ajax({
+type: 'POST',
+url: '{{ route('savesign') }}',
+data:{"_token": "{{ csrf_token() }}","signature": data},
+headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+success: function(data){
+window.location.href = "{{ url('myprofile') }}";
+}
+});
+}
+ 
 });
 
 /*document.getElementById('save-jpeg').addEventListener('click', function () {
@@ -131,6 +160,9 @@ document.getElementById('draw').addEventListener('click', function () {
   var ctx = canvas.getContext('2d');
   ctx.globalCompositeOperation = 'destination-out';
 }); */
-</script>
 
+
+
+
+</script>
 @endsection

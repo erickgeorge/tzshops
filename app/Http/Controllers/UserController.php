@@ -300,29 +300,31 @@ return view('complaint', ['role' => $role,'compliant' => $single,'notifications'
         ]);
 }
 
-Public function savesign(){
+Public function savesign(Request $request){
 
     // Get the data
-$img_data=$_GET['img'];
+//$img_data=$_GET['img'];
 // Remove the headers (data:,) part.
 // A real application should use them according to needs such as to check image type
-$filteredData=substr($img_data, strpos($img_data, ",")+1);
+//$filteredData=substr($img_data, strpos($img_data, ",")+1);
 // Need to decode before saving since the data we received is already base64 encoded
-$unencodedData=base64_decode($filteredData);
+//$unencodedData=base64_decode($filteredData);
 //echo "unencodedData".$unencodedData;
-$imageName = auth()->user()->username.'-'. rand(5,1000) . rand(1, 10) . rand(10000, 150000) . rand(1500, 100000000) . ".png";
+//$imageName = auth()->user()->username.'-'. rand(5,1000) . rand(1, 10) . rand(10000, 150000) . rand(1500, 100000000) . ".png";
 //Set the absolute path to your folder (i.e. /usr/home/your-domain/your-folder/
-$filepath = public_path('signs/') . $imageName;
+//$filepath = public_path('signs/') . $imageName;
 
-$fp = fopen($filepath, 'wb' );
-fwrite( $fp, $unencodedData);
-fclose( $fp );
+//$fp = fopen($filepath, 'wb' );
+//fwrite( $fp, $unencodedData);
+//fclose( $fp );
+    $signature = $request['signature'];
 
         $user = User::where('id', auth()->user()->id)->first();
-        $user->signature_ = $_GET["img"];
+        $user->signature_ = $signature;
         $user->save();
-
-       return redirect()->route('myprofile')->with(['message' => 'Signature saved succesfully']);
+ $msg = "Signature Saved successfully <a class='btn btn-success' href='/myprofile'>Ok</a><br>";
+    return response()->json(array('msg'=> $msg), 200);
+       //return redirect()->route('myprofile')->with(['message' => 'Signature saved succesfully']);
 }
 
 }

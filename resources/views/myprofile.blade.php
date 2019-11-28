@@ -126,16 +126,24 @@ padding: 20 20 20 20;
         </form>
         </div>
         <div class="row">
-    <div class="col">
+    <div class="col border-dark">
         <div class="form-group">
+       @if(auth()->user()->signature_ == null)
+       <p style="padding: 3em;">No Signature</p>
+       @else
         <img src="{{ auth()->user()->signature_ }}" alt="signature" style="height: 100px;">
+        @endif
     </div>
     </div>
 </div>
 <div class="row">
     <div class="col">
         <div class="form-group">
-        <a href="{{ url('s-minutesheet') }}" class="btn btn-primary">Change/add signature</a>
+            @if(auth()->user()->signature_ == null)
+        <a href="{{ url('s-minutesheet') }}" class="btn btn-primary">Add signature</a>
+       @else
+        <a href="{{ url('s-minutesheet') }}" class="btn btn-primary">Change signature</a>
+        @endif
     </div>
     </div>
 </div>
