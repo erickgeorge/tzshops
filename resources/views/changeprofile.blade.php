@@ -157,7 +157,7 @@ padding: 20 20 20 20;
             </form>
         
     
-</div>
+    </div>
 </div>
 <div id="previous_update" align="center">   <div class="row justify-content-center">
        <div class="profile-header-container">

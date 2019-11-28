@@ -6,10 +6,11 @@
 
 @section('body')
 
+
     <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b>Work orders list </b></h3>
+            <h3 style="padding-left: 90px;"><b>Work orders list </b></h3>
         </div>
 
         <div class="col-md-6">
@@ -33,7 +34,7 @@
        
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -513,9 +514,14 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         @endif
                                         <br>
                                           @if(auth()->user()->type == 'Maintenance coordinator')
-                                 <a href="#"><span data-toggle="modal" data-target="#redirect"
+                                          @if($work->redirectwo == 1)
+                                                                         <span class="badge badge-warning">Redirected</span>
+                                                                         @else
+                                          <a href="#"><span data-toggle="modal" data-target="#redirect"
                                                                          class="badge badge-primary">Redirect..</span></a>
-                                       @endif
+
+                                                                         @endif
+                                          @endif
 
 
                                                 @elseif($work->status == 12)

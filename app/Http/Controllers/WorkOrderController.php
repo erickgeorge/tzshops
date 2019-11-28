@@ -745,6 +745,7 @@ public function transportforwork(Request $request, $id)
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
         $wo->problem_type = $request['p_type'];
+        $wo->redirectwo = 1 ;
         $wo->save(); 
         return redirect()->back()->with([
            
