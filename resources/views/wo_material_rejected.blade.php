@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <h3 align="center"><b>Work order whose material are rejected </b></h3>
         </div>
-
+ @if(count($items)>0)
         <div class="col-md-6" align="left">
             <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -28,7 +28,7 @@
                 <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
             </form>
         </div>
-
+@endif
 
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">

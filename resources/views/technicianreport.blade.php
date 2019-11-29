@@ -58,8 +58,9 @@
             </ul>
         </div>
     @endif
+     @if(count($wo) > 0)
        <button   name="b_print" type="button" class="btn btn-outline-primary mb-2"   onClick="printdiv('div_print');"  ><i class="fa fa-file-pdf-o"></i> PDF</button>
-    
+    @endif
 
     <div id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
     

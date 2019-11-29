@@ -41,9 +41,11 @@
         </div>  -->
         <!-- SOMETHING STRANGE HERE -->
              <?php
-use App\Material;?>   <div class="col" align="right">
+use App\Material;?>  
+ @if(count($items)>0) <div class="col" align="right">
            <a href="" data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
         </div>
+        @endif
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

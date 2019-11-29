@@ -39,6 +39,7 @@ use App\WorkOrder;
 use Carbon\Carbon;
  ?>
 <!-- SOMETHING STRANGE HERE -->
+@if(count($rle)>0)
 <div align="right">
           @if(auth()->user()->type == 'CLIENT')
           <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
@@ -50,6 +51,7 @@ use Carbon\Carbon;
 </button>
 @endif
 </div>
+@endif
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

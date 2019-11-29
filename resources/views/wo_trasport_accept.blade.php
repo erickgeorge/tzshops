@@ -11,7 +11,7 @@
         <div class="col-lg-12" align="center">
             <h3><b>Accepted Requested Transport </b></h3>
         </div>
-
+@if(count($items)>0)
         <div class="container" style="padding-left: 620px;">
             <form method="GET" action="wo_transport_request_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -29,7 +29,7 @@
             </form>
         </div>
 
-
+@endif
        
     </div>
     <br>

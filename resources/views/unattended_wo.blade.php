@@ -17,7 +17,7 @@ use App\WorkOrder;
         <div class="col-md-6">
             <h3><b>Completed Work orders</b></h3>
         </div>
-
+ @if(count($wo) > 0)
         <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -35,7 +35,7 @@ use App\WorkOrder;
             </form>
         </div>
 
-
+@endif
        
     </div>
     <br>
@@ -50,12 +50,13 @@ use App\WorkOrder;
     @endif
 
  
-   
+  @if(count($wo) > 0)  
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
            <button data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </button>
         </div>
+        @endif
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

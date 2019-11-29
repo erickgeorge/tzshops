@@ -12,7 +12,7 @@
         <div class="col-md-6">
             <h3 style="padding-left: 90px;"><b>Work orders list </b></h3>
         </div>
-
+@if(count($wo) > 0)
         <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -30,7 +30,7 @@
             </form>
         </div>
 
-
+@endif
        
     </div>
     <br>
@@ -81,6 +81,7 @@ use App\WorkOrder;
 use Carbon\Carbon;
  ?>
 <!-- SOMETHING STRANGE HERE -->
+@if(count($wo) > 0)
           @if(auth()->user()->type == 'CLIENT')
           <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
   <i class="fa fa-file-pdf-o"></i> PDF
@@ -89,6 +90,7 @@ use Carbon\Carbon;
           <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
   <i class="fa fa-file-pdf-o"></i> PDF
 </button>
+@endif
 @endif
 
 <!-- Modal -->

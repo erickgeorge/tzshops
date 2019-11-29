@@ -36,8 +36,8 @@
                     <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">
                         DEPARTMENTS
                     </button>
-                    <button class="tablinks col-md-4" onclick="openTab(event, 'payment')">SECTIONS
-                    </button>
+                   <!-- <button class="tablinks col-md-4" onclick="openTab(event, 'payment')">SECTIONS
+                    </button> -->
                 </div>
             </div>
 
@@ -45,6 +45,7 @@
             <div id="customer" class="tabcontent active">
                 <a href="#new_dir" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new College</a>
+                   @if(count($directorates)>0)
                 <form method="GET" action="manage_directorates" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
                 From:  <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -59,6 +60,7 @@
                              max="<?php echo date('Y-m-d'); ?>">
                 <button class="btn btn-primary bg-primary" style="width: 70px" type="submit">Filter</button>
             </form>
+            @endif
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -136,6 +138,7 @@
             <div id="delivery" class="tabcontent">
                 <a href="#new_dep" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new department</a>
+                    @if(count($deps)>0)
                    <form method="GET" action="manage_directorates" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
                 From:  <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -150,6 +153,7 @@
                              max="<?php echo date('Y-m-d'); ?>">
                 <button class="btn btn-primary bg-primary" style="width: 70px;" type="submit">Filter</button>
             </form>
+            @endif
                 <table id="myTablee" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -235,6 +239,7 @@
             <div id="payment" class="tabcontent">
                 <a href="#new_sec" style="margin-bottom: 20px; "
                    class="btn btn-primary">Add new section</a>
+                   @if(count($secs)>0)
                    <form method="GET" action="manage_directorates" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
                 From:  <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -249,6 +254,7 @@
                              max="<?php echo date('Y-m-d'); ?>">
                 <button class="btn btn-primary bg-primary" style="width: 70px" type="submit">Filter</button>
             </form>
+            @endif
                 <table id="myTableee" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
