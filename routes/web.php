@@ -311,7 +311,7 @@ Route::get('transport_request/reject/{id}','WorkOrderController@transport_reques
 
 
 
-Route::get('work_order_material_accepted', 'HomeController@woMaterialAcceptedView')->name('woMaterialAccepted');
+Route::get('work_order_material_accepted/{id}', 'HomeController@woMaterialAcceptedView')->name('woMaterialAccepted');
 
 
 Route::get('work_order_material_rejected', 'HomeController@woMaterialRejectedView')->name('woMaterialRejected');
@@ -439,6 +439,8 @@ Route::POST('rejected/materials/edit/Material/{id}', 'WorkOrderController@editma
 
 Route::POST('work_order_material_purchased/edit/Material/{id}', 'StoreController@incrementmaterialmodal');
 
+Route::POST('work_order_material_purchased/edit2/Material/{id}', 'StoreController@incrementmaterialmodal2');
+
 
 Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@materialrejectonebyone');
 
@@ -447,6 +449,8 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
 
 
  Route::get('wo_material_reserved', 'HomeController@material_reserved');
+
+ Route::get('wo_material_accepted', 'HomeController@material_accepted');
 
  //Route::get('requested/material/{id}', 'StoreController@MaterialrequestView')->name('store.materialaccept');
 

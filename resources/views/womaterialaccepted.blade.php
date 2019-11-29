@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
 @section('title')
-    store
+    Work order that needs material
     @endSection
 
 @section('body')
-@if(count($items) > 0)
+@if(count($items)>0)
 
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work orders that need Material </b></h3>
+            <h3 align="center"><b>Work order with material accepted</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -30,48 +30,52 @@
             </ul>
         </div>
     @endif
-     </div>
+      </div>
    
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
-                <th >#</th>
-              
-				<th >Workorder ID</th>
-				<th >HOS name</th>
+                
+				
+                <th > No </th>
+				<th >Workorder ID </th>
+                <th >HoS Name </th>
+				<th >Workorder Detail</th>
+				
 				<th >Action</th>
 				
             </tr>
             </thead>
 
-            <tbody>
+          <tbody>                    
 
-            <?php $i=0;  ?>
+           <?php $i= 1; ?>
             @foreach($items as $item)
 
-                <?php $i++ ?>
-                <tr>
-                    <th scope="row">{{ $i }}</th>
-                   
+               
+                <tr> <td>{{$i++}}</td>
                     <td>00{{ $item->work_order_id }}</td>
-                   
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    
+                    <td>{{ $item['workorder']->details }}</td>
+                    
+                    <td>
 					
-                 
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">Material</a>&nbsp;
-                        </td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('woMaterialAccepted', [$item->work_order_id]) }}" role="button">View Material</a></td>
+                  
+                       
                     </tr>
                     @endforeach
             </tbody>
         </table>
     </div>
 </div>
- @else       
-               <div class="container" align="center">
-                
-                   <br><div> <h2 style="padding-top: 300px;">Currently no work order needs Material</h2></div>
-                
-            </div>
-                   @endif
+<br><br><br>
+
+@else
+
+<div style="padding-top: 300px;" align="center"><h1> No Workorder Material accepted by Inspector of Work </h1></div>
+
+@endif
     @endSection

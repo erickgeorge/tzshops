@@ -621,7 +621,7 @@ public function profileView(){
         
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id')
-                     ->where('status',5)
+                     ->where('status',5)->orwhere('reservestatus',1)
                     
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
@@ -632,6 +632,24 @@ public function profileView(){
         return view('womaterialreserved', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
     
+
+          public function material_accepted()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+        $wo_material=   WorkOrderMaterial::
+                     select(DB::raw('work_order_id'),'hos_id')
+                     ->where('status',1)->orwhere('copyforeaccepted' , 1)
+                    
+                     ->groupBy('work_order_id')
+                      ->groupBy('hos_id')
+                     
+                     
+                     ->get();
+               
+        return view('womaterialaccepted', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
 
 
     
@@ -788,7 +806,7 @@ public function profileView(){
     
     
     
-    public function woMaterialAcceptedView()
+    public function woMaterialAcceptedView($id)
     {
         
         if(request()->has('start') && request()->has('end') )  {
@@ -803,7 +821,7 @@ public function profileView(){
         }
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
  
         }
         
@@ -811,7 +829,7 @@ public function profileView(){
         
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('status', 1)->get(),'notifications' => $notifications]);
+        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->get(),'notifications' => $notifications]);
    }
        
      
@@ -1222,7 +1240,7 @@ public function wo_material_acceptedbyIOWView($id)
    
     {
     
-        $wo_material = WorkOrderMaterial::where('status', 5)
+        $wo_material = WorkOrderMaterial::where('status', 5)->orwhere('reservestatus',1)
                    
                      ->get();
         

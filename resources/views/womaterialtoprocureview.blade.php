@@ -40,7 +40,7 @@
                 <th >#</th>
                
                 <th >Material Name</th>
-                <th >Brand Name</th>
+                <th >Material Description</th>
                 <th >Value/Capacity</th>
                 <th >Type</th>
                 <th >Quantity Requested</th>

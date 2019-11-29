@@ -57,21 +57,49 @@ class StoreController extends Controller
 
        $p=$request['istock'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
-       $matir->checkreserve = 1;
+      // $matir->checkreserve = 1;
+       $matir->currentaddedmat = 2;
        $matir->newstock = $request['tstock'];
-       
 
-       $mat = material::where('id', $id)->first();
-      
-      
 
-        
+        if ( ($matir->newstock) > ($matir->quantity - $matir->reserved_material) ) {
+            return redirect()->back()->withErrors(['message' => ' Quantity Purchased for  '.$matir['material']->name. '  is: '.($matir->quantity - $matir->reserved_material).' .Please add '.$matir['material']->name. ' up to total Purchased, If Purchased '.$matir['material']->name. ' is greater than Requested '.$matir['material']->name. ' Please go to Store add excessed  '.$matir['material']->name. ' for the other worksorders, Thanks   '  ]);
+        }
 
-     $matir->save(); 
-        	return redirect()->back()->with(['message' => 'Respective Material added succefully in store']);
+        else{
+          $matir->save(); 
+          return redirect()->back()->with(['message' => 'Respective Material added succefully in store']);
+
         }
   
+        }
+
+  
        
+
+
+        public function incrementmaterialmodal2(Request $request, $id )
+    {   
+       $p=$request['estock'];
+       $matir = WorkOrderMaterial::where('id',$p)->first();
+      // $matir->checkreserve = 1;
+      
+       $matir->newstock = $request['pstock'];
+       
+      
+        if ( ($matir->newstock) > ($matir->quantity - $matir->reserved_material) ) {
+            return redirect()->back()->withErrors(['message' => ' Quantity Purchased for  '.$matir['material']->name. '  is: '.($matir->quantity - $matir->reserved_material).' .Please add '.$matir['material']->name. ' up to total Purchased, If Purchased '.$matir['material']->name. ' is greater than Requested '.$matir['material']->name. ' Please go to Store add excessed  '.$matir['material']->name. ' for the other worksorders, Thanks   '   ]);
+        }
+        else{ 
+          $matir->save(); 
+          return redirect()->back()->with(['message' => 'Respective Material added succefully in store']);
+
+        }
+        
+
+       
+        }
+  
     
  
 
@@ -162,14 +190,17 @@ class StoreController extends Controller
 
 			$mat = WorkOrderMaterial::where('id', $id)->first();
             $mat->status = 5 ;
+            $mat->newstock = 0;
+            $mat->copyforeaccepted = 1;
 
             $material_id=$mat->material_id;
 		
-		    $material=Material::where('id', $material_id)->first();
-		    $mat->reserved_material = $material->stock;
+		        $material=Material::where('id', $material_id)->first();
+		        $mat->reserved_material = $material->stock;
 		   
-		    $material->stock= 0;
-		    $material->save();
+		        $material->stock= 0;
+         
+		        $material->save();
             $mat->save();
 
 
@@ -202,6 +233,7 @@ class StoreController extends Controller
 
 			$mat = WorkOrderMaterial::where('id', $id)->first();
             $mat->status = 3;
+            $mat->copyforeaccepted = 1;
 
             $material_id=$mat->material_id;
 		    $material_quantity=$mat->quantity;
@@ -229,7 +261,7 @@ class StoreController extends Controller
 		 foreach($wo_materials as $wo_material) {
 		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		 $wo_m->status = 1;
-		  $wo_m->save();
+	   $wo_m->save();
 		 }
 		 
 		 //status field of work order
@@ -375,10 +407,13 @@ class StoreController extends Controller
 		 foreach($wo_materials as $wo_material) {
 		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		  $wo_m->status = 5; //status for material missing
+      $wo_m->newstock =0;
+      $wo_m->copyforeaccepted = 1;
 		       $material_id=$wo_m->material_id;
 		       $material=Material::where('id', $material_id)->first();
 		  $wo_m->reserved_material = $material->stock;
 		       $material->stock= 0;
+
 		       $material->save();
 		  $wo_m->save();
 		 }
@@ -450,6 +485,7 @@ class StoreController extends Controller
 		foreach($wochange_status as $wochange_state){
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
 		     $wochange->status=15; //status after release material from head of procurement
+         $wochange->reservestatus = 1;
 		     $wochange->sender_id = auth()->user()->id;
          $wochange->currentaddedmat = 1;
 		     $wochange->save();

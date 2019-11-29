@@ -67,9 +67,12 @@
                 
                 $m = Material::select(DB::raw('name'))->get();
 				
-                $wo_material_reservedd = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->groupBy('work_order_id')->get();
+                $wo_material_reservedd = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',55)->orwhere('reservestatus', 1)->groupBy('work_order_id')->get();
 
-                
+                $woMaterialAccepted = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->orwhere('copyforeaccepted' , 1)
+                    ->groupBy('work_order_id')->get();
+
+      
 
                 $wo_material_procured_by_iow = WorkOrderMaterial::select(DB::raw('material_id'))->where('status',15)->groupBy('material_id')->get();
                 
@@ -330,11 +333,12 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_accepted')}}">Accepted Work Orders</a>
+                        <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted')}}">Accepted Work order<span
+                                    class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_rejected')}}">Rejected Work Orders</a>
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_rejected')}}">Rejected Work order</a>
                     </li>
                     <!--
 					 <li class="nav-item">

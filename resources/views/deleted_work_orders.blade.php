@@ -4,6 +4,7 @@
     work orders
     @endSection
 @section('body')
+<div class="container">
     <br>
     <div class="row container-fluid"  style="margin-left:2%; margin-right:2%; margin-top: 6%;">
         <div class="col-md-8">
@@ -83,6 +84,7 @@
             </div>
         </div>
     </div>
+</div>
     <script>
 
         $(document).ready(function () {

@@ -55,14 +55,15 @@
             <thead class="thead-dark">
             <tr>
                 <th >#</th>
-                <th >HoS Name</th>
+                
                 <th >Material Name</th>
                 <th >Material Description</th>
                 <th >Value/Capacity</th>
                 <th >Type</th>
-                
+                <th>Quntity Requested</th>
+                <th>Quantity Reserved</th>
                 <th >Quantity Purchased</th>
-                 <th >Current Quantity </th>
+                 <th >Quantity Added </th>
                 <th>Action</th>
                
     
@@ -78,28 +79,36 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['staff']->fname.' '.$item['staff']->lname }}</td>
+                   <!-- <td>{{ $item['staff']->fname.' '.$item['staff']->lname }}</td>-->
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>
                     <td>{{ $item['material']->type }}</td>
+                    <td>{{$item->quantity}}</td>
+                    <td>{{$item->reserved_material}}</td>
                  
-                   <td > {{ $item->quantity - $item->reserved_material}}</td>
+                   <td style="color: blue" > {{ $item->quantity - $item->reserved_material}}</td>
                    <td>{{ $item->newstock }}</td>
-
-                   @if($item->newstock == $item->quantity)
-                     <td>Send to HoS<span> <a style="color: green;"  href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
-                   </span> </td>
-                  @endif
-                   
-                        <td>
-  
-                            &nbsp; &nbsp;&nbsp;<a style="color: green;"
+                    <td>
+                   @if($item->newstock == ($item->quantity - $item->reserved_material))
+                      <a style="color: green;"  href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
+                 
+                        
+                           @elseif($item->currentaddedmat == 1)
+                            <a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id}}','{{ $item->reserved_material}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
                                        data-toggle="modal" data-target="#exampleModali" title="Increment Material"><i
                                                 class="fas fa-plus"></i></a>
-                        </td>
-                     
+                                                @else
+                                                 <a style="color: green;"
+                                       onclick="myfunc( '{{ $item->id}}','{{ $item->reserved_material}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
+                                       data-toggle="modal" data-target="#exampleModal2" title="Increment Material"><i
+                                                class="fas fa-plus"></i></a>
+                                                @endif
+
+
+                      
+                         </td>
 
                     </tr>
                     @endforeach
@@ -278,44 +287,41 @@
 
                    
 
-                      <form method="POST" action="edit/Material/{{ $item->id}}" >
+                      <form method="POST" action="edit2/Material/{{ $item->id}}" >
                         @csrf
            
+         
               <label style="width: 777px;" >Material Description </label>           
           <div class="input-group mb-3">  
-                <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
+                <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="descriptiony"
                        aria-describedby="emailHelp" name="description"  >
-
-
           </div>
 
-            <div>
-            <label style="width: 777px;" >Current Reserved Material </label>
+             <div>
+            <label style="width: 777px;" >Current added material after <br> purchased </label>
 
             <div class="input-group mb-3">   
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
-                       id="stock" >   
-                         
+                       id="mstock"  >  
+                       <input  hidden id="estock" name="estock">      
             </div>
             </div>
 
-            <div>
+             <div>
              <label style="width: 777px;" >Add Material in Quantity</label>    
             <div class="input-group mb-3">   
                 <input style="width: 565px;" oninput="totalitem2()" style="color: black" required type="number" min="1"  class="form-control"
-                       aria-describedby="emailHelp" id="istock"  placeholder="Add Material in Quantity" > 
-                       <input hidden id="istock" name="istock">        
+                       aria-describedby="emailHelp" id="astock"  placeholder="Add Material in Quantity" >        
             </div>
             </div>
-
-            <div>
+            
+               <div>
              <label style="width: 777px; "   ><b style="color: black;">Tottal Material requested</b></label>
                
              <div class="input-group mb-3">
                 
-                <input  style="width: 565px;"  required type="number"  class="form-control" id="tstock"
-                        name="tstock" placeholder="Total Material requested">
-
+                <input  style="width: 565px;"  required type="number"  class="form-control" id="pstock"
+                        name="pstock" placeholder="Total Material requested">
 
               </div>
               </div>
@@ -336,35 +342,39 @@
                                                        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> 
     
-     <script type="text/javascript">
+    
 
-         function myfunc2( U , V , W , X  ) {
+
+    <script type="text/javascript"> 
+            
+
+          function myfunc( U , V , W , X  ) {
 
 
             
-            document.getElementById("istock").value = U;
+            document.getElementById("estock").value = U;
 
             document.getElementById("stock").value = V;
 
-            document.getElementById("tstock").value = W;
+            document.getElementById("mstock").value = W;
 
 
-            document.getElementById("description").value = X;
+            document.getElementById("descriptiony").value = X;
             
        }
 
-
-     </script>
-
+    </script>
     <script>
 
    function totalitem2() {
-         var x = document.getElementById("kstock").value;
-         var y = document.getElementById("stock").value;
+         var x = document.getElementById("mstock").value;
+         var y = document.getElementById("astock").value;
          var z  = parseInt(x) + parseInt(y);
-         document.getElementById("tstock").value=z;
-         document.getElementById("tstock").innerHTML = z;
+         document.getElementById("pstock").value=z;
+         document.getElementById("pstock").innerHTML = z;
      }
+
+
 
    </script>
 

@@ -11,9 +11,9 @@
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
             @if(auth()->user()->type =='STORE')
-            <h3 align="center"><b>Work Orders with Material Taken from Store</b></h3>
+            <h3 align="center"><b>Work orders with Material available and required by Head of Section</b></h3>
             @else
-            <h3 align="center"><b>Work Orders with Material Received From Store</b></h3>
+            <h3 align="center"><b>Work orders with Material received From Store</b></h3>
             @endif
 
         </div>

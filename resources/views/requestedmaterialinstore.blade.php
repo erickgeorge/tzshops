@@ -39,9 +39,9 @@
     <th>Type</th>
      <th>Quantity Requested</th>
       <th>Quantity in Store</th>
-      <th>Quantity to Reserve</th>
+      <th>Quantity Reserved</th>
       
-       <th>Quantity to be Purchased</th>
+       <th>Quantity Purchased</th>
        <th>Action</th>
        
        
@@ -91,10 +91,10 @@
 
 
       @if(($matform['material']->stock- $matform['material']->quantity_reserved)<($matform->quantity))
-      <td style="color: blue;">Reserve & Purchase<span> <a style="color: blue;"  href="{{ route('store.material.reserve', [$matform->id]) }}" data-toggle="tooltip" title="Reserve Material"><i class="fas fa-retweet"></i></a>
+      <td style="color: blue;"><span> <a style="color: blue;"  href="{{ route('store.material.reserve', [$matform->id]) }}" data-toggle="tooltip" title="Reserve and Send to Head of Procurement"><i class="fas fa-retweet"></i></a>
                    </span> </td>
       @else
-      <td>Send to HoS<span> <a style="color: green;"  href="{{ route('store.materialtohos', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
+      <td><span> <a style="color: green;"  href="{{ route('store.materialtohos', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
                    </span> </td>
       @endif
 

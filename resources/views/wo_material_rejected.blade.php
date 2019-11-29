@@ -7,12 +7,13 @@
 @section('body')
 
     <br>
+     @if(count($items)>0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work order whose material are rejected </b></h3>
+            <h3 align="center"><b>Work order with rejected Material </b></h3>
         </div>
- @if(count($items)>0)
-        <div class="col-md-6" align="left">
+
+        <div style="padding-left: 650px;">
             <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -94,7 +95,7 @@
     </div>
    
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder Accepted</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no Work Order with Rejected Material</h1>
         @endif
     </div>
 

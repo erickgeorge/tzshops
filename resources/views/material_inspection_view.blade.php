@@ -11,7 +11,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Materials needed by Work order </b></h3>
+            <h3 align="center"><b>Materials needed for Work order </b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -92,7 +92,7 @@
                     <div>
                
                   @if($item->status != 9)
-                     <h5> Send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
+                     <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
                    </span> 
               
 
@@ -215,7 +215,7 @@
    @else       
                <div class="container" align="center">
                 
-                   <br><div> <h2 style="padding-top: 300px;">No Material needed by Work order</h2></div>
+                   <br><div> <h2 style="padding-top: 300px;">Currently No Material needed for Work order</h2></div>
                 
             </div>
                    @endif

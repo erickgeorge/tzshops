@@ -7,12 +7,13 @@
 @section('body')
 
     <br>
+      @if(count($items) > 0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work order whose material are accepted </b></h3>
+            <h3 align="center"><b>Material Accepted for this Work order </b></h3>
         </div>
-  @if(count($items) > 0)
-        <div class="col-md-6" align="right">
+
+        <div style="padding-left: 650px;">
             <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -38,7 +39,7 @@
         </div>--}}
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -55,8 +56,7 @@
             <thead class="thead-dark">
             <tr>
                 <th >#</th>
-                <th >WO ID</th>
-				<th >Workorder Detail</th>
+           			
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
@@ -74,15 +74,26 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>WO {{ $item->work_order_id  }}</td>
                    
-                    <td>{{ $item['workorder']->details }}</td>
+                   
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
 					  <td>{{ $item->quantity }}</td>
-                    <td>
-                       ACCEPTED</td>
+                      @if($item->status == 5)
+                      <td><span class="badge badge-warning">On Procurement Stage</span>
+                       </td>
+                       @elseif($item->status == 3)
+                       <td><span class="badge badge-primary">Sent From Store to HoS</span>
+                       </td>
+                       @elseif($item->status == 15)
+                       <td><span class="badge badge-warning"> Purchased</span>
+                       </td>
+                       @else
+                        <td><span class="badge badge-primary"> ACCEPTED</span>
+                       </td>
+
+                       @endif
                     </tr>
 			
                     @endforeach
@@ -91,7 +102,7 @@
     </div>
    
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder Accepted</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no Work Order with Accepted Material</h1>
         @endif
     </div>
 	</div>

@@ -16,7 +16,7 @@
 
     <div>
         <div>
-            <h3 align="center" class="container"><b>Material Reserved by Works Orders</b></h3>
+            <h3 align="center" class="container"><b>Material Reserved for Work Order</b></h3>
         </div>
        
     </div>
@@ -45,6 +45,7 @@
                 <th >Type</th>
                 <th >Quantity Requested</th>
                 <th >Quantity Reserved</th>
+                <th >Status</th>
                
     
                 
@@ -66,6 +67,13 @@
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td style="color: blue;">{{ $item->reserved_material }}</td>
+                    @if($item->status == 15 )
+                    <td> <span class="badge badge-warning"> Purchased </span> </td>
+                    @elseif($item->status == 3)
+                    <td> <span class="badge badge-info"> Sent to Head of Section </span> </td>
+                    @else
+                    <td> <span class="badge badge-primary"> Reserved </span> </td>
+                    @endif
                    
 
                     </tr>
