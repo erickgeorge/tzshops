@@ -173,7 +173,7 @@ class StoreController extends Controller
             $mat->save();
 
 
-       return redirect()->back()->with(['message' => 'Material Sent  successfully to Head of Section']);
+       return redirect()->back()->with(['message' => 'Material Reserved and Sent Succesifully to Head of Procurement']);
     }
 
 
@@ -451,6 +451,7 @@ class StoreController extends Controller
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
 		     $wochange->status=15; //status after release material from head of procurement
 		     $wochange->sender_id = auth()->user()->id;
+         $wochange->currentaddedmat = 1;
 		     $wochange->save();
 		
 		}

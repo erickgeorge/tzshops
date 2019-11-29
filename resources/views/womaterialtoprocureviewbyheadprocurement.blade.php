@@ -90,16 +90,16 @@
                    @if($item->newstock == $item->quantity)
                      <td>Send to HoS<span> <a style="color: green;"  href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
                    </span> </td>
-                    @else
-                    <td>
+                  @endif
+                   
+                        <td>
   
-                           &nbsp; &nbsp;&nbsp;<a style="color: green;"
+                            &nbsp; &nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id}}','{{ $item->reserved_material}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
                                        data-toggle="modal" data-target="#exampleModali" title="Increment Material"><i
                                                 class="fas fa-plus"></i></a>
                         </td>
-                   
-                    @endif
+                     
 
                     </tr>
                     @endforeach
@@ -147,79 +147,8 @@
 
                       <form method="POST" action="edit/Material/{{ $item->id}}" >
                         @csrf
-                       
-
-
-           
-
-
-           <?php
                   
-                   $a=array("1"=>"true","NULL"=>"false");
-
-                   $a = $item->checkreserve
-                
-            ?>
-
-             
-            @if($item->checkreserve == 1 )
-         
-             <?php ;
-             $a[$i]= "no";
-             $i++;
-             ?>
-
-             @else
-              <?php 
-              $a[$i]= "yes";
-              $i++;
-               ?>
-
-             @endif
-
-
-
-         
-           @if(array_search("true", $a))
-         
-
-              <label style="width: 777px;" >Material Description </label>           
-          <div class="input-group mb-3">  
-                <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
-                       aria-describedby="emailHelp" name="description"  >
-          </div>
-
-             <div>
-            <label style="width: 777px;" >Current added material after <br> purchased </label>
-
-            <div class="input-group mb-3">   
-                <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
-                       id="tstock"  >     
-            </div>
-            </div>
-
-             <div>
-             <label style="width: 777px;" >Add Material in Quantity</label>    
-            <div class="input-group mb-3">   
-                <input style="width: 565px;" oninput="totalitem()" style="color: black" required type="number" min="1"  class="form-control"
-                       aria-describedby="emailHelp" id="istock"  placeholder="Add Material in Quantity" >        
-            </div>
-            </div>
-            
-               <div>
-             <label style="width: 777px; "   ><b style="color: black;">Tottal Material requested</b></label>
-               
-             <div class="input-group mb-3">
-                
-                <input  style="width: 565px;"  required type="number"  class="form-control" id="tstock"
-                        name="tstock" placeholder="Total Material requested">
-
-              </div>
-              </div>
-              
-            @else
-
-              <label style="width: 777px;" >Material Description </label>           
+            <label style="width: 777px;" >Material Description </label>           
           <div class="input-group mb-3">  
                 <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
                        aria-describedby="emailHelp" name="description"  >
@@ -255,11 +184,7 @@
               </div>
 
 
-
-            @endif
-
-
-    
+              
         
                                                     <div style="padding-left: 120px;"> 
                                                        <button style=" width: 100px;" type="submit" class="btn btn-primary">Save
@@ -293,12 +218,147 @@
             document.getElementById("description").value = X;
             
        }
+     </script>
+
+    <script>
+
+    function totalitem() {
+         var x = document.getElementById("kstock").value;
+         var y = document.getElementById("stock").value;
+         var z  = parseInt(x) + parseInt(y);
+         document.getElementById("tstock").value=z;
+         document.getElementById("tstock").innerHTML = z;
+     }
+
+
+   </script>
+
+
+     <script type="text/javascript">
+
+      $("#materialedit").select2({
+            placeholder: "Choose materia..",
+            allowClear: true
+        });
+     </script>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+<!-- modal2 -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div >
+         <div class="modal-dialog" style="width:  400px; background-color: white" role="document">
+         <div class="modal-content">
+
+                    <button  class="close" data-dismiss="modal" aria-label="Close" style="padding-left:350px; ">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                   
+                    <div class="modal-header ">
+                     <div>
+                        <h5  style="width: 360px;" align="center" ><b>Add Material in Store.</b></h5>
+                        <hr  >
+                    </div>  
+                  </div>
+                <div  style="width: 200px; display: inline-block;
+                                            min-height: 50px;
+ 
+                      height: auto; padding-left: 100px;">
+
+                 
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+
+                   
+
+                      <form method="POST" action="edit/Material/{{ $item->id}}" >
+                        @csrf
+           
+              <label style="width: 777px;" >Material Description </label>           
+          <div class="input-group mb-3">  
+                <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
+                       aria-describedby="emailHelp" name="description"  >
+
+
+          </div>
+
+            <div>
+            <label style="width: 777px;" >Current Reserved Material </label>
+
+            <div class="input-group mb-3">   
+                <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
+                       id="stock" >   
+                         
+            </div>
+            </div>
+
+            <div>
+             <label style="width: 777px;" >Add Material in Quantity</label>    
+            <div class="input-group mb-3">   
+                <input style="width: 565px;" oninput="totalitem2()" style="color: black" required type="number" min="1"  class="form-control"
+                       aria-describedby="emailHelp" id="istock"  placeholder="Add Material in Quantity" > 
+                       <input hidden id="istock" name="istock">        
+            </div>
+            </div>
+
+            <div>
+             <label style="width: 777px; "   ><b style="color: black;">Tottal Material requested</b></label>
+               
+             <div class="input-group mb-3">
+                
+                <input  style="width: 565px;"  required type="number"  class="form-control" id="tstock"
+                        name="tstock" placeholder="Total Material requested">
+
+
+              </div>
+              </div>
+        
+                                                    <div style="padding-left: 120px;"> 
+                                                       <button style=" width: 100px;" type="submit" class="btn btn-primary">Save
+                                                       </button>
+                                                    </div>
+                                         
+                                            </form>
+
+
+                </div>
+
+
+           
+                  
+                                                       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> 
+    
+     <script type="text/javascript">
+
+         function myfunc2( U , V , W , X  ) {
+
+
+            
+            document.getElementById("istock").value = U;
+
+            document.getElementById("stock").value = V;
+
+            document.getElementById("tstock").value = W;
+
+
+            document.getElementById("description").value = X;
+            
+       }
+
 
      </script>
 
     <script>
 
-   function totalitem() {
+   function totalitem2() {
          var x = document.getElementById("kstock").value;
          var y = document.getElementById("stock").value;
          var z  = parseInt(x) + parseInt(y);
@@ -317,16 +377,14 @@
         });
      </script>
 
-   
-
-
-
                 <div class="modal-footer">
                 </div>
             </div>
         </div>
         </div>
     </div>
+
+
 
 
             
