@@ -110,7 +110,7 @@
                         <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_directorates')}}">Settings</a>
+                        <a class="nav-link" style="color:white" href="{{ url('settings')}}">Settings</a>
                     </li>
                     @endif
                 @if(auth()->user()->type == 'Estates Director')

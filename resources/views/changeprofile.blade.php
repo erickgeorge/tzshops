@@ -151,7 +151,7 @@ padding: 20 20 20 20;
                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
                 </div>
                 <div>
-            <button type="submit"  class="btn btn-success">Submit</button>
+            <button type="submit"  class="btn btn-success">Save</button>
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </div>
             </form>

@@ -130,6 +130,8 @@
                     </div>
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
+                    <a href="#" class="btn bg-danger btn-danger">Cancel
+                    </a>
                 </form>
             </div>
             {{-- end inspection --}}
@@ -232,6 +234,8 @@
                     
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
+                    <a href="#" class="btn bg-danger btn-danger">Cancel
+                    </a>
                 </form>
             </div>
 
@@ -348,6 +352,9 @@
                     
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
+                    
+                    <a href="#" class="btn bg-danger btn-danger">Cancel
+                    </a>
                 </form>
 			
             </div>

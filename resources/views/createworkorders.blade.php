@@ -101,7 +101,7 @@
                 <div class="input-group-prepend">
                     <label style="height: 28px" class="input-group-text" for="area">Area <sup style="color: red;">*</sup></label>
                 </div>
-                <select style="width: 455px" required class="custom-select" id="area" name="area" onchange="getBlocks()">
+                <select required class="custom-select" id="area" name="area" onchange="getBlocks()">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -113,7 +113,7 @@
                 <div class="input-group-prepend">
                     <label  style="height: 28px" class="input-group-text" for="block">Block <sup style="color: red;">*</sup></label>
                 </div>
-                <select style="width: 452px" required class="custom-select" id="block" name="block" onchange="getRooms()">
+                <select required class="custom-select" id="block" name="block" onchange="getRooms()">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -123,7 +123,7 @@
                 <div class="input-group-prepend">
                     <label   style="height: 28px" class="input-group-text" for="room">Room <sup style="color: red;">*</sup></label>
                 </div>
-                <select style="width: 385px" required class="custom-select" id="room" name="room">
+                <select required class="custom-select" id="room" name="room">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
