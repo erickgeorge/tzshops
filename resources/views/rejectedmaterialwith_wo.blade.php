@@ -38,6 +38,7 @@
               
 				<th >Workorder ID</th>
 				<th >HOS name</th>
+                <th>Workorder Details</th>
 				<th >Action</th>
 				
             </tr>
@@ -55,6 +56,7 @@
                     <td>00{{ $item->work_order_id }}</td>
                    
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{$item['workorder']->details}}</td>
 					
                  
                       <td>  <a style="color: green;" href="rejected/materials/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">Material</a>&nbsp;

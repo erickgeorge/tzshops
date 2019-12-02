@@ -15,9 +15,15 @@
 
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
+       @if(auth()->user()->type != 'Inspector Of Works')
         <div class="col-lg-12">
             <h3 align="center"><b>Material Rejected by Inspector of Work  </b></h3>
         </div>
+        @else
+        <div class="col-lg-12">
+            <h3 align="center"><b>Material Rejected  </b></h3>
+        </div>
+        @endif
 
       <!--<div class="col-md-6" align="left">
             <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
@@ -64,14 +70,16 @@
             <tr>
         <th >No</th>
         
-				<th >Workorder Detail</th>
+			
 				<th >Material Name</th>
 				<th >Material Description</th>
         <th>Unit Measure</th>
 				<th >Type</th>
 				<th >Quantity</th>
                 <th >Reason</th>
+                @if(auth()->user()->type != 'Inspector Of Works')
                 <th>Action</th>
+                @endif
 				<th >Status</th>
 				
             </tr>
@@ -87,7 +95,7 @@
                     <th scope="row">{{ $i }}</th>
                 
                    
-                    <td>{{ $item['workorder']->details }}</td>
+                  
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                      <td>{{ $item['material']->brand }}</td>
@@ -104,6 +112,7 @@
                   @if($item->reason == NULL)
                   <td><span class="badge badge-warning">Approved</span></td>
                   @else
+                  @if(auth()->user()->type != 'Inspector Of Works')
                     <td>
                           <div class="row">
 
@@ -125,15 +134,25 @@
                                     </form>
                       </div>
                     </td>
+                    @else
+                    <td><span class="badge badge-danger">Rejected</span></td>
                     @endif
+                    @endif
+                    @if(auth()->user()->type != 'Inspector Of Works')
                   
                        @if($item->reason == NULL)
                        <td><span class="badge badge-success">Accepted</span></td>
-                       @elseif($item->status == 44)                                               
+                       @elseif($item->status == 44)                                             
                        <td><span class="badge badge-warning">Edited..</span></td>
-                       @else
-                       <td><span class="badge badge-danger">Rejected</span></td>
+                       @elseif($item->status == 17)
+                       <td><span class="badge badge-danger">Rejected</span>
+                               @if($item->matedited == 1)
+                       <span class="badge badge-danger">Again</span>
+                               @endif
+                       </td>
                        @endif
+                    @endif
+
                     </tr>
                     @endforeach
             </tbody>
@@ -144,9 +163,9 @@
 
         <br>
         <br>
-
+          @if(auth()->user()->type != 'Inspector Of Works')
            <div style="color: black; "> <h5> Request Material  again to inspector of work <span> <a style="color: green;" href="/send/material_rejected_again/{{$item->work_order_id}}"  data-toggle="tooltip" title="Request back to inspector of work"><i class="far fa-check-circle"></i></a>
-                   </span> </h5></div> 
+                   </span> </h5></div>  @endif
 
    
         

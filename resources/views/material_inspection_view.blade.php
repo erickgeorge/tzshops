@@ -76,10 +76,16 @@
 
                         <!--<a style="color: black;" title="Reject" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModal"><i class="fas fa-times-circle" style="color: red"></i></a>-->
                     </span> </td>
-                    @if($item->status == 0)
-                    <td><span class="badge badge-primary">Waiting</span></td>
+                    @if($item->matedited == 1)
+                    <td><span class="badge badge-warning">Edited</span>
+                        @if($item->status > $item->matedited) <br>
+                        <span class="badge badge-danger">Rejected Again</span>
+                        @endif
+                    </td>
                     @elseif($item->status == 9)
-                    <td><span class="badge badge-danger">rejected</span></td>
+                    <td><span class="badge badge-danger">Rejected</span></td>
+                    @elseif($item->status == 0)
+                    <td><span class="badge badge-primary">Waiting</span></td>
                     @endif
                     </tr>
                     @endforeach 
@@ -101,14 +107,33 @@
                 </span>  
                  @endif
 
-   
-                  @if($item->status == 9)
+                
+                <?php $i=1; 
+                  $p= array("t");
+                 ?>
+
+
+               
+                <?php   
+                 $p[$i]= "no";
+                  $i++;
+                 ?>
+              
+
+      
+           
+                  @if(in_array("no", $p))
+          
                  
                <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
                    </span></h5>  
 
-                   @endif
+                     
+                      @endif
 
+
+                
+ 
 
 
 

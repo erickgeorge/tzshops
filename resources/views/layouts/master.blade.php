@@ -72,12 +72,11 @@
                 $woMaterialAccepted = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->orwhere('copyforeaccepted' , 1)
                     ->groupBy('work_order_id')->get();
 
-      
-
+                $woMaterialrejected = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',-1)->orwhere('status',17)
+                    ->groupBy('work_order_id')->get();
+   
                 $wo_material_procured_by_iow = WorkOrderMaterial::select(DB::raw('material_id'))->where('status',15)->groupBy('material_id')->get();
                 
-
-
                 $material_to_estatedirector = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->groupBy('work_order_id')->get();
 
                 $material_to_purchased = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',15)->groupBy('work_order_id')->get();
@@ -333,13 +332,17 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted')}}">Accepted Work order<span
+                        <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted')}}">Accepted Materials<span
                                     class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_rejected')}}">Rejected Work order</a>
+                        <a class="nav-link" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials
+                        <span
+                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
                     </li>
+
+                   
                     <!--
 					 <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_purchasing_request')}}">Procurement Requests <span
@@ -439,7 +442,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials</a>
+               <a class="dropdown-item" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials  <span
+                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
                <a style="color:white" class="dropdown-item" href="{{ url('material_received_with_workorder')}}">Received Material from Store</a>
           
 
