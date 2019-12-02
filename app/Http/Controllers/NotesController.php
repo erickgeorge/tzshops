@@ -87,7 +87,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
        
     }
 //if only ->from not inserted
@@ -96,7 +96,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if only status not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
@@ -104,14 +104,14 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if status and ->from not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if only name no inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
@@ -119,27 +119,27 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if name and from not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if name and status not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if name, status, from not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if end not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
@@ -147,51 +147,51 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end and from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if end and status not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end, status, from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('created_at','>=',$_GET['start'])->get();
+        Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if end, name not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end, name, from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if end, name, status not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end,name,status,from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
-        Where('created_at','>=',$_GET['start'])->get();
+        Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if start not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
@@ -199,91 +199,91 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, status not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, status, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, name not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, status not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, status, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, end not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, from not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, status not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, status, from not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
-        Where('problem_type',$_GET['problem_type'])->get();
+        Where('problem_type',$_GET['problem_type'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name, from not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name, status not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
@@ -292,7 +292,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if only ->from not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
@@ -301,7 +301,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if only status not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -310,7 +310,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if status and ->from not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
@@ -318,7 +318,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if only name no inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -327,7 +327,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if name and from not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
@@ -335,7 +335,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if name and status not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -343,14 +343,14 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if name, status, from not inserted
     if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if end not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -359,7 +359,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end and from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
@@ -367,7 +367,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if end and status not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -375,14 +375,14 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end, status, from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('location',$_GET['location'])->
-        Where('created_at','>=',$_GET['start'])->get();
+        Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if end, name not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -390,27 +390,27 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','>=',$_GET['start'])->
         Where('status',$_GET['status'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end, name, from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if end, name, status not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end,name,status,from not inserted
     if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
-        Where('created_at','>=',$_GET['start'])->get();
+        Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if start not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -419,7 +419,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','<=',$_GET['end'])->
         Where('status',$_GET['status'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
@@ -427,7 +427,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, status not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -435,14 +435,14 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, status, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('location',$_GET['location'])->
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, name not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -450,27 +450,27 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','<=',$_GET['end'])->
         Where('status',$_GET['status'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, status not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, status, from not inserted
     if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
-        Where('created_at','<=',$_GET['end'])->get();
+        Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, end not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
@@ -478,54 +478,54 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('problem_type',$_GET['problem_type'])->
         Where('status',$_GET['status'])->
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, from not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, status not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, status, from not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
-        Where('problem_type',$_GET['problem_type'])->get();
+        Where('problem_type',$_GET['problem_type'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
         Where('status',$_GET['status'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name, from not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->get();
+        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name, status not inserted
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
-        Where('client_id',$_GET['userid'])->get();
+        Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
           $data['wo'] =  Workorder::
-        Where('location',$_GET['location'])->get(); 
+        Where('location',$_GET['location'])->orderBy('created_at','Desc')->get(); 
         //$header = $_GET['problem_type'].' Work orders ';
 }
 //if all empty
     elseif(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
-          $data['wo'] =  Workorder::get(); 
+          $data['wo'] =  Workorder::orderBy('created_at','Desc')->get(); 
 }
 ////////////////////////////////////////////////////
         if($data['wo'] ->isEmpty()){
@@ -535,7 +535,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 
     }else{
 $pdf = PDF::loadView('notes_pdf',$data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
     }
 ///////////////////////////////////////////////////////
 }
@@ -559,20 +559,20 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
      $data['header'] = $username.''.$type;
      //////////////////////////////////////////
      if (($_GET['type']=='')&&($_GET['college']=='')) {
-         $data['display_users'] =  user::get();
+         $data['display_users'] =  user::orderBy('fname','asc')->get();
      }
      if (($_GET['type']=='')&&($_GET['college']!='')) {
          $data['display_users'] =  user::
-         Where('id',$_GET['college'])->get();
+         Where('id',$_GET['college'])->orderBy('fname','asc')->get();
      }
       if (($_GET['type']!='')&&($_GET['college']=='')) {
          $data['display_users'] =  user::
-         Where('type',$_GET['type'])->get();
+         Where('type',$_GET['type'])->orderBy('fname','asc')->get();
      }
       if (($_GET['type']!='')&&($_GET['college']!='')) {
          $data['display_users'] =  user::
          Where('id',$_GET['college'])->
-         Where('type',$_GET['type'])->get();
+         Where('type',$_GET['type'])->orderBy('fname','asc')->get();
      }
   //////////////////////////////////////////////   
  if($data['display_users'] ->isEmpty()){
@@ -582,7 +582,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
 }else{
        
 $pdf = PDF::loadView('users_pdf', $data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].''.Now().'.pdf');
     }
  //////////////////////////////////////////////   
     }
@@ -596,39 +596,39 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
      $data['title'] = 'Notes List';
      if (($_GET['name']=='')&&($_GET['brand']=='')&&($_GET['type']!='')) {
          $data['items'] =  material::
-         Where('type',$_GET['type'])->get();
+         Where('type',$_GET['type'])->orderBy('name','asc')->get();
      }
      if (($_GET['name']=='')&&($_GET['brand']!='')&&($_GET['type']=='')) {
         $data['items'] =  material::
-        Where('description',$_GET['brand'])->get();
+        Where('description',$_GET['brand'])->orderBy('name','asc')->get();
      }
      if (($_GET['name']=='')&&($_GET['brand']!='')&&($_GET['type']!='')) {
          $data['items'] =  material::
          Where('type',$_GET['type'])->
-         Where('description',$_GET['brand'])->get();
+         Where('description',$_GET['brand'])->orderBy('name','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']=='')&&($_GET['type']=='')) {
           $data['items'] =  material::
-         Where('name',$_GET['name'])->get();
+         Where('name',$_GET['name'])->orderBy('name','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']=='')&&($_GET['type']!='')) {
           $data['items'] =  material::
          Where('name',$_GET['name'])->
-         Where('type',$_GET['type'])->get();
+         Where('type',$_GET['type'])->orderBy('name','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']!='')&&($_GET['type']=='')) {
           $data['items'] =  material::
          Where('name',$_GET['name'])->
-         Where('description',$_GET['brand'])->get();
+         Where('description',$_GET['brand'])->orderBy('name','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']!='')&&($_GET['type']!='')) {
           $data['items'] =  material::
          Where('type',$_GET['type'])->
          Where('name',$_GET['name'])->
-         Where('description',$_GET['brand'])->get();
+         Where('description',$_GET['brand'])->orderBy('name','asc')->get();
      }
      if (($_GET['name']=='')&&($_GET['brand']=='')&&($_GET['type']=='')) {
-          $data['items'] =  material::get();
+          $data['items'] =  material::orderBy('name','asc')->get();
      }
  ///////////////////////////////////////////////   
  if($data['items'] ->isEmpty()){
@@ -637,7 +637,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
 
 }else{
 $pdf = PDF::loadView('material_pdf', $data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].' - '.Now().'.pdf');
     }
   ////////////////////////////////////////////////////  
     }
@@ -669,7 +669,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
      
 }else{
 $pdf = PDF::loadView('unatended_pdf', ['wo' => $wo ,'tittle' =>$title]);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
     }
 /////////////////////////////////////////////////  
     }
@@ -681,40 +681,40 @@ public function unattendedwopdf(){
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          Where('location',$_GET['location'])->
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','-1')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('status','-1')->OrderBy('created_at','Desc')->get();
       }
    
         if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
             $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
                              Where('location',$_GET['location'])->
-                             Where('status','-1')->get();
+                             Where('status','-1')->OrderBy('created_at','Desc')->get();
          }
 
         if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','-1')->get();
+         Where('status','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
-          Where('status','-1')->get();
+          Where('status','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','-1')->get();
+         Where('status','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
-         Where('status','-1')->get();
+         Where('status','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','-1')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('status','-1')->OrderBy('created_at','Desc')->get();
       }
 
        if(($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']=='')){
-            $data['unattended_work'] =  WorkOrder::Where('status','-1')->get();
+            $data['unattended_work'] =  WorkOrder::Where('status','-1')->OrderBy('created_at','Desc')->get();
        }   
 //////////////////////////////////////////////////////// 
      if($data['unattended_work'] ->isEmpty()){
@@ -723,7 +723,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 }else{
         
  $pdf = PDF::loadView('unattendedwopdf', $data);
- return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+ return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
     }
 ///////////////////////////////////////////////////////////// 
     }
@@ -732,40 +732,40 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          Where('location',$_GET['location'])->
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
       }
    
         if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
             $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
                              Where('location',$_GET['location'])->
-                             Where('status','2')->get();
+                             Where('status','2')->OrderBy('created_at','Desc')->get();
          }
 
         if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->get();
+         Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
-          Where('status','2')->get();
+          Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->get();
+         Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
-         Where('status','2')->get();
+         Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
       }
 
        if(($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']=='')){
-            $data['unattended_work'] =  WorkOrder::Where('status','2')->get();
+            $data['unattended_work'] =  WorkOrder::Where('status','2')->OrderBy('created_at','Desc')->get();
        }   
     
 //////////////////////////////////////////////  
@@ -774,7 +774,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
      
 }else{
 $pdf = PDF::loadView('completewopdf', $data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
     }
 ////////////////////////////////////////////////    
     }
@@ -782,40 +782,40 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          Where('location',$_GET['location'])->
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
       }
    
         if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
             $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
                              Where('location',$_GET['location'])->
-                             Where('status','2')->get();
+                             Where('status','2')->OrderBy('created_at','Desc')->get();
          }
 
         if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->get();
+         Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
-          Where('status','2')->get();
+          Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->get();
+         Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
-         Where('status','2')->get();
+         Where('status','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
       }
 
        if(($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']=='')){
-            $data['unattended_work'] =  WorkOrder::Where('status','2')->get();
+            $data['unattended_work'] =  WorkOrder::Where('status','2')->OrderBy('created_at','Desc')->get();
        }   
     
 /////////////////////////////////////////////////  
@@ -825,7 +825,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 }else{
        
 $pdf = PDF::loadView('wowithdurationpdf', $data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
     }
 ////////////////////////////////////////////////////    
     }
@@ -844,7 +844,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 }else{
         
 $pdf = PDF::loadView('roomreportpdf', $data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
     }
 ///////////////////////////////////////////////////    
     }
@@ -856,15 +856,15 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
         if (($_GET['name']!='')&&($_GET['type']!='')) {
             if ($_GET['change']=='hos') 
             {
-                 $data['fetch'] = user::where('type','like','%HOS%')->get();
+                 $data['fetch'] = user::where('type','like','%HOS%')->OrderBy('fname','asc')->get();
  $data['header'] = 'All Heads of Section Details';
             }elseif($_GET['change']=='iow')
             {
-                 $data['fetch'] = user::where('type','like','%Inspector%')->get();
+                 $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->get();
  $data['header'] = 'All Inspectors of work Details';
             }else
             {
-                 $data['fetch'] = Technician::where('type',$_GET['type'])->get();
+                 $data['fetch'] = Technician::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
              $data['header'] = 'All Technicians Details';    
             }
         }
@@ -872,15 +872,15 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
         {
           if ($_GET['change']=='hos') 
           {
-                 $data['fetch'] = user::where('type',$_GET['type'])->get();
+                 $data['fetch'] = user::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'All '.$_GET['type'].' Head of Section Details';
             }elseif($_GET['change']=='iow')
             {
-                 $data['fetch'] = user::where('type',$_GET['type'])->get();
+                 $data['fetch'] = user::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'All '.$_GET['type'].' Inspector of work Details';
             }else
             {
-                 $data['fetch'] = Technician::where('type',$_GET['type'])->get();
+                 $data['fetch'] = Technician::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'All '.$_GET['type'].'  Technicians Details';     
             }
         }
@@ -888,15 +888,15 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
         {
              if ($_GET['change']=='hos') 
              {
-                 $data['fetch'] = user::where('type','like','%HOS%')->where('id',$_GET['name'])->get();
+                 $data['fetch'] = user::where('type','like','%HOS%')->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'Head of Section Details';
             }elseif($_GET['change']=='iow')
             {
-                 $data['fetch'] = user::where('type','like','%Inspector%')->where('id',$_GET['name'])->get();
+                 $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->where('id',$_GET['name'])->get();
                 $data['header'] = 'Inspector of work Details';
             }else
             {
-                 $data['fetch'] = Technician::where('id',$_GET['name'])->get();
+                 $data['fetch'] = Technician::where('id',$_GET['name'])->OrderBy('fname','asc')->get();
                  $data['header'] = 'Technician Details';    
             }
         }
@@ -904,15 +904,15 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
         {
             if ($_GET['change']=='hos') 
             {
-                 $data['fetch'] = user::where('type','like','%HOS%')->get();
+                 $data['fetch'] = user::where('type','like','%HOS%')->OrderBy('fname','asc')->get();
  $data['header'] = 'All Heads of Section Details';
             }elseif($_GET['change']=='iow')
             {
-                 $data['fetch'] = user::where('type','like','%Inspector%')->get();
+                 $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->get();
  $data['header'] = 'All Inspectors of work Details';
             }else
             {
-                 $data['fetch'] = Technician::get();
+                 $data['fetch'] = Technician::OrderBy('fname','asc')->get();
              $data['header'] = 'All Technician Details';    
             }
         }
@@ -925,7 +925,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found Matching your
 }else{
         
 $pdf = PDF::loadView('allreport', $data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
     }
 /////////////////////////////////////////////////// 
 
@@ -938,7 +938,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
                     ->get()];
          $pdf = PDF::loadView('grnpdf', $data);
    
-     return $pdf->stream('Goods received Note - '.$id.'-'.date('d-m-Y').'.pdf');
+     return $pdf->stream('Goods received Note - '.$id.'-'.Now().'.pdf');
     }
 
     public function issuenotepdf($id){
@@ -948,7 +948,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
                     ->get()];
          $pdf = PDF::loadView('issuenotepdf', $data);
    
-     return $pdf->stream('Issue Note- '.$id.'-'.date('d-m-Y').'.pdf');
+     return $pdf->stream('Issue Note- '.$id.'-'.Now().'.pdf');
     }
 
     public function trackreport (Request $request, $id)
@@ -958,7 +958,7 @@ return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date
 ///////////////////////////////////////////////
      
 $pdf = PDF::loadView('trackworkreport', $data);
-return $pdf->stream(''.$data['header'].'- Generated on :'.date('d-m-Y').'-'.date('h:i').'.pdf');
+return $pdf->stream(''.$data['header'].'- '.Now().'.pdf');
 /////////////////////////////////////////////////// 
     }
 
