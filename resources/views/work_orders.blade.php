@@ -512,14 +512,25 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 </form>
   </div>
 </div>
-          <!-- ---------------------- -->                                        @endif
+                                                @endif
                                         @endif
                                         <br>
                                           @if(auth()->user()->type == 'Maintenance coordinator')
+
                                           @if($work->redirectwo == 1)
                                                                          <span class="badge badge-warning">Redirected</span>
                                                                          @else
-                                          <a href="#"><span data-toggle="modal" data-target="#redirect"
+                                        <!--   <a href="#"><span data-toggle="modal" data-target="#redirect"
+
+
+                                       
+                       &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
+                                       onclick="myfunc1( '{{ $work->id }}','{{ $work->reason }}')"
+                                       data-toggle="modal" data-target="#exampleModali" title="Edit"><i
+                                                class="fas fa-times-circle" style="color: red"></i></a>-->
+
+                                 <a href="#"><span data-toggle="modal" data-target="#redirect"
+
                                                                          class="badge badge-primary">Redirect..</span></a>
 
                                                                          @endif
@@ -619,6 +630,60 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
             </div>
         </div>
     </div>
+
+ 
+
+    <div class="modal fade" id="exampleModali" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" >Redirect Work Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><b>Choose problem type as you want to redirect.</b></p>
+                   <form method="POST" 
+                   action="{{ route('redirect.workorder', [$work->work_order_id ]) }}" class="col-md-6">
+                        @csrf  
+
+             <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
+            </div>
+            <select required style="width: 300px;min-width: 150px;" id="nameid" name="p_type">
+                <option selected value="">Choose...</option>
+                <option value="Carpentry/Painting">Carpentry/Painting</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Masonry/Road">Masonry/Road</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Plumbing">Plumbing</option>
+            </select>
+             </div>
+
+
+                         <div class="form-group">
+                         
+                            <input id="edit_mat" name="edit_mat" id="editmaterial" hidden>
+                         </div>
+                       
+                      
+                        <br>
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+
+
+
+
     @endforeach
     
     

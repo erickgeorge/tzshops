@@ -321,8 +321,23 @@ class StoreController extends Controller
     }
 	
 	
+  
 
-	
+      public function redirecttohos(Request $request, $id )
+    {
+
+       $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+       $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+       $p=$request['edit_mat'];
+       $matir = WorkOrder::where('id',$p)->first();
+      
+       $matir->problem_type = $request['p_type'];
+      
+       $matir->save();
+  
+        return redirect()->back()->with(['message' => 'Respective material Rejected successfully ']);
+    }
 
 
 
