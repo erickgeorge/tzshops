@@ -152,15 +152,16 @@ var total=2;
                 <div class="container-fluid">
                     <div class="tab-group row">
                         <button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:black">ASSIGN TECHNICIAN FOR WORK</b></button>
+
+                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
+                        
                         <button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
                         <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
                         
                         <!--<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>-->
                         <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'crosscheck_material_requested')" id="defaultOpen">CROSS CHECK MATERIAL REQUESTED</button>
-                        
-                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
-                        
+                       
                         
                     </div>
                 </div>
@@ -353,7 +354,7 @@ var total=2;
                                 @endforeach
                             </select>
                         </div>
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Inspections</button>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>
@@ -438,7 +439,7 @@ var total=2;
 
                         </div>
                        <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                         <button style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">New Material</button>
+                         <button style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">Add New Material</button>
                          <br> <br>
                       
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>

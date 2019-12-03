@@ -431,6 +431,7 @@ public function profileView(){
         $wo_material=   WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',0)
+                     ->orwhere('status', 9)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
@@ -450,6 +451,7 @@ public function profileView(){
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',-1)
                      ->orwhere('status',17)
+                     ->orwhere('status', 44)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
@@ -519,8 +521,6 @@ public function profileView(){
         $wo_material=   WorkOrderMaterial::
                     
                      where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
-                     
-            
                      ->get();
                      
         

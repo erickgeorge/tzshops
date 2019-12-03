@@ -70,16 +70,25 @@
 
                         &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id }}','{{ $item->reason }}')"
-                                       data-toggle="modal" data-target="#exampleModali" title="Reject"><i
-                                                class="fas fa-times-circle" style="color: red"></i></a>
+
+                                      
+
+                                       data-toggle="modal" data-target="#exampleModali" title="reject"><i
+                       class="fas fa-times-circle" style="color: red"></i></a>
 
 
                         <!--<a style="color: black;" title="Reject" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModal"><i class="fas fa-times-circle" style="color: red"></i></a>-->
                     </span> </td>
-                    @if($item->status == 0)
-                    <td><span class="badge badge-primary">Waiting</span></td>
+                    @if($item->matedited == 1)
+                    <td><span class="badge badge-warning">Edited</span>
+                        @if($item->status > $item->matedited) <br>
+                        <span class="badge badge-danger">Rejected Again</span>
+                        @endif
+                    </td>
                     @elseif($item->status == 9)
-                    <td><span class="badge badge-danger">rejected</span></td>
+                    <td><span class="badge badge-danger">Rejected</span></td>
+                    @elseif($item->status == 0)
+                    <td><span class="badge badge-primary">Waiting</span></td>
                     @endif
                     </tr>
                     @endforeach 
@@ -92,23 +101,29 @@
                     <div>
                
                   @if($item->status != 9)
+
                      <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
                    </span> 
-              
+
+
 
                 
                  &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
                 </span>  
                  @endif
 
-   
-                  @if($item->status == 9)
-                 
+              
+                     @if($item->status == 9)
+
                <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
                    </span></h5>  
 
-                   @endif
+                     
+                      @endif
 
+
+                
+ 
 
 
 
