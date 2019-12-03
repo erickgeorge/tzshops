@@ -94,7 +94,7 @@
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this college Completely? All of its departments and sections under those college will be deleted')"
+                                          onsubmit="return confirm('Are you sure you want to delete this college Completely?\n\n ({{ $directorate->directorate_description }} - {{ $directorate->name }} )  \n\n All of its departments and sections under those college will be deleted')"
                                           action="{{ route('directorate.delete', [$directorate->id]) }}">
                                         {{csrf_field()}}
 
@@ -186,7 +186,7 @@
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Department Completely?')"
+                                          onsubmit="return confirm('Are you sure you want to delete this Department Completely? \n\n ( {{ $dep->description }} -  {{ $dep->name }} ) \n\n')"
                                           action="{{ route('department.delete', [$dep->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
@@ -289,7 +289,7 @@
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Section Completely?')"
+                                          onsubmit="return confirm('Are you sure you want to delete this Section Completely? \n\n ( {{ $sec->description }} - {{ $sec->section_name }} ) \n\n')"
                                           action="{{ route('section.delete', [$sec->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"

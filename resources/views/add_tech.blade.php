@@ -60,7 +60,7 @@
                 <div class="col">
                     <div class="form-group ">
                 <label for="email">Email Address <sup style="color: red;">*</sup></label>
-                <input style="color: black;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" value="{{ old('email') }}">
+                <input style="color: black;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" value="{{ old('email') }}">
             </div>
                 </div>
             </div>

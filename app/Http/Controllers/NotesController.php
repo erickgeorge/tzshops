@@ -582,6 +582,7 @@ return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
 }else{
        
 $pdf = PDF::loadView('users_pdf', $data);
+
 return $pdf->stream(''.$data['header'].''.Now().'.pdf');
     }
  //////////////////////////////////////////////   

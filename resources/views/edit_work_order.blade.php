@@ -111,7 +111,7 @@ var total=2;
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
-        <h4>Fill the details below to complete the work order.</h4>
+     <!--   <h4>Fill the details below to complete the work order.</h4> -->
         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
             <div class="form-group ">

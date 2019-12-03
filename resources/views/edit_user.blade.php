@@ -73,7 +73,7 @@
                     <label class="input-group-text" for="email">Email <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
-                       name="email" placeholder="Enter email address" value="{{ $user->email }}">
+                       name="email" onblur="validateEmail(this);" placeholder="Enter email address" value="{{ $user->email }}">
             </div>
     </div>
     <div class="col">
