@@ -447,6 +447,8 @@ Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@mat
 Route::POST('rwork_order_material_iow/reject/Material/{id}', 'StoreController@redirecttohos')->name('redirect.workorder');
 
 
+Route::POST('/redirect/workorder/{id}', 'StoreController@redirectworkordertohos');
+
 
 Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@editmaterialhos')->name('material.edit');
 

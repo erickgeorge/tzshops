@@ -86,7 +86,7 @@
                 <div class="input-group-prepend">
                     <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Location</label>
                 </div>
-                <select required class="custom-select" id="location" name="location" onchange="getAreas()">
+                <select style="width:405px;" required class="custom-select" id="location" name="location" onchange="getAreas()">
                     <option value="" selected>Choose... <sup style="color: red;">*</sup></option>
 
                     @foreach($location as $loc)
@@ -101,7 +101,7 @@
                 <div class="input-group-prepend">
                     <label style="height: 28px" class="input-group-text" for="area">Area <sup style="color: red;">*</sup></label>
                 </div>
-                <select required class="custom-select" id="area" name="area" onchange="getBlocks()">
+                <select  required class="custom-select" id="area" name="area" onchange="getBlocks()">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -113,7 +113,7 @@
                 <div class="input-group-prepend">
                     <label  style="height: 28px" class="input-group-text" for="block">Block <sup style="color: red;">*</sup></label>
                 </div>
-                <select required class="custom-select" id="block" name="block" onchange="getRooms()">
+                <select style="width:420px;" required class="custom-select" id="block" name="block" onchange="getRooms()">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>

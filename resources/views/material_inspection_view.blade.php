@@ -71,7 +71,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id }}','{{ $item->reason }}')"
 
-                                       data-toggle="modal" data-target="#exampleModali" title="Reject"><i
+                                      
 
                                        data-toggle="modal" data-target="#exampleModali" title="reject"><i
                        class="fas fa-times-circle" style="color: red"></i></a>
@@ -112,24 +112,9 @@
                 </span>  
                  @endif
 
-                
-                <?php $i=1; 
-                  $p= array("t");
-                 ?>
-
-
-               
-                <?php   
-                 $p[$i]= "no";
-                  $i++;
-                 ?>
               
+                     @if($item->status == 9)
 
-      
-           
-                  @if(in_array("no", $p))
-          
-                 
                <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
                    </span></h5>  
 

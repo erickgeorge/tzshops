@@ -342,6 +342,23 @@ class StoreController extends Controller
 
 
 
+     public function redirectworkordertohos(Request $request, $id )
+    {
+       $p=$request['redirect_id'];
+       $matir = WorkOrder::where('id',$p)->first();
+   
+   
+       $matir->details = $request['details'];
+      
+       $matir->save();
+  
+        return redirect()->back()->with(['message' => 'Respective Workorder Redirected successfully ']);
+    }
+
+
+
+
+
       public function materialrejectonebyone(Request $request, $id )
     {
        $p=$request['edit_mat'];

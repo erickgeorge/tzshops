@@ -35,14 +35,17 @@
     @endif
     <div class="row">
         <div class="col">
-            <h5>This work order is submitted by  <span
-                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>  also has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
-                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
-    <h5>It Has been created on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span>
-    </h5>
+            <h5>This work order was submitted by  <span
+                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+
+    
+    
         </div>
         <div class="col">
-             <h5 style="color: black">Contacts:{{ $wo['user']->phone }}, {{ $wo['user']->email }}</h5>
+        <h5> And has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
+                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
+             <h5 style="color: black">Contacts: <span style="color: green">{{ $wo['user']->phone }}</span> <br>
+              Email: <span style="color:green"> {{ $wo['user']->email }} </span></h5>
         </div>
     </div>
     
@@ -143,6 +146,41 @@
    <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
  @endif
 
+     <br>
+    <h4><b>Inspection Description: </b></h4>
+    @if(empty($wo['work_order_inspection']->status))
+        <p style="color: red">Not inspected yet</p>
+    @else
+    <?php
+  
+  $idwo=$wo->id;
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
+        ?>
+
+<table style="width:100%">
+  <tr>
+    <th>STATUS</th>
+    <th>DESCRIPTION</th> 
+  <th>TECHNICIAN RESPONSIBLE</th> 
+    <th>DATE INSPECTED</th>
+  </tr>
+    @foreach($iforms as $iform)
+  
+  
+  <tr>
+    <td style="color:red" >{{ $iform->status }}</td>
+    <td>{{ $iform->description }}</td>
+      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+    <td>{{ $iform->date_inspected }}</td>
+  </tr>
+  
+  @endforeach
+  </table>
+    @endif
+    <br>
+    <br>
+    <hr>
+
 
   <br>
     <h4><b>Transport Description: </b></h4>
@@ -188,7 +226,8 @@
   </table>
     @endif
     <br>
-  
+   <br>
+   <hr>
   
   
   
@@ -205,9 +244,9 @@
 
 <table style="width:100%">
   <tr>
-    <th>Staff Full Name</th>
+    <th>Full Name</th>
   <th>Status</th>
-    <th>DATE Assigned</th>
+    <th>Date Assigned</th>
   <th>Complete work</th>
   
   </tr>
@@ -220,7 +259,7 @@
   
    @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td style="color:red">@if($techform->status==1) COMPLETED   @else  OnPROGRESS   @endif</td>
+   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
 
      
 
@@ -236,12 +275,15 @@
    $techform->updated_at }}</td>
     @endif
     
+
+    @if(auth()->user()->type != 'CLIENT')
    @if($techform->status!=1)
    <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
                                                     class="fas fa-clipboard-check large"></i></a></td>
                           
     </td>
-  @endif  
+   @endif 
+    @endif 
 
   
   
@@ -259,8 +301,11 @@
   </table>
     @endif
     <br>
+     <br>
+     <hr>
     
   <br>
+  @if(auth()->user()->type != 'CLIENT')
     <h4><b>Material Requests: </b></h4>
   @if(empty($wo['work_order_material']->id))
         <p style="color: red">No Material have been requested yet</p>
@@ -303,9 +348,12 @@
   
   </table>
     @endif
+
     <br>
   
   <br>
+  <hr>
+   @endif
 
      <h4><b>Material Used: </b></h4>
      
@@ -343,37 +391,8 @@
   
   
     <br>
-    <h4><b>Inspection Description: </b></h4>
-    @if(empty($wo['work_order_inspection']->status))
-        <p style="color: red">Not inspected yet</p>
-    @else
-    <?php
-  
-  $idwo=$wo->id;
-  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
-        ?>
+   
 
-<table style="width:100%">
-  <tr>
-    <th>STATUS</th>
-    <th>DESCRIPTION</th> 
-  <th>TECHNICIAN RESPONSIBLE</th> 
-    <th>DATE INSPECTED</th>
-  </tr>
-    @foreach($iforms as $iform)
-  
-  
-  <tr>
-    <td style="color:red" >{{ $iform->status }}</td>
-    <td>{{ $iform->description }}</td>
-      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ $iform->date_inspected }}</td>
-  </tr>
-  
-  @endforeach
-  </table>
-    @endif
-    <br>
     <hr>
     <div>
  

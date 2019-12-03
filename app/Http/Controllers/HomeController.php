@@ -431,6 +431,7 @@ public function profileView(){
         $wo_material=   WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',0)
+                     ->orwhere('status', 9)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
