@@ -206,7 +206,7 @@ User Registrartion
                  <input type="checkbox" name="type[]" value="Auditor"> Auditor </label>
 
                     <label> 
-                 <input type="checkbox" name="type[]" value="Acountant"> Acountant </label>
+                 <input type="checkbox" name="type[]" value="Accountant"> Accountant </label>
      
      
                <div class="checkbox">
