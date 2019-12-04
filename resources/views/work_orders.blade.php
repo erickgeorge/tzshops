@@ -533,7 +533,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                                                          class="badge badge-primary">Redirect..</span></a>
                                                                          <a style="color: green;"
-                                       onclick="myfunc5('{{ $work->id }}','{{ $work->details }}' ,'{{ $work->p_type }}')"
+                                       onclick="myfunc5('{{$work->details}}','{{ $work->id }}' ,'{{ $work->p_type }}')"
 
                                       
 
@@ -692,7 +692,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
          aria-hidden="true">
         <div class="modal-dialog" role="document">
           
-                <form method="POST" action="redirect/workorder/{{ $work->id}}" 
+                <form method="POST" action="redirect/workorder/{{$work->id}}" 
 
         
                   class="col-md-6">
@@ -723,9 +723,10 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 <option value="Plumbing">Plumbing</option>
             </select>
 
-            <input hidden id="redirect_id" name="p_type" >
+            
 
-             <input type="text" name="details" id="details">
+             <input  type="text" name="details" id="details">
+             <input hidden id="redirect_id" name="p_type" >
 
              </div>
             </div>
@@ -808,9 +809,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                          function myfunc5(U, V ) {
 
 
-            document.getElementById("redirect_id").value = U;
+            document.getElementById("details").value = U;
 
-            document.getElementById("details").value = V;
+            document.getElementById("redirect_id").value = V;
 
            
                                              }
