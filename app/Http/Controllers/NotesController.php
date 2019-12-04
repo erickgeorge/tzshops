@@ -535,7 +535,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 
     }else{
 $pdf = PDF::loadView('notes_pdf',$data);
-return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
+return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 ///////////////////////////////////////////////////////
 }
@@ -582,7 +582,8 @@ return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
 }else{
        
 $pdf = PDF::loadView('users_pdf', $data);
-return $pdf->stream(''.$data['header'].''.Now().'.pdf');
+
+return $pdf->stream(''.$data['header'].' '.date('d-m-Y Hi').'.pdf');
     }
  //////////////////////////////////////////////   
     }
@@ -637,7 +638,7 @@ return $pdf->stream(''.$data['header'].''.Now().'.pdf');
 
 }else{
 $pdf = PDF::loadView('material_pdf', $data);
-return $pdf->stream(''.$data['header'].' - '.Now().'.pdf');
+return $pdf->stream(''.$data['header'].' -  '.date('d-m-Y Hi').'.pdf');
     }
   ////////////////////////////////////////////////////  
     }
@@ -669,7 +670,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
      
 }else{
 $pdf = PDF::loadView('unatended_pdf', ['wo' => $wo ,'tittle' =>$title]);
-return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
+return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 /////////////////////////////////////////////////  
     }
@@ -723,7 +724,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 }else{
         
  $pdf = PDF::loadView('unattendedwopdf', $data);
- return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
+ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 ///////////////////////////////////////////////////////////// 
     }
@@ -774,7 +775,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
      
 }else{
 $pdf = PDF::loadView('completewopdf', $data);
-return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
+return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 ////////////////////////////////////////////////    
     }
@@ -825,7 +826,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 }else{
        
 $pdf = PDF::loadView('wowithdurationpdf', $data);
-return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
+return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 ////////////////////////////////////////////////////    
     }
@@ -844,7 +845,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
 }else{
         
 $pdf = PDF::loadView('roomreportpdf', $data);
-return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
+return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 ///////////////////////////////////////////////////    
     }
@@ -925,7 +926,7 @@ return redirect()->back()->withErrors(['message' => 'No data Found Matching your
 }else{
         
 $pdf = PDF::loadView('allreport', $data);
-return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
+return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 /////////////////////////////////////////////////// 
 
@@ -938,7 +939,7 @@ return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
                     ->get()];
          $pdf = PDF::loadView('grnpdf', $data);
    
-     return $pdf->stream('Goods received Note - '.$id.'-'.Now().'.pdf');
+     return $pdf->stream('Goods received Note - '.$id.'- '.date('d-m-Y Hi').'.pdf');
     }
 
     public function issuenotepdf($id){
@@ -948,7 +949,7 @@ return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
                     ->get()];
          $pdf = PDF::loadView('issuenotepdf', $data);
    
-     return $pdf->stream('Issue Note- '.$id.'-'.Now().'.pdf');
+     return $pdf->stream('Issue Note- '.$id.'- '.date('d-m-Y Hi').'.pdf');
     }
 
     public function trackreport (Request $request, $id)
@@ -958,7 +959,7 @@ return $pdf->stream(''.$data['header'].'-'.Now().'.pdf');
 ///////////////////////////////////////////////
      
 $pdf = PDF::loadView('trackworkreport', $data);
-return $pdf->stream(''.$data['header'].'- '.Now().'.pdf');
+return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
 /////////////////////////////////////////////////// 
     }
 

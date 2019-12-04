@@ -162,43 +162,32 @@ use Carbon\Carbon;
   <?php
 //
 
-  $userwithid = WorkOrder::select('staff_id')->distinct()->get();
-   foreach($userwithid as $userwithin){
-      $userinid = User::get();
+  $userwithid = WorkOrder::select('client_id')->distinct()->get();
+foreach($userwithid as $userwithid)
+{
 
-      foreach ($userinid as $usedid) {
-        if ($userwithin->staff_id == $usedid['id']) {
+  $userfetch = user::where('id',$userwithid->client_id)->get();
+  foreach($userfetch as $userfetch)
+  {
+      //echo '<option>yay</option>';
 
-              $user = User::Where('id',$usedid['id'])->get();
-          foreach ($user as $userwith) 
-          {
-            
-              $sectionised = Section::Where('id',$userwith->section_id)->get();
+    $usersection = section::where('id',$userfetch->section_id)->get();
+    foreach($usersection as $usersection)
+    {
 
-              foreach ($sectionised as $sectioner) {
-                if ($sectioner->id == $userwith->section_id) 
-                {
-                  $departmentid = Department::Where('id',$sectioner->department_id)->get();
-                  foreach ($departmentid as $departmentised) 
-                  {
-                    if ($departmentised->id == $sectioner->department_id ) 
-                    {
-                      $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
-                      foreach ($directorate as $directory) {
-                        if ($directory->id == $departmentised->directorate_id ) {
-                          echo "<option value='".$userwith->id."'>".$userwith->fname." ".$userwith->lname." (".$directory->name."-".$departmentised->name.")</option>";
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            
-          }  }
+      $departmentor = department::where('id',$usersection->department_id)->get();
+      foreach($departmentor as $departmentor)
+      {
+
+          $directora = directorate::where('id',$departmentor->directorate_id)->get();
+          foreach($directora as $directora){?>
+<option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->lname }} - {{ $directora->name }}</option>
+          <?php }
       }
-       }
 
-//
+    }
+  }
+}
 
       ?>
    @endif

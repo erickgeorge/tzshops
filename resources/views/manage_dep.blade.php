@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <div class="tab-group row">
                     <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'customer')">
-                        COLLEGE
+                        COLLEGE/DIRECTORATE
                     </button>
                     <button class="tablinks col-md-4" onclick="openTab(event, 'delivery')" id="defaultOpen">
                         DEPARTMENTS
@@ -44,7 +44,7 @@
             {{-- directorate tab--}}
             <div id="customer" class="tabcontent active">
                 <a href="#new_dir" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new College</a>
+                   class="btn btn-primary">Add new College/Directorate</a>
                    @if(count($directorates)>0)
                 <form method="GET" action="manage_directorates" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
                 From:  <input name="start" value="<?php
@@ -94,7 +94,7 @@
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this college Completely? All of its departments and sections under those college will be deleted')"
+                                          onsubmit="return confirm('Are you sure you want to delete this college/directorate Completely?\n\n ({{ $directorate->directorate_description }} - {{ $directorate->name }} )  \n\n All of its departments and sections under those college/directorate will be deleted')"
                                           action="{{ route('directorate.delete', [$directorate->id]) }}">
                                         {{csrf_field()}}
 
@@ -114,19 +114,19 @@
                     </tbody>
                 </table>
                 <br>
-                <h4 id="new_dir">Add new college</h4>
+                <h4 id="new_dir">Add new college/Directorate</h4>
                 <hr>
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf
                     <div class="form-group ">
-                        <label for="dir_name">college name <sup style="color: red;">*</sup></label>
+                        <label for="dir_name">college/directorate name <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="dir_name"
-                               name="dir_name" placeholder="Enter college name">
+                               name="dir_name" placeholder="Enter college/directorate name">
                     </div>
                     <div class="form-group ">
-                        <label for="dir_abb">college abbreviation <sup style="color: red;">*</sup></label>
+                        <label for="dir_abb">college/directorate abbreviation <sup style="color: red;">*</sup></label>
                         <input style="color: black" type="text" required class="form-control" id="dir_abb"
-                               name="dir_abb" placeholder="Enter College abbreviation">
+                               name="dir_abb" placeholder="Enter College/directorate abbreviation">
                     </div>
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
@@ -162,7 +162,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Abbreviation</th>
-                        <th scope="col">College</th>
+                        <th scope="col">College/Directorate</th>
                         <th scope="col">Added on</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -186,7 +186,7 @@
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Department Completely?')"
+                                          onsubmit="return confirm('Are you sure you want to delete this Department Completely? \n\n ( {{ $dep->description }} -  {{ $dep->name }} ) \n\n')"
                                           action="{{ route('department.delete', [$dep->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
@@ -289,7 +289,7 @@
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Section Completely?')"
+                                          onsubmit="return confirm('Are you sure you want to delete this Section Completely? \n\n ( {{ $sec->description }} - {{ $sec->section_name }} ) \n\n')"
                                           action="{{ route('section.delete', [$sec->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"

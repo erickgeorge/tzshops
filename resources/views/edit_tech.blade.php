@@ -50,7 +50,7 @@
             </div>
             <div class="form-group col-lg-6">
                 <label for="email">Email Address <sup style="color: red;">*</sup></label>
-                                <input style="color: black; " required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ $tech->email }}">
+                                <input style="color: black; " required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" onblur="validateEmail(this);" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ $tech->email }}">
             </div>
             <br>
             <br>
