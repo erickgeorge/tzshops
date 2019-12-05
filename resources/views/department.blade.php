@@ -1,0 +1,273 @@
+@extends('layouts.master')
+
+@section('title')
+Department
+@endSection
+
+@section('body')
+
+<div class="container" style="padding-top: 100px;">
+
+
+	 @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if(Session::has('message'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+    @endif
+
+       @if(count($directorates)>0)
+                <h2 style="margin-bottom: 20px;"
+                   class="btn btn-default">List of Departments</h2>
+
+               
+                <form method="GET" action="/Manage/department" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
+                From:  <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To: <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-primary bg-primary" style="width: 70px" type="submit">Filter</button>
+                     
+
+            </form>
+        
+            <hr class="container">
+
+            <a href="Add/department" style="margin-bottom: 20px;"
+                   class="btn btn-primary">Add new Department</a>
+                <table id="myTablee" class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Abbreviation</th>
+                        <th scope="col">College/Directorate</th>
+                        <th scope="col">Added on</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $i = 0; ?>
+                    @foreach($deps as $dep)
+                        <?php $i++; ?>
+                        <tr>
+                            <th scope="row">{{ $i }}</th>
+                            <td>{{ $dep->description }}</td>
+                            <td>{{ $dep->name }}</td>
+                            <td>{{ $dep['directorate']->name }}</td>
+                            <td><?php $time = strtotime($dep->created_at); echo date('d/m/Y',$time);  ?></td>
+
+                            <td>
+                                <div class="row">
+                                    <a style="color: green;"
+                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->name }}','{{ $dep->description }}','{{ $dep['directorate']->id }}')"
+                                       data-toggle="modal" data-target="#editDepartment" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+                                    <p>&nbsp;</p>
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Department Completely? \n\n ( {{ $dep->description }} -  {{ $dep->name }} ) \n\n')"
+                                          action="{{ route('department.delete', [$dep->id]) }}">
+                                        {{csrf_field()}}
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                title="Delete" style="color: red;" data-toggle="tooltip"><i
+                                                    class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
+
+                <div class="text-center">
+
+                </div>
+       
+            </div>
+
+
+              <div class="modal fade" id="editDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Department</h5>
+
+
+                </div>
+
+                <form method="POST" action="edit/department" class="col">
+                    <div class="modal-body">
+
+
+                        @csrf
+						
+						
+						
+						<div class="form-group">
+                       
+                            <label for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
+                       
+                        <select  style="color: black;"  required class="form-control" name="editdirectoratefdep" id="editdirectoratefdep">
+                            <option value="">Choose...</option>
+                            @foreach($directorates as $directorate)
+                                <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+						
+                        <div class="form-group">
+                            <label for="edirname">Department name <sup style="color: red;">*</sup></label>
+                            <input style="color: black;" type="text" required class="form-control"
+                                   id="edepdesc"
+                                   name="edepdesc" placeholder="Enter Department name">
+                            <input id="edepid" name="edepid" hidden>
+
+
+                        </div>
+                        <div class="form-group ">
+                            <label for="edirabb">Department abbreviation <sup style="color: red;">*</sup></label>
+                            <input style="color: black;" type="text" required class="form-control"
+                                   id="edepname"
+                                   name="edepname" placeholder="Enter Department abbreviation">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">save
+                        </button>
+                        <a href="/Manage/department" class="btn btn-danger">Cancel
+                    </a>
+
+                    </div>
+                </form>
+
+
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+             @else
+                    <h1 style="padding-top: 56px;" align="center"> No available Department</h1>
+                     <br>
+                     <a href="/Manage/department" class="btn btn-warning">Cancel
+                    </a>
+                     @endif
+
+
+                      <script>
+        window.onload = function () {
+            //write your function code here.
+
+            document.getElementById("modal").click();
+        };
+
+        $(document).ready(function () {
+
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#myTable').dataTable({
+                "dom": '<"top"i>rt<"bottom"flp><"clear">'
+            });
+
+            $('#myTablee').DataTable();
+            $('#myTableee').DataTable();
+
+
+        });
+
+
+        function myfunc(x, y, z) {
+            document.getElementById("edirid").value = x;
+            document.getElementById("edirname").value = y;
+
+            document.getElementById("edirabb").value = z;
+        }
+
+
+        function myfunc1(x, y, z,p) {
+			
+			
+            document.getElementById("edepid").value = x;
+            document.getElementById("edepname").value = y;
+
+            document.getElementById("edepdesc").value = z;
+			
+			
+			 for(var i = 0;i < document.getElementById("editdirectoratefdep").length;i++){
+            if(document.getElementById("editdirectoratefdep").options[i].value == p ){
+               document.getElementById("editdirectoratefdep").selectedIndex = i;
+            }
+        }
+			
+			
+        }
+
+
+        function myfunc2(x, y, z) {
+            document.getElementById("esecid").value = x;
+            document.getElementById("esecname").value = y;
+
+            document.getElementById("esecdesc").value = z;
+        }
+		
+		
+		
+		
+		var selecteddep = null;
+var selectedsection = null;
+function getDepartments(){
+	selecteddep = document.getElementById('directoratte').value;
+
+    console.log('ID: '+selecteddep);
+	$.ajax({
+		method: 'GET',
+		url: 'departments/',
+		data: {id: selecteddep}
+	})
+	.done(function(msg){
+        console.log(msg['departments']);
+		var object = JSON.parse(JSON.stringify(msg['departments']));
+		$('#department').empty();
+		
+		var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('department').appendChild(option);
+			
+			
+		
+		for (var i = 0; i < object.length; i++) {
+			var option = document.createElement('option');
+			option.innerHTML = object[i].description;
+			option.value = object[i].id;
+			document.getElementById('department').appendChild(option);
+		}
+	});
+}
+
+
+    </script>
+
+@endSection

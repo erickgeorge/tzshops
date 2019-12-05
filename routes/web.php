@@ -27,6 +27,7 @@ Route::get('/myprofile','HomeController@myprofileView' )->name('myprofile');
 Route::get('/dashboard', 'HomeController@dashboardView');
 
 
+
 Route::get('/settings', 'HomeController@settingsView');
 
 // Route::get('/create_user', 'HomeController@createUserView')->name('view.create.user');
@@ -109,7 +110,15 @@ Route::get('blocks', 'UserController@getBlocks')->name('blocks.view');
 Route::get('rooms', 'UserController@getRooms')->name('rooms.view');
 Route::get('sections', 'UserController@getSections')->name('departments.view');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view');
-Route::get('settings', 'DirectorateController@departmentsView')->name('dir.manage');
+Route::get('Manage/department', 'DirectorateController@departmentsView')->name('dipartment.manage');
+Route::get('Manage/directorate', 'DirectorateController@directorateView')->name('dir.manage');
+
+Route::get('Manage/Add/directorate', 'DirectorateController@adddirectorateView');
+
+Route::get('Manage/Add/department', 'DirectorateController@adddepartmentView');
+
+
+
 Route::post('edit/user/{id}', 'UserController@editUser')->name('user.edit');
 
 Route::post('password/change', 'UserController@changePassword')->name('password.change');
@@ -117,11 +126,11 @@ Route::post('password/change', 'UserController@changePassword')->name('password.
 
 Route::post('save/directorate', 'DirectorateController@createDirectorate')->name('directorate.save');
 
-Route::POST('edit/directorate', 'DirectorateController@editDirectorate')->name('directorate.edit');
+Route::POST('Manage/edit/directorate', 'DirectorateController@editDirectorate')->name('directorate.edit');
 Route::post('delete/directorate/{id}', 'DirectorateController@deleteDirectorate')->name('directorate.delete');
 
 
-Route::POST('edit/department', 'DirectorateController@editDepartment')->name('department.edit');
+Route::POST('Manage/edit/department', 'DirectorateController@editDepartment')->name('department.edit');
 Route::post('delete/department/{id}', 'DirectorateController@deleteDepartment')->name('department.delete');
 
 //////////////////////////////////////////

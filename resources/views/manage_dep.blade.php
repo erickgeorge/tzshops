@@ -134,7 +134,7 @@
                     </a>
                 </form>
             </div>
-            {{-- end inspection --}}
+            {{-- end directorate --}}
 
             {{-- department tab --}}
             <div id="delivery" class="tabcontent">

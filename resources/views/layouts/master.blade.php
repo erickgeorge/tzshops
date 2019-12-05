@@ -108,9 +108,27 @@
                   <!--  <li class="nav-item">
                         <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
                     </li>-->
-                    <li class="nav-item">
+                   <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('settings')}}">Settings</a>
-                    </li>
+                    </li>-->
+
+
+
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Settings 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+          
+
+        </div>
+       </li>
+
                     @endif
                 @if(auth()->user()->type == 'Estates Director')
                     
@@ -709,6 +727,17 @@
             allowClear: true
         });
 </script>
+
+<script type="text/javascript">
+
+      $("#directoratee").select2({
+            placeholder: "Choose Section...",
+            allowClear: true
+        });
+</script>
+
+
+
 
 </body>
 </body>

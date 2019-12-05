@@ -37,7 +37,7 @@ class DirectorateController extends Controller
         $from=request('end');
         }// start> end
         
-       return view('manage_dep', [
+       return view('department', [
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
@@ -47,7 +47,7 @@ class DirectorateController extends Controller
 
         
     }
-        return view('manage_dep', [
+        return view('department', [
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::all(),
@@ -55,6 +55,84 @@ class DirectorateController extends Controller
             'secs' => Section::with('department')->get()
         ]);
     }
+
+
+
+
+ public function directorateView(){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        if(request()->has('start'))  { //date filter
+        
+        
+        $from=request('start');
+        $to=request('end');
+        
+        
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+        
+       return view('directorate', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('directorate')->get(),
+            'secs' => Section::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('department')->get()
+        ]);
+
+        
+    }
+        return view('directorate', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::all(),
+            'deps' => Department::with('directorate')->get(),
+            'secs' => Section::with('department')->get()
+        ]);
+    }
+
+
+     public function adddirectorateView(){
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        return view('add_directorate', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::all(),
+            'deps' => Department::with('directorate')->get(),
+            'secs' => Section::with('department')->get()
+        ]);
+
+
+     }
+
+
+
+     public function adddepartmentView(){
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        return view('add_dipartment', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::all(),
+            'deps' => Department::with('directorate')->get(),
+            'secs' => Section::with('department')->get()
+        ]);
+
+
+     }
+
+
+    
 
     public function createDirectorate(Request $request)
     {
@@ -142,7 +220,7 @@ class DirectorateController extends Controller
         $dpeartment->directorate_id = $request['directorate'];
         $dpeartment->save();
 
-        return redirect()->route('dir.manage')->with(['message' => 'Department added successfully']);
+        return redirect()->route('dipartment.manage')->with(['message' => 'Department added successfully']);
     }
 	
 	
@@ -160,7 +238,7 @@ class DirectorateController extends Controller
         //$directoratee->campus_id = 1;
         $dep->save();
 
-        return redirect()->route('dir.manage')->with(['message' => 'Department Edited successfully']);
+        return redirect()->route('dipartment.manage')->with(['message' => 'Department Edited successfully']);
     }
 	
 	
@@ -173,7 +251,7 @@ class DirectorateController extends Controller
 		  $dep->delete();
 		  
 		  
-		  return redirect()->route('dir.manage')->with(['message' => 'Department Deleted successfully']);
+		  return redirect()->route('dipartment.manage')->with(['message' => 'Department Deleted successfully']);
   
 
       

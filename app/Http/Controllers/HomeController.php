@@ -293,8 +293,6 @@ $v2=$type[1];
 
 
 
-    
-
     public function createUserView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -320,6 +318,8 @@ $v2=$type[1];
 
     }
     
+
+
     
     
      public function storeshosView()
