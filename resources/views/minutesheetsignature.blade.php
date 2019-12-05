@@ -112,6 +112,9 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+$("#save-png").html("Saving ...");
+$("#clear").prop("hidden", "hidden");
+$("#draw").prop("hidden", "hidden");
 $.ajax({
 type: 'POST',
 url: '{{ route('savesign') }}',

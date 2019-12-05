@@ -145,8 +145,7 @@ use App\User;
 
   <label class="label" style="margin:5px;"> Signature :</label>
    @if(auth()->user()->signature_ == null)
-       <p style="padding: 3em;">No Signature</p>
-       <p> <a href="{{ url('s-minutesheet') }}" class="btn btn-primary">Add signature</a></p>
+       <p style="padding: 3em;">No Signature <a href="{{ url('s-minutesheet') }}" class="btn btn-primary">Add signature</a></p>
        @else
         <img src="{{ auth()->user()->signature_ }}" alt="signature can't be shown" style="height: 100px;">
         @endif
