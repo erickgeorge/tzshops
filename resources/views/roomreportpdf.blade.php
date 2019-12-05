@@ -20,8 +20,7 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 #footer{position:fixed; right:0px; bottom:10px; text-align:center; border-top:1px solid black; }
-#footer .page:after{content:counter(page, decimal);}
-@page {margin:20px 30px 40px 50px;}
+#footer .page:before { content: "Page " counter(page); } @page {margin:20px 30px 40px 50px;}
 </style>
 <table>
     <?php use App\WorkOrder; ?>
@@ -57,5 +56,5 @@ tr:nth-child(even) {
                 </tbody>
 </table>
 <div id='footer'>
-    <p class="page">page</p>
+    <p class="page"></p>
 </div>

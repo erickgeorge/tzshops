@@ -1,6 +1,23 @@
 <h1 style="text-align: center"> ESTATE </h1>
 <h1 style="text-align: center">unattended workorder report</h1>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+#footer{position:fixed; right:0px; bottom:10px; text-align:center; border-top:1px solid black; }
+#footer .page:before { content: "Page " counter(page); } @page {margin:20px 30px 40px 50px;}
+</style>
 
 <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         @if(count($wo) > 0)
@@ -99,3 +116,6 @@
             <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
         @endif
     </div>
+    <div id='footer'>
+    <p class="page"></p>
+</div>

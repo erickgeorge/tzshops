@@ -165,7 +165,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
   <div class="mine messages">
     <div class="message last">
       To: <?php $huyu = User::Where('id',$conv->_To)->get(); ?>@foreach($huyu as $huyu) {{ $huyu->fname }} {{ $huyu->lname }}@endforeach <hr>
-     <b>{{ $conv->Message }}</b><br><small><?php $time = strtotime($conv->Sent); echo date('d/m/Y',$time);  ?></small>&nbsp;&nbsp;&nbsp; | From : <?php $huyu = User::Where('id',$conv->_From)->get(); ?>@foreach($huyu as $huyu) {{ $huyu->fname }} {{ $huyu->lname }}@endforeach
+     <b>{{ $conv->Message }}</b><br><small><?php $time = strtotime($conv->Sent); echo date('d/m/Y',$time);  ?></small>&nbsp;&nbsp;&nbsp; | From : <?php $huyu = User::Where('id',$conv->_From)->get(); ?>@foreach($huyu as $huyu) {{ $huyu->fname }} {{ $huyu->lname }}<hr><img src="{{ auth()->user()->signature_ }}" alt="not signed" style="height: 100px;">@endforeach
      </div>
   </div>
 
@@ -173,7 +173,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
      <div class="yours messages">
     <div class="message">
         To: <?php $huyu = User::Where('id',$conv->_To)->get(); ?>@foreach($huyu as $huyu) {{ $huyu->fname }} {{ $huyu->lname }}@endforeach<hr>
-    <b>{{ $conv->Message }}</b><br><small><?php $time = strtotime($conv->Sent); echo date('d/m/Y',$time);  ?></small>&nbsp;&nbsp;&nbsp; | From : <?php $huyu = User::Where('id',$conv->_From)->get(); ?>@foreach($huyu as $huyu) {{ $huyu->fname }} {{ $huyu->lname }}@endforeach
+    <b>{{ $conv->Message }}</b><br><small><?php $time = strtotime($conv->Sent); echo date('d/m/Y',$time);  ?></small>&nbsp;&nbsp;&nbsp; | From : <?php $huyu = User::Where('id',$conv->_From)->get(); ?>@foreach($huyu as $huyu) {{ $huyu->fname }} {{ $huyu->lname }}<hr><img src="{{ auth()->user()->signature_ }}" alt="not signed" style="height: 100px;">@endforeach
     </div>
   </div>
     @endif

@@ -141,15 +141,19 @@ use App\User;
       </div>
       </div>
   </div>
-  <label class="label" style="margin:5px;"> Signature :</label>
-  <div class="modal-body" class="border-dark" style="border:1px solid;">
+  <div class="modal-body" class="border-dark">
 
-    <canvas></canvas>
+  <label class="label" style="margin:5px;"> Signature :</label>
+   @if(auth()->user()->signature_ == null)
+       <p style="padding: 3em;">No Signature</p>
+       <p> <a href="{{ url('s-minutesheet') }}" class="btn btn-primary">Add signature</a></p>
+       @else
+        <img src="{{ auth()->user()->signature_ }}" alt="signature can't be shown" style="height: 100px;">
+        @endif
   </div>
       <div class="modal-footer">
 
         <button type="submit" class="btn btn-primary">Create</button>
-        <input type="button" class="btn btn-warning" value="Clear" onclick="mySign()">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
@@ -160,15 +164,6 @@ use App\User;
   
                
     </div>
-<script>
-function mySign() {
-  document.getElementById("mySign").reset();
-}
-</script>
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-<script>
-  var canvas = document.querySelector("canvas");
-  var signaturePad = new SignaturePad(canvas);
-</script>
+
     
     @endSection
