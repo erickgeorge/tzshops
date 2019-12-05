@@ -82,7 +82,7 @@
 $checkes = minutesheet::where('Woid',$item->work_order_id)->get();
  ?>
  @if(count($checkes)>0)
-  <b class="badge badge-info btn-sm">Minutes sheet already created</b>
+  <b class="badge badge-info btn-sm">Minutes sheet already created</b> <a class="btn btn-success" href="{{ url('minutesheet',[$item->work_order_id]) }}">View</a>
          
   @else               
        <a class="btn btn-success btn-sm" href="#" role="button" data-toggle="modal" data-target="#exampleModal">Create Minute Sheet</a> 
