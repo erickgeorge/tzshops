@@ -93,7 +93,7 @@ Route::post('savesign','UserController@savesign')->name('savesign');
 ///////////////////////////////////////////////////////////////
 
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
-Route::post('redirect/workorder_to_hos/{id}', 'WorkOrderController@redirectToHoS')->name('to.HoS.workorder');
+
 
 Auth::routes();
 
@@ -447,7 +447,7 @@ Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@mat
 Route::POST('rwork_order_material_iow/reject/Material/{id}', 'StoreController@redirecttohos')->name('redirect.workorder');
 
 
-Route::POST('/reirect/workorder/{id}', 'StoreController@redirectworkordertohos');
+Route::POST('/redirect/workorder/to/hos', 'StoreController@redirectworkordertohos');
 
 
 Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@editmaterialhos')->name('material.edit');

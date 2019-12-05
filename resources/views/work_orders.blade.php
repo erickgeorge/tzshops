@@ -518,16 +518,11 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                        data-toggle="modal" data-target="#exampleModali" title="Edit"><i
                                                 class="fas fa-times-circle" style="color: red"></i></a>-->
 
-                                 <a href="#"><span data-toggle="modal" data-target="#redirect"
-
-                                                                         class="badge badge-primary">Redirect..</span></a>
-                                                                         <a style="color: green;"
-                                       onclick="myfunc5('{{$work->details}}','{{ $work->id }}' ,'{{ $work->p_type }}')"
-
-                                      
-
-                                       data-toggle="modal" data-target="#exampleModo" title="reject"><i
-                       class="fas fa-times-circle" style="color: red"></i></a>
+                               
+                                      &nbsp;&nbsp;&nbsp;&nbsp;                                  <a 
+                                       onclick="myfunc5('{{$work->id}}','{{ $work->details }}' ,'{{ $work->p_type }}')"
+                                       data-toggle="modal" data-target="#exampleModo"><i
+                                  class="fas fa-recycle"  data-toggle="tooltip" data-placement="right" title="Redirect to Head of Section" style="color: blue"></i></a>
 
                                                                          @endif
                                           @endif
@@ -585,105 +580,12 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
  
 @foreach($wo as $work)
-    <div class="modal fade" id="redirect" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-           <form method="POST" action="{{ route('to.HoS.workorder', [$work->id]) }}">     
-                @csrf
-            <div class="modal-content" style="height: 430px; width: 400px;" >
-                <div class="modal-header">
-
-                    <h5 class="modal-title" id="exampleModalLabel" ><b>Choose problem type as you want to redirect.</b></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-   
-                <div class="modal-body">
-
-                     <div class="col">
-                <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
-            </div>
-            <select required style="width: 300px;min-width: 150px;" id="nameid" name="p_type">
-                <option selected value="">Choose...</option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Masonry/Road">Masonry/Road</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Plumbing">Plumbing</option>
-            </select>
-             </div>
-            </div>
-            </div>
-                <div class="modal-footer">
-                </div>
-
-         <button type="submit" class="btn btn-primary ">Send to Head of Section</button>
-    </form>
-            </div>
-        </div>
-    </div>
-
- 
-
-    <div class="modal fade" id="exampleModali" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" >Redirect Work Order</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><b>Choose problem type as you want to redirect.</b></p>
-                   <form method="POST" 
-                   action="{{ route('redirect.workorder', [$work->work_order_id ]) }}" class="col-md-6">
-                        @csrf  
-
-             <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
-            </div>
-            <select required style="width: 300px;min-width: 150px;" id="nameid" name="p_type">
-                <option selected value="">Choose...</option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Masonry/Road">Masonry/Road</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Plumbing">Plumbing</option>
-            </select>
-             </div>
-
-
-                         <div class="form-group">
-                         
-                            <input id="edit_mat" name="edit_mat" id="editmaterial" hidden>
-                         </div>
-                       
-                      
-                        <br>
-                        <button type="submit" class="btn btn-danger">Reject</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    
 
     <div class="modal fade" id="exampleModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
           
-                <form method="POST" action="redirect/workorder/{{$work->id}}" 
-
-        
+                <form method="POST" action="redirect/workorder/to/hos" 
                   class="col-md-6">
                         @csrf
             <div class="modal-content" style="height: 430px; width: 400px;" >
@@ -703,7 +605,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
             <div class="input-group-prepend">
                 <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
             </div>
-            <select  style="width: 300px;min-width: 150px;" id="redirect_id" name="p_type">
+            <select  style="width: 300px;min-width: 150px;" id="p_type" name="p_type">
                 <option selected value="">Choose...</option>
                 <option value="Carpentry/Painting">Carpentry/Painting</option>
                 <option value="Electrical">Electrical</option>
@@ -711,11 +613,8 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 <option value="Mechanical">Mechanical</option>
                 <option value="Plumbing">Plumbing</option>
             </select>
-
-            
-
-             <input  type="text" name="details" id="details">
-             <input hidden id="redirect_id" name="p_type" >
+             <!--<input  type="text" name="details"  id="details">-->
+             <input hidden id="redirect_id" name="redirect_id" >
 
              </div>
             </div>
@@ -730,38 +629,6 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
     </div>
 
  
-
-    <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" >Not satisfied with material requested</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Please provide reason as to why you want to reject this material requested by Head of Section.</p>
-                   <form method="POST" action="reject/Material/{{ $work->id }}" class="col-md-6">
-                        @csrf
-
-
-                         <div class="form-group">
-                          <textarea style="overflow: auto; width: 420px;" name="reason" required maxlength="400" class="form-control"  rows="5" id="editmaterial" wrap="off" placeholder="Enter Reason for rejecting this material...">
-                          </textarea>
-                            <input id="edit_mat" name="edit_mat" hidden>
-                         </div>
-                       
-                      
-                        <br>
-                        <button type="submit" class="btn btn-danger">Reject</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
 
  
 
@@ -795,16 +662,17 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
           <script type="text/javascript">
                        
-                         function myfunc5(U, V ) {
+                         function myfunc5(U, V , W) {
 
 
-            document.getElementById("details").value = U;
+            document.getElementById("redirect_id").value = U;
 
-            document.getElementById("redirect_id").value = V;
+            document.getElementById("details").value = V;
 
-           
-                                             }
+            document.getElementById("p_type").value = W;
+                                }
 
         </script>
+        
 
     @endSection

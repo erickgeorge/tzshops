@@ -603,6 +603,14 @@
 
 <script type="text/javascript">
 
+      $("#p_type").select2({
+            placeholder: "Choose type of problem...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
       $("#area").select2({
             placeholder: "Choose Area...",
             allowClear: true

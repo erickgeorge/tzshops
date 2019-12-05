@@ -157,12 +157,12 @@
 
                        
 
-                         <div class="input-group mb-3">
+                   <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             
                             <label class="input-group-text" for="directorate">Zone Name <sup style="color: red;">*</sup></label>
                         </div>
-                        <select required class="custom-select" name="zone" id="zone">
+                            <select required class="custom-select" name="zone" id="zone">
                             <option value="">Choose...</option>
                             @foreach($newzone as $zone)
                                 <option value="{{ $zone->id }}">{{ $zone->Zone_name }}</option>

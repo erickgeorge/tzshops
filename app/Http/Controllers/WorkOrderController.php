@@ -741,20 +741,6 @@ public function transportforwork(Request $request, $id)
     }
 
 
-    public function redirectToHoS(request $request, $id)
-    {
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        $wo = WorkOrder::where('id', $id)->first();
-        $wo->problem_type = $request['p_type'];
-        $wo->redirectwo = 1 ;
-        $wo->save(); 
-        return redirect()->back()->with([
-           
-            'message' => 'Work order successfully sent to Respective Head of Section'
-        ]);
-    }
-
 
 
     public function trackWO($id)

@@ -342,14 +342,14 @@ class StoreController extends Controller
 
 
 
-     public function redirectworkordertohos(Request $request, $id )
+     public function redirectworkordertohos(Request $request )
     {
        $p=$request['redirect_id'];
+
        $matir = WorkOrder::where('id',$p)->first();
-   
-   
-       $matir->details = $request['details'];
-      
+       $matir->problem_type = $request['p_type'];
+       $matir->redirectwo = 1 ;
+       //$matir->details = $request['details'];
        $matir->save();
   
         return redirect()->back()->with(['message' => 'Respective Workorder Redirected successfully ']);
