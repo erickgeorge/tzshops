@@ -368,7 +368,7 @@
                    @ENDIF
                 @if(auth()->user()->type == 'Estates Director')
  <li class="nav-item">
-     <a href="{{ url('comp') }}" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
+     <a href="{{ url('comp') }}" title="Complaints" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
  </li>
  @endif
  @if(auth()->user()->type == 'Maintenance coordinator')
