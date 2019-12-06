@@ -3,7 +3,25 @@
 @section('title')
 User Registrartion
 @endSection
+ <script type="text/javascript">
 
+function checkboxlimit(checkgroup, limit){
+	var checkgroup=checkgroup
+	var limit=limit
+	for (var i=0; i<checkgroup.length; i++){
+		checkgroup[i].onclick=function(){
+		var checkedcount=0
+		for (var i=0; i<checkgroup.length; i++)
+			checkedcount+=(checkgroup[i].checked)? 1 : 0
+		if (checkedcount>limit){
+			alert("You can only select a maximum of "+limit+" Head of Sections")
+			this.checked=false
+			}
+		}
+	}
+}
+
+</script>
 @section('body')
  <style type="text/css">
  	#Div2 {
@@ -44,7 +62,7 @@ User Registrartion
 
 
 
-<form method="POST" action="{{ route('user.create') }}"  enctype="multipart/form-data">
+<form id="world" name="world" method="POST" action="{{ route('user.create') }}"  enctype="multipart/form-data">
                         @csrf
 <div class="row">
 	<div class="col">
@@ -168,29 +186,32 @@ User Registrartion
 	           <br>
 
                <div  id="Div2">
-                <label> 
-                 <input type="checkbox" name="type[]" value="HOS Electrical"> HOS Electrical </label>
-         
+               	
+              
+                 <input type="checkbox" name="type[]"    value="HOS Electrical"> HOS Electrical 
+             
+                &nbsp;&nbsp;&nbsp;
+               
+                 <input type="checkbox" name="type[]"  value="HOS Plumbing"> HOS Plumbing 
+            
+                &nbsp;&nbsp;&nbsp;
+          
+                
+                 <input type="checkbox"  name="type[]"   value="HOS Carpentry/Painting"> HOS Carpentry/Painting 
+                  
+                &nbsp;&nbsp;&nbsp;
 
-                <label> 
-                 <input type="checkbox" name="type[]" value="HOS Plumbing"> HOS Plumbing </label>
+
       
              
-          
-                <label> 
-                 <input type="checkbox" name="type[]" value="HOS Carpentry/Painting"> HOS Carpentry/Painting </label>
-          
-           
-
-
-      
-                <label> 
-                 <input type="checkbox" name="type[]" value="HOS Mechanical"> HOS Mechanical</label>
+                 <input type="checkbox" name="type[]"  value="HOS Mechanical"> HOS Mechanical
+                 
   
 
-
-                <label> 
-                 <input type="checkbox" name="type[]" value="HOS Masonry/Road"> HOS Masonry/Road </label>
+                &nbsp;&nbsp;&nbsp;
+                
+                 <input type="checkbox"  name="type[]"   value="HOS Masonry/Road"> HOS Masonry/Road 
+                 
        
 
 
@@ -235,8 +256,10 @@ User Registrartion
                 <label> 
                  <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
         
--->
+-->          
              </div>
+
+             
          </div>
 
 
@@ -278,6 +301,12 @@ User Registrartion
 
 
 
+<script type="text/javascript">
+
+
+checkboxlimit(document.forms.world.type, 3)
+
+</script>
 
   <script type="text/javascript">
 	
@@ -295,6 +324,7 @@ User Registrartion
             }
 }
   </script>
+ 
 
 
 <br>

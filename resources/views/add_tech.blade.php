@@ -119,9 +119,10 @@ $roleofuser =1;
                         <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Section</label>
             </div>
-                 <input required  type="text"  class="form-control" id="typetechhos" name="typetechhos"  value="{{ auth()->user()->type,  1 }}">
+                 <input required  type="text"  class="form-control" id="typetechhos" name="typetechhos"  value="{{ auth()->user()->type}}">
+           </div>
             @endif
-        </div>
+        
                 </div>
             </div>
             

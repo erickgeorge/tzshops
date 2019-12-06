@@ -21,8 +21,8 @@ class TechnicianController extends Controller
 
     public function createTech(Request $request){
         $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
+            'fname' => 'required|unique:technicians',
+            'lname' => 'required|unique:technicians',
             'phone' => 'required|max:15|min:10',
             'email' => 'required|unique:technicians'
         ]);

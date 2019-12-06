@@ -138,7 +138,7 @@ use App\Section;
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
       <th scope="col">Section</th>
-      <th scope="col">Actions</th>
+      <!--<th scope="col">Actions</th>-->
     </tr>
   </thead>
   <tbody>
@@ -177,7 +177,7 @@ else {
       <td style="text-transform: lowercase;">{{ $user->type }}</td>
         <td>{{ $user['section']['department']['directorate']->name }}</td>
       <td>{{ $user['section']['department']->name }}</td>
-      <td>{{ $user['section']->section_name }}</td>
+     <!--<td>{{ $user['section']->section_name }}</td>-->
       <td>
         <div class="row">
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>

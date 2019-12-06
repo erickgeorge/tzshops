@@ -566,6 +566,14 @@ public function profileView(){
 
         ]);
         } else{
+
+               $type=explode(",",auth()->user()->type);
+                $length=count($type);
+
+
+                   if($length==1){
+ 
+          
   
         return view('technicians', [
             'role' => $role,
@@ -573,11 +581,138 @@ public function profileView(){
             'notifications' => $notifications
 
         ]);
-   }
+        }
 
+        else if($length==2){
+
+
+
+
+    $v1=$type[0];
+    $v2=$type[1];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false) {
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                     'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
+                    
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false) {
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                     'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
+                    
+                ]);
+                }
+                else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false) {
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                     'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
+                    
+                ]);
+                 }
+            else  if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false) {
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                     'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
+                    
+                ]);
+
+}
+
+  
+   
+    }
+
+
+    else if($length==3){
+
+
+
+
+$v1=$type[0];
+$v2=$type[1];
+$v3=$type[2];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") !== false) {
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                    
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                     'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+
+                else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") !== false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                   'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+
+            else  if(strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                   'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                   'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") !== false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                   'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") !== false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                return view('technicians', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                   'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
+                ]);
+            }
+
+}
    }
-   
-   
+   }
     public function workOrderNeedMaterialView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
