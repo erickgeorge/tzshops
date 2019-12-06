@@ -736,6 +736,14 @@
         });
 </script>
 
+<script type="text/javascript">
+
+      $("#type").select2({
+            placeholder: "Choose user type...",
+            allowClear: true
+        });
+</script>
+
 
 
 

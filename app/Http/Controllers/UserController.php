@@ -51,10 +51,9 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];
-         $user->type  = implode(",", $request->type);
+        $user->type  = implode(",", $request->type);
         $user->section_id = $request['section'];
         $user->password = bcrypt($request['name'].'@esmis');
-	   
         $user->save();
 
         $role = new UserRole();
@@ -78,6 +77,8 @@ class UserController extends Controller
             'display_users' => $users = User::all()
         ]);
     }
+
+    
 
     public function deleteUser($id)
     {

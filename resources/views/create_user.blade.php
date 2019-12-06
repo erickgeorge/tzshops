@@ -5,19 +5,24 @@ User Registrartion
 @endSection
 
 @section('body')
+ <style type="text/css">
+ 	#Div2 {
+  display: none;
+}
+ </style>
 <br>
 <div class="row" style="margin-top: 6%; margin-left: 3%;">
 	<div class="col-md-8">
-		<h2>Create New user</h2>
+		<h2 class="container">Create New user</h2>
 	</div>
 
 	<!-- <div class="col-md-4">
 		<a href="{{ url('viewusers') }}" > <button type="" class="btn btn-primary">View all users</button></a>
 	</div> -->
 </div>
-<br>
-<hr>
-<div class="container" 
+
+<hr class="container">
+<div class="container" >
 @if ($errors->any())
 <div class="alert alert-danger">
 	 <ul class="alert alert-danger">
@@ -57,7 +62,7 @@ User Registrartion
 	<div class="col">
 		<div class="form-group ">
 	    <label for="phone">Phone number <sup style="color: red;">*</sup></label>
-	    <input style="color: black"  required type="text"     name="phone"  
+	    <input style="color: black; width: 340px;"  required type="text"     name="phone"  
 	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "10"  minlength = "10"
 	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 "  value="{{ old('phone') }}">
@@ -66,11 +71,11 @@ User Registrartion
 </div>
 <div class="row">
 	<div class="col">
-		<div class="input-group mb-3">
+		<div class="input-group ">
 	  <div class="input-group-prepend">
 	    <label style="height:28px;" class="input-group-text" for="Email">Email <sup style="color: red;">*</sup></label>
 	  </div>
-	    <input style="color: black; height: 28px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+	    <input style="color: black; height: 28px; width: 80px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
 	</div>
 	</div>
 	<div class="col">
@@ -78,7 +83,7 @@ User Registrartion
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="directorate">College <sup style="color: red;">*</sup></label>
 	  </div>
-	  <select style="color: black; width: 270px;" required class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+	  <select style="color: black; width: 430px;" required class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
 		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
 	    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
@@ -86,50 +91,83 @@ User Registrartion
 	  </select>
 	</div>
 	</div>
-	<div class="col">
+	</div>
+	<div class="row" >
+		<div class="col"> 
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="department">Department <sup style="color: red;">*</sup></label>
 	  </div>
-	  <select style="color: black" required class="custom-select" name="department" id="department" onchange="getSections()" value="{{ old('department') }}">
+	  <select style="color: black; width: 410px;" required class="custom-select" name="department" id="department" onchange="getSections()" value="{{ old('department') }}">
 	  </select>
+	    </div>
 	</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col">
+
+
+	 <div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="section">Section <sup style="color: red;">*</sup></label>
 	  </div>
-	  <select style="color: black; width: 270px;"  class="custom-select" name="section" id="section" value="{{ old('section') }}">
+	  <select style="color: black; width: 430px;"  class="custom-select" name="section" id="section" value="{{ old('section') }}">
 		 
 	  </select>
+	  </div>
+	  </div>
 	</div>
-	</div>
+
+    <div class="row">
 	<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label  style="height: 28px" class="input-group-text" for="inputGroupSelect01">Role</label>
 	  </div>
-	  <select style="color: black; width: 452px" required class="custom-select" name="role" id="role">
+	  <select style="color: black; width: 460px" required class="custom-select" name="role" id="role">
 	    <option value="" selected>Choose...</option>
 	    <option value="1">Admin</option>
 	    <option value="2">Staff</option>
 	  </select>
 	</div>
 	</div>
+     <div class="col">
+	<div class="align-content-center">
+		<div class="input-group mb-3">
+	  <div class="input-group-prepend">
+	    <label  style="height: 28px;" class="input-group-text" for="username">Username <sup style="color: red;">*</sup></label>
+	  </div>
+	     <input style="color: black; width:200px; height: 28PX;"  required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+	 </div>
+	</div>
+	</div>
+</div>
 	
      
 
-<DIV>
-         <div class="col">
-		<div class="input-group mb-3">
-	 	   <div >
-	    <label>Type of User</label>
-	  </div>
-     
-	</div>
+<div>
+         <div >
+	
+	   <div >
+	    <label>Type of User</label><br>
+       	<input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
+       </div>
+              <div id="Div1" >
+               <select class="custom-select" name="type[]" id="type">
+	                  <option value="" selected>Choose...</option>
+	                  <option value="Accountant">Accountant</option>
+	                  <option value="Auditor">Auditor</option>
+	                  <option value="CLIENT">Client</option>
+	                  <option value="DVC Admin">DVC Admin</option>
+	                  <option value="Estates Director">Estates Director</option>
+	                  <option value="Head Procurement">Head of Procurement</option>
+	                  <option value="Inspector Of Works">Inspector Of Works</option>
+	                  <option value="Maintenance coordinator">Maintenance Coordinator</option> 
+	                  <option value="STORE">Store Manager</option>
+	                  <option value="Transport Officer">Transport Officer</option>
+	           </select>
+	           </div>
+	           <br>
+
+               <div  id="Div2">
                 <label> 
                  <input type="checkbox" name="type[]" value="HOS Electrical"> HOS Electrical </label>
          
@@ -157,7 +195,7 @@ User Registrartion
 
 
 
-                <label> 
+              <!--  <label> 
                  <input type="checkbox" name="type[]" value="Maintenance coordinator"> Maintenance Coordinator </label>
      
 
@@ -165,26 +203,10 @@ User Registrartion
                 <label> 
                  <input type="checkbox" name="type[]" value="DVC Admin"> DVC Admin</label>
     
-                   
-
-
-       
-                <label> 
-                 <input type="checkbox" name="type[]" value="SECRETARY"> Secretary </label>
-
-
-                <label> 
-                 <input type="checkbox" name="type[]" value="Technician"> Technician </label>
-      
-        
-
 
                 <label> 
                  <input type="checkbox" name="type[]" value="Estates Director"> Estates Director </label>
   
-
-
-
             
                 <label> 
                  <input type="checkbox" name="type[]" value="STORE"> Store Manager </label>
@@ -213,27 +235,20 @@ User Registrartion
                 <label> 
                  <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
         
+-->
+             </div>
+         </div>
 
 
-
-             
-                <label> 
-                 <input type="checkbox" name="type[]" value="UDSM STAFF"> Udsm Staff </label>
+  
             
-</DIV>
+</div>
 
-	</div>
+
 
 	
 <div>
-	<div class="align-content-center">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label   class="input-group-text" for="username">Username <sup style="color: red;">*</sup></label>
-	  </div>
-	     <input style="color: black; width:200px; " style="color: black" required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
-	 </div>
-	</div>
+	
 	<!--<div class="col">
 		<div class="form-group ">
 	    <label style="color: black" for="pass">Password</label>
@@ -260,5 +275,27 @@ User Registrartion
     </form>
 
 </div>
+
+
+
+
+  <script type="text/javascript">
+	
+	function switchVisible() {
+            if (document.getElementById('Div1')) {
+
+                if (document.getElementById('Div1').style.display == 'none') {
+                    document.getElementById('Div1').style.display = 'block';
+                    document.getElementById('Div2').style.display = 'none';
+                }
+                else {
+                    document.getElementById('Div1').style.display = 'none';
+                    document.getElementById('Div2').style.display = 'block';
+                }
+            }
+}
+  </script>
+
+
 <br>
 @endSection
