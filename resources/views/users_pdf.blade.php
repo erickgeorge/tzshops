@@ -62,8 +62,8 @@ else {
       <td><a style="color: #000;" href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
       <td>{{ $user->phone }}</td>
       <td>{{ $user->type }}</td>
-        <td>{{ $user['section']['department']['directorate']->name }}</td>
-      <td>{{ $user['section']['department']->name }}</td>
+         <td>{{ $user['department']['directorate']->name }}</td>
+        <td>{{ $user['department']->name }}</td>
    
      
       </td>

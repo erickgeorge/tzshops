@@ -28,10 +28,10 @@ use App\Section;
     <br>
     <p class="alert alert-success">{{ Session::get('message') }}</p>
   @endif
-<br>
+
 <hr>
 
-  @if(!$display_users->isEmpty())
+  
     
   
   
@@ -46,6 +46,7 @@ use App\Section;
 
 
 </div>
+@if(!$display_users->isEmpty())
 
 <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
@@ -137,8 +138,8 @@ use App\Section;
       <th scope="col">Type</th>
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
-      <th scope="col">Section</th>
-      <!--<th scope="col">Actions</th>-->
+      <!--<th scope="col">Section</th>-->
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -175,13 +176,12 @@ else {
 
       ?></td>
       <td style="text-transform: lowercase;">{{ $user->type }}</td>
-        <td>{{ $user['section']['department']['directorate']->name }}</td>
-      <td>{{ $user['section']['department']->name }}</td>
-     <!--<td>{{ $user['section']->section_name }}</td>-->
-      <td>
+         <td>{{ $user['department']['directorate']->name }}</td>
+        <td>{{ $user['department']->name }}</td>
+        <td>
         <div class="row">
-        <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
-
+        <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
+ 
 
          <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')" action="{{ route('user.delete', [$user->id]) }}" >
           {{csrf_field()}}

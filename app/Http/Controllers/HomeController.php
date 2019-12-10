@@ -488,7 +488,7 @@ $v3=$type[2];
     public function usersView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        $users = User::with('section.department.directorate')->where('id', '<>', auth()->user()->id)->where('status', '=', 1)->get();
+        $users = User::where('id', '<>', auth()->user()->id)->where('status', '=', 1)->get();
 
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();

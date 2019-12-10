@@ -116,13 +116,13 @@ function checkboxlimit(checkgroup, limit){
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="department">Department <sup style="color: red;">*</sup></label>
 	  </div>
-	  <select style="color: black; width: 410px;" required class="custom-select" name="department" id="department" onchange="getSections()" value="{{ old('department') }}">
+	  <select style="color: black; width: 410px;" required class="custom-select" name="department" id="department"  value="{{ old('department') }}">
 	  </select>
 	    </div>
 	</div>
 
 
-	 <div class="col">
+	 <!--<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="section">Section <sup style="color: red;">*</sup></label>
@@ -131,7 +131,7 @@ function checkboxlimit(checkgroup, limit){
 		 
 	  </select>
 	  </div>
-	  </div>
+	  </div>-->
 	</div>
 
     <div class="row">

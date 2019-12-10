@@ -32,7 +32,7 @@ class User extends Authenticatable
         return $this->hasOne('App\UserRole');
     }
 
-    public function section(){
-        return $this->belongsTo('App\Section');
+    public function department(){
+        return $this->belongsTo('App\Department' , 'section_id');
     }
 }

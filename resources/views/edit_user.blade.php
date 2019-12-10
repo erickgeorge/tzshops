@@ -83,7 +83,7 @@
                 </div>
                 <select class="custom-select" name="college" id="directorate" onchange="getDepartments()">
                     @foreach($directorates as $directorate)
-                        <option <?php if(($user['section']['department']['directorate']->name) == $directorate->name) {?>
+                        <option <?php if(($user['department']['directorate']->name) == $directorate->name) {?>
                                 selected="selected"
                                 <?php } ?>
                                 value="{{ $directorate->id }}" > {{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
@@ -97,23 +97,14 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="department">Department</label>
                 </div>
-                <select class="custom-select" name="department" id="department" onchange="getSections()">
-                    <option value="{{ $user['section']['department']->id }}">{{ $user['section']['department']->description }}</option>
+                <select class="custom-select" name="department" id="department" >
+                    <option value="{{ $user['department']->id }}">{{ $user['department']->description }}</option>
                 </select>
             </div>
     </div>
 </div>
 <div class="row">
-    <div class="col">
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="section">Section</label>
-                </div>
-                <select class="custom-select" name="section" id="section">
-                    <option value="{{ $user['section']->id }}">{{ $user['section']->section_name }}</option>
-                </select>
-            </div>
-    </div>
+
     <div class="col">
         <div class="input-group mb-3">
                 <div class="input-group-prepend">

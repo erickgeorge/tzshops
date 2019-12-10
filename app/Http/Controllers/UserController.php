@@ -30,7 +30,7 @@ class UserController extends Controller
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
-            'section' => 'required',
+            //'section' => 'required',
             'name' => 'required|unique:users',
             'phone' => 'required|max:15|min:10',
             'email' => 'required|unique:users',
@@ -51,8 +51,8 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];
-        $user->type  = implode(",", $request->type);
-        $user->section_id = $request['section'];
+        $user->type  = implode("", $request->type);
+        $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
         $user->save();
 
@@ -63,7 +63,7 @@ class UserController extends Controller
 
         $users = User::get();
         $departments = Department::where('directorate_id', 1)->get();
-        $sections = Section::where('department_id', 1)->get();
+        //$sections = Section::where('department_id', 1)->get();
         // return redirect()->route('createUserView')->with([
         //     'message' => 'User created successfully',
         //     'directorates' => Directorate::all(),
@@ -140,7 +140,7 @@ class UserController extends Controller
 //        return response()->json(User::with('section.department.directorate')->where('id', $id)->first());
         return view('edit_user', [
 
-            'user' => User::with('section.department.directorate')->where('id', $id)->first(),
+            'user' => User::with('department.directorate')->where('id', $id)->first(),
             'directorates' => Directorate::all(),
             'role' => $role,
             'nrole' => $role,
@@ -156,7 +156,7 @@ class UserController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             //'uname' => 'required',
-            'section' => 'required',
+            //'section' => 'required',
             'phone' => 'required|max:15|min:10',
             'email' => 'required'
         ]);
