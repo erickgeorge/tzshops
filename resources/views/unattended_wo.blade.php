@@ -88,12 +88,9 @@ use App\WorkOrder;
           foreach ($user as $userwith) 
           {
             
-              $sectionised = Section::Where('id',$userwith->section_id)->get();
 
-              foreach ($sectionised as $sectioner) {
-                if ($sectioner->id == $userwith->section_id) 
-                {
-                  $departmentid = Department::Where('id',$sectioner->department_id)->get();
+             
+                  $departmentid = Department::Where('id',$userwith->section_id)->get();
                   foreach ($departmentid as $departmentised) 
                   {
                     if ($departmentised->id == $sectioner->department_id ) 
@@ -110,8 +107,7 @@ use App\WorkOrder;
               }
             
           }  }
-      }
-       }
+     
 
 //WADUDUUUUUUUUUUUUUUUUUUUUUUU
 

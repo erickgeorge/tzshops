@@ -22,8 +22,8 @@
                 //if (request()->has('start')) {
                    // echo $_GET['start'];
                // } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php// echo date('Y-m-d'); ?>">
-                To <input value="<?php
+                               max="<?php // echo date('Y-m-d'); ?>">
+                To <input value=" <?php
                 //if (request()->has('end')) {
                     //echo $_GET['end'];
                // } ?>"
@@ -51,11 +51,11 @@
             </ul>
         </div>
     @endif
-  
+
 
     <div class="container">
-  
-             
+
+
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
@@ -70,10 +70,10 @@
                 @else
                 <th >Available Quantity</th>
                 @endif
-        
+
         <th >Status</th>
         <th >HoS Approval</th>
-        
+
             </tr>
             </thead>
 
@@ -90,33 +90,33 @@
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
-                  
+
                        @if($item->checkreserve == 1)
                        <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span> <br><span class="badge badge-light">purchased</span>
                       </td>
                        @else
                        <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span>
                       </td>
-                       @endif  
+                       @endif
 
                        @if( $item->secondstatus == null)
 
-                       <td><span class="badge badge-danger">  NOT APPROVED</span></td> 
+                       <td><span class="badge badge-danger">  NOT APPROVED</span></td>
                         @else
-                       <td><span class="badge badge-success">  APPROVED</span></td> 
+                       <td><span class="badge badge-success">  APPROVED</span></td>
                        @endif
 
-                    
+
                     </tr>
                     @endforeach
             </tbody>
         </table>
     </div>
-         
-        
-   
-      
-            
+
+
+
+
+
           @if(auth()->user()->type =='STORE')
 
           <br>
@@ -132,17 +132,17 @@
 
          @endif
 
-       
+
     </div>
 
 
-    
-     
-   
 
 
 
-    
+
+
+
+
     <script>
 
         $(document).ready(function () {
@@ -156,10 +156,10 @@
 
 
         });
-    
-   
 
-  
+
+
+
 
     </script>
     @endSection

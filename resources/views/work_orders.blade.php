@@ -171,11 +171,9 @@ foreach($userwithid as $userwithid)
   {
       //echo '<option>yay</option>';
 
-    $usersection = section::where('id',$userfetch->section_id)->get();
-    foreach($usersection as $usersection)
-    {
+    
 
-      $departmentor = department::where('id',$usersection->department_id)->get();
+      $departmentor = department::where('id',$userfetch->section_id)->get();
       foreach($departmentor as $departmentor)
       {
 
@@ -185,7 +183,7 @@ foreach($userwithid as $userwithid)
           <?php }
       }
 
-    }
+    
   }
 }
 
