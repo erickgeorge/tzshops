@@ -24,8 +24,10 @@
     <h5>This work order is from <span style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h5>
     <h5>Has been submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
     <h3 style="color: black">Contacts:</h3>
-    <h5>{{ $wo['user']->phone }}</h5>
-    <h5>{{ $wo['user']->email }}</h5>
+    <h5><span style="color:green;">{{ $wo['user']->phone }}</span></h5>
+    <h5><span style="color: green;">{{ $wo['user']->email }}</span></h5>
+
+
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
