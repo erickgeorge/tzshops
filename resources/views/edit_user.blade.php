@@ -58,7 +58,7 @@
     <div class="col">
         <div class="form-group ">
                 <label for="phone">Phone number <sup style="color: red;">*</sup></label>
-                <input style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
+                <input  style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                        maxlength="13" minlength="2"
                        class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number"
@@ -66,22 +66,23 @@
             </div>
     </div>
 </div>
-<div class="row">
+ <div class="row">
     <div class="col">
          <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="email">Email <sup style="color: red;">*</sup></label>
+                    <label style="height: 28px;" class="input-group-text" for="email">Email</label>
                 </div>
-                <input style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
+                <input style="height: 28px;" style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
                        name="email" onblur="validateEmail(this);" placeholder="Enter email address" value="{{ $user->email }}">
             </div>
     </div>
+    
     <div class="col">
         <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
+                    <label style="height: 28px;" class="input-group-text" for="directorate">Directorate/College <sup style="color: red;"></label>
                 </div>
-                <select class="custom-select" name="college" id="directorate" onchange="getDepartments()">
+                <select style="width: 366px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()">
                     @foreach($directorates as $directorate)
                         <option <?php if(($user['department']['directorate']->name) == $directorate->name) {?>
                                 selected="selected"
@@ -90,25 +91,34 @@
                     @endforeach 
 
                 </select>
-            </div>
-    </div>
-    <div class="col">
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="department">Department</label>
-                </div>
-                <select class="custom-select" name="department" id="department" >
-                    <option value="{{ $user['department']->id }}">{{ $user['department']->description }}</option>
-                </select>
-            </div>
+        </div>
     </div>
 </div>
-<div class="row">
 
+
+  <div class="row">
     <div class="col">
         <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Role</label>
+                    <label  style="height: 28px;" class="input-group-text" for="department">Department</label>
+                </div>
+                 
+                <select class="custom-select" name="department" id="department" >
+                     @foreach($departments as $dep)
+                    <option value="{{ $dep->id }}">{{ $dep->description }}</option>
+                     @endforeach
+                </select>
+                 
+            </div>
+    </div>
+
+
+</div>
+
+    <div >
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label  class="input-group-text" for="inputGroupSelect01">Role</label>
                 </div>
                 <select class="custom-select" name="role" id="inputGroupSelect02">
 
@@ -132,115 +142,94 @@
                 </select>
             </div>
     </div>
-   <DIV>
-         <div class="col">
-        <div class="input-group mb-3">
-           <div >
-        <label>Type of User</label>
-      </div>
+
+
 
     <?php $string = $user->type;
      $str_array = preg_split("/\,/", $string);
      ?>
 
-    </div>
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('HOS Electrical',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Electrical"> HOS Electrical </label>
-         
+    <div>
+       <div >
+        <label>Type of User</label><br>
+        <input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
+       </div>
+              <div id="Div1" >
+               <select class="custom-select" name="type[]" id="type">
+                      <option value="" selected>Choose...</option>
+                      <option value="Accountant">Accountant</option>
+                      <option value="Auditor">Auditor</option>
+                      <option value="CLIENT">Client</option>
+                      <option value="DVC Admin">DVC Admin</option>
+                      <option value="Estates Director">Estates Director</option>
+                      <option value="Head Procurement">Head of Procurement</option>
+                      <option value="Inspector Of Works">Inspector Of Works</option>
+                      <option value="Maintenance coordinator">Maintenance Coordinator</option> 
+                      <option value="STORE">Store Manager</option>
+                      <option value="Transport Officer">Transport Officer</option>
 
+               </select>
+               </div>
+               <br>
+
+               <div  id="Div2">
+                
+              
+                <label> 
+                 <input  type="checkbox" name="type[]" @if (in_array('HOS Electrical',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Electrical"> HOS Electrical </label>
+         
+           &nbsp; &nbsp; &nbsp;
                 <label> 
                  <input type="checkbox" name="type[]" @if (in_array('HOS Plumbing',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Plumbing"> HOS Plumbing </label>
       
-             
+           &nbsp; &nbsp; &nbsp;
           
                 <label> 
                  <input type="checkbox" name="type[]" @if (in_array('HOS Carpentry/Painting',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Carpentry/Painting"> HOS Carpentry/Painting </label>
           
            
-
+             &nbsp; &nbsp; &nbsp;
 
       
                 <label> 
                  <input type="checkbox" name="type[]" @if (in_array('HOS Mechanical',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Mechanical"> HOS Mechanical</label>
   
-
+             &nbsp; &nbsp; &nbsp;
 
                 <label> 
                  <input type="checkbox" name="type[]" @if (in_array('HOS Masonry/Road',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Masonry/Road"> HOS Masonry/Road </label>
        
 
 
-
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('Maintenance Coordinator',$str_array)) { checked = 'checked' } @else{} @endif value="Maintenance Coordinator"> Maintenance Coordinator </label>
-     
-
-          
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('DVC Admin',$str_array)) { checked = 'checked' } @else{} @endif value="DVC Admin"> DVC Admin</label>
-    
-                   
-
-
-       
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('Secretary',$str_array)) { checked = 'checked' } @else{} @endif value="Secretary"> Secretary </label>
-
-
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('Technician',$str_array)) { checked = 'checked' } @else{} @endif value="Technician"> Technician </label>
-
-
-
-                 label> 
-                 <input type="checkbox" name="type[]" @if (in_array('STORE',$str_array)) { checked = 'checked' } @else{} @endif value="STORE"> Store Manager </label>
-      
-      
-        
-
-
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('Estates Director',$str_array)) { checked = 'checked' } @else{} @endif value="Estates Director"> Estates Director </label>
-  
-
-
-    
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('Inspector Of Works',$str_array)) { checked = 'checked' } @else{} @endif value="Inspector Of Works"> Inspector Of Works </label>
-            
-
-
-          
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('Transport Officer',$str_array)) { checked = 'checked' } @else{} @endif value="Transport Officer"> Transport Officer </label>
-     
-
-              
-
-
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('Head Procurement',$str_array)) { checked = 'checked' } @else{} @endif value="Head Procurement"> Head Procurement </label>
-     
-
-
-               <div class="checkbox">
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('CLIENT',$str_array)) { checked = 'checked' } @else{} @endif value="CLIENT"> CLIENT </label>
-        
-
-
+             
+             </div>
 
              
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('UDSM STAFF',$str_array)) { checked = 'checked' } @else{} @endif value="UDSM STAFF"> UDSM STAFF </label>
+         </div>
+
+
+  
             
 
 
-            
-</DIV>
+  <script type="text/javascript">
+    
+    function switchVisible() {
+            if (document.getElementById('Div1')) {
 
-    </div>
-</div>
+                if (document.getElementById('Div1').style.display == 'none') {
+                    document.getElementById('Div1').style.display = 'block';
+                    document.getElementById('Div2').style.display = 'none';
+                }
+                else {
+                    document.getElementById('Div1').style.display = 'none';
+                    document.getElementById('Div2').style.display = 'block';
+                }
+            }
+}
+  </script>
+
+
             
             
             

@@ -107,6 +107,8 @@ class UserController extends Controller
     }
 
 
+
+
     public function getAreas(Request $request)
     {
         return response()->json(['areas' => Area::where('location_id', $request->get('id'))->orderby('name_of_area','ASC')->get()]);
@@ -141,7 +143,8 @@ class UserController extends Controller
         return view('edit_user', [
 
             'user' => User::with('department.directorate')->where('id', $id)->first(),
-            'directorates' => Directorate::all(),
+            'directorates' => Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(),
+            'departments' => Department::all(),
             'role' => $role,
             'nrole' => $role,
             'notifications' => $notifications,
@@ -175,8 +178,8 @@ class UserController extends Controller
         // $user->name = $request['uname'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];
-        $user->section_id = $request['section'];
-        $user->type  = implode(",", $request->type);
+        $user->section_id = $request['department'];
+        $user->type  = implode("", $request->type);
         $user->save();
 
         $role = UserRole::where('user_id', $id)->first();
