@@ -119,7 +119,39 @@ $roleofuser =1;
                         <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Section</label>
             </div>
-                 <input required  type="text"  class="form-control" id="typetechhos" name="typetechhos"  value="{{ auth()->user()->type}}">
+            <!--  ------------------------------- -->           
+    <?php $string = auth()->user()->type;
+    $str_array = preg_split("/\,/", $string);
+    ?>
+    <select  name='typetechhos' class="form-control" id="typetechhos" required>
+        @if (in_array('HOS Electrical',$str_array)) {
+            <option value="Electrical">Electrical</option> 
+          } @endif
+          @if (in_array('HOS Plumbing',$str_array)) {
+            <option value="HOS Plumbing">Plumbing</option> 
+          } @endif
+          @if (in_array('HOS Carpentry/Painting',$str_array)) {
+            <option value="Carpentry/Painting">Carpentry/Painting</option> 
+          } @endif
+          @if (in_array('HOS Mechanical',$str_array)) {
+            <option value="Mechanical">Mechanical</option> 
+          } @endif
+          @if (in_array('HOS Masonry/Road',$str_array)) {
+            <option value="Masonry/Road">Masonry/Road</option> 
+          } @endif
+          @if (in_array('HOS Masonry/Road',$str_array)) {
+            <option value="Masonry/Road">Masonry/Road</option> 
+          } @endif
+        </select>
+   </div>
+            <br>
+           
+
+
+   </div>
+</div>
+<!--  ------------------------------- -->
+               
            </div>
             @endif
         
