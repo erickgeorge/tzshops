@@ -99,9 +99,9 @@ function checkboxlimit(checkgroup, limit){
 	<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="directorate">College <sup style="color: red;">*</sup></label>
+	    <label style="height: 28px" class="input-group-text" for="directorate">Directorate/College </label>
 	  </div>
-	  <select style="color: black; width: 430px;" required class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+	  <select style="color: black; width: 366px;" required class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
 		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
 	    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>

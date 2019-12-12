@@ -358,13 +358,39 @@ foreach($userwithid as $userwithid)
                                 <span class="badge badge-danger">Emergency</span></td>
                                 @endif
                                                              @endif
-                             @elseif($work->status == 15)
+                               @elseif($work->status == 15)
                                                             <td><span class="badge badge-info">Material Accepted by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
 
-                             @elseif($work->status == 16)
+                                @elseif($work->status == 55)
+                                                          @if(auth()->user()->type != 'CLIENT')
+                                                            <td><span class="badge badge-danger">Some of Material Rejected</span>  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif
+                                                            @else
+                                                             <td><span class="badge badge-warning">Material on Check by IoW</span>  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif
+                                                             @endif
+
+                                @elseif($work->status == 57)
+                                                          @if(auth()->user()->type != 'CLIENT')
+                                                            <td><span class="badge badge-primary">Material Requested Again</span>  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif
+                                                            @else
+                                                             <td><span class="badge badge-warning">Material on Check by IoW and HoS</span>  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif
+                                                             @endif                           
+
+                                @elseif($work->status == 16)
                                                           @if(auth()->user()->type != 'CLIENT')
                                                             <td><span class="badge badge-danger">Material rejected by IoW</span>  <br>
                                 @if($work->emergency == 1)

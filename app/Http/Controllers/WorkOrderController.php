@@ -653,7 +653,7 @@ public function transportforwork(Request $request, $id)
             'role' => $role,
             'wo' => WorkOrder::where('id', $id)->first(),
             'notifications' => $notifications,
-            'items' => WorkOrderMaterial::where('staff_id', auth()->user()->id)->where('status', -1)->orwhere('work_order_id',$id)->where('status',17)->orwhere('work_order_id',$id)->where('status',44)->get()
+            'items' => WorkOrderMaterial::where('staff_id', auth()->user()->id)->orwhere('work_order_id',$id)->where('status',-1)->orwhere('work_order_id',$id)->where('status',17)->orwhere('work_order_id',$id)->where('status',44)->get()
 
             
         ]);

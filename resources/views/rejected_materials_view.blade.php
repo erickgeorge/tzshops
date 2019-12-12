@@ -150,6 +150,8 @@
                        <span class="badge badge-danger">Again</span>
                                @endif
                        </td>
+                       @else
+                       <td><span class="badge badge-danger">Rejected</span></td>
                        @endif
                     @endif
 

@@ -175,7 +175,7 @@ class StoreController extends Controller
 		 
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
-             $mForm->status = 15;
+             $mForm->status = 55;
 			
              $mForm->save();
        return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Rejected successfully with others Accepted']);
@@ -604,8 +604,8 @@ public function deletematerial($id)
        
 
        $mForm = WorkOrder::where('id', $id)->first();
-       $mForm->status = 7;  //material requested status
-	   $mForm->save();
+       $mForm->status = 57;  //material requested status
+	     $mForm->save();
 
        
 		 return redirect()->back()->with(['message' => 'Materials sent again successfully to Inspector of Work']);

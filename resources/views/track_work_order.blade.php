@@ -35,16 +35,16 @@
     @endif
     <div class="row">
         <div class="col">
-            <h5>This work order was submitted by  <span
+            <h5>Submitted by  <span
                 style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
 
     
     
         </div>
         <div class="col">
-        <h5> And has been @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
+        <h5>  @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
                 style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
-             <h5 style="color: black">Contacts: <span style="color: green">{{ $wo['user']->phone }}</span> <br>
+             <h5 style="color: black">Mobile number: <span style="color: green">{{ $wo['user']->phone }}</span> <br>
               Email: <span style="color:green"> {{ $wo['user']->email }} </span></h5>
         </div>
     </div>
@@ -335,8 +335,55 @@
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) RELEASED FROM STORE @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)
-    REJECTED BY IOW
+   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+       @endif</td>
+      
+   <td>{{$matform->created_at }}</td>
+   <td>{{$matform->updated_at }}</td>
+   
+  </tr>
+  
+  @endforeach
+  
+  </table>
+    @endif
+
+    <br>
+  
+  <br>
+  <hr>
+   @elseif(auth()->user()->type == 'CLIENT')
+      <h4><b>Material Requests: </b></h4>
+  @if(empty($wo['work_order_material']->id))
+        <p style="color: red">No Material have been requested yet</p>
+    @else
+    <?php
+  
+  $idwo=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+     
+    <th>Material Name</th>
+    <th>Material Description</th>
+  <th>Type</th>
+   <th>Quantity</th>
+    <th>Status</th>
+     <th>Date Requested</th>
+      <th>Date Updated</th>
+  
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+    
+    <td>{{$matform['material']->name }}</td>
+   <td>{{$matform['material']->description }}</td>
+    <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> MATERIAL WAITING FOR APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">MATERIAL APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">MATERIAL RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">MATERIAL REQUESTED </span> @elseif($matform->status==17) <span class="badge badge-warning">MATERIAL ON CHECK BY IOW </span>  @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status == -1)<span class="badge badge-warning">MATERIAL ON CHECK BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
       
    <td>{{$matform->created_at }}</td>
