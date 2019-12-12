@@ -51,7 +51,9 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];
-        $user->type  = implode("", $request->type);
+        
+        $user->type  = implode(",", $request->type);
+        $user->type = ltrim($user->type,",");
         $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
         $user->save();
@@ -162,6 +164,7 @@ class UserController extends Controller
             //'section' => 'required',
             'phone' => 'required|max:15|min:10',
             'email' => 'required'
+           
         ]);
 
         if ($request['role'] == 'Choose...') {
@@ -179,7 +182,9 @@ class UserController extends Controller
         $user->phone = $request['phone'];
         $user->email = $request['email'];
         $user->section_id = $request['department'];
-        $user->type  = implode("", $request->type);
+      
+        $user->type  = implode(",", $request->type);
+        $user->type = ltrim($user->type,",");
         $user->save();
 
         $role = UserRole::where('user_id', $id)->first();

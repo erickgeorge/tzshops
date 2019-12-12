@@ -157,7 +157,7 @@
               <div id="Div1" >
                <select class="custom-select" name="type[]" id="type">
                       <option value="" selected>Choose...</option>
-                      <option value="Accountant">Accountant</option>
+                      <option  value="Accountant">Accountant</option>
                       <option value="Auditor">Auditor</option>
                       <option value="CLIENT">Client</option>
                       <option value="DVC Admin">DVC Admin</option>
@@ -167,7 +167,6 @@
                       <option value="Maintenance coordinator">Maintenance Coordinator</option> 
                       <option value="STORE">Store Manager</option>
                       <option value="Transport Officer">Transport Officer</option>
-
                </select>
                </div>
                <br>

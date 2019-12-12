@@ -39,10 +39,22 @@ var total=2;
         </div>
     @endif
     <div style="margin-right: 2%; margin-left: 2%;">
-    <h5>This work order is submitted by  <span
-                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>  also has been processed by  <span
-                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span> &nbsp;<br>It Has been submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
-    <h5 style="color: black">Contacts: {{ $wo['user']->phone }} ,&nbsp;{{ $wo['user']->email }}</h5>
+    <div class="row">
+        <div class="col">
+            <h5>Submitted by  <span
+                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+
+    
+    
+        </div>
+        <div class="col">
+        <h5>  @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
+                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
+             <h5 style="color: black">Mobile number: <span style="color: green">{{ $wo['user']->phone }}</span> <br>
+              Email: <span style="color:green"> {{ $wo['user']->email }} </span></h5>
+        </div>
+    </div>
+    
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
