@@ -998,20 +998,20 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
             $data['header'] = 'All Departments Details';
         }
 
-        if(($_GET['department']=='')||($_GET['college']!=''))
+        if(($_GET['department']=='')&&($_GET['college']!=''))
         {
             $data['catch'] = department::where('directorate_id',$_GET['college'])->get();
             $data['header'] = 'All Departments Details';
         }
 
-        if(($_GET['department']!='')||($_GET['college']==''))
+        if(($_GET['department']!='')&&($_GET['college']==''))
         {
             $data['catch'] = department::where('id',$_GET['department'])->get();
 
             $data['header'] = 'Departments Details';
         }
 
-        if(($_GET['department']=='')||($_GET['college']==''))
+        if(($_GET['department']=='')&&($_GET['college']==''))
         {
             $data['catch'] = department::get();
             $data['header'] = 'All Departments Details';

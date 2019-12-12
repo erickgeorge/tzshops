@@ -124,7 +124,10 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-          
+               @if($role['user_role']['role_id'] == 1)
+                <a class="dropdown-item" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
+                @endif
+
 
         </div>
        </li>
@@ -157,13 +160,14 @@
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-          Technician Reports 
+          Technician
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
                <a class="dropdown-item" style="color:white" href="{{ url('/techniciancountcomp')}}">Technician Completed Work</a>
           <a  style="color:white" class="dropdown-item" href="{{ url('/techniciancount')}}">Technician on Progress</a>
           
+          <a  style="color:white" class="dropdown-item" href="{{ url('/alltechnicians')}}">All Technicians Details</a>
 
         </div>
        </li> 
@@ -187,17 +191,39 @@
 
         </div>
        </li> 
-                      <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
-                    </li>
+                     
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                          HOS
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+                
+                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sectios Details</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
+                        </div>
+                       </li> 
 
                   
                     <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician Report</a>
                     </li>-->
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('store_report')}}">Available Store</a>
-                    </li> 
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                          Store
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+                
+                          <a class="dropdown-item" style="color:white" href="{{ url('store_report')}}">Materials Available in Store</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('stores')}}">All Materials in Store<span
+                            class="badge badge-light">{{ count($m) }}</span></a>
+                        </div>
+                       </li>
+
                          <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
                     </li>
@@ -386,12 +412,12 @@
                    @ENDIF
                 @if(auth()->user()->type == 'Estates Director')
  <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
+     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
  @endif
  @if(auth()->user()->type == 'Maintenance coordinator')
  <li class="nav-item">
-     <a href="{{ url('comp') }}" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
+     <a href="{{ url('comp') }}" class="nav-link" style="color:white"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
 
                      <li class="nav-item">
@@ -409,8 +435,6 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">Head of sections</a>
-          <a  style="color:white" class="dropdown-item" href="{{ url('/alltechnicians')}}">Technicians</a>
            <a style="color:white" class="dropdown-item" href="{{ url('/alliow')}}">Inspectors of work</a>
            
 
@@ -421,19 +445,12 @@
                   <!--  <li class="nav-item">
                         <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
                     </li>-->
-                   
-                   
-
-
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
-                    </li>
-
-
-                     <li class="nav-item">
+                    @if(auth()->user()->type != 'Estates Director')
+                    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
                                     class="badge badge-light">{{ count($m) }}</span></a>
                     </li>
+                    @endif
                 @endif
 
                 @if(strpos(auth()->user()->type, "HOS") !== false)

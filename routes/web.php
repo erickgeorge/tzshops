@@ -91,7 +91,7 @@ Route::get('minutesheet/{id}','MinuteController@minutesheet')->name('minutesheet
 Route::post('newsheets','MinuteController@newsheet')->name('newsheet');
 Route::get('conversation','MinuteController@conversation')->name('conversation');
 Route::post('addconv','MinuteController@addconv')->name('addconv');
-
+Route::get('closeminute/{id}','MinuteController@closeminute')->name('closeminute');
 Route::get('/s-minutesheet','MinuteController@sminutesheet')->name('s-minutesheet');
 Route::post('savesign','UserController@savesign')->name('savesign');
 ///////////////////////////////////////////////////////////////

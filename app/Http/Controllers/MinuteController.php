@@ -115,6 +115,17 @@ $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 'role' => $role]);
     }
 
+   /* public function closeminute($id)
+    {
+        $minute=MinuteSheet::Where('status',1)->where('Woid', $id)->get();
+        foreach( $minute as $minute )
+        { 
+            $minute->status ='2'; 
+            $minute->save();
+        }
+		  
+    }*/
+
     }
 
 

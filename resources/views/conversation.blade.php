@@ -86,16 +86,25 @@ use App\MinuteConversation;
 
 
 </style>
+@foreach($worked as $woid)
+           <?php $name = $woid->Woid; ?>
+            @endforeach
 <div class="container">
 <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <h3><b>Minute Sheet - Conversation </b></h3>
         </div>
-        <div class="col-md-6"> <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+        <div class="col-md-4"> <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
  Minute sheet Details
 </button>
         </div>
+        <?php $angalia = minutesheet::where('status',1)->where('Woid',$name)->get(); ?>
+       {{-- if(count($angalia)>0) --}}
+     <!--   <div class="col-md-3">
+          <a href="{{ url('closeminute',$name) }}" class="btn badge-danger">Close Minutesheet</a>
+        </div> -->
+       {{-- endif --}}
 
 
 <!-- SOMETHING STRANGE HERE -->
@@ -182,6 +191,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
 </div>
 
 </div>
+{{-- if(count($angalia)>0) --}}
 @foreach($last as $him)
 @if(($him->_From == auth()->user()->id)||($him->_To == auth()->user()->id)||($him->_With == auth()->user()->id))
 <div style="position: fixed; bottom: 0; left: 0; right: 0;">
@@ -234,6 +244,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
 </div>
  
 </div>
-</div>
 @endif
 @endforeach
+{{-- endif --}}
+</div>
