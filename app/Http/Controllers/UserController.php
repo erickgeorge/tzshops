@@ -149,6 +149,7 @@ class UserController extends Controller
             'departments' => Department::all(),
             'role' => $role,
             'nrole' => $role,
+            
             'notifications' => $notifications,
             'trole' => $trole
 

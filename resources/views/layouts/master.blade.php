@@ -105,14 +105,7 @@
 
 
                  @if(($role['user_role']['role_id'] == 1))
-                  <!--  <li class="nav-item">
-                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
-                    </li>-->
-                   <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('settings')}}">Settings</a>
-                    </li>-->
-
-
+                  
 
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
@@ -396,20 +389,7 @@
                     
                 @endif
 
-                @if(auth()->user()->type != 'Acountant')
-                @if(auth()->user()->type != 'STORE')
-                @if(auth()->user()->type != 'Transport Officer')
-                @if(auth()->user()->type != 'Inspector Of Works')
-                @if(auth()->user()->type != 'Estates Director')
-                <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
-                </li>
-                @endif
-                @ENDIF
-                
-                @ENDIF
-                @ENDIF
-                   @ENDIF
+        
                 @if(auth()->user()->type == 'Estates Director')
  <li class="nav-item">
      <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
@@ -441,29 +421,39 @@
         </div>
        </li> 
 @endif
-                @if($role['user_role']['role_id'] == 1)
+             @if($role['user_role']['role_id'] == 1)
                   <!--  <li class="nav-item">
                         <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
                     </li>-->
-                    @if(auth()->user()->type != 'Estates Director')
-                    <li class="nav-item">
+                   
+                   
+
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
+                    </li>
+
+
+                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
                                     class="badge badge-light">{{ count($m) }}</span></a>
                     </li>
-                    @endif
-                @endif
+                 @endif
+              
 
-                @if(strpos(auth()->user()->type, "HOS") !== false)
+                @if(strpos(auth()->user()->type, "HOS") !== false or $role['user_role']['role_id'] == 1)
+                     <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
                     </li>
-					
-					@if($role['user_role']['role_id'] != 1)
-					 <!--<li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('storeshos')}}">Current Store</a>
-                    </li>-->
-					@endif
+
+        	
                 @endif
+
+
+               
 
 
                 @if(strpos(auth()->user()->type, "HOS") !== false)
@@ -485,6 +475,13 @@
         </div>
        </li> 
        @endif
+             
+               @if(auth()->user()->type == 'CLIENT')
+                             <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
+                    </li>
+               @endif
+   
 
                 @if(auth()->user()->type == 'STORE')
                     <li class="nav-item">

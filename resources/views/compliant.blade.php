@@ -18,7 +18,7 @@
        
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -37,7 +37,7 @@
         </div>
     @endif
 
-    </div>
+   
     <?php use App\Compliant;
             use App\User;
 
@@ -73,3 +73,4 @@
                         @endforeach
                     </tbody>
                 </table>
+ </div>

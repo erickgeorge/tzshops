@@ -18,7 +18,7 @@
        
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -37,7 +37,6 @@
         </div>
     @endif
 
-    </div>
     <?php use App\Compliant;
             use App\User;
             use App\WorkOrder;
@@ -46,7 +45,7 @@
      @foreach($compliant as $compliment)
      <?php $user = user::where('id',$compliment->sender)->get(); ?>
      <?php $work = workorder::where('id',$compliment->work)->get(); ?>
-     <div class="container">
+     
         <div class="row">
             <div class="col">From:@foreach($user as $us) {{ $us->fname }} {{ $us->lname }} @endforeach</div>
             <div class="col">Date: <?php $time = strtotime($compliment->created_at); echo date('d/m/Y',$time);  ?></div>

@@ -241,8 +241,8 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 //for email that currently working disabled partially
 
-/*
-     $data = array('name'=>$userName, "body" => "Your Work-Order No : Wo-$wo->id sent to Directorate of Estates on : $wo->created_at, of  Problem Type : $wo->problem_type has been ACCEPTED.Please login in the system for further information .",
+
+     $data = array('name'=>$userName, "body" => "Your Work-Order No : $wO->id sent to Directorate of Estates on : $wO->created_at, of  Problem Type : $wO->problem_type has been ACCEPTED.Please login in the system for further information .",
 
                     "footer"=>"Thanks","footer1"=>"Directorate  of Estates"
                 );
@@ -254,7 +254,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
        $message->from('udsmestates@gmail.com',$sender);
        });
 		
-        */
+       
 		
 		
 		

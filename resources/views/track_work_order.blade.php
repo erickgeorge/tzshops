@@ -362,7 +362,7 @@
   
   $idwo=$wo->id;
   $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
-?>
+  ?>
 
 <table style="width:100%">
   <tr>
