@@ -12,6 +12,8 @@ use App\Notification;
 use App\Material;
 use App\Technician;
 use App\workorderMaterial;
+use App\Directorate;
+use App\Department;
    
 class NotesController extends Controller
 {
@@ -961,6 +963,69 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 $pdf = PDF::loadView('trackworkreport', $data);
 return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
 /////////////////////////////////////////////////// 
+    }
+    public function colgenerate()
+    {
+     if($_GET['college']=='')
+     {
+        $data['catch'] = directorate::get();
+        $data['header'] = 'All Directorates Details';
+     }
+     if($_GET['college']!='')
+     {
+        $data['catch'] = directorate::where('id',$_GET['college'])->get();
+        $data['header'] = 'Directorate Details';
+           
+     }
+
+     if($data['catch'] ->isEmpty()){
+     
+        return redirect()->back()->withErrors(['message' => 'No data Found Matching your filter ']);         
+        }else{
+                
+        $pdf = PDF::loadView('collegesreport', $data);
+        return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
+            }
+
+
+    }
+    
+    public function depgenerate()
+    {
+        if(($_GET['department']!='')||($_GET['college']!=''))
+        {
+            $data['catch'] = department::Where('id',$_GET['department'])->where('directorate_id',$_GET['college'])->get();
+            $data['header'] = 'All Departments Details';
+        }
+
+        if(($_GET['department']=='')||($_GET['college']!=''))
+        {
+            $data['catch'] = department::where('directorate_id',$_GET['college'])->get();
+            $data['header'] = 'All Departments Details';
+        }
+
+        if(($_GET['department']!='')||($_GET['college']==''))
+        {
+            $data['catch'] = department::where('id',$_GET['department'])->get();
+
+            $data['header'] = 'Departments Details';
+        }
+
+        if(($_GET['department']=='')||($_GET['college']==''))
+        {
+            $data['catch'] = department::get();
+            $data['header'] = 'All Departments Details';
+        }
+
+        if($data['catch'] ->isEmpty()){
+     
+            return redirect()->back()->withErrors(['message' => 'No data Found Matching your filter ']);         
+            }else{
+                    
+            $pdf = PDF::loadView('departmentsreport', $data);
+            return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
+                }
+
     }
 
 }

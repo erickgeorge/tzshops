@@ -25,7 +25,7 @@ Directorate
             </ul>
         </div>
     @endif 
-
+<?php use App\Directorate; ?>
   @if(count($directorates)>0)
                 <h2 style="margin-bottom: 20px;"
                    class="btn btn-default">List of College/Directorates</h2>
@@ -53,6 +53,43 @@ Directorate
 
             <a href="Add/directorate" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new College/Directorate</a>
+                   <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
+                   class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
+
+                   
+                 
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf"></i> Generate Report</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">X</span>
+                          </button>
+                        </div>
+                        <form method="GET" action="{{url('colgenerate')}}">
+                            @csrf
+                        <div class="modal-body">
+                            <label>Choose College / Directorate</label>
+                            <select class="form-control" name="college">
+                                <option value="">All Colleges</option>
+                                <?php
+                                $colle = directorate::get();
+                                ?>
+                                @foreach ($colle as $colle)
+                              <option value="{{ $colle->id }}">{{ $colle->directorate_description }} - {{$colle->name}}</option>
+                          @endforeach
+                            </select>
+                          </div>
+                        
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
 
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">

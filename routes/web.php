@@ -50,7 +50,10 @@ Route::get('/addmaterial', 'HomeController@AddMaterialVO');
 
 
 Auth::routes();
-
+/////////////////////////
+Route::get('depgenerate','NotesController@depgenerate')->name('depgenerate');
+Route::get('colgenerate','NotesController@colgenerate')->name('colgenerate');
+/////////////////////
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/createuser', 'UserController@create')->name('user.create');
