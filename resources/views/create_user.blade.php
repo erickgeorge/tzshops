@@ -67,20 +67,20 @@ function checkboxlimit(checkgroup, limit){
 <div class="row">
 	<div class="col">
 		<div class="form-group ">
-	    <label for="fname">First name <sup style="color: red;">*</sup></label>
+	    <label for="fname">First name</label>
 	    <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}" >
 	 </div>
 	</div>
 	<div class="col">
 		<div class="form-group ">
-	    <label for="lname">Last name <sup style="color: red;">*</sup></label>
+	    <label for="lname">Last name </label>
 	    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
 	</div>
 	</div>
 	<div class="col">
 		<div class="form-group ">
-	    <label for="phone">Phone number <sup style="color: red;">*</sup></label>
-	    <input style="color: black; width: 340px;"  required type="text"     name="phone"  
+	    <label for="phone">Phone number </label>
+	    <input style="color: black; width: 340px;"  required type="text"     name="phone"
 	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "10"  minlength = "10"
 	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 "  value="{{ old('phone') }}">
@@ -91,7 +91,7 @@ function checkboxlimit(checkgroup, limit){
 	<div class="col">
 		<div class="input-group ">
 	  <div class="input-group-prepend">
-	    <label style="height:28px;" class="input-group-text" for="Email">Email <sup style="color: red;">*</sup></label>
+	    <label style="height:28px;" class="input-group-text" for="Email">Email </label>
 	  </div>
 	    <input style="color: black; height: 28px; width: 80px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
 	</div>
@@ -111,10 +111,10 @@ function checkboxlimit(checkgroup, limit){
 	</div>
 	</div>
 	<div class="row" >
-		<div class="col"> 
+		<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="department">Department <sup style="color: red;">*</sup></label>
+	    <label style="height: 28px" class="input-group-text" for="department">Department </label>
 	  </div>
 	  <select style="color: black; width: 410px;" required class="custom-select" name="department" id="department"  value="{{ old('department') }}">
 	  </select>
@@ -128,7 +128,7 @@ function checkboxlimit(checkgroup, limit){
 	    <label style="height: 28px" class="input-group-text" for="section">Section <sup style="color: red;">*</sup></label>
 	  </div>
 	  <select style="color: black; width: 430px;"  class="custom-select" name="section" id="section" value="{{ old('section') }}">
-		 
+
 	  </select>
 	  </div>
 	  </div>-->
@@ -151,19 +151,19 @@ function checkboxlimit(checkgroup, limit){
 	<div class="align-content-center">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label  style="height: 28px;" class="input-group-text" for="username">Username <sup style="color: red;">*</sup></label>
+	    <label  style="height: 28px;" class="input-group-text" for="username">Username </label>
 	  </div>
 	     <input style="color: black; width:200px; height: 28PX;"  required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
 	 </div>
 	</div>
 	</div>
 </div>
-	
-     
+
+
 
 <div>
          <div >
-	
+
 	   <div >
 	    <label>Type of User</label><br>
        	<input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
@@ -178,7 +178,7 @@ function checkboxlimit(checkgroup, limit){
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
 	                  <option value="Inspector Of Works">Inspector Of Works</option>
-	                  <option value="Maintenance coordinator">Maintenance Coordinator</option> 
+	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
 	                  <option value="Transport Officer">Transport Officer</option>
 	           </select>
@@ -186,92 +186,92 @@ function checkboxlimit(checkgroup, limit){
 	           <br>
 
                <div  id="Div2">
-               	
-              
-                 <input type="checkbox" name="type[]"    value="HOS Electrical"> HOS Electrical 
-             
+
+
+                 <input type="checkbox" name="type[]"    value="HOS Electrical"> HOS Electrical
+
                 &nbsp;&nbsp;&nbsp;
-               
-                 <input type="checkbox" name="type[]"  value="HOS Plumbing"> HOS Plumbing 
-            
-                &nbsp;&nbsp;&nbsp;
-          
-                
-                 <input type="checkbox"  name="type[]"   value="HOS Carpentry/Painting"> HOS Carpentry/Painting 
-                  
+
+                 <input type="checkbox" name="type[]"  value="HOS Plumbing"> HOS Plumbing
+
                 &nbsp;&nbsp;&nbsp;
 
 
-      
-             
+                 <input type="checkbox"  name="type[]"   value="HOS Carpentry/Painting"> HOS Carpentry/Painting
+
+                &nbsp;&nbsp;&nbsp;
+
+
+
+
                  <input type="checkbox" name="type[]"  value="HOS Mechanical"> HOS Mechanical
-                 
-  
+
+
 
                 &nbsp;&nbsp;&nbsp;
-                
-                 <input type="checkbox"  name="type[]"   value="HOS Masonry/Road"> HOS Masonry/Road 
-                 
-       
+
+                 <input type="checkbox"  name="type[]"   value="HOS Masonry/Road"> HOS Masonry/Road
 
 
 
-              <!--  <label> 
+
+
+              <!--  <label>
                  <input type="checkbox" name="type[]" value="Maintenance coordinator"> Maintenance Coordinator </label>
-     
 
-          
-                <label> 
+
+
+                <label>
                  <input type="checkbox" name="type[]" value="DVC Admin"> DVC Admin</label>
-    
 
-                <label> 
+
+                <label>
                  <input type="checkbox" name="type[]" value="Estates Director"> Estates Director </label>
-  
-            
-                <label> 
-                 <input type="checkbox" name="type[]" value="STORE"> Store Manager </label>
-   
-    
-                <label> 
-                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
-            
-                <label> 
-                 <input type="checkbox" name="type[]" value="Transport Officer"> Transport Officer </label>
-     
 
-              
-                <label> 
+
+                <label>
+                 <input type="checkbox" name="type[]" value="STORE"> Store Manager </label>
+
+
+                <label>
+                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
+
+                <label>
+                 <input type="checkbox" name="type[]" value="Transport Officer"> Transport Officer </label>
+
+
+
+                <label>
                  <input type="checkbox" name="type[]" value="Head Procurement"> Head Procurement </label>
 
 
-                   <label> 
+                   <label>
                  <input type="checkbox" name="type[]" value="Auditor"> Auditor </label>
 
-                    <label> 
+                    <label>
                  <input type="checkbox" name="type[]" value="Accountant"> Accountant </label>
-     
-     
+
+
                <div class="checkbox">
-                <label> 
+                <label>
                  <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
-        
--->          
+
+-->
              </div>
 
-             
+
          </div>
 
 
-  
-            
+
+
 </div>
 
 
 
-	
+
 <div>
-	
+
 	<!--<div class="col">
 		<div class="form-group ">
 	    <label style="color: black" for="pass">Password</label>
@@ -286,12 +286,12 @@ function checkboxlimit(checkgroup, limit){
 </div>
 
 
-	
+
                <!-- <div class="form-group">
                     <input  type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp" value="{{ old('avatar') }}">
                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
                 </div>-->
-    <div align="center">           
+    <div align="center">
 	<button type="submit" class="btn btn-primary"> Save</button>
 	<a class="btn btn-danger" href="/viewusers" role="button">Cancel </a>
 </div>
@@ -309,7 +309,7 @@ checkboxlimit(document.forms.world.type, 3)
 </script>
 
   <script type="text/javascript">
-	
+
 	function switchVisible() {
             if (document.getElementById('Div1')) {
 
@@ -324,7 +324,7 @@ checkboxlimit(document.forms.world.type, 3)
             }
 }
   </script>
- 
+
 
 
 <br>

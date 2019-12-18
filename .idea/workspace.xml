@@ -4,13 +4,15 @@
     <list default="true" id="ef3d687c-519b-4201-929b-84ec9dfd477b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/FYP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FYP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TechnicianController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TechnicianController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/create_user.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/create_user.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -151,6 +153,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="FullScreen" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -166,18 +169,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
-      <PhpTestRunnerSettings />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
-      <BehatRunner />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
-      <PhpTestRunnerSettings />
-      <method />
-    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
@@ -251,6 +242,7 @@
       <workItem from="1561024077067" duration="1884000" />
       <workItem from="1576135826506" duration="790000" />
       <workItem from="1576137143013" duration="187000" />
+      <workItem from="1576480567603" duration="579000" />
     </task>
     <servers />
   </component>
@@ -278,9 +270,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="186" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1576135958291" />
-    <state x="391" y="190" key="com.intellij.ide.util.TipDialog" timestamp="1576135854825">
+    <state x="391" y="190" key="com.intellij.ide.util.TipDialog" timestamp="1576480600705">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="391" y="190" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1576480600705" />
     <state x="391" y="190" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1576135854825" />
   </component>
 </project>

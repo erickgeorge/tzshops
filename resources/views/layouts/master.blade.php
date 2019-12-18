@@ -117,10 +117,7 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-               @if($role['user_role']['role_id'] == 1)
-                <a class="dropdown-item" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
-                @endif
-
+              
 
         </div>
        </li>
@@ -411,7 +408,7 @@
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-         Others 
+         Other Users
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 

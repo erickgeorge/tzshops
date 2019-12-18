@@ -90,7 +90,7 @@ class TechnicianController extends Controller
 
     public function deleteTech($id){
         Technician::find($id)->delete();
-        return redirect()->back()->with(['message', 'Technician deleted']);
+        return redirect()->back()->with(['message', 'Technician deleted Successfully']);
     }
 	
 	
