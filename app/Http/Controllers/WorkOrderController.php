@@ -681,6 +681,14 @@ public function transportforwork(Request $request, $id)
                 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 3)->get()
             ]);
 
+          } elseif(strpos(auth()->user()->type, "HOS") !== false){
+
+             return view('received_materials_view', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 3)->get()
+            ]);
+
 
         }
            
