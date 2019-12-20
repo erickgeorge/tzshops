@@ -8,7 +8,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-     <link rel="icon" type="image/png" href="{{ asset('images/index.png') }}"/>
+     <link rel="icon" type="image/png" href="{{ url('/images/index.jpg') }}"/>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">

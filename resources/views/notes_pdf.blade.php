@@ -1,5 +1,5 @@
 <div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
     <div style="background-image: url('img_girl.jpg');">
 
 
