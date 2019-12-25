@@ -74,44 +74,36 @@ use App\WorkOrder;
         <div class="row">
             <div class="col">
                 <select name="name" class="form-control mr-sm-2">
-                    <option selected="selected" value="">name</option>
+                    <option selected="selected" value="">Select name</option>
                     <?php
 ////////////WADUDUUUUUUUUUUUU
 
-  $userwithid = WorkOrder::select('staff_id')->Where('status','-1')->distinct()->get();
-   foreach($userwithid as $userwithin){
-      $userinid = User::get();
-
-      foreach ($userinid as $usedid) {
-        if ($userwithin->staff_id == $usedid['id']) {
-
-              $user = User::Where('id',$usedid['id'])->get();
-          foreach ($user as $userwith) 
-          {
-            
-              
-                  $departmentid = Department::Where('id',$userwith->section_id)->get();
-                  foreach ($departmentid as $departmentised) 
-                  {
-                    if ($departmentised->id == $departmentised->department_id ) 
-                    {
-                      $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
-                      foreach ($directorate as $directory) {
-                        if ($directory->id == $departmentised->directorate_id ) {
-                          echo "<option value='".$userwith->id."'>".$userwith->fname." ".$userwith->lname." (".$directory->name."-".$departmentised->name.")</option>";
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            
-          }  }
+  $userwithid = WorkOrder::select('client_id')->Where('status','-1')->distinct()->get();
+  foreach($userwithid as $userwithid)
+  {
+  
+    $userfetch = user::where('id',$userwithid->client_id)->get();
+    foreach($userfetch as $userfetch)
+    {
+        //echo '<option>yay</option>';
+  
       
-
-//WADUDUUUUUUUUUUUUUUUUUUUUUUU
-
-      ?>
+  
+        $departmentor = department::where('id',$userfetch->section_id)->get();
+        foreach($departmentor as $departmentor)
+        {
+  
+            $directora = directorate::where('id',$departmentor->directorate_id)->get();
+            foreach($directora as $directora){?>
+  <option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->lname }} - {{ $directora->name }}</option>
+            <?php }
+        }
+  
+      
+    }
+  }
+  
+        ?>
                 </select>
             </div>
         </div>

@@ -31,23 +31,7 @@ Directorate
                    class="btn btn-default">List of College/Directorates</h2>
 
                  
-                <form method="GET" action="/Manage/directorate" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
-                From:  <input name="start" value="<?php
-                if (request()->has('start')) {
-                    echo $_GET['start'];
-                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php echo date('Y-m-d'); ?>">
-                To: <input value="<?php
-                if (request()->has('end')) {
-                    echo $_GET['end'];
-                } ?>"
-                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-primary bg-primary" style="width: 70px" type="submit">Filter</button>
-
-
-
-            </form>
+                
         
             <hr class="container">
 
@@ -84,7 +68,7 @@ Directorate
                         
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary">Filter</button>
+                          <button type="submit" class="btn btn-primary">Generate</button>
                         </div>
                         </form>
                       </div>
@@ -97,7 +81,6 @@ Directorate
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Abbreviation</th>
-                        <th scope="col">Added on</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -109,9 +92,7 @@ Directorate
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $directorate->directorate_description }}</td>
                             <td>{{ $directorate->name }}</td>
-                            <td><?php $time = strtotime($directorate->created_at); echo date('d/m/Y',$time);  ?></td>
-
-
+                           
 
                             <td>
                                 <div class="row">

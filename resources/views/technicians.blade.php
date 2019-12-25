@@ -75,7 +75,7 @@ foreach ($hoos as $hous) {
       <div class="row">
         <div class="col">
           <select name="name" class="form-control mr-sm-2">
-                <option value="" selected="selected">Name</option>
+                <option value="" selected="selected">All Technicians</option>
 @foreach($rle as $tech)
  @if(($role['user_role']['role_id'] == 1))
  <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
@@ -100,7 +100,7 @@ foreach ($hoos as $hous) {
             
  @if(($role['user_role']['role_id'] == 1))
  
-<option selected="">All</option>
+<option selected="">All Sections</option>
  @if($head == 'All HOS Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 @elseif($head == 'All Technicians Details')

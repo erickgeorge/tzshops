@@ -190,8 +190,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
                 
-                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sectios Details</a>
-                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sectinos Details</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS with completed works orders</a>
                         </div>
                        </li> 
 
@@ -208,7 +208,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
                 
-                          <a class="dropdown-item" style="color:white" href="{{ url('store_report')}}">Materials Available in Store</a>
+                        <!--  <a class="dropdown-item" style="color:white" href="{{-- url('store_report')--}}">Materials Available in Store</a> -->
                           <a class="dropdown-item" style="color:white" href="{{ url('stores')}}">All Materials in Store<span
                             class="badge badge-light">{{ count($m) }}</span></a>
                         </div>

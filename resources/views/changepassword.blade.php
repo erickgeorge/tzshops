@@ -35,22 +35,36 @@
 
         <form action="{{ route('password.change') }}" method="POST">
             @csrf
+            
+            <div class="form-group col-lg-6">
+                    <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <label style="width:200px;" class="input-group-text" for="Email">Old password <sup style="color: red;">*</sup></label>
+                  </div>
+                  <input type="password" required class="form-control" id="old-pass" name="old-pass"
+                  placeholder="Enter old password">  </div>
+                </div>
 
-            <div class="form-group col-lg-6">
-                <label for="old-pass">Old password <sup style="color: red;">*</sup></label>
-                <input type="password" required class="form-control" id="old-pass" name="old-pass"
-                       placeholder="Enter old password" value="{{ old('old-pass') }}">
-            </div>
-            <div class="form-group col-lg-6">
-                <label for="new-pass">New password <sup style="color: red;">*</sup></label>
-                <input type="password" required class="form-control" id="new-pass" name="new-pass"
-                       placeholder="Enter new password" value="{{ old('new-pass') }}">
-            </div>
-            <div class="form-group col-lg-6">
-                <label for="confirm-pass">New password <sup style="color: red;">*</sup></label>
-                <input type="password" required class="form-control" id="confirm-pass" name="confirm-pass"
-                       placeholder="Confirm password" value="{{ old('confirm-pass') }}">
-            </div>
+                <div class="form-group col-lg-6">
+                    <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <label style="width:200px;" class="input-group-text" for="Email">New password <sup style="color: red;">*</sup></label>
+                  </div>
+                  <input type="password" required class="form-control" id="new-pass" name="new-pass"
+                  placeholder="Enter new password">
+                  </div>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <label style="width:200px;" class="input-group-text" for="Email">Confirm New password <sup style="color: red;">*</sup></label>
+                  </div>
+                  <input type="password" required class="form-control" id="confirm-pass" name="confirm-pass"
+                       placeholder="Confirm password">
+                  </div>
+                </div>
+           
             <button type="submit" class="btn btn-primary">Change password</button>
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
 
