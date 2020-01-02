@@ -365,6 +365,8 @@ Route::get('gettechniciandetails/{id}', 'TechnicianController@getTechnicianDetai
 Route::get('work_order_technician_complete/{id}', 'WorkOrderController@woTechnicianComplete')->name('workOrder.technicianComplete');
 
 
+Route::get('work_order_technician_complete_inspection/{id}', 'WorkOrderController@TechnicianCompleteinspection')->name('workOrder.technicianCompleteinspection');
+
 
 Route::get('/unattended_work_orders', 'HomeController@unattendedWorkOrdersView')->name('unattended_work_orders');
 

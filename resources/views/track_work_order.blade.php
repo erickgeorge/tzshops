@@ -9,6 +9,7 @@
     use App\WorkOrderTransport;
     use App\WorkOrderStaff;
     use App\WorkOrderMaterial;
+    use App\techasigned;
  
 
  ?>
@@ -145,6 +146,85 @@
  @if($wo->emergency == 1)
    <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
  @endif
+
+
+
+    <h4><b>Technician assigned for Inspection : </b></h4>
+    @if(empty($wo['work_order_staffassigned']->id))
+       <p style="color: red">No Technician assigned yet</p>
+    @else
+     
+      
+    <?php
+  
+  $idwo=$wo->id;
+  $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date Assigned</th>
+  <th>Complete work</th>
+  
+  </tr>
+    @foreach($techforms as $techform)
+  
+  
+
+
+  <tr>
+  
+     @if($techform['technician_assigned_for_inspection'] != null)
+    <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
+   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
+
+     
+
+    <td>{{ 
+   $techform->created_at }}</td>
+   
+    @if($techform->created_at ==  $techform->updated_at)
+   
+   
+    <td> NOT COMPLETED</td>
+    @else
+    <td>{{ 
+   $techform->updated_at }}</td>
+    @endif
+    
+    @if($techform->status!=1)
+   <td>   <a style="color: black;" href="{{ route('workOrder.technicianCompleteinspection', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE INSPECTION"><i
+                                                    class="fas fa-clipboard-check large"></i></a></td>
+                          
+    </td>
+   @endif 
+
+  
+  
+
+
+
+         
+      @endif
+  
+  
+  
+  </tr>
+    @endforeach
+  </table>
+   
+
+    @endif
+   <br>
+    
+   <hr>
+    <br>
+
+
+
+
 
   <h4><b>Technician assigned for Work: </b></h4>
 @if(empty($wo['work_order_staff']->id))

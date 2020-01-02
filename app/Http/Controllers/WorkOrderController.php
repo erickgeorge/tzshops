@@ -1139,6 +1139,19 @@ session::flash('message', ' Your workorder have been closed successfully');
          return redirect()->back()->with(['message' => 'STATUS OF TECHNICIAN IS CHANGED SUCCESSFULLY']);
          }	
 		 
+
+
+     public function TechnicianCompleteinspection($id)
+    {
+       
+        $wo_staff =techasigned::where('id', $id)->first();
+
+        
+        $wo_staff->status = 1;
+        $wo_staff->save();
+         return redirect()->back()->with(['message' => 'STATUS OF TECHNICIAN IS CHANGED SUCCESSFULLY']);
+         }  
+         
 		 
 		 
 	public function woChangeTypeView($id)
