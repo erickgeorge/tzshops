@@ -12,6 +12,7 @@ use App\Technician;
 use App\User;
 use App\WorkOrderInspectionForm;
 use App\WorkOrderStaff;
+use App\techasigned;
 use App\WorkOrderTransport;
 use App\WorkOrderProgress;
 use App\WorkOrderMaterial;
@@ -409,6 +410,9 @@ public function transportforwork(Request $request, $id)
     }
 	
 	
+
+
+
 	
     public function assigntechnicianforwork(Request $request, $id)
     {
@@ -431,15 +435,14 @@ public function transportforwork(Request $request, $id)
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         
             $work_order_staff->staff_id = $request['technician_work'];
-			 $work_order_staff->status =0;
-             $work_order_staff->work_order_id = $id;
+			$work_order_staff->status =0;
+            $work_order_staff->work_order_id = $id;
             $work_order_staff->save();
 			
 			
 			$mForm = WorkOrder::where('id', $id)->first();
-             $mForm->status =3;
-			
-             $mForm->save();
+            $mForm->status =3;
+            $mForm->save();
        
         
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -454,6 +457,55 @@ public function transportforwork(Request $request, $id)
 	}
 	
 	
+
+
+  
+    public function assigntechnicianforinspection(Request $request, $id)
+    {
+
+        if ($request['technician_work'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Technician for work order is required']);
+        }
+        
+        $checkstaff = techasigned::where('staff_id', $request['technician_work'])->where('work_order_id', $id)->first();
+        
+        
+        if (empty($checkstaff)) {
+           
+        
+        
+        
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $work_order_staffassign = new  techasigned();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+            $work_order_staffassign->staff_id = $request['technician_work'];
+            $work_order_staffassign->status =0;
+            $work_order_staffassign->work_order_id = $id;
+            $work_order_staffassign->save();
+            
+            
+            $mForm = WorkOrder::where('id', $id)->first();
+            $mForm->status =70;
+            $mForm->save();
+       
+        
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Technician assigned successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    
+    
+        }  else { return redirect()->back()->withErrors(['message' => 'Technician Selected has already been assigned for this  work order,You can not assign him repeatedly']);}
+    }
+    
+    
+
+
+
 	
 	
 	public function materialaddforwork(Request $request,$id)
@@ -763,6 +815,28 @@ public function transportforwork(Request $request, $id)
         ]);
     }
 
+
+
+    public function closeWorkOrderinspector($id, $receiver_id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        $wo = WorkOrder::find($id);
+        $wo->status = 52; // to be verified by inspector of work
+        $wo->save();
+
+        return redirect()->route('workOrder.track', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Work order is sent successfully to Inspector of work for checking',
+            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
+        ]);
+    }
+    
+
+
+
     public function closeWorkOrder($id, $receiver_id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -776,7 +850,7 @@ public function transportforwork(Request $request, $id)
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $receiver_id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
+        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been temporally closed closed!.';
         $notify->save();
 
     
@@ -875,15 +949,28 @@ session::flash('message', ' Your workorder have been closed successfully');
         ]);
     }
     
+    	   
+    
+    public function WOapproveIoW($id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        $wo = WorkOrder::find($id);
+        $wo->status = 25;
+       
+        $wo->save();
+      
+
+        return redirect()->route('workOrder.track', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Work order is Successfully Approved',
+            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
+        ]);
+    }
     
     
-    
-    
-    
-	
-	
-	
-	
 	
 	
 	
@@ -908,13 +995,6 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notify->type = 'wo_closed';
         $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' is satisfied by client!.';
         $notify->save();
-
-	
-	
-	
-	
-	
-
 
         return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,
@@ -966,7 +1046,32 @@ session::flash('message', ' Your workorder have been closed successfully');
     }
     
     
-	
+
+
+	   
+    public function closeWONotSatisfiedbyiow(Request $request, $id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        $wo = WorkOrder::find($id);
+        $wo->status = 53;
+        $wo->notsatisfiedreason = $request['notsatisfiedreason'];
+        $wo->save();
+        
+
+        return redirect()->route('workOrder.track', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Work order is not approved successifully by Inspector of Work',
+            'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
+        ]);
+    }
+    
+    
+    
+    
+    
 	
 	
 	

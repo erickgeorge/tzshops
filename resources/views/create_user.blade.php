@@ -3,30 +3,24 @@
 @section('title')
 User Registrartion
 @endSection
- <script type="text/javascript">
 
-function checkboxlimit(checkgroup, limit){
-	var checkgroup=checkgroup
-	var limit=limit
-	for (var i=0; i<checkgroup.length; i++){
-		checkgroup[i].onclick=function(){
-		var checkedcount=0
-		for (var i=0; i<checkgroup.length; i++)
-			checkedcount+=(checkgroup[i].checked)? 1 : 0
-		if (checkedcount>limit){
-			alert("You can only select a maximum of "+limit+" Head of Sections")
-			this.checked=false
-			}
-		}
-	}
-}
-
-</script>
 @section('body')
+<script src= 
+"https://code.jquery.com/jquery-1.12.4.min.js"> 
+	</script> 
  <style type="text/css">
  	#Div2 {
   display: none;
 }
+
+.selectt { 
+			
+			
+			display: none; 
+			 
+		} 
+		
+		
  </style>
 <br>
 <div class="row" style="margin-top: 6%; margin-left: 3%;">
@@ -96,12 +90,41 @@ function checkboxlimit(checkgroup, limit){
 	    <input style="color: black; height: 28px; width: 80px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
 	</div>
 	</div>
-	<div class="col">
+
+
+	     <div class="col">
+	<div class="align-content-center">
+		<div class="input-group mb-3">
+	  <div class="input-group-prepend">
+	    <label  style="height: 28px;" class="input-group-text" for="username">Username </label>
+	  </div>
+	     <input style="color: black; width:200px; height: 28PX;"  required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+	 </div>
+	</div>
+	</div>
+</div>
+
+	<div class="input-group mb-3">
+	  <div class="input-group-prepend">
+	    <label  style="height: 28px" class="input-group-text" for="inputGroupSelect01">Role</label>
+	  </div>
+	  <select style="color: black; width: 460px" required class="custom-select" name="role" id="role">
+	    <option value="" selected>Choose...</option>
+	    <option value="1">Admin</option>
+	    <option value="2">Staff</option>
+	  </select>
+	</div>
+
+  
+
+    
+<div class="row">
+	<div  class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="directorate">Directorate/College </label>
 	  </div>
-	  <select style="color: black; width: 366px;" required class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+	  <select required style="color: black; width: 360px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
 		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
 	    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
@@ -109,17 +132,19 @@ function checkboxlimit(checkgroup, limit){
 	  </select>
 	</div>
 	</div>
-	</div>
-	<div class="row" >
+	
+	
 		<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="department">Department </label>
 	  </div>
-	  <select style="color: black; width: 410px;" required class="custom-select" name="department" id="department"  value="{{ old('department') }}">
+	  <select required style="color: black; width: 410px;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
 	  </select>
 	    </div>
 	</div>
+
+
 
 
 	 <!--<div class="col">
@@ -132,49 +157,42 @@ function checkboxlimit(checkgroup, limit){
 	  </select>
 	  </div>
 	  </div>-->
-	</div>
+	
 
-    <div class="row">
-	<div class="col">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label  style="height: 28px" class="input-group-text" for="inputGroupSelect01">Role</label>
-	  </div>
-	  <select style="color: black; width: 460px" required class="custom-select" name="role" id="role">
-	    <option value="" selected>Choose...</option>
-	    <option value="1">Admin</option>
-	    <option value="2">Staff</option>
-	  </select>
-	</div>
-	</div>
-     <div class="col">
-	<div class="align-content-center">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label  style="height: 28px;" class="input-group-text" for="username">Username </label>
-	  </div>
-	     <input style="color: black; width:200px; height: 28PX;"  required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
-	 </div>
-	</div>
-	</div>
 </div>
 
 
 
-<div>
-         <div >
 
-	   <div >
+
+     <div>
+
+	
 	    <label>Type of User</label><br>
+
+	    <div> 
+			<label> 
+				<input type="checkbox" 
+					value="C">DES </label> 
+					&nbsp;&nbsp;&nbsp;
+			<label> 
+				<input type="checkbox" 
+					value="Cplus"> UDSM</label> 
+			
+		</div> 
+
+		<div class="C selectt">
+
+	    <div >
        	<input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
        </div>
               <div id="Div1" >
-               <select class="custom-select" name="type[]" id="type">
+               <select style="width: 300px;" class="custom-select" name="type[]" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>
 	                  <option value="Auditor">Auditor</option>
-	                  <option value="CLIENT">Client</option>
-	                  <option value="DVC Admin">DVC Admin</option>
+	               
+	                  
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
 	                  <option value="Inspector Of Works">Inspector Of Works</option>
@@ -213,61 +231,32 @@ function checkboxlimit(checkgroup, limit){
                  <input type="checkbox"  name="type[]"   value="HOS Masonry/Road"> HOS Masonry/Road
 
 
+          </div>
+    </div>
+
+    <div class="Cplus selectt" >
+    	<div  >
+               <select style="width: 300px;" class="custom-select" name="type[]" id="typeudsm">
+	                  <option value="" selected>Choose...</option>
+	                 
+	                  <option value="CLIENT">Client</option>
+	                  <option value="DVC Admin">DVC Admin</option>
+	                  
+	           </select>
+	           </div>
+    	
+    </div>
 
 
 
-              <!--  <label>
-                 <input type="checkbox" name="type[]" value="Maintenance coordinator"> Maintenance Coordinator </label>
 
 
-
-                <label>
-                 <input type="checkbox" name="type[]" value="DVC Admin"> DVC Admin</label>
-
-
-                <label>
-                 <input type="checkbox" name="type[]" value="Estates Director"> Estates Director </label>
-
-
-                <label>
-                 <input type="checkbox" name="type[]" value="STORE"> Store Manager </label>
-
-
-                <label>
-                 <input type="checkbox" name="type[]" value="Inspector Of Works"> Inspector Of Works </label>
-
-                <label>
-                 <input type="checkbox" name="type[]" value="Transport Officer"> Transport Officer </label>
-
-
-
-                <label>
-                 <input type="checkbox" name="type[]" value="Head Procurement"> Head Procurement </label>
-
-
-                   <label>
-                 <input type="checkbox" name="type[]" value="Auditor"> Auditor </label>
-
-                    <label>
-                 <input type="checkbox" name="type[]" value="Accountant"> Accountant </label>
-
-
-               <div class="checkbox">
-                <label>
-                 <input type="checkbox" name="type[]" value="CLIENT"> CLIENT </label>
-
--->
-             </div>
-
-
-         </div>
-
+	 
 
 
 
 </div>
-
-
+</div>
 
 
 <div>
@@ -301,12 +290,7 @@ function checkboxlimit(checkgroup, limit){
 
 
 
-<script type="text/javascript">
 
-
-checkboxlimit(document.forms.world.type, 3)
-
-</script>
 
   <script type="text/javascript">
 
@@ -325,7 +309,17 @@ checkboxlimit(document.forms.world.type, 3)
 }
   </script>
 
+  <script type="text/javascript"> 
+			$(document).ready(function() { 
+				$('input[type="checkbox"]').click(function() { 
+					var inputValue = $(this).attr("value"); 
+					$("." + inputValue).toggle(); 
+					 
+				}); 
+			}); 
+</script> 
 
 
-<br>
+ 
+
 @endSection

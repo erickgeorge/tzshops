@@ -13,6 +13,8 @@ use App\PurchasingOrder;
 use App\Directorate;
 use App\WorkOrder;
 use App\Department;
+use App\Des;
+use App\Desdepartment;
 use App\Section;
 use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
@@ -138,7 +140,13 @@ class HomeController extends Controller
             
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
-            }  else
+            } 
+
+
+             else if (auth()->user()->type == "Inspector Of Works"){
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
+            } 
+             else
             
         {// HOS and their work order type 
 
@@ -698,6 +706,11 @@ $v5=$type[4];
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
             }
+
+             else if (auth()->user()->type == "Inspector Of Works"){
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
+            }
+            
             else{
                 
         return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()]);
@@ -1230,14 +1243,18 @@ $v5=$type[4];
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $directorate = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get();
+        $des = Des::where('name','<>',null)->OrderBy('name','ASC')->get();
         $departments = Department::where('directorate_id', 1)->get();
         $sections = Section::where('department_id', 1)->get();
+        $desp = desdepartment::all();
         return view('create_user', [
             'directorates' => $directorate,
             'role' => $role,
             'sections' => $sections,
             'departments' => $departments,
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'des'=> $des,
+            'desp'=>$desp
         ]);
     }
 
@@ -2656,11 +2673,11 @@ public function wo_material_acceptedbyIOWView($id)
 
 
   
-     public function wo_material_to_purchaseViewbystore(request $id)
+     public function wo_material_to_purchaseViewbystore($id)
    
     {
     
-        $wo_material = WorkOrderMaterial::where('status', 5)->orwhere('reservestatus',1)
+        $wo_material = WorkOrderMaterial::where('work_order_id',$id)->where('status', 5)->orwhere('work_order_id',$id)->where('reservestatus',1)
                    
                      ->get();
         
@@ -2672,7 +2689,7 @@ public function wo_material_acceptedbyIOWView($id)
 
  
 
-      public function wo_material_purchasedViewbyheadprocurement(request $id)
+      public function wo_material_purchasedViewbyheadprocurement($id)
    
     {
     

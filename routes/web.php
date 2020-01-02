@@ -75,6 +75,8 @@ Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrd
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
 
 Route::post('assigntech/work_order/{id}', 'WorkOrderController@assigntechnicianforwork')->name('work.assigntechnician');
+Route::post('assigntechforinspection/work_order/{id}', 'WorkOrderController@assigntechnicianforinspection')->name('work.assigntechnicianforinspection');
+
 Route::post('transportrequest/work_order/{id}', 'WorkOrderController@transportforwork')->name('work.transport');
 
 Route::post('materialadd/work_order/{id}', 'WorkOrderController@materialaddforwork')->name('work.materialadd');
@@ -153,10 +155,17 @@ Route::post('save/section', 'DirectorateController@createSection')->name('sectio
 Route::post('', 'UserController@changeProfile')->name('profile.change');
 Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');
 Route::post('close/work/order/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrder')->name('workorder.close');
+
+Route::post('close/work/order/inspector/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrderinspector')->name('workorder.inspector');
+
 Route::post('close/work/order/complete/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrdercomplete')->name('workorder.close.complete');
+
+Route::post('close/approved/{id}', 'WorkOrderController@WOapproveIoW')->name('workorder.iowapprove');
 
 Route::post('close/satisfied/{id}', 'WorkOrderController@closeWOSatisfied')->name('workorder.satisfied');
 Route::post('close/notsatisfied/{id}', 'WorkOrderController@closeWONotSatisfied')->name('workorder.notsatisfied');
+
+Route::post('close/notsatisfied/iow/{id}', 'WorkOrderController@closeWONotSatisfiedbyiow')->name('workorder.notsatisfiedbyiow');
 
 
 

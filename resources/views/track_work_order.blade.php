@@ -146,6 +146,78 @@
    <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
  @endif
 
+  <h4><b>Technician assigned for Work: </b></h4>
+@if(empty($wo['work_order_staff']->id))
+        <p style="color: red">No Technician assigned yet</p>
+    @else
+    <?php
+  
+  $idwo=$wo->id;
+  $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date Assigned</th>
+  <th>Complete work</th>
+  
+  </tr>
+    @foreach($techforms as $techform)
+  
+  
+
+
+  <tr>
+  
+   @if($techform['technician_assigned'] != null)
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
+   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
+
+     
+
+    <td>{{ 
+   $techform->created_at }}</td>
+   
+    @if($techform->created_at ==  $techform->updated_at)
+   
+   
+    <td> NOT COMPLETED</td>
+    @else
+    <td>{{ 
+   $techform->updated_at }}</td>
+    @endif
+    
+
+    @if(auth()->user()->type != 'CLIENT')
+   @if($techform->status!=1)
+   <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
+                                                    class="fas fa-clipboard-check large"></i></a></td>
+                          
+    </td>
+   @endif 
+    @endif 
+
+  
+  
+
+
+
+          @else
+          <td style="color: red">No technician assigned yet</td>
+      @endif
+  
+  
+  
+  </tr>
+    @endforeach
+  </table>
+    @endif
+    <br>
+     <br>
+   <hr>
+
      <br>
     <h4><b>Inspection Description: </b></h4>
     @if(empty($wo['work_order_inspection']->status))
@@ -226,81 +298,12 @@
   </table>
     @endif
     <br>
-   <br>
-   <hr>
+  
   
   
   
   <br>
-    <h4><b>Technician assigned: </b></h4>
-@if(empty($wo['work_order_staff']->id))
-        <p style="color: red">No Technician assigned yet</p>
-    @else
-    <?php
-  
-  $idwo=$wo->id;
-  $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
-?>
-
-<table style="width:100%">
-  <tr>
-    <th>Full Name</th>
-  <th>Status</th>
-    <th>Date Assigned</th>
-  <th>Complete work</th>
-  
-  </tr>
-    @foreach($techforms as $techform)
-  
-  
-
-
-  <tr>
-  
-   @if($techform['technician_assigned'] != null)
-    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
-
-     
-
-    <td>{{ 
-   $techform->created_at }}</td>
    
-    @if($techform->created_at ==  $techform->updated_at)
-   
-   
-    <td> NOT COMPLETED</td>
-    @else
-    <td>{{ 
-   $techform->updated_at }}</td>
-    @endif
-    
-
-    @if(auth()->user()->type != 'CLIENT')
-   @if($techform->status!=1)
-   <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
-                                                    class="fas fa-clipboard-check large"></i></a></td>
-                          
-    </td>
-   @endif 
-    @endif 
-
-  
-  
-
-
-
-          @else
-          <td style="color: red">No technician assigned yet</td>
-      @endif
-  
-  
-  
-  </tr>
-    @endforeach
-  </table>
-    @endif
-    <br>
      <br>
      <hr>
     
@@ -401,6 +404,7 @@
   <br>
   <hr>
    @endif
+     <br>  <br>
 
      <h4><b>Material Used: </b></h4>
      
@@ -455,6 +459,15 @@
             <div>
                 <span class="badge badge-warning" style="padding: 20px">Work order tempolary closed!</span>
             </div>
+        @elseif($wo->status == 52)
+            <div>
+                <span class="badge badge-warning" style="padding: 20px">Work order is on check by IoW!</span>
+            </div>
+        @elseif($wo->status == 53)
+            <div>
+                <span class="badge badge-danger" style="padding: 20px">Work order is not approved by IoW!</span>
+            </div>
+
         @elseif($wo->status == 9)
               <div>
                 <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
@@ -462,19 +475,27 @@
                     <button type="submit" class="btn btn-danger">Close work order completely</button>
                 </form>
             </div>
-        @else
+        @elseif($wo->status == 25)
             <div>
                 <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
                     @csrf
                     <button type="submit" class="btn btn-warning">Close work order temporalily</button>
                 </form>
             </div>
+        @else
+            <div>
+                <form method="POST" action="{{ route('workorder.inspector', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-warning">Notify IoW to verify Work Order before Closing</button>
+                </form>
+            </div>
+      
         @endif
         <div style="padding: 1em;">
          <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
     Print report
   </button></a>
-</div>
+        </div>
 
     @else
         <div class="row">
@@ -529,6 +550,33 @@
         </div>
     </div>
 </div>
+
+
+
+       <div class="modal fade" id="iowapproval" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Not satisfied Work order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please provide reason as to why you are not satisfied with inspection for this work order.</p>
+                    <form method="POST" action="{{ route('workorder.notsatisfiedbyiow', [$wo->id]) }}">
+                        @csrf
+                        <textarea name="notsatisfiedreason" required maxlength="400" class="form-control"  rows="5" id="notsatisfiedreason"></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-primary">submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -606,18 +654,12 @@
 
 
 
-    <script type="text/javascript">
+  
+
+  
+         @if($wo->client_id == auth()->user()->id)
+           @if($wo->status == 2)
         
-
-
-    </script>
-
-        @if(auth()->user()->type=='CLIENT')
-         @if($wo->status == 30)
-            <div class="container" style="padding-left: 55px;">
-                <span class="badge badge-warning" style="padding: 15px">Work order completely closed!</span>
-            </div>
-        @elseif($wo->status == 2)
         <div style="padding-left:  800px;">
         <div class="row">
                  <div class="row">
@@ -634,12 +676,44 @@
                         </div>  
        </div>
 
-                @endif
-                  @endif
+              @endif
+        @endif
 
                   <br>
                    <br>
                     <br>
+
+
+
+
+        @if(auth()->user()->type=='Inspector Of Works')
+      
+          @if($wo->status == 52)
+        <div style="padding-left:  800px;">
+        <div class="row">
+                 <div class="row">
+                    <form method="POST" action="{{ route('workorder.iowapprove', [$wo->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-success">Appprove</button>
+                    </form>
+                     </div> 
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="col">
+                     <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#iowapproval">Not Satisfied</button>
+                 
+                        </div>   
+                        </div>  
+       </div>
+
+                @endif
+                 
+
+                  <br>
+                   <br>
+                    <br>
+                     @endif
+
+
 
 
 </div>

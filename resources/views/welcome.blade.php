@@ -71,7 +71,7 @@ background-color: #423e3e;
 
                             <div>
 
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Password">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Enter Password">
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">

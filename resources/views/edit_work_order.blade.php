@@ -5,6 +5,17 @@
     @endSection
 
 @section('body')
+
+<?php use App\WorkOrderInspectionForm;
+    use App\WorkOrderTransport;
+    use App\WorkOrderStaff;
+    use App\techasigned;
+    use App\WorkOrderMaterial;
+ 
+
+ ?>
+
+
 <style type="text/css">
 .label{
     width: 700px;
@@ -123,6 +134,393 @@ var total=2;
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
+
+     @if($wo->emergency == 1)
+   <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
+    @endif
+
+
+
+     
+    @if(empty($wo['work_order_staffassigned']->id))
+       
+    @else
+     <h4><b>Technician assigned for Inspection : </b></h4>
+    <?php
+  
+  $idwo=$wo->id;
+  $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date Assigned</th>
+  <th>Complete work</th>
+  
+  </tr>
+    @foreach($techforms as $techform)
+  
+  
+
+
+  <tr>
+  
+     @if($techform['technician_assigned_for_inspection'] != null)
+    <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
+   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
+
+     
+
+    <td>{{ 
+   $techform->created_at }}</td>
+   
+    @if($techform->created_at ==  $techform->updated_at)
+   
+   
+    <td> NOT COMPLETED</td>
+    @else
+    <td>{{ 
+   $techform->updated_at }}</td>
+    @endif
+    
+
+
+  
+  
+
+
+
+         
+      @endif
+  
+  
+  
+  </tr>
+    @endforeach
+  </table>
+   <br>
+    
+   <hr>
+    <br>
+
+    @endif
+   
+
+
+
+
+     
+    @if(empty($wo['work_order_staff']->id))
+       
+    @else
+     <h4><b>Technician assigned for Work : </b></h4>
+    <?php
+  
+  $idwo=$wo->id;
+  $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date Assigned</th>
+  <th>Complete work</th>
+  
+  </tr>
+    @foreach($techforms as $techform)
+  
+  
+
+
+  <tr>
+  
+     @if($techform['technician_assigned'] != null)
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
+   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
+
+     
+
+    <td>{{ 
+   $techform->created_at }}</td>
+   
+    @if($techform->created_at ==  $techform->updated_at)
+   
+   
+    <td> NOT COMPLETED</td>
+    @else
+    <td>{{ 
+   $techform->updated_at }}</td>
+    @endif
+    
+
+
+  
+  
+
+
+
+         
+      @endif
+  
+  
+  
+  </tr>
+    @endforeach
+  </table>
+   <br>
+    
+   <hr>
+    <br>
+
+    @endif
+   
+  
+    
+    @if(empty($wo['work_order_inspection']->status))
+        
+    @else
+    <h4><b>Inspection Description: </b></h4>
+    <?php
+  
+  $idwo=$wo->id;
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
+        ?>
+
+<table style="width:100%">
+  <tr>
+    <th>STATUS</th>
+    <th>DESCRIPTION</th> 
+  <th>TECHNICIAN RESPONSIBLE</th> 
+    <th>DATE INSPECTED</th>
+  </tr>
+    @foreach($iforms as $iform)
+  
+  
+  <tr>
+    <td style="color:red" >{{ $iform->status }}</td>
+    <td>{{ $iform->description }}</td>
+      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+    <td>{{ $iform->date_inspected }}</td>
+  </tr>
+  
+  @endforeach
+  </table>
+  <br>
+    <hr>
+      <br>
+    
+
+
+  <br>
+    
+    @endif
+  
+  @if(empty($wo['work_order_transport']->work_order_id))
+      
+    @else
+    <h4><b>Transport Description: </b></h4>
+    <?php
+  
+  $idwo=$wo->id;
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+    <th>DATE</th>
+    <th>TIME</th> 
+    <th>DETAILS</th> 
+  <th>STATUS</th>
+  <th>MESSAGE</th>
+  
+    <th>DATE REQUESTED</th>
+  </tr>
+    @foreach($tforms as $tform)
+  
+  
+  <tr>
+    <td>{{ date('F d Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td> 
+     <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
+                                                                         class="badge badge-success">View Details</span></a></td>
+    <td style="color:red">@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
+  
+
+
+     <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
+                                                                         class="badge badge-success">View Message</span></a></td>
+
+  <td>{{ 
+   $tform->created_at }}</td>
+  </tr>
+  
+  @endforeach
+  </table>
+  <br>
+     <hr>
+       <br>
+   
+     
+    
+  <br>
+    @endif
+    <br>
+  
+  
+  
+  
+
+  @if(auth()->user()->type != 'CLIENT')
+    
+  @if(empty($wo['work_order_material']->id))
+      
+    @else
+    <h4><b>Material Requests: </b></h4>
+    <?php
+  
+  $idwo=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+     
+    <th>Material Name</th>
+    <th>Material Description</th>
+  <th>Type</th>
+   <th>Quantity</th>
+    <th>Status</th>
+     <th>Date Requested</th>
+      <th>Date Updated</th>
+  
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+    
+    <td>{{$matform['material']->name }}</td>
+   <td>{{$matform['material']->description }}</td>
+    <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+       @endif</td>
+      
+   <td>{{$matform->created_at }}</td>
+   <td>{{$matform->updated_at }}</td>
+   
+  </tr>
+  
+  @endforeach
+  
+  </table>
+  <br>
+    <hr>
+    <br>
+    @endif
+
+    
+  
+  
+
+   @elseif(auth()->user()->type == 'CLIENT')
+     
+  @if(empty($wo['work_order_material']->id))
+     
+    @else
+     <h4><b>Material Requests: </b></h4>
+    <?php
+  
+  $idwo=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+  ?>
+
+<table style="width:100%">
+  <tr>
+     
+    <th>Material Name</th>
+    <th>Material Description</th>
+  <th>Type</th>
+   <th>Quantity</th>
+    <th>Status</th>
+     <th>Date Requested</th>
+      <th>Date Updated</th>
+  
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+    
+    <td>{{$matform['material']->name }}</td>
+   <td>{{$matform['material']->description }}</td>
+    <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> MATERIAL WAITING FOR APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">MATERIAL APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">MATERIAL RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">MATERIAL REQUESTED </span> @elseif($matform->status==17) <span class="badge badge-warning">MATERIAL ON CHECK BY IOW </span>  @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status == -1)<span class="badge badge-warning">MATERIAL ON CHECK BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+       @endif</td>
+      
+   <td>{{$matform->created_at }}</td>
+   <td>{{$matform->updated_at }}</td>
+   
+  </tr>
+  
+  @endforeach
+  
+  </table>
+    @endif
+
+    <br>
+  
+  <br>
+  <hr>
+    <br>  <br>
+   @endif
+   
+
+   
+     
+  @if(empty($wo['work_order_material']->id))
+       
+    @else
+      <h4><b>Material Used: </b></h4>
+    <?php
+  
+  $idw=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
+?>
+
+<table style="width:100%">
+  <tr>
+     
+    <th>Material Name</th>
+    <th>Material Description</th>
+     <th>Type</th>
+     <th>Quantity</th>  
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+   <td>{{$matform['material']->name }}</td>
+   <td>{{$matform['material']->description }}</td>
+   <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+  </tr>
+  
+  @endforeach
+   
+       
+  </table>
+  <br>
+    <br>
+  <hr>
+     
+    @endif
+ 
+   
+
+    
+  
+
+
      <!--   <h4>Fill the details below to complete the work order.</h4> -->
         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
@@ -163,9 +561,11 @@ var total=2;
             <div class="tab">
                 <div class="container-fluid">
                     <div class="tab-group row">
-                        <button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:black">ASSIGN TECHNICIAN FOR WORK</b></button>
+                       <button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnicianforinspection')"><b style="color:black">ASSIGN TECHNICIAN FOR INSPECTION</b></button>
 
-                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
+                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
+
+                        <button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnician')"><b style="color:black">ASSIGN TECHNICIAN FOR WORK</b></button>
                         
                         <button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
@@ -187,7 +587,7 @@ var total=2;
                     @csrf
                     <div id="assigntechnician" class="tabcontent">
                         <?php
-                        use App\WorkOrderStaff;
+                    
                         use App\Technician;
                         $checktech = WorkOrderStaff::where('work_order_id',$wo->id)->get();
                         $i = 1;
@@ -213,7 +613,7 @@ var total=2;
                          @endif
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign Technician for this work-order</p>
+                                <p>Assign Technician for this work order</p>
                             </div>
                         </div>
                         <div >
@@ -311,6 +711,111 @@ var total=2;
                 
 
 
+                       {{-- ASSIGN TECHNICIAN tab--}}
+               
+                    @csrf
+                    <div id="assigntechnicianforinspection" class="tabcontent">
+                       
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Assign Technician for inspection before Work</p>
+                            </div>
+                        </div>
+                        <div >
+                        <p id="alltechdetails">  </p>
+                        
+                        
+                        
+                        </div>
+                        
+                        
+                       
+                        <form method="POST" action="{{ route('work.assigntechnicianforinspection', [$wo->id]) }}">
+                        @csrf
+                          <div class="form-group">
+                          <!-- <input  id="technician_work"  type="text" hidden> </input>  -->
+                            <select   id="techidforinspection" required class="custom-select"  name="technician_work" style="width: 700px;">
+                               
+                               
+                               
+                               
+                               
+                               
+                               <?php 
+                $p=-1;
+      ?>
+                               
+                                @foreach($techs as $tech)
+                                <?php
+                                
+                                $wo_technician_count = techasigned::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',0)
+                     ->where('staff_id',$tech->id)
+                     ->groupBy('staff_id')
+                     ->first();
+                     
+                               ?>
+                               @if(empty($wo_technician_count->total_wo))
+                                   <?php $t=0;?>
+                               
+                               @else
+                                    <?php $t=$wo_technician_count->total_wo;?>
+                                
+                                @endif
+                               
+                              <?php
+                             $p++;
+                              $name[$p]=$tech->fname.' '.$tech->lname;
+                              $ident[$p]=$tech->id;
+                              $cwo[$p]=$t;
+                              
+                              ?>
+                              
+                              
+                              
+                                    
+                                @endforeach
+                                <?php
+                                for($i=0;$i<=$p-1;$i++){
+                                    for($j=$i+1 ;$j<=$p;$j++){
+                                        if($cwo[$i]>$cwo[$j]){
+                                            $t1=$name[$i];
+                                            $t2=$ident[$i];
+                                            $t3=$cwo[$i];
+                                            
+                                            $name[$i]=$name[$j];
+                                            $ident[$i]=$ident[$j];
+                                            $cwo[$i]=$cwo[$j];
+                                            
+                                            
+                                            $name[$j]=$t1;
+                                            $ident[$j]=$t2;
+                                            $cwo[$j]=$t3;
+                                }}}
+                                
+                                    for($x=0;$x<=$p;$x++){      
+                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Workorders'}} </option>
+                                    <?php }  ?>
+                                            
+                                
+                            </select>
+                        </div>
+                         
+                        <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </form>
+                        
+                        
+                    </div>
+               
+                {{-- end ASSIGN TECHNICIAN  --}}
+
+
+
+
+
+
 
                 {{-- INSPECTION tab--}}
                 <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
@@ -356,13 +861,13 @@ var total=2;
                                 
                                 
                                 
+                                <?php
+                               
+                        $techassigned = techasigned::where('work_order_id',$wo->id)->get();
+                                ?>
                                 
-                                $staff= WorkOrderStaff::where('work_order_id',$wo->id)->where('status',1)->get();
-                        
-                                
-                                
-                                @foreach($staff as $tech)
-                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}</option>
+                                @foreach($techassigned as $tech)
+                                    <option value="{{ $tech->staf_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -435,7 +940,7 @@ var total=2;
                             <select  required class="custom-select"  id="materialreq" name="1" style="width: 700px">
                                 <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
-                                    <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
+                                    <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -477,7 +982,7 @@ var total=2;
                 
                         <?php
                         
-                        use App\WorkOrderMaterial;
+                       
                         $wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',20)->get();
                         
                         ?>
@@ -676,6 +1181,52 @@ var total=2;
     {{-- TECHNICIAN DETAILS FORM  --}}
     
 </div>
+
+ <!-- Modal for view Details -->
+    <div class="modal fade" id="viewMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: black"><b></b> Details you sent to Transport Officer.</b></h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 id="comments"><b> </b></h3>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Modal for view Message -->
+    <div class="modal fade" id="viewdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: black"><b></b> Message From Transport Officer.</b></h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 id="details"><b> </b></h3>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
   @endSection
      
      <?php  
@@ -824,6 +1375,17 @@ document.getElementById("totalmaterials").value=total;
             allowClear: true
         });
     </script>
+
+    <script type="text/javascript">
+  
+   function myfunc5(x) {
+            document.getElementById("comments").innerHTML = x;
+        }
+
+         function myfunc6(x) {
+            document.getElementById("details").innerHTML = x;
+  }
+</script>
 
 
     

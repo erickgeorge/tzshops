@@ -41,7 +41,7 @@
       <th>Quantity in Store</th>
       <th>Quantity Reserved</th>
       
-       <th>Quantity Purchased</th>
+       <th>Quantity to Purchase</th>
        <th>Action</th>
        
        
