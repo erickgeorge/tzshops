@@ -236,7 +236,7 @@ class UserController extends Controller
             $user->password = bcrypt($request['new-pass']);
             $user->change_password = \Carbon\Carbon::now();
             $user->save();
-            return redirect()->back()->with(['message' => 'Password changed successfully']);
+            return redirect()->route('myprofile')->with(['message' => 'Password changed successfully']);
         }
         return redirect()->back()->withErrors(['message' => 'You entered the wrong old password']);
     }

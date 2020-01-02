@@ -35,22 +35,7 @@ use app\department;
                    class="btn btn-default">List of Departments</h2>
 
                
-                <form method="GET" action="/Manage/department" class="form-inline my-2 my-lg-0" style="float: right; margin-right:20px;">
-                From:  <input name="start" value="<?php
-                if (request()->has('start')) {
-                    echo $_GET['start'];
-                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php echo date('Y-m-d'); ?>">
-                To: <input value="<?php
-                if (request()->has('end')) {
-                    echo $_GET['end'];
-                } ?>"
-                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-primary bg-primary" style="width: 70px" type="submit">Filter</button>
-                     
-
-            </form>
+                
         
             <hr class="container">
 
@@ -99,7 +84,7 @@ use app\department;
                         
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary">Filter</button>
+                          <button type="submit" class="btn btn-primary">Generate</button>
                         </div>
                         </form>
                       </div>
@@ -114,7 +99,6 @@ use app\department;
                         <th scope="col">Name</th>
                         <th scope="col">Abbreviation</th>
                         <th scope="col">College/Directorate</th>
-                        <th scope="col">Added on</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -127,8 +111,6 @@ use app\department;
                             <td>{{ $dep->description }}</td>
                             <td>{{ $dep->name }}</td>
                             <td>{{ $dep['directorate']->name }}</td>
-                            <td><?php $time = strtotime($dep->created_at); echo date('d/m/Y',$time);  ?></td>
-
                             <td>
                                 <div class="row">
                                     <a style="color: green;"

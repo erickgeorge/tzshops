@@ -40,7 +40,6 @@
 				<th >Location</th>
                 <th >Details</th>
 				<th >Date</th>
-				<th >Time</th>
 				
 				<th >Action</th>
 				
@@ -73,9 +72,7 @@
                 <td>{{$item->coments}}</td>
 				
 				
-					<td>{{ date('F d Y', strtotime($item->time)) }}</td>
-					
-					<td>{{ date('h:m:s a', strtotime($item->time)) }}</td>
+					<td>{{ date('d/m/Y', strtotime($item->time)) }} - {{ date('h:m a', strtotime($item->time)) }}</td>
 					<?php
 					$idt=$item->id;
 
@@ -108,7 +105,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Please fill details of your transport form.</p>
+                    <p>Comments from Transport Officer .</p>
                     <form method="POST" action="transport_request/accept">
 					
 					  &nbsp &nbsp 
@@ -117,15 +114,17 @@
 					   <input   id="transportid" name="transportid"  hidden  />
 					    <input   id="status" name="status"  hidden  />
                       
-                        <textarea name="details" required maxlength="100" class="form-control"  rows="5" id="details"></textarea>
+                        <textarea name="details" required maxlength="100" class="form-control"  rows="5" ></textarea>
                         <br>
 						
 					
-                        <button type="submit" class="btn btn-primary">Save</button>
-						
+                        
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+						
                 </div>
             </div>
         </div>

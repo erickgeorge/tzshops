@@ -96,7 +96,7 @@ use App\WorkOrder;
                   $departmentid = Department::Where('id',$userwith->section_id)->get();
                   foreach ($departmentid as $departmentised) 
                   {
-                    if ($departmentised->id == $sectioner->department_id ) 
+                    if ($departmentised->id == $departmentised->department_id ) 
                     {
                       $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
                       foreach ($directorate as $directory) {

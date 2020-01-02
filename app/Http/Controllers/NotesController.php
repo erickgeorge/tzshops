@@ -72,7 +72,7 @@ class NotesController extends Controller
   }
 }
 if($_GET['problem_type']!= ''){$probleme = 'All '.$_GET['problem_type'];}else{$probleme='All ';}
-if($_GET['userid']!=''){$usere = ' WorkOrders From '.$username;}else{$usere =' WorkOrders ';}
+if($_GET['userid']!=''){$usere = ' Works Orders From '.$username;}else{$usere =' WorkOrders ';}
 if($_GET['start']!=''){$starte = ' <date> from'.$_GET['start'];}else{$starte ='<date>';}   
 if($_GET['end']!=''){$ende = ' to '.$_GET['end'].'</date>';}else{$ende ='</date>';}
 if($_GET['status']!= ''){$statuse = '<br> Status :'.$statusvalue;} else{$statuse ='';}  
@@ -523,7 +523,7 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
     if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
           $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->orderBy('created_at','Desc')->get(); 
-        //$header = $_GET['problem_type'].' Work orders ';
+        //$header = $_GET['problem_type'].' Works orders ';
 }
 //if all empty
     elseif(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
@@ -860,7 +860,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             if ($_GET['change']=='hos') 
             {
                  $data['fetch'] = user::where('type','like','%HOS%')->OrderBy('fname','asc')->get();
- $data['header'] = 'All Heads of Section Details';
+ $data['header'] = 'All Heads of Sections Details';
             }elseif($_GET['change']=='iow')
             {
                  $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->get();
@@ -876,7 +876,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
           if ($_GET['change']=='hos') 
           {
                  $data['fetch'] = user::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
-                $data['header'] = 'All '.$_GET['type'].' Head of Section Details';
+                $data['header'] = 'All '.$_GET['type'].' Heads of Sections Details';
             }elseif($_GET['change']=='iow')
             {
                  $data['fetch'] = user::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
@@ -908,7 +908,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             if ($_GET['change']=='hos') 
             {
                  $data['fetch'] = user::where('type','like','%HOS%')->OrderBy('fname','asc')->get();
- $data['header'] = 'All Heads of Section Details';
+ $data['header'] = 'All Heads of Sections Details';
             }elseif($_GET['change']=='iow')
             {
                  $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->get();
@@ -957,7 +957,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     public function trackreport (Request $request, $id)
     {
     $data['wo'] = WorkOrder::where('id', $id)->with('work_order_inspection')->first();
-    $data['header'] = 'Work Order Details (WO#'.$id.')';
+    $data['header'] = 'Works Order Report (WO#'.$id.')';
 ///////////////////////////////////////////////
      
 $pdf = PDF::loadView('trackworkreport', $data);

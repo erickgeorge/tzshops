@@ -37,6 +37,8 @@ use App\Department;
 use App\Section;
 use App\WorkOrder;
 use Carbon\Carbon;
+
+
  ?>
 <!-- SOMETHING STRANGE HERE -->
 @if(count($rle)>0)
@@ -53,6 +55,13 @@ use Carbon\Carbon;
 </div>
 @endif
 <!-- Modal -->
+@if($head == 'All HOS Details')
+<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
+@elseif($head == 'All Technicians Details')
+<?php $to = Technician::select('type')->distinct()->get(); $v='technician';?>
+@elseif($head == 'All Inspectors of work Details')
+<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
+@endif
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form method="GET" action="{{ url('allpdf') }}">
@@ -67,7 +76,13 @@ use Carbon\Carbon;
       <div class="row">
         <div class="col">
           <select name="name" class="form-control mr-sm-2">
-                <option value="" selected="selected">Name</option>
+                <option value="" selected="selected">select Name</option>
+                <option value="">All <?php 
+                if($v == 'technician'){ echo 'Technicians';}  
+                if($v == 'iow'){ echo 'Inspectors of Works';}
+                if($v == 'hos'){ echo 'Heads of Sections'; }
+                    
+                     ?></option>
 @foreach($rle as $tech)
 <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
 @endforeach
@@ -80,15 +95,10 @@ use Carbon\Carbon;
       <div class="row">
           <div class="col">
               <select name="type" class="form-control mr-sm-2">
-                <option value='' selected="selected">Type/section</option>
+                <option value='' selected="selected">Select Type/section</option>
+                <option value="">All Type/Sections</option>
                
-@if($head == 'All HOS Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
-@elseif($head == 'All Technicians Details')
-<?php $to = Technician::select('type')->distinct()->get(); $v='technician';?>
-@elseif($head == 'All Inspectors of work Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
-@endif
+
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ $too->type }}</option>
 @endforeach

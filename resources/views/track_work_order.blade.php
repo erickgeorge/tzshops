@@ -448,6 +448,13 @@
     <div>
  
 </div>
+@if(auth()->user()->type == "CLIENT")
+<div style="padding: 1em;">
+  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+Print report
+</button></a>
+</div>
+@endif
     @if(strpos(auth()->user()->type, "HOS") !== false)
          
           @if($wo->status == 30)

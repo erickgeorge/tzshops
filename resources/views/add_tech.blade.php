@@ -92,6 +92,7 @@ $roleofuser =1;
              </div>
              
             <select  style="width: 290px" class="custom-select" id="typetechadmin" name="typetechadmin">
+                <option selected value="Carpentry/Painting"> select section </option>
                 <option value="Carpentry/Painting">Carpentry/Painting Technician</option>
                <option value="Electrical">Electrical Technician</option>
                <option value="Masonry/Road">Masonry/Road Technician</option>

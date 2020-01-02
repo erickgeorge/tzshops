@@ -45,7 +45,7 @@
                 <label for="phone">Phone number <sup style="color: red;">*</sup></label>
                 <input  required type="text"     name="phone"  value="{{ $tech->phone }}"
                         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                        maxlength = "10"  minlength = "2"
+                        maxlength = "10"  minlength = "10"
                         class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
             </div>
             <div class="form-group col-lg-6">

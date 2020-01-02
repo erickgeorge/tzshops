@@ -28,9 +28,9 @@
     <div class="container " >
         <div class="row ">
         <div class="col">
-
+            @if(auth()->user()->type == 'STORE')
              <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new material</button></a>
-
+@endif
         </div>
        <!-- <div class="col" align="right">
             <a href="{{ url('work_order_material_missing') }}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Material requests <b style="color:red; background-color: grey; padding: 4px; border-radius: 5px;">90</b></button></a>
@@ -62,7 +62,7 @@ use App\Material;?>
         <div class="row">
             <div class="col">
                 <select name="name" class="form-control mr-sm-2">
-                    <option selected="selected" value="">name</option>
+                    <option selected="selected" value="">Material name</option>
                     <?php $name = Material::select('name')->distinct()->get();
                     foreach ($name as $named) {
                      echo"   <option value='".$named->name."'>".$named->name."</option>";
@@ -75,7 +75,7 @@ use App\Material;?>
         <div class="row">
             <div class="col">
                 <select name="brand" class="form-control mr-sm-2">
-                    <option selected="selected" value="">brand</option>
+                    <option selected="selected" value=""> material brand</option>
                     <?php $brand = Material::select('description')->distinct()->get();
                     foreach ($brand as $branded) {
                      echo"   <option value='".$branded->description."'>".$branded->description."</option>";
@@ -88,7 +88,7 @@ use App\Material;?>
         <div class="row">
             <div class="col">
                 <select name="type" class="form-control mr-sm-2">
-                    <option value="">type</option>
+                    <option value="">material type</option>
                     <?php $type = Material::select('type')->distinct()->get();
                     foreach ($type as $typed) {
                      echo"   <option value='".$typed->type."'>".$typed->type."</option>";
@@ -116,9 +116,10 @@ use App\Material;?>
                 <th >Unit Measure</th>
                 <th >Type</th>
                 <th >Current Stock</th>
-                <th >Created date</th>
-                <th >Stock updated at</th>
+                <th >Stock updated on</th>
+                @if(auth()->user()->type == 'STORE')
                 <th >action</th>
+                @endif
             </tr>
             </thead>
 
@@ -137,13 +138,13 @@ use App\Material;?>
                    
 
                     <td>{{ $item->stock }}</td>
-                    <td><?php $time = strtotime($item->created_at); echo date('d/m/Y',$time);  ?> </td>
                     <td><?php $time = strtotime($item->updated_at); echo date('d/m/Y',$time);  ?> </td>
-                    <td>
+                    @if(auth()->user()->type == 'STORE') <td>
                         &nbsp;&nbsp;&nbsp;
                         <a style="color: green;" href="{{ route('storeIncrement.view', [$item->id]) }}"  data-toggle="tooltip" title="Increment material"><i class="fas fa-plus"></i></a>&nbsp;
                         <!--<a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>-->
                         </td>
+                        @endif
                     </tr>
                     @endforeach
             </tbody>

@@ -8,7 +8,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-     <link rel="icon" type="image/png" href="{{ asset('images/index.png') }}"/>
+     <link rel="icon" type="image/png" href="{{ url('/images/index.jpg') }}"/>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
@@ -195,8 +195,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
                 
-                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sectios Details</a>
-                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS count</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sectinos Details</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS with completed works orders</a>
                         </div>
                        </li> 
 
@@ -213,7 +213,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
                 
-                          <a class="dropdown-item" style="color:white" href="{{ url('store_report')}}">Materials Available in Store</a>
+                        <!--  <a class="dropdown-item" style="color:white" href="{{-- url('store_report')--}}">Materials Available in Store</a> -->
                           <a class="dropdown-item" style="color:white" href="{{ url('stores')}}">All Materials in Store<span
                             class="badge badge-light">{{ count($m) }}</span></a>
                         </div>
