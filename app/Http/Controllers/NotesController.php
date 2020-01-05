@@ -969,12 +969,12 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
      if($_GET['college']=='')
      {
         $data['catch'] = directorate::get();
-        $data['header'] = 'All Directorates Details';
+        $data['header'] = 'All Colleges/Directorates/Institute/Schools Details';
      }
      if($_GET['college']!='')
      {
         $data['catch'] = directorate::where('id',$_GET['college'])->get();
-        $data['header'] = 'Directorate Details';
+        $data['header'] = 'Colleges/Directorates/Institute/Schools Details';
            
      }
 

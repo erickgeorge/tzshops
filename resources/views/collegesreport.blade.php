@@ -34,7 +34,7 @@ use App\Directorate;
         <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Description</th>
+                        <th>Abbreviation</th>
                         
             
         </tr>

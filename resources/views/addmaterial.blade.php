@@ -29,7 +29,6 @@
         </div>
     @endif
 
-    <p align="center" style="color: red">All fields are compulsory</p>
     </br>
     <form method="POST" action="{{ route('material.create') }}">
         @csrf
@@ -39,7 +38,7 @@
 		
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Material Name <sup style="color: red;">*</sup></label>
+                    <label class="input-group-text" style="width:200px;" for="inputGroupSelect01">Material Name <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="name"
                        aria-describedby="emailHelp" name="name" placeholder="Material Name">
@@ -48,7 +47,7 @@
 
              <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Description <sup style="color: red;">*</sup></label>
+                    <label class="input-group-text" style="width:200px;" for="inputGroupSelect01">Description <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="description"
                        aria-describedby="emailHelp" name="description" placeholder="Material Description">
@@ -58,7 +57,7 @@
 		 
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Unit Measure <sup style="color: red;">*</sup></label>
+                    <label class="input-group-text" style="width:200px;" for="inputGroupSelect01">Unit Measure <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="text" maxlength="35" class="form-control" id="brand"
                        aria-describedby="emailHelp" name="brand" placeholder="Unit Measure">
@@ -68,7 +67,7 @@
 		
         <div class="input-group mb-3 col-lg-6">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Material Type <sup style="color: red;">*</sup></label>
+                <label class="input-group-text" style="width:200px;" for="inputGroupSelect01">Material Type <sup style="color: red;">*</sup></label>
             </div>
             <select required class="custom-select" id="inputGroupSelect01" name="m_type">
                 <option selected value="">Choose...</option>
@@ -86,10 +85,10 @@
         
             <div class="input-group mb-3 col-lg-6">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Quantity <sup style="color: red;">*</sup></label>
+                    <label class="input-group-text" style="width:200px;" for="inputGroupSelect01">Quantity <sup style="color: red;">*</sup></label>
                 </div>
                 <input style="color: black" required type="number"  class="form-control" id="stock"
-                       aria-describedby="emailHelp" name="stock" placeholder="Enter Quantity of material">
+                       aria-describedby="emailHelp" name="stock" min="1" placeholder="Enter Quantity of material">
             </div>
         
         <button type="submit" class="btn btn-primary">Add Material</button>

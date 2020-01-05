@@ -576,6 +576,14 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
             </table>
         @else
             <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <div class="container" align="center">
+              <br>
+            <div class='row'>
+              <div class="col-sm-3">
+                <a href="{{ url('dashboard') }}" class="btn btn-primary">Dashboard</a>
+              </div>
+            </div>
+            </div>
         @endif
     </div>
 

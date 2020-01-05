@@ -33,9 +33,8 @@ use App\Directorate;
         
         <tr>
                         <th>#</th>
+                        <th>Abbreviation</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>College</th>
                         
             
         </tr>
@@ -53,7 +52,6 @@ use App\Directorate;
                                 <th scope="row">{{ $i }}</th>
                                 <td >{{ $work->name }}</td>
                                 <td>{{ $work->description }}</td>
-                                <td>{{ $colleg->directorate_description}} ({{$colleg->name}})</td>
                                 
                             </tr>
                     @endforeach

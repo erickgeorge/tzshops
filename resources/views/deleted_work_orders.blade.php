@@ -60,6 +60,13 @@
         </table>
     @else
         <h1 class="text-center" style="margin-top: 150px">You have no rejected work orders</h1>
+        <div class="container" align="center">
+            <br>
+            <div class="col-sm-3">
+              <a href="{{ url('work_order') }}" class="btn btn-primary">All Work Orders</a>
+            </div>
+          </div>
+        </div>
     @endif
 
     <!-- Modal -->
