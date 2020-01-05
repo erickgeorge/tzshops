@@ -290,11 +290,18 @@ foreach($userwithid as $userwithid)
                             @elseif($work->status == 30)
                                 <td><span class="badge badge-success">Completely Closed</span></td>
                             @elseif($work->status == 3)
-                                <td><span class="badge badge-info">technician assigned</span>
+                                <td><span class="badge badge-info">technician assigned for work</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
+                             @elseif($work->status == 70)
+                                <td><span class="badge badge-info">technician assigned for inspection</span>
+                                  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif 
+
                             @elseif($work->status == 4)
                                 <td><span class="badge badge-info">transportation stage</span> 
                                  <br>
@@ -319,6 +326,28 @@ foreach($userwithid as $userwithid)
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
+                           @elseif($work->status == 52)
+            
+                              <td><span class="badge badge-info">IoW is checking for Work Order</span>
+                                  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif  
+                           @elseif($work->status == 53)
+            
+                              <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
+                                  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif        
+
+                          @elseif($work->status == 25)
+            
+                              <td><span class="badge badge-info">Work Order Succesifully approved by IoW</span>
+                                  <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif    
                            @elseif($work->status == 8)
                                   @if(auth()->user()->type == 'CLIENT')
                               <td><span class="badge badge-warning">  Material requested on progress</span>
@@ -453,6 +482,13 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                                     class="fas fa-tasks"></i></a>
                                                     <a onclick="myfunc('{{ $work->unsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
                                                                          class="badge badge-success">View reason</span></a>
+                                                       @elseif($work->status == 53)
+                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+                                        <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
+                                                    class="fas fa-tasks"></i></a>
+                                                    <a onclick="myfunc('{{ $work->notsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
+                                                                         class="badge badge-success">View reason</span></a>                  
 
                                    @elseif($work->status == 30 )
                                     <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
@@ -472,6 +508,8 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                     @endif
+
+
                                 @else
                                     @if($work->status == -1)
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
@@ -557,7 +595,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                                     class="fas fa-tasks"></i></a>
                                                     <a onclick="myfunc('{{ $work->unsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
                                                                          class="badge badge-success">View reason</span></a>
-                                    @else
+                                                  @else
                                         {{--<a href="{{ route('workOrder.view', [$work->id]) }}" data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>--}}
                                         &nbsp;
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
@@ -566,6 +604,16 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                 @endif
 
                                 @endif
+
+                                @if(auth()->user()->type == 'Inspector Of Works' )
+                                  @if($work->status == 53)
+                                         
+                                     
+                                                    <a onclick="myfunc('{{ $work->notsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
+                                                                         class="badge badge-success">View reason</span></a>
+
+                                   @endif
+                                   @endif
                                 <br>
                               
                             </td>

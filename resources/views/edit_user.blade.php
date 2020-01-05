@@ -156,17 +156,17 @@
        </div>
               <div id="Div1" >
                <select class="custom-select" name="type[]" id="type">
-                      <option value="" selected>Choose...</option>
-                      <option  value="Accountant">Accountant</option>
-                      <option value="Auditor">Auditor</option>
-                      <option value="CLIENT">Client</option>
-                      <option value="DVC Admin">DVC Admin</option>
-                      <option value="Estates Director">Estates Director</option>
-                      <option value="Head Procurement">Head of Procurement</option>
-                      <option value="Inspector Of Works">Inspector Of Works</option>
-                      <option value="Maintenance coordinator">Maintenance Coordinator</option> 
-                      <option value="STORE">Store Manager</option>
-                      <option value="Transport Officer">Transport Officer</option>
+                      <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose...</option>
+                      <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
+                      <option @if (in_array('Auditor',$str_array)) { selected="selected" } @else{} @endif  value="Auditor">Auditor</option>
+                      <option @if (in_array('CLIENT',$str_array)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
+                      <option @if (in_array('DVC Admin',$str_array)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
+                      <option @if (in_array('Estates Director',$str_array)) { selected="selected" } @else{} @endif   value="Estates Director">Estates Director</option>
+                      <option @if (in_array('Head Procurement',$str_array)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
+                      <option @if (in_array('Inspector Of Works',$str_array)) { selected="selected" } @else{} @endif  value="Inspector Of Works">Inspector Of Works</option>
+                      <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option> 
+                      <option  @if (in_array('STORE',$str_array)) { selected="selected" } @else{} @endif value="STORE">Store Manager</option>
+                      <option @if (in_array('Transport Officer',$str_array)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
                </select>
                </div>
                <br>

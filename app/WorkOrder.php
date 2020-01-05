@@ -30,7 +30,7 @@ class WorkOrder extends Model
     }	
 
 
-public function work_order_transport(){
+    public function work_order_transport(){
         return $this->hasOne('App\WorkOrderTransport');
     }	
 	
@@ -38,9 +38,15 @@ public function work_order_transport(){
         return $this->hasOne('App\WorkOrderStaff');
     }	
 
-public function work_order_material(){
+    public function work_order_material(){
         return $this->hasOne('App\WorkOrderMaterial');
     }	
+
+
+    public function work_order_staffassigned(){
+        return $this->hasOne('App\techasigned');
+    }   
+
 
 
 

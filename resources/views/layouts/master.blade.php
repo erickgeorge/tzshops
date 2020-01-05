@@ -74,6 +74,11 @@
 
                 $woMaterialrejected = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',-1)->orwhere('status',17)
                     ->groupBy('work_order_id')->get();
+
+               $woMaterialreserved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->orwhere('reservestatus',1)
+                    ->groupBy('work_order_id')->get();
+
+                    
    
                 $wo_material_procured_by_iow = WorkOrderMaterial::select(DB::raw('material_id'))->where('status',15)->groupBy('material_id')->get();
                 
@@ -245,6 +250,10 @@
                 @endif
                 
                 @if(auth()->user()->type == 'STORE')
+                 <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
+                    </li>
+                    
                    <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
                                     class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
@@ -266,7 +275,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved') }}" >Reserved Materials <span
-                                    class="badge badge-light">{{ count($wo_material_reservedd) }}</span></a>
+                                    class="badge badge-light">{{ count($woMaterialreserved) }}</span></a>
                     </li>
 
                      <li class="nav-item">
@@ -359,6 +368,11 @@
 				   
                  @endif
                    @if(auth()->user()->type == 'Inspector Of Works')
+
+                    <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">Work order needs material <span
                                     class="badge badge-light">{{ count($material_requests) }}</span></a>
@@ -393,6 +407,11 @@
  </li>
  @endif
  @if(auth()->user()->type == 'Maintenance coordinator')
+
+  <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
+                    </li>
+                    
  <li class="nav-item">
      <a href="{{ url('comp') }}" class="nav-link" style="color:white"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
@@ -751,6 +770,39 @@
 
       $("#type").select2({
             placeholder: "Choose user type...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#des").select2({
+            placeholder: "Choose Directorate...",
+            allowClear: true
+        });
+</script>
+
+
+<script type="text/javascript">
+
+      $("#desp").select2({
+            placeholder: "Choose department...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#typeudsm").select2({
+            placeholder: "Choose user type...",
+            allowClear: true
+        });
+</script>
+
+<script type="text/javascript">
+
+      $("#techidforinspection").select2({
+            placeholder: "Choose Technician...",
             allowClear: true
         });
 </script>

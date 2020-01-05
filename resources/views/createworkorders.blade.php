@@ -87,7 +87,8 @@
                     <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Location</label>
                 </div>
                 <select style="width:405px;" required class="custom-select" id="location" name="location" onchange="getAreas()">
-                    <option value="" selected>Choose... <sup style="color: red;">*</sup></option>
+                    <option value="" selected>Choose... 
+                    </option>
 
                     @foreach($location as $loc)
                         <option value="{{ $loc->id }}">{{ $loc->name }}</option>
@@ -99,9 +100,10 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label style="height: 28px" class="input-group-text" for="area">Area <sup style="color: red;">*</sup></label>
+                    <label style="height: 28px" class="input-group-text" for="area">Area 
+                    </label>
                 </div>
-                <select  required class="custom-select" id="area" name="area" onchange="getBlocks()">
+                <select style="width:430px;" required class="custom-select" id="area" name="area" onchange="getBlocks()">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -111,7 +113,8 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label  style="height: 28px" class="input-group-text" for="block">Block <sup style="color: red;">*</sup></label>
+                    <label  style="height: 28px" class="input-group-text" for="block">Block 
+                    </label>
                 </div>
                 <select style="width:420px;" required class="custom-select" id="block" name="block" onchange="getRooms()">
                     <!-- <option selected>Choose...</option> -->
@@ -121,9 +124,10 @@
             <div class="col">
                  <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label   style="height: 28px" class="input-group-text" for="room">Room <sup style="color: red;">*</sup></label>
+                    <label   style="height: 28px" class="input-group-text" for="room">Room 
+                    </label>
                 </div>
-                <select required class="custom-select" id="room" name="room">
+                <select style="width:420px;" required class="custom-select" id="room" name="room">
                     <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
@@ -132,7 +136,8 @@
     </div>
         
         <div class="form-group">
-            <label for="comment">Details: <sup style="color: red;">*</sup></label>
+            <label for="comment">Details:
+            </label>
             <textarea name="details" value="{{ old('details') }}" required maxlength="100" class="form-control" rows="5"
                       id="comment"></textarea>
         </div>
