@@ -137,7 +137,7 @@ session::flash('message', ' Your workorder have been rejected successfully ');
 
      $data = array('name'=>$userName, "body" => "Your Work-Order No : WO-$wO->id sent to Directorate of Estates on : $wO->created_at, of  Problem Type : $wO->problem_type has been REJECTED.Please login in the system for further information .",
 
-                    "footer"=>"Thanks","footer1"=>"Directorate  of Estates"
+                  "footer"=>"Thanks", "footer1"=>" $sender , $section " , "footer2"=>"Directorate  of Estates"
                 );
     
        Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
