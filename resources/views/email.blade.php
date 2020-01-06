@@ -9,3 +9,6 @@ Dear <strong>{{ $name }}</strong>,
 
 </br>
 <p>{{ $footer1 }}.</p>
+
+</br>
+<p>{{ $footer2 }}.</p>

@@ -182,7 +182,7 @@ session::flash('message', ' Your workorder have been rejected successfully ');
 
 
 
- $work = WorkOrder::where('id', $id)->first();
+  $work = WorkOrder::where('id', $id)->first();
   $cfirstname= $work['user']->fname;
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
@@ -226,6 +226,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $senderf=auth()->user()->fname;
         $senderl=auth()->user()->lname;
         $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
 
 
         /*
@@ -245,7 +246,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
      $data = array('name'=>$userName, "body" => "Your Work-Order No : $wO->id sent to Directorate of Estates on : $wO->created_at, of  Problem Type : $wO->problem_type has been ACCEPTED.Please login in the system for further information .",
 
-                    "footer"=>"Thanks","footer1"=>"Directorate  of Estates"
+                    "footer"=>"Thanks", "footer1"=>" $sender , $section " , "footer2"=>"Directorate  of Estates"
                 );
     
        Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
