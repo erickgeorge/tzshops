@@ -40,8 +40,8 @@ class DirectorateController extends Controller
        return view('department', [
             'role' => $role,
             'notifications' => $notifications,
-            'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
-            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('directorate')->get(),
+            'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->get(),
+            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get(),
             'secs' => Section::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('department')->get()
         ]);
 
@@ -50,8 +50,8 @@ class DirectorateController extends Controller
         return view('department', [
             'role' => $role,
             'notifications' => $notifications,
-            'directorates' => Directorate::all(),
-            'deps' => Department::with('directorate')->get(),
+            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
             'secs' => Section::with('department')->get()
         ]);
     }
@@ -82,8 +82,8 @@ class DirectorateController extends Controller
        return view('directorate', [
             'role' => $role,
             'notifications' => $notifications,
-            'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
-            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('directorate')->get(),
+            'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->get(),
+            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get(),
             'secs' => Section::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('department')->get()
         ]);
 
@@ -92,8 +92,8 @@ class DirectorateController extends Controller
         return view('directorate', [
             'role' => $role,
             'notifications' => $notifications,
-            'directorates' => Directorate::all(),
-            'deps' => Department::with('directorate')->get(),
+            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
             'secs' => Section::with('department')->get()
         ]);
     }
@@ -106,8 +106,8 @@ class DirectorateController extends Controller
         return view('add_directorate', [
             'role' => $role,
             'notifications' => $notifications,
-            'directorates' => Directorate::all(),
-            'deps' => Department::with('directorate')->get(),
+            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
             'secs' => Section::with('department')->get()
         ]);
 
@@ -123,8 +123,8 @@ class DirectorateController extends Controller
         return view('add_dipartment', [
             'role' => $role,
             'notifications' => $notifications,
-            'directorates' => Directorate::all(),
-            'deps' => Department::with('directorate')->get(),
+            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
             'secs' => Section::with('department')->get()
         ]);
 
