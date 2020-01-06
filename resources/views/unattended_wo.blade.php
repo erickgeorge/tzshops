@@ -249,7 +249,7 @@ use App\WorkOrder;
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no work order</h1>
         @endif
     </div>
     <script>

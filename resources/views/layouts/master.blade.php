@@ -160,7 +160,7 @@
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
                <a class="dropdown-item" style="color:white" href="{{ url('/techniciancountcomp')}}">Technician Completed Work</a>
-          <a  style="color:white" class="dropdown-item" href="{{ url('/techniciancount')}}">Technician on Progress</a>
+          <a  style="color:white" class="dropdown-item" href="{{ url('/techniciancount')}}">Technicians on work (duty)</a>
           
           <a  style="color:white" class="dropdown-item" href="{{ url('/alltechnicians')}}">All Technicians Details</a>
 
@@ -195,7 +195,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
                 
-                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sectinos Details</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sections Details</a>
                           <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS with completed works orders</a>
                         </div>
                        </li> 

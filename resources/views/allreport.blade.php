@@ -1,5 +1,5 @@
 <div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
     <div style="background-image: url('img_girl.jpg');">
 
 
@@ -33,7 +33,7 @@ tr:nth-child(even) {
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
-            <th scope="col">Section/type</th>
+          @if($section!='0') @else <th scope="col">Section/type</th>@endif
         </tr>
         </thead>
         <tbody>
@@ -54,7 +54,7 @@ tr:nth-child(even) {
         }else { echo $tech->phone;}
 
       ?></td>
-                <td>{{ $tech->type }}</td>
+                @if($section!='0') @else <td>{{ $tech->type }}</td>@endif
                 
             </tr>
         @endforeach

@@ -859,16 +859,19 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         if (($_GET['name']!='')&&($_GET['type']!='')) {
             if ($_GET['change']=='hos') 
             {
-                 $data['fetch'] = user::where('type','like','%HOS%')->OrderBy('fname','asc')->get();
+                 $data['fetch'] = user::where('type','like','%'.$_GET['type'].'%')->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
  $data['header'] = 'All Heads of Sections Details';
+ $data['section'] ='0';
             }elseif($_GET['change']=='iow')
             {
-                 $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->get();
+                 $data['fetch'] = user::where('type','like','%'.$_GET['type'].'%')->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
  $data['header'] = 'All Inspectors of work Details';
+ $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
-             $data['header'] = 'All Technicians Details';    
+                 $data['fetch'] = Technician::where('type',$_GET['type'])->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+             $data['header'] = 'All Technicians Details';
+             $data['section'] ='0';    
             }
         }
         if (($_GET['name']=='')&&($_GET['type']!='')) 
@@ -876,46 +879,54 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
           if ($_GET['change']=='hos') 
           {
                  $data['fetch'] = user::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
-                $data['header'] = 'All '.$_GET['type'].' Heads of Sections Details';
+                $data['header'] = 'All '.$_GET['type'].' Details';
+                $data['section'] =$_GET['type']; 
             }elseif($_GET['change']=='iow')
             {
                  $data['fetch'] = user::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
-                $data['header'] = 'All '.$_GET['type'].' Inspector of work Details';
+                $data['header'] = 'All '.$_GET['type'].' Details';
+               $data['section'] =$_GET['type']; 
             }else
             {
                  $data['fetch'] = Technician::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
-                $data['header'] = 'All '.$_GET['type'].'  Technicians Details';     
+                $data['header'] = 'All '.$_GET['type'].'  Technicians Details'; 
+                $data['section'] =$_GET['type'];    
             }
         }
         if (($_GET['name']!='')&&($_GET['type']=='')) 
         {
              if ($_GET['change']=='hos') 
              {
-                 $data['fetch'] = user::where('type','like','%HOS%')->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+                 $data['fetch'] = user::where('id',$_GET['name'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'Head of Section Details';
+                $data['section'] ='0';
             }elseif($_GET['change']=='iow')
             {
-                 $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->where('id',$_GET['name'])->get();
+                 $data['fetch'] = user::where('id',$_GET['name'])->OrderBy('fname','asc')->where('id',$_GET['name'])->get();
                 $data['header'] = 'Inspector of work Details';
+                $data['section'] ='0';
             }else
             {
                  $data['fetch'] = Technician::where('id',$_GET['name'])->OrderBy('fname','asc')->get();
-                 $data['header'] = 'Technician Details';    
+                 $data['header'] = 'Technician Details'; 
+                 $data['section'] ='0';   
             }
         }
         if (($_GET['name']=='')&&($_GET['type']=='')) 
         {
             if ($_GET['change']=='hos') 
             {
-                 $data['fetch'] = user::where('type','like','%HOS%')->OrderBy('fname','asc')->get();
+                 $data['fetch'] = user::OrderBy('type','asc')->OrderBy('fname','asc')->get();
  $data['header'] = 'All Heads of Sections Details';
+ $data['section'] ='0';
             }elseif($_GET['change']=='iow')
             {
-                 $data['fetch'] = user::where('type','like','%Inspector%')->OrderBy('fname','asc')->get();
+                 $data['fetch'] = user::OrderBy('type','asc')->OrderBy('fname','asc')->get();
  $data['header'] = 'All Inspectors of work Details';
+ $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::OrderBy('type','asc')->OrderBy('fname','asc')->get();
              $data['header'] = 'All Technician Details';    
             }
         }
@@ -968,13 +979,13 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
     {
      if($_GET['college']=='')
      {
-        $data['catch'] = directorate::get();
-        $data['header'] = 'All Directorates Details';
+        $data['catch'] = directorate::orderby('name','ASC')->get();
+        $data['header'] = 'All Colleges/Directorates/Institute/Schools Details';
      }
      if($_GET['college']!='')
      {
-        $data['catch'] = directorate::where('id',$_GET['college'])->get();
-        $data['header'] = 'Directorate Details';
+        $data['catch'] = directorate::where('id',$_GET['college'])->orderby('name','ASC')->get();
+        $data['header'] = 'Colleges/Directorates/Institute/Schools Details';
            
      }
 
@@ -992,16 +1003,23 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
     
     public function depgenerate()
     {
-        if(($_GET['department']!='')||($_GET['college']!=''))
+        if(($_GET['department']!='')&&($_GET['college']!=''))
         {
-            $data['catch'] = department::Where('id',$_GET['department'])->where('directorate_id',$_GET['college'])->get();
+            $data['catch'] = department::Where('id',$_GET['department'])->where('directorate_id',$_GET['college'])->OrderBy('name','ASC')->get();
             $data['header'] = 'All Departments Details';
+            $data['dept'] = '0';
         }
 
         if(($_GET['department']=='')&&($_GET['college']!=''))
         {
-            $data['catch'] = department::where('directorate_id',$_GET['college'])->get();
-            $data['header'] = 'All Departments Details';
+            $department = directorate::where('id',$_GET['college'])->orderBy('name','ASC')->get();
+            foreach ($department as $department) {
+
+            }
+            $data['catch'] = department::where('directorate_id',$_GET['college'])->orderBy('name','ASC')->get();
+            
+            $data['header'] = $department->name.' Departments Details';
+            $data['dept'] = $department->name;
         }
 
         if(($_GET['department']!='')&&($_GET['college']==''))
@@ -1009,12 +1027,14 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
             $data['catch'] = department::where('id',$_GET['department'])->get();
 
             $data['header'] = 'Departments Details';
+            $data['dept'] = '0';
         }
 
         if(($_GET['department']=='')&&($_GET['college']==''))
         {
-            $data['catch'] = department::get();
+            $data['catch'] = department::orderby('name','ASC')->get();
             $data['header'] = 'All Departments Details';
+            $data['dept'] = '0';
         }
 
         if($data['catch'] ->isEmpty()){
