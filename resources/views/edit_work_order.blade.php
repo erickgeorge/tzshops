@@ -383,7 +383,7 @@ var total=2;
   
   $idwo=$wo->id;
   $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
-?>
+    ?>
 
 <table style="width:100%">
   <tr>
@@ -854,20 +854,21 @@ var total=2;
                             <input type="date" style="color: black; width:  700px;" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
-                            <label>Select Technician on Duty</label>
+                            <label>Select Technician in Charge</label>
                             <br>
-                            <select style="color: black; width:  700px;" required class="custom-select"  name="technician">
+                            <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
                                 <option  selected value="" >Choose...</option>
                                 
                                 
                                 
                                 <?php
                                
-                        $techassigned = techasigned::where('work_order_id',$wo->id)->get();
+                                $techassigned = techasigned::where('work_order_id',$wo->id)->get();
                                 ?>
                                 
                                 @foreach($techassigned as $tech)
-                                    <option value="{{ $tech->staf_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}</option>
+                                    <option value="{{ $tech->id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

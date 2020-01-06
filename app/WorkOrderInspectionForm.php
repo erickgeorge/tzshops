@@ -8,10 +8,7 @@ class WorkOrderInspectionForm extends Model
 {
 	
 	
-
-
-
-	 public function technician(){
+     public function technician(){
         return $this->belongsTo('App\Technician');
 
     }
@@ -20,8 +17,6 @@ class WorkOrderInspectionForm extends Model
         return $this->belongsTo('App\User', 'work_order_id');
     }
 	
-	
-	
-	
+		
     //
 }

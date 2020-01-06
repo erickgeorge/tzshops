@@ -356,14 +356,13 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
    
              $mForm->status = $statusfield;
-			
              $mForm->save();
  
             $form = new WorkOrderInspectionForm();
             $form->status = $request['status'];
 			$form->date_inspected = $request['inspectiondate'];
 			
-			 $form->description = $request['details'];
+			$form->description = $request['details'];
             $form->technician_id = $request['technician'];
             $form->work_order_id = $id;
             $form->save();
