@@ -16,7 +16,7 @@
 
 @section('body')
 
-
+ @if(count($wo) > 0)
 
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
@@ -60,7 +60,7 @@
 	
 
 
-        @if(count($wo) > 0)
+       
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
                 <tr>

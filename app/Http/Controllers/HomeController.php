@@ -138,9 +138,13 @@ class HomeController extends Controller
                 ]);
             }
             
+            
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
             } 
+            else if (auth()->user()->type == "DVC Admin"){
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
+            }
 
 
              else if (auth()->user()->type == "Inspector Of Works"){
@@ -708,6 +712,10 @@ $v5=$type[4];
             }
 
              else if (auth()->user()->type == "Inspector Of Works"){
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
+            }
+
+            else if (auth()->user()->type == "DVC Admin"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
             }
             
@@ -2572,7 +2580,7 @@ public function techniciancountcomp()
         
         $wo_hos_count = WorkOrder::
                      select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
-                     ->where('status',2)
+                     ->where('status',30)
                      ->groupBy('staff_id')
                      
                      ->get();
@@ -2590,7 +2598,7 @@ public function techniciancountcomp()
         
         $wo_hos_count = WorkOrder::
                      select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
-                     ->where('status',2)
+                     ->where('status',30)
                      ->whereBetween('created_at', [$from, $to])
                      ->groupBy('staff_id')
                      
