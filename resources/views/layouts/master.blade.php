@@ -413,6 +413,10 @@
  <li class="nav-item">
      <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
+ @elseif(auth()->user()->type == 'DVC Admin')
+ <li class="nav-item">
+     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
+ </li>
  @endif
  @if(auth()->user()->type == 'Maintenance coordinator')
 
