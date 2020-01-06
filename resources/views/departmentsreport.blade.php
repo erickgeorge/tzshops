@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use App\Directorate;
 ?>
 <div style="margin-top: 20px" align="center">
-        <img src="{{ public_path('/images/index.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+        <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
         <p><h2>University of Dar es salaam</h2> <h5>Directorate of Estates Services</h5></p><p><b><?php
          echo $header; 
          ?></b></p>
