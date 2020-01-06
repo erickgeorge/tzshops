@@ -137,7 +137,7 @@ use App\Material;?>
                     <td>{{ $item->type }}</td>
                    
 
-                    <td>{{ $item->stock }}</td>
+                    <td><?php echo  number_format($item->stock); ?></td>
                     <td><?php $time = strtotime($item->updated_at); echo date('d/m/Y',$time);  ?> </td>
                     @if(auth()->user()->type == 'STORE') <td>
                         &nbsp;&nbsp;&nbsp;

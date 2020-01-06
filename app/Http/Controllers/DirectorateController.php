@@ -141,6 +141,12 @@ class DirectorateController extends Controller
             'dir_abb' => 'required|unique:directorates'
         ]);*/
 
+         $request->validate([
+            'dir_name' => 'required|unique:directorates',
+            'dir_ab' => 'required|unique:directorates',
+            
+        ]);
+
         if ($request['location'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Campus is required']);
         }
@@ -205,6 +211,11 @@ class DirectorateController extends Controller
             'dep_name' => 'required|unique:directorates',
             'dep_ab' => 'required|unique:directorates'
         ]);*/
+         $request->validate([
+            'dep_name' => 'required|unique:directorates',
+            'dep_ab' => 'required|unique:directorates',
+            
+        ]);
 
         if ($request['directorate'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Directorate is required']);

@@ -1181,7 +1181,15 @@ session::flash('message', ' Your workorder have been closed successfully');
 
  
 		 
-	
+	public function hoscompletedjob($id)
+    {
+        $hosWO = Workorder::where('staff_id',$id)->where('status','30')->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+ return view('hoscompletedjobsall', [ 'hosWo' => $hosWO, 'notifications' => $notifications,
+            'role' => $role,'hosid'=>$id, 'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
 	
 	
 }

@@ -67,6 +67,7 @@
                    
 					<th>HOS name</th>
                     <th>Total Works orders Completed</th>
+                    <th colspan="" rowspan="" headers="" scope="">Action</th>
                    
                 </tr>
                 </thead>
@@ -78,6 +79,7 @@
                         <tr>
                              <td>{{ $work['hos']->fname.' '.$work['hos']->lname }}</td>
 							<td>{{ $work->total_wo }}  </td>
+                            <td colspan="" rowspan="" headers=""><a href="{{ route('hoscompletedjob', [$work['hos']->id]) }}"><i class="fa fa-eye"></i> View</a></td>
                         </tr>
                         @endforeach
                 </tbody>
