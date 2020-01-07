@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
 @section('title')
-    Room Report - Location
+    Room Report - Area/College/Directorate
     @endSection
 
 @section('body')
-<?php use App\location; ?>
+<?php use App\area; ?>
 <div class="container">
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Room report - Location</b></h3>
+            <h3 align="center"><b>Room report - Area/College/Directorate</b></h3>
         </div>
 
   
@@ -33,7 +33,7 @@
                 <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>Location</th>
+                    <th>Area/College/Directorate</th>
                    
                     <th>WO TOTAL REQUESTS</th>
                     <th>Action</th>
@@ -52,30 +52,23 @@
                             <th scope="row">{{ $i }}</th>
                         
 							
-							@if($work->location ==null)
+							
 								<td >
-                                     <?php $locational = location::select('name')->where('id',$work->loc_id)->get();
+                                     <?php $locational = area::select('name_of_area')->where('id',$work->area_id)->get();
                                      foreach ($locational as $locational) {
-                                        echo $locational->name;  
+                                        echo $locational->name_of_area;  
                                       } ?>
                                           
                                       </td>
-                            @else
-									<td >
-                                {{ $work->location }}  </td>
-                            @endif
+                           
 							
 						
-                            	@if($work->location ==null)
+                            	
 								<td>
                                     {{ $work->total_room }}  </td>
-                                    <td><form method="get" action="inroomreport"><button class="btn btn-primary" name="room" value="{{ $work->loc_id }}"><i class="fa fa-eye"></i> view</button></form></td>
+                                    <td><form method="get" action="inroomreportextended"><button class="btn btn-primary" name="room" value="{{ $work->area_id }}"><i class="fa fa-eye"></i> view</button></form></td>
 									
-								 @else
-									<td >
-                                {{ $work->total_location }}  </td>
-                                 <td><form method="get" action="thisroomreport"><button class="btn btn-primary" name="workorders" value="{{ $work->location }}"><i class="fa fa-eye"></i> view</button></form></td>
-                            @endif
+								
                             
                             
                         </tr>

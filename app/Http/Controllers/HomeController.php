@@ -2408,9 +2408,9 @@ $v5=$type[4];
     {
         
         $wo_room = WorkOrder::
-                     select(DB::raw('count(id) as total_room,count(location) as total_location, location,room_id'))
+                     select(DB::raw('count(id) as total_room,count(location) as total_location, location,loc_id'))
                      
-                     ->groupBy('room_id')
+                     ->groupBy('loc_id')
                      ->groupBy('location')
                      ->get();
                      
@@ -2856,6 +2856,74 @@ public function wo_material_acceptedbyIOWView($id)
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     $head = 'All Inspectors of work Details';
         return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
+   }
+
+   public function anonymousroomreport()
+    {
+        
+        $wo_room = WorkOrder::
+                     select(DB::raw('count(id) as total_room,area_id'))
+                     
+                     ->groupBy('area_id')
+                     ->where('loc_id',$_GET['room'])
+                     ->get();
+                     
+                     
+                     
+        
+        
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('anonymousroom', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+   }
+   public function anonymousroomreportextended()
+    {
+        
+        $wo_room = WorkOrder::
+                     select(DB::raw('count(id) as total_room,block_id'))
+                     
+                     ->groupBy('block_id')
+                     ->where('area_id',$_GET['room'])
+                     ->get();
+                     
+                     
+                     
+        
+        
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('anonymousroomextended', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+   }
+    public function inroomreportextendedwithrooms()
+    {
+        
+        $wo_room = WorkOrder::
+                     select(DB::raw('count(id) as total_room,room_id'))
+                     
+                     ->groupBy('room_id')
+                     ->where('block_id',$_GET['room'])
+                     ->get();
+                     
+                     
+                     
+        
+        
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('foundrooms', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+   }
+   public function knownroomreport()
+    {
+        
+        $wo_room = WorkOrder::where('location',$_GET['workorders'])->OrWhere('room_id',$_GET['workorders'])->get();
+                     
+                     
+                     
+        
+        
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('knownroom', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
    }
 
 

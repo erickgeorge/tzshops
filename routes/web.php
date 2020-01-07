@@ -116,6 +116,7 @@ Route::get('rooms', 'UserController@getRooms')->name('rooms.view');
 Route::get('sections', 'UserController@getSections')->name('departments.view');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view');
 Route::get('Manage/department', 'DirectorateController@departmentsView')->name('dipartment.manage');
+Route::get('Manage/section', 'DirectorateController@workordersectionView')->name('section.manage');
 Route::get('Manage/directorate', 'DirectorateController@directorateView')->name('dir.manage');
 
 Route::get('Manage/Add/directorate', 'DirectorateController@adddirectorateView');
@@ -491,3 +492,10 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
  Route::post('delete/material/{id}', 'StoreController@deletematerial')->name('material.delete');
  Route::get('trackreport/{id}','NotesController@trackreport')->name('trackreport');
  Route::get('hoscompletedjob/{id}','WorkOrderController@hoscompletedjob')->name('hoscompletedjob');
+
+ Route::get('inroomreport','HomeController@anonymousroomreport')->name('inroomreport');
+
+ Route::get('inroomreportextended','HomeController@anonymousroomreportextended')->name('inroomreportextended');
+Route::get('inroomreporwithrooms','HomeController@inroomreportextendedwithrooms')->name('inroomreporwithrooms');
+
+  Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport');

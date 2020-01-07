@@ -49,6 +49,9 @@ class WorkOrderController extends Controller
         } else {
 
             $work_order->room_id = $request['room'];
+            $work_order->block_id = $request['block'];
+            $work_order->area_id = $request['area'];
+            $work_order->loc_id = $request['location'];
 
         }
 

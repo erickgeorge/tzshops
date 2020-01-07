@@ -4,15 +4,17 @@
     work orders
     @endSection
 @section('body')
+
 <div class="container">
     <br>
+     @if(count($wo) > 0)
     <div class="row container-fluid"  style="margin-left:2%; margin-right:2%; margin-top: 6%;">
         <div class="col-md-8">
             <h3>Rejected work orders</h3>
         </div>
     </div>
     <hr>
-    @if(count($wo) > 0)
+   
         <table class="table table-hover table-striped table-condensed table-scrollable" id="myTable">
             <thead class="thead-dark">
             <tr>
@@ -63,7 +65,7 @@
         <div class="container" align="center">
             <br>
             <div class="col-sm-3">
-              <a href="{{ url('work_order') }}" class="btn btn-primary">All Work Orders</a>
+              <a href="{{ url('work_order') }}" class="btn btn-primary">Return to work orders</a>
             </div>
           </div>
         </div>

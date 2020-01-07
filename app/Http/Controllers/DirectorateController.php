@@ -17,6 +17,46 @@ class DirectorateController extends Controller
         $this->middleware('auth');
     }
 
+    public function workordersectionView(){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        if(request()->has('start'))  { //date filter
+        
+        
+        $from=request('start');
+        $to=request('end');
+        
+        
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+        
+       return view('workordersection', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->get(),
+            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get(),
+            'secs' => Section::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('department')->get()
+        ]);
+
+        
+    }
+        return view('workordersection', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
+            'secs' => Section::with('department')->get()
+        ]);
+    }
+
+
     public function departmentsView(){
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
