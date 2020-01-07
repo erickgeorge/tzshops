@@ -16,6 +16,7 @@ use App\Department;
 use App\Des;
 use App\Desdepartment;
 use App\Section;
+use App\workordersection;
 use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
 use App\Note;
@@ -1253,12 +1254,12 @@ $v5=$type[4];
         $directorate = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get();
         $des = Des::where('name','<>',null)->OrderBy('name','ASC')->get();
         $departments = Department::where('directorate_id', 1)->get();
-        $sections = Section::where('department_id', 1)->get();
+       
         $desp = desdepartment::all();
         return view('create_user', [
             'directorates' => $directorate,
             'role' => $role,
-            'sections' => $sections,
+            'worksec' => workordersection::OrderBy('section_name', 'ASC')->get(),
             'departments' => $departments,
             'notifications' => $notifications,
             'des'=> $des,

@@ -6,7 +6,7 @@ use App\Department;
 use App\Directorate;
 use App\Location;
 use App\Notification;
-use App\Section;
+use App\workordersection;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -16,6 +16,42 @@ class DirectorateController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function workordersectionView(){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        if(request()->has('start'))  { //date filter
+        
+        
+        $from=request('start');
+        $to=request('end');
+        
+        
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+        
+       return view('workordersection', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'worksec' => workordersection::whereBetween('created_at', [$from, $to])->OrderBy('section_name', 'ASC')->get()
+            
+        ]);
+        
+    }
+        return view('workordersection', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'worksec' => workordersection::OrderBy('section_name', 'ASC')->get()
+        ]);
+    }
+
 
     public function departmentsView(){
 
@@ -41,8 +77,7 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->get(),
-            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('department')->get()
+            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
 
         
@@ -51,8 +86,7 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
-            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::with('department')->get()
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
     }
 
@@ -83,8 +117,7 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->get(),
-            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('department')->get()
+            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
 
         
@@ -93,8 +126,7 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
-            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::with('department')->get()
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
     }
 
@@ -107,8 +139,7 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
-            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::with('department')->get()
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
 
 
@@ -124,8 +155,22 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
-            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::with('department')->get()
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get()
+        ]);
+
+
+     }
+
+
+   public function addsectionView(){
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        return view('add_workordersection', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
 
 
@@ -270,7 +315,7 @@ class DirectorateController extends Controller
 	
 	
 
-    public function createSection(Request $request)
+    public function createworkorderection(Request $request)
     {
         /*$request->validate([
             'sec_ab' => 'required|unique:directorates',
@@ -281,17 +326,14 @@ class DirectorateController extends Controller
             return redirect()->back()->withErrors(['message' => 'Department is required']);
         }
 
-        if (Section::where('description',$request['section_name'])->first() || Section::where('description',$request['sec_ab'])->first()){
-            return redirect()->back()->withErrors(['message' => 'Section already exist']);
-        }
+       
 
-        $section = new Section();
-        $section->description = $request['sec_name'];
-        $section->section_name = $request['sec_ab'];
-        $section->department_id = $request['department'];
-        $section->save();
+        $wsection = new workordersection();
+        $wsection->section_name = $request['sec_name' ];
+       
+        $wsection->save();
 
-        return redirect()->route('dir.manage')->with(['message' => 'Department added successfully']);
+        return redirect()->route('section.manage')->with(['message' => 'Work order Section added successfully']);
     }
 	
 

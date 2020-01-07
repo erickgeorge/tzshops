@@ -5,6 +5,15 @@
     @endSection
 
 @section('body')
+<style type="text/css">
+  #Div2 {
+  display: none;
+}
+
+
+    
+    
+ </style>
 <div class="container">
     <br>
     <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
@@ -199,7 +208,19 @@
                  <input type="checkbox" name="type[]" @if (in_array('HOS Masonry/Road',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Masonry/Road"> HOS Masonry/Road </label>
        
 
+                <label> &nbsp;&nbsp;&nbsp;
+                    @foreach($worksec as $dep)
+                   
+                      
+                            
+                           
+                           <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}" > {{ $dep->section_name }} &nbsp;&nbsp;&nbsp;
 
+                      
+                                
+                           
+                    @endforeach
+                </label>
              
              </div>
 

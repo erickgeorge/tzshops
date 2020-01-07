@@ -116,11 +116,14 @@ Route::get('rooms', 'UserController@getRooms')->name('rooms.view');
 Route::get('sections', 'UserController@getSections')->name('departments.view');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view');
 Route::get('Manage/department', 'DirectorateController@departmentsView')->name('dipartment.manage');
+Route::get('Manage/section', 'DirectorateController@workordersectionView')->name('section.manage');
 Route::get('Manage/directorate', 'DirectorateController@directorateView')->name('dir.manage');
 
 Route::get('Manage/Add/directorate', 'DirectorateController@adddirectorateView');
 
 Route::get('Manage/Add/department', 'DirectorateController@adddepartmentView');
+
+Route::get('Manage/Add/section', 'DirectorateController@addsectionView');
 
 
 
@@ -149,8 +152,8 @@ Route::post('delete/section/{id}', 'DirectorateController@deleteSection')->name(
 
 
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');
-Route::post('save/section', 'DirectorateController@createSection')->name('section.save');
 
+Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save');
 
 Route::post('', 'UserController@changeProfile')->name('profile.change');
 Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');

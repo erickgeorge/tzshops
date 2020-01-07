@@ -12,6 +12,7 @@ use App\User;
 use App\UserRole;
 use App\Directorate;
 use App\Department;
+use App\workordersection;
 use App\Section;
 use App\Complaint;
 use App\WorkOrder;
@@ -149,7 +150,7 @@ class UserController extends Controller
             'departments' => Department::all(),
             'role' => $role,
             'nrole' => $role,
-            
+             'worksec' => workordersection::OrderBy('section_name', 'ASC')->get(),
             'notifications' => $notifications,
             'trole' => $trole
 

@@ -147,16 +147,6 @@ User Registrartion
 
 
 
-	 <!--<div class="col">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="section">Section <sup style="color: red;">*</sup></label>
-	  </div>
-	  <select style="color: black; width: 430px;"  class="custom-select" name="section" id="section" value="{{ old('section') }}">
-
-	  </select>
-	  </div>
-	  </div>-->
 	
 
 </div>
@@ -229,6 +219,19 @@ User Registrartion
                 &nbsp;&nbsp;&nbsp;
 
                  <input type="checkbox"  name="type[]"   value="HOS Masonry/Road"> HOS Masonry/Road
+
+                &nbsp;&nbsp;&nbsp;
+                    @foreach($worksec as $dep)
+                   
+                      
+                            
+                           
+                           <input type="checkbox"  name="type[]"  value="{{$dep->section_name}}" > {{ $dep->section_name }} &nbsp;&nbsp;&nbsp;
+
+                      
+                                
+                           
+                    @endforeach
 
 
           </div>
