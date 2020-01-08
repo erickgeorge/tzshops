@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Add Directorate
+    Add Section For Workorder
     @endSection
 @section('body')
 
@@ -31,8 +31,8 @@
                    
                     <div class="form-group ">
                         <label for="dep_name">Section Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="dep_name"
-                               name="sec_name" placeholder="Enter Section Name">
+                        <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
+                               name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc.">
                     </div>
                    
                     
@@ -42,5 +42,9 @@
                     </a>
                 </form>
             </div>
+
+
+
+          
 
     @endSection

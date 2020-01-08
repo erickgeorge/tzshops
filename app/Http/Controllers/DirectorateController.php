@@ -40,29 +40,15 @@ class DirectorateController extends Controller
        return view('workordersection', [
             'role' => $role,
             'notifications' => $notifications,
-<<<<<<< HEAD
-            'directorates' => Directorate::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->get(),
-            'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->with('department')->get()
-        ]);
-
-=======
             'worksec' => workordersection::whereBetween('created_at', [$from, $to])->OrderBy('section_name', 'ASC')->get()
             
         ]);
->>>>>>> 6a6d2a9bd6deb5f6d7b78040f4ef2b0ae4767dd7
         
     }
         return view('workordersection', [
             'role' => $role,
             'notifications' => $notifications,
-<<<<<<< HEAD
-            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
-            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
-            'secs' => Section::with('department')->get()
-=======
             'worksec' => workordersection::OrderBy('section_name', 'ASC')->get()
->>>>>>> 6a6d2a9bd6deb5f6d7b78040f4ef2b0ae4767dd7
         ]);
     }
 
@@ -331,16 +317,10 @@ class DirectorateController extends Controller
 
     public function createworkorderection(Request $request)
     {
-        /*$request->validate([
-            'sec_ab' => 'required|unique:directorates',
-            'sec_name' => 'required|unique:directorates'
-        ]);*/
-
-        if ($request['department'] == 'Choose...') {
-            return redirect()->back()->withErrors(['message' => 'Department is required']);
+        
+         if (!empty(workordersection::where('section_name',$request['sec_name'])->first())){
+            return redirect()->back()->withErrors(['message' => 'Workorder Section already exist']);
         }
-
-       
 
         $wsection = new workordersection();
         $wsection->section_name = $request['sec_name' ];
@@ -351,32 +331,38 @@ class DirectorateController extends Controller
     }
 	
 
-	public function editSection(Request $request)
+	public function editworkorderSection(Request $request)
     {
+
+          if (!empty(workordersection::where('section_name',$request['sec_name'])->first())){
+            return redirect()->back()->withErrors(['message' => 'Workorder Section already exist']);
+        }
+        
        $p=$request['esecid'];
         
 		
-        $sec = Section::where('id',$p)->first();
+        $wsec = workordersection::where('id',$p)->first();
 		
-		$sec->section_name = $request['esecname'];
-        $sec->description = $request['esecdesc'];
+		$wsec->section_name = $request['sec_name' ];
+       
+        $wsec->save();
         
         //$directoratee->campus_id = 1;
-        $sec->save();
+        $wsec->save();
 
-        return redirect()->route('dir.manage')->with(['message' => 'Section Edited successfully']);
+        return redirect()->route('section.manage')->with(['message' => 'Work order Section Edited successfully']);
     }
 	
 
-	public function deleteSection($id)
+	public function deleteWorkorderSection($id)
     {
 
-        $sec=Section::where('id', $id)->first();
+          $sec=workordersection::where('id', $id)->first();
 		
 		  $sec->delete();
 		  
 		  
-		  return redirect()->route('dir.manage')->with(['message' => 'Section Deleted successfully']);
+		  return redirect()->route('section.manage')->with(['message' => 'Workorder Section Deleted successfully']);
   
 
       

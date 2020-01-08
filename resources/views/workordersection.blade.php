@@ -84,8 +84,23 @@ Workorder Section
                         <tr>
                             <th scope="row">{{ $i }}</th>
                            
-                            <td>{{ $dep->section_name }}</td>
+                            <td><?php echo strtoupper( $dep->section_name ); ?></td>
                             <td>
+                                 <div class="row">
+                                    <a style="color: green;"
+                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->section_name }}')"
+                                       data-toggle="modal" data-target="#editDepartment" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+                                    <p>&nbsp;</p>
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Workorder Section Completely? \n\n {{   $dep->section_name }} \n\n')"
+                                          action="{{ route('worksection.delete', [$dep->id]) }}">
+                                        {{csrf_field()}}
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                title="Delete" style="color: red;" data-toggle="tooltip"><i
+                                                    class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </div>
                                 
                             </td>
                         </tr>
@@ -111,7 +126,7 @@ Workorder Section
 
                 </div>
 
-                <form method="POST" action="edit/department" class="col">
+                <form method="POST" action="edit/workordersection" class="col">
                     <div class="modal-body">
 
 
@@ -121,18 +136,17 @@ Workorder Section
 						
 						
 						
-                        <div class="form-group">
-                            <label for="edirname">Section name </label>
-                            <input style="color: black;" type="text" required class="form-control"
-                                   id="edepdesc"
-                                   name="edepdesc" placeholder="Enter Section name">
-                            <input id="edepid" name="edepid" hidden>
-                        </div>
+                    <div class="form-group ">
+                        <label for="dep_name">Section Name</label>
+                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
+                               name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc." >
+                                 <input id="esecid" name="esecid" hidden>
+                    </div>
                        
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
-                        <a href="/Manage/department" class="btn btn-danger">Cancel
+                        <a href="/Manage/section" class="btn btn-danger">Cancel
                     </a>
 
                     </div>
@@ -171,74 +185,22 @@ Workorder Section
         });
 
 
-        function myfunc(x, y, z) {
-            document.getElementById("edirid").value = x;
-            document.getElementById("edirname").value = y;
-
-            document.getElementById("edirabb").value = z;
-        }
+        
 
 
-        function myfunc1(x, y, z,p) {
+        function myfunc1(x,y) {
 			
 			
-            document.getElementById("edepid").value = x;
-            document.getElementById("edepname").value = y;
-
-            document.getElementById("edepdesc").value = z;
-			
-			
-			 for(var i = 0;i < document.getElementById("editdirectoratefdep").length;i++){
-            if(document.getElementById("editdirectoratefdep").options[i].value == p ){
-               document.getElementById("editdirectoratefdep").selectedIndex = i;
-            }
-        }
-			
-			
-        }
-
-
-        function myfunc2(x, y, z) {
             document.getElementById("esecid").value = x;
-            document.getElementById("esecname").value = y;
+            document.getElementById("sname").value = y;
 
-            document.getElementById("esecdesc").value = z;
+			
         }
-		
-		
-		
-		
-		var selecteddep = null;
-var selectedsection = null;
-function getDepartments(){
-	selecteddep = document.getElementById('directoratte').value;
 
-    console.log('ID: '+selecteddep);
-	$.ajax({
-		method: 'GET',
-		url: 'departments/',
-		data: {id: selecteddep}
-	})
-	.done(function(msg){
-        console.log(msg['departments']);
-		var object = JSON.parse(JSON.stringify(msg['departments']));
-		$('#department').empty();
+
 		
-		var option = document.createElement('option');
-			option.innerHTML = 'Choose...';
-			option.value = '';
-			document.getElementById('department').appendChild(option);
-			
-			
 		
-		for (var i = 0; i < object.length; i++) {
-			var option = document.createElement('option');
-			option.innerHTML = object[i].description;
-			option.value = object[i].id;
-			document.getElementById('department').appendChild(option);
-		}
-	});
-}
+
 
 
     </script>

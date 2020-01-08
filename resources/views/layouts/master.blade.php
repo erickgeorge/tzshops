@@ -122,7 +122,7 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">Section</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">Workorder Sections</a>
 
               
 

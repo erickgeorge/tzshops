@@ -181,44 +181,11 @@
                <br>
 
                <div  id="Div2">
-                
-              
-                <label> 
-                 <input  type="checkbox" name="type[]" @if (in_array('HOS Electrical',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Electrical"> HOS Electrical </label>
-         
-           &nbsp; &nbsp; &nbsp;
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('HOS Plumbing',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Plumbing"> HOS Plumbing </label>
-      
-           &nbsp; &nbsp; &nbsp;
-          
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('HOS Carpentry/Painting',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Carpentry/Painting"> HOS Carpentry/Painting </label>
-          
            
-             &nbsp; &nbsp; &nbsp;
-
-      
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('HOS Mechanical',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Mechanical"> HOS Mechanical</label>
-  
-             &nbsp; &nbsp; &nbsp;
-
-                <label> 
-                 <input type="checkbox" name="type[]" @if (in_array('HOS Masonry/Road',$str_array)) { checked = 'checked' } @else{} @endif value="HOS Masonry/Road"> HOS Masonry/Road </label>
-       
-
                 <label> &nbsp;&nbsp;&nbsp;
                     @foreach($worksec as $dep)
-                   
-                      
-                            
-                           
-                           <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}" > {{ $dep->section_name }} &nbsp;&nbsp;&nbsp;
-
-                      
-                                
-                           
+                               <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?>  &nbsp;&nbsp;&nbsp;
+     
                     @endforeach
                 </label>
              

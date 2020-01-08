@@ -147,8 +147,8 @@ Route::get('/alltechnicians','HomeController@alltechnicians')->name('alltechnici
 Route::get('/alliow','HomeController@alliow')->name('alliow');
 //////////////////////////////////////////
 
-Route::POST('edit/section', 'DirectorateController@editSection')->name('section.edit');
-Route::post('delete/section/{id}', 'DirectorateController@deleteSection')->name('section.delete');
+Route::POST('Manage/edit/workordersection', 'DirectorateController@editworkorderSection')->name('workordersection.edit');
+Route::post('delete/workordersection/{id}', 'DirectorateController@deleteWorkorderSection')->name('worksection.delete');
 
 
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');

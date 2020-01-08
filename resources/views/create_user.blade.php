@@ -196,40 +196,12 @@ User Registrartion
                <div  id="Div2">
 
 
-                 <input type="checkbox" name="type[]"    value="HOS Electrical"> HOS Electrical
-
-                &nbsp;&nbsp;&nbsp;
-
-                 <input type="checkbox" name="type[]"  value="HOS Plumbing"> HOS Plumbing
-
-                &nbsp;&nbsp;&nbsp;
-
-
-                 <input type="checkbox"  name="type[]"   value="HOS Carpentry/Painting"> HOS Carpentry/Painting
-
-                &nbsp;&nbsp;&nbsp;
-
-
-
-
-                 <input type="checkbox" name="type[]"  value="HOS Mechanical"> HOS Mechanical
-
-
-
-                &nbsp;&nbsp;&nbsp;
-
-                 <input type="checkbox"  name="type[]"   value="HOS Masonry/Road"> HOS Masonry/Road
-
+                
                 &nbsp;&nbsp;&nbsp;
                     @foreach($worksec as $dep)
-                   
-                      
-                            
-                           
-                           <input type="checkbox"  name="type[]"  value="{{$dep->section_name}}" > {{ $dep->section_name }} &nbsp;&nbsp;&nbsp;
-
-                      
-                                
+ 
+                           <input type="checkbox"  name="type[]"  value="{{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?> &nbsp;&nbsp;&nbsp;
+         
                            
                     @endforeach
 
