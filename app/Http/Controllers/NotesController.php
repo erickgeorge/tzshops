@@ -927,8 +927,13 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }else
             {
                  $data['fetch'] = Technician::OrderBy('type','asc')->OrderBy('fname','asc')->get();
+<<<<<<< HEAD
              $data['header'] = 'All Technician Details'; 
               $data['section'] ='0';   
+=======
+             $data['header'] = 'All Technician Details';  
+             $data['section'] ='0';  
+>>>>>>> bfbd11b40bf0a192ea363bc6af452fdf85a49d3c
             }
         }
 

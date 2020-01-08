@@ -207,7 +207,7 @@ Route::get('/incrementmaterial/{id}', 'StoreController@incrementmaterialView')->
 
 Route::post('incrementmaterial', 'StoreController@incrementmaterial')->name('material.increment');
 
-Route::get('technicians', 'HomeController@techniciansView')->name('technicians');
+Route::get('technicians', 'HomeController@alltechnicians')->name('technicians');
 
 
 Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneededyi');
