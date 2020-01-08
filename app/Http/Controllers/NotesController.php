@@ -890,7 +890,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             {
                  $data['fetch'] = Technician::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'All '.$_GET['type'].'  Technicians Details'; 
-                $data['section'] =$_GET['type'];    
+                $data['section'] = $_GET['type'];    
             }
         }
         if (($_GET['name']!='')&&($_GET['type']=='')) 
@@ -927,7 +927,8 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }else
             {
                  $data['fetch'] = Technician::OrderBy('type','asc')->OrderBy('fname','asc')->get();
-             $data['header'] = 'All Technician Details';    
+             $data['header'] = 'All Technician Details'; 
+              $data['section'] ='0';   
             }
         }
 
