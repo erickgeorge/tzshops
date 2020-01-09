@@ -41,12 +41,12 @@
             </div>
             <select required style="width: 300px;min-width: 150px;" id="nameid" name="p_type">
                 <option selected value="">Choose... <sup style="color: red;">*</sup></option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Masonry/Road">Masonry/Road</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Others">Others</option>
-                <option value="Plumbing">Plumbing</option>
+                <?php use App\workordersection; ?>
+<?php $sectionss = workordersection::get(); ?>
+ @foreach($sectionss as $sectionss) 
+               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               @endforeach
+                   
             </select>
              </div>
             </div>

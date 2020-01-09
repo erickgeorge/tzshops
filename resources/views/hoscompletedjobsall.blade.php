@@ -598,11 +598,12 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
             </div>
             <select  style="width: 300px;min-width: 150px;" id="p_type" name="p_type">
                 <option selected value="">Choose...</option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Masonry/Road">Masonry/Road</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Plumbing">Plumbing</option>
+                <?php use App\workordersection; ?>
+<?php $sectionss = workordersection::get(); ?>
+ @foreach($sectionss as $sectionss) 
+               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               @endforeach
+                   
             </select>
              <!--<input  type="text" name="details"  id="details">-->
              <input hidden id="redirect_id" name="redirect_id" >
