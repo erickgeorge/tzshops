@@ -109,27 +109,6 @@
                 ?>
 
 
-                 @if(($role['user_role']['role_id'] == 1))
-                  
-
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Settings 
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">Workorder Sections</a>
-
-              
-
-        </div>
-       </li>
-
-                    @endif
                 @if(auth()->user()->type == 'Estates Director')
                     
                     
@@ -144,16 +123,47 @@
                         <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
                     </li>
                     -->
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
-                    </li>  
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
-                    </li> 
+                      
+                   
                   
                     
+       
+    
+
+         
         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Works Order Reports 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('/unattended_work_orders')}}">Unattended Work Orders</a>
+          <a  style="color:white" class="dropdown-item" href="{{ url('/completed_work_orders')}}">Completed Work Orders</a>
+           <a style="color:white" class="dropdown-item" href="{{ url('/woduration')}}">Work Orders Duration</a>
+            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">All WorkOrders <span
+                                    class="badge badge-light">{{ count($w) }}</span></a>
+
+        </div>
+       </li> 
+
+        
+                     
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                          HOS
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+                
+                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sections Details</a>
+                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS with completed works orders</a>
+                        </div>
+                       </li> 
+
+                        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
@@ -168,39 +178,21 @@
 
         </div>
        </li> 
-
-    
-
-         
-        <li class="nav-item dropdown">
+            
+         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-          WorkOrder Reports 
+        Users
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('/unattended_work_orders')}}">Unattended Work Orders</a>
-          <a  style="color:white" class="dropdown-item" href="{{ url('/completed_work_orders')}}">Completed Work Orders</a>
-           <a style="color:white" class="dropdown-item" href="{{ url('/woduration')}}">Work Orders Duration</a>
-            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">All WorkOrders <span
-                                    class="badge badge-light">{{ count($w) }}</span></a>
+           <a style="color:white" class="dropdown-item" href="{{ url('/alliow')}}">Inspectors of work</a>
+           
 
         </div>
        </li> 
-                     
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                          HOS
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-                
-                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sections Details</a>
-                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS with completed works orders</a>
-                        </div>
-                       </li> 
+
 
                   
                     <!-- <li class="nav-item">
@@ -221,9 +213,39 @@
                         </div>
                        </li>
 
-                         <li class="nav-item">
+                       <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Purchase <span
+                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
+                    </li>
+
+
+
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Settings 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">Workorder Sections</a>
+
+              
+
+        </div>
+       </li>
+
+                        
+                      
+                       <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
                     </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
+                    </li> 
 
                     
             
@@ -237,7 +259,7 @@
                 @endif
 
                 
-                 @if(auth()->user()->type == 'Transport Officer')
+                @if(auth()->user()->type == 'Transport Officer')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request')}}">Transport Requests <span
                                     class="badge badge-light">{{ count($wo_transport) }}</span></a>
@@ -306,17 +328,7 @@
                         <a class="nav-link" style="color:white"  href="{{ url('work_order_material_purchased') }}" >Material Purchased <span
                                     class="badge badge-light">{{ count($material_to_purchased) }}</span></a>
                     </li>
-
-
-                   
-
-
-
-                    
-
-
-
-                    
+   
                     
 
 					 <!--
@@ -328,7 +340,7 @@
                         <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
                     </li>
 					-->
-                @endif  
+               @endif  
 
 
                  @if(auth()->user()->type == 'Head Procurement')
@@ -436,39 +448,7 @@
   @endif
 
 
-  @if(auth()->user()->type == 'Estates Director')               
-<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-         Other Users
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
-           <a style="color:white" class="dropdown-item" href="{{ url('/alliow')}}">Inspectors of work</a>
-           
-
-        </div>
-       </li> 
-@endif
-             @if($role['user_role']['role_id'] == 1)
-                  <!--  <li class="nav-item">
-                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
-                    </li>-->
-                   
-                   
-
-
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
-                    </li>
-
-
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
-                                    class="badge badge-light">{{ count($m) }}</span></a>
-                    </li>
-                 @endif
               
 
                 @if(strpos(auth()->user()->type, "HOS") !== false or $role['user_role']['role_id'] == 1)
@@ -520,6 +500,47 @@
                     </li>
                 @endif
 
+
+              @if($role['user_role']['role_id'] == 1)
+                  <!--  <li class="nav-item">
+                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
+                    </li>-->
+                   
+                   
+                
+                  
+
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Settings 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
+
+              
+
+        </div>
+       </li>
+
+                 
+
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
+                    </li>
+
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
+                                    class="badge badge-light">{{ count($m) }}</span></a>
+                    </li>
+                 @endif
+
  
 
                 
@@ -528,7 +549,7 @@
 
       <ul class="navbar-nav mr-auto">
         <li>
-         @if($role['user_role']['role_id'] == 1)
+             @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
                         <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
                     </li>

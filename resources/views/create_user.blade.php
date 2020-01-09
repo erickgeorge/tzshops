@@ -197,10 +197,10 @@ User Registrartion
 
 
                 
-                &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                     @foreach($worksec as $dep)
  
-                           <input type="checkbox"  name="type[]"  value="{{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?> &nbsp;&nbsp;&nbsp;
+                           <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}"  ><?php echo strtoupper( $dep->section_name ); ?> &nbsp;&nbsp;&nbsp;
          
                            
                     @endforeach

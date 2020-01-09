@@ -851,7 +851,7 @@ var total=2;
                         </br>
                         <p>Inspection date</p>
                         <div class="form-group">
-                            <input type="date" style="color: black; width:  700px;" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
+                            <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
                             <label>Select Technician in Charge</label>
