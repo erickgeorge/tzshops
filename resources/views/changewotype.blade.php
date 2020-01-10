@@ -34,13 +34,12 @@
             <label class="input-group-text">Type of a problem <sup style="color: red;">*</sup></label>
         </div>
       <select required class="custom-select" id="inputGroupSelect01" name="p_type">
-                <option selected value="" >Choose...</option>
-                <option value="Electrical" >Electrical</option>
-                <option value="Plumbing" >Plumbing</option>
-                <option value="Masonry/Road" >Masonry/Road</option>
-                <option value="Mechanical" >Mechanical</option>
-                <option value="Carpentry/Painting" >Carpentry/Painting</option>
-                <option value="Others" >Others</option>
+               <?php use App\workordersection; ?>
+<?php $sectionss = workordersection::get(); ?>
+ @foreach($sectionss as $sectionss) 
+               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               @endforeach
+                   
             </select>
 			<input required class="form-control" name="wo_id"
             value="{{ $wo->id }}" hidden>

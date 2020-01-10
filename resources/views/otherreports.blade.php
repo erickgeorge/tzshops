@@ -40,6 +40,25 @@ use Carbon\Carbon;
 
 
  ?>
+ <?php
+      $maintenance_coordinator = '';
+$hoos = user::select('type')->where('id',auth()->user()->id)->get();
+foreach ($hoos as $hous) {
+   $hotype = $hous->type;
+        if(substr($hotype,0,4) == 'HOS '){
+
+          echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+          }
+          elseif($hotype == 'Maintenance coordinator'){
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+
+          }elseif($role['user_role']['role_id'] == 1){
+
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+
+          }
+}
+?>
 <!-- SOMETHING STRANGE HERE -->
 @if(count($rle)>0)
 <div align="right">

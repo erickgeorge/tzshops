@@ -4,6 +4,8 @@
     Add Technician
     @endSection
 @section('body')
+<?php use App\workordersection; ?>
+<?php $sectionss = workordersection::get(); ?>
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
@@ -93,11 +95,10 @@ $roleofuser =1;
              
             <select  style="width: 290px" class="custom-select" id="typetechadmin" name="typetechadmin">
                 <option selected value="Carpentry/Painting"> select section </option>
-                <option value="Carpentry/Painting">Carpentry/Painting Technician</option>
-               <option value="Electrical">Electrical Technician</option>
-               <option value="Masonry/Road">Masonry/Road Technician</option>
-               <option value="Mechanical">Mechanical Technician</option>
-               <option value="Plumbing">Plumbing Technician</option>
+               
+               @foreach($sectionss as $sectionss) 
+               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               @endforeach
                    
             </select>
             @elseif(auth()->user()->type == 'Maintenance coordinator')
@@ -107,11 +108,9 @@ $roleofuser =1;
              </div>
              
             <select  style="width: 290px" class="custom-select" id="typetechadmin" name="typetechadmin">
-                <option value="Carpentry/Painting">Carpentry/Painting Technician</option>
-               <option value="Electrical">Electrical Technician</option>
-               <option value="Masonry/Road">Masonry/Road Technician</option>
-               <option value="Mechanical">Mechanical Technician</option>
-               <option value="Plumbing">Plumbing Technician</option>
+                 @foreach($sectionss as $sectionss) 
+               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               @endforeach
                    
             </select>
             @else
@@ -125,24 +124,12 @@ $roleofuser =1;
     $str_array = preg_split("/\,/", $string);
     ?>
     <select  name='typetechhos' class="form-control" id="typetechhos" required>
-        @if (in_array('HOS Electrical',$str_array)) {
-            <option value="Electrical">Electrical</option> 
+      @foreach($sectionss as $sectionss)
+        @if (in_array('HOS '.$sectionss->section_name.'',$str_array) || in_array('HOS'.$sectionss->section_name.'',$str_array)) {
+            <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option> 
           } @endif
-          @if (in_array('HOS Plumbing',$str_array)) {
-            <option value="HOS Plumbing">Plumbing</option> 
-          } @endif
-          @if (in_array('HOS Carpentry/Painting',$str_array)) {
-            <option value="Carpentry/Painting">Carpentry/Painting</option> 
-          } @endif
-          @if (in_array('HOS Mechanical',$str_array)) {
-            <option value="Mechanical">Mechanical</option> 
-          } @endif
-          @if (in_array('HOS Masonry/Road',$str_array)) {
-            <option value="Masonry/Road">Masonry/Road</option> 
-          } @endif
-          @if (in_array('HOS Masonry/Road',$str_array)) {
-            <option value="Masonry/Road">Masonry/Road</option> 
-          } @endif
+
+          @endforeach
         </select>
    </div>
             <br>
