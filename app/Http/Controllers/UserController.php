@@ -55,6 +55,7 @@ class UserController extends Controller
         
         $user->type  = implode(",", $request->type);
         $user->type = ltrim($user->type,",");
+        $user->type = rtrim($user->type,",");
         $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
         $user->save();

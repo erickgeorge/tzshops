@@ -7,6 +7,7 @@
 @section('body')
 
     <br>
+     @if(count($items) > 0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
             <h3 align="center"><b>Work Orders with Material Rejected</b></h3>
@@ -30,7 +31,7 @@
     @endif
    
     <div class="container " >
-        @if(count($items) > 0)
+       
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
