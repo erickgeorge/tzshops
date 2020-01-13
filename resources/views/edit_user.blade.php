@@ -18,7 +18,7 @@
     <br>
     <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
         <div class="col-lg-12" align="center">
-            <h2>Edit user</h2>
+            <h2>Edit User</h2>
         </div>
         {{--<div class="col-md-4">
             <a href="{{ url('viewusers') }}">
@@ -184,7 +184,7 @@
            
                 <label> &nbsp;&nbsp;&nbsp;
                     @foreach($worksec as $dep)
-                               <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?>  &nbsp;&nbsp;&nbsp;
+                               <input type="checkbox"  name="type[]" @if (in_array('HOS ELECTRICAL',$str_array)) { selected="selected" } @else{} @endif value="HOS {{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?>  &nbsp;&nbsp;&nbsp;
      
                     @endforeach
                 </label>

@@ -97,7 +97,7 @@ $roleofuser =1;
                 <option selected value="Carpentry/Painting"> select section </option>
                
                @foreach($sectionss as $sectionss) 
-               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               <option value="{{ $sectionss->section_name }}"><?php echo strtoupper( $sectionss->section_name ); ?></option>
                @endforeach
                    
             </select>
