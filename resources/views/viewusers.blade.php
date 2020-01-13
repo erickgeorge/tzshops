@@ -28,6 +28,16 @@ use App\Section;
     <br>
     <p class="alert alert-success">{{ Session::get('message') }}</p>
   @endif
+  
+  @if ($errors->any())
+        <div class="alert alert-danger">
+             <ul class="alert alert-danger" style="list-style: none;">
+                @foreach ($errors->all() as $error)
+                    <li><?php echo $error; ?></li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 <hr>
 
@@ -68,7 +78,8 @@ use App\Section;
         <div class="row">
             <div class="col">
                 <select name="college" class="form-control mr-sm-2">
-                    <option selected="selected" value="">name</option>
+                    <option selected="selected" value="">select name</option>
+                    <option value="">All users</option>
         <?php 
                  $userfetch = user::get();
   foreach($userfetch as $userfetch)
@@ -99,7 +110,9 @@ use App\Section;
         <div class="row">
             <div class="col">
                 <select name="type" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Type</option>
+                    <option selected="selected" value="">select Type</option>
+                    <option value="">All Types</option>
+
                     <?php
                       $type = User::select('type')->distinct()->get();
                       foreach ($type as $typed) {
