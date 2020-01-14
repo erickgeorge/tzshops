@@ -60,12 +60,12 @@
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button>
+                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new work order</button>
             </a>
         </div>
             <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected Work Orders
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected work orders
                 </button>
             </a>
         </div>

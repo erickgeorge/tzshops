@@ -1,84 +1,80 @@
 @extends('layouts.master')
 
 @section('title')
-    manage staff house
+    manage cleaning zone
     @endSection
 
 @section('body')
     <br>
    
-   
-<div class="container">
-  
-
- 
-<br><br><br>
-            <div >
-               @if(Session::has('message'))
+    @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-              @endif
-                  <h3><b>Available Staff Houses </b></h3>
-                  <hr>
-                <a href="{{ route('registerstaffhouse') }}"
-                   class="btn btn-primary">Add New Staff House</a>
-                   <br> <br> 
-    
-                <table id="myTableee" id="myTable" class="table table-striped">
-                      
+    @endif
+<div class="container">
+   
+             
+         <div>
+          <br>
+          <br>
+          <br>
+              <h3><b>Available Cleaning Zones </b></h3>
+              <hr>
+                <a href="{{ route('registercleaningzone') }}" 
+                   class="btn btn-primary">Add New CLeaning Zone</a>
+
+                   <br><br>
+
+                <table id="myTable" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">House Name</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">No of Rooms</th>
+                        <th scope="col">Zone Name</th>
                         <th scope="col">Campus Name</th>
+                        <th scope="col">Type</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
 
 
+
                     <tbody>
-                    <?php $i = 0; ?>
-                    @foreach($staffhouses as $house)
+                  <?php $i = 0; ?>
+                    @foreach($newzone as $zone)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td>{{ $house->name_of_house }}</td>
-                            <td>{{ $house->location }}</td>
-                            <td>{{ $house->type}}</td>
-                            <td>{{ $house->no_room }}</td>
-                            <td>{{ $house['campus']->campus_name }}</td> 
-                            
+                            <td>{{ $zone->Zone_name }}</td>
+                            <td>{{ $zone['Campus']->campus_name }}</td>
+                            <td>{{ $zone->type }}</td>
                             <td>
-
-
                             <div class="row">
 
-
                                     <a style="color: green;"
-                                       onclick="myfunc('{{ $house->id }}','{{ $house->name_of_house }}','{{ $house->location }}','{{$house->type}}','{{$house->no_room}}' )"
-                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
+                                       onclick="myfunc5('{{ $zone->id }}','{{ $zone->zone_name }}','{{ $zone->type }}')"
+                                       data-toggle="modal" data-target="#editzone" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this House Completely? ')"
-                                          action="{{ route('house.delete', [$house->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to delete this zone Completely? ')"
+                                          action="{{ route('zone.delete', [$zone->id]) }}">
                                         {{csrf_field()}}
 
 
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
                                                 data-toggle="tooltip" title="Delete"><a style="color: red;"
                                                                                         data-toggle="tooltip"><i
-                                                        class="fas fa-trash-alt"></i></a>
+                                                         class="fas fa-trash-alt"></i></a>
+
+
                                         </button>
                                     </form>
                                 </div>
+
                          </td>
                            
                         </tr>
@@ -86,58 +82,29 @@
                     </tbody>
                     
                 </table>
-                <br>
-
+                
             </div>
             
 
 
 
-               <div class="modal fade" id="editHouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+               <div class="modal fade" id="editzone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit House Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Zone Details</h5>
                 </div>
 
-                <form method="POST" action="edit/House" class="col-md-6">
+                <form method="POST" action="edit/zone" class="col-md-6">
                     <div class="modal-body">
-
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">House Name <sup style="color: red;">*</sup></label>
+                            <label for="name_of_house">Zone Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_name"
-                                   name="name_of_house" placeholder="Enter House name">
-                            <input id="edit_id" name="edit_id" hidden>
-                        </div>
-
-
-
-
-                        <div class="form-group ">
-                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_location"
-                                   name="location" placeholder="Enter House Location">
-                        </div>
-                       
-
-                    
-                        <div class="form-group ">
-                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_type"
-                                   name="type" placeholder="Enter House Type">
-                        </div>
-                       
-
-                         <div class="form-group ">
-                            <label for="editlocation">No of Rooms <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_room"
-                                   name="no_room" placeholder="Enter Number of Rooms">
+                                   id="edit_zone"
+                                   name="zone_name" placeholder="Enter Zone Name">
+                            <input id="editzone_id" name="editzone_id" hidden>
                         </div>
 
 
@@ -156,8 +123,12 @@
                         </select>
                     </div>   
 
-
-
+                        <div class="form-group ">
+                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edit_type"
+                                   name="type" placeholder="Enter Zone Type">
+                        </div>
                        
                          <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
@@ -187,6 +158,7 @@
 
 
 
+
         
     @endSection
 
@@ -209,7 +181,7 @@
 
             $('#myTablee').DataTable();
             $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
+                                                       
  
 
         });

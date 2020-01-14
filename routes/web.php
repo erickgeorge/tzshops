@@ -405,6 +405,10 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
 
 
  Route::get('manage_Houses', 'AssetsController@HousesView')->name('register.house');
+ Route::get('manage_Campus', 'AssetsController@managecampus')->name('register.campus');
+ Route::get('manage_Hall_of_resdence', 'AssetsController@Hallofresdence')->name('register.hallofres');
+ Route::get('manage_Cleaning_area', 'AssetsController@Cleaningarea')->name('register.cleaningareas');
+ Route::get('manage_Cleaning_zone', 'AssetsController@cleaningzone')->name('register.cleanningzone');
 
  
 Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save');

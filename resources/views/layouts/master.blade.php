@@ -237,6 +237,8 @@
         </div>
        </li>
 
+
+
                         
                       
                        <li class="nav-item">
@@ -539,6 +541,31 @@
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
                                     class="badge badge-light">{{ count($m) }}</span></a>
                     </li>
+
+
+
+                         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Assets
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('manage_Campus')}}">Manage Campuses</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('manage_Houses')}}">Manage Staff Houses </a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('manage_Hall_of_resdence')}}">Manage  Hall of Resdences</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('manage_Cleaning_zone')}}">Manage  Cleaning Zone</a>
+
+                 <a style="color:white" class="dropdown-item" href="{{ url('manage_Cleaning_area')}}">Manage Cleaning Area </a>
+
+
+              
+
+        </div>
+       </li>
+
+
                  @endif
 
  

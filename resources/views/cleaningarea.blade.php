@@ -1,59 +1,59 @@
 @extends('layouts.master')
 
 @section('title')
-    manage staff house
+    manage cleaning area
     @endSection
 
 @section('body')
     <br>
-   
-   
-<div class="container">
-  
 
- 
-<br><br><br>
-            <div >
-               @if(Session::has('message'))
+<div class="container">
+   
+     
+     <br>
+     <br>
+     <br>
+
+
+       
+         <div >
+
+             @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-              @endif
-                  <h3><b>Available Staff Houses </b></h3>
-                  <hr>
-                <a href="{{ route('registerstaffhouse') }}"
-                   class="btn btn-primary">Add New Staff House</a>
-                   <br> <br> 
-    
-                <table id="myTableee" id="myTable" class="table table-striped">
-                      
+             @endif
+              <h3><b>Available Cleaning Area </b></h3>
+              <hr>
+                <a href="{{ route('Registercleaningarea') }}"
+                   class="btn btn-primary">Add New CLeaning Area</a>
+                   <br><br>
+
+                <table id="myTable" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">House Name</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">No of Rooms</th>
-                        <th scope="col">Campus Name</th>
+                        <th scope="col">Area Name</th>
+                        <th scope="col">Zone Name</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
 
 
+
                     <tbody>
-                    <?php $i = 0; ?>
-                    @foreach($staffhouses as $house)
+                  <?php $i = 0; ?>
+                    @foreach($cleanarea as $clean_area)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td>{{ $house->name_of_house }}</td>
-                            <td>{{ $house->location }}</td>
-                            <td>{{ $house->type}}</td>
-                            <td>{{ $house->no_room }}</td>
-                            <td>{{ $house['campus']->campus_name }}</td> 
                             
+                            <td>{{ $clean_area->cleaning_name }}</td>
+                            <td>{{ $clean_area['zone']->Zone_name }}</td>
+
+
                             <td>
 
 
@@ -61,14 +61,14 @@
 
 
                                     <a style="color: green;"
-                                       onclick="myfunc('{{ $house->id }}','{{ $house->name_of_house }}','{{ $house->location }}','{{$house->type}}','{{$house->no_room}}' )"
-                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
+                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->Zone_name }}' )"
+                                       data-toggle="modal" data-target="#editarea" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this House Completely? ')"
-                                          action="{{ route('house.delete', [$house->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to delete this Cleaning Area Completely? ')"
+                                          action="{{ route('cleanarea.delete', [$clean_area->id]) }}">
                                         {{csrf_field()}}
 
 
@@ -79,87 +79,63 @@
                                         </button>
                                     </form>
                                 </div>
+
                          </td>
-                           
+
+
+
+                            
+                                               
                         </tr>
                     @endforeach
                     </tbody>
                     
                 </table>
                 <br>
-
+                
             </div>
             
 
 
 
-               <div class="modal fade" id="editHouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+               <div class="modal fade" id="editarea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit House Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Cleaning Area Details</h5>
                 </div>
 
-                <form method="POST" action="edit/House" class="col-md-6">
+                <form method="POST" action="edit/cleaningarea" class="col-md-6">
                     <div class="modal-body">
-
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">House Name <sup style="color: red;">*</sup></label>
+                            <label for="name_of_house">Cleaning Area Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_name"
-                                   name="name_of_house" placeholder="Enter House name">
-                            <input id="edit_id" name="edit_id" hidden>
+                                   id="edit_carea"
+                                   name="cleaning_name" placeholder="Enter Cleaning Area Name">
+                            <input id="editarea_id" name="editarea_id" hidden>
                         </div>
 
-
-
-
-                        <div class="form-group ">
-                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_location"
-                                   name="location" placeholder="Enter House Location">
-                        </div>
                        
 
-                    
-                        <div class="form-group ">
-                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_type"
-                                   name="type" placeholder="Enter House Type">
-                        </div>
-                       
-
-                         <div class="form-group ">
-                            <label for="editlocation">No of Rooms <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_room"
-                                   name="no_room" placeholder="Enter Number of Rooms">
-                        </div>
-
-
-
-                        <div class="input-group mb-3">
+                   <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
+                            <label class="input-group-text" for="directorate">Zone Name <sup style="color: red;">*</sup></label>
                         </div>
-                        <select required class="custom-select" name="campus" id="campus">
+                            <select required class="custom-select" name="zone" id="zone">
                             <option value="">Choose...</option>
-                            @foreach($campuses as $campus)
-                                <option value="{{ $campus->id }}">{{ $campus->campus_name }}</option>
+                            @foreach($newzone as $zone)
+                                <option value="{{ $zone->id }}">{{ $zone->Zone_name }}</option>
                             @endforeach
 
                         </select>
-                    </div>   
-
-
-
+                    </div> 
                        
-                         <div style="width:600px;">
+                        
+                
+                                               <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
                                                       
                                                         <button  type="submit" class="btn btn-primary">Save Changes
@@ -175,7 +151,9 @@
                                                        </div>
                                             </div>
                                                 </div>
-                </form>
+      
+
+              </form>
 
 
                 <div class="modal-footer">

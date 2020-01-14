@@ -66,11 +66,73 @@ class AssetsController extends Controller
              'campuses' => Campus::all(),
                'newzone' => zone::all(),
                'cleanarea' => cleaningarea::all(),
-             
-          
-          
+  
           ]);
-     }
+         }
+
+
+         public function managecampus(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         
+         return view('managecampus', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'staffhouses' => House::all(),
+            'HallofResdence' => Hall::all(),
+             'campuses' => Campus::all(),
+               'newzone' => zone::all(),
+               'cleanarea' => cleaningarea::all(),
+  
+          ]);
+
+         }
+
+
+           public function Hallofresdence(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('hallofresdence', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'staffhouses' => House::all(),
+            'HallofResdence' => Hall::all(),
+             'campuses' => Campus::all(),
+               'newzone' => zone::all(),
+               'cleanarea' => cleaningarea::all(),
+  
+          ]);
+         }
+
+           public function Cleaningarea(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('cleaningarea', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'staffhouses' => House::all(),
+            'HallofResdence' => Hall::all(),
+             'campuses' => Campus::all(),
+               'newzone' => zone::all(),
+               'cleanarea' => cleaningarea::all(),
+  
+          ]);
+         }
+
+           public function cleaningzone(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('cleaningzone', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'staffhouses' => House::all(),
+            'HallofResdence' => Hall::all(),
+             'campuses' => Campus::all(),
+               'newzone' => zone::all(),
+               'cleanarea' => cleaningarea::all(),
+  
+          ]);
+         }
 
 
 
@@ -118,7 +180,7 @@ class AssetsController extends Controller
         $HallofResdence->location = $request['location'];
         $HallofResdence->save();
 
-        return redirect()->route('register.house')->with(['message' => 'New Hall of Residence is registered successfully']);
+        return redirect()->route('register.hallofres')->with(['message' => 'New Hall of Residence is registered successfully']);
     }
 
 
@@ -128,7 +190,7 @@ class AssetsController extends Controller
        {
            $HallofRes=Hall::where('id', $id)->first();
            $HallofRes->delete();
-           return redirect()->route('register.house')->with(['message' => 'Respective hall is deleted successfully']);
+           return redirect()->route('register.hallofres')->with(['message' => 'Respective hall is deleted successfully']);
        }
 
 
@@ -146,7 +208,7 @@ class AssetsController extends Controller
        $hall->location = $request['location'];
        $hall->save();
   
-        return redirect()->route('register.house')->with(['message' => 'Respective Hall Edited successfully']);
+        return redirect()->route('register.hallofres')->with(['message' => 'Respective Hall Edited successfully']);
     }
   
   
@@ -160,7 +222,7 @@ class AssetsController extends Controller
         $campuses->campus_name = $request['campus_name'];
         $campuses->location = $request['location'];
         $campuses->save();
-        return redirect()->route('register.house')->with(['message' => 'New Campus is registered successfully']);
+        return redirect()->route('register.campus')->with(['message' => 'New Campus is registered successfully']);
     }
 
 
@@ -172,7 +234,7 @@ class AssetsController extends Controller
            $campus->location = $request['location'];
            $campus->save();
   
-        return redirect()->route('register.house')->with(['message' => 'Respective campus Edited successfully']);
+        return redirect()->route('register.campus')->with(['message' => 'Respective campus Edited successfully']);
     }
   
 
@@ -180,7 +242,7 @@ class AssetsController extends Controller
        {
            $HallofRes=Campus::where('id', $id)->first();
            $HallofRes->delete();
-           return redirect()->route('register.house')->with(['message' => 'Respective campus is deleted successfully']);
+           return redirect()->route('register.campus')->with(['message' => 'Respective campus is deleted successfully']);
        }
 
 
@@ -193,7 +255,7 @@ class AssetsController extends Controller
         $newzone->campus_id = $request['campus'];
         $newzone->type = $request['type'];
         $newzone->save();
-        return redirect()->route('register.house')->with(['message' => 'New Zones is registered successfully']);
+        return redirect()->route('register.cleanningzone')->with(['message' => 'New Zones is registered successfully']);
     }
 
 
@@ -201,7 +263,7 @@ class AssetsController extends Controller
        {
            $newzone=zone::where('id', $id)->first();
            $newzone->delete();
-           return redirect()->route('register.house')->with(['message' => 'Respective Zone is deleted successfully']);
+           return redirect()->route('register.cleanningzone')->with(['message' => 'Respective Zone is deleted successfully']);
        }
 
 
@@ -214,7 +276,7 @@ class AssetsController extends Controller
         $editnewzone->type = $request['type'];
         $editnewzone->save();
   
-        return redirect()->route('register.house')->with(['message' => 'Respective zone Edited successfully']);
+        return redirect()->route('register.cleanningzone')->with(['message' => 'Respective zone Edited successfully']);
     }
   
 
@@ -226,7 +288,7 @@ class AssetsController extends Controller
         $cleanarea->zone_id = $request['zone'];
        
         $cleanarea->save();
-        return redirect()->route('register.house')->with(['message' => 'New Cleaning Area is registered successfully']);
+        return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area is registered successfully']);
     }
 
 
@@ -235,7 +297,7 @@ public function deletecleanarea($id)
        {
            $cleanareaa=cleaningarea::where('id', $id)->first();
            $cleanareaa->delete();
-           return redirect()->route('register.house')->with(['message' => 'Respective Clean Area is deleted successfully']);
+           return redirect()->route('register.cleaningareas')->with(['message' => 'Respective Clean Area is deleted successfully']);
        }
 
 
@@ -246,7 +308,7 @@ public function deletecleanarea($id)
         $editcleanarea->cleaning_name = $request['cleaning_name'];
         $editcleanarea->zone_id = $request['zone'];
         $editcleanarea->save();
-        return redirect()->route('register.house')->with(['message' => 'Respective Clean Area Edited successfully']);
+        return redirect()->route('register.cleaningareas')->with(['message' => 'Respective Clean Area Edited successfully']);
     }
  
 

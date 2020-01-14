@@ -1,74 +1,78 @@
 @extends('layouts.master')
 
 @section('title')
-    manage staff house
+    manage hall of resdence
     @endSection
 
 @section('body')
     <br>
    
-   
-<div class="container">
-  
-
- 
-<br><br><br>
-            <div >
-               @if(Session::has('message'))
+    @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-              @endif
-                  <h3><b>Available Staff Houses </b></h3>
+    @endif
+<div class="container">
+   <br>
+   <br>
+   <br>
+        
+            @if(Session::has('message'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+            @endif
+        <h3><b>Available Hall of Resdences </b></h3>
                   <hr>
-                <a href="{{ route('registerstaffhouse') }}"
-                   class="btn btn-primary">Add New Staff House</a>
-                   <br> <br> 
-    
-                <table id="myTableee" id="myTable" class="table table-striped">
-                      
+                <a href="{{ route('registerhall') }}" 
+                   class="btn btn-primary">Add new Hall of Resdence</a>
+                   <br><br>
+
+                <table id="myTablee" id="myTable" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">House Name</th>
-                        <th scope="col">Location</th>
+                        <th scope="col">Hall Name</th>
+                        <th scope="col">Campus</th>
+                        <th scope="col">Area</th>
                         <th scope="col">Type</th>
-                        <th scope="col">No of Rooms</th>
-                        <th scope="col">Campus Name</th>
+                        <th scope="col">Location</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
 
 
                     <tbody>
-                    <?php $i = 0; ?>
-                    @foreach($staffhouses as $house)
+                     <?php $i = 0; ?>
+                    @foreach($HallofResdence as $hall)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td>{{ $house->name_of_house }}</td>
-                            <td>{{ $house->location }}</td>
-                            <td>{{ $house->type}}</td>
-                            <td>{{ $house->no_room }}</td>
-                            <td>{{ $house['campus']->campus_name }}</td> 
+                            <td>{{ $hall->hall_name }}</td>
+                            <td>{{ $hall['campus']->campus_name }}</td>
+                            <td>{{ $hall->area_name}}</td>
+                            <td>{{ $hall->type}}</td>
+                            <td>{{ $hall->location }}</td>
+
+
                             
                             <td>
-
-
                             <div class="row">
 
 
                                     <a style="color: green;"
-                                       onclick="myfunc('{{ $house->id }}','{{ $house->name_of_house }}','{{ $house->location }}','{{$house->type}}','{{$house->no_room}}' )"
-                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
+                                       onclick="myfunc1('{{ $hall->id }}','{{ $hall->hall_name }}','{{ $hall->campus_id }}','{{ $hall->area_name }}','{{$hall->type}}','{{$hall->location}}' )"
+                                       data-toggle="modal" data-target="#editHall" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this House Completely? ')"
-                                          action="{{ route('house.delete', [$house->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to delete this Hall Completely? ')"
+                                          action="{{ route('hall.delete',[$hall->id]) }}">
                                         {{csrf_field()}}
 
 
@@ -79,70 +83,44 @@
                                         </button>
                                     </form>
                                 </div>
+
                          </td>
-                           
-                        </tr>
+                             </tr>
+
                     @endforeach
-                    </tbody>
+                </tbody>
                     
                 </table>
                 <br>
-
-            </div>
-            
+                
 
 
-
-               <div class="modal fade" id="editHouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    
+                        <div class="modal fade" id="editHall" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit House Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Hall Details</h5>
+
+
                 </div>
 
-                <form method="POST" action="edit/House" class="col-md-6">
+                <form method="POST" action="edit/Hall" class="col-md-6">
                     <div class="modal-body">
 
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">House Name <sup style="color: red;">*</sup></label>
+                            <label for="name_of_house">Hall Name <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_name"
-                                   name="name_of_house" placeholder="Enter House name">
-                            <input id="edit_id" name="edit_id" hidden>
+                                   id="edit_hname"
+                                   name="hall_name" placeholder="Enter Hall name">
+                            <input id="edit_hallid" name="edit_hallid" hidden>
                         </div>
 
 
 
-
-                        <div class="form-group ">
-                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_location"
-                                   name="location" placeholder="Enter House Location">
-                        </div>
-                       
-
-                    
-                        <div class="form-group ">
-                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_type"
-                                   name="type" placeholder="Enter House Type">
-                        </div>
-                       
-
-                         <div class="form-group ">
-                            <label for="editlocation">No of Rooms <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_room"
-                                   name="no_room" placeholder="Enter Number of Rooms">
-                        </div>
-
-
-
-                        <div class="input-group mb-3">
+                      <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             
                             <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
@@ -157,9 +135,30 @@
                     </div>   
 
 
-
+                    
+                        <div class="form-group ">
+                            <label for="editlocation">Area <sup style="color: red;">*</sup></label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edit_area"
+                                   name="area_name" placeholder="Enter House Type">
+                        </div>
                        
-                         <div style="width:600px;">
+
+                         <div class="form-group ">
+                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edit_type1"
+                                   name="type" placeholder="Enter Number of Rooms">
+                        </div>
+
+
+                         <div class="form-group ">
+                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edit_location1"
+                                   name="location" placeholder="Enter Number of Rooms">
+                        </div>
+                        <div style="width:600px;">
                                                 <div style="float: left; width: 130px"> 
                                                       
                                                         <button  type="submit" class="btn btn-primary">Save Changes
@@ -177,12 +176,12 @@
                                                 </div>
                 </form>
 
-
-                <div class="modal-footer">
+             <div class="modal-footer">
                 </div>
             </div>
         </div>
     </div>
+
 
 
 

@@ -184,7 +184,7 @@
            
                 <label> &nbsp;&nbsp;&nbsp;
                     @foreach($worksec as $dep)
-                               <input type="checkbox"  name="type[]" @if (in_array('HOS ELECTRICAL',$str_array)) { selected="selected" } @else{} @endif value="HOS {{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?>  &nbsp;&nbsp;&nbsp;
+                               <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?>  &nbsp;&nbsp;&nbsp;
      
                     @endforeach
                 </label>
