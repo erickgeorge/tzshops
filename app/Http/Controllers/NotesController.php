@@ -14,6 +14,7 @@ use App\Technician;
 use App\workorderMaterial;
 use App\Directorate;
 use App\Department;
+use App\workordersection;
    
 class NotesController extends Controller
 {
@@ -1052,6 +1053,12 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
             return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                 }
 
+    }
+    public function desdepts()
+    {
+        $data['sects'] = workordersection::orderby('section_name','ASC')->get();
+        $pdf = PDF::loadView('desdeptsreport', $data);
+        return $pdf->stream('All sections report - '.date('d-m-Y Hi').'.pdf');
     }
 
 }

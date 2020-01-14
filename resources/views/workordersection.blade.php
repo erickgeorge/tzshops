@@ -37,33 +37,8 @@ Workorder Section
 
             <a href="Add/section" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new Section for  Work order</a>
-                   <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
+                   <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
-
-                   
-                 
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf"></i> Generate Report</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">X</span>
-                          </button>
-                        </div>
-                        <form method="GET" action="{{url('depgenerate')}}">
-                            @csrf
-                       
-                        
-                        
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary">Generate</button>
-                        </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
 
 
                 <table id="myTablee" class="table table-striped">

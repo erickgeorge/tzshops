@@ -505,3 +505,4 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
 Route::get('inroomreporwithrooms','HomeController@inroomreportextendedwithrooms')->name('inroomreporwithrooms');
 
   Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport');
+  Route::get('desdepts','NotesController@desdepts')->name('desdepts');
