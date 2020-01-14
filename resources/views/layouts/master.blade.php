@@ -441,6 +441,9 @@
                     </li>
                     
  <li class="nav-item">
+  <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
+                    </li>
      <a href="{{ url('comp') }}" class="nav-link" style="color:white"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
 
