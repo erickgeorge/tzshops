@@ -36,7 +36,7 @@ Cleaningzone Registration
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
+                            <label style="width:150px;" class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -46,21 +46,26 @@ Cleaningzone Registration
 
                         </select>
                     </div> 
-                    <div class="form-group col-lg-6">
-                        <label for="dir_name">Zone Name <sup style="color: red;">*</sup></label>
+
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:150px;" class="input-group-text" for="directorate">Zone Name<sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="zone_name" placeholder="Enter Zone Name">
                     </div>
 
-
-                       
-
-
-                     <div class="form-group col-lg-6">
-                        <label for="dir_name">Zone Type <sup style="color: red;">*</sup></label>
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:150px;" class="input-group-text" for="directorate">ZZone Type<sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="type" placeholder="Enter Zone Type">
                     </div>
+
+
 
 
                     <button type="submit" class="btn btn-primary">Register

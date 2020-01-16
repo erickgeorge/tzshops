@@ -37,7 +37,7 @@ StaffHouse Registrartion
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
+                            <label style="width:150px;" class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -47,26 +47,51 @@ StaffHouse Registrartion
 
                         </select>
                     </div> 
-                    <div class="form-group col-lg-6 ">
-                        <label for="dir_name">House Name <sup style="color: red;">*</sup></label>
+
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:150px;" class="input-group-text" for="directorate">House Name <sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="name_of_house" placeholder="Enter House Name">
                     </div>
 
-                    <div class="form-group col-lg-6">
-                        <label for="dir_abb">House Location <sup style="color: red;">*</sup></label>
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:150px;" class="input-group-text" for="directorate">House Name <sup style="color: red;">*</sup></label>
+                        </div>
+                        <input style="color: black" type="text" required class="form-control" id="Housename"
+                               name="name_of_house" placeholder="Enter House Name">
+                    </div>
+
+
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:150px;" class="input-group-text" for="directorate">House Location <sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="houselocation"
                                name="location" placeholder="Enter House Location ">
                     </div>
-                    <div class="form-group col-lg-6">
-                        <label for="dir_name">Type of House <sup style="color: red;">*</sup></label>
+
+
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:150px;" class="input-group-text" for="directorate">Type of House <sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="type" placeholder="Enter House Type">
                     </div>
 
 
-                    <div class="form-group col-lg-6">
-                        <label for="dir_name">No of Rooms <sup style="color: red;">*</sup></label>
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:150px;" class="input-group-text" for="directorate">No of Rooms<sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="no_room" placeholder="Enter No of Rooms"    onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) ">
                     </div>

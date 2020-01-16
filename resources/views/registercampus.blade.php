@@ -30,17 +30,28 @@ Campus Registration
                 <form method="POST" action="{{ route('campus.save') }}" class="col-lg-12">
                     @csrf
                     <div  align='center'>
-                    <div class="form-group col-lg-6">
-                        <label for="dir_name">Campus Name <sup style="color: red;">*</sup></label>
+
+
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:200px;" class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="campus_name" placeholder="Enter Campus Name">
                     </div>
 
-                    <div class="form-group col-lg-6">
-                        <label for="dir_abb">Campus Location <sup style="color: red;">*</sup></label>
+                    <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+                          <label style="width:200px;" class="input-group-text" for="directorate">Campus Location<sup style="color: red;">*</sup></label>
+                        </div>
                         <input style="color: black" type="text" required class="form-control" id="houselocation"
                                name="location" placeholder="Enter Campus Location ">
                     </div>
+
+                    
+
 
                     <button  type="submit" class="btn btn-primary">Register
                         New Campus

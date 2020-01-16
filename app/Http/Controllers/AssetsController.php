@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\House;
-use App\Hall;
-use App\notification;
+use App\house;
+use App\hall;
+use App\Notification;
 use App\user;
-use App\campus;
+use App\Campus;
 use App\zone;
 use App\cleaningarea;
 
@@ -368,6 +368,14 @@ public function deletecleanarea($id)
             'campuses' => Campus::all(),
                 'newzone' => zone::all(),
           ]);
+     }
+
+     public function nonbuildingasset(){
+      return view('Nonbuildingasset');
+     }
+
+     public function cleaningcompany(){
+      return view('cleaningcompany');
      }
 }
  

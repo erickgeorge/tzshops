@@ -535,9 +535,7 @@
                  
 
 
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('manage_Houses')}}">Assets</a>
-                    </li>
+                    
 
 
                      <li class="nav-item">
@@ -557,10 +555,12 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('manage_Campus')}}">Manage Campuses</a>
                <a style="color:white" class="dropdown-item" href="{{ url('manage_Houses')}}">Manage Staff Houses </a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('manage_Hall_of_resdence')}}">Manage  Hall of Resdences</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('manage_Hall_of_resdence')}}">Manage  Hall of Residences</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('manage_Cleaning_zone')}}">Manage  Cleaning Zone</a>
 
                  <a style="color:white" class="dropdown-item" href="{{ url('manage_Cleaning_area')}}">Manage Cleaning Area </a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('cleaningcompany')}}">Manage Cleaning Company </a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('nonbuildingasset')}}">Manage Non-building Assets </a>
 
 
               
