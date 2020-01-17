@@ -10,6 +10,7 @@ use App\user;
 use App\Campus;
 use App\zone;
 use App\cleaningarea;
+use App\NonBuildingAsset;
 
 class AssetsController extends Controller
 {
@@ -371,7 +372,23 @@ public function deletecleanarea($id)
      }
 
      public function nonbuildingasset(){
-      return view('Nonbuildingasset');
+
+      $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        return view('Nonbuildingasset', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'NonAsset' => NonBuildingAsset::all()
+  
+          ]);
+     }
+
+     public function registernonbuildingasset(){
+      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('registernonbuildingasset', ['role' => $role,'notifications' => $notifications]);
      }
 
      public function cleaningcompany(){

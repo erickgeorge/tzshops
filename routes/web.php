@@ -506,7 +506,7 @@ Route::get('inroomreporwithrooms','HomeController@inroomreportextendedwithrooms'
 
   Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport');
   Route::get('desdepts','NotesController@desdepts')->name('desdepts');
-
+//////////////////// non building assets & cleaning company ////////////////////////////
 Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbuildingasset');
 Route::get('cleaningcompany','AssetsController@cleaningcompany')->name('cleaningcompany');
 
