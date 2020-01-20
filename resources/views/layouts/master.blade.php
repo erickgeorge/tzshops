@@ -525,8 +525,7 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
-
+                
               
 
         </div>
@@ -561,6 +560,8 @@
                  <a style="color:white" class="dropdown-item" href="{{ url('manage_Cleaning_area')}}">Manage Cleaning Area </a>
                  <a style="color:white" class="dropdown-item" href="{{ url('cleaningcompany')}}">Manage Cleaning Company </a>
                  <a style="color:white" class="dropdown-item" href="{{ url('nonbuildingasset')}}">Manage Non-building Assets </a>
+                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
+
 
 
               

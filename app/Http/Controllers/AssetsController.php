@@ -218,12 +218,17 @@ class AssetsController extends Controller
 
      public function RegisteCampus(Request $request)
     {
-      
+        
+        if (!empty(Campus::where('campus_name',$request['campus_name'])->first())){
+            return redirect()->back()->withErrors(['message' => 'Campus name already exist']);
+        }
+
         $campuses = new Campus();
         $campuses->campus_name = $request['campus_name'];
         $campuses->location = $request['location'];
         $campuses->save();
-        return redirect()->route('register.campus')->with(['message' => 'New Campus is registered successfully']);
+        return redirect()->route('register.campus')->with(['message' => 'New campus is registered successfully']);
+
     }
 
 
