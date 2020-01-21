@@ -19,7 +19,7 @@
             </ul>
         </div>
             @endif
-        <h3><b>Non-Building Assets </b></h3>
+        <h3><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b></h3>
                   <hr>
                 <a href="{{ route('registernonbuildingasset') }}" 
                    class="btn btn-primary">Add New Non-Building Assets</a>
@@ -30,7 +30,7 @@
                     <tr>
                         <th scope="col">#</th>
 
-                        <th scope="col">Name of asset</th>
+                        <th scope="col">Located at</th>
                         <th>Total Quantity</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -44,12 +44,21 @@
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             
-                            <td>{{ $non->name_of_asset }}</td>
+                            <td> @if($non->area_id==null)
+                                {{ $non->location }}
+                                @else
+                                <?php $asset = Area::where('id',$non->area_id)->get();?>
+                                @foreach($asset as $asset)
+                                @endforeach
+                                {{ $asset->name_of_area }}
+                                @endif
+                            </td>
                            
                             <td>{{ $non->total_asset }}</td>
                             <td>
-                            <form method="Get" action="NonBuildAsset">
-                                <input type="text" value="{{ $non->name_of_asset }}" hidden name="asset">
+                            <form method="Get" action="@if($non->area_id==null) @else NonassetIn @endif ">
+                                <input type="text" value="@if($non->area_id==null){{ $non->location }} @else {{ $non->area_id }} @endif" hidden name="location">
+                                <input type="text" name="asset" value="{{ $_GET['asset'] }}" hidden>
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-eye"></i> View</button>
                             </form>
 

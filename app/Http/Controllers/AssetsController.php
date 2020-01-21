@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\house;
 use App\hall;
@@ -11,6 +14,10 @@ use App\Campus;
 use App\zone;
 use App\cleaningarea;
 use App\NonBuildingAsset;
+use App\Area;
+use App\Room;
+use App\Block;
+use App\Location;
 
 class AssetsController extends Controller
 {
@@ -377,10 +384,14 @@ public function deletecleanarea($id)
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
+$assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_asset')) ->OrderBy('name_of_asset','ASC')
+->groupBy('name_of_asset')
+->get();
+
         return view('Nonbuildingasset', [
             'role' => $role,
             'notifications' => $notifications,
-            'NonAsset' => NonBuildingAsset::all()
+            'NonAsset' => $assets,
   
           ]);
      }
@@ -393,6 +404,113 @@ public function deletecleanarea($id)
 
      public function cleaningcompany(){
       return view('cleaningcompany');
+     }
+
+     public function submitnonAsset(Request $request){
+      $request->validate([
+            'assetname' => 'required',
+            'assettype'=>'required',
+            'assetmdate'=>'required',
+            'assetspan'=>'required',
+            'quantity'=>'required',
+        ]);
+
+
+       
+
+        if ($request['location'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Location required required ']);
+        }
+        $non_building_asset = new NonBuildingAsset();
+
+
+        if ($request['checkdiv'] == 'yesmanual') {
+
+            $non_building_asset->location = $request['manual'];
+
+        } else {
+
+            $non_building_asset->room_located = $request['room'];
+            $non_building_asset->block_id = $request['block'];
+            $non_building_asset->area_id = $request['area'];
+            $non_building_asset->loc_id = $request['location'];
+
+        }
+
+
+        $non_building_asset->name_of_asset = $request['assetname'];
+        $non_building_asset->type = $request['assettype'];
+        $non_building_asset->manufactured_date = $request['assetmdate'];
+        $non_building_asset->life_span = $request['assetspan'];
+        $non_building_asset->quantity = $request['quantity'];
+        $non_building_asset->save();
+
+        return redirect()->route('nonbuildingasset')->with(['message' => 'Asset Added Succesfully']);
+     }
+
+     public function NonBuildAsset()
+     {
+
+
+       $assets = NonBuildingAsset::
+                     select(DB::raw('count(id) as total_asset, location,area_id'))
+                     ->where('name_of_asset',$_GET['asset'])
+                     ->groupBy('area_id')
+                     ->groupBy('location')
+                     ->get();
+
+  $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+ return view('Nonbuildingasset1', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'NonAsset' => $assets,
+  
+          ]);
+     }
+
+     public function NonassetIn()
+     {
+       $areaaa = Area::select('name_of_area')->where('id',$_GET['location'])->get();
+    $assets = NonBuildingAsset::
+                     select(DB::raw('count(id) as total_asset,block_id'))
+                     ->where('name_of_asset',$_GET['asset'])
+                     ->Where('area_id',$_GET['location'])
+                     ->groupBy('block_id')
+                     ->get();
+
+  $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+ return view('Nonbuildingasset2', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'NonAsset' => $assets,
+            'aariya'=>$areaaa,
+  
+          ]);
+     }
+
+     public function NonassetAt()
+     {
+
+$assets = NonBuildingAsset::where('name_of_asset',$_GET['asset'])->where('block_id',$_GET['location'])->get();
+
+$coll = NonBuildingAsset::select('area_id')->distinct()->where('name_of_asset',$_GET['asset'])->where('block_id',$_GET['location'])->get();
+
+
+
+$areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
+  $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+ return view('Nonbuildingasset3', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'NonAsset' => $assets,
+  'aariya'=>$areaaa,'arcol'=>$coll,
+          ]);
      }
 }
  

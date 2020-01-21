@@ -165,9 +165,9 @@
     <div class="align-content-center">
         <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label  style="height: 40px;" class="input-group-text" for="username">Quantity</label>
+        <label  style="height: 40px;" class="input-group-text">Quantity</label>
       </div>
-         <input style="color: black; height: 40PX;"  required type="number" class="form-control" id="assetspan" aria-describedby="assetspan" min="1" name="assetspan" placeholder="enter quantity" value="{{ old('assettype') }}">
+         <input style="color: black; height: 40PX;"  required type="number" class="form-control" id="assetquantity" aria-describedby="assetquantity" min="1" name="quantity">
      </div>
     </div>
     </div>
@@ -177,7 +177,7 @@
         <div align="center">
         <button type="submit" class="btn btn-primary">Submit</button>
 
-        <a class="btn btn-danger" href="/work_order" role="button">Cancel</a>
+        <a class="btn btn-danger" href="/nonbuildingasset" role="button">Cancel</a>
 </div>
         </div>
     </form>

@@ -511,4 +511,7 @@ Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbui
 Route::get('cleaningcompany','AssetsController@cleaningcompany')->name('cleaningcompany');
 
 Route::get('registernonbuildingasset','AssetsController@registernonbuildingasset')->name('registernonbuildingasset');
-Route::get('registercleaningcompany','AssetsController@registercleaningcompany')->name('registercleaningcompany');
+Route::post('submitnonAsset','AssetsController@SubmitnonAsset')->name('nonbuildingasset.create');
+Route::get('NonBuildAsset','AssetsController@NonBuildAsset')->name('NonBuildAsset');
+Route::get('NonassetIn','AssetsController@NonassetIn')->name('NonassetIn');
+Route::get('NonassetAt','AssetsController@NonassetAt')->name('NonassetAt');

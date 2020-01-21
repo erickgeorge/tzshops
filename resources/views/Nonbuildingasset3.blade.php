@@ -5,7 +5,7 @@
     @endSection
 
 @section('body')
-   <?php use App\Area; ?> 
+   <?php use App\Room; use App\Area;?> 
     <br>
 <div class="container">
    <br>
@@ -19,7 +19,18 @@
             </ul>
         </div>
             @endif
-        <h3><b>Non-Building Assets </b></h3>
+       <h3><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - 
+
+<small>
+@foreach($arcol as $arcol)
+        <?php $cvb = Area::where('id',$arcol->area_id)->get(); ?>
+        @foreach($cvb as $cvsb)
+        {{ $cvsb->name_of_area }}
+        @endforeach
+@endforeach
+</small>
+
+        - <small>@foreach($aariya as $arriya) {{$arriya->name_of_block }} @endforeach </small></h3>
                   <hr>
                 <a href="{{ route('registernonbuildingasset') }}" 
                    class="btn btn-primary">Add New Non-Building Assets</a>
@@ -30,9 +41,10 @@
                     <tr>
                         <th scope="col">#</th>
 
-                        <th scope="col">Name of asset</th>
+                        <th scope="col">Located at</th>
+                        <th scope="col">MFG Date</th>
+                        <th scope="col">Life span</th>
                         <th>Total Quantity</th>
-                        <th scope="col">Action</th>
                     </tr>
                     </thead>
 
@@ -44,16 +56,18 @@
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             
-                            <td>{{ $non->name_of_asset }}</td>
-                           
-                            <td>{{ $non->total_asset }}</td>
-                            <td>
-                            <form method="Get" action="NonBuildAsset">
-                                <input type="text" value="{{ $non->name_of_asset }}" hidden name="asset">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-eye"></i> View</button>
-                            </form>
-
-                         </td>
+                            <td> 
+                                <?php $asset = Room::where('id',$non->room_located)->get();?>
+                                @foreach($asset as $asset)
+                                {{ $asset->name_of_room }}
+                                @endforeach
+                                
+                                
+                            </td>
+                           <td>{{ $non->manufactured_date }}</td>
+                           <td>{{ $non->life_span }}</td>
+                            <td>{{ $non->quantity }}</td>
+                            
                              </tr>
 
                     @endforeach
