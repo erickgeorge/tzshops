@@ -5,9 +5,12 @@ Campus Registration
 @endSection
 
 @section('body')
-<br>
 
 @if ($errors->any())
+
+
+<div class="container">
+    <br>
 <div class="alert alert-danger" style="margin-top: 6%;">
 	<ul>
 		@foreach ($errors->all() as $error)
@@ -23,9 +26,10 @@ Campus Registration
 	</ul>
 </div>
 @endif
+<br>
 
                 <h4 style="margin-top: 6%" align="center" id="Add New campus">Register New Campus</h4>
-                <hr>
+                <hr class="container">
                 <p align="center" style="color: red; margin-left: 2%;">All fields are compulsory</p>
                 <form method="POST" action="{{ route('campus.save') }}" class="col-lg-12">
                     @csrf
@@ -56,7 +60,7 @@ Campus Registration
                     <button  type="submit" class="btn btn-primary">Register
                         New Campus
                     </button>
-                        <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
+                        <a class="btn btn-danger" href="/manage_Campus" role="button">Cancel </a>
                     </div>
                 </form>
             </div>

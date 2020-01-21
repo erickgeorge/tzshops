@@ -32,11 +32,11 @@
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">House Name</th>
+                        <th scope="col">Grade</th>
+                        <th scope="col">Number of Bedrooms</th>
                         <th scope="col">Location</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">No of Rooms</th>
-                        <th scope="col">Campus Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Campus</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -49,8 +49,9 @@
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->name_of_house }}</td>
-                            <td>{{ $house->location }}</td>
                             <td>{{ $house->type}}</td>
+                            <td>{{ $house->location }}</td>
+                            
                             <td>{{ $house->no_room }}</td>
                             <td>{{ $house['campus']->campus_name }}</td> 
                             
@@ -106,10 +107,10 @@
 
                         @csrf
                         <div class="form-group">
-                            <label for="name_of_house">House Name <sup style="color: red;">*</sup></label>
+                            <label for="name_of_house">Grade </label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_name"
-                                   name="name_of_house" placeholder="Enter House name">
+                                   name="name_of_house" placeholder="Enter House Grade">
                             <input id="edit_id" name="edit_id" hidden>
                         </div>
 
@@ -117,37 +118,71 @@
 
 
                         <div class="form-group ">
-                            <label for="editlocation">Location <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_location"
-                                   name="location" placeholder="Enter House Location">
+                            <label for="editlocation">Location </label>
+                            
+                            <select style="width: 350px;" required class="custom-select" name="location" id="campus">
+                            <option value="">Choose Location...</option>
+                                 
+                                <option value="BIAFRA FLATS">BIAFRA FLATS</option>
+                                <option value="DARAJANI HOUSES">DARAJANI HOUSES</option>
+                                <option value="KILIMAHEWA HOUSES">KILIMAHEWA HOUSES</option>
+                                <option value="KILIMAHEWA FLATS">KILIMAHEWA FLATS</option>
+                                <option value="KILELENI HOUSES">KILELENI HOUSES</option>
+                                <option value="KIJITONYAMA FLATS">KIJITONYAMA FLATS</option>
+                                <option value="KINONDONI NGANO HOUSES">KINONDONI NGANO HOUSES</option>
+                                <option value="KOROSHINI HOUSES">KOROSHINI HOUSES</option>
+                                <option value="KUNDUCHI HOUSES">KUNDUCHI HOUSES</option>
+                                <option value="KUNDUCHI QUARTERS">KUNDUCHI QUARTERS</option>
+                                <option value="LAMBONI HOUSES">LAMBONI HOUSES</option>        
+                                <option value="UBUNGO HOUSES">UBUNGO HOUSES</option>
+                                <option value="MBEZI HOUSES">MBEZI HOUSES</option>
+                                <option value="MABIBO HOSTEL">MABIBO HOSTEL</option>
+                                <option value="MIKOCHENI HOUSES">MIKOCHENI HOUSES</option>
+                                <option value="MIKOCHENI QUARTERS">MIKOCHENI QUARTERS</option>
+                                <option value="MPAKANI QUARTERS">MPAKANI QUARTERS</option>
+                                <option value="MWEMBENI HOUSES">MWEMBENI HOUSES</option>
+                                <option value="MBUGANI HOUSES">MBUGANI HOUSES</option>
+                                <option value="NEC HOUSES">NEC HOUSES</option>
+                                <option value="NG'AMBO HOUSES">NG'AMBO HOUSES</option>
+                                <option value="NG'AMBO FLATS ">NG'AMBO FLATS</option>
+                                <option value="SIMBA FLATS">SIMBA FLATS</option>
+                                <option value="SIMBA HOUSES">SIMBA HOUSES</option>
+                                <option value="SINZA HOUSES">SINZA HOUSES</option>
+                                <option value="SINZA FLATS">SINZA FLATS</option>
+                                <option value="UBUNGO FLATS">UBUNGO FLATS</option>
+                                <option value="UNIVERSITY ROAD">UNIVERSITY ROAD</option>
+                                
+                                
+
+                        </select>
                         </div>
                        
 
                     
                         <div class="form-group ">
-                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <label for="editlocation">No of Bedrooms </label>
+                            <input style="color: black;width:350px" type="Number" required class="form-control"
                                    id="edit_type"
-                                   name="type" placeholder="Enter House Type">
+                                   name="type" placeholder="Enter Number of Bedrooms">
                         </div>
                        
 
                          <div class="form-group ">
-                            <label for="editlocation">No of Rooms <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <label for="editlocation">Quantity</label>
+                            <input style="color: black;width:350px" type="Number" required class="form-control"
                                    id="edit_room"
-                                   name="no_room" placeholder="Enter Number of Rooms">
+                                   name="no_room" placeholder="Enter House Quantity">
                         </div>
 
 
 
-                        <div class="input-group mb-3">
-                        <div class="input-group-prepend">
+                        <div class="form-group">
+                       
                             
-                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
-                        </div>
-                        <select required class="custom-select" name="campus" id="campus">
+                            <label for="directorate">Campus</label>
+                            
+                       
+                        <select style="width: 350" required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
                             @foreach($campuses as $campus)
                                 <option value="{{ $campus->id }}">{{ $campus->campus_name }}</option>

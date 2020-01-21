@@ -51,8 +51,8 @@
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td>{{ $campus->campus_name }}</td>
-                            <td>{{ $campus->location }}</td>
+                            <td> <?php echo strtoupper( $campus->campus_name ); ?></td>
+                            <td> <?php echo strtoupper( $campus->location  ); ?> </td>
                              <td>
 
 
