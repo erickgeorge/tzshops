@@ -11,7 +11,7 @@ use App\User;
 use App\Notification;
 use App\Material;
 use App\Technician;
-use App\workorderMaterial;
+use App\WorkOrderMaterial;
 use App\Directorate;
 use App\Department;
 use App\workordersection;

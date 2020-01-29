@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Login</title>
+ <link rel="icon" type="image/png" href="{{ url('/images/index.jpg') }}"/>
+        <title>ESMIS - Login</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('/fontawesome/css/all.css') }}">
 <link rel="stylesheet" href="/css/main.css">
     </head>
-    <body style="background-color: #e1e8f0">
+    <body style="background-color: #fff">
 
 <style>
     
@@ -29,23 +29,22 @@ background-color: #423e3e;
  }
 
 
-</style>
-
-
-<br>
-<br>
-<br>
-  
-  <h1 style="text-align: center"><b>Estates Services Management Information System</b></h1>
+</style><br>
+  <div class="container" align="center">
+      <img src="{{ url('/images/udsm.png') }}" alt="udsm logo" style="height: 150px; width: 150px;">
+      <p><h3>UNIVERSITY OF DAR ES SALAAM</h5></p>
+  </div>
+  <h2 style="text-align: center"><b>Estates Services Management Information System</b></h1>
   <br>
  
 
                 <div class=" container col-md-4 jumbotron ">
-                <div  >
+                    <div align="center" style="font-size: 18px;">LOGIN<hr></div>
+                <div>
                      @guest
                     <form method="POST" action="{{ route('login')}}" class="">
                          @csrf
-
+                         
 
                      <div >
                     

@@ -30,7 +30,7 @@
 
 
 </head>
-<body>
+<body  onload="createTable()">
 <style type="text/css">
     .nav-item:hover{
         background-color:#0acb;
@@ -357,6 +357,23 @@
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white" ></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+         Procurement
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+
+               <a class="dropdown-item" style="color:white" href=" {{ url('procurementAddMaterial') }}">Add new procurement list</a>
+               <a class="dropdown-item" style="color:white" href="{{ url('ProcurementHistory') }}">View Procurement History</a>
+               <a class="dropdown-item" style="color:white" href="">Send Materials to store</a>
+        </div>
+       </li>
 
                 @endif
 

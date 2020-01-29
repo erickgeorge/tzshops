@@ -120,7 +120,7 @@
           @if(auth()->user()->type =='STORE')
 
           <br>
-          @if($item->secondstatus != 1)
+          @if($item->secondstatus == 1)
 
           <h4  style="     color: #733703;"><b> Please assign Issue Note for materials requested so as Head of Section to Sign.</b></h4>
          <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>   @endif

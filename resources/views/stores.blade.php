@@ -120,6 +120,7 @@ use App\Material;?>
                 @if(auth()->user()->type == 'STORE')
                 <th >action</th>
                 @endif
+                
             </tr>
             </thead>
 
@@ -145,6 +146,7 @@ use App\Material;?>
                         <!--<a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>-->
                         </td>
                         @endif
+                       
                     </tr>
                     @endforeach
             </tbody>
