@@ -51,17 +51,13 @@ class UserController extends Controller
         $user->lname = $request['lname'];
         $user->name = $request['name'];
         $user->phone = $request['phone'];
-        $user->email = $request['email'];
-        
+        $user->email = $request['email']; 
         $user->type  = implode(",", $request->type);
         $user->type = ltrim($user->type,",");
         $user->type = rtrim($user->type,",");
         $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
         $user->IoW = 1;
-        
-
-
         $user->save();
 
         $role = new UserRole();
@@ -80,11 +76,12 @@ class UserController extends Controller
         // ]);
         
 
-        if( $user->type = 'Inspector Of Works' ){
+        if( $user->type == 'Inspector Of Works' ){
           
         return redirect()->route('users.inspectorofwork')->with(['message' => 'Please assign zone for Inspector of Work you created.']);
 
         }
+
         else
 
         return redirect()->route('users.view')->with([
