@@ -29,7 +29,7 @@ class MinuteController extends Controller
        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $sheets = MinuteSheet:: select(DB::raw('Woid'),'status')->groupBy('Woid')->groupBy('status')->get();
-         return view('minutesheets', [
+         return view('Minutesheets', [
             'role' => $role,
             'sheet'=>$sheets,
             'notifications' => $notifications,

@@ -104,9 +104,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form method="POST" action="transport_request/accept">
                 <div class="modal-body">
                     <p>Comments from Transport Officer .</p>
-                    <form method="POST" action="transport_request/accept">
+                    
 					
 					  &nbsp &nbsp 
 					   @csrf
@@ -119,13 +120,14 @@
 						
 					
                         
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save</button>
 						
                 </div>
+                </form>
             </div>
         </div>
     </div>

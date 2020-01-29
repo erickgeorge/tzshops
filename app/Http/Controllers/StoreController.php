@@ -11,7 +11,7 @@ use App\Material;
 use App\WorkOrderStaff;
 use App\Technician;
 use App\WorkOrder;
-
+use App\Procurement;
 use App\WorkOrderMaterial;
 
 class StoreController extends Controller
@@ -611,4 +611,100 @@ public function deletematerial($id)
 		 return redirect()->back()->with(['message' => 'Materials sent again successfully to Inspector of Work']);
 	
 }
+    public function procurementAddMaterial()
+    {
+      
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+ return view('procurementstostore', [ 'notifications' => $notifications, 'role' => $role ]);
+
+    }
+
+    public function procuredmaterialsadding(Request $request)
+    {
+      $y=1;
+    $totmat=$request['totalinputs']/5;
+   
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+      $z=1;
+      $tag = date("Y-m-d H:i:s");
+      for ($x = 1; $x <= $totmat; $x++) {
+        
+      $procure_material = new  Procurement();
+
+            $procure_material->material_name = $request[$z];
+              $z=$z+1;
+            $procure_material->material_description = $request[$z];
+              $z=$z+1;
+            $procure_material->unit_measure = $request[$z];
+              $z=$z+1;
+            $procure_material->total_input = $request[$z];
+              $z=$z+1;
+            $procure_material->price_tag = $request[$z];
+
+            $procure_material->tag_ = $tag; //differentiating from different inputs 
+            $procure_material->procured_by = auth()->user()->id;
+            $procure_material->store_received = 0;
+              $z++;
+            $procure_material->save();
+    }
+
+    return redirect()->route('ProcurementHistory')->with(['message' => 'Procured Materials Saved Successfully!. ']);
+  }
+
+  public function ProcurementHistory()
+  {
+     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+     if(request()->has('start'))  { //date filter
+        
+        
+        $from=request('start');
+        $to=request('end');
+        
+        
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+
+$procured = Procurement::
+            select(DB::raw('count(id) as total_materials, tag_,procured_by,store_received'))
+            ->whereBetween('created_at', [$from, $to])
+            ->groupBy('tag_')
+            ->groupBy('procured_by')
+            ->groupBy('store_received')
+            ->orderBy('created_at','Desc')
+            ->get();
+}else{
+      $procured = Procurement::
+            select(DB::raw('count(id) as total_materials, tag_,procured_by,store_received'))
+            ->groupBy('tag_')
+            ->groupBy('procured_by')
+            ->groupBy('store_received')
+            ->orderBy('created_at','Desc')
+            ->get();
+
+
+}
+
+      return view('procurementhistory', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$procured]); 
+  }
+
+  public function procuredMaterials($id)
+  {
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+      $material = Procurement::where('tag_',$id)->orderBy('material_name','Asc')->get();
+
+return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
+  }
+
 }

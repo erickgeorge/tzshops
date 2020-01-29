@@ -104,7 +104,7 @@ class WorkOrderController extends Controller
  
 	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been REJECTED .  Thanks   Directorate of Estates.';
 
-         $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');
+        /* $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');
 $client = new \Nexmo\Client($basic);
 
 $message = $client->message()->send([
@@ -113,7 +113,7 @@ $message = $client->message()->send([
     'text' => $msg
 ]);
 
-session::flash('message', ' Your workorder have been rejected successfully ');
+//session::flash('message', ' Your workorder have been rejected successfully '); */
 
 
 
@@ -131,7 +131,7 @@ session::flash('message', ' Your workorder have been rejected successfully ');
         $senderf=auth()->user()->fname;
         $senderl=auth()->user()->lname;
         $sender=$senderf.' '.$senderl;
-
+        $section=auth()->user()->type;
 
         /*
         Mail::to($toEmail)->send(new MailNotify(auth()->user()));

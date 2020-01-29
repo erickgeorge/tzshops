@@ -530,3 +530,9 @@ Route::post('submitnonAsset','AssetsController@SubmitnonAsset')->name('nonbuildi
 Route::get('NonBuildAsset','AssetsController@NonBuildAsset')->name('NonBuildAsset');
 Route::get('NonassetIn','AssetsController@NonassetIn')->name('NonassetIn');
 Route::get('NonassetAt','AssetsController@NonassetAt')->name('NonassetAt');
+
+
+Route::get('procurementAddMaterial','StoreController@procurementAddMaterial')->name('procurementAddMaterial');
+Route::post('procuredmaterialsadding','StoreController@procuredmaterialsadding')->name('procuredmaterialsadding');
+Route::get('ProcurementHistory','StoreController@ProcurementHistory')->name('ProcurementHistory');
+Route::get('procuredMaterials/{id}','StoreController@procuredMaterials')->name('procuredMaterials');

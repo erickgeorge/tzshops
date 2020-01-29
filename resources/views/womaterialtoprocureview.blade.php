@@ -5,8 +5,9 @@
     @endSection
 
 @section('body')
-
-<?php use App\Minutesheet; ?>
+<?php
+use App\User;
+use App\MinuteSheet; ?>
     <br>
     <br>
 
@@ -79,7 +80,7 @@
          <a class="btn btn-primary btn-sm" href="{{ route('store.materialafterpurchase', [$item->work_order_id]) }}" role="button">Notify Store Manager</a>
          @endif
 <?php 
-$checkes = minutesheet::where('Woid',$item->work_order_id)->get();
+$checkes = Minutesheet::where('Woid',$item->work_order_id)->get();
  ?>
  @if(count($checkes)>0)
   <b class="badge badge-info btn-sm">Minutes sheet already created</b> <a class="btn btn-success" href="{{ url('minutesheet',[$item->work_order_id]) }}">View</a>
@@ -97,9 +98,7 @@ $checkes = minutesheet::where('Woid',$item->work_order_id)->get();
                                 </a>
                             </div> --}}
             @endif
-                     <?php
-use App\User;
- ?>
+                     
 <!-- SOMETHING STRANGE HERE -->
           
 
