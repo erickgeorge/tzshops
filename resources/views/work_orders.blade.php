@@ -275,7 +275,11 @@ foreach($userwithid as $userwithid)
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
-                                <td><span class="badge badge-warning">new</span></td>
+                                <td><span class="badge badge-warning">new</span>
+                                <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif
                             @elseif($work->status == 1)
                                 <td><span class="badge badge-success">Accepted</span>
                                   <br>

@@ -7,8 +7,11 @@ use App\Directorate;
 use App\Location;
 use App\Notification;
 use App\workordersection;
+use App\iowzone;
 use App\User;
 use Illuminate\Http\Request;
+
+
 
 class DirectorateController extends Controller
 {
@@ -16,6 +19,24 @@ class DirectorateController extends Controller
     {
         $this->middleware('auth');
     }
+
+
+    
+     public function IoWZonesview(){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+       return view('iowzoneview', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'iowzone' => iowzone::OrderBy('zonename', 'ASC')->get()
+            
+        ]);
+   
+    }
+
+
 
     public function workordersectionView(){
 
@@ -51,6 +72,8 @@ class DirectorateController extends Controller
             'worksec' => workordersection::OrderBy('section_name', 'ASC')->get()
         ]);
     }
+
+
 
 
     public function departmentsView(){
@@ -177,6 +200,23 @@ class DirectorateController extends Controller
      }
 
 
+        public function addiowzoneView(){
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        return view('add_iowzone', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get()
+        ]);
+
+
+     }
+
+
+
+    
     
 
     public function createDirectorate(Request $request)
@@ -313,6 +353,7 @@ class DirectorateController extends Controller
       
     }
 	
+    
 	
 
     public function createworkorderection(Request $request)
@@ -329,6 +370,25 @@ class DirectorateController extends Controller
 
         return redirect()->route('section.manage')->with(['message' => 'Work order Section added successfully']);
     }
+
+
+
+
+    public function createiowzone(Request $request)
+    {
+        
+         if (!empty(iowzone::where('zonename',$request['zonename'])->first())){
+            return redirect()->back()->withErrors(['message' => 'IoW Zone already exist']);
+        }
+
+        $iowzone = new iowzone();
+        $iowzone->zonename = $request['zonename' ];
+       
+        $iowzone->save();
+
+        return redirect()->route('manage.IoWZones')->with(['message' => 'IoW Zone added successfully']);
+    }
+    
 	
 
 	public function editworkorderSection(Request $request)

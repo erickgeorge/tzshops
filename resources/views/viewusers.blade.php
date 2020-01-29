@@ -182,7 +182,17 @@ else {
         }else { echo $user->phone;}
 
       ?></td>
-      <td style="text-transform: lowercase;">{{ $user->type }}</td>
+
+      @if( $user->type == "Inspector Of Works")
+      <td style="text-transform: lowercase;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+       
+      @else
+
+             <td style="text-transform: lowercase;">{{ $user->type }} </td>
+      
+      @endif
+
+
          <td>{{ $user['department']['directorate']->name }}</td>
         <td>{{ $user['department']->name }}</td>
         <td>

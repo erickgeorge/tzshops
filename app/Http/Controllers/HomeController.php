@@ -1299,6 +1299,19 @@ $v5=$type[4];
 
     }
 
+
+        public function iowzone()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        $IoW = User::where('id', '<>', auth()->user()->id)->where('status', '=', 1)->where('type', 'inspector of works')->where('IoW', 1)->get();
+//        return response()->json($users);
+        return view('iowzone', ['role' => $role,'notifications' => $notifications , 'IoW' => $IoW ]);
+
+    }
+
     public function createWOView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();

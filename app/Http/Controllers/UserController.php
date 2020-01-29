@@ -18,16 +18,16 @@ use App\Complaint;
 use App\WorkOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 class UserController extends Controller
 {
     public function create(Request $request)
     {
 		
-		
-		
-		
-		
+	
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -58,6 +58,10 @@ class UserController extends Controller
         $user->type = rtrim($user->type,",");
         $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
+        $user->IoW = 1;
+        
+
+
         $user->save();
 
         $role = new UserRole();
@@ -74,7 +78,14 @@ class UserController extends Controller
         //     'sections' => $sections,
         //     'departments' => $departments, 'role' => $role
         // ]);
+        
 
+        if( $user->type = 'Inspector Of Works' ){
+          
+        return redirect()->route('users.inspectorofwork')->with(['message' => 'Please assign zone for Inspector of Work you created.']);
+
+        }
+        else
 
         return redirect()->route('users.view')->with([
             'message' => 'User Created Successfully',
@@ -82,7 +93,15 @@ class UserController extends Controller
         ]);
     }
 
+
     
+    public function createuseriow(Request $request )
+    {
+        $iow=User::where('id', $id)->first();
+        $iow->zone = $request['zone'];
+        $iow->save();
+    }
+
 
     public function deleteUser($id)
     {
@@ -158,6 +177,32 @@ class UserController extends Controller
         ]);
     }
 
+
+        public function assigniowzoneview($id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $trole = User::where('id', $id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+
+//        return response()->json(User::with('section.department.directorate')->where('id', $id)->first());
+        return view('assigniowzone', [
+
+            'user' => User::with('department.directorate')->where('id', $id)->first(),
+            'directorates' => Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(),
+            'departments' => Department::all(),
+            'role' => $role,
+            'nrole' => $role,
+             'worksec' => workordersection::OrderBy('section_name', 'ASC')->get(),
+            'notifications' => $notifications,
+            'trole' => $trole
+
+        ]);
+    }
+
+
+
+
     public function editUser(Request $request, $id)
     {
         $request->validate([
@@ -188,6 +233,8 @@ class UserController extends Controller
       
         $user->type  = implode(",", $request->type);
         $user->type = ltrim($user->type,",");
+        $user->zone = $request['zone'];
+        $user->IoW = 2;
         $user->save();
 
         $role = UserRole::where('user_id', $id)->first();
@@ -200,6 +247,27 @@ class UserController extends Controller
             'display_users' => $users = User::all()
         ]);
     }
+
+
+
+
+    public function assignzoneiow(Request $request, $id)
+    {
+
+
+  
+        $user = User::where('id', $id)->first();
+        $user->zone = $request['zone'];
+        $user->IoW = 2;
+        $user->save();
+       
+
+        return redirect()->route('users.view')->with([
+            'message' => 'User created and zone assigned successfully',
+            'display_users' => $users = User::all()
+        ]);
+    }
+
 
     public function changePassword(Request $request){
 
@@ -257,21 +325,25 @@ class UserController extends Controller
         $user = User::find(auth()->user()->id);
         
 		 $user->email = $request['email'];
-		  $user->phone = $request['phone'];
+		$user->phone = $request['phone'];
             $user->save();
             
              
 
-     $user = Auth::user();
-if ($request->Image!='') {
-        
-        $ImageName = $user->id.'_Image'.time().'.'.request()->Image->getClientOriginalExtension();
+       $user = Auth::user();
 
-        $request->Image->storeAs('avatars',$ImageName);
+    $cover = $request->file('Image');
+    $extension = $cover->getClientOriginalExtension();
+    Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
 
-        $user->avatar = $ImageName;
+   
+
+
+        $user->avatar = $cover->getFilename().'.'.$extension;
         $user->save();
-}
+
+
+
 
 return redirect()->route('myprofile')->with(['message' => 'Profile has changed successfully']);
         }

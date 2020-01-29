@@ -230,7 +230,12 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">Workorder Sections</a>
+
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
+
+                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
+
+
 
               
 
@@ -525,6 +530,10 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
+
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
+
                 
               
 
@@ -874,6 +883,14 @@
         });
 </script>
 
+
+<script type="text/javascript">
+
+      $("#zone").select2({
+            placeholder: "Choose IoW Zone...",
+            allowClear: true
+        });
+</script>
 
 
 

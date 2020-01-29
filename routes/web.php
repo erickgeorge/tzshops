@@ -42,6 +42,9 @@ Route::get('/work_order', 'HomeController@WorkorderView')->name('work_order');
 
 Route::get('/viewusers', 'HomeController@usersView')->name('users.view');
 
+Route::get('/selectzoneforinspectorofwork', 'HomeController@iowzone')->name('users.inspectorofwork');
+
+
 Route::get('/createworkorders', 'HomeController@createWOView');
 
 
@@ -57,6 +60,8 @@ Route::get('colgenerate','NotesController@colgenerate')->name('colgenerate');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/createuser', 'UserController@create')->name('user.create');
+
+Route::post('/createuseriow', 'UserController@createuseriow')->name('user.createiow');
 
 Route::post('/viewusers/delete/{id}', 'UserController@deleteUser')->name('user.delete');
 Auth::routes();
@@ -115,8 +120,12 @@ Route::get('blocks', 'UserController@getBlocks')->name('blocks.view');
 Route::get('rooms', 'UserController@getRooms')->name('rooms.view');
 Route::get('sections', 'UserController@getSections')->name('departments.view');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view');
+Route::get('assign/iow/zone/{id}', 'UserController@assigniowzoneview')->name('iow.assign.zone');
 Route::get('Manage/department', 'DirectorateController@departmentsView')->name('dipartment.manage');
 Route::get('Manage/section', 'DirectorateController@workordersectionView')->name('section.manage');
+
+Route::get('Manage/IoWZones', 'DirectorateController@IoWZonesview')->name('manage.IoWZones');
+
 Route::get('Manage/directorate', 'DirectorateController@directorateView')->name('dir.manage');
 
 Route::get('Manage/Add/directorate', 'DirectorateController@adddirectorateView');
@@ -125,9 +134,12 @@ Route::get('Manage/Add/department', 'DirectorateController@adddepartmentView');
 
 Route::get('Manage/Add/section', 'DirectorateController@addsectionView');
 
+Route::get('Manage/Add/iowzone', 'DirectorateController@addiowzoneView');
+
 
 
 Route::post('edit/user/{id}', 'UserController@editUser')->name('user.edit');
+Route::post('assign/zone/{id}', 'UserController@assignzoneiow')->name('user.createzoneiow');
 
 Route::post('password/change', 'UserController@changePassword')->name('password.change');
 
@@ -154,6 +166,9 @@ Route::post('delete/workordersection/{id}', 'DirectorateController@deleteWorkord
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');
 
 Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save');
+
+Route::post('save/iowzone', 'DirectorateController@createiowzone')->name('iowzone.save');
+
 
 Route::post('', 'UserController@changeProfile')->name('profile.change');
 Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track');

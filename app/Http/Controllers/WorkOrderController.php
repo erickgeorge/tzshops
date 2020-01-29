@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Mail;
 
 class WorkOrderController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request )
     {
         $request->validate([
             'details' => 'required',
@@ -59,6 +59,14 @@ class WorkOrderController extends Controller
         $work_order->client_id = auth()->user()->id;
         $work_order->problem_type = $request['p_type'];
         $work_order->details = $request['details'];
+
+        if (isset($request['emergency'])) {
+            $work_order->emergency = 1;
+        } else {
+            $work_order->emergency = 0;
+        }
+     
+
         $work_order->save();
 
         return redirect()->route('work_order')->with(['message' => 'Work order successfully created']);

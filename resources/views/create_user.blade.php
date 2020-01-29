@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-User Registrartion
+User Registration
 @endSection
 
 @section('body')
@@ -160,19 +160,7 @@ User Registrartion
 	
 	    <label>Type of User</label><br>
 
-	    <div> 
-			<label> 
-				<input type="checkbox" 
-					value="C">DES </label> 
-					&nbsp;&nbsp;&nbsp;
-			<label> 
-				<input type="checkbox" 
-					value="Cplus"> UDSM</label> 
-			
-		</div> 
-
-		<div class="C selectt">
-
+	
 	    <div >
        	<input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
        </div>
@@ -180,15 +168,16 @@ User Registrartion
                <select style="width: 300px;" class="custom-select" name="type[]" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>
-	                  <option value="Auditor">Auditor</option>
-	               
 	                  
+ 	                  <option value="CLIENT">Client</option>
+	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
 	                  <option value="Inspector Of Works">Inspector Of Works</option>
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
 	                  <option value="Transport Officer">Transport Officer</option>
+
 	           </select>
 	           </div>
 	           <br>
@@ -206,21 +195,13 @@ User Registrartion
                     @endforeach
 
 
-          </div>
-    </div>
+                </div>
+    
 
-    <div class="Cplus selectt" >
-    	<div  >
-               <select style="width: 300px;" class="custom-select" name="type[]" id="typeudsm">
-	                  <option value="" selected>Choose...</option>
-	                 
-	                  <option value="CLIENT">Client</option>
-	                  <option value="DVC Admin">DVC Admin</option>
-	                  
-	           </select>
-	           </div>
+    
+    	    
     	
-    </div>
+   
 
 
 
