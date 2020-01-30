@@ -91,10 +91,11 @@
                 
 
                 
-                $material_requests = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
                 
+                 $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
 
-				$wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
+				         $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
 				
 				
@@ -471,6 +472,11 @@
 
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">Work order needs material <span
+                                    class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
                     </li>
   @endif
 

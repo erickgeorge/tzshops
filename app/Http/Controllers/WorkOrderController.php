@@ -561,6 +561,7 @@ public function transportforwork(Request $request, $id)
 			$work_order_material->status = 20; //status for HOS to view material before sent to IoW
 			$work_order_material->hos_id = auth()->user()->id;
             $work_order_material->staff_id = auth()->user()->id;
+            $work_order_material->zone = $request['zone'];
             $work_order_material->save();
 } 
 			
