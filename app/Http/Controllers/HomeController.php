@@ -1922,16 +1922,23 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
-        $wo_material=   WorkOrderMaterial::
+        $wo_material=   WorkOrderMaterial::where('zone', auth()->user()->id)->
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',0)
                      ->orwhere('status', 9)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
-        
-        
-        return view('womaterialneeded', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+
+        $mc_material=   WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'hos_id')
+                     ->where('status',0)
+                     ->orwhere('status', 9)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     ->get();
+                      
+        return view('womaterialneeded', ['role' => $role, 'items' => $wo_material, 'mcitems' => $mc_material,'notifications' => $notifications]);
     }
 
 
@@ -2012,14 +2019,18 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
        
-        $wo_material=   WorkOrderMaterial::
+        $wo_material=   WorkOrderMaterial::where('zone', auth()->user()->id)->
                     
                      where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
                      ->get();
-                     
+        
+        $mc_material=   WorkOrderMaterial::
+                    
+                     where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
+                     ->get();             
         
         
-        return view('material_inspection_view', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications ,  'wo' => WorkOrder::where('id', $id)->first(),]);
+        return view('material_inspection_view', ['role' => $role, 'items' => $wo_material, 'mcitems' => $mc_material,'notifications' => $notifications ,  'wo' => WorkOrder::where('id', $id)->first(),]);
     }
 
 

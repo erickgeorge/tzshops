@@ -11,9 +11,14 @@
     use App\WorkOrderStaff;
     use App\techasigned;
     use App\WorkOrderMaterial;
+    use App\User;
+    use App\iowzone;
  
 
  ?>
+
+  <?php 
+     $IoWzone = User::where('status', '=', 1)->where('type', 'inspector of works')->where('IoW', 2)->get(); ?>
 
 
 <style type="text/css">
@@ -392,9 +397,10 @@ var total=2;
     <th>Material Description</th>
   <th>Type</th>
    <th>Quantity</th>
+   <th>IoW</th>
     <th>Status</th>
      <th>Date Requested</th>
-      <th>Date Updated</th>
+      
   
   </tr>
     @foreach($matforms as $matform)
@@ -404,12 +410,13 @@ var total=2;
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
+   <td>{{$matform['iowzone']->name }}</td>
    <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
       
    <td>{{$matform->created_at }}</td>
-   <td>{{$matform->updated_at }}</td>
+   
    
   </tr>
   
@@ -951,12 +958,34 @@ var total=2;
                         <div class="form-group">
                             <input type="number" min="1"  style="color: black; width: 700px" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
+
                         
                         
                         <div id="newmaterial" style="width: 700px">
 
                         </div>
                        <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
+           
+
+            <div>
+                        <label for="dep_name">Section Zone </label>
+                        <br>
+                       
+                        <select required style="width: 500px;"  name="zone" id="zone">
+                       <option selected value="">  </option>
+      
+              @foreach($IoWzone as $user)
+               <option value="{{ $user->id }}" >NAME:&nbsp;  <?php echo strtoupper( $user->name ); ?>&nbsp; &nbsp; &nbsp; ZONE:&nbsp; <?php echo strtoupper( $user->zone ); ?></option>
+               
+               @endforeach
+                   
+                        </select>
+            </div>
+             <br>
+             <br>
+
+             
+
                          <button style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">Add New Material</button>
                          <br> <br>
                       
@@ -979,23 +1008,26 @@ var total=2;
                 
      {{-- crosscheck material--}}
                 <div class="container">
-                 <div id="crosscheck_material_requested" class="tabcontent">
-                
+                 <div id="crosscheck_material_requested" class="tabcontent">                
                         <?php
                         
                        
                         $wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',20)->get();
                         
                         ?>
+ 
+                      
                          @if(COUNT($wo_materials)!=0)
+       <div>Inspector of Work:&nbsp; <mark>{{$matform['iowzone']->name }}</mark> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Zone: &nbsp;<mark>{{$matform['iowzone']->zone }}</mark></div>  
+        <br> 
                         <table class="table table-striped" style="width:100%">
   <tr>
-     <th>No</th>
+    <th>No</th>
     <th>Material Name</th>
-    <th>Brand Name</th>
+    <th>Description</th>
     <th>Type</th>
-     <th>Quantity Requested</th>
-      <th>Action</th>
+    <th>Quantity Requested</th>
+    <th>Action</th>
 
   </tr>
 
@@ -1008,15 +1040,16 @@ var total=2;
   <tr>
     <td>{{$i++}}</td>
     <td>{{$matform['material']->name }}</td>
-     <td>{{$matform['material']->description }}</td>
-     <td>{{$matform['material']->type }}</td>
-     <td>{{$matform->quantity }}</td>
+    <td>{{$matform['material']->description }}</td>
+    <td>{{$matform['material']->type }}</td>
+    <td>{{$matform->quantity }}</td>
+    
       <td>
 
 
                             <div class="row">
-
-
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+ 
                                     <a style="color: green;"
                                        onclick="myfunc1( '{{ $matform->id }}','{{ $matform->quantity }}', '{{$matform->name}}')"
                                        data-toggle="modal" data-target="#exampleModali" title="Edit"><i
@@ -1041,7 +1074,10 @@ var total=2;
   </tr>   
     @endforeach
 </table>   
+
+
     <button class="btn btn-success" style="color: white" > <a  href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button> 
+
 
 
 </div>
