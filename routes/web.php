@@ -38,7 +38,9 @@ Route::get('/stores', 'HomeController@storesView')->name('store');
 Route::get('/storeshos', 'HomeController@storeshosView');
 
 
-Route::get('/work_order', 'HomeController@WorkorderView')->name('work_order');
+Route::get('/work_order', 'HomeController@WorkorderView')->name('work_order');  
+
+Route::get('/redirected_work_order', 'HomeController@Workorderredirectedview');  
 
 Route::get('/viewusers', 'HomeController@usersView')->name('users.view');
 

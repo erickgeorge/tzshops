@@ -461,7 +461,7 @@
 
   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
-                    </li>
+  </li>
                     
  <li class="nav-item">
   <li class="nav-item">
@@ -470,14 +470,18 @@
      <a href="{{ url('comp') }}" class="nav-link" style="color:white"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
 
-                     <li class="nav-item">
+   <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
-                    </li>
+   </li>
 
-                     <li class="nav-item">
+   <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">Work order needs material <span
                                     class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
-                    </li>
+  </li>
+
+   <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('redirected_work_order')}}">Redirected Works order  </a>
+  </li>
   @endif
 
 
