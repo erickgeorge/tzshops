@@ -25,8 +25,8 @@ Cleaningzone Registration
 @endif
 
 
-</table>
-                <h4 style="margin-top:6%;" align="center"  id="Add New campus">Add New Cleaning Zone</h4>
+<div class="container">
+                <h4 style="margin-top:6%;"  id="Add New campus">Add New Cleaning Zone</h4>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
               
@@ -36,7 +36,7 @@ Cleaningzone Registration
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                            <label style="width:150px;" class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
+                            <label style="width:150px;" class="input-group-text" for="directorate">Campus Name </label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -50,7 +50,7 @@ Cleaningzone Registration
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:150px;" class="input-group-text" for="directorate">Zone Name<sup style="color: red;">*</sup></label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Zone Name</label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="zone_name" placeholder="Enter Zone Name">
@@ -59,7 +59,7 @@ Cleaningzone Registration
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:150px;" class="input-group-text" for="directorate">ZZone Type<sup style="color: red;">*</sup></label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">ZZone Type</label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="type" placeholder="Enter Zone Type">
@@ -71,7 +71,7 @@ Cleaningzone Registration
                     <button type="submit" class="btn btn-primary">Register
                         New Zone
                     </button>
-                     <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
+                     <a class="btn btn-danger" href="/manage_Cleaning_zone" role="button">Cancel </a>
                  </div>
                 </form>
             </div>

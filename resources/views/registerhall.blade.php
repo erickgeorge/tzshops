@@ -24,9 +24,9 @@ Campus Registration
 </div>
 @endif
 
+<div class="container">
 
-</table>
-                <h4 style="margin-top: 6%;" align="center" id="Add New campus">Register New Hall of Resdence</h4>
+                <h4 style="margin-top: 7%;" id="Add New campus">Register New Hall of Resdence</h4>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
               
@@ -37,7 +37,7 @@ Campus Registration
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
+                          <label class="input-group-text" for="directorate">Campus Name </label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
@@ -51,7 +51,7 @@ Campus Registration
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label class="input-group-text" for="directorate">Hall Name <sup style="color: red;">*</sup></label>
+                          <label class="input-group-text" for="directorate">Hall Name </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="hall_name" placeholder="Enter Hall Name">
@@ -60,7 +60,7 @@ Campus Registration
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:100px;" class="input-group-text" for="directorate">Area <sup style="color: red;">*</sup></label>
+                          <label style="width:100px;" class="input-group-text" for="directorate">Area </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="type"
                                name="area_name" placeholder="Enter Hall Area">
@@ -69,7 +69,7 @@ Campus Registration
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:100px;" class="input-group-text" for="directorate">Type <sup style="color: red;">*</sup></label>
+                          <label style="width:100px;" class="input-group-text" for="directorate">Type </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="type" placeholder="Enter Hall Type">
@@ -78,7 +78,7 @@ Campus Registration
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:100px;" class="input-group-text" for="directorate">Location <sup style="color: red;">*</sup></label>
+                          <label style="width:100px;" class="input-group-text" for="directorate">Location </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="location" placeholder="Enter Hall Location">
@@ -88,7 +88,8 @@ Campus Registration
                     <button type="submit" class="btn btn-primary">Register
                         New Hall
                     </button>
-                    <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
+                    <a class="btn btn-danger" href="/manage_Hall_of_resdence" role="button">Cancel </a>
                 </div>
                 </form>
+            </div>
 @endSection

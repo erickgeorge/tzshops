@@ -26,10 +26,16 @@ Campus Registration
 	</ul>
 </div>
 @endif
+<<<<<<< Updated upstream
 <br>
 
                 <h4 style="margin-top: 6%" align="center" id="Add New campus">Register New Campus</h4>
                 <hr class="container">
+=======
+<div class="container">
+                <h4 style="margin-top: 6%"  id="Add New campus">Register New Campus</h4>
+                <hr>
+>>>>>>> Stashed changes
                 <p align="center" style="color: red; margin-left: 2%;">All fields are compulsory</p>
                 <form method="POST" action="{{ route('campus.save') }}" class="col-lg-12">
                     @csrf
@@ -39,7 +45,7 @@ Campus Registration
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:200px;" class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
+                          <label style="width:200px;" class="input-group-text" for="directorate">Campus Name </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="campus_name" placeholder="Enter Campus Name">
@@ -48,7 +54,7 @@ Campus Registration
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:200px;" class="input-group-text" for="directorate">Campus Location<sup style="color: red;">*</sup></label>
+                          <label style="width:200px;" class="input-group-text" for="directorate">Campus Location</label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="houselocation"
                                name="location" placeholder="Enter Campus Location ">

@@ -24,9 +24,9 @@ StaffHouse Registrartion
 </div>
 @endif
 
-
+<div class="container">
 <br>
-                <h4 style="margin-top: 6%;" align="center" id="Add New House">Register  New Cleaning Area</h4>
+                <h4 style="margin-top: 6%;" id="Add New House">Register  New Cleaning Area</h4>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
     
@@ -38,7 +38,7 @@ StaffHouse Registrartion
                         <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
-                            <label style="width:150px;" class="input-group-text" for="directorate">Zone Name <sup style="color: red;">*</sup></label>
+                            <label style="width:150px;" class="input-group-text" for="directorate">Zone Name </label>
                         </div>
                         <select required class="custom-select" name="zone" id="zone">
                             <option value="">Choose...</option>
@@ -52,7 +52,7 @@ StaffHouse Registrartion
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:200px;" class="input-group-text" for="directorate">Cleaning Area Name <sup style="color: red;">*</sup></label>
+                          <label style="width:200px;" class="input-group-text" for="directorate">Cleaning Area Name </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="cleaning_name" placeholder="Enter Cleaning Area Name">
@@ -62,7 +62,7 @@ StaffHouse Registrartion
                     <button type="submit" class="btn btn-primary">Register
                         New Cleaning Area
                     </button>
-                      <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
+                      <a class="btn btn-danger" href="/manage_Cleaning_area" role="button">Cancel </a>
                   </div>
                 </form>
                   

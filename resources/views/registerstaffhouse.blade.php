@@ -25,8 +25,8 @@ StaffHouse Registrartion
 @endif
 
 
-<br>
-                <h4 style='margin-top: 6%;' align="center" id="Add New House">Register  New House</h4>
+<div class="container">
+                <h4 style='margin-top: 7%;'  id="Add New House">Register  New House</h4>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
           
@@ -51,13 +51,18 @@ StaffHouse Registrartion
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
+<<<<<<< Updated upstream
                           <label style="width:150px;" class="input-group-text" for="directorate">House Grade </label>
+=======
+                          <label style="width:150px;" class="input-group-text" for="directorate">House Name </label>
+>>>>>>> Stashed changes
                         </div>
                         
 
                         <select required class="custom-select" name="name_of_house" id="campus">
                             <option value="">Choose Grade...</option>
                             
+<<<<<<< Updated upstream
                                 <option value="A1">A1</option>
                                 <option value="A2">A2</option>
                                 <option value="A3">A3</option>
@@ -73,6 +78,12 @@ StaffHouse Registrartion
                          
 
                         </select>
+=======
+                          <label style="width:150px;" class="input-group-text" for="directorate">House Name </label>
+                        </div>
+                        <input style="color: black" type="text" required class="form-control" id="Housename"
+                               name="name_of_house" placeholder="Enter House Name">
+>>>>>>> Stashed changes
                     </div>
 
                  
@@ -126,7 +137,11 @@ StaffHouse Registrartion
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
+<<<<<<< Updated upstream
                           <label style="width:150px;" class="input-group-text" for="directorate">No of Bedrooms </label>
+=======
+                          <label style="width:150px;" class="input-group-text" for="directorate">Type of House </label>
+>>>>>>> Stashed changes
                         </div>
                         <input style="color: black" type="number" required class="form-control" id="type"
                                name="type" placeholder="Enter Number of Bedrooms">
@@ -136,10 +151,17 @@ StaffHouse Registrartion
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
+<<<<<<< Updated upstream
                           <label style="width:150px;" class="input-group-text" for="directorate">Quantity</label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="no_room" placeholder="Enter House Quantity"    onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) ">
+=======
+                          <label style="width:150px;" class="input-group-text" for="directorate">No of Rooms</label>
+                        </div>
+                        <input style="color: black" type="number" required class="form-control" id="no_room"
+                               name="no_room" placeholder="Enter No of Rooms"    onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) ">
+>>>>>>> Stashed changes
                     </div>
 
 

@@ -235,7 +235,10 @@ class AssetsController extends Controller
         $campuses->location = $request['location'];
         $campuses->save();
         return redirect()->route('register.campus')->with(['message' => 'New campus is registered successfully']);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     }
 
 
@@ -385,6 +388,7 @@ public function deletecleanarea($id)
 
      public function nonbuildingasset(){
 
+<<<<<<< Updated upstream
       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -405,6 +409,21 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
       $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registernonbuildingasset', ['role' => $role,'notifications' => $notifications]);
+=======
+
+       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('Nonbuildingasset', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'staffhouses' => House::all(),
+            'HallofResdence' => Hall::all(),
+             'campuses' => Campus::all(),
+               'newzone' => zone::all(),
+               'cleanarea' => cleaningarea::all(),
+            ]);
+      
+>>>>>>> Stashed changes
      }
 
      public function cleaningcompany(){
