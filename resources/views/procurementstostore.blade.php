@@ -59,7 +59,7 @@
         <div class="row">
 			
 			<div class="col">
-				<button id="bt" type="submit" class="btn btn-primary">Submit</button>&nbsp;<a href="{{ url('ProcurementHistory') }}" class="btn btn-danger">Cancel</a>
+				<button id="bt" type="submit" class="btn btn-primary" disabled>Submit</button>&nbsp;<a href="{{ url('ProcurementHistory') }}" class="btn btn-danger">Cancel</a>
 			</div>
 		</div>
     </p>
@@ -69,7 +69,7 @@
 <script>
     // ARRAY FOR HEADER.
     var arrHead = new Array();
-    arrHead = ['','Material Name', 'Description', 'Unit Measure','Total','Price', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+    arrHead = ['','Material Name', 'Description','Type', 'Unit Measure','Total','Price', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
 
     // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
     // ADD THE TABLE TO YOUR WEB PAGE.
@@ -83,16 +83,20 @@
             var th = document.createElement('th'); 
 
 
-            if(h==4){
+            if(h==5){
                 	th.setAttribute('style','width:95px;')
                 }
                
 
-                if(h==5){
+                if(h==6){
                 	th.setAttribute('style','width:125px;')
                 }
 
-                if(h==3){
+                if(h ==3){
+                    th.setAttribute('style','width:100px;')
+                }
+
+                if(h==4){
                 	th.setAttribute('style','width:125px;')
                 }
 
@@ -134,7 +138,7 @@
             else {
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
                 var ele = document.createElement('input');
-                if(c==4){
+                if(c==5){
                 	ele.setAttribute('type', 'number');
                 	ele.setAttribute('style','width:90px;')
                 }
@@ -142,11 +146,15 @@
                 	ele.setAttribute('type', 'text');
                 }
 
-                if(c==5){
+                if(c==6){
                 	ele.setAttribute('style','width:120px;')
                 }
 
-                if(c==3){
+                 if(c==3){
+                    ele.setAttribute('style','width:100px;')
+                }
+
+                if(c==4){
                 	ele.setAttribute('style','width:120px;')
                 }
 
@@ -211,7 +219,7 @@
            else {
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
                 var ele = document.createElement('input');
-                if(c==4){
+                if(c==5){
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('style','width:90px;')
                 }
@@ -219,11 +227,14 @@
                     ele.setAttribute('type', 'text');
                 }
 
-                if(c==5){
+                if(c==6){
                     ele.setAttribute('style','width:120px;')
                 }
 
                 if(c==3){
+                    ele.setAttribute('style','width:100px;')
+                }
+                if(c==4){
                     ele.setAttribute('style','width:120px;')
                 }
 
@@ -268,11 +279,13 @@
 var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
 
-    if(value<=0)
-    {
-        var hide = document.getElementById('bt');
-        hide.setAttribute('disabled','')
-    }
+    var hide = document.getElementById('bt');
+        if (value > 1) {
+            hide.disabled = false;
+        }
+        else {
+            hide.disabled = true;
+        }
               // BUTTON -> TD -> TR.
     }
 

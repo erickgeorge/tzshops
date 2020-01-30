@@ -623,7 +623,7 @@ public function deletematerial($id)
     public function procuredmaterialsadding(Request $request)
     {
       $y=1;
-    $totmat=$request['totalinputs']/5;
+    $totmat=$request['totalinputs']/6;
    
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
@@ -638,12 +638,16 @@ public function deletematerial($id)
             $procure_material->material_name = $request[$z];
               $z=$z+1;
             $procure_material->material_description = $request[$z];
+            $z=$z+1;
+            $procure_material->type = $request[$z];
               $z=$z+1;
             $procure_material->unit_measure = $request[$z];
+
               $z=$z+1;
             $procure_material->total_input = $request[$z];
               $z=$z+1;
             $procure_material->price_tag = $request[$z];
+              
 
             $procure_material->tag_ = $tag; //differentiating from different inputs 
             $procure_material->procured_by = auth()->user()->id;
@@ -702,9 +706,63 @@ $procured = Procurement::
   {
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
       $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-      $material = Procurement::where('tag_',$id)->orderBy('material_name','Asc')->get();
+      $material = Procurement::where('tag_',$id)->orderBy('material_name','Asc')->OrderBy('type','Asc')->get();
 
 return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
+  }
+
+  public function AcceptProcuredMaterial(Request $request)
+  {
+
+    $catch_materials = Procurement::
+    where('procured_by',$request['added_by'])->
+    where('tag_',$request['tag_'])->
+    where('store_received',$request['store_received'])->get();
+
+    foreach ($catch_materials as $check_material) 
+    {
+      $fetch_store = Material::
+      where('name','LIKE','%'.$check_material->material_name.'%')->
+      where('description','LIKE','%'.$check_material->material_description.'%')->
+      where('brand','LIKE','%'.$check_material->unit_measure.'%')->
+      where('type','LIKE','%'.$check_material->type.'%')->get();
+
+      if(count($fetch_store)<1)
+      {
+        $material = new Material();
+
+        $material->name = $check_material->material_name;
+        $material->description = $check_material->material_description;
+        $material->brand = $check_material->unit_measure;
+        $material->type = $check_material->type;
+    
+        $material->stock = $check_material->total_input;
+        $material->save();
+
+            $update_procurement = Procurement::where('id',$check_material->id)->first();
+            $update_procurement->store_received = auth()->user()->id;
+            $update_procurement->save();
+
+      }
+      else
+      {
+        foreach($fetch_store as $carry_store)
+        {
+            $update_material = Material::where('id',$carry_store->id)->first();
+            $update_material->stock = $carry_store->stock + $check_material->total_input;
+            $update_material->save();
+
+            $update_procurement = Procurement::where('id',$check_material->id)->first();
+            $update_procurement->store_received = auth()->user()->id;
+            $update_procurement->save();
+        }
+      }
+
+      
+    }
+  
+  return redirect()->back()->with(['message' => 'Material Accepted and successfully added in the stock!']);
+
   }
 
 }

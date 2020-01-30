@@ -536,3 +536,7 @@ Route::get('procurementAddMaterial','StoreController@procurementAddMaterial')->n
 Route::post('procuredmaterialsadding','StoreController@procuredmaterialsadding')->name('procuredmaterialsadding');
 Route::get('ProcurementHistory','StoreController@ProcurementHistory')->name('ProcurementHistory');
 Route::get('procuredMaterials/{id}','StoreController@procuredMaterials')->name('procuredMaterials');
+
+Route::post('AcceptProcuredMaterial','StoreController@AcceptProcuredMaterial')->name('AcceptProcuredMaterial');
+
+Route::get('exportProcure/{id}','NotesController@exportProcure')->name('exportProcure');

@@ -15,6 +15,8 @@ use App\WorkOrderMaterial;
 use App\Directorate;
 use App\Department;
 use App\workordersection;
+use App\Procurement;
+
    
 class NotesController extends Controller
 {
@@ -1059,6 +1061,14 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
         $data['sects'] = workordersection::orderby('section_name','ASC')->get();
         $pdf = PDF::loadView('desdeptsreport', $data);
         return $pdf->stream('All sections report - '.date('d-m-Y Hi').'.pdf');
+    }
+
+    public function exportProcure($id)
+    {
+        $data['procure'] = Procurement::where('tag_',$id)->orderBy('material_name','Asc')->orderBy('type','Asc')->get();
+        $data['header'] = "Procured Materials Sent To Store";
+        $pdf = PDF::loadView('procurementList',$data);
+        return $pdf->stream(' Procured Materials - '.date('d-m-Y H:i').'.pdf');
     }
 
 }

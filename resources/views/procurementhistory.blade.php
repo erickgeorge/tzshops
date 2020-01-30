@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>Procurement Entry History </b></h3>
+            <h3 style="padding-left: 90px;"><b>@if(auth()->user()->type == 'Head Procurement') Procurement Entry History @else Procured Materials @endif </b></h3>
         </div>
 @if(count($procured) > 0)
         <div class="col-md-6">
@@ -73,6 +73,7 @@
     @endif
 
     </div>
+    @if(auth()->user()->type == 'Head Procurement')
     <div id="div_print" class="container">
         <div class="row ">
         <div class="col">
@@ -82,6 +83,7 @@
         </div>
     </div>
     </div>
+    @endif
     <div class="container">
         @if(count($procured) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
@@ -91,7 +93,7 @@
           			<th>Date</th>
                     <th>Total Entries</th>
                     <th>Status</th>
-                    <th>Added By</th>
+                    <th>@if(auth()->user()->type == 'Head Procurement')Added By @else Sent By @endif</th>
                     <th>Action</th>
 
                 </tr>
@@ -108,8 +110,8 @@
                             <td id="wo-id"><?php $time = strtotime($material->tag_); echo date('d/m/Y',$time);  ?></td>
                             <td id="wo-details">{{ $material->total_materials }}</td>
                             <td>@if($material->store_received == 0)
-                            	<div class="badge badge-warning">Not Confirmed by store</div>
-                            	@else<div class="badge badge-success">Received by store</div>
+                            	<div class="badge badge-warning">@if(auth()->user()->type == 'Head Procurement') Not Received by store @else Not Confirmed @endif</div>
+                            	@else<div class="badge badge-success">@if(auth()->user()->type == 'Head Procurement') Received by store @else Received @endif</div>
                             	@endif
                         	</td>
                             <td><?php $officer = User::where('id',$material->procured_by)->get(); ?>
@@ -122,7 +124,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">No Procured Materials Available</h1>
+            <h1 class="text-center" style="margin-top: 150px">No Procured Materials Found</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

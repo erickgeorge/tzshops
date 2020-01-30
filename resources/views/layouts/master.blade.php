@@ -525,6 +525,9 @@
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" style="color: white;" href="{{ url('ProcurementHistory') }}">Procurement</a>
+                    </li>
                 @endif
 
 
