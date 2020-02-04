@@ -5,6 +5,7 @@
     @endSection
 
 @section('body')
+<?php use App\workordersection; ?>
 <style>
         table {
             width: 100%;
@@ -137,88 +138,13 @@
             }
             else {
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
-                var ele = document.createElement('input');
-                if(c==5){
-                	ele.setAttribute('type', 'number');
-                	ele.setAttribute('style','width:90px;')
+                if(c==3)
+                {
+                        var ele = document.createElement('select');
+                }else
+                {
+                    var ele = document.createElement('input');
                 }
-                else{
-                	ele.setAttribute('type', 'text');
-                }
-
-                if(c==6){
-                	ele.setAttribute('style','width:120px;')
-                }
-
-                 if(c==3){
-                    ele.setAttribute('style','width:100px;')
-                }
-
-                if(c==4){
-                	ele.setAttribute('style','width:120px;')
-                }
-
-                ele.setAttribute('required', '');
-                ele.setAttribute('class', 'form-control');
-                ele.setAttribute('name',c);
-
-               
-
-    var value = parseInt(document.getElementById('totalmaterials').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('totalmaterials').value = value;
-
-    var hide = document.getElementById('bt');
-        if (value > 1) {
-            hide.disabled = false;
-        }
-        else {
-            hide.disabled = true;
-        }
-
-            ele.setAttribute('value', '');
-            ele.setAttribute('name',value);
-            td.appendChild(ele);
-                
-            }
-        }
-
-       
-    }
-
-    // ADD A NEW ROW TO THE TABLE.s
-    function addRow() {
-        var empTab = document.getElementById('MatForm');
-
-        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
-        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
-        tr = empTab.insertRow(rowCnt);
-
-        for (var c = 0; c < arrHead.length; c++) {
-            var td = document.createElement('td');          // TABLE DEFINITION.
-            td = tr.insertCell(c);
-
-            if (c == 0) {           // FIRST COLUMN.
-                // ADD A BUTTON.
-                var button = document.createElement('button');
-
-                // SET INPUT ATTRIBUTE.
-                button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger')
-
-                // ADD THE BUTTON's 'onclick' EVENT.
-                button.setAttribute('onclick', 'removeRow(this)');
-
-                td.appendChild(button);
-
-                var i = document.createElement('i');
-                	i.setAttribute('class', 'fa fa-trash');
-                	button.appendChild(i);
-            }
-           else {
-                // CREATE AND ADD TEXTBOX IN EACH CELL.
-                var ele = document.createElement('input');
                 if(c==5){
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('style','width:90px;')
@@ -259,8 +185,122 @@
 
             ele.setAttribute('value', '');
             ele.setAttribute('name',value);
+            ele.setAttribute('id',value);
             td.appendChild(ele);
-                
+
+            if(c==3)
+                {
+                    var option = document.getElementById(value);
+
+                    <?php $worksections = workordersection::get(); ?>
+                    @foreach($worksections as $section)
+                    var options = document.createElement('option');
+                    options.setAttribute('value','<?php echo $section->section_name; ?>');
+                    options.text = "<?php echo $section->section_name; ?>";
+                    option.appendChild(options);
+                    @endforeach
+                }
+
+            }
+        }
+
+       
+    }
+
+    // ADD A NEW ROW TO THE TABLE.s
+    function addRow() {
+        var empTab = document.getElementById('MatForm');
+
+        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+        tr = empTab.insertRow(rowCnt);
+
+        for (var c = 0; c < arrHead.length; c++) {
+            var td = document.createElement('td');          // TABLE DEFINITION.
+            td = tr.insertCell(c);
+
+            if (c == 0) {           // FIRST COLUMN.
+                // ADD A BUTTON.
+                var button = document.createElement('button');
+
+                // SET INPUT ATTRIBUTE.
+                button.setAttribute('type', 'button');
+                button.setAttribute('class', 'btn btn-danger')
+
+                // ADD THE BUTTON's 'onclick' EVENT.
+                button.setAttribute('onclick', 'removeRow(this)');
+
+                td.appendChild(button);
+
+                var i = document.createElement('i');
+                	i.setAttribute('class', 'fa fa-trash');
+                	button.appendChild(i);
+            }
+           else {
+                // CREATE AND ADD TEXTBOX IN EACH CELL.
+                if(c==3)
+                {
+                        var ele = document.createElement('select');
+                }else
+                {
+                    var ele = document.createElement('input');
+                }
+                if(c==5){
+                    ele.setAttribute('type', 'number');
+                    ele.setAttribute('style','width:90px;')
+                }
+                else{
+                    ele.setAttribute('type', 'text');
+                }
+
+                if(c==6){
+                    ele.setAttribute('style','width:120px;')
+                }
+
+                if(c==3){
+                    ele.setAttribute('style','width:100px;')
+                }
+                if(c==4){
+                    ele.setAttribute('style','width:120px;')
+                }
+
+                ele.setAttribute('required', '');
+                ele.setAttribute('class', 'form-control');
+                ele.setAttribute('name',c);
+
+               
+
+    var value = parseInt(document.getElementById('totalmaterials').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('totalmaterials').value = value;
+
+    var hide = document.getElementById('bt');
+        if (value > 1) {
+            hide.disabled = false;
+        }
+        else {
+            hide.disabled = true;
+        }
+
+            ele.setAttribute('value', '');
+            ele.setAttribute('name',value);
+            ele.setAttribute('id',value);
+            td.appendChild(ele);
+
+            if(c==3)
+                {
+                    var option = document.getElementById(value);
+
+                    <?php $worksections = workordersection::get(); ?>
+                    @foreach($worksections as $section)
+                    var options = document.createElement('option');
+                    options.setAttribute('value','<?php echo $section->section_name; ?>');
+                    options.text = "<?php echo $section->section_name; ?>";
+                    option.appendChild(options);
+                    @endforeach
+                }
+
             }
         }
 
@@ -272,7 +312,7 @@
         var empTab = document.getElementById('MatForm');
     var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
-    --value; --value; --value; --value; --value;
+    --value; --value; --value; --value; --value; --value;
     document.getElementById('totalmaterials').value = value;
         empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); 
 

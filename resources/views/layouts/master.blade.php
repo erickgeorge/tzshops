@@ -58,15 +58,15 @@
                 </li>
 <?php 
                 use App\WorkOrderMaterial;
-				use App\PurchasingOrder;
+        use App\PurchasingOrder;
                 use App\WorkOrderTransport;
                 use App\Material;
                 use App\WorkOrder;
-				
+        
                 $w = WorkOrder::select(DB::raw('id'))->get();
                 
                 $m = Material::select(DB::raw('name'))->get();
-				
+        
                 $wo_material_reservedd = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',55)->orwhere('reservestatus', 1)->groupBy('work_order_id')->get();
 
                 $woMaterialAccepted = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->orwhere('copyforeaccepted' , 1)
@@ -87,23 +87,20 @@
                 $material_to_purchased = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',15)->groupBy('work_order_id')->get();
                 
                  $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
-
-                
-
-                
+   
                 $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
               
-                
+
                  $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
 
-				         $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
+                 $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
-				
-				
+        
+        
                 $wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
                 
                 $wo_material_approved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();;
-				$procurement_request = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+        $procurement_request = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
                 $procurement_request_acceptedbyiow = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
                 $wo_transport = WorkOrderTransport::where('status',0)->get();
@@ -237,17 +234,8 @@
 
                   <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
 
-
-
-              
-
         </div>
-       </li>
-
-
-
-                        
-                      
+       </li>   
                        <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
                     </li>
@@ -340,15 +328,15 @@
    
                     
 
-					 <!--
-					 <li class="nav-item">
+           <!--
+           <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
                     </li>
-					
-					 <li class="nav-item">
+          
+           <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
                     </li>
-					-->
+          -->
                @endif  
 
 
@@ -403,17 +391,17 @@
                     -->
                 
                 @endif
-				
-				
-				
-				   @if(auth()->user()->type == 'Procurement and Supplies Officer')
-					   <li class="nav-item">
+        
+        
+        
+           @if(auth()->user()->type == 'Procurement and Supplies Officer')
+             <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_procurement_request')}}">Procurement Requests <span
                                     class="badge badge-light">{{ count($procurement_request_acceptedbyiow) }}</span></a>
                     </li>   
-				   
-				   
-				   
+           
+           
+           
                  @endif
                    @if(auth()->user()->type == 'Inspector Of Works')
 
@@ -440,7 +428,7 @@
 
                    
                     <!--
-					 <li class="nav-item">
+           <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_purchasing_request')}}">Procurement Requests <span
                                     class="badge badge-light">{{ count($procurement_request) }}</span></a>
                     </li>
@@ -497,7 +485,7 @@
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
                     </li>
 
-        	
+          
                 @endif
 
 

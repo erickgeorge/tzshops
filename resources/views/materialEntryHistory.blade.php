@@ -1,16 +1,15 @@
 @extends('layouts.master')
 
 @section('title')
-    Procurement History
+   Materials Entry History
     @endSection
 
 @section('body')
-
 <?php use App\User; ?>
     <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>@if(auth()->user()->type == 'Head Procurement') Procurement Entry History @else Procured Materials @endif </b></h3>
+            <h3 style="padding-left: 90px;"><b>Store Material Entry History </b></h3>
         </div>
 @if(count($procured) > 0)
         <div class="col-md-6">
@@ -50,9 +49,8 @@
         </div>
 
 @endif
-       
-    </div>
-    <br>
+</div>
+<br>
     <hr class="container">
     <div class="container">
     @if(Session::has('message'))
@@ -73,18 +71,7 @@
     @endif
 
     </div>
-    @if(auth()->user()->type == 'Head Procurement')
-    <div id="div_print" class="container">
-        <div class="row ">
-        <div class="col">
-            <a href="{{ url('procurementAddMaterial') }}">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Add new procured materials</button>
-            </a>
-        </div>
-    </div>
-    </div>
-    @endif
-    <div class="container">
+     <div class="container">
         @if(count($procured) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
@@ -92,8 +79,7 @@
                     <th>#</th>
           			<th>Date</th>
                     <th>Total Entries</th>
-                    <th>Status</th>
-                    <th>@if(auth()->user()->type == 'Head Procurement')Added By @else Sent By @endif</th>
+                    <th>Added By </th>
                     <th>Action</th>
 
                 </tr>
@@ -109,21 +95,11 @@
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id"><?php $time = strtotime($material->tag_); echo date('d/m/Y',$time);  ?></td>
                             <td id="wo-details">{{ $material->total_materials }}</td>
-                            <td>@if($material->store_received == 0)
-                            	<div class="badge badge-warning">@if(auth()->user()->type == 'Head Procurement') Not Received by store @else Not Confirmed @endif</div>
-                            	@else<div class="badge badge-success">@if(auth()->user()->type == 'Head Procurement') Received by store @else Received @endif</div>
-                            	@endif
-
-                                @if($material->stored == null)
-                                @if(auth()->user()->type == 'Head Procurement')  @else <div class="badge badge-warning"> Not Added in Stock </div> @endif
-                                @else @if(auth()->user()->type == 'Head Procurement') @else <div class="badge badge-success"> In Stock </div> @endif
-                                @endif
-
-                        	</td>
-                            <td><?php $officer = User::where('id',$material->procured_by)->get(); ?>
+                           
+                            <td><?php $officer = User::where('id',$material->added_by)->get(); ?>
                             	@foreach($officer as $offier) {{ $offier->fname }} {{ $offier->lname }} @endforeach
                             </td>
- 							<td><a href="{{ url('procuredMaterials',$material->tag_) }}"><button class="btn btn-success"><i class="fa fa-eye"></i></button></a></td>
+ 							<td><a href="{{ url('materialEntry',$material->tag_) }}"><button class="btn btn-success"><i class="fa fa-eye"></i></button></a></td>
                              
                         </tr>
                         @endforeach

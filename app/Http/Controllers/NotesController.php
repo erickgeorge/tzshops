@@ -16,6 +16,7 @@ use App\Directorate;
 use App\Department;
 use App\workordersection;
 use App\Procurement;
+use App\Storehistory;
 
    
 class NotesController extends Controller
@@ -1069,6 +1070,20 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
         $data['header'] = "Procured Materials Sent To Store";
         $pdf = PDF::loadView('procurementList',$data);
         return $pdf->stream(' Procured Materials - '.date('d-m-Y H:i').'.pdf');
+    }
+    public function PrintNote($id)
+    {
+        $data['procure'] = Procurement::where('tag_',$id)->orderBy('material_name','Asc')->orderBy('type','Asc')->get();
+        $data['header'] = "Procured Materials Receiving Document";
+        $pdf = PDF::loadView('procurementReceiving',$data);
+        return $pdf->stream(' Procured Materials Receiving Document - '.date('d-m-Y H:i').'.pdf');
+    }
+     public function materialEntrypdf($id)
+    {
+        $data['entry'] = Storehistory::where('tag_',$id)->orderBy('material_name','Asc')->orderBy('type','Asc')->get();
+        $data['header'] = "Store Material Entry Report";
+        $pdf = PDF::loadView('materialEntrypdf',$data);
+        return $pdf->stream('Store Material Entry Report - '.date('d-m-Y H:i').'.pdf');
     }
 
 }

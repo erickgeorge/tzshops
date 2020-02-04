@@ -228,7 +228,7 @@ class DirectorateController extends Controller
 
          $request->validate([
             'dir_name' => 'required|unique:directorates',
-            'dir_ab' => 'required|unique:directorates',
+            'dir_abb' => 'required|unique:directorates',
             
         ]);
 

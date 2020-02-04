@@ -542,3 +542,9 @@ Route::get('procuredMaterials/{id}','StoreController@procuredMaterials')->name('
 Route::post('AcceptProcuredMaterial','StoreController@AcceptProcuredMaterial')->name('AcceptProcuredMaterial');
 
 Route::get('exportProcure/{id}','NotesController@exportProcure')->name('exportProcure');
+
+Route::post('ReceivedProcurement','StoreController@ReceivedProcurement')->name('ReceivedProcurement');
+Route::get('PrintNote/{id}','NotesController@PrintNote')->name('PrintNote');
+Route::get('materialEntryHistory','StoreController@materialEntryHistory')->name('materialEntryHistory');
+Route::get('materialEntry/{id}','StoreController@materialEntry')->name('materialEntry');
+Route::get('materialEntrypdf/{id}','NotesController@materialEntrypdf')->name('materialEntrypdf');

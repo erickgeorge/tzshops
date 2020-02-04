@@ -27,9 +27,14 @@
     
     <div class="container " >
         <div class="row ">
-        <div class="col">
+        <div class="col-lg-4">
             @if(auth()->user()->type == 'STORE')
              <a href="{{url('addmaterial')}} "><button style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new material</button></a>
+@endif
+        </div>
+         <div class="col">
+            @if(auth()->user()->type == 'STORE')
+             <a href="{{ url('materialEntryHistory') }}"><button style="margin-bottom: 20px" type="button" class="btn btn-primary">Materials Entry History</button></a>
 @endif
         </div>
        <!-- <div class="col" align="right">

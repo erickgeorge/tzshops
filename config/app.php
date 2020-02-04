@@ -140,7 +140,7 @@ return [
          * Laravel Framework Service Providers...
          */
 		 
-		 Barryvdh\DomPDF\ServiceProvider::Class,
+		 Barryvdh\DomPDF\ServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -163,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -205,6 +206,7 @@ return [
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,

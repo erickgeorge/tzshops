@@ -13,6 +13,7 @@ use App\Technician;
 use App\WorkOrder;
 use App\Procurement;
 use App\WorkOrderMaterial;
+use App\Storehistory;
 
 class StoreController extends Controller
 {
@@ -130,33 +131,54 @@ class StoreController extends Controller
 	
 	 public function addnewmaterail(Request $request)
     {
-        //$request->validate([
-          //  'description' => 'required|unique:materials',
-			
-        //]);
-
-
        
+//here
 
-        if ($request['m_type'] == 'Choose...') {
-            return redirect()->back()->withErrors(['message' => 'Material type required ']);
-        }
-        $material = new Material();
+      $y=1;
+    $totmat=$request['totalinputs']/5;
+   
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        
+      $z=1;
+      $tag = date("Y-m-d H:i:s");
+      for ($x = 1; $x <= $totmat; $x++) {
+        
+      $_material = new  Storehistory();
+      $material = new Material();
 
+            $_material->material_name = $request[$z];
+            $material->name = $request[$z];
 
-      
+              $z=$z+1;
+            $_material->material_description = $request[$z];
+            $material->description = $request[$z];
 
+            $z=$z+1;
+            $_material->type = $request[$z];
+            $material->type = $request[$z];
+            
+              $z=$z+1;
+            $_material->unit_measure = $request[$z];
+            $material->brand = $request[$z];
 
-        $material->name = $request['name'];
-        $material->description = $request['description'];
-        $material->brand = $request['brand'];
-        $material->type = $request['m_type'];
-		
-		 $material->stock = $request['stock'];
-        $material->save();
+              $z=$z+1;
+            $_material->total_input = $request[$z];
+             $material->stock = $request[$z];
+              
 
-        return redirect()->route('add_material')->with(['message' => 'New material successfully added']);
+            $_material->tag_ = $tag; //differentiating from different inputs 
+            $_material->added_by = auth()->user()->id;
+              $z++;
+            $_material->save();
+             $material->save();
+       
     }
+
+     return redirect()->route('store')->with(['message' => 'New material successfully added']);
+
+  }
    
 
 
@@ -680,18 +702,20 @@ public function deletematerial($id)
         }// start> end
 
 $procured = Procurement::
-            select(DB::raw('count(id) as total_materials, tag_,procured_by,store_received'))
+            select(DB::raw('count(id) as total_materials, tag_,procured_by,store_received,stored'))
             ->whereBetween('created_at', [$from, $to])
             ->groupBy('tag_')
+            ->groupBy('stored')
             ->groupBy('procured_by')
             ->groupBy('store_received')
             ->orderBy('created_at','Desc')
             ->get();
 }else{
       $procured = Procurement::
-            select(DB::raw('count(id) as total_materials, tag_,procured_by,store_received'))
+            select(DB::raw('count(id) as total_materials, tag_,procured_by,store_received,stored'))
             ->groupBy('tag_')
             ->groupBy('procured_by')
+            ->groupBy('stored')
             ->groupBy('store_received')
             ->orderBy('created_at','Desc')
             ->get();
@@ -740,7 +764,7 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
         $material->save();
 
             $update_procurement = Procurement::where('id',$check_material->id)->first();
-            $update_procurement->store_received = auth()->user()->id;
+            $update_procurement->stored = auth()->user()->id;
             $update_procurement->save();
 
       }
@@ -753,7 +777,7 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
             $update_material->save();
 
             $update_procurement = Procurement::where('id',$check_material->id)->first();
-            $update_procurement->store_received = auth()->user()->id;
+            $update_procurement->stored = auth()->user()->id;
             $update_procurement->save();
         }
       }
@@ -761,8 +785,49 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
       
     }
   
-  return redirect()->back()->with(['message' => 'Material Accepted and successfully added in the stock!']);
+  return redirect()->back()->with(['message' => 'Material successfully added in the stock!']);
 
+  }
+
+  public function ReceivedProcurement(Request $request)
+  {
+   $catch_materials = Procurement::select('id')->
+    where('procured_by',$request['added_by'])->
+    where('tag_',$request['tag_'])->
+    where('store_received',$request['store_received'])->get();
+
+    foreach($catch_materials as $procured_stored)
+    { 
+            $update_procurement = Procurement::where('id',$procured_stored->id)->first();
+            $update_procurement->store_received = auth()->user()->id;
+            $update_procurement->save();
+    }
+    
+   return redirect()->back()->with(['message' => 'Material Accepted Successfully!']);
+  }
+
+  public function materialEntryHistory()
+  {
+
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+      $material = Storehistory::
+      select(DB::raw('count(id) as total_materials, tag_,added_by'))
+            ->groupBy('tag_')
+            ->groupBy('added_by')
+            ->orderBy('created_at','Desc')
+            ->get();
+
+return view('materialEntryHistory', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
+  }
+
+  public function materialEntry($id)
+  {
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+      $material = Storehistory::where('tag_',$id)->orderBy('material_name','Asc')->OrderBy('type','Asc')->get();
+
+return view('materialEntry', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
   }
 
 }
