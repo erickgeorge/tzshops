@@ -87,14 +87,25 @@
                 $material_to_purchased = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',15)->groupBy('work_order_id')->get();
                 
                  $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
-
-                
-
-                
-                $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+   
+                $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->
+                       select(DB::raw('work_order_id'),'hos_id' )
+                     ->where('status',0)
+                     ->orwhere('status', 9)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     
+                     ->get();
               
-                
-                 $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+
+                 $material_requestsmc = WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'hos_id' , 'zone')
+                     ->where('status',0)
+                     ->orwhere('status', 9)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     ->groupBy('zone')
+                     ->get();
 
 				         $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 
@@ -237,17 +248,8 @@
 
                   <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
 
-
-
-              
-
         </div>
-       </li>
-
-
-
-                        
-                      
+       </li>   
                        <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
                     </li>

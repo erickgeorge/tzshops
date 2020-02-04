@@ -44,6 +44,7 @@
               
                 <th >Works order ID</th>
                 <th >HoS name</th>
+                <th >Sent To</th>
                 <th >Action</th>
                 
             </tr>
@@ -60,10 +61,12 @@
                    
                     <td>00{{ $item->work_order_id }}</td>
                    
-                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+
+                    <td>{{ $item['iowzone']->lname.' '.$item['iowzone']->fname }}</td>
                     
                  
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">Material</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">Material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach
@@ -117,6 +120,7 @@
               
                 <th >Works order ID</th>
                 <th >HoS name</th>
+              
                 <th >Action</th>
                 
             </tr>
@@ -133,9 +137,10 @@
                    
                     <td>00{{ $item->work_order_id }}</td>
                    
-                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     
-                 
+                    
+
                       <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">Material</a>&nbsp;
                         </td>
                     </tr>

@@ -335,13 +335,13 @@ var total=2;
 
 <table style="width:100%">
   <tr>
-    <th>DATE</th>
-    <th>TIME</th> 
-    <th>DETAILS</th> 
-  <th>STATUS</th>
-  <th>MESSAGE</th>
+    <th>Date</th>
+    <th>Time</th> 
+    <th>Details</th> 
+  <th>Status</th>
+  <th>Message</th>
   
-    <th>DATE REQUESTED</th>
+    <th>Date Requested</th>
   </tr>
     @foreach($tforms as $tform)
   
@@ -358,8 +358,8 @@ var total=2;
      <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
                                                                          class="badge badge-success">View Message</span></a></td>
 
-  <td>{{ 
-   $tform->created_at }}</td>
+ <td><?php $time = strtotime($tform->created_at); echo date('d/m/Y',$time);  ?> </td>
+                            <td>
   </tr>
   
   @endforeach
@@ -415,7 +415,8 @@ var total=2;
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
       
-   <td>{{$matform->created_at }}</td>
+  <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
+                            <td>
    
    
   </tr>
