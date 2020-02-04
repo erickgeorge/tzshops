@@ -88,10 +88,31 @@
                 
                  $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
    
+<<<<<<< HEAD
                 $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
               
 
                  $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+=======
+                $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->
+                       select(DB::raw('work_order_id'),'hos_id' )
+                     ->where('status',0)
+                     ->orwhere('status', 9)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     
+                     ->get();
+              
+
+                 $material_requestsmc = WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'hos_id' , 'zone')
+                     ->where('status',0)
+                     ->orwhere('status', 9)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     ->groupBy('zone')
+                     ->get();
+>>>>>>> 87e40af3d34159d13ea76359afbfc639422a615e
 
                  $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
                 

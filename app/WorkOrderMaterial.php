@@ -40,6 +40,11 @@ class WorkOrderMaterial extends Model
         return $this->belongsTo('App\User','zone');
     }
 
+
+     public function acceptedby(){
+        return $this->belongsTo('App\User','accepted_by');
+    }
+
     
 
     

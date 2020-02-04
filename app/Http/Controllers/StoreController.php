@@ -278,11 +278,12 @@ class StoreController extends Controller
 
 	public function acceptMaterial($id)
     {
-        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->get();
+     $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->where('zone', auth()->user()->id)->get();
 
 		 foreach($wo_materials as $wo_material) {
 		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		 $wo_m->status = 1;
+     $wo_m->accepted_by = auth()->user()->id;
 	   $wo_m->save();
 		 }
 		 
@@ -293,6 +294,30 @@ class StoreController extends Controller
              $mForm->save();
        return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Accepted successfully ']);
     }
+
+
+
+
+
+  public function acceptMaterialiow($id , $zoneid)
+    {
+     $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('zone', $zoneid)->where('status',0)->get();
+
+     foreach($wo_materials as $wo_material) {
+     $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();   
+     $wo_m->status = 1;
+     $wo_m->accepted_by = auth()->user()->id;
+     $wo_m->save();
+     }
+     
+     //status field of work order
+      $mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status = 15;
+      
+             $mForm->save();
+       return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Accepted successfully ']);
+    }
+
 
 
 

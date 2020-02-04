@@ -10,10 +10,10 @@
       @if(count($items) > 0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Material Accepted for this Work order </b></h3>
+            <h3 align="center"><b>Material Accepted for this Works order </b></h3>
         </div>
 
-        <div style="padding-left: 650px;">
+       <!-- <div style="padding-left: 650px;">
             <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -28,7 +28,7 @@
                              max="<?php echo date('Y-m-d'); ?>">
                 <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
             </form>
-        </div>
+        </div>-->
 @endif
 
         {{--<div class="col-md-4">

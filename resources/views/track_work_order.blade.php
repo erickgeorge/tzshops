@@ -182,16 +182,16 @@
 
      
 
-    <td>{{ 
-   $techform->created_at }}</td>
+   <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
+                            <td>
    
     @if($techform->created_at ==  $techform->updated_at)
    
    
     <td> NOT COMPLETED</td>
     @else
-    <td>{{ 
-   $techform->updated_at }}</td>
+   <td><?php $time = strtotime($techform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+                            <td>
     @endif
     
     @if($techform->status!=1)
@@ -311,10 +311,10 @@
 
 <table style="width:100%">
   <tr>
-    <th>STATUS</th>
-    <th>DESCRIPTION</th> 
-  <th>TECHNICIAN RESPONSIBLE</th> 
-    <th>DATE INSPECTED</th>
+    <th>Status</th>
+    <th>Description</th> 
+  <th>Technician responsible</th> 
+    <th>Date Inspected</th>
   </tr>
     @foreach($iforms as $iform)
   
@@ -347,13 +347,13 @@
 
 <table style="width:100%">
   <tr>
-    <th>DATE</th>
-    <th>TIME</th> 
-    <th>DETAILS</th> 
-  <th>STATUS</th>
-  <th>MESSAGE</th>
+    <th>Date</th>
+    <th>Time</th> 
+    <th>Details</th> 
+  <th>Status</th>
+  <th>Message</th>
   
-    <th>DATE REQUESTED</th>
+    <th>Date Requested</th>
   </tr>
     @foreach($tforms as $tform)
   
@@ -370,9 +370,8 @@
      <td> <a onclick="myfunc2('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
                                                                          class="badge badge-success">View Message</span></a></td>
 
-  <td>{{ 
-   $tform->created_at }}</td>
-  </tr>
+  <td><?php $time = strtotime($tform->created_at); echo date('d/m/Y',$time);  ?> </td>
+                            <td>
   
   @endforeach
   </table>
@@ -403,9 +402,11 @@
   <tr>
      
     <th>Material Name</th>
-    <th>Material Description</th>
+   
   <th>Type</th>
    <th>Quantity</th>
+   <th>IoW</th>
+   <th>Approved By</th>
     <th>Status</th>
      <th>Date Requested</th>
       <th>Date Updated</th>
@@ -415,15 +416,25 @@
   <tr>
     
     <td>{{$matform['material']->name }}</td>
-   <td>{{$matform['material']->description }}</td>
+ 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
+   <td>{{$matform['iowzone']->name }}</td>
+       <td>
+       @if($matform->accepted_by == NULL)
+      <span class="badge badge-warning">Not accepted Yet.</span> 
+       @else
+       {{ $matform['acceptedby']->name }}
+       @endif
+       </td>
    <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
       
-   <td>{{$matform->created_at }}</td>
-   <td>{{$matform->updated_at }}</td>
+  <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
+                          
+    <td><?php $time = strtotime($matform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+                            
    
   </tr>
   
@@ -452,11 +463,11 @@
      
     <th>Material Name</th>
     <th>Material Description</th>
-  <th>Type</th>
-   <th>Quantity</th>
+    <th>Type</th>
+    <th>Quantity</th>
     <th>Status</th>
-     <th>Date Requested</th>
-      <th>Date Updated</th>
+    <th>Date Requested</th>
+    <th>Date Updated</th>
   
   </tr>
     @foreach($matforms as $matform)
@@ -469,9 +480,10 @@
    <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> MATERIAL WAITING FOR APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">MATERIAL APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">MATERIAL RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">MATERIAL REQUESTED </span> @elseif($matform->status==17) <span class="badge badge-warning">MATERIAL ON CHECK BY IOW </span>  @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status == -1)<span class="badge badge-warning">MATERIAL ON CHECK BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
       
-   <td>{{$matform->created_at }}</td>
-   <td>{{$matform->updated_at }}</td>
-   
+   <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
+                            
+    <td><?php $time = strtotime($matform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+                            
   </tr>
   
   @endforeach

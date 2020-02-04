@@ -242,7 +242,9 @@ Route::get('rejected/materials/{id}', 'WorkOrderController@rejectedmaterialview'
 Route::get('work_order_material_purchased', 'HomeController@MaterialpurchasedView')->name('wo.materialneededy');
 
 
-Route::get('work_order_material_iow/{id}', 'HomeController@workOrderMaterialInspectionView')->name('material.inspection.view');
+Route::get('work_order_material_iow/{id}/{zoneid}' , 'HomeController@workOrderMaterialInspectionView')->name('material.inspection.view');
+
+Route::get('work_order_material_iow/{id}' , 'HomeController@workOrderMaterialInspectionViewforinspector')->name('material.inspection.view');
 
 Route::get('work_order_material_purchased/{id}', 'HomeController@workOrderMaterialpurchased')->name('material.inspection.view1');
 
@@ -304,6 +306,8 @@ Route::get('material/afterpurchase/{id}', 'StoreController@materialafterpurchase
 Route::get('material/material/{id}', 'StoreController@materialtoreserveonebyone')->name('store.material.reserve');
 
 Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('store.materialaccept');
+
+Route::get('accept/material/mc/{id}/{zoneid}', 'StoreController@acceptMaterialiow')->name('store.materialacceptmc');
 
 Route::get('accept/material/with/rejected/{id}', 'StoreController@Materialacceptedwithrejected')->name('store.materialaccept.reject');
 
