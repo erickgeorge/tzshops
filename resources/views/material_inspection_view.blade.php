@@ -101,7 +101,7 @@
 
                     <div>
 
-                     <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id , $item->zone] ) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
+                     <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialacceptmc', [$item->work_order_id , $item->zone] ) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
                    </span> 
                 
                  &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>

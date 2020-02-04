@@ -307,7 +307,7 @@ Route::get('material/material/{id}', 'StoreController@materialtoreserveonebyone'
 
 Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('store.materialaccept');
 
-Route::get('accept/material/mc/{id}/{zoneid}', 'StoreController@acceptMaterialiow')->name('store.materialaccept');
+Route::get('accept/material/mc/{id}/{zoneid}', 'StoreController@acceptMaterialiow')->name('store.materialacceptmc');
 
 Route::get('accept/material/with/rejected/{id}', 'StoreController@Materialacceptedwithrejected')->name('store.materialaccept.reject');
 
