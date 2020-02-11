@@ -27,7 +27,6 @@ Route::get('/myprofile','HomeController@myprofileView' )->name('myprofile');
 Route::get('/dashboard', 'HomeController@dashboardView');
 
 
-
 Route::get('/settings', 'HomeController@settingsView');
 
 // Route::get('/create_user', 'HomeController@createUserView')->name('view.create.user');
@@ -162,7 +161,12 @@ Route::get('/alliow','HomeController@alliow')->name('alliow');
 //////////////////////////////////////////
 
 Route::POST('Manage/edit/workordersection', 'DirectorateController@editworkorderSection')->name('workordersection.edit');
+
+Route::POST('Manage/edit/iowzone', 'DirectorateController@editiowzone')->name('workordersection.edit');
+
 Route::post('delete/workordersection/{id}', 'DirectorateController@deleteWorkorderSection')->name('worksection.delete');
+
+Route::post('delete/iowzone/{id}', 'DirectorateController@deleteiowzone')->name('iowzone.delete');
 
 
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');

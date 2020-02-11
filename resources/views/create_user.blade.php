@@ -165,7 +165,7 @@ User Registration
        	<input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
        </div>
               <div id="Div1" >
-               <select style="width: 300px;" class="custom-select" name="type[]" id="type">
+               <select  required style="width: 300px;" class="custom-select" name="type[]" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>
 	                  
@@ -189,7 +189,7 @@ User Registration
                     &nbsp;&nbsp;&nbsp;
                     @foreach($worksec as $dep)
  
-                           <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}"  ><?php echo strtoupper( $dep->section_name ); ?> &nbsp;&nbsp;&nbsp;
+                           <input required type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}"  ><?php echo strtoupper( $dep->section_name ); ?> &nbsp;&nbsp;&nbsp;
          
                            
                     @endforeach
@@ -265,15 +265,6 @@ User Registration
 }
   </script>
 
-  <script type="text/javascript"> 
-			$(document).ready(function() { 
-				$('input[type="checkbox"]').click(function() { 
-					var inputValue = $(this).attr("value"); 
-					$("." + inputValue).toggle(); 
-					 
-				}); 
-			}); 
-</script> 
 
 
  

@@ -63,13 +63,13 @@ IoW Zones
                             <td>
                                  <div class="row">
                                     <a style="color: green;"
-                                       onclick="myfunc1('{{ $iow->id }}','{{ $iow->section_name }}')"
+                                       onclick="myfunc1('{{ $iow->id }}','{{ $iow->zonename}}')"
                                        data-toggle="modal" data-target="#editDepartment" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Workorder Section Completely? \n\n {{   $iow->zonename }} \n\n')"
-                                          action="{{ route('worksection.delete', [$iow->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to delete this zone completely? \n\n {{   $iow->zonename }} \n\n')"
+                                          action="{{ route('iowzone.delete', [$iow->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
                                                 title="Delete" style="color: red;" data-toggle="tooltip"><i
@@ -96,32 +96,29 @@ IoW Zones
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Section</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Zone</h5>
 
 
                 </div>
 
-                <form method="POST" action="edit/workordersection" class="col">
+                <form method="POST" action="edit/iowzone" class="col">
                     <div class="modal-body">
 
 
                         @csrf
-						
-						
-						
-						
+	
 						
                     <div class="form-group ">
-                        <label for="dep_name">Section Name</label>
+                        <label for="dep_name">Zone Name</label>
                         <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
-                               name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc." >
+                               name="sec_name" placeholder="Enter Zone Name" >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
                        
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
-                        <a href="/Manage/section" class="btn btn-danger">Cancel
+                        <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
                     </a>
 
                     </div>
