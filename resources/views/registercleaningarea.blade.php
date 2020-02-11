@@ -40,7 +40,7 @@ StaffHouse Registrartion
                             
                             <label style="width:150px;" class="input-group-text" for="directorate">Zone Name </label>
                         </div>
-                        <select required class="custom-select" name="zone" id="zone">
+                        <select required class="custom-select" name="zone" id="zonne">
                             <option value="">Choose...</option>
                             @foreach($newzone as $zone)
                                 <option value="{{ $zone->id }}">{{ $zone->Zone_name }}</option>
