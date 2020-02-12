@@ -4,8 +4,8 @@
     technicians
     @endSection
 @section('body')
-    <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center">Available Technicians</h3>
         </div>
@@ -16,7 +16,7 @@
         <p class="alert alert-success">{{ Session::get('message') }}</p>
     @endif
     </div>
-    <br>
+    
     <hr class="container">
     <div class="container">
     <a style="margin-left: 2%;" href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>    <?php

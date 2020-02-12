@@ -74,3 +74,5 @@
                     </tbody>
                 </table>
  </div>
+
+ @endsection

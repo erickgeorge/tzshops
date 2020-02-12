@@ -6,7 +6,7 @@
 @section('body')
 
   <br>
-      <div style="padding-top: 60px;" class="container">
+      <div  class="container">
             <br>
               @if ($errors->any())
         <div class="alert alert-danger">
@@ -38,7 +38,7 @@
                     
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
-                    <a href="/Manage/section" class="btn btn-danger">Cancel
+                    <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
                     </a>
                 </form>
             </div>

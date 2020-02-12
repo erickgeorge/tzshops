@@ -6,7 +6,7 @@
 
 @section('body')
     <br>
-    <div class="row" style="margin-top: 6%; margin-left:2%; margin-right:2%;">
+    <div class="row" style=" margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
             <h2>Create new work order</h2>
         </div>

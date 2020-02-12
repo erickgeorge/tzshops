@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
     manage hall of resdence
@@ -15,9 +15,7 @@
         </div>
     @endif
 <div class="container">
-   <br>
-   <br>
-   <br>
+  
         
             @if(Session::has('message'))
         <div class="alert alert-success">

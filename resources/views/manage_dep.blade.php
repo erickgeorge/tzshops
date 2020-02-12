@@ -10,7 +10,7 @@
    
 
     {{-- tabs --}}
-    <div class="payment-section-margin" style="margin-top: 6%;">
+    <div class="payment-section-margin" >
          @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

@@ -23,7 +23,7 @@ User Registration
 		
  </style>
 <br>
-<div class="row" style="margin-top: 6%; margin-left: 3%;">
+<div class="row" style=" margin-left: 3%;">
 	<div class="col-md-8">
 		<h2 class="container">Create New User</h2>
 	</div>

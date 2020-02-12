@@ -13,7 +13,7 @@ use App\Section;
 use App\WorkOrder;
  ?>
     <br>
-    <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
+    <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
             <h3><b>Completed Work orders</b></h3>
         </div>

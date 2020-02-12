@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
 StaffHouse Registrartion
@@ -26,7 +26,7 @@ StaffHouse Registrartion
 
 
 <div class="container">
-                <h4 style='margin-top: 7%;'  id="Add New House">Register  New House</h4>
+                <h4  id="Add New House">Register  New House</h4>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
           

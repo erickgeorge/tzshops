@@ -8,7 +8,7 @@ Cleaningzone Registration
 <br>
 
 @if ($errors->any())
-<div class="alert alert-danger" style="margin-top: 6%;">
+<div class="alert alert-danger" >
 	<ul>
 		@foreach ($errors->all() as $error)
 			<li>{{ $error }}</li>

@@ -7,7 +7,7 @@ IoW Zones
 @section('body')
 
 
-<div class="container" style="padding-top: 100px;">
+<div class="container" >
 
 
 	 @if ($errors->any())

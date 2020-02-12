@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
     manage staff house
@@ -12,7 +12,7 @@
   
 
  
-<br><br><br>
+
             <div >
                @if(Session::has('message'))
         <div class="alert alert-success">

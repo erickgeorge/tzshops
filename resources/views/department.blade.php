@@ -10,7 +10,7 @@ use app\directorate;
 use app\department;
 ?>
 
-<div class="container" style="padding-top: 100px;">
+<div class="container" >
 
 
 	 @if ($errors->any())

@@ -7,7 +7,7 @@
 <?php use App\workordersection; ?>
 <?php $sectionss = workordersection::get(); ?>
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center">Add new technician</h3>
         </div>

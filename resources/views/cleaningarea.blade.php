@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
     manage cleaning area
@@ -10,9 +10,7 @@
 <div class="container">
    
      
-     <br>
-     <br>
-     <br>
+  
 
 
        

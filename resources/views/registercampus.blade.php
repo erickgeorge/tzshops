@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
 Campus Registration
@@ -10,8 +10,9 @@ Campus Registration
 
 
 <div class="container">
-    <br>
-<div class="alert alert-danger" style="margin-top: 6%;">
+  <br>
+  <br>
+<div class="alert alert-danger" style="margin-top: 86%;">
 	<ul>
 		@foreach ($errors->all() as $error)
 			<li>{{ $error }}</li>
@@ -27,10 +28,10 @@ Campus Registration
 </div>
 @endif
 
-<br>
 
+<br>
 <div class="container">
-                <h4 style="margin-top: 6%"  id="Add New campus">Register New Campus</h4>
+                <h4   id="Add New campus">Register New Campus</h4>
                 <hr>
 
                 <p align="center" style="color: red; margin-left: 2%;">All fields are compulsory</p>

@@ -7,7 +7,7 @@
 @section('body')
     <br>
     <div class="container">
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center">Work order details</h3>
         </div>

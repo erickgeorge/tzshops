@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
 Campus Registration
@@ -8,7 +8,7 @@ Campus Registration
 <br>
 
 @if ($errors->any())
-<div class="alert alert-danger" style="margin-top: 6%;">
+<div class="alert alert-danger" >
 	<ul>
 		@foreach ($errors->all() as $error)
 			<li>{{ $error }}</li>
@@ -26,7 +26,7 @@ Campus Registration
 
 <div class="container">
 
-                <h4 style="margin-top: 7%;" id="Add New campus">Register New Hall of Resdence</h4>
+                <h4  id="Add New campus">Register New Hall of Resdence</h4>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
               

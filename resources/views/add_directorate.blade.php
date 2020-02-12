@@ -6,7 +6,7 @@
 @section('body')
 
   <br>
-      <div style="padding-top: 80px;" class="container">
+      <div class="container">
           @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

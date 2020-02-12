@@ -56,6 +56,8 @@
                     <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span
                                     class="sr-only">(current)</span></a> </b>
                 </li>
+
+
 <?php 
                 use App\WorkOrderMaterial;
         use App\PurchasingOrder;
@@ -564,15 +566,16 @@
                                     class="badge badge-light">{{ count($m) }}</span></a>
             </li>
 
+              
 
- <li class="nav-item">
+               <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('manage_Campus')}}">Assets</a>
             </li>
-
 
              <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('manage_Campus')}}">Land Scapping</a>
             </li>
+
 
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
@@ -791,25 +794,13 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('work_order')}}" ><h6>Works order </h6></a>
+  <a  href="{{ url('manage_Campus')}}" ><h6>Campuses </h6></a>
 
-  <a href="{{ url('technicians') }}"><h6>Technicians</h6></a>
-
-   <a href="{{ url('Manage/section')}}"><h6>DES Sections</h6></a>  
-  <button style=" background-color: #c2bebe;
-  color: white;
-  
-  border: 2px solid white;" class="dropdown-btn"><h6>Material Update
-    <i class="fa fa-caret-down"></i></h6>
-  </button>
-  <div class="dropdown-container">
-    <a href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</h6></span></a>
-    <a href="{{ url('material_received_with_workorder')}}"><h6>Received Material from Store</h6><span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
-   
-  </div>
-
- 
+    <a  href="{{ url('manage_Houses')}}"><h6>Staff House</h6></a>
+    <a  href="{{ url('manage_Hall_of_resdence')}}"><h6>Hall of Resdence</h6></a>  
+    <a  href="{{ url('nonbuildingasset')}}"><h6>Non-building Asset</h6></a>  
+    <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Company</h6></a>  
+    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Area</h6></a>  
 </div>
 
 <div class="main">

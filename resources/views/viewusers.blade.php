@@ -12,7 +12,7 @@ use App\Department;
 use App\Section;
  ?>
 <br>
-<div class="row container-fluid" style="margin-top: 6%;">
+<div class="row container-fluid" >
   <div class="col-lg-4">
     <h3>Available Users</h3>
   </div>

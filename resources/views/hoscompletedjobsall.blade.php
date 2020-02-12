@@ -15,7 +15,7 @@ use Carbon\Carbon;
  ?>
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
+    <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
           <?php $hosname = user::where('id',$hosid)->get(); ?>
           @foreach($hosname as $hosname) @endforeach

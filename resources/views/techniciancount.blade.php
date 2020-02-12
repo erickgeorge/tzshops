@@ -18,7 +18,7 @@
 @section('body')
 
     <br>
-    <div style="margin-top: 6%;">
+    <div >
         <div class="col-lg-12">
             <h3 class="container"><b>Available Technician on Progress</b></h3>
         </div>

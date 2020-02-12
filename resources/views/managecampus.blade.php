@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
     manage Campuses
@@ -12,9 +12,7 @@
   
 
          <div >
-          <br>
-           <br>
-           <br>
+        
             @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
