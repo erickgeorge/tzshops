@@ -355,6 +355,7 @@ class StoreController extends Controller
 		 foreach($wo_materials as $wo_material) {
 		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
 		$wo_m->status = -1;
+    $wo_m->accepted_by = auth()->user()->id;
 		$wo_m->reason = $request['reason'];
 		$wo_m->save();
 		 }  

@@ -26,16 +26,13 @@ Campus Registration
 	</ul>
 </div>
 @endif
-<<<<<<< Updated upstream
+
 <br>
 
-                <h4 style="margin-top: 6%" align="center" id="Add New campus">Register New Campus</h4>
-                <hr class="container">
-=======
 <div class="container">
                 <h4 style="margin-top: 6%"  id="Add New campus">Register New Campus</h4>
                 <hr>
->>>>>>> Stashed changes
+
                 <p align="center" style="color: red; margin-left: 2%;">All fields are compulsory</p>
                 <form method="POST" action="{{ route('campus.save') }}" class="col-lg-12">
                     @csrf

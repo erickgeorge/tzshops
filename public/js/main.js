@@ -37,10 +37,7 @@ return false;
 				
 				
 				$("#manual").attr('required', '');
-				
-				
-				
-				
+			
 				
                 $("#divmanual").show();
 				$("#locationdiv").hide();
@@ -51,15 +48,12 @@ return false;
 				$("#room").attr('required', '');
 				
 				$("#manual").removeAttr('required');
-				
-				
-				
-				
-                 $("#divmanual").hide();
+                $("#divmanual").hide();
 				$("#locationdiv").show();
             }
         });
     });
+
 	
 function ShowwHideDiv(checkdiv) {
         var dvPassport = document.getElementById("locationdiv");

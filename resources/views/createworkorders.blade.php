@@ -76,7 +76,7 @@
                  <div class="checkbox">
             <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
                 Enter Location manually</label>
-        </div>
+               </div>
             </div>
         </div>
 

@@ -93,7 +93,7 @@
               
 
                  $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-     $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->
+                $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->
                        select(DB::raw('work_order_id'),'hos_id' )
                      ->where('status',0)
                      ->orwhere('status', 9)
@@ -114,6 +114,13 @@
 
 
                  $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
+
+                $wo_materialreceive=   WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'receiver_id')
+                     ->where('status',3)
+                     ->groupBy('work_order_id')
+                     ->groupBy('receiver_id')
+                     ->get();
                 
         
         
@@ -327,7 +334,7 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved') }}" >Reserved Materials <span
                                     class="badge badge-light">{{ count($woMaterialreserved) }}</span></a>
-                    </li>
+                    </li> ``        
 
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted_by_iow')}}">Material requests<span
@@ -475,6 +482,11 @@
   </li>
                     
  <li class="nav-item">
+
+  <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('redirected_work_order')}}">Redirected Works order  </a>
+  </li> 
+
   <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
                     </li>
@@ -485,14 +497,30 @@
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
    </li>
 
-   <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_material_needed')}}">Work order needs material <span
+  
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Material Requests Update 
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" style="color:white" href="{{ url('work_order_material_needed')}}">Work order needs material <span
                                     class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
-  </li>
+                 <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}">Accepted Materials<span
+                                    class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
+               
+               <a class="dropdown-item" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials
+                        <span
+                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
 
-   <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('redirected_work_order')}}">Redirected Works order  </a>
-  </li>
+          
+
+        </div>
+       </li>
+
+
+  
   @endif
 
 
@@ -527,7 +555,8 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials  <span
                                     class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
-               <a style="color:white" class="dropdown-item" href="{{ url('material_received_with_workorder')}}">Received Material from Store</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('material_received_with_workorder')}}">Received Material from Store  <span
+                                    class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
           
 
         </div>
