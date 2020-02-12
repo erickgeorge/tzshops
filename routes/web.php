@@ -552,3 +552,7 @@ Route::get('PrintNote/{id}','NotesController@PrintNote')->name('PrintNote');
 Route::get('materialEntryHistory','StoreController@materialEntryHistory')->name('materialEntryHistory');
 Route::get('materialEntry/{id}','StoreController@materialEntry')->name('materialEntry');
 Route::get('materialEntrypdf/{id}','NotesController@materialEntrypdf')->name('materialEntrypdf');
+
+
+Route::post('importUserExcel','ImportExcelController@importUserExcel')->name('importUserExcel');
+Route::get('excelinsertusers','ImportExcelController@excelinsertusers')->name('excelinsertusers');

@@ -254,6 +254,8 @@
 
                   <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
 
+                 
+
         </div>
        </li>   
                        <li class="nav-item">
@@ -573,7 +575,7 @@
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
-
+ <a style="color:white" class="dropdown-item" href="{{ url('excelinsertusers')}}">Import Excel</a>
 
                 
               

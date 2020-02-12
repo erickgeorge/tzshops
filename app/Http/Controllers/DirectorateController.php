@@ -284,17 +284,13 @@ class DirectorateController extends Controller
 
     public function createDepartment(Request $request)
     {
-        /*$request->validate([
-            'dep_name' => 'required|unique:directorates',
-            'dep_ab' => 'required|unique:directorates'
-        ]);*/
         
 
         if ($request['directorate'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Directorate is required']);
         }
 
-        if (!empty(Department::where('description',$request['dep_name'])->where('name',$request['dep_ab'])->first())){
+        if (!empty(Department::where('description',$request['dep_name'])->where('directorate_id',$request['directorate'])->where('name',$request['dep_ab'])->first())){
             return redirect()->back()->withErrors(['message' => 'Department already exist']);
         }
 
