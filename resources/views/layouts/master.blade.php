@@ -388,7 +388,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #f7f5f5;
+  background-color: #c2bebe;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -413,6 +413,10 @@
 
 }
 
+.sidenav button{
+  color: white;
+}
+
 /* On mouse-over */
 .sidenav a:hover, .dropdown-btn:hover {
   color: #f1f1f1;
@@ -424,16 +428,19 @@
 .sidenav a {
   background-color: #c2bebe;
   color: white;
+
  
  
-  border: 2px solid white;
 
 
 
 }
 
-
-
+.sidenav a, .dropdown-btn, .sidenav button {
+  color: #f1f1f1;
+   background: grey;
+    margin-top: 2px; 
+}
 
 
 /* Main content */
@@ -482,21 +489,18 @@
  @if($role['user_role']['role_id'] == 1)
  
 
-   <a href="{{ url('Manage/section')}}"><h6>DES Sections</h6></a>  
+   <a  href="{{ url('Manage/section')}}"><h6>DES Sections</h6></a>  
  @endif
 
  @if(strpos(auth()->user()->type, "HOS") !== false )
- <a href="{{ url('technicians') }}"><h6>Technicians</h6></a>
- <button style=" background-color: #c2bebe;
-  color: white;
-  
-  border: 2px solid white;" class="dropdown-btn"><h6>Material Update
+ <a  href="{{ url('technicians') }}"><h6>Technicians</h6></a>
+ <button class="dropdown-btn"><h6>Material Update
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials <span
+    <a  href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials <span
                                     class="badge badge-light">{{ count($woMaterialrejected) }}</h6></span></a>
-    <a href="{{ url('material_received_with_workorder')}}"><h6>Received Material from Store</h6><span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
+    <a  href="{{ url('material_received_with_workorder')}}"><h6>Received Material from Store</h6><span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
    
   </div>
 
@@ -509,21 +513,18 @@
   
   <a  href="{{ url('roomreport')}}"><h6>Room Report</h6></a>
                    
-   <a href="{{ url('comp') }}" ><h6>Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i></h6></a>
+   <a  href="{{ url('comp') }}" ><h6>Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i></h6></a>
    <a  href="{{ url('technicians') }}"><h6>Technicians</h6></a>
 
 
-    <button style=" background-color: #c2bebe;
-  color: white;
-  
-  border: 2px solid white;" class="dropdown-btn"><h6>Material Requests Update
+    <button  class="dropdown-btn"><h6>Material Requests Update
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
     <a  href="{{ url('work_order_material_needed')}}"><h6>Work order needs material <span
                                     class="badge badge-light">{{ count($material_requestsmc) }}</span></h6></a>
-    <a class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}"><h6>Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></h6></a>
-     <a href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials
+    <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}"><h6>Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></h6></a>
+     <a  href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials
                         <span
                                     class="badge badge-light">{{ count($woMaterialrejected) }}</span></h6></a>
                                
@@ -552,24 +553,20 @@
                     -->
                       
                    
-  <button style=" background-color: #c2bebe;
-  color: white;
-  
-  border: 2px solid white;" class="dropdown-btn"><h6>Works order Reports
+  <button  class="dropdown-btn"><h6>Works order Reports
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a  href="{{ url('/unattended_work_orders')}}"><h6>Unattended Work Orders</h6></a>
-    <a  href="{{ url('/completed_work_orders')}}"><h6>Completed Work Orders</h6></a>
-    <a  href="{{ url('/woduration')}}"><h6>Work Orders Duration</h6></a>
+    <a class="btn" href="{{ url('/unattended_work_orders')}}"><h6>Unattended Work Orders</h6></a>
+    <a class="btn" href="{{ url('/completed_work_orders')}}"><h6>Completed Work Orders</h6></a>
+    <a class="btn" href="{{ url('/woduration')}}"><h6>Work Orders Duration</h6></a>
                                
    
   </div>   
 
-  <button style=" background-color: #c2bebe;
-  color: white;
+  <button 
   
-  border: 2px solid white;" class="dropdown-btn"><h6>Head of Sections
+  class="dropdown-btn"><h6>Head of Sections
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
@@ -578,10 +575,7 @@
   </div>    
 
 
-   <button style=" background-color: #c2bebe;
-  color: white;
-  
-  border: 2px solid white;" class="dropdown-btn"><h6>Technicians
+   <button class="dropdown-btn"><h6>Technicians
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
@@ -593,10 +587,7 @@
    <a  href="{{ url('/alliow')}}"><h6>Inspectors of work</h6></a>                
 
    
-   <button style=" background-color: #c2bebe;
-  color: white;
-  
-  border: 2px solid white;" class="dropdown-btn"><h6>store
+   <button  class="dropdown-btn"><h6>store
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
@@ -696,10 +687,7 @@
         
 <a href="{{ url('stores')}}"><h6>Store</h6></a>
                                     
-  <button style=" background-color: #c2bebe;
-  color: white;
-  
-  border: 2px solid white;" class="dropdown-btn"><h6>Procurement
+  <button  class="dropdown-btn"><h6>Procurement
     <i class="fa fa-caret-down"></h6></i>
   </button>
   <div class="dropdown-container">
