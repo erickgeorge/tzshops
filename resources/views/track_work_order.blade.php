@@ -16,7 +16,7 @@
  <div class="container">
 
     <br>
-    <div  style="margin-top: 6%;">
+    <div >
         <div class="col-lg-12">
             <h3 align="center">Work order details</h3>
         </div>

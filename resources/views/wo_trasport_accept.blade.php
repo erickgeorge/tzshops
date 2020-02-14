@@ -7,7 +7,7 @@
 @section('body')
 
   <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12" align="center">
             <h3><b>Accepted Requested Transport </b></h3>
         </div>

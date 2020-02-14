@@ -794,13 +794,11 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('manage_Campus')}}" ><h6>Campuses </h6></a>
+  <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
 
-    <a  href="{{ url('manage_Houses')}}"><h6>Staff House</h6></a>
-    <a  href="{{ url('manage_Hall_of_resdence')}}"><h6>Hall of Resdence</h6></a>  
-    <a  href="{{ url('nonbuildingasset')}}"><h6>Non-building Asset</h6></a>  
-    <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Company</h6></a>  
-    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Area</h6></a>  
+    <a  href="{{ url('manage_Houses')}}"><h6>Cleaning Company</h6></a>
+    <a  href="{{ url('manage_Hall_of_resdence')}}"><h6>Reports</h6></a>  
+   
 </div>
 
 <div class="main">
@@ -878,8 +876,8 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 <script type="text/javascript">
 
-      $("#nameid").select2({
-            placeholder: "Choose type of problem...",
+      $("#sec").select2({
+            placeholder: "Choose Maintenance Section...",
             allowClear: true
         });
 </script>

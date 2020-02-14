@@ -14,10 +14,7 @@
  @if(count($items) > 0)
 
     <br>
-    <br>
 
-<br>
-<br>
 
 
     <div>

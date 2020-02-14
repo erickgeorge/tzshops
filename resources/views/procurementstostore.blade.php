@@ -19,7 +19,7 @@
         }
     </style>
 <br>
-<div class="container" style="margin-top: 6%;">
+<div class="container" >
   <div class="col-lg-4">
     <h3>Add procured materials</h3>
   </div>
@@ -349,3 +349,6 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
         console.log(values);
     }
 </script>
+
+
+@endsection

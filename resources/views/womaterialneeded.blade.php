@@ -11,7 +11,7 @@
 @if(count($mcitems) > 0)
 
    <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center"><b>Works order needs Material </b></h3>
         </div>

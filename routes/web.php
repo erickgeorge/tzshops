@@ -560,3 +560,17 @@ Route::get('materialEntrypdf/{id}','NotesController@materialEntrypdf')->name('ma
 
 Route::post('importUserExcel','ImportExcelController@importUserExcel')->name('importUserExcel');
 Route::get('excelinsertusers','ImportExcelController@excelinsertusers')->name('excelinsertusers');
+
+
+
+
+
+//landscaping
+Route::post('workorder/create/landscaping', 'LandscapingController@createlandwork')->name('wo.create.landscaping');
+
+Route::get('/createlandworkorders', 'LandscapingController@createlandwo');
+Route::get('/Land/work_order', 'LandscapingController@landworkorderview'); 
+Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwoland')->name('workOrder.track.landscaping');
+Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc');
+Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
+Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping');

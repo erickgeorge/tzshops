@@ -14,7 +14,7 @@
                          ?>
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid">
        @if(auth()->user()->type != 'Inspector Of Works')
         <div class="col-lg-12">
             <h3 align="center"><b>Material Rejected by Inspector of Work  </b></h3>

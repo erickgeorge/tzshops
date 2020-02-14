@@ -5,7 +5,7 @@
     @endSection
 @section('body')
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center">{{ $head }}</h3>
         </div>

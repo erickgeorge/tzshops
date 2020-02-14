@@ -9,10 +9,8 @@
 use App\User;
 use App\MinuteSheet; ?>
     <br>
-    <br>
+    
 
-<br>
-<br>
 
     <div>
         <div>

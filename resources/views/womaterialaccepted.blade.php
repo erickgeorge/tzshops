@@ -8,7 +8,7 @@
 @if(count($items)>0)
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center"><b>Works order with material accepted</b></h3>
         </div>

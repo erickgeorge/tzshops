@@ -8,7 +8,7 @@
 <?php use App\block; ?>
 <div class="container">
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center"><b>Room report - Block</b></h3>
         </div>

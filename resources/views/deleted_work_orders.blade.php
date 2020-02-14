@@ -8,7 +8,7 @@
 <div class="container">
     <br>
      @if(count($wo) > 0)
-    <div class="row container-fluid"  style="margin-left:2%; margin-right:2%; margin-top: 6%;">
+    <div class="row container-fluid"  style="margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
             <h3>Rejected work orders</h3>
         </div>

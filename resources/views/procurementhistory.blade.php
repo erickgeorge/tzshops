@@ -8,7 +8,7 @@
 
 <?php use App\User; ?>
     <br>
-    <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
+    <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
             <h3 style="padding-left: 90px;"><b>@if(auth()->user()->type == 'Head Procurement') Procurement Entry History @else Procured Materials @endif </b></h3>
         </div>
@@ -157,3 +157,6 @@
         });
 
     </script>
+
+
+    @endsection
