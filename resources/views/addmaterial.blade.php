@@ -342,3 +342,5 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
         console.log(values);
     }
 </script>
+
+@endsection

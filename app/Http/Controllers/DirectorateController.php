@@ -208,7 +208,9 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
-            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get()
+            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
+            'iows' => User::where('type' , 'Inspector Of Works')->get()
+            
         ]);
 
 
@@ -367,7 +369,8 @@ class DirectorateController extends Controller
 
         $iowzone = new iowzone();
         $iowzone->zonename = $request['zonename' ];
-       
+        $iowzone->location = $request['location' ];
+        $iowzone->iow = $request['iow' ];
         $iowzone->save();
 
         return redirect()->route('manage.IoWZones')->with(['message' => 'IoW Zone added successfully']);

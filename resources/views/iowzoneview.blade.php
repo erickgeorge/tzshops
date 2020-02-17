@@ -46,7 +46,8 @@ IoW Zones
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name of Zone</th>
-                       
+                        <th scope="col">Location</th>
+                        <th>Inspector of Work</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -60,6 +61,8 @@ IoW Zones
                             <th scope="row">{{ $i }}</th>
                            
                             <td><?php echo strtoupper( $iow->zonename ); ?></td>
+                            <td>{{$iow->location}}</td>
+                             <td>{{ $iow['user']->fname.' '.$iow['user']->lname }}</td>
                             <td>
                                  <div class="row">
                                     <a style="color: green;"
