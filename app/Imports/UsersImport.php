@@ -4,8 +4,8 @@ namespace App\Imports;
 
 use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
-
-class UsersImport implements ToModel
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+class UsersImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,13 +15,12 @@ class UsersImport implements ToModel
     public function model(array $row)
     {
         return new User([
-           'fname'     => ''.$row[2],
-            'mid_name'    => ''.$row[3], 
-            'lname'    => ''.$row[4], 
-            'type'    => 'CLIENT', 
-            'section_id'    => ''.$row[8], 
-            'name' => $row[2].''.$row[4],
-            'password' => bcrypt($row[4].'@esmis')
+           'fname'     => $row['fname'].''.$row['lname'],
+            'mid_name'    => ''.$row['mname'], 
+            'lname'    => ''.$row['lname'],
+            'section_id'    => ''.$row['id'], 
+            'name' => $row['fname'].''.$row['lname'],
+            'password' => bcrypt($row['lname'].'@esmis')
         ]);
     }
 }

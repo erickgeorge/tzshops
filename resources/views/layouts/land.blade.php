@@ -692,7 +692,6 @@
     <div>
     <div style="padding-top:78px;">
 
-
 <style>
 
 
@@ -704,7 +703,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #f7f5f5;
+  background-color: #c2bebe;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -729,6 +728,10 @@
 
 }
 
+.sidenav button{
+  color: white;
+}
+
 /* On mouse-over */
 .sidenav a:hover, .dropdown-btn:hover {
   color: #f1f1f1;
@@ -740,16 +743,19 @@
 .sidenav a {
   background-color: #c2bebe;
   color: white;
+
  
  
-  border: 2px solid white;
 
 
 
 }
 
-
-
+.sidenav a, .dropdown-btn, .sidenav button {
+  color: #f1f1f1;
+   background: grey;
+    margin-top: 2px; 
+}
 
 
 /* Main content */
