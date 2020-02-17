@@ -1005,6 +1005,15 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 
+<script type="text/javascript">
+
+      $("#iow").select2({
+            placeholder: "Choose Inspector of Work...",
+            allowClear: true
+        });
+</script>
+
+
 
 </body>
 </body>

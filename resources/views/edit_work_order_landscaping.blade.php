@@ -74,7 +74,7 @@ var total=2;
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem</label>
+            <label class="input-group-text">Maintainance Section</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
@@ -139,6 +139,125 @@ var total=2;
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
  
+   
+
+     <br>
+        <h4>Work order forms.</h4>
+        {{-- tabs --}}
+        <div class="payment-section-margin">
+            <div class="tab">
+                <div class="container-fluid">
+                    <div class="tab-group row">
+                      
+
+                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORM</button>
+                        
+                        <button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
+                        </button>
+                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
+   
+                    </div>
+                </div>
+    
+
+
+
+                {{-- INSPECTION tab--}}
+                <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+                    @csrf
+                    <div id="customer" class="tabcontent">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Work order status</p>
+                            </div>
+                        </div>
+                        
+                        
+                         <div class="form-group">
+                            
+                            <select class="custom-select" required name="status" style="color: black; width:  700px;">
+                                <option selected value="" >Choose...</option>
+                               
+                                    <option value="Report Before Work">Report Before Work</option>
+                                       <option value="Report After Work">Report After Work</option>
+                              
+                            </select>
+                            
+                        </div>
+                    
+                        
+                        
+                        
+                        <p>Inspection description</p>
+                        <div class="form-group">
+                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+                        
+                        </br>
+                        <p>Inspection date</p>
+                        <div class="form-group">
+                            <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Technician in Charge</label>
+                            <br>
+                            <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
+                                <option  selected value="" >Choose...</option>
+                                
+                                
+                                
+                                <?php
+                               
+                                $techassigned = techasigned::where('work_order_id',$wo->id)->get();
+                                ?>
+                                
+                                @foreach($techassigned as $tech)
+                                    <option value="{{ $tech->id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </div>
+                </form>
+                {{-- end inspection --}}
+                
+                
+                
+                 {{-- request_transport form--}}
+                <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
+                    @csrf
+                    <div id="request_transport" class="tabcontent">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Work order Transport Request Form</p>
+                            </div>
+                        </div>
+                </br>
+                        <p>Transport date</p>
+                        <div class="form-group">
+                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
+                        </div>
+                        
+                          <p>Transport time</p>
+                        <div class="form-group">
+                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  rows="5" id="time"></input>
+                        </div>
+
+                         <p>Transport Details</p>
+                        <div class="form-group">
+                            <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+                        <br>
+
+                       
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </div>
+                </form>
+                {{-- end request_transport form --}}
+                
   @endSection
  
 

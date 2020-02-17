@@ -5,6 +5,7 @@
     @endSection
 @section('body')
 
+
   <br>
       <div  class="container">
             <br>
@@ -24,7 +25,7 @@
             </ul>
         </div>
     @endif 
-                <h4 id="new_dep">Add New IoW Zone</h4>
+                <h4 id="new_dep">Add new iow zone</h4>
                 <hr>
                 <form method="POST" action="{{ route('iowzone.save') }}" class="col-md-6">
                     @csrf
@@ -32,8 +33,29 @@
                     <div class="form-group ">
                         <label for="dep_name" style="color: black;">IoW zone Name</label>
                         <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
-                               name="zonename" placeholder="Enter Zone Name ...">
+                               name="zonename" placeholder="Enter Zone Name ">
                     </div>
+
+                    <div class="form-group ">
+                        <label for="dep_name" style="color: black;">Location</label>
+                        <input style="color: black" type="text" required class="form-control" id="d"   maxlength = "15"  
+                               name="location" placeholder="Enter Zone Location">
+                    </div>
+
+                   <div class="form-group ">
+                        <label for="dep_name" style="color: black;">Inspector of Work</label>
+                         
+                         <select required class="custom-select" name="iow" id="iow">
+                            <option value="">Choose...</option>
+                            @foreach($iows as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+
+
+                   
                    
                     
                     <button type="submit" class="btn bg-primary btn-primary">Save
