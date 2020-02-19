@@ -262,7 +262,6 @@ foreach($userwithid as $userwithid)
 
                 <tbody>
 
-                {{-- CREATE A CLASS WITH DEFINED W.O STASTUS FROM 1-7 THAT WILL CHECK HE STATUS NUMBER AND RETURN STATUS WORDS --}}
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
@@ -274,11 +273,11 @@ foreach($userwithid as $userwithid)
                             <td id="wo-details">{{ $work->details }}</td>
                             <td>{{ $work->maintenance_section }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                             @if($work->status == 1)
+                            @if($work->status == 1)
                             <td><span class="badge badge-warning">new</span></td>
-                            @else
-                            <td>edited</td>
-                              @endif
+                            @elseif($work->status == 2)
+                            <td><span class="badge badge-success">accepted</span></td>
+                             @endif
  
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
                             <td>
@@ -302,10 +301,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                              @endif
                             </td>
                              @if($work->status == 1)
-                           
-                                           <td>  <a href=" {{ route('workorder.view.landsc', [$work->id]) }} "><span
+                            <td>  <a href=" {{ route('workorder.view.landsc', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a></td>
-                              @else
+                             @elseif($work->status == 2)
                                <td> <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                             &nbsp;&nbsp;

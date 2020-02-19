@@ -28,15 +28,15 @@ IoW Zones
     @endif
 
                 <h2 style="margin-bottom: 20px;"
-                   class="btn btn-default">List of available IoW Zones</h2>
+                   class="btn btn-default">List of available locations</h2>
 
                
                 
         
             <hr class="container">
 
-            <a href="Add/iowzone" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new Zone for IoW</a>
+            <a href="{{ route('add.iowzone.location',[$zoneid->id])}}" style="margin-bottom: 20px;"
+                   class="btn btn-primary">Add new Location</a>
                    <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
@@ -44,10 +44,9 @@ IoW Zones
                 <table id="myTablee" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name of Zone</th>
-                        <th>Inspector of Work</th>
+                        <th scope="col">#</th> 
                         <th scope="col">Location</th>
+                        <th scope="col">Inspector of Work</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -59,11 +58,10 @@ IoW Zones
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                           
-                            <td><?php echo strtoupper( $iow->zonename ); ?></td>
-                            <td>{{ $iow['user']->fname.' '.$iow['user']->lname }}</td>
-                            <td><a class="btn btn-primary" href="{{route('view.location',[$iow->id])}}" >view</a></td>
-                             
+                            <td>{{ $iow->location }}</td>  
+                            <td>{{ $iow['iow']->fname}}</td>
+                            
+
                             <td>
                                  <div class="row">
                                     <a style="color: green;"
@@ -100,7 +98,7 @@ IoW Zones
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Zone</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Location</h5>
 
 
                 </div>
@@ -113,9 +111,9 @@ IoW Zones
 	
 						
                     <div class="form-group ">
-                        <label for="dep_name">Zone Name</label>
+                        <label for="dep_name">Location Name</label>
                         <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
-                               name="sec_name" placeholder="Enter Zone Name" >
+                               name="sec_name" placeholder="Enter Location Name" >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
                        

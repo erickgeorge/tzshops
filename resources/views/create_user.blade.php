@@ -176,6 +176,7 @@ User Registration
 	                  <option value="Inspector Of Works">Inspector Of Works</option>
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
+	                  <option value="Supervisor LECC ">Supervisor LECC </option>
 	                  <option value="Transport Officer">Transport Officer</option>
 
 	           </select>

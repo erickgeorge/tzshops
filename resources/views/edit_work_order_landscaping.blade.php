@@ -163,12 +163,12 @@ var total=2;
 
 
                 {{-- INSPECTION tab--}}
-                <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+                <form method="POST" action="{{ route('work.inspection.landscaping', [$wo->id]) }}">
                     @csrf
                     <div id="customer" class="tabcontent">
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Work order status</p>
+                                <p>Inspection status</p>
                             </div>
                         </div>
                         
@@ -199,20 +199,12 @@ var total=2;
                             <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
-                            <label>Select Technician in Charge</label>
+                            <label>Select Supervisor of Landscaping</label>
                             <br>
-                            <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
-                                <option  selected value="" >Choose...</option>
-                                
-                                
-                                
-                                <?php
-                               
-                                $techassigned = techasigned::where('work_order_id',$wo->id)->get();
-                                ?>
-                                
-                                @foreach($techassigned as $tech)
-                                    <option value="{{ $tech->id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                            <select style="color: black; width:  700px;" required class="custom-select"  name="supervisor" >
+                         
+                                @foreach($slecc as $slecc)
+                                    <option value="{{ $slecc->id }}">{{ $slecc->lname.' '.$slecc->fname }}
                                     </option>
                                 @endforeach
                             </select>

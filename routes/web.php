@@ -127,6 +127,8 @@ Route::get('Manage/section', 'DirectorateController@workordersectionView')->name
 
 Route::get('Manage/IoWZones', 'DirectorateController@IoWZonesview')->name('manage.IoWZones');
 
+Route::get('Manage/IoWZones/location/{id}', 'DirectorateController@IoWZonesviewlocation')->name('view.location');
+
 Route::get('Manage/directorate', 'DirectorateController@directorateView')->name('dir.manage');
 
 Route::get('Manage/Add/directorate', 'DirectorateController@adddirectorateView');
@@ -136,6 +138,7 @@ Route::get('Manage/Add/department', 'DirectorateController@adddepartmentView');
 Route::get('Manage/Add/section', 'DirectorateController@addsectionView');
 
 Route::get('Manage/Add/iowzone', 'DirectorateController@addiowzoneView');
+Route::get('Add/iowzone/location/{id}', 'DirectorateController@addiowzonelocationView')->name('add.iowzone.location');
 
 
 
@@ -174,6 +177,8 @@ Route::post('save/department', 'DirectorateController@createDepartment')->name('
 Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save');
 
 Route::post('save/iowzone', 'DirectorateController@createiowzone')->name('iowzone.save');
+Route::post('save/iowzone/location/{id}', 'DirectorateController@createiowzonelocation')->name('iowzone.location.save');
+
 
 
 Route::post('', 'UserController@changeProfile')->name('profile.change');
@@ -574,3 +579,4 @@ Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwola
 Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc');
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
 Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping');
+Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');

@@ -12,7 +12,7 @@ use App\landworkorders;
 use App\User;
 use App\WorkOrderProgress;
 use App\WorkOrderStaff;
-use App\Technician;
+use App\landscapinginspectionform;
 
 use Illuminate\Http\Request;
 use App\WorkOrder;
@@ -156,7 +156,7 @@ class LandscapingController extends Controller
 
         $wO = landworkorders::where('id', $id)->first();
         $wO->staff_id = auth()->user()->id;
-        $wO->status = 1;
+        $wO->status = 2; //accepted
         $wO->save();
 
 
@@ -211,11 +211,11 @@ class LandscapingController extends Controller
         
     
 
-        return redirect()->route('workOrder.edit.view', [$wO->id])->with([
+        return redirect()->route('workOrder.edit.landscaping', [$wO->id])->with([
             'role' => $role,
             'notifications' => $notifications,
             'techs' => User::where('type', 'TECHNICIAN')->get(),
-            'message' => 'Landscaping work order accepted . You can now edit it!',
+            'message' => 'Landscaping work order accepted succesifully. You can now edit it!',
             'wo' => landworkorders::where('id', $id)->first()
         ]);
     }
@@ -232,12 +232,42 @@ class LandscapingController extends Controller
         
         
         return view('edit_work_order_landscaping', [
-            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
+           
             'notifications' => $notifications,
-            'staff' => $staff,
-            'role' => $role, 'wo' => landworkorders::where('id', $id)->first()
+            
+            'role' => $role, 'wo' => landworkorders::where('id', $id)->first(),
+            'slecc' =>User::where('type', 'Supervisor LECC')->get()
         ]);
     }
+
+
+
+         public function landinspectionForm(Request $request, $id)
+    {
+
+
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+   
+           
+ 
+            $form = new landscapinginspectionform();
+            $form->status = $request['status'];
+            $form->date = $request['inspectiondate'];
+            $form->description = $request['details'];
+            $form->supervisor = $request['supervisor'];
+            $form->work_order_id = $id;
+            $form->save();
+        
+
+        return redirect()->route('workOrder.edit.landscaping', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Inspection from successfully updated',
+            'wo' => landworkorders::where('id', $id)->first()
+        ]);
+    }
+    
 
 
 }

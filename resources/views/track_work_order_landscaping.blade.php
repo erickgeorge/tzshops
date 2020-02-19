@@ -10,6 +10,7 @@
     use App\WorkOrderStaff;
     use App\WorkOrderMaterial;
     use App\techasigned;
+    use App\landscapinginspectionform;
  
 
  ?>
@@ -145,8 +146,26 @@
   <br>
 
 
+    <h4><b>Supervisor assigned for Inspection: </b></h4>
+   
 
-</div>
+<table style="width:100%">
+  <tr>
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date Assigned</th>
+  <th>Complete work</th>
+  
+  </tr>
+
+
+  </table>
+   
+
+   <br>
+    
+   <hr>
+    <br>
 
 
 <script type="text/javascript">

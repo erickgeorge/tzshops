@@ -5,8 +5,6 @@
     @endSection
 @section('body')
 
-
-  <br>
       <div  class="container">
             <br>
               @if ($errors->any())
@@ -36,11 +34,11 @@
                                name="zonename" placeholder="Enter Zone Name ">
                     </div>
 
-                    <div class="form-group ">
+                    <!--<div class="form-group ">
                         <label for="dep_name" style="color: black;">Location</label>
                         <input style="color: black" type="text" required class="form-control" id="d"   maxlength = "15"  
                                name="location" placeholder="Enter Zone Location">
-                    </div>
+                    </div>-->
 
                    <div class="form-group ">
                         <label for="dep_name" style="color: black;">Inspector of Work</label>
