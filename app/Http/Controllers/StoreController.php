@@ -120,6 +120,20 @@ class StoreController extends Controller
 		 $material->stock = $request['tstock'];
         $material->save();
 
+        
+          $historysave = new Storehistory();
+          $historysave->material_name = $material->name;
+          $historysave->material_description = $material->description;
+          $historysave->total_input = $request['istock'];
+          $historysave->type = $material->type;
+          $historysave->unit_measure = $material->brand;
+          $historysave->tag_ = now();
+          $historysave->added_by = auth()->user()->id;
+          $historysave->incremented = 'incremented';
+          $historysave->save();
+
+       
+
          return redirect()->route('store')->with(['role' => $role, 'notifications' => $notifications,
             'notifications' => $notifications,'role' => $role,
 			 'message' => 'Materials succesfully added in Store'] );    
@@ -838,9 +852,10 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
       $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
       $material = Storehistory::
-      select(DB::raw('count(id) as total_materials, tag_,added_by'))
+      select(DB::raw('count(id) as total_materials, tag_,added_by,incremented'))
             ->groupBy('tag_')
             ->groupBy('added_by')
+            ->groupBy('incremented')
             ->orderBy('created_at','Desc')
             ->get();
 

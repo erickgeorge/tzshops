@@ -94,7 +94,16 @@
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id"><?php $time = strtotime($material->tag_); echo date('d/m/Y',$time);  ?></td>
-                            <td id="wo-details">{{ $material->total_materials }}</td>
+                            <td id="wo-details">{{ $material->total_materials }}
+
+                                @if($material->incremented == 'new')
+                                <b class="badge badge-success">new entry</b>
+                                @else
+                                <b class="badge badge-primary">Incremetal entry</b>
+ 
+                                @endif
+
+                            </td>
                            
                             <td><?php $officer = User::where('id',$material->added_by)->get(); ?>
                             	@foreach($officer as $offier) {{ $offier->fname }} {{ $offier->lname }} @endforeach
