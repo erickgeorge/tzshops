@@ -17,6 +17,8 @@ use App\Department;
 use App\workordersection;
 use App\Procurement;
 use App\Storehistory;
+use App\iowzone;
+use App\iowzonelocation;
 
    
 class NotesController extends Controller
@@ -1056,12 +1058,28 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
             return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                 }
 
-    }
+    }  
     public function desdepts()
     {
         $data['sects'] = workordersection::orderby('section_name','ASC')->get();
         $pdf = PDF::loadView('desdeptsreport', $data);
         return $pdf->stream('All sections report - '.date('d-m-Y Hi').'.pdf');
+    }
+
+
+    public function iowzones()
+    {
+        $data['iowzone'] = iowzone::orderby('zonename','ASC')->get();
+        $pdf = PDF::loadView('iowzonereport', $data);
+        return $pdf->stream('iowzone - '.date('d-m-Y Hi').'.pdf');
+    }
+
+
+        public function iowlocation($id)
+    {
+        $data['iowlocation'] = iowzonelocation::where('iowzone_id',$id)->orderby('location','ASC')->get();
+        $pdf = PDF::loadView('iowlocationreport', $data);
+        return $pdf->stream('iowlocation - '.date('d-m-Y Hi').'.pdf');
     }
 
     public function exportProcure($id)

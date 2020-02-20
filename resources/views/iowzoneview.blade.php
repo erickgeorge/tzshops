@@ -37,7 +37,7 @@ IoW Zones
 
             <a href="Add/iowzone" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new Zone for IoW</a>
-                   <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
+                   <a href="{{ url('iowwithzones')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
 

@@ -27,8 +27,10 @@ IoW Zones
         </div>
     @endif
 
+     @foreach($iowzone as $iow)
+     @endforeach
                 <h2 style="margin-bottom: 20px;"
-                   class="btn btn-default">List of available locations</h2>
+                   class="btn btn-default">List of available locations in {{ $iow['iow']->zonename }}</h2>
 
                
                 
@@ -37,7 +39,7 @@ IoW Zones
 
             <a href="{{ route('add.iowzone.location',[$zoneid->id])}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new Location</a>
-                   <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
+                   <a href="{{ url('iowwithlocation',[$zoneid->id])}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
 
@@ -46,7 +48,7 @@ IoW Zones
                     <tr>
                         <th scope="col">#</th> 
                         <th scope="col">Location</th>
-                        <th scope="col">Inspector of Work</th>
+                        <!--<th scope="col">Inspector of Work</th>-->
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -59,7 +61,7 @@ IoW Zones
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $iow->location }}</td>  
-                            <td>{{ $iow['iow']->fname}}</td>
+                           <!-- <td>{{ $iow['iow']->fname}}</td>-->
                             
 
                             <td>

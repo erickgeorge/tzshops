@@ -30,7 +30,7 @@
                    
                     <div class="form-group ">
                         <label for="dep_name" style="color: black;">IoW zone Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
+                        <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "30"  
                                name="zonename" placeholder="Enter Zone Name ">
                     </div>
 
@@ -46,7 +46,7 @@
                          <select required class="custom-select" name="iow" id="iow">
                             <option value="">Choose...</option>
                             @foreach($iows as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}">{{ $user->fname .'  '.$user->lname }}</option>
                             @endforeach
 
                         </select>

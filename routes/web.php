@@ -534,8 +534,13 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
  Route::get('inroomreportextended','HomeController@anonymousroomreportextended')->name('inroomreportextended');
 Route::get('inroomreporwithrooms','HomeController@inroomreportextendedwithrooms')->name('inroomreporwithrooms');
 
-  Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport');
-  Route::get('desdepts','NotesController@desdepts')->name('desdepts');
+Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport');
+Route::get('desdepts','NotesController@desdepts')->name('desdepts');
+
+Route::get('iowwithzones','NotesController@iowzones')->name('zones');
+
+Route::get('iowwithlocation/{id}','NotesController@iowlocation')->name('zones');
+
 //////////////////// non building assets & cleaning company ////////////////////////////
 Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbuildingasset');
 Route::get('cleaningcompany','AssetsController@cleaningcompany')->name('cleaningcompany');

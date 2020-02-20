@@ -30,7 +30,7 @@
                    
                     <div class="form-group ">
                         <label for="dep_name" style="color: black;">Location Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
+                        <input style="color: black" type="text" required class="form-control" id="dep_name"     
                                name="location" placeholder="Enter Location Name ">
                     </div>
 
