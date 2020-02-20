@@ -167,11 +167,12 @@ Route::POST('Manage/edit/workordersection', 'DirectorateController@editworkorder
 
 Route::POST('Manage/edit/iowzone', 'DirectorateController@editiowzone')->name('workordersection.edit');
 
+Route::POST('/Manage/IoWZones/location/edit/{id}', 'DirectorateController@editiowzonelocation')->name('edit/iowzone/location');
+
 Route::post('delete/workordersection/{id}', 'DirectorateController@deleteWorkorderSection')->name('worksection.delete');
 
 Route::post('delete/iowzone/{id}', 'DirectorateController@deleteiowzone')->name('iowzone.delete');
-
-
+Route::post('delete/iowzone/location/{id}', 'DirectorateController@deleteiowzonelocation')->name('iowzonelocation.delete');
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');
 
 Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save');
@@ -265,6 +266,7 @@ Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMate
 
 
 Route::get('work_order_with_missing_material', 'HomeController@workorderwithmissingmaterial')->name('work_order_with_missing_material');
+
 
 
 

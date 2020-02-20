@@ -37,7 +37,7 @@
                     
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
-                    <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
+                    <a href="{{route('view.location', [$zoneid->id])}}" class="btn btn-danger">Cancel
                     </a>
                 </form>
             </div>

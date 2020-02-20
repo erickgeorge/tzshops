@@ -421,7 +421,7 @@ class DirectorateController extends Controller
         $iowzone->iowzone_id = $id;
         $iowzone->save();
 
-        return redirect()->back()->with(['message' => 'location added successfully']);
+        return redirect()->route('view.location', [$id] )->with(['message' => 'location added successfully']);
     }
 	
 
@@ -469,6 +469,28 @@ class DirectorateController extends Controller
 
         return redirect()->route('manage.IoWZones')->with(['message' => 'Zone edited successfully']);
     }
+
+
+            public function editiowzonelocation(Request $request , $id)
+    {
+
+          if (!empty(iowzonelocation::where('location',$request['location'])->first())){
+            return redirect()->back()->withErrors(['message' => 'Zone location already exist']);
+        }
+        
+       $p=$request['esecid'];
+        
+        
+        $wsec = iowzonelocation::where('id',$p)->first();
+        
+        $wsec->location = $request['location' ];
+       
+        $wsec->save();
+        
+       
+
+        return redirect()->route('view.location', [$id])->with(['message' => 'Zone location edited successfully']);
+    }
 	
 
 	public function deleteWorkorderSection($id)
@@ -498,6 +520,18 @@ class DirectorateController extends Controller
   
 
       
+    }
+
+     public function deleteiowzonelocation($id)
+    {
+
+          $zone=iowzonelocation::where('id', $id)->first();
+        
+          $zone->delete();
+          
+          
+          return redirect()->back()->with(['message' => 'Zone Location deleted successfully']);
+
     }
 	
 }
