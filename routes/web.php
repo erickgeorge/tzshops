@@ -444,15 +444,21 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
 
  
 Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save');
+Route::post('CompanyRegistration', 'AssetsController@Registercompany')->name('company.save');
 Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete');
 Route::POST('edit/House', 'AssetsController@editHouse')->name('house.edit');
+Route::POST('edit/company', 'AssetsController@editcompany')->name('company.edit');
 Route::get('Register_Staffhouse', 'AssetsController@Registerstaffhouseview')->name('registerstaffhouse');
+
+Route::get('Register_company', 'AssetsController@Registercompanyview')->name('registercompany');
+
 
 
 
 
 Route::post('HallRegistration', 'AssetsController@RegisterHalls')->name('hall.save');
 Route::post('delete/Hall/{id}', 'AssetsController@deleteHall')->name('hall.delete');
+Route::post('delete/company/{id}', 'AssetsController@deletecompany')->name('company.delete');
 Route::POST('edit/Hall', 'AssetsController@editHall')->name('hall.edit');
 Route::get('Register_hall', 'AssetsController@Registerhallview')->name('registerhall');
 
@@ -587,3 +593,4 @@ Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwoland
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
 Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping');
 Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');
+Route::post('assessment/work_order/landscaping/{id}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping');

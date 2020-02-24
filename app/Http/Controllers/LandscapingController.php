@@ -13,6 +13,11 @@ use App\User;
 use App\WorkOrderProgress;
 use App\WorkOrderStaff;
 use App\landscapinginspectionform;
+use App\company;
+use App\cleaningarea;
+use App\landassessmentform;
+
+
 
 use Illuminate\Http\Request;
 use App\WorkOrder;
@@ -130,7 +135,8 @@ class LandscapingController extends Controller
         return view('track_work_order_landscaping', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => landworkorders::where('id', $id)->first()
+            'wo' => landworkorders::where('id', $id)->first(),
+            'inspection' => landscapinginspectionform::where('work_order_id', $id)->get()
         ]);
     }
   
@@ -225,18 +231,18 @@ class LandscapingController extends Controller
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
-//        return response()->json(WorkOrder::where('id', $id)->first());
 
 
-        $staff=WorkOrderStaff::where('work_order_id', $id)->get();
-        
-        
         return view('edit_work_order_landscaping', [
            
             'notifications' => $notifications,
             
-            'role' => $role, 'wo' => landworkorders::where('id', $id)->first(),
-            'slecc' =>User::where('type', 'Supervisor LECC')->get()
+            'role' => $role, 
+            'wo' => landworkorders::where('id', $id)->first(),
+            'slecc' =>User::where('type', 'Supervisor LECC')->get(),
+            'company' =>company::all(),
+            'carea' =>cleaningarea::all()
+
         ]);
     }
 
@@ -258,12 +264,53 @@ class LandscapingController extends Controller
             $form->supervisor = $request['supervisor'];
             $form->work_order_id = $id;
             $form->save();
+
+
+            $inspectionForm = landworkorders::where('id', $id)->first();
+            $inspectionForm->status =3;
+            $inspectionForm->save();
         
 
         return redirect()->route('workOrder.edit.landscaping', [$id])->with([
             'role' => $role,
-            'notifications' => $notifications,
+            'notifications' => $notifications,  
             'message' => 'Inspection from successfully updated',
+            'wo' => landworkorders::where('id', $id)->first()
+        ]);
+    }
+
+
+
+
+
+         public function landassessmentForm(Request $request, $id)
+    {
+
+
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+   
+           
+ 
+            $form = new landassessmentform();
+            $form->campany_id = $request['company'];
+            $form->area_id = $request['area'];
+            $form->assessment_month = $request['assessmment'];
+            $form->activity = $request['activity'];
+            $form->score = $request['score'];
+            $form->work_order_id = $id;
+            $form->save();
+
+
+            $inspectionForm = landworkorders::where('id', $id)->first();
+            $inspectionForm->status =4;
+            $inspectionForm->save();
+        
+
+        return redirect()->route('workOrder.edit.landscaping', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,  
+            'message' => 'Assesmennt from successfully updated',
             'wo' => landworkorders::where('id', $id)->first()
         ]);
     }

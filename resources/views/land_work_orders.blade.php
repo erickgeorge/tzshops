@@ -277,7 +277,9 @@ foreach($userwithid as $userwithid)
                             <td><span class="badge badge-warning">new</span></td>
                             @elseif($work->status == 2)
                             <td><span class="badge badge-success">accepted</span></td>
-                             @endif
+                            @elseif($work->status == 3)
+                             <td><span class="badge badge-success">Inspection Stage</span></td>
+                            @endif
  
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
                             <td>
@@ -303,7 +305,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                              @if($work->status == 1)
                             <td>  <a href=" {{ route('workorder.view.landsc', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a></td>
-                             @elseif($work->status == 2)
+                             @else
                                <td> <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                             &nbsp;&nbsp;

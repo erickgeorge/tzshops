@@ -18,6 +18,7 @@ use App\Area;
 use App\Room;
 use App\Block;
 use App\Location;
+use App\company;
 
 class AssetsController extends Controller
 {
@@ -41,6 +42,25 @@ class AssetsController extends Controller
         $staffhouse->save();
         return redirect()->route('register.house')->with(['message' => 'New house is registered successfully']);
     }
+
+
+
+      public function Registercompany(Request $request)
+    {
+       
+        $company = new company();
+        $company->company_name = $request['name'];
+        $company->type = $request['type'];
+        $company->status = $request['status'];
+        $company->registration = $request['Registration'];
+        $company->tin = $request['TIN'];
+        $company->vat = $request['VAT'];
+        $company->license = $request['license'];
+        $company->save();
+        return redirect()->route('cleaningcompany')->with(['message' => 'New Company is registered successfully']);
+    }
+
+
 
 
 
@@ -97,7 +117,23 @@ class AssetsController extends Controller
          }
 
 
-           public function Hallofresdence(){
+
+       public function cleaningcompany(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         
+         return view('cleaningcompany', [
+            'role' => $role,
+            'notifications' => $notifications,
+        
+           'cleangcompany' => company::all()
+  
+          ]);
+
+         }
+
+
+       public function Hallofresdence(){
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('hallofresdence', [
@@ -169,12 +205,25 @@ class AssetsController extends Controller
         return redirect()->route('register.house')->with(['message' => 'House Edited successfully']);
     }
   
+
+
+
+      public function editcompany(Request $request)
+    {
+           $p=$request['edit_id'];
+           $company = company::where('id',$p)->first();
+           $company->company_name = $request['name'];
+           $company->type = $request['type'];
+           $company->status = $request['status'];
+           $company->registration = $request['registration'];
+           $company->tin = $request['tin'];
+           $company->vat = $request['vat'];
+           $company->license = $request['license'];
+           $company->save();
   
-
-
-
-
-
+        return redirect()->route('cleaningcompany')->with(['message' => 'Company Edited successfully']);
+    }
+  
 
 
      public function RegisterHalls(Request $request)
@@ -202,6 +251,13 @@ class AssetsController extends Controller
        }
 
 
+
+          public function deletecompany($id)
+       {
+           $comp=company::where('id', $id)->first();
+           $comp->delete();
+           return redirect()->route('cleaningcompany')->with(['message' => 'Respective company is deleted successfully']);
+       }
 
 
 
@@ -306,7 +362,7 @@ class AssetsController extends Controller
 
 
 
-public function deletecleanarea($id)
+  public function deletecleanarea($id)
        {
            $cleanareaa=cleaningarea::where('id', $id)->first();
            $cleanareaa->delete();
@@ -335,7 +391,7 @@ public function deletecleanarea($id)
      }
 
    public function Registerstaffhouseview(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registerstaffhouse', [
             'role' => $role,
@@ -343,6 +399,18 @@ public function deletecleanarea($id)
             'campuses' => Campus::all(),
           ]);
      }
+
+
+    public function Registercompanyview(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('registercompany', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'campuses' => Campus::all(),
+          ]);
+     }
+
 
 
 
@@ -359,7 +427,7 @@ public function deletecleanarea($id)
 
 
 
- public function Registercleanzoneview(){
+     public function Registercleanzoneview(){
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registercleaningzone', [
@@ -372,7 +440,7 @@ public function deletecleanarea($id)
 
 
 
- public function Registercleaningareaview(){
+    public function Registercleaningareaview(){
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registercleaningarea', [
@@ -421,9 +489,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
 
      }
 
-     public function cleaningcompany(){
-      return view('cleaningcompany');
-     }
+  
 
      public function submitnonAsset(Request $request){
       $request->validate([
@@ -491,7 +557,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
 
      public function NonassetIn()
      {
-       $areaaa = Area::select('name_of_area')->where('id',$_GET['location'])->get();
+    $areaaa = Area::select('name_of_area')->where('id',$_GET['location'])->get();
     $assets = NonBuildingAsset::
                      select(DB::raw('count(id) as total_asset,block_id'))
                      ->where('name_of_asset',$_GET['asset'])

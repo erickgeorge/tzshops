@@ -234,7 +234,7 @@
 
 
              <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Land/work_order')}}">Land Scapping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Land/work_order')}}">Landscaping</a>
             </li>
 
         <li class="nav-item dropdown">
