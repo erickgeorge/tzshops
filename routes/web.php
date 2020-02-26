@@ -592,7 +592,7 @@ Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwola
 Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc');
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
 Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping');
-<<<<<<< HEAD
+
 
 
 //ppu
@@ -607,7 +607,7 @@ Route::post('saveeditedproject','PhysicalPlanningController@saveeditedproject')-
 Route::get('ppurejectproject/{id}','PhysicalPlanningController@ppurejectproject')->name('ppurejectproject');
 Route::get('ppuprojectforwarddes/{id}','PhysicalPlanningController@ppuprojectforwarddes')->name('ppuprojectforwarddes');
 
-=======
+
 Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');
 Route::post('assessment/work_order/landscaping/{id}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping');
->>>>>>> f3b6708b07f07bd0a1db944c827e0438db0f582b
+
