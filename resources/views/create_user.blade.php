@@ -167,15 +167,20 @@ User Registration
               <div id="Div1" >
                <select  style="width: 300px;" class="custom-select" name="type[]" id="type">
 	                  <option value="" selected>Choose...</option>
-	                  <option value="Accountant">Accountant</option>
-	                  
+	                  <option value="Accountant">Accountant</option>	                  
+	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
+	                  <option value="CLIENT">Client</option>
  	                  <option value="CLIENT">Client</option>
 	                  <option value="DVC Admin">DVC Admin</option>
+	                  <option value="Director DPI">Director DPI</option>
+	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
+	                  <option value="Head PPU">Head PPU</option>
 	                  <option value="Inspector Of Works">Inspector Of Works</option>
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
+	                  <option value="Secretary to Council">Secretary to Council</option>
 	                  <option value="Transport Officer">Transport Officer</option>
 
 	           </select>

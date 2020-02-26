@@ -574,3 +574,17 @@ Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwola
 Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc');
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
 Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping');
+
+
+//ppu
+Route::get('physicalplanning','PhysicalPlanningController@physicalplanning')->name('physicalplanning');
+Route::get('infrastructureproject','PhysicalPlanningController@infrastructureproject')->name('infrastructureproject');
+Route::get('newinfrastructureproject','PhysicalPlanningController@newinfrastructureproject')->name('newinfrastructureproject');
+Route::post('postinfrastructureproject','PhysicalPlanningController@postinfrastructureproject')->name('postinfrastructureproject');
+Route::get('ppuprojectview/{id}','PhysicalPlanningController@ppuprojectview')->name('ppuprojectview');
+Route::get('ppuprojectforwarddvc/{id}','PhysicalPlanningController@ppuprojectforwarddvc')->name('ppuprojectforwarddvc');
+Route::get('ppueditproject/{id}','PhysicalPlanningController@ppueditproject')->name('ppueditproject');
+Route::post('saveeditedproject','PhysicalPlanningController@saveeditedproject')->name('saveeditedproject');
+Route::get('ppurejectproject/{id}','PhysicalPlanningController@ppurejectproject')->name('ppurejectproject');
+Route::get('ppuprojectforwarddes/{id}','PhysicalPlanningController@ppuprojectforwarddes')->name('ppuprojectforwarddes');
+
