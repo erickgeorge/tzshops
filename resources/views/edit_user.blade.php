@@ -16,7 +16,7 @@
  </style>
 <div class="container">
     <br>
-    <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
+    <div class="row" style=" margin-right: 2%; margin-left: 2%;">
         <div class="col-lg-12" align="center">
             <h2>Edit User</h2>
         </div>
@@ -176,6 +176,9 @@
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option> 
                       <option  @if (in_array('STORE',$str_array)) { selected="selected" } @else{} @endif value="STORE">Store Manager</option>
                       <option @if (in_array('Transport Officer',$str_array)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
+                      <option @if (in_array('Supervisor LECC',$str_array)) { selected="selected" } @else{} @endif  value="Supervisor LECC ">Supervisor LECC </option>
+
+                      
                </select>
                </div>
                <br>

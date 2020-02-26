@@ -9,6 +9,7 @@ use App\Notification;
 use App\workordersection;
 use App\iowzone;
 use App\User;
+use App\iowzonelocation;
 use Illuminate\Http\Request;
 
 
@@ -32,6 +33,20 @@ class DirectorateController extends Controller
             'notifications' => $notifications,
             'iowzone' => iowzone::OrderBy('zonename', 'ASC')->get()
             
+        ]);
+   
+    }
+
+     public function IoWZonesviewlocation($id){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+       return view('iowzonelocationview', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'zoneid' =>  iowzone::where('id', $id)->first(),
+            'iowzone' => iowzonelocation::where('iowzone_id', $id)->OrderBy('location', 'ASC')->get()
         ]);
    
     }
@@ -207,8 +222,25 @@ class DirectorateController extends Controller
         return view('add_iowzone', [
             'role' => $role,
             'notifications' => $notifications,
-            'directorates' => Directorate::OrderBy('name', 'ASC')->get(),
-            'deps' => Department::OrderBy('name', 'ASC')->with('directorate')->get(),
+            
+            'iows' => User::where('type' , 'Inspector Of Works')->get()
+            
+        ]);
+
+
+     }
+
+
+
+
+        public function addiowzonelocationView($id){
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        return view('add_iowzone_location', [
+            'role' => $role,
+            'notifications' => $notifications,
+             'zoneid' =>  iowzone::where('id', $id)->first(),
             'iows' => User::where('type' , 'Inspector Of Works')->get()
             
         ]);
@@ -376,6 +408,21 @@ class DirectorateController extends Controller
         return redirect()->route('manage.IoWZones')->with(['message' => 'IoW Zone added successfully']);
     }
     
+
+     public function createiowzonelocation(Request $request , $id)
+    {
+        
+         if (!empty(iowzonelocation::where('location',$request['location'])->first())){
+            return redirect()->back()->withErrors(['message' => 'location already exist']);
+        }
+         
+        $iowzone = new iowzonelocation();  
+        $iowzone->location = $request['location' ];
+        $iowzone->iowzone_id = $id;
+        $iowzone->save();
+
+        return redirect()->route('view.location', [$id] )->with(['message' => 'location added successfully']);
+    }
 	
 
 	public function editworkorderSection(Request $request)
@@ -422,6 +469,28 @@ class DirectorateController extends Controller
 
         return redirect()->route('manage.IoWZones')->with(['message' => 'Zone edited successfully']);
     }
+
+
+            public function editiowzonelocation(Request $request , $id)
+    {
+
+          if (!empty(iowzonelocation::where('location',$request['location'])->first())){
+            return redirect()->back()->withErrors(['message' => 'Zone location already exist']);
+        }
+        
+       $p=$request['esecid'];
+        
+        
+        $wsec = iowzonelocation::where('id',$p)->first();
+        
+        $wsec->location = $request['location' ];
+       
+        $wsec->save();
+        
+       
+
+        return redirect()->route('view.location', [$id])->with(['message' => 'Zone location edited successfully']);
+    }
 	
 
 	public function deleteWorkorderSection($id)
@@ -451,6 +520,18 @@ class DirectorateController extends Controller
   
 
       
+    }
+
+     public function deleteiowzonelocation($id)
+    {
+
+          $zone=iowzonelocation::where('id', $id)->first();
+        
+          $zone->delete();
+          
+          
+          return redirect()->back()->with(['message' => 'Zone Location deleted successfully']);
+
     }
 	
 }

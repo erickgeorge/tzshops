@@ -10,6 +10,7 @@
     use App\WorkOrderStaff;
     use App\WorkOrderMaterial;
     use App\techasigned;
+    use App\landscapinginspectionform;
  
 
  ?>
@@ -145,19 +146,69 @@
   <br>
 
 
+<h5><b>Supervisor assigned for Land scaping inspection: </b></h5>
 
-</div>
+@if(count($inspection) > 0)
+
+<table style="width:100%">
+  <tr>
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date of Inspection</th>
+  <th>Inspection Description</th>
+  </tr>
+
+  @foreach($inspection as $insp)
+  <tr>
+   <td>{{$insp['usersupervior']->fname . '  ' . $insp['usersupervior']->lname}}</td>
+   <td>{{$insp->status}}</td>
+   <td>{{$insp->date}}</td>
+   <td> <a onclick="myfunc2('{{$insp->description}}')"><span data-toggle="modal" data-target="#viewdetails"
+                                                                         class="badge badge-success">View Description</span></a></td>
+ </tr>
+
+  @endforeach
+
+  </table>
+   <br>
+  @else
+  <h8><span class="badge badge-danger">No Supervisor Assigned yet!</span></h8> 
+  @endif
+
+   <hr>
+   
+    
 
 
-<script type="text/javascript">
-  
-   function myfunc(x) {
-            document.getElementById("comments").innerHTML = x;
-        }
+     <!-- Modal for view description -->
+    <div class="modal fade" id="viewdetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: black"><b></b> Description before work.</b></h5>
+                    <div></div>
 
-         function myfunc2(x) {
-            document.getElementById("details").innerHTML = x;
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 id="description"><b> </b></h3>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+  <script type="text/javascript">
+   function myfunc2(x) {
+            document.getElementById("description").innerHTML = x;
   }
-</script>
+  </script>
 
     @endSection

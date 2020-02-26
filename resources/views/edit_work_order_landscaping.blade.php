@@ -142,19 +142,19 @@ var total=2;
    
 
      <br>
-        <h4>Work order forms.</h4>
+        <h5>Landscaping works order forms.</h5>
         {{-- tabs --}}
         <div class="payment-section-margin">
             <div class="tab">
                 <div class="container-fluid">
                     <div class="tab-group row">
-                      
 
                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORM</button>
+                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'assesment')">ASSESSMENT FORM</button>
                         
                         <button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
-                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
+                       
    
                     </div>
                 </div>
@@ -163,12 +163,12 @@ var total=2;
 
 
                 {{-- INSPECTION tab--}}
-                <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+                <form method="POST" action="{{ route('work.inspection.landscaping', [$wo->id]) }}">
                     @csrf
                     <div id="customer" class="tabcontent">
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Work order status</p>
+                                <p>Inspection status</p>
                             </div>
                         </div>
                         
@@ -199,20 +199,12 @@ var total=2;
                             <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
-                            <label>Select Technician in Charge</label>
+                            <label>Select Supervisor of Landscaping</label>
                             <br>
-                            <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
-                                <option  selected value="" >Choose...</option>
-                                
-                                
-                                
-                                <?php
-                               
-                                $techassigned = techasigned::where('work_order_id',$wo->id)->get();
-                                ?>
-                                
-                                @foreach($techassigned as $tech)
-                                    <option value="{{ $tech->id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                            <select style="color: black; width:  700px;" required class="custom-select"  name="supervisor" >
+                         
+                                @foreach($slecc as $slecc)
+                                    <option value="{{ $slecc->id }}">{{ $slecc->lname.' '.$slecc->fname }}
                                     </option>
                                 @endforeach
                             </select>
@@ -222,6 +214,84 @@ var total=2;
                     </div>
                 </form>
                 {{-- end inspection --}}
+
+
+
+                {{-- ASSESMENT tab--}}
+                <form method="POST" action="{{ route('work.assessment.landscaping', [$wo->id]) }}">
+                    @csrf
+                    <div id="assesment" class="tabcontent">
+                   
+                     <div class="form-group">
+                            <label>Company Name</label>
+                            <br>
+                            <select style="color: black; width:  700px;" required class="custom-select"  name="company" id="company" >
+                         
+                                @foreach($company as $comp)
+                                    <option value="{{ $comp->id }}">{{ $comp->company_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                      </div>
+
+
+                       <div class="form-group">
+                            <label>Cleaning Area</label>
+                            <br>
+                            <select style="color: black; width:  700px;" required class="custom-select"  name="area" id="carea" >
+                         
+                                @foreach($carea as $carea)
+                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
+                                    </option>
+                                @endforeach
+                            </select>
+                      </div>
+      
+                       <p>Assessment Date</p>
+                        <div class="form-group">
+                            <input type="date"  style="color: black; width:  700px;" name="assessmment"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" class="form-control" required ></input>
+                        </div>
+                         
+                        <p>Type</p>
+                        <div class="form-group">
+                            <input  style="color: black; width:  700px;" name="type" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Type"></input>
+                        </div>
+
+
+
+                        <p>Activity</p>
+                        <div class="form-group">
+                            <input  style="color: black; width:  700px;" name="activity" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Activity"></input>
+                        </div>
+
+
+                        <p>Score</p>
+                        <div class="form-group">
+                            <input   style="color: black; width:  700px;" name="score" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Score"></input>
+                        </div>
+
+                     <!--   <p>Assesor Remark</p>
+                        <div class="form-group">
+                            <textarea   style="color: black; width:  700px;" name="details"  maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+
+                        <p>Company Remark</p>
+                        <div class="form-group">
+                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+
+                        <p>Approval Remark</p>
+                        <div class="form-group">
+                            <textarea   style="color: black; width:  700px;" name="details"  maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div> -->
+
+
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                    </div>
+                </form>
+                {{-- end assesment --}}
+
                 
                 
                 

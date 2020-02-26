@@ -170,20 +170,14 @@
   
   </tr>
     @foreach($techforms as $techform)
-  
-  
-
-
   <tr>
   
      @if($techform['technician_assigned_for_inspection'] != null)
     <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
    <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
 
-     
-
    <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
-                            <td>
+                          
    
     @if($techform->created_at ==  $techform->updated_at)
    

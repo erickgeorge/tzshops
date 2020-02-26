@@ -180,7 +180,11 @@ User Registration
 	                  <option value="Inspector Of Works">Inspector Of Works</option>
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
+<<<<<<< HEAD
 	                  <option value="Secretary to Council">Secretary to Council</option>
+=======
+	                  <option value="Supervisor LECC ">Supervisor LECC </option>
+>>>>>>> f3b6708b07f07bd0a1db944c827e0438db0f582b
 	                  <option value="Transport Officer">Transport Officer</option>
 
 	           </select>

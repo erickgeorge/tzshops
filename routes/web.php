@@ -127,6 +127,8 @@ Route::get('Manage/section', 'DirectorateController@workordersectionView')->name
 
 Route::get('Manage/IoWZones', 'DirectorateController@IoWZonesview')->name('manage.IoWZones');
 
+Route::get('Manage/IoWZones/location/{id}', 'DirectorateController@IoWZonesviewlocation')->name('view.location');
+
 Route::get('Manage/directorate', 'DirectorateController@directorateView')->name('dir.manage');
 
 Route::get('Manage/Add/directorate', 'DirectorateController@adddirectorateView');
@@ -136,6 +138,7 @@ Route::get('Manage/Add/department', 'DirectorateController@adddepartmentView');
 Route::get('Manage/Add/section', 'DirectorateController@addsectionView');
 
 Route::get('Manage/Add/iowzone', 'DirectorateController@addiowzoneView');
+Route::get('Add/iowzone/location/{id}', 'DirectorateController@addiowzonelocationView')->name('add.iowzone.location');
 
 
 
@@ -164,16 +167,19 @@ Route::POST('Manage/edit/workordersection', 'DirectorateController@editworkorder
 
 Route::POST('Manage/edit/iowzone', 'DirectorateController@editiowzone')->name('workordersection.edit');
 
+Route::POST('/Manage/IoWZones/location/edit/{id}', 'DirectorateController@editiowzonelocation')->name('edit/iowzone/location');
+
 Route::post('delete/workordersection/{id}', 'DirectorateController@deleteWorkorderSection')->name('worksection.delete');
 
 Route::post('delete/iowzone/{id}', 'DirectorateController@deleteiowzone')->name('iowzone.delete');
-
-
+Route::post('delete/iowzone/location/{id}', 'DirectorateController@deleteiowzonelocation')->name('iowzonelocation.delete');
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save');
 
 Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save');
 
 Route::post('save/iowzone', 'DirectorateController@createiowzone')->name('iowzone.save');
+Route::post('save/iowzone/location/{id}', 'DirectorateController@createiowzonelocation')->name('iowzone.location.save');
+
 
 
 Route::post('', 'UserController@changeProfile')->name('profile.change');
@@ -260,6 +266,7 @@ Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMate
 
 
 Route::get('work_order_with_missing_material', 'HomeController@workorderwithmissingmaterial')->name('work_order_with_missing_material');
+
 
 
 
@@ -437,15 +444,21 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
 
  
 Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save');
+Route::post('CompanyRegistration', 'AssetsController@Registercompany')->name('company.save');
 Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete');
 Route::POST('edit/House', 'AssetsController@editHouse')->name('house.edit');
+Route::POST('edit/company', 'AssetsController@editcompany')->name('company.edit');
 Route::get('Register_Staffhouse', 'AssetsController@Registerstaffhouseview')->name('registerstaffhouse');
+
+Route::get('Register_company', 'AssetsController@Registercompanyview')->name('registercompany');
+
 
 
 
 
 Route::post('HallRegistration', 'AssetsController@RegisterHalls')->name('hall.save');
 Route::post('delete/Hall/{id}', 'AssetsController@deleteHall')->name('hall.delete');
+Route::post('delete/company/{id}', 'AssetsController@deletecompany')->name('company.delete');
 Route::POST('edit/Hall', 'AssetsController@editHall')->name('hall.edit');
 Route::get('Register_hall', 'AssetsController@Registerhallview')->name('registerhall');
 
@@ -529,8 +542,13 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
  Route::get('inroomreportextended','HomeController@anonymousroomreportextended')->name('inroomreportextended');
 Route::get('inroomreporwithrooms','HomeController@inroomreportextendedwithrooms')->name('inroomreporwithrooms');
 
-  Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport');
-  Route::get('desdepts','NotesController@desdepts')->name('desdepts');
+Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport');
+Route::get('desdepts','NotesController@desdepts')->name('desdepts');
+
+Route::get('iowwithzones','NotesController@iowzones')->name('zones');
+
+Route::get('iowwithlocation/{id}','NotesController@iowlocation')->name('zones');
+
 //////////////////// non building assets & cleaning company ////////////////////////////
 Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbuildingasset');
 Route::get('cleaningcompany','AssetsController@cleaningcompany')->name('cleaningcompany');
@@ -574,6 +592,7 @@ Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwola
 Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc');
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
 Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping');
+<<<<<<< HEAD
 
 
 //ppu
@@ -588,3 +607,7 @@ Route::post('saveeditedproject','PhysicalPlanningController@saveeditedproject')-
 Route::get('ppurejectproject/{id}','PhysicalPlanningController@ppurejectproject')->name('ppurejectproject');
 Route::get('ppuprojectforwarddes/{id}','PhysicalPlanningController@ppuprojectforwarddes')->name('ppuprojectforwarddes');
 
+=======
+Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');
+Route::post('assessment/work_order/landscaping/{id}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping');
+>>>>>>> f3b6708b07f07bd0a1db944c827e0438db0f582b
