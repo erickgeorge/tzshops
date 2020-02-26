@@ -25,7 +25,10 @@ class ImportExcelController extends Controller
 {
 	 public function importUserExcel(Request $request)
 	 {
-		 Excel::import(new UsersImport,$request->select_file);
+	 	$request->validate(['select_file'=>'required']);
+			Excel::import(new UsersImport,$request->select_file);
+	 	 
+	 	 
 
 	 	 return redirect()->route('users.view')->with(['message' => 'Users Data Inserted succesfully!.']);
 

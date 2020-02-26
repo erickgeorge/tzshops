@@ -5,6 +5,10 @@ namespace App\Imports;
 use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 class UsersImport implements ToModel, WithHeadingRow
 {
     /**
@@ -23,4 +27,4 @@ class UsersImport implements ToModel, WithHeadingRow
             'password' => bcrypt($row['lname'].'@esmis')
         ]);
     }
-}
+} 
