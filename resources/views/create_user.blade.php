@@ -173,21 +173,32 @@ User Registration
               <div id="locationdiv" >
                <select  required style="width: 300px;" class="custom-select" name="type" id="type">
 	                  <option value="" selected>Choose...</option>
-	                  <option value="Accountant">Accountant</option>
-	                  
+	                  <option value="Accountant">Accountant</option>	                  
+	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
+	                  <option value="CLIENT">Client</option>
  	                  <option value="CLIENT">Client</option>
 	                  <option value="DVC Admin">DVC Admin</option>
+	                  <option value="Director DPI">Director DPI</option>
+	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
+<<<<<<< HEAD
 	                  @foreach($worksec as $dep)
  
                            <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
          
                        @endforeach
+=======
+	                  <option value="Head PPU">Head PPU</option>
+>>>>>>> 6ed2677d7c14bedf981386b26bc2f578e209b7ae
 	                  <option value="Inspector Of Works">Inspector Of Works</option>
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
+<<<<<<< HEAD
+	                  <option value="Secretary to Council">Secretary to Council</option>
+=======
 	                  <option value="Supervisor LECC ">Supervisor LECC </option>
+>>>>>>> f3b6708b07f07bd0a1db944c827e0438db0f582b
 	                  <option value="Transport Officer">Transport Officer</option>
 
 	           </select>

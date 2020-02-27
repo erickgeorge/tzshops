@@ -64,7 +64,7 @@
                     <td>{{ $item->name }}</td>
                     <td id="wo-details">{{ $item->description }}</td>
                     <td>{{ $item->type }}</td>
-                    <td>{{ $item->stock }}</td>
+                    <td>{{ number_format($item->stock) }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>{{ $item->updated_at }}</td>
                     

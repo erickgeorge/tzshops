@@ -59,5 +59,9 @@
      </table>
     </div>
    </form>
+<<<<<<< Updated upstream
 
 @endsection
+=======
+   @endSection
+>>>>>>> Stashed changes

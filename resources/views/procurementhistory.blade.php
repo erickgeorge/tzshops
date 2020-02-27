@@ -108,7 +108,7 @@
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id"><?php $time = strtotime($material->tag_); echo date('d/m/Y',$time);  ?></td>
-                            <td id="wo-details">{{ $material->total_materials }}</td>
+                            <td id="wo-details">{{ number_format($material->total_materials) }}</td>
                             <td>@if($material->store_received == 0)
                             	<div class="badge badge-warning">@if(auth()->user()->type == 'Head Procurement') Not Received by store @else Not Confirmed @endif</div>
                             	@else<div class="badge badge-success">@if(auth()->user()->type == 'Head Procurement') Received by store @else Received @endif</div>

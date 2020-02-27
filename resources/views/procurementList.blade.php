@@ -92,9 +92,9 @@ else {
    
       <td>{{ $procure->material_description }}</td>
       <td>{{ $procure->type }}</td>
-      <td>{{ $procure->total_input }}</td>
+      <td>{{ number_format($procure->total_input) }}</td>
          <td>{{ $procure->unit_measure }}</td>
-        <td>{{ $procure->price_tag }}</td>
+        <td>{{ number_format($procure->price_tag) }}</td>
    
      
       </td>

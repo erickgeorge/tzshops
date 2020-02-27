@@ -54,7 +54,7 @@
                                   <td>{{ $item->name }}</td>
                                   <td>{{ $item->description }}</td>
                                   <td>{{ $item->type }}</td>
-                                  <td>{{ $item->totalstock }}</td>
+                                  <td>{{ number_format($item->totalstock) }}</td>
                                   <td>{{ $item->stock }}</td>    
                                   </tr>
                     @endforeach

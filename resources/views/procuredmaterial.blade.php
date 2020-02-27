@@ -87,9 +87,9 @@
                             <td id="wo-id">{{ $material->material_name }}</td>
                             <td id="wo-details">{{ $material->material_description }}</td>
                             <td>{{ $material->type }}</td>
-                            <td> {{ $material->total_input }}</td>
+                            <td> {{ number_format($material->total_input) }}</td>
                             <td>{{ $material->unit_measure }}</td>
- 							<td>{{ $material->price_tag }}</td>
+ 							<td>{{ number_format($material->price_tag) }}</td>
                              
                         </tr>
                         @endforeach

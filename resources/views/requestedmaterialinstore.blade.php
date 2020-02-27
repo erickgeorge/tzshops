@@ -60,18 +60,18 @@
     <td>{{$matform['material']->name }}</td>
      <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
-     <td>{{$matform->quantity }}</td>
+     <td>{{number_format($matform->quantity) }}</td>
     <?php  $x=$matform['material']->stock - $matform['material']->quantity_reserved; ?>
      @if($x<=0)
       <td>0</td>
       @else
-      <td>{{$matform['material']->stock  - $matform['material']->quantity_reserved }}</td>
+      <td>{{number_format($matform['material']->stock  - $matform['material']->quantity_reserved) }}</td>
       @endif
      
 
 
      @if(($matform['material']->stock- $matform['material']->quantity_reserved)>=($matform->quantity))
-          <td>{{$matform->quantity }}</td>
+          <td>{{number_format($matform->quantity) }}</td>
        <?php $procured=0;
        $p[$i]= "no";
        $i++;
