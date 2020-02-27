@@ -1,7 +1,7 @@
 <?php
    
 namespace App\Http\Controllers;
-   
+use Illuminate\Support\Facades\DB;   
 use App\Note;
 use Illuminate\Http\Request;
 use Redirect;
@@ -1069,18 +1069,41 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
 
     public function iowzones()
     {
-        $data['iowzone'] = iowzone::orderby('zonename','ASC')->get();
+        $data['iowzone'] =  User::where('type', 'Inspector Of Works')->
+                       select(DB::raw('zone') )
+                       ->where('status', 1)
+                       ->where('zone','<>', 'NULL')
+                     ->groupBy('zone')
+                     ->get();
         $pdf = PDF::loadView('iowzonereport', $data);
         return $pdf->stream('iowzone - '.date('d-m-Y Hi').'.pdf');
     }
 
 
+        public function iowonlyzones()
+    {
+        $data['iowzone'] = iowzone::OrderBy('zonename', 'ASC')->get();
+        $pdf = PDF::loadView('iowonlyzonereport', $data);
+        return $pdf->stream('iowzone - '.date('d-m-Y Hi').'.pdf');
+    }
+
+
+        public function iowfromzones($zone)
+    {
+        $data['iowzone'] =  User::where('zone', $zone)->get();
+        $pdf = PDF::loadView('iowfromzonereport', $data);
+        return $pdf->stream('iowzone - '.date('d-m-Y Hi').'.pdf');
+    }
+
+
+
         public function iowlocation($id)
     {
-        $data['iowlocation'] = iowzonelocation::where('iowzone_id',$id)->orderby('location','ASC')->get();
+        $data['iowlocation'] = iowzonelocation::where('iow_id',$id)->orderby('location','ASC')->get();
         $pdf = PDF::loadView('iowlocationreport', $data);
         return $pdf->stream('iowlocation - '.date('d-m-Y Hi').'.pdf');
     }
+
 
     public function exportProcure($id)
     {

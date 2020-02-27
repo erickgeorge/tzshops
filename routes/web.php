@@ -126,8 +126,11 @@ Route::get('Manage/department', 'DirectorateController@departmentsView')->name('
 Route::get('Manage/section', 'DirectorateController@workordersectionView')->name('section.manage');
 
 Route::get('Manage/IoWZones', 'DirectorateController@IoWZonesview')->name('manage.IoWZones');
+Route::get('Manage/IoWZones/with/iow', 'DirectorateController@IoWZoneswithiowview')->name('manage.IoWZones.iow');
 
 Route::get('Manage/IoWZones/location/{id}', 'DirectorateController@IoWZonesviewlocation')->name('view.location');
+
+Route::get('Manage/Inspectorofwork/{zone}', 'DirectorateController@IoWZonesviewinspector')->name('view.iowwithloc');
 
 Route::get('Manage/directorate', 'DirectorateController@directorateView')->name('dir.manage');
 
@@ -546,6 +549,10 @@ Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomrep
 Route::get('desdepts','NotesController@desdepts')->name('desdepts');
 
 Route::get('iowwithzones','NotesController@iowzones')->name('zones');
+
+Route::get('iowonlyzones','NotesController@iowonlyzones');
+
+Route::get('iowfromzones/{zone}','NotesController@iowfromzones')->name('iowwith.zone');
 
 Route::get('iowwithlocation/{id}','NotesController@iowlocation')->name('zones');
 

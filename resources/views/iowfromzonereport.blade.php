@@ -2,10 +2,11 @@
     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
     <div style="background-image: url('img_girl.jpg');">
 
-    @foreach($iowlocation as $iow)
+     @foreach($iowzone as $zonename)
      @endforeach
+                
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b>List of available location for {{ $iow['iow']->fname. ' ' .$iow['iow']->lname  }} </b></p>
+    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b>List of Inspector of Work in {{ $zonename->zone }}</b></p>
 </div><br>
 
 <style>
@@ -34,8 +35,8 @@ tr:nth-child(even) {
     
     <tr>
                     <th>#</th>
-                    <th>Location  Name</th>
-                 
+                    <th>Name</th>
+                   
                     
         
     </tr>
@@ -43,14 +44,14 @@ tr:nth-child(even) {
  <tbody align="center">
 
                 <?php $i = 0;  ?>
-                @foreach($iowlocation as $sect)
+                @foreach($iowzone as $sect)
                         <tr>
                        <?php $i++;?>
                         <td>{{$i}}</td>
-                       <td class="nameee"> {{$sect->location}}</td>
+                       <td class="nameee"> {{ $sect->fname .'  '. $sect->lname }}</td>
                       
                        </tr>
-                        @endforeach
+                @endforeach
                 </tbody>
 </table>
 <div id='footer'>

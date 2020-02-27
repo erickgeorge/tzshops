@@ -40,7 +40,7 @@
                                name="location" placeholder="Enter Zone Location">
                     </div>-->
 
-                   <div class="form-group ">
+                   <!--<div class="form-group ">
                         <label for="dep_name" style="color: black;">Inspector of Work</label>
                          
                          <select required class="custom-select" name="iow" id="iow">
@@ -50,7 +50,7 @@
                             @endforeach
 
                         </select>
-                    </div>
+                    </div>-->
 
 
                    

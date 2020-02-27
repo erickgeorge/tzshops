@@ -8,7 +8,7 @@ class  iowzonelocation extends Model
 {
 		
 		public function iow(){
-        return $this->belongsTo('App\iowzone','iowzone_id');
+        return $this->belongsTo('App\User','iow_id');
     }
 
 

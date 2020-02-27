@@ -10,7 +10,7 @@ IoW Zones
 <div class="container" >
 
 
-	 @if ($errors->any())
+     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -27,21 +27,20 @@ IoW Zones
         </div>
     @endif
 
-     @foreach($iowzone as $iow)
-     @endforeach
-                <h2 style="margin-bottom: 20px;"
-                   class="btn btn-default">List of available locations in {{ $iow['iow']->zonename }}</h2>
+          <br>
+ @if(count($iowzone)>0)
+  @foreach($iowzone as $zone)
+  @endforeach
+                <h5>List of locations available for {{ $zone['iow']->fname.' '.$zone['iow']->lname }} </h5>
 
-               
-                
-        
+
             <hr class="container">
 
-            <a href="{{ route('add.iowzone.location',[$zoneid->id])}}" style="margin-bottom: 20px;"
+            <a href="{{ route('add.iowzone.location',[$userid->id])}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new Location</a>
-                   <a href="{{ url('iowwithlocation',[$zoneid->id])}}" style="margin-bottom: 20px; float:right;"
+ 
+                   <a href="{{ url('iowwithlocation',[$userid->id])}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
-
 
                 <table id="myTablee" class="table table-striped">
                     <thead class="thead-dark">
@@ -61,7 +60,7 @@ IoW Zones
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $iow->location }}</td>  
-                           <!-- <td>{{ $iow['iow']->fname}}</td>-->
+                          
                             
 
                             <td>
@@ -105,13 +104,12 @@ IoW Zones
 
                 </div>
 
-                <form method="POST" action="{{route('edit/iowzone/location', [$zoneid->id])}}" class="col">
+                <form method="POST" action="{{route('edit/iowzone/location', [$userid->id])}}" class="col">
                     <div class="modal-body">
 
 
                         @csrf
-	
-						
+                          
                     <div class="form-group ">
                         <label for="dep_name">Location Name</label>
                         <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   
@@ -122,7 +120,7 @@ IoW Zones
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
-                        <a href="{{route('view.location', [$zoneid->id])}}" class="btn btn-danger">Cancel
+                        <a href="{{route('view.location', [$userid->id])}}" class="btn btn-danger">Cancel
                     </a>
 
                     </div>
@@ -134,6 +132,12 @@ IoW Zones
             </div>
         </div>
     </div>
+
+    @else
+    <h6>No Location available You can add new Location below...</h6>
+       <a href="{{ route('add.iowzone.location',[$userid->id])}}" style="margin-bottom: 20px;"
+                   class="btn btn-primary">Add new Location</a> 
+    @endif
 
 
            
@@ -165,17 +169,17 @@ IoW Zones
 
 
         function myfunc1(x,y) {
-			
-			
+            
+            
             document.getElementById("esecid").value = x;
             document.getElementById("sname").value = y;
 
-			
+            
         }
 
 
-		
-		
+        
+        
 
 
 

@@ -91,7 +91,7 @@
                 <div class="input-group-prepend">
                     <label style="height: 28px;" class="input-group-text" for="directorate">Directorate/College <sup style="color: red;"></label>
                 </div>
-                <select style="width: 366px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()">
+                <select style="width: 350px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()">
                     @foreach($directorates as $directorate)
                         <option <?php if(($user['department']['directorate']->name) == $directorate->name) {?>
                                 selected="selected"
@@ -159,12 +159,11 @@
      ?>
 
     <div>
-       <div >
+       
         <label>Type of User</label><br>
-        <input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
-       </div>
-              <div id="Div1" >
-               <select class="custom-select" name="type[]" id="type">
+       
+              <div  >
+               <select class="custom-select" name="type" id="type">
                       <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose...</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
                       
@@ -172,30 +171,26 @@
                       <option @if (in_array('DVC Admin',$str_array)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
                       <option @if (in_array('Estates Director',$str_array)) { selected="selected" } @else{} @endif   value="Estates Director">Estates Director</option>
                       <option @if (in_array('Head Procurement',$str_array)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
+                       @foreach($worksec as $dep)
+ 
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
+         
+                       @endforeach
                       <option @if (in_array('Inspector Of Works',$str_array)) { selected="selected" } @else{} @endif  value="Inspector Of Works">Inspector Of Works</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option> 
                       <option  @if (in_array('STORE',$str_array)) { selected="selected" } @else{} @endif value="STORE">Store Manager</option>
-                      <option @if (in_array('Transport Officer',$str_array)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
                       <option @if (in_array('Supervisor LECC',$str_array)) { selected="selected" } @else{} @endif  value="Supervisor LECC ">Supervisor LECC </option>
+                      <option @if (in_array('Transport Officer',$str_array)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
+                      
 
                       
                </select>
                </div>
-               <br>
-
-               <div  id="Div2">
-           
-                <label> &nbsp;&nbsp;&nbsp;
-                    @foreach($worksec as $dep)
-                               <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}" ><?php echo strtoupper( $dep->section_name ); ?>  &nbsp;&nbsp;&nbsp;
-     
-                    @endforeach
-                </label>
-             
-             </div>
-
-             
+               <br>      
          </div>
+
+
+    
 
                <?php use App\iowzone; ?>
                <?php $iowzone = iowzone::get(); ?>
@@ -277,7 +272,7 @@
         </form>
 
     </div>
-    <br>
+    <br>  
 
 
     <script>

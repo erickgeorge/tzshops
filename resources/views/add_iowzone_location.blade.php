@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Add Section For Workorder
+    Add Location For IoW
     @endSection
 @section('body')
 
@@ -25,7 +25,7 @@
     @endif 
                 <h4 id="new_dep">Add new location</h4>
                 <hr>
-                <form method="POST" action="{{ route('iowzone.location.save' , [$zoneid->id]) }}" class="col-md-6">
+                <form method="POST" action="{{ route('iowzone.location.save' , [$iowuser->id]) }}" class="col-md-6">
                     @csrf
                    
                     <div class="form-group ">
@@ -37,7 +37,7 @@
                     
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
-                    <a href="{{route('view.location', [$zoneid->id])}}" class="btn btn-danger">Cancel
+                    <a href="{{route('view.location', [$iowuser->id])}}" class="btn btn-danger">Cancel
                     </a>
                 </form>
             </div>

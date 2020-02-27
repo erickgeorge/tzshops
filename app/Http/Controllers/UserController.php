@@ -52,12 +52,23 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->phone = $request['phone'];
         $user->email = $request['email']; 
-        $user->type  = implode(",", $request->type);
-        $user->type = ltrim($user->type,",");
-        $user->type = rtrim($user->type,",");
+
+         if ($request['checkdiv'] == 'yesmanual') {
+
+             $user->zone = $request['zone'];
+             $user->type = 'Inspector Of Works';
+             
+
+        } else {
+
+             $user->type  = $request['type'];
+        }
+
+
+       
         $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
-        $user->IoW = 1;
+        $user->IoW = 2;
         $user->save();
 
         $role = new UserRole();
@@ -76,13 +87,6 @@ class UserController extends Controller
         // ]);
         
 
-        if( $user->type == 'Inspector Of Works' ){
-          
-        return redirect()->route('users.inspectorofwork')->with(['message' => 'Please assign zone for Inspector of Work you created.']);
-
-        }
-
-        else
 
         return redirect()->route('users.view')->with([
             'message' => 'User Created Successfully',
@@ -151,6 +155,13 @@ class UserController extends Controller
     {
         return response()->json(['sections' => Section::where('department_id', $request->get('id'))->orderby('section_name','ASC')->get()]);
     }
+
+
+    public function getinspector(Request $request)
+    {
+        return response()->json(['inspectors' => User::where('zone', $request->get('id'))->orderby('zone','ASC')->get()]);
+    }
+
 
     public function editUserView($id)
     {
@@ -228,8 +239,7 @@ class UserController extends Controller
         $user->email = $request['email'];
         $user->section_id = $request['department'];
       
-        $user->type  = implode(",", $request->type);
-        $user->type = ltrim($user->type,",");
+        $user->type  = $request['type'];
         $user->zone = $request['zone'];
         $user->IoW = 2;
         $user->save();

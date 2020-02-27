@@ -19,6 +19,7 @@ use App\Section;
 use App\workordersection;
 use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
+use App\iowzone;
 use App\Note;
 use Redirect;
 use PDF;
@@ -1288,6 +1289,7 @@ $v5=$type[4];
             'directorates' => $directorate,
             'role' => $role,
             'worksec' => workordersection::OrderBy('section_name', 'ASC')->get(),
+            'zone' => iowzone::OrderBy('zonename', 'ASC')->get(),
             'departments' => $departments,
             'notifications' => $notifications,
             'des'=> $des,
