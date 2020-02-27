@@ -605,39 +605,39 @@ return $pdf->stream(''.$data['header'].' '.date('d-m-Y Hi').'.pdf');
      $data['title'] = 'Notes List';
      if (($_GET['name']=='')&&($_GET['brand']=='')&&($_GET['type']!='')) {
          $data['items'] =  material::
-         Where('type',$_GET['type'])->orderBy('name','asc')->get();
+         Where('type',$_GET['type'])->orderBy('name','asc')->orderBy('description','asc')->get();
      }
      if (($_GET['name']=='')&&($_GET['brand']!='')&&($_GET['type']=='')) {
         $data['items'] =  material::
-        Where('description',$_GET['brand'])->orderBy('name','asc')->get();
+        Where('description',$_GET['brand'])->orderBy('name','asc')->orderBy('description','asc')->get();
      }
      if (($_GET['name']=='')&&($_GET['brand']!='')&&($_GET['type']!='')) {
          $data['items'] =  material::
          Where('type',$_GET['type'])->
-         Where('description',$_GET['brand'])->orderBy('name','asc')->get();
+         Where('description',$_GET['brand'])->orderBy('name','asc')->orderBy('description','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']=='')&&($_GET['type']=='')) {
           $data['items'] =  material::
-         Where('name',$_GET['name'])->orderBy('name','asc')->get();
+         Where('name',$_GET['name'])->orderBy('name','asc')->orderBy('description','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']=='')&&($_GET['type']!='')) {
           $data['items'] =  material::
          Where('name',$_GET['name'])->
-         Where('type',$_GET['type'])->orderBy('name','asc')->get();
+         Where('type',$_GET['type'])->orderBy('name','asc')->orderBy('description','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']!='')&&($_GET['type']=='')) {
           $data['items'] =  material::
          Where('name',$_GET['name'])->
-         Where('description',$_GET['brand'])->orderBy('name','asc')->get();
+         Where('description',$_GET['brand'])->orderBy('name','asc')->orderBy('description','asc')->get();
      }
      if (($_GET['name']!='')&&($_GET['brand']!='')&&($_GET['type']!='')) {
           $data['items'] =  material::
          Where('type',$_GET['type'])->
          Where('name',$_GET['name'])->
-         Where('description',$_GET['brand'])->orderBy('name','asc')->get();
+         Where('description',$_GET['brand'])->orderBy('name','asc')->orderBy('description','asc')->get();
      }
      if (($_GET['name']=='')&&($_GET['brand']=='')&&($_GET['type']=='')) {
-          $data['items'] =  material::orderBy('name','asc')->get();
+          $data['items'] =  material::orderBy('name','asc')->orderBy('description','asc')->get();
      }
  ///////////////////////////////////////////////   
  if($data['items'] ->isEmpty()){

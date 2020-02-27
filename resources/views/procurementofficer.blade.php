@@ -51,7 +51,7 @@
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
-					  <td>{{ $item->quantity }}</td>
+					  <td>{{ number_format($item->quantity) }}</td>
 					 
                     
 					
