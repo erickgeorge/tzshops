@@ -730,6 +730,8 @@
 
     @if(auth()->user()->type == 'Inspector Of Works')
                  
+     <a href="{{ url('myzone')}}"><h6>My Zone <span
+                                    class="badge badge-light">{{ count($material_requests) }}</span></h6></a>
 
                  
                         <a href="{{ url('work_order_material_needed')}}"><h6>Work order needs material <span

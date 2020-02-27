@@ -5,7 +5,7 @@
     @endSection
 
 @section('body')
-<?php use App\workordersection; ?>
+<?php use App\workordersection; use App\Material; ?>
 <style>
         table {
             width: 100%;
@@ -47,7 +47,7 @@
 	
 </div>
 </div>	<br>
-<form method="POST" action="{{ url('procuredmaterialsadding') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ url('procuredmaterialsadding') }}" enctype="multipart/form-data" autocomplete="off">
 	@csrf
     <div id="cont"></div>
     <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
@@ -66,6 +66,9 @@
     </p>
 </form>
 </div>
+
+
+
 
 <script>
     // ARRAY FOR HEADER.
@@ -138,13 +141,21 @@
             }
             else {
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
-                if(c==3)
+               if(c==3)
                 {
                         var ele = document.createElement('select');
                 }else
                 {
                     var ele = document.createElement('input');
                 }
+                if(c==1){
+                    ele.setAttribute('onClick','reply_click(this.id)');
+                }
+                if(c==2){
+                    ele.setAttribute('onClick','reply_click1(this.id)');
+                }
+
+                ele.setAttribute('id',c);
                 if(c==5){
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('style','width:90px;')
@@ -167,6 +178,13 @@
                 ele.setAttribute('required', '');
                 ele.setAttribute('class', 'form-control');
                 ele.setAttribute('name',c);
+                if(c==2){
+                    ele.setAttribute('onClick','reply_click1(this.id)');
+                }
+                if(c==1){
+                    ele.setAttribute('onClick','reply_click(this.id)');
+                }
+                ele.setAttribute('id',c);
 
                
 
@@ -245,6 +263,14 @@
                 {
                     var ele = document.createElement('input');
                 }
+                if(c==1){
+                    ele.setAttribute('onClick','reply_click(this.id)');
+                }
+                if(c==2){
+                    ele.setAttribute('onClick','reply_click1(this.id)');
+                }
+
+                ele.setAttribute('id',c);
                 if(c==5){
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('style','width:90px;')
@@ -267,6 +293,13 @@
                 ele.setAttribute('required', '');
                 ele.setAttribute('class', 'form-control');
                 ele.setAttribute('name',c);
+                if(c==2){
+                    ele.setAttribute('onClick','reply_click1(this.id)');
+                }
+                if(c==1){
+                    ele.setAttribute('onClick','reply_click(this.id)');
+                }
+                ele.setAttribute('id',c);
 
                
 
@@ -348,7 +381,233 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
         // SHOW THE RESULT IN THE CONSOLE WINDOW.
         console.log(values);
     }
-</script>
 
+
+
+</script>
+<script>
+function reply_click(clicked_id)
+  {
+      var clicked = clicked_id;
+  
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("style","max-height:120px; overflow:scroll;");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+<?php $materialname = Material::select('name')->distinct()->get(); ?>
+/*An array containing all the country names in the world:*/
+var materials = [@foreach($materialname as $materialised)"{{ $materialised->name }}",@endforeach];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById(clicked), materials);
+}
+
+</script>
+<script type="text/javascript">
+    
+function reply_click1(clicked_id)
+  {
+      var clicked = clicked_id;
+  
+function autocomplete1(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var x, y, z, bal = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!bal) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      x = document.createElement("DIV");
+      x.setAttribute("id", this.id + "autocomplete-list");
+      x.setAttribute("style","max-height:120px; overflow:scroll;");
+      x.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(x);
+      /*for each item in the array...*/
+      for (z = 0; z < arr.length; z++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[z].substr(0, bal.length).toUpperCase() == bal.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          y = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          y.innerHTML = "<strong>" + arr[z].substr(0, bal.length) + "</strong>";
+          y.innerHTML += arr[z].substr(bal.length);
+          /*insert a input field that will hold the current array item's value:*/
+          y.innerHTML += "<input type='hidden' value='" + arr[z] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          y.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          x.appendChild(y);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var s = document.getElementById(this.id + "autocomplete-list");
+      if (s) s = s.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(s);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(s);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (s) s[currentFocus].click();
+        }
+      }
+  });
+  function addActive(s) {
+    /*a function to classify an item as "active":*/
+    if (!s) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(s);
+    if (currentFocus >= s.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (s.length - 1);
+    /*add class "autocomplete-active":*/
+    s[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(s) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var z = 0; z < s.length; z++) {
+      s[z].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var s = document.getElementsByClassName("autocomplete-items");
+    for (var z = 0; z < s.length; z++) {
+      if (elmnt != s[z] && elmnt != inp) {
+        s[z].parentNode.removeChild(s[z]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+<?php $description = Material::select('description')->distinct()->get(); ?>
+/*An array containing all the country names in the world:*/
+var items = [@foreach($description as $mater)"{{ $mater->description }}",@endforeach];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete1(document.getElementById(clicked), items);
+}
+</script>
 
 @endsection

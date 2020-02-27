@@ -123,4 +123,26 @@ return redirect()->route('infrastructureproject')->with(['message' => 'Infrastru
 
 		return redirect()->route('ppuprojectview', $request['projectid'])->with(['message' => 'Project Updated Succesfully!']);
 	}
+
+	public function ppurejectproject(Request $request)
+	{
+		$request->validate([
+            'reason'=>'required',
+        ]);
+
+		$newstatus = new ppuprojectprogress;
+			$newstatus->project_id = $request['projectid'];
+			$newstatus->date_entered = now();
+			$newstatus->notification = $request['reason'];
+			$newstatus->status = -1;
+			$newstatus->updated_by = auth()->user()->id;
+			$newstatus->save();
+
+	return redirect()->route('infrastructureproject')->with(['message' => 'Project Rejected!']);
+	}
+
+	public function ppuprojectforwarddes($id)
+	{
+
+	}
 }

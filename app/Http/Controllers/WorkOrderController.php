@@ -1203,5 +1203,14 @@ session::flash('message', ' Your workorder have been closed successfully');
         ]);
     }
 	
-	
+	public function myzone()
+    {
+
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+
+       
+       return view('zonesiow', [ 'role' => $role, 'notifications' => $notifications,]);
+    }
 }

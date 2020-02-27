@@ -79,6 +79,7 @@ Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name(
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
+Route::get('myzone','WorkOrderController@myzone')->name('myzone');
 
 Route::post('assigntech/work_order/{id}', 'WorkOrderController@assigntechnicianforwork')->name('work.assigntechnician');
 Route::post('assigntechforinspection/work_order/{id}', 'WorkOrderController@assigntechnicianforinspection')->name('work.assigntechnicianforinspection');
@@ -593,6 +594,8 @@ Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwoland
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
 Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping');
 
+Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');
+Route::post('assessment/work_order/landscaping/{id}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping');
 
 
 //ppu
@@ -604,10 +607,6 @@ Route::get('ppuprojectview/{id}','PhysicalPlanningController@ppuprojectview')->n
 Route::get('ppuprojectforwarddvc/{id}','PhysicalPlanningController@ppuprojectforwarddvc')->name('ppuprojectforwarddvc');
 Route::get('ppueditproject/{id}','PhysicalPlanningController@ppueditproject')->name('ppueditproject');
 Route::post('saveeditedproject','PhysicalPlanningController@saveeditedproject')->name('saveeditedproject');
-Route::get('ppurejectproject/{id}','PhysicalPlanningController@ppurejectproject')->name('ppurejectproject');
+
+Route::post('ppurejectproject','PhysicalPlanningController@ppurejectproject')->name('ppurejectproject');
 Route::get('ppuprojectforwarddes/{id}','PhysicalPlanningController@ppuprojectforwarddes')->name('ppuprojectforwarddes');
-
-
-Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');
-Route::post('assessment/work_order/landscaping/{id}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping');
-

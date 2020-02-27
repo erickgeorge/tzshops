@@ -141,7 +141,7 @@ var total=2;
     <br>
 
      @if($wo->emergency == 1)
-   <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
+   <h6 align="center" style="color:red;"><b> This Workorder is Emergency &#9888;</b></h6>
     @endif
 
 
@@ -535,9 +535,9 @@ var total=2;
             <div class="form-group ">
                 {{--<p>Is this work order emergency?</p>--}}
                 @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> This work order is emergency.
+                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This work order is emergency.</b>
                 @else
-                    <input type="checkbox" name="emergency"> This work order is emergency.
+                    <input type="checkbox" name="emergency"> <b style="color:red;">This work order is emergency.</b>
                 @endif
             </div>
             <!--<div class="form-group ">
