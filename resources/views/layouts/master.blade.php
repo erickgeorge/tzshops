@@ -136,7 +136,7 @@
 
 @if(auth()->user()->type == 'Director DPI')
   <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('physicalplanning')}}">PPU</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
             </li>
  @endif
 

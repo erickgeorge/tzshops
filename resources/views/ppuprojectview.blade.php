@@ -71,15 +71,18 @@
                         <?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}
                     </div>
                     <div class="col"> Status:
-                        <div class="badge badge-primary">
                             <?php $progress = ppuprojectprogress::orderBy('id','Desc')->where('project_id',$project->id)->first(); ?> 
-                         @if($progress->status == 0) New Project @endif
-                        @if($progress->status == 1) Forwarded to DVC Admin 
+                         @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
+                        @if($progress->status == 1) <div class="badge badge-primary">Forwarded to DVC Admin  
                         @if(auth()->user()->type == 'DVC Admin') 
                         <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                        @endif 
+                        @endif </div>
                         @endif
-                        </div>
+                        @if($progress->status == -1) <div class="badge badge-danger">Rejected by DVC Admin  
+                        @if(auth()->user()->type == 'Director DPI') 
+                        <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                        @endif </div>
+                        @endif
                     </div>
                 </div>
                     @if(auth()->user()->type == 'Director DPI')
