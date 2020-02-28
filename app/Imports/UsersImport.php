@@ -4,9 +4,14 @@ namespace App\Imports;
 
 use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+
+<<<<<<< Updated upstream
 
 
-
+=======
+class UsersImport implements ToModel, WithHeadingRow
+>>>>>>> Stashed changes
 {
     /**
     * @param array $row

@@ -58,14 +58,4 @@
       </tr>
      </table>
     </div>
-   </form>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
-@endsection
-=======
-   @endSection
->>>>>>> Stashed changes
-=======
-   @endSection
->>>>>>> Stashed changes
