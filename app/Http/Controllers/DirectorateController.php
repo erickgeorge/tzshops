@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Department;
 use App\Directorate;
 use App\Location;
@@ -37,6 +37,26 @@ class DirectorateController extends Controller
    
     }
 
+
+    public function IoWZoneswithiowview(){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+       return view('iowzoneiowview', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'iowzone' => User::where('type', 'Inspector Of Works')->
+                       select(DB::raw('zone') )
+                       ->where('status', 1)
+                       ->where('zone','<>', 'NULL')
+                     ->groupBy('zone')
+                     ->get()
+        ]);
+   
+    }
+
+
      public function IoWZonesviewlocation($id){
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
@@ -45,11 +65,26 @@ class DirectorateController extends Controller
        return view('iowzonelocationview', [
             'role' => $role,
             'notifications' => $notifications,
-            'zoneid' =>  iowzone::where('id', $id)->first(),
-            'iowzone' => iowzonelocation::where('iowzone_id', $id)->OrderBy('location', 'ASC')->get()
+            'userid' =>  User::where('id', $id)->first(),
+            'iowzone' => iowzonelocation::where('iow_id', $id)->OrderBy('location', 'ASC')->get()
+        ]);
+    }
+
+
+     public function IoWZonesviewinspector($zone){
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+       return view('iowzonewithinspector', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'zone' =>  User::where('zone', $zone)->get()
+           
         ]);
    
     }
+
 
 
 
@@ -231,8 +266,6 @@ class DirectorateController extends Controller
      }
 
 
-
-
         public function addiowzonelocationView($id){
           $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -240,18 +273,12 @@ class DirectorateController extends Controller
         return view('add_iowzone_location', [
             'role' => $role,
             'notifications' => $notifications,
-             'zoneid' =>  iowzone::where('id', $id)->first(),
-            'iows' => User::where('type' , 'Inspector Of Works')->get()
+            'zoneid' =>  iowzonelocation::where('iow_id', $id)->first(),
+            'iowuser' => User::where('id' , $id)->first()
             
         ]);
-
-
      }
-
-
-
-    
-    
+   
 
     public function createDirectorate(Request $request)
     {
@@ -418,7 +445,7 @@ class DirectorateController extends Controller
          
         $iowzone = new iowzonelocation();  
         $iowzone->location = $request['location' ];
-        $iowzone->iowzone_id = $id;
+        $iowzone->iow_id = $id;
         $iowzone->save();
 
         return redirect()->route('view.location', [$id] )->with(['message' => 'location added successfully']);
@@ -471,24 +498,21 @@ class DirectorateController extends Controller
     }
 
 
-            public function editiowzonelocation(Request $request , $id)
+         public function editiowzonelocation(Request $request ,$id)
     {
 
           if (!empty(iowzonelocation::where('location',$request['location'])->first())){
             return redirect()->back()->withErrors(['message' => 'Zone location already exist']);
         }
         
-       $p=$request['esecid'];
-        
-        
+         $p=$request['esecid'];
+  
         $wsec = iowzonelocation::where('id',$p)->first();
         
         $wsec->location = $request['location' ];
        
         $wsec->save();
-        
-       
-
+     
         return redirect()->route('view.location', [$id])->with(['message' => 'Zone location edited successfully']);
     }
 	

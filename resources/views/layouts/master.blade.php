@@ -255,8 +255,8 @@
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
 
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
- <a style="color:white" class="dropdown-item" href="{{ url('excelinsertusers')}}">Import Excel</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
+
 
                 
               
@@ -1024,6 +1024,15 @@ for (i = 0; i < dropdown.length; i++) {
             allowClear: true
         });
 </script>
+
+<script type="text/javascript">
+
+      $("#inspector").select2({
+            placeholder: "Choose zone for IoW...",
+            allowClear: true
+        });
+</script>
+
 
 
 

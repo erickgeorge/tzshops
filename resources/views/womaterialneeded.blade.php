@@ -66,7 +66,7 @@
                     <td>{{ $item['iowzone']->lname.' '.$item['iowzone']->fname }}</td>
                     
                  
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">Material</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">View Material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach
@@ -141,7 +141,7 @@
                     
                     
 
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept">Material</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="Accept"> View Material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach

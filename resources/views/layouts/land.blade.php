@@ -260,7 +260,7 @@
 
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
 
-                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
+                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
 
                  
 

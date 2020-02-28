@@ -3,7 +3,7 @@
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b>All Inspector of work List with zone</b></p>
+    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b>List of zones assigned to Inspector of Work</b></p>
 </div><br>
 
 <style>
@@ -33,7 +33,7 @@ tr:nth-child(even) {
     <tr>
                     <th>#</th>
                     <th>Name of zone</th>
-                    <th>Inspector of work</th>
+                   
                     
         
     </tr>
@@ -45,8 +45,8 @@ tr:nth-child(even) {
                         <tr>
                        <?php $i++;?>
                         <td>{{$i}}</td>
-                       <td class="nameee"> {{$sect->zonename}}</td>
-                       <td>{{ $sect['user']->fname.' '.$sect['user']->lname }}</td>
+                       <td class="nameee"> {{$sect->zone}}</td>
+                      
                        </tr>
                         @endforeach
                 </tbody>

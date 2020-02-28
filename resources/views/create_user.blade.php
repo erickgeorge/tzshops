@@ -25,7 +25,7 @@ User Registration
 <br>
 <div class="row" style=" margin-left: 3%;">
 	<div class="col-md-8">
-		<h2 class="container">Create New User</h2>
+		<h2 class="container">Create new user</h2>
 	</div>
 
 	<!-- <div class="col-md-4">
@@ -108,7 +108,7 @@ User Registration
 	  <div class="input-group-prepend">
 	    <label  style="height: 28px" class="input-group-text" for="inputGroupSelect01">Role</label>
 	  </div>
-	  <select style="color: black; width: 460px" required class="custom-select" name="role" id="role">
+	  <select style="color: black; width: 430  px" required class="custom-select" name="role" id="role">
 	    <option value="" selected>Choose...</option>
 	    <option value="1">Admin</option>
 	    <option value="2">Staff</option>
@@ -124,7 +124,7 @@ User Registration
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="directorate">Directorate/College </label>
 	  </div>
-	  <select required style="color: black; width: 360px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+	  <select required style="color: black; width: 330px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
 		  <option selected value="" >Choose...</option>
 	    @foreach($directorates as $directorate)
 	    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
@@ -139,7 +139,7 @@ User Registration
 	  <div class="input-group-prepend">
 	    <label style="height: 28px" class="input-group-text" for="department">Department </label>
 	  </div>
-	  <select required style="color: black; width: 410px;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
+	  <select required style="color: black; width: 380px;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
 	  </select>
 	    </div>
 	</div>
@@ -161,11 +161,17 @@ User Registration
 	    <label>Type of User</label><br>
 
 	
-	    <div >
-       	<input id="Button1" type="checkbox" value="Click" onclick="switchVisible();"/>Head of Section
-       </div>
-              <div id="Div1" >
-               <select  style="width: 300px;" class="custom-select" name="type[]" id="type">
+	  
+            <div >
+                 <div class="checkbox">
+            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+                Inspector of Works</label>
+               </div>
+            </div>
+       
+
+              <div id="locationdiv" >
+               <select  required style="width: 300px;" class="custom-select" name="type" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>	                  
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
@@ -176,48 +182,40 @@ User Registration
 	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
+
+	                  @foreach($worksec as $dep)
+ 
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
+         
+                       @endforeach
+
 	                  <option value="Head PPU">Head PPU</option>
-	                  <option value="Inspector Of Works">Inspector Of Works</option>
+
+	                  
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
-<<<<<<< HEAD
+
 	                  <option value="Secretary to Council">Secretary to Council</option>
-=======
+
 	                  <option value="Supervisor LECC ">Supervisor LECC </option>
->>>>>>> f3b6708b07f07bd0a1db944c827e0438db0f582b
+
 	                  <option value="Transport Officer">Transport Officer</option>
 
 	           </select>
 	           </div>
-	           <br>
+	           
 
-               <div  id="Div2">
-
-
+               <div id="divmanual">
+               <select  required style="width: 300px;" class="custom-select" name="zone" id="zone">
+	                  @foreach($zone as $zone)
+                       <option  value="{{$zone->zonename}}"  ><?php echo strtoupper( $zone->zonename ); ?></option>
+                      @endforeach
+	                  
+	           </select>
                 
-                    &nbsp;&nbsp;&nbsp;
-                    @foreach($worksec as $dep)
- 
-                           <input type="checkbox"  name="type[]"  value="HOS {{$dep->section_name}}"  ><?php echo strtoupper( $dep->section_name ); ?> &nbsp;&nbsp;&nbsp;
-         
-                           
-                    @endforeach
-
 
                 </div>
     
-
-    
-    	    
-    	
-   
-
-
-
-
-
-	 
-
 
 
 </div>
@@ -256,23 +254,64 @@ User Registration
 
 
 
+    <script type="text/javascript">
+
+        $("#divmanual").hide();
+        $("input:checkbox").on('click', function () {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+    </script>
+
 
   <script type="text/javascript">
+    	
 
-	function switchVisible() {
-            if (document.getElementById('Div1')) {
-
-                if (document.getElementById('Div1').style.display == 'none') {
-                    document.getElementById('Div1').style.display = 'block';
-                    document.getElementById('Div2').style.display = 'none';
-                }
-                else {
-                    document.getElementById('Div1').style.display = 'none';
-                    document.getElementById('Div2').style.display = 'block';
-                }
+ $("#divmanual").hide();
+ $(function () {
+        $("#checkdiv").click(function () {
+            if ($(this).is(":checked")) {
+				$("#type").removeAttr('required'); 
+				$("#zone").removeAttr('required'); 
+				
+				
+				
+				$("#manual").attr('required', '');
+			
+				
+                $("#divmanual").show();
+				$("#locationdiv").hide();
+            } else {
+				$("#type").attr('required', '');
+				$("#zone").attr('required', '');
+			
+				
+				$("#manual").removeAttr('required');
+                $("#divmanual").hide();
+				$("#locationdiv").show();
             }
-}
-  </script>
+        });
+    });
+
+	
+     function ShowwHideDiv(checkdiv) {
+        var dvPassport = document.getElementById("locationdiv");
+        locationdiv.style.display = checkdiv.checked ? "block" : "none";
+    }
+
+
+    </script>
 
 
 

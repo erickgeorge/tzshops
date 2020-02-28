@@ -297,7 +297,13 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
             'notifications' => $notifications,
 			'staff' => $staff,
-            'role' => $role, 'wo' => WorkOrder::where('id', $id)->first()
+            'role' => $role, 'wo' => WorkOrder::where('id', $id)->first(),
+            'iowzone' => User::where('type', 'Inspector Of Works')->
+                       select(DB::raw('zone') )
+                       ->where('status', 1)
+                       ->where('zone','<>', 'NULL')
+                     ->groupBy('zone')
+                     ->get()
         ]);
     }
 

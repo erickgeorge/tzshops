@@ -559,9 +559,42 @@ var total=2;
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="/home" class="btn btn-danger">Cancel</a>
             
-                </form>
-                <!-- <a href="/workorder/procurement/?id={{$wo->id}}" class="btn btn-dark">Procurement Request</a> -->
-    
+          </form>
+
+           
+   
+
+          <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label  class="input-group-text" for="inputGroupSelect01">Zone </label>
+                </div>
+                <select style="width:405px;" required class="custom-select" id="iowzone" name="location" onchange="getinspector()">
+                    <option value="" selected>Choose... 
+                    </option>
+
+               @foreach($iowzone as $user)
+               <option value="{{ $user->id }}" >{{ $user->zone }}</option>
+               @endforeach
+
+                </select>
+            </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label  class="input-group-text" for="area">IoW 
+                    </label>
+                </div>
+                <select style="width:430px;" required class="custom-select" id="iowname" name="area" >
+                    <!-- <option selected>Choose...</option> -->
+                </select>
+            </div>
+            </div>
+        </div>
+               
+
         <br>
         <h4>Work order forms.</h4>
         {{-- tabs --}}

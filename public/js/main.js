@@ -242,6 +242,43 @@ function closeTab() {
     }
 
 
+
+
+
+var selectedzone = null;
+
+function getinspector() {
+    selectedzone = document.getElementById('iowzone').value;
+
+    $.ajax({
+        method: 'GET',
+        url: 'inspectors/',
+        data: {id: selectedzone}
+    })
+        .done(function(msg){
+            var object = JSON.parse(JSON.stringify(msg['inspectors']));
+            $('#iowname').empty();
+			
+			
+			var option = document.createElement('option');
+			option.innerHTML = 'Choose...';
+			option.value = '';
+			document.getElementById('iowname').appendChild(option);
+			
+			
+			
+			
+			
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].zone;
+                option.value = object[i].id;
+                document.getElementById('iowname').appendChild(option);
+            }
+        });
+}
+
+
     
 
 }

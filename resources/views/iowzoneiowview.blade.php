@@ -26,17 +26,15 @@ IoW Zones
             </ul>
         </div>
     @endif
-           <br>
-                <h6>List of available IoW zones</h6>
+ <br> 
+                <h5 >List of zones assigned to Inspector of Work</h5>
 
-               
-                
-        
+
             <hr class="container">
 
-            <a href="Add/iowzone" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new zone for IoW</a>
-                   <a href="{{ url('iowonlyzones')}}" style="margin-bottom: 20px; float:right;"
+            <a href="{{route('manage.IoWZones')}}" style="margin-bottom: 20px;"
+                   class="btn btn-primary">Manage zone</a>
+                   <a href="{{ url('iowwithzones')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
 
@@ -45,8 +43,9 @@ IoW Zones
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name of Zone</th>
-                       
-                        <th scope="col">Actions</th>
+                        <th>Inspector of Work</th>
+                        
+                      
                     </tr>
                     </thead>
                     <tbody>
@@ -58,28 +57,11 @@ IoW Zones
                         <tr>
                             <th scope="row">{{ $i }}</th>
                            
-                            <td><?php echo strtoupper( $iow->zonename ); ?></td>
-                            
-                            
+                            <td><?php echo strtoupper( $iow->zone ); ?></td>
+                       
+                            <td><a class="btn btn-primary" href="{{route('view.iowwithloc', [$iow->zone])}}" >view</a></td>
                              
-                            <td>
-                                 <div class="row">
-                                    <a style="color: green;"
-                                       onclick="myfunc1('{{ $iow->id }}','{{ $iow->zonename}}')"
-                                       data-toggle="modal" data-target="#editDepartment" title="Edit"><i
-                                                class="fas fa-edit"></i></a>
-                                    <p>&nbsp;</p>
-                                    <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this zone completely? \n\n {{   $iow->zonename }} \n\n')"
-                                          action="{{ route('iowzone.delete', [$iow->id]) }}">
-                                        {{csrf_field()}}
-                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                title="Delete" style="color: red;" data-toggle="tooltip"><i
-                                                    class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </div>
-                                
-                            </td>
+
                         </tr>
                     @endforeach
                     </tbody>
