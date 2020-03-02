@@ -565,30 +565,19 @@ var total=2;
    
 
           <div class="row">
-            <div class="col">
+            <div class="col-lg-5">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label  class="input-group-text" for="inputGroupSelect01">Zone </label>
+                    <label  class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
-                <select style="width:405px;" required class="custom-select" id="iowzone" name="location" onchange="getinspector()">
+                <select required class="custom-select" id="iowzone" name="location">
                     <option value="" selected>Choose... 
                     </option>
 
                @foreach($iowzone as $user)
-               <option value="{{ $user->id }}" >{{ $user->zone }}</option>
+               <option value="{{ $user->iowzone_id }}" >{{ $user->location }}</option>
                @endforeach
 
-                </select>
-            </div>
-            </div>
-            <div class="col">
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label  class="input-group-text" for="area">IoW 
-                    </label>
-                </div>
-                <select style="width:430px;" required class="custom-select" id="iowname" name="area" >
-                    <!-- <option selected>Choose...</option> -->
                 </select>
             </div>
             </div>

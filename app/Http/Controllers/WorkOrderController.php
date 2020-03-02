@@ -21,6 +21,7 @@ use App\WorkOrder;
 use App\PurchasingOrder;
 use App\Material;
 use Illuminate\Support\Facades\Mail;
+use App\iowzonelocation;
 
 
 class WorkOrderController extends Controller
@@ -283,7 +284,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         ]);
     }
 
-    public function editWOView($id)
+    public function   editWOView($id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
@@ -298,12 +299,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'notifications' => $notifications,
 			'staff' => $staff,
             'role' => $role, 'wo' => WorkOrder::where('id', $id)->first(),
-            'iowzone' => User::where('type', 'Inspector Of Works')->
-                       select(DB::raw('zone') )
-                       ->where('status', 1)
-                       ->where('zone','<>', 'NULL')
-                     ->groupBy('zone')
-                     ->get()
+            'iowzone' => iowzonelocation::orderby('location','asc')->orderby('iowzone_id','asc')->get()
         ]);
     }
 
@@ -318,7 +314,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
-
+//6
     public function editWO(Request $request, $id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
