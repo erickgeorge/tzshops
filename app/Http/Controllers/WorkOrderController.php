@@ -314,7 +314,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
-//6
+
     public function editWO(Request $request, $id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -334,6 +334,11 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $wo->needs_contractor = 1;
         } else {
             $wo->needs_contractor = 0;
+        }
+        if (isset($request['location'])) {
+            $wo->zone_location = $request['location'];
+        } else {
+            $wo->zone_location = null;
         }
         $wo->save();
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -564,6 +569,7 @@ public function transportforwork(Request $request, $id)
 			$work_order_material->hos_id = auth()->user()->id;
             $work_order_material->staff_id = auth()->user()->id;
             $work_order_material->zone = $request['zone'];
+
             $work_order_material->save();
 } 
 			

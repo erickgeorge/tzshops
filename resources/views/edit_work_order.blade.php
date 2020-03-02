@@ -13,6 +13,7 @@
     use App\WorkOrderMaterial;
     use App\User;
     use App\iowzone;
+    use App\iowzonelocation;
  
 
  ?>
@@ -394,30 +395,39 @@ var total=2;
   <tr>
      
     <th>Material Name</th>
-    <th>Material Description</th>
+   
   <th>Type</th>
    <th>Quantity</th>
    <th>IoW</th>
+   <th>Approved By</th>
     <th>Status</th>
      <th>Date Requested</th>
-      
+      <th>Date Updated</th>
   
   </tr>
     @foreach($matforms as $matform)
   <tr>
     
     <td>{{$matform['material']->name }}</td>
-   <td>{{$matform['material']->description }}</td>
+ 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
    <td>{{$matform['iowzone']->name }}</td>
+       <td>
+       @if($matform->accepted_by == NULL)
+      <span class="badge badge-warning">Not accepted Yet.</span> 
+       @else
+       {{ $matform['acceptedby']->name }}
+       @endif
+       </td>
    <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
       
   <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
-                            <td>
-   
+                          
+    <td><?php $time = strtotime($matform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+                            
    
   </tr>
   
@@ -449,9 +459,11 @@ var total=2;
   <tr>
      
     <th>Material Name</th>
-    <th>Material Description</th>
+   
   <th>Type</th>
    <th>Quantity</th>
+   <th>IoW</th>
+   <th>Approved By</th>
     <th>Status</th>
      <th>Date Requested</th>
       <th>Date Updated</th>
@@ -461,14 +473,25 @@ var total=2;
   <tr>
     
     <td>{{$matform['material']->name }}</td>
-   <td>{{$matform['material']->description }}</td>
+ 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> MATERIAL WAITING FOR APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">MATERIAL APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">MATERIAL RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">MATERIAL REQUESTED </span> @elseif($matform->status==17) <span class="badge badge-warning">MATERIAL ON CHECK BY IOW </span>  @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status == -1)<span class="badge badge-warning">MATERIAL ON CHECK BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+   <td>{{$matform['iowzone']->name }}</td>
+       <td>
+       @if($matform->accepted_by == NULL)
+      <span class="badge badge-warning">Not accepted Yet.</span> 
+       @else
+       {{ $matform['acceptedby']->name }}
+       @endif
+       </td>
+   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
       
-   <td>{{$matform->created_at }}</td>
-   <td>{{$matform->updated_at }}</td>
+  <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
+                          
+    <td><?php $time = strtotime($matform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+                            
    
   </tr>
   
@@ -532,6 +555,35 @@ var total=2;
      <!--   <h4>Fill the details below to complete the work order.</h4> -->
         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
+            <div class="row">
+            <div class="col-lg-5">
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label  class="input-group-text" for="inputGroupSelect01">Zone Location</label>
+                </div>
+                <select required class="custom-select" id="iowzone" name="location">
+                  <?php 
+                        $zonelocation = iowzonelocation::where('id',$wo->zone_location)->first();
+                        $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
+                         ?>
+                    @if($wo->zone_location != null) 
+                       <option value="{{ $wo->zone_location }}" selected>
+                        
+                          {{ $zonelocation->location }}, {{ $zoned->zonename }}
+                        </option>
+                    @else
+                    <option value="" selected>Choose... </option>
+                    @endif
+
+               @foreach($iowzone as $user)
+               <option value="{{ $user->id }}" >{{ $user->location }}</option>
+               @endforeach
+
+                </select>
+            </div>
+            </div>
+        </div>
+        <br>
             <div class="form-group ">
                 {{--<p>Is this work order emergency?</p>--}}
                 @if($wo->emergency == 1)
@@ -564,24 +616,7 @@ var total=2;
            
    
 
-          <div class="row">
-            <div class="col-lg-5">
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label  class="input-group-text" for="inputGroupSelect01">Zone Location</label>
-                </div>
-                <select required class="custom-select" id="iowzone" name="location">
-                    <option value="" selected>Choose... 
-                    </option>
-
-               @foreach($iowzone as $user)
-               <option value="{{ $user->iowzone_id }}" >{{ $user->location }}</option>
-               @endforeach
-
-                </select>
-            </div>
-            </div>
-        </div>
+          
                
 
         <br>
@@ -988,22 +1023,9 @@ var total=2;
 
                         </div>
                        <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-           
-
-            <div>
-                        <label for="dep_name">Section Zone </label>
-                        <br>
-                       
-                        <select required style="width: 500px;"  name="zone" id="zone">
-                       <option selected value="">  </option>
-      
-              @foreach($IoWzone as $user)
-               <option value="{{ $user->id }}" >NAME:&nbsp;  <?php echo strtoupper( $user->name ); ?>&nbsp; &nbsp; &nbsp; ZONE:&nbsp; <?php echo strtoupper( $user->zone ); ?></option>
-               
-               @endforeach
-                   
-                        </select>
-            </div>
+        
+<input type="text" name="zone" value="{{ $zoned->iow }}" hidden>
+            
              <br>
              <br>
 
@@ -1041,7 +1063,7 @@ var total=2;
  
                       
                          @if(COUNT($wo_materials)!=0)
-       <div>Inspector of Work:&nbsp; <mark>{{$matform['iowzone']->name }}</mark> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Zone: &nbsp;<mark>{{$matform['iowzone']->zone }}</mark></div>  
+       
         <br> 
                         <table class="table table-striped" style="width:100%">
   <tr>
