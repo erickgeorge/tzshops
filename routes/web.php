@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,9 +38,9 @@ Route::get('/stores', 'HomeController@storesView')->name('store');
 Route::get('/storeshos', 'HomeController@storeshosView');
 
 
-Route::get('/work_order', 'HomeController@WorkorderView')->name('work_order');  
+Route::get('/work_order', 'HomeController@WorkorderView')->name('work_order');
 
-Route::get('/redirected_work_order', 'HomeController@Workorderredirectedview');  
+Route::get('/redirected_work_order', 'HomeController@Workorderredirectedview');
 
 Route::get('/viewusers', 'HomeController@usersView')->name('users.view');
 
@@ -108,7 +109,7 @@ Route::post('savesign','UserController@savesign')->name('savesign');
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder');
 
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -388,11 +389,20 @@ Route::get('allpdf','NotesController@allpdf')->name('allpdf');
  Route::get('techniciancompleteworkpdf','NotesController@techniciancompleteworkpdf');
  Route::get('hosCountpdf','NotesController@hosCountpdf');
  Route::get('unattendedwopdf','NotesController@unattendedwopdf');
- Route::get('completewopdf','NotesController@completewopdf'); 
+ Route::get('completewopdf','NotesController@completewopdf');
  Route::get('work_order_material_purchased/grnpdf/{id}','NotesController@grnotepdf');
  Route::get('received/materials/from_store/issuenotepdf/{id}','NotesController@issuenotepdf');
 
+// iow myzone ////////
+Route::get('newworkorders','WorkOrderController@newworkorders')->name('newworkorders');
+Route::get('acceptedworkorders','WorkOrderController@acceptedworkorders')->name('acceptedworkorders');
+Route::get('onprocessworkorders','WorkOrderController@onprocessworkorders')->name('onprocessworkorders');
+Route::get('closedworkorders','WorkOrderController@closedworkorders')->name('closedworkorders');
+Route::get('completedworkorders','WorkOrderController@completedworkorders')->name('completedworkorders');
+Route::get('rejectedworkorders','WorkOrderController@rejectedworkorders')->name('rejectedworkorders');
 
+
+// end here ///////////
 Route::get('wo_transport_request_accepted', 'HomeController@woTransportAcceptedView')->name('woTransportAccepted');
 
 Route::get('wo_transport_request_rejected', 'HomeController@woTransportRejectedView')->name('woTransportRejected');
@@ -431,8 +441,8 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
  Route::get('pdf', 'NotesController@pdf');
 
  Route::get('userpdf', 'NotesController@userspdf');
- Route::get('materialpdf', 'NotesController@storespdf'); 
- Route::get('unatendedwopdf', 'NotesController@unatendedpdf');               
+ Route::get('materialpdf', 'NotesController@storespdf');
+ Route::get('unatendedwopdf', 'NotesController@unatendedpdf');
 
 
  Route::get('sms', 'SmsController@sendSms');
@@ -446,7 +456,7 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
  Route::get('manage_Cleaning_area', 'AssetsController@Cleaningarea')->name('register.cleaningareas');
  Route::get('manage_Cleaning_zone', 'AssetsController@cleaningzone')->name('register.cleanningzone');
 
- 
+
 Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save');
 Route::post('CompanyRegistration', 'AssetsController@Registercompany')->name('company.save');
 Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete');
@@ -595,7 +605,7 @@ Route::get('excelinsertusers','ImportExcelController@excelinsertusers')->name('e
 Route::post('workorder/create/landscaping', 'LandscapingController@createlandwork')->name('wo.create.landscaping');
 
 Route::get('/createlandworkorders', 'LandscapingController@createlandwo');
-Route::get('/Land/work_order', 'LandscapingController@landworkorderview'); 
+Route::get('/Land/work_order', 'LandscapingController@landworkorderview');
 Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwoland')->name('workOrder.track.landscaping');
 Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc');
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');

@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
 @section('title')
-    My Zone
+    Accepted Work Orders
     @endSection
-
-    <?php
+<?php
 	use App\iowzonelocation;
 	use App\WorkOrder;
  ?>
@@ -14,10 +13,10 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>All Work orders list </b></h3>
+            <h3 style="padding-left: 90px;"><b>Accepted Work orders list </b></h3>
         </div>
 @if(count($locations) > 0)
-     <!--   <div class="col-md-6">
+      <!--  <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -126,7 +125,7 @@ use Carbon\Carbon;
             <select name="problem_type" class="form-control mr-sm-2">
                 <option value="" selected="selected">Select Problem Type</option>
                 <?php
-                  $prob = WorkOrder::select('problem_type')->distinct()->get();
+                  $prob = WorkOrder::select('problem_type')->distinct()->where('status',1)->get();
                   foreach ($prob as $problem) {
                     echo "<option value='".$problem->problem_type."'>".$problem->problem_type."</option>";
                   }
@@ -141,7 +140,7 @@ use Carbon\Carbon;
           <select name="location" class="form-control mr-sm-2">
                 <option value="" selected="selected">Select Location</option>
                 <?php
-                  $loca = WorkOrder::select('location')->Where('location','<>',null)->distinct()->get();
+                  $loca = WorkOrder::select('location')->distinct()->Where('location','<>',null)->where('status',1)->get();
                   foreach ($loca as $location) {
                     echo "<option value='".$location->location."'>".$location->location."</option>";
                   }
@@ -165,7 +164,7 @@ use Carbon\Carbon;
   <?php
 //
 
-  $userwithid = WorkOrder::select('client_id')->distinct()->get();
+  $userwithid = WorkOrder::select('client_id')->distinct()->where('status',1)->get();
 foreach($userwithid as $userwithid)
 {
 
@@ -200,14 +199,13 @@ foreach($userwithid as $userwithid)
       <div class="row">
           <div class="col">
               <select name="status" class="form-control mr-sm-2">
-                <option value='' selected="selected">Select status</option>
-    <?php $statusago = WorkOrder::select('status')->distinct()->get();
+    <?php $statusago = WorkOrder::select('status')->distinct()->where('status',1)->get();
     foreach ($statusago as $statusname) {
 
      if($statusname->status == -1)
       { echo "<option value='".$statusname->status."'>New</option>";}
      elseif($statusname->status == 1)
-      {echo "<option value='".$statusname->status."'>Accepted</option>";}
+      {echo "<option selected='selected' value='".$statusname->status."'>Accepted</option>";}
      elseif($statusname->status == 0)
       {echo"<option value='".$statusname->status."'>Rejected</option>";}
      elseif($statusname->status == 2)
@@ -245,51 +243,53 @@ foreach($userwithid as $userwithid)
 
     </div>
     <div class="bs-example">
-        <div class=" row nav nav-tabs text-center">
-            <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}"><b>All <b class="badge badge-light"></b></b></a>
-            <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}"><b>Accepted <b class="badge badge-light"></b></b></a>
-             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}"><b>On-process <b class="badge badge-light"></b></b></a>
-             <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}"><b>Closed <b class="badge badge-light"></b></b></a>
-             <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}"><b>Completed <b class="badge badge-light"></b></b></a>
-        </div>
+    <div class=" row nav nav-tabs text-center">
+    	<a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}"><b>All <b class="badge badge-light"></b></b></a>
+	    <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}"><b>Accepted <b class="badge badge-light"></b></b></a>
+	     <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}"><b>On-process <b class="badge badge-light"></b></b></a>
+	     <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}"><b>Closed <b class="badge badge-light"></b></b></a>
+	     <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}"><b>Completed <b class="badge badge-light"></b></b></a>
+    </div>
     <br>
-    <form method="get" enctype="multipart/form-data" action="">
-    <div class="row">
-        <div class="col-lg-3"></div>
 
-        <div class="col-lg-4">
-            <div class="input-group ">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" >Location </label>
+    <form method="get" enctype="multipart/form-data" action="">
+        <div class="row">
+            <div class="col-lg-3"></div>
+
+            <div class="col-lg-4">
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" >Location </label>
+                    </div>
+                    <select name="location" class="form-control mr-sm-2" required>
+                        <option selected value="All">All locations</option>
+                        @foreach ($locations as $local)
+                    <option value="{{ $local->id }}">{{$local->location}}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <select name="location" class="form-control mr-sm-2" required>
-                    <option selected value="All">All locations</option>
-                    @foreach ($locations as $local)
-                <option value="{{ $local->id }}">{{$local->location}}</option>
+            </div>
+           <div class="col">
+                <select name="year" class="form-control mr-sm-2" required>
+                    <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
+                    @foreach($locations as $loca)
+                        <?php $worklocationa = Workorder::select('created_at')->distinct()->where('zone_location',$loca->id)->get(); ?>
+                        @foreach ($worklocationa as $year)
+                        <?php $time = strtotime($year->created_at); ?>
+                            @if( date('Y',$time) != date('Y'))
+                                <option value="">{{ date('Y',$time) }}</option>
+                            @endif
+                        @endforeach
+
                     @endforeach
                 </select>
             </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
         </div>
-       <div class="col">
-            <select name="year" class="form-control mr-sm-2" required>
-                <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
-                @foreach($locations as $loca)
-                    <?php $worklocationa = Workorder::select('created_at')->distinct()->where('zone_location',$loca->id)->get(); ?>
-                    @foreach ($worklocationa as $year)
-                    <?php $time = strtotime($year->created_at); ?>
-                    	@if( date('Y',$time) != date('Y'))
-                        	<option value="">{{ date('Y',$time) }}</option>
-                        @endif
-                    @endforeach
-
-                @endforeach
-            </select>
-        </div>
-        <div class="col">
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </div>
-</form>
+    </form>
+        <br/>
     <br/>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
@@ -321,25 +321,24 @@ foreach($userwithid as $userwithid)
 
                  ?>
                  @foreach($locations as $locations)
-
-                  @if(isset($_GET['location']) && isset($_GET['year']))
-                  	@if($_GET['location']=='All')
+                 
+                   @if(isset($_GET['location']) && isset($_GET['year']))
+                    @if($_GET['location']=='All')
                 
                 <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->get(); ?>
 
-                  	@else
+                    @else
 
                 <?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->get(); ?>
-                	@endif
+                  @endif
 
                 @else
                     <?php $workorders = Workorder::where('zone_location',$locations->id)->get(); ?>
                 @endif
 
-                 
                 @foreach($workorders as $work)
 
-                    @if($work->status !== 0)
+                    @if(($work->status !== 0)&&($work->status == 1))
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>

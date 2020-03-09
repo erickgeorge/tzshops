@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
 @section('title')
-    My Zone
+    Closed Work Orders
     @endSection
-
-    <?php
+<?php
 	use App\iowzonelocation;
 	use App\WorkOrder;
  ?>
@@ -14,10 +13,10 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>All Work orders list </b></h3>
+            <h3 style="padding-left: 90px;"><b>Closed Work orders list </b></h3>
         </div>
 @if(count($locations) > 0)
-     <!--   <div class="col-md-6">
+      <!--  <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -126,7 +125,7 @@ use Carbon\Carbon;
             <select name="problem_type" class="form-control mr-sm-2">
                 <option value="" selected="selected">Select Problem Type</option>
                 <?php
-                  $prob = WorkOrder::select('problem_type')->distinct()->get();
+                  $prob = WorkOrder::select('problem_type')->distinct()->where('status',2)->orWhere('status',30)->get();
                   foreach ($prob as $problem) {
                     echo "<option value='".$problem->problem_type."'>".$problem->problem_type."</option>";
                   }
@@ -141,7 +140,7 @@ use Carbon\Carbon;
           <select name="location" class="form-control mr-sm-2">
                 <option value="" selected="selected">Select Location</option>
                 <?php
-                  $loca = WorkOrder::select('location')->Where('location','<>',null)->distinct()->get();
+                  $loca = WorkOrder::select('location')->Where('location','<>',null)->distinct()->where('status',2)->orWhere('status',30)->get();
                   foreach ($loca as $location) {
                     echo "<option value='".$location->location."'>".$location->location."</option>";
                   }
@@ -165,7 +164,7 @@ use Carbon\Carbon;
   <?php
 //
 
-  $userwithid = WorkOrder::select('client_id')->distinct()->get();
+  $userwithid = WorkOrder::select('client_id')->distinct()->where('status',2)->orWhere('status',30)->get();
 foreach($userwithid as $userwithid)
 {
 
@@ -201,7 +200,7 @@ foreach($userwithid as $userwithid)
           <div class="col">
               <select name="status" class="form-control mr-sm-2">
                 <option value='' selected="selected">Select status</option>
-    <?php $statusago = WorkOrder::select('status')->distinct()->get();
+    <?php $statusago = WorkOrder::select('status')->distinct()->where('status',2)->orWhere('status',30)->get();
     foreach ($statusago as $statusname) {
 
      if($statusname->status == -1)
@@ -254,43 +253,45 @@ foreach($userwithid as $userwithid)
         </div>
     <br>
     <form method="get" enctype="multipart/form-data" action="">
-    <div class="row">
-        <div class="col-lg-3"></div>
+        <div class="row">
+            <div class="col-lg-3"></div>
 
-        <div class="col-lg-4">
-            <div class="input-group ">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" >Location </label>
+            <div class="col-lg-4">
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" >Location </label>
+                    </div>
+                    <select name="location" class="form-control mr-sm-2" required>
+                        <option selected value="All">All locations</option>
+                        @foreach ($locations as $local)
+                    <option value="{{ $local->id }}">{{$local->location}}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <select name="location" class="form-control mr-sm-2" required>
-                    <option selected value="All">All locations</option>
-                    @foreach ($locations as $local)
-                <option value="{{ $local->id }}">{{$local->location}}</option>
+            </div>
+           <div class="col">
+                <select name="year" class="form-control mr-sm-2" required>
+                    <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
+                    @foreach($locations as $loca)
+                        <?php $worklocationa = Workorder::select('created_at')->distinct()->where('zone_location',$loca->id)->get(); ?>
+                        @foreach ($worklocationa as $year)
+                        <?php $time = strtotime($year->created_at); ?>
+                            @if( date('Y',$time) != date('Y'))
+                                <option value="">{{ date('Y',$time) }}</option>
+                            @endif
+                        @endforeach
+
                     @endforeach
                 </select>
             </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
         </div>
-       <div class="col">
-            <select name="year" class="form-control mr-sm-2" required>
-                <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
-                @foreach($locations as $loca)
-                    <?php $worklocationa = Workorder::select('created_at')->distinct()->where('zone_location',$loca->id)->get(); ?>
-                    @foreach ($worklocationa as $year)
-                    <?php $time = strtotime($year->created_at); ?>
-                    	@if( date('Y',$time) != date('Y'))
-                        	<option value="">{{ date('Y',$time) }}</option>
-                        @endif
-                    @endforeach
-
-                @endforeach
-            </select>
-        </div>
-        <div class="col">
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </div>
-</form>
+    </form>
+        <br/>
     <br/>
+
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
             @if(count($locations) > 0)
@@ -321,25 +322,24 @@ foreach($userwithid as $userwithid)
 
                  ?>
                  @foreach($locations as $locations)
-
-                  @if(isset($_GET['location']) && isset($_GET['year']))
-                  	@if($_GET['location']=='All')
+                 
+                   @if(isset($_GET['location']) && isset($_GET['year']))
+                    @if($_GET['location']=='All')
                 
                 <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->get(); ?>
 
-                  	@else
+                    @else
 
                 <?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->get(); ?>
-                	@endif
+                  @endif
 
                 @else
                     <?php $workorders = Workorder::where('zone_location',$locations->id)->get(); ?>
                 @endif
 
-                 
                 @foreach($workorders as $work)
 
-                    @if($work->status !== 0)
+                    @if(($work->status !== 0)&&(($work->status == 9)||($work->status == 2)))
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
