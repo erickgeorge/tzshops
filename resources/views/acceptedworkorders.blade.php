@@ -12,7 +12,7 @@
 @if(auth()->user()->type == 'Maintenance coordinator')
 <?php  $locations = iowzonelocation::where('iowzone_id',$_GET['zone'])->get(); ?>
 @else
-<?php  $locations = iowzonelocation::where('iowzone_id',$workszon['id'])->get(); ?>
+<?php  $locations = iowzonelocation::where('iowzone_id',$workszon['zone'])->get(); ?>
 @endif
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">

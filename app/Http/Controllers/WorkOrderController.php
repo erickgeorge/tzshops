@@ -23,6 +23,7 @@ use App\Material;
 use Illuminate\Support\Facades\Mail;
 use App\iowzonelocation;
 use App\iowzone;
+use App\zoneinspector;
 
 
 class WorkOrderController extends Controller
@@ -1220,10 +1221,10 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     if(auth()->user()->type == 'Maintenance coordinator')
         {
-            $inspectorzone = iowzone::get();
+            $inspectorzone = zoneinspector::get();
         }
     else{
-        $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+        $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
         
 
@@ -1240,10 +1241,10 @@ session::flash('message', ' Your workorder have been closed successfully');
 
        if(auth()->user()->type == 'Maintenance coordinator')
         {
-            $inspectorzone = iowzone::get();
+            $inspectorzone = zoneinspector::get();
         }
     else{
-        $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+        $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
 
 
@@ -1258,10 +1259,10 @@ session::flash('message', ' Your workorder have been closed successfully');
 
       if(auth()->user()->type == 'Maintenance coordinator')
         {
-            $inspectorzone = iowzone::get();
+            $inspectorzone = zoneinspector::get();
         }
     else{
-        $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+        $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
 
 
@@ -1276,10 +1277,10 @@ session::flash('message', ' Your workorder have been closed successfully');
 
        if(auth()->user()->type == 'Maintenance coordinator')
         {
-            $inspectorzone = iowzone::get();
+            $inspectorzone = zoneinspector::get();
         }
     else{
-        $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+        $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
 
 
@@ -1294,10 +1295,10 @@ session::flash('message', ' Your workorder have been closed successfully');
 
        if(auth()->user()->type == 'Maintenance coordinator')
         {
-            $inspectorzone = iowzone::get();
+            $inspectorzone = zoneinspector::get();
         }
     else{
-        $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+        $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
 
 

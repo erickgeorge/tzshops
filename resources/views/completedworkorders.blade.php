@@ -12,7 +12,7 @@
 @if(auth()->user()->type == 'Maintenance coordinator')
 <?php  $locations = iowzonelocation::where('iowzone_id',$_GET['zone'])->get(); ?>
 @else
-<?php  $locations = iowzonelocation::where('iowzone_id',$workszon['id'])->get(); ?>
+<?php  $locations = iowzonelocation::where('iowzone_id',$workszon['zone'])->get(); ?>
 @endif
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
@@ -21,25 +21,7 @@
 @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h3>
         </div>
-@if(count($locations) > 0)
-    <!--    <div class="col-md-6">
-            <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
-                From <input name="start" value="<?php
-                if (request()->has('start')) {
-                    echo $_GET['start'];
-                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php echo date('Y-m-d'); ?>">
-                To <input value="<?php
-                if (request()->has('end')) {
-                    echo $_GET['end'];
-                } ?>"
-                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
-            </form>
-        </div> -->
-
-@endif
+ 
 
     </div>
     <br>

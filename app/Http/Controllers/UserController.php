@@ -16,6 +16,8 @@ use App\workordersection;
 use App\Section;
 use App\Complaint;
 use App\WorkOrder;
+use App\zoneinspector;
+use App\iowzone;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -75,6 +77,15 @@ class UserController extends Controller
         $role->user_id = $user->id;
         $role->role_id = $request['role'];
         $role->save();
+
+        if ($request['checkdiv'] == 'yesmanual') {
+
+            $zonename = iowzone::where('zonename',$request['zone'])->first();
+            $zoneinspector = new zoneinspector();
+            $zoneinspector->zone =  $zonename['id'];
+            $zoneinspector->inspector = $user->id;
+            $zoneinspector->save();
+        }
 
         $users = User::get();
         $departments = Department::where('directorate_id', 1)->get();
