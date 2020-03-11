@@ -1218,30 +1218,33 @@ session::flash('message', ' Your workorder have been closed successfully');
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
+    if(auth()->user()->type == 'Maintenance coordinator')
+        {
+            $inspectorzone = iowzone::get();
+        }
+    else{
         $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+    }
+        
 
 
        return view('zonesiow', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
     }
 
-    public function newworkorders()
-    {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-
-        $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
-
-
-       return view('newworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
-
-    }
+    
 
     public function acceptedworkorders()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
+       if(auth()->user()->type == 'Maintenance coordinator')
+        {
+            $inspectorzone = iowzone::get();
+        }
+    else{
         $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+    }
 
 
        return view('acceptedworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
@@ -1253,7 +1256,13 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
+      if(auth()->user()->type == 'Maintenance coordinator')
+        {
+            $inspectorzone = iowzone::get();
+        }
+    else{
         $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+    }
 
 
        return view('onprocessworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
@@ -1265,7 +1274,13 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
+       if(auth()->user()->type == 'Maintenance coordinator')
+        {
+            $inspectorzone = iowzone::get();
+        }
+    else{
         $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+    }
 
 
        return view('closedworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
@@ -1277,22 +1292,26 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
+       if(auth()->user()->type == 'Maintenance coordinator')
+        {
+            $inspectorzone = iowzone::get();
+        }
+    else{
         $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
+    }
 
 
        return view('completedworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
 
     }
 
-    public function rejectedworkorders()
+    
+
+    public function workzones()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-
-        $inspectorzone = iowzone::where('iow',auth()->user()->id)->first();
-
-
-       return view('rejectedworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
-
+        $inspectorzone = iowzone::orderBy('zonename','ASC')->get();
+        return view('workzones', [ 'role' => $role, 'notifications' => $notifications, 'workszones' => $inspectorzone]);
     }
 }

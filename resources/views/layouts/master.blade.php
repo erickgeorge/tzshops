@@ -525,7 +525,7 @@
 
    <a  href="{{ url('comp') }}" ><h6>Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i></h6></a>
    <a  href="{{ url('technicians') }}"><h6>Technicians</h6></a>
-
+   <a  href="{{ url('workzones')}}"><h6>Zones</h6></a>
 
     <button  class="dropdown-btn"><h6>Material Requests Update
     <i class="fa fa-caret-down"></i></h6>

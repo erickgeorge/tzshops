@@ -401,7 +401,7 @@ Route::get('closedworkorders','WorkOrderController@closedworkorders')->name('clo
 Route::get('completedworkorders','WorkOrderController@completedworkorders')->name('completedworkorders');
 Route::get('rejectedworkorders','WorkOrderController@rejectedworkorders')->name('rejectedworkorders');
 
-
+Route::get('workzones','WorkOrderController@workzones')->name('workzones');
 // end here ///////////
 Route::get('wo_transport_request_accepted', 'HomeController@woTransportAcceptedView')->name('woTransportAccepted');
 

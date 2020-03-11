@@ -6,14 +6,20 @@
 <?php
 	use App\iowzonelocation;
 	use App\WorkOrder;
+   use App\iowzone;
  ?>
 @section('body')
+@if(auth()->user()->type == 'Maintenance coordinator')
+<?php  $locations = iowzonelocation::where('iowzone_id',$_GET['zone'])->get(); ?>
+@else
 <?php  $locations = iowzonelocation::where('iowzone_id',$workszon['id'])->get(); ?>
-
+@endif
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>Completed Work orders list </b></h3>
+            <h3 style="padding-left: 50px;"><b>Completed Work orders list - 
+@if(auth()->user()->type == 'Maintenance coordinator')
+<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h3>
         </div>
 @if(count($locations) > 0)
     <!--    <div class="col-md-6">
@@ -246,11 +252,11 @@ foreach($userwithid as $userwithid)
     </div>
     <div class="bs-example">
         <div class=" row nav nav-tabs text-center">
-            <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}"><b>All <b class="badge badge-light"></b></b></a>
-            <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}"><b>Accepted <b class="badge badge-light"></b></b></a>
-             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}"><b>On-process <b class="badge badge-light"></b></b></a>
-             <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}"><b>Closed <b class="badge badge-light"></b></b></a>
-             <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}"><b>Completed <b class="badge badge-light"></b></b></a>
+            <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All <b class="badge badge-light"></b></b></a>
+            <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Accepted <b class="badge badge-light"></b></b></a>
+             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On-process <b class="badge badge-light"></b></b></a>
+             <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Closed <b class="badge badge-light"></b></b></a>
+             <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed <b class="badge badge-light"></b></b></a>
         </div>
     <br>
     <form method="get" enctype="multipart/form-data" action="">
