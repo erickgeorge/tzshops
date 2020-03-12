@@ -36,15 +36,15 @@ IoW Zones
 
             <hr class="container">
 
-            <a href="{{ route('add.iowzone.location',[$userid->id])}}" style="margin-bottom: 20px;"
+            <a href="{{ route('add.iowzone.location',[$userid->id , $userzone->zone])}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new Location</a>
  
                    <a href="{{ url('iowwithlocation',[$userid->id])}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
                 <table id="myTablee" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                   <tr style="color: white;">
                         <th scope="col">#</th> 
                         <th scope="col">Location</th>
                         <!--<th scope="col">Inspector of Work</th>-->
@@ -120,7 +120,7 @@ IoW Zones
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
-                        <a href="{{route('view.location', [$userid->id])}}" class="btn btn-danger">Cancel
+                        <a href="{{route('view.location', [$userid->id , $userzone->zone])}}" class="btn btn-danger">Cancel
                     </a>
 
                     </div>
@@ -135,7 +135,7 @@ IoW Zones
 
     @else
     <h6>No Location available You can add new Location below...</h6>
-       <a href="{{ route('add.iowzone.location',[$userid->id])}}" style="margin-bottom: 20px;"
+       <a href="{{ route('add.iowzone.location',[$userid->id , $userzone->zone ])}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new Location</a> 
     @endif
 

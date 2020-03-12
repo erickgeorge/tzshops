@@ -42,8 +42,8 @@ Workorder Section
 
 
                 <table id="myTablee" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                    <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name of Section</th>
                        

@@ -57,7 +57,7 @@ class DirectorateController extends Controller
     }
 
 
-     public function IoWZonesviewlocation($id){
+     public function IoWZonesviewlocation($id, $zone){
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -66,6 +66,7 @@ class DirectorateController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'userid' =>  User::where('id', $id)->first(),
+            'userzone' =>  User::where('zone', $zone)->first(),
             'iowzone' => iowzonelocation::where('iow_id', $id)->OrderBy('location', 'ASC')->get()
         ]);
     }
@@ -266,15 +267,15 @@ class DirectorateController extends Controller
      }
 
 
-        public function addiowzonelocationView($id){
+        public function addiowzonelocationView($id , $zone){
           $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('add_iowzone_location', [
             'role' => $role,
-            'notifications' => $notifications,
-            'zoneid' =>  iowzonelocation::where('iow_id', $id)->first(),
-            'iowuser' => User::where('id' , $id)->first()
+            'notifications' => $notifications, 
+            'iowuser' => User::where('id' , $id)->first(),
+            'iowuserzone' => User::where('zone' , $zone)->first()
             
         ]);
      }
@@ -436,19 +437,20 @@ class DirectorateController extends Controller
     }
     
 
-     public function createiowzonelocation(Request $request , $id)
+     public function createiowzonelocation(Request $request , $id , $zone)
     {
         
          if (!empty(iowzonelocation::where('location',$request['location'])->first())){
             return redirect()->back()->withErrors(['message' => 'location already exist']);
         }
-         
+        $zoneid = iowzone::where('zonename',$zone)->first();
         $iowzone = new iowzonelocation();  
         $iowzone->location = $request['location' ];
         $iowzone->iow_id = $id;
+        $iowzone->iowzone_id = $zoneid['id'];
         $iowzone->save();
 
-        return redirect()->route('view.location', [$id] )->with(['message' => 'location added successfully']);
+        return redirect()->route('view.location', [$id , $zone] )->with(['message' => 'location added successfully']);
     }
 	
 
@@ -498,7 +500,7 @@ class DirectorateController extends Controller
     }
 
 
-         public function editiowzonelocation(Request $request ,$id)
+         public function editiowzonelocation(Request $request ,$id )
     {
 
           if (!empty(iowzonelocation::where('location',$request['location'])->first())){
@@ -513,7 +515,7 @@ class DirectorateController extends Controller
        
         $wsec->save();
      
-        return redirect()->route('view.location', [$id])->with(['message' => 'Zone location edited successfully']);
+        return redirect()->back()->with(['message' => 'Zone location edited successfully']);
     }
 	
 

@@ -548,18 +548,43 @@ var total=2;
 
 
 
+      
 
-
-     <!--   <h4>Fill the details below to complete the work order.</h4> -->
         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
+        
+            <div class="form-group ">
+                {{--<p>Is this work order emergency?</p>--}}
+                @if($wo->emergency == 1)
+                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This work order is emergency.</b>
+                @else
+                    <input type="checkbox" name="emergency"> <b style="color:red;">This work order is emergency.</b>
+                @endif
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save</button>
+         
+
+          </form>
+
+        <div class="row">
+            <div class="col">
+                 <div class="checkbox">
+            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+                Assign Zone Location</label>
+               </div>
+            </div>
+        </div>
+       <div id="divmanual">
+         <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
+            @csrf
             <div class="row">
-            <div class="col-lg-5">
+            <div class="container" >
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label  class="input-group-text" for="inputGroupSelect01">Zone Location</label>
+                    <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
-                <select required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
+                <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
                   @if($wo->zone_location != null) <?php
                         $zonelocation = iowzonelocation::where('id',$wo->zone_location)->first();
                         $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
@@ -582,37 +607,15 @@ var total=2;
             </div>
             </div>
         </div>
-        <br>
-            <div class="form-group ">
-                {{--<p>Is this work order emergency?</p>--}}
-                @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This work order is emergency.</b>
-                @else
-                    <input type="checkbox" name="emergency"> <b style="color:red;">This work order is emergency.</b>
-                @endif
-            </div>
-            <!--<div class="form-group ">
-                {{--<p>Does this work order needs labourer?</p>--}}
-                @if($wo->needs_laboured == 1)
-                    <input type="checkbox" name="labour" checked> This work order needs labourer.
-                @else
-                    <input type="checkbox" name="labour"> This work order needs labourer.
-                @endif
-            </div>
-            <div class="form-group ">
-                {{--<p>Does this work order needs contractor?</p>--}}
-                @if($wo->needs_contractor == 1)
-                    <input type="checkbox" name="contractor" checked> This work order needs contractor.
-                @else
-                    <input type="checkbox" name="contractor"> This work order needs contractor.
-                @endif
-            </div>-->
+     
             <button type="submit" class="btn btn-primary">Save</button>
-            <a href="/home" class="btn btn-danger">Cancel</a>
+           
 
           </form>
 
 
+       </div>
+        
 
 
 
@@ -1468,6 +1471,27 @@ document.getElementById("totalmaterials").value=total;
             document.getElementById("details").innerHTML = x;
   }
 </script>
+
+
+ <script type="text/javascript">
+
+        $("#divmanual").hide();
+        $("input:checkbox").on('click', function () {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+    </script>
 
 
 

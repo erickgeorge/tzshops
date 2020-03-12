@@ -12,7 +12,7 @@
 
 <div class="container">
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center"><b>Materials needed for Work order </b></h3>
         </div>
@@ -188,7 +188,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Please provide reason as to why you want to reject this material requested by Head of Section.</p>
-                   <form method="POST" action="reject/Material/{{ $item->work_order_id }}" class="col-md-6">
+                   <form method="POST"   action="{{ route('material_onebyone',[$item->work_order_id ])}}" class="col-md-6">
                         @csrf
 
 
@@ -240,7 +240,7 @@
 
 <div class="container">
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center"><b>Materials needed for Work order </b></h3>
         </div>
@@ -264,8 +264,8 @@
    
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
-            <thead class="thead-dark">
-            <tr>
+            <thead >
+           <tr style="color: white;">
                 <th >#</th>
               
                 <th >Material Name</th>

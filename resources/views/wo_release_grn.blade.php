@@ -31,9 +31,8 @@
    
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
-            <thead class="thead-dark">
-            <tr>
-                
+            <thead >
+           <tr style="color: white;">
 				
                 
 				<th >Work-Order ID </th>

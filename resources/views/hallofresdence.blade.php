@@ -31,8 +31,8 @@
                    <br><br>
 
                 <table id="myTablee" id="myTable" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                   <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Hall Name</th>
                         <th scope="col">Campus</th>

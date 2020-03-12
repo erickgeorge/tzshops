@@ -74,8 +74,8 @@
      <div class="container">
         @if(count($procured) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead >
+              <tr style="color: white;">
                     <th>#</th>
           			<th>Date</th>
                     <th>Total Entries</th>

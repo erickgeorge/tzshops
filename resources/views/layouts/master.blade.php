@@ -42,7 +42,7 @@
     </style>
 
 <div>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom: #fff 2px solid;">
+     <nav class="navbar fixed-top navbar-expand-lg "  style="border-bottom: #ebe9e6 8px solid; background-color: #376ad3;">
 
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -254,7 +254,7 @@
            aria-haspopup="true" aria-expanded="false">
           Settings
         </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
@@ -280,7 +280,7 @@
            aria-haspopup="true" aria-expanded="false">
           Settings
         </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
@@ -359,14 +359,14 @@
            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
           {{ Auth::user()->name }}
         </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;" >
            <!--SETTING AND CHANGE PASSWORD
           <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
 
                <a class="dropdown-item" style="color:white" href="{{ url('myprofile')}}">My Profile</a>
-          <a class="dropdown-item" href="{{ url('password')}}">Change Password</a>
+          <a class="dropdown-item" style="color:white"  href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{ route('logout') }}"
+          <a class="dropdown-item" style="color:white"  href="{{ route('logout') }}"
              onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -391,6 +391,7 @@
     <div style="padding-top:78px;">
 
 
+
 <style>
 
 
@@ -402,9 +403,10 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #c2bebe;
+  background-color: none;
   overflow-x: hidden;
   padding-top: 20px;
+  border-right: #ebe9e6 8px solid
 }
 
 /* Style the sidenav links and the dropdown button */
@@ -445,22 +447,20 @@
 
 
 
-
-
-
 }
 
 .sidenav a, .dropdown-btn, .sidenav button {
   color: #f1f1f1;
-   background: grey;
-    margin-top: 2px;
+  border: none;
+   background: #376ad3;
+    margin-top: 2px; 
 }
 
 
 /* Main content */
 .main {
   margin-left: 150px; /* Same as the width of the sidenav */
-
+ 
   padding: 0px 10px;
 }
 
@@ -468,7 +468,7 @@
 .active {
   background-color: #046475;
   color: white;
-
+  
   border: 2px solid white;
 
 
@@ -480,6 +480,11 @@
   background-color: white;
 
 
+
+}
+
+.dropdown-container a {
+  background-color: black;
 
 }
 
@@ -1033,11 +1038,13 @@ for (i = 0; i < dropdown.length; i++) {
 
 <script type="text/javascript">
 
-      $("#inspector").select2({
-            placeholder: "Choose zone for IoW...",
+      $("#iowzone").select2({
+            placeholder: "Choose zone Location...",
             allowClear: true
         });
 </script>
+
+
 
 
 

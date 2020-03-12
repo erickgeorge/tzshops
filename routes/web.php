@@ -79,6 +79,7 @@ Route::post('workorder/accept/{id}', 'WorkOrderController@acceptWO')->name('work
 Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name('workOrder.edit.view');
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
+Route::post('edit/work_order/zone/{id}', 'WorkOrderController@editWOzone')->name('workOrder.edit.zoneloc');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
 Route::get('myzone','WorkOrderController@myzone')->name('myzone');
 
@@ -130,7 +131,7 @@ Route::get('Manage/section', 'DirectorateController@workordersectionView')->name
 Route::get('Manage/IoWZones', 'DirectorateController@IoWZonesview')->name('manage.IoWZones');
 Route::get('Manage/IoWZones/with/iow', 'DirectorateController@IoWZoneswithiowview')->name('manage.IoWZones.iow');
 
-Route::get('Manage/IoWZones/location/{id}', 'DirectorateController@IoWZonesviewlocation')->name('view.location');
+Route::get('Manage/IoWZones/location/{id}/{zone}', 'DirectorateController@IoWZonesviewlocation')->name('view.location');
 
 Route::get('Manage/Inspectorofwork/{zone}', 'DirectorateController@IoWZonesviewinspector')->name('view.iowwithloc');
 
@@ -143,7 +144,7 @@ Route::get('Manage/Add/department', 'DirectorateController@adddepartmentView');
 Route::get('Manage/Add/section', 'DirectorateController@addsectionView');
 
 Route::get('Manage/Add/iowzone', 'DirectorateController@addiowzoneView');
-Route::get('Add/iowzone/location/{id}', 'DirectorateController@addiowzonelocationView')->name('add.iowzone.location');
+Route::get('Add/iowzone/location/{id}/{zone}', 'DirectorateController@addiowzonelocationView')->name('add.iowzone.location');
 
 
 
@@ -183,7 +184,7 @@ Route::post('save/department', 'DirectorateController@createDepartment')->name('
 Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save');
 
 Route::post('save/iowzone', 'DirectorateController@createiowzone')->name('iowzone.save');
-Route::post('save/iowzone/location/{id}', 'DirectorateController@createiowzonelocation')->name('iowzone.location.save');
+Route::post('save/iowzone/location/{id}/{zone}', 'DirectorateController@createiowzonelocation')->name('iowzone.location.save');
 
 
 
@@ -524,7 +525,7 @@ Route::POST('work_order_material_purchased/edit/Material/{id}', 'StoreController
 Route::POST('work_order_material_purchased/edit2/Material/{id}', 'StoreController@incrementmaterialmodal2');
 
 
-Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@materialrejectonebyone');
+Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@materialrejectonebyone')->name('material_onebyone');
 
 Route::POST('rwork_order_material_iow/reject/Material/{id}', 'StoreController@redirecttohos')->name('redirect.workorder');
 

@@ -38,11 +38,11 @@ IoW Zones
 
                
                 <table id="myTablee" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                    <tr style="color: white;">
                         <th scope="col">#</th> 
                         <th scope="col">Inspector of Work</th>
-                        <th scope="col">Location</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,7 @@ IoW Zones
                               {{ $iow->fname.' '.$iow->lname }}
                             </td>
 
-                            <td><a class="btn btn-primary" href="{{route('view.location', [$iow->id])}}" >view</a></td>
+                            <td><a class="btn btn-primary" href="{{route('view.location', [$iow->id , $iow->zone])}}" >view Location</a></td>
                         </tr>
                     @endforeach
                     </tbody>

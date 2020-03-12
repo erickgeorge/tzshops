@@ -135,8 +135,8 @@ use App\Section;
   </div>
   
 <table class="table table-striped" id="myTable">
-  <thead class="thead-dark">
-    <tr>
+  <thead >
+    <tr style="color: white;">
       <th scope="col">#</th>
       <th scope="col">Full Name</th>
       <th scope="col">Username</th>

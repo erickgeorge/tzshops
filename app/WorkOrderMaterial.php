@@ -37,7 +37,7 @@ class WorkOrderMaterial extends Model
 
 
     public function iowzone(){
-        return $this->belongsTo('App\User','zone');
+        return $this->belongsTo('App\iowzone','zone');
     }
 
 

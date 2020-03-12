@@ -1955,9 +1955,9 @@ $v5=$type[4];
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
-        $iozonename = iowzone::where('id',$iozone->zone)->first();
+        $iozonename = iowzone::where('id',$iozone['zone'])->first();
         
-        $wo_material=   WorkOrderMaterial::where('zone', $iozone->zone)->
+        $wo_material=   WorkOrderMaterial::where('zone', $iozone['zone'])->
                        select(DB::raw('work_order_id'),'hos_id' )
                      ->where('status',0)
                      ->orwhere('status', 9)
@@ -2057,7 +2057,7 @@ $v5=$type[4];
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
         
-        $wo_material=   WorkOrderMaterial::where('zone', $iozone->zone)->
+        $wo_material=   WorkOrderMaterial::where('zone', $iozone['zone'])->
                     
                      where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
                      ->get();
@@ -2080,7 +2080,7 @@ $v5=$type[4];
 
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
        
-        $wo_material=   WorkOrderMaterial::where('zone', $iozone->zone)->
+        $wo_material=   WorkOrderMaterial::where('zone', $iozone['zone'])->
                     
                      where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
                      ->get();

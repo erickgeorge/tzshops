@@ -30,8 +30,8 @@
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead >
+            <tr style="color: white;">
                     <th>#</th>
                     <th>Room</th>
                    

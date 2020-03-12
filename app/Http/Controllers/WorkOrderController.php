@@ -317,6 +317,9 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         ]);
     }
 
+
+    
+
     public function editWO(Request $request, $id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -350,6 +353,28 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
+
+
+    public function editWOzone(Request $request, $id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $wo = WorkOrder::where('id', $id)->first();
+      
+        if (isset($request['location'])) {
+            $wo->zone_location = $request['location'];
+        } else {
+            $wo->zone_location = null;
+        }
+        $wo->save();
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Zone Location saved successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+
 
     public function fillInspectionForm(Request $request, $id)
     {

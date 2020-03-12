@@ -162,8 +162,8 @@ foreach ($hoos as $hous) {
 
     @if(!$techs->isEmpty())
         <table class="table table-striped" id="myTable">
-        <thead class="thead-dark">
-        <tr>
+        <thead >
+       <tr style="color: white;">
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>

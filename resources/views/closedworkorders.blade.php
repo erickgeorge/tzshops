@@ -302,8 +302,8 @@ foreach($userwithid as $userwithid)
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
             @if(count($locations) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead>
+                <tr style="color: white;">
                     <th>#</th>
           <th>WorkOrder ID</th>
                     <th>Details</th>

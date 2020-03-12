@@ -60,8 +60,8 @@ use App\iowzonelocation;
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
             @if(count($workszones) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead >
+              <tr style="color: white;">
                     <th>#</th>
           			<th>Zone name</th>
                     <th>Total locations</th>

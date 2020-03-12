@@ -97,7 +97,7 @@ font-weight:bold;
 
 
 .dropdown-item:hover{
-	background-color: #423e3e;
+	background-color: #046475;
 }
 
 .navbar-nav > .nav-item > .nav-link:hover{
@@ -217,8 +217,8 @@ tr {
  width:12px;
 }
 
-table{
-     // Firefox Bad Effect
+thead{
+      background-color: #376ad3;
 }
 tr{
           

@@ -38,8 +38,8 @@
 
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
-            <thead class="thead-dark">
-            <tr>
+            <thead >
+          <tr style="color: white;">
                 <th >#</th>
               
                 <th >Works order ID</th>
@@ -63,7 +63,7 @@
                    
                     <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 
-                    <td>{{ $item['iowzone']->lname.' '.$item['iowzone']->fname }}</td>
+                    <td>{{ $item['iowzone']->zonename }}</td>
                     
                  
                       <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">View Material</a>&nbsp;
@@ -87,7 +87,7 @@
 @if(count($items) > 0)
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center"><b>Works order needs Material </b></h3>
         </div>
@@ -114,8 +114,8 @@
 
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
-            <thead class="thead-dark">
-            <tr>
+            <thead >
+           <tr style="color: white;">
                 <th >#</th>
               
                 <th >Works order ID</th>

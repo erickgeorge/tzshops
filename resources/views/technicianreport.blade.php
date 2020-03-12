@@ -68,8 +68,8 @@
  
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTableee" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead >
+                <tr style="color: white;">
                    
                     <th>Technician name</th>
                     <th>Total Work orders</th>

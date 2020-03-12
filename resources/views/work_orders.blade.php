@@ -244,10 +244,10 @@ foreach($userwithid as $userwithid)
     </div>
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead >
+                <tr style="color: white;">
                     <th>#</th>
-          <th>WorkOrder ID</th>
+          <th>ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>

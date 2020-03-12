@@ -41,8 +41,8 @@ tr:nth-child(even) {
       
 
 <table>
-  <thead class="thead-dark" align="center">
-    <tr>
+  <thead  align="center">
+    <tr style="color: white;">
       <th scope="col">#</th>
       <th scope="col">Material Name</th>
      

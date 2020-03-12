@@ -62,9 +62,8 @@
 
        
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
-                   
+                <thead >
+               <tr style="color: white;">
 					<th>HOS name</th>
                     <th>Total Works orders Completed</th>
                     <th colspan="" rowspan="" headers="" scope="">Action</th>

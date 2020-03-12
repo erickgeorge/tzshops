@@ -30,8 +30,8 @@
                    <br><br>
 
                 <table id="myTable" id="myTable" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">Zone Name</th>

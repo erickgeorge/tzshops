@@ -76,8 +76,8 @@ Directorate
                   </div>
 
                 <table id="myTable" id="myTable" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                    <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Abbreviation</th>

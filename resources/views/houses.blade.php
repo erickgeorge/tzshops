@@ -29,8 +29,8 @@
     
                 <table id="myTableee" id="myTable" class="table table-striped">
                       
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                   <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Grade</th>
                         <th scope="col">Number of Bedrooms</th>

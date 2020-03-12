@@ -16,8 +16,8 @@
     <hr>
    
         <table class="table table-hover table-striped table-condensed table-scrollable" id="myTable">
-            <thead class="thead-dark">
-            <tr>
+            <thead >
+           <tr style="color: white;">
                 <th scope="col">#</th>
 		<th scope="col">ID</th>
                 <th scope="col">Details</th>

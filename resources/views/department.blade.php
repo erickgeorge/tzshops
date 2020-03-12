@@ -93,8 +93,8 @@ use app\department;
 
 
                 <table id="myTablee" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
+                    <thead >
+                  <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Abbreviation</th>
