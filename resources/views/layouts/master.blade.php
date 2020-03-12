@@ -93,11 +93,11 @@
                  $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
 
 
-                $material_requests = WorkOrderMaterial::where('zone', $iozone->zone)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                $material_requests = WorkOrderMaterial::where('zone', $iozone['zone'])->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
 
 
                  $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-                $material_requests = WorkOrderMaterial::where('zone', $iozone->zone)->
+                $material_requests = WorkOrderMaterial::where('zone', $iozone['zone'])->
                        select(DB::raw('work_order_id'),'hos_id' )
                      ->where('status',0)
                      ->orwhere('status', 9)
