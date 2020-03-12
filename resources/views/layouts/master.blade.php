@@ -63,6 +63,10 @@
                 use App\Material;
                 use App\WorkOrder;
 
+
+        use App\zoneinspector;
+        $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
+
                 $w = WorkOrder::select(DB::raw('id'))->get();
 
                 $m = Material::select(DB::raw('name'))->get();
@@ -89,11 +93,11 @@
                  $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
 
 
-                $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                $material_requests = WorkOrderMaterial::where('zone', $iozone->zone)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
 
 
                  $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-                $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->
+                $material_requests = WorkOrderMaterial::where('zone', $iozone->zone)->
                        select(DB::raw('work_order_id'),'hos_id' )
                      ->where('status',0)
                      ->orwhere('status', 9)

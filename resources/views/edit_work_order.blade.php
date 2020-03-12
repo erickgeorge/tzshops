@@ -398,7 +398,6 @@ var total=2;
 
   <th>Type</th>
    <th>Quantity</th>
-   <th>IoW</th>
    <th>Approved By</th>
     <th>Status</th>
      <th>Date Requested</th>
@@ -412,7 +411,6 @@ var total=2;
 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td>{{$matform['iowzone']->name }}</td>
        <td>
        @if($matform->accepted_by == NULL)
       <span class="badge badge-warning">Not accepted Yet.</span>
@@ -1025,7 +1023,7 @@ var total=2;
                         </div>
                        <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
  @if($wo->zone_location != null)
-                    <input type="text" name="zone" value="{{ $zoned->iow }}" hidden>
+                    <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
                     @endif
 
              <br>

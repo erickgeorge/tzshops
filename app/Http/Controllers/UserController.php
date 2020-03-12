@@ -28,8 +28,8 @@ class UserController extends Controller
 {
     public function create(Request $request)
     {
-		
-	
+        
+    
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -37,7 +37,7 @@ class UserController extends Controller
             'name' => 'required|unique:users',
             'phone' => 'required|max:15|min:10',
             'email' => 'required|unique:users',
-			
+            
         ]);
 
         if ($request['role'] == 'Choose...') {
@@ -119,8 +119,8 @@ class UserController extends Controller
     {
 
         $user=User::where('id', $id)->first();
-		$user->status='0';
-		  $user->save();
+        $user->status='0';
+          $user->save();
         $users = User::where('status', 1)->get();
         return redirect()->route('users.view')->with([
             'message' => 'User deleted successfully',
@@ -255,6 +255,12 @@ class UserController extends Controller
         $user->IoW = 2;
         $user->save();
 
+            $zonename = iowzone::where('zonename',$request['zone'])->first();
+            $zoneinspector =  zoneinspector::where('inspector',$user->id)->first();
+            $zoneinspector->zone =  $zonename['id'];
+            $zoneinspector->inspector = $user->id;
+            $zoneinspector->save();
+
         $role = UserRole::where('user_id', $id)->first();
         $role->user_id = $user->id;
         $role->role_id = $request['role'];
@@ -328,9 +334,9 @@ class UserController extends Controller
         }
         return redirect()->back()->withErrors(['message' => 'You entered the wrong old password']);
     }
-	
-	
-		 public function changeProfile(Request $request){
+    
+    
+         public function changeProfile(Request $request){
             if ($request->Image!='') {
         $request->validate(['Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
             }
@@ -342,8 +348,8 @@ class UserController extends Controller
         ]);
         $user = User::find(auth()->user()->id);
         
-		 $user->email = $request['email'];
-		$user->phone = $request['phone'];
+         $user->email = $request['email'];
+        $user->phone = $request['phone'];
             $user->save();
             
              

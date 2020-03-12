@@ -14,6 +14,7 @@ use App\WorkOrder;
 use App\Procurement;
 use App\WorkOrderMaterial;
 use App\Storehistory;
+use App\zoneinspector;
 
 class StoreController extends Controller
 {
@@ -292,7 +293,10 @@ class StoreController extends Controller
 
 	public function acceptMaterial($id)
     {
-     $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->where('zone', auth()->user()->id)->get();
+
+      $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
+      
+     $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->where('zone', $iozone->zone)->get();
 
 		 foreach($wo_materials as $wo_material) {
 		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
