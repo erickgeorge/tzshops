@@ -10,7 +10,7 @@
      @if(count($items)>0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work order with rejected Material </b></h3>
+            <h3 align="center"><b>Works order with rejected Material </b></h3>
         </div>
 
         <div style="padding-left: 650px;">
@@ -95,7 +95,7 @@
     </div>
    
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no Work Order with Rejected Material</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no works order with rejected material</h1>
         @endif
     </div>
 

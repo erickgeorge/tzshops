@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>Redirected Works orders list </b></h3>
+            <h3><b>List of redirected works orders</b></h3>
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">
@@ -627,7 +627,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no workorder</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no redirected works order</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

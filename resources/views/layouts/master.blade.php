@@ -52,6 +52,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
+              <li class="nav-item" style="margin-top: -10px;">
+                
+                <a class="nav-link" style="color:white" >
+                    <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
+              </li>
                 <li class="nav-item">
                     <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span
                                     class="sr-only">(current)</span></a> </b>
@@ -272,6 +277,30 @@
 
                  @endif
 
+  @if(auth()->user()->type == 'Maintenance coordinator')
+                      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
+
+
+
+
+
+        </div>
+       </li>
+  
+
+                    @endif
+
 
                     @if(auth()->user()->type == 'Estates Director')
                       <li class="nav-item dropdown">
@@ -285,9 +314,7 @@
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
 
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
- <a style="color:white" class="dropdown-item" href="{{ url('excelinsertusers')}}">Import Excel</a>
-
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
 
 
 

@@ -663,9 +663,7 @@ var total=2;
 
                          <?php $named = Technician::get(); ?>
                          <div class="row">
-                            <div class="col-lg-12" style="font-weight: bold; color: black;">
-                            Technicians Assigned for this work order:
-                            </div><br><br>
+                        
                          @foreach($checktech as $fetchtech)
                          @foreach($named as $names)
                          @if($fetchtech->staff_id == $names->id)
@@ -678,6 +676,12 @@ var total=2;
 
                          @else
                          @endif
+
+                 @if($wo->statusmform != 1)
+
+                     <div class="col-lg-12" style="font-weight: bold; color: black;">
+                            Technicians Assigned for this work order:
+                            </div><br><br>
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Assign Technician for this work order</p>
@@ -767,8 +771,9 @@ var total=2;
                         <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </form>
-
-
+                @else
+               <div align="center" style="color: red;"> Please assign Technician for Inspection before assigning Technician for Work. </div>
+                @endif  
                     </div>
 
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -888,6 +893,7 @@ var total=2;
                 <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
                     @csrf
                     <div id="customer" class="tabcontent">
+                      @if($wo->statusmform != 1)
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Work order status</p>
@@ -943,6 +949,10 @@ var total=2;
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>
+               @else
+               <div align="center" style="color: red;"> Please assign Technician for Inspection before filling Inspection Form. </div>
+                @endif
+                 </div>
                 {{-- end inspection --}}
 
 
@@ -951,6 +961,7 @@ var total=2;
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div id="request_transport" class="tabcontent">
+                  @if($wo->statusmform != 1)  
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Work order Transport Request Form</p>
@@ -978,6 +989,12 @@ var total=2;
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>
+
+                @else
+               <div align="center" style="color: red;"> Please assign Technician for Inspection before requesting Transport. </div>
+                @endif
+
+                </div>
                 {{-- end request_transport form --}}
 
 
@@ -989,11 +1006,7 @@ var total=2;
                 <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
                     @csrf
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Select material for work-order</p>
-                            </div>
-                        </div>
+                       
 
                         <?php
 
@@ -1002,6 +1015,12 @@ var total=2;
 
 
                         ?>
+                         @if($wo->statusmform == 3) 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Select material for works order</p>
+                            </div>
+                        </div>
 
                         <div class="form-group">
 
@@ -1040,10 +1059,10 @@ var total=2;
                         <button @if($wo->zone_location == null) disabled="" @endif style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </form>
-
-
-
-                 </div>
+                @else
+               <div align="center" style="color: red;"> Please assign Technician for Inspection before requesting Material for Work. </div>
+                @endif
+                 </div> 
                 {{-- end material_request  --}}
 
 

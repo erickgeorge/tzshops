@@ -17,10 +17,10 @@
 @endif
 
     <br>
-    <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
-        <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>All Work orders list - @if(auth()->user()->type == 'Maintenance coordinator')
-<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h3>
+    <div >
+        <div class="container">
+            <h4 ><b>List of works order assigned in  @if(auth()->user()->type == 'Maintenance coordinator')
+<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h4>
         </div>
 
 
@@ -51,9 +51,7 @@
     <div id="div_print" class="container">
         <div class="row ">
         <div class="col">
-            <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new work order</button>
-            </a>
+            
         </div>
            <!-- <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
@@ -228,10 +226,12 @@ foreach($userwithid as $userwithid)
     </div>
 </form>
   </div>
+
 </div>
           <!-- ---------------------- -->
-
+ 
     </div>
+     <br>
     <div class="bs-example">
         <div class=" row nav nav-tabs text-center">
             <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All <b class="badge badge-light"></b></b></a>

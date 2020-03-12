@@ -7,9 +7,9 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
-        <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>All Work Zones list </b></h3>
+    <div >
+        <div class="container">
+            <h4 ><b>List of zones and total locations with works order  </b></h4>
         </div>
 
 
@@ -65,7 +65,7 @@ use App\iowzonelocation;
                     <th>#</th>
           			<th>Zone name</th>
                     <th>Total locations</th>
-                    <th>Inspector's name</th>
+                   
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -81,10 +81,7 @@ use App\iowzonelocation;
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $locations->zonename }}</td>
                             <td><?php $locationtotal = iowzonelocation::where('iowzone_id',$locations->id)->get(); echo count($locationtotal); ?> locations </td>
-                            <td>
-                            	<?php $zonemaster = user::where('id',$locations->iow)->first(); ?>
-                            	{{ $zonemaster['fname'] }} {{ $zonemaster['lname'] }}
-                            </td>
+                           
                             <td><a href="myzone?zone={{ $locations->id }} " class="btn btn-primary">view workorders</a></td>
                         </tr>
                         @endforeach
