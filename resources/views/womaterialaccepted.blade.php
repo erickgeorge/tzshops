@@ -5,6 +5,7 @@
     @endSection
 
 @section('body')
+
 @if(count($items)>0)
 
     <br>
@@ -50,7 +51,26 @@
             </thead>
 
           <tbody>                    
+            @if(auth()->user()->type == 'Inspector Of Works')
+            <?php $i= 1; ?>
+            @foreach($materls as $item)
 
+               
+                <tr> <td>{{$i++}}</td>
+                    <td>00{{ $item->work_order_id }}</td>
+                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    
+                    <td>{{ $item['workorder']->details }}</td>
+                    <td>{{ $item['acceptedby']->name }}</td>
+                    
+                    <td>
+                    
+                     <a class="btn btn-primary btn-sm" href="{{ route('woMaterialAccepted', [$item->work_order_id]) }}" role="button">View Material</a></td>
+                  
+                       
+                    </tr>
+                    @endforeach
+            @else
            <?php $i= 1; ?>
             @foreach($items as $item)
 
@@ -69,6 +89,7 @@
                        
                     </tr>
                     @endforeach
+                    @endif
             </tbody>
         </table>
     </div>
