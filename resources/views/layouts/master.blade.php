@@ -60,11 +60,7 @@
                 <a class="nav-link" style="color:white" >
                     <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
               </li>
-<<<<<<< HEAD
-                
-=======
-             
->>>>>>> 55037404e0db669c55999fb1d02f73a2d7814880
+
 <?php
                 use App\WorkOrderMaterial;
         use App\PurchasingOrder;
@@ -434,7 +430,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #80808091;
+  background-color: none;
   background-color: none;
   overflow-x: hidden;
   padding-top: 20px;
