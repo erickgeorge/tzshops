@@ -256,11 +256,11 @@ class UserController extends Controller
         $user->save();
 
 
-            $zonename = iowzone::where('zonename',$request['zone'])->first();
-            $zoneinspector =  zoneinspector::where('inspector',$user->id)->first();
-            $zoneinspector->zone =  $zonename['id'];
-            $zoneinspector->inspector = $user->id;
-            $zoneinspector->save();
+       $zonename = iowzone::where('zonename',$request['zone'])->first();
+       $zoneinspector =  zoneinspector::where('inspector',$user->id)->first();
+       $zoneinspector->zone =  $zonename['id'];
+       $zoneinspector->inspector = $user->id;
+       $zoneinspector->save();
        
 
         $role = UserRole::where('user_id', $id)->first();

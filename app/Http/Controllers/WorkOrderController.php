@@ -72,7 +72,7 @@ class WorkOrderController extends Controller
 
         $work_order->save();
 
-        return redirect()->route('work_order')->with(['message' => 'Work order successfully created']);
+        return redirect()->route('work_order')->with(['message' => 'Works order successfully created']);
     }
 
     public function rejectWO(Request $request, $id)
@@ -93,7 +93,7 @@ class WorkOrderController extends Controller
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_rejected';
-        $notify->message = 'Your work order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been rejected.';
+        $notify->message = 'Your works order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been rejected.';
         $notify->save();
 
 
@@ -105,7 +105,7 @@ class WorkOrderController extends Controller
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
 
-	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been REJECTED .  Thanks   Directorate of Estates.';
+	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your works order sent to  Directorate of Estate Services  on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' given identification number 00'.$wO->id.'has been REJECTED. Thanks   Directorate of Estate Services.';
 
         /* $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');
 $client = new \Nexmo\Client($basic);
@@ -149,22 +149,22 @@ $message = $client->message()->send([
  */
 
 
-     $data = array('name'=>$userName, "body" => "Your Work-Order No : WO-$wO->id sent to Directorate of Estates on : $wO->created_at, of  Problem Type : $wO->problem_type has been REJECTED.Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on : $wO->created_at, of  Problem Type : $wO->problem_type given identification number 00$wO->id has been REJECTED.Please login in the system for further information .",
 
-                  "footer"=>"Thanks", "footer1"=>" $sender , $section " , "footer2"=>"Directorate  of Estates"
+                  "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
 
        Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
 
        $message->to($toEmail,$userName)
-            ->subject('WORK ORDER ACCEPTANCE.');
+            ->subject('WORKS ORDER REJECTION.');
        $message->from('udsmestates@gmail.com',$sender);
        });
 
         return redirect()->route('work_order')->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order has been rejected ' ,
+            'message' => 'Your works order has been rejected ' ,
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()]);
     }
 
@@ -191,7 +191,7 @@ $message = $client->message()->send([
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_accepted';
         $notify->status = 0;
-        $notify->message = 'Your work order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been accepted.';
+        $notify->message = 'Your works order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been accepted.';
         $notify->save();
 
 
@@ -258,15 +258,15 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 //for email that currently working disabled partially
 
 
-     $data = array('name'=>$userName, "body" => "Your Work-Order No : $wO->id sent to Directorate of Estates on : $wO->created_at, of  Problem Type : $wO->problem_type has been ACCEPTED.Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on : $wO->created_at, of  Problem Type : $wO->problem_type given identification number 00$wO->id  has been ACCEPTED.Please login in the system for further information .",
 
-                    "footer"=>"Thanks", "footer1"=>" $sender , $section " , "footer2"=>"Directorate  of Estates"
+                    "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
 
        Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
 
        $message->to($toEmail,$userName)
-            ->subject('WORK ORDER ACCEPTANCE.');
+            ->subject('WORKS ORDER ACCEPTANCE.');
        $message->from('udsmestates@gmail.com',$sender);
        });
 

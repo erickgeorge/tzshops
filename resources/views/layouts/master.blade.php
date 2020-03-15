@@ -60,10 +60,7 @@
                 <a class="nav-link" style="color:white" >
                     <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
               </li>
-                <li class="nav-item">
-                    <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span
-                                    class="sr-only">(current)</span></a> </b>
-                </li>
+             
 <?php
                 use App\WorkOrderMaterial;
         use App\PurchasingOrder;
