@@ -95,7 +95,8 @@
     </div>
    
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no works order with rejected material</h1>
+
+               <br><div> <h2 style="padding-top: 300px;">Currently no works order with rejected material</h2></div>
         @endif
     </div>
 
