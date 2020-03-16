@@ -255,14 +255,13 @@ class UserController extends Controller
         $user->IoW = 2;
         $user->save();
 
-            if($user->type=='Inspector Of Works'){
+
             $zonename = iowzone::where('zonename',$request['zone'])->first();
             $zoneinspector =  zoneinspector::where('inspector',$user->id)->first();
             $zoneinspector->zone =  $zonename['id'];
             $zoneinspector->inspector = $user->id;
             $zoneinspector->save();
-            }
-           
+
 
         $role = UserRole::where('user_id', $id)->first();
         $role->user_id = $user->id;

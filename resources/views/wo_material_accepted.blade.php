@@ -102,7 +102,10 @@
     </div>
    
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no Work Order with Accepted Material</h1>
+
+             <br><div> <h2 style="padding-top: 300px;">Currently no works order with accepted material</h2></div>
+             
+                
         @endif
     </div>
 	</div>

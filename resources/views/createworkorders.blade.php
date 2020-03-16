@@ -28,8 +28,8 @@
             </ul>
         </div>
     @endif
-<div class="container">
-    <p style="color: red">All fields are compulsory except for emergence works order</p>
+    <div class="container">
+    <p class="container" style="color: red">All fields are compulsory except for emergence works order</p>
     </br>
     <form method="POST" action="{{ route('workorder.create') }}"  style="margin-left:2%; margin-right:2%;">
         @csrf
@@ -135,8 +135,8 @@
         </div>
     </div>
      <br>
-      <div>
-      <input type="checkbox" name="emergency"> This work order is emergency.
+      <div style="color: red;">
+      <input type="checkbox" name="emergency" > This work order is emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>
       </div>
       <br>
 

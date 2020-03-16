@@ -18,8 +18,7 @@
 
  ?>
 
-  <?php
-     $IoWzone = User::where('status', '=', 1)->where('type', 'inspector of works')->where('IoW', 2)->get(); ?>
+
 
 
 <style type="text/css">
@@ -543,29 +542,24 @@ var total=2;
   <hr>
 
     @endif
+ 
 
 
-
-
-
-      
-
-        <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
+         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
         
             <div class="form-group ">
-                {{--<p>Is this work order emergency?</p>--}}
+             
                 @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This work order is emergency.</b>
+                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This work order is emergency</b>
                 @else
-                    <input type="checkbox" name="emergency"> <b style="color:red;">This work order is emergency.</b>
+                    <input type="checkbox" name="emergency"> <b style="color:red;">This work order is emergency</b>
                 @endif
             </div>
             
             <button type="submit" class="btn btn-primary">Save</button>
-         
-
           </form>
+
 
         <div class="row">
             <div class="col">
@@ -575,6 +569,8 @@ var total=2;
                </div>
             </div>
         </div>
+
+
        <div id="divmanual">
          <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
             @csrf
@@ -679,9 +675,7 @@ var total=2;
 
                  @if($wo->statusmform != 1)
 
-                     <div class="col-lg-12" style="font-weight: bold; color: black;">
-                            Technicians Assigned for this work order:
-                            </div><br><br>
+                  
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Assign Technician for this work order</p>

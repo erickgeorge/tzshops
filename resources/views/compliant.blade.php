@@ -7,17 +7,19 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
-        <div class="col-lg-12">
+
+
+    <?php use App\Compliant;
+            use App\User;
+
+     ?>
+   @if(count($compliant)>0) 
+
+        <div class="container">
             <h3><b>Complaints </b></h3>
         </div>
 
-        
-
-
-       
-    </div>
-    <br>
+ 
     <hr class="container">
     <div class="container">
     @if(Session::has('message'))
@@ -37,11 +39,7 @@
         </div>
     @endif
 
-   
-    <?php use App\Compliant;
-            use App\User;
-
-     ?>
+ 
     <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
@@ -74,5 +72,8 @@
                     </tbody>
                 </table>
  </div>
+ @else
+ <td><h3 style="padding-top: 200px;" align="center">Currently no compliant submitted</h3></td>
+ @endif
 
  @endsection

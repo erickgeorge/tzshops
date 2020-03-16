@@ -77,7 +77,7 @@
  @else       
                <div class="container" align="center">
                 
-                   <br><div> <h2 style="padding-top: 300px;">Currently no work order needs Material</h2></div>
+                   <br><div> <h2 style="padding-top: 300px;">Currently no works order needs Material</h2></div>
                 
             </div>
 @endif
@@ -152,7 +152,7 @@
  @else       
                <div class="container" align="center">
                 
-                   <br><div> <h2 style="padding-top: 300px;">Currently no work order needs Material</h2></div>
+                   <br><div> <h2 style="padding-top: 300px;">Currently no works order needs Material</h2></div>
                 
             </div>
 @endif

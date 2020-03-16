@@ -412,6 +412,14 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $form->work_order_id = $id;
             $form->save();
 
+            $w = WorkOrder::where('id', $id)->first();
+       
+             $w->statusmform = 3;
+         
+             $w->save();
+        
+
+
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
@@ -487,6 +495,7 @@ public function transportforwork(Request $request, $id)
 
 			$mForm = WorkOrder::where('id', $id)->first();
             $mForm->status =3;
+            $mForm->statusmform=3;
             $mForm->save();
 
 
@@ -533,6 +542,7 @@ public function transportforwork(Request $request, $id)
 
             $mForm = WorkOrder::where('id', $id)->first();
             $mForm->status =70;
+            $mForm->statusmform = 2;
             $mForm->save();
 
 
