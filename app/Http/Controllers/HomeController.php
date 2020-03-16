@@ -1984,6 +1984,18 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
+        $iozonename = iowzone::where('id',$iozone['zone'])->first();
+        
+        $wo_materialed=   WorkOrderMaterial::where('zone', $iozone['zone'])->
+                       select(DB::raw('work_order_id'),'hos_id')
+                     ->where('status',-1)
+                     ->orwhere('status',17)
+                     ->orwhere('status', 44)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     ->get();
         
         $wo_material=   WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'hos_id')
@@ -1995,7 +2007,7 @@ $v5=$type[4];
                      ->get();
         
         
-        return view('rejectedmaterialwith_wo', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+        return view('rejectedmaterialwith_wo', ['role' => $role, 'materialed' => $wo_materialed,'items' => $wo_material,'notifications' => $notifications]);
     }
 
       public function MaterialReceivewithWo()
@@ -2197,6 +2209,19 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
+        $iozonename = iowzone::where('id',$iozone['zone'])->first();
+        
+        $wo_materiald=   WorkOrderMaterial::where('zone', $iozone['zone'])->
+                       select(DB::raw('work_order_id'),'hos_id','accepted_by')
+                     ->where('status',1)->orwhere('copyforeaccepted' , 1)
+
+                    ->groupBy('work_order_id')
+                    ->groupBy('hos_id')
+                    ->groupBy('accepted_by')
+                     
+                     ->get();
         
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id','accepted_by')
@@ -2208,8 +2233,8 @@ $v5=$type[4];
                      
                      
                      ->get();
-               
-        return view('womaterialaccepted', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+               //
+        return view('womaterialaccepted', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications,'materls' => $wo_materiald]);
     }
 
 

@@ -5,16 +5,11 @@
     @endSection
 
 @section('body')
-
+<?php  
+      use App\zoneinspector;  ?>
     <br>
      @if(count($items) > 0)
-      @if(auth()->user()->type == 'Inspector Of Works')
-      <?php 
-      use App\zoneinspector; 
-      $checkzone = zoneinspector::where('inspector',auth()->user()->id)->first();
-      ?>
-
-      @endif
+      
     <div class="row container-fluid">
         <div class="col-lg-12">
             <h3 align="center"><b>Works orders with material rejected</b></h3>
@@ -53,7 +48,26 @@
             </thead>
 
             <tbody>
+     @if(auth()->user()->type == 'Inspector Of Works')
+      
+<?php $i=0;  ?>
+            @foreach($materialed as $item)
 
+                <?php $i++ ?>
+                <tr>
+                    <th scope="row">{{ $i }}</th>
+                   
+                    <td>00{{ $item->work_order_id }}</td>
+                   
+                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{$item['workorder']->details}}</td>
+                    
+                 
+                      <td>  <a style="color: green;" href="rejected/materials/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">Material</a>&nbsp;
+                        </td>
+                    </tr>
+                    @endforeach
+      @else
             <?php $i=0;  ?>
             @foreach($items as $item)
 
@@ -71,6 +85,7 @@
                         </td>
                     </tr>
                     @endforeach
+                    @endif
             </tbody>
         </table>
         @else
