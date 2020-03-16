@@ -47,6 +47,7 @@ var total=2;
             </ul>
         </div>
     @endif
+
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -58,16 +59,16 @@ var total=2;
     <div class="row">
         <div class="col">
             <h5>Submitted by  <span
-                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style=" font-weight: bold;">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
 
 
 
         </div>
         <div class="col">
         <h5>  @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
-                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
-             <h5 style="color: black">Mobile number: <span style="color: green">{{ $wo['user']->phone }}</span> <br>
-              Email: <span style="color:green"> {{ $wo['user']->email }} </span></h5>
+                style=" font-weight: bold;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
+             <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span> <br>
+              Email: <span style=" font-weight: bold;"> {{ $wo['user']->email }} </span></h5>
         </div>
     </div>
 
@@ -926,15 +927,13 @@ var total=2;
                             <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
                                 <option  selected value="" >Choose...</option>
 
-
-
                                 <?php
 
                                 $techassigned = techasigned::where('work_order_id',$wo->id)->get();
                                 ?>
 
                                 @foreach($techassigned as $tech)
-                                    <option value="{{ $tech->id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
                                     </option>
                                 @endforeach
                             </select>
