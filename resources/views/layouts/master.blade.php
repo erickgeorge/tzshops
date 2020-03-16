@@ -39,6 +39,9 @@
         .tablinks:hover{
             background-color:#4d6788;
         }
+        div{
+            font-weight: bold;
+        }
     </style>
 
 <div>

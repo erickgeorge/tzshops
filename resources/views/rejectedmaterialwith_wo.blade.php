@@ -8,6 +8,13 @@
 
     <br>
      @if(count($items) > 0)
+      @if(auth()->user()->type == 'Inspector Of Works')
+      <?php 
+      use App\zoneinspector; 
+      $checkzone = zoneinspector::where('inspector',auth()->user()->id)->first();
+      ?>
+
+      @endif
     <div class="row container-fluid">
         <div class="col-lg-12">
             <h3 align="center"><b>Work Orders with Material Rejected</b></h3>

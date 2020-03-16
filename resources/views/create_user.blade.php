@@ -219,30 +219,8 @@ User Registration
 
 
 </div>
-</div>
 
 
-<div>
-
-	<!--<div class="col">
-		<div class="form-group ">
-	    <label style="color: black" for="pass">Password</label>
-	    <div class="row">
-	    	<div class="col-md-8">
-	    <input style="color: black" required maxlength="15"  minlength="8"  type="text" class="form-control" id="pass" aria-describedby="emailHelp" name="password" placeholder="Should have 8 characters minimum">
-	    	</div>
-	    <button type="button" onclick="generatePass()" class="btn btn-danger">Generate Password</button>
-	    </div>
-	</div>
-	</div>-->
-</div>
-
-
-
-               <!-- <div class="form-group">
-                    <input  type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp" value="{{ old('avatar') }}">
-                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
-                </div>-->
     <div align="center">
 	<button type="submit" class="btn btn-primary"> Save</button>
 	<a class="btn btn-danger" href="/viewusers" role="button">Cancel </a>
