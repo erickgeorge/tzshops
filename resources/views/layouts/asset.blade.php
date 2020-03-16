@@ -55,10 +55,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
-                <li class="nav-item">
-                    <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span
-                                    class="sr-only">(current)</span></a> </b>
-                </li>
+               
 
 
 <?php 

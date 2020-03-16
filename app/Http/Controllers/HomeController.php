@@ -55,7 +55,7 @@ class HomeController extends Controller
         else{
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-            return view('dashboard', ['role' => $role, 'notifications' => $notifications]);   
+            return redirect()->route('work_order');   
         }
 
 
@@ -77,7 +77,7 @@ class HomeController extends Controller
                 return view('stores', ['role' => $role, 'items' => Material::all(), 'notifications' => $notifications]);
             }
         }
-        return view('dashboard', ['role' => $role, 'items' => Material::all(), 'notifications' => $notifications]);
+        return redirect()->route('work_order');
 
     }
     public function Workorderredirectedview(){
@@ -1355,7 +1355,7 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('dashboard', ['role' => $role,'notifications' => $notifications]);
+        return redirect()->route('work_order');  
     }
 
     public function notificationView()

@@ -46,7 +46,7 @@ background-color:  #376ad3;
                     <div align="center" style="font-size: 18px;">LOGIN<hr></div>
                 <div>
                      @guest
-                    <form method="POST" action="{{ route('login')}}" class="">
+                    <form method="POST" action="{{ route('login')}}" class="" autocomplete="off">
                          @csrf
                          
 

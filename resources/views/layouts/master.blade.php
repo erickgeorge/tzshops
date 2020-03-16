@@ -60,10 +60,7 @@
                 <a class="nav-link" style="color:white" >
                     <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
               </li>
-                <li class="nav-item">
-                    <b> <a class="nav-link" style="color:white" href="{{ url('dashboard')}}">Dashboard <span
-                                    class="sr-only">(current)</span></a> </b>
-                </li>
+                
 <?php
                 use App\WorkOrderMaterial;
         use App\PurchasingOrder;
@@ -433,6 +430,7 @@
   z-index: 1;
   top: 0;
   left: 0;
+  background-color: #80808091;
   background-color: none;
   overflow-x: hidden;
   padding-top: 20px;
@@ -769,8 +767,7 @@
 
     @if(auth()->user()->type == 'Inspector Of Works')
 
-     <a href="{{ url('myzone')}}"><h6>My Zone <span
-                                    class="badge badge-light">{{ count($material_requests) }}</span></h6></a>
+     <a href="{{ url('myzone')}}"><h6>My Zone </h6></a>
 
 
                         <a href="{{ url('work_order_material_needed')}}"><h6>Work order needs material <span

@@ -25,7 +25,7 @@ Route::get('/myprofile','HomeController@myprofileView' );
 Route::get('/myprofile','HomeController@myprofileView' )->name('myprofile');
 
 
-Route::get('/dashboard', 'HomeController@dashboardView');
+Route::get('/dashboard', 'HomeController@WorkorderView');
 
 
 Route::get('/settings', 'HomeController@settingsView');
