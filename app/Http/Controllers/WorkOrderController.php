@@ -281,7 +281,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'role' => $role,
             'notifications' => $notifications,
             'techs' => User::where('type', 'TECHNICIAN')->get(),
-            'message' => 'Work order accepted . You can now edit it!',
+            'message' => 'Works order accepted successfully . You can now edit it!',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }

@@ -12,9 +12,9 @@
 
 <div class="container">
     <br>
-    <div class="row container-fluid" >
+    <div class="row container-fluid">
         <div class="col-lg-12">
-            <h3 align="center"><b>Materials needed for Work order </b></h3>
+            <h3 align="center"><b>Materials needed for works order </b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -36,8 +36,8 @@
    
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
-            <thead class="thead-dark">
-            <tr>
+            <thead >
+            <tr style="color: white;">
                 <th >#</th>
               
                 <th >Material Name</th>

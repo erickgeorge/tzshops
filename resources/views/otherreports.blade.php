@@ -179,8 +179,10 @@ foreach ($hoos as $hous) {
           
         }else { echo $tech->phone;}
 
-      ?></td>
-                <td>{{ $tech->type }}</td>
+      ?></td>   
+       <td>
+              <?php  
+               echo strtoupper($tech->type);  ?></td>
                 
             </tr>
         @endforeach

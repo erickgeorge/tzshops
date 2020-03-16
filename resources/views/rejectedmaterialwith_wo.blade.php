@@ -17,7 +17,7 @@
       @endif
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work Orders with Material Rejected</b></h3>
+            <h3 align="center"><b>Works orders with material rejected</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -44,7 +44,7 @@
            <tr style="color: white;">
                 <th >#</th>
               
-				<th >Workorder ID</th>
+				<th >Worksorder ID</th>
 				<th >HOS name</th>
                 <th>Workorder Details</th>
 				<th >Action</th>
@@ -74,7 +74,7 @@
             </tbody>
         </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no Workorder with material rejected by Inspector of Work</h1>
+            <h2 class="text-center" style="margin-top: 150px">You have no works order with material rejected by Inspector of Work</h2>
         @endif
     </div>
 </div>
