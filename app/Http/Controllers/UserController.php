@@ -255,13 +255,11 @@ class UserController extends Controller
         $user->IoW = 2;
         $user->save();
 
-
             $zonename = iowzone::where('zonename',$request['zone'])->first();
             $zoneinspector =  zoneinspector::where('inspector',$user->id)->first();
             $zoneinspector->zone =  $zonename['id'];
             $zoneinspector->inspector = $user->id;
             $zoneinspector->save();
-
 
         $role = UserRole::where('user_id', $id)->first();
         $role->user_id = $user->id;
@@ -358,17 +356,17 @@ class UserController extends Controller
 
        $user = Auth::user();
 
-if ($request->Image!='') {
-    
     $cover = $request->file('Image');
     $extension = $cover->getClientOriginalExtension();
     Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
 
    
-    $user->avatar = $cover->getFilename().'.'.$extension;
-    $user->save();
 
-}
+
+        $user->avatar = $cover->getFilename().'.'.$extension;
+        $user->save();
+
+
 
 
 return redirect()->route('myprofile')->with(['message' => 'Profile has changed successfully']);

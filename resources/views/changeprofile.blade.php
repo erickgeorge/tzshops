@@ -38,7 +38,7 @@ padding: 20 20 20 20;
 
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center">Change Profile</h3>
         </div>
@@ -97,7 +97,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
                
-        <label for="fname"> First Name <sup style="color: red;">*</sup></label>
+        <label for="fname"> First Name </label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->fname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -107,7 +107,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
                
-        <label for="phone">Last Name <sup style="color: red;">*</sup></label>
+        <label for="phone">Last Name </label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->lname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
@@ -120,7 +120,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
                
-        <label for="phone">Phone number <sup style="color: red;">*</sup></label>
+        <label for="phone">Phone number </label>
         <input style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->phone }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "10"  minlength = "10"
@@ -129,7 +129,7 @@ padding: 20 20 20 20;
     </div>
     <div class="col">
         <div class="form-group">
-        <label for="email">Email Address <sup style="color: red;">*</sup></label>
+        <label for="email">Email Address </label>
         <input style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
     </div> 
     </div>

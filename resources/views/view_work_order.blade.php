@@ -5,6 +5,11 @@
     @endSection
 
 @section('body')
+<style type="text/css">
+    span{
+        font-weight: bold;
+    }
+</style>
     <br>
     <div class="container">
     <div class="row container-fluid" >
@@ -21,11 +26,11 @@
             </ul>
         </div>
     @endif
-    <h5>Submitted by <span style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h5>
-    <h5>Submitted on <span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
-    <h3 style="color: black">Contacts:</h3>
-    <h5>Mobile Number:<span style="color:green;">  {{ $wo['user']->phone }}</span></h5>
-    <h5>Email:        <span style="color: green;"> {{ $wo['user']->email }}</span></h5>
+    <h5>Submitted by <span >{{ $wo['user']->fname.' '.$wo['user']->lname }}</span></h5>
+    <h5>Submitted on <span >{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+    <h3 >Contacts:</h3>
+    <h5>Mobile Number:<span >  {{ $wo['user']->phone }}</span></h5>
+    <h5>Email:        <span > {{ $wo['user']->email }}</span></h5>
 
 
     <br>

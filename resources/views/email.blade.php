@@ -11,4 +11,7 @@ Dear <strong>{{ $name }}</strong>,
 <p>{{ $footer1 }}.</p>
 
 </br>
+<p>{{ $footer3 }}.</p>
+
+</br>
 <p>{{ $footer2 }}.</p>
