@@ -345,7 +345,7 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
                          <span class="badge badge-light">{{ count($notifications) }}</span></a>
-                    <div class="dropdown-menu dropdown-menu-right" style="background-color: #676464; color:#212529;" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-right" style="background-color: #376ad3; color: white;"  aria-labelledby="navbarDropdown">
                         @foreach($notifications as $notification)
                             @if($notification->type == 'wo_rejected')
                                 <a class="dropdown-item"

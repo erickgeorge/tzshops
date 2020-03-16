@@ -7,7 +7,7 @@
 @section('body')
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type == 'STORE')
             <h3 align="center"><b>List of Available Material required by Head of Section</b></h3>
@@ -122,11 +122,11 @@
           <br>
           @if($item->secondstatus == 1)
 
-          <h4  style="     color: #733703;"><b> Please assign Issue Note for materials requested so as Head of Section to Sign.</b></h4>
+          <h5  style="     color: #733703;"><b> Please assign Issue Note for materials requested so as Head of Section to Sign.</b></h5>
          <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>   @endif
          @else
          @if($item->status == 3)
-         <h4  style="     color: #733703;"><b>  Please Approve if you have received Material.</b></h4>
+         <h5  style="     color: #733703;"><b>  Please Approve if you have received Material.</b></h5>
          <a class="btn btn-primary btn-sm"  href="tick/material_received/{{$item->work_order_id}}" role="button">Approve (&#10004;)</a>
          @endif
 

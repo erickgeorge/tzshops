@@ -179,9 +179,7 @@ class HomeController extends Controller
             }
 
 
-             else if (auth()->user()->type == "Inspector Of Works"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
-            } 
+        
              else
             
         {// HOS and their work order type 
@@ -743,9 +741,7 @@ $v5=$type[4];
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
             }
 
-             else if (auth()->user()->type == "Inspector Of Works"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
-            }
+           
 
             else if (auth()->user()->type == "DVC Admin"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
