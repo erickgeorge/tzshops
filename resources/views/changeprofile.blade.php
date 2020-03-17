@@ -162,7 +162,7 @@ padding: 20 20 20 20;
 <div id="previous_update" align="center">   <div class="row justify-content-center">
        <div class="profile-header-container">
                 <div class="profile-header-img">
-                    <img class="rounded-circle" src="/storage/avatars/{{ $user->avatar }}" />
+                    <img class="rounded-circle" src="/storage/{{ $user->avatar }}" />
                     <!-- badge -->
                   
                 </div>

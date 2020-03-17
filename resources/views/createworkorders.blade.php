@@ -34,7 +34,7 @@
     <form method="POST" action="{{ route('workorder.create') }}"  style="margin-left:2%; margin-right:2%;">
         @csrf
         <div class="row">
-            <div class="col">
+            <div class="col">  
                 <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
@@ -50,14 +50,12 @@
             </select>
              </div>
             </div>
-        <div class="col">
+        <div >
                 
         <?php
         use App\Location;
         $location = Location::where('name','<>',null)->orderby('name')->get();
         ?>
-
-       
 
         <div id="divmanual">
             <div class="input-group mb-3">
@@ -68,6 +66,7 @@
                        aria-describedby="emailHelp" name="manual" placeholder="Type Location Address">
             </div>
         </div>
+
             </div>
 
         </div>

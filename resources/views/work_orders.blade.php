@@ -627,7 +627,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no workorder</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

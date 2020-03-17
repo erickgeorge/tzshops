@@ -156,7 +156,7 @@ padding: 20 20 20 20;
      <div class="profile-header-container">
                 <div class="profile-header-img">
 
-                    <img class="rounded-circle" src="/storage/avatars/{{ $user->avatar }}" />
+                    <img class="rounded-circle" src="/storage/{{ $user->avatar }}" />
                     <!-- badge -->
                   
                 </div>
