@@ -1106,7 +1106,7 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript">
 
       $("#secondtype").select2({
-            placeholder: "Choose Second User Type...",
+            placeholder: "Choose second user type...",
             allowClear: true
         });
 </script>

@@ -54,7 +54,7 @@ User Registration
 </div>
 @endif
 <div class="col-lg-12">
-<p style="color: red">All fields are compulsory</p>
+<p style="color: red">All fields are compulsory except second type of user</p>
 
 
 
@@ -168,7 +168,7 @@ User Registration
        
 
               <div id="locationdiv" >
-               <select  required style="width: 300px;" class="custom-select" name="type" id="type">
+               <select  required style="width: 500px;" class="custom-select" name="type" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>	                  
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
@@ -203,7 +203,7 @@ User Registration
 	           
 
                <div id="divmanual">
-               <select  required style="width: 300px;" class="custom-select" name="zone" id="zone">
+               <select  required style="width: 500px;" class="custom-select" name="zone" id="zone">
 	                  @foreach($zone as $zone)
                        <option  value="{{$zone->zonename}}"  ><?php echo strtoupper( $zone->zonename ); ?></option>
                       @endforeach
@@ -221,13 +221,11 @@ User Registration
 	<div class="align-content-center">
 		<div class="input-group mb-3">
 	          <div class="contacts">
-                     <input type="checkbox" id="check1"> Other type of user
-              </div>
-
-              <div href="#" id="div2" style="display: none;">
+                      Second type of user
+             
               	<br>
   
-                <select   style="width: 300px;" class="custom-select" name="secondtype" id="secondtype">
+                <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>	                  
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
