@@ -20,6 +20,7 @@ use App\workordersection;
 use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
 use App\iowzone;
+use App\usertype;
 use App\Note;
 use Redirect;
 use PDF;
@@ -1319,9 +1320,12 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $users = User::where('id', '<>', auth()->user()->id)->where('status', '=', 1)->get();
-
-
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+
+
+   
+        
 //        return response()->json($users);
         return view('viewusers', ['display_users' => $users, 'role' => $role,'notifications' => $notifications]);
 

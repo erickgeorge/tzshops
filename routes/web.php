@@ -597,8 +597,7 @@ Route::get('materialEntrypdf/{id}','NotesController@materialEntrypdf')->name('ma
 
 Route::post('importUserExcel','ImportExcelController@importUserExcel')->name('importUserExcel');
 Route::get('excelinsertusers','ImportExcelController@excelinsertusers')->name('excelinsertusers');
-
-
+Route::post('change_user_type/{check}','UserController@changetypeview')->name('changeusertype');
 
 
 
@@ -614,6 +613,8 @@ Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwoland
 
 Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');
 Route::post('assessment/work_order/landscaping/{id}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping');
+
+
 
 
 //ppu

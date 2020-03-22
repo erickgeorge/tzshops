@@ -18,6 +18,7 @@ use App\Complaint;
 use App\WorkOrder;
 use App\zoneinspector;
 use App\iowzone;
+use App\usertype;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -78,6 +79,17 @@ class UserController extends Controller
         $role->role_id = $request['role'];
         $role->save();
 
+
+
+
+        $type = new usertype();
+        $type->user_id = $user->id;
+        $type->type2 = $request['secondtype'];
+        $type->type = $user->type;
+        $type->save();
+
+
+
         if ($request['checkdiv'] == 'yesmanual') {
 
             $zonename = iowzone::where('zonename',$request['zone'])->first();
@@ -112,6 +124,20 @@ class UserController extends Controller
         $iow=User::where('id', $id)->first();
         $iow->zone = $request['zone'];
         $iow->save();
+    }
+
+
+      public function changetypeview(Request $request , $check)
+    {
+
+        $user=User::where('id', $check)->first();
+        $user->type=$request['usertype'];
+        $user->save();
+       
+        return redirect()->back()->with([
+            'message' => 'The user role changed successfully'
+        
+        ]);
     }
 
 

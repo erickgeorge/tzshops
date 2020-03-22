@@ -604,9 +604,9 @@ var total=2;
             </div>
             </div>
         </div>
-     
+       @if($wo->zone_location == null) 
             <button type="submit" class="btn btn-primary">Save</button>
-           
+       @endif  
 
           </form>
 

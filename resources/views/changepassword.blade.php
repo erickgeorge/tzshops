@@ -6,7 +6,7 @@
 
 @section('body')
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             <h3 align="center">Change password</h3>
         </div>
@@ -39,7 +39,7 @@
             <div class="form-group col-lg-6">
                     <div class="input-group ">
                   <div class="input-group-prepend">
-                    <label style="width:200px;" class="input-group-text" for="Email">Old password <sup style="color: red;">*</sup></label>
+                    <label style="width:200px;" class="input-group-text" for="Email">Old password </label>
                   </div>
                   <input type="password" required class="form-control" id="old-pass" name="old-pass"
                   placeholder="Enter old password">  </div>
@@ -48,7 +48,7 @@
                 <div class="form-group col-lg-6">
                     <div class="input-group ">
                   <div class="input-group-prepend">
-                    <label style="width:200px;" class="input-group-text" for="Email">New password <sup style="color: red;">*</sup></label>
+                    <label style="width:200px;" class="input-group-text" for="Email">New password </label>
                   </div>
                   <input type="password" required class="form-control" id="new-pass" name="new-pass"
                   placeholder="Enter new password">
@@ -58,7 +58,7 @@
                 <div class="form-group col-lg-6">
                     <div class="input-group ">
                   <div class="input-group-prepend">
-                    <label style="width:200px;" class="input-group-text" for="Email">Confirm New password <sup style="color: red;">*</sup></label>
+                    <label style="width:200px;" class="input-group-text" for="Email">Confirm New password </label>
                   </div>
                   <input type="password" required class="form-control" id="confirm-pass" name="confirm-pass"
                        placeholder="Confirm password">

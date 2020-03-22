@@ -223,7 +223,7 @@ var total=2;
                     <div id="assesment" class="tabcontent">
                    
                      <div class="form-group">
-                            <label>Company Name</label>
+                            <label>Company name assessed</label>
                             <br>
                             <select style="color: black; width:  700px;" required class="custom-select"  name="company" id="company" >
                          
@@ -236,7 +236,7 @@ var total=2;
 
 
                        <div class="form-group">
-                            <label>Cleaning Area</label>
+                            <label>Area name</label>
                             <br>
                             <select style="color: black; width:  700px;" required class="custom-select"  name="area" id="carea" >
                          
@@ -247,27 +247,24 @@ var total=2;
                             </select>
                       </div>
       
-                       <p>Assessment Date</p>
+                       <p>Assessment date</p>
                         <div class="form-group">
                             <input type="date"  style="color: black; width:  700px;" name="assessmment"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" class="form-control" required ></input>
                         </div>
                          
-                        <p>Type</p>
-                        <div class="form-group">
-                            <input  style="color: black; width:  700px;" name="type" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Type"></input>
-                        </div>
+
 
 
 
                         <p>Activity</p>
                         <div class="form-group">
-                            <input  style="color: black; width:  700px;" name="activity" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Activity"></input>
+                            <textarea  style="color: black; width:  700px;" name="activity" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Activity..."></textarea>
                         </div>
 
 
                         <p>Score</p>
                         <div class="form-group">
-                            <input   style="color: black; width:  700px;" name="score" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Score"></input>
+                            <input type="number"   style="color: black; width:  700px;" name="score" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Score"></input>
                         </div>
 
                      <!--   <p>Assesor Remark</p>
