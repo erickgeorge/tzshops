@@ -225,7 +225,7 @@ User Registration
               </div>
 
               <div href="#" id="div2" style="display: none;">
-              	
+              	<br>
   
                 <select   style="width: 300px;" class="custom-select" name="secondtype" id="secondtype">
 	                  <option value="" selected>Choose...</option>
@@ -358,14 +358,8 @@ User Registration
     
 
     }
-
-
-
   );
-
-
-
-
+</script>
 
 
 
