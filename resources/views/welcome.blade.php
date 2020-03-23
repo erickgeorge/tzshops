@@ -57,7 +57,7 @@ background-color:  #376ad3;
                              User Name') }}</strong></label>
 
                            
-                                <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('email') }}" required autofocus placeholder="Enter User Name">
+                                <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" required autofocus placeholder="Enter User Name">
                                  <!-- <small id="emailHelp" class="form-text text-muted">Your Name is Handled Privately.</small>-->
 
                                 @if ($errors->has('email'))

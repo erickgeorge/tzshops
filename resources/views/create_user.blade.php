@@ -103,7 +103,8 @@ User Registration
 	</div>
 	</div>
 </div>
-
+<div class="row">
+	<div class="col">
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <label  style="height: 28px" class="input-group-text" for="inputGroupSelect01">Role</label>
@@ -114,6 +115,16 @@ User Registration
 	    <option value="2">Staff</option>
 	  </select>
 	</div>
+</div>
+	<div class="col">
+		<div class="input-group mb-3">
+	  <div class="input-group-prepend">
+	    <label class="input-group-text" for="inputGroupSelect01">Password</label>
+	  </div>
+	 <input type="password" name="password" required="" class="form-control">
+	</div>
+	</div>
+</div>
 
   
 
