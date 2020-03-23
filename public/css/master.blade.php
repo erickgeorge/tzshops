@@ -330,41 +330,9 @@
 
 
             </ul>
+            <span class="navbar-text">
 
-
-
-    <span class="navbar-text">
       <ul class="navbar-nav mr-auto">
-
-        <?php use App\usertype;
-         $usertypes = usertype::where('user_id', auth()->user()->id)->get();
-
-        $check = auth()->user()->id; ?>
-           @foreach($usertypes as $type)
-
-            @if($type->type2 == NULL)
-            @else
-  
-              <form action="{{route('changeusertype' , [$check])}}" method="POST">
-                   @csrf
-             <div >
-              @foreach($usertypes as $type)
-               <select style="background-color: #376ad3; color: white;font-weight:bold;margin-top: 8px; " name="usertype" onchange="this.form.submit();">
-                 <option>Role</option>
-                 <option value="{{$type->type}}"> {{$type->type}}</option>
-                 <option value="{{$type->type2}}">{{$type->type2}}</option>
-                </select>
-              @endforeach 
-             </div>
-             </form>
-
-             @endif
-
-             @endforeach   
-
-
-
-
         <li>
              @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
@@ -1099,14 +1067,6 @@ for (i = 0; i < dropdown.length; i++) {
 
       $("#iowzone").select2({
             placeholder: "Choose zone Location...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#secondtype").select2({
-            placeholder: "Choose second user type...",
             allowClear: true
         });
 </script>

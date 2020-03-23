@@ -45,7 +45,8 @@
     </style>
 
 <div>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom: #fff 2px solid;">
+    <nav class="navbar fixed-top navbar-expand-lg "  style="border-bottom: #ebe9e6 8px solid; background-color: #376ad3;">
+
        
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -55,9 +56,12 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
+                   <li class="nav-item" style="margin-top: -10px;">
+                  <a class="nav-link" style="color:white" >
+                    <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
+              </li>
                
-
-
+               
 <?php 
                 use App\WorkOrderMaterial;
         use App\PurchasingOrder;
@@ -695,7 +699,6 @@
 
 <style>
 
-
 /* Fixed sidenav, full height */
 .sidenav {
   height: 100%;
@@ -704,9 +707,11 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #c2bebe;
+  background-color: none;
+  background-color: none;
   overflow-x: hidden;
   padding-top: 20px;
+  border-right: #ebe9e6 8px solid
 }
 
 /* Style the sidenav links and the dropdown button */
@@ -745,16 +750,14 @@
   background-color: #c2bebe;
   color: white;
 
- 
- 
-
 
 
 }
 
 .sidenav a, .dropdown-btn, .sidenav button {
   color: #f1f1f1;
-   background: grey;
+  border: none;
+   background: #376ad3;
     margin-top: 2px; 
 }
 
@@ -782,6 +785,11 @@
   background-color: white;
 
 
+
+}
+
+.dropdown-container a {
+  background-color: black;
 
 }
 

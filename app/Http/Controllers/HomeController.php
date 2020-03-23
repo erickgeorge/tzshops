@@ -20,6 +20,7 @@ use App\workordersection;
 use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
 use App\iowzone;
+use App\usertype;
 use App\Note;
 use Redirect;
 use PDF;
@@ -179,9 +180,7 @@ class HomeController extends Controller
             }
 
 
-             else if (auth()->user()->type == "Inspector Of Works"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
-            } 
+        
              else
             
         {// HOS and their work order type 
@@ -743,9 +742,7 @@ $v5=$type[4];
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
             }
 
-             else if (auth()->user()->type == "Inspector Of Works"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
-            }
+           
 
             else if (auth()->user()->type == "DVC Admin"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
@@ -1323,9 +1320,12 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $users = User::where('id', '<>', auth()->user()->id)->where('status', '=', 1)->get();
-
-
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        
+
+
+   
+        
 //        return response()->json($users);
         return view('viewusers', ['display_users' => $users, 'role' => $role,'notifications' => $notifications]);
 

@@ -26,13 +26,6 @@ html, body {
 				
 			}
 			
-			custom-select
-			
-			input,select{
-				
-				color:black;
-background-color:black; 
-font-weight:bold;
 
 	
 }
@@ -139,9 +132,6 @@ hr {
   border-top: 5px solid rgb(169,169,169);
 }
 
-.welcome-body{
-    background-image: url('/meeeting.jpg');
-}
 
 
 

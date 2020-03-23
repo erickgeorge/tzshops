@@ -8,12 +8,12 @@
    @if(count($items) > 0)
 
     <br>
-    <div class="row container-fluid" style="margin-top: 6%;">
+    <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type =='STORE')
-            <h3 align="center"><b>Work orders with Material available and required by Head of Section</b></h3>
+            <h3 align="center"><b>Works orders with Material available and required by Head of Section</b></h3>
             @else
-            <h3 align="center"><b>Work orders with Material received From Store</b></h3>
+            <h3 align="center"><b>Works orders with Material received From Store</b></h3>
             @endif
 
         </div>
@@ -42,7 +42,7 @@
            <tr style="color: white;">
                 <th >#</th>
               
-				<th >Workorder ID</th>
+				<th >Works order ID</th>
 				<th >Store Manager</th>
 				<th >Action</th>
 				
@@ -63,7 +63,7 @@
                     <td>Mr .{{ $item['userreceiver']->lname.' '.$item['userreceiver']->fname }}</td>
 					
                  
-                      <td>  <a style="color: green;" href="received/materials/from_store/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">Material</a>&nbsp;
+                      <td>  <a style="color: green;" href="received/materials/from_store/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">View Material</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach

@@ -42,9 +42,9 @@
             <select required style="width: 300px;min-width: 150px;" id="nameid" name="p_type">
                 <option selected value="">Choose... <sup style="color: red;">*</sup></option>
                 <?php use App\workordersection; ?>
-<?php $sectionss = workordersection::get(); ?>
- @foreach($sectionss as $sectionss) 
-               <option value="{{ $sectionss->section_name }}"><?php echo strtoupper( $sectionss->section_name ); ?></option>
+      <?php $sectionss = workordersection::get(); ?>
+      @foreach($sectionss as $sectionss) 
+               <option value="{{ $sectionss->section_name }}"><?php echo strtolower( $sectionss->section_name ); ?></option>
                @endforeach
                    
             </select>

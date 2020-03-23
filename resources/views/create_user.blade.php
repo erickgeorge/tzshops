@@ -5,6 +5,8 @@ User Registration
 @endSection
 
 @section('body')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script src= 
 "https://code.jquery.com/jquery-1.12.4.min.js"> 
 	</script> 
@@ -52,7 +54,7 @@ User Registration
 </div>
 @endif
 <div class="col-lg-12">
-<p style="color: red">All fields are compulsory</p>
+<p style="color: red">All fields are compulsory except second type of user</p>
 
 
 
@@ -155,24 +157,19 @@ User Registration
 	    </div>
 	</div>
 
-
-
-
-	
-
 </div>
 
 
 
 
 
-     <div>
+
 
 	
 	    <label>Type of User</label><br>
 
-	
-	  
+	  <div class="row">
+	  <div class="col">
             <div >
                  <div class="checkbox">
             <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
@@ -182,12 +179,12 @@ User Registration
        
 
               <div id="locationdiv" >
-               <select  required style="width: 300px;" class="custom-select" name="type" id="type">
+               <select  required style="width: 500px;" class="custom-select" name="type" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>	                  
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
 	                  <option value="CLIENT">Client</option>
- 	                  <option value="CLIENT">Client</option>
+ 	                 
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
 	                  <option value="Estates officer">Estates officer</option>
@@ -196,7 +193,7 @@ User Registration
 
 	                  @foreach($worksec as $dep)
  
-                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
          
                        @endforeach
 
@@ -217,7 +214,7 @@ User Registration
 	           
 
                <div id="divmanual">
-               <select  required style="width: 300px;" class="custom-select" name="zone" id="zone">
+               <select  required style="width: 500px;" class="custom-select" name="zone" id="zone">
 	                  @foreach($zone as $zone)
                        <option  value="{{$zone->zonename}}"  ><?php echo strtoupper( $zone->zonename ); ?></option>
                       @endforeach
@@ -226,6 +223,54 @@ User Registration
                 
 
                 </div>
+
+        </div>
+
+
+
+	     <div class="col">
+	<div class="align-content-center">
+		<div class="input-group mb-3">
+	          <div class="contacts">
+                      Second type of user
+             
+              	<br>
+  
+                <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
+	                  <option value="" selected>Choose...</option>
+	                  <option value="Accountant">Accountant</option>	                  
+	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
+	                  <option value="CLIENT">Client</option>
+ 	                 
+	                  <option value="DVC Admin">DVC Admin</option>
+	                  <option value="Director DPI">Director DPI</option>
+	                  <option value="Estates officer">Estates officer</option>
+	                  <option value="Estates Director">Estates Director</option>
+	                  <option value="Head Procurement">Head of Procurement</option>
+
+	                  @foreach($worksec as $dep)
+ 
+                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+         
+                       @endforeach
+
+	                  <option value="Head PPU">Head PPU</option>
+
+	                  
+	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
+	                  <option value="STORE">Store Manager</option>
+
+	                  <option value="Secretary to Council">Secretary to Council</option>
+
+	                  <option value="Supervisor LECC ">Supervisor LECC </option>
+
+	                  <option value="Transport Officer">Transport Officer</option>
+
+	           </select>
+             </div>
+	 </div>
+	</div>
+	</div>
     
 
 
@@ -301,6 +346,29 @@ User Registration
 
 
     </script>
+
+
+
+<script>
+  var allCheckboxes = $("input[type=checkbox]");
+
+  allCheckboxes.click(
+    function () {
+      var showSendSelected = $("input[type=checkbox]:checked").length > 0;
+      var sendSelectedLink = $("#div2");
+      if (showSendSelected) {
+
+        sendSelectedLink.show();
+        
+      } else {
+        sendSelectedLink.hide();
+      }
+     
+    
+
+    }
+  );
+</script>
 
 
 
