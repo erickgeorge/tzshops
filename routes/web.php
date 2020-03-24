@@ -605,7 +605,7 @@ Route::post('change_user_type/{check}','UserController@changetypeview')->name('c
 Route::post('workorder/create/landscaping', 'LandscapingController@createlandwork')->name('wo.create.landscaping');
 
 Route::get('/createlandworkorders', 'LandscapingController@createlandwo');
-Route::get('/Land/work_order', 'LandscapingController@landworkorderview');
+Route::get('/Land/work_order', 'LandscapingController@landworkorderview')->name('Land_work_order');
 Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwoland')->name('workOrder.track.landscaping');
 Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc');
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping');
@@ -613,6 +613,9 @@ Route::get('edit/work_order/landscaping/{id}', 'LandscapingController@editwoland
 
 Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping');
 Route::post('assessment/work_order/landscaping/{id}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping');
+
+Route::post('assessment/work_order/activity/landscaping/{id}', 'LandscapingController@landassessmentactivityForm')->name('work.assessment.activity.landscaping');
+
 
 
 

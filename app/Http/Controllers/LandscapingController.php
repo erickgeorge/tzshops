@@ -16,6 +16,7 @@ use App\landscapinginspectionform;
 use App\company;
 use App\cleaningarea;
 use App\landassessmentform;
+use App\landassessmentactivityform;
 
 
 
@@ -64,7 +65,7 @@ class LandscapingController extends Controller
 
         $work_order->save();
 
-        return redirect()->back()->with(['message' => 'Works order for ladscaping is successfully created']);
+        return redirect()->route('Land_work_order')->with(['message' => 'Works order for ladscaping is successfully created']);
     }
 
 
@@ -310,7 +311,47 @@ class LandscapingController extends Controller
         return redirect()->route('workOrder.edit.landscaping', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,  
-            'message' => 'Assesmennt from successfully updated',
+            'message' => 'Assessment company from successfully updated',
+            'wo' => landworkorders::where('id', $id)->first()
+        ]);
+    }
+
+
+
+         public function landassessmentactivityForm(Request $request, $id)
+    {
+
+      
+          
+ 
+ 
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+             $y=1;
+             $z=1;
+             for ($x = 1; $x <= $request['activity']; $x++) {
+            
+             $form = new landassessmentactivityform();
+
+             $form->activity = $request[$z];
+             $z=$z+1;
+             $z++;
+            
+            $form->work_id = $id;
+            $form->save();
+
+            }
+
+
+            $inspectionForm = landworkorders::where('id', $id)->first();
+            $inspectionForm->status =4;
+            $inspectionForm->save();
+        
+
+        return redirect()->route('workOrder.edit.landscaping', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,  
+            'message' => 'Assessment activity from successfully updated',
             'wo' => landworkorders::where('id', $id)->first()
         ]);
     }
@@ -318,3 +359,4 @@ class LandscapingController extends Controller
 
 
 }
+

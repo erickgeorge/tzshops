@@ -31,10 +31,10 @@
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Type of a problem</label>
+            <label class="input-group-text">Maintenance Section</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
-               aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
+               aria-describedby="emailHelp" value="{{ $wo->maintenance_section }}" disabled>
     </div>
     
      @if(empty($wo->room_id))

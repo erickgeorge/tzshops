@@ -74,10 +74,10 @@ var total=2;
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text">Maintainance Section</label>
+            <label class="input-group-text">Maintenance Section</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
-               aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
+               aria-describedby="emailHelp" value="{{ $wo->maintenance_section }}" disabled>
     </div>
     
     @if(empty($wo->room_id) )
@@ -150,7 +150,8 @@ var total=2;
                     <div class="tab-group row">
 
                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORM</button>
-                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'assesment')">ASSESSMENT FORM</button>
+                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'assesment')">ASSESSMENT FORM(COMPANY)</button>
+                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'assesment_activity')">ASSESSMENT FORM(ACTIVITY)</button>
                         
                         <button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
                         </button>
@@ -256,16 +257,6 @@ var total=2;
 
 
 
-                        <p>Activity</p>
-                        <div class="form-group">
-                            <textarea  style="color: black; width:  700px;" name="activity" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Activity..."></textarea>
-                        </div>
-
-
-                        <p>Score</p>
-                        <div class="form-group">
-                            <input type="number"   style="color: black; width:  700px;" name="score" required maxlength="500" class="form-control"  rows="5" id="comment" placeholder="Score"></input>
-                        </div>
 
                      <!--   <p>Assesor Remark</p>
                         <div class="form-group">
@@ -287,6 +278,69 @@ var total=2;
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
                     </div>
                 </form>
+                {{-- end assesment --}}
+
+
+
+
+                {{-- ASSESMENT actvity tab--}}
+
+ <form method="POST" action="{{ route('work.assessment.activity.landscaping', [$wo->id]) }}">
+                    @csrf
+                    <div id="assesment_activity" class="tabcontent">
+           
+
+<style>
+        table {
+            width: 100%;
+            font: 17px Calibri;
+        }
+        table, th, td {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+    </style>
+
+
+    <table id="dataTable" width="350px"  >
+        <th></th>
+        <th>No</th>
+        <th>Activity</th>
+        <th>Percentage</th>
+        <th>Score</th>
+        <th>Remark</th>
+        <TR>
+            <td><input type="checkbox" name="chk"/></td>
+            <td> 1 </TD>
+            <td> <textarea required = "required" placeholder="Enter assesment activity" name="activity" ></textarea></td>
+      
+        </TR>
+    </table>
+
+
+
+    <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
+
+    <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
+    <br>
+    <br>
+
+     <button id="bt" style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                 <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+
+
+
+
+</form>
+</div>
+
+
+
+
+
+
                 {{-- end assesment --}}
 
                 
@@ -324,6 +378,67 @@ var total=2;
                     </div>
                 </form>
                 {{-- end request_transport form --}}
+
+
+
+
+
+
+   
+    <SCRIPT language="javascript">
+        function addRow(tableID) {
+
+            var table = document.getElementById(tableID);
+
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("input");
+            element1.type = "checkbox";
+            element1.name="chkbox[]";
+            cell1.appendChild(element1);
+
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = rowCount ++;
+
+            var cell3 = row.insertCell(2);
+            var element2 = document.createElement("textarea");
+            element2.type = "text";
+            element2.required = "required";
+            element2.placeholder = "Enter assesment activity";
+            element2.name = "activity[]";
+            cell3.appendChild(element2);
+
+
+
+
+        }
+
+        function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+
+    </SCRIPT>
+
+
                 
   @endSection
  

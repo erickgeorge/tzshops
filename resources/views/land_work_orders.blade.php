@@ -249,10 +249,10 @@ foreach($userwithid as $userwithid)
                     <th>#</th>
           <th>ID</th>
                     <th>Details</th>
-                    <th>Maintenance Section</th>
+                    <th>Section</th>
                     <th>From</th>
                     <th>Status</th>
-                    <th>Created date</th>
+                    <th>Createddate</th>
                     <th>Location</th>
                     <th>Duration</th>
                     <th>Actions</th>
@@ -279,6 +279,8 @@ foreach($userwithid as $userwithid)
                             <td><span class="badge badge-success">accepted</span></td>
                             @elseif($work->status == 3)
                              <td><span class="badge badge-success">Inspection Stage</span></td>
+                            @elseif($work->status == 4)
+                             <td><span class="badge badge-success">Assessment Stage</span></td>
                             @endif
  
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
