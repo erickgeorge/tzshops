@@ -16,7 +16,7 @@
 
 @section('body')
 
-
+ @if(count($wo) > 0)
     <br>
     <div class="row container-fluid ">
         <div class="col-lg-12">
@@ -50,13 +50,13 @@
  
 </div>
 
-        @if(count($wo) > 0)
+       
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
                    
 					<th>Technician name</th>
-                    <th>Total Work orders Completed</th>
+                    <th>Total Works orders Completed</th>
                    
                 </tr>
                 </thead>
@@ -87,7 +87,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no Technician completed Work order</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no technician completed works order</h1>
         @endif
     </div>
     <script>

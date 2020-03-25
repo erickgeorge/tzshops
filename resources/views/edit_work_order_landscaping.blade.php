@@ -312,10 +312,10 @@ var total=2;
         <th>Score</th>
         <th>Remark</th>
         <TR>
-            <td><input type="checkbox" name="chk"/></td>
-            <td> 1 </TD>
-            <td> <textarea required = "required" placeholder="Enter assesment activity" name="activity" ></textarea></td>
-      
+            <td><input hidden type="checkbox" name="chk"/></td>
+            <td hidden > 1 </TD>
+            <td> 
+                <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
         </TR>
     </table>
 
@@ -388,6 +388,13 @@ var total=2;
     <SCRIPT language="javascript">
         function addRow(tableID) {
 
+              var value = parseInt(document.getElementById('totalmaterials').value, 10);
+              value = isNaN(value) ? 0 : value;
+              value++;
+              document.getElementById('totalmaterials').value = value;
+
+  
+
             var table = document.getElementById(tableID);
 
             var rowCount = table.rows.length;
@@ -402,13 +409,18 @@ var total=2;
             var cell2 = row.insertCell(1);
             cell2.innerHTML = rowCount ++;
 
+
+  
+
             var cell3 = row.insertCell(2);
             var element2 = document.createElement("textarea");
             element2.type = "text";
             element2.required = "required";
             element2.placeholder = "Enter assesment activity";
-            element2.name = "activity[]";
+            element2.name = "activity";
             cell3.appendChild(element2);
+            
+
 
 
 

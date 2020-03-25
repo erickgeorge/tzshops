@@ -50,6 +50,7 @@
             </select>
              </div>
             </div>
+            </div>
         <div >
                 
         <?php
@@ -62,14 +63,14 @@
                 <div class="input-group-prepend">
                     <label  class="input-group-text" for="inputGroupSelect01">Enter Location in text</label>
                 </div>
-                <input   style="color: black" type="text" maxlength="35" class="form-control" id="manual"
+                <input   style="color: black; width: 265px;" type="text" maxlength="35" id="manual"
                        aria-describedby="emailHelp" name="manual" placeholder="Type Location Address">
             </div>
         </div>
 
             </div>
 
-        </div>
+        
         <div class="row">
             <div class="col">
                  <div class="checkbox">

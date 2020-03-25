@@ -2497,7 +2497,7 @@ $v5=$type[4];
         }
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',2)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
+        return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',30)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
  
         }
         
@@ -2505,7 +2505,7 @@ $v5=$type[4];
         
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',2)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
+        return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',30)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
    }
    
    

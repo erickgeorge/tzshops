@@ -632,13 +632,13 @@
                     -->
 
 
-  <button  class="dropdown-btn"><h6>Works order Reports
+  <button  class="dropdown-btn"><h6>Works orders Reports
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a class="btn" href="{{ url('/unattended_work_orders')}}"><h6>Unattended Work Orders</h6></a>
-    <a class="btn" href="{{ url('/completed_work_orders')}}"><h6>Completed Work Orders</h6></a>
-    <a class="btn" href="{{ url('/woduration')}}"><h6>Work Orders Duration</h6></a>
+    <a class="btn" href="{{ url('/unattended_work_orders')}}"><h6>Unattended Works orders</h6></a>
+    <a class="btn" href="{{ url('/completed_work_orders')}}"><h6>Completed Works orders</h6></a>
+    <!--<a class="btn" href="{{ url('/woduration')}}"><h6>Works orders Duration</h6></a>-->
 
 
   </div>
@@ -658,8 +658,9 @@
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a href="{{ url('/techniciancountcomp')}}"><h6>Technician Completed Work</h6></a>
-    <a href="{{ url('/alltechnicians')}}"><h6>All Technicians Details</h6></a>
+    <a href="{{ url('/alltechnicians')}}"><h6>All Technicians details</h6></a>
+    <a href="{{ url('/techniciancount')}}"><h6>Technician on Work(duty)</h6></a>
+    <a href="{{ url('/techniciancountcomp')}}"><h6>Technician completed work</h6></a>
   </div>
 
 
@@ -802,7 +803,7 @@
      <a href="{{ url('myzone')}}"><h6>My Zone </h6></a>
 
 
-                        <a href="{{ url('work_order_material_needed')}}"><h6>Work order needs material <span
+                        <a href="{{ url('work_order_material_needed')}}"><h6>Works orders needs material <span
                                     class="badge badge-light">{{ count($material_requests) }}</span></h6></a>
 
 

@@ -5,13 +5,13 @@
     @endSection
 
 @section('body')
-
+@if(count($wo) > 0)
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
             <h3><b>Work orders with duration </b></h3>
         </div>
-@if(count($wo) > 0)
+
         <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -79,7 +79,7 @@ use App\WorkOrder;
                 <select name="name" class="form-control mr-sm-2">
                     <option selected="selected" value="">name</option>
                     <?php
-////////////WADUDUUUUUUUUUUUU
+///////////
 
   $userwithid = WorkOrder::select('staff_id')->Where('status','2')->distinct()->get();
    foreach($userwithid as $userwithin){
@@ -112,7 +112,7 @@ use App\WorkOrder;
           }  }
       
 
-//WADUDUUUUUUUUUUUUUUUUUUUUUUU
+//
 
       ?>
                 </select>

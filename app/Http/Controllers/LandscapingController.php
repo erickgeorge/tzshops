@@ -322,26 +322,24 @@ class LandscapingController extends Controller
     {
 
       
-          
+            $y=1;
+        $totmat=$request['totalinputs'];
+
  
  
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-             $y=1;
-             $z=1;
-             for ($x = 1; $x <= $request['activity']; $x++) {
-            
-             $form = new landassessmentactivityform();
+             
+               $z=1;
+      
+      for ($x = 1; $x <= $totmat; $x++) {
 
-             $form->activity = $request[$z];
+            $matr = new landassessmentactivityform();
+            $matr->activity = $request[$z];
              $z=$z+1;
-             $z++;
-            
-            $form->work_id = $id;
-            $form->save();
-
-            }
-
+             $z=$z++;
+            $matr->save();
+}
 
             $inspectionForm = landworkorders::where('id', $id)->first();
             $inspectionForm->status =4;
