@@ -5,6 +5,7 @@
     @endSection
 
 @section('body')
+<?php use App\iowzonelocation; ?>
 <style type="text/css">
   #Div2 {
   display: none;
@@ -193,7 +194,9 @@
     
 
                <?php use App\iowzone; ?>
-               <?php $iowzone = iowzone::get(); ?>
+               <?php $iowzone = iowzone::get(); 
+
+               ?>
  
           @if( $user->type == "Inspector Of Works")
 
@@ -205,9 +208,18 @@
            
                
                @foreach($iowzone as $zone) 
+               <?php $locationzone = iowzonelocation::where('iowzone_id',$zone->id)->get();
+                  $zoneloc = count($locationzone);
+                ?>
                <option <?php if(($user->zone == $zone->zonename)) {?>
-                                selected="selected"
-                                <?php } ?>
+                                selected="selected" 
+                                <?php } 
+
+                                if($zoneloc < 1){
+                                  echo 'disabled';
+                                }
+
+                                ?> 
                                 value="{{ $zone->zonename }}" ><?php echo strtoupper( $zone->zonename ); ?></option>
                @endforeach
 

@@ -714,7 +714,33 @@ public function transportforwork(Request $request, $id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+//777
+        if(request()->has('year'))  {
 
+            $from=request('year');
+
+        if ($role['user_role']['role_id'] == 1) {
+            return view('deleted_work_orders', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'wo' => WorkOrder::where('status', 0)->whereYear('created_at',$from)->get()
+            ]);
+        } else
+            if (strpos(auth()->user()->type, "HOS") !== false) {
+                return view('deleted_work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->whereYear('created_at',$from)->get()
+                ]);
+            }
+        return view('deleted_work_orders', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', 0)->whereYear('created_at',$from)->get()
+        ]);
+    } 
+    else
+    {
         if ($role['user_role']['role_id'] == 1) {
             return view('deleted_work_orders', [
                 'role' => $role,
@@ -735,6 +761,7 @@ public function transportforwork(Request $request, $id)
             'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', 0)->get()
         ]);
     }
+}
 
 
 

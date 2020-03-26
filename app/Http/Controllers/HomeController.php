@@ -714,6 +714,593 @@ $v5=$type[4];
 }
 
 
+
+////////// 1234 ///////////////////////////
+if(request()->has('year'))  { //date filter
+        
+        
+        $from=request('year');
+        
+        
+        
+        
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        if ($role['user_role']->role_id == 1){
+            return view('work_orders', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+            ]);
+        }//if role=1
+
+        else { //role role not 1
+
+
+
+                $type=explode(",",auth()->user()->type);
+                $length=count($type);
+
+
+                   if($length==1){
+
+            if (strpos(auth()->user()->type, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (auth()->user()->type == "Maintenance coordinator"){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            
+            
+            else if (auth()->user()->type == "Estates Director"){
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()]);
+            } 
+            else if (auth()->user()->type == "DVC Admin"){
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()]);
+            }
+
+
+        
+             else
+            
+        {// HOS and their work order type 
+
+        return view('work_orders', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+        ]);
+   
+        
+        
+    }//
+
+}
+
+
+ //lenght not 1
+
+ else if($length==2){
+
+
+
+
+$v1=$type[0];
+$v2=$type[1];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', $v2)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+                else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type',$v1)->orwhere('problem_type', $v2)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+}
+
+else if($length==3){
+
+
+$v1=$type[0];
+$v2=$type[1];
+$v3=$type[2];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', $v2)->orwhere('problem_type', $v3)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+                else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") !== false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type',$v1)->orwhere('problem_type', $v2)->orwhere('problem_type', $v3)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+            else  if(strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type',$v1)->orwhere('problem_type', $v2)->orwhere('problem_type', $v3)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") !== false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") !== false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', $v1)->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+}
+
+
+else if($length==4){
+
+
+$v1=$type[0];
+$v2=$type[1];
+$v3=$type[2];
+$v4=$type[3];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+                else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+            else  if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+          else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+           else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+          else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+          else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+         else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+
+}
+
+
+
+else if($length==5){
+
+
+$v1=$type[0];
+$v2=$type[1];
+$v3=$type[2];
+$v4=$type[3];
+$v5=$type[4];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+               else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+           else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+           else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+          else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+          else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+         else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+         else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+       else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                return view('work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr($v1, " "), 1))->orwhere('problem_type', substr(strstr($v2, " "), 1))->orwhere('problem_type', substr(strstr($v3, " "), 1))->orwhere('problem_type', substr(strstr($v4, " "), 1))->orwhere('problem_type', substr(strstr($v5, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+
+
+}
+
+
+
+
+ }
+}
+////////// --1234-- ///////////////////////////
+
+
  
 //lenght
 // end start 
