@@ -12,12 +12,13 @@ use App\Department;
 use App\Section;
 use App\WorkOrder;
  ?>
+  @if(count($wo) > 0)
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
             <h3><b>Completed Work orders</b></h3>
         </div>
- @if(count($wo) > 0)
+
         <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -158,8 +159,8 @@ use App\WorkOrder;
           <!-- ---------------------- -->
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead >
+                <tr style="color: white;">
                     <th>#</th>
                     <th>Details</th>
                     <th>Type</th>
@@ -173,7 +174,7 @@ use App\WorkOrder;
 
                 <tbody>
 
-                {{-- CREATE A CLASS WITH DEFINED W.O STASTUS FROM 1-7 THAT WILL CHECK HE STATUS NUMBER AND RETURN STATUS WORDS --}}
+              
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
@@ -184,27 +185,9 @@ use App\WorkOrder;
                             <td id="wo-details">{{str_limit($work->details, 10) }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                            @if($work->status == -1)
-                                <td><span class="badge badge-warning">new</span></td>
-                            @elseif($work->status == 1)
-                                <td><span class="badge badge-success">accepted</span></td>
-                                
-                            @elseif($work->status == 2)
-                                <td><span class="badge badge-success">CLOSED</span></td>
-                            @elseif($work->status == 3)
-                                <td><span class="badge badge-info">technician assigned</span></td>
-                            @elseif($work->status == 4)
-                                <td><span class="badge badge-info">transportation stage</span></td>
-                            @elseif($work->status == 5)
-                                                            <td><span class="badge badge-info">pre-implementation</span></td>
-                            @elseif($work->status == 6)
-                                                            <td><span class="badge badge-info">post implementation</span></td>
-                            @elseif($work->status == 7)
-                                                            <td><span class="badge badge-info">material requested</span></td>
-                            @else
-                                <td><span class="badge badge-success">procurement stage</span></td>                             
-                            @endif
-                            
+                         
+                                                            <td><span class="badge badge-info">Completed Closed</span></td>
+                           
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                             <td>
 

@@ -1037,7 +1037,7 @@ var total=2;
 
                         </div>
                        <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
- @if($wo->zone_location != null)
+                    @if($wo->zone_location != null)
                     <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
                     @endif
 

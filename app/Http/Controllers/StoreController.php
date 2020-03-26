@@ -688,8 +688,8 @@ public function deletematerial($id)
 
     public function procuredmaterialsadding(Request $request)
     {
-      $y=1;
-    $totmat=$request['totalinputs']/6;
+        $y=1;
+        $totmat=$request['totalinputs']/6;
    
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         

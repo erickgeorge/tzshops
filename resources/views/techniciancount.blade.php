@@ -11,11 +11,12 @@
         }
 		
     </style>
-@section('title')
+    @section('title')
     Technician on Progress
     @endSection
 
 @section('body')
+@if(count($wo) > 0)
 
     <br>
     <div >
@@ -59,13 +60,13 @@
 	
 	
 
-        @if(count($wo) > 0)
+        
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
                    
 					<th>Technician name</th>
-                    <th>Total Work orders</th>
+                    <th>Total Works orders</th>
                    
                 </tr>
                 </thead>
@@ -96,7 +97,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no Available Technician on Progress</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no available technician on progress</h1>
         @endif
     </div>
     <script>

@@ -11,12 +11,14 @@ use App\Directorate;
 use App\Department;
 use App\WorkOrder;
  ?>
+@if(count($wo) > 0)
     <br>
-    <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
+
+    <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b>Unattended Work orders</b></h3>
+            <h3><b>Unattended Works orders</b></h3>
         </div>
- @if(count($wo) > 0)
+ 
         <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -34,7 +36,7 @@ use App\WorkOrder;
             </form>
         </div>
 
-@endif
+
        
     </div>
     <br>
@@ -53,11 +55,11 @@ use App\WorkOrder;
    
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
       <!-- SOMETHING STRANGE HERE -->
-      @if(count($wo) > 0)
+      
                 <div class="col" align="right">
            <button data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </button>
         </div>
-        @endif
+     
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -148,7 +150,7 @@ use App\WorkOrder;
   </div>
 </div>
           <!-- ---------------------- -->
-        @if(count($wo) > 0)
+       
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
@@ -165,7 +167,7 @@ use App\WorkOrder;
 
                 <tbody>
 
-                {{-- CREATE A CLASS WITH DEFINED W.O STASTUS FROM 1-7 THAT WILL CHECK THE STATUS NUMBER AND RETURN STATUS WORDS --}}
+                
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
@@ -241,7 +243,7 @@ use App\WorkOrder;
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no available unattended work order</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no available unattended works order</h1>
         @endif
     </div>
     <script>
