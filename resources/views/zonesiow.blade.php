@@ -19,7 +19,7 @@
     <br>
     <div >
         <div class="container">
-            <h4 ><b>List of works order assigned in  @if(auth()->user()->type == 'Maintenance coordinator')
+            <h4 style="text-transform: uppercase;"><b>List of works order assigned in  @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h4>
         </div>
 
@@ -689,7 +689,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no workorder</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

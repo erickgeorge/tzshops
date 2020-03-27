@@ -1,7 +1,7 @@
 @extends('layouts.land')
 
 @section('title')
-    work order
+    works order
     @endSection
 
 @section('body')
@@ -19,7 +19,7 @@
     <br>
     <div >
         <div class="col-lg-12">
-            <h3 align="center">Landscaping works order details</h3>
+            <h3 align="center" style="text-transform: uppercase;">Landscaping works order details</h3>
         </div>
     
   

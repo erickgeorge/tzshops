@@ -11,7 +11,7 @@
      @if(count($wo) > 0)
     <div class="row container-fluid"  style="margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h3>Rejected work orders</h3>
+            <h3 style="text-transform: uppercase;">Rejected works orders</h3>
         </div>
     </div>
     <hr>

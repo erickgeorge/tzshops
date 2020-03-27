@@ -19,7 +19,7 @@
             </ul>
         </div>
             @endif
-        <h3><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b></h3>
+        <h3 style="text-transform: uppercase;"><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b></h3>
                   <hr>
                 <a href="{{ route('registernonbuildingasset') }}" 
                    class="btn btn-primary">Add New Non-Building Assets</a>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Add Section For Workorder
+    Add Section For Works order
     @endSection
 @section('body')
 
@@ -24,7 +24,7 @@
             </ul>
         </div>
     @endif 
-                <h4 id="new_dep">Add New Section</h4>
+                <h4 id="new_dep" style="text-transform: uppercase;">Add New Section</h4>
                 <hr>
                 <form method="POST" action="{{ route('section.save') }}" class="col-md-6">
                     @csrf

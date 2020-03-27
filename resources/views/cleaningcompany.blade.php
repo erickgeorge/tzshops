@@ -21,10 +21,10 @@
             </ul>
         </div>
               @endif
-                  <h3><b>Available cleaning companies </b></h3>
+                  <h3><b style="text-transform: uppercase;">Available cleaning companies </b></h3>
                   <hr>
                 <a href="{{ route('registercompany') }}"
-                   class="btn btn-primary">Add new cleaning company</a>
+                   class="btn btn-primary" >Add new cleaning company</a>
                    <br> <br> 
     
                 <table id="myTableee" id="myTable" class="table table-striped">

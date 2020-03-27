@@ -14,7 +14,7 @@ use App\MinuteSheet; ?>
 
     <div>
         <div>
-            <h3 align="center"><b>Work order  with material to be purchased </b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Works order  with material to be purchased </b></h3>
         </div>
        
     </div>

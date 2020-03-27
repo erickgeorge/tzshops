@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center">Add new technician</h3>
+            <h3 align="center" style="text-transform: uppercase;">Add new technician</h3>
         </div>
     </div>
     <hr class="container">

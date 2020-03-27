@@ -1,4 +1,4 @@
-@extends('layouts.master')
+ @extends('layouts.master')
 
 @section('title')
     Closed Work Orders
@@ -17,7 +17,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>Closed Work orders list - 
+            <h3 style="padding-left: 90px;"><b style="text-transform: uppercase;">Closed Work orders list - 
 @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h3>
         </div>
@@ -707,7 +707,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no workorder</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

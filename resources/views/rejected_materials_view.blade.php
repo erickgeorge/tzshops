@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')
@@ -17,7 +17,7 @@
     <div class="row container-fluid">
        @if(auth()->user()->type != 'Inspector Of Works')
         <div class="col-lg-12">
-            <h3 align="center"><b>Material Rejected by Inspector of Work  </b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Material Rejected by Inspector of Work  </b></h3>
         </div>
         @else
         <div class="col-lg-12">
@@ -183,7 +183,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Inspector of Work Rejecting Material Request.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason of Rejecting Material Request.</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -365,7 +365,7 @@
 
 
     @else
-            <h1 class="text-center" style="margin-top: 150px">You have no material rejected by Inspector of Work</h1>
+            <h1 class="text-center" style="margin-top: 150px ; text-transform: uppercase;">no material rejected by Inspector of Work</h1>
         @endif
     <!-- End Modals-->
 

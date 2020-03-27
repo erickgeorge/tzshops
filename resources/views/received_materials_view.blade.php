@@ -10,9 +10,9 @@
     <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type == 'STORE')
-            <h3 align="center"><b>List of Available Material required by Head of Section</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">List of Available Material required by Head of Section</b></h3>
             @else
-            <h3 align="center"><b>Available Material you requested  from Store </b></h3>
+            <h3 align="center" style="text-transform: uppercase;"><b>Available Material you requested  from Store </b></h3>
             @endif
         </div>
 
@@ -61,7 +61,7 @@
            <tr style="color: white;">
         <th >No</th>
 
-        <th >Workorder Details</th>
+        <th >Works order Details</th>
         <th >Material Name</th>
         <th >Material Description</th>
         <th >Type</th>

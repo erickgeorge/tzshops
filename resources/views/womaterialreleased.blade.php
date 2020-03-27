@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>Material released to work orders</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Material released to work orders</b></h3>
         </div>
        
     </div>
@@ -30,7 +30,7 @@
            <tr style="color: white;">
                 <th> </th>
                 <th >ID</th>
-				<th >Workorder Detail</th>
+				<th >Works order Detail</th>
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>

@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>Store Material Entry History </b></h3>
+            <h3 style="padding-left: 90px;"><b style="text-transform: uppercase;">Store Material Entry History </b></h3>
         </div>
 @if(count($procured) > 0)
         <div class="col-md-6">

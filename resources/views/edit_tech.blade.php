@@ -7,7 +7,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center">Edit technician</h3>
+            <h3 align="center" style="text-transform: uppercase;">Edit technician</h3>
         </div>
     </div>
     <hr class="container">

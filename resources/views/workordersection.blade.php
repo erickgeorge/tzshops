@@ -27,8 +27,8 @@ Workorder Section
         </div>
     @endif
 
-                <h2 style="margin-bottom: 20px;"
-                   class="btn btn-default">List of available Sections</h2>
+                <h2 style="margin-bottom: 20px; text-transform: uppercase;"
+                   class="btn btn-default" >List of available Sections</h2>
 
                
                 
@@ -36,7 +36,7 @@ Workorder Section
             <hr class="container">
 
             <a href="Add/section" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new Section for  Work order</a>
+                   class="btn btn-primary">Add new Section for  Works order</a>
                    <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 

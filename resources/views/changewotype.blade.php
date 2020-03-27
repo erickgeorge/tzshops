@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center">CHANGE PROBLEM TYPE :</h3>
+            <h3 align="center" style="text-transform: uppercase;">CHANGE PROBLEM TYPE :</h3>
         </div>
     </div>
     <hr>

@@ -24,7 +24,7 @@
             </ul>
         </div>
             @endif
-        <h3><b>Available Hall of Resdences </b></h3>
+        <h3><b style="text-transform: uppercase;">Available Hall of Resdences </b></h3>
                   <hr>
                 <a href="{{ route('registerhall') }}" 
                    class="btn btn-primary">Add new Hall of Resdence</a>

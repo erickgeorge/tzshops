@@ -11,7 +11,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>Works order with material accepted</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Works order with material accepted</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -98,7 +98,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h1> No Workorder Material accepted by Inspector of Work </h1></div>
+<div style="padding-top: 300px;" align="center"><h1> No Works order Material accepted by Inspector of Work </h1></div>
 
 @endif
     @endSection

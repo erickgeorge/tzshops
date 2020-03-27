@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b>Work orders with duration </b></h3>
+            <h3><b style="text-transform: uppercase;">Works orders with duration </b></h3>
         </div>
 
         <div class="col-md-6">
@@ -244,7 +244,7 @@ use App\WorkOrder;
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no works oder</h1>
         @endif
     </div>
     </div>

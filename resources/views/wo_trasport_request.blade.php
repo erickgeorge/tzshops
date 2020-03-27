@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>All transport Requests</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">All transport Requests</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">

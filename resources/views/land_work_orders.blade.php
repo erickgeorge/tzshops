@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 ><b>List of Landscaping work orders </b></h3>
+            <h3 ><b style="text-transform: uppercase;">List of Landscaping works orders </b></h3>
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">
@@ -65,7 +65,7 @@
         </div>
             <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected work orders
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected works orders
                 </button>
             </a>
         </div>
@@ -320,7 +320,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no workorder</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

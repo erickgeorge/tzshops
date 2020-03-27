@@ -21,7 +21,7 @@
     <br>
     <div >
         <div class="col-lg-12">
-            <h3 class="container"><b>Available Technician on Progress</b></h3>
+            <h3  class="container"><b style="text-transform: uppercase;">Available Technician on Progress</b></h3>
         </div>
 
         <!--<div class="col-md-6" align="right">
@@ -118,7 +118,7 @@
 		
 function printdiv(printpage)
 {
-var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORK ORDERS </h1>";
+var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORKS ORDERS </h1>";
 var footstr = "</body>";
 var newstr = document.all.item(printpage).innerHTML;
 //var exclude = document.getElementByid('exclude').innerHTML;

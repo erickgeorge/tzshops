@@ -13,7 +13,7 @@
 
     <div>
         <div>
-            <h3 style="text-align: center"><b>Release Material for the workorder</b></h3>
+            <h3 style="text-align: center"><b style="text-transform: uppercase;">Release Material for the works order</b></h3>
         </div>
        
     </div>

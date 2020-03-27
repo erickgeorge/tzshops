@@ -21,7 +21,7 @@
 <br>
 <div class="container" >
   <div class="col-lg-4">
-    <h3>Add procured materials</h3>
+    <h3 style="text-transform: uppercase;">Add procured materials</h3>
   </div>
 </div>
   @if(Session::has('message'))

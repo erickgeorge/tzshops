@@ -14,7 +14,7 @@
 
     <div>
         <div>
-            <h3 align="center" class="container"><b>Material Reserved for Work Order</b></h3>
+            <h3 align="center" class="container"><b style="text-transform: uppercase;">Material Reserved for Works Order</b></h3>
         </div>
        
     </div>

@@ -11,7 +11,7 @@
     <br>
     <div style="margin-top: 20px" align="center">
     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h5>Directorate of Estates Services</h5></p><p><b><?php
+    <p><h2>University of Dar es salaam</h2> <h5>Directorate of Estates Services</h5></p><p><b style="text-transform: uppercase;"><?php
      echo $header; 
      ?></b></p>
 </div><br>
@@ -28,7 +28,7 @@
     @endif
     <div class="row">
         <div class="col"  align="center">
-            <h5>This work order is submitted by  <span
+            <h5>This works order is submitted by  <span
                 style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;Contacts:{{ $wo['user']->phone }}, {{ $wo['user']->email }} </h5>
     
         </div>
@@ -70,7 +70,7 @@
   <hr>
   <br>
  @if($wo->emergency == 1)
-   <h6 align="center" style="color: red;"><b> This Workorder is Emergency </b></h6>
+   <h6 align="center" style="color: red;"><b> This Works order is Emergency </b></h6>
  @endif
 
 
@@ -237,7 +237,7 @@
      <h4><b>Material Used: </b></h4>
      
   @if(empty($wo['work_order_material']->id))
-        <p style="color: red">No Material Used for this Workorder</p>
+        <p style="color: red">No Material Used for this Works order</p>
     @else
     <?php
   
@@ -306,12 +306,12 @@
          
           @if($wo->status == 30)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Work order completely closed!</span>
+                <span class="badge badge-warning" style="padding: 20px">Works order completely closed!</span>
             </div>
 
         @elseif($wo->status == 2)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Work order tempolary closed!</span>
+                <span class="badge badge-warning" style="padding: 20px">Works order tempolary closed!</span>
             </div>
         @elseif($wo->status == 9)
               

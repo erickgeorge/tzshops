@@ -6,7 +6,7 @@
      @endforeach
                 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b>List of Inspector of Work in {{ $zonename->zone }}</b></p>
+    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of Inspector of Work in {{ $zonename->zone }}</b></p>
 </div><br>
 
 <style>

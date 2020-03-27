@@ -20,7 +20,7 @@
             </ul>
         </div>
             @endif
-            <h3><b>Available Campuses </b></h3>
+            <h3><b style="text-transform: uppercase;">Available Campuses </b></h3>
             <hr>
                 <a href="{{ route('registercampus') }}" 
                    class="btn btn-primary">Add New Campus</a>

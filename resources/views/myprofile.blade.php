@@ -40,7 +40,7 @@ padding: 20 20 20 20;
 
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center">Profile Details</h3>
+            <h3 align="center" style="text-transform: uppercase;">Profile Details</h3>
         </div>
     </div>
     <hr>

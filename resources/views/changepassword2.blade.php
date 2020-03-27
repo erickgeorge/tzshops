@@ -14,7 +14,7 @@
 
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Its your first time to log in into the system please change your password</b></h3>
+            <h3 align="center"><b >Its your first time to log in into the system please change your password</b></h3>
         </div>
     </div>
     <hr>

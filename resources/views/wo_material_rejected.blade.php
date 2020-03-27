@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')
@@ -10,7 +10,7 @@
      @if(count($items)>0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Works order with rejected Material </b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Works order with rejected Material </b></h3>
         </div>
 
         <div style="padding-left: 650px;">
@@ -58,7 +58,7 @@
            <tr style="color: white;">
                 <th >#</th>
                 <th >WO ID</th>
-				<th >Workorder Detail</th>
+				<th >Works order Detail</th>
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
@@ -106,7 +106,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Inspector of Work Rejecting Material Request.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Inspector of Work Rejected Material Request.</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>Work order with material reserved</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;"> Work order with material reserved</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -39,9 +39,9 @@
                 
 				
                 <th > No </th>
-				<th >Workorder ID </th>
+				<th >Works order ID </th>
                 <th >HoS Name </th>
-				<th >Workorder Detail</th>
+				<th >Works order Detail</th>
 				
 				<th >Action</th>
 				
@@ -75,7 +75,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h1> No Workorder Material accepted by Inspector of Work </h1></div>
+<div style="padding-top: 300px;" align="center"><h1> No Works order Material accepted by Inspector of Work </h1></div>
 
 @endif
     @endSection

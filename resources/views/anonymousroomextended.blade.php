@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>Room report - Block</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Room report - Block</b></h3>
         </div>
 
   

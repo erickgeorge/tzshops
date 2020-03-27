@@ -7,7 +7,7 @@
 @section('body')<br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>PPU Infrastructure Projects </b></h3>
+            <h3 style="padding-left: 90px;"><b style="text-transform: uppercase;">PPU Infrastructure Projects </b></h3>
         </div>
 @if(count($projects)>0)
         <div class="col-md-6">

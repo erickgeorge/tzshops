@@ -5,7 +5,7 @@
     @foreach($iowlocation as $iow)
      @endforeach
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b>List of available location for {{ $iow['iow']->fname. ' ' .$iow['iow']->lname  }} </b></p>
+    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of available location for {{ $iow['iow']->fname. ' ' .$iow['iow']->lname  }} </b></p>
 </div><br>
 
 <style>

@@ -7,7 +7,7 @@
     
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center">Available Technicians</h3>
+            <h3 align="center" style="text-transform: uppercase;">Available Technicians</h3>
         </div>
     </div>
     <div class="container">

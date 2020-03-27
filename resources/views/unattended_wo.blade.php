@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    completed work orders
+    completed works orders
     @endSection
 
 @section('body')
@@ -16,7 +16,7 @@ use App\WorkOrder;
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b>Completed Work orders</b></h3>
+            <h3><b style="text-transform: uppercase;">Completed Works orders</b></h3>
         </div>
 
         <div class="col-md-6">
@@ -232,7 +232,7 @@ use App\WorkOrder;
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work order</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
         @endif
     </div>
     <script>

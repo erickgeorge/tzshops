@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')
@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 ><b>Works orders list </b></h3>
+            <h3 ><b style="text-transform: uppercase;">Works orders list </b></h3>
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">

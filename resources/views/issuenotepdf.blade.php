@@ -1,7 +1,7 @@
 <div style="margin-top: 20px" align="center">
     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
     <p><h2>University of Dar es salaam</h2> <h5>DIRECTORATE OF ESTATE SERVICES</h5></p>
-    <p><b><u>ISSUE NOTE</u></b></p>
+    <p><b style="text-transform: uppercase;"><u>ISSUE NOTE</u></b></p>
 </div>
 <style>
     body { background-image:  url('/images/essuenote.jpg');
@@ -121,14 +121,14 @@ tr:nth-child(even) {
 
      
      <div class="container-name">
-     <div  class="div1" > WorkOrder No:<u style="padding-left: 100px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
+     <div  class="div1" > Works Order No:<u style="padding-left: 100px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
 
 
      <div class="div2">Date Received From Store:<u style="padding-left: 40px; width: 80px">    <?php $time = strtotime($item['material']->updated_at); echo date('d/m/Y',$time);  ?> </u> </div>
     </div>
 
 
-     <div  class="div1" > WorkOrder Details:<u style="padding-left: 60px; width: 45px"> {{ $item['workorder']->details }}</u> </div>
+     <div  class="div1" > Works Order Details:<u style="padding-left: 60px; width: 45px"> {{ $item['workorder']->details }}</u> </div>
 
 
 

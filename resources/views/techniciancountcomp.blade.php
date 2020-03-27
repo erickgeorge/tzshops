@@ -11,7 +11,7 @@
 		
     </style>
 @section('title')
-    work orders vs Technician count 
+    works orders vs Technician count 
     @endSection
 
 @section('body')
@@ -20,7 +20,7 @@
     <br>
     <div class="row container-fluid ">
         <div class="col-lg-12">
-            <h3 class="container"><b>Available Technician Completed their works order</b></h3>
+            <h3 class="container"><b style="text-transform: uppercase;">Available Technician Completed their works order</b></h3>
         </div>
              
   

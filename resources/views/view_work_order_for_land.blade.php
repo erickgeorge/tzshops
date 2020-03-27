@@ -1,7 +1,7 @@
 @extends('layouts.land')
 
 @section('title')
-    work order
+    works order
     @endSection
 
 @section('body')
@@ -9,7 +9,7 @@
     <div class="container">
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center">Landscaping works order details</h3>
+            <h3 align="center" style="text-transform: uppercase;">Landscaping works order details</h3>
         </div>
     </div>
     <hr>
@@ -110,13 +110,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Rejecting work order</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Rejecting works order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Please provide reason as to why you want to reject this work order.</p>
+                    <p>Please provide reason as to why you want to reject this works order.</p>
                     <form method="POST" action="{{ route('workorder.reject',['id'=>$wo->id]) }}">
                         @csrf
                         <textarea name="reason" required maxlength="100" class="form-control"  rows="5" id="reason"></textarea>

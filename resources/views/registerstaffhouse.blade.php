@@ -1,7 +1,7 @@
 @extends('layouts.asset')
 
 @section('title')
-StaffHouse Registrartion
+Staff House Registrartion
 @endSection
 
 @section('body')
@@ -26,7 +26,7 @@ StaffHouse Registrartion
 
 
 <div class="container">
-                <h4  id="Add New House">Register  New House</h4>
+                <h4  id="Add New House" style="text-transform: uppercase;">Register  New House</h4>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
           

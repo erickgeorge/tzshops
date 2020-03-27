@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')
@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12" align="center">
-            <h3><b>Rejected Requested Transport </b></h3>
+            <h3><b style="text-transform: uppercase;">Rejected Transport Requests</b></h3>
         </div>
 @if(count($items)>0)
         <div class="container" style="padding-left: 620px;">

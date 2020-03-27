@@ -24,7 +24,7 @@
   
 <div class="container">
 
-<div style="text-align: center"><h3><b>Material accepted by inspector of work</b></h3></div>
+<div style="text-align: center"><h3><b style="text-transform: uppercase;">Material accepted by inspector of work</b></h3></div>
 
 <br>  
 <hr>
@@ -126,7 +126,7 @@
 <br>
 <br>
 <br>
-<div align="center"> <h1>No Workorder Material accepted by Inspector of Work</h1></div>
+<div align="center"> <h1>No Works order Material accepted by Inspector of Work</h1></div>
 
 
                          @endif

@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-lg-12">
-            <h3><b>Complaint </b></h3>
+            <h3><b style="text-transform: uppercase;">Complaint </b></h3>
         </div>
 
         

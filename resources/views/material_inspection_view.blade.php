@@ -14,7 +14,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h3 align="center"><b>Materials needed for works order </b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Materials needed for works order </b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -213,7 +213,7 @@
    @else       
                <div class="container" align="center">
                 
-                   <br><div> <h2 style="padding-top: 300px;">Currently No Material needed for Work order</h2></div>
+                   <br><div> <h2 style="padding-top: 300px;">Currently No Material needed for Works order</h2></div>
                 
             </div>
                    @endif
@@ -242,7 +242,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>Materials needed for Work order </b></h3>
+            <h3 align="center"><b>Materials needed for Works order </b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -465,7 +465,7 @@
    @else       
                <div class="container" align="center">
                 
-                   <br><div> <h2 style="padding-top: 300px;">Currently No Material needed for Work order</h2></div>
+                   <br><div> <h2 style="padding-top: 300px;">Currently No Material needed for Works order</h2></div>
                 
             </div>
                    @endif

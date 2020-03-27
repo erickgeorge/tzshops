@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')
@@ -144,18 +144,18 @@ footer {
 
 <u>
     <ul>
-                       <LI><a  href="{{ url('unattended_work_orders')}}">Unatttended Work orders</a></LI>
+                       <LI><a  href="{{ url('unattended_work_orders')}}">Unatttended Works orders</a></LI>
                     </ul>
 
       <ul>
-        <li><a  href="{{ url('completed_work_orders')}}">Completed WorkOrders</a></li>
+        <li><a  href="{{ url('completed_work_orders')}}">Completed Works Orders</a></li>
      </ul>
     
      <ul>
-        <li><a  href="{{ url('work_order')}}">WorkOrders</a></li>
+        <li><a  href="{{ url('work_order')}}">Works Orders</a></li>
      </ul>
      <ul>
-        <li><a  href="{{ url('woduration')}}">WorkOrder Duration</a></li>
+        <li><a  href="{{ url('woduration')}}">Works Order Duration</a></li>
      </ul>
      
 </u>
@@ -170,25 +170,25 @@ footer {
 
  
   
-  <h1 >List of available workorder reports to be downloaded</h1>
+  <h1 >List of available works order reports to be downloaded</h1>
   <hr>
 
 
               
 
 <ul>
-        <li>Unattended WorkOrders</li>
+        <li>Unattended Works Orders</li>
      </ul>
 
       <ul>
-        <li>Completed WorkOrders</li>
+        <li>Completed Works Orders</li>
      </ul>
     
      <ul>
-        <li>WorkOrders</li>
+        <li>Works Orders</li>
      </ul>
      <ul>
-        <li>WorkOrder Duration</li>
+        <li>Works Order Duration</li>
      </ul>
 
 

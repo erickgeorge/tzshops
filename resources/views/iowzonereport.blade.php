@@ -3,7 +3,7 @@
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b>List of zones assigned to Inspector of Work</b></p>
+    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of zones assigned to Inspector of Work</b></p>
 </div><br>
 
 <style>

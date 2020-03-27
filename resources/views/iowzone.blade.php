@@ -25,7 +25,7 @@
             </ul>
         </div>
     @endif 
-                <h4 id="new_dep">Assign zone for Inspector of Work</h4>
+                <h4 style="text-transform: uppercase;" id="new_dep">Assign zone for Inspector of Work</h4>
                 <hr>
 
 

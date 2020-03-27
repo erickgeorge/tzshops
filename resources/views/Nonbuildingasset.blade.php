@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-<<<<<<< Updated upstream
+
     Non-Building Assets
     @endSection
 
@@ -14,7 +14,7 @@
    <br>
         
             @if(Session::has('message'))
-=======
+
     manage cleaning zone
     @endSection
 
@@ -22,15 +22,15 @@
     <br>
    
     @if(Session::has('message'))
->>>>>>> Stashed changes
+
         <div class="alert alert-success">
             <ul>
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-<<<<<<< Updated upstream
+
             @endif
-        <h3><b>Non-Building Assets </b></h3>
+        <h3><b style="text-transform: uppercase;">Non-Building Assets </b></h3>
                   <hr>
                 <a href="{{ route('registernonbuildingasset') }}" 
                    class="btn btn-primary">Add New Non-Building Assets</a>
@@ -43,7 +43,7 @@
 
                         <th scope="col">Name of asset</th>
                         <th>Total Quantity</th>
-=======
+
     @endif
 <div class="container">
    
@@ -66,13 +66,13 @@
                         <th scope="col">Zone Name</th>
                         <th scope="col">Campus Name</th>
                         <th scope="col">Type</th>
->>>>>>> Stashed changes
+
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
 
 
-<<<<<<< Updated upstream
+
                     <tbody>
                      <?php $i = 0; ?>
                     @foreach($NonAsset as $non)
@@ -98,7 +98,6 @@
                 </table>
                 <br>
                 
-=======
 
                     <tbody>
                   <?php $i = 0; ?>
@@ -213,7 +212,7 @@
             </div>
         </div>
     </div>
->>>>>>> Stashed changes
+
 
 
 
@@ -241,18 +240,14 @@
 
             $('#myTablee').DataTable();
             $('#myTableee').DataTable();     
-<<<<<<< Updated upstream
+
                 $('#myTable5').DataTable();                                            
-=======
-                                                       
->>>>>>> Stashed changes
+
  
 
         });
 
 
-<<<<<<< Updated upstream
-=======
         function myfunc(V, W, X, Y, Z) {
 
             document.getElementById("edit_id").value = V;
@@ -325,7 +320,7 @@
           
        }
 
->>>>>>> Stashed changes
+
 
 
     </script>

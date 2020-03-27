@@ -19,7 +19,7 @@
 
     <div>
         <div>
-            <h3 align="center"><b>Material Purchased by Head of Procurement </b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Material Purchased by Head of Procurement </b></h3>
 
         </div>
        

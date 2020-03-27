@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid"  style="margin-top: 6%;">
         <div class="col-md-8">
-            <h3 align="center"><b>PROCUREMENT REQUEST OF WORK ORDER</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">PROCUREMENT REQUEST OF WORKs ORDER</b></h3>
         </div>
        
     </div>

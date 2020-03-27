@@ -16,7 +16,7 @@ use App\WorkOrder;
 
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b>Unattended Works orders</b></h3>
+            <h3><b style="text-transform: uppercase;">Unattended Works orders</b></h3>
         </div>
  
         <div class="col-md-6">

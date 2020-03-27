@@ -21,7 +21,7 @@
 <br>
 <div class="container" style="margin-top: 6%;">
   <div class="col-lg-4">
-    <h3>Add new Material</h3>
+    <h3 style="text-transform: uppercase;">Add new Material</h3>
   </div>
 </div>
   @if(Session::has('message'))

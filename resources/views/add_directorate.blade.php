@@ -23,7 +23,7 @@
             </ul>
         </div>
     @endif 
-                <h4 >Add new college/Directorate</h4>
+                <h4 style="text-transform: uppercase;">Add new college/Directorate</h4>
                 <hr >
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf

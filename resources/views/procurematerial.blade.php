@@ -36,7 +36,7 @@ $id=$_GET["id"];
                    
                         <div class="row" style="margin-top: 6%">
                             <div >
-                                <p align="center">Select material for work-order</p>
+                                <p align="center" style="text-transform: uppercase;">Select material for work-order</p>
                             </div>
                         </div>
 						

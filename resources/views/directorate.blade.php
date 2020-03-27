@@ -28,7 +28,7 @@ Directorate
 <?php use App\Directorate; ?>
   @if(count($directorates)>0)
                 <h2 style="margin-bottom: 20px;"
-                   class="btn btn-default">List of College/Directorates</h2>
+                   class="btn btn-default" style="text-transform: uppercase;">List of College/Directorates</h2>
 
                  
                 

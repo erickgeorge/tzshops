@@ -34,7 +34,7 @@ background-color:  #376ad3;
 <div class="col-lg-3" style="margin-top: 20px; margin-left:20px;" >
   <img src="{{ url('/images/udsmlogo.jpg') }}" alt="udsm logo" style="height: 150px; width: 150px;">
  </div>
-<div class="col-lg-6"> <h3 style="color: white;" align="center"><b><br>UNIVERSITY OF DAR ES SALAAM</b><br><b>Estates Services Management Information System</b></h3></div>
+<div class="col-lg-6"> <h3 style="color: white;" align="center"><b ><br>UNIVERSITY OF DAR ES SALAAM</b><br><b>Estates Services Management Information System</b></h3></div>
 </div>
 
 

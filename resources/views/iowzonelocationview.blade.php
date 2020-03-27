@@ -31,7 +31,7 @@ IoW Zones
  @if(count($iowzone)>0)
   @foreach($iowzone as $zone)
   @endforeach
-                <h5>List of locations available for {{ $zone['iow']->fname.' '.$zone['iow']->lname }} </h5>
+                <h5 style="text-transform: uppercase;">List of locations available for {{ $zone['iow']->fname.' '.$zone['iow']->lname }} </h5>
 
 
             <hr class="container">

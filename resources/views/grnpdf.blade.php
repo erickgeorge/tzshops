@@ -110,7 +110,7 @@ tr:nth-child(even) {
 
      
      <div class="container-name">
-     <div  class="div1" > WorkOrder No:<u style="padding-left: 65px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
+     <div  class="div1" > Works Order No:<u style="padding-left: 65px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
 
 
      <div class="div2">Purchased at:<u style="padding-left: 100px; width: 80px">    <?php $time = strtotime($item['material']->updated_at); echo date('d/m/Y',$time);  ?> </u> </div>

@@ -23,7 +23,7 @@
             </ul>
         </div>
              @endif
-              <h3><b>Available Cleaning Area </b></h3>
+              <h3><b style="text-transform: uppercase;">Available Cleaning Area </b></h3>
               <hr>
                 <a href="{{ route('Registercleaningarea') }}"
                    class="btn btn-primary">Add New CLeaning Area</a>

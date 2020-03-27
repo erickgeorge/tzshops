@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work order
+    works order
     @endSection
 
 @section('body')
@@ -18,7 +18,7 @@
     <br>
     <div >
         <div class="col-lg-12">
-            <h3 align="center">Work order details</h3>
+            <h3 align="center" style="text-transform: uppercase;">Works order details</h3>
         </div>
     
   
@@ -144,7 +144,7 @@
   
   <br>
  @if($wo->emergency == 1)
-   <h6 align="center" style="color: red;"><b> This Workorder is Emergency &#9888;</b></h6>
+   <h6 align="center" style="color: red;"><b> This Works order is Emergency &#9888;</b></h6>
  @endif
 
 
@@ -495,7 +495,7 @@
      <h4><b>Material Used: </b></h4>
      
   @if(empty($wo['work_order_material']->id))
-        <p style="color: red">No Material Used for this Workorder</p>
+        <p style="color: red">No Material Used for this Works order</p>
     @else
     <?php
   
@@ -545,34 +545,34 @@ Print report
          
           @if($wo->status == 30)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Work order completely closed!</span>
+                <span class="badge badge-warning" style="padding: 20px">Works order completely closed!</span>
             </div>
 
         @elseif($wo->status == 2)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Work order tempolary closed!</span>
+                <span class="badge badge-warning" style="padding: 20px">Works order tempolary closed!</span>
             </div>
         @elseif($wo->status == 52)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Work order is on check by IoW!</span>
+                <span class="badge badge-warning" style="padding: 20px">Works order is on check by IoW!</span>
             </div>
         @elseif($wo->status == 53)
             <div>
-                <span class="badge badge-danger" style="padding: 20px">Work order is not approved by IoW!</span>
+                <span class="badge badge-danger" style="padding: 20px">Works order is not approved by IoW!</span>
             </div>
 
         @elseif($wo->status == 9)
               <div>
                 <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Close work order completely</button>
+                    <button type="submit" class="btn btn-danger">Close works order completely</button>
                 </form>
             </div>
         @elseif($wo->status == 25)
             <div>
                 <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-warning">Close work order temporalily</button>
+                    <button type="submit" class="btn btn-warning">Close works order temporalily</button>
                 </form>
             </div>
         @else
@@ -622,13 +622,13 @@ Print report
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Rejecting work order</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Rejecting works order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Please provide reason as to why you want to reject this work order.</p>
+                    <p>Please provide reason as to why you want to reject this works order.</p>
                     <form method="POST" action="{{ route('workorder.reject',['id'=>$wo->id]) }}">
                         @csrf
                         <textarea name="reason" required maxlength="100" class="form-control" rows="5"
@@ -650,13 +650,13 @@ Print report
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Not satisfied Work order</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Not satisfied Works order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Please provide reason as to why you are not satisfied with inspection for this work order.</p>
+                    <p>Please provide reason as to why you are not satisfied with inspection for this works order.</p>
                     <form method="POST" action="{{ route('workorder.notsatisfiedbyiow', [$wo->id]) }}">
                         @csrf
                         <textarea name="notsatisfiedreason" required maxlength="400" class="form-control"  rows="5" id="notsatisfiedreason"></textarea>
@@ -677,13 +677,13 @@ Print report
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Not satisfied Work order</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Not satisfied Works order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Please provide reason as to why you are not satisfied with your work order.</p>
+                    <p>Please provide reason as to why you are not satisfied with your works order.</p>
                     <form method="POST" action="{{ route('workorder.notsatisfied', [$wo->id]) }}">
                         @csrf
                         <textarea name="unsatisfiedreason" required maxlength="400" class="form-control"  rows="5" id="unsatisfiedreason"></textarea>

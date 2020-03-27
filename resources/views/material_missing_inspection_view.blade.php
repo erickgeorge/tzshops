@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Work Orders that need material </b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Works Orders that need material </b></h3>
         </div>
        
     </div>

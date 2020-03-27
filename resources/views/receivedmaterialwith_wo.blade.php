@@ -11,9 +11,9 @@
     <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type =='STORE')
-            <h3 align="center"><b>Works orders with Material available and required by Head of Section</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Works orders with Material available and required by Head of Section</b></h3>
             @else
-            <h3 align="center"><b>Works orders with Material received From Store</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;"> Works orders with Material received From Store</b></h3>
             @endif
 
         </div>
@@ -70,10 +70,10 @@
             </tbody>
         </table>
         @elseif(auth()->user()->type =='STORE')
-            <h1 class="text-center" style="margin-top: 350px">You have no Workorder with material taken from store</h1>
+            <h1 class="text-center" style="margin-top: 350px">You have no Works order with material taken from store</h1>
         @else
 
-         <h1 class="text-center" style="margin-top: 350px">You have no Workorder with material rejected by Inspector of Work</h1>
+         <h1 class="text-center" style="margin-top: 350px">You have no Works order with material rejected by Inspector of Work</h1>
         @endif
 
 

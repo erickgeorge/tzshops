@@ -19,7 +19,7 @@ use Carbon\Carbon;
         <div class="col-md-6">
           <?php $hosname = user::where('id',$hosid)->get(); ?>
           @foreach($hosname as $hosname) @endforeach
-            <h4 style="padding-left: 90px;"><b>{{ $hosname->fname }} {{ $hosname->lname }}'s Completed Works orders </b></h4>
+            <h4 style="padding-left: 90px;"><b style="text-transform: uppercase;">{{ $hosname->fname }} {{ $hosname->lname }}'s Completed Works orders </b></h4>
         </div>
 @if(count($hosWo) > 0)
         <div class="col-md-6">

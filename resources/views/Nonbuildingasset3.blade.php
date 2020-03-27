@@ -19,7 +19,7 @@
             </ul>
         </div>
             @endif
-       <h3><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - 
+       <h3><b style="text-transform: uppercase;">Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - 
 
 <small>
 @foreach($arcol as $arcol)

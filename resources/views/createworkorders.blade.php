@@ -8,7 +8,7 @@
     <br>
     <div class="row" style=" margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h2>Create new work order</h2>
+            <h2 style="text-transform: uppercase;">Create new works order</h2>
         </div>
     </div>
     <hr>

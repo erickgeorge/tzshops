@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Cleaningzone Registration
+Cleaning zone Registration
 @endSection
 
 @section('body')
@@ -26,7 +26,7 @@ Cleaningzone Registration
 
 
 <div class="container">
-                <h4 style="margin-top:6%;"  id="Add New campus">Add New Cleaning Zone</h4>
+                <h4  style="text-transform: uppercase; margin-top:6%;"  id="Add New campus" >Add New Cleaning Zone</h4>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
               

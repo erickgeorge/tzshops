@@ -9,7 +9,7 @@
     <br>
     <div >
         <div class="container">
-            <h4 ><b>List of zones and total locations with works order  </b></h4>
+            <h4 ><b style="text-transform: uppercase;">List of zones and total locations with works order  </b></h4>
         </div>
 
 
@@ -82,7 +82,7 @@ use App\iowzonelocation;
                             <td>{{ $locations->zonename }}</td>
                             <td><?php $locationtotal = iowzonelocation::where('iowzone_id',$locations->id)->get(); echo count($locationtotal); ?> locations </td>
                            
-                            <td><a href="myzone?zone={{ $locations->id }} " class="btn btn-primary">view workorders</a></td>
+                            <td><a href="myzone?zone={{ $locations->id }} " class="btn btn-primary">view works orders</a></td>
                         </tr>
                         @endforeach
                 </tbody>

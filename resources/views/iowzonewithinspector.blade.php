@@ -29,7 +29,7 @@ IoW Zones
          <br>
          @foreach($zone as $zonename)
          @endforeach
-                <h5>List of Inspector of Work in  {{ $zonename->zone }} </h5>
+                <h5 style="text-transform: uppercase;">List of Inspector of Work in  {{ $zonename->zone }} </h5>
 
             <hr class="container">
 

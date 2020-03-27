@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b>List of redirected works orders</b></h3>
+            <h3><b style="text-transform: uppercase;">List of redirected works orders</b></h3>
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">
@@ -60,12 +60,12 @@
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new work order</button>
+                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new works order</button>
             </a>
         </div>
             <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected work orders
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected works orders
                 </button>
             </a>
         </div>
@@ -247,7 +247,7 @@ foreach($userwithid as $userwithid)
                 <thead >
               <tr style="color: white;">
                     <th>#</th>
-          <th>WorkOrder ID</th>
+          <th>WO ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
@@ -332,14 +332,14 @@ foreach($userwithid as $userwithid)
                                 @endif
                            @elseif($work->status == 52)
             
-                              <td><span class="badge badge-info">IoW is checking for Work Order</span>
+                              <td><span class="badge badge-info">IoW is checking for Works Order</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif  
                            @elseif($work->status == 53)
             
-                              <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
+                              <td><span class="badge badge-danger">Works Order is not approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -347,7 +347,7 @@ foreach($userwithid as $userwithid)
 
                           @elseif($work->status == 25)
             
-                              <td><span class="badge badge-info">Work Order Succesifully approved by IoW</span>
+                              <td><span class="badge badge-info">Works Order Succesifully approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>

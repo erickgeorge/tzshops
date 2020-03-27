@@ -17,7 +17,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 60px;"><b>Accepted Work orders list -
+            <h3 style="padding-left: 60px;"><b style="text-transform: uppercase;">Accepted Work orders list -
 @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h3>
         </div>
@@ -304,7 +304,7 @@ foreach($userwithid as $userwithid)
                 <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-          <th>WorkOrder ID</th>
+          <th>WO ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
@@ -706,7 +706,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no workorder</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

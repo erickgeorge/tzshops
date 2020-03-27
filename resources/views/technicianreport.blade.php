@@ -72,7 +72,7 @@
                 <tr style="color: white;">
                    
                     <th>Technician name</th>
-                    <th>Total Work orders</th>
+                    <th>Total Works orders</th>
                    
                 </tr>
                 </thead>
@@ -103,7 +103,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">No Technicians Available</h1>
         @endif
     </div>
            
@@ -150,7 +150,7 @@
                 <tr>
                    
                     <th>Technician name</th>
-                    <th>Total Work orders Completed</th>
+                    <th>Total Works orders Completed</th>
                    
                 </tr>
                 </thead>
@@ -181,7 +181,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no work oder</h1>
+            <h1 class="text-center" style="margin-top: 150px">No Technicians Available</h1>
         @endif
     </div>
              
@@ -243,7 +243,7 @@
         
 function printdiv(printpage)
 {
-var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORK ORDERS </h1>";
+var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORKs ORDERS </h1>";
 var footstr = "</body>";
 var newstr = document.all.item(printpage).innerHTML;
 //var exclude = document.getElementByid('exclude').innerHTML;

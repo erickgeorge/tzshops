@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center"><b>Purchasing Order Requests</b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Purchasing Order Requests</b></h3>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -39,8 +39,8 @@
                 
 				
                 
-				<th >Work-Order ID </th>
-				<th >Workorder Detail</th>
+				<th >Works Order ID </th>
+				<th >Works order Detail</th>
 				
 				<th >Action</th>
 				

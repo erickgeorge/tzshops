@@ -16,7 +16,7 @@
    @if(count($compliant)>0) 
 
         <div class="container">
-            <h3><b>Complaints </b></h3>
+            <h3><b style="text-transform: uppercase;">Complaints </b></h3>
         </div>
 
  
@@ -44,7 +44,7 @@
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
-                    <th>WorkOrder</th>
+                    <th>Works Order</th>
           <th>Sender</th>
                     <th>Complaint</th>
                     <th>Date</th>

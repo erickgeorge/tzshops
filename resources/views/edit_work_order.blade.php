@@ -34,7 +34,7 @@ var total=2;
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h3 align="center">Works order details</h3>
+            <h3 align="center" style="text-transform: uppercase;">Works order details</h3>
         </div>
     </div>
     <hr>
@@ -142,7 +142,7 @@ var total=2;
     <br>
 
      @if($wo->emergency == 1)
-   <h6 align="center" style="color:red;"><b> This Workorder is Emergency &#9888;</b></h6>
+   <h6 align="center" style="color:red;"><b> This Works order is Emergency &#9888;</b></h6>
     @endif
 
 

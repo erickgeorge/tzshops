@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')
@@ -10,7 +10,7 @@
       @if(count($items) > 0)
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>Material accepted for this works order </b></h3>
+            <h3 align="center"><b style="text-transform: uppercase;">Material accepted for this works  order </b></h3>
         </div>
 
        <!-- <div style="padding-left: 650px;">

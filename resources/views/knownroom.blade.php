@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b>Work orders list </b></h3>
+            <h3 style="padding-left: 90px;"><b style="text-transform: uppercase;">Works orders list </b></h3>
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">
@@ -60,12 +60,12 @@
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Work Order</button>
+                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Works Order</button>
             </a>
         </div>
             <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected Work Orders
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected Works Orders
                 </button>
             </a>
         </div>

@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12" align="center">
-            <h3><b>Available materials </b></h3>
+            <h3><b style="text-transform: uppercase;">Available materials in store </b></h3>
         </div>
         
     </div>
