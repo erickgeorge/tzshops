@@ -56,7 +56,7 @@
             @endforeach
 			<div class="col">
 				<button type="submit" class="btn btn-primary">Send</button>
-				<a class="btn btn-danger" href="infrastructureproject">Cancel</a>
+				<a class="btn btn-danger" href="{{ route('ppuprojectview', [$project->id]) }}">Cancel</a>
 			</div>
     	</form>
     </div>

@@ -49,7 +49,9 @@
 </div>	<br>
 <form method="POST" action="{{ url('procuredmaterialsadding') }}" enctype="multipart/form-data" autocomplete="off">
 	@csrf
-    <div id="cont"></div>
+    <div id="cont">
+        
+    </div>
     <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
     <p>
         <div class="row">

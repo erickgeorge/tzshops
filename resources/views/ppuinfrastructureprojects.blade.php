@@ -76,14 +76,17 @@
         <tbody>
             {{ $i=1 }}
             @foreach($projects  as $project)
-            
+            <?php $progress = ppuprojectprogress::orderBy('id','Desc')->where('project_id',$project->id)->first(); ?> 
+            @if(auth()->user()->type == 'DVC Admin')
+                @if($progress->status == 0)
+                @else
             <tr>
                 <td>{{ $i }}</td>
                 <td>{{ $project->project_name }}</td>
                 <td><?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}</td>
                 <td>
                     
-                         <?php $progress = ppuprojectprogress::orderBy('id','Desc')->where('project_id',$project->id)->first(); ?> 
+                         
                         @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
                         @if($progress->status == 1) <div class="badge badge-primary">Forwarded to DVC Admin  
                         @if(auth()->user()->type == 'DVC Admin') 
@@ -99,6 +102,32 @@
                 <td><a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a></td>
                 {{ $i++ }}
             </tr>
+                @endif
+                @else
+            <tr>
+                <td>{{ $i }}</td>
+                <td>{{ $project->project_name }}</td>
+                <td><?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}</td>
+                <td>
+                    
+                         
+                        @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
+                        @if($progress->status == 1) <div class="badge badge-primary">Sent to DVC Admin  
+                        @if(auth()->user()->type == 'DVC Admin') 
+                        <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                        @endif </div>
+                        @endif
+                        @if($progress->status == -1) <div class="badge badge-danger">Rejected by DVC Admin  
+                        @if(auth()->user()->type == 'Director DPI') 
+                        <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                        @endif </div>
+                        @endif
+                </td>
+                <td><a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a></td>
+                {{ $i++ }}
+            </tr>
+            @endif
+            
             @endforeach
         </tbody>
     </table>

@@ -45,7 +45,7 @@
     </style>
 
 <div>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom: #fff 2px solid;">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-primary bg-primary" style="border-bottom: #fff 2px solid;">
        
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -480,7 +480,7 @@
      <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
  <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('physicalplanning')}}">PPU</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
             </li>
             <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
@@ -713,7 +713,6 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #c2bebe;
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -723,7 +722,6 @@
   padding: 4px 6px 4px 10px;
   text-decoration: none;
   font-size: 20px;
-  color: #818181;
   display: block;
   border: none;
   background: none;
@@ -745,7 +743,6 @@
 /* On mouse-over */
 .sidenav a:hover, .dropdown-btn:hover {
   color: #f1f1f1;
-   background: #046475;
 }
 
 
@@ -763,7 +760,6 @@
 
 .sidenav a, .dropdown-btn, .sidenav button {
   color: #f1f1f1;
-   background: grey;
     margin-top: 2px; 
 }
 
@@ -809,15 +805,15 @@
 </head>
 <body>
 
-<div class="sidenav" style="padding-top:90px;">
+<div class="sidenav bg-light" style="padding-top:90px;">
     @if(auth()->user()->type == 'DVC Admin')
-  <a  href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects</h6></a>
+  <a class="bg-primary" href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects</h6></a>
     @endif
-  <a  href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects</h6></a>
-    <a  href="{{ url('manage_Houses')}}"><h6>Projects budgets</h6></a>
-    <a  href="{{ url('manage_Houses')}}"><h6>Tender Documents</h6></a>
-    <a  href="{{ url('manage_Houses')}}"><h6>Consultant ToRs</h6></a>
-    <a  href="{{ url('manage_Hall_of_resdence')}}"><h6>Reports</h6></a>  
+  <a class="bg-primary" href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects</h6></a>
+    <a class="bg-primary"  href="{{ url('manage_Houses')}}"><h6>Projects budgets</h6></a>
+    <a class="bg-primary" href="{{ url('manage_Houses')}}"><h6>Tender Documents</h6></a>
+    <a class="bg-primary" href="{{ url('manage_Houses')}}"><h6>Consultant ToRs</h6></a>
+    <a class="bg-primary" href="{{ url('manage_Hall_of_resdence')}}"><h6>Reports</h6></a>  
    
 </div>
 
