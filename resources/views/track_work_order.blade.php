@@ -579,7 +579,7 @@ Print report
             <div>
                 <form method="POST" action="{{ route('workorder.inspector', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-warning">Notify IoW to verify Work Order before Closing</button>
+                    <button type="submit" class="btn btn-warning">Notify IoW to approve work done</button>
                 </form>
             </div>
       

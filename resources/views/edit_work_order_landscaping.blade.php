@@ -303,19 +303,21 @@ var total=2;
         }
     </style>
 
+ <div onload="createTable()"></div>
+   <div id="cont"></div>
 
     <table id="dataTable" width="350px"  >
         <th></th>
         <th>No</th>
         <th>Activity</th>
         <th>Percentage</th>
-        <th>Score</th>
+        <th>Score</th> 
         <th>Remark</th>
         <TR>
-            <td><input hidden type="checkbox" name="chk"/></td>
-            <td hidden > 1 </TD>
-            <td> 
+          
+             <td >   
                 <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
+            </td>
         </TR>
     </table>
 
@@ -386,6 +388,42 @@ var total=2;
 
    
     <SCRIPT language="javascript">
+
+ 
+    function createTable() {
+           var empTable = document.createElement('table');
+           empTable.setAttribute('id', 'empTable');       
+
+            var table = document.getElementById('empTable');
+
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("input");
+            element1.type = "checkbox";
+            element1.name="chkbox[]";
+            cell1.appendChild(element1);
+
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = rowCount ++;
+
+            var cell3 = row.insertCell(2);
+            var element2 = document.createElement("textarea");
+            element2.type = "text";
+            element2.required = "required";
+            element2.placeholder = "Enter assesment activity";
+            element2.setAttribute('name',value);
+            cell3.appendChild(element2);
+
+
+
+            var div = document.getElementById('cont');
+            div.appendChild(empTable);    
+    }
+
+ 
+
         function addRow(tableID) {
 
               var value = parseInt(document.getElementById('totalmaterials').value, 10);
@@ -410,16 +448,17 @@ var total=2;
             cell2.innerHTML = rowCount ++;
 
 
-  
+
 
             var cell3 = row.insertCell(2);
             var element2 = document.createElement("textarea");
             element2.type = "text";
             element2.required = "required";
             element2.placeholder = "Enter assesment activity";
-            element2.name = "activity";
+            element2.setAttribute('name',value);
             cell3.appendChild(element2);
-            
+
+
 
 
 
@@ -453,7 +492,4 @@ var total=2;
 
                 
   @endSection
- 
 
-    
-    

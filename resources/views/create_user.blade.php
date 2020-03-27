@@ -118,14 +118,7 @@ User Registration
 	  </select>
 	</div>
 </div>
-	<div class="col">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label class="input-group-text" for="inputGroupSelect01">Password</label>
-	  </div>
-	 <input type="password" name="password" required="" class="form-control">
-	</div>
-	</div>
+
 </div>
 
   

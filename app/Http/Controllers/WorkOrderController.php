@@ -149,7 +149,7 @@ $message = $client->message()->send([
  */
 
 
-     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on : $wO->created_at, of  Problem Type : $wO->problem_type given identification number 00$wO->id has been REJECTED.Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system for further information .",
 
                   "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -258,7 +258,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 //for email that currently working disabled partially
 
 
-     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on : $wO->created_at, of  Problem Type : $wO->problem_type given identification number 00$wO->id  has been ACCEPTED.Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED, and  given identification number 00$wO->id. Please login in the system for further information .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );

@@ -321,25 +321,22 @@ class LandscapingController extends Controller
          public function landassessmentactivityForm(Request $request, $id)
     {
 
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
       
             $y=1;
-        $totmat=$request['totalinputs'];
+            $totmat=$request['totalinputs'];
 
- 
- 
-            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-             
-               $z=1;
+           $z=1;
       
-      for ($x = 1; $x <= $totmat; $x++) {
+             for ($x = 1; $x <= $totmat; $x++) {
 
             $matr = new landassessmentactivityform();
             $matr->activity = $request[$z];
              $z=$z+1;
              $z=$z++;
             $matr->save();
-}
+           }
 
             $inspectionForm = landworkorders::where('id', $id)->first();
             $inspectionForm->status =4;

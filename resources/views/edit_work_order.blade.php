@@ -34,7 +34,7 @@ var total=2;
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h3 align="center">Work order details</h3>
+            <h3 align="center">Works order details</h3>
         </div>
     </div>
     <hr>

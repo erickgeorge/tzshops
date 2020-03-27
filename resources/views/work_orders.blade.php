@@ -245,13 +245,13 @@ foreach($userwithid as $userwithid)
 
            <form method="get" enctype="multipart/form-data" action="#@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif">
                 <div class="row">
-                    <div class="col-lg-6"></div>
+                    <div class="col-lg-5"></div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" style="margin-right: 70px;">
                         
                     </div>
                    <div class="col">
-                        <select name="year" class="form-control mr-sm-2" required>
+                        <select name="year" class="form-control mr-sm-2" style="min-width: 85px;" required>
                             <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
                             
                                 <?php $worklocationa = Workorder::select('created_at')->distinct()->orderby('created_at','ASC')->get(); ?>
