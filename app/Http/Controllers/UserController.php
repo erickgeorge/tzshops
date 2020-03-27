@@ -70,7 +70,7 @@ class UserController extends Controller
 
        
         $user->section_id = $request['department'];
-        $user->password = bcrypt($request['password']);
+        $user->password = bcrypt($request['name'].'@esmis');
         $user->IoW = 2;
         $user->save();
 
