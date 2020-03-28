@@ -464,7 +464,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
         return view('Nonbuildingasset', [
             'role' => $role,
             'notifications' => $notifications,
-            'NonAsset' => $assets,
+            'NonAsset' => $assets,'newzone' => zone::all(),'campuses' => Campus::all(),
   
           ]);
      }
@@ -476,15 +476,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
 
        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('Nonbuildingasset', [
-            'role' => $role,
-            'notifications' => $notifications,
-            'staffhouses' => House::all(),
-            'HallofResdence' => Hall::all(),
-             'campuses' => Campus::all(),
-               'newzone' => zone::all(),
-               'cleanarea' => cleaningarea::all(),
-            ]);
+        return redirect()->route('nonbuildingasset')->with(['message' => 'Asset Added Succesfully']);
       
 
      }

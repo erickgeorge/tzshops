@@ -93,7 +93,9 @@ class WorkOrderController extends Controller
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_rejected';
-        $notify->message = 'Your works order of ' . $time = strtotime($wO->created_at); echo date('d/m/Y',$time) . ' about ' . $wO->problem_type . ' has been rejected.';
+         $time = strtotime($wO->created_at);
+         $timed = date('d/m/Y',$time);
+        $notify->message = 'Your works order of ' . $timed . ' about ' . $wO->problem_type . ' has been rejected.';
         $notify->save();
 
 
@@ -104,8 +106,9 @@ class WorkOrderController extends Controller
   $cfirstname= $work['user']->fname;
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
-
-	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your works order sent to  Directorate of Estate Services  on  ' . $time = strtotime($wO->created_at); echo date('d/m/Y',$time) . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' given Reference number 00'.$wO->id.'has been REJECTED. Thanks   Directorate of Estates Services.';
+    $time = strtotime($wO->created_at);
+      $timed = date('d/m/Y',$time);
+	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your works order sent to  Directorate of Estate Services  on  ' . $timed . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' given Reference number 00'.$wO->id.'has been REJECTED. Thanks   Directorate of Estates Services.';
 
         /* $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');
 $client = new \Nexmo\Client($basic);
@@ -147,9 +150,9 @@ $message = $client->message()->send([
       }
 
  */
-
-
-     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on ".$time = strtotime($wO->created_at); echo date('d/m/Y',$time).", of  Problem Type $wO->problem_type, has been REJECTED and given Reference number 00$wO->id. Please login in the system for further information .",
+      $time = strtotime($wO->created_at);
+      $timed = date('d/m/Y',$time);
+     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on ". $timed .", of  Problem Type $wO->problem_type, has been REJECTED and given Reference number 00$wO->id. Please login in the system for further information .",
 
                   "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -191,7 +194,9 @@ $message = $client->message()->send([
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_accepted';
         $notify->status = 0;
-        $notify->message = 'Your works order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been accepted.';
+        $time = strtotime($wO->created_at);
+        $timed = date('d/m/Y',$time);
+        $notify->message = 'Your works order of ' . $timed . ' about ' . $wO->problem_type . ' has been accepted.';
         $notify->save();
 
 
@@ -200,8 +205,9 @@ $message = $client->message()->send([
   $cfirstname= $work['user']->fname;
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
-
-	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No: WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been ACCEPTED .				 Thanks   Directorate of Estates.';
+        $time = strtotime($wO->created_at);
+        $timed = date('d/m/Y',$time);
+	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your work order No: WO-'.$wO->id.' sent to Estate Directorate on  ' . $timed . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' has been ACCEPTED .				 Thanks   Directorate of Estates.';
 
 /*
          $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');
@@ -257,8 +263,10 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 //for email that currently working disabled partially
 
+ $time = strtotime($wO->created_at);
+$timed = date('d/m/Y',$time);
 
-     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED, and  given identification number 00$wO->id. Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $timed, of  Problem Type $wO->problem_type has been ACCEPTED, and  given identification number 00$wO->id. Please login in the system for further information .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -945,8 +953,9 @@ public function transportforwork(Request $request, $id)
   $cfirstname= $work['user']->fname;
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
-
-    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $wo->created_at . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed.
+   $time = strtotime($wO->created_at);
+   $timed = date('d/m/Y',$time);
+    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $timed . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed.
  Please Visit the system for more informations. Thanks
 
     Directorate of Estates.';
@@ -990,7 +999,9 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $receiver_id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
+         $time = strtotime($wO->created_at);
+      $timed = date('d/m/Y',$time);
+        $notify->message = 'Your work order of ' . $timed . ' about ' . $wo->problem_type . ' has been closed!.';
         $notify->save();
 
 
@@ -1001,8 +1012,9 @@ session::flash('message', ' Your workorder have been closed successfully');
   $cfirstname= $work['user']->fname;
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
-
-    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $wo->created_at . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed.
+ $time = strtotime($wO->created_at);
+      $timed = date('d/m/Y',$time);
+    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $timed . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed.
  Please Visit the system for more informations. Thanks
 
     Directorate of Estates.';
@@ -1111,7 +1123,9 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $us->id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' is not satisfied by client!.';
+         $time = strtotime($wO->created_at);
+      $timed = date('d/m/Y',$time);
+        $notify->message = 'Your work order of ' . $timed . ' about ' . $wo->problem_type . ' is not satisfied by client!.';
         $notify->save();
 
 

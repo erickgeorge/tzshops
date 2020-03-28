@@ -1,22 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
 
     Non-Building Assets
-    @endSection
+    @endsection
 
-@section('body')
-   <?php use App\Area; ?> 
-    <br>
-<div class="container">
-   <br>
-   <br>
-   <br>
-        
-            @if(Session::has('message'))
-
-    manage cleaning zone
-    @endSection
 
 @section('body')
     <br>
@@ -29,8 +17,13 @@
             </ul>
         </div>
 
-            @endif
-        <h3><b style="text-transform: uppercase;">Non-Building Assets </b></h3>
+    @endif
+<div class="container">
+   
+             
+         <div>
+          
+              <h3><b style="text-transform: uppercase;">Non-Building Assets </b></h3>
                   <hr>
                 <a href="{{ route('registernonbuildingasset') }}" 
                    class="btn btn-primary">Add New Non-Building Assets</a>
@@ -43,29 +36,6 @@
 
                         <th scope="col">Name of asset</th>
                         <th>Total Quantity</th>
-
-    @endif
-<div class="container">
-   
-             
-         <div>
-          <br>
-          <br>
-          <br>
-              <h3><b>Available Non- Building Assets </b></h3>
-              <hr>
-                <a href="{{ route('registercleaningzone') }}" 
-                   class="btn btn-primary">Add New CLeaning Zone</a>
-
-                   <br><br>
-
-                <table id="myTable" class="table table-striped">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Zone Name</th>
-                        <th scope="col">Campus Name</th>
-                        <th scope="col">Type</th>
 
                         <th scope="col">Action</th>
                     </tr>
@@ -96,131 +66,11 @@
                 </tbody>
                     
                 </table>
-                <br>
-                
-
-                    <tbody>
-                  <?php $i = 0; ?>
-                    @foreach($newzone as $zone)
-                        <?php $i++; ?>
-                        <tr>
-                            <th scope="row">{{ $i }}</th>
-                            <td>{{ $zone->Zone_name }}</td>
-                            <td>{{ $zone['Campus']->campus_name }}</td>
-                            <td>{{ $zone->type }}</td>
-                            <td>
-                            <div class="row">
-
-                                    <a style="color: green;"
-                                       onclick="myfunc5('{{ $zone->id }}','{{ $zone->zone_name }}','{{ $zone->type }}')"
-                                       data-toggle="modal" data-target="#editzone" title="Edit"><i
-                                                class="fas fa-edit"></i></a>
-
-
-                                    <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this zone Completely? ')"
-                                          action="{{ route('zone.delete', [$zone->id]) }}">
-                                        {{csrf_field()}}
-
-
-                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
-                                                                                        data-toggle="tooltip"><i
-                                                         class="fas fa-trash-alt"></i></a>
-
-
-                                        </button>
-                                    </form>
-                                </div>
-
-                         </td>
-                           
-                        </tr>
-                    @endforeach
-                    </tbody>
-                    
-                </table>
-                
-            </div>
-            
-
-
-
-               <div class="modal fade" id="editzone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Zone Details</h5>
-                </div>
-
-                <form method="POST" action="edit/zone" class="col-md-6">
-                    <div class="modal-body">
-                        @csrf
-                        <div class="form-group">
-                            <label for="name_of_house">Zone Name <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_zone"
-                                   name="zone_name" placeholder="Enter Zone Name">
-                            <input id="editzone_id" name="editzone_id" hidden>
-                        </div>
-
-
-
-                        <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            
-                            <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
-                        </div>
-                        <select required class="custom-select" name="campus" id="campus">
-                            <option value="">Choose...</option>
-                            @foreach($campuses as $campus)
-                                <option value="{{ $campus->id }}">{{ $campus->campus_name }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>   
-
-                        <div class="form-group ">
-                            <label for="editlocation">Type <sup style="color: red;">*</sup></label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_type"
-                                   name="type" placeholder="Enter Zone Type">
-                        </div>
-                       
-                         <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
-                                                      
-                                                        <button  type="submit" class="btn btn-primary">Save Changes
-                                                        </button>
-                  
-                                                       
-                                               </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
-                                                        
-                                                  <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
-                                                     
-                                                       </div>
-                                            </div>
-                                                </div>
-                </form>
-
-
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
 
 
 
         
-    @endSection
-
+    
 
     <script>
         window.onload = function () {
@@ -324,3 +174,5 @@
 
 
     </script>
+
+    @endsection

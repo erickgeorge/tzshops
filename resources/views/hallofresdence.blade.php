@@ -17,13 +17,7 @@
 <div class="container">
   
         
-            @if(Session::has('message'))
-        <div class="alert alert-success">
-            <ul>
-                <li>{{ Session::get('message') }}</li>
-            </ul>
-        </div>
-            @endif
+           
         <h3><b style="text-transform: uppercase;">Available Hall of Resdences </b></h3>
                   <hr>
                 <a href="{{ route('registerhall') }}" 

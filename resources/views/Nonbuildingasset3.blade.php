@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.asset')
 
 @section('title')
     Non-Building Assets
@@ -45,6 +45,7 @@
                         <th scope="col">MFG Date</th>
                         <th scope="col">Life span</th>
                         <th>Total Quantity</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
 
@@ -67,7 +68,7 @@
                            <td>{{ $non->manufactured_date }}</td>
                            <td>{{ $non->life_span }}</td>
                             <td>{{ $non->quantity }}</td>
-                            
+                            <td><a class="btn btn-primary text-light"><i class="fa fa-pencil"></i></a><a class="btn btn-danger text-light"><i class="fa fa-trash "></i></a></td>
                              </tr>
 
                     @endforeach

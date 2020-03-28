@@ -33,8 +33,6 @@ tr:nth-child(even) {
                 <th >Value/Capacity</th>
                 <th >Type</th>
                 <th >Stock</th>
-                <th >Created at</th>
-                <th >Updated at</th>
           
             </tr>
             </thead>
@@ -54,9 +52,7 @@ tr:nth-child(even) {
                    
 
                     <td>{{ $item->stock }}</td>
-                    <td><?php $time = strtotime($item->created_at); echo date('d/m/Y',$time);  ?> </td>
-                    <td><?php $time = strtotime($item->updated_at); echo date('d/m/Y',$time);  ?> </td>
-                    
+                   
                     </tr>
                     @endforeach
             </tbody>
