@@ -243,31 +243,7 @@ foreach($userwithid as $userwithid)
     </div>
 
 
-           <form method="get" enctype="multipart/form-data" action="#@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif">
-                <div class="row">
-                    <div class="col-lg-5"></div>
-
-                    <div class="col-lg-4" style="margin-right: 70px;">
-                        
-                    </div>
-                   <div class="col">
-                        <select name="year" class="form-control mr-sm-2" style="min-width: 85px;" required>
-                            <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
-                            
-                                <?php $worklocationa = Workorder::select('created_at')->distinct()->orderby('created_at','ASC')->get(); ?>
-                                @foreach ($worklocationa as $year)
-                                <?php $time = strtotime($year->created_at); ?>
-                                  @if( date('Y',$time) != date('Y'))
-                                      <option value="{{ date('Y',$time) }}">{{ date('Y',$time) }}</option>
-                                    @endif
-                                @endforeach
-                        </select>
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
-                </div>
-            </form> 
+          
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >

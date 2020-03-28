@@ -93,7 +93,7 @@ class WorkOrderController extends Controller
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_rejected';
-        $notify->message = 'Your works order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been rejected.';
+        $notify->message = 'Your works order of ' . $time = strtotime($wO->created_at); echo date('d/m/Y',$time) . ' about ' . $wO->problem_type . ' has been rejected.';
         $notify->save();
 
 
@@ -105,7 +105,7 @@ class WorkOrderController extends Controller
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
 
-	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your works order sent to  Directorate of Estate Services  on  ' . $wO->created_at . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' given identification number 00'.$wO->id.'has been REJECTED. Thanks   Directorate of Estate Services.';
+	$msg='Dear  '. $cfirstname.'  '.$clastname.'. Your works order sent to  Directorate of Estate Services  on  ' . $time = strtotime($wO->created_at); echo date('d/m/Y',$time) . ' of  Problem Type :' . $wO->problem_type . '  about '.$wO->details.' given Reference number 00'.$wO->id.'has been REJECTED. Thanks   Directorate of Estates Services.';
 
         /* $basic  = new \Nexmo\Client\Credentials\Basic('6a962480', 'vTb5bfCxCPaGP9sU');
 $client = new \Nexmo\Client($basic);
@@ -149,7 +149,7 @@ $message = $client->message()->send([
  */
 
 
-     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on ".$time = strtotime($wO->created_at); echo date('d/m/Y',$time).", of  Problem Type $wO->problem_type, has been REJECTED and given Reference number 00$wO->id. Please login in the system for further information .",
 
                   "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );

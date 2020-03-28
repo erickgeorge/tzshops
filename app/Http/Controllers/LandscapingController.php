@@ -173,7 +173,7 @@ class LandscapingController extends Controller
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_accepted';
         $notify->status = 0;
-        $notify->message = 'Your work order for Landscaping of ' . $wO->created_at . ' about ' . $wO->maintenance_section . ' has been accepted.';
+        $notify->message = 'Your work order for Landscaping of ' . $time = strtotime($wO->created_at); echo date('d/m/Y',$time) . ' about ' . $wO->maintenance_section . ' has been accepted.';
         $notify->save();
 
 
@@ -184,8 +184,8 @@ class LandscapingController extends Controller
         $clastname=$work['user']->lname;
         $cmobile=$work['user']->phone;
  
-        $msg='Dear  '. $cfirstname.'  '.$clastname.'. Your landscaping work order No: WO-'.$wO->id.' sent to Estate Directorate on  ' . $wO->created_at . ' of  maintenance section :' . $wO->maintenance_section . '  about '.$wO->details.' has been ACCEPTED .              Thanks   Directorate of Estates.';
-
+        $msg='Dear  '. $cfirstname.'  '.$clastname.'. Your landscaping work order with Ref No: WO-'.$wO->id.' sent to Estate Directorate on  ' . $time = strtotime($wO->created_at); echo date('d/m/Y',$time) . ' of  maintenance section :' . $wO->maintenance_section . '  about '.$wO->details.' has been ACCEPTED .              Thanks   Directorate of Estates Services.';
+  
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
@@ -204,9 +204,9 @@ class LandscapingController extends Controller
 
     
 
-        $data = array('name'=>$userName, "body" => "Your Landscaping Work-Order No : $wO->id sent to Directorate of Estates on : $wO->created_at, of  maintenance section : $wO->maintenance_section has been ACCEPTED.Please login in the system for further information .",
+        $data = array('name'=>$userName, "body" => "Your Landscaping Work-Order No : $wO->id sent to Directorate of Estates on : ".$time = strtotime($wO->created_at); echo date('d/m/Y',$time).", of  maintenance section : $wO->maintenance_section has been ACCEPTED.Please login in the system for further information .",
 
-                    "footer"=>"Thanks", "footer1"=>" $sender , $section " , "footer2"=>"Directorate  of Estates"
+                    "footer"=>"Thanks", "footer1"=>" $sender , $section " , "footer2"=>"Directorate  of Estates Services"
                 );
     
        Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
