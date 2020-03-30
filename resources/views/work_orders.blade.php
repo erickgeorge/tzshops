@@ -10,7 +10,9 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
+
             <h3 ><b style="text-transform: uppercase;">Works orders list </b></h3>
+
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">
@@ -243,7 +245,7 @@ foreach($userwithid as $userwithid)
     </div>
 
 
-          
+
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >

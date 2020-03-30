@@ -14,7 +14,7 @@ use App\Section;
 <br>
 <div class="row container-fluid" >
   <div class="col-lg-4">
-    <h3 style="text-transform: uppercase;">Available Registered Users</h3>
+    <h3 style="text-transform: uppercase;">Available Users</h3>
   </div>
  
   {{--<div class="col-md-5">

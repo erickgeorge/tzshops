@@ -67,8 +67,20 @@ Route::post('/viewusers/delete/{id}', 'UserController@deleteUser')->name('user.d
 
 
 
+
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/create_user', 'HomeController@createUserView')->name('createUserView')->middleware('auth');
+Route::post('workorder/create', 'WorkOrderController@create')->name('workorder.create');
+Route::post('workorder/reject/{id}', 'WorkOrderController@rejectWO')->name('workorder.reject');
+Route::post('workorder/accept/{id}', 'WorkOrderController@acceptWO')->name('workorder.accept');
+Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name('workOrder.edit.view');
+Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
+Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
+Route::post('edit/work_order/zone/two/{id}', 'WorkOrderController@editWOzonetwo')->name('workOrder.edit.zoneloctwo');
+Route::post('edit/work_order/zone/{id}', 'WorkOrderController@editWOzone')->name('workOrder.edit.zoneloc');
+Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
+Route::get('myzone','WorkOrderController@myzone')->name('myzone');
+
 
 Route::post('workorder/create', 'WorkOrderController@create')->name('workorder.create')->middleware('auth');
 Route::post('workorder/reject/{id}', 'WorkOrderController@rejectWO')->name('workorder.reject')->middleware('auth');
@@ -406,6 +418,8 @@ Route::get('work_order_technician_complete/{id}', 'WorkOrderController@woTechnic
 
 
 Route::get('work_order_technician_complete_inspection/{id}', 'WorkOrderController@TechnicianCompleteinspection')->name('workOrder.technicianCompleteinspection')->middleware('auth');
+
+Route::get('work_order_technician_assign_leader/{id}/{id2}', 'WorkOrderController@Technicianassignleader')->name('workOrder.technicianassignleader')->middleware('auth');
 
 
 Route::get('/unattended_work_orders', 'HomeController@unattendedWorkOrdersView')->name('unattended_work_orders')->middleware('auth');
