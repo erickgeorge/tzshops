@@ -8,7 +8,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center" style="text-transform: uppercase;">Change password</h3>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Change password</h5>
         </div>
     </div>
     <hr>

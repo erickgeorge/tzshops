@@ -21,7 +21,7 @@
             </ul>
         </div>
               @endif
-                  <h3><b style="text-transform: uppercase;">Available cleaning companies </b></h3>
+                  <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available cleaning companies </b></h5>
                   <hr>
                 <a href="{{ route('registercompany') }}"
                    class="btn btn-primary" >Add new cleaning company</a>

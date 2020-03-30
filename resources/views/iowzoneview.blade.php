@@ -27,7 +27,7 @@ IoW Zones
         </div>
     @endif
            <br>
-                <h6 style="text-transform: uppercase;">List of available IoW zones</h6>
+                <h5 style="text-transform: uppercase;">List of available IoW zones</h5>
 
                
                 

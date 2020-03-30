@@ -23,7 +23,7 @@
             </ul>
         </div>
     @endif 
-                <h4 id="new_dep" style="text-transform: uppercase;">Add new iow zone</h4>
+                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep">Add new iow zone</h5>
                 <hr>
                 <form method="POST" action="{{ route('iowzone.save') }}" class="col-md-6">
                     @csrf

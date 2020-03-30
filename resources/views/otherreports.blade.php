@@ -7,7 +7,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center" style="text-transform: uppercase;">{{ $head }}</h3>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"  >{{ $head }}</h5>
         </div>
     </div>
     @if(Session::has('message'))

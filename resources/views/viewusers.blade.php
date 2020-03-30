@@ -13,8 +13,8 @@ use App\Section;
  ?>
 <br>
 <div class="row container-fluid" >
-  <div class="col-lg-4">
-    <h3 style="text-transform: uppercase;">Available Registered Users</h3>
+  <div class="col">
+    <h5 style="padding-left: 90px;  text-transform: uppercase;">Available Registered Users</h5>
   </div>
  
   {{--<div class="col-md-5">

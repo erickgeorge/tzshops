@@ -26,7 +26,7 @@ Staff House Registrartion
 
 
 <div class="container">
-                <h4  id="Add New House" style="text-transform: uppercase;">Register  New House</h4>
+                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="Add New House" >Register  New House</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
           

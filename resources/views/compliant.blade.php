@@ -16,7 +16,7 @@
    @if(count($compliant)>0) 
 
         <div class="container">
-            <h3><b style="text-transform: uppercase;">Complaints </b></h3>
+           <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Complaints </b></h5>
         </div>
 
  

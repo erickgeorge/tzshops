@@ -26,7 +26,7 @@ Cleaning zone Registration
 
 
 <div class="container">
-                <h4  style="text-transform: uppercase; margin-top:6%;"  id="Add New campus" >Add New Cleaning Zone</h4>
+               <h5 style="padding-left: 90px;  text-transform: uppercase;  margin-top:6%;"  id="Add New campus" >Add New Cleaning Zone</h5>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
               

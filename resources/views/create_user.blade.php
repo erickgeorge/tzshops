@@ -27,7 +27,7 @@ User Registration
 <br>
 <div class="row" style=" margin-left: 3%;">
 	<div class="col-md-8">
-		<h2 class="container" style="text-transform: uppercase;">Create new user</h2>
+		<h5 style="padding-left: 90px;  text-transform: uppercase;" >Create new user</h5>
 	</div>
 
 	<!-- <div class="col-md-4">

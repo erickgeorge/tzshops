@@ -77,7 +77,7 @@
   <br>
     <h4><b>Transport Description: </b></h4>
   @if(empty($wo['work_order_transport']->work_order_id))
-        <p style="color: blue;">No Transport form</p>
+        <p style="color:blue;">No Transport form</p>
     @else
     <?php
   
@@ -122,7 +122,7 @@
   <hr>
     <h4><b>Technician assigned: </b></h4>
 @if(empty($wo['work_order_staff']->id))
-        <p style="color: blue;">No Technician assigned yet</p>
+        <p style="color:blue;">No Technician assigned yet</p>
     @else
     <?php
   
@@ -174,7 +174,7 @@
 
 
           @else
-          <td style="color: blue;">No technician assigned yet</td>
+          <td style="color:blue;">No technician assigned yet</td>
       @endif
   
   
@@ -189,7 +189,7 @@
   <br>
     <h4><b>Material Requests: </b></h4>
   @if(empty($wo['work_order_material']->id))
-        <p style="color: blue;">No Material have been requested yet</p>
+        <p style="color:blue;">No Material have been requested yet</p>
     @else
     <?php
   
@@ -237,7 +237,7 @@
      <h4><b>Material Used: </b></h4>
      
   @if(empty($wo['work_order_material']->id))
-        <p style="color: blue;">No Material Used for this Works order</p>
+        <p style="color:blue;">No Material Used for this Works order</p>
     @else
     <?php
   
@@ -272,7 +272,7 @@
   <hr>
     <h4><b>Inspection Description: </b></h4>
     @if(empty($wo['work_order_inspection']->status))
-        <p style="color: blue;">Not inspected yet</p>
+        <p style="color:blue;">Not inspected yet</p>
     @else
     <?php
   

@@ -19,7 +19,7 @@
     <br>
     <div class="row" style=" margin-right: 2%; margin-left: 2%;">
         <div class="col-lg-12" align="center">
-            <h2 style="text-transform: uppercase;">Edit User</h2>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Edit User</h5>
         </div>
         {{--<div class="col-md-4">
             <a href="{{ url('viewusers') }}">

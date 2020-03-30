@@ -24,7 +24,7 @@
   
 <div class="container">
 
-<div style="text-align: center"><h3><b style="text-transform: uppercase;">Material accepted by inspector of work</b></h3></div>
+<div style="text-align: center"><h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Material accepted by inspector of work</b></h5></div>
 
 <br>  
 <hr>

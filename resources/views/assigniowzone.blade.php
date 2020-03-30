@@ -18,7 +18,7 @@
     <br>
     <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
         <div class="col-lg-12" align="center">
-            <h2 style="text-transform: uppercase;">Please assign zone for Inspector of Work</h2>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Please assign zone for Inspector of Work</h5>
         </div>
 
     </div>
