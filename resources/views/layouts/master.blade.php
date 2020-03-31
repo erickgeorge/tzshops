@@ -1016,7 +1016,7 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript">
 
       $("#techid").select2({
-            placeholder: "Choose Section...",
+            placeholder: "Choose technician for work...",
             allowClear: true
         });
 </script>

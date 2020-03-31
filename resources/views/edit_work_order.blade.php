@@ -179,16 +179,15 @@ var total=2;
 
 
 
-    <td>{{
-   $techform->created_at }}</td>
+  <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
 
     @if($techform->created_at ==  $techform->updated_at)
 
 
     <td> NOT COMPLETED</td>
     @else
-    <td>{{
-   $techform->updated_at }}</td>
+      <td><?php $time = strtotime($techform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+
     @endif
 
 
@@ -234,6 +233,7 @@ var total=2;
   <th>Status</th>
     <th>Date Assigned</th>
   <th>Complete work</th>
+  <th>Leader</th>
 
   </tr>
     @foreach($techforms as $techform)
@@ -248,9 +248,8 @@ var total=2;
    <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
 
 
+    <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
 
-    <td>{{
-   $techform->created_at }}</td>
 
     @if($techform->created_at ==  $techform->updated_at)
 
@@ -260,6 +259,18 @@ var total=2;
     <td>{{
    $techform->updated_at }}</td>
     @endif
+
+@if($techform->leader == null )
+
+<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
+                                                    class="fas fa-user-tie large"></i></a></td>
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Leader<i
+                                                    class="fas fa-user-tie large"></i></td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
+                                                    @endif
+
 
 
 
@@ -573,6 +584,37 @@ var total=2;
 
 
        <div id="divmanual">
+
+     @if($wo->zonelocationtwo == null)
+
+                 <form method="POST" action="{{ route('workOrder.edit.zoneloctwo', [$wo->id]) }}">
+            @csrf
+            <div class="row">
+            <div class="container" >
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
+                </div>
+                <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" >
+
+
+               @foreach($iowzone as $user)
+               <option value="{{ $user->id }}" >{{ $user->location }}</option>
+               @endforeach
+
+                </select>
+            </div>
+            </div>
+        </div>
+       @if($wo->zonelocationtwo == null) 
+            <button type="submit" class="btn btn-primary">Save</button>
+       @endif  
+
+          </form>
+     @endif     
+
+     @if($wo->zonelocationtwo != null)
+
          <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
             @csrf
             <div class="row">
@@ -582,19 +624,22 @@ var total=2;
                     <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
                 <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
-                  @if($wo->zone_location != null) <?php
-                        $zonelocation = iowzonelocation::where('id',$wo->zone_location)->first();
+                 
+                  @if($wo->zonelocationtwo != null) <?php
+                        $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
                         $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
                          ?>
                          @endif
-                    @if($wo->zone_location != null)
-                       <option value="{{ $wo->zone_location }}" selected>
+                         @if($wo->zonelocationtwo != null)
+                       <option value="{{ $wo->zonelocationtwo }}" selected>
 
                           {{ $zonelocation->location }}, {{ $zoned->zonename }}
                         </option>
                     @else
                     <option value="" selected>Choose... </option>
                     @endif
+
+
 
                @foreach($iowzone as $user)
                <option value="{{ $user->id }}" >{{ $user->location }}</option>
@@ -610,13 +655,15 @@ var total=2;
 
           </form>
 
+     @endif     
+
 
        </div>
         
 
 
 
-
+       @if($wo->zone_location != null)
 
         <br>
         <h4>Work order forms.</h4>
@@ -641,6 +688,9 @@ var total=2;
 
                     </div>
                 </div>
+       @else
+         <div align="center" style="color: red;"> Please assign zone location for further Steps. </div>         
+       @endif         
 
 
 
@@ -648,38 +698,16 @@ var total=2;
 
             {{-- ASSIGN TECHNICIAN tab--}}
 
-                    @csrf
+                  
                     <div id="assigntechnician" class="tabcontent">
-                        <?php
 
-                        use App\Technician;
-                        $checktech = WorkOrderStaff::where('work_order_id',$wo->id)->get();
-                        $i = 1;
-                         ?>
-                         @if($checktech)
-
-                         <?php $named = Technician::get(); ?>
-                         <div class="row">
-                        
-                         @foreach($checktech as $fetchtech)
-                         @foreach($named as $names)
-                         @if($fetchtech->staff_id == $names->id)
-                         <div class="col-lg-12"><b style="font-weight: bold; color: black;">{{ $i }}. {{ $names->fname }} {{ $names->lname }}<?php $i++; ?></b></div>
-                         <br>
-                         @endif
-                         @endforeach
-                         @endforeach
-                     </div><br><br>
-
-                         @else
-                         @endif
 
                  @if($wo->statusmform != 1)
 
                   
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign Technician for this work order</p>
+                                <p>Assign Technician for this works order</p>
                             </div>
                         </div>
                         <div >
@@ -900,9 +928,9 @@ var total=2;
 
                             <select class="custom-select" required name="status" style="color: black; width:  700px;">
                                 <option selected value="" >Choose...</option>
-
-                                    <option value="Report Before Work">Report Before Work</option>
-                                       <option value="Report After Work">Report After Work</option>
+                                   @if($wo->status == 70)
+                                    <option value="Report before work">Report before Work</option> @else
+                                       <option value="Report after Work">Report after Work</option>@endif
 
                             </select>
 

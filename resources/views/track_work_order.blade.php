@@ -236,6 +236,7 @@
   <th>Status</th>
     <th>Date Assigned</th>
   <th>Complete work</th>
+  <th>Leader</th>
   
   </tr>
     @foreach($techforms as $techform)
@@ -262,6 +263,17 @@
     <td>{{ 
    $techform->updated_at }}</td>
     @endif
+
+    @if($techform->leader == null )
+
+<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
+                                                    class="fas fa-user-tie large"></i></a></td>
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Leader<i
+                                                    class="fas fa-user-tie large"></i></td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
+                                                    @endif
     
 
     @if(auth()->user()->type != 'CLIENT')
