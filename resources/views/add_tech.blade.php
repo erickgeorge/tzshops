@@ -126,7 +126,7 @@ $roleofuser =1;
     <select  name='typetechhos' class="form-control" id="typetechhos" required>
       @foreach($sectionss as $sectionss)
         @if (in_array('HOS '.$sectionss->section_name.'',$str_array) || in_array('HOS'.$sectionss->section_name.'',$str_array)) {
-            <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option> 
+            <option value="{{ $sectionss->section_name }}">{{ ucwords(strtolower($sectionss->section_name)) }}</option> 
           } @endif
 
           @endforeach

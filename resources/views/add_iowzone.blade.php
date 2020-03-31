@@ -34,23 +34,7 @@
                                name="zonename" placeholder="Enter Zone Name ">
                     </div>
 
-                    <!--<div class="form-group ">
-                        <label for="dep_name" style="color: black;">Location</label>
-                        <input style="color: black" type="text" required class="form-control" id="d"   maxlength = "15"  
-                               name="location" placeholder="Enter Zone Location">
-                    </div>-->
-
-                   <!--<div class="form-group ">
-                        <label for="dep_name" style="color: black;">Inspector of Work</label>
-                         
-                         <select required class="custom-select" name="iow" id="iow">
-                            <option value="">Choose...</option>
-                            @foreach($iows as $user)
-                                <option value="{{ $user->id }}">{{ $user->fname .'  '.$user->lname }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>-->
+                    
 
 
                    

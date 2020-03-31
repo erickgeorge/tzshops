@@ -111,7 +111,7 @@ foreach ($hoos as $hous) {
 <?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
 @endif
 @foreach($to as $too)
-<option value="{{ $too->type }}">{{ $too->type }}</option>
+<option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
 
 @endforeach
  @elseif($maintenance_coordinator == 1)
@@ -126,7 +126,7 @@ foreach ($hoos as $hous) {
 <?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
 @endif
 @foreach($to as $too)
-<option value="{{ $too->type }}">{{ $too->type }}</option>
+<option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
 
 @endforeach
  @else             
@@ -204,7 +204,7 @@ foreach ($hoos as $hous) {
         }else { echo $tech->phone;}
 
       ?></td>
-                <td>{{ $tech->type }}</td>
+                <td>{{ ucwords(strtolower($tech->type)) }}</td>
                 <td>
                     <div class="row">
                         <a style="color: green;" href="{{ route('tech.edit.view', [$tech->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>

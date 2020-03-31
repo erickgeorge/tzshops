@@ -37,7 +37,7 @@
                <?php use App\workordersection; ?>
 <?php $sectionss = workordersection::get(); ?>
  @foreach($sectionss as $sectionss) 
-               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               <option value="{{ $sectionss->section_name }}">{{ ucwords(strtolower($sectionss->section_name)) }}</option>
                @endforeach
                    
             </select>

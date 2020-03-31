@@ -56,7 +56,7 @@
 								<td >
                                      <?php $locational = area::select('name_of_area')->where('id',$work->area_id)->get();
                                      foreach ($locational as $locational) {
-                                        echo $locational->name_of_area;  
+                                        echo ucwords(strtolower($locational->name_of_area));  
                                       } ?>
                                           
                                       </td>
