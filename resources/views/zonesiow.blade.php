@@ -19,8 +19,8 @@
     <br>
     <div >
         <div class="container">
-            <h4 style="text-transform: uppercase;"><b>List of works order assigned in  @if(auth()->user()->type == 'Maintenance coordinator')
-<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h4>
+            <h5 style="padding-left: 90px; text-transform: uppercase;"><b>List of works order assigned in  @if(auth()->user()->type == 'Maintenance coordinator')
+<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
 
 

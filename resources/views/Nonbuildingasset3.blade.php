@@ -19,7 +19,7 @@
             </ul>
         </div>
             @endif
-       <h3><b style="text-transform: uppercase;">Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - 
+      <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - 
 
 <small>
 @foreach($arcol as $arcol)
@@ -30,7 +30,7 @@
 @endforeach
 </small>
 
-        - <small>@foreach($aariya as $arriya) {{$arriya->name_of_block }} @endforeach </small></h3>
+        - <small>@foreach($aariya as $arriya) {{$arriya->name_of_block }} @endforeach </small></h5>
                   <hr>
                 <a href="{{ route('registernonbuildingasset') }}" 
                    class="btn btn-primary">Add New Non-Building Assets</a>

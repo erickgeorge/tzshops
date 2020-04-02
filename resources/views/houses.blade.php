@@ -21,7 +21,7 @@
             </ul>
         </div>
               @endif
-                  <h3><b style="text-transform: uppercase;">Available Staff Houses </b></h3>
+                  <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Staff Houses </b></h5>
                   <hr>
                 <a href="{{ route('registerstaffhouse') }}"
                    class="btn btn-primary">Add New Staff House</a>

@@ -54,7 +54,7 @@ tr:nth-child(even) {
         }else { echo $tech->phone;}
 
       ?></td>
-                @if($section!='0') @else <td>{{ $tech->type }}</td>@endif
+                @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
                 
             </tr>
         @endforeach

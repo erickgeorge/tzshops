@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12" align="center">
-            <h3><b style="text-transform: uppercase;">Available materials </b></h3>
+            <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Available materials </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3><b style="text-transform: uppercase;">Minute Sheets </b></h3>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Minute Sheets </b></h5>
         </div>
 
        

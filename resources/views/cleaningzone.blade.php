@@ -21,7 +21,7 @@
           <br>
           <br>
           <br>
-              <h3><b style="text-transform: uppercase;">Available Cleaning Zones </b></h3>
+              <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Cleaning Zones </b></h5>
               <hr>
                 <a href="{{ route('registercleaningzone') }}" 
                    class="btn btn-primary">Add New CLeaning Zone</a>

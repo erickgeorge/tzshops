@@ -20,7 +20,7 @@
 
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 class="container"><b style="text-transform: uppercase;">Number of Head of Sections Completed their Works orders  </b></h3>
+            <h5 class="container"><b style="text-transform: uppercase;">Number of Head of Sections Completed their Works orders  </b></h5>
         </div>
 
        <!-- <div class="col-md-6">

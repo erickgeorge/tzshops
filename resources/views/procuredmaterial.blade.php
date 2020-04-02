@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 90px;"><b style="text-transform: uppercase;">Procured materials list</b></h3>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Procured materials list</b></h5>
         </div>
        
     </div>

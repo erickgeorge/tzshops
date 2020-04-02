@@ -17,9 +17,9 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h3 style="padding-left: 40px;"><b style="text-transform: uppercase;">On-process Work orders list -
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">On-process Work orders list -
 @if(auth()->user()->type == 'Maintenance coordinator')
-<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h3>
+<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
 @if(count($locations) > 0)
        <!-- <div class="col-md-6">

@@ -23,7 +23,7 @@
              
          <div>
           
-              <h3><b style="text-transform: uppercase;">Non-Building Assets </b></h3>
+              <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Non-Building Assets </b></h5>
                   <hr>
                 <a href="{{ route('registernonbuildingasset') }}" 
                    class="btn btn-primary">Add New Non-Building Assets</a>

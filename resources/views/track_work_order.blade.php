@@ -18,7 +18,7 @@
     <br>
     <div >
         <div class="col-lg-12">
-            <h3 align="center" style="text-transform: uppercase;">Works order details</h3>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;">Works order details</h5>
         </div>
     
   
@@ -60,7 +60,7 @@
             <label class="input-group-text">Type of a problem</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
-               aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
+               aria-describedby="emailHelp" value="{{ ucwords(strtolower($wo->problem_type)) }}" disabled>
     </div>
     </div>
     <div class="col">

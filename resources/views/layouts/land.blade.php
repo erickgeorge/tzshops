@@ -282,7 +282,11 @@
                     
             
                 @endif
-
+                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'DVC Admin'))
+                  <li class="nav-item">
+                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
+                            </li>
+                 @endif
                 
                 @if(auth()->user()->type == 'DVC Admin')
                 <li class="nav-item">

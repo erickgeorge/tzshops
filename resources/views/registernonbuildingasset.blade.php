@@ -8,7 +8,7 @@
     <br>
     <div class="row" style="margin-top: 6%; margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h2 style="text-transform: uppercase;">    Register Non-Building Asset</h2>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" >    Register Non-Building Asset</h5>
         </div>
     </div>
     <hr>

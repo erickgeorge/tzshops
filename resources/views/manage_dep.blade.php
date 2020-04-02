@@ -114,7 +114,7 @@
                     </tbody>
                 </table>
                 <br>
-                <h4 id="new_dir" style="text-transform: uppercase;">Add new college/Directorate</h4>
+               <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dir">Add new college/Directorate</h5>
                 <hr>
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf
@@ -205,7 +205,7 @@
 
                 </div>
                 <br>
-                <h4 style="text-transform: uppercase;" id="new_dep">Add new department</h4>
+               <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep">Add new department</h5>
                 <hr>
                 <form method="POST" action="{{ route('department.save') }}" class="col-md-6">
                     @csrf
@@ -311,7 +311,7 @@
 				
 				<!--<h4 style="color:red;" id="new_sec">NOT YET IMPLEMENTED</h4> -->
 				
-				 <h4 id="new_sec" style="text-transform: uppercase;">Add new section</h4>
+				 <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_sec" >Add new section</h5>
 				
 			<!-- IN PROGRESS -->
                

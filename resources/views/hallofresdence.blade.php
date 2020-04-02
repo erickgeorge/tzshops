@@ -18,7 +18,7 @@
   
         
            
-        <h3><b style="text-transform: uppercase;">Available Hall of Resdences </b></h3>
+        <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Hall of Resdences </b></h5>
                   <hr>
                 <a href="{{ route('registerhall') }}" 
                    class="btn btn-primary">Add new Hall of Resdence</a>

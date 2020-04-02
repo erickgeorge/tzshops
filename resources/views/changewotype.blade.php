@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h3 align="center" style="text-transform: uppercase;">CHANGE PROBLEM TYPE :</h3>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" >CHANGE PROBLEM TYPE :</h5>
         </div>
     </div>
     <hr>
@@ -37,7 +37,7 @@
                <?php use App\workordersection; ?>
 <?php $sectionss = workordersection::get(); ?>
  @foreach($sectionss as $sectionss) 
-               <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
+               <option value="{{ $sectionss->section_name }}">{{ ucwords(strtolower($sectionss->section_name)) }}</option>
                @endforeach
                    
             </select>

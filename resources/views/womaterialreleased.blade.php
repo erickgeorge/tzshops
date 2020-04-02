@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b style="text-transform: uppercase;">Material released to work orders</b></h3>
+            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Material released to work orders</b></h5>
         </div>
        
     </div>

@@ -23,7 +23,7 @@
             </ul>
         </div>
     @endif 
-                <h4 id="new_dep" style="text-transform: uppercase;">Add new location</h4>
+               <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep">Add new location</h5>
                 <hr>
                 <form method="POST" action="{{ route('iowzone.location.save' , [$iowuser->id , $iowuserzone->zone]) }}" class="col-md-6">
                     @csrf

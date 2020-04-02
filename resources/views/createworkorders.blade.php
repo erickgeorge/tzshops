@@ -8,7 +8,7 @@
     <br>
     <div class="row" style=" margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h2 style="text-transform: uppercase;">Create new works order</h2>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Create new works order</h5>
         </div>
     </div>
     <hr>
@@ -44,7 +44,7 @@
                 <?php use App\workordersection; ?>
       <?php $sectionss = workordersection::get(); ?>
       @foreach($sectionss as $sectionss) 
-               <option value="{{ $sectionss->section_name }}"><?php echo strtolower( $sectionss->section_name ); ?></option>
+               <option value="{{ $sectionss->section_name }}"><?php echo ucwords(strtolower( $sectionss->section_name )); ?></option>
                @endforeach
                    
             </select>

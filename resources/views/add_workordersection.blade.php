@@ -24,7 +24,7 @@
             </ul>
         </div>
     @endif 
-                <h4 id="new_dep" style="text-transform: uppercase;">Add New Section</h4>
+                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep" >Add New Section</h5>
                 <hr>
                 <form method="POST" action="{{ route('section.save') }}" class="col-md-6">
                     @csrf

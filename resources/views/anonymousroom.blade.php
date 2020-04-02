@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b style="text-transform: uppercase;">Room report - Area/College/Directorate</b></h3>
+            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Room report - Area/College/Directorate</b></h5>
         </div>
 
   
@@ -56,7 +56,7 @@
 								<td >
                                      <?php $locational = area::select('name_of_area')->where('id',$work->area_id)->get();
                                      foreach ($locational as $locational) {
-                                        echo $locational->name_of_area;  
+                                        echo ucwords(strtolower($locational->name_of_area));  
                                       } ?>
                                           
                                       </td>

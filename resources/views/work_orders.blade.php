@@ -10,8 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-
-            <h3 ><b style="text-transform: uppercase;">Works orders list </b></h3>
+            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Works orders list </b></h5>
 
         </div>
 @if(count($wo) > 0)
@@ -127,7 +126,7 @@ use Carbon\Carbon;
                 <?php
                   $prob = WorkOrder::select('problem_type')->distinct()->get();
                   foreach ($prob as $problem) {
-                    echo "<option value='".$problem->problem_type."'>".$problem->problem_type."</option>";
+                    echo "<option value='".$problem->problem_type."'>".ucwords(strtolower($problem->problem_type))."</option>";
                   }
                  ?>
             </select>
@@ -276,7 +275,7 @@ foreach($userwithid as $userwithid)
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id">00{{ $work->id }}</td>
                             <td id="wo-details">{{ $work->details }}</td>
-                            <td>{{ $work->problem_type }}</td>
+                            <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
                                 <td><span class="badge badge-warning">new</span>

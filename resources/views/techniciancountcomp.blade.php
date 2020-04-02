@@ -20,7 +20,7 @@
     <br>
     <div class="row container-fluid ">
         <div class="col-lg-12">
-            <h3 class="container"><b style="text-transform: uppercase;">Available Technician Completed their works order</b></h3>
+           <h5 style="padding-left: 90px; " class="container"><b style="text-transform: uppercase;">Available Technician Completed their works order</b></h5>
         </div>
              
   

@@ -31,7 +31,7 @@ Campus Registration
 
 <br>
 <div class="container">
-                <h4  style="text-transform: uppercase;" id="Add New campus">Register New Campus</h4>
+                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="Add New campus">Register New Campus</h5>
                 <hr>
 
                 <p align="center" style="color: red; margin-left: 2%;">All fields are compulsory</p>

@@ -27,8 +27,8 @@ Workorder Section
         </div>
     @endif
 
-                <h2 style="margin-bottom: 20px; text-transform: uppercase;"
-                   class="btn btn-default" >List of available Sections</h2>
+                <h5 style="padding-left: 90px; margin-bottom: 20px; text-transform: uppercase;"
+                   class="btn btn-default" >List of available Sections</h5>
 
                
                 
