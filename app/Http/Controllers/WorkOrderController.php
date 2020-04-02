@@ -684,6 +684,8 @@ public function transportforwork(Request $request, $id)
 
             public function editmaterial(Request $request, $id )
     {
+        $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 17)->orwhere('status', -1)->update(array('check_return' =>null));   
+    
        $p=$request['edit_mat'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
        $matir->material_id = $request['material'];

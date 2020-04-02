@@ -14,14 +14,15 @@
                          ?>
 
     <br>
+     @if(count($items) > 0)
     <div class="row container-fluid">
        @if(auth()->user()->type != 'Inspector Of Works')
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Material Rejected by Inspector of Work  </b></h5>
+            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Material Rejected by Inspector of Works  </b></h5>
         </div>
         @else
         <div class="col-lg-12">
-            <h3 align="center"><b>Material Rejected  </b></h3>
+            <h5 align="center"><b>REJECTED MATERIAL </b></h5>
         </div>
         @endif
 
@@ -63,7 +64,7 @@
   
 
     <div class="container">
-        @if(count($items) > 0)
+       
              
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead>
@@ -122,7 +123,7 @@
                                                 class="fas fa-edit"></i></a> &nbsp;&nbsp;
                             <form method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this Material from the list? ')"
-                                          action="{{ route('material.delete', [$item->id]) }}">
+                                          action="{{ route('material.delete', [$item->id , $item->work_order_id ]) }}">
                                         {{csrf_field()}}
 
 
@@ -165,9 +166,11 @@
 
         <br>
         <br>
+          @if($item->check_return == NULL)
           @if(auth()->user()->type != 'Inspector Of Works')
-           <div style="color: black; "> <h5> Request Material  again to inspector of work <span> <a style="color: green;" href="/send/material_rejected_again/{{$item->work_order_id}}"  data-toggle="tooltip" title="Request back to inspector of work"><i class="far fa-check-circle"></i></a>
+           <div style="color: black; "> <h5> Request material back to inspector of works <span> <a style="color: green;" href="/send/material_rejected_again/{{$item->work_order_id}}"  data-toggle="tooltip" title="Request back to inspector of works"><i class="far fa-check-circle"></i></a>
                    </span> </h5></div>  @endif
+                   @endif
 
    
         
@@ -322,7 +325,7 @@
                         
                     
                          <div class="form-group">
-                            <label for="name_of_house">Quantity <sup style="color: red;">*</sup></label>
+                            <label for="name_of_house">Quantity </label>
                             <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
                                    name="quantity" placeholder="Enter quantity again">
                             <input id="edit_mat" name="edit_mat" hidden>
@@ -365,7 +368,7 @@
 
 
     @else
-            <h1 class="text-center" style="margin-top: 150px ; text-transform: uppercase;">no material rejected by Inspector of Work</h1>
+            <h4 class="text-center" style="margin-top: 150px ; text-transform: uppercase;">no material rejected by Inspector of Works</h4>
         @endif
     <!-- End Modals-->
 

@@ -204,11 +204,11 @@ class StoreController extends Controller
     {
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('status',9)->get();
 
-		 foreach($wo_materials as $wo_material) {
-		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
-		 $wo_m->status = 17;
-		  $wo_m->save();
-		 }
+		   foreach($wo_materials as $wo_material) {
+		   $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		   $wo_m->status = 17;
+		   $wo_m->save();
+		    }
 		 
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
@@ -366,7 +366,9 @@ class StoreController extends Controller
 
 	
 	public function rejectMaterial(request $request, $id)
-    {
+    {  
+
+      $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1));   
        
           $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('work_order_id', $id)->where('status',9)->get();
 
@@ -427,12 +429,16 @@ class StoreController extends Controller
 
       public function materialrejectonebyone(Request $request, $id )
     {
+       $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1)); 
+
        $p=$request['edit_mat'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
       
        $matir->reason = $request['reason'];
        $matir->status = 9; 
        $matir->save();
+
+
   
         return redirect()->back()->with(['message' => 'Respective material Rejected successfully ']);
     }
@@ -615,11 +621,13 @@ class StoreController extends Controller
 	
 
 
-public function deletematerial($id)
-       {
+public function deletematerial($id , $woid)
+       {   
+          $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $woid)->where('status', 17)->update(array('check_return' =>null));   
+
            $matrialdelete=WorkOrderMaterial::where('id', $id)->first();
            $matrialdelete->delete();
-           return redirect()->back()->with(['message' => 'Respective Material is deleted successfully']);
+           return redirect()->back()->with(['message' => 'Respective material deleted successfully']);
        }
 
 

@@ -554,7 +554,7 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
 
 
 
- Route::post('delete/material/{id}', 'StoreController@deletematerial')->name('material.delete')->middleware('auth');
+ Route::post('delete/material/{id}/{woid}', 'StoreController@deletematerial')->name('material.delete')->middleware('auth');
  Route::get('trackreport/{id}','NotesController@trackreport')->name('trackreport')->middleware('auth');
  Route::get('hoscompletedjob/{id}','WorkOrderController@hoscompletedjob')->name('hoscompletedjob')->middleware('auth');
 
