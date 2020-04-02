@@ -410,7 +410,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             return redirect()->back()->withErrors(['message' => 'Status of Inspection form required required']);
         }
 
-		else if ($request['status'] == 'Report Before Work') {
+		else if ($request['status'] == 'Report before work') {
            $statusfield=5;
         }
 		else  {
@@ -418,9 +418,9 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 		}
 
 
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $mForm = WorkOrder::where('id', $id)->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            $mForm = WorkOrder::where('id', $id)->first();
+             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
              $mForm->status = $statusfield;
              $mForm->save();
@@ -446,7 +446,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Inspection from successfully updated',
+            'message' => 'Inspection form updated successfully.',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
@@ -491,40 +491,53 @@ public function transportforwork(Request $request, $id)
 
     public function assigntechnicianforwork(Request $request, $id)
     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+       $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         if ($request['technician_work'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Technician for work order is required']);
         }
 
-		$checkstaff = WorkOrderStaff::where('staff_id', $request['technician_work'])->where('work_order_id', $id)->first();
+             $txtbox = $request['technician_work'];
+
+              foreach($txtbox as $a => $b){
+            $checkstaff = WorkOrderStaff::where('staff_id', $txtbox[ $a ])->where('work_order_id', $id)->first(); }
 
 
 		if (empty($checkstaff)) {
 
+          
+                //  First Store data in $arr
+             $arr = array();
+                  foreach ($txtbox as $address) {
+                   $arr[] = $address;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
 
 
 
+             $work_order_staff = new  WorkOrderStaff();
+     
 
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $work_order_staff = new  WorkOrderStaff();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-
-            $work_order_staff->staff_id = $request['technician_work'];
+            $work_order_staff->staff_id = $txtbox[ $a ];
 			$work_order_staff->status =0;
             $work_order_staff->work_order_id = $id;
-            $work_order_staff->save();
+            $work_order_staff->save(); }
 
 
 			$mForm = WorkOrder::where('id', $id)->first();
             $mForm->status =3;
-            $mForm->statusmform=3;
+            $mForm->statusmform=4;
             $mForm->save();
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Technician assigned successfully',
+            'message' => 'Technician for performing this works order assigned successfully',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
 
@@ -537,29 +550,38 @@ public function transportforwork(Request $request, $id)
 
 
     public function assigntechnicianforinspection(Request $request, $id)
-    {
+    {  
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         if ($request['technician_work'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Technician for work order is required']);
         }
+             $txtbox = $request['technician_work'];
 
-        $checkstaff = techasigned::where('staff_id', $request['technician_work'])->where('work_order_id', $id)->first();
+              foreach($txtbox as $a => $b){
+            $checkstaff = techasigned::where('staff_id', $txtbox[ $a ])->where('work_order_id', $id)->first(); }
+
+            if (empty($checkstaff))
+             {
 
 
-        if (empty($checkstaff)) {
 
-
-
-
-
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $work_order_staffassign = new  techasigned();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-
-            $work_order_staffassign->staff_id = $request['technician_work'];
+                //  First Store data in $arr
+             $arr = array();
+                  foreach ($txtbox as $address) {
+                   $arr[] = $address;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
+ 
+            $work_order_staffassign = new  techasigned();
+            $work_order_staffassign->staff_id = $txtbox[ $a ];
             $work_order_staffassign->status =0;
             $work_order_staffassign->work_order_id = $id;
-            $work_order_staffassign->save();
+            $work_order_staffassign->save();  }
 
 
             $mForm = WorkOrder::where('id', $id)->first();
@@ -571,7 +593,7 @@ public function transportforwork(Request $request, $id)
         return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Technician assigned successfully',
+            'message' => 'Technician assigned successfully please assign leader before filling inspection form',
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
 
@@ -1267,6 +1289,21 @@ session::flash('message', ' Your workorder have been closed successfully');
          return redirect()->back()->with(['message' => 'Technician leader assigned successifully']);
 
          }     
+
+
+       public function Technicianassignleaderinspection($id , $id2)
+    {
+
+        $wo_staff =techasigned::where('work_order_id', $id)->update(array('leader' =>1));
+
+        $wo_leader =techasigned::where('id', $id2)->first();
+        $wo_leader->leader2 = 3;
+        $wo_leader->save();
+
+         return redirect()->back()->with(['message' => 'Technician leader assigned successifully you can fill inspection before work']);
+
+         }     
+
 
 
 

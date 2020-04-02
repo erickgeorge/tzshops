@@ -303,23 +303,24 @@ var total=2;
         }
     </style>
 
- <div onload="createTable()"></div>
-   <div id="cont"></div>
 
-    <table id="dataTable" width="350px"  >
-        <th></th>
-        <th>No</th>
-        <th>Activity</th>
-        <th>Percentage</th>
-        <th>Score</th> 
-        <th>Remark</th>
+
+    <TABLE id="dataTable" width="350px" border="1">
         <TR>
-          
-             <td >   
-                <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
-            </td>
+            <TD><INPUT type="checkbox" name="chk"/></TD>
+           
+            <TD>
+                <SELECT style="width:  700px;"  name="activity[]">
+                    <OPTION value="in">India</OPTION>
+                    <OPTION value="de">Germany</OPTION>
+                    <OPTION value="fr">France</OPTION>
+                    <OPTION value="us">United States</OPTION>
+                    <OPTION value="ch">Switzerland</OPTION>
+                </SELECT>
+            </TD>
+             
         </TR>
-    </table>
+    </TABLE>
 
 
 
@@ -387,83 +388,51 @@ var total=2;
 
 
    
-    <SCRIPT language="javascript">
-
- 
-    function createTable() {
-           var empTable = document.createElement('table');
-           empTable.setAttribute('id', 'empTable');       
-
-            var table = document.getElementById('empTable');
-
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-
-            var cell1 = row.insertCell(0);
-            var element1 = document.createElement("input");
-            element1.type = "checkbox";
-            element1.name="chkbox[]";
-            cell1.appendChild(element1);
-
-            var cell2 = row.insertCell(1);
-            cell2.innerHTML = rowCount ++;
-
-            var cell3 = row.insertCell(2);
-            var element2 = document.createElement("textarea");
-            element2.type = "text";
-            element2.required = "required";
-            element2.placeholder = "Enter assesment activity";
-            element2.setAttribute('name',value);
-            cell3.appendChild(element2);
-
-
-
-            var div = document.getElementById('cont');
-            div.appendChild(empTable);    
-    }
-
  
 
+<SCRIPT language="javascript">
         function addRow(tableID) {
-
-              var value = parseInt(document.getElementById('totalmaterials').value, 10);
-              value = isNaN(value) ? 0 : value;
-              value++;
-              document.getElementById('totalmaterials').value = value;
-
-  
 
             var table = document.getElementById(tableID);
 
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
 
-            var cell1 = row.insertCell(0);
-            var element1 = document.createElement("input");
-            element1.type = "checkbox";
-            element1.name="chkbox[]";
-            cell1.appendChild(element1);
-
-            var cell2 = row.insertCell(1);
-            cell2.innerHTML = rowCount ++;
+            var colCount = table.rows[0].cells.length;
 
 
 
+            for(var i=0; i<colCount; i++)
+             {
 
-            var cell3 = row.insertCell(2);
-            var element2 = document.createElement("textarea");
-            element2.type = "text";
-            element2.required = "required";
-            element2.placeholder = "Enter assesment activity";
-            element2.setAttribute('name',value);
-            cell3.appendChild(element2);
-
+                var newcell = row.insertCell(i);
+                 
+               
+              
 
 
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
 
 
+                }
 
+                  
 
+            }
+
+           
         }
 
         function deleteRow(tableID) {
@@ -475,6 +444,10 @@ var total=2;
                 var row = table.rows[i];
                 var chkbox = row.cells[0].childNodes[0];
                 if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
                     table.deleteRow(i);
                     rowCount--;
                     i--;

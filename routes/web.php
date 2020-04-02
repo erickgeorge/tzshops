@@ -420,6 +420,8 @@ Route::get('work_order_technician_complete/{id}', 'WorkOrderController@woTechnic
 Route::get('work_order_technician_complete_inspection/{id}', 'WorkOrderController@TechnicianCompleteinspection')->name('workOrder.technicianCompleteinspection')->middleware('auth');
 
 Route::get('work_order_technician_assign_leader/{id}/{id2}', 'WorkOrderController@Technicianassignleader')->name('workOrder.technicianassignleader')->middleware('auth');
+Route::get('work_order_technician_assign_leader_inspection/{id}/{id2}', 'WorkOrderController@Technicianassignleaderinspection')->name('workOrder.technicianassignleaderinspection')->middleware('auth');
+
 
 
 Route::get('/unattended_work_orders', 'HomeController@unattendedWorkOrdersView')->name('unattended_work_orders')->middleware('auth');

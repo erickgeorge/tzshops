@@ -164,40 +164,36 @@ var total=2;
   <th>Status</th>
     <th>Date Assigned</th>
   <th>Complete work</th>
+  <th>Leader</th>
 
   </tr>
     @foreach($techforms as $techform)
-
-
-
-
   <tr>
 
      @if($techform['technician_assigned_for_inspection'] != null)
     <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
-   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
-
-
-
+   <td class="text-primary">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
   <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
 
+
+
     @if($techform->created_at ==  $techform->updated_at)
-
-
     <td> NOT COMPLETED</td>
     @else
       <td><?php $time = strtotime($techform->updated_at); echo date('d/m/Y',$time);  ?> </td>
 
     @endif
 
+    @if($techform->leader == null )
 
-
-
-
-
-
-
-
+<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
+                                                    class="fas fa-user-tie large"></i></a></td>
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Leader<i
+                                                    class="fas fa-user-tie large"></i></td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
+                                                    @endif
       @endif
 
 
@@ -245,7 +241,7 @@ var total=2;
 
      @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td style="color:red">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
+   <td class="text-primary">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
 
 
     <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
@@ -317,7 +313,7 @@ var total=2;
 
 
   <tr>
-    <td style="color:red" >{{ $iform->status }}</td>
+    <td class="text-primary" >{{ $iform->status }}</td>
     <td>{{ $iform->description }}</td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ $iform->date_inspected }}</td>
@@ -363,7 +359,7 @@ var total=2;
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
      <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
                                                                          class="badge badge-success">View Details</span></a></td>
-    <td style="color:red">@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
+    <td class="text-primary">@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
 
 
 
@@ -429,7 +425,7 @@ var total=2;
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+   <td class="text-primary">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
 
@@ -493,7 +489,7 @@ var total=2;
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td style="color:red">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+   <td class="text-primary">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
 
@@ -702,7 +698,7 @@ var total=2;
                     <div id="assigntechnician" class="tabcontent">
 
 
-                 @if($wo->statusmform != 1)
+                 @if(($wo->statusmform == 3) || ($wo->statusmform == 4))
 
                   
                         <div class="row">
@@ -723,7 +719,13 @@ var total=2;
                         @csrf
                           <div class="form-group">
                           <!-- <input  id="technician_work"  type="text" hidden> </input>  -->
-                            <select   id="techid" required class="custom-select"  name="technician_work" style="width: 700px;">
+
+              <TABLE id="dataTable" width="350px" >
+                  <TR>
+                       <TD><INPUT type="checkbox" name="chk[]"/></TD>
+                      
+                       <TD>
+                            <select   id="techidc" required class="custom-select"  name="technician_work[]" style="width: 700px;">
 
 
 
@@ -789,13 +791,26 @@ var total=2;
 
 
                             </select>
+                              </TD>
+
+           
+                  </TR>
+        </TABLE>
+
                         </div>
 
+                        <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow1('dataTable')" />
+
+                        <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow1('dataTable')" />
+                        <br><br>
+
                         <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
+
+                  
                 @else
-               <div align="center" style="color: red;"> Please assign Technician for Inspection before assigning Technician for Work. </div>
+               <div align="center" style="color: red;"> Please assign inspection form before work before assigning technician for work. </div>
                 @endif  
                     </div>
 
@@ -828,17 +843,19 @@ var total=2;
                         <form method="POST" action="{{ route('work.assigntechnicianforinspection', [$wo->id]) }}">
                         @csrf
                           <div class="form-group">
-                          <!-- <input  id="technician_work"  type="text" hidden> </input>  -->
-                            <select   id="techidforinspection" required class="custom-select"  name="technician_work" style="width: 700px;">
 
-
-
-
+          <TABLE id="dataTable" width="350px" >
+                  <TR>
+                       <TD><INPUT type="checkbox" name="chk[]"/></TD>
+                      
+                       <TD>
+                           
+                            <select   id="techidfoxrinspection" required class="custom-select"  name="technician_work[]" style="width: 700px;">
 
 
                                <?php
                 $p=-1;
-      ?>
+            ?>
 
                                 @foreach($techs as $tech)
                                 <?php
@@ -867,9 +884,6 @@ var total=2;
 
                               ?>
 
-
-
-
                                 @endforeach
                                 <?php
                                 for($i=0;$i<=$p-1;$i++){
@@ -895,10 +909,21 @@ var total=2;
 
 
                             </select>
+                       </TD>
+
+           
+                  </TR>
+        </TABLE>
+
                         </div>
 
+                        <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
+
+                        <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
+                        <br><br>
+
                         <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
 
 
@@ -919,7 +944,7 @@ var total=2;
                       @if($wo->statusmform != 1)
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Work order status</p>
+                                <p>Works order status</p>
                             </div>
                         </div>
 
@@ -950,28 +975,45 @@ var total=2;
                             <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
                         </div>
                         <div class="form-group">
-                            <label>Select Technician in Charge</label>
+                            <label>Select technician leader</label>
                             <br>
                             <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
                                 <option  selected value="" >Choose...</option>
+                                @if($wo->status == 70)
 
                                 <?php
 
-                                $techassigned = techasigned::where('work_order_id',$wo->id)->get();
+                                $techassigned = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->get();
                                 ?>
 
                                 @foreach($techassigned as $tech)
                                     <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
                                     </option>
                                 @endforeach
+
+                                @else
+
+                                <?php
+
+                                $techassigned = WorkOrderStaff::where('work_order_id',$wo->id)->where('leader2', 3)->get();
+                                ?>
+
+                                @foreach($techassigned as $tech)
+                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}
+                                    </option>
+                                @endforeach
+                                @endif
                             </select>
                         </div>
+
+      
+
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
                @else
-               <div align="center" style="color: red;"> Please assign Technician for Inspection before filling Inspection Form. </div>
+               <div align="center" style="color: red;"> Please assign technician for inspection before filling inspection form. </div>
                 @endif
                  </div>
                 {{-- end inspection --}}
@@ -1007,12 +1049,12 @@ var total=2;
 
 
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
 
                 @else
-               <div align="center" style="color: red;"> Please assign Technician for Inspection before requesting Transport. </div>
+               <div align="center" style="color: red;"> Please assign technician for inspection before requesting transport. </div>
                 @endif
 
                 </div>
@@ -1036,7 +1078,7 @@ var total=2;
 
 
                         ?>
-                         @if($wo->statusmform == 3) 
+                         @if($wo->statusmform == 4) 
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Select material for works order</p>
@@ -1078,10 +1120,10 @@ var total=2;
                          <br> <br>
 
                         <button @if($wo->zone_location == null) disabled="" @endif style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
                 @else
-               <div align="center" style="color: red;"> Please assign Technician for Inspection before requesting Material for Work. </div>
+               <div align="center" style="color: red;"> Please assign technician for inspection before requesting material for work. </div>
                 @endif
                  </div> 
                 {{-- end material_request  --}}
@@ -1103,7 +1145,6 @@ var total=2;
                         $wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',20)->get();
 
                         ?>
-
 
                          @if(COUNT($wo_materials)!=0)
 
@@ -1284,7 +1325,7 @@ var total=2;
                     <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
 
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
                     <button style="background-color: blue; color: white" onclick="newmaterialproc()" class="btn btn-success">New Material</button>
@@ -1532,6 +1573,153 @@ document.getElementById("totalmaterials").value=total;
             }
         });
     </script>
+
+
+
+
+
+  
+
+<SCRIPT language="javascript">
+        function addRow(tableID) {
+
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var colCount = table.rows[0].cells.length;
+
+
+
+            for(var i=0; i<colCount; i++)
+             {
+
+                var newcell = row.insertCell(i);
+                 
+               
+              
+
+
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+
+
+                }
+
+                  
+
+            }
+
+           
+        }
+
+        function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+
+    </SCRIPT>
+
+
+    <SCRIPT language="javascript">
+        function addRow1(tableID) {
+
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var colCount = table.rows[0].cells.length;
+
+
+
+            for(var i=0; i<colCount; i++)
+             {
+
+                var newcell = row.insertCell(i);
+                 
+               
+              
+
+
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+
+
+                }
+
+                  
+
+            }
+
+           
+        }
+
+        function deleteRow1(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+
+    </SCRIPT>
 
 
 
