@@ -54,6 +54,7 @@
 			</div>
             <input type="text" name="projectid" value="{{ $project->id }}" hidden>
             @endforeach
+            <input type="text" name="reedit" value="@if(isset($_GET['reediting'])) 1 @else 0 @endif" hidden>
 			<div class="col">
 				<button type="submit" class="btn btn-primary">Send</button>
 				<a class="btn btn-danger" href="{{ route('ppuprojectview', [$project->id]) }}">Cancel</a>

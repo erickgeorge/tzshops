@@ -58,7 +58,7 @@
               <li class="nav-item" style="margin-top: -10px;">
                 
                 <a class="nav-link" style="color:white" >
-                    <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
+                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
               </li>
 
 <?php
@@ -143,9 +143,9 @@
 
                 ?>
 
-@if(auth()->user()->type == 'Director DPI')
+@if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU'))
   <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
             </li>
  @endif
 
@@ -207,7 +207,7 @@
      <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
  <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
             </li>
  @endif
 
@@ -321,7 +321,7 @@
         </div>
        </li>
        <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
             </li>
 
                     @endif

@@ -57,7 +57,7 @@
 
                                <li class="nav-item" style="margin-top: -10px;">
                   <a class="nav-link" style="color:white" >
-                    <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
+                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
               </li>
                
 
@@ -283,9 +283,9 @@
             
                 @endif
 
-                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'DVC Admin'))
+                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Head PPU'))
                   <li class="nav-item">
-                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
+                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
                             </li>
                  @endif
                 @if(auth()->user()->type == 'DVC Admin')

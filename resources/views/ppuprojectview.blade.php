@@ -71,21 +71,32 @@
             </div>
                 <br>
                 <div class="row" style="font-weight: bold;">
-                    <div class="col">Created on: 
+                    <div class="col-lg-3">Created on: 
                         <?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}
                     </div>
-                    <div class="col-lg-3"> Status:
+                    <div class="col"> Status:
                             <?php $progress = ppuprojectprogress::orderBy('id','Desc')->where('project_id',$project->id)->first(); ?> 
-                         @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
-                        @if($progress->status == 1) <div class="badge badge-primary">Sent to DVC Admin  
-                        @if(auth()->user()->type == 'DVC Admin') 
-                        <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                        @endif </div>
+                         @if($progress->status == 0) <div class="btn btn-outline-primary">New Project </div>@endif
+
+                        @if($progress->status == 1) <div class="btn btn-outline-primary">Sent to DVC Admin  
+                          @if(auth()->user()->type == 'DVC Admin') 
+                          <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                          @endif </div>
                         @endif
-                        @if($progress->status == -1) <div class="badge badge-danger"><a class="link">Rejected by DVC Admin  </a>
-                        @if(auth()->user()->type == 'Director DPI') 
-                        <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                        @endif </div>
+                        @if($progress->status == -1) <div class="btn btn-outline-danger"><a class="link">Rejected by DVC Admin  </a>
+                          @if(auth()->user()->type == 'Director DPI') 
+                          <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                          @endif </div>
+                        @endif
+                        @if($progress->status == 2) <div class="btn btn-outline-primary"><a class="link">Forwarded to Director DES  </a>
+                          @if(auth()->user()->type == 'Estates Director') 
+                          <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                          @endif </div>
+                        @endif
+                        @if($progress->status == 3) <div class="btn btn-outline-primary"><a class="link">Forwarded to Head PPU  </a>
+                          @if(auth()->user()->type == 'Head PPU') 
+                          <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                          @endif </div>
                         @endif
                     </div>
                     @if($progress->status == -1) <button  class="col-sm-1 badge badge-primary text-light" data-toggle="modal" data-target="#exampleModal1">View Reason</button>
@@ -116,16 +127,24 @@
                       </div>
                     </div>
                         @endif
-                    @if(auth()->user()->type == 'Director DPI')
-                    @if($progress->status == 0)
-
-                    @endif
+                    @if(auth()->user()->type == 'Estates Director')
+                      @if($progress->status == 2)
+                           <div class="col">
+                           
+                            <a href="{{ route('ppuprojectforwardppu', [$project->id]) }}" class="btn btn-primary">Accept & Forward To Head PPU</a>
+                          </div>
+                      @endif
                     @endif
                     @if(auth()->user()->type == 'Director DPI')
                     @if($progress->status == 0)
                         <div class="col">
                             <a class="btn btn-warning" href="{{ route('ppueditproject', [$project->id]) }}">Edit</a>
                             <a href="{{ route('ppuprojectforwarddvc', [$project->id]) }}" class="btn btn-primary">Forward To DVC Admin</a>
+                        </div>
+                    @endif
+                     @if($progress->status == -1)
+                        <div class="col">
+                            <a class="btn btn-warning" href="{{ route('ppueditproject', [$project->id]) }}?reediting=1">Edit</a>
                         </div>
                     @endif
                     @endif

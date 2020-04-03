@@ -636,3 +636,4 @@ Route::post('saveeditedproject','PhysicalPlanningController@saveeditedproject')-
 
 Route::post('ppurejectproject','PhysicalPlanningController@ppurejectproject')->name('ppurejectproject')->middleware('auth');
 Route::get('ppuprojectforwarddes/{id}','PhysicalPlanningController@ppuprojectforwarddes')->name('ppuprojectforwarddes')->middleware('auth');
+Route::get('ppuprojectforwardppu/{id}','PhysicalPlanningController@ppuprojectforwardppu')->name('ppuprojectforwardppu')->middleware('auth');

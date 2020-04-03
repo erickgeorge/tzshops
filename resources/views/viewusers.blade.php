@@ -13,13 +13,10 @@ use App\Section;
  ?>
 <br>
 <div class="row container-fluid" >
-<<<<<<< HEAD
   <div class="col">
     <h5 style="padding-left: 90px;  text-transform: uppercase;">Available Registered Users</h5>
-=======
-  <div class="col-lg-4">
-    <h3 style="text-transform: uppercase;">Available Users</h3>
->>>>>>> d6db0e8b980fbc6ca3097202e7209db55cb12717
+
+
   </div>
  
   {{--<div class="col-md-5">

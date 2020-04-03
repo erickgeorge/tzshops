@@ -47,7 +47,7 @@ class PhysicalPlanningController extends Controller
 	public function infrastructureproject()
 	{
 		$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
-		$project = ppuproject::get();
+		$project = ppuproject::orderby('id','DESC')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
        return view('ppuinfrastructureprojects', [ 'role' => $role, 'notifications' => $notifications,'projects'=>$project]);
 	}
@@ -101,7 +101,11 @@ return redirect()->route('infrastructureproject')->with(['message' => 'Infrastru
 			$newstatus->updated_by = auth()->user()->id;
 			$newstatus->save();
 
-	return redirect()->route('ppuprojectview', [$id])->with(['message' => 'Project Forwarded Succesfully!']);
+		$projectstatus = ppuproject::where('id',$id)->first();
+		$projectstatus->status = 1;
+		$projectstatus->save();	
+
+	return redirect()->route('ppuprojectview', [$id])->with(['message' => 'Project Forwarded to DVC Succesfully!']);
 	}
 	public function ppueditproject($id)
 	{
@@ -119,6 +123,19 @@ return redirect()->route('infrastructureproject')->with(['message' => 'Infrastru
 			$newplan = ppuproject::where('id',$request['projectid'])->first();
 			$newplan->project_name = $request['projectname'];
 			$newplan->description = $request['projectdescription'];
+			if($request['reedit']==1)
+			{
+				$newplan->status = 0;
+
+
+
+				$newstatus = new ppuprojectprogress;
+				$newstatus->project_id = $newplan->id;
+				$newstatus->date_entered = $newplan->created_at;
+				$newstatus->status = 0;
+				$newstatus->updated_by = auth()->user()->id;
+				$newstatus->save();
+			}
 			$newplan->save();
 
 		return redirect()->route('ppuprojectview', $request['projectid'])->with(['message' => 'Project Updated Succesfully!']);
@@ -143,6 +160,33 @@ return redirect()->route('infrastructureproject')->with(['message' => 'Infrastru
 
 	public function ppuprojectforwarddes($id)
 	{
-		///
+			$newstatus = new ppuprojectprogress;
+			$newstatus->project_id = $id;
+			$newstatus->date_entered = now();
+			$newstatus->status = 2;
+			$newstatus->updated_by = auth()->user()->id;
+			$newstatus->save();
+
+		$projectstatus = ppuproject::where('id',$id)->first();
+		$projectstatus->status = 2;
+		$projectstatus->save();	
+
+	return redirect()->route('ppuprojectview', [$id])->with(['message' => 'Project Forwarded to Director DES Succesfully!']);
+	}
+
+	public function ppuprojectforwardppu($id)
+	{
+		$newstatus = new ppuprojectprogress;
+			$newstatus->project_id = $id;
+			$newstatus->date_entered = now();
+			$newstatus->status = 3;
+			$newstatus->updated_by = auth()->user()->id;
+			$newstatus->save();
+
+		$projectstatus = ppuproject::where('id',$id)->first();
+		$projectstatus->status = 3;
+		$projectstatus->save();	
+
+	return redirect()->route('ppuprojectview', [$id])->with(['message' => 'Project Forwarded to Head PPU Succesfully!']);
 	}
 }

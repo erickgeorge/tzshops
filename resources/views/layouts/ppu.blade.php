@@ -59,7 +59,7 @@
  <li class="nav-item" style="margin-top: -10px;">
                 
                 <a class="nav-link" style="color:white" >
-                    <img src="images/udsmlogo.jpg" style="height: 45px; width: 45px;"></a>
+                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
               </li>
 
 <?php 
@@ -142,148 +142,34 @@
 
 
                 @if(auth()->user()->type == 'Estates Director')
-                    
-                    
-                    
-                 <!--    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('completed_work_orders')}}">Completed Work-orders</a>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
-                    
-                
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
-                    </li>
-                    -->
-                      
-                   
-                  
-                    
-       
-    
-
-         
-        <li class="nav-item dropdown">
+                      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-          Works Order Reports 
+          Settings
         </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('/unattended_work_orders')}}">Unattended Work Orders</a>
-          <a  style="color:white" class="dropdown-item" href="{{ url('/completed_work_orders')}}">Completed Work Orders</a>
-           <a style="color:white" class="dropdown-item" href="{{ url('/woduration')}}">Work Orders Duration</a>
-            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">All WorkOrders <span
-                                    class="badge badge-light">{{ count($w) }}</span></a>
-
-        </div>
-       </li> 
-
-        
-                     
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                          HOS
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-                
-                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sections Details</a>
-                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS with completed works orders</a>
-                        </div>
-                       </li> 
-
-                        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Technician
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('/techniciancountcomp')}}">Technician Completed Work</a>
-          <a  style="color:white" class="dropdown-item" href="{{ url('/techniciancount')}}">Technicians on work (duty)</a>
-          
-          <a  style="color:white" class="dropdown-item" href="{{ url('/alltechnicians')}}">All Technicians Details</a>
-
-        </div>
-       </li> 
-            
-         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-        Users
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-           <a style="color:white" class="dropdown-item" href="{{ url('/alliow')}}">Inspectors of work</a>
-           
-
-        </div>
-       </li> 
-
-
-                  
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician Report</a>
-                    </li>-->
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                          Store
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-                
-                          <a class="dropdown-item" style="color:white" href="{{ url('stores')}}">All Materials in Store<span
-                            class="badge badge-light">{{ count($m) }}</span></a>
-                        </div>
-                       </li>
-
-                       <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
-                    </li>
-
-
-
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Settings 
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
 
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
 
-                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
 
-                 
 
         </div>
-       </li>   
-                       <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
-                    </li>
+       </li>
+       <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+            </li>
 
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
-                    </li> 
-
-                    
-            
-                @endif
-                @if(auth()->user()->type == 'Director DPI')
+                    @endif
+                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU'))
                   <li class="nav-item">
-                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
+                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
                             </li>
                  @endif
                 
@@ -476,15 +362,15 @@
 
         
                 @if(auth()->user()->type == 'Estates Director')
- <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
- </li>
+ <!-- <li class="nav-item">
+     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a> 
+ </li> -->
  @elseif(auth()->user()->type == 'DVC Admin')
+ <!-- <li class="nav-item">
+     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a> 
+ </li> -->
  <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
- </li>
- <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">PPU</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
             </li>
             <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
@@ -496,7 +382,7 @@
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
   </li>
                     
- <li class="nav-item">
+
 
   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('redirected_work_order')}}">Redirected Works order  </a>
@@ -505,8 +391,8 @@
   <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
                     </li>
-     <a href="{{ url('comp') }}" class="nav-link" style="color:white"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
- </li>
+   <li class="nav-item">   <a href="{{ url('comp') }}" class="nav-link" style="color:white"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
+ </li> 
 
    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
@@ -848,17 +734,15 @@ for (i = 0; i < dropdown.length; i++) {
 
 
 
-        
+
     </div>
-</div><!--  
+</div><!--
 <footer class="py-3 bg-dark" style="margin-bottom: 0;">
     <div class="container">
     <p class="m-0 text-center text-white"> ESMIS &copy; <?php echo date('Y'); ?>, All rights reserved</div>
 </footer>-->
 <script
-        src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
@@ -866,20 +750,22 @@ for (i = 0; i < dropdown.length; i++) {
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js" data-semver="2.0.3" data-require="jquery"></script>
+<script data-require="jqueryui@*" data-semver="1.10.0" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.js" data-semver="1.9.4" data-require="datatables@*"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
 <script>
-
     $('#myTable').DataTable();
     $('#myTablee').DataTable();
     $('#myTableee').DataTable();
 </script>
 
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 </body>
 </body>
