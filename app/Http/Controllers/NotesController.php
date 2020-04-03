@@ -728,9 +728,10 @@ public function unattendedwopdf(){
 //////////////////////////////////////////////////////// 
      if($data['unattended_work'] ->isEmpty()){
  
-return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
+return redirect()->back()->withErrors(['message' => 'No data Found For Your Search ']);
 }else{
         
+        $data['header'] = 'Un-attended works order';
  $pdf = PDF::loadView('unattendedwopdf', $data);
  return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
