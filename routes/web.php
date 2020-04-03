@@ -420,6 +420,8 @@ Route::get('work_order_technician_complete/{id}', 'WorkOrderController@woTechnic
 Route::get('work_order_technician_complete_inspection/{id}', 'WorkOrderController@TechnicianCompleteinspection')->name('workOrder.technicianCompleteinspection')->middleware('auth');
 
 Route::get('work_order_technician_assign_leader/{id}/{id2}', 'WorkOrderController@Technicianassignleader')->name('workOrder.technicianassignleader')->middleware('auth');
+Route::get('work_order_technician_assign_leader_inspection/{id}/{id2}', 'WorkOrderController@Technicianassignleaderinspection')->name('workOrder.technicianassignleaderinspection')->middleware('auth');
+
 
 
 Route::get('/unattended_work_orders', 'HomeController@unattendedWorkOrdersView')->name('unattended_work_orders')->middleware('auth');
@@ -552,7 +554,7 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
 
 
 
- Route::post('delete/material/{id}', 'StoreController@deletematerial')->name('material.delete')->middleware('auth');
+ Route::post('delete/material/{id}/{woid}', 'StoreController@deletematerial')->name('material.delete')->middleware('auth');
  Route::get('trackreport/{id}','NotesController@trackreport')->name('trackreport')->middleware('auth');
  Route::get('hoscompletedjob/{id}','WorkOrderController@hoscompletedjob')->name('hoscompletedjob')->middleware('auth');
 

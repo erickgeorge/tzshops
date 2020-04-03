@@ -100,16 +100,20 @@
                 </br>
 
                     <div>
-
+              @if($item->check_return == NULL)
                      <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialacceptmc', [$item->work_order_id , $item->zone] ) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
                    </span> 
                 
                  &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
-                </span>  
-             
+                </span> 
+
+              @endif   
+               
+              @if($item->check_return != NULL)  
 
                <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
                    </span></h5>  
+                   @endif
 
                      
 
@@ -242,7 +246,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h3 align="center"><b>Materials needed for Works order </b></h3>
+            <h4 align="center"><b>MATERIALS NEEDED FOR WORKS ORDER </b></h4>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -332,7 +336,7 @@
                     <div>
                
                  
-                 
+                  @if($item->check_return == NULL)
 
                      <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
                    </span> 
@@ -343,24 +347,18 @@
                  &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
                 </span>  
              
-
-
+              @endif
               
              
-
-
+              @if($item->check_return != NULL)
+                 
                <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
                    </span></h5>  
 
+              @endif     
+
                      
-                   
-
-
-
                 
- 
-
-
 
                    </h5> </div>
 

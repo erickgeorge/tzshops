@@ -546,6 +546,13 @@
     <div>
  
 </div>
+@if(auth()->user()->type == 'Estates Director')
+<div style="padding: 1em;">
+  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+Print report
+</button></a>
+</div>
+@endif
 @if(auth()->user()->type == "CLIENT")
 <div style="padding: 1em;">
   <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
@@ -588,12 +595,15 @@ Print report
                 </form>
             </div>
         @else
+
+          @if($wo->status == 6)
             <div>
                 <form method="POST" action="{{ route('workorder.inspector', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-warning">Notify IoW to approve work done</button>
+                    <button type="submit" class="btn btn-warning">Notify Inspector of work to approve work done</button>
                 </form>
             </div>
+          @endif
       
         @endif
         <div style="padding: 1em;">
