@@ -412,9 +412,13 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 		else if ($request['status'] == 'Report before work') {
            $statusfield=5;
+
+            $tech_complete =techasigned::where('work_order_id', $id)->update(array('status' =>1)); 
         }
-		else  {
+		else if ($request['status'] == 'Report after Work') {
 			 $statusfield=6;
+
+            $tech_complete_work =WorkOrderStaff::where('work_order_id', $id)->update(array('status' =>1)); 
 		}
 
 
@@ -439,8 +443,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
              $w->statusmform = 3;
          
              $w->save();
-        
-
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -1270,7 +1272,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
 
      public function TechnicianCompleteinspection($id)
-    {
+       {
 
         $wo_staff =techasigned::where('id', $id)->first();
         $wo_staff->status = 1;
