@@ -334,7 +334,7 @@ foreach($userwithid as $userwithid)
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id">00{{ $work->id }}</td>
                             <td id="wo-details">{{ $work->details }}</td>
-                            <td>{{ $work->problem_type }}</td>
+                            <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
                                 <td><span class="badge badge-warning">new</span>

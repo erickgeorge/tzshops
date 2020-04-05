@@ -78,7 +78,7 @@ var total=2;
             <label class="input-group-text">Type of a problem</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
-               aria-describedby="emailHelp" value="{{ $wo->problem_type }}" disabled>
+               aria-describedby="emailHelp" value="{{  ucwords(strtolower($wo->problem_type))  }}" disabled>
     </div>
 
     @if(empty($wo->room_id) )
@@ -720,7 +720,7 @@ var total=2;
                           <div class="form-group">
                           <!-- <input  id="technician_work"  type="text" hidden> </input>  -->
 
-              <TABLE id="dataTable" width="350px" >
+              <TABLE id="dataTable1" width="350px" >
                   <TR>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
                       
@@ -799,9 +799,9 @@ var total=2;
 
                         </div>
 
-                        <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow1('dataTable')" />
+                        <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow1('dataTable1')" />
 
-                        <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow1('dataTable')" />
+                        <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow1('dataTable1')" />
                         <br><br>
 
                         <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
@@ -1187,7 +1187,7 @@ var total=2;
 
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this Material from the list? ')"
-                                          action="{{ route('material.delete', [$matform->id]) }}">
+                                          action="{{ route('material.delete', [$matform->id , $matform->work_order_id ]) }}">
                                         {{csrf_field()}}
 
 
