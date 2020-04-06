@@ -82,7 +82,7 @@ use App\iowzonelocation;
                             <td>{{ $locations->zonename }}</td>
                             <td><?php $locationtotal = iowzonelocation::where('iowzone_id',$locations->id)->get(); echo count($locationtotal); ?> locations </td>
                            
-                            <td><a href="myzone?zone={{ $locations->id }} " class="btn btn-primary">view works orders</a></td>
+                            <td>@if(count($locationtotal)  < 1)<a class="btn text-light btn-primary" title="Can not view works order with zero locations" >No works order</a> @else<a href="myzone?zone={{ $locations->id }} " class="btn btn-primary">view works orders</a>@endif</td>
                         </tr>
                         @endforeach
                 </tbody>
