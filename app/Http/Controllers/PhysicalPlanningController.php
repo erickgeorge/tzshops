@@ -189,4 +189,23 @@ return redirect()->route('infrastructureproject')->with(['message' => 'Infrastru
 
 	return redirect()->route('ppuprojectview', [$id])->with(['message' => 'Project Forwarded to Head PPU Succesfully!']);
 	}
+
+	public function ppuprojectdraftsman(request $request)
+	{
+				$projectstatus = ppuproject::where('id',$request['projectid'])->first();
+
+				$newstatus = new ppuprojectprogress;
+				$newstatus->project_id = $request['projectid'];
+				$newstatus->date_entered = $projectstatus['created_at'];
+				$newstatus->status = 4;
+				$newstatus->remarks = $request['reason'];
+				$newstatus->updated_by = auth()->user()->id;
+				$newstatus->save();
+
+				
+				$projectstatus->status = 4;
+				$projectstatus->save();	
+
+			return redirect()->route('ppuprojectview', [$request['projectid']])->with(['message' => 'Project Accepted and Forwarded to Draftsman Succesfully!']);
+	}
 }

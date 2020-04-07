@@ -143,7 +143,7 @@
 
                 ?>
 
-@if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU'))
+@if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman'))
   <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
             </li>

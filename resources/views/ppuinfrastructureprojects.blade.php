@@ -110,6 +110,11 @@
                             <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
                             @endif </div>
                         @endif
+                         @if($progress->status == 4) <div class="badge badge-primary">Forwarded to Draftsman  
+                            @if(auth()->user()->type == 'Architect & Draftsman') 
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                            @endif </div>
+                        @endif
                 </td>
                 <td><a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a></td>
             </tr>
@@ -121,14 +126,13 @@
                 <td><?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}</td>
                 <td>
                     
-                         
                          @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
                         @if($progress->status == 1) <div class="badge badge-primary">Forwarded to DVC Admin  
                             @if(auth()->user()->type == 'DVC Admin') 
                             <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
                             @endif </div>
                         @endif
-                        
+
                         @if($progress->status == -1) <div class="badge badge-danger">Rejected by DVC Admin  
                             @if(auth()->user()->type == 'Director DPI') 
                             <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
@@ -136,7 +140,7 @@
                         @endif
 
                         @if($progress->status == 2) <div class="badge badge-primary">Forwarded to Director DES  
-                            @if(auth()->user()->type == 'Director DPI') 
+                            @if(auth()->user()->type == 'Estates Director') 
                             <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
                             @endif </div>
                         @endif
@@ -145,6 +149,12 @@
                             <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
                             @endif </div>
                         @endif
+                         @if($progress->status == 4) <div class="badge badge-primary">Forwarded to Draftsman  
+                            @if(auth()->user()->type == 'Architect & Draftsman') 
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                            @endif </div>
+                        @endif
+                        
                 </td>
                 <td><a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a></td>
             </tr>
