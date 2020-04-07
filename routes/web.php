@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/notification', 'HomeController@notificationView')->middleware('auth');
 
 Route::get('password','HomeController@passwordView' )->middleware('auth');
