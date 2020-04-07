@@ -242,43 +242,7 @@ foreach($userwithid as $userwithid)
              <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed <b class="badge badge-light"></b></b></a>
         </div>
     <br>
-    <form method="get" enctype="multipart/form-data" action="#@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif">
-    <div class="row">
-        <div class="col-lg-3"></div>
-
-        <div class="col-lg-4">
-            <div class="input-group ">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" >Location </label>
-                </div>
-                <select name="location" class="form-control mr-sm-2" required>
-                    <option selected value="All">All locations</option>
-                    @foreach ($locations as $local)
-                <option value="{{ $local->id }}">{{$local->location}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-       <div class="col">
-            <select name="year" class="form-control mr-sm-2" required>
-                <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
-                @foreach($locations as $loca)
-                    <?php $worklocationa = Workorder::select('created_at')->distinct()->where('zone_location',$loca->id)->get(); ?>
-                    @foreach ($worklocationa as $year)
-                    <?php $time = strtotime($year->created_at); ?>
-                    	@if( date('Y',$time) != date('Y'))
-                        	<option value="">{{ date('Y',$time) }}</option>
-                        @endif
-                    @endforeach
-
-                @endforeach
-            </select>
-        </div>
-        <div class="col">
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </div>
-</form>
+ 
     <br/>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
@@ -334,7 +298,7 @@ foreach($userwithid as $userwithid)
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id">00{{ $work->id }}</td>
                             <td id="wo-details">{{ $work->details }}</td>
-                            <td>{{ $work->problem_type }}</td>
+                            <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
                                 <td><span class="badge badge-warning">new</span>

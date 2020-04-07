@@ -150,11 +150,7 @@
  @endif
 
 
-                @if(auth()->user()->type == 'DVC Admin')
-                <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
-                    </li>
-                @endif
+             
 
 
 

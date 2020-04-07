@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works order with material accepted by Inspector of Work</b></h5>
+            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works order with material accepted by Inspector of Works</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -72,7 +72,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h1> No Works order Material accepted by Inspector of Work </h1></div>
+<div style="padding-top: 300px;" align="center"><h1>Currently no works order material accepted by Inspector of Works </h1></div>
 
 @endif
     @endSection

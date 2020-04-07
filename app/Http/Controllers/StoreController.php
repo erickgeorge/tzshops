@@ -653,7 +653,7 @@ public function deletematerial($id , $woid)
 	   $mForm->save();
 
        
-		 return redirect()->back()->with(['message' => 'Materials sent successfully to Inspector of Work']);
+		 return redirect()->back()->with(['message' => 'Materials sent successfully to Inspector of Works']);
 
 		
 }

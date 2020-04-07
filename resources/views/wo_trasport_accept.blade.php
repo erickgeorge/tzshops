@@ -7,12 +7,13 @@
 @section('body')
 
   <br>
+  @if(count($items)>0)
     <div class="row container-fluid" >
         <div class="col-lg-12" align="center">
            <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Accepted Requested Transport </b></h5>
-        </div>
-@if(count($items)>0)
-        <div class="container" style="padding-left: 620px;">
+
+
+        <div class="container" style="padding-left: 500px;">
             <form method="GET" action="wo_transport_request_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -29,7 +30,8 @@
             </form>
         </div>
 
-@endif
+
+        </div>
        
     </div>
     <br>
@@ -97,4 +99,12 @@
         </table>
     </div>
 </div>
+
+@else
+ <div class="container" align="center">
+                
+                   <br><div> <h2 style="padding-top: 300px;">Currently no transport requests accepted</h2></div>
+                
+            </div>
+            @endif
     @endSection

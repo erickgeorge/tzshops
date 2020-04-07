@@ -256,51 +256,15 @@ foreach($userwithid as $userwithid)
         </div>
     <br>
 
-    <form method="get" enctype="multipart/form-data" action="">
-        <div class="row">
-            <div class="col-lg-3"></div>
-
-            <div class="col-lg-4">
-                <div class="input-group ">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" >Location </label>
-                    </div>
-                    <select name="location" class="form-control mr-sm-2" required>
-                        <option selected value="All">All locations</option>
-                        @foreach ($locations as $local)
-                    <option value="{{ $local->id }}">{{$local->location}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-           <div class="col">
-                <select name="year" class="form-control mr-sm-2" required>
-                    <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>
-                    @foreach($locations as $loca)
-                        <?php $worklocationa = Workorder::select('created_at')->distinct()->where('zone_location',$loca->id)->get(); ?>
-                        @foreach ($worklocationa as $year)
-                        <?php $time = strtotime($year->created_at); ?>
-                            @if( date('Y',$time) != date('Y'))
-                                <option value="">{{ date('Y',$time) }}</option>
-                            @endif
-                        @endforeach
-
-                    @endforeach
-                </select>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary">Filter</button>
-            </div>
-        </div>
-    </form>
+   
         <br/>
     <br/>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
             @if(count($locations) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
-                <thead class="thead-dark">
-                <tr>
+                <thead >
+                <tr style="color: white;">
                     <th>#</th>
           <th>WO ID</th>
                     <th>Details</th>

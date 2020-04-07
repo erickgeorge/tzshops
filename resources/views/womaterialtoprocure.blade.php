@@ -11,7 +11,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works order with missing materials and need to be purchased</b></h5>
+            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works order with missing materials</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -40,7 +40,7 @@
                 
 				
                 <th > # </th>
-				<th > ID </th>
+				<th > Wo ID </th>
                 <th>HoS Name</th>
 				<th >Works order Detail</th>
 				

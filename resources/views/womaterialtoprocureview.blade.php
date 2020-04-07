@@ -14,7 +14,7 @@ use App\MinuteSheet; ?>
 
     <div>
         <div>
-            <h5 style="padding-left: 90px;" align="center"><b style="text-transform: uppercase;">Works order  with material to be purchased </b></h5>
+            <h5 style="padding-left: 90px;" align="center"><b style="text-transform: uppercase;">Material to be purchased </b></h5>
         </div>
        
     </div>
@@ -84,7 +84,7 @@ $checkes = Minutesheet::where('Woid',$item->work_order_id)->get();
   <b class="badge badge-info btn-sm">Minutes sheet already created</b> <a class="btn btn-success" href="{{ url('minutesheet',[$item->work_order_id]) }}">View</a>
          
   @else               
-       <a class="btn btn-success btn-sm" href="#" role="button" data-toggle="modal" data-target="#exampleModal">Create Minute Sheet</a> 
+ 
         </div>
     @endif       
 

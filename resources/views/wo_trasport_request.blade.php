@@ -6,6 +6,8 @@
 
 @section('body')
 
+  @if(count($items)>0)
+
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
@@ -133,6 +135,14 @@
     </div>
 	<p id="n" > </p> 
 </div>
+
+@else
+ <div class="container" align="center">
+                
+                   <br><div> <h2 style="padding-top: 300px;">Currently no transport requests</h2></div>
+                
+            </div>
+            @endif
 	
     @endSection
 	
