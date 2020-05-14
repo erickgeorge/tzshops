@@ -26,7 +26,7 @@
               <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Cleaning Area </b></h5>
               <hr>
                 <a href="{{ route('Registercleaningarea') }}"
-                   class="btn btn-primary">Add New CLeaning Area</a>
+                   class="btn btn-primary">Add new cleaning area</a>
                    <br><br>
 
                 <table id="myTable" id="myTable" class="table table-striped">
@@ -49,7 +49,7 @@
                             <th scope="row">{{ $i }}</th>
                             
                             <td>{{ $clean_area->cleaning_name }}</td>
-                            <td>{{ $clean_area['zone']->Zone_name }}</td>
+                            <td>{{ $clean_area['zone']->zonename }}</td>
 
 
                             <td>

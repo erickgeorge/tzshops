@@ -160,11 +160,13 @@ var total=2;
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
   <th>Complete work</th>
   <th>Leader</th>
+     </thead>
 
   </tr>
     @foreach($techforms as $techform)
@@ -225,11 +227,13 @@ var total=2;
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
   <th>Complete work</th>
   <th>Leader</th>
+</thead>
 
   </tr>
     @foreach($techforms as $techform)
@@ -304,10 +308,12 @@ var total=2;
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
     <th>STATUS</th>
     <th>DESCRIPTION</th>
   <th>TECHNICIAN RESPONSIBLE</th>
     <th>DATE INSPECTED</th>
+  </thead>
   </tr>
     @foreach($iforms as $iform)
 
@@ -343,6 +349,7 @@ var total=2;
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
     <th>Date</th>
     <th>Time</th>
     <th>Details</th>
@@ -350,6 +357,7 @@ var total=2;
   <th>Message</th>
 
     <th>Date Requested</th>
+  </thead>
   </tr>
     @foreach($tforms as $tform)
 
@@ -400,6 +408,7 @@ var total=2;
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
 
     <th>Material Name</th>
 
@@ -409,6 +418,7 @@ var total=2;
     <th>Status</th>
      <th>Date Requested</th>
       <th>Date Updated</th>
+    </thead>
 
   </tr>
     @foreach($matforms as $matform)
@@ -462,6 +472,7 @@ var total=2;
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
 
     <th>Material Name</th>
 
@@ -472,6 +483,7 @@ var total=2;
     <th>Status</th>
      <th>Date Requested</th>
       <th>Date Updated</th>
+    </thead>
 
   </tr>
     @foreach($matforms as $matform)
@@ -527,11 +539,13 @@ var total=2;
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
 
     <th>Material Name</th>
     <th>Material Description</th>
      <th>Type</th>
      <th>Quantity</th>
+   </thead>
   </tr>
     @foreach($matforms as $matform)
   <tr>
@@ -1550,8 +1564,8 @@ document.getElementById("totalmaterials").value=total;
 
          function myfunc6(x) {
             document.getElementById("details").innerHTML = x;
-  }
-</script>
+  }  
+   </script>
 
 
  <script type="text/javascript">

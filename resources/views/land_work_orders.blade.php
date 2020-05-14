@@ -271,7 +271,7 @@ foreach($userwithid as $userwithid)
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id">00{{ $work->id }}</td>
                             <td id="wo-details">{{ $work->details }}</td>
-                            <td>{{ $work->maintenance_section }}</td>
+                             <td>{{ ucwords(strtolower($work->maintenance_section)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == 1)
                             <td><span class="badge badge-warning">new</span></td>
@@ -281,6 +281,12 @@ foreach($userwithid as $userwithid)
                              <td><span class="badge badge-success">Inspection Stage</span></td>
                             @elseif($work->status == 4)
                              <td><span class="badge badge-success">Assessment Stage</span></td>
+                             @elseif($work->status == 5)
+                             <td><span class="badge badge-success">Approved by Head PPU</span></td>
+                             @elseif($work->status == 6)
+                             <td><span class="badge badge-success">Approved by Estate Director</span></td>
+                              @elseif($work->status == 7)
+                             <td><span class="badge badge-success">Payment appdated by Accountant</span></td>
                             @endif
  
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
@@ -308,11 +314,11 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                             <td>  <a href=" {{ route('workorder.view.landsc', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a></td>
                              @else
-                               <td> <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
+                               <td> <a style="color: green;" href="{{ url('edit/work_order/landscaping', [$work->id]) }}"
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a> 
+                            <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
-                            &nbsp;&nbsp;
-                           <a style="color: green;" href="{{ url('edit/work_order/landscaping', [$work->id]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;</td>
+                           </td>
                                           
                               @endif                        
                       @endif

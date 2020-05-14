@@ -1,0 +1,42 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class landcrosschecklandassessmentactivity extends Model
+{
+	
+ public function approval(){
+        return $this->belongsTo('App\User', 'accepted_by');
+    }
+
+  public function approvalpayment(){
+        return $this->belongsTo('App\User', 'approved_by');
+    }    
+
+  public function paymentaccountant(){
+        return $this->belongsTo('App\User', 'payment_by');
+    }   
+
+
+  public function rejection(){
+        return $this->belongsTo('App\User', 'a_rejected_by');
+    }  
+
+
+      public function rejectionestate(){
+        return $this->belongsTo('App\User', 'es_rejected_by');
+    } 
+
+
+
+      public function rejectiondvc(){
+        return $this->belongsTo('App\User', 'dvc_rejected_by');
+    } 
+  
+  
+	
+
+  
+}

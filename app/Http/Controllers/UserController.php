@@ -384,7 +384,7 @@ class UserController extends Controller
              
 
        $user = Auth::user();
-if ($request->Image!='') {
+     if ($request->Image!='') {
     $cover = $request->file('Image');
     $extension = $cover->getClientOriginalExtension();
     Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));

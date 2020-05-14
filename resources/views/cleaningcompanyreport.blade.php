@@ -1,7 +1,7 @@
 @extends('layouts.land')
 
 @section('title')
-    Cleaning Company
+    Cleaning Company report
     @endSection
 
 @section('body')
@@ -21,13 +21,8 @@
               @endif
                   <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available cleaning companies </b></h5>
                   <hr>
-                   @if(auth()->user()->type != 'DVC Admin')
-                   @if(auth()->user()->type != 'Estates Director')
-                   <div class="row"><div class="col">
-                  <a href="{{ route('registercompany') }}"
-                   class="btn btn-primary" >Add new cleaning company</a> </div> @endif @endif
-                    <div><a href="{{ route('registercompany') }}"
-                   class="btn btn-primary" >Report</a></div></div><br> <br> 
+                  
+                   <br> <br> 
     
                 <table id="myTableee" id="myTable" class="table table-striped">
                       
@@ -54,7 +49,6 @@
                 <?php $now1 =  Carbon::now();
                 $dcont = Carbon::parse($house->datecontract);
                 $dnext = Carbon::parse($house->nextmonth);
-                $endcont = Carbon::parse($house->endcontract);
 
                 $date_left = $now1->diffInDays($dcont);
                 $date_next = $now1->diffInDays($dnext); ?>
@@ -67,10 +61,8 @@
                   @if($house->status == 2 ) 
                            <td><span class="badge badge-danger">Not assigned yet </span><br>
                             @if($now1 >= $dcont)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
-                  @elseif($now1 > $endcont)
-                           <td><span class="badge badge-warning">Contract Expired </span><br>
-                          
-                  
+
+
                   @else
 
                           <?php  $ddate = strtotime($house->nextmonth);
@@ -83,11 +75,6 @@
                             <td>{{ $house->registration }}</td>
                             <td>{{ $house->tin }}</td>
 
-        @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Can not assessed </span><br></td>
-        @else
-                                   
-
                   @if($house->status == 1)
 
                   @if($now1 >= $dnext)
@@ -97,8 +84,8 @@
                   @endif 
 
 
-                  
-                  @else
+
+                  @else 
 
 
                  @if($now1 >= $dcont)
@@ -110,19 +97,12 @@
 
                    
                   @endif
-           @endif       
 
 
            
                 <?php $date = Carbon::parse($house->datecontract);
-                 $now = Carbon::parse($house->endcontract);
+                $now = Carbon::parse($house->endcontract);
                  $diff = $date->diffInDays($now); ?>
-
-
-
-        @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
-        @else
 
                  @if($diff >= 365)
      
@@ -136,7 +116,7 @@
 
 
 
-                         
+                        
                    @else
 
                            <td><?php 
@@ -147,65 +127,14 @@
                              $dd = date_diff($start_date,$end_date);
                              echo $dd->m." months ".$dd->d." days"; ?></td>   
 
+                  @endif
+
+                  
+                          <td><a style="color: green;"  href="{{route('view_company_report' , [$house->id])}}" data-toggle="tooltip" title="View report"><i
+                                                    class="fas fa-eye"></i></a></td>        
 
 
-                           
-                  @endif  
-               @endif   
-          
-
-             <td>
-
-                   <div class="row">  &nbsp;&nbsp;&nbsp;
-                   @if(auth()->user()->type != 'DVC Admin')
-                   @if(auth()->user()->type != 'Estates Director')
-                                  
-                                    <a style="color: green;"
-                                       onclick="myfunc('{{ $house->id }}','{{ $house->company_name }}','{{ $house->type }}','{{$house->status}}','{{$house->registration}}','{{$house->tin}}','{{$house->vat}}','{{$house->license}}' )"
-                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
-                                                class="fas fa-edit"></i></a> @endif @endif &nbsp;&nbsp;
-        @if($now1 > $endcont)
-                         <a style="color: green;"  href="{{route('view_company_report' , [$house->id])}}" data-toggle="tooltip" title="View company trending report"><i
-                                                    class="fas fa-eye"></i></a>  &nbsp;&nbsp;
-                         <a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>   
-        @else                                
-               
-               @if( $house->status == 2) 
-                                    <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this company Completely? ')"
-                                          action="{{ route('company.delete', [$house->id]) }}">
-                                        {{csrf_field()}}
-
-
-                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
-                                                                                        data-toggle="tooltip"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                        </button>
-                                    </form>&nbsp;&nbsp;
-               
-                @if($now1 >= $dcont)
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id])}}" data-toggle="tooltip" title="Please assign this company"><i
-                                                    class="fas fa-share"></i></a>  
-                @endif       
-                @elseif( $house->status == 1 ) 
-
-                <a style="color: black;"  href="{{route('track_company' , [$house->id])}}" data-toggle="tooltip" title="Track"><i
-                                                    class="fas fa-tasks"></i></a>    &nbsp;&nbsp;
-
-                @if($now1 >= $dnext)
-
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id])}}" data-toggle="tooltip" title="Please assign this company again"><i
-                                                    class="fas fa-share"></i></a>  
-                @endif 
-
-          
-               
-
-                @endif 
-        @endif                                   
-               </div>
-          </td>
+                      
 
 
 

@@ -198,7 +198,11 @@ User Registration
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
 
-	                  <option value="Supervisor LECC ">Supervisor LECC </option>
+	                  @foreach($maintsec as $sec)
+ 
+                           <option  value="HOS {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
+         
+                       @endforeach
 
 	                  <option value="Transport Officer">Transport Officer</option>
 
@@ -243,7 +247,7 @@ User Registration
 
 	                  @foreach($worksec as $dep)
  
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+                           <option  value="Supervisor {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
          
                        @endforeach
 
@@ -255,7 +259,11 @@ User Registration
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
 
-	                  <option value="Supervisor LECC ">Supervisor LECC </option>
+	                  @foreach($maintsec as $sec)
+ 
+                           <option  value="Supervisor {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
+         
+                       @endforeach
 
 	                  <option value="Transport Officer">Transport Officer</option>
 

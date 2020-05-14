@@ -19,6 +19,9 @@ use App\Procurement;
 use App\Storehistory;
 use App\iowzone;
 use App\iowzonelocation;
+use App\landassessmentactivityform;
+use App\landassessmentform;
+use App\landcrosschecklandassessmentactivity;
 
    
 class NotesController extends Controller
@@ -968,6 +971,8 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
      return $pdf->stream('Goods received Note - '.$id.'- '.date('d-m-Y Hi').'.pdf');
     }
 
+
+
     public function issuenotepdf($id){
 
           
@@ -1127,5 +1132,30 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
         $pdf = PDF::loadView('materialEntrypdf',$data);
         return $pdf->stream('Store Material Entry Report - '.date('d-m-Y H:i').'.pdf');
     }
+
+
+      public function assessmentpdf($id){
+
+           $data = ['title' => 'Notes List' , 'assessmmentcompany' => landassessmentform::where('id', $id)->get(),
+              'assessmmentactivity' => landcrosschecklandassessmentactivity::where('assessment_id', $id)->get()];
+         $pdf = PDF::loadView('assessmentpdf', $data);
+   
+     return $pdf->stream('Assessmentform - '.$id.'- '.date('d-m-Y Hi').'.pdf');
+    } 
+
+
+
+
+    public function printmonthreport($id){
+
+           $data = ['title' => 'Notes List' ,
+            'assessmmentcompany' => landassessmentform::where('assessment_month', $id)->get()
+        ];
+         $pdf = PDF::loadView('assessmentmonthreport', $data);
+   
+     return $pdf->stream('Assessmentmonthreport - '.$id.'- '.date('d-m-Y Hi').'.pdf');
+    }  
+
+
 
 }

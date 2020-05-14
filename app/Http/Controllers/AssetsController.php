@@ -19,6 +19,10 @@ use App\Room;
 use App\Block;
 use App\Location;
 use App\company;
+use App\landassessmentform;
+use App\iowzone;
+use App\companywitharea;
+use Carbon\Carbon;
 
 class AssetsController extends Controller
 {
@@ -48,17 +52,83 @@ class AssetsController extends Controller
       public function Registercompany(Request $request)
     {
        
+
         $company = new company();
         $company->company_name = $request['name'];
         $company->type = $request['type'];
-        $company->status = $request['status'];
+        $company->status = 2;
         $company->registration = $request['Registration'];
         $company->tin = $request['TIN'];
-        $company->vat = $request['VAT'];
-        $company->license = $request['license'];
-        $company->save();
-        return redirect()->route('cleaningcompany')->with(['message' => 'New Company is registered successfully']);
-    }
+        $company->payment = $request['payment'];
+        $company->datecontract = $request['datecontract'];
+        $company->nextmonth = $request['datecontract'];
+        $company->endcontract =  $request['duration'];
+               
+
+
+
+
+     if ($company->datecontract >= $company->endcontract) {
+
+         return redirect()->back()->withErrors(['message' => 'Please enter the valid end of contract as compared to the start of the contract']);
+   
+     }
+
+     else{
+
+        $carea = $request['area'];
+          foreach($carea as $a =>   $b)
+          {
+            $companyarea = new companywitharea();
+            $companyarea->area_id = $carea[$a];
+            $companyarea->company_name =  $request['name'];
+            $companyarea->save();
+          }
+                          
+        $company->save(); 
+      }   
+
+        return redirect()->route('cleaningcompany')->with(['message' => 'New company is registered successfully']);
+    } 
+
+
+
+
+
+
+
+      public function Renewcompany(Request $request , $id)
+    {
+       
+
+        $company = company::where('id', $id)->first();
+        $company->status = 1;
+        $company->payment = $request['payment'];
+        $company->datecontract = $request['datecontract'];
+        $company->nextmonth = $request['datecontract'];
+        $company->endcontract =  $request['duration'];
+               
+
+
+
+
+     if ($company->datecontract >= $company->endcontract) {
+
+         return redirect()->back()->withErrors(['message' => 'Please enter the valid end of contract as compared to the start of the contract']);
+   
+     }
+
+     else
+
+
+                          
+         $company->save(); 
+      
+
+        return redirect()->route('cleaningcompany')->with(['message' => 'Company contract renewed successfully']);
+    } 
+
+
 
 
 
@@ -121,16 +191,34 @@ class AssetsController extends Controller
        public function cleaningcompany(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-         
+       
          return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-        
-           'cleangcompany' => company::all()
+             
+             'cleangcompany' => company::all()
   
           ]);
 
          }
+
+
+        public function cleaningcompanyreport(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+       
+         return view('cleaningcompanyreport', [
+            'role' => $role,
+            'notifications' => $notifications,
+             
+             'cleangcompany' => company::where('status', 1)->get()
+  
+          ]);
+
+         }
+
+
+
 
 
        public function Hallofresdence(){
@@ -256,7 +344,7 @@ class AssetsController extends Controller
        {
            $comp=company::where('id', $id)->first();
            $comp->delete();
-           return redirect()->route('cleaningcompany')->with(['message' => 'Respective company is deleted successfully']);
+           return redirect()->route('cleaningcompany')->with(['message' => 'Respective company deleted successfully']);
        }
 
 
@@ -408,9 +496,22 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'campuses' => Campus::all(),
+             'carea' =>cleaningarea::all()
           ]);
      }
 
+
+    public function Renewcompanycontract($id){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('renewcompanycontract', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'campuses' => Campus::all(),
+             'carea' =>cleaningarea::all(),
+             'company' => company::where('id', $id)->first()
+          ]);
+     }
 
 
 
@@ -447,7 +548,7 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'campuses' => Campus::all(),
-                'newzone' => zone::all(),
+                'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
           ]);
      }
 

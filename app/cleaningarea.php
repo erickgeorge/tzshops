@@ -8,7 +8,7 @@ class cleaningarea extends Model
 {
 
 	public function zone(){
-        return $this->belongsTo('App\zone');
+        return $this->belongsTo('App\iowzone');
     }
     	
     //
