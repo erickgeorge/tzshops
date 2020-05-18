@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="col">
-				<button type="submit" class="btn btn-primary">Send</button>
+				<button type="submit" class="btn btn-primary">Save</button>
 				<a class="btn btn-danger" href="infrastructureproject">Cancel</a>
 			</div>
     	</form>

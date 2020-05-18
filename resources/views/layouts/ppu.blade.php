@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/fontawesome/css/all.css') }}">
     <!-- code mpya -->
-   
+
 
     <!-- code mpya -->
-    
+
 
 
 
@@ -45,9 +45,9 @@
     </style>
 
 <div>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-primary bg-primary" style="border-bottom: #fff 2px solid;">
-       
-        
+    <nav class="navbar fixed-top navbar-expand-lg navbar-primary " style="border-bottom: #fff 2px solid; background-color:#376ad3;">
+
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -55,24 +55,27 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
-               
+
  <li class="nav-item" style="margin-top: -10px;">
-                
+
                 <a class="nav-link" style="color:white" >
                     <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
               </li>
 
-<?php 
+<?php
                 use App\WorkOrderMaterial;
         use App\PurchasingOrder;
                 use App\WorkOrderTransport;
                 use App\Material;
                 use App\WorkOrder;
-        
+
+                      use App\ppuproject;
+
+
                 $w = WorkOrder::select(DB::raw('id'))->get();
-                
+
                 $m = Material::select(DB::raw('name'))->get();
-        
+
                 $wo_material_reservedd = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',55)->orwhere('reservestatus', 1)->groupBy('work_order_id')->get();
 
                 $woMaterialAccepted = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->orwhere('copyforeaccepted' , 1)
@@ -84,19 +87,19 @@
                $woMaterialreserved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->orwhere('reservestatus',1)
                     ->groupBy('work_order_id')->get();
 
-                    
-   
+
+
                 $wo_material_procured_by_iow = WorkOrderMaterial::select(DB::raw('material_id'))->where('status',15)->groupBy('material_id')->get();
-                
+
                 $material_to_estatedirector = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->groupBy('work_order_id')->get();
 
                 $material_to_purchased = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',15)->groupBy('work_order_id')->get();
-                
+
                  $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
-   
+
 
                 $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-              
+
 
                  $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
                 $material_requests = WorkOrderMaterial::where('zone', auth()->user()->id)->
@@ -105,9 +108,9 @@
                      ->orwhere('status', 9)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
-                     
+
                      ->get();
-              
+
 
                  $material_requestsmc = WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'hos_id' , 'zone')
@@ -127,17 +130,17 @@
                      ->groupBy('work_order_id')
                      ->groupBy('receiver_id')
                      ->get();
-                
-        
-        
+
+
+
                 $wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
-                
+
                 $wo_material_approved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();;
         $procurement_request = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
                 $procurement_request_acceptedbyiow = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
-                
+
                 $wo_transport = WorkOrderTransport::where('status',0)->get();
-                 
+
                 ?>
 
 
@@ -162,38 +165,67 @@
 
         </div>
        </li>
-       <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-            </li>
+
 
                     @endif
-                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman'))
-                  <li class="nav-item">
-                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-                            </li>
-                 @endif
-                
+                    @if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
+
+      <li class="nav-item">
+          <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">
+              Planning
+              <span class="badge badge-light">
+                  @if(auth()->user()->type == 'Estates Director')
+                      @php
+                          $statusPPU = ppuproject::where('status','10')->orwhere('status','7')->orwhere('status','11')->orwhere('status','2')->get();
+                      @endphp
+                  @elseif(auth()->user()->type == 'DVC Admin')
+                      @php
+                          $statusPPU = ppuproject::where('status','1')->orwhere('status','6')->orwhere('status','13')->get();
+                      @endphp
+                  @elseif(auth()->user()->type == 'Director DPI')
+                      @php
+                          $statusPPU = ppuproject::where('status','0')->orwhere('status','-1')->get();
+                      @endphp
+                  @elseif(auth()->user()->type == 'Head PPU')
+                      @php
+                          $statusPPU = ppuproject::where('status','3')->orwhere('status','5')->orwhere('status','12')->orwhere('status','9')->get();
+                      @endphp
+                  @elseif(auth()->user()->type == 'Architect & Draftsman')
+                      @php
+                          $statusPPU = ppuproject::where('status','4')->get();
+                      @endphp
+                  @else
+                      @php
+                          $statusPPU = ppuproject::where('status','8')->get();
+                      @endphp
+                  @endif
+                  {{ count($statusPPU) }}
+              </span>
+          </a>
+        </li>
+       @endif
+
                 @if(auth()->user()->type == 'DVC Admin')
                 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
                     </li>
                 @endif
 
-                
+
                 @if(auth()->user()->type == 'Transport Officer')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request')}}">Transport Requests <span
                                     class="badge badge-light">{{ count($wo_transport) }}</span></a>
                     </li>
-                    
+
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request_accepted')}}">Accepted Transports</a>
                     </li>
                  <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_transport_request_rejected')}}">Rejected Transports</a>
-                    </li>   
-                    
-                    
+                    </li>
+
+
                 @endif
 
                 @if(auth()->user()->type == 'Acountant')
@@ -201,17 +233,17 @@
                         <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
                     </li>
                 @endif
-                
+
                 @if(auth()->user()->type == 'STORE')
                  <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
                     </li>
-                    
+
                    <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
                                     class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
                     </li>-->
-                    
+
                     <!--<li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
                     </li>-->
@@ -229,7 +261,7 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('wo_material_reserved') }}" >Reserved Materials <span
                                     class="badge badge-light">{{ count($woMaterialreserved) }}</span></a>
-                    </li> ``        
+                    </li> ``
 
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted_by_iow')}}">Material requests<span
@@ -249,19 +281,19 @@
                         <a class="nav-link" style="color:white"  href="{{ url('work_order_material_purchased') }}" >Material Purchased <span
                                     class="badge badge-light">{{ count($material_to_purchased) }}</span></a>
                     </li>
-   
-                    
+
+
 
            <!--
            <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
                     </li>
-          
+
            <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
                     </li>
           -->
-               @endif  
+               @endif
 
 
                  @if(auth()->user()->type == 'Head Procurement')
@@ -302,30 +334,30 @@
                         <a class="nav-link" style="color:white">Materials to be purchased <span
                                     class="badge badge-light"></span></a>
                     </li>-->
-                    
-                    
+
+
                      <!--
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
                     </li>
-                    
+
                      <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
                     </li>
                     -->
-                
+
                 @endif
-        
-        
-        
+
+
+
            @if(auth()->user()->type == 'Procurement and Supplies Officer')
              <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_procurement_request')}}">Procurement Requests <span
                                     class="badge badge-light">{{ count($procurement_request_acceptedbyiow) }}</span></a>
-                    </li>   
-           
-           
-           
+                    </li>
+
+
+
                  @endif
                    @if(auth()->user()->type == 'Inspector Of Works')
 
@@ -343,35 +375,32 @@
                         <a class="nav-link" style="color:white" href="{{ url('wo_material_accepted')}}">Accepted Materials<span
                                     class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials
                         <span
                                     class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
                     </li>
 
-                   
+
                     <!--
            <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_purchasing_request')}}">Procurement Requests <span
                                     class="badge badge-light">{{ count($procurement_request) }}</span></a>
                     </li>
                     -->
-                    
+
                 @endif
 
-        
+
                 @if(auth()->user()->type == 'Estates Director')
  <!-- <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a> 
+     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li> -->
  @elseif(auth()->user()->type == 'DVC Admin')
  <!-- <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a> 
+     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li> -->
- <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-            </li>
             <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
@@ -381,62 +410,62 @@
   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
   </li>
-                    
+
 
 
   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('redirected_work_order')}}">Redirected Works order  </a>
-  </li> 
+  </li>
 
   <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
                     </li>
    <li class="nav-item">   <a href="{{ url('comp') }}" class="nav-link" style="color:white"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
- </li> 
+ </li>
 
    <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('technicians') }}">Technicians</a>
    </li>
 
-  
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-          Material Requests Update 
+          Material Requests Update
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" style="color:white" href="{{ url('work_order_material_needed')}}">Work order needs material <span
                                     class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
                  <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}">Accepted Materials<span
                                     class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
-               
+
                <a class="dropdown-item" style="color:white" href="{{ url('material_rejected_with_workorder')}}">Rejected Materials
                         <span
                                     class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
 
-          
+
 
         </div>
        </li>
 
 
-  
+
   @endif
 
 
 
-              
+
 
                 @if(strpos(auth()->user()->type, "HOS") !== false or $role['user_role']['role_id'] == 1)
 
                       <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
-                    
-                
 
-          
+
+
+
                 @endif
 
 
@@ -446,7 +475,7 @@
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
                     </li>
                @endif
-   
+
 
                 @if(auth()->user()->type == 'STORE')
                     <li class="nav-item">
@@ -460,13 +489,13 @@
 
 
               @if($role['user_role']['role_id'] == 1)
-        
+
             <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
                                     class="badge badge-light">{{ count($m) }}</span></a>
             </li>
 
-              
+
 
                <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('manage_Campus')}}">Assets</a>
@@ -481,7 +510,7 @@
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-          Settings 
+          Settings
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
 
@@ -491,8 +520,8 @@
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones')}}">IoW Zones</a>
  <a style="color:white" class="dropdown-item" href="{{ url('excelinsertusers')}}">Import Excel</a>
 
-                
-              
+
+
 
         </div>
        </li>
@@ -501,9 +530,9 @@
 
                  @endif
 
- 
 
-                
+
+
             </ul>
             <span class="navbar-text">
 
@@ -561,14 +590,14 @@
            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
           {{ Auth::user()->name }}
         </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-           <!--SETTING AND CHANGE PASSWORD 
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;" >
+           <!--SETTING AND CHANGE PASSWORD
           <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
 
                <a class="dropdown-item" style="color:white" href="{{ url('myprofile')}}">My Profile</a>
-          <a class="dropdown-item" href="{{ url('password')}}">Change Password</a>
+          <a class="dropdown-item" style="color:white"  href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{ route('logout') }}"
+          <a class="dropdown-item" style="color:white"  href="{{ route('logout') }}"
              onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -641,8 +670,8 @@
   background-color: #c2bebe;
   color: white;
 
- 
- 
+
+
 
 
 
@@ -650,14 +679,14 @@
 
 .sidenav a, .dropdown-btn, .sidenav button {
   color: #f1f1f1;
-    margin-top: 2px; 
+    margin-top: 2px;
 }
 
 
 /* Main content */
 .main {
   margin-left: 150px; /* Same as the width of the sidenav */
- 
+
   padding: 0px 10px;
 }
 
@@ -665,7 +694,7 @@
 .active {
   background-color: #046475;
   color: white;
-  
+
   border: 2px solid white;
 
 
@@ -696,15 +725,18 @@
 <body>
 
 <div class="sidenav bg-light" style="padding-top:90px;">
-    @if(auth()->user()->type == 'DVC Admin')
-  <a class="bg-primary" href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects</h6></a>
+
+  <a class="bg-primary" href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects <span class="badge badge-light">{{ count($statusPPU) }}</span></h6></a>
+  @if(auth()->user()->type == 'Architect & Draftsman')
+  <a class="bg-primary" href="{{ url('ppudrawingslibrary')}}" ><h6>Drawings Library</h6></a>
     @endif
-  <a class="bg-primary" href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects</h6></a>
-    <a class="bg-primary"  href="{{ url('manage_Houses')}}"><h6>Projects budgets</h6></a>
-    <a class="bg-primary" href="{{ url('manage_Houses')}}"><h6>Tender Documents</h6></a>
-    <a class="bg-primary" href="{{ url('manage_Houses')}}"><h6>Consultant ToRs</h6></a>
-    <a class="bg-primary" href="{{ url('manage_Hall_of_resdence')}}"><h6>Reports</h6></a>  
-   
+    @if(auth()->user()->type == 'Quality Surveyor')
+  <a class="bg-primary" href="{{ url('ppubudgetlibrary')}}" ><h6>Budgets Library</h6></a>
+    @endif
+    <a class="bg-primary" href=" "><h6>Tender Documents</h6></a>
+    <a class="bg-primary" href=" "><h6>Consultant ToRs</h6></a>
+    <a class="bg-primary" href=" "><h6>Reports</h6></a>
+
 </div>
 
 <div class="main">
@@ -767,6 +799,5 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 
-</body>
 </body>
 </html>

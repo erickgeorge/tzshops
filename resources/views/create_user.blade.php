@@ -7,22 +7,22 @@ User Registration
 @section('body')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<script src= 
-"https://code.jquery.com/jquery-1.12.4.min.js"> 
-	</script> 
+<script src=
+"https://code.jquery.com/jquery-1.12.4.min.js">
+	</script>
  <style type="text/css">
  	#Div2 {
   display: none;
 }
 
-.selectt { 
-			
-			
-			display: none; 
-			 
-		} 
-		
-		
+.selectt {
+
+
+			display: none;
+
+		}
+
+
  </style>
 <br>
 <div class="row" style=" margin-left: 3%;">
@@ -121,9 +121,9 @@ User Registration
 
 </div>
 
-  
 
-    
+
+
 <div class="row">
 	<div  class="col">
 		<div class="input-group mb-3">
@@ -138,8 +138,8 @@ User Registration
 	  </select>
 	</div>
 	</div>
-	
-	
+
+
 		<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
@@ -158,7 +158,7 @@ User Registration
 
 
 
-	
+
 	    <label>Type of User</label><br>
 
 	  <div class="row">
@@ -169,15 +169,15 @@ User Registration
                 Inspector of Works</label>
                </div>
             </div>
-       
+
 
               <div id="locationdiv" >
                <select  required style="width: 500px;" class="custom-select" name="type" id="type">
 	                  <option value="" selected>Choose...</option>
-	                  <option value="Accountant">Accountant</option>	                  
+	                  <option value="Accountant">Accountant</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
 	                  <option value="CLIENT">Client</option>
- 	                 
+
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
 	                  <option value="Estates officer">Estates officer</option>
@@ -185,15 +185,16 @@ User Registration
 	                  <option value="Head Procurement">Head of Procurement</option>
 
 	                  @foreach($worksec as $dep)
- 
+
                            <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
-         
+
                        @endforeach
 
 	                  <option value="Head PPU">Head PPU</option>
 
-	                  
-	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
+
+                      <option value="Maintenance coordinator">Maintenance Coordinator</option>
+                      <option value="Quality Surveyor">Quality Surveyor</option>
 	                  <option value="STORE">Store Manager</option>
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
@@ -204,16 +205,16 @@ User Registration
 
 	           </select>
 	           </div>
-	           
+
 
                <div id="divmanual">
                <select  required style="width: 500px;" class="custom-select" name="zone" id="zone">
 	                  @foreach($zone as $zone)
                        <option  value="{{$zone->zonename}}"  ><?php echo strtoupper( $zone->zonename ); ?></option>
                       @endforeach
-	                  
+
 	           </select>
-                
+
 
                 </div>
 
@@ -226,15 +227,15 @@ User Registration
 		<div class="input-group mb-3">
 	          <div class="contacts">
                       Second type of user
-             
+
               	<br>
-  
+
                 <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
 	                  <option value="" selected>Choose...</option>
-	                  <option value="Accountant">Accountant</option>	                  
+	                  <option value="Accountant">Accountant</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
 	                  <option value="CLIENT">Client</option>
- 	                 
+
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
 	                  <option value="Estates officer">Estates officer</option>
@@ -242,14 +243,14 @@ User Registration
 	                  <option value="Head Procurement">Head of Procurement</option>
 
 	                  @foreach($worksec as $dep)
- 
+
                            <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
-         
+
                        @endforeach
 
 	                  <option value="Head PPU">Head PPU</option>
 
-	                  
+
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
 	                  <option value="STORE">Store Manager</option>
 
@@ -264,7 +265,7 @@ User Registration
 	 </div>
 	</div>
 	</div>
-    
+
 
 
 </div>
@@ -303,27 +304,27 @@ User Registration
 
 
   <script type="text/javascript">
-    	
+
 
  $("#divmanual").hide();
  $(function () {
         $("#checkdiv").click(function () {
             if ($(this).is(":checked")) {
-				$("#type").removeAttr('required'); 
-				$("#zone").removeAttr('required'); 
-				
-				
-				
+				$("#type").removeAttr('required');
+				$("#zone").removeAttr('required');
+
+
+
 				$("#manual").attr('required', '');
-			
-				
+
+
                 $("#divmanual").show();
 				$("#locationdiv").hide();
             } else {
 				$("#type").attr('required', '');
 				$("#zone").attr('required', '');
-			
-				
+
+
 				$("#manual").removeAttr('required');
                 $("#divmanual").hide();
 				$("#locationdiv").show();
@@ -331,7 +332,7 @@ User Registration
         });
     });
 
-	
+
      function ShowwHideDiv(checkdiv) {
         var dvPassport = document.getElementById("locationdiv");
         locationdiv.style.display = checkdiv.checked ? "block" : "none";
@@ -352,12 +353,12 @@ User Registration
       if (showSendSelected) {
 
         sendSelectedLink.show();
-        
+
       } else {
         sendSelectedLink.hide();
       }
-     
-    
+
+
 
     }
   );
@@ -365,6 +366,6 @@ User Registration
 
 
 
- 
+
 
 @endSection

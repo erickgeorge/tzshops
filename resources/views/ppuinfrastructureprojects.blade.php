@@ -26,7 +26,7 @@
                 <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
             </form>
         </div>
-  @endif     
+  @endif
     </div>
     <br>
     <hr class="container">
@@ -49,7 +49,7 @@
     @endif
 
     </div>
-    
+
  @if(auth()->user()->type == 'Director DPI')
     <div id="div_print" class="container">
         <div class="row ">
@@ -76,90 +76,197 @@
         <tbody>
             <?php $i=1 ?>
             @foreach($projects  as $project)
-            <?php $progress = ppuprojectprogress::orderBy('id','Desc')->where('project_id',$project->id)->first(); ?> 
-            @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'Head PPU'))
+            <?php $progress = ppuprojectprogress::orderBy('id','Desc')->where('project_id',$project->id)->first(); ?>
+            @if(auth()->user()->type == 'Director DPI')
+
+            <tr>
+                <td>{{ $i }}</td>
+                <td>{{substr($project->project_name,0,25).'...'  }}</td>
+                <td><?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}</td>
+                <td>
+
+                    @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
+                   @if($progress->status == 1) <div class="badge badge-primary">Project Forwarded to DVC Admin
+                       @if(auth()->user()->type == 'DVC Admin')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+
+                   @if($progress->status == -1) <div class="badge badge-danger">Project Rejected by DVC Admin
+                       @if(auth()->user()->type == 'Director DPI')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+
+                   @if($progress->status == 2) <div class="badge badge-primary">Project Forwarded to Director DES
+                       @if(auth()->user()->type == 'Estates Director')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+                    @if($progress->status == 3) <div class="badge badge-primary">Project Forwarded to Head PPU
+                       @if(auth()->user()->type == 'Head PPU')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+                    @if($progress->status == 4) <div class="badge badge-primary">Project Forwarded to Draftsman
+                       @if(auth()->user()->type == 'Architect & Draftsman')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+                   @if($progress->status == 5) <div class="badge badge-primary">Plans & Drawings Sent to Head PPU
+                       @if(auth()->user()->type == 'Head PPU')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+                   @if($progress->status == 11) <div class="badge badge-primary">Plans & Drawings Sent to Director DES for Approval
+                    @if(auth()->user()->type == 'Estates Director')
+                    <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                    @endif </div>
+                @endif
+                   @if($progress->status == 6) <div class="badge badge-primary">Plans & Drawings Sent to DVC Admin
+                       @if(auth()->user()->type == 'DVC Admin')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+                   @if($progress->status == 7) <div class="badge badge-primary">Plans & Drawings Approved By DVC Admin
+                       @if(auth()->user()->type == 'Estates Director')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+                   @if($progress->status == 12) <div class="badge badge-primary">Approved Plans & Drawings sent to Head PPU
+                       @if(auth()->user()->type == 'Head PPU')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+
+                   @if($progress->status == 8) <div class="badge badge-primary">Plans & Drawings Forwarded to QS
+                       @if(auth()->user()->type == 'Quality Surveyor')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                   @endif
+                   @if($progress->status == 9) <div class="badge badge-primary">Project Budget Forwarded to Head PPU
+                     @if(auth()->user()->type == 'Head PPU')
+                     <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                     @endif </div>
+                     @endif
+                     @if($progress->status == 10) <div class="badge badge-primary">Project Budget Forwarded to Director DES for Approval
+                       @if(auth()->user()->type == 'Estates Director')
+                       <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                       @endif </div>
+                       @endif
+                       @if($progress->status == 13) <div class="badge badge-primary">Project Budget Forwarded to DVC Admin for Approval
+                         @if(auth()->user()->type == 'DVC Admin')
+                         <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                         @endif </div>
+                         @endif
+                         @if($progress->status == 14) <div class="badge badge-primary">Project Budget Approved by DVC Admin
+                          </div>
+                           @endif
+
+
+           </td>
+                <td><a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a>
+                    <a href="{{ route('pputrack', [$project->id]) }}" class="btn btn-dark" title="Track"> <i class=" fa fa-tasks"></i> </a>
+                </td>
+            </tr>
+
+                @else
                 @if($progress->status == 0)
                 @else
             <tr>
                 <td>{{ $i }}</td>
-                <td>{{ $project->project_name }}</td>
+                <td>{{substr($project->project_name,0,25).'...'  }}</td>
                 <td><?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}</td>
                 <td>
-                    
-                         
-                        @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
-                        @if($progress->status == 1) <div class="badge badge-primary">Forwarded to DVC Admin  
-                            @if(auth()->user()->type == 'DVC Admin') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                            @endif </div>
-                        @endif
 
-                        @if($progress->status == -1) <div class="badge badge-danger">Rejected by DVC Admin  
-                            @if(auth()->user()->type == 'Director DPI') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                            @endif </div>
-                        @endif
-
-                        @if($progress->status == 2) <div class="badge badge-primary">Forwarded to Director DES  
-                            @if(auth()->user()->type == 'Estates Director') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                            @endif </div>
-                        @endif
-                         @if($progress->status == 3) <div class="badge badge-primary">Forwarded to Head PPU  
-                            @if(auth()->user()->type == 'Head PPU') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                            @endif </div>
-                        @endif
-                         @if($progress->status == 4) <div class="badge badge-primary">Forwarded to Draftsman  
-                            @if(auth()->user()->type == 'Architect & Draftsman') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
-                            @endif </div>
-                        @endif
-                </td>
-                <td><a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a></td>
-            </tr>
-                @endif
-                @else
-            <tr>
-                <td>{{ $i }}</td>
-                <td>{{ $project->project_name }}</td>
-                <td><?php  $time = strtotime($project->created_at)?> {{ date('d/m/Y',$time)  }}</td>
-                <td>
-                    
                          @if($progress->status == 0) <div class="badge badge-primary">New Project </div>@endif
-                        @if($progress->status == 1) <div class="badge badge-primary">Forwarded to DVC Admin  
-                            @if(auth()->user()->type == 'DVC Admin') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                        @if($progress->status == 1) <div class="badge badge-primary">Project Forwarded to DVC Admin
+                            @if(auth()->user()->type == 'DVC Admin')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
                             @endif </div>
                         @endif
 
-                        @if($progress->status == -1) <div class="badge badge-danger">Rejected by DVC Admin  
-                            @if(auth()->user()->type == 'Director DPI') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                        @if($progress->status == -1) <div class="badge badge-danger">Project Rejected by DVC Admin
+                            @if(auth()->user()->type == 'Director DPI')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
                             @endif </div>
                         @endif
 
-                        @if($progress->status == 2) <div class="badge badge-primary">Forwarded to Director DES  
-                            @if(auth()->user()->type == 'Estates Director') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                        @if($progress->status == 2) <div class="badge badge-primary">Project Forwarded to Director DES
+                            @if(auth()->user()->type == 'Estates Director')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
                             @endif </div>
                         @endif
-                         @if($progress->status == 3) <div class="badge badge-primary">Forwarded to Head PPU  
-                            @if(auth()->user()->type == 'Head PPU') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                         @if($progress->status == 3) <div class="badge badge-primary">Project Forwarded to Head PPU
+                            @if(auth()->user()->type == 'Head PPU')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
                             @endif </div>
                         @endif
-                         @if($progress->status == 4) <div class="badge badge-primary">Forwarded to Draftsman  
-                            @if(auth()->user()->type == 'Architect & Draftsman') 
-                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b> 
+                         @if($progress->status == 4) <div class="badge badge-primary">Project Forwarded to Draftsman
+                            @if(auth()->user()->type == 'Architect & Draftsman')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
                             @endif </div>
                         @endif
-                        
+                        @if($progress->status == 5) <div class="badge badge-primary">Plans & Drawings Sent to Head PPU
+                            @if(auth()->user()->type == 'Head PPU')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                            @endif </div>
+                        @endif
+                        @if($progress->status == 11) <div class="badge badge-primary">Plans & Drawings Sent to Director DES for Approval
+                         @if(auth()->user()->type == 'Estates Director')
+                         <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                         @endif </div>
+                     @endif
+                        @if($progress->status == 6) <div class="badge badge-primary">Plans & Drawings Sent to DVC Admin
+                            @if(auth()->user()->type == 'DVC Admin')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                            @endif </div>
+                        @endif
+                        @if($progress->status == 7) <div class="badge badge-primary">Plans & Drawings Approved By DVC Admin
+                            @if(auth()->user()->type == 'Estates Director')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                            @endif </div>
+                        @endif
+                        @if($progress->status == 12) <div class="badge badge-primary">Approved Plans & Drawings sent to Head PPU
+                            @if(auth()->user()->type == 'Head PPU')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                            @endif </div>
+                        @endif
+
+                        @if($progress->status == 8) <div class="badge badge-primary">Plans & Drawings Forwarded to QS
+                            @if(auth()->user()->type == 'Quality Surveyor')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                            @endif </div>
+                        @endif
+                        @if($progress->status == 9) <div class="badge badge-primary">Project Budget Forwarded to Head PPU
+                          @if(auth()->user()->type == 'Head PPU')
+                          <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                          @endif </div>
+                          @endif
+                          @if($progress->status == 10) <div class="badge badge-primary">Project Budget Forwarded to Director DES for Approval
+                            @if(auth()->user()->type == 'Estates Director')
+                            <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                            @endif </div>
+                            @endif
+                            @if($progress->status == 13) <div class="badge badge-primary">Project Budget Forwarded to DVC Admin for Approval
+                              @if(auth()->user()->type == 'DVC Admin')
+                              <b class="badge badge-warning"><i class="fa fa-exclamation"></i></b>
+                              @endif </div>
+                              @endif
+                              @if($progress->status == 14) <div class="badge badge-primary">Project Budget Approved by DVC Admin
+                               </div>
+                                @endif
+
+
                 </td>
-                <td><a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a></td>
+                <td>
+                    <a class="btn btn-primary" href="{{ route('ppuprojectview', [$project->id]) }}">View</a>
+                    <a href="{{ route('pputrack', [$project->id]) }}" class="btn btn-dark" title="Track"> <i class=" fa fa-tasks"></i> </a>
+                </td>
             </tr>
             @endif
-            
+            @endif
+
                 <?php $i++ ?>
             @endforeach
         </tbody>

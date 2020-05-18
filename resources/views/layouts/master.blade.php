@@ -56,7 +56,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
               <li class="nav-item" style="margin-top: -10px;">
-                
+
                 <a class="nav-link" style="color:white" >
                     <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
               </li>
@@ -67,6 +67,7 @@
                 use App\WorkOrderTransport;
                 use App\Material;
                 use App\WorkOrder;
+                use App\ppuproject;
 
 
         use App\zoneinspector;
@@ -143,14 +144,45 @@
 
                 ?>
 
-@if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman'))
-  <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-            </li>
+@if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
+
+<li class="nav-item">
+    <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">
+        Planning
+        <span class="badge badge-light">
+            @if(auth()->user()->type == 'Estates Director')
+                @php
+                    $statusPPU = ppuproject::where('status','10')->orwhere('status','7')->orwhere('status','11')->orwhere('status','2')->get();
+                @endphp
+            @elseif(auth()->user()->type == 'DVC Admin')
+                @php
+                    $statusPPU = ppuproject::where('status','1')->orwhere('status','6')->orwhere('status','13')->get();
+                @endphp
+            @elseif(auth()->user()->type == 'Director DPI')
+                @php
+                    $statusPPU = ppuproject::where('status','0')->orwhere('status','-1')->get();
+                @endphp
+            @elseif(auth()->user()->type == 'Head PPU')
+                @php
+                    $statusPPU = ppuproject::where('status','3')->orwhere('status','5')->orwhere('status','12')->orwhere('status','9')->get();
+                @endphp
+            @elseif(auth()->user()->type == 'Architect & Draftsman')
+                @php
+                    $statusPPU = ppuproject::where('status','4')->get();
+                @endphp
+            @else
+                @php
+                    $statusPPU = ppuproject::where('status','8')->get();
+                @endphp
+            @endif
+            {{ count($statusPPU) }}
+        </span>
+    </a>
+  </li>
  @endif
 
 
-             
+
 
 
 
@@ -202,9 +234,6 @@
  <li class="nav-item">
      <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
- <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-            </li>
  @endif
 
 
@@ -293,7 +322,7 @@
 
         </div>
        </li>
-  
+
 
                     @endif
 
@@ -316,9 +345,6 @@
 
         </div>
        </li>
-       <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-            </li>
 
                     @endif
 
@@ -340,7 +366,7 @@
 
             @if($type->type2 == NULL)
             @else
-  
+
               <form action="{{route('changeusertype' , [$check])}}" method="POST">
                    @csrf
              <div >
@@ -350,13 +376,13 @@
                  <option value="{{$type->type}}"> {{$type->type}}</option>
                  <option value="{{$type->type2}}">{{$type->type2}}</option>
                 </select>
-              @endforeach 
+              @endforeach
              </div>
              </form>
 
              @endif
 
-             @endforeach   
+             @endforeach
 
 
 
@@ -509,14 +535,14 @@
   color: #f1f1f1;
   border: none;
    background: #376ad3;
-    margin-top: 2px; 
+    margin-top: 2px;
 }
 
 
 /* Main content */
 .main {
   margin-left: 150px; /* Same as the width of the sidenav */
- 
+
   padding: 0px 10px;
 }
 
@@ -524,7 +550,7 @@
 .active {
   background-color: #046475;
   color: white;
-  
+
   border: 2px solid white;
 
 
@@ -1113,6 +1139,5 @@ for (i = 0; i < dropdown.length; i++) {
 
 
 
-</body>
 </body>
 </html>

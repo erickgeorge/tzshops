@@ -389,9 +389,6 @@ if ($request->Image!='') {
     $extension = $cover->getClientOriginalExtension();
     Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
 
-   
-
-
         $user->avatar = $cover->getFilename().'.'.$extension;
         $user->save();
 

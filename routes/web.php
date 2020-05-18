@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,6 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::get('/notification', 'HomeController@notificationView')->middleware('auth');
 
@@ -641,3 +641,19 @@ Route::post('ppurejectproject','PhysicalPlanningController@ppurejectproject')->n
 Route::get('ppuprojectforwarddes/{id}','PhysicalPlanningController@ppuprojectforwarddes')->name('ppuprojectforwarddes')->middleware('auth');
 Route::get('ppuprojectforwardppu/{id}','PhysicalPlanningController@ppuprojectforwardppu')->name('ppuprojectforwardppu')->middleware('auth');
 Route::post('ppuprojectdraftsman','PhysicalPlanningController@ppuprojectdraftsman')->name('ppuprojectdraftsman')->middleware('auth');
+Route::post('ppudraftsdraws','PhysicalPlanningController@ppudraftsdraws')->name('ppudraftsdraws')->middleware('auth');
+Route::get('viewppudraws/{id}/{type}/{name}/','PhysicalPlanningController@viewppudraws')->name('viewppudraws')->middleware('auth');
+Route::get('ppuforwardplanDES/{id}','PhysicalPlanningController@ppuforwardplanDES')->name('ppuforwardplanDES')->middleware('auth');
+Route::get('ppuforwardplanDvcAdmin/{id}','PhysicalPlanningController@ppuforwardplanDvcAdmin')->name('ppuforwardplanDvcAdmin')->middleware('auth');
+Route::get('ppuApproveplanDES/{id}','PhysicalPlanningController@ppuApproveplanDES')->name('ppuApproveplanDES')->middleware('auth');
+Route::post('ppuForwardPlansQS','PhysicalPlanningController@ppuForwardPlansQS')->name('ppuForwardPlansQS')->middleware('auth');
+Route::get('pputrack/{id}','PhysicalPlanningController@pputrack')->name('pputrack')->middleware('auth');
+Route::get('ppubudgetAppoveDES/{id}','PhysicalPlanningController@ppubudgetAppoveDES')->name('ppubudgetAppoveDES')->middleware('auth');
+Route::get('ppuForwardDVCppu/{id}','PhysicalPlanningController@ppuForwardDVCppu')->name('ppuForwardDVCppu')->middleware('auth');
+Route::post('ppuForwardBudgetppu','PhysicalPlanningController@ppuForwardBudgetppu')->name('ppuForwardBudgetppu')->middleware('auth');
+Route::get('ppubudgetAppoveDVC/{id}','PhysicalPlanningController@ppubudgetAppoveDVC')->name('ppubudgetAppoveDVC')->middleware('auth');
+Route::get('ppubudgetApprovedDVC/{id}','PhysicalPlanningController@ppubudgetApprovedDVC')->name('ppubudgetApprovedDVC')->middleware('auth');
+Route::get('ppudrawingslibrary','PhysicalPlanningController@ppudrawingslibrary')->name('ppudrawingslibrary')->middleware('auth');
+Route::get('ppudrawingsview/{id}','PhysicalPlanningController@ppudrawingsview')->name('ppudrawingsview')->middleware('auth');
+Route::get('ppubudgetlibrary','PhysicalPlanningController@ppubudgetlibrary')->name('ppubudgetlibrary')->middleware('auth');
+Route::get('ppubudgetview/{id}','PhysicalPlanningController@ppubudgetview')->name('ppubudgetview')->middleware('auth');
