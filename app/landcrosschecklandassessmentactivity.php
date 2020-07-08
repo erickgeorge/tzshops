@@ -15,6 +15,10 @@ class landcrosschecklandassessmentactivity extends Model
         return $this->belongsTo('App\User', 'approved_by');
     }    
 
+  public function approvaldvc(){
+        return $this->belongsTo('App\User', 'dvc_accepted_by');
+    }  
+
   public function paymentaccountant(){
         return $this->belongsTo('App\User', 'payment_by');
     }   
@@ -35,8 +39,20 @@ class landcrosschecklandassessmentactivity extends Model
         return $this->belongsTo('App\User', 'dvc_rejected_by');
     } 
   
-  
-	
 
+      public function assessmentid(){
+        return $this->belongsTo('App\company', 'assessment_id');
+    } 
+
+
+        public function cleaningarea(){
+        return $this->belongsTo('App\cleaningarea', 'area_id');
+    } 
+
+        public function initiated(){
+        return $this->belongsTo('App\User', 'initiated_by');
+    } 
+  
+  
   
 }

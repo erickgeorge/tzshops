@@ -57,12 +57,11 @@ Assessment form
 
     </div>
     
-        
-
-                <a href="{{route('assessmentform.view.second')}}"><button style="max-height: 40px; " type="button" class="btn btn-outline-primary" >
-                 All assessment
+                <a href="{{route('assessmentform.view')}}"><button style="max-height: 40px; " type="button" class="btn btn-outline-primary" >
+                  Curent assessment
                 </button></a> 
             
+
 
                  <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
                  <i class="fa fa-file-pdf-o"></i> PDF
@@ -238,9 +237,8 @@ Assessment form
 
                         
                     <?php $i = 0;?>
-
                     @foreach($assessmmentcompany as $assesment)
-                     @if($assesment->lessmonth == date("Y-m") )
+                   
                           <?php $i++; ?>  
                          <tr>
                              <td>{{ $i }}</td>
@@ -281,7 +279,7 @@ Assessment form
                                                     class="fas fa-tasks"></i></a>-->
                            </td>
                          </tr>
-           @endif
+        
                       @endforeach
                     </tbody>
                 </table>

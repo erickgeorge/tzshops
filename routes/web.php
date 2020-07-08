@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/notification', 'HomeController@notificationView')->middleware('auth');
 
 Route::get('password','HomeController@passwordView' )->middleware('auth');
@@ -123,6 +124,7 @@ Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary'
 
 
 Route::get('departments', 'UserController@getDepartments')->name('departments.view')->middleware('auth');
+Route::get('companytender', 'UserController@getcompany')->name('companyies.view')->middleware('auth');
 Route::get('areas', 'UserController@getAreas')->name('areas.view')->middleware('auth');
 Route::get('blocks', 'UserController@getBlocks')->name('blocks.view')->middleware('auth');
 Route::get('rooms', 'UserController@getRooms')->name('rooms.view')->middleware('auth');
@@ -466,14 +468,16 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
 
 Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save')->middleware('auth');
 Route::post('CompanyRegistration', 'AssetsController@Registercompany')->name('company.save')->middleware('auth');
-Route::post('Companyrenewregistration/{id}', 'AssetsController@Renewcompany')->name('company.save.renew')->middleware('auth');
+Route::post('Company_registration', 'AssetsController@Renewcompany')->name('company.save.renew')->middleware('auth');
+Route::post('Addnewsheet', 'AssetsController@addnewsheetc')->name('addnew.sheet')->middleware('auth');
 Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete')->middleware('auth');
 Route::POST('edit/House', 'AssetsController@editHouse')->name('house.edit')->middleware('auth');
 Route::POST('edit/company', 'AssetsController@editcompany')->name('company.edit')->middleware('auth');
 Route::get('Register_Staffhouse', 'AssetsController@Registerstaffhouseview')->name('registerstaffhouse')->middleware('auth');
 
-Route::get('Register_company', 'AssetsController@Registercompanyview')->name('registercompany')->middleware('auth');
-Route::get('Renew_company_contract/{id}', 'AssetsController@Renewcompanycontract')->name('renew_company_contract')->middleware('auth');
+Route::get('Register_tender', 'AssetsController@Registercompanyview')->name('registercompany')->middleware('auth');
+Route::get('Add_new_company', 'AssetsController@Renewcompanycontract')->name('renew_company_contract')->middleware('auth');
+Route::get('add_new_sheet', 'AssetsController@addnewsheet')->name('add_new_sheet')->middleware('auth');
 
 
 
@@ -481,6 +485,7 @@ Route::get('Renew_company_contract/{id}', 'AssetsController@Renewcompanycontract
 Route::post('HallRegistration', 'AssetsController@RegisterHalls')->name('hall.save')->middleware('auth');
 Route::post('delete/Hall/{id}', 'AssetsController@deleteHall')->name('hall.delete')->middleware('auth');
 Route::post('delete/company/{id}', 'AssetsController@deletecompany')->name('company.delete')->middleware('auth');
+Route::post('cleaming/delete/company/{id}', 'AssetsController@deletecleaningcompany')->name('cleaning.company.delete')->middleware('auth');
 Route::POST('edit/Hall', 'AssetsController@editHall')->name('hall.edit')->middleware('auth');
 Route::get('Register_hall', 'AssetsController@Registerhallview')->name('registerhall')->middleware('auth');
 
@@ -567,6 +572,7 @@ Route::get('inroomreporwithrooms','HomeController@inroomreportextendedwithrooms'
 Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport')->middleware('auth');
 Route::get('desdepts','NotesController@desdepts')->name('desdepts')->middleware('auth');
 
+
 Route::get('iowwithzones','NotesController@iowzones')->name('zones')->middleware('auth');
 
 Route::get('iowonlyzones','NotesController@iowonlyzones')->middleware('auth');
@@ -577,8 +583,10 @@ Route::get('iowwithlocation/{id}','NotesController@iowlocation')->name('zones')-
 
 //////////////////// non building assets & cleaning company ////////////////////////////
 Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbuildingasset')->middleware('auth');
-Route::get('cleaningcompany','AssetsController@cleaningcompany')->name('cleaningcompany')->middleware('auth');
+Route::get('tender','AssetsController@cleaningcompany')->name('cleaningcompany')->middleware('auth');
+Route::get('cleaningcompany','AssetsController@cleaningcompanynew')->name('cleaning_company')->middleware('auth');
 Route::get('cleaningcompanyreport','AssetsController@cleaningcompanyreport')->name('cleaningcompanyreport')->middleware('auth');
+Route::get('assessmentsheet','AssetsController@assessmentsheet')->name('assessment_sheet')->middleware('auth');
 
 Route::get('registernonbuildingasset','AssetsController@registernonbuildingasset')->name('registernonbuildingasset')->middleware('auth');
 Route::post('submitnonAsset','AssetsController@SubmitnonAsset')->name('nonbuildingasset.create')->middleware('auth');
@@ -617,40 +625,50 @@ Route::get('/Land/work_order', 'LandscapingController@landworkorderview')->name(
 Route::get('track/work_order/landscaping/{id}', 'LandscapingController@trackwoland')->name('workOrder.track.landscaping')->middleware('auth');
 Route::get('view/work_order/landscaping/{id}', 'LandscapingController@viewwolandsc')->name('workorder.view.landsc')->middleware('auth');
 Route::post('workorder/accept/landscaping/{id}', 'LandscapingController@acceptwoforlandsc')->name('workorder.accept.landscaping')->middleware('auth');
-Route::get('edit/assessmentform/landscaping/{id}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping')->middleware('auth');
+Route::get('edit/assessmentform/landscaping/{id}/{company}/{month}', 'LandscapingController@editwolandscaping')->name('workOrder.edit.landscaping')->middleware('auth');
 
 Route::post('inspect/work_order/landscaping/{id}', 'LandscapingController@landinspectionForm')->name('work.inspection.landscaping')->middleware('auth');
-Route::post('assessment/work_order/landscaping/{id}/{date}/{status}/{nextmonth}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping')->middleware('auth');
+Route::post('assessment/work_order/landscaping/{id}/{comp}/{date}/{status}/{nextmonth}', 'LandscapingController@landassessmentForm')->name('work.assessment.landscaping')->middleware('auth');
 Route::post('chrosscheck/assessment/work_order/landscaping/{id}/{asid}', 'LandscapingController@crosschecklandassessmentForm')->name('crosscheck.assessment.landscaping')->middleware('auth');
 
-Route::post('assessment/activity/form/landscaping/{id}', 'LandscapingController@landassessmentactivityForm')->name('work.assessment.activity.landscaping')->middleware('auth');
+Route::post('assessment/activity/form/landscaping/{id}/{companys}', 'LandscapingController@landassessmentactivityForm')->name('work.assessment.activity.landscaping')->middleware('auth');
 
-Route::post('crosscheck/assessment/activity/form/{id}', 'LandscapingController@crosschecklandassessmentactivity')->name('croscheck.assessment.activity.landscaping')->middleware('auth');
-
-Route::post('eddited/assessment/activity/form/{id}', 'LandscapingController@editedlandassessmentactivity')->name('edited.assessment.activity.landscaping')->middleware('auth');
-
-
+Route::post('editassessment_sheet/{id}', 'LandscapingController@editassessmentsheet')->name('edit.assessment.sheet')->middleware('auth');
+Route::post('editassessment_sheet_proceeding/{id}/{type}', 'LandscapingController@editassessmentsheetproceeding')->name('edit.assessment.proceeding')->middleware('auth');
+Route::get('finalsave/sheet/{name}', 'LandscapingController@finalsave_sheet')->name('finalsavesheet')->middleware('auth');
 
 
-Route::get('approveassessmentform/{id}', 'LandscapingController@approveassessment')->name('approveassessment')->middleware('auth');
-Route::get('approveassessmentforpayment/{id}', 'LandscapingController@approveassessmentforpayment')->name('approveassessmentforpayment')->middleware('auth');
+Route::post('crosscheck/assessment/activity/form/{id}/{company}/{date}/{status}/{nextmonth}', 'LandscapingController@crosschecklandassessmentactivity')->name('croscheck.assessment.activity.landscaping')->middleware('auth');
+Route::post('crosscheck/assessment/activity/form/second/{id}/{company}/{month}', 'LandscapingController@crosschecklandassessmentactivitysecond')->name('croscheck.assessment.activity.landscapingsecond')->middleware('auth');
+
+Route::post('eddited/assessment/activity/form/{id}/{tender}/{month}', 'LandscapingController@editedlandassessmentactivity')->name('edited.assessment.activity.landscaping')->middleware('auth');
+
+
+
+Route::get('approveassessmentifpaid/{id}/{tender}/{month}', 'LandscapingController@approveassessmentifpaid')->name('approveassessmentifpaid')->middleware('auth');
+Route::get('approveassessmentform/{id}/{tender}/{month}', 'LandscapingController@approveassessment')->name('approveassessment')->middleware('auth');
+Route::get('approveassessmentforpayment/{id}/{tender}/{month}', 'LandscapingController@approveassessmentforpayment')->name('approveassessmentforpayment')->middleware('auth');
+Route::get('approveassessmentformbydvc/{id}/{tender}/{month}', 'LandscapingController@approveassessmentformbydvc')->name('approveassessmentformbydvc')->middleware('auth');
 Route::post('appdatepayment/{id}', 'LandscapingController@apdatepayment')->name('updatepayment')->middleware('auth');
 
-Route::post('rejectassessmentwithreason/{id}', 'LandscapingController@rejectassessmentwithreason')->name('rejectwithreasonassessment')->middleware('auth');
+Route::post('rejectassessmentwithreason/{id}/{tender}/{month}', 'LandscapingController@rejectassessmentwithreason')->name('rejectwithreasonassessment')->middleware('auth');
 
-Route::post('rejectassessmentwithreasonestate/{id}', 'LandscapingController@rejectassessmentwithreasonestate')->name('rejectwithreasonassessmentestate')->middleware('auth');
+Route::post('rejectassessmentwithreasonestate/{id}/{tender}/{month}', 'LandscapingController@rejectassessmentwithreasonestate')->name('rejectwithreasonassessmentestate')->middleware('auth');
 
-Route::post('rejectassessmentwithreasondvc/{id}', 'LandscapingController@rejectassessmentwithreasondvcadmin')->name('rejectwithreasonassessmentdvc')->middleware('auth');
+Route::post('rejectassessmentwithreasondvc/{id}/{tender}/{month}', 'LandscapingController@rejectassessmentwithreasondvcadmin')->name('rejectwithreasonassessmentdvc')->middleware('auth');
 
 
-Route::get('assessmentpdf/{id}','NotesController@assessmentpdf')->name('assessmentpdfform')->middleware('auth');
+Route::get('assessmentpdf/{id}/{tender}/{month}','NotesController@assessmentpdf')->name('assessmentpdfform')->middleware('auth');
 Route::get('Maintainance/section', 'LandscapingController@maintainancesection')->name('section.maintenance')->middleware('auth');
 
 Route::get('Assessment/form', 'LandscapingController@assessmentformview')->name('assessmentform.view')->middleware('auth');
 
+Route::get('Assessment/formsecond', 'LandscapingController@assessmentformviewsecond')->name('assessmentform.view.second')->middleware('auth');
+
+
 Route::get('Add/maintainance/section', 'LandscapingController@addsection')->name('addmsection')->middleware('auth');
 
-Route::get('Add/company/for/assessment/{id}', 'LandscapingController@addcompanyforassessment')->name('addcompanytoassess')->middleware('auth');
+Route::get('Add/company/for/assessment/{id}/{tender}', 'LandscapingController@addcompanyforassessment')->name('addcompanytoassess')->middleware('auth');
 
 Route::post('save/section', 'LandscapingController@createmaintainancesection')->name('section.save.maintainance')->middleware('auth');
 Route::post('delete/maintainancesection/{id}', 'LandscapingController@deletemaintainanceSection')->name('maintainancesection.delete')->middleware('auth');
@@ -658,14 +676,25 @@ Route::get('track/company/forms/{id}', 'LandscapingController@trackcompanyview')
 Route::get('company_report_with_month/', 'LandscapingController@companywithmonth')->name('comapy_view_month')->middleware('auth');   
 Route::get('track/company/assessment/forms/{id}', 'LandscapingController@trackcompanyassessmentview')->name('track_company_assessment')->middleware('auth');
 Route::get('companyreportview/{id}', 'LandscapingController@companyreport')->name('view_company_month')->middleware('auth');
-Route::get('viewcompanyreportview/{id}', 'LandscapingController@viewcompanyreport')->name('view_company_report')->middleware('auth');
+Route::get('viewcompanyreportview/{tender}/{company}/{area}', 'LandscapingController@viewcompanyreport')->name('view_company_report')->middleware('auth');
+Route::get('viewassessmentsheet/{id}', 'LandscapingController@viewassessmentsheet')->name('view_assessment_sheet')->middleware('auth');
 Route::get('companyreporteditview/{id}', 'LandscapingController@companyeditreport')->name('edit_company_month')->middleware('auth');
-Route::post('update_comments/{id}' , 'LandscapingController@updatecomments')->name('update.comment');
+Route::post('companyreporteditview/edit/comment/new' , 'LandscapingController@updatecomments')->name('update.comment');
 Route::get('foward_dvc_admin/{id}' , 'LandscapingController@fowardtodvc')->name('foward.dvc.adimin');
 
+Route::get('viewmothwithtenderreport/{id}/{tender}', 'LandscapingController@companytenderformonthreport')->name('companywithmothtenderreport')->middleware('auth');
 
+Route::post('assessmentreports','NotesController@assessmentviewpdf')->name('assessments')->middleware('auth');
 
+Route::post('tenderreports','NotesController@tenderviewpdf')->name('tendersreport')->middleware('auth');
+Route::post('viewtrendingscorereport/{tender}/{company}','NotesController@trendingscorereport')->name('trendingscore_report')->middleware('auth');
+Route::get('viewtrendingscorereportforcompany/{tender}/{month}','NotesController@trendingscorereportcompany')->name('trendingscore_report_company')->middleware('auth');
+Route::get('cleaning_company_report','NotesController@landcleaningcompanyreport')->name('landscapingcleaningcompanyreport')->middleware('auth');
 
+Route::get('viewsheetbeforeproceeding/{id}', 'LandscapingController@viewsheetbeforeproceeding')->name('view_sheet_before_proceeding')->middleware('auth');
+
+Route::post('delete/assessmentsheet/{id}', 'LandscapingController@deleteassessmentsheet')->name('assess.sheet.delete')->middleware('auth');
+Route::POST('viewsheetbeforeproceeding/edit/assessment/sheets', 'LandscapingController@editassessmentsheeeet')->name('assessment.sheet.edit')->middleware('auth');
 
 
 
@@ -682,4 +711,10 @@ Route::post('saveeditedproject','PhysicalPlanningController@saveeditedproject')-
 Route::post('ppurejectproject','PhysicalPlanningController@ppurejectproject')->name('ppurejectproject')->middleware('auth');
 Route::get('ppuprojectforwarddes/{id}','PhysicalPlanningController@ppuprojectforwarddes')->name('ppuprojectforwarddes')->middleware('auth');
 Route::get('ppuprojectforwardppu/{id}','PhysicalPlanningController@ppuprojectforwardppu')->name('ppuprojectforwardppu')->middleware('auth');
-Route::get('printreportm/{id}','NotesController@printmonthreport')->name('print.month.report')->middleware('auth');
+
+//merged
+
+Route::post('printreportm/{id}','NotesController@printmonthreport')->name('print.month.report')->middleware('auth');
+
+Route::post('ppuprojectdraftsman','PhysicalPlanningController@ppuprojectdraftsman')->name('ppuprojectdraftsman')->middleware('auth');
+

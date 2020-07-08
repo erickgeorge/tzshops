@@ -1,7 +1,7 @@
 @extends('layouts.land')
 
 @section('title')
-    Cleaning Company report
+    Assessment sheet
     @endSection
 
 @section('body')
@@ -11,7 +11,6 @@
 <div class="container">
   
 
-       <div >
                @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -19,20 +18,26 @@
             </ul>
         </div>
               @endif
-                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available  companies </b></h5>
+                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available assessment sheet </b></h5>
                   <hr>
+                    
+            
+                   @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+                   <a href="{{ route('add_new_sheet') }}"
+                   class="btn btn-primary" >Add new assessment sheet</a>  <br> <br> @endif
+             
                   
-                   <br> <br> 
+                  
     
                 <table id="myTableee" id="myTable" class="table table-striped">
                       
                     <thead >
                    <tr style="color: white;">
                         <th scope="col">#</th>
-                        <th scope="col">Tender Number</th>
-                        <th scope="col">Company Name</th> 
-                        <th scope="col">Area Name</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                         <th scope="col">Percentage(%)</th>
+                 
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -43,49 +48,15 @@
                     @foreach($cleangcompany as $house)
                         <?php $i++; ?>
 
-                <?php $now1 =  Carbon::now();
-                $dcont = Carbon::parse($house->datecontract);
-                $dnext = Carbon::parse($house->nextmonth);
-
-                $date_left = $now1->diffInDays($dcont);
-                $date_next = $now1->diffInDays($dnext); ?>
-
 
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                             <td>{{ $house->tender }}</td>
-                              <td>{{ $house['compantwo']->company_name }}</td>
-                            <td>{{ $house['are_a']->cleaning_name }}</td>
-                           
-                           
-                  @if($house->status == 2 ) 
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $dcont)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
-
-
-                  @else
-
-                          <?php  $ddate = strtotime($house->nextmonth);
-                              $newDate = date("Y-m-d", strtotime("-1 month", $ddate));
-                                                                                    ?>
-
-
-                           <td><span class="badge badge-primary">Current assessment on {{ date('F Y', strtotime($newDate))}}</span> </td> 
-                  @endif 
-                           
-             
-
-           
-                    
-                            <?php $tender = Crypt::encrypt($house->tender ); ?>
-                          <td><a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a></td>        
-
-
-                      
-
-
-
+                            <td>{{ $house->name }}</td>
+                            <td>{{ $house->type}}</td>
+                            <td>{{ $house->percentage}}</td>
+                  
+                          <td> <a style="color: green;"  href="{{route('view_assessment_sheet' , [$house->name])}}" data-toggle="tooltip" title="View and edit assessment sheet"><i
+                                                    class="fas fa-eye"></i></a> </td>        
                            
                         </tr>
                     @endforeach
