@@ -1,24 +1,18 @@
 @extends('layouts.land')
 
 @section('title')
-    work order
+    Assessment form
     @endSection
 
 @section('body')
 
-<?php use App\WorkOrderInspectionForm;
-    use App\WorkOrderTransport;
-    use App\WorkOrderStaff;
-    use App\techasigned;
-    use App\WorkOrderMaterial;
+<?php 
     use App\User;
-    use App\iowzone;
- 
-
+    use App\assessmentsheet;  
+    use App\landassessmentactivityform; 
+    use App\landcrosschecklandassessmentactivity;
+    use App\company;
  ?>
-
-  <?php 
-     $IoWzone = User::where('status', '=', 1)->where('type', 'inspector of works')->where('IoW', 2)->get(); ?>
 
 
 <style type="text/css">
@@ -32,13 +26,8 @@ var total=2;
 
 </script>
     <br>
-    <div class="row container-fluid">
-        <div class="col-lg-12">
-            <h5 align="center" style="text-transform: uppercase;">landscaping works order details</h5>
-        </div>
-    </div>
-    <hr>
-    @if ($errors->any())
+
+        @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
@@ -54,350 +43,821 @@ var total=2;
             </ul>
         </div>
     @endif
-    <div style="margin-right: 2%; margin-left: 2%;">
-    <div class="row">
-        <div class="col">
-            <h5>Submitted by  <span
-                style="color: green">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style="color: green">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
 
-    
-    
-        </div>
-        <div class="col">
-        <h5>  @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
-                style="color: green">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
-             <h5 style="color: black">Mobile number: <span style="color: green">{{ $wo['user']->phone }}</span> <br>
-              Email: <span style="color:green"> {{ $wo['user']->email }} </span></h5>
-        </div>
-    </div>
-    
-    <br>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Maintenance Section</label>
-        </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
-               aria-describedby="emailHelp" value="{{ $wo->maintenance_section }}" disabled>
-    </div>
-    
-    @if(empty($wo->room_id) )
-        
-    
-     <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Location</label>
-        </div>
-        
-        
-        <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
-               aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
-    </div>
-    
-    
-    
-    
-    @else
-        
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Location</label>
-        </div>
-        
-        
-        <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
-               aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']['location']->name }}" disabled>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Area</label>
-        </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
-               value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Block</label>
-        </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
-               value="{{ $wo['room']['block']->name_of_block }}" disabled>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Room</label>
-        </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
-               value="{{ $wo['room']->name_of_room }}" disabled>
-    </div>
-    
-    @endif
-    
-    
-    <div class="form-group ">
-        <label for="">Details:</label>
-        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
-                  id="comment" disabled>{{ $wo->details }}</textarea>
-    </div>
- 
-   
-
-     <br>
-        <h5>Landscaping works order forms.</h5>
-        {{-- tabs --}}
-        <div class="payment-section-margin">
-            <div class="tab">
-                <div class="container-fluid">
-                    <div class="tab-group row">
-
-                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORM</button>
-                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'assesment')">ASSESSMENT FORM(COMPANY)</button>
-                       <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'assesment_activity')">ASSESSMENT FORM(ACTIVITY)</button>
-                        
-                        <button  style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'request_transport')">REQUEST TRASPORT
-                        </button>
-                       
-   
-                    </div>
-                </div>
-    
+ @foreach($assessmmentcompanyname as $company)
+ @endforeach
 
 
 
-                {{-- INSPECTION tab--}}
-                <form method="POST" action="{{ route('work.inspection.landscaping', [$wo->id]) }}">
-                    @csrf
-                    <div id="customer" class="tabcontent">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Inspection status</p>
-                            </div>
-                        </div>
-                        
-                        
-                         <div class="form-group">
-                            
-                            <select class="custom-select" required name="status" style="color: black; width:  700px;">
-                                <option selected value="" >Choose...</option>
-                               
-                                    <option value="Report Before Work">Report Before Work</option>
-                                       <option value="Report After Work">Report After Work</option>
-                              
-                            </select>
-                            
-                        </div>
-                    
-                        
-                        
-                        
-                        <p>Inspection description</p>
-                        <div class="form-group">
-                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
-                        </div>
-                        
-                        </br>
-                        <p>Inspection date</p>
-                        <div class="form-group">
-                            <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
-                        </div>
-                        <div class="form-group">
-                            <label>Select Supervisor of Landscaping</label>
-                            <br>
-                            <select style="color: black; width:  700px;" required class="custom-select"  name="supervisor" >
-                         
-                                @foreach($slecc as $slecc)
-                                    <option value="{{ $slecc->id }}">{{ $slecc->lname.' '.$slecc->fname }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
-                    </div>
-                </form>
-                {{-- end inspection --}}
+     <?php 
+    $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
+     ?>
+      @foreach($crosscheckassessmmentactivity as $assesment)
+      @endforeach
+ <br>
+<div class="jumbotron">
+  <div class="row">
+<div class="col"><h6 ><b>This sheet with tender number: {{$assesment->company}} is submitted by:</b></h6></div>
+<div class="col"><h6 >
+<table>
+  <tr>
+    <th>Full name</th>
+      <th>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</th> 
+  </tr>
 
+    <tr>
+    <th>Phone</th>
+      <th>{{ $assesment['initiated']->phone }}</th> 
+  </tr>
 
+    <tr>
+    <th>Email</th>
+      <th> {{ $assesment['initiated']->email}}</th> 
+  </tr>
 
-                {{-- ASSESMENT tab--}}
-                <form method="POST" action="{{ route('work.assessment.landscaping', [$wo->id]) }}">
-                    @csrf
-                    <div id="assesment" class="tabcontent">
-                   
-                     <div class="form-group">
-                            <label>Company name assessed</label>
-                            <br>
-                            <select style="color: black; width:  700px;" required class="custom-select"  name="company" id="company" >
-                         
-                                @foreach($company as $comp)
-                                    <option value="{{ $comp->id }}">{{ $comp->company_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                      </div>
+    <tr>
+    <th>Submitted on </th>
+      <th>{{ $assesment->created_at }}</th> 
+  </tr>
+  
+</table>
 
+</h6>
 
-                       <div class="form-group">
-                            <label>Area name</label>
-                            <br>
-                            <select style="color: black; width:  700px;" required class="custom-select"  name="area" id="carea" >
-                         
-                                @foreach($carea as $carea)
-                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
-                                    </option>
-                                @endforeach
-                            </select>
-                      </div>
-      
-                       <p>Assessment date</p>
-                        <div class="form-group">
-                            <input type="date"  style="color: black; width:  700px;" name="assessmment"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" class="form-control" required ></input>
-                        </div>
-                         
+</div>
 
-
-
-
-
-                     <!--   <p>Assesor Remark</p>
-                        <div class="form-group">
-                            <textarea   style="color: black; width:  700px;" name="details"  maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
-                        </div>
-
-                        <p>Company Remark</p>
-                        <div class="form-group">
-                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
-                        </div>
-
-                        <p>Approval Remark</p>
-                        <div class="form-group">
-                            <textarea   style="color: black; width:  700px;" name="details"  maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
-                        </div> -->
-
-
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
-                    </div>
-                </form>
-                {{-- end assesment --}}
-
-
-
-
-                {{-- ASSESMENT actvity tab--}}
-
- <form method="POST" action="{{ route('work.assessment.activity.landscaping', [$wo->id]) }}">
-                    @csrf
-                    <div id="assesment_activity" class="tabcontent">
-           
-
-<style>
-        table {
-            width: 100%;
-            font: 17px Calibri;
-        }
-        table, th, td {
-            border: solid 1px #DDD;
-            border-collapse: collapse;
-            padding: 2px 3px;
-            text-align: center;
-        }
-    </style>
-
-
-
-    <TABLE id="dataTable" width="350px" border="1">
-        <TR>
-            <TD><INPUT type="checkbox" name="chk"/></TD>
-           
-            <TD>
-                <SELECT style="width:  700px;"  name="activity[]">
-                    <OPTION value="in">India</OPTION>
-                    <OPTION value="de">Germany</OPTION>
-                    <OPTION value="fr">France</OPTION>
-                    <OPTION value="us">United States</OPTION>
-                    <OPTION value="ch">Switzerland</OPTION>
-                </SELECT>
-            </TD>
-             
-        </TR>
-    </TABLE>
-
-
-
-    <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
-
-    <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
-    <br>
-    <br>
-
-     <button id="bt" style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                 <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
-
-
-
-
-</form>
+</div>
 </div>
 
 
+<?php $i = 0; ?>
+ @foreach($assessmmentcompanyname as $company)
+ <?php $i++ ?>
 
 
+<br>
 
 
-                {{-- end assesment --}}
-
-                
-                
-                
-                 {{-- request_transport form--}}
-                <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
-                    @csrf
-                    <div id="request_transport" class="tabcontent">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Work order Transport Request Form</p>
-                            </div>
-                        </div>
-                </br>
-                        <p>Transport date</p>
-                        <div class="form-group">
-                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
-                        </div>
-                        
-                          <p>Transport time</p>
-                        <div class="form-group">
-                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  rows="5" id="time"></input>
-                        </div>
-
-                         <p>Transport Details</p>
-                        <div class="form-group">
-                            <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
-                        </div>
-                        <br>
-
-                       
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #212529; color: white" class="btn btn-dark">Cancel</button></a>
-                    </div>
-                </form>
-                {{-- end request_transport form --}}
-
-
-
-
-
+    <div class="row container-fluid">
+        <div class="col-lg-12">
+          
+            <h5><b>Sheet No:0{{$i}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details for {{$company->assessment_name}}</b></h5>
+        </div>
+    </div>
+    <hr>
 
    
+
  
+
+    <br>
+     <div class="row">
+    <div class="input-group mb-3 col">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Company name</label>
+        </div>
+        <input  required class="form-control" placeholder="{{$company['companyname']['compantwo']->company_name}} " 
+               aria-describedby="emailHelp" disabled="disabled" >
+    </div>
+    
+  
+        
+    <div class="input-group mb-3 col">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Area name</label>
+        </div>
+        <input style="color: black" type="text" required class="form-control" placeholder="{{$company['areaname']->cleaning_name}}" 
+               aria-describedby="emailHelp" value="" disabled>
+    </div>
+        
+    </div>
+
+    <br>
+
+         <div class="row">
+    <div class="input-group mb-3 col">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Assessment period</label>
+        </div>
+        <?php  $dnext = strtotime($company->enddate); ?>
+        <input style="color: black" type="text" required class="form-control" placeholder=" {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }} "
+               aria-describedby="emailHelp" value="" disabled>
+    </div>
+    
+  
+        
+    <div class="input-group mb-3 col">
+        
+    </div>
+        
+    </div>
+
+    <?php 
+      $companypayment = company::where('tender', $company->company)->first();
+      $assessmentsheetview = assessmentsheet::where('name', $company->assessment_name)->get();
+      $assessmmentactivity = landassessmentactivityform::where('companynew', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
+      $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
+
+      $sumscore = landcrosschecklandassessmentactivity::where('company', $company->company)->where('month',$company->assessment_month)->select(DB::raw('sum(score) as sum_score'))->first();
+     ?>
+
+
+  
+    <br>
+
+     @foreach($crosscheckassessmmentactivity as $statuscheck)
+     @endforeach
+
+
+  @if(count($crosscheckassessmmentactivity) == 0)
+  
+   
+  @if(count($assessmmentactivity) == 0)
+
+      <table class="table table-striped">
+      <tr>
+         <thead style="color: white;">
+        <th style="width:20px" >#</th>  
+        <th style="width:400px" >Activity</th>
+        <th style="width:40px">Percentage(%)</th>
+        <th style="width:110px">Score(%)</th>
+        <th>Remark</th>
+      </thead>
+      </tr>
+    
+     <tbody>
+
+      @foreach($assessmentsheetview as $assess)
+
+       <?php $cmp = Crypt::encrypt($company->company); ?>
+       <form method="POST" action="{{ route('work.assessment.activity.landscaping', [$company->id , $cmp , $company->assessment_month]) }}">
+                    @csrf
+  
+    <TABLE >
+     
+        <TR>
+          
+            <input  name="assessment_sheet[]" value="{{$assess->name}}"  hidden > 
+              <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden > 
+       
+             <TD><input   style="width: 559px; height: 65px;" class="form-control" type="text" name="activity[]" placeholder="{{$assess->activity}}" value="{{$assess->activity}}"  readonly="readonly" ></TD> 
+           
+
+                  
+             <TD><input style="width: 112px; text-align: center;" class="form-control" type="number"   name="percentage[]" placeholder="{{$assess->percentage}}" value="{{$assess->percentage}}" readonly="readonly"></TD> 
+                  
+              
+            <TD><input style="width: 112px; text-align: center;" class="form-control" type="number" id="tstock"   name="score[]" placeholder="Score" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required" min="0" max="{{$assess->percentage}}"></TD> 
+                  
+
+           <TD><textarea  style="width: 300px;" class="form-control" type="text" name="remark[]" placeholder="Remark"  ></textarea></TD> 
+            
+        </TR>
+
+
+    @endforeach
+          </tbody>
+
+    
+       
+             
+     
+    </TABLE>
+
+    @else
+
+
+<div>
+
+    <table class="table table-striped">
+      <tr>
+         <thead style="color: white;">
+        <th style="width:20px" >#</th>  
+        <th style="width:400px" >Activity</th>
+        <th style="width:40px">Percentage(%)</th>
+        <th style="width:110px">Score(%)</th>
+        <th>Remark</th>
+      </thead>
+      </tr>
+    
+     <tbody>
+ 
+   <?php $cmp = Crypt::encrypt($company->company); ?>
+     <form method="POST" action="{{ route('croscheck.assessment.activity.landscapingsecond', [$company->id  , $cmp , $company->assessment_month]) }}">
+                    @csrf
+
+   <?php  
+   $summ = 0;
+   $summm = 0;
+   ?>
+
+
+  @foreach($assessmmentactivity as $assesment)
+   <?php   $summ += $assesment->percentage;  $summm += $assesment->score;?>
+
+
+  <tr>
+      <input  name="assessment_sheet[]" value ="{{$assesment->assessment_sheet}}" hidden="hidden">
+      <input  name="areaid[]" value ="{{$company->area_id}}" hidden="hidden">
+      <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden > 
+     
+      <TD  ><input  style="width: 559px;" class="form-control" type="text" name="activity[]" placeholder="activity..." value="{{$assesment->activity}}" required="required" readonly="readonly" ></TD> 
+           
+      <TD><input style="width: 112px; text-align: center;"    min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD> 
+              
+      <TD><input style="width: 112px; text-align: center;" class="form-control" type="number"  name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" min="0" max="{{$assesment->percentage}}" ></TD> 
+                  
+       <TD><input  style="width: 300px;" class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD> 
+
+ </tr>
+
+  @endforeach
+   </tbody>
+
+ <th><b>Tottal</b></th>
+  <td align="center" ><b><?php echo $summ ?>%</b></td>
+  <td align="center"><b><?php echo $summm ?>%</b></td>
+
+ 
+ 
+  </table>
+
+
+
+    <br>
+    <br>
+ @endif
+
+
+
+
+
+ @elseif(($statuscheck->status == 10)||($statuscheck->status == 11)||($statuscheck->status == 12))
+
+ <!--rejection-->
+
+
+
+   <table class="table table-striped">
+      <tr>
+         <thead style="color: white;">
+        <th style="width:20px" >#</th>  
+        <th style="width:400px" >Activity</th>
+        <th style="width:40px">Percentage(%)</th>
+        <th style="width:110px">Score(%)</th>
+        <th>Remark</th>
+      </thead>
+      </tr>
+    
+     <tbody>
+
+ 
+   <?php $i=0; ?>
+  @foreach($crosscheckassessmmentactivity as $assesment)
+  <?php $i++; ?>
+
+   <?php $tender = Crypt::encrypt($company->company); ?>
+     <form method="POST" action="{{ route('edited.assessment.activity.landscaping', [$assesment->assessment_id , $tender , $company->assessment_month]) }}">
+                    @csrf
+
+
+  <tr>
+    <td>{{$i}}</td>
+        <input  name="assessment_sheet[]" value ="{{$assesment->assessment_sheet}}" hidden="hidden">
+         <input  name="areaid[]" value ="{{$company->area_id}}" hidden="hidden">
+        <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden > 
+        <input  name="activity[]" value="{{$assesment->activity}}"  hidden > 
+
+      
+      <TD  ><textarea class="form-control" type="text"  placeholder="{{$assesment->activity}}" required="required" readonly="readonly"></textarea> </TD> 
+           
+      <TD><input oninput="totalitem()"  id="istock"  min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD> 
+              
+      <TD><input class="form-control" type="number" id="tstock" name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" max="{{$assesment->percentage}}" ></TD> 
+                  
+       <TD><input class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD> 
+
+
+
+ </tr>
+
+
+
+  @endforeach
+
+ </tbody>
+ 
+  </table>
+
+
+
+
+
+
+ <!--rejection-->
+
+ @else
+ <!--crosscheck-->
+  
+
+<table class="table table-striped">
+      <tr>
+         <thead style="color: white;">
+        <th style="width:20px" >#</th>  
+        <th style="width:400px" >Activity</th>
+        <th style="width:40px">Percentage(%)</th>
+        <th style="width:110px">Score(%)</th>
+        <th>Remark</th>
+      </thead>
+      </tr>
+    
+     <tbody>
+     
+
+
+  </tr>
+  <?php  
+   $sum = 0;
+   $summ = 0;
+    $i = 0;
+  
+   ?>
+   <tbody>
+  @foreach($crosscheckassessmmentactivity as $assesment)
+  <?php  $i++;   $sum += $assesment->percentage;  $summ += $assesment->score;?>
+  
+  <tr>
+    <td>{{$i}}</td>
+   <td>{{$assesment->activity}}</td>
+   <td align="center">{{$assesment->percentage}}</td>
+    <td align="center">{{$assesment->score}}</td>
+    <td>{{$assesment->remark}}</td>
+    
+ </tr>
+
+  @endforeach
+   </tbody>
+  <td align="center" colspan="2"><b>Tottal</b></td>
+  <td align="center"><b><?php echo $sum ?>%</b></td>
+  <td align="center"><b><?php echo $summ ?>%</b></td>
+  </table>
+   <br>
+
+   <!--crosscheck-->
+
+
+
+ @endif
+ @endforeach
+
+
+<br>
+   
+    @foreach($assessmmentactivity as $assesmentstatus)
+    @endforeach
+      @if(auth()->user()->type == 'Supervisor Landscaping')
+      @if(count($assessmmentactivity) == 0) <button id="bt" type="submit" class="btn btn-primary">Save</button> 
+      @elseif($assesmentstatus->status == 1)
+       <button id="bt" type="submit" class="btn btn-primary" title="You will not able to edit after final save">Final save</button>
+       @elseif(($statuscheck->status == 10)||($statuscheck->status == 11)||($statuscheck->status == 12))
+           <button id="bt" type="submit" class="btn btn-primary">Save</button> @endif @endif
+
+@if(count($crosscheckassessmmentactivity) > 0)
+<!--avarage-->
+</br>
+
+<table>
+  <thead>
+  <tr style="color:white;"><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
+ </thead>
+ <tbody>
+  <tr><td><?php $totalscore = $sumscore->sum_score; $countdata = count($assessmmentcompanyname); $percent = $totalscore/$countdata; echo number_format($percent , 2);  ?>%</td><td><?php $paym=$companypayment->payment; echo number_format($paym); ?> Tshs</td><td>@if($percent >= 90)
+<?php $payall=$companypayment->payment; echo number_format($payall); ?> Tshs
+@elseif($percent >= 80 )
+<?php $pay9=$companypayment->payment*0.9;  echo number_format($pay9); ?> Tshs
+@elseif($percent >= 70 )
+<?php  $pay8=$companypayment->payment*0.8;  echo number_format($pay8);?> Tshs
+@elseif($percent >= 65 )
+<?php $pay7=$companypayment->payment*0.7;  echo number_format($pay7);?> Tshs
+@elseif($percent >= 50 )
+<?php $pay5=$companypayment->payment*0.5;  echo number_format($pay5);?>  Tshs
+@elseif($percent < 50)
+<?php $pay0=$companypayment->payment*0;  echo number_format($pay0);?> Tshs
+@endif</td></tr>
+   
+ </tbody>
+</table>
+
+</br>
+
+
+
+
+
+<!--avarage-->
+@endif
+
+ <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>
+
+
+</form>
+   
+<br>
+
+
+
+
+
+
+
+ <!-- begin of assessment activity -->
+
+
+ @if(count($crosscheckassessmmentactivity) > 0)
+
+
+
+
+  @if(($assesment->a_rejected_by != null))
+  <b>Rejected by Head PPU : {{ $assesment['rejection']->fname .' ' . $assesment['rejection']->lname }}  on:  {{ date('d F Y', strtotime($assesment->rejected_on))}}   <td> <a onclick="myfunc5('{{$assesment->reason}}')"><span data-toggle="modal" data-target="#viewreason"
+                                                                         class="badge badge-danger">View Reason</span></a></td></b><br>@endif
+
+
+   @if(($assesment->es_rejected_by != null))
+ 
+  <b>Rejected by Estates Director : {{ $assesment['rejectionestate']->fname .' ' . $assesment['rejectionestate']->lname }}  on: {{ date('d F Y', strtotime($assesment->esrejected_on)) }}     <td> <a onclick="myfunc6('{{$assesment->reasonestate}}')"><span data-toggle="modal" data-target="#viewreasonestate"
+                                                                         class="badge badge-danger">View Reason</span></a></td></b> @endif  
+  @if(($assesment->dvc_rejected_by != null))
+  <br>
+  <b>Rejected by DVC Admin : {{ $assesment['rejectiondvc']->fname .' ' . $assesment['rejectiondvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvcrejected_on)) }}     <td> <a onclick="myfunc7('{{$assesment->reasondvc}}')"><span data-toggle="modal" data-target="#viewreasondvc"
+                                                                         class="badge badge-danger">View Reason</span></a></td></b><br>@endif
+
+                        
+                                                         
+
+
+
+  <br>
+
+
+
+
+
+
+  @if($assesment->status == 1)
+  <b>status:</b><b style="color: blue;">  Not yet approved</b>
+  @elseif(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
+  <b>Approved by Head PPU : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
+  @endif
+  <br>
+  
+  @if(auth()->user()->type == 'Head PPU')
+  @if($assesment->status == 1)
+  <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 800px;">Approve <a href="{{route('approveassessment', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
+     <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#rejectppu"
+                                                            style="color: green;" 
+                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
+  @endif
+  @endif
+
+
+
+
+
+
+  @if(auth()->user()->type == 'Estates Director')
+   @if($assesment->status == 2)
+    <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 800px;">Approve<a href="{{route('approveassessmentforpayment', [$assesment->assessment_id , $tender  , $assesment->month])}}" title="Approve assessment form "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#rejectestate"
+                                                            style="color: green;" 
+                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
+   @endif
+   @endif
+  
+  @if(($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
+  <b>Approved by Estate Director : {{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  on: {{ date('d F Y', strtotime($assesment->approved_on))}}</b>
+  <br>
+ @endif 
+
+ @if(($assesment->status == 4)||($assesment->status == 5))
+  <b>Approved by DVC Admin : {{ $assesment['approvaldvc']->fname .' ' . $assesment['approvaldvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b>
+  <br>
+ @endif 
+
+
+
+ @if($assesment->status == 5)
+  <b>Company paid and updated by : {{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b>
+  <br>
+ @endif 
+
+  
+ 
+     @if(auth()->user()->type == 'Supervisor Landscaping')
+   @if($assesment->status == 1)
+  <!--<b style="padding-left: 800px;">Update payment <a data-toggle="modal" data-target="#payment"
+                                                            style="color: green;" 
+                                           data-toggle="tooltip" title="Update payment"><i class="fas fa-edit"></i></a> </b>-->
+   @endif
+   @endif
+
+<br>
+     @if(auth()->user()->type == 'DVC Admin')
+  @if($assesment->status == 3)
+   <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 750px;">Approve<a href="{{route('approveassessmentformbydvc', [$assesment->assessment_id , $tender  , $assesment->month])}}" title="Approve assessment form "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">Reject <a data-toggle="modal" data-target="#rejectdvc"
+                                                            style="color: green;" 
+                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
+                                           
+
+  @endif
+  @endif
+
+
+  <br>
+     @if(auth()->user()->type == 'Dvc Accountant')
+  @if($assesment->status == 4)
+   <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 750px;">verify if company is paid<a href="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve company if paid "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">
+
+  @endif
+  @endif
+<br>
+  <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 800px;">Pdf <a href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Print assessment from"><i style="color: blue;" class="far fa-file"></i> </a></b>
+
+
+
+
+  
+  
+  
+    <!--Update Payment-->
+    <div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" align="center" style="color: black"><b></b>UPDATE PAYMENT</b></h5>
+                   
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                   <form method="POST" action="{{route('updatepayment', [$assesment->assessment_id])}}">
+                             @csrf                   
+                        
+                        <input style="color: black" type="number" required class="form-control"   maxlength = "30"  
+                               name="payment" placeholder="Update Payment ..." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+                               <br>
+
+
+                               <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+
+                    
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--reject by Head PPU-->
+    <div class="modal fade" id="rejectppu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" align="center" style="color: black"><b></b>REJECT ASSESSMENT FORM</b></h5>
+                   
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                     <?php $tender = Crypt::encrypt($assesment->company); ?>
+                   <form method="POST" action="{{route('rejectwithreasonassessment', [$assesment->assessment_id , $tender , $assesment->month])}}">
+                             @csrf                   
+                        
+                        <textarea style="color: black" type="number" required class="form-control"     
+                               name="reason" placeholder="Give reason ..."  required></textarea> 
+                               <br>
+
+
+                               <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+
+                    
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+     <!-- Modal for view Reason -->
+    <div class="modal fade" id="viewreason" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;"><b></b> Rejection reason from Head PPU .</b></h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h5 id="reason"><b> </b></h5>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--reject by ESTATE DIRECTOR-->
+    <div class="modal fade" id="rejectestate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" align="center" style="color: black"><b></b>REJECT ASSESSMENT FORM</b></h5>
+                   
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <?php $tender = Crypt::encrypt($assesment->company); ?>
+                   <form method="POST" action="{{route('rejectwithreasonassessmentestate', [$assesment->assessment_id , $tender , $assesment->month])}}">
+                             @csrf                   
+                        
+                        <textarea style="color: black" type="number" required class="form-control"     
+                               name="reason" placeholder="Give reason ..."  required></textarea> 
+                               <br>
+
+
+                               <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+
+                    
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Modal for view Reason ESTATE-->
+    <div class="modal fade" id="viewreasonestate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;"><b></b> Rejection reason from Estate Director.</b></h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h5 id="resonestates"><b> </b></h5>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--reject by DVC-->
+    <div class="modal fade" id="rejectdvc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" align="center" style="color: black"><b></b>REJECT ASSESSMENT FORM</b></h5>
+                   
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                     <?php $tender = Crypt::encrypt($assesment->company); ?>
+                   <form method="POST" action="{{route('rejectwithreasonassessmentdvc', [$assesment->assessment_id , $tender , $assesment->month])}}">
+                             @csrf                   
+                        
+                        <textarea style="color: black" type="number" required class="form-control"     
+                               name="reason" placeholder="Give reason ..."  required></textarea> 
+                               <br>
+
+
+                               <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+
+                    
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Modal for view Reason ESTATE-->
+    <div class="modal fade" id="viewreasondvc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;"><b></b> Rejection reason from DVC Admin.</b></h5>
+                    <div></div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h5 id="resondvc"><b> </b></h5>
+              </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+ @else
+    @if(auth()->user()->type != 'Supervisor Landscaping')
+<p style="color: red;">No assessment form submitted yet</p> 
+     @endif
+  @endif
+    <br>
+
+
+
+    
+     
+
+
+
+
+
+
+
+
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
-
+             
             var table = document.getElementById(tableID);
-
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
-
             var colCount = table.rows[0].cells.length;
 
 
@@ -407,10 +867,6 @@ var total=2;
 
                 var newcell = row.insertCell(i);
                  
-               
-              
-
-
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
 
                 //alert(newcell.childNodes);
@@ -434,6 +890,8 @@ var total=2;
 
            
         }
+
+
 
         function deleteRow(tableID) {
             try {
@@ -461,6 +919,43 @@ var total=2;
         }
 
     </SCRIPT>
+
+
+        <script type="text/javascript">
+
+   function myfunc5(x) {
+            document.getElementById("reason").innerHTML = x;
+        }
+
+         function myfunc6(x) {
+            document.getElementById("resonestates").innerHTML = x;  
+  }  
+
+
+        function myfunc7(x) {
+            document.getElementById("resondvc").innerHTML = x;  
+  }
+   </script>
+
+
+      <script>
+function totalitem() {
+  var x = 0;
+  var y = document.getElementById("istock").value;
+  var z  = parseInt(x) + parseInt(y);
+  document.getElementById("tstock").value=z;
+  document.getElementById("tstock").innerHTML = z;
+}
+</script>
+
+
+
+
+    
+    
+    
+
+    
 
 
                 

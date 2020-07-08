@@ -528,8 +528,6 @@ class DirectorateController extends Controller
 		  
 		  
 		  return redirect()->route('section.manage')->with(['message' => 'Workorder Section Deleted successfully']);
-  
-
       
     }
 

@@ -44,6 +44,8 @@
         }
     </style>
 
+
+
 <div>
      <nav class="navbar fixed-top navbar-expand-lg "  style="border-bottom: #ebe9e6 8px solid; background-color: #376ad3;">
 
@@ -239,15 +241,41 @@
      <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
  </li>
  @endif
-
-
-
-
-
-
-                      <li class="nav-item">
+                    <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
+
+                     @if(auth()->user()->type == 'DVC Admin')
+
+                       <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+                       </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
+                       @endif
+
+                                     @if(auth()->user()->type == 'Dvc Accountant')
+
+                       <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+                       </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
+                       @endif
+
+
+
+                    @if((auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Supervisor Landscaping'))
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
+
+                    @endif
 
 
 
@@ -279,7 +307,7 @@
 
 
              <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Land/work_order')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
             </li>
 
         <li class="nav-item dropdown">
@@ -326,13 +354,23 @@
 
         </div>
        </li>
+<<<<<<< HEAD
+
+=======
+>>>>>>> c6abe3ed2fd682267c23f8f5ecbb3c1e335cb0c9
+
+       @endif
+
+                @if(auth()->user()->type == 'Accountant')
+                <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                </li>
+                @endif
 
 
-                    @endif
 
-
-                    @if(auth()->user()->type == 'Estates Director')
-                      <li class="nav-item dropdown">
+   @if(auth()->user()->type == 'Estates Director')
+       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
@@ -349,6 +387,11 @@
 
         </div>
        </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
 
                     @endif
 

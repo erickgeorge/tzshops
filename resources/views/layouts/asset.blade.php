@@ -620,7 +620,7 @@
             </li>
 
              <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Land/work_order')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
             </li>
 
 

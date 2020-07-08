@@ -22,6 +22,7 @@ use App\WorkOrderTransport;
 use App\iowzone;
 use App\usertype;
 use App\Note;
+use App\landmaintainancesection;
 use Redirect;
 use PDF;
 
@@ -61,7 +62,7 @@ class HomeController extends Controller
 
 
 
-     $data['wo'] = Workorder::OrderBy('created_at', 'DESC')->paginate(10);
+        $data['wo'] = Workorder::OrderBy('created_at', 'DESC')->paginate(10);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //         return response()->json($role);
@@ -1875,6 +1876,7 @@ $v5=$type[4];
             'directorates' => $directorate,
             'role' => $role,
             'worksec' => workordersection::OrderBy('section_name', 'ASC')->get(),
+             'maintsec' => landmaintainancesection::OrderBy('section', 'ASC')->get(),
             'zone' => iowzone::OrderBy('zonename', 'ASC')->get(),
             'departments' => $departments,
             'notifications' => $notifications,

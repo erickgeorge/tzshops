@@ -44,6 +44,42 @@
         }
     </style>
 
+
+
+<style type="text/css">
+
+              input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
+  color: #fff;
+  position: relative;
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field{
+  position: absolute !important;
+  border-left:1px solid #8c8c8c;
+  padding: 2px;
+  color:#000;
+  left: 56px;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field{
+  position: absolute !important;
+  border-left:1px solid #8c8c8c;
+  padding: 2px;
+  color:#000;
+  left: 26px;
+}
+
+
+input[type="date"]::-webkit-datetime-edit-day-field{
+  position: absolute !important;
+  color:#000;
+  padding: 2px;
+  left: 4px;
+
+}
+
+            </style>
+
 <div>
     <nav class="navbar fixed-top navbar-expand-lg "  style="border-bottom: #ebe9e6 8px solid; background-color: #376ad3;">
 
@@ -143,192 +179,98 @@
                 ?>
 
 
-                @if(auth()->user()->type == 'Estates Director')
 
+                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU'))
+                  <li class="nav-item">
+                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+                            </li>
+                 @endif
 
+                 @if(auth()->user()->type == 'DVC Admin')
+                         <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                  </li>
+                    <li class="nav-item">
+                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+                            </li>
 
-                 <!--    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('completed_work_orders')}}">Completed Work-orders</a>
+                        <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                     </li>
+                       @endif
+
+                     @if(auth()->user()->type == 'Dvc Accountant')
+                         <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                  </li>
+                    <li class="nav-item">
+                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+                            </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
+                       @endif
 
 
+                @if(auth()->user()->type == 'Accountant')
+
+
+               <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                </li>
+                @endif
+
+
+
+                    @if((auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Supervisor Landscaping'))
+
+                        <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                    </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
-                    </li>
-                    -->
-
-
-
-
-
-
-
-
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Works Order Reports
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('/unattended_work_orders')}}">Unattended Work Orders</a>
-          <a  style="color:white" class="dropdown-item" href="{{ url('/completed_work_orders')}}">Completed Work Orders</a>
-           <a style="color:white" class="dropdown-item" href="{{ url('/woduration')}}">Work Orders Duration</a>
-            <a style="color:white" class="dropdown-item" href="{{ url('/work_order')}}">All WorkOrders <span
-                                    class="badge badge-light">{{ count($w) }}</span></a>
-
-        </div>
-       </li>
-
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                          HOS
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-                          <a class="dropdown-item" style="color:white" href="{{ url('/allhos')}}">All Head of sections Details</a>
-                          <a class="dropdown-item" style="color:white" href="{{ url('hoscount')}}">HOS with completed works orders</a>
-                        </div>
-                       </li>
-
-                        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Technician
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('/techniciancountcomp')}}">Technician Completed Work</a>
-          <a  style="color:white" class="dropdown-item" href="{{ url('/techniciancount')}}">Technicians on work (duty)</a>
-
-          <a  style="color:white" class="dropdown-item" href="{{ url('/alltechnicians')}}">All Technicians Details</a>
-
-        </div>
-       </li>
-
-         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-        Users
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-           <a style="color:white" class="dropdown-item" href="{{ url('/alliow')}}">Inspectors of work</a>
-
-
-        </div>
-       </li>
-
-
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician Report</a>
-                    </li>-->
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                          Store
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-
-                          <a class="dropdown-item" style="color:white" href="{{ url('stores')}}">All Materials in Store<span
-                            class="badge badge-light">{{ count($m) }}</span></a>
-                        </div>
-                       </li>
-
-                       <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                     </li>
 
+                    @endif
 
+                      @if(auth()->user()->type == 'Estates Director')
 
-        <li class="nav-item dropdown">
+                           <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                    </li>
+
+       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
           Settings
         </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
 
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/section')}}">DES Sections</a>
-
-                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
 
 
 
         </div>
        </li>
-                       <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('roomreport')}}">Room Report</a>
+       <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+            </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                     </li>
 
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
-                    </li>
-
-
-
-                @endif
-                @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
-                <li class="nav-item">
-                    <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
-        </li>
-                @endif
-                @if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
-
-<li class="nav-item">
-    <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">
-        Planning
-        <span class="badge badge-light">
-            @if(auth()->user()->type == 'Estates Director')
-                @php
-                    $statusPPU = ppuproject::where('status','10')->orwhere('status','7')->orwhere('status','11')->orwhere('status','2')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'DVC Admin')
-                @php
-                    $statusPPU = ppuproject::where('status','1')->orwhere('status','6')->orwhere('status','13')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'Director DPI')
-                @php
-                    $statusPPU = ppuproject::where('status','0')->orwhere('status','-1')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'Head PPU')
-                @php
-                    $statusPPU = ppuproject::where('status','3')->orwhere('status','5')->orwhere('status','12')->orwhere('status','9')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'Architect & Draftsman')
-                @php
-                    $statusPPU = ppuproject::where('status','4')->get();
-                @endphp
-            @else
-                @php
-                    $statusPPU = ppuproject::where('status','8')->get();
-                @endphp
-            @endif
-            {{ count($statusPPU) }}
-        </span>
-    </a>
-  </li>
- @endif
-                @if(auth()->user()->type == 'DVC Admin')
-                <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
-                    </li>
-                @endif
+                    @endif
 
 
                 @if(auth()->user()->type == 'Transport Officer')
@@ -512,15 +454,8 @@
                 @endif
 
 
-                @if(auth()->user()->type == 'Estates Director')
- <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
- </li>
- @elseif(auth()->user()->type == 'DVC Admin')
- <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
- </li>
- @endif
+
+
  @if(auth()->user()->type == 'Maintenance coordinator')
 
   <li class="nav-item">
@@ -618,7 +553,7 @@
             </li>
 
              <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Land/work_order')}}">Lanscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
             </li>
 
 
@@ -849,11 +784,31 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
+   <!-- <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
+    <a  href="{{ url('Maintainance/section')}}" ><h6> Maintenance  section </h6></a>-->
+    <a  href="{{ url('Assessment/form')}}" ><h6>Assessment Form</h6></a>
 
+    <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheet </h6></a>
+
+
+
+   <button class="dropdown-btn"><h6>Company Report
+    <i class="fa fa-caret-down"></i></h6>
+  </button>
+  <div class="dropdown-container">
+    <a href="{{ route('comapy_view_month')}}"><h6>Monthly assessment report</h6></a>
+    <a href="{{ url('cleaningcompanyreport')}}"><h6>Company trending </h6></a>
+
+  </div>
+
+    @if(auth()->user()->type != 'Head PPU')
+
+    <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
     <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Company</h6></a>
     <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Area</h6></a>
-    <a  href="{{ url('manage_Hall_of_resdence')}}"><h6>Reports</h6></a>
+
+    @endif
+
 
 </div>
 
@@ -1109,7 +1064,7 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript">
 
       $("#company").select2({
-            placeholder: "Choose Company Name...",
+            placeholder: "Choose company name...",
             allowClear: true
         });
 </script>
@@ -1118,7 +1073,7 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript">
 
       $("#carea").select2({
-            placeholder: "Choose Company Name...",
+            placeholder: "Choose cleaning area...",
             allowClear: true
         });
 </script>

@@ -19,6 +19,7 @@ use App\WorkOrder;
 use App\zoneinspector;
 use App\iowzone;
 use App\usertype;
+use App\tendernumber;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -174,6 +175,14 @@ class UserController extends Controller
     {
         return response()->json(['areas' => Area::where('location_id', $request->get('id'))->orderby('name_of_area','ASC')->get()]);
     }
+
+
+
+    public function getcompany(Request $request)
+    {
+        return response()->json(['companytender' => tendernumber::where('company', $request->get('id'))->get()]);
+    }
+
 
 
     public function getBlocks(Request $request)
@@ -384,7 +393,7 @@ class UserController extends Controller
              
 
        $user = Auth::user();
-if ($request->Image!='') {
+     if ($request->Image!='') {
     $cover = $request->file('Image');
     $extension = $cover->getClientOriginalExtension();
     Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));

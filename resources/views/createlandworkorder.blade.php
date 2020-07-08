@@ -41,10 +41,10 @@
             </div>
             <select required style="width: 300px;min-width: 150px;" id="sec" name="p_type">
                 <option selected value="">Choose...</option>
-                <?php use App\workordersection; ?>
-<?php $sectionss = workordersection::get(); ?>
+                <?php use App\landmaintainancesection; ?>
+<?php $sectionss = landmaintainancesection::get(); ?>
  @foreach($sectionss as $sectionss) 
-               <option value="{{ $sectionss->section_name }}"><?php echo strtoupper( $sectionss->section_name ); ?></option>
+               <option value="{{ $sectionss->section }}"><?php echo ucwords(strtolower($sectionss->section)); ?></option>
                @endforeach
                    
             </select>

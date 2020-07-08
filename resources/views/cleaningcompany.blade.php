@@ -1,45 +1,192 @@
-@extends('layouts.asset')
+@extends('layouts.land')
 
 @section('title')
-    Cleaning Company
+  Tenders
     @endSection
 
 @section('body')
     <br>
-   
+   <?php use Carbon\Carbon;?>
    
 <div class="container">
-  
 
- 
-
-            <div >
-               @if(Session::has('message'))
+      <div class="container">
+    @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-              @endif
-                  <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available cleaning companies </b></h5>
-                  <hr>
-                <a href="{{ route('registercompany') }}"
-                   class="btn btn-primary" >Add new cleaning company</a>
-                   <br> <br> 
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+             <ul class="alert alert-danger" style="list-style: none;">
+                @foreach ($errors->all() as $error)
+                    <li><?php echo $error; ?></li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    </div>
+  
+       <div class="row">  
+      <div class="col">
+            <h5 ><b style="text-transform: uppercase;">Available tenders with area</b></h5>
+
+        </div>
+
+        <div>
+            <form method="GET" action="{{route('cleaningcompany')}}" class="form-inline my-2 my-lg-0">
+                From <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
+            </form>
+        </div>
+
+     </div>
+     <br>
+     <hr>
+
+
+                 <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                 <i class="fa fa-file-pdf-o"></i> PDF
+                </button>
+
+
+
+                <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="POST" action="{{ route('tendersreport')}}">
+             @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Filter your data</span>
+        </button>
+      </div>
+ 
+  <div class="modal-body">
+
+
+
+        <div class="row">
+          
+
+               <div class="col">   From <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>"  class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                </div>
+              
+                <div class="col">
+                To<input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end"  class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                </div>             
+       </div>
+<br>
+             
+
+        <div class="row">
+          <div class="col">
+              <select name="tender" class="form-control mr-sm-2">
+                <option value='' selected="selected">Select tender number</option>
+                @foreach($assessmmenttender as $astender)
+                <option value="{{$astender->tender }}">{{ $astender->tender }}</option>
+                @endforeach
+      
+              </select>
+          </div>
+      </div>
+      
+      <br>    
+
+              <div class="row">
+          <div class="col">
+              <select name="company" class="form-control mr-sm-2">
+                <option value='' selected="selected">Select company name</option>
+                 @foreach($assessmmentcompany as $ascompany)
+                <option value="{{ $ascompany->company_name }}">{{ $ascompany['compantwo']->company_name }}</option>
+                @endforeach
+      
+              </select>
+          </div>
+      </div>
+      
+      <br>  
+
+              <div class="row">
+          <div class="col">
+              <select name="area" class="form-control mr-sm-2">
+                <option value='' selected="selected">Select area name</option>
+                 @foreach($assessmmentareas as $asarea)
+                <option value="{{ $asarea->area }}">{{ $asarea['are_a']->cleaning_name }}</option>
+                @endforeach
+              
+              </select>
+          </div>
+      </div>
+      
+      <br>     
+
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Export</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+
+      
+  
+
+       <div >
+   
+                
+                
+                     @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+                  <a href="{{ route('registercompany') }}"
+                   class="btn btn-primary" >Add new tender</a> @endif
+                   <br>
+                   <br>
+              
     
                 <table id="myTableee" id="myTable" class="table table-striped">
                       
                     <thead >
                    <tr style="color: white;">
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
+                        <th scope="col">Tender Number</th>
+                        <th scope="col">Area Name</th>
+                        <th scope="col">Company Name</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Registration</th>
-                        <th scope="col">Tin</th>
-                        <th scope="col">Vat</th>
-                        <th scope="col">license</th>
-                        <th scope="col">ACTION</th>
+                        <th scope="col">Next Assessment</th>
+                        <th scope="col">Contract Duration</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
 
@@ -48,29 +195,136 @@
                     <?php $i = 0; ?>
                     @foreach($cleangcompany as $house)
                         <?php $i++; ?>
+                
+                <?php $now1 =  Carbon::now();
+                 
+                $next30day = strtotime($house->datecontract);
+                $next30days = date("Y-m-d", strtotime("+1 month", $next30day));
+
+                $dcont = Carbon::parse($house->datecontract);
+                $dnext = Carbon::parse($house->nextmonth);
+                $endcont = Carbon::parse($house->endcontract);
+
+                $date_left = $now1->diffInDays($next30days);
+                $date_next = $now1->diffInDays($dnext); ?>
+
+
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td>{{ $house->company_name }}</td>
-                            <td>{{ $house->type}}</td>
-                            <td>{{ $house->status }}</td>
-                            <td>{{ $house->registration }}</td>
-                            <td>{{ $house->tin }}</td>
-                            <td>{{ $house->vat }}</td>
-                            <td>{{ $house->license }}</td>
-                            <td>
+                            <td>{{ $house->tender }}</td>
+                            <td>{{ $house['are_a']->cleaning_name }}</td>
+                            <td>{{ $house['compantwo']->company_name }}</td>
+                            
+                  @if($house->status == 2 ) 
+                           <td><span class="badge badge-danger">Not assigned yet </span><br>
+                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
+                  @elseif($now1 > $endcont)
+                           <td><span class="badge badge-warning">Contract Expired </span><br>
+                          
+                  
+                  @else
 
-                            <div class="row">
+                          <?php  $ddate = strtotime($house->nextmonth);
+                              $newDate = date("Y-m-d", strtotime("-1 month", $ddate));
+                                                                                    ?>
 
 
-                                    <a style="color: green;"
+                           <td><span class="badge badge-primary">Current assessment on {{ date('F Y', strtotime($newDate))}}</span> </td> 
+                  @endif 
+                            
+        @if($now1 > $endcont)
+                           <td><span class="badge badge-danger">Can not assessed </span><br></td>
+        @else
+                                   
+
+                  @if($house->status == 1)
+
+                  @if($now1 >= $dnext)
+                           <td style="color: red">{{$date_next}} Days</td>
+                  @else
+                           <td>{{$date_next}} Days left</td>
+                  @endif 
+
+
+                  
+                  @else
+
+
+                 @if($now1 >= $next30days)
+                           <td style="color: red">{{$date_left}} Days</td>
+                 @else
+                           <td>{{$date_left}} Days left</td>
+                 @endif 
+
+
+                   
+                  @endif
+           @endif       
+
+
+           
+                <?php $date = Carbon::parse($house->datecontract);
+                 $now = Carbon::parse($house->endcontract);
+                 $diff = $date->diffInDays($now); ?>
+
+
+
+        @if($now1 > $endcont)
+                           <td><span class="badge badge-danger">Contract expired </span></td>
+        @else
+
+                 @if($diff >= 365)
+     
+                           <td><?php 
+                            
+
+                             $start_date = new DateTime();
+                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
+                             $dd = date_diff($start_date,$end_date);
+                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>   
+
+
+
+                         
+                   @else
+
+                           <td><?php 
+                            
+
+                             $start_date = new DateTime();
+                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
+                             $dd = date_diff($start_date,$end_date);
+                             echo $dd->m." months ".$dd->d." days"; ?></td>   
+
+
+
+                           
+                  @endif  
+               @endif   
+          
+
+             <td>
+
+                   <div class="row">  &nbsp;&nbsp;
+                   @if(auth()->user()->type != 'DVC Admin')
+                   @if(auth()->user()->type != 'Estates Director')
+                                  
+                                  <!--  <a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->company_name }}','{{ $house->type }}','{{$house->status}}','{{$house->registration}}','{{$house->tin}}','{{$house->vat}}','{{$house->license}}' )"
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
-                                                class="fas fa-edit"></i></a>
+                                                class="fas fa-edit"></i></a>--> @endif @endif &nbsp;
+        @if($now1 > $endcont)
+                         <a style="color: green;"  href="{{route('view_company_report' , [$house->id])}}" data-toggle="tooltip" title="View company trending report"><i
+                                                    class="fas fa-eye"></i></a>  &nbsp;
+                         <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->   
+        @else                                
+               
+               @if( $house->status == 2) 
 
 
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this company Completely? ')"
-                                          action="{{ route('company.delete', [$house->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
+                                          action="{{ route('cleaning.company.delete', [$house->id]) }}">
                                         {{csrf_field()}}
 
 
@@ -79,9 +333,37 @@
                                                                                         data-toggle="tooltip"><i
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
-                                    </form>
-                                </div>
-                         </td>
+                                    </form>&nbsp;
+               
+                @if($now1 >= $next30days)
+                   @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+                 <?php $hou = Crypt::encrypt($house->tender); ?>
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
+                                                    class="fas fa-share"></i></a>  @endif
+                @endif       
+                @elseif( $house->status == 1 ) 
+
+                                           <?php $tender = Crypt::encrypt($house->tender ); ?>
+                          <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
+                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
+
+                @if($now1 >= $dnext)
+                   @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+                <?php $hou = Crypt::encrypt($house->tender); ?>
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
+                                                    class="fas fa-share"></i></a>  @endif
+                @endif 
+
+          
+               
+
+                @endif 
+        @endif                                   
+               </div>
+          </td>
+
+
+
                            
                         </tr>
                     @endforeach
@@ -103,7 +385,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Edit Cleaning Company</h5>
                 </div>
 
-                <form method="POST" action="edit/company" class="col-md-6">
+                <form method="POST" action="{{route('assessment.sheet.edit')}}" class="col-md-6">
                     <div class="modal-body">
 
                         @csrf
@@ -201,8 +483,9 @@
 
 
 
+
         
-    @endSection
+   
 
 
     <script>
@@ -252,3 +535,6 @@
 
 
     </script>
+
+
+     @endSection

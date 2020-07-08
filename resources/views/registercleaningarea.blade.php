@@ -26,7 +26,7 @@ StaffHouse Registrartion
 
 <div class="container">
 
-                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="Add New House">Register  New Cleaning Area</h5>
+                <h5 style="  text-transform: uppercase;"  id="Add New House">Register  new cleaning area</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
     
@@ -43,7 +43,7 @@ StaffHouse Registrartion
                         <select required class="custom-select" name="zone" id="zonne">
                             <option value="">Choose...</option>
                             @foreach($newzone as $zone)
-                                <option value="{{ $zone->id }}">{{ $zone->Zone_name }}</option>
+                                <option value="{{ $zone->id }}">{{ $zone->zonename }}</option>
                             @endforeach
 
                         </select>
@@ -60,7 +60,7 @@ StaffHouse Registrartion
                 
 
                     <button type="submit" class="btn btn-primary">Register
-                        New Cleaning Area
+                        new cleaning area
                     </button>
                       <a class="btn btn-danger" href="/manage_Cleaning_area" role="button">Cancel </a>
                   </div>

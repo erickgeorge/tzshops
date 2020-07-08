@@ -180,9 +180,11 @@ User Registration
 
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
+	                   <option value="Dvc Accountant">Dvc Accountant</option>
 	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
+
 
 	                  @foreach($worksec as $dep)
 
@@ -199,7 +201,11 @@ User Registration
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
 
-	                  <option value="Supervisor LECC ">Supervisor LECC </option>
+	                  @foreach($maintsec as $sec)
+
+                           <option  value="HOS {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
+
+                       @endforeach
 
                       <option value="Transport Officer">Transport Officer</option>
                       <option value="USAB">USAB</option>
@@ -257,7 +263,11 @@ User Registration
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
 
-	                  <option value="Supervisor LECC ">Supervisor LECC </option>
+	                  @foreach($maintsec as $sec)
+
+                           <option  value="Supervisor {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
+
+                       @endforeach
 
 	                  <option value="Transport Officer">Transport Officer</option>
 

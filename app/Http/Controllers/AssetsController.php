@@ -41,6 +41,12 @@ use Illuminate\Support\Carbon;
 
 use PDF;
 
+use App\landassessmentform;
+use App\iowzone;
+use App\companywitharea;
+use App\assessmentsheet;
+use App\areacompany;
+use App\tendernumber;
 
 class AssetsController extends Controller
 {
@@ -70,17 +76,171 @@ class AssetsController extends Controller
       public function Registercompany(Request $request)
     {
 
+
+    $checktender = company::where('tender', $request['tendern'])->where('company_name', $request['companyid'])->first();
+
+    if (empty($checktender)) {
+
+            $area = $request['area'];
+            $sheet = $request['sheets'];
+
+
+
+          //  First Store data in $arr
+             $arr = array();
+                  foreach ($area as $address) {
+                   $arr[] = $address;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
+
+
         $company = new company();
-        $company->company_name = $request['name'];
-        $company->type = $request['type'];
-        $company->status = $request['status'];
-        $company->registration = $request['Registration'];
-        $company->tin = $request['TIN'];
-        $company->vat = $request['VAT'];
-        $company->license = $request['license'];
+        $company->sheet = $sheet[$a];
+        $company->area = $area[$a];
+
+
+        $company->company_name = $request['companyid'];
+        $company->tender = $request['tendern'];
+        $company->status = 2;
+        $company->payment = $request['payment'];
+        $company->datecontract = $request['datecontract'];
+        $company->nextmonth = $request['datecontract'];
+        $company->endcontract =  $request['duration'];
+
+
+
+
+     if ($company->datecontract >= $company->endcontract) {
+
+         return redirect()->back()->withErrors(['message' => 'Please enter the valid end of contract as compared to the start of the contract']);
+
+     }
+
+
+
+     $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $company->tender)->first();
+     $companynew->payment = $request['payment'];
+     $companynew->datecontract = $request['datecontract'];
+     $companynew->endcontract =  $request['duration'];
+     $companynew->status = 1;
+     $companynew->save();
+
+
+
+
+
+
+      $company->save();
+         }
+
+           return redirect()->route('cleaningcompany')->with(['message' => 'New tender registered successfully']);
+
+
+}
+
+
+
+   else {
+
+        return redirect()->back()->withErrors(['message' => 'The tender number selected has already been assigned for another company, Please select another tender number']);
+       }
+
+
+       }
+
+
+
+
+
+
+      public function Renewcompany(Request $request )
+    {
+
+
+
+
+        $company = new companywitharea();
+        $company->company_name = $request['company_name'];
         $company->save();
-        return redirect()->route('cleaningcompany')->with(['message' => 'New Company is registered successfully']);
+
+
+       $tendernu = $request['tender'];
+
+             //  First Store data in $arr
+             $arr = array();
+                  foreach ($tendernu as $address) {
+                   $arr[] = $address;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
+
+          $checktender = tendernumber::where('tender', $tendernu[$a])->first();
+
+       if (empty($checktender)) {
+
+        $tender = new tendernumber();
+        $tender->tender = $tendernu[$a];
+        $tender->company = $company->id;
+        $tender->save(); }
+           else {
+
+        return redirect()->back()->withErrors(['message' => 'The tender number selected has already been assigned for another company, Please select another tender number']);
+       }
+
+         }
+
+        return redirect()->route('cleaning_company')->with(['message' => 'Company registered successfully']);
+
+      }
+
+
+
+
+         public function addnewsheetc(Request $request )
+    {
+
+
+
+            $activityi = $request['activity'];
+            $percentagee = $request['percentage'];
+            $summ = 0;
+
+            foreach($activityi as $a => $b){
+            $summ += $percentagee[$a];
+
+            if($summ != 100) {
+
+        $company = new assessmentsheet();
+        $company->activity = $activityi[$a];
+        $company->percentage = $percentagee[$a];
+        $company->type = $request['type'];
+        $company->name = $request['name'];
+        $company->status = 1;
+
+        $company->save();
+
+              return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Please enter percentage total of 100']);
+            }
+              else{
+
+        $company = new assessmentsheet();
+        $company->activity = $activityi[$a];
+        $company->percentage = $percentagee[$a];
+        $company->type = $request['type'];
+        $company->name = $request['name'];
+        $company->status = 2;
+
+        $company->save();
+      } }
+
+
+        return redirect()->route('assessment_sheet')->with(['message' => 'New assessment sheet registered successfully']);
     }
+
+
 
 
 
@@ -150,9 +310,114 @@ class AssetsController extends Controller
 
            'cleangcompany' => company::all()
 
+            if(request()->has('start'))  { //date filter
+
+
+        $from=request('start');
+        $to=request('end');
+
+
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+
+
+         return view('cleaningcompany', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
           ]);
 
          }
+         else{
+
+             return view('cleaningcompany', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => company::orderby('created_at','DESC')->get(),
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
+          ]);
+
+         }
+
+       }
+
+
+
+        public function cleaningcompanynew(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+         return view('cleaningcompanynew', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => tendernumber::all()
+
+          ]);
+
+         }
+
+
+
+        public function cleaningcompanyreport(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+         return view('cleaningcompanyreport', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => company::where('status','<>',2)->get()
+
+          ]);
+
+         }
+
+
+             public function assessmentsheet(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+         return view('assessmentsheet', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => assessmentsheet::select(DB::raw('name , type ,sum(percentage) as percentage')) ->where('status',2)->OrderBy('name','ASC')
+              ->groupBy('name')->groupBy('type')
+             ->get()
+
+          ]);
+
+         }
+
+
+
+
+
 
 
        public function Hallofresdence(){
@@ -233,17 +498,13 @@ class AssetsController extends Controller
       public function editcompany(Request $request)
     {
            $p=$request['edit_id'];
-           $company = company::where('id',$p)->first();
-           $company->company_name = $request['name'];
-           $company->type = $request['type'];
-           $company->status = $request['status'];
-           $company->registration = $request['registration'];
-           $company->tin = $request['tin'];
-           $company->vat = $request['vat'];
-           $company->license = $request['license'];
+           $company = tendernumber::where('id',$p)->first();
+           $company->tender = $request['tender'];
+
+
            $company->save();
 
-        return redirect()->route('cleaningcompany')->with(['message' => 'Company Edited successfully']);
+        return redirect()->back()->with(['message' => 'Company Edited successfully']);
     }
 
 
@@ -276,10 +537,20 @@ class AssetsController extends Controller
 
           public function deletecompany($id)
        {
+           $comp=tendernumber::where('id', $id)->first();
+           $comp->delete();
+           return redirect()->back()->with(['message' => 'Respective company deleted successfully']);
+       }
+
+
+
+          public function deletecleaningcompany($id)
+       {
            $comp=company::where('id', $id)->first();
            $comp->delete();
-           return redirect()->route('cleaningcompany')->with(['message' => 'Respective company is deleted successfully']);
+           return redirect()->back()->with(['message' => 'Respective tender deleted successfully']);
        }
+
 
 
 
@@ -430,9 +701,38 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'campuses' => Campus::all(),
+             'carea' =>cleaningarea::all(),
+              'sheets' =>assessmentsheet::select(DB::raw('name'))
+                    ->where('status', 2)->groupBy('name')->OrderBy('name')->get(),
+                      'companyall' => companywitharea::OrderBy('company_name', 'ASC')->get()
+
           ]);
      }
 
+
+    public function Renewcompanycontract(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('renewcompanycontract', [
+            'role' => $role,
+            'notifications' => $notifications,
+             'carea' =>cleaningarea::all()
+
+
+          ]);
+     }
+
+
+         public function addnewsheet(){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('addnewassesssheet', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+
+          ]);
+     }
 
 
 
@@ -469,7 +769,7 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'campuses' => Campus::all(),
-                'newzone' => zone::all(),
+                'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
           ]);
      }
 
