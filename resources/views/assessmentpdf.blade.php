@@ -163,6 +163,7 @@ tr:nth-child(even) {
 
     <thead style=" background-color: #376ad3; color: white; ">
       <tr>
+         <th style="width: 20px" ><b>#</b></th>
     <th ><b>Activity</b></th>
      <th style="width: 20px"><b>Percentage(%)</b></th>
     <th style="width: 20px"><b>Score(%)</b></th>
@@ -173,12 +174,14 @@ tr:nth-child(even) {
   <?php  
    $sum = 0;
    $summ = 0;
+   $i = 0;
   
    ?>
   @foreach($crosscheckassessmmentactivity as $assesment)
-  <?php     $sum += $assesment->percentage;  $summ += $assesment->score;?>
+  <?php    $i++;   $sum += $assesment->percentage;  $summ += $assesment->score;?>
   <tbody>
   <tr>
+    <td>{{$i}}</td>
    <td>{{$assesment->activity}}</td>
    <td style="text-align: center">{{$assesment->percentage}}</td>
     <td  style="text-align: center">{{$assesment->score}}</td>
