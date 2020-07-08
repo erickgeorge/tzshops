@@ -24,7 +24,7 @@ Cleaning company report
         </div>
     @endif 
 
-     <h5 style=" text-transform: uppercase;" ><b style="text-transform: uppercase;">Available month with company assessment </b></h5>
+     <h5 style=" text-transform: uppercase;" ><b style="text-transform: uppercase;">Months</b></h5>
               <hr>
 
                    <br>

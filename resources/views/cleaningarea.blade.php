@@ -1,4 +1,4 @@
-@extends('layouts.asset')
+@extends('layouts.land')
 
 @section('title')
     manage cleaning area
@@ -23,11 +23,12 @@
             </ul>
         </div>
              @endif
-              <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Cleaning Area </b></h5>
+              <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Cleaning Area </b></h5>
               <hr>
+               @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                 <a href="{{ route('Registercleaningarea') }}"
                    class="btn btn-primary">Add new cleaning area</a>
-                   <br><br>
+                   <br><br>@endif
 
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead >

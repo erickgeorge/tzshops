@@ -29,7 +29,7 @@ Company Registrartion
 
 
 <div class="container">
-                <h5 style=" text-transform: uppercase;"   id="Add New House" >Register  new comapany</h5>
+                <h5 style=" text-transform: uppercase;"   id="Add New House" >register New tender</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
           
@@ -37,77 +37,107 @@ Company Registrartion
                     @csrf
 
                 <div align="center">
+
+
+<div class="jumbotron" style="width: 500px;">
+     <table>
+    
+      <tr>
+     <thead style="color: white;">
+        <th style="width: 25px"></th>
+        <th style="width: 250px">Area</th>
+        <th style="width: 250px">Assessment sheet</th>
      
-                    
-                        <div class="input-group mb-3 col-lg-6">
+     </thead>
+      </tr>
+
+     </table>
+
+
+         
+       <TABLE id="dataTable" width="350px" border="1">
+        <TR>
+            <TD><INPUT type="checkbox" name="chk"/></TD>
+            <TD  >
+                          
+                            <select style="color: black; width:  200px;" required class="custom-select"  name="area[]"  required >
+                             <option value="" selected>Choose area... 
+                            </option>
+                         
+                                @foreach($carea as $carea)
+                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
+                                    </option>
+                                @endforeach
+                            </select>      
+                      
+              </TD> 
+           
+            <TD>
+                         <select style="color: black; width:  200px;" required class="custom-select"  name="sheets[]"  required >
+                             <option value="" selected>Choose assessment sheet... 
+                            </option>
+                         
+                                @foreach($sheets as $sheet)
+                                    <option value="{{ $sheet->name }}">{{ $sheet->name}}
+                                    </option>
+                                @endforeach
+                          </select> 
+           </TD> 
+              
+          
+        </TR>
+     </TABLE>
+
+    <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
+
+    <INPUT  class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
+
+  </div>
+
+                
+                     
+                 
+                    <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
 
                           <label style="width:150px;" class="input-group-text" for="directorate">Company name</label>
 
                         </div>
-                        <input style="color: black" type="text" required class="form-control" id="name"
-                               name="name" value="{{ old('name') }}" placeholder="Enter company name" >
-                    </div>
+                          
 
-
-
-                    <div class="input-group mb-3 col-lg-6">
-                        <div class="input-group-prepend">
-                            
-
-                          <label style="width:150px;" class="input-group-text" >Type </label>
-
-                        </div>
-                   
-
-                        <select required class="custom-select"  name="type" required>
-                            <option value="">Choose type...</option>
-                            <option value="Cleaning Garden">Cleaning Garden</option>
-                            <option value="Other">Other</option>     
-
-                        </select>
-
-  
-                    </div>
-
-
-                 
-                    <!--<div class="input-group mb-3 col-lg-6">
-                        <div class="input-group-prepend">
-                            
-
-                          <label style="width:150px;" class="input-group-text" for="directorate">Status </label>
-
-                        </div>
-                        <input style="color: black" type="text" required class="form-control" id="type"
-                               name="status" placeholder="Enter Company Status">
-                    </div>-->
+                           <select  class="custom-select"  name="companyid" id="companyi"  onchange="getcompany()" required>
+                             <option value="" selected>Choose company... 
+                            </option>
+                         
+                                @foreach($companyall as $carea)
+                                    <option value="{{ $carea->id }}">{{ $carea->company_name}}
+                                    </option>
+                                @endforeach
+                          </select> 
+                     </div>
 
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
 
-                          <label style="width:150px;" class="input-group-text" for="directorate">Registration </label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Tender number</label>
 
                         </div>
-                        <input style="color: black" type="text" required class="form-control" id="type"
-                               name="Registration" placeholder="Enter company registration" value="{{ old('Registration') }}" >
-                    </div>
+                          
 
-                    <div class="input-group mb-3 col-lg-6">
-                        <div class="input-group-prepend">
-                            
-
-                          <label style="width:150px;" class="input-group-text" for="directorate">TIN </label>
-
-                        </div>
-                        <input style="color: black" type="text" required class="form-control" id="type"
-                               name="TIN" placeholder="Enter company tin" value="{{ old('TIN') }}" >
-                    </div>
+                           <select   class="custom-select"  name="tendern" id="tendernumber" required  >
+                             <option value="" selected>Choose tender number... 
+                            </option>
+                         
+                               
+                          </select> 
+                     </div>
 
 
+
+ 
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
@@ -117,7 +147,7 @@ Company Registrartion
 
                         </div>
                         <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  style="color: black" type="number" required class="form-control" id="type"
-                               name="payment" placeholder="Enter company payment" value="{{ old('payment') }}" >
+                               name="payment" placeholder="Enter monthly payment" value="{{ old('payment') }}" >
                     </div>
 
 
@@ -128,7 +158,7 @@ Company Registrartion
 
                         </div>
                         <input style="color: black" type="date" required class="form-control" id="type"
-                               name="datecontract" required min="<?php echo date('Y-m-d'); ?>"  value="{{ old('datecontract') }}" >
+                               name="datecontract" required max="<?php echo date('Y-m-d'); ?>"  value="{{ old('datecontract') }}" >
 
                  </div>
 
@@ -145,35 +175,7 @@ Company Registrartion
                  </div>
 
 
-                <div class="input-group mb-3 col-lg-6">
-                        <div class="input-group-prepend">
-                            
-                          <label style="width:150px;" class="input-group-text" for="directorate">Area</label>
-
-                        </div>
-                                                 <TABLE id="dataTable"  border="1">
-                      <TR>
-                                <TD><INPUT type="checkbox" name="chk"/></TD>
-                                <TD  ><select style="color: black; width:  310px;" required class="custom-select"  name="area[]"  required >
-                             <option value="" selected>Choose area... 
-                            </option>
-                         
-                                @foreach($carea as $carea)
-                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
-                                    </option>
-                                @endforeach
-                            </select></TD> 
-           
-          
-                     </TR>
-                        </TABLE> 
-                      
-                 </div>
-                 <div style="padding-left: 300px;">
-                         <INPUT class="btn badge-primary" type="button" value="Add area" onclick="addRow('dataTable')" />
-
-                         <INPUT class="btn btn-danger" type="button" value="remove" onclick="deleteRow('dataTable')" />
-                 </div>       
+                
 
                          <br>
                          <br>
@@ -187,7 +189,7 @@ Company Registrartion
               
             <button type="submit" class="btn btn-primary">Save
                     </button>
-                    <a class="btn btn-danger" href="/cleaningcompany" role="button">Cancel </a>
+                    <a class="btn btn-danger" href="/tender" role="button">Cancel </a>
                 </div>
                 </form>
             </div>
@@ -263,6 +265,41 @@ Company Registrartion
         }
 
     </SCRIPT>
+
+
+
+<script type="text/javascript">
+var selectedcompany = null;
+
+function getcompany() {
+    selectedcompany = document.getElementById('companyi').value;
+
+    $.ajax({
+        method: 'GET',
+        url: 'companytender/',
+        data: {id: selectedcompany}
+    })
+        .done(function(msg){
+            var object = JSON.parse(JSON.stringify(msg['companytender']));
+            $('#tendernumber').empty();
+      
+      
+      var option = document.createElement('option');
+      option.innerHTML = 'Choose...';
+      option.value = '';
+      document.getElementById('tendernumber').appendChild(option);
+      
+      
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].tender;
+                option.value = object[i].tender;
+                document.getElementById('tendernumber').appendChild(option);
+            }
+        });
+}
+
+</script>
 
 
 

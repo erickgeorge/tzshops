@@ -18,12 +18,12 @@ class landassessmentform extends Model
     }
 	
 
-	 public function workorder(){
-        return $this->belongsTo('App\landworkorders', 'work_order_id');
-    }
-
      public function assessorname(){
         return $this->belongsTo('App\User', 'assessor');
+    }
+
+    public function assessmentname(){
+        return $this->belongsTo('App\assessmentsheet', 'assessment_id');
     }
 
 	

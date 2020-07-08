@@ -198,6 +198,19 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                     </li>
                        @endif
 
+                     @if(auth()->user()->type == 'Dvc Accountant')
+                         <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                  </li>
+                    <li class="nav-item">
+                                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
+                            </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
+                       @endif
+
 
                 @if(auth()->user()->type == 'Accountant')
 
@@ -627,14 +640,14 @@ input[type="date"]::-webkit-datetime-edit-day-field{
            aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
           {{ Auth::user()->name }}
         </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown">
-           <!--SETTING AND CHANGE PASSWORD 
+        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;" >
+           <!--SETTING AND CHANGE PASSWORD
           <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
 
                <a class="dropdown-item" style="color:white" href="{{ url('myprofile')}}">My Profile</a>
-          <a class="dropdown-item" href="{{ url('password')}}">Change Password</a>
+          <a class="dropdown-item" style="color:white"  href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{ route('logout') }}"
+          <a class="dropdown-item" style="color:white"  href="{{ route('logout') }}"
              onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -773,6 +786,8 @@ input[type="date"]::-webkit-datetime-edit-day-field{
    <!-- <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
     <a  href="{{ url('Maintainance/section')}}" ><h6> Maintenance  section </h6></a>-->
     <a  href="{{ url('Assessment/form')}}" ><h6>Assessment Form</h6></a>
+
+    <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheet </h6></a>
   
   
 
@@ -780,14 +795,14 @@ input[type="date"]::-webkit-datetime-edit-day-field{
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a href="{{ route('comapy_view_month')}}"><h6> Assessment month</h6></a>
+    <a href="{{ route('comapy_view_month')}}"><h6>Monthly assessment report</h6></a>
     <a href="{{ url('cleaningcompanyreport')}}"><h6>Company trending </h6></a>
   
   </div>
 
     @if(auth()->user()->type != 'Head PPU')
     
-
+    <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
     <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Company</h6></a>
     <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Area</h6></a>  
  

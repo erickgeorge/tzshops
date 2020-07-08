@@ -180,9 +180,11 @@ User Registration
  	                 
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
+	                   <option value="Dvc Accountant">Dvc Accountant</option>
 	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
+
 
 	                  @foreach($worksec as $dep)
  
