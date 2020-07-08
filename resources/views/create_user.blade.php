@@ -191,7 +191,7 @@ User Registration
                        @endforeach
 
 	                  <option value="Head PPU">Head PPU</option>
-
+                    <option value="Housing Officer">Housing Officer</option>
 
                       <option value="Maintenance coordinator">Maintenance Coordinator</option>
                       <option value="Quality Surveyor">Quality Surveyor</option>
@@ -201,7 +201,8 @@ User Registration
 
 	                  <option value="Supervisor LECC ">Supervisor LECC </option>
 
-	                  <option value="Transport Officer">Transport Officer</option>
+                      <option value="Transport Officer">Transport Officer</option>
+                      <option value="USAB">USAB</option>
 
 	           </select>
 	           </div>

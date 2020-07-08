@@ -6,11 +6,11 @@
 
 @section('body')
 
-      
+
        <?php use App\Material;
-             
-                        $materials = Material::get(); 
-                     
+
+                        $materials = Material::get();
+
                          ?>
 
     <br>
@@ -61,17 +61,17 @@
             </ul>
         </div>
     @endif
-  
+
 
     <div class="container">
-       
-             
+
+
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead>
            <tr style="color: white;">
         <th >No</th>
-        
-			
+
+
 				<th >Material Name</th>
 				<th >Material Description</th>
         <th>Unit Measure</th>
@@ -82,7 +82,7 @@
                 <th>Action</th>
                 @endif
 				<th >Status</th>
-				
+
             </tr>
             </thead>
 
@@ -94,9 +94,9 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                
-                   
-                  
+
+
+
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                      <td>{{ $item['material']->brand }}</td>
@@ -140,10 +140,10 @@
                     @endif
                     @endif
                     @if(auth()->user()->type != 'Inspector Of Works')
-                  
+
                        @if($item->reason == NULL)
                        <td><span class="badge badge-success">Accepted</span></td>
-                       @elseif($item->status == 44)                                             
+                       @elseif($item->status == 44)
                        <td><span class="badge badge-warning">Edited..</span></td>
                        @elseif($item->status == 17)
                        <td><span class="badge badge-danger">Rejected</span>
@@ -172,11 +172,11 @@
                    </span> </h5></div>  @endif
                    @endif
 
-   
-        
+
+
     </div>
-     
-   
+
+
 
 
 
@@ -214,7 +214,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-left:900px; ">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                   
+
                     <div class="modal-header ">
                      <div>
                         <h5  style="width: 900px;" id="exampleModalLabel">Request material again.</h5>
@@ -222,12 +222,12 @@
                     </div>
 
 
-                   
+
                 </div>
                 <div class="modal-body">
-    <div class="container">  
+    <div class="container">
      <form method="POST"  >
-                    @csrf  
+                    @csrf
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
@@ -238,12 +238,12 @@
                 <th >Material Description</th>
                 <th >Type</th>
                 <th >previous quantity requested</th>
-                <th >Request quantity again</th>  
+                <th >Request quantity again</th>
             </tr>
             </thead>
 
             <tbody>
-                
+
 
             <?php// $i=0;  ?>
             @foreach($items as $item)
@@ -252,17 +252,17 @@
                 <tr>
                     <th scope="row">{{ $i }}</th>
                    <td>00{{ $item->work_order_id }}</td>
-                   
+
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
-                  
+
                     <td><input type="number"  style="color: black; width: 150px" name="quantity"  class="form-control"  rows="5" id="quantity"></input></td>
-                    
-                   
-                                       
+
+
+
                     </tr>
                     @endforeach
 
@@ -274,7 +274,7 @@
 
        <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Request Material again</button>
          </form>
-    </div>   
+    </div>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -296,22 +296,22 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-left:600px; ">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                   
+
                     <div class="modal-header ">
                      <div>
                         <h5  style="width: 600px;" id="exampleModalLabel">Request material again.</h5>
                         <hr>
-                    </div>  
+                    </div>
                   </div>
                 <div class="modal-body">
                     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
-                   
+
 
                       <form method="POST" action="edit/Material/{{ $item->work_order_id }}" class="col-md-6">
                         @csrf
-                       
+
 
                        <div class="form-group">
                             <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
@@ -322,24 +322,24 @@
                                 @endforeach
                             </select>
                         </div>
-                        
-                    
+
+
                          <div class="form-group">
                             <label for="name_of_house">Quantity </label>
                             <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
                                    name="quantity" placeholder="Enter quantity again">
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
-                                                    <div> 
+                                                    <div>
                                                        <button style=" width: 205px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
-                                         
+
                                             </form>
 
 
-           
-                  
+
+
                                                        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
@@ -352,7 +352,7 @@
         });
      </script>
 
-   
+
                 </div>
 
 
@@ -390,9 +390,9 @@
             padding: 30px;
             margin-top: 30px;
             width: 100%;
-           
+
         }
-       
+
         label {
             margin-right: 20px;
         }
@@ -400,29 +400,29 @@
 </head>
 
 <body>
-    
-       
-  
+
+
+
       <!--  <div>
             <label>
                 <input type="checkbox" name="colorCheckbox"
                     value="C"> <b>List of Edited Materials</b></label>
-          
+
         </div>-->
         <div class="C selectt">
 
 
           <div class="container">
                  <div >
-                
+
                         <?php
-                        
+
                         use App\WorkOrderMaterial;
                         $wo_materials= WorkOrderMaterial::where('work_order_id',$wo->id)->where('status',23)->get();
-                        
+
                         ?>
                         @if(count($wo_materials) > 0)
-                       
+
                         <table class="table table-striped" style="width:100%">
   <tr>
      <th>No</th>
@@ -431,16 +431,16 @@
     <th>Unit Measure</th>
     <th>Type</th>
      <th>Quantity Requested</th>
-   
+
 
   </tr>
 
-  <?php $i=1; 
- 
+  <?php $i=1;
+
 
   ?>
     @foreach($wo_materials as $matform)
-    
+
   <tr>
     <td>{{$i++}}</td>
     <td>{{$matform['material']->name }}</td>
@@ -448,11 +448,11 @@
       <td>{{$matform['material']->brand }}</td>
      <td>{{$matform['material']->type }}</td>
      <td>{{$matform->quantity }}</td>
-     
-  </tr>   
-    @endforeach                                      
-</table>   
-    <button class="btn btn-primary"  > <a  href="/send/material_rejected_again/{{$wo->id}}"   > REQUEST MATERIAL AGAIN</a></button> 
+
+  </tr>
+    @endforeach
+</table>
+    <button class="btn btn-primary"  > <a  href="/send/material_rejected_again/{{$wo->id}}"   > REQUEST MATERIAL AGAIN</a></button>
 
 
 </div>
@@ -467,7 +467,7 @@
 
 
        </div>
-       
+
         <script type="text/javascript">
             $(document).ready(function() {
                 $('input[type="checkbox"]').click(function() {
@@ -477,13 +477,13 @@
                 });
             });
         </script>
-   
-</body>
- 
-   
-  
 
-     
+</body>
+
+
+
+
+
  <br>
         <br>
             <br>
@@ -501,8 +501,8 @@
 
 
         });
-    
-   
+
+
 
          function myfunc(x) {
             document.getElementById("reason").innerHTML = x;

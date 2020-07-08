@@ -283,6 +283,11 @@
 
 
                 @endif
+                @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
+        </li>
+                @endif
                 @if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
 
 <li class="nav-item">
@@ -609,7 +614,7 @@
 
 
                <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('manage_Campus')}}">Assets</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
             </li>
 
              <li class="nav-item">

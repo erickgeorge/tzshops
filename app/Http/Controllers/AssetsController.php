@@ -19,6 +19,28 @@ use App\Room;
 use App\Block;
 use App\Location;
 use App\company;
+use App\assetsland;
+use App\assetsbuilding;
+use App\assetscomputerequipment;
+use App\assetsequipment;
+use App\assetsfurniture;
+use App\assetsintangible;
+use App\assetsmotorvehicle;
+use App\assetsplantandmachinery;
+use App\assetsworkinprogress;
+
+use App\assetsassesbuilding;
+use App\assetsassescomputerequipment;
+use App\assetsassesequipment;
+use App\assetsassesfurniture;
+use App\assetsassesintangible;
+use App\assetsassesland;
+use App\assetsassesmotorvehicle;
+use App\assetsassesplantandmachinery;
+use Illuminate\Support\Carbon;
+
+use PDF;
+
 
 class AssetsController extends Controller
 {
@@ -26,7 +48,7 @@ class AssetsController extends Controller
 
      public function RegisterHouse(Request $request)
     {
-       
+
 
         if ($request['campus'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'campus is required']);
@@ -47,7 +69,7 @@ class AssetsController extends Controller
 
       public function Registercompany(Request $request)
     {
-       
+
         $company = new company();
         $company->company_name = $request['name'];
         $company->type = $request['type'];
@@ -71,13 +93,13 @@ class AssetsController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
-       
+
        return view('technicianreport', [
             'role' => $role,
             'notifications' => $notifications,
-           
-          
-          
+
+
+
           ]);
     }
 
@@ -94,7 +116,7 @@ class AssetsController extends Controller
              'campuses' => Campus::all(),
                'newzone' => zone::all(),
                'cleanarea' => cleaningarea::all(),
-  
+
           ]);
          }
 
@@ -102,7 +124,7 @@ class AssetsController extends Controller
          public function managecampus(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-         
+
          return view('managecampus', [
             'role' => $role,
             'notifications' => $notifications,
@@ -111,7 +133,7 @@ class AssetsController extends Controller
              'campuses' => Campus::all(),
                'newzone' => zone::all(),
                'cleanarea' => cleaningarea::all(),
-  
+
           ]);
 
          }
@@ -121,13 +143,13 @@ class AssetsController extends Controller
        public function cleaningcompany(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-         
+
          return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-        
+
            'cleangcompany' => company::all()
-  
+
           ]);
 
          }
@@ -144,7 +166,7 @@ class AssetsController extends Controller
              'campuses' => Campus::all(),
                'newzone' => zone::all(),
                'cleanarea' => cleaningarea::all(),
-  
+
           ]);
          }
 
@@ -159,7 +181,7 @@ class AssetsController extends Controller
              'campuses' => Campus::all(),
                'newzone' => zone::all(),
                'cleanarea' => cleaningarea::all(),
-  
+
           ]);
          }
 
@@ -174,7 +196,7 @@ class AssetsController extends Controller
              'campuses' => Campus::all(),
                'newzone' => zone::all(),
                'cleanarea' => cleaningarea::all(),
-  
+
           ]);
          }
 
@@ -195,16 +217,16 @@ class AssetsController extends Controller
            $p=$request['edit_id'];
            $House = House::where('id',$p)->first();
            $House->name_of_house = $request['name_of_house'];
-       
+
            $House->location = $request['location'];
            $House->type = $request['type'];
            $House->no_room = $request['no_room'];
            $House->campus_id = $request['campus'];
            $House->save();
-  
+
         return redirect()->route('register.house')->with(['message' => 'House Edited successfully']);
     }
-  
+
 
 
 
@@ -220,15 +242,15 @@ class AssetsController extends Controller
            $company->vat = $request['vat'];
            $company->license = $request['license'];
            $company->save();
-  
+
         return redirect()->route('cleaningcompany')->with(['message' => 'Company Edited successfully']);
     }
-  
+
 
 
      public function RegisterHalls(Request $request)
     {
-      
+
         $HallofResdence = new Hall();
         $HallofResdence->hall_name = $request['hall_name'];
         $HallofResdence->campus_id = $request['campus'];
@@ -271,17 +293,17 @@ class AssetsController extends Controller
        $hall->type = $request['type'];
        $hall->location = $request['location'];
        $hall->save();
-  
+
         return redirect()->route('register.hallofres')->with(['message' => 'Respective Hall Edited successfully']);
     }
-  
-  
+
+
 
 
 
      public function RegisteCampus(Request $request)
     {
-        
+
         if (!empty(Campus::where('campus_name',$request['campus_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Campus name already exist']);
         }
@@ -302,10 +324,10 @@ class AssetsController extends Controller
            $campus->campus_name = $request['campus_name'];
            $campus->location = $request['location'];
            $campus->save();
-  
+
         return redirect()->route('register.campus')->with(['message' => 'Respective campus Edited successfully']);
     }
-  
+
 
       public function deletecampus($id)
        {
@@ -318,7 +340,7 @@ class AssetsController extends Controller
 
        public function Registerzone(Request $request)
     {
-      
+
         $newzone = new zone();
         $newzone->zone_name = $request['zone_name'];
         $newzone->campus_id = $request['campus'];
@@ -344,10 +366,10 @@ class AssetsController extends Controller
         $editnewzone->campus_id = $request['campus'];
         $editnewzone->type = $request['type'];
         $editnewzone->save();
-  
+
         return redirect()->route('register.cleanningzone')->with(['message' => 'Respective zone Edited successfully']);
     }
-  
+
 
 
   public function RegisterCleaningArea(Request $request)
@@ -355,7 +377,7 @@ class AssetsController extends Controller
         $cleanarea = new cleaningarea();
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];
-       
+
         $cleanarea->save();
         return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area is registered successfully']);
     }
@@ -379,7 +401,7 @@ class AssetsController extends Controller
         $editcleanarea->save();
         return redirect()->route('register.cleaningareas')->with(['message' => 'Respective Clean Area Edited successfully']);
     }
- 
+
 
    public function Registercampusview(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
@@ -465,7 +487,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
             'role' => $role,
             'notifications' => $notifications,
             'NonAsset' => $assets,'newzone' => zone::all(),'campuses' => Campus::all(),
-  
+
           ]);
      }
 
@@ -477,11 +499,11 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return redirect()->route('nonbuildingasset')->with(['message' => 'Asset Added Succesfully']);
-      
+
 
      }
 
-  
+
 
      public function submitnonAsset(Request $request){
       $request->validate([
@@ -493,7 +515,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
         ]);
 
 
-       
+
 
         if ($request['location'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Location required required ']);
@@ -543,7 +565,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
             'role' => $role,
             'notifications' => $notifications,
             'NonAsset' => $assets,
-  
+
           ]);
      }
 
@@ -565,7 +587,7 @@ $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_as
             'notifications' => $notifications,
             'NonAsset' => $assets,
             'aariya'=>$areaaa,
-  
+
           ]);
      }
 
@@ -589,5 +611,1158 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
   'aariya'=>$areaaa,'arcol'=>$coll,
           ]);
      }
+
+     public function assetsManager()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsMain',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewLand()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewLand',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewLandSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsland();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsLand')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsLand()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsland::get();
+
+        return view('assetsLand',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsLandView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsland::where('id',$id)->get();
+        $asses = assetsassesland::where('assetID',$id)->get();
+        return view('assetsLandView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsLandEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsland::where('id',$id)->get();
+        return view('assetsLandEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsLandEditSave(Request $request)
+     {
+        $assetland =  assetsland::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsLandView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     //
+     public function assetsNewPlantMachinery()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewPlantMachinery',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewPlantMachinerySave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsplantandmachinery();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsPlantMachinery')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsPlantMachinery()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsplantandmachinery::get();
+        return view('assetsPlantMachinery',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsPlantMachineryView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsplantandmachinery::where('id',$id)->get();
+        $asses = assetsassesplantandmachinery::where('assetID',$id)->get();
+        return view('assetsPlantMachineryView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsPlantMachineryEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsplantandmachinery::where('id',$id)->get();
+        return view('assetsPlantMachineryEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsPlantMachineryEditSave(Request $request)
+     {
+        $assetland =  assetsplantandmachinery::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsPlantMachineryView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     //
+
+
+
+     public function assetsNewIntangible()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewIntangible',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewIntangibleSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsintangible();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsIntangible')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsIntangible()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsintangible::get();
+        return view('assetsIntangible',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsIntangibleView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsintangible::where('id',$id)->get();
+        $asses = assetsassesintangible::where('assetID',$id)->get();
+        return view('assetsIntangibleView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsIntangibleEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsintangible::where('id',$id)->get();
+        return view('assetsIntangibleEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsIntangibleEditSave(Request $request)
+     {
+        $assetland =  assetsintangible::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsIntangibleView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     //
+
+
+
+     public function assetsNewMotorVehicle()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewMotorVehicle',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewMotorVehicleSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsmotorvehicle();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsMotorVehicle')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsMotorVehicle()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsmotorvehicle::get();
+        return view('assetsMotorVehicle',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsMotorVehicleView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsmotorvehicle::where('id',$id)->get();
+        $asses = assetsassesmotorvehicle::where('assetID',$id)->get();
+        return view('assetsMotorVehicleView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsMotorVehicleEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsmotorvehicle::where('id',$id)->get();
+        return view('assetsMotorVehicleEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsMotorVehicleEditSave(Request $request)
+     {
+        $assetland =  assetsmotorvehicle::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsMotorVehicleView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     //
+
+
+
+     public function assetsNewFurniture()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewFurniture',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewFurnitureSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsfurniture();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsFurniture')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsFurniture()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsfurniture::get();
+        return view('assetsFurniture',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsFurnitureView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsfurniture::where('id',$id)->get();
+        $asses = assetsassesfurniture::where('assetID',$id)->get();
+        return view('assetsFurnitureView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsFurnitureEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsfurniture::where('id',$id)->get();
+        return view('assetsFurnitureEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsFurnitureEditSave(Request $request)
+     {
+        $assetland =  assetsfurniture::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsFurnitureView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     //
+
+
+
+     public function assetsNewEquipment()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewEquipment',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewEquipmentSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsequipment();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsEquipment')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsEquipment()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsequipment::get();
+        return view('assetsEquipment',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsEquipmentView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsequipment::where('id',$id)->get();
+        $asses = assetsassesequipment::where('assetID',$id)->get();
+        return view('assetsEquipmentView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsEquipmentEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsequipment::where('id',$id)->get();
+        return view('assetsEquipmentEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsEquipmentEditSave(Request $request)
+     {
+        $assetland =  assetsequipment::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsEquipmentView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     //
+
+
+
+     public function assetsNewComputerEquipment()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewComputerEquipment',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewComputerEquipmentSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetscomputerequipment();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsComputerEquipment')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsComputerEquipment()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetscomputerequipment::get();
+        return view('assetsComputerEquipment',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsComputerEquipmentView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetscomputerequipment::where('id',$id)->get();
+        $asses = assetsassescomputerequipment::where('assetID',$id)->get();
+        return view('assetsComputerEquipmentView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsComputerEquipmentEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetscomputerequipment::where('id',$id)->get();
+        return view('assetsComputerEquipmentEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsComputerEquipmentEditSave(Request $request)
+     {
+        $assetland =  assetscomputerequipment::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->location = $request['SiteLocation2'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsComputerEquipmentView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+
+     //
+
+
+
+     public function assetsNewBuilding()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewBuilding',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewBuildingSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsbuilding();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsBuilding')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsBuilding()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsbuilding::get();
+        return view('assetsBuilding',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsBuildingView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsbuilding::where('id',$id)->get();
+        $asses = assetsassesbuilding::where('assetID',$id)->get();
+        return view('assetsBuildingView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsBuildingEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsbuilding::where('id',$id)->get();
+        return view('assetsBuildingEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsBuildingEditSave(Request $request)
+     {
+        $assetland =  assetsbuilding::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsBuildingView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     //
+
+     public function assetsNewWorkinProgress()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('assetsNewWorkinProgress',['role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsNewWorkinProgressSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsworkinprogress();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->Cost = $request['cost'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsWorkinProgress')->with(['message' => 'New Asset Added Succesfully']);
+     }
+
+     public function assetsWorkinProgress()
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsworkinprogress::where('_status',0)->get();
+        return view('assetsWorkinProgress',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+     public function assetsWorkinProgressView($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsworkinprogress::where('id',$id)->where('_status',0)->get();
+        return view('assetsWorkinProgressView',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsWorkinProgressEdit($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsworkinprogress::where('id',$id)->where('_status',0)->get();
+        return view('assetsWorkinProgressEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+     public function assetsWorkinProgressEditSave(Request $request)
+     {
+        $assetland =  assetsworkinprogress::where('id',$request['id'])->first();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->Cost = $request['cost'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        return redirect()->route('assetsWorkinProgressView',[$request["id"]])->with(['message' => 'Changes Saved Succesfully']);
+     }
+
+     public function assetsWorkinProgressReallocate($id)
+     {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $land = assetsworkinprogress::where('id',$id)->where('_status',0)->get();
+        return view('assetsWorkinProgressReallocate',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
+     }
+
+
+     public function  assetsWorkinProgressReallocateSave(Request $request)
+     {
+        $request->validate([
+            'SiteLocation'=>'required',
+            'Quantity'=>'required',
+        ]);
+
+        $assetland = new assetsbuilding();
+        $assetland->assetNumber = $request['AssetNumber'];
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $assetland->assetLocation = $request['SiteLocation'];
+        $assetland->assetDescription = $request['AssetDescription'];
+        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetDateinUse = $request['DateinUse'];
+        $assetland->Cost = $request['cost'];
+        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+        $assetland->addedBy = auth()->user()->id;
+        $assetland->save();
+
+        $assetwip =  assetsworkinprogress::where('id',$request['id'])->first();
+        $assetwip->_status = 1;
+        $assetwip->save();
+
+        return redirect()->route('assetsBuilding')->with(['message' => 'New Asset Added Succesfully']);
+     }
+     // asses
+
+     public function assetsAssesBuildingSave(Request $request)
+     {
+        $assetland =  assetsbuilding::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassesbuilding();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsBuildingView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+     public function assetsAssesFurnitureSave(Request $request)
+     {
+        $assetland =  assetsfurniture::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassesfurniture();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsFurnitureView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+     public function assetsAssesEquipmentSave(Request $request)
+     {
+        $assetland =  assetsequipment::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassesequipment();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsEquipmentView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+     public function assetsAssesComputerEquipmentSave(Request $request)
+     {
+        $assetland =  assetscomputerequipment::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassescomputerequipment();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsComputerEquipmentView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+     public function assetsAssesPlantMachinerySave(Request $request)
+     {
+        $assetland =  assetsplantandmachinery::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassesplantandmachinery();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsPlantMachineryView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+     public function assetsAssesMotorVehicleSave(Request $request)
+     {
+        $assetland =  assetsmotorvehicle::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassesmotorvehicle();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsMotorVehicleView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+     public function assetsAssesLandSave(Request $request)
+     {
+        $assetland =  assetsland::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassesland();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsLandView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+     public function assetsAssesIntangibleSave(Request $request)
+     {
+        $assetland =  assetsintangible::where('id',$request['id'])->first();
+        $assetland->_condition = $request['AssetCondition'];
+        $assetland->save();
+
+        $assetdep = new assetsassesintangible();
+        $assetdep->assetID = $request['id'];
+        $assetdep->assesedBy = auth()->user()->id;
+        $assetdep->assesmentYear = $request['depreciationDate'];
+        $assetdep->disposalCost = $request['disposalCost'];
+        $assetdep->impairmentLoss = $request['impairmentLoss'];
+
+          $time = strtotime($assetland['assetAcquisitionDate']);
+          $percent = $assetland['depreciationRate'];
+          $cost = $assetland['Cost'];
+          $amount = abs(($percent/100)*$cost);
+          $timed = strtotime($request['depreciationDate']);
+          $catch =  $time;
+          $catched = $timed;
+          $totalyearsc = abs($catched-$catch);
+          $ds = floor($totalyearsc/(365*60*60*24));
+          $totalyears = $ds;
+        $assetdep->totalDepreciatedYears = $totalyears ;
+        $assetdep->accumulatedDepreciation = $amount*$totalyears;
+        $assetdep->save();
+
+        return redirect()->route('assetsIntangibleView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+
+     }
+     //
+
+
+     public function exportinfo($id, $type)
+     {
+
+
+        if($type=='building')
+        {
+            $land=assetsbuilding::where('id',$id)->get();
+        }else if($type=='land')
+        {
+            $land=assetsland::where('id',$id)->get();
+        }else if($type=='motorvehicle')
+        {
+            $land=assetsmotorvehicle::where('id',$id)->get();
+        }else if($type=='plantandmachinery')
+        {
+            $land=assetsplantandmachinery::where('id',$id)->get();
+        }else if($type=='computerequipment')
+        {
+            $land=assetscomputerequipment::where('id',$id)->get();
+        }else if($type=='equipment')
+        {
+            $land=assetsequipment::where('id',$id)->get();
+        }else if($type=='furniture')
+        {
+            $land=assetsfurniture::where('id',$id)->get();
+        }else if($type=='intangible')
+        {
+            $land=assetsintangible::where('id',$id)->get();
+        }else if($type=='workinprogress')
+        {
+            $land=assetsintangible::where('id',$id)->get();
+        }
+
+        $pdf = PDF::loadView('exports.assetsInfo', ['land' => $land]);
+        return $pdf->stream(''.$type.''.$id.' asset information'.date('d-m-Y H-i').'.pdf');
+
+     }
+
+     public function assesExport($type)
+     {
+        if($_GET['type']=='building')
+        {
+            $land = assetsbuilding::where('id',$type)->get();
+
+        }else if($_GET['type']=='land')
+        {
+            $land = assetsland::where('id',$type)->get();
+
+        }else if($_GET['type']=='motorvehicle')
+        {
+            $land = assetsmotorvehicle::where('id',$type)->get();
+
+        }else if($_GET['type']=='plantandmachinery')
+        {
+            $land = assetsplantandmachinery::where('id',$type)->get();
+
+        }else if($_GET['type']=='computerequipment')
+        {
+            $land = assetscomputerequipment::where('id',$type)->get();
+
+        }else if($_GET['type']=='equipment')
+        {
+            $land = assetsequipment::where('id',$type)->get();
+
+        }else if($_GET['type']=='furniture')
+        {
+            $land =  assetsfurniture::where('id',$type)->get();
+
+        }else if($_GET['type']=='intangible')
+        {
+            $land =  assetsintangible::where('id',$type)->get();
+
+        }
+        $pdf = PDF::loadView('exports.assetassessmentsingle', ['land'=>$land])->setPaper('a4', 'landscape');
+        return $pdf->stream($_GET['type'].'-'.$type.' asset information '.date('d-m-Y H-i').'.pdf');
+
+     }
+     public function  assetssummaryall()
+     {
+         $pdf = PDF::loadView('exports.assetsallsummary')->setPaper('a4', 'landscape');
+         return $pdf->stream(' asset summary '.date('d-m-Y H-i').'.pdf');
+     }
+
+     public function assetsSummaryFiltered()
+     {
+         if ($_GET['filter']!='') {
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+            if($_GET['asset']=='Land')
+            {
+                $assetsinfo = assetsassesland::where('assesmentYear',$_GET['filter'])->get();
+            }else if( $_GET['asset']=='Building')
+            {
+                $assetsinfo = assetsassesbuilding::where('assesmentYear',$_GET['filter'])->get();
+
+            }else if( $_GET['asset']=='PlantMachinery')
+            {
+                $assetsinfo = assetsassesplantandmachinery::where('assesmentYear',$_GET['filter'])->get();
+
+            }else if( $_GET['asset']=='MotorVehicle')
+            {
+                $assetsinfo = assetsassesmotorvehicle::where('assesmentYear',$_GET['filter'])->get();
+
+            }else if( $_GET['asset']=='ComputerEquipment')
+            {
+                $assetsinfo = assetsassescomputerequipment::where('assesmentYear',$_GET['filter'])->get();
+
+            }else if( $_GET['asset']=='Equipment')
+            {
+                $assetsinfo = assetsassesequipment::where('assesmentYear',$_GET['filter'])->get();
+
+            }else if( $_GET['asset']=='Furniture')
+            {
+                $assetsinfo = assetsassesfurniture::where('assesmentYear',$_GET['filter'])->get();
+
+            }else if( $_GET['asset']=='Intangible')
+            {
+                $assetsinfo = assetsassesintangible::where('assesmentYear',$_GET['filter'])->get();
+
+            } else
+            {
+                return redirect()->back();
+
+            }
+
+            return view('exports.assetsassesmentview',['asses'=>$assetsinfo,'role'=>$role,'notifications'=>$notifications]);
+
+         } else {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Date For Filtering']);
+         }
+
+     }
 }
- 

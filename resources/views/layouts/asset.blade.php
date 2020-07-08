@@ -24,13 +24,14 @@
     <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
 </head>
-<body  onload="createTable()">
+<body  onload="createTable()" >
 <style type="text/css">
     .nav-item:hover{
         background-color:#0acb;
@@ -443,6 +444,11 @@
 
                 @endif
 
+                @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
+        </li>
+                @endif
 
                  @if(auth()->user()->type == 'Head Procurement')
                    <!-- <li class="nav-item">
@@ -610,7 +616,7 @@
 
 
                <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('manage_Campus')}}">Assets</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
             </li>
 
              <li class="nav-item">
@@ -846,13 +852,18 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('manage_Campus')}}" ><h6>Campuses </h6></a>
+  <a  href="{{ url('assetsManager')}}" ><h6>All Assets </h6></a>
 
-    <a  href="{{ url('manage_Houses')}}"><h6>Staff House</h6></a>
-    <a  href="{{ url('manage_Hall_of_resdence')}}"><h6>Hall of Resdence</h6></a>
-    <a  href="{{ url('nonbuildingasset')}}"><h6>Non-building Asset</h6></a>
-    <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Company</h6></a>
-    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Area</h6></a>
+    <a  href="{{ url('assetsLand')}}"><h6>Land assets</h6></a>
+    <a  href="{{ url('assetsBuilding')}}"><h6>Building assets</h6></a>
+    <a  href="{{ url('assetsPlantMachinery')}}"><h6>Plant & Machinery</h6></a>
+    <a  href="{{ url('assetsMotorVehicle')}}"><h6>Motor Vehicles</h6></a>
+    <a  href="{{ url('assetsComputerEquipment')}}"><h6>Computer Equipments</h6></a>
+    <a  href="{{ url('assetsEquipment')}}"><h6>Equipments Assets</h6></a>
+    <a  href="{{ url('assetsFurniture')}}"><h6>Furniture Assets</h6></a>
+    <a  href="{{ url('assetsWorkinProgress')}}"><h6>Work in Progress</h6></a>
+    <a  href="{{ url('assetsIntangible')}}"><h6>Intangible Assets</h6></a>
+
 </div>
 
 <div class="main">
@@ -1104,7 +1115,108 @@ for (i = 0; i < dropdown.length; i++) {
         });
 </script>
 
+<script>
 
+   var xport = {
+  _fallbacktoCSV: true,
+  toXLS: function(tableId, filename) {
+    this._filename = (typeof filename == 'undefined') ? tableId : filename;
+
+    //var ieVersion = this._getMsieVersion();
+    //Fallback to CSV for IE & Edge
+    if ((this._getMsieVersion() || this._isFirefox()) && this._fallbacktoCSV) {
+      return this.toCSV(tableId);
+    } else if (this._getMsieVersion() || this._isFirefox()) {
+      alert("Not supported browser");
+    }
+
+    //Other Browser can download xls
+    var htmltable = document.getElementById(tableId);
+    var html = htmltable.outerHTML;
+
+    this._downloadAnchor("data:application/vnd.ms-excel; base64," + encodeURIComponent(html), 'xls');
+  },
+  toCSV: function(tableId, filename) {
+    this._filename = (typeof filename === 'undefined') ? tableId : filename;
+    // Generate our CSV string from out HTML Table
+    var csv = this._tableToCSV(document.getElementById(tableId));
+    // Create a CSV Blob
+    var blob = new Blob([ new Uint8Array([0xEF, 0xBB, 0xBF]), csv ], { type: "text/csv;charset=utf-8" });
+
+    // Determine which approach to take for the download
+    if (navigator.msSaveOrOpenBlob) {
+      // Works for Internet Explorer and Microsoft Edge
+      navigator.msSaveOrOpenBlob(blob, this._filename + ".csv");
+    } else {
+      this._downloadAnchor(URL.createObjectURL(blob), 'csv');
+    }
+  },
+  _getMsieVersion: function() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf("MSIE ");
+    if (msie > 0) {
+      // IE 10 or older => return version number
+      return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+    }
+
+    var trident = ua.indexOf("Trident/");
+    if (trident > 0) {
+      // IE 11 => return version number
+      var rv = ua.indexOf("rv:");
+      return parseInt(ua.substring(rv + 3, ua.indexOf(".", rv)), 10);
+    }
+
+    var edge = ua.indexOf("Edge/");
+    if (edge > 0) {
+      // Edge (IE 12+) => return version number
+      return parseInt(ua.substring(edge + 5, ua.indexOf(".", edge)), 10);
+    }
+
+    // other browser
+    return false;
+  },
+  _isFirefox: function(){
+    if (navigator.userAgent.indexOf("Firefox") > 0) {
+      return 1;
+    }
+
+    return 0;
+  },
+  _downloadAnchor: function(content, ext) {
+      var anchor = document.createElement("a");
+      anchor.style = "display:none !important";
+      anchor.id = "downloadanchor";
+      document.body.appendChild(anchor);
+
+      // If the [download] attribute is supported, try to use it
+
+      if ("download" in anchor) {
+        anchor.download = this._filename + "." + ext;
+      }
+      anchor.href = content;
+      anchor.click();
+      anchor.remove();
+  },
+  _tableToCSV: function(table) {
+    // We'll be co-opting `slice` to create arrays
+    var slice = Array.prototype.slice;
+
+    return slice
+      .call(table.rows)
+      .map(function(row) {
+        return slice
+          .call(row.cells)
+          .map(function(cell) {
+            return '"t"'.replace("t", cell.textContent);
+          })
+          .join(",");
+      })
+      .join("\r\n");
+  }
+};
+
+</script>
 
 </body>
 </html>
