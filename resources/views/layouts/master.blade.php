@@ -49,6 +49,8 @@
         div{
             font-weight: bold;
         }
+
+
     </style>
 
 
@@ -152,14 +154,32 @@
                 $wo_transport = WorkOrderTransport::where('status',0)->get();
 
                 ?>
-@if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+
+                  <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                    </li>
+
+
+
+ @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
+     
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
+                                    class="badge badge-light">{{ count($m) }}</span></a>
+                    </li>
+
+ @endif
+
+
+@if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin')||(auth()->user()->type == 'Estates Director'))
 <li class="nav-item">
     <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
 </li>
 @endif
+
 @if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">
         Planning
         <span class="badge badge-light">
@@ -191,7 +211,7 @@
             {{ count($statusPPU) }}
         </span>
     </a>
-  </li>
+  </li>-->
  @endif
 
 
@@ -243,27 +263,22 @@
 
 
 
- @if(auth()->user()->type == 'DVC Admin')
- <li class="nav-item">
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" class="nav-link"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i>Complaints</a>
- </li>
- @endif
-                    <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
-                    </li>
+                  
 
                      @if(auth()->user()->type == 'DVC Admin')
 
-                       <li class="nav-item">
+                      <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-                       </li>
+                       </li>-->
 
                         <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                     </li>
                        @endif
 
-                                     @if(auth()->user()->type == 'Dvc Accountant')
+                      
+
+                   @if(auth()->user()->type == 'Dvc Accountant')
 
                        <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
@@ -308,7 +323,7 @@
             </li>
 
 
- <li class="nav-item">
+             <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
             </li>
 
@@ -341,7 +356,7 @@
 
                  @endif
 
-  @if(auth()->user()->type == 'Maintenance coordinator')
+  @if((auth()->user()->type == 'Maintenance coordinator')||(auth()->user()->type == 'DVC Admin'))
                       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
@@ -361,10 +376,7 @@
 
         </div>
        </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> c6abe3ed2fd682267c23f8f5ecbb3c1e335cb0c9
 
        @endif
 
@@ -377,6 +389,11 @@
 
 
    @if(auth()->user()->type == 'Estates Director')
+      <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
+
+
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
@@ -396,9 +413,7 @@
        </li>
 
 
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
-                    </li>
+                 
 
                     @endif
 
@@ -692,7 +707,7 @@
 
 
 
-                @if(auth()->user()->type == 'Estates Director')
+                @if((auth()->user()->type == 'Estates Director')||@(auth()->user()->type == 'DVC Admin')||($role['user_role']['role_id'] == 1))
 
 
 
@@ -915,6 +930,240 @@
 <div class="main">
  @yield('body')
 </div>
+
+
+<style type="text/css">
+    html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+            
+            .form-control{
+                
+                
+                font-weight: bold;
+            }
+            
+            
+            .custom-select{
+                
+                
+                font-weight: bold;
+            }
+            
+            
+            td{
+                font-weight: bold;
+                
+            }
+            
+
+    
+}
+            
+            .dataTables_filter {
+     
+     padding: 0;
+          margin: 0px;
+          width:999px;
+           align-items: right;
+                
+}
+            
+            
+            
+
+            .full-height {
+                height: 100vh;
+            }
+
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .position-ref {
+                position: relative;
+            }
+
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .title {
+                font-size: 84px;
+            }
+
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+
+.top-dropdown{
+    background-color: #676464;
+}
+
+
+.dropdown-item:hover{
+    background-color: #046475;
+}
+
+.navbar-nav > .nav-item > .nav-link:hover{
+    color: white;
+}
+
+#login-view{
+    background-color: rgba(66, 62, 62, 0.79);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    position: absolute;
+    right: 33%;
+    bottom: 25%;
+}
+
+#login-viewold{
+    background-color: #423e3e;
+    padding: 20px;
+    color: white;
+    position: absolute;
+    right: 33%;
+    bottom: 25%;
+    border-radius: 10px;
+}
+
+.estate-title{
+    position: absolute;
+    right: 6%;
+    top: 10%;
+    font-size: 50px;
+}
+
+
+hr {
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 5px solid rgb(169,169,169);
+}
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+}
+
+.tab-group{
+    border-bottom: 1px solid #cccccc;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    outline: none;
+    cursor: pointer;
+    width: 240px;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: #cccccc;
+    border: none;
+    font-weight: bold;
+    font-size: small;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    color: black;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    color: black;
+    border-bottom: 2px solid #cccccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    margin-top: 50px;
+}
+
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+.dataTables_filter {
+   width: 80%;
+   float: right;
+padding: 20px 60px;
+   text-align: right;
+}
+
+#wo-details{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /*line-height: 16px;     !* fallback *!*/
+    /*max-height: 32px;      !* fallback *!*/
+    -webkit-line-clamp: 3; /* number of lines to show */
+}
+
+
+
+
+    table {
+           
+            font: 17px Calibri;
+        }
+        table, th, td {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+          
+        }
+
+tr {
+ width:12px;
+}
+
+thead{
+      background-color: #376ad3;
+}
+tr{
+          
+   
+
+}
+
+img {
+  object-fit: cover;
+  width:250px;
+  height:250px;
+  
+
+</style>
 
 <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
