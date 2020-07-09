@@ -65,7 +65,7 @@ Plant and Machinery Asset
                                 <b style="color: black;"> Asset Quantity : </b>  {{$landinfo->assetQuantity}}
                             </div>
                             <div class="col">
-                                <b style="color: black;"> Cost/Rep.Cost : </b> {{number_format($landinfo->Cost)}}  Tshs
+                                <b style="color: black;"> Cost/Rep.Cost : </b> {{number_format($landinfo->Cost)}}  
                             </div>
                         </div>
                         <br>
@@ -230,9 +230,9 @@ Plant and Machinery Asset
                     <td>{{$u}}</td>
                     <td><?php  $time = strtotime($asses->assesmentYear)?>  {{date('d/m/Y',$time)  }}</td>
                     <td>{{$asses->totalDepreciatedYears}}</td>
-                    <td style="text-align:right;">{{number_format($asses->accumulatedDepreciation)}}  Tshs</td>
-                    <td style="text-align:right;">{{number_format($asses->impairmentLoss)}} Tshs</td>
-                    <td style="text-align:right;">{{number_format($asses->disposalCost)}} Tshs</td>
+                    <td style="text-align:right;">{{number_format($asses->accumulatedDepreciation)}}</td>
+                    <td style="text-align:right;">{{number_format($asses->impairmentLoss)}} </td>
+                    <td style="text-align:right;">{{number_format($asses->disposalCost)}} </td>
                     @php
                         $user = User::where('id',$asses->assesedBy)->first();
                     @endphp

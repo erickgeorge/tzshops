@@ -64,7 +64,7 @@ tr:nth-child(even) {
             <td>{{$user->assetDateinUse}}</td>
             <td>{{$user->assetEndingDepreciationDate}}</td>
             <td>{{$user->assetQuantity}}</td>
-            <td style="text-align:right;">{{number_format($user->Cost)}}  Tshs</td>
+            <td style="text-align:right;">{{number_format($user->Cost)}}  </td>
             <td>{{$user->_condition}}</td>
             <td>{{$user->usefulLife}}</td>
             <td>{{number_format($user->depreciationRate,2)}}</td>

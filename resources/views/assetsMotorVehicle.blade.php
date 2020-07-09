@@ -116,7 +116,7 @@ use App\assetsassesmotorvehicle;
                                     @endphp
                                         <option value="" selected>Not filtered</option>
                                     @foreach ($Cost as $cost)
-                                        <option value="{{$cost->Cost}}">{{number_format($cost->Cost)}}  Tshs</option>
+                                        <option value="{{$cost->Cost}}">{{number_format($cost->Cost)}}  </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -224,7 +224,7 @@ use App\assetsassesmotorvehicle;
                     <td>{{$landinfo->assetNumber}}</td>
                     <td>{{substr($landinfo->assetDescription,0,25).'...'}}</td>
                     <td>{{$landinfo->assetLocation}}</td>
-                    <td style="text-align:right;">{{number_format($landinfo->Cost)}}  Tshs</td>
+                    <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
                     <td>{{$landinfo->_condition}}</td>
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
@@ -315,9 +315,9 @@ use App\assetsassesmotorvehicle;
                       <td>{{$assetid['assetNumber']}}</td>
                       <td><?php  $time = strtotime($asseted['assesmentYear'])?>  {{date('d/m/Y',$time)  }}</td>
                       <td>{{$asseted['totalDepreciatedYears']}}</td>
-                      <td style="text-align:right;">{{number_format($asseted['accumulatedDepreciation'])}}  Tshs</td>
-                      <td style="text-align:right;">{{number_format($asseted['impairmentLoss'])}}  Tshs</td>
-                      <td style="text-align:right;">{{number_format($asseted['disposalCost'])}}  Tshs</td>
+                      <td style="text-align:right;">{{number_format($asseted['accumulatedDepreciation'])}}  </td>
+                      <td style="text-align:right;">{{number_format($asseted['impairmentLoss'])}}  </td>
+                      <td style="text-align:right;">{{number_format($asseted['disposalCost'])}}  </td>
 
                   </tr>
                   @php

@@ -38,26 +38,26 @@ Edit Work in Progress
                 <div class="card-body">
                     <div class="card-text">
                            <div class="form-group">
-                               <label for="my-textarea">Asset Description</label>
+                               <label for="my-textarea">Asset Description <sup class="text-danger">*</sup></label>
                                <textarea id="description" class="form-control" name="AssetDescription" rows="3" required>{{$item->assetDescription}}</textarea>
                            </div>
                            <div class="row">
                                <div class="form-group col">
-                                   <label for="my-input">Site Location</label>
+                                   <label for="my-input">Site Location <sup class="text-danger">*</sup></label>
                                    <input id="location" required value="{{$item->assetLocation}}" required class="form-control" placeholder="Site Location" type="text" name="SiteLocation">
                                </div>
                                <div class="form-group col">
-                                   <label for="my-input">Asset Number</label>
+                                   <label for="my-input">Asset Number <sup class="text-danger">*</sup></label>
                                    <input id="assetnumber" value="{{$item->assetNumber}}" required class="form-control" placeholder="Asset Number" type="text" name="AssetNumber">
                                </div>
                            </div>
                            <div class="row">
                             <div class="form-group col">
-                                <label for="my-input">Quantity</label>
+                                <label for="my-input">Quantity <sup class="text-danger">*</sup></label>
                                 <input id="quantity" required min="1" class="form-control" value="{{$item->assetQuantity}}" type="number" name="Quantity">
                             </div>
                             <div class="form-group col">
-                                <label for="my-input">Cost/Rep. Cost</label>
+                                <label for="my-input">Cost/Rep. Cost  <sup class="text-danger">*</sup></label>
                                 <input id="quantity" value="{{$item->Cost}}" required min="1" class="form-control" value="1" type="number" name="cost">
                             </div>
                            </div>

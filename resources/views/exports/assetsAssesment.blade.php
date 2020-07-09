@@ -93,9 +93,9 @@ tr:nth-child(even) {
                 @endphp
                 <td>{{$info['assesmentYear']}}</td>
                 <td>{{$info['totalDepreciatedYears']}}</td>
-                <td>{{number_format($info['accumulatedDepreciation'])}}  Tshs</td>
-                <td>{{number_format($info['impairmentLoss'])}}  Tshs</td>
-                <td>{{number_format($info['DisposalCost'])}}  Tshs</td>
+                <td>{{number_format($info['accumulatedDepreciation'])}}  </td>
+                <td>{{number_format($info['impairmentLoss'])}}  </td>
+                <td>{{number_format($info['DisposalCost'])}}  </td>
             </tr>
         @endforeach
     </tbody>

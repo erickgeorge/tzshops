@@ -324,9 +324,9 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
                     <td>{{$assetid['assetNumber']}}</td>
                     <td><?php  $time = strtotime($asseted['assesmentYear'])?>  {{date('d/m/Y',$time)  }}</td>
                     <td>{{$asseted['totalDepreciatedYears']}}</td>
-                    <td style="text-align:right;">{{number_format($asseted['accumulatedDepreciation'])}}  Tshs</td>
-                    <td style="text-align:right;">{{number_format($asseted['impairmentLoss'])}}  Tshs</td>
-                    <td style="text-align:right;">{{number_format($asseted['disposalCost'])}}  Tshs</td>
+                    <td style="text-align:right;">{{number_format($asseted['accumulatedDepreciation'])}}  </td>
+                    <td style="text-align:right;">{{number_format($asseted['impairmentLoss'])}}  </td>
+                    <td style="text-align:right;">{{number_format($asseted['disposalCost'])}}  </td>
 
                 </tr>
                 @php

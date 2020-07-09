@@ -304,12 +304,6 @@ class AssetsController extends Controller
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-         return view('cleaningcompany', [
-            'role' => $role,
-            'notifications' => $notifications,
-
-           'cleangcompany' => company::all()
-
             if(request()->has('start'))  { //date filter
 
 
@@ -935,18 +929,26 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'Quantity'=>'required',
         ]);
 
+
+
         $assetland = new assetsland();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
+
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->assetLocation = $request['SiteLocation'];
+
+
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+            $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -991,7 +993,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1015,18 +1021,282 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         ]);
 
         $assetland = new assetsplantandmachinery();
-        $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
+
+                    //
+                    if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                    }else  if($request['SiteLocation']=='CoET')
+                    {
+
+                    $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'College of Engineering and Technology';
+
+                    }else if($request['SiteLocation']=='CoAF')
+                    {
+
+                    $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                    }else  if($request['SiteLocation']=='CoSS')
+                    {
+
+                    $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'College of Social science';
+
+                    }else if($request['SiteLocation']=='SJMC')
+                    {
+
+                    $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                    }else  if($request['SiteLocation']=='UDBS')
+                    {
+
+                    $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                    }else if($request['SiteLocation']=='CoHU')
+                    {
+
+                    $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'College of Humanities';
+
+                    }else if($request['SiteLocation']=='CONAS')
+                    {
+
+                    $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                    }else if($request['SiteLocation']=='SoED')
+                    {
+
+                    $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'School of Education';
+
+                    }else if($request['SiteLocation']=='UDSoL')
+                    {
+
+                    $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                    }else if($request['SiteLocation']=='IDS')
+                    {
+
+                    $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Institute of Development Studies';
+
+                    }else if($request['SiteLocation']=='IKS')
+                    {
+
+                    $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                    }else if($request['SiteLocation']=='IRA')
+                    {
+
+                    $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                    }else if($request['SiteLocation']=='IMS')
+                    {
+
+                    $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                    }else if($request['SiteLocation']=='CIUDSM')
+                    {
+
+                    $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Confucius Institute';
+
+                    }else if($request['SiteLocation']=='IGS')
+                    {
+
+                    $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Institute of Gender Studies';
+
+                    }else if($request['SiteLocation']=='MCHS')
+                    {
+
+                    $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                    }else if($request['SiteLocation']=='DES')
+                    {
+
+                    $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Directorate of Estates Services';
+
+                    }else if($request['SiteLocation']=='ULB')
+                    {
+
+                    $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'University Library';
+
+                    }else if($request['SiteLocation']=='VC')
+                    {
+
+                    $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                    }else if($request['SiteLocation']=='CCC')
+                    {
+
+                    $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                    }else if($request['SiteLocation']=='MHL')
+                    {
+
+                    $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Mabibo Hostel';
+
+                    }else if($request['SiteLocation']=='MNS')
+                    {
+
+                    $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Mlimani Nursery School';
+
+                    }else if($request['SiteLocation']=='ADM')
+                    {
+
+                    $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Administration Block';
+
+                    }else if($request['SiteLocation']=='DRP')
+                    {
+
+                    $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Lecture Room';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Magufuli Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Hall 1 Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Hall 2 Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Hall 3 Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Hall 4 Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Hall 5 Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Hall 6 Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Hall 7 Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Mikocheni Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Seminar Room';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Theater Room';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Ubungo Hostel';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Michaud Library';
+
+                    }else if($request['SiteLocation']=='CoICT')
+                    {
+
+                    $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                    $assetland->assetLocation = 'Water Resources Houses';
+
+                    }else
+                    {
+
+                    $assetland->assetNumber = $request['AssetNumber'];
+                    $assetland->assetLocation = $request['SiteLocation'];
+                    }
+                    //
+
         $assetland->location = $request['SiteLocation2'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1060,18 +1330,282 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      public function assetsPlantMachineryEditSave(Request $request)
      {
         $assetland =  assetsplantandmachinery::where('id',$request['id'])->first();
-        $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
+
+                        //
+                        if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                        }else  if($request['SiteLocation']=='CoET')
+                        {
+
+                        $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Engineering and Technology';
+
+                        }else if($request['SiteLocation']=='CoAF')
+                        {
+
+                        $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                        }else  if($request['SiteLocation']=='CoSS')
+                        {
+
+                        $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Social science';
+
+                        }else if($request['SiteLocation']=='SJMC')
+                        {
+
+                        $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                        }else  if($request['SiteLocation']=='UDBS')
+                        {
+
+                        $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                        }else if($request['SiteLocation']=='CoHU')
+                        {
+
+                        $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Humanities';
+
+                        }else if($request['SiteLocation']=='CONAS')
+                        {
+
+                        $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                        }else if($request['SiteLocation']=='SoED')
+                        {
+
+                        $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Education';
+
+                        }else if($request['SiteLocation']=='UDSoL')
+                        {
+
+                        $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                        }else if($request['SiteLocation']=='IDS')
+                        {
+
+                        $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Development Studies';
+
+                        }else if($request['SiteLocation']=='IKS')
+                        {
+
+                        $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                        }else if($request['SiteLocation']=='IRA')
+                        {
+
+                        $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                        }else if($request['SiteLocation']=='IMS')
+                        {
+
+                        $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                        }else if($request['SiteLocation']=='CIUDSM')
+                        {
+
+                        $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Confucius Institute';
+
+                        }else if($request['SiteLocation']=='IGS')
+                        {
+
+                        $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Gender Studies';
+
+                        }else if($request['SiteLocation']=='MCHS')
+                        {
+
+                        $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                        }else if($request['SiteLocation']=='DES')
+                        {
+
+                        $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Estates Services';
+
+                        }else if($request['SiteLocation']=='ULB')
+                        {
+
+                        $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University Library';
+
+                        }else if($request['SiteLocation']=='VC')
+                        {
+
+                        $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                        }else if($request['SiteLocation']=='CCC')
+                        {
+
+                        $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                        }else if($request['SiteLocation']=='MHL')
+                        {
+
+                        $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mabibo Hostel';
+
+                        }else if($request['SiteLocation']=='MNS')
+                        {
+
+                        $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mlimani Nursery School';
+
+                        }else if($request['SiteLocation']=='ADM')
+                        {
+
+                        $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Administration Block';
+
+                        }else if($request['SiteLocation']=='DRP')
+                        {
+
+                        $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Lecture Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Magufuli Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 1 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 2 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 3 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 4 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 5 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 6 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 7 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mikocheni Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Seminar Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Theater Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Ubungo Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Michaud Library';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Water Resources Houses';
+
+                        }else
+                        {
+
+                        $assetland->assetNumber = $request['AssetNumber'];
+                        $assetland->assetLocation = $request['SiteLocation'];
+                        }
+                        //
+
         $assetland->location = $request['SiteLocation2'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1108,7 +1642,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1152,7 +1690,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->Cost = $request['cost'];
         $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1190,7 +1732,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1235,7 +1781,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1262,17 +1812,281 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         ]);
 
         $assetland = new assetsfurniture();
-        $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
+
+                        //
+                        if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                        }else  if($request['SiteLocation']=='CoET')
+                        {
+
+                        $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Engineering and Technology';
+
+                        }else if($request['SiteLocation']=='CoAF')
+                        {
+
+                        $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                        }else  if($request['SiteLocation']=='CoSS')
+                        {
+
+                        $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Social science';
+
+                        }else if($request['SiteLocation']=='SJMC')
+                        {
+
+                        $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                        }else  if($request['SiteLocation']=='UDBS')
+                        {
+
+                        $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                        }else if($request['SiteLocation']=='CoHU')
+                        {
+
+                        $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Humanities';
+
+                        }else if($request['SiteLocation']=='CONAS')
+                        {
+
+                        $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                        }else if($request['SiteLocation']=='SoED')
+                        {
+
+                        $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Education';
+
+                        }else if($request['SiteLocation']=='UDSoL')
+                        {
+
+                        $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                        }else if($request['SiteLocation']=='IDS')
+                        {
+
+                        $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Development Studies';
+
+                        }else if($request['SiteLocation']=='IKS')
+                        {
+
+                        $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                        }else if($request['SiteLocation']=='IRA')
+                        {
+
+                        $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                        }else if($request['SiteLocation']=='IMS')
+                        {
+
+                        $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                        }else if($request['SiteLocation']=='CIUDSM')
+                        {
+
+                        $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Confucius Institute';
+
+                        }else if($request['SiteLocation']=='IGS')
+                        {
+
+                        $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Gender Studies';
+
+                        }else if($request['SiteLocation']=='MCHS')
+                        {
+
+                        $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                        }else if($request['SiteLocation']=='DES')
+                        {
+
+                        $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Estates Services';
+
+                        }else if($request['SiteLocation']=='ULB')
+                        {
+
+                        $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University Library';
+
+                        }else if($request['SiteLocation']=='VC')
+                        {
+
+                        $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                        }else if($request['SiteLocation']=='CCC')
+                        {
+
+                        $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                        }else if($request['SiteLocation']=='MHL')
+                        {
+
+                        $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mabibo Hostel';
+
+                        }else if($request['SiteLocation']=='MNS')
+                        {
+
+                        $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mlimani Nursery School';
+
+                        }else if($request['SiteLocation']=='ADM')
+                        {
+
+                        $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Administration Block';
+
+                        }else if($request['SiteLocation']=='DRP')
+                        {
+
+                        $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Lecture Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Magufuli Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 1 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 2 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 3 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 4 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 5 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 6 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 7 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mikocheni Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Seminar Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Theater Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Ubungo Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Michaud Library';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Water Resources Houses';
+
+                        }else
+                        {
+
+                        $assetland->assetNumber = $request['AssetNumber'];
+                        $assetland->assetLocation = $request['SiteLocation'];
+                        }
+                        //
+
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1306,17 +2120,281 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      public function assetsFurnitureEditSave(Request $request)
      {
         $assetland =  assetsfurniture::where('id',$request['id'])->first();
-        $assetland->assetNumber = $request['AssetNumber'];
-        $assetland->assetLocation = $request['SiteLocation'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->_condition = $request['AssetCondition'];
+
+                        //
+                        if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                        }else  if($request['SiteLocation']=='CoET')
+                        {
+
+                        $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Engineering and Technology';
+
+                        }else if($request['SiteLocation']=='CoAF')
+                        {
+
+                        $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                        }else  if($request['SiteLocation']=='CoSS')
+                        {
+
+                        $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Social science';
+
+                        }else if($request['SiteLocation']=='SJMC')
+                        {
+
+                        $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                        }else  if($request['SiteLocation']=='UDBS')
+                        {
+
+                        $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                        }else if($request['SiteLocation']=='CoHU')
+                        {
+
+                        $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Humanities';
+
+                        }else if($request['SiteLocation']=='CONAS')
+                        {
+
+                        $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                        }else if($request['SiteLocation']=='SoED')
+                        {
+
+                        $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Education';
+
+                        }else if($request['SiteLocation']=='UDSoL')
+                        {
+
+                        $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                        }else if($request['SiteLocation']=='IDS')
+                        {
+
+                        $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Development Studies';
+
+                        }else if($request['SiteLocation']=='IKS')
+                        {
+
+                        $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                        }else if($request['SiteLocation']=='IRA')
+                        {
+
+                        $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                        }else if($request['SiteLocation']=='IMS')
+                        {
+
+                        $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                        }else if($request['SiteLocation']=='CIUDSM')
+                        {
+
+                        $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Confucius Institute';
+
+                        }else if($request['SiteLocation']=='IGS')
+                        {
+
+                        $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Gender Studies';
+
+                        }else if($request['SiteLocation']=='MCHS')
+                        {
+
+                        $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                        }else if($request['SiteLocation']=='DES')
+                        {
+
+                        $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Estates Services';
+
+                        }else if($request['SiteLocation']=='ULB')
+                        {
+
+                        $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University Library';
+
+                        }else if($request['SiteLocation']=='VC')
+                        {
+
+                        $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                        }else if($request['SiteLocation']=='CCC')
+                        {
+
+                        $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                        }else if($request['SiteLocation']=='MHL')
+                        {
+
+                        $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mabibo Hostel';
+
+                        }else if($request['SiteLocation']=='MNS')
+                        {
+
+                        $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mlimani Nursery School';
+
+                        }else if($request['SiteLocation']=='ADM')
+                        {
+
+                        $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Administration Block';
+
+                        }else if($request['SiteLocation']=='DRP')
+                        {
+
+                        $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Lecture Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Magufuli Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 1 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 2 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 3 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 4 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 5 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 6 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 7 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mikocheni Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Seminar Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Theater Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Ubungo Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Michaud Library';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Water Resources Houses';
+
+                        }else
+                        {
+
+                        $assetland->assetNumber = $request['AssetNumber'];
+                        $assetland->assetLocation = $request['SiteLocation'];
+                        }
+                        //
+
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1343,18 +2421,282 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         ]);
 
         $assetland = new assetsequipment();
-        $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
         $assetland->location = $request['SiteLocation2'];
+
+                        //
+                        if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                        }else  if($request['SiteLocation']=='CoET')
+                        {
+
+                        $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Engineering and Technology';
+
+                        }else if($request['SiteLocation']=='CoAF')
+                        {
+
+                        $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                        }else  if($request['SiteLocation']=='CoSS')
+                        {
+
+                        $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Social science';
+
+                        }else if($request['SiteLocation']=='SJMC')
+                        {
+
+                        $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                        }else  if($request['SiteLocation']=='UDBS')
+                        {
+
+                        $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                        }else if($request['SiteLocation']=='CoHU')
+                        {
+
+                        $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Humanities';
+
+                        }else if($request['SiteLocation']=='CONAS')
+                        {
+
+                        $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                        }else if($request['SiteLocation']=='SoED')
+                        {
+
+                        $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'School of Education';
+
+                        }else if($request['SiteLocation']=='UDSoL')
+                        {
+
+                        $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                        }else if($request['SiteLocation']=='IDS')
+                        {
+
+                        $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Development Studies';
+
+                        }else if($request['SiteLocation']=='IKS')
+                        {
+
+                        $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                        }else if($request['SiteLocation']=='IRA')
+                        {
+
+                        $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                        }else if($request['SiteLocation']=='IMS')
+                        {
+
+                        $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                        }else if($request['SiteLocation']=='CIUDSM')
+                        {
+
+                        $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Confucius Institute';
+
+                        }else if($request['SiteLocation']=='IGS')
+                        {
+
+                        $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Institute of Gender Studies';
+
+                        }else if($request['SiteLocation']=='MCHS')
+                        {
+
+                        $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                        }else if($request['SiteLocation']=='DES')
+                        {
+
+                        $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Estates Services';
+
+                        }else if($request['SiteLocation']=='ULB')
+                        {
+
+                        $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'University Library';
+
+                        }else if($request['SiteLocation']=='VC')
+                        {
+
+                        $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                        }else if($request['SiteLocation']=='CCC')
+                        {
+
+                        $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                        }else if($request['SiteLocation']=='MHL')
+                        {
+
+                        $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mabibo Hostel';
+
+                        }else if($request['SiteLocation']=='MNS')
+                        {
+
+                        $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mlimani Nursery School';
+
+                        }else if($request['SiteLocation']=='ADM')
+                        {
+
+                        $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Administration Block';
+
+                        }else if($request['SiteLocation']=='DRP')
+                        {
+
+                        $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Lecture Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Magufuli Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 1 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 2 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 3 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 4 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 5 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 6 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Hall 7 Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Mikocheni Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Seminar Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Theater Room';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Ubungo Hostel';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Michaud Library';
+
+                        }else if($request['SiteLocation']=='CoICT')
+                        {
+
+                        $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                        $assetland->assetLocation = 'Water Resources Houses';
+
+                        }else
+                        {
+
+                        $assetland->assetNumber = $request['AssetNumber'];
+                        $assetland->assetLocation = $request['SiteLocation'];
+                        }
+                        //
+
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1388,18 +2730,282 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      public function assetsEquipmentEditSave(Request $request)
      {
         $assetland =  assetsequipment::where('id',$request['id'])->first();
-        $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
         $assetland->location = $request['SiteLocation2'];
+
+                         //
+                         if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                         }else  if($request['SiteLocation']=='CoET')
+                         {
+
+                         $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'College of Engineering and Technology';
+
+                         }else if($request['SiteLocation']=='CoAF')
+                         {
+
+                         $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                         }else  if($request['SiteLocation']=='CoSS')
+                         {
+
+                         $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'College of Social science';
+
+                         }else if($request['SiteLocation']=='SJMC')
+                         {
+
+                         $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                         }else  if($request['SiteLocation']=='UDBS')
+                         {
+
+                         $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                         }else if($request['SiteLocation']=='CoHU')
+                         {
+
+                         $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'College of Humanities';
+
+                         }else if($request['SiteLocation']=='CONAS')
+                         {
+
+                         $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                         }else if($request['SiteLocation']=='SoED')
+                         {
+
+                         $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'School of Education';
+
+                         }else if($request['SiteLocation']=='UDSoL')
+                         {
+
+                         $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                         }else if($request['SiteLocation']=='IDS')
+                         {
+
+                         $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Institute of Development Studies';
+
+                         }else if($request['SiteLocation']=='IKS')
+                         {
+
+                         $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                         }else if($request['SiteLocation']=='IRA')
+                         {
+
+                         $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                         }else if($request['SiteLocation']=='IMS')
+                         {
+
+                         $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                         }else if($request['SiteLocation']=='CIUDSM')
+                         {
+
+                         $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Confucius Institute';
+
+                         }else if($request['SiteLocation']=='IGS')
+                         {
+
+                         $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Institute of Gender Studies';
+
+                         }else if($request['SiteLocation']=='MCHS')
+                         {
+
+                         $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                         }else if($request['SiteLocation']=='DES')
+                         {
+
+                         $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Directorate of Estates Services';
+
+                         }else if($request['SiteLocation']=='ULB')
+                         {
+
+                         $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'University Library';
+
+                         }else if($request['SiteLocation']=='VC')
+                         {
+
+                         $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                         }else if($request['SiteLocation']=='CCC')
+                         {
+
+                         $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                         }else if($request['SiteLocation']=='MHL')
+                         {
+
+                         $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Mabibo Hostel';
+
+                         }else if($request['SiteLocation']=='MNS')
+                         {
+
+                         $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Mlimani Nursery School';
+
+                         }else if($request['SiteLocation']=='ADM')
+                         {
+
+                         $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Administration Block';
+
+                         }else if($request['SiteLocation']=='DRP')
+                         {
+
+                         $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Lecture Room';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Magufuli Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Hall 1 Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Hall 2 Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Hall 3 Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Hall 4 Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Hall 5 Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Hall 6 Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Hall 7 Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Mikocheni Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Seminar Room';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Theater Room';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Ubungo Hostel';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Michaud Library';
+
+                         }else if($request['SiteLocation']=='CoICT')
+                         {
+
+                         $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                         $assetland->assetLocation = 'Water Resources Houses';
+
+                         }else
+                         {
+
+                         $assetland->assetNumber = $request['AssetNumber'];
+                         $assetland->assetLocation = $request['SiteLocation'];
+                         }
+                         //
+
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1426,18 +3032,282 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         ]);
 
         $assetland = new assetscomputerequipment();
-        $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
         $assetland->location = $request['SiteLocation2'];
+
+                 //
+                 if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                 }else  if($request['SiteLocation']=='CoET')
+                 {
+
+                 $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'College of Engineering and Technology';
+
+                 }else if($request['SiteLocation']=='CoAF')
+                 {
+
+                 $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                 }else  if($request['SiteLocation']=='CoSS')
+                 {
+
+                 $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'College of Social science';
+
+                 }else if($request['SiteLocation']=='SJMC')
+                 {
+
+                 $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                 }else  if($request['SiteLocation']=='UDBS')
+                 {
+
+                 $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                 }else if($request['SiteLocation']=='CoHU')
+                 {
+
+                 $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'College of Humanities';
+
+                 }else if($request['SiteLocation']=='CONAS')
+                 {
+
+                 $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                 }else if($request['SiteLocation']=='SoED')
+                 {
+
+                 $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'School of Education';
+
+                 }else if($request['SiteLocation']=='UDSoL')
+                 {
+
+                 $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                 }else if($request['SiteLocation']=='IDS')
+                 {
+
+                 $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Institute of Development Studies';
+
+                 }else if($request['SiteLocation']=='IKS')
+                 {
+
+                 $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                 }else if($request['SiteLocation']=='IRA')
+                 {
+
+                 $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                 }else if($request['SiteLocation']=='IMS')
+                 {
+
+                 $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                 }else if($request['SiteLocation']=='CIUDSM')
+                 {
+
+                 $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Confucius Institute';
+
+                 }else if($request['SiteLocation']=='IGS')
+                 {
+
+                 $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Institute of Gender Studies';
+
+                 }else if($request['SiteLocation']=='MCHS')
+                 {
+
+                 $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                 }else if($request['SiteLocation']=='DES')
+                 {
+
+                 $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Directorate of Estates Services';
+
+                 }else if($request['SiteLocation']=='ULB')
+                 {
+
+                 $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'University Library';
+
+                 }else if($request['SiteLocation']=='VC')
+                 {
+
+                 $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                 }else if($request['SiteLocation']=='CCC')
+                 {
+
+                 $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                 }else if($request['SiteLocation']=='MHL')
+                 {
+
+                 $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Mabibo Hostel';
+
+                 }else if($request['SiteLocation']=='MNS')
+                 {
+
+                 $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Mlimani Nursery School';
+
+                 }else if($request['SiteLocation']=='ADM')
+                 {
+
+                 $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Administration Block';
+
+                 }else if($request['SiteLocation']=='DRP')
+                 {
+
+                 $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Lecture Room';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Magufuli Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Hall 1 Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Hall 2 Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Hall 3 Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Hall 4 Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Hall 5 Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Hall 6 Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Hall 7 Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Mikocheni Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Seminar Room';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Theater Room';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Ubungo Hostel';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Michaud Library';
+
+                 }else if($request['SiteLocation']=='CoICT')
+                 {
+
+                 $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                 $assetland->assetLocation = 'Water Resources Houses';
+
+                 }else
+                 {
+
+                 $assetland->assetNumber = $request['AssetNumber'];
+                 $assetland->assetLocation = $request['SiteLocation'];
+                 }
+                 //
+
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+3 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1471,18 +3341,283 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      public function assetsComputerEquipmentEditSave(Request $request)
      {
         $assetland =  assetscomputerequipment::where('id',$request['id'])->first();
-        $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
         $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
         $assetland->location = $request['SiteLocation2'];
+
+                     //
+                     if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'College of Information and Communication Technologies';
+
+                     }else  if($request['SiteLocation']=='CoET')
+                     {
+
+                     $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'College of Engineering and Technology';
+
+                     }else if($request['SiteLocation']=='CoAF')
+                     {
+
+                     $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+
+                     }else  if($request['SiteLocation']=='CoSS')
+                     {
+
+                     $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'College of Social science';
+
+                     }else if($request['SiteLocation']=='SJMC')
+                     {
+
+                     $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'School of Journalism and Mass Communication';
+
+                     }else  if($request['SiteLocation']=='UDBS')
+                     {
+
+                     $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'University of Dar es Salaam Business School';
+
+                     }else if($request['SiteLocation']=='CoHU')
+                     {
+
+                     $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'College of Humanities';
+
+                     }else if($request['SiteLocation']=='CONAS')
+                     {
+
+                     $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'College of Natural and Applied Sciences';
+
+                     }else if($request['SiteLocation']=='SoED')
+                     {
+
+                     $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'School of Education';
+
+                     }else if($request['SiteLocation']=='UDSoL')
+                     {
+
+                     $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'University of Dar es salaam School of Law';
+
+                     }else if($request['SiteLocation']=='IDS')
+                     {
+
+                     $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Institute of Development Studies';
+
+                     }else if($request['SiteLocation']=='IKS')
+                     {
+
+                     $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Institute of Kiswahili Studies';
+
+                     }else if($request['SiteLocation']=='IRA')
+                     {
+
+                     $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Institute of Resource Assesment';
+
+                     }else if($request['SiteLocation']=='IMS')
+                     {
+
+                     $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Institute of Marine Sciences';
+
+                     }else if($request['SiteLocation']=='CIUDSM')
+                     {
+
+                     $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Confucius Institute';
+
+                     }else if($request['SiteLocation']=='IGS')
+                     {
+
+                     $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Institute of Gender Studies';
+
+                     }else if($request['SiteLocation']=='MCHS')
+                     {
+
+                     $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Mbeya college of health and allied sciences';
+
+                     }else if($request['SiteLocation']=='DES')
+                     {
+
+                     $assetland->assetNumber = 'DES'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Directorate of Estates Services';
+
+                     }else if($request['SiteLocation']=='ULB')
+                     {
+
+                     $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'University Library';
+
+                     }else if($request['SiteLocation']=='VC')
+                     {
+
+                     $assetland->assetNumber = 'VC'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Vice Chancelor\'s Office';
+
+                     }else if($request['SiteLocation']=='CCC')
+                     {
+
+                     $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Center for Climate Change Studies';
+
+                     }else if($request['SiteLocation']=='MHL')
+                     {
+
+                     $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Mabibo Hostel';
+
+                     }else if($request['SiteLocation']=='MNS')
+                     {
+
+                     $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Mlimani Nursery School';
+
+                     }else if($request['SiteLocation']=='ADM')
+                     {
+
+                     $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Administration Block';
+
+                     }else if($request['SiteLocation']=='DRP')
+                     {
+
+                     $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Directorate of Research and Publication';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Kijitonyama Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Lecture Room';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Magufuli Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Hall 1 Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Hall 2 Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Hall 3 Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Hall 4 Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Hall 5 Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Hall 6 Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Hall 7 Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Mikocheni Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Seminar Room';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'THR'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Theater Room';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Ubungo Hostel';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Directorate of Post Graduate Studies';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Michaud Library';
+
+                     }else if($request['SiteLocation']=='CoICT')
+                     {
+
+                     $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
+                     $assetland->assetLocation = 'Water Resources Houses';
+
+                     }else
+                     {
+
+                     $assetland->assetNumber = $request['AssetNumber'];
+                     $assetland->assetLocation = $request['SiteLocation'];
+                     }
+                     //
+
+
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+3 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1520,7 +3655,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1564,7 +3703,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->Cost = $request['cost'];
         $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 
@@ -1664,7 +3807,11 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetQuantity = $request['Quantity'];
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
-        $assetland->assetEndingDepreciationDate = $request['EndingDepreciationDate'];
+
+        $end = $request['DateinUse'];
+
+        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
 

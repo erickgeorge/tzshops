@@ -88,9 +88,9 @@ use App\assetsplantandmachinery;
                 <td>{{$assetid['assetNumber']}}</td>
                 <td><?php  $time = strtotime($asses->assesmentYear)?>  {{date('d/m/Y',$time)  }}</td>
                 <td>{{$asses->totalDepreciatedYears}}</td>
-                <td style="text-align:right;">{{number_format($asses->accumulatedDepreciation)}}  Tshs</td>
-                <td style="text-align:right;">{{number_format($asses->impairmentLoss)}}  Tshs</td>
-                <td style="text-align:right;">{{number_format($asses->disposalCost)}}  Tshs </td>
+                <td style="text-align:right;">{{number_format($asses->accumulatedDepreciation)}}  </td>
+                <td style="text-align:right;">{{number_format($asses->impairmentLoss)}}  </td>
+                <td style="text-align:right;">{{number_format($asses->disposalCost)}}   </td>
                 <td> <a class="btn btn-primary" href="{{route('assets'.$_GET['asset'].'View',[$asses->assetID])}}">View</a>  </td>
 
             </tr>

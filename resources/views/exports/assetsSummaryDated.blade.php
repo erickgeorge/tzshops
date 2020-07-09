@@ -118,7 +118,7 @@ tr:nth-child(even) {
                 <td>{{date('d/m/Y',$time)}}</td>
 
                 <td>{{$data['assetQuantity']}}</td>
-                <td style="text-align:right;">{{number_format($data['Cost'])}}  Tshs</td>
+                <td style="text-align:right;">{{number_format($data['Cost'])}}  </td>
                 <td>{{$data['_condition']}}</td>
                 <td>{{$data['usefulLife']}}</td>
                 <td>{{number_format($data['depreciationRate'],2)}}</td>
@@ -127,14 +127,14 @@ tr:nth-child(even) {
                 <?php  $time = strtotime($items->assesmentYear)?>
                 <td>{{date('d/m/Y',$time)}}</td>
 
-                <td style="text-align:right;">{{number_format($items->accumulatedDepreciation)}} Tshs</td>
+                <td style="text-align:right;">{{number_format($items->accumulatedDepreciation)}} </td>
                 <td>{{$items->impairmentLoss}}</td>
                 <td>{{$items->DisposalCost}}</td>
                 <td style="text-align:right;">
                     @php
                         $net = $data['Cost'] - $items->accumulatedDepreciation;
                     @endphp
-                    {{number_format($net)}}  Tshs
+                    {{number_format($net)}}  
                 </td>
             </tr>
             @php

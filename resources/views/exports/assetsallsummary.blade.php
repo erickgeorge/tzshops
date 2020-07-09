@@ -71,7 +71,7 @@ tr:nth-child(even) {
                 @foreach ($building as $buildingd)
                 @php $total2 =  $total2 +$buildingd->Cost; @endphp
                 @endforeach
-                @php echo number_format($total2); @endphp  Tshs
+                @php echo number_format($total2); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsBuilding')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -92,7 +92,7 @@ tr:nth-child(even) {
                 @foreach ($computerequipment as $computerequipment)
                 @php $total2 = $total2 +$computerequipment->Cost; @endphp
                 @endforeach
-                @php echo number_format($total2); @endphp  Tshs
+                @php echo number_format($total2); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsComputerEquipment')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -113,7 +113,7 @@ tr:nth-child(even) {
                 @foreach ($equipment as $equipmentd)
                 @php $total3 =  $total3+$equipmentd->Cost; @endphp
                 @endforeach
-                @php echo number_format($total3); @endphp  Tshs
+                @php echo number_format($total3); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsEquipment')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -132,7 +132,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total4); @endphp  Tshs
+                @php echo number_format($total4); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsFurniture')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -151,7 +151,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total5); @endphp  Tshs
+                @php echo number_format($total5); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsIntangible')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -170,7 +170,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total6); @endphp  Tshs
+                @php echo number_format($total6); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsLand')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -189,7 +189,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total7); @endphp  Tshs
+                @php echo number_format($total7); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsMotorVehicle')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -208,7 +208,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total8); @endphp  Tshs
+                @php echo number_format($total8); @endphp  
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsPlantMachinery')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -227,7 +227,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td style="text-align:right;">
-                @php echo number_format($total9); @endphp  Tshs
+                @php echo number_format($total9); @endphp  
             </td>
 
         </tr>
@@ -242,7 +242,7 @@ tr:nth-child(even) {
                     $total10 = $total1+$total2+$total3+$total4+$total5+$total6+$total7+$total8+$total9;
 
                     echo number_format($total10);
-                @endphp  Tshs </th>
+                @endphp   </th>
                 <th></th>
         </tr>
     </tfoot>
