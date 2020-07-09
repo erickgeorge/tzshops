@@ -300,23 +300,18 @@ class AssetsController extends Controller
 
 
 
+
        public function cleaningcompany(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-         return view('cleaningcompany', [
-            'role' => $role,
-            'notifications' => $notifications,
-
-           'cleangcompany' => company::all()
-
             if(request()->has('start'))  { //date filter
-
-
+        
+        
         $from=request('start');
         $to=request('end');
-
-
+        
+        
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -325,46 +320,46 @@ class AssetsController extends Controller
         $from=request('end');
         }// start> end
 
-
+       
          return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-
+             
              'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
-                    ->groupBy('company_name')->get(),
+                    ->groupBy('company_name')->get(),  
             'assessmmenttender' => company::select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
             'assessmmentareas' => company::select(DB::raw('area'))
-                    ->groupBy('area')->get(),
-
+                    ->groupBy('area')->get(),  
+  
           ]);
 
-         }
+         } 
          else{
 
              return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-
+             
              'cleangcompany' => company::orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
-                    ->groupBy('company_name')->get(),
+                    ->groupBy('company_name')->get(),  
             'assessmmenttender' => company::select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
             'assessmmentareas' => company::select(DB::raw('area'))
-                    ->groupBy('area')->get(),
-
+                    ->groupBy('area')->get(),  
+  
           ]);
 
          }
 
        }
-
+      
 
 
         public function cleaningcompanynew(){

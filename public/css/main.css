@@ -26,6 +26,13 @@ html, body {
 				
 			}
 			
+			custom-select
+			
+			input,select{
+				
+				color:black;
+background-color:black; 
+font-weight:bold;
 
 	
 }
@@ -132,6 +139,9 @@ hr {
   border-top: 5px solid rgb(169,169,169);
 }
 
+.welcome-body{
+    background-image: url('/meeeting.jpg');
+}
 
 
 
@@ -201,27 +211,20 @@ padding: 20px 60px;
 
 
 
-    table {
-           
-            font: 17px Calibri;
-        }
-        table, th, td {
-            border: solid 1px #DDD;
-            border-collapse: collapse;
-            padding: 2px 3px;
-          
-        }
+
 
 tr {
  width:12px;
 }
 
 thead{
-      background-color: #376ad3;
+
+      background-color: red;
 }
+
+
 tr{
           
-   
 
 }
 

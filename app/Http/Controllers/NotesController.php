@@ -1140,7 +1140,7 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
         return $pdf->stream('Store Material Entry Report - '.date('d-m-Y H:i').'.pdf');
     }
 
-}
+
 
       public function assessmentpdf($id , $tender , $month){
          $company = Crypt::decrypt($tender);
