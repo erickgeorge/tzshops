@@ -162,7 +162,7 @@
 
 
  @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
-     
+
                     <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
@@ -263,7 +263,7 @@
 
 
 
-                  
+
 
                      @if(auth()->user()->type == 'DVC Admin')
 
@@ -276,7 +276,7 @@
                     </li>
                        @endif
 
-                      
+
 
                    @if(auth()->user()->type == 'Dvc Accountant')
 
@@ -413,7 +413,7 @@
        </li>
 
 
-                 
+
 
                     @endif
 
@@ -941,41 +941,41 @@
                 height: 100vh;
                 margin: 0;
             }
-            
+
             .form-control{
-                
-                
+
+
                 font-weight: bold;
             }
-            
-            
+
+
             .custom-select{
-                
-                
+
+
                 font-weight: bold;
             }
-            
-            
+
+
             td{
                 font-weight: bold;
-                
-            }
-            
 
-    
+            }
+
+
+
 }
-            
+
             .dataTables_filter {
-     
+
      padding: 0;
           margin: 0px;
           width:999px;
            align-items: right;
-                
+
 }
-            
-            
-            
+
+
+
 
             .full-height {
                 height: 100vh;
@@ -1134,14 +1134,14 @@ padding: 20px 60px;
 
 
     table {
-           
+
             font: 17px Calibri;
         }
         table, th, td {
             border: solid 1px #DDD;
             border-collapse: collapse;
             padding: 2px 3px;
-          
+
         }
 
 tr {
@@ -1152,8 +1152,8 @@ thead{
       background-color: #376ad3;
 }
 tr{
-          
-   
+
+
 
 }
 
@@ -1161,7 +1161,7 @@ img {
   object-fit: cover;
   width:250px;
   height:250px;
-  
+}
 
 </style>
 

@@ -158,7 +158,7 @@
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
 
-     
+
                     <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
@@ -204,7 +204,7 @@
     </a>
   </li>-->
  @endif
-            
+
 
 
                 @if(auth()->user()->type == 'Transport Officer')
@@ -490,7 +490,7 @@
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                     </li>
 
-                    
+
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
@@ -776,41 +776,41 @@
                 height: 100vh;
                 margin: 0;
             }
-            
+
             .form-control{
-                
-                
+
+
                 font-weight: bold;
             }
-            
-            
+
+
             .custom-select{
-                
-                
+
+
                 font-weight: bold;
             }
-            
-            
+
+
             td{
                 font-weight: bold;
-                
-            }
-            
 
-    
+            }
+
+
+
 }
-            
+
             .dataTables_filter {
-     
+
      padding: 0;
           margin: 0px;
           width:999px;
            align-items: right;
-                
+
 }
-            
-            
-            
+
+
+
 
             .full-height {
                 height: 100vh;
@@ -969,14 +969,14 @@ padding: 20px 60px;
 
 
     table {
-           
+
             font: 17px Calibri;
         }
         table, th, td {
             border: solid 1px #DDD;
             border-collapse: collapse;
             padding: 2px 3px;
-          
+
         }
 
 tr {
@@ -987,8 +987,8 @@ thead{
       background-color: #376ad3;
 }
 tr{
-          
-   
+
+
 
 }
 
@@ -996,7 +996,7 @@ img {
   object-fit: cover;
   width:250px;
   height:250px;
-  
+}
 
 </style>
 
@@ -1052,9 +1052,13 @@ for (i = 0; i < dropdown.length; i++) {
 <script>
 
     $('#myTable').DataTable();
+    $('#myTable4').DataTable({
+        dom: 'Bfrtip',
+        buttons: ['excel']
+    });
     $('#myTablee').DataTable();
     $('#myTableee').DataTable();
-    
+
 
 </script>
 

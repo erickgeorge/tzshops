@@ -47,6 +47,123 @@ Plant and Machinery Assets
             <a href="{{url('assetsNewPlantMachinery')}}" class="btn btn-primary text-light" type="button"><b>Add new Plant and Machinery asset</b></a>
         </div>
         @endif
+
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">
+                
+                <table class="table table-striped display">
+                    <thead style="text-transform: uppercase;">
+                        <tr style="color:white;">
+                            <th>New</th>
+                            <th>Good</th>
+                            <th>Fair</th>
+                            <th>Poor</th>
+                            <th>Very Poor</th>
+                            <th>Absolette</th>
+                            <th>Disposed</th>
+                            <th>Sold</th>
+                            <th>Expired</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @php
+                                $plantandmachinery = assetsplantandmachinery::where('_condition','New')->get();
+                                $plantandmachinery2 = assetsplantandmachinery::where('_condition','Good')->get();
+                                $plantandmachinery3 = assetsplantandmachinery::where('_condition','Fair')->get();
+                                $plantandmachinery4 = assetsplantandmachinery::where('_condition','Poor')->get();
+                                $plantandmachinery5 = assetsplantandmachinery::where('_condition','Very Poor')->get();
+                                $plantandmachinery6 = assetsplantandmachinery::where('_condition','Absolette')->get();
+                                $plantandmachinery7 = assetsplantandmachinery::where('_condition','Disposed')->get();
+                                $plantandmachinery8 = assetsplantandmachinery::where('_condition','Sold')->get();
+                                $plantandmachinery9 = assetsplantandmachinery::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                            @endphp
+                                                                <td>
+                                @if (count($plantandmachinery)>0)
+                                        {{count($plantandmachinery)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery2)>0)
+                                        {{count($plantandmachinery2)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery2)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery3)>0)
+                                        {{count($plantandmachinery3)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery3)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery4)>0)
+                                        {{count($plantandmachinery4)}}
+                                        &nbsp;<a  title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery4)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery5)>0)
+                                        {{count($plantandmachinery5)}}
+                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery5)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery6)>0)
+                                        {{count($plantandmachinery6)}}
+                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery6)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery7)>0)
+                                        {{count($plantandmachinery7)}}
+                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery7)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery8)>0)
+                                        {{count($plantandmachinery8)}}
+                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery8)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery9)>0)
+                                        {{count($plantandmachinery9)}}
+                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery9)}}
+                                @endif
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            
+        </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
         </div>
@@ -225,7 +342,14 @@ Plant and Machinery Assets
                     <td>{{substr($landinfo->assetDescription,0,25).'...'}}</td>
                     <td>{{$landinfo->assetLocation}}</td>
                     <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
+
+                    @if ($landinfo->_condition=='Disposed')
+                    <td class="text-danger">{{$landinfo->_condition}}</td>
+                    @else
                     <td>{{$landinfo->_condition}}</td>
+                    @endif
+
+                    
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetEndingDepreciationDate)?>  {{date('d/m/Y',$time)  }}</td>

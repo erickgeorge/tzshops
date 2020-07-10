@@ -24827,6 +24827,87 @@ class ExcelController extends Controller
                 ($_GET['assetDateinUse']=='')&&
                 ($_GET['EndingDepreciationDate']=='')&&
                 ($_GET['Quantity']=='')&&
+                ($_GET['condition']=='')&&
+                ($_GET['expired']!='')
+            ) {
+
+                if ($_GET['asset']=='building') {//
+
+                    $assetdata = assetsbuilding::
+
+                where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                get();
+
+                }else if ($_GET['asset']=='computerequipments') {//
+
+                    $assetdata = assetscomputerequipment::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='equipments') {//
+
+                    $assetdata = assetsequipment::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+
+                } else if ($_GET['asset']=='furniture') {//
+
+                    $assetdata = assetsfurniture::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+
+                }else if ($_GET['asset']=='intangible') {//
+
+                    $assetdata = assetsintangible::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='land') {//
+
+                    $assetdata = assetsland::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='motorvehicle') {//
+
+                    $assetdata = assetsmotorvehicle::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='plantandmachinery') {//
+
+                    $assetdata = assetsplantandmachinery::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='workinprogress') {//
+
+                    $assetdata = assetsworkinprogress::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+
+                }
+
+            ///////////////////////////////////
+            }else if (
+                ($_GET['assetNumber']=='')&&
+                ($_GET['AssetLocation']=='')&&
+                ($_GET['cost']=='')&&
+                ($_GET['DateofAcquisition']=='')&&
+                ($_GET['assetDateinUse']=='')&&
+                ($_GET['EndingDepreciationDate']=='')&&
+                ($_GET['Quantity']=='')&&
                 ($_GET['condition']=='')
             ) {
                         if ($_GET['asset']=='building') {
@@ -24888,8 +24969,13 @@ class ExcelController extends Controller
 
 
             }else{
-                return Excel::download(new ExcelExport, $_GET['asset'].' assets '.date('d-m-Y H-i').'.xlsx');
-            }
+                $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+                $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+                return view('exports.preview', [
+                    'assetdata' => $assetdata,  'role' => $role,
+                    'notifications' => $notifications
+                ]);            }
 
         }
 

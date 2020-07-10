@@ -48,6 +48,121 @@ use Illuminate\Support\Facades\DB;
             <a href="{{url('assetsNewBuilding')}}" class="btn btn-primary text-light" type="button"><b>Add new Building asset</b></a>
         </div>
         @endif
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">
+                <table class="table table-striped display">
+                    <thead style="text-transform: uppercase;">
+                        <tr style="color:white;">
+                            <th>New</th>
+                            <th>Good</th>
+                            <th>Fair</th>
+                            <th>Poor</th>
+                            <th>Very Poor</th>
+                            <th>Absolette</th>
+                            <th>Disposed</th>
+                            <th>Sold</th>
+                            <th>Expired</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @php
+                            $build = assetsbuilding::where('_condition','New')->get();
+                            $build2 = assetsbuilding::where('_condition','Good')->get();
+                            $build3 = assetsbuilding::where('_condition','Fair')->get();
+                            $build4 = assetsbuilding::where('_condition','Poor')->get();
+                            $build5 = assetsbuilding::where('_condition','Very Poor')->get();
+                            $build6 = assetsbuilding::where('_condition','Absolette')->get();
+                            $build7 = assetsbuilding::where('_condition','Disposed')->get();
+                            $build8 = assetsbuilding::where('_condition','Sold')->get();
+                            $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                        @endphp
+                        <td>
+                        @if (count($build)>0)
+                                {{count($build)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build2)>0)
+                                {{count($build2)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build2)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build3)>0)
+                                {{count($build3)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build3)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build4)>0)
+                                {{count($build4)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build4)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build5)>0)
+                                {{count($build5)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build5)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build6)>0)
+                                {{count($build6)}}
+                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build6)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build7)>0)
+                                {{count($build7)}}
+                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build7)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build8)>0)
+                                {{count($build8)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build8)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build9)>0)
+                                {{count($build9)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build9)}}
+                        @endif
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            
+        </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
         </div>
@@ -230,6 +345,14 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
                         <td>{{substr($landinfo->assetDescription,0,25).'...'}}</td>
                         <td>{{$landinfo->assetLocation}}</td>
                         <td style="text-align:right;">{{number_format($landinfo->Cost)}}</td>
+
+                        @if ($landinfo->_condition=='Disposed')
+                        <td class="text-danger">{{$landinfo->_condition}}</td>
+                        @else
+                        <td>{{$landinfo->_condition}}</td>
+                        @endif
+
+                        
                         <td>{{$landinfo->_condition}}</td>
                         <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                         <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>

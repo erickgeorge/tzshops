@@ -65,7 +65,7 @@ Land Asset
                                     <b style="color: black;"> Asset Quantity : </b>  {{$landinfo->assetQuantity}}
                                 </div>
                                 <div class="col">
-                                    <b style="color: black;"> Cost/Rep.Cost : </b> {{number_format($landinfo->Cost)}}  
+                                    <b style="color: black;"> Cost/Rep.Cost : </b> {{number_format($landinfo->Cost)}}
                                 </div>
                             </div>
                             <br>
@@ -99,9 +99,13 @@ Land Asset
                 </div>
                 <div class="card-footer text-right">
                     <!-- Button trigger modal -->
-                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                       <i class="fa fa-calendar-check-o" aria-hidden="true"></i>  Asses
-                     </button>
+                    @if ($landinfo->_condition=='Disposed')
+
+                    @else
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>  Asses
+                      </button>
+                    @endif
                      <a href="{{route('assetinfo/export/',[$landinfo->id,'land'])}}" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export</a>
                      @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
                      @else
@@ -136,6 +140,8 @@ Land Asset
                                       <option value="Poor">Poor</option>
                                       <option value="Very Poor">Very Poor</option>
                                       <option value="Absolute">Absolette</option>
+                                      <option value="Disposed">Disposed</option>
+                                      <option value="Sold">Sold</option>
                                   </select>
                               </div>
                             </div>

@@ -99,6 +99,9 @@ New Computer Equipment Asset
                                     <input id="usedate"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">
                                 </div>
                             </div>
+                            <div class="row">
+                                <input type="text" name="AssetUsefulLife" value="3" hidden>
+                            </div>
                     </div>
                 </div>
             </div>

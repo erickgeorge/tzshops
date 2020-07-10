@@ -50,9 +50,16 @@ tr:nth-child(even) {
             <td>{{$user->assetNumber}}</td>
             <td>{{$user->assetDescription}}</td>
             <td>{{$user->assetLocation}}</td>
-            <td>{{$user->assetAcquisitionDate}}</td>
-            <td>{{$user->assetDateinUse}}</td>
-            <td>{{$user->assetEndingDepreciationDate}}</td>
+
+            <?php  $time = strtotime($user->assetAcquisitionDate)?>
+            <td>{{date('d/m/Y',$time)  }}</td>
+
+            <?php  $time = strtotime($user->assetDateinUse)?>
+            <td>{{date('d/m/Y',$time)  }}</td>
+
+            <?php  $time = strtotime($user->assetEndingDepreciationDate)?>
+            <td>{{date('d/m/Y',$time)  }}</td>
+            
             <td>{{$user->assetQuantity}}</td>
             <td style="text-align:right;">{{number_format($user->Cost)}}  </td>
             <td>{{$user->_condition}}</td>

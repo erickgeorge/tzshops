@@ -68,9 +68,17 @@ tr:nth-child(even) {
                 <td>{{$asses->assetLocation}}</td>
                 <td>{{$asses->Cost}}</td>
                 <td>{{$asses->_condition}}</td>
-                <td>{{$asses->assetacquisitionDate}}</td>
-                <td>{{$asses->assetDateinUse}}</td>
-                <td>{{$asses->assetEndingDepreciationDate}}</td>
+
+
+                <?php  $time = strtotime($asses->assetacquisitionDate)?>
+                <td>{{date('d/m/Y',$time)  }}</td>
+
+                <?php  $time = strtotime($asses->assetDateinUse)?>
+                <td>{{date('d/m/Y',$time)  }}</td>
+
+                <?php  $time = strtotime($asses->assetEndingDepreciationDate)?>
+                <td>{{date('d/m/Y',$time)  }}</td>
+                
                 <td>{{$asses->assetQuantity}}</td>
                 @php
                     if ($_GET['type'] == 'building') {

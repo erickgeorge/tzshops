@@ -48,6 +48,122 @@ Intangible Assets
         </div>
         @endif
 
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">
+                
+                <table class="table table-striped display">
+                    <thead style="text-transform: uppercase;">
+                        <tr style="color:white;">
+                            <th>New</th>
+                            <th>Good</th>
+                            <th>Fair</th>
+                            <th>Poor</th>
+                            <th>Very Poor</th>
+                            <th>Absolette</th>
+                            <th>Disposed</th>
+                            <th>Sold</th>
+                            <th>Expired</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @php
+                                $intangible = assetsintangible::where('_condition','New')->get();
+                                $intangible2 = assetsintangible::where('_condition','Good')->get();
+                                $intangible3 = assetsintangible::where('_condition','Fair')->get();
+                                $intangible4 = assetsintangible::where('_condition','Poor')->get();
+                                $intangible5 = assetsintangible::where('_condition','Very Poor')->get();
+                                $intangible6 = assetsintangible::where('_condition','Absolette')->get();
+                                $intangible7 = assetsintangible::where('_condition','Disposed')->get();
+                                $intangible8 = assetsintangible::where('_condition','Sold')->get();
+                                $intangible9 = assetsintangible::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                            @endphp
+                                                               <td>
+                                @if (count($intangible)>0)
+                                        {{count($intangible)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible2)>0)
+                                        {{count($intangible2)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible2)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible3)>0)
+                                        {{count($intangible3)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible3)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible4)>0)
+                                        {{count($intangible4)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible4)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible5)>0)
+                                        {{count($intangible5)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible5)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible6)>0)
+                                        {{count($intangible6)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible6)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible7)>0)
+                                        {{count($intangible7)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible7)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible8)>0)
+                                        {{count($intangible8)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible8)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible9)>0)
+                                        {{count($intangible9)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible9)}}
+                                @endif
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            
+        </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
         </div>
@@ -226,7 +342,14 @@ Intangible Assets
                     <td>{{substr($landinfo->assetDescription,0,25).'...'}}</td>
                     <td>{{$landinfo->assetLocation}}</td>
                     <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
+
+                    @if ($landinfo->_condition=='Disposed')
+                    <td class="text-danger">{{$landinfo->_condition}}</td>
+                    @else
                     <td>{{$landinfo->_condition}}</td>
+                    @endif
+
+                    
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetEndingDepreciationDate)?>  {{date('d/m/Y',$time)  }}</td>

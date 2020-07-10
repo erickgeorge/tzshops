@@ -48,6 +48,123 @@ Land Assets
             <a href="{{url('assetsNewLand')}}" class="btn btn-primary text-light" type="button"><b>Add new Land asset</b></a>
         </div>
         @endif
+
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">
+                
+                <table class="table table-striped display">
+                    <thead style="text-transform: uppercase;">
+                        <tr style="color:white;">
+                            <th>New</th>
+                            <th>Good</th>
+                            <th>Fair</th>
+                            <th>Poor</th>
+                            <th>Very Poor</th>
+                            <th>Absolette</th>
+                            <th>Disposed</th>
+                            <th>Sold</th>
+                            <th>Expired</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @php
+                            $land = assetsland::where('_condition','New')->get();
+                            $land2 = assetsland::where('_condition','Good')->get();
+                            $land3 = assetsland::where('_condition','Fair')->get();
+                            $land4 = assetsland::where('_condition','Poor')->get();
+                            $land5 = assetsland::where('_condition','Very Poor')->get();
+                            $land6 = assetsland::where('_condition','Absolette')->get();
+                            $land7 = assetsland::where('_condition','Disposed')->get();
+                            $land8 = assetsland::where('_condition','Sold')->get();
+                            $land9 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                        @endphp
+                                                            <td>
+                            @if (count($land)>0)
+                                    {{count($land)}}
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land2)>0)
+                                    {{count($land2)}}
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land2)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land3)>0)
+                                    {{count($land3)}}
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land3)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land4)>0)
+                                    {{count($land4)}}
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land4)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land5)>0)
+                                    {{count($land5)}}
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land5)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land6)>0)
+                                    {{count($land6)}}
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land6)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land7)>0)
+                                    {{count($land7)}}
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land7)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land8)>0)
+                                    {{count($landd8)}}
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land8)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land9)>0)
+                                    {{count($land9)}}
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land9)}}
+                            @endif
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            
+        </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
         </div>
@@ -224,7 +341,14 @@ Land Assets
                     <td>{{$d}}</td>
                     <td>{{$landinfo->assetNumber}}</td>
                     <td>{{substr($landinfo->assetDescription,0,25).'...'}}</td>
-                    <td>{{$landinfo->assetLocation}}</td>
+
+                    @if ($landinfo->_condition=='Disposed')
+                    <td class="text-danger">{{$landinfo->_condition}}</td>
+                    @else
+                    <td>{{$landinfo->_condition}}</td>
+                    @endif
+
+                    
                     <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
                     <td>{{$landinfo->_condition}}</td>
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
