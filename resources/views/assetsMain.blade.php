@@ -28,7 +28,7 @@ $plantmachinery = assetsplantandmachinery::get();
 $workinprogress = assetsworkinprogress::get();
 
 @endphp
-@if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+@if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin')||(auth()->user()->type =='Bursar'))
         @else
 <div class="container"><br>
     <div class="row container-fluid" >

@@ -67,7 +67,7 @@ Work in Progress
                             </div>
                     </p>
                 </div>
-                @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+                @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Bursar')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
         @else
                 <div class="card-footer text-right">
                     <a href="{{route('assetsWorkinProgressReallocate',[$landinfo->id])}}" class="btn btn-primary text-light" type="button"> <i class="fa fa-plus-circle" aria-hidden="true"></i> Reallocate</a>

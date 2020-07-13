@@ -190,6 +190,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -268,6 +269,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetLocation',$_GET['AssetLocation'])->
                 get();
 
@@ -339,6 +341,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                     }else if ($_GET['asset']=='workinprogress') {//
 
                         $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                         where('assetLocation',$_GET['AssetLocation'])->
                     get();
 
@@ -466,6 +469,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -592,6 +596,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -709,6 +714,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -833,6 +839,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -950,6 +957,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1066,6 +1074,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1174,6 +1183,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1297,6 +1307,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1414,6 +1425,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1530,6 +1542,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1638,6 +1651,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1753,6 +1767,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1861,6 +1876,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -1968,6 +1984,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2067,6 +2084,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2189,6 +2207,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2306,6 +2325,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2422,6 +2442,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2530,6 +2551,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2645,6 +2667,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2753,6 +2776,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2860,6 +2884,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -2959,6 +2984,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3073,6 +3099,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3181,6 +3208,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3288,6 +3316,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3387,6 +3416,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3494,6 +3524,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3593,6 +3624,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3691,6 +3723,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
@@ -3797,6 +3830,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                     where('Cost',$_GET['cost'])->
                 where('assetNumber',$_GET['assetNumber'])->
@@ -3920,6 +3954,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4037,6 +4072,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4145,6 +4181,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4260,6 +4297,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4368,6 +4406,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4475,6 +4514,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4574,6 +4614,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4688,6 +4729,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4796,6 +4838,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -4903,6 +4946,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -5002,6 +5046,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -5108,6 +5153,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -5207,6 +5253,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -5305,6 +5352,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -5395,6 +5443,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
@@ -5508,6 +5557,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -5616,6 +5666,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -5723,6 +5774,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -5822,6 +5874,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -5928,6 +5981,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -6027,6 +6081,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -6125,6 +6180,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -6215,6 +6271,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -6320,6 +6377,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -6419,6 +6477,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -6517,6 +6576,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -6607,6 +6667,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -6704,6 +6765,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -6794,6 +6856,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -6883,6 +6946,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -6964,6 +7028,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetNumber',$_GET['assetNumber'])->
                 get();
@@ -7084,6 +7149,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7209,6 +7275,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7326,6 +7393,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7434,6 +7502,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7549,6 +7618,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7657,6 +7727,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7764,6 +7835,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7863,6 +7935,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -7977,6 +8050,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8085,6 +8159,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8192,6 +8267,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8291,6 +8367,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8397,6 +8474,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8496,6 +8574,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8594,6 +8673,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8684,6 +8764,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -8797,6 +8878,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -8905,6 +8987,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -9012,6 +9095,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -9111,6 +9195,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -9217,6 +9302,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -9316,6 +9402,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -9414,6 +9501,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -9504,6 +9592,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -9609,6 +9698,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -9708,6 +9798,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -9806,6 +9897,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -9896,6 +9988,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -9994,6 +10087,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -10084,6 +10178,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -10173,6 +10268,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -10286,6 +10382,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -10386,6 +10483,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -10492,6 +10590,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -10591,6 +10690,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -10689,6 +10789,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -10779,6 +10880,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -10884,6 +10986,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -10983,6 +11086,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -11081,6 +11185,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -11171,6 +11276,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -11268,6 +11374,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -11358,6 +11465,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -11447,6 +11555,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -11528,6 +11637,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('Cost',$_GET['cost'])->
                 get();
@@ -11632,6 +11742,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -11731,6 +11842,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -11829,6 +11941,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -11919,6 +12032,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -12016,6 +12130,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -12106,6 +12221,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -12195,6 +12311,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -12276,6 +12393,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 get();
@@ -12372,6 +12490,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -12462,6 +12581,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -12551,6 +12671,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -12632,6 +12753,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 get();
@@ -12720,6 +12842,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -12801,6 +12924,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
                 get();
@@ -12881,6 +13005,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                     where('_condition',$_GET['condition'])->
                 where('assetQuantity',$_GET['Quantity'])->
                 get();
@@ -12944,6 +13069,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                     }else{
 
                         $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                         where('_condition',$_GET['condition'])->
                         get();
                     }
@@ -13062,6 +13188,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13187,6 +13314,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13304,6 +13432,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13412,6 +13541,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13527,6 +13657,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13635,6 +13766,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13742,6 +13874,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13841,6 +13974,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -13955,6 +14089,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14063,6 +14198,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14170,6 +14306,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14269,6 +14406,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14375,6 +14513,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14474,6 +14613,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14572,6 +14712,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14662,6 +14803,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -14775,6 +14917,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -14883,6 +15026,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -14990,6 +15134,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -15089,6 +15234,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -15195,6 +15341,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -15294,6 +15441,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -15392,6 +15540,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -15482,6 +15631,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -15587,6 +15737,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -15686,6 +15837,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -15784,6 +15936,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -15874,6 +16027,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -15972,6 +16126,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -16062,6 +16217,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -16151,6 +16307,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -16264,6 +16421,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -16372,6 +16530,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -16471,6 +16630,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -16577,6 +16737,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -16676,6 +16837,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -16774,6 +16936,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -16864,6 +17027,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -16969,6 +17133,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -17068,6 +17233,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -17166,6 +17332,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -17256,6 +17423,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -17353,6 +17521,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -17443,6 +17612,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -17532,6 +17702,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -17613,6 +17784,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('Cost',$_GET['cost'])->
                 get();
@@ -17717,6 +17889,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -17816,6 +17989,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -17914,6 +18088,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -18004,6 +18179,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -18101,6 +18277,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -18191,6 +18368,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -18280,6 +18458,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -18361,6 +18540,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 get();
@@ -18457,6 +18637,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -18547,6 +18728,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -18636,6 +18818,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -18717,6 +18900,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 get();
@@ -18805,6 +18989,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -18886,6 +19071,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
                 get();
@@ -18966,6 +19152,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 where('assetQuantity',$_GET['Quantity'])->
                 get();
@@ -19038,6 +19225,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
                 where('assetNumber',$_GET['assetNumber'])->
                 get();
 
@@ -19157,6 +19345,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -19274,6 +19463,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -19382,6 +19572,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -19497,6 +19688,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -19605,6 +19797,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -19712,6 +19905,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -19811,6 +20005,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -19925,6 +20120,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -20033,6 +20229,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -20140,6 +20337,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -20239,6 +20437,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -20345,6 +20544,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -20444,6 +20644,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -20542,6 +20743,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -20656,6 +20858,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -20764,6 +20967,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -20871,6 +21075,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -20970,6 +21175,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -21076,6 +21282,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -21175,6 +21382,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -21273,6 +21481,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -21363,6 +21572,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -21468,6 +21678,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -21567,6 +21778,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -21665,6 +21877,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -21755,6 +21968,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -21853,6 +22067,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -21943,6 +22158,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -22032,6 +22248,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -22121,6 +22338,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetLocation',$_GET['AssetLocation'])->
                 where('Cost',$_GET['cost'])->
@@ -22234,6 +22452,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -22334,6 +22553,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -22440,6 +22660,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -22539,6 +22760,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -22637,6 +22859,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -22727,6 +22950,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
@@ -22832,6 +23056,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -22931,6 +23156,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -23029,6 +23255,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -23119,6 +23346,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -23216,6 +23444,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -23306,6 +23535,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -23395,6 +23625,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -23476,6 +23707,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('Cost',$_GET['cost'])->
                 get();
@@ -23580,6 +23812,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -23679,6 +23912,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -23777,6 +24011,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -23867,6 +24102,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetDateinUse',$_GET['assetDateinUse'])->
@@ -23964,6 +24200,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -24054,6 +24291,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -24143,6 +24381,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -24224,6 +24463,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetAcquisitionDate',$_GET['DateofAcquisition'])->
                 get();
@@ -24320,6 +24560,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -24410,6 +24651,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
@@ -24499,6 +24741,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -24580,6 +24823,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetDateinUse',$_GET['assetDateinUse'])->
                 get();
@@ -24668,6 +24912,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
                 where('assetQuantity',$_GET['Quantity'])->
@@ -24749,6 +24994,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetEndingDepreciationDate',$_GET['EndingDepreciationDate'])->
                 get();
@@ -24829,6 +25075,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                 }else if ($_GET['asset']=='workinprogress') {//
 
                     $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                 where('assetQuantity',$_GET['Quantity'])->
                 get();
@@ -24890,6 +25137,7 @@ class ExcelExport implements FromView, ShouldAutoSize //, WithHeadings
                     }else{
 
                         $assetdata = assetsworkinprogress::
+                Where('_status','0')->
 
                         get();
                     }

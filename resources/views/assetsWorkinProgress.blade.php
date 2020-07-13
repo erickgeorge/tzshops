@@ -38,7 +38,7 @@ Work in Progress
 </div>
 <div class="container">
     <div class="row">
-        @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+        @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Bursar')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
         @else
         <div class="col-md-5">
             <a href="{{url('assetsNewWorkinProgress')}}" class="btn btn-primary text-light" type="button"><b>Add new Work in Progress</b></a>

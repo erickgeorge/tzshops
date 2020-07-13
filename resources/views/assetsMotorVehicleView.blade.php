@@ -107,7 +107,7 @@ MotorVehicle Asset
                   </button>
                 @endif
                  <a href="{{route('assetinfo/export/',[$landinfo->id,'motorvehicle'])}}" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export</a>
-                 @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+                 @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Bursar')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
         @else
                 <a href="{{route('assetsMotorVehicleEdit',[$landinfo->id])}}" class="btn btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
            @endif
