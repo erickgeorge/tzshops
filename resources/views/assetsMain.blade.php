@@ -106,7 +106,7 @@ $workinprogress = assetsworkinprogress::get();
             <div class="card-body">
                 <p class="card-text">
                     <table class="table table-striped display" id="myTable" style="width:100%">
-                        <thead style="text-transform: uppercase;">
+                        <thead  >
                             <tr style="color:white;">
                                 <th>#</th>
                                 <th>Asset Group</th>
@@ -831,7 +831,7 @@ $workinprogress = assetsworkinprogress::get();
                     <a href="{{route('assetssummaryall')}}" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                     </p>
                     <table class="table table-striped display" id="myTable" style="width:100%">
-                        <thead style="text-transform: uppercase;">
+                        <thead  >
                             <tr style="color:white;">
                                 <th>#</th>
                                 <th>Asset Group</th>

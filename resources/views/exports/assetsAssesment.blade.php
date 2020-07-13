@@ -43,7 +43,7 @@ tr:nth-child(even) {
             <th>ASSET #</th>
             <th>DESCRIPTION</th>
             <th>LOCATION</th>
-            <th>COST</th>
+            <th style="text-align:right;">COST</th>
             <th>CONDITION</th>
             <th>D O A </th>
             <th>D I U </th>
@@ -51,9 +51,9 @@ tr:nth-child(even) {
             <th>QN</th>
             <th>A D </th>
             <th>T D Y </th>
-            <th>A D </th>
-            <th>I L </th>
-            <th>D C </th>
+            <th style="text-align:right;">A D </th>
+            <th style="text-align:right;">I L </th>
+            <th style="text-align:right;">D C </th>
         </tr>
     </thead>
     <tbody>

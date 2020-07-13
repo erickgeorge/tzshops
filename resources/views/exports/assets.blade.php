@@ -44,7 +44,7 @@ tr:nth-child(even) {
             <th><b>DATE IN USE</b></th>
             <th><b>ENDING DEPRECIATION DATE</b></th>
             <th><b>QUANTITY</b></th>
-            <th><b>COST/REP COST</b></th>
+            <th style="text-align:right;"><b>COST/REP COST</b></th>
             <th><b>CONDITION</b></th>
             <th><b>USEFUL LIFE</b></th>
             <th><b>DEPRECIATION RATE</b></th>

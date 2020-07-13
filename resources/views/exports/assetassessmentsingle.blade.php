@@ -100,9 +100,9 @@ tr:nth-child(even) {
             <th>#</th>
             <th>Assesment Year</th>
             <th>Total Depreciated Years</th>
-            <th>Accumulated Depreciation</th>
-            <th>Impairment Loss</th>
-            <th>Disposal Cost</th>
+            <th style="text-align:right;">Accumulated Depreciation</th>
+            <th style="text-align:right;">Impairment Loss</th>
+            <th style="text-align:right;">Disposal Cost</th>
         </tr>
     </thead>
     @php

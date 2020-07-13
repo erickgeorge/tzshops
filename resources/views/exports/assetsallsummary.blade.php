@@ -52,7 +52,7 @@ tr:nth-child(even) {
             <th>#</th>
             <th>Asset Group</th>
             <th>Total</th>
-            <th>Asset Value</th>
+            <th style="text-align:right;">Asset Value</th>
         </tr>
     </thead>
     <tbody>

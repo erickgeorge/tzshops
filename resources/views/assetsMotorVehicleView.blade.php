@@ -216,14 +216,14 @@ MotorVehicle Asset
             </div>
         </div><br>
         <table class="table table-striped display" id="myTable" style="width:100%">
-            <thead style="text-transform: uppercase;">
+            <thead  >
                 <tr style="color:white;">
                     <th>#</th>
                     <th>Assesment date</th>
                     <th>Total Depreciated Years</th>
-                    <th>Accumulated Depreciation</th>
-                    <th>Impairment Loss</th>
-                    <th>Disposal Cost</th>
+                    <th style="text-align:right;">Accumulated Depreciation</th>
+                    <th style="text-align:right;">Impairment Loss</th>
+                    <th style="text-align:right;">Disposal Cost</th>
                     <th>Assesed By</th>
                 </tr>
             </thead>

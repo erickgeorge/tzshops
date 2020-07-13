@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\DB;
         <div class="card-body">
             <p class="card-text">
                 <table class="table table-striped display">
-                    <thead style="text-transform: uppercase;">
+                    <thead>
                         <tr style="color:white;">
                             <th>New</th>
                             <th>Good</th>
@@ -320,14 +320,14 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
     <div id="accordion">
         @if (count($land)>0)
         <table class="table table-striped display" id="myTable" style="width:100%">
-            <thead style="text-transform: uppercase;">
+            <thead>
                 <tr style="color:white;">
                     <th>#</th>
-                    <th>ASSET #</th>
+                    <th>Asset #</th>
                     <th>Description</th>
                     <th>Location</th>
-                    <th>Cost</th>
-                    <th>Condition</th>
+                    <th style="text-align:right;">Cost</th>
+                    <th >Condition</th>
                     <th title="Date of Acqusition">DoA</th>
                     <th title="Date in use">DiU</th>
                     <th title="Ending Depreciation Date">EDD</th>
@@ -422,15 +422,15 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
         </div>
 </div>
         <table class="table table-striped display" id="myTableAssesment" style="width:100%">
-            <thead style="text-transform: uppercase;">
+            <thead>
                 <tr style="color:white;">
                     <th>#</th>
                     <th>Asset Number</th>
-                    <th>Assesment date</th>
+                    <th>Assessment date</th>
                     <th>Total Depreciated Years</th>
-                    <th>Accumulated Depreciation</th>
-                    <th>Impairment Loss</th>
-                    <th>Disposal Cost</th>
+                    <th style="text-align:right;">Accumulated Depreciation</th>
+                    <th style="text-align:right;">Impairment Loss</th>
+                    <th  style="text-align:right;">Disposal Cost</th>
                 </tr>
             </thead>
             @php

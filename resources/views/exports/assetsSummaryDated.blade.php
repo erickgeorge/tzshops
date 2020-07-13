@@ -58,15 +58,15 @@ tr:nth-child(even) {
             <th><b>Date in Use</b></th>
             <th><b>Ending Depreciation Date</b></th>
             <th><b>Qty</b></th>
-            <th><b>Cost/Rep.Cost</b></th>
+            <th style="text-align:right;"><b>Cost/Rep.Cost</b></th>
             <th><b>Asset Condition</b></th>
             <th><b>Assets Useful Life</b></th>
             <th><b>Depreciation Rate</b></th>
             <th><b>Total Depreciated years</b></th>
             <th><b>Depreciation For The Year</b></th>
-            <th><b>Accumulated Depreciation</b></th>
-            <th><b>Impairment Loss</b></th>
-            <th><b>Disposal Cost</b></th>
+            <th style="text-align:right;"><b>Accumulated Depreciation</b></th>
+            <th style="text-align:right;"><b>Impairment Loss</b></th>
+            <th style="text-align:right;"><b>Disposal Cost</b></th>
             <th><b>Net Carring Amount</b></th>
         </tr>
     </thead>

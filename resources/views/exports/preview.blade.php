@@ -49,7 +49,7 @@
                 <th><b>Date In Use </b></th>
                 <th><b  >Ending Depreciation Date </b></th>
                 <th><b  >Quantity</b></th>
-                <th><b  >Cost/Repair Cost</b></th>
+                <th style="text-align:right;"><b  >Cost/Repair Cost</b></th>
                 <th><b  >Condition</b></th>
                 <th><b   >Useful Life</b></th>
                 <th><b >Depreciation Rate </b></th>

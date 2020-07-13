@@ -197,7 +197,7 @@ Work in Progress
     <br>
     @if (count($land)>0)
     <table class="table table-striped display" id="myTable" style="width:100%">
-        <thead style="text-transform: uppercase;">
+        <thead >
             <tr style="color:white;">
                 <th>#</th>
                 <th>Asset#</th>

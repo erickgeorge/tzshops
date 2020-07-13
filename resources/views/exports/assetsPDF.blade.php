@@ -34,7 +34,7 @@ tr:nth-child(even) {
             <th><b style="text-transform: capitalize;">DATE IN USE </b></th>
             <th><b style="text-transform: capitalize;">ENDING DPRECIATION DATE </b></th>
             <th><b style="text-transform: capitalize;">QUANTITY</b></th>
-            <th><b style="text-transform: capitalize;">COST/REPAIR COST</b></th>
+            <th style="text-align:right;"><b style="text-transform: capitalize;">COST/REPAIR COST</b></th>
             <th><b style="text-transform: capitalize;">CONDITION</b></th>
             <th><b style="text-transform: capitalize;">USEFUL LIFE</b></th>
             <th><b style="text-transform: capitalize;">DEPRECIATION RATE </b></th>
