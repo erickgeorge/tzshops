@@ -165,7 +165,7 @@ Intangible Assets
 
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
         </div>
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -369,7 +369,7 @@ Intangible Assets
     </div>
     @endif
 <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Latest Assets Assesment Summary</a>
+  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Latest Assets Assessment Summary</a>
 
 </p>
 <div class="row">

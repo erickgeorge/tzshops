@@ -45,7 +45,7 @@ Work in Progress
         </div>
         @endif
         <div class="col-md-3">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
         </div>
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

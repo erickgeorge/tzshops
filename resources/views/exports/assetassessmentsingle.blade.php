@@ -99,7 +99,7 @@ tr:nth-child(even) {
     <thead class="thead-light">
         <tr>
             <th>#</th>
-            <th>Assesment Year</th>
+            <th>Assessment Year</th>
             <th>Total Depreciated Years</th>
             <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
             <th style="text-align:right;">Impairment Loss (Tsh)</th>

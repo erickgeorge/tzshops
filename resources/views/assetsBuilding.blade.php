@@ -164,7 +164,7 @@ use Illuminate\Support\Facades\DB;
 
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
     </div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -310,7 +310,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Export</button>
+          <button type="submit" class="btn btn-primary">Export </button>
         </div>
         </form>
       </div>
@@ -374,7 +374,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
 
 
 <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Latest Assets Assesment Summary</a>
+  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Latest Assets Assessment Summary</a>
 
 </p>
 <div class="row">

@@ -106,7 +106,7 @@ Equipment Asset
                     <i class="fa fa-calendar-check-o" aria-hidden="true"></i>  Asses
                   </button>
                 @endif
-                 <a href="{{route('assetinfo/export/',[$landinfo->id,'equipment'])}}" class="btn btn-primary" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export</a>
+                 <a href="{{route('assetinfo/export/',[$landinfo->id,'equipment'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                  @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Bursar')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
                  @else
                 <a href="{{route('assetsEquipmentEdit',[$landinfo->id])}}" class="btn btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
@@ -195,8 +195,8 @@ Equipment Asset
                         <input type="text" name="id" value="{{$landinfo->id}}" hidden>
                   </div>
                   <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Assesment</button>
                   </div>
               </form>
                 </div>
@@ -212,7 +212,7 @@ Equipment Asset
         <h4>Assesmet Records</h4><hr>
         <div class="row text-right">
             <div class="col">
-                <a href="{{route('asset/assesment/export/',[$type])}}?type=equipment" class="btn btn-primary" id="btnExport" > Export </a>
+                <a href="{{route('asset/assesment/export/',[$type])}}?type=equipment" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
             </div>
         </div><br>
         <table class="table table-striped display" id="myTable" style="width:100%">

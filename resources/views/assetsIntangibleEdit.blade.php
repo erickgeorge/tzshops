@@ -94,10 +94,10 @@ Edit Intangible Asset
             <br>
             <div class="row">
                 <div class="form-group col-md-2">
-                    <a href="{{route('assetsIntangibleView',[$item->id])}}" class="form-control btn btn-danger" name="newcard">Cancel</a>
+                    <button id="newcard" class="form-control btn btn-primary" name="newcard">Save</button>
                 </div>
                 <div class="form-group col-md-2">
-                    <button id="newcard" class="form-control btn btn-primary" name="newcard">Submit</button>
+                    <a href="{{route('assetsIntangibleView',[$item->id])}}" class="form-control btn btn-danger" name="newcard">Cancel</a>
                 </div>
             </div>
         </form>

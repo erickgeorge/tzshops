@@ -36,7 +36,7 @@ tr:nth-child(even) {
         </center>
     </div>
 </div>
-<center> @php echo ' Asset Assesment Record'; @endphp </center>
+<center> @php echo ' Asset Assessment Records'; @endphp </center>
 <table class="table table-light">
     <thead class="thead-light">
         <tr>

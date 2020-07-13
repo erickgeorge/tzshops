@@ -19,7 +19,7 @@ use App\assetsplantandmachinery;
     <div class="row container-fluid" >
         <div class="col">
             <h4 style="text-transform: uppercase;">
-                All @php echo $_GET['asset']; @endphp Assets Assesment Records For <?php  $time = strtotime($_GET['filter'])?>  {{date('d/m/Y',$time)  }}
+                All @php echo $_GET['asset']; @endphp Assets Assessment Records For <?php  $time = strtotime($_GET['filter'])?>  {{date('d/m/Y',$time)  }}
             </h4>
         </div>
     </div>
@@ -43,7 +43,7 @@ use App\assetsplantandmachinery;
             <tr style="color:white;">
                 <th>#</th>
                 <th>Asset Number</th>
-                <th>Assesment date</th>
+                <th>Assessment date</th>
                 <th>Total Depreciated Years</th>
                 <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
                 <th style="text-align:right;">Impairment Loss (Tsh)</th>
@@ -91,7 +91,7 @@ use App\assetsplantandmachinery;
                 <td style="text-align:right;">{{number_format($asses->accumulatedDepreciation)}}  </td>
                 <td style="text-align:right;">{{number_format($asses->impairmentLoss)}}  </td>
                 <td style="text-align:right;">{{number_format($asses->disposalCost)}}   </td>
-                <td> <a class="btn btn-primary" href="{{route('assets'.$_GET['asset'].'View',[$asses->assetID])}}">View</a>  </td>
+                <td> <a class="btn btn-primary" href="{{route('assets'.$_GET['asset'].'View',[$asses->assetID])}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>  </td>
 
             </tr>
             @php
