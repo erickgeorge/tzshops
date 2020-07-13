@@ -180,6 +180,7 @@ Work in Progress
                                         <option value="{{$quantity->assetQuantity}}">{{$quantity->assetQuantity}}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="expired" value="" hidden>
                             </div>
                         </div>
                       </div>

@@ -115,7 +115,7 @@ $workinprogress = assetsworkinprogress::get();
                                 <th>Fair</th>
                                 <th>Poor</th>
                                 <th>Very Poor</th>
-                                <th>Absolette</th>
+                                <th>Obsolete</th>
                                 <th>Disposed</th>
                                 <th>Sold</th>
                                 <th>Expired</th>
@@ -131,7 +131,7 @@ $workinprogress = assetsworkinprogress::get();
                                     $build3 = assetsbuilding::where('_condition','Fair')->get();
                                     $build4 = assetsbuilding::where('_condition','Poor')->get();
                                     $build5 = assetsbuilding::where('_condition','Very Poor')->get();
-                                    $build6 = assetsbuilding::where('_condition','Absolette')->get();
+                                    $build6 = assetsbuilding::where('_condition','Obsolete')->get();
                                     $build7 = assetsbuilding::where('_condition','Disposed')->get();
                                     $build8 = assetsbuilding::where('_condition','Sold')->get();
                                     $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -218,7 +218,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $computerequipment3 = assetscomputerequipment::where('_condition','Fair')->get();
                                 $computerequipment4 = assetscomputerequipment::where('_condition','Poor')->get();
                                 $computerequipment5 = assetscomputerequipment::where('_condition','Very Poor')->get();
-                                $computerequipment6 = assetscomputerequipment::where('_condition','Absolette')->get();
+                                $computerequipment6 = assetscomputerequipment::where('_condition','Obsolete')->get();
                                 $computerequipment7 = assetscomputerequipment::where('_condition','Disposed')->get();
                                 $computerequipment8 = assetscomputerequipment::where('_condition','Sold')->get();
                                 $computerequipment9 = assetscomputerequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -305,7 +305,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $equipment3 = assetsequipment::where('_condition','Fair')->get();
                                 $equipment4 = assetsequipment::where('_condition','Poor')->get();
                                 $equipment5 = assetsequipment::where('_condition','Very Poor')->get();
-                                $equipment6 = assetsequipment::where('_condition','Absolette')->get();
+                                $equipment6 = assetsequipment::where('_condition','Obsolete')->get();
                                 $equipment7 = assetsequipment::where('_condition','Disposed')->get();
                                 $equipment8 = assetsequipment::where('_condition','Sold')->get();
                                 $equipment9 = assetsequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -392,7 +392,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $furniture3 = assetsfurniture::where('_condition','Fair')->get();
                                 $furniture4 = assetsfurniture::where('_condition','Poor')->get();
                                 $furniture5 = assetsfurniture::where('_condition','Very Poor')->get();
-                                $furniture6 = assetsfurniture::where('_condition','Absolette')->get();
+                                $furniture6 = assetsfurniture::where('_condition','Obsolete')->get();
                                 $furniture7 = assetsfurniture::where('_condition','Disposed')->get();
                                 $furniture8 = assetsfurniture::where('_condition','Sold')->get();
                                 $furniture9 = assetsfurniture::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -479,7 +479,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $intangible3 = assetsintangible::where('_condition','Fair')->get();
                                 $intangible4 = assetsintangible::where('_condition','Poor')->get();
                                 $intangible5 = assetsintangible::where('_condition','Very Poor')->get();
-                                $intangible6 = assetsintangible::where('_condition','Absolette')->get();
+                                $intangible6 = assetsintangible::where('_condition','Obsolete')->get();
                                 $intangible7 = assetsintangible::where('_condition','Disposed')->get();
                                 $intangible8 = assetsintangible::where('_condition','Sold')->get();
                                 $intangible9 = assetsintangible::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -566,7 +566,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $land3 = assetsland::where('_condition','Fair')->get();
                                 $land4 = assetsland::where('_condition','Poor')->get();
                                 $land5 = assetsland::where('_condition','Very Poor')->get();
-                                $land6 = assetsland::where('_condition','Absolette')->get();
+                                $land6 = assetsland::where('_condition','Obsolete')->get();
                                 $land7 = assetsland::where('_condition','Disposed')->get();
                                 $land8 = assetsland::where('_condition','Sold')->get();
                                 $land9 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -653,7 +653,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $motorvehicle3 = assetsmotorvehicle::where('_condition','Fair')->get();
                                 $motorvehicle4 = assetsmotorvehicle::where('_condition','Poor')->get();
                                 $motorvehicle5 = assetsmotorvehicle::where('_condition','Very Poor')->get();
-                                $motorvehicle6 = assetsmotorvehicle::where('_condition','Absolette')->get();
+                                $motorvehicle6 = assetsmotorvehicle::where('_condition','Obsolete')->get();
                                 $motorvehicle7 = assetsmotorvehicle::where('_condition','Disposed')->get();
                                 $motorvehicle8 = assetsmotorvehicle::where('_condition','Sold')->get();
                                 $motorvehicle9 = assetsmotorvehicle::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -740,7 +740,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $plantandmachinery3 = assetsplantandmachinery::where('_condition','Fair')->get();
                                 $plantandmachinery4 = assetsplantandmachinery::where('_condition','Poor')->get();
                                 $plantandmachinery5 = assetsplantandmachinery::where('_condition','Very Poor')->get();
-                                $plantandmachinery6 = assetsplantandmachinery::where('_condition','Absolette')->get();
+                                $plantandmachinery6 = assetsplantandmachinery::where('_condition','Obsolete')->get();
                                 $plantandmachinery7 = assetsplantandmachinery::where('_condition','Disposed')->get();
                                 $plantandmachinery8 = assetsplantandmachinery::where('_condition','Sold')->get();
                                 $plantandmachinery9 = assetsplantandmachinery::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();

@@ -175,7 +175,7 @@
 
 
                     @endif
-                    @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+                    @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin')||(auth()->user()->type == 'Bursar')||(auth()->user()->type == 'Assets Officer'))
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
             </li>

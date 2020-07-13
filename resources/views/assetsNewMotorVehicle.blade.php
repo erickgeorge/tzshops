@@ -64,7 +64,7 @@ New MotorVehicle Asset
                                     <option value="Fair">Fair</option>
                                     <option value="Poor">Poor</option>
                                     <option value="Very Poor">Very Poor</option>
-                                    <option value="Absolute">Absolette</option>
+                                    <option value="Obsolete">Obsolete</option>
                                 </select>
                             </div>
                         </div>

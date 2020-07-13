@@ -53,7 +53,7 @@ Intangible Assets
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                
+
                 <table class="table table-striped display">
                     <thead style="text-transform: uppercase;">
                         <tr style="color:white;">
@@ -62,7 +62,7 @@ Intangible Assets
                             <th>Fair</th>
                             <th>Poor</th>
                             <th>Very Poor</th>
-                            <th>Absolette</th>
+                            <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
                             <th>Expired</th>
@@ -76,7 +76,7 @@ Intangible Assets
                                 $intangible3 = assetsintangible::where('_condition','Fair')->get();
                                 $intangible4 = assetsintangible::where('_condition','Poor')->get();
                                 $intangible5 = assetsintangible::where('_condition','Very Poor')->get();
-                                $intangible6 = assetsintangible::where('_condition','Absolette')->get();
+                                $intangible6 = assetsintangible::where('_condition','Obsolete')->get();
                                 $intangible7 = assetsintangible::where('_condition','Disposed')->get();
                                 $intangible8 = assetsintangible::where('_condition','Sold')->get();
                                 $intangible9 = assetsintangible::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -162,7 +162,7 @@ Intangible Assets
     <br>
     <div class="row">
         <div class="col">
-            
+
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
@@ -300,6 +300,7 @@ Intangible Assets
                                         <option value="{{$quantity->assetQuantity}}">{{$quantity->assetQuantity}}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="expired" value="" hidden>
                             </div>
                         </div>
                       </div>
@@ -349,7 +350,7 @@ Intangible Assets
                     <td>{{$landinfo->_condition}}</td>
                     @endif
 
-                    
+
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetEndingDepreciationDate)?>  {{date('d/m/Y',$time)  }}</td>

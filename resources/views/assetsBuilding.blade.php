@@ -61,7 +61,7 @@ use Illuminate\Support\Facades\DB;
                             <th>Fair</th>
                             <th>Poor</th>
                             <th>Very Poor</th>
-                            <th>Absolette</th>
+                            <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
                             <th>Expired</th>
@@ -75,7 +75,7 @@ use Illuminate\Support\Facades\DB;
                             $build3 = assetsbuilding::where('_condition','Fair')->get();
                             $build4 = assetsbuilding::where('_condition','Poor')->get();
                             $build5 = assetsbuilding::where('_condition','Very Poor')->get();
-                            $build6 = assetsbuilding::where('_condition','Absolette')->get();
+                            $build6 = assetsbuilding::where('_condition','Obsolete')->get();
                             $build7 = assetsbuilding::where('_condition','Disposed')->get();
                             $build8 = assetsbuilding::where('_condition','Sold')->get();
                             $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -161,7 +161,7 @@ use Illuminate\Support\Facades\DB;
     <br>
     <div class="row">
         <div class="col">
-            
+
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
@@ -303,6 +303,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
                                     <option value="{{$quantity->assetQuantity}}">{{$quantity->assetQuantity}}</option>
                                 @endforeach
                             </select>
+                            <input type="text" name="expired" value="" hidden>
                         </div>
                     </div>
                   </div>
@@ -352,7 +353,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
                         <td>{{$landinfo->_condition}}</td>
                         @endif
 
-                        
+
                         <td>{{$landinfo->_condition}}</td>
                         <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                         <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>

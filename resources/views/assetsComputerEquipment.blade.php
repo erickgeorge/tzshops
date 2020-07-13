@@ -47,13 +47,13 @@ Computer Equipment Assets
             <a href="{{url('assetsNewComputerEquipment')}}" class="btn btn-primary text-light" type="button"><b>Add new Computer Equipment asset</b></a>
         </div>
         @endif
-        
+
     </div>
     <br>
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                
+
                 <table class="table table-striped display">
                     <thead style="text-transform: uppercase;">
                         <tr style="color:white;">
@@ -62,7 +62,7 @@ Computer Equipment Assets
                             <th>Fair</th>
                             <th>Poor</th>
                             <th>Very Poor</th>
-                            <th>Absolette</th>
+                            <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
                             <th>Expired</th>
@@ -76,7 +76,7 @@ Computer Equipment Assets
                                 $computerequipment3 = assetscomputerequipment::where('_condition','Fair')->get();
                                 $computerequipment4 = assetscomputerequipment::where('_condition','Poor')->get();
                                 $computerequipment5 = assetscomputerequipment::where('_condition','Very Poor')->get();
-                                $computerequipment6 = assetscomputerequipment::where('_condition','Absolette')->get();
+                                $computerequipment6 = assetscomputerequipment::where('_condition','Obsolete')->get();
                                 $computerequipment7 = assetscomputerequipment::where('_condition','Disposed')->get();
                                 $computerequipment8 = assetscomputerequipment::where('_condition','Sold')->get();
                                 $computerequipment9 = assetscomputerequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -162,7 +162,7 @@ Computer Equipment Assets
     <br>
     <div class="row">
         <div class="col">
-            
+
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
@@ -300,6 +300,7 @@ Computer Equipment Assets
                                         <option value="{{$quantity->assetQuantity}}">{{$quantity->assetQuantity}}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="expired" value="" hidden>
                             </div>
                         </div>
                       </div>
@@ -351,7 +352,7 @@ Computer Equipment Assets
                     <td>{{$landinfo->_condition}}</td>
                     @endif
 
-                    
+
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetEndingDepreciationDate)?>  {{date('d/m/Y',$time)  }}</td>

@@ -53,7 +53,7 @@ use App\assetsassesmotorvehicle;
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                
+
                 <table class="table table-striped display">
                     <thead style="text-transform: uppercase;">
                         <tr style="color:white;">
@@ -62,7 +62,7 @@ use App\assetsassesmotorvehicle;
                             <th>Fair</th>
                             <th>Poor</th>
                             <th>Very Poor</th>
-                            <th>Absolette</th>
+                            <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
                             <th>Expired</th>
@@ -76,7 +76,7 @@ use App\assetsassesmotorvehicle;
                                 $motorvehicle3 = assetsmotorvehicle::where('_condition','Fair')->get();
                                 $motorvehicle4 = assetsmotorvehicle::where('_condition','Poor')->get();
                                 $motorvehicle5 = assetsmotorvehicle::where('_condition','Very Poor')->get();
-                                $motorvehicle6 = assetsmotorvehicle::where('_condition','Absolette')->get();
+                                $motorvehicle6 = assetsmotorvehicle::where('_condition','Obsolete')->get();
                                 $motorvehicle7 = assetsmotorvehicle::where('_condition','Disposed')->get();
                                 $motorvehicle8 = assetsmotorvehicle::where('_condition','Sold')->get();
                                 $motorvehicle9 = assetsmotorvehicle::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -162,7 +162,7 @@ use App\assetsassesmotorvehicle;
     <br>
     <div class="row">
         <div class="col">
-            
+
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
@@ -300,6 +300,7 @@ use App\assetsassesmotorvehicle;
                                         <option value="{{$quantity->assetQuantity}}">{{$quantity->assetQuantity}}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="expired" value="" hidden>
                             </div>
                         </div>
                       </div>
@@ -349,7 +350,7 @@ use App\assetsassesmotorvehicle;
                     <td>{{$landinfo->_condition}}</td>
                     @endif
 
-                    
+
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetEndingDepreciationDate)?>  {{date('d/m/Y',$time)  }}</td>

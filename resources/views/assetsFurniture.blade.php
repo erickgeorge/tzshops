@@ -53,7 +53,7 @@ Furniture Assets
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                
+
                 <table class="table table-striped display">
                     <thead style="text-transform: uppercase;">
                         <tr style="color:white;">
@@ -62,7 +62,7 @@ Furniture Assets
                             <th>Fair</th>
                             <th>Poor</th>
                             <th>Very Poor</th>
-                            <th>Absolette</th>
+                            <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
                             <th>Expired</th>
@@ -76,7 +76,7 @@ Furniture Assets
                                 $furniture3 = assetsfurniture::where('_condition','Fair')->get();
                                 $furniture4 = assetsfurniture::where('_condition','Poor')->get();
                                 $furniture5 = assetsfurniture::where('_condition','Very Poor')->get();
-                                $furniture6 = assetsfurniture::where('_condition','Absolette')->get();
+                                $furniture6 = assetsfurniture::where('_condition','Obsolete')->get();
                                 $furniture7 = assetsfurniture::where('_condition','Disposed')->get();
                                 $furniture8 = assetsfurniture::where('_condition','Sold')->get();
                                 $furniture9 = assetsfurniture::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -162,7 +162,7 @@ Furniture Assets
     <br>
     <div class="row">
         <div class="col">
-            
+
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
@@ -300,6 +300,7 @@ Furniture Assets
                                         <option value="{{$quantity->assetQuantity}}">{{$quantity->assetQuantity}}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="expired" value="" hidden>
                             </div>
                         </div>
                       </div>
@@ -349,7 +350,7 @@ Furniture Assets
                     <td>{{$landinfo->_condition}}</td>
                     @endif
 
-                    
+
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetEndingDepreciationDate)?>  {{date('d/m/Y',$time)  }}</td>

@@ -54,7 +54,7 @@ Land Assets
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                
+
                 <table class="table table-striped display">
                     <thead style="text-transform: uppercase;">
                         <tr style="color:white;">
@@ -63,7 +63,7 @@ Land Assets
                             <th>Fair</th>
                             <th>Poor</th>
                             <th>Very Poor</th>
-                            <th>Absolette</th>
+                            <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
                             <th>Expired</th>
@@ -77,7 +77,7 @@ Land Assets
                             $land3 = assetsland::where('_condition','Fair')->get();
                             $land4 = assetsland::where('_condition','Poor')->get();
                             $land5 = assetsland::where('_condition','Very Poor')->get();
-                            $land6 = assetsland::where('_condition','Absolette')->get();
+                            $land6 = assetsland::where('_condition','Obsolete')->get();
                             $land7 = assetsland::where('_condition','Disposed')->get();
                             $land8 = assetsland::where('_condition','Sold')->get();
                             $land9 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
@@ -163,7 +163,7 @@ Land Assets
     <br>
     <div class="row">
         <div class="col">
-            
+
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export </button>
@@ -301,6 +301,7 @@ Land Assets
                                         <option value="{{$quantity->assetQuantity}}">{{$quantity->assetQuantity}}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="expired" value="" hidden>
                             </div>
                         </div>
                       </div>
@@ -348,7 +349,7 @@ Land Assets
                     <td>{{$landinfo->_condition}}</td>
                     @endif
 
-                    
+
                     <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
                     <td>{{$landinfo->_condition}}</td>
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>

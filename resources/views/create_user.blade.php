@@ -176,7 +176,9 @@ User Registration
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
-	                  <option value="CLIENT">Client</option>
+                      <option value="Assets Officer">Assets Officer</option>
+                      <option value="Bursar">Bursar</option>
+                      <option value="CLIENT">Client</option>
 
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>

@@ -140,7 +140,7 @@ ComputerEquipment Asset
                                   <option value="Poor">Poor</option>
                                   <option value="Very Poor">Very Poor</option>
                                   <option value="Absolute">Absolette</option>
-                                  <option value="Disposed">Disposed</option>
+                                  <option value="Obsolete">Obsolete</option>
                                   <option value="Sold">Sold</option>
                               </select>
                           </div>
