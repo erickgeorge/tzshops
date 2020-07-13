@@ -11,8 +11,9 @@ use App\assetsassesplantandmachinery;
 
 @endphp
 <center>
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <h1>University of Dar es salaam</h1>
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+
     <h3>Directorate of Estates Services</h3>
 </center>
 <hr>
@@ -100,9 +101,9 @@ tr:nth-child(even) {
             <th>#</th>
             <th>Assesment Year</th>
             <th>Total Depreciated Years</th>
-            <th style="text-align:right;">Accumulated Depreciation</th>
-            <th style="text-align:right;">Impairment Loss</th>
-            <th style="text-align:right;">Disposal Cost</th>
+            <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
+            <th style="text-align:right;">Impairment Loss (Tsh)</th>
+            <th style="text-align:right;">Disposal Cost (Tsh)</th>
         </tr>
     </thead>
     @php

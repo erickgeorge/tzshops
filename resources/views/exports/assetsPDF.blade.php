@@ -16,8 +16,9 @@ tr:nth-child(even) {
 </style>
 <div>
     <center>
-        <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+       
         <h1>University of Dar es salaam</h1>
+        <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
         <h2>Direcorate of Estates Services</h2>
         <h3>NON - CURRENT ASSET REGISTER - AS AT @php echo date('d M, Y'); @endphp</h3>
     </center>
@@ -26,18 +27,18 @@ tr:nth-child(even) {
     <thead class="thead-light">
 
         <tr>
-            <th><b style="text-transform: capitalize;">SN</b></th>
-            <th><b style="text-transform: capitalize;">ASSET #</b></th>
-            <th><b style="text-transform: capitalize;">ASSET DESCRIPTION </b></th>
-            <th><b style="text-transform: capitalize;">SITE LOCATION </b></th>
-            <th><b style="text-transform: capitalize;">DATE OF ACQUISITION </b></th>
-            <th><b style="text-transform: capitalize;">DATE IN USE </b></th>
-            <th><b style="text-transform: capitalize;">ENDING DPRECIATION DATE </b></th>
-            <th><b style="text-transform: capitalize;">QUANTITY</b></th>
-            <th style="text-align:right;"><b style="text-transform: capitalize;">COST/REPAIR COST</b></th>
-            <th><b style="text-transform: capitalize;">CONDITION</b></th>
-            <th><b style="text-transform: capitalize;">USEFUL LIFE</b></th>
-            <th><b style="text-transform: capitalize;">DEPRECIATION RATE </b></th>
+            <th><b>SN</b></th>
+            <th><b >Asset #</b></th>
+            <th><b  >Asset Description </b></th>
+            <th><b  >Site Location </b></th>
+            <th><b  >Date Of Acquistion </b></th>
+            <th><b >Date In Use </b></th>
+            <th><b  >Ending Depreciation Date </b></th>
+            <th><b  >Quantity</b></th>
+            <th style="text-align:right;"><b >Cost/Repair Cost (Tshs)</b></th>
+            <th><b >Condition</b></th>
+            <th><b  >Useful Life</b></th>
+            <th><b  >Depreciation Rate </b></th>
         </tr>
     </thead>
     <tbody>

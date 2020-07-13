@@ -37,17 +37,17 @@ tr:nth-child(even) {
         </tr>
         <tr>
             <th><b>SN</b></th>
-            <th><b>ASSET NUMBER</b></th>
-            <th><b>ASSET DESCRIPTION</b></th>
-            <th><b>SITE LOCATION</b></th>
-            <th><b>DATE OF ACQUISITION</b></th>
-            <th><b>DATE IN USE</b></th>
-            <th><b>ENDING DEPRECIATION DATE</b></th>
-            <th><b>QUANTITY</b></th>
-            <th style="text-align:right;"><b>COST/REP COST</b></th>
-            <th><b>CONDITION</b></th>
-            <th><b>USEFUL LIFE</b></th>
-            <th><b>DEPRECIATION RATE</b></th>
+            <th><b>Asset Number</b></th>
+            <th><b>Asset Description</b></th>
+            <th><b>Site Location</b></th>
+            <th><b>Date of Acquisition</b></th>
+            <th><b>Date in Use</b></th>
+            <th><b>Ending depreciation Rate</b></th>
+            <th><b>Quantity</b></th>
+            <th style="text-align:right;"><b>Cost/ Rep cost (Tsh)</b></th>
+            <th><b>Condition</b></th>
+            <th><b>Useful Life</b></th>
+            <th><b>Depreciation Rate</b></th>
         </tr>
     </thead>
     <tbody>

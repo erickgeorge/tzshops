@@ -203,11 +203,11 @@ Work in Progress
                 <th>Asset#</th>
                 <th>Description</th>
                 <th>Location</th>
-                <th>cost</th>
+                <th style="text-align: right;">Cost (Tsh)</th>
                 <th>condition</th>
                 <th>Created at</th>
                 <th>Quantity</th>
-                <th></th>
+                <th>Action</th>
             </tr>
             @php
                 $d=1;

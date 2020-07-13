@@ -55,7 +55,7 @@ Plant and Machinery Assets
             <p class="card-text">
 
                 <table class="table table-striped display">
-                    <thead style="text-transform: uppercase;">
+                    <thead >
                         <tr style="color:white;">
                             <th>New</th>
                             <th>Good</th>
@@ -323,13 +323,13 @@ Plant and Machinery Assets
                 <th>Asset#</th>
                 <th>Description</th>
                 <th>Location</th>
-                <th style="text-align:right;">cost</th>
+                <th style="text-align:right;">Cost (Tsh)</th>
                 <th>condition</th>
                 <th title="Date of Acqusition">DoA</th>
                 <th title="Date in use">DiU</th>
                 <th title="Ending Depreciation Date">EDD</th>
                 <th>Quantity</th>
-                <th></th>
+                <th>Action</th>
             </tr>
             @php
                 $d=1;
@@ -419,9 +419,9 @@ Plant and Machinery Assets
                       <th>Asset Number</th>
                       <th>Assessment date</th>
                       <th>Total Depreciated Years</th>
-                      <th style="text-align:right;">Accumulated Depreciation</th>
-                      <th style="text-align:right;">Impairment Loss</th>
-                      <th style="text-align:right;">Disposal Cost</th>
+                      <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
+                      <th style="text-align:right;">Impairment Loss (Tsh)</th>
+                      <th style="text-align:right;">Disposal Cost (Tsh)</th>
                   </tr>
               </thead>
               @php

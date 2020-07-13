@@ -222,9 +222,9 @@ Plant and Machinery Asset
                     <th>#</th>
                     <th>Assessment date</th>
                     <th>Total Depreciated Years</th>
-                    <th style="text-align:right;">Accumulated Depreciation</th>
-                    <th style="text-align:right;">Impairment Loss</th>
-                    <th style="text-align:right;">Disposal Cost</th>
+                    <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
+                    <th style="text-align:right;">Impairment Loss (Tsh)</th>
+                    <th style="text-align:right;">Disposal Cost (Tsh)</th>
                     <th>Assesed By</th>
                 </tr>
             </thead>

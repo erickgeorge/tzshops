@@ -29,8 +29,9 @@ tr:nth-child(even) {
 <div>
     <div>
         <center>
-            <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
             <h1>University of Dar es salaam</h1>
+            <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+
             <h3>Directorate of Estates Services</h3>
         </center>
     </div>
@@ -40,20 +41,20 @@ tr:nth-child(even) {
     <thead class="thead-light">
         <tr>
             <th>SN</th>
-            <th>ASSET #</th>
-            <th>DESCRIPTION</th>
-            <th>LOCATION</th>
-            <th style="text-align:right;">COST</th>
-            <th>CONDITION</th>
-            <th>D O A </th>
-            <th>D I U </th>
-            <th>E D D </th>
-            <th>QN</th>
-            <th>A D </th>
-            <th>T D Y </th>
-            <th style="text-align:right;">A D </th>
-            <th style="text-align:right;">I L </th>
-            <th style="text-align:right;">D C </th>
+            <th>Asset #</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th style="text-align:right;">Cost (Tsh)</th>
+            <th>Condition</th>
+            <th>Date of Acquistion </th>
+            <th>Date in Use </th>
+            <th>Ending Depreciation Date </th>
+            <th>Quantity</th>
+            <th>Assessment Year </th>
+            <th>Total Depreciated Years </th>
+            <th style="text-align:right;">Acumulated Depreciation </th>
+            <th style="text-align:right;">Impairment Loss </th>
+            <th style="text-align:right;">Disposal Cost </th>
         </tr>
     </thead>
     <tbody>
