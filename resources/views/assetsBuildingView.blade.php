@@ -99,6 +99,8 @@ Building Asset
             </div>
             <div class="card-footer text-right">
                <!-- Button trigger modal -->
+               @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
+
                @if ($landinfo->_condition=='Disposed')
 
                @else
@@ -106,8 +108,9 @@ Building Asset
                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>  Asses
                  </button>
                @endif
+               @endif
                 <a href="{{route('assetinfo/export/',[$landinfo->id,'building'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
-                @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Bursar')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin'))
+                @if (($role['user_role']['role_id'] != 1)||(auth()->user()->type !='Assets Officer'))
                 @else
                 <a href="{{route('assetsBuildingEdit',[$landinfo->id])}}" class="btn btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
                 @endif

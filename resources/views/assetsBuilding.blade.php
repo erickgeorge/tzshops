@@ -42,7 +42,7 @@ use Illuminate\Support\Facades\DB;
 </div>
 <div class="container">
     <div class="row">
-        @if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin')||(auth()->user()->type =='Bursar'))
+        @if (($role['user_role']['role_id'] != 1)||(auth()->user()->type !='Assets Officer'))
         @else
         <div class="col-md-5">
             <a href="{{url('assetsNewBuilding')}}" class="btn btn-primary text-light" type="button"><b>Add new Building asset</b></a>
