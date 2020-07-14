@@ -41,8 +41,8 @@ Computer Equipment Assets
 </div>
 <div class="container">
     <div class="row">
-        @if (($role['user_role']['role_id'] != 1)||(auth()->user()->type !='Assets Officer'))
-        @else
+        @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
+        
         <div class="col-md-6">
             <a href="{{url('assetsNewComputerEquipment')}}" class="btn btn-primary text-light" type="button"><b>Add new Computer Equipment asset</b></a>
         </div>

@@ -42,8 +42,8 @@ Land Assets
 </div>
 <div class="container">
     <div class="row">
-        @if (($role['user_role']['role_id'] != 1)||(auth()->user()->type !='Assets Officer'))
-        @else
+        @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
+        
         <div class="col-md-5">
             <a href="{{url('assetsNewLand')}}" class="btn btn-primary text-light" type="button"><b>Add new Land asset</b></a>
         </div>

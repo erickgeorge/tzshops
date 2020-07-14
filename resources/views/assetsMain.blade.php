@@ -28,8 +28,8 @@ $plantmachinery = assetsplantandmachinery::get();
 $workinprogress = assetsworkinprogress::get();
 
 @endphp
-@if (($role['user_role']['role_id'] != 1)||(auth()->user()->type !='Assets Officer'))
-        @else
+@if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
+      
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">

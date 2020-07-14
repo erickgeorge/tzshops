@@ -79,13 +79,9 @@ New Building Asset
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col">
+                                <div class="form-group col-md-6">
                                     <label for="my-input">Date in Use <sup class="text-danger">*</sup></label>
                                     <input id="usedate"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="my-input">Ending Depreciation Date <sup class="text-danger">*</sup></label>
-                                    <input id="endingdate"   min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Ending Depreciation Date" type="date" name="EndingDepreciationDate">
                                 </div>
                                 <input type="text" name="AssetUsefulLife" value="25" hidden>
                             </div>
