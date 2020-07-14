@@ -138,11 +138,13 @@ Directorate
 
 
                 </div>
-
-                <form method="POST" action="edit/directorate" class="col">
                     <div class="modal-body">
 
-                        @csrf
+                <form method="POST" action="edit/directorate" class="col">
+                      @csrf
+                
+
+                      
                         <div class="form-group">
                             <label for="edirname">Directorate name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
@@ -163,8 +165,10 @@ Directorate
                         <a href="/Manage/directorate" class="btn btn-danger">Cancel
                     </a>
 
-                    </div>
-                </form>
+                                   </form>
+
+                                    </div>
+
 
 
                 <div class="modal-footer">

@@ -150,9 +150,10 @@ use app\department;
 
 
                 </div>
+                   <div class="modal-body">
 
                 <form method="POST" action="edit/department" class="col">
-                    <div class="modal-body">
+                 
 
 
                         @csrf
@@ -193,8 +194,10 @@ use app\department;
                         <a href="/Manage/department" class="btn btn-danger">Cancel
                     </a>
 
-                    </div>
+                   
                 </form>
+
+                 </div>
 
 
                 <div class="modal-footer">
