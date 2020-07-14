@@ -238,7 +238,7 @@ ComputerEquipment Asset
                     <td>{{$asses->totalDepreciatedYears}}</td>
                     <td style="text-align:right;">{{number_format($asses->accumulatedDepreciation)}}  </td>
                     <td style="text-align:right;">{{number_format($asses->impairmentLoss)}}  </td>
-                    <td style="text-align:right;">{{number_format($asses->disposalCost)}}  </td>
+                    <td style="text-align:right;">{{number_format($asses->DisposalCost)}}  </td>
                     @php
                         $user = User::where('id',$asses->assesedBy)->first();
                     @endphp

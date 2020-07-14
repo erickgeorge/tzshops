@@ -179,7 +179,7 @@ Equipment Asset
                           <div class="col">
                             <div class="form-group">
                                 <label for="my-input">Impairment Loss</label>
-                                <input class="form-control" value="0" type="number" name="impairmentLoss">
+                                <input class="form-control"  type="number" name="impairmentLoss">
                             </div>
                           </div>
                       </div>
@@ -188,7 +188,7 @@ Equipment Asset
                           <div class="col">
                             <div class="form-group">
                                 <label for="my-input">Disposal Cost</label>
-                                <input class="form-control" value="0" type="number" name="disposalCost">
+                                <input class="form-control"  type="number" name="disposalCost">
                             </div>
                           </div>
                       </div>
@@ -238,7 +238,7 @@ Equipment Asset
                     <td>{{$asses->totalDepreciatedYears}}</td>
                     <td style="text-align:right;">{{number_format($asses->accumulatedDepreciation)}}  </td>
                     <td style="text-align:right;">{{number_format($asses->impairmentLoss)}}  </td>
-                    <td style="text-align:right;">{{number_format($asses->disposalCost)}}  </td>
+                    <td style="text-align:right;">{{number_format($asses->DisposalCost)}}  </td>
                     @php
                         $user = User::where('id',$asses->assesedBy)->first();
                     @endphp

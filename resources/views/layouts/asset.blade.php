@@ -750,15 +750,15 @@
 <div class="sidenav" style="padding-top:90px;">
   <a  href="{{ url('assetsManager')}}" ><h6>All Assets </h6></a>
 
-    <a  href="{{ url('assetsLand')}}"><h6>Land assets</h6></a>
-    <a  href="{{ url('assetsBuilding')}}"><h6>Building assets</h6></a>
+    <a  href="{{ url('assetsLand')}}"><h6>Land</h6></a>
+    <a  href="{{ url('assetsBuilding')}}"><h6>Buildings</h6></a>
     <a  href="{{ url('assetsPlantMachinery')}}"><h6>Plant & Machinery</h6></a>
     <a  href="{{ url('assetsMotorVehicle')}}"><h6>Motor Vehicles</h6></a>
     <a  href="{{ url('assetsComputerEquipment')}}"><h6>Computer Equipments</h6></a>
-    <a  href="{{ url('assetsEquipment')}}"><h6>Equipments Assets</h6></a>
-    <a  href="{{ url('assetsFurniture')}}"><h6>Furniture Assets</h6></a>
+    <a  href="{{ url('assetsEquipment')}}"><h6>Equipment</h6></a>
+    <a  href="{{ url('assetsFurniture')}}"><h6>Furniture</h6></a>
     <a  href="{{ url('assetsWorkinProgress')}}"><h6>Work in Progress</h6></a>
-    <a  href="{{ url('assetsIntangible')}}"><h6>Intangible Assets</h6></a>
+    <a  href="{{ url('assetsIntangible')}}"><h6>Intangibles</h6></a>
 
 </div>
 

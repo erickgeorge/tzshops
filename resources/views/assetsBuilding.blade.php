@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Building Assets</b></h5>
+            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Buildings</b></h5>
         </div>
     </div>
     <hr class="container">

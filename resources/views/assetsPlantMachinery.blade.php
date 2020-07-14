@@ -14,7 +14,7 @@ Plant and Machinery Assets
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Plant and Machinery Assets</b></h5>
+            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Plant and Machinery</b></h5>
         </div>
     </div>
     <hr class="container">

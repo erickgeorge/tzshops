@@ -7,9 +7,9 @@
 @section('body')
 
 
-       <?php use App\Material;
-
-                        $materials = Material::get();
+       <?php 
+       use App\Material;
+    $materials = Material::get();
 
                          ?>
 
