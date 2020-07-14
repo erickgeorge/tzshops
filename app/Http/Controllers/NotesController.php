@@ -1019,7 +1019,7 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
         return redirect()->back()->withErrors(['message' => 'No data Found Matching your filter ']);
         }else{
 
-        $pdf = PDF::loadView('collegesreport', $data);
+        $pdf = PDF::load('collegesreport', $data);
         return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }
 
@@ -1286,6 +1286,25 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
 
      return $pdf->stream('cleaning_company_report - '.date('d-m-Y Hi').'.pdf');
     }
+
+
+
+    public function landcleaningareareport(){
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+           $data = [
+            'notifications' => $notifications,
+            'role' => $role,
+            'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
+            'cleanarea' => cleaningarea::all(),
+               ];
+         $pdf = PDF::loadView('landcleaning_areareport', $data);
+
+     return $pdf->stream('cleaning_area_report - '.date('d-m-Y Hi').'.pdf');
+    }
+
 
 
 

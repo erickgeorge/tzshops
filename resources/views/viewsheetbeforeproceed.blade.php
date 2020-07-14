@@ -100,7 +100,7 @@ Company report
 
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this activity and percentage completely? ')"
-                                          action="{{ route('assess.sheet.delete', [$assesment->id]) }}">
+                                          action="{{ route('assess.sheet.delete', [$assesment->id , $assesment->name]) }}">
                                         {{csrf_field()}}
 
 
@@ -145,7 +145,7 @@ Company report
 
                         @csrf
 
-                    <div class="form-group">
+                        <div class="form-group" style="width: 440px">
                             <label for="name_of_house">Activity <sup style="color: red;">*</sup></label>
                             <textarea type="text" required class="form-control"
                                    id="activity"
@@ -154,15 +154,15 @@ Company report
                         </div>
                        
 
-                         <div class="form-group">
+                             <div class="form-group" style="width: 440px">
                             <label for="name_of_house">Percentage <sup style="color: red;">*</sup></label>
-                           <input   oninput="totalitem()" id="type"  min="0" max="100"  class="form-control" type="number" name="percentage" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   > 
+                           <input   oninput="totalitem()" id="type"  min="1" max="100"  class="form-control" type="number" name="percentage" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   > 
 
                           
                         </div>
                                    <div style="float: left; width: 130px"> 
                                                       
-                                                        <button  type="submit" class="btn btn-primary">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save 
                                                         </button>
                   
                                                        
@@ -198,7 +198,7 @@ Company report
               
 
  
-                    @csrf
+                
 
    <div align="center">
 

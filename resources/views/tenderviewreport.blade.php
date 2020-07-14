@@ -2,7 +2,7 @@
  
 
     <p><h2>University of Dar es salaam</h2>  <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <div style="background-image: url('img_girl.jpg');"> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">tender Details</b></p>
+    <div style="background-image: url('img_girl.jpg');"> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">tenders Details</b></p>
 </div><br>
 
 <style>
@@ -39,7 +39,9 @@ tr:nth-child(even) {
                         <th scope="col">Tender Number</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">Company Name</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Starting of Tender</th>
+                        <th scope="col">Ending of Tender</th>
+               
                         <th scope="col">Next Assessment</th>
                         <th scope="col">Contract Duration</th>
                      
@@ -70,23 +72,11 @@ tr:nth-child(even) {
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
+                            <td>{{ $house->datecontract }}</td>
+                             <td>{{ $house->endcontract }}</td>
+
                             
-                  @if($house->status == 2 ) 
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
-                  @elseif($now1 > $endcont)
-                           <td><span class="badge badge-warning">Contract Expired </span><br>
-                          
-                  
-                  @else
-
-                          <?php  $ddate = strtotime($house->nextmonth);
-                              $newDate = date("Y-m-d", strtotime("-1 month", $ddate));
-                                                                                    ?>
-
-
-                           <td><span class="badge badge-primary">Current assessment on {{ date('F Y', strtotime($newDate))}}</span> </td> 
-                  @endif 
+       
                             
         @if($now1 > $endcont)
                            <td><span class="badge badge-danger">Can not assessed </span><br></td>

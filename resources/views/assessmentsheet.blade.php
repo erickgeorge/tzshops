@@ -18,7 +18,7 @@
             </ul>
         </div>
               @endif
-                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available assessment sheet </b></h5>
+                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available assessment sheets </b></h5>
                   <hr>
                     
             

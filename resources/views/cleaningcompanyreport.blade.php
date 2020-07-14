@@ -19,7 +19,7 @@
             </ul>
         </div>
               @endif
-                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available  companies </b></h5>
+                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Companies trending </b></h5>
                   <hr>
                   
                    <br> <br> 

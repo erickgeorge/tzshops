@@ -578,6 +578,42 @@ class LandscapingController extends Controller
 
    
 
+           public function editassessmentsheetproceedingtwo(Request $request, $id , $type)
+    {
+
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+          
+      
+            $activityi = $request['activity'];
+            $percent = $request['percentage'];
+          
+  
+           foreach($activityi as $a => $b){
+ 
+            $matr = new assessmentsheet();
+            $matr->name = $id;
+            $matr->type = $type;
+            $matr->status = 2;
+            $matr->activity = $activityi[$a] ;
+            $matr->percentage = $percent[$a] ;    
+
+            $matr->save();
+             }
+
+
+
+        return redirect()->back()->with([
+            'role' => $role,
+            'notifications' => $notifications,  
+            'message' => ' Assessment sheet updated successifully'
+           
+        ]); 
+             }         
+
+
+   
+
            public function finalsave_sheet($name)
     {
 
@@ -612,12 +648,30 @@ class LandscapingController extends Controller
              
 
 
-      public function deleteassessmentsheet($id)
-       {
+      public function deleteassessmentsheet($id , $name)
+       {   
+           $checkforemptysheet=assessmentsheet::where('name', $name)->get();
+
+            if (count($checkforemptysheet) == 1) {
+
            $cleanareaa=assessmentsheet::where('id', $id)->first();
            $cleanareaa->delete();
-           return redirect()->back()->with(['message' => 'Respective activity and percentage successfully']);
+        
+
+           return redirect()->route('add_new_sheet')->with(['message' => 'Respective assesment sheet deleted successfully']);
+          }
+
+          else {
+
+        $cleanareaa=assessmentsheet::where('id', $id)->first();
+        $cleanareaa->delete();
+        
+
+        return redirect()->back()->with(['message' => 'Respective activity and percentage successfully']);
+
        }
+
+     }
       
 
             public function editassessmentsheeeet(Request $request)
@@ -630,6 +684,9 @@ class LandscapingController extends Controller
   
         return redirect()->back()->with(['message' => 'Assessment sheet edited successfully']);
     }
+
+
+
   
 
 

@@ -60,7 +60,7 @@ Assessment form
         
 
                 <a href="{{route('assessmentform.view.second')}}"><button style="max-height: 40px; " type="button" class="btn btn-outline-primary" >
-                 All assessment
+                 All assessments
                 </button></a> 
             
 
@@ -164,13 +164,13 @@ Assessment form
                              @elseif($assesment->status == 2)
                            </option value='2'> <span class="badge badge-primary">Crosscheck assessment form</span> </option>
                              @elseif($assesment->status == 3)
-                           <option value='3'>  <span class="badge badge-warning">Assessment form submitted</span> </option>
+                           <option value='3'>  <span class="badge badge-warning">Submitted to Head PPU<br> for approval</span> </option>
                              @elseif($assesment->status == 4)
-                            <option value='4'>  <span class="badge badge-primary">Assessment form approved by Head PPU</span> </option>
+                            <option value='4'>  <span class="badge badge-primary">Approved by Head PPU</span> </option>
                              @elseif($assesment->status == 5)
-                            <option value='5' > <span class="badge badge-primary">Assessment form approved by Estate Director</span> </option>
+                            <option value='5' > <span class="badge badge-primary">Approved by Estate Director</span> </option>
                              @elseif($assesment->status == 6)
-                           <option value='6'>  <span class="badge badge-primary">Assessment form submitted</span> </option>
+                           <option value='6'>  <span class="badge badge-primary">Submitted to Head PPU<br> for approval</span> </option>
                              @elseif($assesment->status == 7)
                            <option value='7'> <span class="badge badge-danger">Closed</span> </option>
                              @elseif($assesment->status == 10)
@@ -179,7 +179,7 @@ Assessment form
                            <option value='11'> <span class="badge badge-danger">Rejected by Estate Director</span> </option>
                              @elseif($assesment->status == 12)
                           <option value='12'>  <span class="badge badge-danger">Rejected by DVC Admin</span> </option>                             @elseif($assesment->status == 13)
-                          <option value='13'> <span class="badge badge-primary">Assessment form approved by DVC Admin</span> </option>
+                          <option value='13'> <span class="badge badge-primary">Approved by DVC Admin</span> </option>
                              @elseif($assesment->status == 25)
                           <option value='25'> <span class="badge badge-success">Company paid </span> </option>
                              @endif
@@ -254,13 +254,13 @@ Assessment form
                              @elseif($assesment->status == 2)
                              <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
                              @elseif($assesment->status == 3)
-                             <td><span class="badge badge-warning">Assessment form submitted</span></td>
+                             <td><span class="badge badge-warning">Submitted to Head PPU<br> for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Assessment form approved by Head PPU</span></td>
+                             <td><span class="badge badge-primary">Approved by Head PPU , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Assessment form approved by Estate Director</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Admin for approval</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Assessment form submitted</span></td>
+                             <td><span class="badge badge-primary">Submitted to Head PPU <br>for approval</span></td>
                              @elseif($assesment->status == 7)
                              <td><span class="badge badge-danger">Closed</span></td>
                              @elseif($assesment->status == 10)
@@ -270,7 +270,7 @@ Assessment form
                              @elseif($assesment->status == 12)
                              <td><span class="badge badge-danger">Rejected by DVC Admin</span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Assessment form approved by DVC Admin</span></td>
+                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
                              <td><span class="badge badge-success">Company paid </span></td>
                              @endif

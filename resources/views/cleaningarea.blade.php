@@ -23,12 +23,21 @@
             </ul>
         </div>
              @endif
-              <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Cleaning Area </b></h5>
+              <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;"> Cleaning Areas </b></h5>
               <hr>
+
+                            <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
+                <a href="{{route('landscapingcleaningarea')}}" 
+                                                             
+                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF </a> 
+                </button>
+
+
                @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                 <a href="{{ route('Registercleaningarea') }}"
                    class="btn btn-primary">Add new cleaning area</a>
                    <br><br>@endif
+
 
                 <table id="myTable" id="myTable" class="table table-striped">
                     <thead >
@@ -36,7 +45,9 @@
                         <th scope="col">#</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">Zone Name</th>
+                          @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                         <th scope="col">Action</th>
+                        @endif
                     </tr>
                     </thead>
 
@@ -52,18 +63,20 @@
                             <td>{{ $clean_area->cleaning_name }}</td>
                             <td>{{ $clean_area['zone']->zonename }}</td>
 
+  @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
 
                             <td>
 
 
                             <div class="row">
+                              &nbsp; &nbsp; &nbsp;
 
 
                                     <a style="color: green;"
                                        onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->Zone_name }}' )"
                                        data-toggle="modal" data-target="#editarea" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
-
+                             &nbsp;
 
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this Cleaning Area Completely? ')"
@@ -80,6 +93,8 @@
                                 </div>
 
                          </td>
+
+                         @endif
 
 
 
@@ -118,16 +133,12 @@
 
                        
 
-                   <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            
-                            <label class="input-group-text" for="directorate">Zone Name <sup style="color: red;">*</sup></label>
-                        </div>
-                            <select required class="custom-select" name="zone" id="zone">
+            
+                            <select style="color: black;width:350px" required class="custom-select" name="zone" >
                             <option value="">Choose...</option>
-                            @foreach($newzone as $zone)
-                                <option value="{{ $zone->id }}">{{ $zone->Zone_name }}</option>
-                            @endforeach
+                               @foreach($newzone as $zone)
+                                <option value="{{ $zone->id }}">{{ $zone->zonename }}</option>
+                                @endforeach
 
                         </select>
                     </div> 
@@ -135,17 +146,18 @@
                         
                 
                                                <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
+                                                <div style="float: left;"> 
                                                       
-                                                        <button  type="submit" class="btn btn-primary">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save 
                                                         </button>
                   
                                                        
                                                </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
+
+                                               <div> 
+                                                      &nbsp;
                                                         
-                                                  <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
+                                                  <a class="btn btn-danger" href="/manage_Cleaning_area" role="button">Cancel </a>
                                                      
                                                        </div>
                                             </div>

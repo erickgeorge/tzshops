@@ -17,7 +17,7 @@ add new assessment sheet
 	</ul>
 </div>
 @endif
-@if(Session::has('message'))]
+@if(Session::has('message'))
 <div class="alert alert-success" style="margin-top: 6%;">
 	<ul>
 		<li>{{ Session::get('message') }}</li>
@@ -57,7 +57,7 @@ add new assessment sheet
                           <label style="width:150px;" class="input-group-text" for="directorate">Type</label>
 
                         </div>
-                       <select  class="form-control" name="type">
+                       <select  class="form-control" name="type" required="required">
                          <option value="">Choose type...</option>
                           <option value="Exterior">Exterior</option>
                            <option value="Interior">Interior</option>
@@ -91,7 +91,7 @@ add new assessment sheet
             <TD><INPUT type="checkbox" name="chk"/></TD>
             <TD  ><textarea style="width: 250px; height: 60px;" class="form-control" type="text" name="activity[]"  placeholder ="activity..." required="required"  ></textarea></TD> 
            
-            <TD><input style="width:150px;"  oninput="totalitem()" id="istock"  min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   >    </TD> 
+            <TD><input style="width:150px;"  oninput="totalitem()" id="istock"  min="1" max="100"  class="form-control" type="number" name="percentage[]" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   >    </TD> 
               
           
         </TR>

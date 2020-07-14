@@ -6,7 +6,7 @@ Company report
 <br>
 @foreach($assessmmentcompany as $company)
 @endforeach
-<h5 style="text-transform: uppercase;">COMPANY SCORES(%) ACCORDING TO ASSESSMENT ON {{ date('F Y', strtotime($company->assessment_month))}}</h5>
+<h5 style="text-transform: uppercase;">COMPANIES SCORES(%) IN {{ date('F Y', strtotime($company->assessment_month))}}</h5>
 <hr>
 
 <html lang="en">
@@ -29,7 +29,18 @@ Company report
 
 
 
-<tlx-chart style="height: 500px" chart-type="ColumnChart"
+
+
+
+                <div class="d-flex container">
+                  <p class="d-flex flex-column">
+                    <span>Percentages (%)</span>
+                  </p>
+                 
+                </div>
+                <!-- graph -->
+
+                <tlx-chart style="height: 500px" chart-type="ColumnChart"
   chart-columns="${['Element','Percentage']}" 
 
 
@@ -51,7 +62,7 @@ Company report
   <?php  $summ += $assesment->score;  ?>
   @endforeach
 
-     ['{{$assesment->company}} , {{$assesment['assessmentid']['compantwo']->company_name}} , {{$assesment['cleaningarea']->cleaning_name}} ', <?php echo $summ ?> ],
+     [' {{$assesment['assessmentid']['compantwo']->company_name}} , {{$assesment['cleaningarea']->cleaning_name}} ', <?php echo $summ ?> ],
 
         @endif
 
@@ -64,8 +75,23 @@ Company report
 </tlx-chart>
 
 
+            
+               <!-- graph -->
+                <div class="d-flex flex-row justify-content-end container">
+                  <span class="mr-2">
+                    </i> Companies, Area
+                  </span>   
+                </div>
+         
+
+<br>
+
+
+
+
 </body>
 </html>	
+
 
 
 

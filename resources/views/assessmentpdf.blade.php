@@ -88,7 +88,7 @@ tr:nth-child(even) {
  <br>
 <div class="jumbotron">
   <div class="row">
-<div class="col"><h4 ><b>This assessment sheet with tender number: {{$assesment->company}} is submitted by:</b></h4></div>
+<div class="col"><h4 ><b>This assessment sheet with tender number: {{$assesment->company}} is initiated by:</b></h4></div>
 <div class="col"><h4><b>
 <table>
   <tr>
@@ -107,7 +107,7 @@ tr:nth-child(even) {
   </tr>
 
     <tr>
-    <th>Submitted on </th>
+    <th>Initiated on </th>
       <th>{{ $assesment->created_at }}</th> 
   </tr>
   

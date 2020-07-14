@@ -52,15 +52,17 @@ Cleaning company report
                             
                           
                            
-                            <td><a style="color: green;"  href="{{route('edit_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="Edit report"><i
-                                                    class="fas fa-edit"></i></a> &nbsp; <a style="color: green;"  href="{{route('view_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a></td>
+                            <td>@if(auth()->user()->type == 'Supervisor Landscaping')<a style="color: green;"  href="{{route('edit_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="Edit report"><i
+                                                    class="fas fa-edit"></i></a>@else <a style="color: green;"  href="{{route('edit_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="view report"><i
+                                                    class="fas fa-eye"></i></a>  @endif &nbsp; <a style="color: green;"  href="{{route('view_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="View report in bar graph"><i
+                                                   class="fa fa-bar-chart"></i></a></td>
                            
                         </tr>
                     @endforeach
                     </tbody>
                     
                 </table>
+
 
 
 

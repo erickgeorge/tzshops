@@ -3,7 +3,7 @@
     <p><h2>University of Dar es salaam</h2>
      <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
-<p style="text-transform: uppercase; text-align: center;"><B><u>AVAILABLE CLEANING COMPANY </u></B>
+<p style="text-transform: uppercase; text-align: center;"><B><u> CLEANING COMPANIES </u></B>
  </p>
 </div>
 <style>
@@ -88,7 +88,7 @@ tr:nth-child(even) {
                         <th scope="col">#</th>
                         <th scope="col">Tender Number</th>
                         <th scope="col">Company Name</th>
-                        <th scope="col">Monthly Payment</th>
+                        <th scope="col">Monthly Payment(Tshs)</th>
                         
                         <th scope="col">Contract Duration</th>
                         <th scope="col">Status</th>
@@ -109,7 +109,7 @@ tr:nth-child(even) {
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['tendercompany']->company_name }}</td>
                             @if($house->status == 1)
-                            <td><?php echo number_format($house->payment) ?> Tshs </td>
+                            <td  style="text-align: right"><?php echo number_format($house->payment) ?>  </td>
                             @else
                             <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
                             @endif

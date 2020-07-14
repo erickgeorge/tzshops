@@ -57,7 +57,7 @@ var total=2;
  <br>
 <div class="jumbotron">
   <div class="row">
-<div class="col"><h6 ><b>This sheet with tender number: {{$assesment->company}} is submitted by:</b></h6></div>
+<div class="col"><h6 ><b>This assessment sheet with tender number: {{$assesment->company}} is initiated by:</b></h6></div>
 <div class="col"><h6 >
 <table>
   <tr>
@@ -76,7 +76,7 @@ var total=2;
   </tr>
 
     <tr>
-    <th>Submitted on </th>
+    <th>Initiated on </th>
       <th>{{ $assesment->created_at }}</th> 
   </tr>
   
@@ -585,7 +585,14 @@ var total=2;
   @endif
 <br>
   <?php $tender = Crypt::encrypt($assesment->company); ?>
-  <b style="padding-left: 800px;">Pdf <a href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Print assessment from"><i style="color: blue;" class="far fa-file"></i> </a></b>
+
+
+      <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
+                 <a href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"><i class="fa fa-file-pdf-o"></i> PDF </a> 
+                </button>
+
+                <br>
+                <br>
 
 
 

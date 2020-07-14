@@ -81,7 +81,7 @@ Company Registrartion
                                     <option value="{{ $sheet->name }}">{{ $sheet->name}}
                                     </option>
                                 @endforeach
-                          </select> 
+                        </select> 
            </TD> 
               
           
@@ -157,8 +157,9 @@ Company Registrartion
                           <label style="width:150px;" class="input-group-text" for="directorate">Start of contract</label>
 
                         </div>
+                       
                         <input style="color: black" type="date" required class="form-control" id="type"
-                               name="datecontract" required max="<?php echo date('Y-m-d'); ?>"  value="{{ old('datecontract') }}" >
+                               name="datecontract" required min="<?php echo date('Y-m-d', strtotime("-1 month")); ?>" max="<?php echo date('Y-m-d'); ?>" value="{{ old('datecontract') }}" >
 
                  </div>
 
@@ -170,7 +171,7 @@ Company Registrartion
 
                         </div>
                         <input style="color: black" type="date" required class="form-control" id="type"
-                               name="duration" required min="<?php echo date('Y-m-d'); ?>" value="{{ old('duration') }}" >
+                               name="duration" required min="<?php echo date('Y-m-d' , strtotime("+1 year")); ?>" value="{{ old('duration') }}" >
 
                  </div>
 

@@ -183,6 +183,7 @@
                         <th scope="col">Tender Number</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">Company Name</th>
+                        <th scope="col">Assessment sheet</th>
                         <th scope="col">Status</th>
                         <th scope="col">Next Assessment</th>
                         <th scope="col">Contract Duration</th>
@@ -214,6 +215,7 @@
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
+                            <td>{{ $house->sheet }}</td>
                             
                   @if($house->status == 2 ) 
                            <td><span class="badge badge-danger">Not assigned yet </span><br>
@@ -225,11 +227,10 @@
                   @else
 
                           <?php  $ddate = strtotime($house->nextmonth);
-                              $newDate = date("Y-m-d", strtotime("-1 month", $ddate));
+                              $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-
-                           <td><span class="badge badge-primary">Current assessment on {{ date('F Y', strtotime($newDate))}}</span> </td> 
+                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td> 
                   @endif 
                             
         @if($now1 > $endcont)
@@ -314,7 +315,8 @@
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
                                                 class="fas fa-edit"></i></a>--> @endif @endif &nbsp;
         @if($now1 > $endcont)
-                         <a style="color: green;"  href="{{route('view_company_report' , [$house->id])}}" data-toggle="tooltip" title="View company trending report"><i
+                        <?php $tender = Crypt::encrypt($house->tender ); ?>
+                          <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
                                                     class="fas fa-eye"></i></a>  &nbsp;
                          <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->   
         @else                                

@@ -59,8 +59,7 @@ StaffHouse Registrartion
                     </div>
                 
 
-                    <button type="submit" class="btn btn-primary">Register
-                        new cleaning area
+                    <button type="submit" class="btn btn-primary">Save
                     </button>
                       <a class="btn btn-danger" href="/manage_Cleaning_area" role="button">Cancel </a>
                   </div>

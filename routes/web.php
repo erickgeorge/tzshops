@@ -634,7 +634,13 @@ Route::post('chrosscheck/assessment/work_order/landscaping/{id}/{asid}', 'Landsc
 Route::post('assessment/activity/form/landscaping/{id}/{companys}', 'LandscapingController@landassessmentactivityForm')->name('work.assessment.activity.landscaping')->middleware('auth');
 
 Route::post('editassessment_sheet/{id}', 'LandscapingController@editassessmentsheet')->name('edit.assessment.sheet')->middleware('auth');
+
 Route::post('editassessment_sheet_proceeding/{id}/{type}', 'LandscapingController@editassessmentsheetproceeding')->name('edit.assessment.proceeding')->middleware('auth');
+
+Route::post('edit_sheet_proceeding/{id}/{type}', 'LandscapingController@editassessmentsheetproceedingtwo')->name('edit.assessment.proceeding.two')->middleware('auth');
+
+
+
 Route::get('finalsave/sheet/{name}', 'LandscapingController@finalsave_sheet')->name('finalsavesheet')->middleware('auth');
 
 
@@ -691,9 +697,11 @@ Route::post('viewtrendingscorereport/{tender}/{company}','NotesController@trendi
 Route::get('viewtrendingscorereportforcompany/{tender}/{month}','NotesController@trendingscorereportcompany')->name('trendingscore_report_company')->middleware('auth');
 Route::get('cleaning_company_report','NotesController@landcleaningcompanyreport')->name('landscapingcleaningcompanyreport')->middleware('auth');
 
+Route::get('cleaning_area_report','NotesController@landcleaningareareport')->name('landscapingcleaningarea')->middleware('auth');
+
 Route::get('viewsheetbeforeproceeding/{id}', 'LandscapingController@viewsheetbeforeproceeding')->name('view_sheet_before_proceeding')->middleware('auth');
 
-Route::post('delete/assessmentsheet/{id}', 'LandscapingController@deleteassessmentsheet')->name('assess.sheet.delete')->middleware('auth');
+Route::post('delete/assessmentsheet/{id}/{name}', 'LandscapingController@deleteassessmentsheet')->name('assess.sheet.delete')->middleware('auth');
 Route::POST('viewsheetbeforeproceeding/edit/assessment/sheets', 'LandscapingController@editassessmentsheeeet')->name('assessment.sheet.edit')->middleware('auth');
 
 

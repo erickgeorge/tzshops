@@ -55,7 +55,7 @@
 
 <style type="text/css">
 
-              input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
+input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
   color: #fff;
   position: relative;
 }
@@ -74,6 +74,7 @@ input[type="date"]::-webkit-datetime-edit-month-field{
   padding: 2px;
   color:#000;
   left: 26px;
+
 }
 
 
@@ -85,7 +86,8 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 }
 
-            </style>
+
+</style>
 
 <div>
     <nav class="navbar fixed-top navbar-expand-lg "  style="border-bottom: #ebe9e6 8px solid; background-color: #376ad3;">
@@ -769,9 +771,9 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 <div class="sidenav" style="padding-top:90px;">
    <!-- <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
     <a  href="{{ url('Maintainance/section')}}" ><h6> Maintenance  section </h6></a>-->
-    <a  href="{{ url('Assessment/form')}}" ><h6>Assessment Form</h6></a>
+    <a  href="{{ url('Assessment/form')}}" ><h6>Assessment Forms</h6></a>
 
-    <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheet </h6></a>
+    <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheets </h6></a>
 
 
 
@@ -779,18 +781,19 @@ input[type="date"]::-webkit-datetime-edit-day-field{
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a href="{{ route('comapy_view_month')}}"><h6>Monthly assessment report</h6></a>
-    <a href="{{ url('cleaningcompanyreport')}}"><h6>Company trending </h6></a>
+    <a href="{{ route('comapy_view_month')}}"><h6>Monthly Assessment Report</h6></a>
+    <a href="{{ url('cleaningcompanyreport')}}"><h6>Companies Trending </h6></a>
 
   </div>
 
-    @if(auth()->user()->type != 'Head PPU')
+    
 
+  
+    <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Companies</h6></a>
+    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Areas</h6></a>
     <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
-    <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Company</h6></a>
-    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Area</h6></a>
 
-    @endif
+
 
 
 </div>

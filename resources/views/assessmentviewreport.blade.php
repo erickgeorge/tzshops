@@ -63,13 +63,13 @@ tr:nth-child(even) {
                              @elseif($assesment->status == 2)
                              <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
                              @elseif($assesment->status == 3)
-                             <td><span class="badge badge-warning">Assessment form submitted</span></td>
+                             <td><span class="badge badge-warning">Submitted to Head PPU<br> for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Assessment form approved by Head PPU</span></td>
+                             <td><span class="badge badge-primary">Approved by Head PPU , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Assessment form approved by Estate Director</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Admin for approval</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Assessment form submitted</span></td>
+                             <td><span class="badge badge-primary">Submitted to Head PPU <br>for approval</span></td>
                              @elseif($assesment->status == 7)
                              <td><span class="badge badge-danger">Closed</span></td>
                              @elseif($assesment->status == 10)
@@ -79,7 +79,7 @@ tr:nth-child(even) {
                              @elseif($assesment->status == 12)
                              <td><span class="badge badge-danger">Rejected by DVC Admin</span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Assessment form approved by DVC Admin</span></td>
+                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
                              <td><span class="badge badge-success">Company paid </span></td>
                              @endif

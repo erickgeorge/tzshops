@@ -12,15 +12,35 @@ Companies
   
 
        <div >
-               @if(Session::has('message'))
+      
+      <div class="container">
+    @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-              @endif
-                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available cleaning company  </b></h5>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+             <ul class="alert alert-danger" style="list-style: none;">
+                @foreach ($errors->all() as $error)
+                    <li><?php echo $error; ?></li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    </div>
+                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Cleaning companies </b></h5>
                   <hr>
+
+                       <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
+                <a href="{{route('landscapingcleaningcompanyreport')}}" 
+                                                             
+                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF </a> 
+                </button>
+
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                    <div class="row"><div class="col">
                   <a href="{{ route('renew_company_contract') }}"
@@ -35,7 +55,7 @@ Companies
                         <th scope="col">#</th>
                         <th scope="col">Tender Number</th>
                         <th scope="col">Company Name</th>
-                        <th scope="col">Monthly Payment</th>
+                        <th scope="col">Monthly Payment (Tshs)</th>
                         
                         <th scope="col">Contract Duration</th>
                         <th scope="col">Status</th>
@@ -56,7 +76,7 @@ Companies
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['tendercompany']->company_name }}</td>
                             @if($house->status == 1)
-                            <td><?php echo number_format($house->payment) ?> Tshs </td>
+                            <td align="right"><?php echo number_format($house->payment) ?></td>
                             @else
                             <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
                             @endif
@@ -180,9 +200,7 @@ Companies
 
 
                                               
-                                             <b style=" float:right;" > Report <a href="{{route('landscapingcleaningcompanyreport')}}" 
-                                                            style="color: green;" 
-                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i></a> </b>
+                                          
                                          
 
             </div>
@@ -220,13 +238,14 @@ Companies
                         </div>-->
 
                          <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
+                                                <div style="float: left;"> 
                                                       
-                                                        <button  type="submit" class="btn btn-primary">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save
                                                         </button>
                   
                                                        
                                                </div>
+                                               &nbsp;
                                                <div"> 
                                                      
                                                         
