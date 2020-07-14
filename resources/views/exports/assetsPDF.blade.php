@@ -16,11 +16,11 @@ tr:nth-child(even) {
 </style>
 <div>
     <center>
-       
+
         <h1>University of Dar es salaam</h1>
         <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
         <h2>Direcorate of Estates Services</h2>
-        <h3>NON - CURRENT ASSET REGISTER - AS AT @php echo date('d M, Y'); @endphp</h3>
+        <h3>NON - CURRENT ASSET REGISTER - AS ON @php echo date('d M, Y'); @endphp</h3>
     </center>
 </div>
 <table class="table table-light">
@@ -60,7 +60,7 @@ tr:nth-child(even) {
 
             <?php  $time = strtotime($user->assetEndingDepreciationDate)?>
             <td>{{date('d/m/Y',$time)  }}</td>
-            
+
             <td>{{$user->assetQuantity}}</td>
             <td style="text-align:right;">{{number_format($user->Cost)}}  </td>
             <td>{{$user->_condition}}</td>

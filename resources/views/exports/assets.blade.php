@@ -32,7 +32,7 @@ tr:nth-child(even) {
         </tr>
         <tr >
             <th colspan="12">
-                <h2 style="margin-left: 28%;">NON - CURRENT ASSET REGISTER - AS AT @php echo date('d M, Y'); @endphp </h2>
+                <h2 style="margin-left: 28%;">NON - CURRENT ASSET REGISTER - AS ON @php echo date('d M, Y'); @endphp </h2>
             </th>
         </tr>
         <tr>
@@ -68,7 +68,7 @@ tr:nth-child(even) {
 
                 <?php  $time = strtotime($user->assetEndingDepreciationDate)?>
                 <td>{{date('d/m/Y',$time)  }}</td>
-                
+
             <td>{{$user->assetQuantity}}</td>
             <td style="text-align:right;">{{number_format($user->Cost)}}  </td>
             <td>{{$user->_condition}}</td>
