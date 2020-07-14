@@ -380,16 +380,36 @@ Equipment Assets
   <div>
           <div class="row">
 
-            <form class="col-md-8" action="assetsSummaryFiltered" method="get">
+            <form class="col-md-8" action="{{route('assetsSummaryFiltered')}}" method="get">
                 <div class="row">
-                    <div class="form-group  col">
-                  <select name="filter" id="my-select" class="form-control" name="">
-                      <option selected value="">Filter Assessment According to Date</option>
+              <div class="form-group  col">
+                  <select  id="my-select" class="form-control" name="date">
+                      <option selected value="">Date</option>
                       @php
-                          $dates = assetsassesequipment::select('assesmentYear')->distinct()->orderBy('assesmentyear','Desc')->get();
+                          $dates = assetsassesequipment::select(DB::raw('DAY(assesmentYear) as day'))->distinct()->orderBy('assesmentyear','Desc')->get();
                       @endphp
                       @foreach ($dates as $dated)
-                  <option value="{{$dated->assesmentYear}}"><?php  $time = strtotime($dated->assesmentYear)?>  {{date('d/m/Y',$time)  }}</option>
+                  <option value="{{$dated->day}}">  {{$dated->day  }}</option>
+                      @endforeach
+                  </select>
+              </div><div class="form-group  col">
+                  <select  id="my-select" class="form-control" name="month">
+                      <option selected value="">Month</option>
+                      @php
+                          $dates = assetsassesequipment::select(DB::raw('MONTH(assesmentYear) as month'))->distinct()->orderBy('assesmentyear','Desc')->get();
+                      @endphp
+                      @foreach ($dates as $dated)
+                  <option value="{{$dated->month}}">  {{$dated->month  }}</option>
+                      @endforeach
+                  </select>
+              </div><div class="form-group  col">
+                  <select id="my-select" class="form-control" name="year">
+                      <option selected value="">Year</option>
+                      @php
+                          $dates = assetsassesequipment::select(DB::raw('YEAR(assesmentYear) as year'))->distinct()->orderBy('assesmentyear','Desc')->get();
+                      @endphp
+                      @foreach ($dates as $dated)
+                  <option value="{{$dated->year}}">  {{$dated->year  }}</option>
                       @endforeach
                   </select>
               </div>

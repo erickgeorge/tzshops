@@ -19,7 +19,7 @@ use App\assetsplantandmachinery;
     <div class="row container-fluid" >
         <div class="col">
             <h4 style="text-transform: uppercase;">
-                All @php echo $_GET['asset']; @endphp Assets Assessment Records For <?php  $time = strtotime($_GET['filter'])?>  {{date('d/m/Y',$time)  }}
+                All @php echo $_GET['asset']; @endphp Assets Assessment Records : <?php  $time = strtotime($year)?>  {{date('d/m/Y',$time)  }}
             </h4>
         </div>
     </div>
@@ -32,7 +32,7 @@ use App\assetsplantandmachinery;
             <form action="{{route('assetreportfromsummary')}}" method="get" enctype="multipart/form-data">
                 @csrf
                 <input type="text" name="asset" value="{{$_GET['asset']}}" hidden>
-                <input type="text" name="date" value="{{$_GET['filter']}}" hidden>
+                <input type="text" name="date" value="{{$year}}" hidden>
                 <button class="btn btn-primary" type="submit"> Export <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
             </form>
         </div>

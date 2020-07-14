@@ -306,12 +306,12 @@ class AssetsController extends Controller
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -320,46 +320,46 @@ class AssetsController extends Controller
         $from=request('end');
         }// start> end
 
-       
+
          return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-             
+
              'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
-                    ->groupBy('company_name')->get(),  
+                    ->groupBy('company_name')->get(),
             'assessmmenttender' => company::select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
             'assessmmentareas' => company::select(DB::raw('area'))
-                    ->groupBy('area')->get(),  
-  
+                    ->groupBy('area')->get(),
+
           ]);
 
-         } 
+         }
          else{
 
              return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-             
+
              'cleangcompany' => company::orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
-                    ->groupBy('company_name')->get(),  
+                    ->groupBy('company_name')->get(),
             'assessmmenttender' => company::select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
             'assessmmentareas' => company::select(DB::raw('area'))
-                    ->groupBy('area')->get(),  
-  
+                    ->groupBy('area')->get(),
+
           ]);
 
          }
 
        }
-      
+
 
 
         public function cleaningcompanynew(){
@@ -4165,40 +4165,45 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsSummaryFiltered()
      {
-         if ($_GET['filter']!='') {
+         if ($_GET['date']!='') {
+            if ($_GET['month']!='') {
+                if ($_GET['year']!='') {
+                    $time = strtotime($_GET['date'].'/'.$_GET['month'].'/'.$_GET['year']);
+                    $datyer = date('Y-d-m',$time);
+
             $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if($_GET['asset']=='Land')
             {
-                $assetsinfo = assetsassesland::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassesland::where('assesmentYear',$datyer)->get();
             }else if( $_GET['asset']=='Building')
             {
-                $assetsinfo = assetsassesbuilding::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassesbuilding::where('assesmentYear',$datyer)->get();
 
             }else if( $_GET['asset']=='PlantMachinery')
             {
-                $assetsinfo = assetsassesplantandmachinery::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassesplantandmachinery::where('assesmentYear',$datyer)->get();
 
             }else if( $_GET['asset']=='MotorVehicle')
             {
-                $assetsinfo = assetsassesmotorvehicle::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassesmotorvehicle::where('assesmentYear',$datyer)->get();
 
             }else if( $_GET['asset']=='ComputerEquipment')
             {
-                $assetsinfo = assetsassescomputerequipment::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassescomputerequipment::where('assesmentYear',$datyer)->get();
 
             }else if( $_GET['asset']=='Equipment')
             {
-                $assetsinfo = assetsassesequipment::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassesequipment::where('assesmentYear',$datyer)->get();
 
             }else if( $_GET['asset']=='Furniture')
             {
-                $assetsinfo = assetsassesfurniture::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassesfurniture::where('assesmentYear',$datyer)->get();
 
             }else if( $_GET['asset']=='Intangible')
             {
-                $assetsinfo = assetsassesintangible::where('assesmentYear',$_GET['filter'])->get();
+                $assetsinfo = assetsassesintangible::where('assesmentYear',$datyer)->get();
 
             } else
             {
@@ -4206,9 +4211,24 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
             }
 
-            return view('exports.assetsassesmentview',['asses'=>$assetsinfo,'role'=>$role,'notifications'=>$notifications]);
+            if(count($assetsinfo)>0)
+            {
+                return view('exports.assetsassesmentview',['asses'=>$assetsinfo,'role'=>$role,'notifications'=>$notifications,'year'=>$datyer]);
+
+            }else
+            {
+                return redirect()->back()->withErrors(['message' => 'No Data Found Matching Your Filter']);
+
+            }
+
 
          } else {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Year For Filtering']);
+         }
+        }else {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Month For Filtering']);
+         }
+        }else {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Date For Filtering']);
          }
 
