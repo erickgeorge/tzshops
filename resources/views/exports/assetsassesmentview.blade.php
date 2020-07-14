@@ -19,7 +19,24 @@ use App\assetsplantandmachinery;
     <div class="row container-fluid" >
         <div class="col">
             <h4 style="text-transform: uppercase;">
-                All @php echo $_GET['asset']; @endphp Assets Assessment Records : <?php  $time = strtotime($year)?>  {{date('d/m/Y',$time)  }}
+                All @php
+
+            if( $_GET['asset']=='PlantMachinery')
+            {
+echo 'Plant and Machinery';
+            }else if( $_GET['asset']=='MotorVehicle')
+            {
+echo 'Motor Vehicle';
+            }else if( $_GET['asset']=='ComputerEquipment')
+            {
+echo 'Computer Equipments';
+            }else{
+                echo $_GET['asset'];
+            }
+
+
+
+                    @endphp  Assessment Records : <?php  $time = strtotime($year)?>  {{date('d/m/Y',$time)  }}
             </h4>
         </div>
     </div>
@@ -38,7 +55,7 @@ use App\assetsplantandmachinery;
         </div>
     </div>
     <br>
-    <table class="table table-striped display" id="myTableAssesment" style="width:100%">
+    <table class="table table-striped display" id="myTable" style="width:100%">
         <thead >
             <tr style="color:white;">
                 <th>#</th>
