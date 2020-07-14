@@ -4230,7 +4230,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
             }
 
-            return view('exports.assetsassesmentview',['asses'=>$assetsinfo,'role'=>$role,'notifications'=>$notifications]);
+            return view('exports.assetsassesmentview',['asses'=>$assetsinfo,'role'=>$role,,'year'=>$datyer,'notifications'=>$notifications]);
 
          } else {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Year For Filtering']);
