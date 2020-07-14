@@ -112,7 +112,7 @@ Equipment Asset
 
                 @endif
                  <a href="{{route('assetinfo/export/',[$landinfo->id,'equipment'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                 
+
             </div>
 
 
@@ -122,7 +122,7 @@ Equipment Asset
               <div class="modal-dialog " role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Asses Building Asset</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Asses Asset</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span title="Close" style="color: red;" aria-hidden="true">X</span>
                     </button>
@@ -181,7 +181,7 @@ Equipment Asset
                           <div class="col">
                             <div class="form-group">
                                 <label for="my-input">Impairment Loss</label>
-                                <input class="form-control"  type="number" name="impairmentLoss">
+                                <input class="form-control" value="0"  type="number" name="impairmentLoss">
                             </div>
                           </div>
                       </div>
@@ -190,7 +190,7 @@ Equipment Asset
                           <div class="col">
                             <div class="form-group">
                                 <label for="my-input">Disposal Cost</label>
-                                <input class="form-control"  type="number" name="disposalCost">
+                                <input class="form-control" value="0"  type="number" name="disposalCost">
                             </div>
                           </div>
                       </div>

@@ -97,7 +97,7 @@ Edit Plant And Machinery Asset
                                 </div>
                                 <div class="form-group col">
                                     <label for="my-input">Date in Use <sup class="text-danger">*</sup></label>
-                                    <input id="usedate" required value="{{$item->assetDateinUse}}'"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">
+                                    <input id="usedate" required value="{{$item->assetDateinUse}}"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">
                                 </div>
                             </div>
                             <input type="text" name="id" id="" value="{{$item->id}}" hidden>

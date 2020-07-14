@@ -17,19 +17,10 @@ use App\assetsmotorvehicle;
 use App\assetsplantandmachinery;
 use App\assetsworkinprogress;
 
-$land = assetsland::get();
-$building = assetsbuilding::get();
-$computerequipment = assetscomputerequipment::get();
-$equipment = assetsequipment::get();
-$furniture = assetsfurniture::get();
-$intangible = assetsintangible::get();
-$motorvehicle = assetsmotorvehicle::get();
-$plantmachinery = assetsplantandmachinery::get();
-$workinprogress = assetsworkinprogress::get();
 
 @endphp
 @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-      
+
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
@@ -915,6 +906,18 @@ $workinprogress = assetsworkinprogress::get();
                                 <th> </th>
                             </tr>
                         </thead>
+                        @php
+
+$land = assetsland::get();
+$building = assetsbuilding::get();
+$computerequipment = assetscomputerequipment::get();
+$equipment = assetsequipment::get();
+$furniture = assetsfurniture::get();
+$intangible = assetsintangible::get();
+$motorvehicle = assetsmotorvehicle::get();
+$plantmachinery = assetsplantandmachinery::get();
+$workinprogress = assetsworkinprogress::get();
+                        @endphp
                         <tbody>
                             <tr>
                                 <td>1</td>

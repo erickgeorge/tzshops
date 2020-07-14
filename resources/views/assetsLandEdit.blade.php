@@ -83,7 +83,7 @@ Edit Land Asset
                                <div class="form-group col-md-6">
                                    <label for="my-input">Date in Use <sup class="text-danger">*</sup></label>
                                    <input id="usedate" required value="{{$item->assetDateinUse}}"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">
-                               </div>
+                                </div>
                            </div>
                             <input type="text" name="id" id="" value="{{$item->id}}" hidden>
                             <input type="text" name="AssetUsefulLife" value="{{$item->usefulLife}}" hidden>

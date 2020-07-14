@@ -26,7 +26,7 @@ IoW Zones
             </ul>
         </div>
     @endif
- <br> 
+ <br>
                 <h5 style="text-transform: uppercase;" >List of zones assigned to Inspector of Work</h5>
 
 
@@ -44,23 +44,23 @@ IoW Zones
                         <th scope="col">#</th>
                         <th scope="col">Name of Zone</th>
                         <th>Inspector of Work</th>
-                        
-                      
+
+
                     </tr>
                     </thead>
                     <tbody>
 
-                        
+
                     <?php $i = 0; ?>
                     @foreach($iowzone as $iow)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                           
+
                             <td><?php echo strtoupper( $iow->zone ); ?></td>
-                       
+
                             <td><a class="btn btn-primary" href="{{route('view.iowwithloc', [$iow->zone])}}" >view</a></td>
-                             
+
 
                         </tr>
                     @endforeach
@@ -71,7 +71,7 @@ IoW Zones
                 <div class="text-center">
 
                 </div>
-       
+
             </div>
 
 
@@ -85,20 +85,21 @@ IoW Zones
 
                 </div>
 
+                <div class="modal-body">
                 <form method="POST" action="edit/iowzone" class="col">
                     <div class="modal-body">
-
-
                         @csrf
-	
-						
-                    <div class="form-group ">
-                        <label for="dep_name">Zone Name</label>
-                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
-                               name="sec_name" placeholder="Enter Zone Name" >
-                                 <input id="esecid" name="esecid" hidden>
+
+
+                        <div class="form-group ">
+                            <label for="dep_name">Zone Name</label>
+                            <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"
+                                   name="sec_name" placeholder="Enter Zone Name" >
+                                     <input id="esecid" name="esecid" hidden>
+                        </div>
                     </div>
-                       
+                        <div class="modal-body">
+
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
@@ -108,7 +109,7 @@ IoW Zones
                     </div>
                 </form>
 
-
+                </div>
                 <div class="modal-footer">
                 </div>
             </div>
@@ -116,7 +117,7 @@ IoW Zones
     </div>
 
 
-           
+
 
                       <script>
         window.onload = function () {
@@ -141,21 +142,21 @@ IoW Zones
         });
 
 
-        
+
 
 
         function myfunc1(x,y) {
-			
-			
+
+
             document.getElementById("esecid").value = x;
             document.getElementById("sname").value = y;
 
-			
+
         }
 
 
-		
-		
+
+
 
 
 

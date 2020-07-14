@@ -353,15 +353,17 @@ Land Assets
                     <td>{{$landinfo->assetNumber}}</td>
                     <td>{{substr($landinfo->assetDescription,0,25).'...'}}</td>
 
+
+                    <td>{{$landinfo->assetLocation}}</td>
+
+
+
+                    <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
                     @if ($landinfo->_condition=='Disposed')
                     <td class="text-danger">{{$landinfo->_condition}}</td>
                     @else
                     <td>{{$landinfo->_condition}}</td>
                     @endif
-
-
-                    <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
-                    <td>{{$landinfo->_condition}}</td>
                     <td><?php  $time = strtotime($landinfo->assetAcquisitionDate)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetDateinUse)?>  {{date('d/m/Y',$time)  }}</td>
                     <td><?php  $time = strtotime($landinfo->assetEndingDepreciationDate)?>  {{date('d/m/Y',$time)  }}</td>

@@ -1019,7 +1019,7 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
         return redirect()->back()->withErrors(['message' => 'No data Found Matching your filter ']);
         }else{
 
-        $pdf = PDF::load('collegesreport', $data);
+        $pdf = PDF::loadView('collegesreport', $data);
         return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }
 
