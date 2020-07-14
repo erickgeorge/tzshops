@@ -1297,8 +1297,8 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
            $data = [
             'notifications' => $notifications,
             'role' => $role,
-            'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
-            'cleanarea' => cleaningarea::all(),
+                           'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
+               'cleanarea' => cleaningarea::all(),
                ];
          $pdf = PDF::loadView('landcleaning_areareport', $data);
 

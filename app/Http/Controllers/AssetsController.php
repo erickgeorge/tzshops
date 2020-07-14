@@ -114,7 +114,17 @@ class AssetsController extends Controller
 
      if ($company->datecontract >= $company->endcontract) {
 
-         return redirect()->back()->withErrors(['message' => 'Please enter the valid end of contract as compared to the start of the contract']);
+         return redirect()->back()->withErrors(['message' => 'Please enter the valid end of contract , End of contract must be greater than start of the contract']);
+
+     }
+
+     $enddate = Carbon::parse($company->endcontract);
+     $startdate = Carbon::parse($company->datecontract);
+     $diff = $startdate->diffInDays($enddate); 
+
+     if ( $diff < 365 ) {
+
+         return redirect()->back()->withErrors(['message' => 'The contract duration must be greater than or equal to one year']);
 
      }
 
@@ -222,7 +232,7 @@ class AssetsController extends Controller
 
         $company->save();
 
-              return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Please enter percentage total of 100']);
+              return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Value must be greater than zero and less or equal to 100']);
             }
               else{
 
@@ -306,12 +316,12 @@ class AssetsController extends Controller
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if(request()->has('start'))  { //date filter
-
-
+        
+        
         $from=request('start');
         $to=request('end');
-
-
+        
+        
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -320,46 +330,46 @@ class AssetsController extends Controller
         $from=request('end');
         }// start> end
 
-
+       
          return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-
+             
              'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
-                    ->groupBy('company_name')->get(),
+                    ->groupBy('company_name')->get(),  
             'assessmmenttender' => company::select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
             'assessmmentareas' => company::select(DB::raw('area'))
-                    ->groupBy('area')->get(),
-
+                    ->groupBy('area')->get(),  
+  
           ]);
 
-         }
+         } 
          else{
 
              return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-
+             
              'cleangcompany' => company::orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
-                    ->groupBy('company_name')->get(),
+                    ->groupBy('company_name')->get(),  
             'assessmmenttender' => company::select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
             'assessmmentareas' => company::select(DB::raw('area'))
-                    ->groupBy('area')->get(),
-
+                    ->groupBy('area')->get(),  
+  
           ]);
 
          }
 
        }
-
+      
 
 
         public function cleaningcompanynew(){
@@ -439,7 +449,7 @@ class AssetsController extends Controller
             'staffhouses' => House::all(),
             'HallofResdence' => Hall::all(),
              'campuses' => Campus::all(),
-               'newzone' => zone::all(),
+               'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
                'cleanarea' => cleaningarea::all(),
 
           ]);
@@ -496,10 +506,19 @@ class AssetsController extends Controller
            $company = tendernumber::where('id',$p)->first();
            $company->tender = $request['tender'];
 
+          $checktender = tendernumber::where('tender', $company->tender)->first();
 
+         if (empty($checktender)) {
            $company->save();
 
-        return redirect()->back()->with(['message' => 'Company Edited successfully']);
+            return redirect()->back()->with(['message' => 'Company Edited successfully']);
+         } 
+         else { 
+
+             return redirect()->back()->withErrors(['message' => 'selected tender number already exists']);
+         }
+
+       
     }
 
 
@@ -4165,45 +4184,40 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsSummaryFiltered()
      {
-         if ($_GET['date']!='') {
-            if ($_GET['month']!='') {
-                if ($_GET['year']!='') {
-                    $time = strtotime($_GET['date'].'/'.$_GET['month'].'/'.$_GET['year']);
-                    $datyer = date('Y-d-m',$time);
-
+         if ($_GET['filter']!='') {
             $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if($_GET['asset']=='Land')
             {
-                $assetsinfo = assetsassesland::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassesland::where('assesmentYear',$_GET['filter'])->get();
             }else if( $_GET['asset']=='Building')
             {
-                $assetsinfo = assetsassesbuilding::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassesbuilding::where('assesmentYear',$_GET['filter'])->get();
 
             }else if( $_GET['asset']=='PlantMachinery')
             {
-                $assetsinfo = assetsassesplantandmachinery::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassesplantandmachinery::where('assesmentYear',$_GET['filter'])->get();
 
             }else if( $_GET['asset']=='MotorVehicle')
             {
-                $assetsinfo = assetsassesmotorvehicle::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassesmotorvehicle::where('assesmentYear',$_GET['filter'])->get();
 
             }else if( $_GET['asset']=='ComputerEquipment')
             {
-                $assetsinfo = assetsassescomputerequipment::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassescomputerequipment::where('assesmentYear',$_GET['filter'])->get();
 
             }else if( $_GET['asset']=='Equipment')
             {
-                $assetsinfo = assetsassesequipment::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassesequipment::where('assesmentYear',$_GET['filter'])->get();
 
             }else if( $_GET['asset']=='Furniture')
             {
-                $assetsinfo = assetsassesfurniture::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassesfurniture::where('assesmentYear',$_GET['filter'])->get();
 
             }else if( $_GET['asset']=='Intangible')
             {
-                $assetsinfo = assetsassesintangible::where('assesmentYear',$datyer)->get();
+                $assetsinfo = assetsassesintangible::where('assesmentYear',$_GET['filter'])->get();
 
             } else
             {
@@ -4211,24 +4225,9 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
             }
 
-            if(count($assetsinfo)>0)
-            {
-                return view('exports.assetsassesmentview',['asses'=>$assetsinfo,'role'=>$role,'notifications'=>$notifications,'year'=>$datyer]);
-
-            }else
-            {
-                return redirect()->back()->withErrors(['message' => 'No Data Found Matching Your Filter']);
-
-            }
-
+            return view('exports.assetsassesmentview',['asses'=>$assetsinfo,'role'=>$role,'notifications'=>$notifications]);
 
          } else {
-            return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Year For Filtering']);
-         }
-        }else {
-            return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Month For Filtering']);
-         }
-        }else {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assesment Date For Filtering']);
          }
 
