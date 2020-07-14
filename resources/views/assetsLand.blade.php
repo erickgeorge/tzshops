@@ -43,7 +43,7 @@ Land Assets
 <div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-        
+
         <div class="col-md-5">
             <a href="{{url('assetsNewLand')}}" class="btn btn-primary text-light" type="button"><b>Add new Land asset</b></a>
         </div>
@@ -73,7 +73,7 @@ Land Assets
                     <tbody>
                         <tr>
                             @php
-                            $land = assetsland::where('_condition','New')->get();
+                            $land0 = assetsland::where('_condition','New')->get();
                             $land2 = assetsland::where('_condition','Good')->get();
                             $land3 = assetsland::where('_condition','Fair')->get();
                             $land4 = assetsland::where('_condition','Poor')->get();
@@ -85,11 +85,11 @@ Land Assets
                             $land9 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                         @endphp
                                                             <td>
-                            @if (count($land)>0)
-                                    {{count($land)}}
+                            @if (count($land0)>0)
+                                    {{count($land0)}}
                                     &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
-                                    {{count($land)}}
+                                    {{count($land0)}}
                             @endif
                             </td>
                             <td>
