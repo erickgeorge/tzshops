@@ -65,6 +65,7 @@ Intangible Assets
                             <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
+                            <th>Expiring Soon</th>
                             <th>Expired</th>
                         </tr>
                     </thead>
@@ -79,6 +80,7 @@ Intangible Assets
                                 $intangible6 = assetsintangible::where('_condition','Obsolete')->get();
                                 $intangible7 = assetsintangible::where('_condition','Disposed')->get();
                                 $intangible8 = assetsintangible::where('_condition','Sold')->get();
+                            $intangible10 =  assetsintangible::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $intangible9 = assetsintangible::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                <td>
@@ -143,6 +145,14 @@ Intangible Assets
                                         &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($intangible8)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($intangible10)>0)
+                                        {{count($intangible10)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible10)}}
                                 @endif
                                 </td>
                                 <td>

@@ -11,7 +11,24 @@
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: uppercase;">@php echo $_GET['asset']; @endphp Assets Export Preview</b></h5>
+            <h5><b style="text-transform: uppercase;">@php
+
+
+            if( $_GET['asset']=='plantandmachinery')
+            {
+echo 'Plant and Machinery';
+            }else if( $_GET['asset']=='motorvehicle')
+            {
+echo 'Motor Vehicle';
+            }else if( $_GET['asset']=='computerequipments')
+            {
+echo 'Computer Equipments';
+            }else{
+                echo $_GET['asset'];
+            }
+
+
+                @endphp Assets Export Preview</b></h5>
         </div>
     </div>
     <hr class="container">

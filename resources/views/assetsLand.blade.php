@@ -66,6 +66,7 @@ Land Assets
                             <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
+                            <th>Expiring Soon</th>
                             <th>Expired</th>
                         </tr>
                     </thead>
@@ -80,6 +81,7 @@ Land Assets
                             $land6 = assetsland::where('_condition','Obsolete')->get();
                             $land7 = assetsland::where('_condition','Disposed')->get();
                             $land8 = assetsland::where('_condition','Sold')->get();
+                            $land10 = assetsland::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                             $land9 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                         @endphp
                                                             <td>
@@ -144,6 +146,14 @@ Land Assets
                                     &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land8)}}
+                            @endif
+                            </td>
+                            <td>
+                                @if (count($land10)>0)
+                                    {{count($land10)}}
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                @else
+                                    {{count($land10)}}
                             @endif
                             </td>
                             <td>

@@ -65,6 +65,7 @@ Computer Equipment Assets
                             <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
+                            <th>Expiring Soon</th>
                             <th>Expired</th>
                         </tr>
                     </thead>
@@ -79,6 +80,7 @@ Computer Equipment Assets
                                 $computerequipment6 = assetscomputerequipment::where('_condition','Obsolete')->get();
                                 $computerequipment7 = assetscomputerequipment::where('_condition','Disposed')->get();
                                 $computerequipment8 = assetscomputerequipment::where('_condition','Sold')->get();
+                            $computerequipment10 = assetscomputerequipment::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $computerequipment9 = assetscomputerequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                    <td>
@@ -143,6 +145,14 @@ Computer Equipment Assets
                                             &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment8)}}
+                                    @endif
+                                    </td>
+                                    <td>
+                                        @if (count($computerequipment10)>0)
+                                            {{count($computerequipment10)}}
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        @else
+                                            {{count($computerequipment10)}}
                                     @endif
                                     </td>
                                     <td>

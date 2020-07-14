@@ -65,6 +65,7 @@ Furniture Assets
                             <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
+                            <th>Expiring Soon</th>
                             <th>Expired</th>
                         </tr>
                     </thead>
@@ -79,6 +80,7 @@ Furniture Assets
                                 $furniture6 = assetsfurniture::where('_condition','Obsolete')->get();
                                 $furniture7 = assetsfurniture::where('_condition','Disposed')->get();
                                 $furniture8 = assetsfurniture::where('_condition','Sold')->get();
+                            $furniture10 = assetsfurniture::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $furniture9 = assetsfurniture::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                <td>
@@ -143,6 +145,14 @@ Furniture Assets
                                         &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture8)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($furniture10)>0)
+                                        {{count($furniture10)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($furniture10)}}
                                 @endif
                                 </td>
                                 <td>

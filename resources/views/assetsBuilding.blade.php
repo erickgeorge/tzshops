@@ -64,6 +64,7 @@ use Illuminate\Support\Facades\DB;
                             <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
+                            <th>Expiring Soon</th>
                             <th>Expired</th>
                         </tr>
                     </thead>
@@ -79,6 +80,8 @@ use Illuminate\Support\Facades\DB;
                             $build7 = assetsbuilding::where('_condition','Disposed')->get();
                             $build8 = assetsbuilding::where('_condition','Sold')->get();
                             $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                            $build10 = assetsbuilding::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
+
                         @endphp
                         <td>
                         @if (count($build)>0)
@@ -142,6 +145,14 @@ use Illuminate\Support\Facades\DB;
                                 &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build8)}}
+                        @endif
+                        </td>
+                        <td>
+                            @if (count($build10)>0)
+                                {{count($build10)}}
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                            @else
+                                {{count($build10)}}
                         @endif
                         </td>
                         <td>

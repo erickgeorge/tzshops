@@ -67,13 +67,13 @@ Work in Progress
                             </div>
                     </p>
                 </div>
-                @if (($role['user_role']['role_id'] != 1)||(auth()->user()->type !='Assets Officer'))
-        @else
+                @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
                 <div class="card-footer text-right">
                     <a href="{{route('assetsWorkinProgressReallocate',[$landinfo->id])}}" class="btn btn-primary text-light" type="button"> <i class="fa fa-plus-circle" aria-hidden="true"></i> Reallocate</a>
 
                     <a href="{{route('assetsWorkinProgressEdit',[$landinfo->id])}}" class="btn btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
                 </div>
+
 @endif
             @endforeach
         </div>

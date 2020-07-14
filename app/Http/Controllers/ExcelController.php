@@ -25077,6 +25077,82 @@ class ExcelController extends Controller
                 ($_GET['condition']=='')&&
                 ($_GET['expired']!='')
             ) {
+                if($_GET['expired']=='aboutto')
+                {
+
+
+                if ($_GET['asset']=='building') {//
+
+                    $assetdata = assetsbuilding::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                get();
+
+                }else if ($_GET['asset']=='computerequipments') {//
+
+                    $assetdata = assetscomputerequipment::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='equipments') {//
+
+                    $assetdata = assetsequipment::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+
+                } else if ($_GET['asset']=='furniture') {//
+
+                    $assetdata = assetsfurniture::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+
+                }else if ($_GET['asset']=='intangible') {//
+
+                    $assetdata = assetsintangible::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='land') {//
+
+                    $assetdata = assetsland::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='motorvehicle') {//
+
+                    $assetdata = assetsmotorvehicle::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='plantandmachinery') {//
+
+                    $assetdata = assetsplantandmachinery::
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='workinprogress') {//
+
+                    $assetdata = assetsworkinprogress::
+                Where('_status','0')->
+
+                whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+
+                }
+                }else
+                {
+
+
 
                 if ($_GET['asset']=='building') {//
 
@@ -25145,6 +25221,7 @@ class ExcelController extends Controller
                     get();
 
 
+                }
                 }
 
             ///////////////////////////////////

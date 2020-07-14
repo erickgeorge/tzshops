@@ -118,6 +118,7 @@ $workinprogress = assetsworkinprogress::get();
                                 <th>Obsolete</th>
                                 <th>Disposed</th>
                                 <th>Sold</th>
+                                <th>Expiring Soon</th>
                                 <th>Expired</th>
                             </tr>
                         </thead>
@@ -134,7 +135,9 @@ $workinprogress = assetsworkinprogress::get();
                                     $build6 = assetsbuilding::where('_condition','Obsolete')->get();
                                     $build7 = assetsbuilding::where('_condition','Disposed')->get();
                                     $build8 = assetsbuilding::where('_condition','Sold')->get();
+                                    $build10 = assetsbuilding::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                     $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+
                                 @endphp
                                 <td>
                                 @if (count($build)>0)
@@ -201,6 +204,14 @@ $workinprogress = assetsworkinprogress::get();
                                 @endif
                                 </td>
                                 <td>
+                                    @if (count($build10)>0)
+                                        {{count($build10)}}
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($build10)}}
+                                @endif
+                                </td>
+                                <td>
                                     @if (count($build9)>0)
                                         {{count($build9)}}
                                         &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
@@ -222,6 +233,8 @@ $workinprogress = assetsworkinprogress::get();
                                 $computerequipment7 = assetscomputerequipment::where('_condition','Disposed')->get();
                                 $computerequipment8 = assetscomputerequipment::where('_condition','Sold')->get();
                                 $computerequipment9 = assetscomputerequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                                $computerequipment10 = assetscomputerequipment::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
+
                             @endphp
                                    <td>
                                     @if (count($computerequipment)>0)
@@ -288,6 +301,14 @@ $workinprogress = assetsworkinprogress::get();
                                     @endif
                                     </td>
                                     <td>
+                                        @if (count($computerequipment10)>0)
+                                            {{count($computerequipment10)}}
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        @else
+                                            {{count($computerequipment10)}}
+                                    @endif
+                                    </td>
+                                    <td>
                                         @if (count($computerequipment9)>0)
                                             {{count($computerequipment9)}}
                                             &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
@@ -308,6 +329,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $equipment6 = assetsequipment::where('_condition','Obsolete')->get();
                                 $equipment7 = assetsequipment::where('_condition','Disposed')->get();
                                 $equipment8 = assetsequipment::where('_condition','Sold')->get();
+                                $equipment10 = assetsequipment::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $equipment9 = assetsequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                 <td>
@@ -375,6 +397,14 @@ $workinprogress = assetsworkinprogress::get();
                                 @endif
                                 </td>
                                 <td>
+                                    @if (count($equipment10)>0)
+                                        {{count($equipment10)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($equipment10)}}
+                                @endif
+                                </td>
+                                <td>
                                     @if (count($equipment9)>0)
                                         {{count($equipment9)}}
                                         &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
@@ -395,6 +425,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $furniture6 = assetsfurniture::where('_condition','Obsolete')->get();
                                 $furniture7 = assetsfurniture::where('_condition','Disposed')->get();
                                 $furniture8 = assetsfurniture::where('_condition','Sold')->get();
+                                $furniture10 = assetsfurniture::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $furniture9 = assetsfurniture::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                <td>
@@ -462,6 +493,14 @@ $workinprogress = assetsworkinprogress::get();
                                 @endif
                                 </td>
                                 <td>
+                                    @if (count($furniture10)>0)
+                                        {{count($furniture10)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($furniture10)}}
+                                @endif
+                                </td>
+                                <td>
                                     @if (count($furniture9)>0)
                                         {{count($furniture9)}}
                                         &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
@@ -482,6 +521,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $intangible6 = assetsintangible::where('_condition','Obsolete')->get();
                                 $intangible7 = assetsintangible::where('_condition','Disposed')->get();
                                 $intangible8 = assetsintangible::where('_condition','Sold')->get();
+                                $intangible10 = assetsintangible::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $intangible9 = assetsintangible::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                <td>
@@ -549,6 +589,14 @@ $workinprogress = assetsworkinprogress::get();
                                 @endif
                                 </td>
                                 <td>
+                                    @if (count($intangible10)>0)
+                                        {{count($intangible10)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($intangible10)}}
+                                @endif
+                                </td>
+                                <td>
                                     @if (count($intangible9)>0)
                                         {{count($intangible9)}}
                                         &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
@@ -569,6 +617,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $land6 = assetsland::where('_condition','Obsolete')->get();
                                 $land7 = assetsland::where('_condition','Disposed')->get();
                                 $land8 = assetsland::where('_condition','Sold')->get();
+                                $land10 = assetsland::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $land9 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                 <td>
@@ -636,6 +685,14 @@ $workinprogress = assetsworkinprogress::get();
                                 @endif
                                 </td>
                                 <td>
+                                    @if (count($land10)>0)
+                                        {{count($land10)}}
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($land10)}}
+                                @endif
+                                </td>
+                                <td>
                                     @if (count($land9)>0)
                                         {{count($land9)}}
                                         &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
@@ -656,6 +713,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $motorvehicle6 = assetsmotorvehicle::where('_condition','Obsolete')->get();
                                 $motorvehicle7 = assetsmotorvehicle::where('_condition','Disposed')->get();
                                 $motorvehicle8 = assetsmotorvehicle::where('_condition','Sold')->get();
+                                $motorvehicle10 = assetsmotorvehicle::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $motorvehicle9 = assetsmotorvehicle::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                 <td>
@@ -723,6 +781,14 @@ $workinprogress = assetsworkinprogress::get();
                                 @endif
                                 </td>
                                 <td>
+                                    @if (count($motorvehicle10)>0)
+                                        {{count($motorvehicle10)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=motorvehicle&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($motorvehicle10)}}
+                                @endif
+                                </td>
+                                <td>
                                     @if (count($motorvehicle9)>0)
                                         {{count($motorvehicle9)}}
                                         &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=motorvehicle&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
@@ -743,6 +809,7 @@ $workinprogress = assetsworkinprogress::get();
                                 $plantandmachinery6 = assetsplantandmachinery::where('_condition','Obsolete')->get();
                                 $plantandmachinery7 = assetsplantandmachinery::where('_condition','Disposed')->get();
                                 $plantandmachinery8 = assetsplantandmachinery::where('_condition','Sold')->get();
+                                $plantandmachinery10 = assetsplantandmachinery::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $plantandmachinery9 = assetsplantandmachinery::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                 <td>
@@ -807,6 +874,14 @@ $workinprogress = assetsworkinprogress::get();
                                         &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($plantandmachinery8)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($plantandmachinery10)>0)
+                                        {{count($plantandmachinery10)}}
+                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($plantandmachinery10)}}
                                 @endif
                                 </td>
                                 <td>

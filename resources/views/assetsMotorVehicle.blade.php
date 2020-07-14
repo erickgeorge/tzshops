@@ -65,6 +65,7 @@ use App\assetsassesmotorvehicle;
                             <th>Obsolete</th>
                             <th>Disposed</th>
                             <th>Sold</th>
+                            <th>Expiring Soon</th>
                             <th>Expired</th>
                         </tr>
                     </thead>
@@ -79,6 +80,7 @@ use App\assetsassesmotorvehicle;
                                 $motorvehicle6 = assetsmotorvehicle::where('_condition','Obsolete')->get();
                                 $motorvehicle7 = assetsmotorvehicle::where('_condition','Disposed')->get();
                                 $motorvehicle8 = assetsmotorvehicle::where('_condition','Sold')->get();
+                            $motorvehicle10 = assetsmotorvehicle::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $motorvehicle9 = assetsmotorvehicle::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                 <td>
@@ -143,6 +145,14 @@ use App\assetsassesmotorvehicle;
                                         &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=motorvehicle&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($motorvehicle8)}}
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($motorvehicle10)>0)
+                                        {{count($motorvehicle10)}}
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=motorvehicle&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    @else
+                                        {{count($motorvehicle10)}}
                                 @endif
                                 </td>
                                 <td>
