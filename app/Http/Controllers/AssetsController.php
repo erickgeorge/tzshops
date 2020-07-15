@@ -4187,8 +4187,9 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         if ($_GET['date']!='') {
             if ($_GET['month']!='') {
                 if ($_GET['year']!='') {
-                    $time = strtotime($_GET['date'].'/'.$_GET['month'].'/'.$_GET['year']);
-                    $datyer = date('Y-d-m',$time);
+                    $time = strtotime($_GET['year'].'/'.$_GET['month'].'/'.$_GET['date']);
+                    $datyer = date('Y-m-d',$time);
+                    // echo $datyer;
 
             $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
