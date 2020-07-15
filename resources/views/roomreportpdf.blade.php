@@ -1,7 +1,7 @@
-<div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h5>Directorate of Estates Services</h5></p><p><b style="text-transform: uppercase;"><?php
-     echo $header; 
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <p> <h5>Directorate of Estates Services</h5></p><p><b style="text-transform: uppercase;"><?php
+     echo $header;
      ?></b></p>
 </div><br>
 <style>
@@ -25,13 +25,13 @@ tr:nth-child(even) {
 <table>
     <?php use App\WorkOrder; ?>
  <thead class="thead-dark" align="center">
-    
+
     <tr>
                     <th>#</th>
                     <th>location</th>
                     <th>Total works order requests</th>
-                    
-        
+
+
     </tr>
  </thead>
  <tbody align="center">
@@ -44,7 +44,7 @@ tr:nth-child(even) {
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-details">{{ $work->location }}</td>
-                            <td> <?php 
+                            <td> <?php
                                 $count = WorkOrder::select(DB::raw('count(location) as total_location'))->Where('location',$work->location)->get();
                                 foreach ($count as $counted) {
                                     echo $counted['total_location'];

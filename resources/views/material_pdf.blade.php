@@ -1,8 +1,8 @@
 
-<div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"><?php
-     echo $header; 
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"><?php
+     echo $header;
      ?></b></p>
 </div><br>
 <style>
@@ -33,7 +33,7 @@ tr:nth-child(even) {
                 <th >Value/Capacity</th>
                 <th >Type</th>
                 <th >Stock</th>
-          
+
             </tr>
             </thead>
 
@@ -49,10 +49,10 @@ tr:nth-child(even) {
                     <td id="wo-details">{{ $item->description }}</td>
                      <td>{{ $item->brand }}</td>
                     <td>{{ $item->type }}</td>
-                   
+
 
                     <td>{{ $item->stock }}</td>
-                   
+
                     </tr>
                     @endforeach
             </tbody>

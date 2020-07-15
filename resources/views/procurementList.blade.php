@@ -1,6 +1,6 @@
-<div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"> <?php
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"> <?php
      echo $header;
       ?></b></p>
 </div><br>
@@ -29,48 +29,48 @@ tr:nth-child(even) {
     $store_received = $produced->store_received
 ?>
        @endforeach
-      <center> 
-        @if(auth()->user()->type == 'Head Procurement') Added By: 
-        @else Sent By: 
-        @endif 
+      <center>
+        @if(auth()->user()->type == 'Head Procurement') Added By:
+        @else Sent By:
+        @endif
 
         <?php $officer = User::where('id',$procured_by )->get(); ?>
 
-   
-   @foreach($officer as $offier) {{ $offier->fname }} {{ $offier->lname }} 
+
+   @foreach($officer as $offier) {{ $offier->fname }} {{ $offier->lname }}
    @endforeach &nbsp;&nbsp;&nbsp;on :
    <?php $time = strtotime($tag_); echo date('d/m/Y',$time);  ?>
- &nbsp;&nbsp;&nbsp;  
- @if($store_received == 0) 
-  @if(auth()->user()->type == 'Head Procurement') status: Not Received by store 
-  @else status: Not Confirmed 
+ &nbsp;&nbsp;&nbsp;
+ @if($store_received == 0)
+  @if(auth()->user()->type == 'Head Procurement') status: Not Received by store
+  @else status: Not Confirmed
   @endif
-@else 
+@else
    Received by :
     <?php $store =  User::where('id',$store_received )->get(); ?>
-@foreach($store as $officcer) {{ $officcer->fname }} {{ $officcer->lname }} 
+@foreach($store as $officcer) {{ $officcer->fname }} {{ $officcer->lname }}
 @endforeach
    @endif</center><br>
-                            
-      
+
+
 
 <table>
   <thead  align="center">
    <tr style="color: white;">
       <th scope="col">#</th>
       <th scope="col">Material Name</th>
-     
+
       <th scope="col">Description</th>
       <th scope="col">Type</th>
       <th scope="col">Total</th>
     <th scope="col">Unit Measure</th>
       <th scope="col">Price</th>
-  
- 
+
+
     </tr>
   </thead>
   <tbody align="center">
-  <?php 
+  <?php
 
  if (isset($_GET['page'])){
 if ($_GET['page']==1){
@@ -89,20 +89,20 @@ else {
     <tr>
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $procure->material_name }}</td>
-   
+
       <td>{{ $procure->material_description }}</td>
       <td>{{ $procure->type }}</td>
       <td>{{ number_format($procure->total_input) }}</td>
          <td>{{ $procure->unit_measure }}</td>
         <td>{{ number_format($procure->price_tag) }}</td>
-   
-     
+
+
       </td>
     </tr>
     @endforeach
   </tbody>
 
- 
+
 </table>
 
 </div>

@@ -1,10 +1,10 @@
-<div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"><?php
-     echo $header; 
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"><?php
+     echo $header;
      ?></b></p>
 </div><br>
 
@@ -28,17 +28,17 @@ tr:nth-child(even) {
 </style>
 <table>
  <thead class="thead-dark" align="center">
-    
+
     <tr>
                     <th>#</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
                     <th>Status</th>
-               
+
                     <th>Location</th>
-                    
-        
+
+
     </tr>
  </thead>
  <tbody align="center">
@@ -57,7 +57,7 @@ tr:nth-child(even) {
                                 <td><span class="badge badge-warning">new</span></td>
                             @elseif($work->status == 1)
                                 <td><span class="badge badge-success">accepted</span></td>
-                
+
               @elseif($work->status == 2)
                                 <td><span class="badge badge-success">CLOSED</span></td>
               @elseif($work->status == 3)
@@ -71,9 +71,9 @@ tr:nth-child(even) {
               @elseif($work->status == 7)
                               <td><span class="badge badge-info">material requested</span></td>
               @else
-                                <td><span class="badge badge-success">procurement stage</span></td>               
+                                <td><span class="badge badge-success">procurement stage</span></td>
                             @endif
-                       
+
                             <td>
 
                                 @if($work->location ==null)
@@ -83,7 +83,7 @@ tr:nth-child(even) {
                                 {{ $work->location }}
                             @endif
                             </td>
-                               
+
                                 @endif
                         </tr>
                         @endforeach

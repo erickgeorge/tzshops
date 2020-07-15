@@ -1,9 +1,9 @@
-<div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">All Sections List</b></p>
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">All Sections List</b></p>
 </div><br>
 
 <style>
@@ -29,12 +29,12 @@ tr:nth-child(even) {
 </style>
 <table>
  <thead class="thead-dark" align="center">
-    
+
     <tr>
                     <th>#</th>
                     <th>Name</th>
-                    
-        
+
+
     </tr>
  </thead>
  <tbody align="center">

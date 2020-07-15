@@ -7,7 +7,7 @@
 @section('body')
 
 
-       <?php 
+       <?php
        use App\Material;
     $materials = Material::get();
 
@@ -26,30 +26,6 @@
         </div>
         @endif
 
-      <!--<div class="col-md-6" align="left">
-            <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
-                From <input name="start" value="<?php
-                //if (request()->has('start')) {
-                   // echo $_GET['start'];
-               // } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php// echo date('Y-m-d'); ?>">
-                To <input value="<?php
-                //if (request()->has('end')) {
-                    //echo $_GET['end'];
-               // } ?>"
-                            // name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             //max="<?php //echo date('Y-m-d'); ?>">
-                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
-            </form>
-        </div>-->
-
-
-        {{--<div class="col-md-4">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by type, status and name" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>--}}
     </div>
     <br>
     <hr class="container">
@@ -161,8 +137,7 @@
             </tbody>
         </table>
     </div>
-     <!--<div class="container">    <button  type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalu">Send Material request again</button>
-        </div>-->
+     
 
         <br>
         <br>
@@ -203,87 +178,6 @@
         </div>
     </div>
 
-<!-- Modals-->
-
-   <!--  <div class="modal fade" id="exampleModalu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-         <div >
-         <div class="modal-dialog" style="padding-right: 955px; background-color: white" role="document">
-         <div class="modal-content">
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-left:900px; ">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
-                    <div class="modal-header ">
-                     <div>
-                        <h5  style="width: 900px;" id="exampleModalLabel">Request material again.</h5>
-                        <hr>
-                    </div>
-
-
-
-                </div>
-                <div class="modal-body">
-    <div class="container">
-     <form method="POST"  >
-                    @csrf
-        <table class="table table-striped display" id="myTable"  style="width:100%">
-            <thead class="thead-dark">
-            <tr>
-                <th >#</th>
-                <th >WorkOrder ID</th>
-                <th >Workorder Detail</th>
-                <th >Material Name</th>
-                <th >Material Description</th>
-                <th >Type</th>
-                <th >previous quantity requested</th>
-                <th >Request quantity again</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-
-            <?php// $i=0;  ?>
-            @foreach($items as $item)
-
-                <?php// $i++ ?>
-                <tr>
-                    <th scope="row">{{ $i }}</th>
-                   <td>00{{ $item->work_order_id }}</td>
-
-                    <td>{{ $item['workorder']->details }}</td>
-                    <td>{{$item['material']->name }}</td>
-                    <td>{{ $item['material']->description }}</td>
-                    <td>{{ $item['material']->type }}</td>
-                    <td>{{ $item->quantity }}</td>
-
-                    <td><input type="number"  style="color: black; width: 150px" name="quantity"  class="form-control"  rows="5" id="quantity"></input></td>
-
-
-
-                    </tr>
-                    @endforeach
-
-            </tbody>
-
-        </table>
-        <hr>
-        <br>
-
-       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Request Material again</button>
-         </form>
-    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>-->
-
-<!-- Modal for edit material again-->
 
 
 

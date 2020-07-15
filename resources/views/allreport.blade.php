@@ -1,10 +1,11 @@
 <div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+    <h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"><?php
-     echo $header; 
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"><?php
+     echo $header;
      ?></b></p>
 </div><br>
 
@@ -50,12 +51,12 @@ tr:nth-child(even) {
 
           $phonreplaced = ltrim($phonenumber,'0');
           echo '+255'.$phonreplaced;
-          
+
         }else { echo $tech->phone;}
 
       ?></td>
                 @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
-                
+
             </tr>
         @endforeach
         </tbody>

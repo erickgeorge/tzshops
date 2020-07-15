@@ -1,6 +1,6 @@
-<div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h4>Directorate of Estates Services</h4></p><p><b ><?php
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <p><h4>Directorate of Estates Services</h4></p><p><b ><?php
      echo $header;
       ?></b></p>
 </div><br>
@@ -28,18 +28,18 @@ tr:nth-child(even) {
     <tr>
       <th scope="col">#</th>
       <th scope="col">Full Name</th>
-     
+
       <th scope="col">Email</th>
       <th title="phone" scope="col">Phone</th>
       <th scope="col">Type</th>
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
-  
- 
+
+
     </tr>
   </thead>
   <tbody align="center">
-  <?php 
+  <?php
 
  if (isset($_GET['page'])){
 if ($_GET['page']==1){
@@ -58,20 +58,20 @@ else {
     <tr>
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $user->fname . ' ' . $user->lname }}</td>
-   
+
       <td><a style="color: #000;" href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
       <td>{{ $user->phone }}</td>
       <td>{{ $user->type }}</td>
          <td>{{ $user['department']['directorate']->name }}</td>
         <td>{{ $user['department']->name }}</td>
-   
-     
+
+
       </td>
     </tr>
     @endforeach
   </tbody>
 
- 
+
 </table>
 
 </div>

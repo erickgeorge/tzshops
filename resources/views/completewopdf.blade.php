@@ -1,6 +1,6 @@
-<div style="margin-top: -7px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h5>Director of Estates Services</h5></p><p><b style="text-transform: uppercase;">Completed Works Orders With Time taken</b></p>
+<div style="margin-top: -7px" align="center"><h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <p><h5>Director of Estates Services</h5></p><p><b style="text-transform: uppercase;">Completed Works Orders With Time taken</b></p>
 </div><br>
 <style>
 table {
@@ -22,17 +22,17 @@ tr:nth-child(even) {
 </style>
 <table>
  <thead class="thead-dark" align="center">
-    
+
     <tr>
                     <th>#</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
                     <th>Time</th>
-               
+
                     <th>Location</th>
-                    
-        
+
+
     </tr>
  </thead>
  <tbody align="center">
@@ -50,10 +50,10 @@ tr:nth-child(even) {
                             <?php
                             $datetime1 = $work->created_at;
                             $datetime2 = $work->updated_at;
-    
+
                             $interval = date_diff($datetime1, $datetime2);
-    
-                            
+
+
                          ?>
                          <td>{{ $interval->format('%a') }} <small>Week(s)</small>  </td>
                             <td>
@@ -65,7 +65,7 @@ tr:nth-child(even) {
                                 {{ $work->location }}
                             @endif
                             </td>
-                               
+
                                 @endif
                         </tr>
                         @endforeach

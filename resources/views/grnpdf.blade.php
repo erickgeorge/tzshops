@@ -1,6 +1,6 @@
-<div style="margin-top: 20px" align="center">
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
-    <p><h2>University of Dar es salaam</h2> <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
     <p><b><u>GOODS RECEIVED NOTE</u></b></p>
 </div>
 <style>
@@ -15,7 +15,7 @@
   background-size: cover;
 
     }
-   
+
    .box{
     width:710px;
     height: 130px;
@@ -29,12 +29,12 @@
   display: inline-block;
   width: 400px;
   min-height: 50px;
- 
+
   height: auto;
   }
 
 
-     
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -53,9 +53,9 @@ tr:nth-child(even) {
 #footer .page:after{content:counter(page, decimal);}
 @page {margin:20px 30px 40px 50px;}
 </style>
- 
 
-    
+
+
    <body>
       <table border = "2" cellpadding = "5" cellspacing = "5">
          <tr >
@@ -65,7 +65,7 @@ tr:nth-child(even) {
                 <th >Description</th>
                 <th >Value/Capacity</th>
                 <th >Type</th>
-                
+
                 <th >Quantity Purchased</th>>
          </tr>
           <tbody>
@@ -85,7 +85,7 @@ tr:nth-child(even) {
                    <td style="color: blue"> {{ $item->quantity - $item->reserved_material }}</td>
 
                     </tr>
-                    
+
             </tbody>
             @endforeach
 
@@ -95,7 +95,7 @@ tr:nth-child(even) {
 <div >
     <br>
 
-     
+
     <div class="container-name">
      <div class="div1">Material Purchased By: <u style="padding-left: 12px;"> {{ $item['user']->fname.' '.$item['user']->lname }}</u></div>
     <div class="div2"> Store Manager:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}  </u> </div>
@@ -104,11 +104,11 @@ tr:nth-child(even) {
    <div class="container-name">
     <div class="div1">Signature  <u style="padding-left: 85px; width: 55px"> </u>  .................................</div>
     <div class="div2">Signature  <u style="padding-left: 65px; width: 55px"> </u>         .................................</div>
-     
+
 
    </div>
 
-     
+
      <div class="container-name">
      <div  class="div1" > Works Order No:<u style="padding-left: 65px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
 
@@ -126,22 +126,22 @@ tr:nth-child(even) {
           </div>
       </div>
       <br>
-      <br>  
-     
+      <br>
+
 
         <!--<br>
          <br>
-        <div style="padding-left: 400px"> 
+        <div style="padding-left: 400px">
       Official Stamp:  ..........................................................
        </div>-->
-      
+
    </body>
 
 
 
-             
+
 
 
 <div id='footer'>
     <p class="page">page</p>
-</div>   
+</div>
