@@ -42,7 +42,7 @@ Equipment Assets
 <div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-        
+
         <div class="col-md-5">
             <a href="{{url('assetsNewEquipment')}}" class="btn btn-primary text-light" type="button"><b>Add new Equipment asset</b></a>
         </div>
@@ -102,7 +102,7 @@ Equipment Assets
                                 <td>
                                     @if (count($equipment3)>0)
                                         {{count($equipment3)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($equipment3)}}
                                 @endif
@@ -110,7 +110,7 @@ Equipment Assets
                                 <td>
                                     @if (count($equipment4)>0)
                                         {{count($equipment4)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($equipment4)}}
                                 @endif

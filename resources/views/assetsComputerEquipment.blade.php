@@ -42,7 +42,7 @@ Computer Equipment Assets
 <div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-        
+
         <div class="col-md-6">
             <a href="{{url('assetsNewComputerEquipment')}}" class="btn btn-primary text-light" type="button"><b>Add new Computer Equipment asset</b></a>
         </div>
@@ -102,7 +102,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment3)>0)
                                             {{count($computerequipment3)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment3)}}
                                     @endif
@@ -110,7 +110,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment4)>0)
                                             {{count($computerequipment4)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment4)}}
                                     @endif

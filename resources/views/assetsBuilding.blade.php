@@ -43,7 +43,7 @@ use Illuminate\Support\Facades\DB;
 <div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-        
+
         <div class="col-md-5">
             <a href="{{url('assetsNewBuilding')}}" class="btn btn-primary text-light" type="button"><b>Add new Building asset</b></a>
         </div>
@@ -102,7 +102,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build3)>0)
                                 {{count($build3)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build3)}}
                         @endif
@@ -110,7 +110,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build4)>0)
                                 {{count($build4)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build4)}}
                         @endif
