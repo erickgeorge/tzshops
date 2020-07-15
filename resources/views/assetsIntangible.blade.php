@@ -42,7 +42,7 @@ Intangible Assets
 <div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-        
+
         <div class="col-md-5">
             <a href="{{url('assetsNewIntangible')}}" class="btn btn-primary text-light" type="button"><b>Add new Intangible asset</b></a>
         </div>
@@ -470,7 +470,7 @@ Intangible Assets
                     <td>{{$asseted['totalDepreciatedYears']}}</td>
                     <td style="text-align:right;">{{number_format($asseted['accumulatedDepreciation'])}}  </td>
                     <td style="text-align:right;">{{number_format($asseted['impairmentLoss'])}}  </td>
-                    <td style="text-align:right;">{{number_format($asseted['disposalCost'])}}  </td>
+                    <td style="text-align:right;">{{number_format($asseted['DisposalCost'])}}  </td>
 
                 </tr>
                 @php

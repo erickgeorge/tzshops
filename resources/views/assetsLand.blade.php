@@ -474,7 +474,7 @@ Land Assets
                       <td>{{$asseted['totalDepreciatedYears']}}</td>
                       <td style="text-align:right;">{{number_format($asseted['accumulatedDepreciation'])}}  </td>
                       <td style="text-align:right;">{{number_format($asseted['impairmentLoss'])}}  </td>
-                      <td style="text-align:right;">{{number_format($asseted['disposalCost'])}}  </td>
+                      <td style="text-align:right;">{{number_format($asseted['DisposalCost'])}}  </td>
 
                   </tr>
                   @php
