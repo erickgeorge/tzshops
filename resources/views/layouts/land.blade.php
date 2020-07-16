@@ -62,18 +62,28 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
 
 input[type="date"]::-webkit-datetime-edit-year-field{
   position: absolute !important;
-  border-left:1px solid #8c8c8c;
+  border-left:2px solid #8c8c8c;
   padding: 2px;
   color:#000;
   left: 56px;
+
+    border-top-right-radius: 20px 50px;
+  border-top-left-radius: 20px 50px;
+
 }
 
 input[type="date"]::-webkit-datetime-edit-month-field{
   position: absolute !important;
-  border-left:1px solid #8c8c8c;
+  border-left: 2px solid #8c8c8c;
   padding: 2px;
   color:#000;
   left: 26px;
+
+
+
+  height: 1px;
+  width: 1px;
+  
 
 }
 
@@ -83,6 +93,9 @@ input[type="date"]::-webkit-datetime-edit-day-field{
   color:#000;
   padding: 2px;
   left: 4px;
+
+
+  
 
 }
 

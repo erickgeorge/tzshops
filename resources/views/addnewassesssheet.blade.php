@@ -101,7 +101,7 @@ add new assessment sheet
     </TABLE>
    <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
 
-    <INPUT  class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
+    <INPUT id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
 
   </div>
    
@@ -120,7 +120,6 @@ add new assessment sheet
 
 
 
-
 <SCRIPT language="javascript">
         function addRow(tableID) {
              
@@ -129,10 +128,22 @@ add new assessment sheet
             var row = table.insertRow(rowCount);
             var colCount = table.rows[0].cells.length;
 
-
+       
 
             for(var i=0; i<colCount; i++)
              {
+
+              
+               if(rowCount = 1) {
+                      
+                          document.getElementById('deleterowbutton').style.display='inline-block';
+
+
+
+                    }
+
+                
+
 
                 var newcell = row.insertCell(i);
                  
@@ -174,7 +185,15 @@ add new assessment sheet
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");
                         break;
-                    }
+                    } 
+
+
+                        if(rowCount <= 2) {
+                       
+
+                        document.getElementById('deleterowbutton').style.display='none';
+                    } 
+
                     table.deleteRow(i);
                     rowCount--;
                     i--;
@@ -182,10 +201,14 @@ add new assessment sheet
 
 
             }
+
             }catch(e) {
                 alert(e);
             }
         }
+
+
+
 
     </SCRIPT>
 
