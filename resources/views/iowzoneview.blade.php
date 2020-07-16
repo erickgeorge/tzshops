@@ -102,9 +102,9 @@ IoW Zones
 
 
                 </div>
-
+    <div class="modal-body">
                 <form method="POST" action="edit/iowzone" class="col">
-                    <div class="modal-body">
+                
 
 
                         @csrf
@@ -123,8 +123,9 @@ IoW Zones
                         <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
                     </a>
 
-                    </div>
+                  
                 </form>
+               </div>   
 
 
                 <div class="modal-footer">

@@ -104,8 +104,9 @@ IoW Zones
 
                 </div>
 
+  <div class="modal-body">
                 <form method="POST" action="{{route('edit/iowzone/location', [$userid->id])}}" class="col">
-                    <div class="modal-body">
+                  
 
 
                         @csrf
@@ -123,8 +124,9 @@ IoW Zones
                         <a href="{{route('view.location', [$userid->id , $userzone->zone])}}" class="btn btn-danger">Cancel
                     </a>
 
-                    </div>
-                </form>
+                              </form>
+ </div>
+                            
 
 
                 <div class="modal-footer">

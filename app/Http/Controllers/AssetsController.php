@@ -450,7 +450,7 @@ class AssetsController extends Controller
             'HallofResdence' => Hall::all(),
              'campuses' => Campus::all(),
                'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
-               'cleanarea' => cleaningarea::all(),
+               'cleanarea' => cleaningarea::OrderBy('cleaning_name', 'ASC')->get()
 
           ]);
          }

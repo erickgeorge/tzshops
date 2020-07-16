@@ -1,4 +1,4 @@
-@extends('layouts.asset')
+@extends('layouts.land')
 
 @section('title')
 StaffHouse Registrartion
@@ -40,10 +40,10 @@ StaffHouse Registrartion
                             
                             <label style="width:150px;" class="input-group-text" for="directorate">Zone Name </label>
                         </div>
-                        <select required class="custom-select" name="zone" id="zonne">
+                        <select  class="custom-select" name="zone" id="zonne">
                             <option value="">Choose...</option>
                             @foreach($newzone as $zone)
-                                <option value="{{ $zone->id }}">{{ $zone->zonename }}</option>
+                                <option value="{{ $zone->zonename }}">{{ $zone->zonename }}</option>
                             @endforeach
 
                         </select>
