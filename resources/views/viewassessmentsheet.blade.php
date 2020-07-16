@@ -196,6 +196,12 @@ Company report
     </div>
 
 
+@if($summ > 100)
+<br>
+<div class="container jumbotron" style="color: red;"><p>Please edit the assessment sheet, The total percentage has exceeded 100%. Hence this assessment sheet will not used until total percentage equal to 100%.</p></div>
+<br>
+
+@endif
 
 @if($summ < 100)
 

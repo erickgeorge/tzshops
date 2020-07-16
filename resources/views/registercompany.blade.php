@@ -78,8 +78,10 @@ Company Registrartion
                             </option>
                          
                                 @foreach($sheets as $sheet)
+                                  @if($sheet->percentage == 100)
                                     <option value="{{ $sheet->name }}">{{ $sheet->name}}
                                     </option>
+                                  @endif  
                                 @endforeach
                         </select> 
            </TD> 

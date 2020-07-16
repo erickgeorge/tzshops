@@ -716,8 +716,9 @@ class AssetsController extends Controller
             'notifications' => $notifications,
             'campuses' => Campus::all(),
              'carea' =>cleaningarea::all(),
-              'sheets' =>assessmentsheet::select(DB::raw('name'))
+              'sheets' =>assessmentsheet::select(DB::raw('name ,sum(percentage) as percentage'))
                     ->where('status', 2)->groupBy('name')->OrderBy('name')->get(),
+
                       'companyall' => companywitharea::OrderBy('company_name', 'ASC')->get()
 
           ]);
