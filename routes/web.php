@@ -187,7 +187,7 @@ Route::post('delete/iowzone/{id}', 'DirectorateController@deleteiowzone')->name(
 Route::post('delete/iowzone/location/{id}', 'DirectorateController@deleteiowzonelocation')->name('iowzonelocation.delete')->middleware('auth');
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save')->middleware('auth');
 
-Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save')->middleware('auth');
+Route::post('save/section/workorder', 'DirectorateController@createworkorderection')->name('section.save')->middleware('auth');
 
 Route::post('save/iowzone', 'DirectorateController@createiowzone')->name('iowzone.save')->middleware('auth');
 Route::post('save/iowzone/location/{id}/{zone}', 'DirectorateController@createiowzonelocation')->name('iowzone.location.save')->middleware('auth');

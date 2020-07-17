@@ -212,7 +212,10 @@ class AssetsController extends Controller
          public function addnewsheetc(Request $request )
     {
 
+   
+      $checkforempty = assessmentsheet::where('name', $request['name'])->first();
 
+         if (empty($checkforempty)) {
 
             $activityi = $request['activity'];
             $percentagee = $request['percentage'];
@@ -221,21 +224,6 @@ class AssetsController extends Controller
             foreach($activityi as $a => $b){
             $summ += $percentagee[$a];
 
-            if($summ != 100) {
-
-        $company = new assessmentsheet();
-        $company->activity = $activityi[$a];
-        $company->percentage = $percentagee[$a];
-        $company->type = $request['type'];
-        $company->name = $request['name'];
-        $company->status = 1;
-
-        $company->save();
-
-              return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Value must be greater than zero and less or equal to 100']);
-            }
-              else{
-
         $company = new assessmentsheet();
         $company->activity = $activityi[$a];
         $company->percentage = $percentagee[$a];
@@ -243,13 +231,31 @@ class AssetsController extends Controller
         $company->name = $request['name'];
         $company->status = 2;
 
-        $company->save();
-      } }
+        $company->save();  }
+
+          if($summ != 100) { 
+
+              return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Value must be greater than zero and less or equal to 100']);
+           }
+
+           else{
+
+             return redirect()->route('assessment_sheet')->with(['message' => 'New assessment sheet registered successfully']);
+
+           }
+
+         }
+
+         else {
+           
+            return redirect()->back()->withErrors(['message' => 'The assessment sheet name already exist.']);
+
+         }
+       }
 
 
-        return redirect()->route('assessment_sheet')->with(['message' => 'New assessment sheet registered successfully']);
-    }
 
+   
 
 
 

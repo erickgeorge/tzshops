@@ -1,6 +1,6 @@
 @extends('layouts.land')
 @section('title')
-Company report
+Assessment Sheet
 @endsection
 @section('body')
 <br>
@@ -90,7 +90,7 @@ Company report
 
       <TD  >{{$assesment->activity}}</TD> 
            
-      <TD align="center"  >{{$assesment->percentage}}</TD> 
+      <TD align="center">{{$assesment->percentage}}</TD> 
 
            <td >
                             

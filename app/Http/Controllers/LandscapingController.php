@@ -1560,8 +1560,8 @@ class LandscapingController extends Controller
                return view('viewsheetbeforeproceed', [
             'role' => $role,
             'notifications' => $notifications,           
-         'assessmmentcompany' => assessmentsheet::where('name', $id)->where('status',1)->first(),
-         'assessmmentactivity' => assessmentsheet::where('name', $id)->where('status',1)->get()
+         'assessmmentcompany' => assessmentsheet::where('name', $id)->where('status',2)->first(),
+         'assessmmentactivity' => assessmentsheet::where('name', $id)->where('status',2)->get()
         ]);
          }
 
