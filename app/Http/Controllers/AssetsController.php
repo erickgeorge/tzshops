@@ -109,8 +109,9 @@ class AssetsController extends Controller
         $company->payment = $request['payment'];
         $company->datecontract = $request['datecontract'];
         $company->nextmonth = $request['datecontract'];
-        $company->endcontract =  $request['duration'];
-
+        $durass = strtotime($company->datecontract);
+        $dura = $request['duration'];
+        $company->endcontract = date('Y-m-d' , strtotime("+$dura year" , $durass));
 
 
 
@@ -135,7 +136,9 @@ class AssetsController extends Controller
      $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $company->tender)->first();
      $companynew->payment = $request['payment'];
      $companynew->datecontract = $request['datecontract'];
-     $companynew->endcontract =  $request['duration'];
+     $durass = strtotime($companynew->datecontract);
+     $dura = $request['duration'];
+     $companynew->endcontract =  date('Y-m-d' , strtotime("+$dura year" , $durass));
      $companynew->status = 1;
      $companynew->save();
 

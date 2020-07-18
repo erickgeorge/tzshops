@@ -170,11 +170,29 @@ Company Registrartion
                   <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:150px;" class="input-group-text" for="directorate">End of contract</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Contract Duration</label>
 
                         </div>
-                        <input style="color: black" type="date" required class="form-control" id="type"
-                               name="duration" required min="<?php echo date('Y-m-d' , strtotime("+1 year")); ?>" value="{{ old('duration') }}" >
+                       <!-- <input style="color: black" type="date" required class="form-control" id="type"
+                               name="duration" required min="<?php //echo date('Y-m-d' , strtotime("+1 //year")); ?>" value="{{ old('duration') }}" >-->
+
+
+
+                       <select   class="custom-select"  name="duration" id="tendernumber" required  >
+                            <option value="" selected>Choose contract duration...</option>
+                             <option value="1">1 Year</option>
+                             <option value="2">2 Years</option>
+                             <option value="3">3 Years</option>
+                             <option value="4">4 Years</option>
+                             <option value="5">5 Years</option>
+                             <option value="6">6 Years</option>
+                             <option value="7">7 Years</option>
+                             <option value="8">8 Years</option>
+                             <option value="9">9 Years </option>
+                             <option value="10">10 Years</option>
+                         
+                               
+                      </select> 
 
                  </div>
 
