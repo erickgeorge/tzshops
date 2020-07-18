@@ -121,29 +121,54 @@ tr:nth-child(even) {
 </div>
 
 
-      <?php $i = 0; ?>
+
+
+<div class="container">
+
+  <div class="row container-fluid">
+        <div class="col-lg-12">
+          
+           <u> <h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details</b></h5></u>
+        </div>
+    </div>
+   
+
+<br>
+       
+
+   <div class="container-name">
+     <div class="div1">Company Name:&nbsp;&nbsp;  &nbsp; <b>{{$company['companyname']['compantwo']->company_name}}</b></div>
+    <div class="div2"> Assessment Period:<b><?php  $dnext = strtotime($company->enddate); ?> {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
+   </div> 
+    <hr> 
+   
+  
+
+
+
+
+ <br>
+
+
+
+
+
+
+      <?php $ii = 0; ?>
  @foreach($assessmmentcompanyname as $company)
- <?php $i++ ?>
+ <?php $ii++ ?>
   <br>
 
 
     <div class="row container-fluid">
         <div class="col-lg-12">
           
-            <p><h5><b><u>Sheet No:0{{$i}}</u></b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b><u>assessment Sheet details for {{$company->assessment_name}}</u></b></h5></u>
+            <p><h5><b><u>Sheet No:0{{$ii}}</u></b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b><u>sheet name:  &nbsp; {{$company->assessment_name}}</u></b></h5></u>
         </div>
     </div>
    <br>
 
-    <div class="container-name">
-     <div class="div1">Company Name:&nbsp;&nbsp;  &nbsp; <b>{{$company['companyname']['compantwo']->company_name}}</b></div>
-    <div class="div2"> Area Name: &nbsp;&nbsp;  &nbsp; <b>{{$company['areaname']->cleaning_name}}</b> </div>
-   </div>   
-       <div class="container-name">
-     <div class="div1">Assessment Month:&nbsp;&nbsp;  &nbsp; <b>    <?php  $dnext = strtotime($company->enddate); ?> {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
-    <div class="div2">  </div>
-   </div>  
-<br>
+   
 
 
     <?php 
@@ -190,14 +215,14 @@ tr:nth-child(even) {
  </tr>
  </tbody>
   @endforeach
-  <th><b>Tottal</b></th>
-  <td style="text-align: center"><b><?php echo $sum ?>%</b></td>
+  <th colspan="2"><b>Tottal</b></th>
+  <td  style="text-align: center"><b><?php echo $sum ?>%</b></td>
   <td style="text-align: center"><b><?php echo $summ ?>%</b></td>
   </table>
    <br>
 
    <!--crosscheck-->
-
+@endforeach
 <table>
   <thead style=" background-color: #376ad3; color: white;">
   <tr style="color:white;"><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
@@ -221,7 +246,7 @@ tr:nth-child(even) {
 </table>
 
 </br>
-@endforeach
+
 
 <br><br><br>
 
