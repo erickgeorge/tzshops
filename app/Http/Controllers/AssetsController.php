@@ -79,10 +79,12 @@ class AssetsController extends Controller
 
     $checktender = company::where('tender', $request['tendern'])->where('company_name', $request['companyid'])->first();
 
-    if (empty($checktender)) {
+     if (empty($checktender)) {
 
+          
+            
             $area = $request['area'];
-            $sheet = $request['sheets'];
+            $sheet = $request['sheets']; 
 
 
 
@@ -375,6 +377,71 @@ class AssetsController extends Controller
          }
 
        }
+
+
+
+
+
+       public function cleaningcompanyreached(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+            if(request()->has('start'))  { //date filter
+
+
+        $from=request('start');
+        $to=request('end');
+
+
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+
+
+         return view('cleaningcompanyreached', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
+          ]);
+
+         }
+         else{
+
+             return view('cleaningcompanyreached', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => company::orderby('created_at','DESC')->get(),
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
+          ]);
+
+         }
+
+       }
+
+
 
 
 
@@ -722,8 +789,8 @@ class AssetsController extends Controller
             'notifications' => $notifications,
             'campuses' => Campus::all(),
              'carea' =>cleaningarea::all(),
-              'sheets' =>assessmentsheet::select(DB::raw('name ,sum(percentage) as percentage'))
-                    ->where('status', 2)->groupBy('name')->OrderBy('name')->get(),
+              'sheets' =>assessmentsheet::select(DB::raw('name , type , sum(percentage) as percentage'))
+                    ->where('status', 2)->groupBy('name')->groupBy('type')->OrderBy('name')->get(),
 
                       'companyall' => companywitharea::OrderBy('company_name', 'ASC')->get()
 

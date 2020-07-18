@@ -583,7 +583,16 @@ Route::get('iowwithlocation/{id}','NotesController@iowlocation')->name('zones')-
 
 //////////////////// non building assets & cleaning company ////////////////////////////
 Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbuildingasset')->middleware('auth');
+
+
 Route::get('tender','AssetsController@cleaningcompany')->name('cleaningcompany')->middleware('auth');
+
+Route::get('tenders_with_reached_assessment_day','AssetsController@cleaningcompanyreached')->name('tenders_reached')->middleware('auth');
+
+
+
+
+
 Route::get('cleaningcompany','AssetsController@cleaningcompanynew')->name('cleaning_company')->middleware('auth');
 Route::get('cleaningcompanyreport','AssetsController@cleaningcompanyreport')->name('cleaningcompanyreport')->middleware('auth');
 Route::get('assessmentsheet','AssetsController@assessmentsheet')->name('assessment_sheet')->middleware('auth');

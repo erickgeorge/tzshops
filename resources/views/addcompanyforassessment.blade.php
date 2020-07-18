@@ -33,22 +33,65 @@
     use App\landassessmentactivityform; 
     use App\landcrosschecklandassessmentactivity;
     use App\company;
-    $i = 0;
+   
  ?>
 
 
 
-  
+   @foreach($company as $companyiii)
+   @endforeach
  
 <div class="container">
 
+  <div class="row container-fluid">
+        <div class="col-lg-12">
+          
+            <h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details</b></h5>
+        </div>
+    </div>
+    <hr>
+
+   <div class="row">
+     <div class="col">
+       
+
+   <div class="input-group mb-3 col">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Company name</label>
+        </div>
+        <input  required class="form-control" placeholder="{{$companyname['compantwo']->company_name}} " 
+               aria-describedby="emailHelp" disabled="disabled" >
+    </div>
+
+     </div>
+     <div class="col">
+       
+   <div class="input-group mb-3 col">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Assessment period</label>
+        </div>
+
+          <?php  $dnext = strtotime($companyiii->nextmonth); ?>
+        <input style="color: black" type="text" required class="form-control" placeholder=" {{ date('d F Y', strtotime($companyiii->nextmonth))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }} "
+               aria-describedby="emailHelp" value="" disabled>
+    </div>
+
+     </div>
+
+
+
+   </div>
+
+
+ <br>
+ <?php  $ii = 0; ?>
    @foreach($company as $companyiii)
-   <?php $i++; ?>
+   <?php $ii++; ?>
 
     <div class="row container-fluid">
         <div class="col-lg-12">
           
-            <h5><b>Sheet No: {{$i}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details for {{ $companyiii->sheet  }}</b></h5>
+            <h5><b>Sheet No: {{$ii}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  Sheet name: &nbsp; {{ $companyiii->sheet  }}</b></h5>
         </div>
     </div>
     <hr>
@@ -59,13 +102,7 @@
 
     <br>
      <div class="row">
-    <div class="input-group mb-3 col">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Company name</label>
-        </div>
-        <input  required class="form-control" placeholder="{{$companyname['compantwo']->company_name}} " 
-               aria-describedby="emailHelp" disabled="disabled" >
-    </div>
+
     
   
         
@@ -82,21 +119,11 @@
     <br>
 
          <div class="row">
-    <div class="input-group mb-3 col">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Assessment period</label>
-        </div>
-
-          <?php  $dnext = strtotime($companyiii->nextmonth); ?>
-        <input style="color: black" type="text" required class="form-control" placeholder=" {{ date('d F Y', strtotime($companyiii->nextmonth))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }} "
-               aria-describedby="emailHelp" value="" disabled>
-    </div>
+  
     
   
         
-    <div class="input-group mb-3 col">
-        
-    </div>
+
         
     </div>
 

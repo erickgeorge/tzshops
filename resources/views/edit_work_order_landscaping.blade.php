@@ -90,9 +90,60 @@ var total=2;
 </div>
 
 
-<?php $i = 0; ?>
+
+
+
+<div class="container">
+
+  <div class="row container-fluid">
+        <div class="col-lg-12">
+          
+            <h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details</b></h5>
+        </div>
+    </div>
+    <hr>
+
+   <div class="row">
+     <div class="col">
+       
+
+    <div class="input-group mb-3 col">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Company name</label>
+        </div>
+        <input  required class="form-control" placeholder="{{$company['companyname']['compantwo']->company_name}} " 
+               aria-describedby="emailHelp" disabled="disabled" >
+    </div>
+
+     </div>
+     <div class="col">
+       
+   <div class="input-group mb-3 col">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Assessment period</label>
+        </div>
+        <?php  $dnext = strtotime($company->enddate); ?>
+        <input style="color: black" type="text" required class="form-control" placeholder=" {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }} "
+               aria-describedby="emailHelp" value="" disabled>
+    </div>
+
+     </div>
+
+
+
+   </div>
+
+
+ <br>
+
+
+
+
+
+
+<?php $ii = 0; ?>
  @foreach($assessmmentcompanyname as $company)
- <?php $i++ ?>
+ <?php $ii++ ?>
 
 
 <br>
@@ -101,7 +152,7 @@ var total=2;
     <div class="row container-fluid">
         <div class="col-lg-12">
           
-            <h5><b>Sheet No:0{{$i}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details for {{$company->assessment_name}}</b></h5>
+            <h5><b>Sheet No:0{{$ii}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  sheet name: {{$company->assessment_name}}</b></h5>
         </div>
     </div>
     <hr>
@@ -112,13 +163,7 @@ var total=2;
 
     <br>
      <div class="row">
-    <div class="input-group mb-3 col">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Company name</label>
-        </div>
-        <input  required class="form-control" placeholder="{{$company['companyname']['compantwo']->company_name}} " 
-               aria-describedby="emailHelp" disabled="disabled" >
-    </div>
+
     
   
         
@@ -134,23 +179,7 @@ var total=2;
 
     <br>
 
-         <div class="row">
-    <div class="input-group mb-3 col">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Assessment period</label>
-        </div>
-        <?php  $dnext = strtotime($company->enddate); ?>
-        <input style="color: black" type="text" required class="form-control" placeholder=" {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }} "
-               aria-describedby="emailHelp" value="" disabled>
-    </div>
-    
   
-        
-    <div class="input-group mb-3 col">
-        
-    </div>
-        
-    </div>
 
     <?php 
       $companypayment = company::where('tender', $company->company)->first();
