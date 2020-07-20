@@ -83,7 +83,7 @@ input[type="date"]::-webkit-datetime-edit-month-field{
 
   height: 1px;
   width: 1px;
-  
+
 
 }
 
@@ -95,7 +95,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
   left: 4px;
 
 
-  
+
 
 }
 
@@ -114,10 +114,16 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
-                   <li class="nav-item" style="margin-top: -10px;">
-                  <a class="nav-link" style="color:white" >
-                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
-              </li>
+
+                <li class="nav-item" style="margin-top: -10px;">
+   <a class="nav-link" style="color:white" >
+     <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
+</li>
+            </ul>
+            <ul class="navbar-nav m-auto text-center">
+
+
+
 
 
 <?php

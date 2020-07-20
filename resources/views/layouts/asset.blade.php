@@ -98,10 +98,14 @@ input[type="date"]::-webkit-datetime-edit-day-field{
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
 
-                               <li class="nav-item" style="margin-top: -10px;">
-                  <a class="nav-link" style="color:white" >
-                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
-              </li>
+                <li class="nav-item" style="margin-top: -10px;">
+   <a class="nav-link" style="color:white" >
+     <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
+</li>
+            </ul>
+            <ul class="navbar-nav m-auto text-center">
+
+
 
 
 
@@ -642,9 +646,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
           {{ Auth::user()->name }}
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;" >
-           <!--SETTING AND CHANGE PASSWORD
-          <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
-
+         
                <a class="dropdown-item" style="color:white" href="{{ url('myprofile')}}">My Profile</a>
           <a class="dropdown-item" style="color:white"  href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
