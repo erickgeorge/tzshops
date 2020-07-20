@@ -1,6 +1,6 @@
 @extends('layouts.land')
 @section('title')
-Company report
+Assessment Sheet
 @endsection
 @section('body')
 <br>
@@ -90,7 +90,7 @@ Company report
 
       <TD  >{{$assesment->activity}}</TD> 
            
-      <TD align="center"  >{{$assesment->percentage}}</TD> 
+      <TD align="center">{{$assesment->percentage}}</TD> 
 
            <td >
                             
@@ -196,6 +196,12 @@ Company report
     </div>
 
 
+@if($summ > 100)
+<br>
+<div class="container jumbotron" style="color: red;"><p>Please edit the assessment sheet, The total percentage has exceeded 100%. Hence this assessment sheet will not used until total percentage equal to 100%.</p></div>
+<br>
+
+@endif
 
 @if($summ < 100)
 
@@ -256,7 +262,7 @@ Company report
     </TABLE>
    <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
 
-    <INPUT  class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
+    <INPUT id="deleterowbutton" style="display: none;"  class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
 
 <br>
                     <button type="submit" class="btn btn-primary float-right">Save
@@ -302,7 +308,7 @@ Company report
 
 
 
-  <SCRIPT language="javascript">
+<SCRIPT language="javascript">
         function addRow(tableID) {
              
             var table = document.getElementById(tableID);
@@ -310,10 +316,22 @@ Company report
             var row = table.insertRow(rowCount);
             var colCount = table.rows[0].cells.length;
 
-
+       
 
             for(var i=0; i<colCount; i++)
              {
+
+              
+               if(rowCount = 1) {
+                      
+                          document.getElementById('deleterowbutton').style.display='inline-block';
+
+
+
+                    }
+
+                
+
 
                 var newcell = row.insertCell(i);
                  
@@ -355,7 +373,15 @@ Company report
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");
                         break;
-                    }
+                    } 
+
+
+                        if(rowCount <= 2) {
+                       
+
+                        document.getElementById('deleterowbutton').style.display='none';
+                    } 
+
                     table.deleteRow(i);
                     rowCount--;
                     i--;
@@ -363,13 +389,16 @@ Company report
 
 
             }
+
             }catch(e) {
                 alert(e);
             }
         }
 
-    </SCRIPT>
 
+
+
+    </SCRIPT>
                  
            
 

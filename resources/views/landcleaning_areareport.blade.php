@@ -99,7 +99,7 @@ tr:nth-child(even) {
                             <th scope="row">{{ $i }}</th>
                             
                             <td>{{ $clean_area->cleaning_name }}</td>
-                            <td>{{ $clean_area['zone']->zonename }}</td>
+                            <td>{{ $clean_area->zone_id }}</td>
 
 
 

@@ -79,10 +79,12 @@ class AssetsController extends Controller
 
     $checktender = company::where('tender', $request['tendern'])->where('company_name', $request['companyid'])->first();
 
-    if (empty($checktender)) {
+     if (empty($checktender)) {
 
+          
+            
             $area = $request['area'];
-            $sheet = $request['sheets'];
+            $sheet = $request['sheets']; 
 
 
 
@@ -107,8 +109,9 @@ class AssetsController extends Controller
         $company->payment = $request['payment'];
         $company->datecontract = $request['datecontract'];
         $company->nextmonth = $request['datecontract'];
-        $company->endcontract =  $request['duration'];
-
+        $durass = strtotime($company->datecontract);
+        $dura = $request['duration'];
+        $company->endcontract = date('Y-m-d' , strtotime("+$dura year" , $durass));
 
 
 
@@ -133,7 +136,9 @@ class AssetsController extends Controller
      $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $company->tender)->first();
      $companynew->payment = $request['payment'];
      $companynew->datecontract = $request['datecontract'];
-     $companynew->endcontract =  $request['duration'];
+     $durass = strtotime($companynew->datecontract);
+     $dura = $request['duration'];
+     $companynew->endcontract =  date('Y-m-d' , strtotime("+$dura year" , $durass));
      $companynew->status = 1;
      $companynew->save();
 
@@ -212,7 +217,10 @@ class AssetsController extends Controller
          public function addnewsheetc(Request $request )
     {
 
+   
+      $checkforempty = assessmentsheet::where('name', $request['name'])->first();
 
+         if (empty($checkforempty)) {
 
             $activityi = $request['activity'];
             $percentagee = $request['percentage'];
@@ -221,21 +229,6 @@ class AssetsController extends Controller
             foreach($activityi as $a => $b){
             $summ += $percentagee[$a];
 
-            if($summ != 100) {
-
-        $company = new assessmentsheet();
-        $company->activity = $activityi[$a];
-        $company->percentage = $percentagee[$a];
-        $company->type = $request['type'];
-        $company->name = $request['name'];
-        $company->status = 1;
-
-        $company->save();
-
-              return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Value must be greater than zero and less or equal to 100']);
-            }
-              else{
-
         $company = new assessmentsheet();
         $company->activity = $activityi[$a];
         $company->percentage = $percentagee[$a];
@@ -243,13 +236,31 @@ class AssetsController extends Controller
         $company->name = $request['name'];
         $company->status = 2;
 
-        $company->save();
-      } }
+        $company->save();  }
+
+          if($summ != 100) { 
+
+              return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Value must be greater than zero and less or equal to 100']);
+           }
+
+           else{
+
+             return redirect()->route('assessment_sheet')->with(['message' => 'New assessment sheet registered successfully']);
+
+           }
+
+         }
+
+         else {
+           
+            return redirect()->back()->withErrors(['message' => 'The assessment sheet name already exist.']);
+
+         }
+       }
 
 
-        return redirect()->route('assessment_sheet')->with(['message' => 'New assessment sheet registered successfully']);
-    }
 
+   
 
 
 
@@ -372,6 +383,71 @@ class AssetsController extends Controller
 
 
 
+
+
+       public function cleaningcompanyreached(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+            if(request()->has('start'))  { //date filter
+
+
+        $from=request('start');
+        $to=request('end');
+
+
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+
+
+         return view('cleaningcompanyreached', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
+          ]);
+
+         }
+         else{
+
+             return view('cleaningcompanyreached', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => company::orderby('created_at','DESC')->get(),
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
+          ]);
+
+         }
+
+       }
+
+
+
+
+
         public function cleaningcompanynew(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -450,7 +526,7 @@ class AssetsController extends Controller
             'HallofResdence' => Hall::all(),
              'campuses' => Campus::all(),
                'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
-               'cleanarea' => cleaningarea::all(),
+               'cleanarea' => cleaningarea::OrderBy('cleaning_name', 'ASC')->get()
 
           ]);
          }
@@ -716,8 +792,9 @@ class AssetsController extends Controller
             'notifications' => $notifications,
             'campuses' => Campus::all(),
              'carea' =>cleaningarea::all(),
-              'sheets' =>assessmentsheet::select(DB::raw('name'))
-                    ->where('status', 2)->groupBy('name')->OrderBy('name')->get(),
+              'sheets' =>assessmentsheet::select(DB::raw('name , type , sum(percentage) as percentage'))
+                    ->where('status', 2)->groupBy('name')->groupBy('type')->OrderBy('name')->get(),
+
                       'companyall' => companywitharea::OrderBy('company_name', 'ASC')->get()
 
           ]);

@@ -187,7 +187,7 @@ Route::post('delete/iowzone/{id}', 'DirectorateController@deleteiowzone')->name(
 Route::post('delete/iowzone/location/{id}', 'DirectorateController@deleteiowzonelocation')->name('iowzonelocation.delete')->middleware('auth');
 Route::post('save/department', 'DirectorateController@createDepartment')->name('department.save')->middleware('auth');
 
-Route::post('save/section', 'DirectorateController@createworkorderection')->name('section.save')->middleware('auth');
+Route::post('save/section/workorder', 'DirectorateController@createworkorderection')->name('section.save')->middleware('auth');
 
 Route::post('save/iowzone', 'DirectorateController@createiowzone')->name('iowzone.save')->middleware('auth');
 Route::post('save/iowzone/location/{id}/{zone}', 'DirectorateController@createiowzonelocation')->name('iowzone.location.save')->middleware('auth');
@@ -583,7 +583,16 @@ Route::get('iowwithlocation/{id}','NotesController@iowlocation')->name('zones')-
 
 //////////////////// non building assets & cleaning company ////////////////////////////
 Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbuildingasset')->middleware('auth');
+
+
 Route::get('tender','AssetsController@cleaningcompany')->name('cleaningcompany')->middleware('auth');
+
+Route::get('tenders_with_reached_assessment_day','AssetsController@cleaningcompanyreached')->name('tenders_reached')->middleware('auth');
+
+
+
+
+
 Route::get('cleaningcompany','AssetsController@cleaningcompanynew')->name('cleaning_company')->middleware('auth');
 Route::get('cleaningcompanyreport','AssetsController@cleaningcompanyreport')->name('cleaningcompanyreport')->middleware('auth');
 Route::get('assessmentsheet','AssetsController@assessmentsheet')->name('assessment_sheet')->middleware('auth');

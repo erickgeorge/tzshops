@@ -46,6 +46,7 @@
                     <tbody>
                     <?php $i = 0; ?>
                     @foreach($cleangcompany as $house)
+                    
                         <?php $i++; ?>
 
 
@@ -53,7 +54,9 @@
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->name }}</td>
                             <td>{{ $house->type}}</td>
-                            <td>{{ $house->percentage}}</td>
+                            
+                              @if($house->percentage == 100)
+                              <td>{{ $house->percentage}} </td> @else<td title="Please edit to 100%" style="color: red">{{ $house->percentage}}</td> @endif
                   
                           <td> <a style="color: green;"  href="{{route('view_assessment_sheet' , [$house->name])}}" data-toggle="tooltip" title="View and edit assessment sheet"><i
                                                     class="fas fa-eye"></i></a> </td>        

@@ -61,7 +61,7 @@
                             <th scope="row">{{ $i }}</th>
                             
                             <td>{{ $clean_area->cleaning_name }}</td>
-                            <td>{{ $clean_area['zone']->zonename }}</td>
+                            <td>{{ $clean_area->zone_id }}</td>
 
   @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
 
@@ -134,10 +134,10 @@
                        
 
             
-                            <select style="color: black;width:350px" required class="custom-select" name="zone" >
+                            <select style="color: black;width:350px"  class="custom-select" name="zone" >
                             <option value="">Choose...</option>
                                @foreach($newzone as $zone)
-                                <option value="{{ $zone->id }}">{{ $zone->zonename }}</option>
+                                <option value="{{ $zone->zonename }}">{{ $zone->zonename }}</option>
                                 @endforeach
 
                         </select>

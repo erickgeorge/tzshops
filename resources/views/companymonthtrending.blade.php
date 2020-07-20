@@ -40,8 +40,13 @@ Company report
 
 
 
+  <?php $tenders = Crypt::encrypt($company->company); ?> 
 
-
+                       <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
+               <a  href="{{route('trendingscore_report_company' , [ $tenders , $company->assessment_month])}}"
+                                                            style="color: green;" 
+                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF</a>
+                </button>
 
 
           <table id="myTable" class="table table-striped">
@@ -105,11 +110,7 @@ Company report
 <br><br>
 
 
-       <?php $tenders = Crypt::encrypt($company->company); ?> 
-                                             <b style=" float:right;" > Report <a  href="{{route('trendingscore_report_company' , [ $tenders , $company->assessment_month])}}"
-                                                            style="color: green;" 
-                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i></a> </b>
-
+     
 
                        
 

@@ -78,8 +78,11 @@ Company Registrartion
                             </option>
                          
                                 @foreach($sheets as $sheet)
-                                    <option value="{{ $sheet->name }}">{{ $sheet->name}}
+                                  @if($sheet->percentage == 100)
+                                    <option value="{{$sheet->name }}">{{ $sheet->name}}
                                     </option>
+
+                                  @endif  
                                 @endforeach
                         </select> 
            </TD> 
@@ -90,7 +93,7 @@ Company Registrartion
 
     <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
 
-    <INPUT  class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
+    <INPUT  id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
 
   </div>
 
@@ -167,11 +170,29 @@ Company Registrartion
                   <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
                             
-                          <label style="width:150px;" class="input-group-text" for="directorate">End of contract</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Contract Duration</label>
 
                         </div>
-                        <input style="color: black" type="date" required class="form-control" id="type"
-                               name="duration" required min="<?php echo date('Y-m-d' , strtotime("+1 year")); ?>" value="{{ old('duration') }}" >
+                       <!-- <input style="color: black" type="date" required class="form-control" id="type"
+                               name="duration" required min="<?php //echo date('Y-m-d' , strtotime("+1 //year")); ?>" value="{{ old('duration') }}" >-->
+
+
+
+                       <select   class="custom-select"  name="duration" id="tendernumber" required  >
+                            <option value="" selected>Choose contract duration...</option>
+                             <option value="1">1 Year</option>
+                             <option value="2">2 Years</option>
+                             <option value="3">3 Years</option>
+                             <option value="4">4 Years</option>
+                             <option value="5">5 Years</option>
+                             <option value="6">6 Years</option>
+                             <option value="7">7 Years</option>
+                             <option value="8">8 Years</option>
+                             <option value="9">9 Years </option>
+                             <option value="10">10 Years</option>
+                         
+                               
+                      </select> 
 
                  </div>
 
@@ -198,7 +219,6 @@ Company Registrartion
        
 
 
-
 <SCRIPT language="javascript">
         function addRow(tableID) {
              
@@ -207,10 +227,22 @@ Company Registrartion
             var row = table.insertRow(rowCount);
             var colCount = table.rows[0].cells.length;
 
-
+       
 
             for(var i=0; i<colCount; i++)
              {
+
+              
+               if(rowCount = 1) {
+                      
+                          document.getElementById('deleterowbutton').style.display='inline-block';
+
+
+
+                    }
+
+                
+
 
                 var newcell = row.insertCell(i);
                  
@@ -252,7 +284,15 @@ Company Registrartion
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");
                         break;
-                    }
+                    } 
+
+
+                        if(rowCount <= 2) {
+                       
+
+                        document.getElementById('deleterowbutton').style.display='none';
+                    } 
+
                     table.deleteRow(i);
                     rowCount--;
                     i--;
@@ -260,12 +300,17 @@ Company Registrartion
 
 
             }
+
             }catch(e) {
                 alert(e);
             }
         }
 
+
+
+
     </SCRIPT>
+
 
 
 
