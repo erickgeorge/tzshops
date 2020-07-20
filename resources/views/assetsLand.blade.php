@@ -14,7 +14,7 @@ Land Assets
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Land</b></h5>
+            <h5 ><b style="text-transform: uppercase;">Land Assets</b></h5>
         </div>
     </div>
 
@@ -55,7 +55,7 @@ Land Assets
         <div class="card-body">
             <p class="card-text">
 
-                <table class="table table-striped display">
+                <table class="table table-striped display text-center">
                     <thead  >
                         <tr style="color:white;">
                             <th>New</th>
@@ -175,7 +175,7 @@ Land Assets
         <div class="col">
 
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-right">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
         </div>
@@ -197,8 +197,8 @@ Land Assets
               </div>
               <!-- --->
               <br>
-              <INPUT type="radio" name="type" value="Excel" checked> Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
-                <INPUT type="radio" name="type" value="Pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
+              <INPUT type="radio" name="type" value="Excel"> Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
+                <INPUT type="radio" name="type" value="Pdf" checked> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
             <br>
             <!-- --->
                     <p>
@@ -327,7 +327,7 @@ Land Assets
     </div>
     <br>
     @if (count($land)>0)
-    <table class="table table-striped display" id="myTable" style="width:100%">
+    <table class="table table-striped display text-center" id="myTable" style="width:100%">
         <thead  >
             <tr style="color:white;">
                 <th>#</th>
@@ -434,7 +434,7 @@ Land Assets
               <div class="col">
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-right">
                 <form action="{{route('assetreportfromsummary')}}" method="get" enctype="multipart/form-data">
                     @csrf
                     <input type="text" name="asset" value="Land" hidden>
@@ -445,16 +445,16 @@ Land Assets
           </div>
       </form>
   </div>
-          <table class="table table-striped display" id="myTableAssesment" style="width:100%">
+          <table class="table table-striped display text-center" id="myTableAssesment" style="width:100%">
               <thead >
                   <tr style="color:white;">
                       <th>#</th>
                       <th>Asset Number</th>
                       <th>Assessment date</th>
                       <th>Total Depreciated Years</th>
-                      <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
-                      <th style="text-align:right;">Impairment Loss (Tsh)</th>
-                      <th style="text-align:right;">Disposal Cost (Tsh)</th>
+                      <th style="text-align:right;">Accumulated Depreciation (Tshs)</th>
+                      <th style="text-align:right;">Impairment Loss (Tshs)</th>
+                      <th style="text-align:right;">Disposal Cost (Tshs)</th>
                   </tr>
               </thead>
               @php

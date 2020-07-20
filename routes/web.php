@@ -121,7 +121,7 @@ Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary'
 
 
 
-
+ 
 
 Route::get('departments', 'UserController@getDepartments')->name('departments.view')->middleware('auth');
 Route::get('companytender', 'UserController@getcompany')->name('companyies.view')->middleware('auth');

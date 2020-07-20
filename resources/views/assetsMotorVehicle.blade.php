@@ -14,7 +14,7 @@ use App\assetsassesmotorvehicle;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Motor Vehicles</b></h5>
+            <h5 ><b style="text-transform: uppercase;">Motor Vehicles Assets</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -42,7 +42,7 @@ use App\assetsassesmotorvehicle;
 <div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-        
+
         <div class="col-md-5">
             <a href="{{url('assetsNewMotorVehicle')}}" class="btn btn-primary text-light" type="button"><b>Add new Motor Vehicle asset</b></a>
         </div>
@@ -54,7 +54,7 @@ use App\assetsassesmotorvehicle;
         <div class="card-body">
             <p class="card-text">
 
-                <table class="table table-striped display">
+                <table class="table table-striped display text-center">
                     <thead >
                         <tr style="color:white;">
                             <th>New</th>
@@ -174,7 +174,7 @@ use App\assetsassesmotorvehicle;
         <div class="col">
 
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-right">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
         </div>
@@ -196,8 +196,8 @@ use App\assetsassesmotorvehicle;
               </div>
               <!-- --->
               <br>
-              <INPUT type="radio" name="type" value="Excel" checked> Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
-                <INPUT type="radio" name="type" value="Pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
+              <INPUT type="radio" name="type" value="Excel"> Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
+                <INPUT type="radio" name="type" value="Pdf" checked> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
             <br>
             <!-- --->
                     <p>
@@ -326,14 +326,14 @@ use App\assetsassesmotorvehicle;
     </div>
     <br>
     @if (count($land)>0)
-    <table class="table table-striped display" id="myTable" style="width:100%">
+    <table class="table table-striped display text-center" id="myTable" style="width:100%">
         <thead >
             <tr style="color:white;">
                 <th>#</th>
                 <th>Asset#</th>
                 <th>Description</th>
-                <th>Location</th>
-                <th style="text-align:right;">Cost (Tsh)</th>
+                <th>Type</th>
+                <th style="text-align:right;">Cost (Tshs)</th>
                 <th>condition</th>
                 <th title="Date of Acqusition">DoA</th>
                 <th title="Date in use">DiU</th>
@@ -351,7 +351,7 @@ use App\assetsassesmotorvehicle;
                     <td>{{$d}}</td>
                     <td>{{$landinfo->assetNumber}}</td>
                     <td>{{substr($landinfo->assetDescription,0,25).'...'}}</td>
-                    <td>{{$landinfo->assetLocation}}</td>
+                    <td style="text-transform: uppercase;">{{$landinfo->assetLocation}}</td>
                     <td style="text-align:right;">{{number_format($landinfo->Cost)}}  </td>
 
                     @if ($landinfo->_condition=='Disposed')
@@ -432,7 +432,7 @@ use App\assetsassesmotorvehicle;
               <div class="col">
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-right">
                 <form action="{{route('assetreportfromsummary')}}" method="get" enctype="multipart/form-data">
                     @csrf
                     <input type="text" name="asset" value="MotorVehicle" hidden>
@@ -443,16 +443,16 @@ use App\assetsassesmotorvehicle;
           </div>
       </form>
   </div>
-          <table class="table table-striped display" id="myTableAssesment" style="width:100%">
+          <table class="table table-striped display text-center" id="myTableAssesment" style="width:100%">
               <thead>
                   <tr style="color:white;">
                       <th>#</th>
                       <th>Asset Number</th>
                       <th>Assessment date</th>
                       <th>Total Depreciated Years</th>
-                      <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
-                      <th style="text-align:right;">Impairment Loss (Tsh)</th>
-                      <th style="text-align:right;">Disposal Cost (Tsh)</th>
+                      <th style="text-align:right;">Accumulated Depreciation (Tshs)</th>
+                      <th style="text-align:right;">Impairment Loss (Tshs)</th>
+                      <th style="text-align:right;">Disposal Cost (Tshs)</th>
                   </tr>
               </thead>
               @php

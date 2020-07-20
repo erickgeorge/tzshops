@@ -786,9 +786,9 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
   </div>
 
-    
 
-  
+
+
     <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Companies</h6></a>
     <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Areas</h6></a>
     <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
@@ -1066,6 +1066,9 @@ for (i = 0; i < dropdown.length; i++) {
     <div class="container">
     <p class="m-0 text-center text-white"> ESMIS &copy; <?php echo date('Y'); ?>, All rights reserved</div>
 </footer>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{asset('/tables/jQuery-3.3.1/jquery-3.3.1.js')}}"></script>
 <script type="text/javascript" src="{{asset('/tables/Bootstrap-4-4.1.1/js/bootstrap.js')}}"></script>
 <script type="text/javascript" src="{{asset('/tables/JSZip-2.5.0/jszip.js')}}"></script>
@@ -1080,9 +1083,6 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript" src="{{asset('/tables/SearchPanes-1.1.1/js/dataTables.searchPanes.js')}}"></script>
 <script type="text/javascript" src="{{asset('/tables/SearchPanes-1.1.1/js/searchPanes.bootstrap4.js')}}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
 
 <script>

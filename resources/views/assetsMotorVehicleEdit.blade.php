@@ -8,7 +8,7 @@ Edit Motor vehicle Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Edit Motor vehicle Asset</b></h5>
+            <h5><b style="text-transform: uppercase;">Edit Motor vehicle Asset</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -43,11 +43,11 @@ Edit Motor vehicle Asset
                            </div>
                            <div class="row">
                                <div class="form-group col">
-                                   <label for="my-input">Site Location <sup class="text-danger">*</sup></label>
+                                   <label for="my-input">Motor Vehicle type  <sup class="text-danger">*</sup></label>
                                    <input id="location" required value="{{$item->assetLocation}}" required class="form-control" placeholder="Site Location" type="text" name="SiteLocation">
                                </div>
                                <div class="form-group col">
-                                   <label for="my-input">. <sup class="text-danger">*</sup></label>
+                                   <label for="my-input">Location <sup class="text-danger">*</sup></label>
                                    <input id="location" value="{{$item->location}}" required class="form-control" placeholder="Site Location" type="text" name="SiteLocation2">
                                </div>
                             </div>

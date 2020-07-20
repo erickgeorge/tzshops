@@ -32,7 +32,7 @@ tr:nth-child(even) {
         </tr>
         <tr >
             <th colspan="12">
-                <h2 style="margin-left: 28%;">NON - CURRENT ASSET REGISTER - AS ON @php echo date('d M, Y'); @endphp </h2>
+                <h2 style="margin-left: 28%;">NON - CURRENT ASSET REGISTER - AS ON @php echo date('d F, Y'); @endphp </h2>
             </th>
         </tr>
         <tr>
@@ -44,7 +44,7 @@ tr:nth-child(even) {
             <th><b>Date in Use</b></th>
             <th><b>Ending depreciation Rate</b></th>
             <th><b>Quantity</b></th>
-            <th style="text-align:right;"><b>Cost/ Rep cost (Tsh)</b></th>
+            <th style="text-align:right;"><b>Cost/ Rep cost (Tshs)</b></th>
             <th><b>Condition</b></th>
             <th><b>Useful Life</b></th>
             <th><b>Depreciation Rate</b></th>

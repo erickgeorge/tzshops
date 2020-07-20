@@ -8,7 +8,7 @@ Reallocate Work in Progress to Assets
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col ">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Reallocate Work in Progress to Assets</b></h5>
+            <h5><b style="text-transform: uppercase;">Reallocate Work in Progress to Assets</b></h5>
         </div>
     </div>
     <hr class="container">

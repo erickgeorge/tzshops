@@ -24,7 +24,7 @@ use App\assetsworkinprogress;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Assets Management</b></h5>
+            <h5><b style="text-transform: uppercase;">Assets Management</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -50,34 +50,28 @@ use App\assetsworkinprogress;
         <div class="card">
             <div class="card-body">
                 <div class="card-text">
-                    <div class="row">
-                            <a href="{{url('assetsNewLand')}}" class="btn col btn-outline-dark" type="button"><b>Add new Land asset</b></a>
-&nbsp;&nbsp;
-                            <a href="{{url('assetsNewFurniture')}}" class="btn col btn-outline-dark" type="button"><b>Add new Furniture asset</b></a>
 
+                    <div class="row">
+                        <div class="col">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               Add New Asset
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a href="{{url('assetsNewLand')}}" class="dropdown-item"><b>New Land asset</b></a>
+                                    <a href="{{url('assetsNewFurniture')}}" class="dropdown-item"><b>New Furniture asset</b></a>
+                                    <a href="{{url('assetsNewEquipment')}}" class="dropdown-item"><b>New Equipment asset</b></a>
+                                    <a href="{{url('assetsNewPlantMachinery')}}" class="dropdown-item"><b>New Plant & Machinery asset</b></a>
+                                    <a href="{{url('assetsNewMotorVehicle')}}" class="dropdown-item"><b>New Motor Vehicle asset</b></a>
+                                    <a href="{{url('assetsNewComputerEquipment')}}" class="dropdown-item"><b>New Computer Equipment asset</b></a>
+                                    <a href="{{url('assetsNewBuilding')}}" class="dropdown-item"><b>New Building asset</b></a>
+                                    <a href="{{url('assetsNewIntangible')}}" class="dropdown-item"><b>New Intangible asset</b></a>
+                                    <a href="{{url('assetsNewWorkinProgress')}}" class="dropdown-item" ><b>New Work in Progress</b></a>
+
+                                </div>
+                            </div>
+                        </div>
                     </div><br>
-                    <div class="row">
-                            <a href="{{url('assetsNewEquipment')}}" class="btn col btn-outline-dark" type="button"><b>Add new Equipment asset</b></a>
-                            &nbsp;&nbsp;
-                            <a href="{{url('assetsNewPlantMachinery')}}" class="btn col btn-outline-dark" type="button"><b>Add new Plant & Machinery asset</b></a>
-
-                    </div><br>
-                    <div class="row">
-                            <a href="{{url('assetsNewMotorVehicle')}}" class="btn col btn-outline-dark" type="button"><b>Add new Motor Vehicle asset</b></a>
-                            &nbsp;&nbsp;
-                            <a href="{{url('assetsNewComputerEquipment')}}" class="btn col btn-outline-dark" type="button"><b>Add new Computer Equipment asset</b></a>
-
-                    </div><br>
-                    <div class="row">
-                            <a href="{{url('assetsNewBuilding')}}" class="btn col btn-outline-dark" type="button"><b>Add new Building asset</b></a>
-                            &nbsp;&nbsp;
-                            <a href="{{url('assetsNewIntangible')}}" class="btn col btn-outline-dark" type="button"><b>Add new Intangible asset</b></a>
-
-                    </div><br>
-                    <div class="row">
-                            <a href="{{url('assetsNewWorkinProgress')}}" class="btn col-md-6 btn-outline-dark" type="button"><b>Add new Work in Progress</b></a>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -96,7 +90,7 @@ use App\assetsworkinprogress;
         <div class="card">
             <div class="card-body">
                 <p class="card-text">
-                    <table class="table table-striped display" id="myTable" style="width:100%">
+                    <table class="table table-striped display text-center" id="myTable" style="width:100%">
                         <thead  >
                             <tr style="color:white;">
                                 <th>#</th>
@@ -893,17 +887,20 @@ use App\assetsworkinprogress;
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                <p>
-                    <a href="{{route('assetssummaryall')}}" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                    </p>
-                    <table class="table table-striped display" id="myTable" style="width:100%">
+                <div class="row">
+                    <div class="col text-right">
+                        <a href="{{route('assetssummaryall')}}" class="btn btn-primary text-right" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+
+                    </div>
+                </div><br>
+                    <table class="table table-striped display text-center" id="myTable" style="width:100%">
                         <thead  >
                             <tr style="color:white;">
                                 <th>#</th>
                                 <th>Asset Group</th>
-                                <th>Total</th>
-                                <th>Asset Value</th>
-                                <th> </th>
+                                <th class="text-right">Total</th>
+                                <th class="text-right">Asset Value (Tshs)</th>
+                                <th> Action</th>
                             </tr>
                         </thead>
                         @php

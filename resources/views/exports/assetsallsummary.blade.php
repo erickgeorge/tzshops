@@ -53,7 +53,7 @@ tr:nth-child(even) {
             <th>#</th>
             <th>Asset Group</th>
             <th>Total</th>
-            <th style="text-align:right;">Asset Value (Tsh)</th>
+            <th style="text-align:right;">Asset Value (Tshs)</th>
         </tr>
     </thead>
     <tbody>
@@ -72,7 +72,7 @@ tr:nth-child(even) {
                 @foreach ($building as $buildingd)
                 @php $total2 =  $total2 +$buildingd->Cost; @endphp
                 @endforeach
-                @php echo number_format($total2); @endphp  
+                @php echo number_format($total2); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsBuilding')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -93,7 +93,7 @@ tr:nth-child(even) {
                 @foreach ($computerequipment as $computerequipment)
                 @php $total2 = $total2 +$computerequipment->Cost; @endphp
                 @endforeach
-                @php echo number_format($total2); @endphp  
+                @php echo number_format($total2); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsComputerEquipment')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -114,7 +114,7 @@ tr:nth-child(even) {
                 @foreach ($equipment as $equipmentd)
                 @php $total3 =  $total3+$equipmentd->Cost; @endphp
                 @endforeach
-                @php echo number_format($total3); @endphp  
+                @php echo number_format($total3); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsEquipment')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -133,7 +133,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total4); @endphp  
+                @php echo number_format($total4); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsFurniture')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -152,7 +152,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total5); @endphp  
+                @php echo number_format($total5); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsIntangible')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -171,7 +171,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total6); @endphp  
+                @php echo number_format($total6); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsLand')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -190,7 +190,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total7); @endphp  
+                @php echo number_format($total7); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsMotorVehicle')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -209,7 +209,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td  style="text-align:right;">
-                @php echo number_format($total8); @endphp  
+                @php echo number_format($total8); @endphp
             </td>
             <td>
             <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsPlantMachinery')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -228,7 +228,7 @@ tr:nth-child(even) {
                 @php echo $total1; @endphp
             </td>
             <td style="text-align:right;">
-                @php echo number_format($total9); @endphp  
+                @php echo number_format($total9); @endphp
             </td>
 
         </tr>

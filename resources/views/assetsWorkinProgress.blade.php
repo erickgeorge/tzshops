@@ -11,7 +11,7 @@ Work in Progress
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Works in Progress</b></h5>
+            <h5><b style="text-transform: uppercase;">Works in Progress</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -39,7 +39,7 @@ Work in Progress
 <div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
-       
+
         <div class="col-md-5">
             <a href="{{url('assetsNewWorkinProgress')}}" class="btn btn-primary text-light" type="button"><b>Add new Work in Progress</b></a>
         </div>
@@ -66,8 +66,8 @@ Work in Progress
               </div>
               <!-- --->
               <br>
-              <INPUT type="radio" name="type" value="Excel" checked> Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
-                <INPUT type="radio" name="type" value="Pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
+              <INPUT type="radio" name="type" value="Excel"> Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
+                <INPUT type="radio" name="type" value="Pdf" checked> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
             <br>
             <!-- --->
                     <p>
@@ -196,14 +196,14 @@ Work in Progress
     </div>
     <br>
     @if (count($land)>0)
-    <table class="table table-striped display" id="myTable" style="width:100%">
+    <table class="table table-striped display text-center" id="myTable" style="width:100%">
         <thead >
             <tr style="color:white;">
                 <th>#</th>
                 <th>Asset#</th>
                 <th>Description</th>
                 <th>Location</th>
-                <th style="text-align: right;">Cost (Tsh)</th>
+                <th style="text-align: right;">Cost (Tshs)</th>
                 <th>condition</th>
                 <th>Created at</th>
                 <th>Quantity</th>

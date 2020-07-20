@@ -55,16 +55,16 @@ echo 'Computer Equipments';
         </div>
     </div>
     <br>
-    <table class="table table-striped display" id="myTable" style="width:100%">
+    <table class="table table-striped display text-center" id="myTable" style="width:100%">
         <thead >
             <tr style="color:white;">
                 <th>#</th>
                 <th>Asset Number</th>
                 <th>Assessment date</th>
                 <th>Total Depreciated Years</th>
-                <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
-                <th style="text-align:right;">Impairment Loss (Tsh)</th>
-                <th style="text-align:right;">Disposal Cost (Tsh)</th>
+                <th style="text-align:right;">Accumulated Depreciation (Tshs)</th>
+                <th style="text-align:right;">Impairment Loss (Tshs)</th>
+                <th style="text-align:right;">Disposal Cost (Tshs)</th>
                 <th>Action</th>
             </tr>
         </thead>

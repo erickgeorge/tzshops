@@ -12,8 +12,8 @@
 }
 
 
-    
-    
+
+
  </style>
 <div class="container">
     <br>
@@ -48,251 +48,322 @@
     <div class="col-lg-12">
         <form method="POST" action="{{ route('user.edit', [$user->id]) }}">
             @csrf
-<div class="row">
-    <div class="col">
-        <div class="form-group ">
-                <label for="fname">First name <sup style="color: red;">*</sup></label>
-                <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
-                       name="fname" placeholder="Enter first name"
-                       onkeypress="return  event.charCode > 57 " value="{{ $user->fname }}">
-            </div>
-    </div>
-    <div class="col">
-        <div class="form-group ">
-                <label for="lname">Last name <sup style="color: red;">*</sup></label>
-                <input style="color: black" type="text" required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp"
-                       name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 "
-                       value="{{ $user->lname }}">
-            </div>
-    </div>
-    <div class="col">
-        <div class="form-group ">
-                <label for="phone">Phone number <sup style="color: red;">*</sup></label>
-                <input  style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
-                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                       maxlength="10" minlength="10"
-                       class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number"
-                       onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 ">
-            </div>
-    </div>
-</div>
- <div class="row">
-    <div class="col">
-         <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label style="height: 28px;" class="input-group-text" for="email">Email</label>
+            @csrf
+            <div class="row">
+                <div class="col">
+                    <div class="form-group ">
+                    <label for="fname">First name</label>
+                    <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}" >
+                 </div>
                 </div>
-                <input style="height: 28px;" style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
-                       name="email" onblur="validateEmail(this);" placeholder="Enter email address" value="{{ $user->email }}">
-            </div>
-    </div>
-    
-    <div class="col">
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label style="height: 28px;" class="input-group-text" for="directorate">Directorate/College <sup style="color: red;"></label>
+                <div class="col">
+                    <div class="form-group ">
+                    <label for="lname">Last name </label>
+                    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
                 </div>
-                <select style="width: 350px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()">
+                </div>
+                <div class="col">
+                    <div class="form-group ">
+                    <label for="phone">Phone number </label>
+                    <input style="color: black; width: 340px;"  required type="text"     name="phone"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       maxlength = "10"  minlength = "10"
+                     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 "  value="{{ old('phone') }}">
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group ">
+                  <div class="input-group-prepend">
+                    <label style="height:28px;" class="input-group-text" for="Email">Email </label>
+                  </div>
+                    <input style="color: black; height: 28px; width: 80px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="29" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+                </div>
+                </div>
+
+
+                     <div class="col">
+                <div class="align-content-center">
+                    <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label  style="height: 28px;" class="input-group-text" for="username">Username </label>
+                  </div>
+                     <input style="color: black; width:200px; height: 28PX;"  required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+                 </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label  style="height: 28px" class="input-group-text" for="inputGroupSelect01">Role</label>
+                  </div>
+                  <select style="color: black; width: 430  px" required class="custom-select" name="role" id="role">
+                    <option value="" selected>Choose...</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Staff</option>
+                  </select>
+                </div>
+            </div>
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div  class="col">
+                    <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label style="height: 28px" class="input-group-text" for="directorate">Directorate/College </label>
+                  </div>
+                  <select required style="color: black; width: 330px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+                      <option selected value="" >Choose...</option>
                     @foreach($directorates as $directorate)
-                        <option <?php if(($user['department']['directorate']->name) == $directorate->name) {?>
-                                selected="selected"
-                                <?php } ?>
-                                value="{{ $directorate->id }}" > {{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
-                    @endforeach 
-
-                </select>
-        </div>
-    </div>
-</div>
-
-
-  <div class="row">
-    <div class="col">
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label  style="height: 28px;" class="input-group-text" for="department">Department</label>
+                    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+                    @endforeach
+                  </select>
                 </div>
-                 
-                <select class="custom-select" name="department" id="department" >
-                     @foreach($departments as $dep)
-                    <option value="{{ $dep->id }}">{{ $dep->description }}</option>
-                     @endforeach
-                </select>
-                 
-            </div>
-    </div>
-
-
-</div>
-
-    <div >
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label  class="input-group-text" for="inputGroupSelect01">Role</label>
                 </div>
-                <select class="custom-select" name="role" id="inputGroupSelect02">
 
-                    <option
 
-                            @if(($trole['user_role']['role_id']) =="1")
-                            selected="selected"
-                            @else
+                    <div class="col">
+                    <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label style="height: 28px" class="input-group-text" for="department">Department </label>
+                  </div>
+                  <select required style="color: black; width: 380px;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
+                  </select>
+                    </div>
+                </div>
 
-                            @endif
-                            value="1">Admin
-                    </option>
-                    <option
-                            @if(($trole['user_role']['role_id']) =="2")
-                            selected="selected"
-                            @else
-
-                            @endif
-                            value="2">Staff
-                    </option>
-                </select>
             </div>
-    </div>
 
 
 
-    <?php $string = $user->type;
-     $str_array = preg_split("/\,/", $string);
-     ?>
-
-    <div>
-       
-        <label>Type of User</label><br>
-       
-              <div  >
-               <select class="custom-select" name="type" id="type">
-                      <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose...</option>
-                      <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
-                      
-                      <option @if (in_array('CLIENT',$str_array)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
-                      <option @if (in_array('DVC Admin',$str_array)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
-                      <option @if (in_array('Estates Director',$str_array)) { selected="selected" } @else{} @endif   value="Estates Director">Estates Director</option>
-                      <option @if (in_array('Head Procurement',$str_array)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
-                       @foreach($worksec as $dep)
- 
-                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
-         
-                       @endforeach
-                      <option @if (in_array('Inspector Of Works',$str_array)) { selected="selected" } @else{} @endif  value="Inspector Of Works">Inspector Of Works</option>
-                      <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option> 
-                      <option  @if (in_array('STORE',$str_array)) { selected="selected" } @else{} @endif value="STORE">Store Manager</option>
-                      <option @if (in_array('Supervisor LECC',$str_array)) { selected="selected" } @else{} @endif  value="Supervisor LECC ">Supervisor LECC </option>
-                      <option @if (in_array('Transport Officer',$str_array)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
-                      
-
-                      
-               </select>
-               </div>
-               <br>      
-         </div>
 
 
-    
-
-               <?php use App\iowzone; ?>
-               <?php $iowzone = iowzone::get(); 
-
-               ?>
- 
-          @if( $user->type == "Inspector Of Works")
-
-         <div >
-                        <label for="dep_name">Section Zone </label>
-                        <br>
-                       
-                        <select required style="width: 500px;"  name="zone" id="zone">
-           
-               
-               @foreach($iowzone as $zone) 
-               <?php $locationzone = iowzonelocation::where('iowzone_id',$zone->id)->get();
-                  $zoneloc = count($locationzone);
-                ?>
-               <option <?php if(($user->zone == $zone->zonename)) {?>
-                                selected="selected" 
-                                <?php } 
-
-                                if($zoneloc < 1){
-                                  echo 'disabled';
-                                }
-
-                                ?> 
-                                value="{{ $zone->zonename }}" ><?php echo strtoupper( $zone->zonename ); ?></option>
-               @endforeach
-
-                 
-                   
-                        </select>
-          </div>
-
-            @endif
-
-          <br>
 
 
-  
-            
+
+                    <label>Type of User</label><br>
+
+                  <div class="row">
+                  <div class="col">
+                        <div >
+                             <div class="checkbox">
+                        <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+                            Inspector of Works</label>
+                           </div>
+                        </div>
 
 
-  <script type="text/javascript">
-    
-    function switchVisible() {
-            if (document.getElementById('Div1')) {
+                          <div id="locationdiv" >
+                           <select  required style="width: 500px;" class="custom-select" name="type" id="type">
+                                  <option value="" selected>Choose...</option>
+                                  <option value="Accountant">Accountant</option>
+                                  <option value="Architect & Draftsman">Architect & Draftsman</option>
+                                  <option value="Assets Officer">Assets Officer</option>
+                                  <option value="Bursar">Bursar</option>
+                                  <option value="CLIENT">Client</option>
 
-                if (document.getElementById('Div1').style.display == 'none') {
-                    document.getElementById('Div1').style.display = 'block';
-                    document.getElementById('Div2').style.display = 'none';
+                                  <option value="DVC Admin">DVC Admin</option>
+                                  <option value="Director DPI">Director DPI</option>
+                                   <option value="Dvc Accountant">Dvc Accountant</option>
+                                  <option value="Estates officer">Estates officer</option>
+                                  <option value="Estates Director">Estates Director</option>
+                                  <option value="Head Procurement">Head of Procurement</option>
+
+
+                                  @foreach($worksec as $dep)
+
+                                       <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+
+                                   @endforeach
+
+                                  <option value="Head PPU">Head PPU</option>
+                                <option value="Housing Officer">Housing Officer</option>
+
+                                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
+                                  <option value="Quality Surveyor">Quality Surveyor</option>
+                                  <option value="STORE">Store Manager</option>
+
+                                  <option value="Secretary to Council">Secretary to Council</option>
+
+                                  @foreach($maintsec as $sec)
+
+                                       <option  value="HOS {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
+
+                                   @endforeach
+
+                                  <option value="Transport Officer">Transport Officer</option>
+                                  <option value="USAB">USAB</option>
+
+                           </select>
+                           </div>
+
+
+                           <div id="divmanual">
+                           <select  required style="width: 500px;" class="custom-select" name="zone" id="zone">
+                                  @foreach($zone as $zone)
+                                   <option  value="{{$zone->zonename}}"  ><?php echo strtoupper( $zone->zonename ); ?></option>
+                                  @endforeach
+
+                           </select>
+
+
+                            </div>
+
+                    </div>
+
+
+
+                     <div class="col">
+                <div class="align-content-center">
+                    <div class="input-group mb-3">
+                          <div class="contacts">
+                                  Second type of user
+
+                              <br>
+
+                            <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
+                                  <option value="" selected>Choose...</option>
+                                  <option value="Accountant">Accountant</option>
+                                  <option value="Architect & Draftsman">Architect & Draftsman</option>
+                                  <option value="CLIENT">Client</option>
+
+                                  <option value="DVC Admin">DVC Admin</option>
+                                  <option value="Director DPI">Director DPI</option>
+                                  <option value="Estates officer">Estates officer</option>
+                                  <option value="Estates Director">Estates Director</option>
+                                  <option value="Head Procurement">Head of Procurement</option>
+
+                                  @foreach($worksec as $dep)
+
+                                       <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+
+                                   @endforeach
+
+                                  <option value="Head PPU">Head PPU</option>
+
+
+                                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
+                                  <option value="STORE">Store Manager</option>
+
+                                  <option value="Secretary to Council">Secretary to Council</option>
+
+                                  @foreach($maintsec as $sec)
+
+                                       <option  value="Supervisor {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
+
+                                   @endforeach
+
+                                  <option value="Transport Officer">Transport Officer</option>
+
+                           </select>
+                         </div>
+                 </div>
+                </div>
+                </div>
+
+
+
+            </div>
+
+
+                <div align="center">
+                <button type="submit" class="btn btn-primary"> Save</button>
+                <a class="btn btn-danger" href="/viewusers" role="button">Cancel </a>
+            </div>
+                </form>
+
+            </div>
+
+
+
+
+                <script type="text/javascript">
+
+                    $("#divmanual").hide();
+                    $("input:checkbox").on('click', function () {
+                        // in the handler, 'this' refers to the box clicked on
+                        var $box = $(this);
+                        if ($box.is(":checked")) {
+                            // the name of the box is retrieved using the .attr() method
+                            // as it is assumed and expected to be immutable
+                            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                            // the checked state of the group/box on the other hand will change
+                            // and the current value is retrieved using .prop() method
+                            $(group).prop("checked", false);
+                            $box.prop("checked", true);
+                        } else {
+                            $box.prop("checked", false);
+                        }
+                    });
+                </script>
+
+
+              <script type="text/javascript">
+
+
+             $("#divmanual").hide();
+             $(function () {
+                    $("#checkdiv").click(function () {
+                        if ($(this).is(":checked")) {
+                            $("#type").removeAttr('required');
+                            $("#zone").removeAttr('required');
+
+
+
+                            $("#manual").attr('required', '');
+
+
+                            $("#divmanual").show();
+                            $("#locationdiv").hide();
+                        } else {
+                            $("#type").attr('required', '');
+                            $("#zone").attr('required', '');
+
+
+                            $("#manual").removeAttr('required');
+                            $("#divmanual").hide();
+                            $("#locationdiv").show();
+                        }
+                    });
+                });
+
+
+                 function ShowwHideDiv(checkdiv) {
+                    var dvPassport = document.getElementById("locationdiv");
+                    locationdiv.style.display = checkdiv.checked ? "block" : "none";
                 }
-                else {
-                    document.getElementById('Div1').style.display = 'none';
-                    document.getElementById('Div2').style.display = 'block';
+
+
+                </script>
+
+
+
+            <script>
+              var allCheckboxes = $("input[type=checkbox]");
+
+              allCheckboxes.click(
+                function () {
+                  var showSendSelected = $("input[type=checkbox]:checked").length > 0;
+                  var sendSelectedLink = $("#div2");
+                  if (showSendSelected) {
+
+                    sendSelectedLink.show();
+
+                  } else {
+                    sendSelectedLink.hide();
+                  }
+
+
+
                 }
-            }
-}
-  </script>
+              );
+            </script>
 
-
-            
-            
-            
-            
-            
-            
-            
-            
-
-
- <!-- 
-            <div class="form-group ">
-                <label for="uname">Username</label>
-                <input style="color: black" required maxlength="20" type="text" class="form-control"
-                       id="uname" name="uname" aria-describedby="emailHelp"
-                       placeholder="Enter username" value="{{ $user->name }}" disabled data-toggle="tooltip"
-                       title="Cannot edit username">
-            </div>
-			
-			-->
-		
-<div align="center">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a class="btn btn-danger" href="/viewusers" role="button">Cancel</a>
-            </div>
-
-        </form>
-
-    </div>
-    <br>  
-
-
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-		
-		
-		
-    </script>
     @endSection

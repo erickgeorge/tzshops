@@ -8,7 +8,7 @@ New MotorVehicle Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Add New MotorVehicle Asset</b></h5>
+            <h5><b style="text-transform: uppercase;">Add New MotorVehicle Asset</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -43,7 +43,7 @@ New MotorVehicle Asset
                            </div>
                            <div class="row">
                                <div class="form-group col">
-                                   <label for="my-input">Motorvehicle type <sup class="text-danger">*</sup></label>
+                                   <label for="my-input">Motor Vehicle type <sup class="text-danger">*</sup></label>
                                    <input id="location" required class="form-control" placeholder="" type="text" name="SiteLocation">
                                </div>
                                <div class="form-group col">

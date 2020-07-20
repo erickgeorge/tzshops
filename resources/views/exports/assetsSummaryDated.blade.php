@@ -45,7 +45,7 @@ tr:nth-child(even) {
             <th colspan="18">
                 <h1 style="text-transform: capitalize;">
                     <?php  $time = strtotime($_GET['date'])?>
-                    ALL {{strtoupper($_GET['asset'])}} ASSETS ASSESSMENT RECORDS AS AT {{date('d/m/Y',$time)  }}
+                    ALL {{strtoupper($_GET['asset'])}} ASSETS ASSESSMENT RECORDS AS ON {{date('d/m/Y',$time)  }}
                 </h1>
             </th>
         </tr>
@@ -134,7 +134,7 @@ tr:nth-child(even) {
                     @php
                         $net = $data['Cost'] - $items->accumulatedDepreciation;
                     @endphp
-                    {{number_format($net)}}  
+                    {{number_format($net)}}
                 </td>
             </tr>
             @php

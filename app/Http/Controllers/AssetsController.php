@@ -950,7 +950,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         ]);
 
 
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsland();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -1002,6 +1005,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsLandEditSave(Request $request)
      {
+         if( $request['DateofAcquisition'] > $request['DateinUse'] )
+            {
+                return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+            }
         $assetland =  assetsland::where('id',$request['id'])->first();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
@@ -1039,7 +1046,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsplantandmachinery();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -1348,7 +1358,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsPlantMachineryEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsplantandmachinery::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -1650,7 +1663,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsintangible();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
@@ -1698,7 +1714,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsIntangibleEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsintangible::where('id',$request['id'])->first();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
@@ -1739,7 +1758,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsmotorvehicle();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
@@ -1788,7 +1810,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsMotorVehicleEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsmotorvehicle::where('id',$request['id'])->first();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->assetLocation = $request['SiteLocation'];
@@ -1830,7 +1855,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsfurniture();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -2138,7 +2166,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsFurnitureEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsfurniture::where('id',$request['id'])->first();
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
@@ -2439,7 +2470,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsequipment();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -2748,7 +2782,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsEquipmentEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsequipment::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -3050,7 +3087,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetscomputerequipment();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -3359,7 +3399,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsComputerEquipmentEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetscomputerequipment::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -3663,7 +3706,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsbuilding();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
@@ -3711,7 +3757,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsBuildingEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsbuilding::where('id',$request['id'])->first();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
@@ -3750,7 +3799,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsworkinprogress();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->assetLocation = $request['SiteLocation'];
@@ -3787,7 +3839,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
 
      public function assetsWorkinProgressEditSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsworkinprogress::where('id',$request['id'])->first();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->assetLocation = $request['SiteLocation'];
@@ -3815,7 +3870,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
             'SiteLocation'=>'required',
             'Quantity'=>'required',
         ]);
-
+        if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland = new assetsbuilding();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
@@ -3844,7 +3902,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      // asses
 
      public function assetsAssesBuildingSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsbuilding::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
@@ -3875,7 +3936,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
 
      public function assetsAssesFurnitureSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsfurniture::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
@@ -3907,7 +3971,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
 
      public function assetsAssesEquipmentSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsequipment::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
@@ -3939,7 +4006,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
 
      public function assetsAssesComputerEquipmentSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetscomputerequipment::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
@@ -3971,7 +4041,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
 
      public function assetsAssesPlantMachinerySave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsplantandmachinery::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
@@ -4003,7 +4076,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
 
      public function assetsAssesMotorVehicleSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsmotorvehicle::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
@@ -4035,7 +4111,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
 
      public function assetsAssesLandSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsland::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
@@ -4067,7 +4146,10 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
 
      public function assetsAssesIntangibleSave(Request $request)
-     {
+     {if( $request['DateofAcquisition'] > $request['DateinUse'] )
+        {
+            return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
+        }
         $assetland =  assetsintangible::where('id',$request['id'])->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();

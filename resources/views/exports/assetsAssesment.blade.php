@@ -44,7 +44,7 @@ tr:nth-child(even) {
             <th>Asset #</th>
             <th>Description</th>
             <th>Location</th>
-            <th style="text-align:right;">Cost (Tsh)</th>
+            <th style="text-align:right;">Cost (Tshs)</th>
             <th>Condition</th>
             <th>Date of Acquistion </th>
             <th>Date in Use </th>
@@ -79,7 +79,7 @@ tr:nth-child(even) {
 
                 <?php  $time = strtotime($asses->assetEndingDepreciationDate)?>
                 <td>{{date('d/m/Y',$time)  }}</td>
-                
+
                 <td>{{$asses->assetQuantity}}</td>
                 @php
                     if ($_GET['type'] == 'building') {

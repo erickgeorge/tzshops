@@ -14,6 +14,54 @@
             <h5><b style="text-transform: uppercase;">@php
 
 
+                if ($_GET['condition']=='New') {
+                    $pr = 'With New Condition';
+                    $df = '1';
+                } else
+                if ($_GET['condition']=='Good') {
+                    $pr = 'With Good Condition';
+                    $df = '1';
+                } else
+                if ($_GET['condition']=='Fair') {
+                    $pr = 'With Fair Condition';
+                    $df = '1';
+                } else
+                if ($_GET['condition']=='Poor') {
+                    $pr = 'With Poor Condition';
+                    $df = '1';
+                } else
+                if ($_GET['condition']=='Very Poor') {
+                    $pr = 'With Very Poor Condition';
+                    $df = '1';
+                } else
+                if ($_GET['condition']=='Obsolete') {
+                    $pr = 'With Obsolete Condition';
+                    $df = '1';
+                } else
+                if ($_GET['condition']=='Disposed') {
+                    $pr = 'With Disposed Condition';
+                    $df = '1';
+                } else
+                if ($_GET['condition']=='Sold') {
+                    $pr = 'Sold';
+                    $df = '2';
+                } else
+                if ($_GET['expired']=='aboutto') {
+                    $pr = 'About to Expire';
+                    $df = '1';
+                } else
+                if ($_GET['expired']=='expired') {
+                    $pr = 'Expired';
+                    $df = '2';
+                } else {
+                    $pr = '';
+                    $df = '';
+                }
+
+
+    if ($df == '2') {
+       echo $pr.'&nbsp; ';
+    }
             if( $_GET['asset']=='plantandmachinery')
             {
 echo 'Plant and Machinery';
@@ -26,9 +74,18 @@ echo 'Computer Equipments';
             }else{
                 echo $_GET['asset'];
             }
+            @endphp
 
 
-                @endphp Assets Export Preview</b></h5>
+                Assets
+
+                @php
+                    if ($df == '1') {
+                       echo $pr.'';
+                    }
+                @endphp
+
+                Export Preview</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -55,7 +112,7 @@ echo 'Computer Equipments';
 </div>
 <div class="container">
 
-    <table class="table table-striped display" id="myTable4" style="width:100%">
+    <table class="table table-striped display text-center" id="myTable4" style="width:100%">
         <thead>
             <tr style="color:white;">
                 <th><b >Sn</b></th>

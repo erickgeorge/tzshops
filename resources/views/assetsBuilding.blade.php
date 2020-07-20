@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Buildings</b></h5>
+            <h5 ><b style="text-transform: uppercase;">Building Assets</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -53,7 +53,7 @@ use Illuminate\Support\Facades\DB;
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                <table class="table table-striped display">
+                <table class="table table-striped display text-center">
                     <thead>
                         <tr style="color:white;">
                             <th>New</th>
@@ -174,8 +174,8 @@ use Illuminate\Support\Facades\DB;
         <div class="col">
 
         </div>
-        <div class="col-md-3">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
+        <div class="col-md-3 text-right">
+            <button class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
     </div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -196,8 +196,8 @@ use Illuminate\Support\Facades\DB;
           </div>
           <!-- --->
           <br>
-          <INPUT type="radio" name="type" value="Excel" checked> Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
-            <INPUT type="radio" name="type" value="Pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
+          <INPUT type="radio" name="type" value="Excel" > Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i><BR>
+            <INPUT type="radio" name="type" value="Pdf" checked> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i><BR>
         <br>
         <!-- --->
                 <p>
@@ -330,14 +330,14 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
     <br>
     <div id="accordion">
         @if (count($land)>0)
-        <table class="table table-striped display" id="myTable" style="width:100%">
+        <table class="table table-striped display text-center" id="myTable" style="width:100%">
             <thead>
                 <tr style="color:white;">
                     <th>#</th>
                     <th>Asset #</th>
                     <th>Description</th>
                     <th>Location</th>
-                    <th style="text-align:right;">Cost (Tsh)</th>
+                    <th style="text-align:right;">Cost (Tshs)</th>
                     <th >Condition</th>
                     <th title="Date of Acqusition">DoA</th>
                     <th title="Date in use">DiU</th>
@@ -439,7 +439,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
             <div class="col">
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-right">
                 <form action="{{route('assetreportfromsummary')}}" method="get" enctype="multipart/form-data">
                     @csrf
                     <input type="text" name="asset" value="Building" hidden>
@@ -449,16 +449,16 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
             </div>
         </div>
 </div>
-        <table class="table table-striped display" id="myTableAssesment" style="width:100%">
+        <table class="table table-striped display text-center" id="myTableAssesment" style="width:100%">
             <thead>
                 <tr style="color:white;">
                     <th>#</th>
                     <th>Asset Number</th>
                     <th>Assessment date</th>
                     <th>Total Depreciated Years</th>
-                    <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
-                    <th style="text-align:right;">Impairment Loss (Tsh)</th>
-                    <th  style="text-align:right;">Disposal Cost (Tsh)</th>
+                    <th style="text-align:right;">Accumulated Depreciation (Tshs)</th>
+                    <th style="text-align:right;">Impairment Loss (Tshs)</th>
+                    <th  style="text-align:right;">Disposal Cost (Tshs)</th>
                 </tr>
             </thead>
             @php

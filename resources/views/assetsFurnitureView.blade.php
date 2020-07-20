@@ -11,7 +11,7 @@ Furniture Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Furniture Asset</b></h5>
+            <h5><b style="text-transform: uppercase;">Furniture Asset</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -41,7 +41,15 @@ Furniture Asset
     <div class="card">
         @foreach ($land as $landinfo)
             <div class="card-header">
-                Asset Summary
+                <div class="row">
+                    <div class="col">
+                     Asset Summary
+                    </div>
+                    <div class="col text-right">
+                        <a href="{{route('assetinfo/export/',[$landinfo->id,'furniture'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+
+                    </div>
+                </div>
             </div>
             <div class="card-body" style="background-color: #6c757d33 !important;">
                 <p class="card-text">
@@ -105,13 +113,12 @@ Furniture Asset
 
                 @else
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>  Asses
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>  Assess
                   </button>
                 @endif
                 <a href="{{route('assetsFurnitureEdit',[$landinfo->id])}}" class="btn btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
 
                 @endif
-                 <a href="{{route('assetinfo/export/',[$landinfo->id,'furniture'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
             </div>
 
@@ -122,7 +129,7 @@ Furniture Asset
               <div class="modal-dialog " role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Asses Building Asset</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Assess Building Asset</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span title="Close" style="color: red;" aria-hidden="true">X</span>
                     </button>
@@ -211,22 +218,22 @@ Furniture Asset
         @endforeach
     </div><br>
     <div class="container">
-        <h4>Assesmet Records</h4><hr>
+        <h4>Assessment Records</h4><hr>
         <div class="row text-right">
             <div class="col">
                 <a href="{{route('asset/assesment/export/',[$type])}}?type=furniture" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
             </div>
         </div><br>
-        <table class="table table-striped display" id="myTable" style="width:100%">
+        <table class="table table-striped display text-center" id="myTable" style="width:100%">
             <thead  >
                 <tr style="color:white;">
                     <th>#</th>
                     <th>Assessment date</th>
                     <th>Total Depreciated Years</th>
-                    <th style="text-align:right;">Accumulated Depreciation (Tsh)</th>
-                    <th style="text-align:right;">Impairment Loss (Tsh)</th>
-                    <th style="text-align:right;">Disposal Cost (Tsh)</th>
-                    <th>Assesed By</th>
+                    <th style="text-align:right;">Accumulated Depreciation (Tshs)</th>
+                    <th style="text-align:right;">Impairment Loss (Tshs)</th>
+                    <th style="text-align:right;">Disposal Cost (Tshs)</th>
+                    <th>Assessed By</th>
                 </tr>
             </thead>
             @php

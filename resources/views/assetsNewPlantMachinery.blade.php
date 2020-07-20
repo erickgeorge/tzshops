@@ -11,7 +11,7 @@ New Plant And Machinery Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5 style="padding-left: 90px;"><b style="text-transform: uppercase;">Add New Plant And Machinery Asset</b></h5>
+            <h5><b style="text-transform: uppercase;">Add New Plant And Machinery Asset</b></h5>
         </div>
     </div>
     <hr class="container">
