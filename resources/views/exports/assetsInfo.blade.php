@@ -50,7 +50,7 @@ tr:nth-child(even) {
                 <b style="color: black;"> Asset Quantity : </b>  {{$landinfo->assetQuantity}}
             </td>
             <td>
-                <b style="color">Cost/Rep.Cost : </b>   {{number_format($landinfo->Cost)}} .
+                <b style="color">Cost/Repairing Cost : </b>   {{number_format($landinfo->Cost)}} .
             </td>
         </tr>
         <tr>

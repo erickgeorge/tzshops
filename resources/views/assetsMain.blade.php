@@ -58,15 +58,14 @@ use App\assetsworkinprogress;
                                Add New Asset
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a href="{{url('assetsNewLand')}}" class="dropdown-item"><b>New Land asset</b></a>
-                                    <a href="{{url('assetsNewFurniture')}}" class="dropdown-item"><b>New Furniture asset</b></a>
-                                    <a href="{{url('assetsNewEquipment')}}" class="dropdown-item"><b>New Equipment asset</b></a>
-                                    <a href="{{url('assetsNewPlantMachinery')}}" class="dropdown-item"><b>New Plant & Machinery asset</b></a>
-                                    <a href="{{url('assetsNewMotorVehicle')}}" class="dropdown-item"><b>New Motor Vehicle asset</b></a>
-                                    <a href="{{url('assetsNewComputerEquipment')}}" class="dropdown-item"><b>New Computer Equipment asset</b></a>
-                                    <a href="{{url('assetsNewBuilding')}}" class="dropdown-item"><b>New Building asset</b></a>
-                                    <a href="{{url('assetsNewIntangible')}}" class="dropdown-item"><b>New Intangible asset</b></a>
-                                    <a href="{{url('assetsNewWorkinProgress')}}" class="dropdown-item" ><b>New Work in Progress</b></a>
+                                    <a href="{{url('assetsNewLand')}}" class="dropdown-item"><b>Land Asset</b></a>
+                                    <a href="{{url('assetsNewFurniture')}}" class="dropdown-item"><b>Furniture Asset</b></a>
+                                    <a href="{{url('assetsNewPlantMachinery')}}" class="dropdown-item"><b>Plant & Machinery Asset</b></a>
+                                    <a href="{{url('assetsNewMotorVehicle')}}" class="dropdown-item"><b>Motor Vehicle Asset</b></a>
+                                    <a href="{{url('assetsNewComputerEquipment')}}" class="dropdown-item"><b>Computer Equipment Asset</b></a>
+                                    <a href="{{url('assetsNewBuilding')}}" class="dropdown-item"><b>Building Asset</b></a>
+                                    <a href="{{url('assetsNewIntangible')}}" class="dropdown-item"><b>Intangible Asset</b></a>
+                                    <a href="{{url('assetsNewWorkinProgress')}}" class="dropdown-item" ><b>Work in Progress</b></a>
 
                                 </div>
                             </div>

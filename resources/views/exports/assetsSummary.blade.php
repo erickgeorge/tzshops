@@ -95,7 +95,7 @@ tr:nth-child(even) {
             <th><b>Date in Use</b></th>
             <th><b>Ending Depreciation Date</b></th>
             <th><b>Qty</b></th>
-            <th style="text-align:right;"><b>Cost/Rep.Cost (Tshs)</b></th>
+            <th style="text-align:right;"><b>Cost/Repairing Cost (Tshs)</b></th>
             <th><b>Asset Condition</b></th>
             <th><b>Assets Useful Life</b></th>
             <th><b>Depreciation Rate</b></th>

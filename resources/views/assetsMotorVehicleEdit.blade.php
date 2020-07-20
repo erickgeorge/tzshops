@@ -71,7 +71,7 @@ Edit Motor vehicle Asset
                             </div>
                             <div class="row">
                                <div class="form-group col">
-                                   <label for="my-input">Cost/Rep. Cost <sup class="text-danger">*</sup></label>
+                                   <label for="my-input">Cost/Repairing Cost <sup class="text-danger">*</sup></label>
                                    <input id="quantity" value="{{$item->Cost}}" required min="1" class="form-control" value="1" type="number" name="cost">
                                </div>
                                <div class="form-group col">

@@ -57,7 +57,7 @@ New Work in Progress Asset
                                    <input id="quantity"  min="1" class="form-control"   type="number" name="Quantity">
                                </div>
                                <div class="form-group col">
-                                   <label for="my-input">Cost/Rep. Cost <sup class="text-danger">*</sup></label>
+                                   <label for="my-input">Cost/Repairing Cost <sup class="text-danger">*</sup></label>
                                    <input id="quantity"  required min="0" class="form-control"   type="number" name="cost">
                                </div>
                            </div>

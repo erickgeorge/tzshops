@@ -60,7 +60,7 @@ Reallocate Work in Progress to Assets
                                  Asset Quantity: <br>  {{$landinfo->assetQuantity}}
                                 </div>
                                 <div class="col">
-                                    Cost/Rep.Cost : <br> {{number_format($landinfo->Cost)}}
+                                    Cost/Repairing Cost : <br> {{number_format($landinfo->Cost)}}
                                 </div>
                             </div>
                     </p>

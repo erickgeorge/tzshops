@@ -62,7 +62,7 @@ Work in Progress
                                     <b style="color: black;">Asset Quantity: </b>  {{$landinfo->assetQuantity}}
                                 </div>
                                 <div class="col">
-                                    <b style="color: black;"> Cost/Rep.Cost :</b> {{number_format($landinfo->Cost)}}
+                                    <b style="color: black;"> Cost/Repairing Cost :</b> {{number_format($landinfo->Cost)}}
                                 </div>
                             </div>
                     </p>

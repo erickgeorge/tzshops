@@ -81,7 +81,7 @@ New Computer Equipment Asset
                         </div>
                         <div class="row">
                             <div class="form-group col">
-                                <label for="my-input">Cost/Rep. Cost <sup class="text-danger">*</sup></label>
+                                <label for="my-input">Cost/Repairing Cost <sup class="text-danger">*</sup></label>
                                 <input id="quantity" required min="1" class="form-control"  type="number" name="cost">
                             </div>
                             <div class="form-group col">
