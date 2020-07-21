@@ -179,7 +179,7 @@ tr:nth-child(even) {
         </tr>
         <tr>
             <td>7</td>
-            <td>Motor Vehicle Assets</td>
+            <td>Motorvehicle Assets</td>
             <td>
                 @php $total1 = 0; @endphp
                 @php $total7 = 0; @endphp
