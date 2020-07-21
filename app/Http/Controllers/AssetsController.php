@@ -354,7 +354,12 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-             'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+             'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+             'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+            'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),
@@ -372,8 +377,12 @@ class AssetsController extends Controller
              return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
+             
+             'cleangcompanylandscaping' => company::where('type','Exterior')->orderby('created_at','DESC')->get(),
 
-             'cleangcompany' => company::orderby('created_at','DESC')->get(),
+             'cleangcompanyusab' => company::where('type','Interior')->orderby('created_at','DESC')->get(),
+
+             'cleangcompanyadmin' => company::orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),
@@ -417,7 +426,11 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-             'cleangcompany' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+            'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+             
+             'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+            'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),
@@ -436,7 +449,11 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-             'cleangcompany' => company::orderby('created_at','DESC')->get(),
+            'cleangcompanylandscaping' => company::where('type','Exterior')->orderby('created_at','DESC')->get(),
+
+             'cleangcompanyusab' => company::where('type','Interior')->orderby('created_at','DESC')->get(),
+
+             'cleangcompanyadmin' => company::orderby('created_at','DESC')->get(),
 
              'assessmmentcompany' => company::select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),

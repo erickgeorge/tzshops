@@ -690,7 +690,7 @@ class LandscapingController extends Controller
   
 
 
-         public function crosschecklandassessmentactivity(Request $request, $id , $company ,$date ,$status , $nextmonth )
+         public function crosschecklandassessmentactivity(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
     {
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -717,6 +717,8 @@ class LandscapingController extends Controller
             $form->company_id = $id;
             $form->company = $tenders[$a];
             $form->assessment_name = $sheet[$a];
+            $form->type = $type;
+
             $form->status =  1;
             $form->assessment_month = $request['assessmment'];
 
@@ -1289,7 +1291,11 @@ class LandscapingController extends Controller
                     ->groupBy('area_id')->get(),
       
 
-            'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanylandscaping' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
+             'assessmmentcompanyusab' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+             'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+
         ]);
         
             }
@@ -1314,7 +1320,11 @@ class LandscapingController extends Controller
                     ->groupBy('area_id')->get(),     
       
 
-            'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanylandscaping' => landassessmentform::where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanyusab' => landassessmentform::where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
         ]);
     } }
 
@@ -1367,7 +1377,12 @@ class LandscapingController extends Controller
                     ->groupBy('area_id')->get(),
       
 
-            'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+           
+            'assessmmentcompanylandscaping' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
+             'assessmmentcompanyusab' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+             'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+
         ]);
         
             }
@@ -1392,7 +1407,12 @@ class LandscapingController extends Controller
                     ->groupBy('area_id')->get(),     
       
 
-            'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
+           
+            'assessmmentcompanylandscaping' => landassessmentform::where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanyusab' => landassessmentform::where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
         ]);
     } }
 

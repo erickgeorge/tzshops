@@ -4,6 +4,8 @@
 view users
 @endSection
 @section('body')
+
+
 <?php
 use App\Technician;
 use App\User;
@@ -11,10 +13,12 @@ use App\Directorate;
 use App\Department;
 use App\Section;
  ?>
+
+ @if($role['user_role']['role_id'] == 1)
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5 style="padding-left: 90px;  text-transform: uppercase;">Available Registered Users</h5>
+    <h5 style=" text-transform: uppercase;">Available Registered Users</h5>
 
 
   </div>
@@ -223,6 +227,8 @@ else {
 </div>
   @endif
 
+  @endif
+
 
 
 
@@ -271,4 +277,7 @@ function warning (){
   alert("Are you sure you want to delete this?");
 }
 </script>
+
+
+
 @endSection

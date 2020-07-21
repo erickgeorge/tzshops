@@ -196,7 +196,7 @@
 
 
    <?php $cmp = Crypt::encrypt($companyiii->tender); ?>
-     <form method="POST" action="{{ route('croscheck.assessment.activity.landscaping', [$companyiii->id  , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
+     <form method="POST" action="{{ route('croscheck.assessment.activity.landscaping', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
                     @csrf
 
      <input  name="mytender[]"  value="{{$companyiii->tender}}" hidden>
