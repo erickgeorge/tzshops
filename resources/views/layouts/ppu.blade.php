@@ -100,14 +100,11 @@ input[type="date"]::-webkit-datetime-edit-day-field{
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
 
-                <li class="nav-item" style="margin-top: -10px;">
-   <a class="nav-link" style="color:white" >
-     <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
-</li>
-            </ul>
-            <ul class="navbar-nav m-auto text-center">
+ <li class="nav-item" style="margin-top: -10px;">
 
-
+                <a class="nav-link" style="color:white" >
+                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
+              </li>
 
 <?php
                 use App\WorkOrderMaterial;
@@ -841,7 +838,6 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript" src="{{asset('/tables/Buttons-1.6.2/js/buttons.print.js')}}"></script>
 <script type="text/javascript" src="{{asset('/tables/SearchPanes-1.1.1/js/dataTables.searchPanes.js')}}"></script>
 <script type="text/javascript" src="{{asset('/tables/SearchPanes-1.1.1/js/searchPanes.bootstrap4.js')}}"></script>
-
 <script src="{{ asset('/js/main.js') }}"></script>
 
 <script>

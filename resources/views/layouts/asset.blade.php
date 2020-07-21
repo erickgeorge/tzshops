@@ -98,14 +98,10 @@ input[type="date"]::-webkit-datetime-edit-day-field{
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto text-center">
 
-                <li class="nav-item" style="margin-top: -10px;">
-   <a class="nav-link" style="color:white" >
-     <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
-</li>
-            </ul>
-            <ul class="navbar-nav m-auto text-center">
-
-
+                               <li class="nav-item" style="margin-top: -10px;">
+                  <a class="nav-link" style="color:white" >
+                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
+              </li>
 
 
 
@@ -191,8 +187,35 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 
 
- @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
 
+                  @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
+
+                       <li style="width: 80px;">
+                    
+                    </li>
+
+
+
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
+
+
+
+        </div>
+       </li>
+
+       
+               
 
 
                                   <li class="nav-item">
@@ -205,7 +228,16 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                                     class="badge badge-light">{{ count($m) }}</span></a>
                     </li>
 
- @endif
+
+                      <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                    </li>
+
+
+
+
+                    @endif
+
 
 
 
@@ -332,6 +364,9 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                @endif
 
 
+
+
+
                  @if(auth()->user()->type == 'Head Procurement')
                     <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('work_order_with_missing_material')}}">Materials to purchase <span
@@ -441,21 +476,26 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                 @endif
 
 
+  
+                            @if(auth()->user()->type == 'USAB')
+
+
+            
+
+            
+                    
+                <li class="nav-item">
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                </li>
+
+
+               
+              @endif  
 
 
 
 
 
-                @if(strpos(auth()->user()->type, "HOS") !== false or $role['user_role']['role_id'] == 1)
-
-                      <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
-                    </li>
-
-
-
-
-                @endif
 
 
 
@@ -479,6 +519,37 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
               @if($role['user_role']['role_id'] == 1)
 
+
+                <li style="width: 80px;">
+                    
+                    </li>
+             
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
+
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
+
+
+
+        </div>
+       </li>
+
+
+
+                      <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                    </li>
+
+
+
             <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
                                     class="badge badge-light">{{ count($m) }}</span></a>
@@ -495,23 +566,6 @@ input[type="date"]::-webkit-datetime-edit-day-field{
             </li>
 
 
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
-
-        </div>
-       </li>
 
 
 
@@ -525,32 +579,6 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 @endif
 
 
-
-                  @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
-      <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
-                    </li>
-
-
-       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
-
-        </div>
-       </li>
-
-                    @endif
 
 
                     @if(auth()->user()->type == 'Maintenance coordinator')
@@ -646,7 +674,9 @@ input[type="date"]::-webkit-datetime-edit-day-field{
           {{ Auth::user()->name }}
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;" >
-         
+           <!--SETTING AND CHANGE PASSWORD
+          <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
+
                <a class="dropdown-item" style="color:white" href="{{ url('myprofile')}}">My Profile</a>
           <a class="dropdown-item" style="color:white"  href="{{ url('password')}}">Change Password</a>
           <div class="dropdown-divider"></div>
@@ -1087,6 +1117,7 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript" src="{{asset('/tables/SearchPanes-1.1.1/js/searchPanes.bootstrap4.js')}}"></script>
 
 <script src="{{ asset('/js/main.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
 <script>

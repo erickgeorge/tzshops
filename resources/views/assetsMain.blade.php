@@ -55,7 +55,7 @@ use App\assetsworkinprogress;
                         <div class="col">
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               Add New Asset
+                               Add new Asset
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a href="{{url('assetsNewLand')}}" class="dropdown-item"><b>Land Asset</b></a>
