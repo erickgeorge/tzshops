@@ -43,7 +43,7 @@ New MotorVehicle Asset
                            </div>
                            <div class="row">
                                <div class="form-group col">
-                                   <label for="my-input">Motor Vehicle type <sup class="text-danger">*</sup></label>
+                                   <label for="my-input">Motorvehicle type <sup class="text-danger">*</sup></label>
                                    <input id="location" required class="form-control" placeholder="" type="text" name="SiteLocation">
                                </div>
                                <div class="form-group col">
