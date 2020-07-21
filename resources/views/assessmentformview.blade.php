@@ -13,7 +13,7 @@ Assessment form
       <div class="col">
           @foreach($assessmmentcompany as $assesment)
          @endforeach
-            <h5 ><b style="text-transform: uppercase;">assessment forms for {{ date('F Y', strtotime($assesment->assessment_month))}} </b></h5>
+            <h5 ><b style="text-transform: uppercase;">assessment forms assessed for this month </b></h5>
 
         </div>
 

@@ -12,18 +12,18 @@ Company Registrartion
 <div class="container">
 @if ($errors->any())
 <div class="alert alert-danger" >
-	<ul>
-		@foreach ($errors->all() as $error)
-			<li>{{ $error }}</li>
-		@endforeach
-	</ul>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
 </div>
 @endif
 @if(Session::has('message'))
 <div class="alert alert-success" style="margin-top: 6%;">
-	<ul>
-		<li>{{ Session::get('message') }}</li>
-	</ul>
+    <ul>
+        <li>{{ Session::get('message') }}</li>
+    </ul>
 </div>
 @endif
 
@@ -78,11 +78,30 @@ Company Registrartion
                             </option>
                          
                                 @foreach($sheets as $sheet)
-                                  @if($sheet->percentage == 100)
-                                    <option value="{{$sheet->name }}">{{ $sheet->name}}
-                                    </option>
+                                @if((auth()->user()->type == 'USAB') and ($sheet->type == 'Interior'))
 
-                                  @endif  
+                                  @if($sheet->percentage == 100)
+                                    <option value=" {{ $sheet->name }}">{{ $sheet->name}}
+                                    </option>
+                                   @endif
+
+
+                                 @elseif((auth()->user()->type == 'Supervisor Landscaping') and ($sheet->type == 'Exterior'))
+
+                                   @if($sheet->percentage == 100)
+                                    <option value="{{ $sheet->name }}">{{ $sheet->name}}
+                                    </option>
+                                   @endif
+
+                                 @elseif($role['user_role']['role_id'] == 1)  
+
+                                     @if($sheet->percentage == 100)
+                                    <option value="{{ $sheet->name }}">{{ $sheet->name}}
+                                    </option>
+                                   @endif
+                                   
+
+                                @endif  
                                 @endforeach
                         </select> 
            </TD> 

@@ -102,6 +102,14 @@ class AssetsController extends Controller
         $company->sheet = $sheet[$a];
         $company->area = $area[$a];
 
+          $assesssheet = assessmentsheet::where('name' , $sheet[$a])->get();
+        foreach ($assesssheet as $as) {
+
+             $company->type = $as->type;    
+      
+        }
+
+
 
         $company->company_name = $request['companyid'];
         $company->tender = $request['tendern'];
