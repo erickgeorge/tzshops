@@ -213,15 +213,12 @@
                 $date_next = $now1->diffInDays($dnext); ?>
            
 
+         
+
               
 
                @if( $house->status == 2) 
                 @if($now1 >= $next30days)
-
-
-
-
-
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->tender }}</td>
@@ -537,10 +534,7 @@
 
                          @endif
                         @endif
-
-
-
-                    @endforeach
+                 @endforeach
                     </tbody>
                     
                 </table>
