@@ -94,29 +94,6 @@ class DirectorateController extends Controller
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-        if(request()->has('start'))  { //date filter
-        
-        
-        $from=request('start');
-        $to=request('end');
-        
-        
-        $nextday = date("Y-m-d", strtotime("$to +1 day"));
-
-        $to=$nextday;
-        if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
-        }// start> end
-        
-       return view('workordersection', [
-            'role' => $role,
-            'notifications' => $notifications,
-            'worksec' => workordersection::whereBetween('created_at', [$from, $to])->OrderBy('section_name', 'ASC')->get()
-            
-        ]);
-        
-    }
         return view('workordersection', [
             'role' => $role,
             'notifications' => $notifications,
@@ -410,7 +387,7 @@ class DirectorateController extends Controller
         }
 
         $wsection = new workordersection();
-        $wsection->section_name = $request['sec_name' ];
+        $wsection->section_name = ($request['sec_name']);
        
         $wsection->save();
 

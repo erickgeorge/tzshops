@@ -25,17 +25,13 @@
  </style>
 <div class="container">
     <br>
-    <div class="row" style=" margin-right: 2%; margin-left: 2%;">
-        <div class="col-lg-12" align="center">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Edit User</h5>
+    <div class="row">
+        <div class="col-lg-12" >
+            <h4 style="  text-transform: unset;" >Edit User Information</h4>
         </div>
-        {{--<div class="col-md-4">
-            <a href="{{ url('viewusers') }}">
-                <button type="" class="btn btn-primary">View all users</button>
-            </a>
-        </div>--}}
+    
     </div>
-    <br>
+
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -214,7 +210,7 @@
 
                        @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucfirst( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucwords(strtolower( $dep->section_name )); ?></option>
 
                        @endforeach
 
@@ -303,7 +299,7 @@
 
                        @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucfirst( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucwords(strtolower( $dep->section_name )); ?></option>
 
                        @endforeach
 
