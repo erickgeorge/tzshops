@@ -848,7 +848,7 @@ else {
          <td>{{ $user['department']['directorate']->name }}</td>
         <td>{{ $user['department']->name }}</td>
         <td>
-        <div class="row">
+        <div class="row"> &nbsp; &nbsp; &nbsp;
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
  
 

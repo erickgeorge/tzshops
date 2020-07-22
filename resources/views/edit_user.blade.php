@@ -190,9 +190,11 @@
               <div id="locationdiv" >
 
 
-                      <select class="custom-select" name="type" id="type">
+                      <select class="custom-select" name="type" id="type" required>
                       <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose user type...</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
+
+                      <option @if (in_array('Bursar',$str_array)) { selected="selected" } @else{} @endif  value="Bursar">Bursar</option>
 
                       <option @if (in_array('CLIENT',$str_array)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
                       <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
@@ -212,7 +214,7 @@
 
                        @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 
@@ -272,13 +274,18 @@
 
                 <br>
 
+               
                 <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
                   
                     
                       <option @if (in_array('Accountant',$strarray)) { selected="selected" } @else{} @endif value="" selected>Choose user type...</option>
                       <option @if (in_array('Maintenance coordinator',$strarray)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
 
+                      <option @if (in_array('Bursar',$strarray)) { selected="selected" } @else{} @endif  value="Bursar">Bursar</option>
+
+
                       <option @if (in_array('CLIENT',$strarray)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
+
                       <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
                         
                           <option @if (in_array('DVC Accountant',$strarray)) { selected="selected" } @else{} @endif  value="DVC Accountant">DVC Accountant</option>
@@ -296,7 +303,7 @@
 
                        @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 

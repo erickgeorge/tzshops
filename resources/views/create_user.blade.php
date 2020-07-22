@@ -190,7 +190,7 @@ User Registration
 
 	                  @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 
@@ -249,7 +249,7 @@ User Registration
 
 	                  @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 
