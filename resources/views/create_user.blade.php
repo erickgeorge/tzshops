@@ -203,11 +203,7 @@ User Registration
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
 
-	                  @foreach($maintsec as $sec)
-
-                           <option  value="HOS {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
-
-                       @endforeach
+	                  <option value="Supervisor Landscaping">Supervisor Landscaping</option>
 
                       <option value="Transport Officer">Transport Officer</option>
                       <option value="USAB">USAB</option>
@@ -264,13 +260,7 @@ User Registration
 	                  <option value="STORE">Store Manager</option>
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
-
-	                  @foreach($maintsec as $sec)
-
-                           <option  value="Supervisor {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
-
-                       @endforeach
-
+                      <option value="Supervisor Landscaping">Supervisor Landscaping</option>
 	                  <option value="Transport Officer">Transport Officer</option>
 
 	           </select>

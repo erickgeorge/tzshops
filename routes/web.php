@@ -123,6 +123,8 @@ Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary'
 
  
 
+Route::get('direct_torate/{id}', 'UserController@getdepedit')->name('get_depa')->middleware('auth');
+
 Route::get('departments', 'UserController@getDepartments')->name('departments.view')->middleware('auth');
 Route::get('companytender', 'UserController@getcompany')->name('companyies.view')->middleware('auth');
 Route::get('areas', 'UserController@getAreas')->name('areas.view')->middleware('auth');

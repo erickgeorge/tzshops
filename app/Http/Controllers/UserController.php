@@ -203,9 +203,10 @@ class UserController extends Controller
     }
 
 
-    public function getinspector(Request $request)
+
+    public function getdepedit(Request $request , $id)
     {
-        return response()->json(['inspectors' => User::where('zone', $request->get('id'))->orderby('zone','ASC')->get()]);
+        return response()->json(['direct_torate' => Department::where('directorate_id', $request->get('id'))->orderby('name','ASC')->get()]);
     }
 
 
@@ -222,6 +223,8 @@ class UserController extends Controller
             'user' => User::with('department.directorate')->where('id', $id)->first(),
             'directorates' => Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(),
             'departments' => Department::all(),
+            'zone' => iowzone::OrderBy('zonename', 'ASC')->get(),
+            'usertyp' => usertype::where('user_id',$id)->first(),
             'role' => $role,
             'nrole' => $role,
              'worksec' => workordersection::OrderBy('section_name', 'ASC')->get(),
@@ -230,6 +233,9 @@ class UserController extends Controller
 
         ]);
     }
+
+
+
 
 
         public function assigniowzoneview($id)
@@ -285,18 +291,55 @@ class UserController extends Controller
         $user->email = $request['email'];
         $user->section_id = $request['department'];
       
-        $user->type  = $request['type'];
+      
+      if ($request['checkdiv'] == 'yesmanual') {
+
+             $user->zone = $request['zone'];
+             $user->type = 'Inspector Of Works';
+             
+
+        } else {
+
+             $user->type  = $request['type'];
+        }
+
+
         $user->zone = $request['zone'];
         $user->IoW = 2;
         $user->save();
 
             if($user->type=='Inspector Of Works'){
+
+           $checkemptyzoneinspector = zoneinspector::where('inspector',$user->id)->first(); 
+
+       if (empty($checkemptyzoneinspector)) {
+
+
+            $zonename = iowzone::where('zonename',$request['zone'])->first();
+            $zoneinspector = new zoneinspector();
+            $zoneinspector->zone =  $zonename['id'];
+            $zoneinspector->inspector = $user->id;
+            $zoneinspector->save();  }
+
+            else {
+
             $zonename = iowzone::where('zonename',$request['zone'])->first();
             $zoneinspector =  zoneinspector::where('inspector',$user->id)->first();
             $zoneinspector->zone =  $zonename['id'];
             $zoneinspector->inspector = $user->id;
-            $zoneinspector->save();
+            $zoneinspector->save(); 
             }
+
+
+
+            }
+
+
+        $type = usertype::where('user_id', $id)->first();
+        $type->user_id = $user->id;
+        $type->type2 = $request['secondtype'];
+        $type->type = $user->type;
+        $type->save();    
            
 
         $role = UserRole::where('user_id', $id)->first();
