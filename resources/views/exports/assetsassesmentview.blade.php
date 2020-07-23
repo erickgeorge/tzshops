@@ -26,7 +26,7 @@ use App\assetsplantandmachinery;
 echo 'Plant and Machinery';
             }else if( $_GET['asset']=='MotorVehicle')
             {
-echo 'Motorvehicle';
+echo 'Motor Vehicle';
             }else if( $_GET['asset']=='ComputerEquipment')
             {
 echo 'Computer Equipments';

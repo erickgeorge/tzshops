@@ -67,7 +67,7 @@
 echo 'Plant and Machinery';
             }else if( $_GET['asset']=='motorvehicle')
             {
-echo 'Motorvehicle';
+echo 'Motor Vehicle';
             }else if( $_GET['asset']=='computerequipments')
             {
 echo 'Computer Equipments';

@@ -564,21 +564,21 @@ var total=2;
   <hr>
 
     @endif
- 
+
 
 
          <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
-        
+
             <div class="form-group ">
-             
+
                 @if($wo->emergency == 1)
                     <input type="checkbox" name="emergency" checked> <b style="color:red;">This work order is emergency</b>
                 @else
                     <input type="checkbox" name="emergency"> <b style="color:red;">This work order is emergency</b>
                 @endif
             </div>
-            
+
             <button type="submit" class="btn btn-primary">Save</button>
           </form>
 
@@ -616,12 +616,12 @@ var total=2;
             </div>
             </div>
         </div>
-       @if($wo->zonelocationtwo == null) 
+       @if($wo->zonelocationtwo == null)
             <button type="submit" class="btn btn-primary">Save</button>
-       @endif  
+       @endif
 
           </form>
-     @endif     
+     @endif
 
      @if($wo->zonelocationtwo != null)
 
@@ -634,7 +634,7 @@ var total=2;
                     <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
                 <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
-                 
+
                   @if($wo->zonelocationtwo != null) <?php
                         $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
                         $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
@@ -659,17 +659,17 @@ var total=2;
             </div>
             </div>
         </div>
-       @if($wo->zone_location == null) 
+       @if($wo->zone_location == null)
             <button type="submit" class="btn btn-primary">Save</button>
-       @endif  
+       @endif
 
           </form>
 
-     @endif     
+     @endif
 
 
        </div>
-        
+
 
 
 
@@ -699,8 +699,8 @@ var total=2;
                     </div>
                 </div>
        @else
-         <div align="center" style="color: red;"> Please assign zone location for further Steps. </div>         
-       @endif         
+         <div align="center" style="color: red;"> Please assign zone location for further Steps. </div>
+       @endif
 
 
 
@@ -708,13 +708,13 @@ var total=2;
 
             {{-- ASSIGN TECHNICIAN tab--}}
 
-                  
+
                     <div id="assigntechnician" class="tabcontent">
 
 
                  @if(($wo->statusmform == 3) || ($wo->statusmform == 4))
 
-                  
+
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Assign Technician for this works order</p>
@@ -737,7 +737,7 @@ var total=2;
               <TABLE id="dataTable1" width="350px" >
                   <TR>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
-                      
+
                        <TD>
                             <select   id="techidc" required class="custom-select"  name="technician_work[]" style="width: 700px;">
 
@@ -807,7 +807,7 @@ var total=2;
                             </select>
                               </TD>
 
-           
+
                   </TR>
         </TABLE>
 
@@ -822,10 +822,10 @@ var total=2;
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
 
-                  
+
                 @else
                <div align="center" style="color: red;"> Please assign inspection form before work before assigning technician for work. </div>
-                @endif  
+                @endif
                     </div>
 
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -861,9 +861,9 @@ var total=2;
           <TABLE id="dataTable" width="350px" >
                   <TR>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
-                      
+
                        <TD>
-                           
+
                             <select   id="techidfoxrinspection" required class="custom-select"  name="technician_work[]" style="width: 700px;">
 
 
@@ -925,7 +925,7 @@ var total=2;
                             </select>
                        </TD>
 
-           
+
                   </TR>
         </TABLE>
 
@@ -1020,7 +1020,7 @@ var total=2;
                             </select>
                         </div>
 
-      
+
 
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
@@ -1038,7 +1038,7 @@ var total=2;
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div id="request_transport" class="tabcontent">
-                  @if($wo->statusmform != 1)  
+                  @if($wo->statusmform != 1)
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Work order Transport Request Form</p>
@@ -1083,7 +1083,7 @@ var total=2;
                 <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
                     @csrf
 
-                       
+
 
                         <?php
 
@@ -1092,13 +1092,13 @@ var total=2;
 
 
                         ?>
-                         @if($wo->statusmform == 4) 
+                         @if($wo->statusmform == 4)
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Select material for works order</p>
                             </div>
                         </div>
-
+{{--  --}}
                         <div class="form-group">
 
                             <select @if($wo->zone_location == null) disabled="" @endif required class="custom-select"  id="materialreq" name="1" style="width: 700px">
@@ -1139,7 +1139,7 @@ var total=2;
                 @else
                <div align="center" style="color: red;"> Please assign technician for inspection before requesting material for work. </div>
                 @endif
-                 </div> 
+                 </div>
                 {{-- end material_request  --}}
 
 
@@ -1564,7 +1564,7 @@ document.getElementById("totalmaterials").value=total;
 
          function myfunc6(x) {
             document.getElementById("details").innerHTML = x;
-  }  
+  }
    </script>
 
 
@@ -1592,7 +1592,7 @@ document.getElementById("totalmaterials").value=total;
 
 
 
-  
+
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
@@ -1608,9 +1608,9 @@ document.getElementById("totalmaterials").value=total;
              {
 
                 var newcell = row.insertCell(i);
-                 
-               
-              
+
+
+
 
 
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
@@ -1630,11 +1630,11 @@ document.getElementById("totalmaterials").value=total;
 
                 }
 
-                  
+
 
             }
 
-           
+
         }
 
         function deleteRow(tableID) {
@@ -1679,9 +1679,9 @@ document.getElementById("totalmaterials").value=total;
              {
 
                 var newcell = row.insertCell(i);
-                 
-               
-              
+
+
+
 
 
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
@@ -1701,11 +1701,11 @@ document.getElementById("totalmaterials").value=total;
 
                 }
 
-                  
+
 
             }
 
-           
+
         }
 
         function deleteRow1(tableID) {
