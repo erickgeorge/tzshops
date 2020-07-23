@@ -123,6 +123,8 @@ Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary'
 
  
 
+Route::get('direct_torate/{id}', 'UserController@getdepedit')->name('get_depa')->middleware('auth');
+
 Route::get('departments', 'UserController@getDepartments')->name('departments.view')->middleware('auth');
 Route::get('companytender', 'UserController@getcompany')->name('companyies.view')->middleware('auth');
 Route::get('areas', 'UserController@getAreas')->name('areas.view')->middleware('auth');
@@ -653,7 +655,7 @@ Route::post('edit_sheet_proceeding/{id}/{type}', 'LandscapingController@editasse
 Route::get('finalsave/sheet/{name}', 'LandscapingController@finalsave_sheet')->name('finalsavesheet')->middleware('auth');
 
 
-Route::post('crosscheck/assessment/activity/form/{id}/{company}/{date}/{status}/{nextmonth}', 'LandscapingController@crosschecklandassessmentactivity')->name('croscheck.assessment.activity.landscaping')->middleware('auth');
+Route::post('crosscheck/assessment/activity/form/{id}/{type}/{company}/{date}/{status}/{nextmonth}', 'LandscapingController@crosschecklandassessmentactivity')->name('croscheck.assessment.activity.landscaping')->middleware('auth');
 Route::post('crosscheck/assessment/activity/form/second/{id}/{company}/{month}', 'LandscapingController@crosschecklandassessmentactivitysecond')->name('croscheck.assessment.activity.landscapingsecond')->middleware('auth');
 
 Route::post('eddited/assessment/activity/form/{id}/{tender}/{month}', 'LandscapingController@editedlandassessmentactivity')->name('edited.assessment.activity.landscaping')->middleware('auth');

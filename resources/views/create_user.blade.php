@@ -25,9 +25,9 @@ User Registration
 
  </style>
 <br>
-<div class="row" style=" margin-left: 3%;">
+<div class="CONTAINER">
 	<div class="col-md-8">
-		<h5 style="padding-left: 90px;  text-transform: uppercase;" >Create new user</h5>
+		<h5 style="  text-transform: unset;" >Create new user</h5>
 	</div>
 
 	<!-- <div class="col-md-4">
@@ -190,7 +190,7 @@ User Registration
 
 	                  @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 
@@ -203,11 +203,7 @@ User Registration
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
 
-	                  @foreach($maintsec as $sec)
-
-                           <option  value="HOS {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
-
-                       @endforeach
+	                  <option value="Supervisor Landscaping">Supervisor Landscaping</option>
 
                       <option value="Transport Officer">Transport Officer</option>
                       <option value="USAB">USAB</option>
@@ -253,7 +249,7 @@ User Registration
 
 	                  @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo strtolower( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 
@@ -264,13 +260,7 @@ User Registration
 	                  <option value="STORE">Store Manager</option>
 
 	                  <option value="Secretary to Council">Secretary to Council</option>
-
-	                  @foreach($maintsec as $sec)
-
-                           <option  value="Supervisor {{$sec->section}}"  >Supervisor <?php echo strtolower( $sec->section ); ?></option>
-
-                       @endforeach
-
+                      <option value="Supervisor Landscaping">Supervisor Landscaping</option>
 	                  <option value="Transport Officer">Transport Officer</option>
 
 	           </select>

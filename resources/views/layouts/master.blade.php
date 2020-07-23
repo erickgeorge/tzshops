@@ -759,7 +759,9 @@ input[type="date"]::-webkit-datetime-edit-day-field{
  @endif
 
  @if(strpos(auth()->user()->type, "HOS") !== false )
+  @if($role['user_role']['role_id'] != 1)
  <a  href="{{ url('technicians') }}"><h6>Technicians</h6></a>
+ @endif
  <button class="dropdown-btn"><h6>Material Update
     <i class="fa fa-caret-down"></i></h6>
   </button>

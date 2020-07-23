@@ -199,9 +199,12 @@
 
 
                     <tbody>
+
+                
                     <?php $i = 0;  $ii = 0;  $iii = 0;?>
-                    @foreach($cleangcompany as $house)
-                        <?php $i++; $ii++; $iii++;?>
+                        @if(auth()->user()->type == 'Supervisor Landscaping')   
+                    @foreach($cleangcompanylandscaping as $house)
+                        <?php $i++;?>
                 
                 <?php $now1 =  Carbon::now();
                  
@@ -214,9 +217,6 @@
 
                 $date_left = $now1->diffInDays($next30days);
                 $date_next = $now1->diffInDays($dnext); ?>
-
- 
-    @if((auth()->user()->type == 'Supervisor Landscaping') and $house->type == 'Exterior' )
 
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -377,9 +377,27 @@
                            
                         </tr>
 
+   @endforeach
    @endif
      
-    @if((auth()->user()->type == 'USAB') and $house->type == 'Interior' )
+
+
+
+          @if(auth()->user()->type == 'USAB')   
+   @foreach($cleangcompanyusab as $house)
+                        <?php $ii++;?>
+                
+                <?php $now1 =  Carbon::now();
+                 
+                $next30day = strtotime($house->datecontract);
+                $next30days = date("Y-m-d", strtotime("+1 month", $next30day));
+
+                $dcont = Carbon::parse($house->datecontract);
+                $dnext = Carbon::parse($house->nextmonth);
+                $endcont = Carbon::parse($house->endcontract);
+
+                $date_left = $now1->diffInDays($next30days);
+                $date_next = $now1->diffInDays($dnext); ?>
 
                         <tr>
                             <th scope="row">{{ $ii }}</th>
@@ -541,9 +559,25 @@
                         </tr>
 
 
-  @endif
+   @endforeach
 
-  @if(($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'Head PPU') || (auth()->user()->type == 'DVC Admin') || (auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Dvc Accountant'))
+   @endif
+
+    @if((auth()->user()->type != 'USAB') and (auth()->user()->type != 'Supervisor Landscaping') )
+   @foreach($cleangcompanyadmin as $house)
+                        <?php $iii++;?>
+                
+                <?php $now1 =  Carbon::now();
+                 
+                $next30day = strtotime($house->datecontract);
+                $next30days = date("Y-m-d", strtotime("+1 month", $next30day));
+
+                $dcont = Carbon::parse($house->datecontract);
+                $dnext = Carbon::parse($house->nextmonth);
+                $endcont = Carbon::parse($house->endcontract);
+
+                $date_left = $now1->diffInDays($next30days);
+                $date_next = $now1->diffInDays($dnext); ?>
 
                         <tr>
                             <th scope="row">{{ $iii }}</th>
@@ -658,7 +692,8 @@
                
                @if( $house->status == 2) 
 
-
+                                   @if(auth()->user()->type != 'DVC Admin')
+                                   @if(auth()->user()->type != 'Estates Director')
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
                                           action="{{ route('cleaning.company.delete', [$house->id]) }}">
@@ -670,7 +705,13 @@
                                                                                         data-toggle="tooltip"><i
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
-                                    </form>&nbsp;
+                                    </form> @endif @endif &nbsp;
+
+
+                                    @if(($role['user_role']['role_id'] != 1))
+                                  
+                                  <span  class="badge badge-primary">Active <br>Contract </span>
+                                    @endif
                
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
@@ -704,9 +745,9 @@
                            
                         </tr>                    
 
-
-    @endif                    
+                  
                     @endforeach
+                    @endif
                     </tbody>
                     
                 </table>
@@ -810,7 +851,7 @@
                                                      
                                                        </div>
                                             </div>
-                                                </div>
+                         </div>
                 </form>
 
 

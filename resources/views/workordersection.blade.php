@@ -27,8 +27,10 @@ Workorder Section
         </div>
     @endif
 
-                <h5 style="padding-left: 90px; margin-bottom: 20px; text-transform: uppercase;"
-                   class="btn btn-default" >List of available Sections</h5>
+    <div>
+<br><br>
+                <h4 style=" text-transform: unset;"
+                    >List of available Sections</h4></div>
 
                
                 
@@ -36,7 +38,7 @@ Workorder Section
             <hr class="container">
 
             <a href="Add/section" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new Section for  Works order</a>
+                   class="btn btn-primary">Add New Section</a>
                    <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
@@ -59,9 +61,9 @@ Workorder Section
                         <tr>
                             <th scope="row">{{ $i }}</th>
                            
-                            <td><?php echo strtoupper( $dep->section_name ); ?></td>
+                            <td><?php echo ucwords(strtolower( $dep->section_name )); ?></td>
                             <td>
-                                 <div class="row">
+                                 <div class="row">&nbsp;&nbsp;&nbsp;
                                     <a style="color: green;"
                                        onclick="myfunc1('{{ $dep->id }}','{{ $dep->section_name }}')"
                                        data-toggle="modal" data-target="#editDepartment" title="Edit"><i

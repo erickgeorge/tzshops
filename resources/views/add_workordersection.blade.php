@@ -5,7 +5,7 @@
     @endSection
 @section('body')
 
-  <br>
+
       <div  class="container">
             <br>
               @if ($errors->any())
@@ -24,7 +24,7 @@
             </ul>
         </div>
     @endif 
-                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep" >Add New Section</h5>
+                <h5 style=" text-transform: unset;"  id="new_dep" >Add New Section</h5>
                 <hr>
                 <form method="POST" action="{{ route('section.save') }}" class="col-md-6">
                     @csrf
@@ -32,7 +32,7 @@
                     <div class="form-group ">
                         <label for="dep_name">Section Name</label>
                         <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
-                               name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc.">
+                               name="sec_name" placeholder="Enter Section Name, Example: Electrical, Mechanical etc.">
                     </div>
                    
                     

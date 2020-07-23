@@ -1,10 +1,18 @@
 @extends('layouts.master')
 
 @section('title')
-    User Registrartion
+    Edit User
     @endSection
 
 @section('body')
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script src=
+"https://code.jquery.com/jquery-1.12.4.min.js">
+  </script>
+
+
 <?php use App\iowzonelocation; ?>
 <style type="text/css">
   #Div2 {
@@ -17,17 +25,13 @@
  </style>
 <div class="container">
     <br>
-    <div class="row" style=" margin-right: 2%; margin-left: 2%;">
-        <div class="col-lg-12" align="center">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Edit User</h5>
+    <div class="row">
+        <div class="col-lg-12" >
+            <h4 style="  text-transform: unset;" >Edit User Information</h4>
         </div>
-        {{--<div class="col-md-4">
-            <a href="{{ url('viewusers') }}">
-                <button type="" class="btn btn-primary">View all users</button>
-            </a>
-        </div>--}}
+    
     </div>
-    <br>
+
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -92,7 +96,7 @@
                 <div class="input-group-prepend">
                     <label style="height: 28px;" class="input-group-text" for="directorate">Directorate/College <sup style="color: red;"></label>
                 </div>
-                <select style="width: 350px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()">
+                <select style="width: 350px;" class="custom-select" name="college" id="directorate" onchange="getdepedit()">
                     @foreach($directorates as $directorate)
                         <option <?php if(($user['department']['directorate']->name) == $directorate->name) {?>
                                 selected="selected"
@@ -114,9 +118,13 @@
                 </div>
 
                 <select class="custom-select" name="department" id="department" >
-                     @foreach($departments as $dep)
-                    <option value="{{ $dep->id }}">{{ $dep->description }}</option>
-                     @endforeach
+                      @foreach($departments as $dep)
+                        <option <?php if(($user['department']->name) == $dep->name) {?>
+                                selected="selected"
+                                <?php } ?>
+                                value="{{ $dep->id }}" > {{ '('.$dep->name . ') ' . $dep->description }}</option>
+                    @endforeach
+
                 </select>
 
             </div>
@@ -154,111 +162,170 @@
     </div>
 
 
-
     <?php $string = $user->type;
      $str_array = preg_split("/\,/", $string);
      ?>
 
-    <div>
 
-        <label>Type of User</label><br>
 
-              <div  >
-               <select class="custom-select" name="type" id="type">
-                      <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose...</option>
+
+     
+   
+      <label>Type of User</label><br>
+
+    <div class="row">
+    <div class="col">
+            <div >
+                 <div class="checkbox">
+            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+                Inspector of Works</label>
+               </div>
+            </div>
+
+
+              <div id="locationdiv" >
+
+
+                      <select class="custom-select" name="type" id="type" required>
+                      <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose user type...</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
 
+                      <option @if (in_array('Bursar',$str_array)) { selected="selected" } @else{} @endif  value="Bursar">Bursar</option>
+
                       <option @if (in_array('CLIENT',$str_array)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
-                      <option @if (in_array('DVC Admin',$str_array)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
+                      <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
+                        
+                          <option @if (in_array('DVC Accountant',$str_array)) { selected="selected" } @else{} @endif  value="DVC Accountant">DVC Accountant</option>
+
+                        <option @if (in_array('DVC Admin',$str_array)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
+
+
                       <option @if (in_array('Estates Director',$str_array)) { selected="selected" } @else{} @endif   value="Estates Director">Estates Director</option>
+
+                       <option @if (in_array('Estates officer',$str_array)) { selected="selected" } @else{} @endif   value="Estates officer">Estates officer</option>
+
                       <option @if (in_array('Head Procurement',$str_array)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
+
+                       <option @if (in_array('Head PPU',$str_array)) { selected="selected" } @else{} @endif  value="Head PPU">Head PPU</option>
+
                        @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo strtoupper( $dep->section_name ); ?></option>
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucwords(strtolower( $dep->section_name )); ?></option>
 
                        @endforeach
+
+                        <option @if (in_array('Housing Officer',$str_array)) { selected="selected" } @else{} @endif  value="Housing Officer">Housing Officer</option>
+
                       <option @if (in_array('Inspector Of Works',$str_array)) { selected="selected" } @else{} @endif  value="Inspector Of Works">Inspector Of Works</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option>
+
+                       <option @if (in_array('Quality Surveyor',$str_array)) { selected="selected" } @else{} @endif value="Quality Surveyor">Quality Surveyor</option>
+
                       <option  @if (in_array('STORE',$str_array)) { selected="selected" } @else{} @endif value="STORE">Store Manager</option>
-                      <option @if (in_array('Supervisor LECC',$str_array)) { selected="selected" } @else{} @endif  value="Supervisor LECC ">Supervisor LECC </option>
+                       <option  @if (in_array('Secretary to Council',$str_array)) { selected="selected" } @else{} @endif value="Secretary to Council">Secretary to Council</option>
+                      <option @if (in_array('Supervisor Landscaping',$str_array)) { selected="selected" } @else{} @endif  value="Supervisor Landscaping ">Supervisor Landscaping </option>
                       <option @if (in_array('Transport Officer',$str_array)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
+                      <option @if (in_array('USAB',$str_array)) { selected="selected" } @else{} @endif  value="USAB">USAB</option>
 
 
 
                </select>
-               </div>
-               <br>
-         </div>
 
 
 
 
-               <?php use App\iowzone; ?>
-               <?php $iowzone = iowzone::get();
-
-               ?>
-
-          @if( $user->type == "Inspector Of Works")
-
-         <div >
-                        <label for="dep_name">Section Zone </label>
-                        <br>
-
-                        <select required style="width: 500px;"  name="zone" id="zone">
+             </div>
 
 
-               @foreach($iowzone as $zone)
-               <?php $locationzone = iowzonelocation::where('iowzone_id',$zone->id)->get();
-                  $zoneloc = count($locationzone);
-                ?>
-               <option <?php if(($user->zone == $zone->zonename)) {?>
+               <div id="divmanual">
+               <select  required style="width: 500px;" class="custom-select" name="zone" id="zone">
+                    @foreach($zone as $zone)
+                       <option <?php if($user->zone == $zone->zonename) {?>
                                 selected="selected"
-                                <?php }
-
-                                if($zoneloc < 1){
-                                  echo 'disabled';
-                                }
-
-                                ?>
-                                value="{{ $zone->zonename }}" ><?php echo strtoupper( $zone->zonename ); ?></option>
-               @endforeach
+                                <?php } ?> value="{{$zone->zonename}}"  ><?php echo strtoupper( $zone->zonename ); ?></option>
+                      @endforeach
 
 
 
-                        </select>
-          </div>
+                      
 
-            @endif
-
-          <br>
+             </select>
 
 
+                </div>
+
+        </div>
+
+
+    <?php $string = $usertyp->type2;
+     $strarray = preg_split("/\,/", $string);
+     ?>
+  
+
+   <div class="col">
+  <div class="align-content-center">
+    <div class="input-group mb-3">
+            <div class="contacts">
+                      Second type of user
+
+                <br>
+
+               
+                <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
+                  
+                    
+                      <option @if (in_array('Accountant',$strarray)) { selected="selected" } @else{} @endif value="" selected>Choose user type...</option>
+                      <option @if (in_array('Maintenance coordinator',$strarray)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
+
+                      <option @if (in_array('Bursar',$strarray)) { selected="selected" } @else{} @endif  value="Bursar">Bursar</option>
+
+
+                      <option @if (in_array('CLIENT',$strarray)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
+
+                      <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
+                        
+                          <option @if (in_array('DVC Accountant',$strarray)) { selected="selected" } @else{} @endif  value="DVC Accountant">DVC Accountant</option>
+
+                        <option @if (in_array('DVC Admin',$strarray)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
+
+
+                      <option @if (in_array('Estates Director',$strarray)) { selected="selected" } @else{} @endif   value="Estates Director">Estates Director</option>
+
+                       <option @if (in_array('Estates officer',$strarray)) { selected="selected" } @else{} @endif   value="Estates officer">Estates officer</option>
+
+                      <option @if (in_array('Head Procurement',$strarray)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
+
+                       <option @if (in_array('Head PPU',$strarray)) { selected="selected" } @else{} @endif  value="Head PPU">Head PPU</option>
+
+                       @foreach($worksec as $dep)
+
+                           <option  value="HOS {{$dep->section_name}}"  >HoS <?php echo ucwords(strtolower( $dep->section_name )); ?></option>
+
+                       @endforeach
+
+                        <option @if (in_array('Housing Officer',$strarray)) { selected="selected" } @else{} @endif  value="Housing Officer">Housing Officer</option>
+
+                      <option @if (in_array('Maintenance coordinator',$strarray)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option>
+
+                       <option @if (in_array('Quality Surveyor',$strarray)) { selected="selected" } @else{} @endif value="Quality Surveyor">Quality Surveyor</option>
+
+                      <option  @if (in_array('STORE',$strarray)) { selected="selected" } @else{} @endif value="STORE">Store Manager</option>
+                       <option  @if (in_array('Secretary to Council',$strarray)) { selected="selected" } @else{} @endif value="Secretary to Council">Secretary to Council</option>
+                      <option @if (in_array('Supervisor Landscaping',$strarray)) { selected="selected" } @else{} @endif  value="Supervisor Landscaping ">Supervisor Landscaping </option>
+                      <option @if (in_array('Transport Officer',$strarray)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
+                      <option @if (in_array('USAB',$strarray)) { selected="selected" } @else{} @endif  value="USAB">USAB</option>
 
 
 
-
-  <script type="text/javascript">
-
-    function switchVisible() {
-            if (document.getElementById('Div1')) {
-
-                if (document.getElementById('Div1').style.display == 'none') {
-                    document.getElementById('Div1').style.display = 'block';
-                    document.getElementById('Div2').style.display = 'none';
-                }
-                else {
-                    document.getElementById('Div1').style.display = 'none';
-                    document.getElementById('Div2').style.display = 'block';
-                }
-            }
-}
-  </script>
+               </select>
+             </div>
+   </div>
+  </div>
+  </div>
 
 
 
-
-
-
+</div>
 
 
 
@@ -276,7 +343,7 @@
 
 			-->
 
-<div align="center">
+      <div align="center">
             <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-danger" href="/viewusers" role="button">Cancel</a>
             </div>
@@ -287,6 +354,18 @@
     <br>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -295,4 +374,104 @@
 
 
     </script>
+
+
+
+
+    <script type="text/javascript">
+
+        $("#divmanual").hide();
+        $("input:checkbox").on('click', function () {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+    </script>
+
+
+  <script type="text/javascript">
+
+
+ $("#divmanual").hide();
+ $(function () {
+        $("#checkdiv").click(function () {
+            if ($(this).is(":checked")) {
+        $("#type").removeAttr('required');
+        $("#zone").removeAttr('required');
+
+
+
+        $("#manual").attr('required', '');
+
+
+                $("#divmanual").show();
+        $("#locationdiv").hide();
+            } else {
+        $("#type").attr('required', '');
+        $("#zone").attr('required', '');
+
+
+        $("#manual").removeAttr('required');
+                $("#divmanual").hide();
+        $("#locationdiv").show();
+            }
+        });
+    });
+
+
+     function ShowwHideDiv(checkdiv) {
+        var dvPassport = document.getElementById("locationdiv");
+        locationdiv.style.display = checkdiv.checked ? "block" : "none";
+    }
+
+
+    </script>
+
+
+
+
+<script type="text/javascript">
+
+
+var selectdep = null;
+
+function getdepedit() {
+    selectdep = document.getElementById('directorate').value;
+
+    $.ajax({
+        method: 'GET',
+        route: 'get_depa,[$user->id]',
+        data: {id: selectdep}
+    })
+        .done(function(msg){
+            var object = JSON.parse(JSON.stringify(msg['direct_torate']));
+            $('#department').empty();
+      
+      
+      var option = document.createElement('option');
+      option.innerHTML = 'Choose...';
+      option.value = '';
+      document.getElementById('department').appendChild(option);
+      
+      
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].description;
+                option.value = object[i].id;
+                document.getElementById('department').appendChild(option);
+            }
+        });
+}
+</script>
+
     @endSection
