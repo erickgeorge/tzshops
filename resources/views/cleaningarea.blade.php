@@ -23,7 +23,7 @@
             </ul>
         </div>
              @endif
-              <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;"> Cleaning Areas </b></h5>
+              <h5><b > Cleaning Areas </b></h5>
               <hr>
 
                             <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
@@ -44,7 +44,7 @@
                 <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Area Name</th>
-                        <th scope="col">Zone Name</th>
+                        <th scope="col">LOT</th>
                           @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                         <th scope="col">Action</th>
                         @endif
@@ -73,7 +73,7 @@
 
 
                                     <a style="color: green;"
-                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->Zone_name }}' )"
+                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->zone_id }}' )"
                                        data-toggle="modal" data-target="#editarea" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                              &nbsp;
@@ -133,14 +133,14 @@
 
                        
 
-            
-                            <select style="color: black;width:350px"  class="custom-select" name="zone" >
-                            <option value="">Choose...</option>
-                               @foreach($newzone as $zone)
-                                <option value="{{ $zone->zonename }}">{{ $zone->zonename }}</option>
-                                @endforeach
+                    <div class="form-group">
+                            <label for="name_of_house">LOT Name <sup style="color: red;">*</sup></label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edit_type"
+                                   name="zone" placeholder="Enter LOT Name">
+                                <input id="editarea_id"  hidden>  
 
-                        </select>
+                        </div>
                     </div> 
                        
                         
@@ -204,62 +204,6 @@
         });
 
 
-        function myfunc(V, W, X, Y, Z) {
-
-            document.getElementById("edit_id").value = V;
-
-            document.getElementById("edit_name").value = W;
-
-           document.getElementById("edit_location").value = X;
-           
-           document.getElementById("edit_type").value = Y;
-
-           document.getElementById("edit_room").value = Z;
-       }
-
-
-
-        function myfunc1(U, V, W, X, Y, Z) {
-
-
-            document.getElementById("edit_hallid").value = U;
-
-            document.getElementById("edit_hname").value = V;
-
-            document.getElementById("edit_campus").value = W;
-
-           document.getElementById("edit_area").value = X;
-           
-           document.getElementById("edit_type1").value = Y;
-
-           document.getElementById("edit_location1").value = Z;
-       }
-
-
-        function myfunc8(A, B, C) {
-
-             document.getElementById("edit_cid").value = A;
-
-            document.getElementById("edit_campname").value = B;
-
-            document.getElementById("edit_location").value = C;
-       }
-
-
-
-        function myfunc5(U, V, W) {
-
-
-             document.getElementById("editzone_id").value = U;
-
-             document.getElementById("edit_zone").value = V;
-
-            
-
-             document.getElementById("edit_type").value = W;
-
-          
-       }
 
 
        function myfunc9(U, V, W) {

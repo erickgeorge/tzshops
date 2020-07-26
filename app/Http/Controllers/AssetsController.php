@@ -76,8 +76,21 @@ class AssetsController extends Controller
       public function Registercompany(Request $request)
     {
 
+    //checktender
 
-    $checktender = company::where('tender', $request['tendern'])->where('company_name', $request['companyid'])->first();
+        $start = date("Y" , strtotime( $request['datecontract']) ); 
+        $durass = strtotime($request['datecontract']);
+        $dura = $request['duration'];
+        $endd = date('Y-m-d' , strtotime("+$dura year" , $durass));
+
+
+        $end = date("Y" , strtotime( $endd) ); 
+       
+        $checkemptyy = $request['tendern'] .'/'.$start.'/'.$end.'';
+
+
+    //endchecktender
+    $checktender = company::where('tender', $checkemptyy)->where('company_name', $request['companyid'])->first();
 
      if (empty($checktender)) {
 
@@ -102,7 +115,7 @@ class AssetsController extends Controller
         $company->sheet = $sheet[$a];
         $company->area = $area[$a];
 
-          $assesssheet = assessmentsheet::where('name' , $sheet[$a])->get();
+        $assesssheet = assessmentsheet::where('name' , $sheet[$a])->get();
         foreach ($assesssheet as $as) {
 
              $company->type = $as->type;    
@@ -112,7 +125,7 @@ class AssetsController extends Controller
 
 
         $company->company_name = $request['companyid'];
-        $company->tender = $request['tendern'];
+      
         $company->status = 2;
         $company->payment = $request['payment'];
         $company->datecontract = $request['datecontract'];
@@ -120,6 +133,11 @@ class AssetsController extends Controller
         $durass = strtotime($company->datecontract);
         $dura = $request['duration'];
         $company->endcontract = date('Y-m-d' , strtotime("+$dura year" , $durass));
+        
+        $start = date("Y" , strtotime( $company->datecontract) ); 
+        $end = date("Y" , strtotime( $company->endcontract) ); 
+       
+        $company->tender = $request['tendern'] .'/'.$start.'/'.$end.'';
 
 
 
@@ -141,7 +159,9 @@ class AssetsController extends Controller
 
 
 
-     $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $company->tender)->first();
+     $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $request['tendern'])->first();
+
+     $companynew->tender =  $company->tender;
      $companynew->payment = $request['payment'];
      $companynew->datecontract = $request['datecontract'];
      $durass = strtotime($companynew->datecontract);
@@ -183,41 +203,38 @@ class AssetsController extends Controller
 
 
 
+     $checkforempty = companywitharea::where('company_name', $request['company_name'])->first();
+
+         if (empty($checkforempty)) {
 
         $company = new companywitharea();
         $company->company_name = $request['company_name'];
         $company->save();
 
+           }
 
-       $tendernu = $request['tender'];
+    else{
 
-             //  First Store data in $arr
-             $arr = array();
-                  foreach ($tendernu as $address) {
-                   $arr[] = $address;
-             }
-            $unique_data = array_unique($arr);
-            // now use foreach loop on unique data
-            foreach($unique_data as $a => $b) {
+     return redirect()->back()->withErrors(['message' => 'The same company name already registered. ']);
 
-          $checktender = tendernumber::where('tender', $tendernu[$a])->first();
 
-       if (empty($checktender)) {
+    }
+
 
         $tender = new tendernumber();
-        $tender->tender = $tendernu[$a];
+        $tender->tender = 'PA/011/NC/'.$request['tender'];
         $tender->company = $company->id;
-        $tender->save(); }
-           else {
+        $tender->save(); 
+ 
 
-        return redirect()->back()->withErrors(['message' => 'The tender number selected has already been assigned for another company, Please select another tender number']);
-       }
-
-         }
+      
 
         return redirect()->route('cleaning_company')->with(['message' => 'Company registered successfully']);
 
       }
+
+
+
 
 
 
@@ -760,6 +777,7 @@ class AssetsController extends Controller
 
   public function RegisterCleaningArea(Request $request)
     {
+    
         $cleanarea = new cleaningarea();
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];

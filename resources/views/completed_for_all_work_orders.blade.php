@@ -5,18 +5,17 @@
     @endSection
 
 @section('body')
-<br>
+
 
     <br>
-    <div class="container">
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 ><b>On Progress Works Orders List </b></h5>
+            <h5 ><b>Completed Works Orders List </b></h5>
 
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">
-            <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
+            <form method="GET" action="completed_works_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];
@@ -35,7 +34,6 @@
 @endif
 
     </div>
-  </div>
     <br>
     <hr class="container">
     <div class="container">
@@ -67,8 +65,8 @@
             </a>
         </div>
          <div class="col">
-            <a href="{{url('completed_works_order')}} ">
-                <button  type="button" class="btn btn-success">Completed works orders
+            <a href="{{url('work_order')}} ">
+                <button  type="button" class="btn btn-success">On progress works orders
                 </button>
             </a>
         </div>
@@ -257,7 +255,6 @@ foreach($userwithid as $userwithid)
 
 
         @if(count($wo) > 0)
-        <div class="container">
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
@@ -287,8 +284,8 @@ foreach($userwithid as $userwithid)
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-id">00{{ $work->id }}</td>
 
-                            <td id="wo-details">  <?php if (strlen($work->details) > 20) {
-                             echo substr($work->details, 0, 20); echo "...";
+                            <td id="wo-details">  <?php if (strlen($work->details) > 30) {
+                             echo substr($work->details, 0, 30); echo "...";
                             } 
                               else{
                                 echo $work->details;
@@ -497,7 +494,6 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a>
                                      @elseif($work->status == 2)
-
                      <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
 
@@ -650,9 +646,8 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                         @endforeach
                 </tbody>
             </table>
-          </div>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
+            <h1 class="text-center" style="margin-top: 150px">You have no completed works orders</h1>
             <div class="container" align="center">
               <br>
            <!-- <div class='row'>

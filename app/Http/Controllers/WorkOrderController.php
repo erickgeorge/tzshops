@@ -410,12 +410,12 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             return redirect()->back()->withErrors(['message' => 'Status of Inspection form required required']);
         }
 
-		else if ($request['status'] == 'Report before work') {
+		else if ($request['status'] == 'Inspection report before work') {
            $statusfield=5;
 
             $tech_complete =techasigned::where('work_order_id', $id)->update(array('status' =>1)); 
         }
-		else if ($request['status'] == 'Report after Work') {
+		else if ($request['status'] == 'Report after work') {
 			 $statusfield=6;
 
             $tech_complete_work =WorkOrderStaff::where('work_order_id', $id)->update(array('status' =>1)); 
@@ -544,7 +544,7 @@ public function transportforwork(Request $request, $id)
         ]);
 
 
-		}  else { return redirect()->back()->withErrors(['message' => 'Technician Selected has already been assigned for this  work order,You can not assign him repeatedly']);}
+		}  else { return redirect()->back()->withErrors(['message' => 'Technician selected has already been assigned for this  works order,You can not assign him repeatedly']);}
 	}
 
 
@@ -810,6 +810,9 @@ public function transportforwork(Request $request, $id)
         ]);
     }
 }
+
+
+
 
 
 

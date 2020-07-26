@@ -29,7 +29,7 @@ Company Registrartion
 
 
 <div class="container">
-                <h5 style=" text-transform: uppercase;"   id="Add New House" >Register new company</h5>
+                <h5   id="Add New House" >Register New Company</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
           
@@ -49,6 +49,18 @@ Company Registrartion
                         <input style="color: black;" type="text" required class="form-control" id="name"
                                name="company_name"  placeholder="Enter company name"  >
                     </div>
+
+                     <div class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+                            
+
+                          <label style="width:150px;" class="input-group-text" for="directorate"><b>Tender number</b></label>
+
+                        </div>
+                       <input maxlength="2" style="color: black;" type="number" required class="form-control" id="type"
+                               name="tender" placeholder="Enter tender number" min="0" max="99" >
+                    </div>
+
 
 
 
@@ -76,7 +88,7 @@ Company Registrartion
                  </div>-->
 
 
-    <div class="jumbotron" style="width: 500px;">
+   <!-- <div class="jumbotron" style="width: 500px;">
                 
 
                     
@@ -85,23 +97,23 @@ Company Registrartion
 
                           <label style="width:150px;" class="input-group-text" for="directorate"><b>Tender number</b> </label>
 
-                     <TABLE id="dataTable" width="350px" border="1">
+                     <TABLE id="dataTable" width="300px" border="1">
                             <TR>
-                          <TD><INPUT type="checkbox" name="chk"/></TD>
+                       
                                  <TD>
-                            <input style="color: black;" type="text" required class="form-control" id="type"
-                               name="tender[]" placeholder="Enter tender number"  >
+                            <input maxlength="2" style="color: black;" type="number" required class="form-control" id="type"
+                               name="tender" placeholder="Enter tender number" min="0" max="99" >
    
                                  </TD> 
                            </TR>
-                     </TABLE>
+                      </TABLE>
                         </div>
                   
 
     <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
 
     <INPUT id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
-    </div>
+    </div>-->
 
 
 

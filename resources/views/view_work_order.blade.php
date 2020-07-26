@@ -14,7 +14,7 @@
     <div class="container">
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;">Works order details</h5>
+            <h4 >Works Order Details</h4>
         </div>
     </div>
     <hr>

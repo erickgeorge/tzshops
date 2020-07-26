@@ -32,7 +32,7 @@ Companies
     @endif
 
     </div>
-                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Cleaning companies </b></h5>
+                  <h5 ><b >Cleaning Companies </b></h5>
                   <hr>
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >

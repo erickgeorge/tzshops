@@ -26,7 +26,7 @@ StaffHouse Registrartion
 
 <div class="container">
 
-                <h5 style="  text-transform: uppercase;"  id="Add New House">Register  new cleaning area</h5>
+                <h5  id="Add New House">Register  New Cleaning Area</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
     
@@ -35,19 +35,6 @@ StaffHouse Registrartion
 
 <div align="center">
 
-                        <div class="input-group mb-3 col-lg-6" >
-                        <div class="input-group-prepend">
-                            
-                            <label style="width:150px;" class="input-group-text" for="directorate">Zone Name </label>
-                        </div>
-                        <select  class="custom-select" name="zone" id="zonne">
-                            <option value="">Choose...</option>
-                            @foreach($newzone as $zone)
-                                <option value="{{ $zone->zonename }}">{{ $zone->zonename }}</option>
-                            @endforeach
-
-                        </select>
-                    </div> 
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
@@ -57,6 +44,16 @@ StaffHouse Registrartion
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="cleaning_name" placeholder="Enter Cleaning Area Name">
                     </div>
+
+                                            <div class="input-group mb-3 col-lg-6" >
+                        <div class="input-group-prepend">
+                            
+                            <label style="width:200px;" class="input-group-text" for="directorate">LOT Name </label>
+                        </div>
+                        <input style="color: black" type="text" required class="form-control" id="Housename"
+                               name="zone" placeholder="Enter LOT Name">
+                    </div> 
+
                 
 
                     <button type="submit" class="btn btn-primary">Save

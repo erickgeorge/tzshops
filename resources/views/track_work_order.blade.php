@@ -305,7 +305,7 @@
    <hr>
 
      <br>
-    <h4><b>Inspection Description: </b></h4>
+    <h4><b>Inspection Reports</b></h4>
     @if(empty($wo['work_order_inspection']->status))
         <p class="text-primary">Not inspected yet</p>
     @else
@@ -341,9 +341,9 @@
 
 
   <br>
-    <h4><b>Transport Description: </b></h4>
+    <h4><b>Transport Requested: </b></h4>
   @if(empty($wo['work_order_transport']->work_order_id))
-        <p class="text-primary">No Transport form</p>
+        <p class="text-primary">No Transport requested</p>
     @else
     <?php
   

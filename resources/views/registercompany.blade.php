@@ -29,7 +29,7 @@ Company Registrartion
 
 
 <div class="container">
-                <h5 style=" text-transform: uppercase;"   id="Add New House" >register New tender</h5>
+                <h4  id="Add New House" >Register New Tender</h4>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
           
@@ -201,15 +201,7 @@ Company Registrartion
                             <option value="" selected>Choose contract duration...</option>
                              <option value="1">1 Year</option>
                              <option value="2">2 Years</option>
-                             <option value="3">3 Years</option>
-                             <option value="4">4 Years</option>
-                             <option value="5">5 Years</option>
-                             <option value="6">6 Years</option>
-                             <option value="7">7 Years</option>
-                             <option value="8">8 Years</option>
-                             <option value="9">9 Years </option>
-                             <option value="10">10 Years</option>
-                         
+                        
                                
                       </select> 
 
@@ -350,7 +342,7 @@ function getcompany() {
       
       
       var option = document.createElement('option');
-      option.innerHTML = 'Choose...';
+      option.innerHTML = 'Choose tender number...';
       option.value = '';
       document.getElementById('tendernumber').appendChild(option);
       

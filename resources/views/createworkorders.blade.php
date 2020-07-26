@@ -136,7 +136,7 @@
     </div>
      <br>
       <div style="color: red;">
-      <input type="checkbox" name="emergency" > This work order is emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>
+      <input type="checkbox" name="emergency" > This Work Order Is Emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>
       </div>
       <br>
 
