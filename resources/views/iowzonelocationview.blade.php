@@ -31,21 +31,21 @@ IoW Zones
  @if(count($iowzone)>0)
   @foreach($iowzone as $zone)
   @endforeach
-                <h5 style="text-transform: uppercase;">List of locations available for {{ $zone['iow']->fname.' '.$zone['iow']->lname }} </h5>
+                <h5 style="text-transform: capitalize;">List of locations available for {{ $zone['iow']->fname.' '.$zone['iow']->lname }} </h5>
 
 
             <hr class="container">
 
             <a href="{{ route('add.iowzone.location',[$userid->id , $userzone->zone])}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new Location</a>
- 
+
                    <a href="{{ url('iowwithlocation',[$userid->id])}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
                 <table id="myTablee" class="table table-striped">
                     <thead >
                    <tr style="color: white;">
-                        <th scope="col">#</th> 
+                        <th scope="col">#</th>
                         <th scope="col">Location</th>
                         <!--<th scope="col">Inspector of Work</th>-->
                         <th scope="col">Actions</th>
@@ -53,15 +53,15 @@ IoW Zones
                     </thead>
                     <tbody>
 
-                        
+
                     <?php $i = 0; ?>
                     @foreach($iowzone as $iow)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td>{{ $iow->location }}</td>  
-                          
-                            
+                            <td>{{ $iow->location }}</td>
+
+
 
                             <td>
                                  <div class="row">
@@ -79,7 +79,7 @@ IoW Zones
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -90,7 +90,7 @@ IoW Zones
                 <div class="text-center">
 
                 </div>
-       
+
             </div>
 
 
@@ -106,18 +106,18 @@ IoW Zones
 
   <div class="modal-body">
                 <form method="POST" action="{{route('edit/iowzone/location', [$userid->id])}}" class="col">
-                  
+
 
 
                         @csrf
-                          
+
                     <div class="form-group ">
                         <label for="dep_name">Location Name</label>
-                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   
+                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"
                                name="location" placeholder="Enter Location Name" >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
-                       
+
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
@@ -126,7 +126,7 @@ IoW Zones
 
                               </form>
  </div>
-                            
+
 
 
                 <div class="modal-footer">
@@ -138,11 +138,11 @@ IoW Zones
     @else
     <h6>No Location available You can add new Location below...</h6>
        <a href="{{ route('add.iowzone.location',[$userid->id , $userzone->zone ])}}" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new Location</a> 
+                   class="btn btn-primary">Add new Location</a>
     @endif
 
 
-           
+
 
                       <script>
         window.onload = function () {
@@ -167,21 +167,21 @@ IoW Zones
         });
 
 
-        
+
 
 
         function myfunc1(x,y) {
-            
-            
+
+
             document.getElementById("esecid").value = x;
             document.getElementById("sname").value = y;
 
-            
+
         }
 
 
-        
-        
+
+
 
 
 

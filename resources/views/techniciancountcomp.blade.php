@@ -1,17 +1,17 @@
 @extends('layouts.master')
 <style type="text/css" media="print">
-        
+
         #exclude1{
             display:none;
         }
-		
+
 		#exclude2{
             display:none;
         }
-		
+
     </style>
 @section('title')
-    works orders vs Technician count 
+    works orders vs Technician count
     @endSection
 
 @section('body')
@@ -20,14 +20,14 @@
     <br>
     <div class="row container-fluid ">
         <div class="col-lg-12">
-           <h5 style="padding-left: 90px; " class="container"><b style="text-transform: uppercase;">Available Technician Completed their works order</b></h5>
+           <h5 style=" " class="container"><b style="text-transform: capitalize;">Available Technician Completed their works order</b></h5>
         </div>
-             
-  
 
 
 
-       
+
+
+
     </div>
     <br>
     <hr>
@@ -40,48 +40,48 @@
             </ul>
         </div>
     @endif
-   
 
-    
-	
+
+
+
 	 <div class="container">
 
 
- 
+
 </div>
 
-       
+
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
-                   
+
 					<th>Technician name</th>
                     <th>Total Works orders Completed</th>
-                   
+
                 </tr>
                 </thead>
 
                 <tbody>
 
-             
+
                 @foreach($wo as $work)
-						
-						
-						
-                    
-                       
+
+
+
+
+
                         <tr>
-                            
-                           
-							
-							
-					
-							
-							
+
+
+
+
+
+
+
                             <td>{{ $work['technician_assigned']->fname.' '.$work['technician_assigned']->lname }}</td>
 							<td>{{ $work->total_wo }}  </td>
-							
-						  
+
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -103,9 +103,9 @@
 
 
         });
-		
-		
-		
+
+
+
 function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORK ORDERS </h1>";

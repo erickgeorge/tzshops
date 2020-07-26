@@ -11,7 +11,7 @@ Plant and Machinery Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5><b style="text-transform: uppercase;">Plant and Machinery Asset</b></h5>
+            <h5><b style="text-transform: capitalize;">Plant and Machinery Asset</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -129,7 +129,7 @@ Plant and Machinery Asset
               <div class="modal-dialog " role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assess Building Asset</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Assess Asset</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span title="Close" style="color: red;" aria-hidden="true">X</span>
                     </button>
@@ -142,6 +142,8 @@ Plant and Machinery Asset
                             <div class="form-group">
                                 <label for="my-input">Asset Condition</label>
                                 <select id="assetnumber" required class="form-control" name="AssetCondition">
+                                    <option value="" selected style="color: red;">Choose...</option>
+
                                     <option selected value="{{$landinfo->_condition}}">{{$landinfo->_condition}}</option>
                                     <option  value="New">New</option>
                                     <option value="Good">Good</option>

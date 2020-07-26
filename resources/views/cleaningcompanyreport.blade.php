@@ -7,9 +7,9 @@
 @section('body')
     <br>
    <?php use Carbon\Carbon;?>
-   
+
 <div class="container">
-  
+
 
        <div >
                @if(Session::has('message'))
@@ -19,18 +19,18 @@
             </ul>
         </div>
               @endif
-                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Companies trending </b></h5>
+                  <h5 style=" text-transform: capitalize;" ><b style="text-transform: capitalize;">Companies trending </b></h5>
                   <hr>
-                  
-                   <br> <br> 
-    
+
+                   <br> <br>
+
                 <table id="myTableee" id="myTable" class="table table-striped">
-                      
+
                     <thead >
                    <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Tender Number</th>
-                        <th scope="col">Company Name</th> 
+                        <th scope="col">Company Name</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
@@ -56,9 +56,9 @@
                              <td>{{ $house->tender }}</td>
                               <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house['are_a']->cleaning_name }}</td>
-                           
-                           
-                  @if($house->status == 2 ) 
+
+
+                  @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assigned yet </span><br>
                             @if($now1 >= $dcont)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
 
@@ -70,32 +70,32 @@
                                                                                     ?>
 
 
-                           <td><span class="badge badge-primary">Current assessment on {{ date('F Y', strtotime($newDate))}}</span> </td> 
-                  @endif 
-                           
-             
+                           <td><span class="badge badge-primary">Current assessment on {{ date('F Y', strtotime($newDate))}}</span> </td>
+                  @endif
 
-           
-                    
+
+
+
+
                             <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <td><a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a></td>        
-
-
-                      
+                                                    class="fas fa-eye"></i></a></td>
 
 
 
-                           
+
+
+
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
                 <br>
 
             </div>
-            
+
 
 
 
@@ -125,7 +125,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type"
                                    name="type" placeholder="Enter Company type">
-                          
+
                         </div>
 
 
@@ -134,7 +134,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_status"
                                    name="status" placeholder="Enter Company status">
-                          
+
                         </div>
 
                        <div class="form-group">
@@ -142,7 +142,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_registration"
                                    name="registration" placeholder="Enter Company Registration">
-                          
+
                         </div>
 
                         <div class="form-group">
@@ -150,7 +150,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_tin"
                                    name="tin" placeholder="Enter Company tin">
-                           
+
                         </div>
 
 
@@ -159,7 +159,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_vat"
                                    name="vat" placeholder="Enter Company vat">
-                            
+
                         </div>
 
                          <div class="form-group">
@@ -167,7 +167,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_License"
                                    name="license" placeholder="Enter Company License">
-                           
+
                         </div>
 
 
@@ -176,20 +176,20 @@
 
 
 
-                       
+
                          <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
-                                                      
+                                                <div style="float: left; width: 130px">
+
                                                         <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
-                                                        
+                                               <div style="float: right; width: 290px">
+
+
                                                   <a class="btn btn-danger" href="/cleaningcompany" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                                                 </div>
@@ -206,8 +206,8 @@
 
 
 
-        
-   
+
+
 
 
     <script>
@@ -227,9 +227,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 
@@ -241,7 +241,7 @@
             document.getElementById("edit_name").value = B;
 
            document.getElementById("edit_type").value = C;
-           
+
            document.getElementById("edit_status").value = D;
 
            document.getElementById("edit_registration").value = E;

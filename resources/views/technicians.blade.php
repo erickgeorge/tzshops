@@ -4,10 +4,10 @@
     technicians
     @endSection
 @section('body')
-    
+
     <div class="row container-fluid" >
         <div class="col-lg-12">
-             <h5 style="padding-left: 90px;  text-transform: uppercase;">Available Technicians</h5>
+             <h5 style="text-transform: capitalize;">Available Technicians</h5>
         </div>
     </div>
     <div class="container">
@@ -16,7 +16,7 @@
         <p class="alert alert-success">{{ Session::get('message') }}</p>
     @endif
     </div>
-    
+
     <hr class="container">
     <div class="container">
     <a style="margin-left: 2%;" href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>    <?php
@@ -97,9 +97,9 @@ foreach ($hoos as $hous) {
       <div class="row">
           <div class="col">
               <select name="type" class="form-control mr-sm-2">
-            
+
  @if(($role['user_role']['role_id'] == 1))
- 
+
 <option selected="">All Sections</option>
  @if($head == 'All HOS Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
@@ -129,7 +129,7 @@ foreach ($hoos as $hous) {
 <option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
 
 @endforeach
- @else             
+ @else
 @if($head == 'All HOS Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 @elseif($head == 'All Technicians Details')
@@ -147,7 +147,7 @@ foreach ($hoos as $hous) {
           </div>
       </div>
       </div>
-      
+
       <input type="text" name="change"
       value="<?php echo $v; ?>" hidden>
       <div class="modal-footer">
@@ -200,7 +200,7 @@ foreach ($hoos as $hous) {
 
           $phonreplaced = ltrim($phonenumber,'0');
           echo '+255'.$phonreplaced;
-          
+
         }else { echo $tech->phone;}
 
       ?></td>

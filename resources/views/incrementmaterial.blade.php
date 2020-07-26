@@ -9,7 +9,7 @@
     <div class="container">
     <div class="row" style="margin-top: 6%;">
         <div class="col-lg-12" align="center">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Add Material in Store</h5>
+            <h5 style="text-transform: capitalize;" >Add Material in Store</h5>
         </div>
     </div>
     <hr>
@@ -30,12 +30,12 @@
         </div>
     @endif
 
- 
+
     </br>
     <form method="POST" action="{{ route('material.increment') }}"   style=" margin-left: 2%; margin-right: 2%;" >
         @csrf
-		
-		
+
+
 		<div class="row">
             <div class="col">
                  <div id="divmanual">
@@ -49,11 +49,11 @@
         </div>
             </div>
 
-        
+
            <input hidden value="{{$item->id}}"  id="nameid"
                       name="nameid" >
-        
-         
+
+
             <div class="col">
                 <div id="divmanual">
             <div class="input-group mb-3">
@@ -64,26 +64,26 @@
                        aria-describedby="emailHelp" name="description" placeholder="{{$item->description}}">
             </div>
         </div>
-            </div>      
+            </div>
         </div>
         <div class="row">
             <div class="col">
-                
+
 
         <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Current Quantity <sup style="color: red;">*</sup></label>
                 </div>
-                <input disabled value="{{$item->stock}}" style="color: black" required type="number"  id="stock"  class="form-control" 
+                <input disabled value="{{$item->stock}}" style="color: black" required type="number"  id="stock"  class="form-control"
                        aria-describedby="emailHelp" name="istock" placeholder="{{$item->stock}}">
             </div>
         </div>
-        
+
             </div>
             <div class="col">
-                
-        
+
+
         <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -93,10 +93,10 @@
                        aria-describedby="emailHelp" name="istock" placeholder="Add Material in Quantity">
             </div>
         </div>
-        
+
             </div>
         </div>
-		
+
 		<div class="row">
             <div class="col-md-5">
                 <div id="divmanual">
@@ -108,12 +108,12 @@
                        aria-describedby="emailHelp" name="tstock" placeholder="Total Stock">
             </div>
         </div>
-            </div>      
+            </div>
         </div>
-		
-      
-		
-		
+
+
+
+
         <button type="submit" class="btn btn-primary">Add Material</button>
 
         <a class="btn btn-danger" href="/stores" role="button">Cancel</a>
@@ -132,5 +132,5 @@ function totalitem() {
 }
 </script>
 </div>
-	
+
     @endSection

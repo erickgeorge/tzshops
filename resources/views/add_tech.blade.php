@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Add new technician</h5>
+            <h5 style="text-transform: capitalize;" >Add new Technician</h5>
         </div>
     </div>
     <hr class="container">
@@ -67,9 +67,9 @@
                 </div>
             </div>
             <div class="row">
-               
-            
-            <?php 
+
+
+            <?php
             use App\UserRole;
             $role=UserRole::where('user_id',auth()->user()->id)->first();
             $roleofuser=$role->role_id;
@@ -83,35 +83,35 @@ $roleofuser =1;
 
             /////////////////////////////
             ?>
-            
+
              <input hidden  type="number"  class="form-control" id="role" name="role"  value="{{ $roleofuser }}">
       <div class="col-lg-6">
-                   
+
              @if($roleofuser == 1 )
               <div class="input-group mb-3">
                         <div class="input-group-prepend">
                 <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Section</label>
              </div>
-             
+
             <select  style="width: 290px" class="custom-select" id="typetechadmin" name="typetechadmin">
                 <option selected value="Carpentry/Painting"> select section </option>
-               
-               @foreach($sectionss as $sectionss) 
+
+               @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section_name }}"><?php echo strtoupper( $sectionss->section_name ); ?></option>
                @endforeach
-                   
+
             </select>
             @elseif(auth()->user()->type == 'Maintenance coordinator')
             <div class="input-group mb-3">
                         <div class="input-group-prepend">
                 <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Section</label>
              </div>
-             
+
             <select  style="width: 290px" class="custom-select" id="typetechadmin" name="typetechadmin">
-                 @foreach($sectionss as $sectionss) 
+                 @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
                @endforeach
-                   
+
             </select>
             @else
 
@@ -119,34 +119,34 @@ $roleofuser =1;
                         <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Section</label>
             </div>
-            <!--  ------------------------------- -->           
+            <!--  ------------------------------- -->
     <?php $string = auth()->user()->type;
     $str_array = preg_split("/\,/", $string);
     ?>
     <select  name='typetechhos' class="form-control" id="typetechhos" required>
       @foreach($sectionss as $sectionss)
         @if (in_array('HOS '.$sectionss->section_name.'',$str_array) || in_array('HOS'.$sectionss->section_name.'',$str_array)) {
-            <option value="{{ $sectionss->section_name }}">{{ ucwords(strtolower($sectionss->section_name)) }}</option> 
+            <option value="{{ $sectionss->section_name }}">{{ ucwords(strtolower($sectionss->section_name)) }}</option>
           } @endif
 
           @endforeach
         </select>
    </div>
             <br>
-           
+
 
 
    </div>
 </div>
 <!--  ------------------------------- -->
-               
+
            </div>
             @endif
-        
+
                 </div>
             </div>
-            
-            
+
+
          <div align="center">
 
             <button type="submit" class="btn btn-primary">Save</button>

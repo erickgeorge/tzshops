@@ -6,7 +6,7 @@ Company report
 <br>
 <div class="container">
 
-<h5 style="text-transform: uppercase;"><B>TRENDING SCORE FOR "{{$compa}}" WITH DIFFERENT MONTHS </B>
+<h5 style="text-transform: capitalize;"><B>TRENDING SCORE FOR "{{$compa}}" WITH DIFFERENT MONTHS </B>
  </h5>
 <hr>
 
@@ -38,7 +38,7 @@ Company report
                 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-        <?php $tenders = Crypt::encrypt($tender); ?> 
+        <?php $tenders = Crypt::encrypt($tender); ?>
     <form method="POST" action="{{route('trendingscore_report' , [ $tenders , $compa])}}">
              @csrf
     <div class="modal-content">
@@ -48,14 +48,14 @@ Company report
           <span aria-hidden="true">Filter your data</span>
         </button>
       </div>
- 
+
   <div class="modal-body">
 
 
 
-      
+
         <div class="row">
-          
+
 
                <div class="col"> From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -63,7 +63,7 @@ Company report
                 } ?>"  class="form-control mr-sm-2"type="month" placeholder="Start Month"
                                max="<?php echo date('Y-m'); ?>">
                 </div>
-              
+
                 <div class="col">
                 To <input value="<?php
                 if (request()->has('end')) {
@@ -71,10 +71,10 @@ Company report
                 } ?>"
                              name="end"  class="form-control mr-sm-2" type="month" placeholder="End Month"
                              max="<?php echo date('Y-m'); ?>">
-                </div>             
+                </div>
        </div>
 <br>
-             
+
 
 
 
@@ -92,8 +92,8 @@ Company report
   </div>
 </div>
 
-      
-  
+
+
 
 
 
@@ -108,7 +108,7 @@ Company report
                 <th >Month</th>
                 <th >Percentage(%)</th>
                  <th >Action</th>
-                
+
             </tr>
             </thead>
 
@@ -123,12 +123,12 @@ Company report
                     <th scope="row">{{ $i }}</th>
                     <td>{{ date('F Y', strtotime($company->month))}}</td>
                     <td > <?php echo number_format($company->erick / count($crosscheckassessmmentactivitygroupbyarea) , 2) ?> </td>
-                  
+
 
                    <?php $tenderencrypt = Crypt::encrypt($tender); ?>
                    <td><a style="color: green;"  href="{{route('companywithmothtenderreport' , [$company->month , $tenderencrypt])}}" data-toggle="tooltip" title="View report"><i
                                                     class="fas fa-eye"></i></a></td>
-                       
+
                     </tr>
           @endforeach
 

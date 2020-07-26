@@ -22,24 +22,24 @@
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
-                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep">Add new iow zone</h5>
+    @endif
+                <h5 style="text-transform: capitalize;"  id="new_dep">Add new iow zone</h5>
                 <hr>
                 <form method="POST" action="{{ route('iowzone.save') }}" class="col-md-6">
                     @csrf
-                   
+
                     <div class="form-group ">
                         <label for="dep_name" style="color: black;">IoW zone Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "30"  
+                        <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "30"
                                name="zonename" placeholder="Enter Zone Name ">
                     </div>
 
-                    
 
 
-                   
-                   
-                    
+
+
+
+
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
                     <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
@@ -49,6 +49,6 @@
 
 
 
-          
+
 
     @endSection

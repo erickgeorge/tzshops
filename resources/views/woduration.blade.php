@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Works orders with duration </b></h5>
+            <h5 style=" "><b style="text-transform: capitalize;">Works orders with duration </b></h5>
         </div>
 
         <div class="col-md-6">
@@ -31,7 +31,7 @@
         @endif
 
 
-       
+
     </div>
     <br>
     <hr>
@@ -43,10 +43,10 @@
             </ul>
         </div>
     @endif
-   
+
 
     <div id="div_print" class="container">
-    
+
    <!-- SOMETHING STRANGE HERE -->
                   <?php
 use App\User;
@@ -89,14 +89,14 @@ use App\WorkOrder;
         if ($userwithin->staff_id == $usedid['id']) {
 
               $user = User::Where('id',$usedid['id'])->get();
-          foreach ($user as $userwith) 
+          foreach ($user as $userwith)
           {
-            
-             
+
+
                   $departmentid = Department::Where('id',$userwith->section_id)->get();
-                  foreach ($departmentid as $departmentised) 
+                  foreach ($departmentid as $departmentised)
                   {
-                    if ($departmentised->id == $departmentised->department_id ) 
+                    if ($departmentised->id == $departmentised->department_id )
                     {
                       $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
                       foreach ($directorate as $directory) {
@@ -108,9 +108,9 @@ use App\WorkOrder;
                   }
                 }
               }
-            
+
           }  }
-      
+
 
 //
 
@@ -160,7 +160,7 @@ use App\WorkOrder;
                     foreach ($loca as $local) {
                         $datetime1 = $local->created_at;
                             $datetime2 = $local->updated_at;
-    
+
                             $interval = date_diff($datetime1, $datetime2);
 
                             echo "<option value='".$datetime1."&end=".$datetime2."'>".$interval->format('%a')." Week(s)</option>";
@@ -184,7 +184,7 @@ use App\WorkOrder;
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
-                   
+
                     <th>WO ID</th>
                     <th>Details</th>
                     <th>Type</th>
@@ -198,20 +198,20 @@ use App\WorkOrder;
                 <tbody>
 <?php $i = 0;  ?>
                 @foreach($wo as $work)
-                        
-                        
-                        
-                    
-                       
+
+
+
+
+
                         <tr>
-                            
+
                             <td id="wo-details"> {{ $work->id }}</td>
                             <td>{{ str_limit($work->details, 10) }}  </td>
                             <td>{{ $work->problem_type }}  </td>
-                            
-                    
-                            
-                            
+
+
+
+
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                              <td>
 
@@ -224,21 +224,21 @@ use App\WorkOrder;
                          <?php
                             $datetime1 = $work->created_at;
                             $datetime2 = $work->updated_at;
-    
+
                             $interval = date_diff($datetime1, $datetime2);
-    
-                            
+
+
                          ?>
                          <td>{{ $interval->format('%a') }}  </td>
-                          
-                          
+
+
                             <td id="exclude2">
-                               
+
                                        <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i> Track</a>
                                                     </td>
-                          
-                          
+
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -261,9 +261,9 @@ use App\WorkOrder;
 
 
         });
-        
-        
-        
+
+
+
 function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1> Work orders Duration list </h1>";

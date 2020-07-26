@@ -5,13 +5,13 @@
     @endSection
 
 @section('body')
-   <?php use App\Room; use App\Area;?> 
+   <?php use App\Room; use App\Area;?>
     <br>
 <div class="container">
    <br>
    <br>
    <br>
-        
+
             @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -19,7 +19,7 @@
             </ul>
         </div>
             @endif
-      <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - 
+      <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Non-Building Assets - ( {{ $_GET['asset'] }} )</b> -
 
 <small>
 @foreach($arcol as $arcol)
@@ -32,7 +32,7 @@
 
         - <small>@foreach($aariya as $arriya) {{$arriya->name_of_block }} @endforeach </small></h5>
                   <hr>
-                <a href="{{ route('registernonbuildingasset') }}" 
+                <a href="{{ route('registernonbuildingasset') }}"
                    class="btn btn-primary">Add New Non-Building Assets</a>
                    <br><br>
 
@@ -56,14 +56,14 @@
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            
-                            <td> 
+
+                            <td>
                                 <?php $asset = Room::where('id',$non->room_located)->get();?>
                                 @foreach($asset as $asset)
                                 {{ $asset->name_of_room }}
                                 @endforeach
-                                
-                                
+
+
                             </td>
                            <td>{{ $non->manufactured_date }}</td>
                            <td>{{ $non->life_span }}</td>
@@ -73,16 +73,16 @@
 
                     @endforeach
                 </tbody>
-                    
+
                 </table>
                 <br>
-                
 
 
 
 
 
-        
+
+
     @endSection
 
 
@@ -103,9 +103,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 

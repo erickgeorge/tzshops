@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-           <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Materials accepted by Inspector of Works</b></h5>
+           <h5 style=" " align="center"><b style="text-transform: capitalize;">Materials accepted by Inspector of Works</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -28,36 +28,36 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
-				
-                
+
+
 				<th >Works Order ID </th>
 				<th >Works order Detail</th>
-				
+
 				<th >Action</th>
-				
+
             </tr>
             </thead>
 
             <tbody>
 
-           
+
             @foreach($items as $item)
 
-               
+
                 <tr>
-                    
+
                       <td>{{ $item->work_order_id }}</td>
                     <td>{{ $item['workorder']->details }}</td>
-                    
+
                     <td>
-					
+
 					 <a class="btn btn-primary btn-sm" href="{{ route('store.materialview', [$item->work_order_id]) }}" role="button">View</a></td>
-                  
+
                        </td>
                     </tr>
                     @endforeach

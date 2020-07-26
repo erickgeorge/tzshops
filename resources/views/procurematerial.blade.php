@@ -13,45 +13,45 @@ var total=2;
 <div class='container'>
 </br>
 </br>
-<?php 
+<?php
 $id=$_GET["id"];
 
 //echo $id;
 ?>
 
- <?php	
- 
+ <?php
+
  use App\Material;
 						$materials= Material::get();
 						$mat= Material::get();
 						$matvalue= Material::get();
 						?>
 
-							
+
 				          <div id="material_request" class="col-lg-12">
                 <form method="POST"  action="{{ route('work.purchasingorder', [$id]) }}" >
-        
-           
+
+
                     @csrf
-                   
+
                         <div class="row" style="margin-top: 6%">
                             <div >
-                               <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center" style="text-transform: uppercase;">Select material for work-order</h5>
+                               <h5 style="text-transform: capitalize;"  align="center" style="text-transform: uppercase;">Select material for work-order</h5>
                             </div>
                         </div>
-						
+
 						<?php
-						
-					
+
+
 						$materials= Material::get();
-						
+
 						?>
-						
-						
-						
-						
+
+
+
+
                         <div class="form-group col-lg-6">
-                           
+
                             <select onchange="stock();" required class="custom-select"  id="mname" name="1">
                                 <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
@@ -59,28 +59,28 @@ $id=$_GET["id"];
                                 @endforeach
                             </select>
                         </div>
-						
-						
+
+
 						 <p>Quantity <sup style="color: red;">*</sup></p>
                         <div class="form-group col-lg-6">
                             <input type="number" min="1"  style="color: black" name="2" required class="form-control"  rows="5" id="2"></input>
                         </div>
-						
-						
+
+
 						<div id="newmaterial" >
-						
-						
+
+
 						</div>
 					<input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                      
-                       
+
+
                         <button  onclick="newmaterial()" class="btn btn-primary">New Material</button>
                         <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
                          <button type="submit" class="btn btn-primary">Save Material</button>
-                   
+
                 </form>
-					
-                       
+
+
 				 </div>
                 {{-- end material_request  --}}
 @endSection
@@ -90,8 +90,8 @@ $id=$_GET["id"];
     <?php foreach($mat as $key){ ?>
         array.push('<?php echo $key->name." ".$key->description ; ?>');
     <?php } ?>
-	
-	
+
+
 	<?php foreach($mat as $key ){ ?>
         arrayvalue.push('<?php echo $key->id ; ?>');
     <?php } ?>
@@ -101,20 +101,20 @@ $id=$_GET["id"];
 <script>
 
 	  function newmaterial(){
-		 
+
 		 total=total+1;
-		
-		 
+
+
 		 var myDiv = document.getElementById("newmaterial");
-		 
-		 
+
+
 		 var node = document.createElement("label");
   var textnode = document.createTextNode("Material");
   node.appendChild(textnode);
 myDiv.appendChild(node);
-		 
-		 
-		 
+
+
+
 
 //Create array of options to be added
 //var array = ["Volvo","Saab","Mercades","Audi"];
@@ -129,11 +129,11 @@ myDiv.appendChild(selectList);
 
 //Create and append the options
  var option = document.createElement("option");
-   
+
     option.text = 'Choose ...';
 	 option.value = '';
     selectList.appendChild(option);
-	
+
 for (var i = 0; i < array.length; i++) {
     var option = document.createElement("option");
     option.value = arrayvalue[i];
@@ -151,29 +151,29 @@ myDiv.appendChild(node);
 		 input.setAttribute('type', 'number');
 		 input.min=1;
 		 input.required = true;
-		 
+
 		 total=total+1;
-		
+
 		 input.name = total;
 		 input.className = "form-control";
 		 var parent = document.getElementById("newmaterial");
-		 
-		 
+
+
 		parent.appendChild(input);
-		 
-		 
-		 
+
+
+
 		 var node = document.createElement("br");
 
 myDiv.appendChild(node);
 
 document.getElementById("totalmaterials").value=total;
-		 
-		 
+
+
 	 }
-	  
-	  
-	  
-	 
+
+
+
+
 
 </script>

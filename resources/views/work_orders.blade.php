@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h5 ><b style="text-transform: uppercase;">Works orders list </b></h5>
+            <h5 ><b style="text-transform: capitalize;">Works orders list </b></h5>
 
         </div>
 @if(count($wo) > 0)

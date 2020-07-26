@@ -26,16 +26,16 @@ Cleaning zone Registration
 
 
 <div class="container">
-               <h5 style="padding-left: 90px;  text-transform: uppercase;  margin-top:6%;"  id="Add New campus" >Add New Cleaning Zone</h5>
+               <h5 style="text-transform: capitalize;  margin-top:6%;"  id="Add New campus" >Add New Cleaning Zone</h5>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
-              
+
                 <form method="POST" action="{{ route('zone.save') }}" class="col-lg-12">
                     @csrf
 <div align="center">
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                             <label style="width:150px;" class="input-group-text" for="directorate">Campus Name </label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
@@ -45,11 +45,11 @@ Cleaning zone Registration
                             @endforeach
 
                         </select>
-                    </div> 
+                    </div>
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:150px;" class="input-group-text" for="directorate">Zone Name</label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
@@ -58,7 +58,7 @@ Cleaning zone Registration
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:150px;" class="input-group-text" for="directorate">ZZone Type</label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="type"
@@ -75,5 +75,5 @@ Cleaning zone Registration
                  </div>
                 </form>
             </div>
-                   
+
                @endSection

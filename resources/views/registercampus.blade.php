@@ -31,7 +31,7 @@ Campus Registration
 
 <br>
 <div class="container">
-                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="Add New campus">Register New Campus</h5>
+                <h5 style="text-transform: capitalize;"  id="Add New campus">Register New Campus</h5>
                 <hr>
 
                 <p align="center" style="color: red; margin-left: 2%;">All fields are compulsory</p>
@@ -42,7 +42,7 @@ Campus Registration
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:200px;" class="input-group-text" for="directorate">Campus Name </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
@@ -51,14 +51,14 @@ Campus Registration
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:200px;" class="input-group-text" for="directorate">Campus Location</label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="houselocation"
                                name="location" placeholder="Enter Campus Location ">
                     </div>
 
-                    
+
 
 
                     <button  type="submit" class="btn btn-primary">Register
@@ -68,7 +68,7 @@ Campus Registration
                     </div>
                 </form>
             </div>
-            
-	
+
+
 <br>
 @endSection

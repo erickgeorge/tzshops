@@ -9,13 +9,13 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-lg-12">
-           <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Complaint </b></h5>
+           <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Complaint </b></h5>
         </div>
 
-        
 
 
-       
+
+
     </div>
     <br>
     <hr class="container">
@@ -45,7 +45,7 @@
      @foreach($compliant as $compliment)
      <?php $user = user::where('id',$compliment->sender)->get(); ?>
      <?php $work = workorder::where('id',$compliment->work)->get(); ?>
-     
+
         <div class="row">
             <div class="col">From:@foreach($user as $us) {{ $us->fname }} {{ $us->lname }} @endforeach</div>
             <div class="col">Date: <?php $time = strtotime($compliment->created_at); echo date('d/m/Y',$time);  ?></div>
@@ -53,7 +53,7 @@
         </div><br><hr>
         <div class="row">
             <div class="col">
-    
+
   <div class="card-header">Message</div>
   <div class="card-body">
     <p class="card-text">{{ $compliment->message }}</p>

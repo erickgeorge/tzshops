@@ -26,17 +26,17 @@ Staff House Registrartion
 
 
 <div class="container">
-                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="Add New House" >Register  New House</h5>
+                <h5 style="text-transform: capitalize;"  id="Add New House" >Register  New House</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
-          
+
                 <form method="POST" action="{{ route('house.save') }}" class="col-lg-12">
                     @csrf
 
                 <div align="center">
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                             <label style="width:150px;" class="input-group-text" for="directorate">Campus Name </label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
@@ -46,20 +46,20 @@ Staff House Registrartion
                             @endforeach
 
                         </select>
-                    </div> 
+                    </div>
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">House Grade </label>
 
                         </div>
-                        
+
 
                         <select required class="custom-select" name="name_of_house" id="campus">
                             <option value="">Choose Grade...</option>
-                            
+
 
                                 <option value="A1">A1</option>
                                 <option value="A2">A2</option>
@@ -73,25 +73,25 @@ Staff House Registrartion
                                 <option value="D1">D1</option>
                                 <option value="D2">D2</option>
                                 <option value="D3">D3</option>
-                         
+
 
                         </select>
 
                     </div>
 
-                 
+
 
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:150px;" class="input-group-text" for="directorate">House Location </label>
                         </div>
-                       
+
 
                         <select required class="custom-select" name="location" id="campus">
                             <option value="">Choose Location...</option>
-                                 
+
                                 <option value="BIAFRA FLATS">BIAFRA FLATS</option>
                                 <option value="DARAJANI HOUSES">DARAJANI HOUSES</option>
                                 <option value="KILIMAHEWA HOUSES">KILIMAHEWA HOUSES</option>
@@ -102,7 +102,7 @@ Staff House Registrartion
                                 <option value="KOROSHINI HOUSES">KOROSHINI HOUSES</option>
                                 <option value="KUNDUCHI HOUSES">KUNDUCHI HOUSES</option>
                                 <option value="KUNDUCHI QUARTERS">KUNDUCHI QUARTERS</option>
-                                <option value="LAMBONI HOUSES">LAMBONI HOUSES</option>        
+                                <option value="LAMBONI HOUSES">LAMBONI HOUSES</option>
                                 <option value="UBUNGO HOUSES">UBUNGO HOUSES</option>
                                 <option value="MBEZI HOUSES">MBEZI HOUSES</option>
                                 <option value="MABIBO HOSTEL">MABIBO HOSTEL</option>
@@ -120,8 +120,8 @@ Staff House Registrartion
                                 <option value="SINZA FLATS">SINZA FLATS</option>
                                 <option value="UBUNGO FLATS">UBUNGO FLATS</option>
                                 <option value="UNIVERSITY ROAD">UNIVERSITY ROAD</option>
-                                
-                                
+
+
 
                         </select>
                     </div>
@@ -129,7 +129,7 @@ Staff House Registrartion
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">No of Bedrooms </label>
 
@@ -141,7 +141,7 @@ Staff House Registrartion
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">Quantity</label>
                         </div>
@@ -151,7 +151,7 @@ Staff House Registrartion
                     </div>
 
 
-                       
+
                     <button type="submit" class="btn btn-primary">Register
                         New House
                     </button>
@@ -159,7 +159,7 @@ Staff House Registrartion
                 </div>
                 </form>
             </div>
-            
+
 
 
 @endSection

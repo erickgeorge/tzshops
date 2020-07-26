@@ -10,7 +10,7 @@
   @if(count($items)>0)
     <div class="row container-fluid" >
         <div class="col-lg-12" align="center">
-           <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Accepted Requested Transport </b></h5>
+           <h5 style=" "><b style="text-transform: capitalize;">Accepted Requested Transport </b></h5>
 
 
         <div class="container" style="padding-left: 500px;">
@@ -32,7 +32,7 @@
 
 
         </div>
-       
+
     </div>
     <br>
     <hr class="container">
@@ -44,8 +44,8 @@
             </ul>
         </div>
     @endif
-   
-   
+
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
@@ -59,7 +59,7 @@
 				<th>Message</th>
 				<th >Status</th>
 
-				
+
             </tr>
             </thead>
 
@@ -73,26 +73,26 @@
                     <th scope="row">{{ $i }}</th>
                     <td>{{ $item['requester']->fname.'  '.$item['requester']->lname  }}</td>
                     @if(empty($item['workorder']->location))
-                    <td>{{ 
+                    <td>{{
 				$item['workorder']['room']['block']->location_of_block
 
 				}}</td>
-				
+
 				@else
-				<td>{{ 
+				<td>{{
 				$item['workorder']->location
 
 				}}</td>
-				
+
 				@endif
                 <td>{{$item->coments}}</td>
-				
-				
+
+
 					<td>{{ date('F d Y', strtotime($item->time)) }}</td>
-					
+
 					<td>{{ date('h:m:s a', strtotime($item->time)) }}</td>
                       <td>{{$item->details}}</td>
-					 
+
 					<td><span class="badge badge-primary"> ACCEPTED </span> </td>
                     @endforeach
             </tbody>
@@ -102,9 +102,9 @@
 
 @else
  <div class="container" align="center">
-                
+
                    <br><div> <h2 style="padding-top: 300px;">Currently no transport requests accepted</h2></div>
-                
+
             </div>
             @endif
     @endSection

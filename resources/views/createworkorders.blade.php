@@ -8,7 +8,7 @@
     <br>
     <div class="row" style=" margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Create new works order</h5>
+            <h5 style="text-transform: capitalize;" >Create new works order</h5>
         </div>
     </div>
     <hr>
@@ -34,7 +34,7 @@
     <form method="POST" action="{{ route('workorder.create') }}"  style="margin-left:2%; margin-right:2%;">
         @csrf
         <div class="row">
-            <div class="col">  
+            <div class="col">
                 <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
@@ -43,16 +43,16 @@
                 <option selected value="">Choose... <sup style="color: red;">*</sup></option>
                 <?php use App\workordersection; ?>
       <?php $sectionss = workordersection::get(); ?>
-      @foreach($sectionss as $sectionss) 
+      @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section_name }}"><?php echo ucwords(strtolower( $sectionss->section_name )); ?></option>
                @endforeach
-                   
+
             </select>
              </div>
             </div>
             </div>
         <div >
-                
+
         <?php
         use App\Location;
         $location = Location::where('name','<>',null)->orderby('name')->get();
@@ -70,7 +70,7 @@
 
             </div>
 
-        
+
         <div class="row">
             <div class="col">
                  <div class="checkbox">
@@ -87,7 +87,7 @@
                     <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Location</label>
                 </div>
                 <select style="width:405px;" required class="custom-select" id="location" name="location" onchange="getAreas()">
-                    <option value="" selected>Choose... 
+                    <option value="" selected>Choose...
                     </option>
 
                     @foreach($location as $loc)
@@ -100,7 +100,7 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label style="height: 28px" class="input-group-text" for="area">Area 
+                    <label style="height: 28px" class="input-group-text" for="area">Area
                     </label>
                 </div>
                 <select style="width:430px;" required class="custom-select" id="area" name="area" onchange="getBlocks()">
@@ -113,7 +113,7 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label  style="height: 28px" class="input-group-text" for="block">Block 
+                    <label  style="height: 28px" class="input-group-text" for="block">Block
                     </label>
                 </div>
                 <select style="width:420px;" required class="custom-select" id="block" name="block" onchange="getRooms()">
@@ -124,7 +124,7 @@
             <div class="col">
                  <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label   style="height: 28px" class="input-group-text" for="room">Room 
+                    <label   style="height: 28px" class="input-group-text" for="room">Room
                     </label>
                 </div>
                 <select style="width:420px;" required class="custom-select" id="room" name="room">

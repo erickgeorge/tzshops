@@ -6,7 +6,7 @@ Company report
 <br>
 @foreach($assessmmentcompany as $company)
 @endforeach
-<h5 style="text-transform: uppercase;">COMPANIES SCORES(%) IN {{ date('F Y', strtotime($company->assessment_month))}}</h5>
+<h5 style="text-transform: capitalize;">COMPANIES SCORES(%) IN {{ date('F Y', strtotime($company->assessment_month))}}</h5>
 <hr>
 
 <html lang="en">
@@ -18,13 +18,13 @@ Company report
 
 
 
-<?php 
+<?php
     use App\User;
-    use App\assessmentsheet;  
-    use App\landassessmentactivityform; 
+    use App\assessmentsheet;
+    use App\landassessmentactivityform;
     use App\landcrosschecklandassessmentactivity;
     use App\company;
-    
+
  ?>
 
 
@@ -36,12 +36,12 @@ Company report
                   <p class="d-flex flex-column">
                     <span>Percentages (%)</span>
                   </p>
-                 
+
                 </div>
                 <!-- graph -->
 
                 <tlx-chart style="height: 500px" chart-type="ColumnChart"
-  chart-columns="${['Element','Percentage']}" 
+  chart-columns="${['Element','Percentage']}"
 
 
   chart-data="${[
@@ -51,7 +51,7 @@ Company report
      <?php
       $companypayment = company::where('tender', $company->company)->first();
      $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
-       $summ = 0; 
+       $summ = 0;
      ?>
 
     @if(count($crosscheckassessmmentactivity)>0)
@@ -66,7 +66,7 @@ Company report
 
         @endif
 
-   @endforeach 
+   @endforeach
 
 
  ]}" >
@@ -75,14 +75,14 @@ Company report
 </tlx-chart>
 
 
-            
+
                <!-- graph -->
                 <div class="d-flex flex-row justify-content-end container">
                   <span class="mr-2">
                     </i> Companies, Area
-                  </span>   
+                  </span>
                 </div>
-         
+
 
 <br>
 
@@ -90,7 +90,7 @@ Company report
 
 
 </body>
-</html>	
+</html>
 
 
 

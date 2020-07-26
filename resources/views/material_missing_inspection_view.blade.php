@@ -10,9 +10,9 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-           <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"><b style="text-transform: uppercase;">Works Orders that need material </b></h5>
+           <h5 style="text-transform: capitalize;"  align="center"><b style="text-transform: capitalize;">Works Orders that need material </b></h5>
         </div>
-       
+
     </div>
     <br>
     <hr class="container">
@@ -25,19 +25,19 @@
         </div>
     @endif
     </div>
-   
+
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
          <tr style="color: white;">
                 <th >#</th>
-              
+
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
 				<th >Quantity</th>
-				
-				
+
+
             </tr>
             </thead>
 
@@ -45,19 +45,19 @@
 
             <?php $i=0;  ?>
 
-			
+
 
             @foreach($items as $item)
 
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
 					  <td>{{ $item->quantity }}</td>
-                   
+
                     </tr>
 
 
@@ -68,12 +68,12 @@
 <h6>Please add them so that Other Orders can get fulfilled</h6>
 				</br>
 
-                    
+
             </tbody>
         </table><br>
-        <div><a href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-primary'> Go To Store  <span> </button></a> 
+        <div><a href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-primary'> Go To Store  <span> </button></a>
 
-        <a href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-warning'> Proceed  <span> </button></a> 
-        </div> 
+        <a href="stores"  data-toggle="tooltip" title="Accept"> <Button class='btn btn-warning'> Proceed  <span> </button></a>
+        </div>
     </div>
     @endSection

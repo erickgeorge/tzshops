@@ -9,9 +9,9 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Procured materials list</b></h5>
+            <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Procured materials list</b></h5>
         </div>
-       
+
     </div>
     <br>
     <hr class="container">
@@ -71,7 +71,7 @@
                 <?php $i = 0;  ?>
                 @foreach($procured as $material)
 
-                    
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -80,13 +80,13 @@
                             <td>{{ $material->type }}</td>
                             <td> {{ $material->total_input }}</td>
                             <td>{{ $material->unit_measure }}</td>
-                             
+
                         </tr>
                         @endforeach
                 </tbody>
             </table>
-           
-           
+
+
         @else
             <h1 class="text-center" style="margin-top: 150px">No Procured Materials Found</h1>
             <div class="container" align="center">
@@ -100,7 +100,7 @@
         @endif
     </div>
 
-    
+
     <script>
     	$(document).ready(function () {
 

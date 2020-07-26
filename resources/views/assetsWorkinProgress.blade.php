@@ -11,7 +11,7 @@ Work in Progress
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5><b style="text-transform: uppercase;">Works in Progress</b></h5>
+            <h5><b style="text-transform: capitalize;">Works in Progress</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -41,7 +41,7 @@ Work in Progress
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
 
         <div class="col-md-5">
-            <a href="{{url('assetsNewWorkinProgress')}}" class="btn btn-primary text-light" type="button"><b>Add new Work in Progress</b></a>
+            <a href="{{url('assetsNewWorkinProgress')}}" class="btn btn-primary text-light" type="button"><b>Add New Work in Progress</b></a>
         </div>
         @endif
         <div class="col-md-3">

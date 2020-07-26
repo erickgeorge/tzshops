@@ -23,8 +23,8 @@
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
-                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep" >Add new department</h5>
+    @endif
+                <h5 style="text-transform: capitalize;"  id="new_dep" >Add new department</h5>
                 <hr>
                 <form method="POST" action="{{ route('department.save') }}" class="col-md-6">
                     @csrf
@@ -50,7 +50,7 @@
                         <input style="color: black" type="text" required maxlength="8" class="form-control" id="dep_ab"
                                name="dep_ab" placeholder="Enter department abbreviation">
                     </div>
-                    
+
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
                     <a href="/Manage/department" class="btn btn-danger">Cancel

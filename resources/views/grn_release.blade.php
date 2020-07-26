@@ -9,9 +9,9 @@
     <br>
     <div class="row container-fluid"  style="margin-top: 6%;">
         <div class="col-md-8">
-            <h5 align="center"><b style="text-transform: uppercase;">PROCUREMENT REQUEST OF WORKs ORDER</b></h5>
+            <h5 align="center"><b style="text-transform: capitalize;">PROCUREMENT REQUEST OF WORKs ORDER</b></h5>
         </div>
-       
+
     </div>
     <br>
     <hr>
@@ -22,20 +22,20 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " style="margin-left: 2%; margin-right: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
             <tr style="color: white;">
                 <th >#</th>
-               
+
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
 				<th >Quantity</th>
-				
-				
-				
+
+
+
             </tr>
             </thead>
 
@@ -47,27 +47,27 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
 					  <td>{{ $item->quantity }}</td>
-					 
-                    
-					
-				
+
+
+
+
                     </tr>
                     @endforeach
             </tbody>
-		
+
         </table>
 		 <td>
-					
+
 					 <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" role="button" data-toggle="modal" data-target="#exampleModal">ISSUE GRN</a></td>
-		
-                  
+
+
     </div>
-	
+
 
 
 
@@ -113,5 +113,5 @@
 
 
 
-	
+
     @endSection

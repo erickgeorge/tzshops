@@ -7,7 +7,7 @@
 @section('body')
 
 
-  
+
 
 
 
@@ -19,10 +19,10 @@
 
     <div>
         <div>
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Material Purchased by Head of Procurement </b></h5>
+            <h5 style=" " align="center"><b style="text-transform: capitalize;">Material Purchased by Head of Procurement </b></h5>
 
         </div>
-       
+
     </div>
 
 
@@ -46,13 +46,13 @@
         </div>
     @endif
     </div>
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
-                
+
                 <th >Material Name</th>
                 <th >Material Description</th>
                 <th >Value/Capacity</th>
@@ -62,9 +62,9 @@
                 <th >Quantity Purchased</th>
                  <th >Quantity Added </th>
                 <th>Action</th>
-               
-    
-                
+
+
+
             </tr>
             </thead>
 
@@ -83,14 +83,14 @@
                     <td>{{ $item['material']->type }}</td>
                     <td>{{$item->quantity}}</td>
                     <td>{{$item->reserved_material}}</td>
-                 
+
                    <td style="color: blue" > {{ $item->quantity - $item->reserved_material}}</td>
                    <td>{{ $item->newstock }}</td>
                     <td>
                    @if($item->newstock == ($item->quantity - $item->reserved_material))
                       <a style="color: green;"  href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
-                 
-                        
+
+
                            @elseif($item->currentaddedmat == 1)
                             <a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id}}','{{ $item->reserved_material}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
@@ -104,7 +104,7 @@
                                                 @endif
 
 
-                      
+
                          </td>
 
                     </tr>
@@ -112,17 +112,17 @@
             </tbody>
         </table>
 
-       
+
          <h4  style="     color: #c9a8a5;"> Please add material in Store and assign Good Receiving Note for received material.</h4>
          <a class="btn btn-primary btn-sm"  href="grnpdf/{{$item->work_order_id}}" role="button">Assign GRN</a>
-       
-                  
+
+
     </div>
 
-    
 
 
-    
+
+
 
          <div class="modal fade" id="exampleModali" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -133,29 +133,29 @@
                     <button  class="close" data-dismiss="modal" aria-label="Close" style="padding-left:350px; ">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                   
+
                     <div class="modal-header ">
                      <div>
                         <h5  style="width: 360px;" align="center" ><b>Add Material in Store.</b></h5>
                         <hr  >
-                    </div>  
+                    </div>
                   </div>
                 <div  style="width: 200px; display: inline-block;
                                             min-height: 50px;
- 
+
                       height: auto; padding-left: 100px;">
 
-                 
+
                     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
-                   
+
 
                       <form method="POST" action="edit/Material/{{ $item->id}}" >
                         @csrf
-                  
-            <label style="width: 777px;" >Material Description </label>           
-          <div class="input-group mb-3">  
+
+            <label style="width: 777px;" >Material Description </label>
+          <div class="input-group mb-3">
                 <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
                        aria-describedby="emailHelp" name="description"  >
           </div>
@@ -163,26 +163,26 @@
             <div>
             <label style="width: 777px;" >Current Reserved Material </label>
 
-            <div class="input-group mb-3">   
+            <div class="input-group mb-3">
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
-                       id="stock" > 
-                       <input hidden id="istock" name="istock">    
+                       id="stock" >
+                       <input hidden id="istock" name="istock">
             </div>
             </div>
 
             <div>
-             <label style="width: 777px;" >Add Material in Quantity</label>    
-            <div class="input-group mb-3">   
+             <label style="width: 777px;" >Add Material in Quantity</label>
+            <div class="input-group mb-3">
                 <input style="width: 565px;" oninput="totalitem()" style="color: black" required type="number" min="1"  class="form-control"
-                       aria-describedby="emailHelp" id="kstock"  placeholder="Add Material in Quantity" >        
+                       aria-describedby="emailHelp" id="kstock"  placeholder="Add Material in Quantity" >
             </div>
             </div>
 
             <div>
              <label style="width: 777px; "   ><b style="color: black;">Tottal Material requested</b></label>
-               
+
              <div class="input-group mb-3">
-                
+
                 <input  style="width: 565px;"  required type="number"  class="form-control" id="tstock"
                         name="tstock" placeholder="Total Material requested">
 
@@ -190,30 +190,30 @@
               </div>
 
 
-              
-        
-                                                    <div style="padding-left: 120px;"> 
+
+
+                                                    <div style="padding-left: 120px;">
                                                        <button style=" width: 100px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
-                                         
+
                                             </form>
 
 
                 </div>
 
 
-           
-                  
+
+
                                                        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> 
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
      <script type="text/javascript">
 
           function myfunc1( U , V , W , X  ) {
 
 
-            
+
             document.getElementById("istock").value = U;
 
             document.getElementById("stock").value = V;
@@ -222,7 +222,7 @@
 
 
             document.getElementById("description").value = X;
-            
+
        }
      </script>
 
@@ -266,30 +266,30 @@
                     <button  class="close" data-dismiss="modal" aria-label="Close" style="padding-left:350px; ">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                   
+
                     <div class="modal-header ">
                      <div>
                         <h5  style="width: 360px;" align="center" ><b>Add Material in Store.</b></h5>
                         <hr  >
-                    </div>  
+                    </div>
                   </div>
                 <div  style="width: 200px; display: inline-block;
                                             min-height: 50px;
- 
+
                       height: auto; padding-left: 100px;">
 
-                 
+
                     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
-                   
+
 
                       <form method="POST" action="edit2/Material/{{ $item->id}}" >
                         @csrf
-           
-         
-              <label style="width: 777px;" >Material Description </label>           
-          <div class="input-group mb-3">  
+
+
+              <label style="width: 777px;" >Material Description </label>
+          <div class="input-group mb-3">
                 <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="descriptiony"
                        aria-describedby="emailHelp" name="description"  >
           </div>
@@ -297,58 +297,58 @@
              <div>
             <label style="width: 777px;" >Current added material after <br> purchased </label>
 
-            <div class="input-group mb-3">   
+            <div class="input-group mb-3">
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
-                       id="mstock"  >  
-                       <input  hidden id="estock" name="estock">      
+                       id="mstock"  >
+                       <input  hidden id="estock" name="estock">
             </div>
             </div>
 
              <div>
-             <label style="width: 777px;" >Add Material in Quantity</label>    
-            <div class="input-group mb-3">   
+             <label style="width: 777px;" >Add Material in Quantity</label>
+            <div class="input-group mb-3">
                 <input style="width: 565px;" oninput="totalitem2()" style="color: black" required type="number" min="1"  class="form-control"
-                       aria-describedby="emailHelp" id="astock"  placeholder="Add Material in Quantity" >        
+                       aria-describedby="emailHelp" id="astock"  placeholder="Add Material in Quantity" >
             </div>
             </div>
-            
+
                <div>
              <label style="width: 777px; "   ><b style="color: black;">Tottal Material requested</b></label>
-               
+
              <div class="input-group mb-3">
-                
+
                 <input  style="width: 565px;"  required type="number"  class="form-control" id="pstock"
                         name="pstock" placeholder="Total Material requested">
 
               </div>
               </div>
-        
-                                                    <div style="padding-left: 120px;"> 
+
+                                                    <div style="padding-left: 120px;">
                                                        <button style=" width: 100px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
-                                         
+
                                             </form>
 
 
                 </div>
 
 
-           
-                  
+
+
                                                        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> 
-    
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
-    <script type="text/javascript"> 
-            
+
+
+    <script type="text/javascript">
+
 
           function myfunc( U , V , W , X  ) {
 
 
-            
+
             document.getElementById("estock").value = U;
 
             document.getElementById("stock").value = V;
@@ -357,7 +357,7 @@
 
 
             document.getElementById("descriptiony").value = X;
-            
+
        }
 
     </script>
@@ -394,12 +394,12 @@
 
 
 
-            
+
 
 
     @else
     <div align="center" style="padding-top: 250px;"> <h1>No Material Purchased Yet</h1></div>
 
     @endif
-    
+
     @endSection

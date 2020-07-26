@@ -7,9 +7,9 @@
 @section('body')
     <br>
    <?php use Carbon\Carbon;?>
-   
+
 <div class="container">
-  
+
 
                @if(Session::has('message'))
         <div class="alert alert-success">
@@ -18,26 +18,26 @@
             </ul>
         </div>
               @endif
-                  <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available assessment sheets </b></h5>
+                  <h5 style=" text-transform: capitalize;" ><b style="text-transform: uppercase;">Available assessment sheets </b></h5>
                   <hr>
-                    
-            
+
+
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                    <a href="{{ route('add_new_sheet') }}"
                    class="btn btn-primary" >Add new assessment sheet</a>  <br> <br> @endif
-             
-                  
-                  
-    
+
+
+
+
                 <table id="myTableee" id="myTable" class="table table-striped">
-                      
+
                     <thead >
                    <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Type</th>
                          <th scope="col">Percentage(%)</th>
-                 
+
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -46,7 +46,7 @@
                     <tbody>
                     <?php $i = 0; ?>
                     @foreach($cleangcompany as $house)
-                    
+
                         <?php $i++; ?>
 
 
@@ -54,22 +54,22 @@
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->name }}</td>
                             <td>{{ $house->type}}</td>
-                            
+
                               @if($house->percentage == 100)
                               <td>{{ $house->percentage}} </td> @else<td title="Please edit to 100%" style="color: red">{{ $house->percentage}}</td> @endif
-                  
+
                           <td> <a style="color: green;"  href="{{route('view_assessment_sheet' , [$house->name])}}" data-toggle="tooltip" title="View and edit assessment sheet"><i
-                                                    class="fas fa-eye"></i></a> </td>        
-                           
+                                                    class="fas fa-eye"></i></a> </td>
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
                 <br>
 
             </div>
-            
+
 
 
 
@@ -99,7 +99,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type"
                                    name="type" placeholder="Enter Company type">
-                          
+
                         </div>
 
 
@@ -108,7 +108,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_status"
                                    name="status" placeholder="Enter Company status">
-                          
+
                         </div>
 
                        <div class="form-group">
@@ -116,7 +116,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_registration"
                                    name="registration" placeholder="Enter Company Registration">
-                          
+
                         </div>
 
                         <div class="form-group">
@@ -124,7 +124,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_tin"
                                    name="tin" placeholder="Enter Company tin">
-                           
+
                         </div>
 
 
@@ -133,7 +133,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_vat"
                                    name="vat" placeholder="Enter Company vat">
-                            
+
                         </div>
 
                          <div class="form-group">
@@ -141,7 +141,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_License"
                                    name="license" placeholder="Enter Company License">
-                           
+
                         </div>
 
 
@@ -150,20 +150,20 @@
 
 
 
-                       
+
                          <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
-                                                      
+                                                <div style="float: left; width: 130px">
+
                                                         <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
-                                                        
+                                               <div style="float: right; width: 290px">
+
+
                                                   <a class="btn btn-danger" href="/cleaningcompany" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                                                 </div>
@@ -180,8 +180,8 @@
 
 
 
-        
-   
+
+
 
 
     <script>
@@ -201,9 +201,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 
@@ -215,7 +215,7 @@
             document.getElementById("edit_name").value = B;
 
            document.getElementById("edit_type").value = C;
-           
+
            document.getElementById("edit_status").value = D;
 
            document.getElementById("edit_registration").value = E;

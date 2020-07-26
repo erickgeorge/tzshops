@@ -14,7 +14,7 @@ use App\assetsassesmotorvehicle;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 ><b style="text-transform: uppercase;">Motor Vehicles Assets</b></h5>
+            <h5 ><b style="text-transform: capitalize;">Motor Vehicles Assets</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -44,7 +44,7 @@ use App\assetsassesmotorvehicle;
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
 
         <div class="col-md-5">
-            <a href="{{url('assetsNewMotorVehicle')}}" class="btn btn-primary text-light" type="button"><b>Add new Motor Vehicle asset</b></a>
+            <a href="{{url('assetsNewMotorVehicle')}}" class="btn btn-primary text-light" type="button"><b>Add New Motor Vehicle Asset</b></a>
         </div>
         @endif
 

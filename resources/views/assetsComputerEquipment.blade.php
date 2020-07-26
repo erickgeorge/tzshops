@@ -14,7 +14,7 @@ Computer Equipment Assets
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 ><b style="text-transform: uppercase;">Computer Equipments Assets</b></h5>
+            <h5 ><b style="text-transform: capitalize;">Computer Equipments Assets</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -44,7 +44,7 @@ Computer Equipment Assets
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
 
         <div class="col-md-6">
-            <a href="{{url('assetsNewComputerEquipment')}}" class="btn btn-primary text-light" type="button"><b>Add new Computer Equipment asset</b></a>
+            <a href="{{url('assetsNewComputerEquipment')}}" class="btn btn-primary text-light" type="button"><b>Add New Computer Equipment Asset</b></a>
         </div>
         @endif
 

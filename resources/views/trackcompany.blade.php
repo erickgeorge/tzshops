@@ -22,9 +22,9 @@ Cleaning company report
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
+    @endif
 
-     <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;">LIST OF AREAS ASSIGNED TO THIS COMPANY </b></h5>
+     <h5 style="  " ><b style="text-transform: capitalize;">LIST OF AREAS ASSIGNED TO THIS COMPANY </b></h5>
               <hr>
 
                    <br><br>
@@ -71,15 +71,15 @@ Cleaning company report
                              @endif
                             <td><a style="color: green;"  href="{{route('track_company_assessment' , [$comp->id])}}" data-toggle="tooltip" title="View details"><i
                                                     class="fas fa-eye"></i></a></td>
-                         
-                           
+
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
 
 
-          
+
 
     @endSection

@@ -34,7 +34,7 @@ var total=2;
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 align="center" style="text-transform: uppercase;">Works order details</h5>
+            <h5 align="center" style="text-transform: capitalize;">Works order details</h5>
         </div>
     </div>
     <hr>

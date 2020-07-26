@@ -27,9 +27,9 @@
     <br>
     <div class="row">
         <div class="col-lg-12" >
-            <h4 style="  text-transform: unset;" >Edit User Information</h4>
+            <h4 style="text-transform: capitalize;" >Edit User Information</h4>
         </div>
-    
+
     </div>
 
     <hr>
@@ -169,8 +169,8 @@
 
 
 
-     
-   
+
+
       <label>Type of User</label><br>
 
     <div class="row">
@@ -194,7 +194,7 @@
 
                       <option @if (in_array('CLIENT',$str_array)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
                       <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
-                        
+
                           <option @if (in_array('DVC Accountant',$str_array)) { selected="selected" } @else{} @endif  value="DVC Accountant">DVC Accountant</option>
 
                         <option @if (in_array('DVC Admin',$str_array)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
@@ -247,7 +247,7 @@
 
 
 
-                      
+
 
              </select>
 
@@ -260,7 +260,7 @@
     <?php $string = $usertyp->type2;
      $strarray = preg_split("/\,/", $string);
      ?>
-  
+
 
    <div class="col">
   <div class="align-content-center">
@@ -270,10 +270,10 @@
 
                 <br>
 
-               
+
                 <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
-                  
-                    
+
+
                       <option @if (in_array('Accountant',$strarray)) { selected="selected" } @else{} @endif value="" selected>Choose user type...</option>
                       <option @if (in_array('Maintenance coordinator',$strarray)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
 
@@ -283,7 +283,7 @@
                       <option @if (in_array('CLIENT',$strarray)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
 
                       <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
-                        
+
                           <option @if (in_array('DVC Accountant',$strarray)) { selected="selected" } @else{} @endif  value="DVC Accountant">DVC Accountant</option>
 
                         <option @if (in_array('DVC Admin',$strarray)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
@@ -456,14 +456,14 @@ function getdepedit() {
         .done(function(msg){
             var object = JSON.parse(JSON.stringify(msg['direct_torate']));
             $('#department').empty();
-      
-      
+
+
       var option = document.createElement('option');
       option.innerHTML = 'Choose...';
       option.value = '';
       document.getElementById('department').appendChild(option);
-      
-      
+
+
             for (var i = 0; i < object.length; i++) {
                 var option = document.createElement('option');
                 option.innerHTML = object[i].description;

@@ -16,7 +16,7 @@ use App\WorkOrder;
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Completed Works orders</b></h5>
+            <h5 style=" "><b style="text-transform: capitalize;">Completed Works orders</b></h5>
         </div>
 
         <div class="col-md-6">
@@ -37,7 +37,7 @@ use App\WorkOrder;
         </div>
 
 @endif
-       
+
     </div>
     <br>
     <hr>
@@ -50,8 +50,8 @@ use App\WorkOrder;
         </div>
     @endif
 
- 
-  @if(count($wo) > 0)  
+
+  @if(count($wo) > 0)
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
@@ -86,15 +86,15 @@ use App\WorkOrder;
         if ($userwithin->staff_id == $usedid['id']) {
 
               $user = User::Where('id',$usedid['id'])->get();
-          foreach ($user as $userwith) 
+          foreach ($user as $userwith)
           {
-            
 
-             
+
+
                   $departmentid = Department::Where('id',$userwith->section_id)->get();
-                  foreach ($departmentid as $departmentised) 
+                  foreach ($departmentid as $departmentised)
                   {
-                    if ($departmentised->id == $departmentised->department_id ) 
+                    if ($departmentised->id == $departmentised->department_id )
                     {
                       $directorate = Directorate::Where('id',$departmentised->directorate_id)->get();
                       foreach ($directorate as $directory) {
@@ -106,9 +106,9 @@ use App\WorkOrder;
                   }
                 }
               }
-            
+
           }  }
-     
+
 
 //WADUDUUUUUUUUUUUUUUUUUUUUUUU
 
@@ -174,20 +174,20 @@ use App\WorkOrder;
 
                 <tbody>
 
-              
+
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
-                  
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td id="wo-details">{{str_limit($work->details, 10) }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                         
+
                                                             <td><span class="badge badge-info">Completed Closed</span></td>
-                           
+
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                             <td>
 
@@ -198,7 +198,7 @@ use App\WorkOrder;
                                 {{ $work->location }}
                             @endif
                             <td>
-                            
+
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
                                     @if($work->status == -1)
@@ -207,7 +207,7 @@ use App\WorkOrder;
                                     @elseif($work->status == 2)
                                          <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
-                                                    
+
                                     @else
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
@@ -223,7 +223,7 @@ use App\WorkOrder;
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>&nbsp;
                                     @endif
-                              
+
 
                                 @endif
                             </td>
@@ -248,8 +248,8 @@ use App\WorkOrder;
 
 
         });
-        
-        
+
+
         function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1> UN-ATTENDED WORK ORDER LIST </h1>";
@@ -265,5 +265,5 @@ return false;
 }
 
     </script>
-    
+
     @endSection

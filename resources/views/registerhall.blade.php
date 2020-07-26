@@ -26,17 +26,17 @@ Campus Registration
 
 <div class="container">
 
-                <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="Add New campus">Register New Hall of Resdence</h5>
+                <h5 style="text-transform: capitalize;"  id="Add New campus">Register New Hall of Resdence</h5>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
-              
+
                 <form method="POST" action="{{ route('hall.save') }}" class="col-lg-12">
                     @csrf
 
 <div align="center">
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label class="input-group-text" for="directorate">Campus Name </label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
@@ -50,7 +50,7 @@ Campus Registration
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label class="input-group-text" for="directorate">Hall Name </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
@@ -59,7 +59,7 @@ Campus Registration
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:100px;" class="input-group-text" for="directorate">Area </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="type"
@@ -68,7 +68,7 @@ Campus Registration
 
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:100px;" class="input-group-text" for="directorate">Type </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
@@ -77,14 +77,14 @@ Campus Registration
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:100px;" class="input-group-text" for="directorate">Location </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="no_room"
                                name="location" placeholder="Enter Hall Location">
                     </div>
-                 
-                    
+
+
                     <button type="submit" class="btn btn-primary">Register
                         New Hall
                     </button>

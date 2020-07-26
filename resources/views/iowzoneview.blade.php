@@ -27,11 +27,11 @@ IoW Zones
         </div>
     @endif
            <br>
-                <h5 style="text-transform: uppercase;">List of available IoW zones</h5>
+                <h5 style="text-transform: capitalize;">List of available IoW zones</h5>
 
-               
-                
-        
+
+
+
             <hr class="container">
 
             <a href="Add/iowzone" style="margin-bottom: 20px;"
@@ -45,23 +45,23 @@ IoW Zones
                     <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name of Zone</th>
-                       
+
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                        
+
                     <?php $i = 0; ?>
                     @foreach($iowzone as $iow)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                           
+
                             <td><?php echo strtoupper( $iow->zonename ); ?></td>
-                            
-                            
-                             
+
+
+
                             <td>
                                  <div class="row">
                                     <a style="color: green;"
@@ -78,7 +78,7 @@ IoW Zones
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -89,7 +89,7 @@ IoW Zones
                 <div class="text-center">
 
                 </div>
-       
+
             </div>
 
 
@@ -104,28 +104,28 @@ IoW Zones
                 </div>
     <div class="modal-body">
                 <form method="POST" action="edit/iowzone" class="col">
-                
+
 
 
                         @csrf
-	
-						
+
+
                     <div class="form-group ">
                         <label for="dep_name">Zone Name</label>
-                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
+                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"
                                name="sec_name" placeholder="Enter Zone Name" >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
-                       
+
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
                         <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
                     </a>
 
-                  
+
                 </form>
-               </div>   
+               </div>
 
 
                 <div class="modal-footer">
@@ -135,7 +135,7 @@ IoW Zones
     </div>
 
 
-           
+
 
                       <script>
         window.onload = function () {
@@ -160,21 +160,21 @@ IoW Zones
         });
 
 
-        
+
 
 
         function myfunc1(x,y) {
-			
-			
+
+
             document.getElementById("esecid").value = x;
             document.getElementById("sname").value = y;
 
-			
+
         }
 
 
-		
-		
+
+
 
 
 

@@ -13,9 +13,9 @@
 
     <div>
         <div>
-            <h5 style="padding-left: 90px; text-align: center"><b style="text-transform: uppercase;">Release Material for the works order</b></h5>
+            <h5 style="text-transform: capitalize;"><b style="text-transform: capitalize;">Release Material for the works order</b></h5>
         </div>
-       
+
     </div>
 
 
@@ -28,21 +28,21 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
           <tr style="color: white;">
                 <th >#</th>
-               
+
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
 				<th >Quantity Requested</th>
 				<th >Quantity Available on Store</th>
 				<th >Balance after release</th>
-	
-				
+
+
             </tr>
             </thead>
 
@@ -54,7 +54,7 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
@@ -65,11 +65,11 @@
                     @endforeach
             </tbody>
         </table>
-		
+
 		<h2> RELEASE ALL MATERIALS </h2>
 		 <a class="btn btn-primary btn-sm" href="{{ route('store.materialrelease', [$item->work_order_id]) }}" role="button">Release</a></td>
-                  
+
     </div>
-	
-	
+
+
     @endSection

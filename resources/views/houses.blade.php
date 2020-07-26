@@ -6,12 +6,12 @@
 
 @section('body')
     <br>
-   
-   
-<div class="container">
-  
 
- 
+
+<div class="container">
+
+
+
 
             <div >
                @if(Session::has('message'))
@@ -21,14 +21,14 @@
             </ul>
         </div>
               @endif
-                  <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Staff Houses </b></h5>
+                  <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Available Staff Houses </b></h5>
                   <hr>
                 <a href="{{ route('registerstaffhouse') }}"
                    class="btn btn-primary">Add New Staff House</a>
-                   <br> <br> 
-    
+                   <br> <br>
+
                 <table id="myTableee" id="myTable" class="table table-striped">
-                      
+
                     <thead >
                    <tr style="color: white;">
                         <th scope="col">#</th>
@@ -51,10 +51,10 @@
                             <td>{{ $house->name_of_house }}</td>
                             <td>{{ $house->type}}</td>
                             <td>{{ $house->location }}</td>
-                            
+
                             <td>{{ $house->no_room }}</td>
-                            <td>{{ $house['campus']->campus_name }}</td> 
-                            
+                            <td>{{ $house['campus']->campus_name }}</td>
+
                             <td>
 
 
@@ -81,16 +81,16 @@
                                     </form>
                                 </div>
                          </td>
-                           
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
                 <br>
 
             </div>
-            
+
 
 
 
@@ -119,10 +119,10 @@
 
                         <div class="form-group ">
                             <label for="editlocation">Location </label>
-                            
+
                             <select style="width: 350px;" required class="custom-select" name="location" id="campus">
                             <option value="">Choose Location...</option>
-                                 
+
                                 <option value="BIAFRA FLATS">BIAFRA FLATS</option>
                                 <option value="DARAJANI HOUSES">DARAJANI HOUSES</option>
                                 <option value="KILIMAHEWA HOUSES">KILIMAHEWA HOUSES</option>
@@ -133,7 +133,7 @@
                                 <option value="KOROSHINI HOUSES">KOROSHINI HOUSES</option>
                                 <option value="KUNDUCHI HOUSES">KUNDUCHI HOUSES</option>
                                 <option value="KUNDUCHI QUARTERS">KUNDUCHI QUARTERS</option>
-                                <option value="LAMBONI HOUSES">LAMBONI HOUSES</option>        
+                                <option value="LAMBONI HOUSES">LAMBONI HOUSES</option>
                                 <option value="UBUNGO HOUSES">UBUNGO HOUSES</option>
                                 <option value="MBEZI HOUSES">MBEZI HOUSES</option>
                                 <option value="MABIBO HOSTEL">MABIBO HOSTEL</option>
@@ -151,21 +151,21 @@
                                 <option value="SINZA FLATS">SINZA FLATS</option>
                                 <option value="UBUNGO FLATS">UBUNGO FLATS</option>
                                 <option value="UNIVERSITY ROAD">UNIVERSITY ROAD</option>
-                                
-                                
+
+
 
                         </select>
                         </div>
-                       
 
-                    
+
+
                         <div class="form-group ">
                             <label for="editlocation">No of Bedrooms </label>
                             <input style="color: black;width:350px" type="Number" required class="form-control"
                                    id="edit_type"
                                    name="type" placeholder="Enter Number of Bedrooms">
                         </div>
-                       
+
 
                          <div class="form-group ">
                             <label for="editlocation">Quantity</label>
@@ -177,11 +177,11 @@
 
 
                         <div class="form-group">
-                       
-                            
+
+
                             <label for="directorate">Campus</label>
-                            
-                       
+
+
                         <select style="width: 350" required class="custom-select" name="campus" id="campus">
                             <option value="">Choose...</option>
                             @foreach($campuses as $campus)
@@ -189,24 +189,24 @@
                             @endforeach
 
                         </select>
-                    </div>   
+                    </div>
 
 
 
-                       
+
                          <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
-                                                      
+                                                <div style="float: left; width: 130px">
+
                                                         <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
-                                                        
+                                               <div style="float: right; width: 290px">
+
+
                                                   <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                                                 </div>
@@ -222,7 +222,7 @@
 
 
 
-        
+
     @endSection
 
 
@@ -243,9 +243,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 
@@ -257,7 +257,7 @@
             document.getElementById("edit_name").value = W;
 
            document.getElementById("edit_location").value = X;
-           
+
            document.getElementById("edit_type").value = Y;
 
            document.getElementById("edit_room").value = Z;
@@ -275,7 +275,7 @@
             document.getElementById("edit_campus").value = W;
 
            document.getElementById("edit_area").value = X;
-           
+
            document.getElementById("edit_type1").value = Y;
 
            document.getElementById("edit_location1").value = Z;
@@ -300,11 +300,11 @@
 
              document.getElementById("edit_zone").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 
@@ -315,11 +315,11 @@
 
              document.getElementById("edit_carea").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 

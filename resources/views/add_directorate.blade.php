@@ -22,8 +22,8 @@
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
-                <h5 style="padding-left: 90px;  text-transform: uppercase;" >Add new college/Directorate</h5>
+    @endif
+                <h5 style="text-transform: capitalize;" >Add new college/Directorate</h5>
                 <hr >
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf

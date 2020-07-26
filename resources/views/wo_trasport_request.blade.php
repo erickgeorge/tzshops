@@ -11,7 +11,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">All transport Requests</b></h5>
+            <h5 style=" " align="center"><b style="text-transform: capitalize;">All transport Requests</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -32,7 +32,7 @@
         </div>
     @endif
     </div>
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
@@ -42,9 +42,9 @@
 				<th >Location</th>
                 <th >Details</th>
 				<th >Date</th>
-				
+
 				<th >Action</th>
-				
+
             </tr>
             </thead>
 
@@ -58,45 +58,45 @@
                     <th scope="row">{{ $i }}</th>
                     <td>{{ $item['requester']->fname.'  '.$item['requester']->lname  }}</td>
                     @if(empty($item['workorder']->location))
-                    <td>{{ 
-				$item['workorder']['room']['block']->location_of_block  
-				
+                    <td>{{
+				$item['workorder']['room']['block']->location_of_block
+
 				      }}</td>
-				
+
 				    @else
-				    <td>{{ 
+				    <td>{{
 				          $item['workorder']->location
 
 				                                 }}</td>
-				
+
 				@endif
 
                 <td>{{$item->coments}}</td>
-				
-				
+
+
 					<td>{{ date('d/m/Y', strtotime($item->time)) }} - {{ date('h:m a', strtotime($item->time)) }}</td>
 					<?php
 					$idt=$item->id;
 
 					 ?>
-					 
-					
+
+
 					 <td>
 					  @if(($item->time)>Carbon\Carbon::now())
-					<a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','1');" href="#" role="button">Accept</a> 
-						  &nbsp &nbsp 
+					<a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','1');" href="#" role="button">Accept</a>
+						  &nbsp &nbsp
 					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','-1');" href="#" role="button">Reject</a> </td>
-						
+
 						@else
-				 EXPIRED REQUEST 
+				 EXPIRED REQUEST
 						@endif
 				   </tr>
                     @endforeach
             </tbody>
         </table>
-	
+
     </div>
-	
+
 	  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -109,44 +109,44 @@
                 <form method="POST" action="transport_request/accept">
                 <div class="modal-body">
                     <p>Comments from Transport Officer .</p>
-                    
-					
-					  &nbsp &nbsp 
+
+
+					  &nbsp &nbsp
 					   @csrf
-					   
+
 					   <input   id="transportid" name="transportid"  hidden  />
 					    <input   id="status" name="status"  hidden  />
-                      
+
                         <textarea name="details" required maxlength="100" class="form-control"  rows="5" ></textarea>
                         <br>
-						
-					
-                        
-                    
+
+
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save</button>
-						
+
                 </div>
                 </form>
             </div>
         </div>
     </div>
-	<p id="n" > </p> 
+	<p id="n" > </p>
 </div>
 
 @else
  <div class="container" align="center">
-                
+
                    <br><div> <h2 style="padding-top: 300px;">Currently no transport requests</h2></div>
-                
+
             </div>
             @endif
-	
+
     @endSection
-	
-	
+
+
 	<script type="text/javascript">
     function transportrequest (id,status) {
 		document.getElementById('transportid').value=id;

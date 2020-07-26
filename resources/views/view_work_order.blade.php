@@ -14,7 +14,7 @@
     <div class="container">
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;">Works order details</h5>
+            <h5 style="text-transform: capitalize;">Works order details</h5>
         </div>
     </div>
     <hr>
@@ -41,11 +41,11 @@
         <input style="color: black" type="text" required class="form-control" placeholder="problem" name="problem"
                aria-describedby="emailHelp" value="{{ ucwords(strtolower($wo->problem_type))  }}" disabled>
 
-             
+
     </div>
-    
+
      @if(empty($wo->room_id))
-         
+
       <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
@@ -53,12 +53,12 @@
         <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
                aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
     </div>
-           
-          
+
+
         @else
-            
-   
-    
+
+
+
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
@@ -87,7 +87,7 @@
         <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
                value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
-    
+
          @endif
     <div class="form-group ">
         <label for="">Details:</label>

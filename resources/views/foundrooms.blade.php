@@ -10,10 +10,10 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Room report - Room</b></h5>
+            <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Room report - Room</b></h5>
         </div>
 
-  
+
     </div>
     <br>
     <hr>
@@ -26,7 +26,7 @@
     @endif
 
 	<!--<input align="right" name="b_print" type="button" class="btn btn-success mb-2"   onClick="printdiv('div_print');" value=" Print ">-->
-   
+
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
@@ -34,10 +34,10 @@
             <tr style="color: white;">
                     <th>#</th>
                     <th>Room</th>
-                   
+
                     <th>WO TOTAL REQUESTS</th>
                     <th>Action</th>
-                   
+
                 </tr>
                 </thead>
 
@@ -46,31 +46,31 @@
                <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
-                  
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                        
-                            
-                            
+
+
+
                                 <td >
                                      <?php $locational = room::select('name_of_room')->where('id',$work->room_id)->get();
                                      foreach ($locational as $locational) {
-                                        echo $locational->name_of_room;  
+                                        echo $locational->name_of_room;
                                       } ?>
-                                          
+
                                       </td>
-                           
-                            
-                        
-                                
+
+
+
+
                                 <td>
                                     {{ $work->total_room }}  </td>
                                    <td><form method="get" action="thisroomreport"><button class="btn btn-primary" name="workorders" value="{{ $work->room_id }}"><i class="fa fa-eye"></i> view</button></form></td>
-                                    
-                                
-                            
-                            
+
+
+
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -94,8 +94,8 @@
 
 
         });
-		
-		
+
+
 		function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1> Room report </h1>";

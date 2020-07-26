@@ -8,12 +8,12 @@
     <br>
 
 <div class="container">
-   
-     
-  
 
 
-       
+
+
+
+
          <div >
 
              @if(Session::has('message'))
@@ -23,13 +23,13 @@
             </ul>
         </div>
              @endif
-              <h5 style="  text-transform: uppercase;" ><b style="text-transform: uppercase;"> Cleaning Areas </b></h5>
+              <h5 style=" text-transform: capitalize;" ><b style="text-transform: uppercase;"> Cleaning Areas </b></h5>
               <hr>
 
                             <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
-                <a href="{{route('landscapingcleaningarea')}}" 
-                                                             
-                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF </a> 
+                <a href="{{route('landscapingcleaningarea')}}"
+
+                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF </a>
                 </button>
 
 
@@ -59,7 +59,7 @@
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            
+
                             <td>{{ $clean_area->cleaning_name }}</td>
                             <td>{{ $clean_area->zone_id }}</td>
 
@@ -98,17 +98,17 @@
 
 
 
-                            
-                                               
+
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
                 <br>
-                
+
             </div>
-            
+
 
 
 
@@ -131,9 +131,9 @@
                             <input id="editarea_id" name="editarea_id" hidden>
                         </div>
 
-                       
 
-            
+
+
                             <select style="color: black;width:350px"  class="custom-select" name="zone" >
                             <option value="">Choose...</option>
                                @foreach($newzone as $zone)
@@ -141,28 +141,28 @@
                                 @endforeach
 
                         </select>
-                    </div> 
-                       
-                        
-                
+                    </div>
+
+
+
                                                <div style="width:600px;">
-                                                <div style="float: left;"> 
-                                                      
-                                                        <button  type="submit" class="btn btn-primary">Save 
+                                                <div style="float: left;">
+
+                                                        <button  type="submit" class="btn btn-primary">Save
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
 
-                                               <div> 
+                                               <div>
                                                       &nbsp;
-                                                        
+
                                                   <a class="btn btn-danger" href="/manage_Cleaning_area" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                                                 </div>
-      
+
 
               </form>
 
@@ -176,7 +176,7 @@
 
 
 
-        
+
     @endSection
 
 
@@ -197,9 +197,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 
@@ -211,7 +211,7 @@
             document.getElementById("edit_name").value = W;
 
            document.getElementById("edit_location").value = X;
-           
+
            document.getElementById("edit_type").value = Y;
 
            document.getElementById("edit_room").value = Z;
@@ -229,7 +229,7 @@
             document.getElementById("edit_campus").value = W;
 
            document.getElementById("edit_area").value = X;
-           
+
            document.getElementById("edit_type1").value = Y;
 
            document.getElementById("edit_location1").value = Z;
@@ -254,11 +254,11 @@
 
              document.getElementById("edit_zone").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 
@@ -269,11 +269,11 @@
 
              document.getElementById("edit_carea").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 

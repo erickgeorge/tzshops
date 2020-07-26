@@ -6,7 +6,7 @@ Directorate
 
 @section('body')
 
- 
+
            <div class="container">
 
     @if ($errors->any())
@@ -24,15 +24,15 @@ Directorate
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
+    @endif
 <?php use App\Directorate; ?>
   @if(count($directorates)>0)
-                <h5 style="padding-left: 90px;  text-transform: uppercase;" 
+                <h5 style="text-transform: capitalize;"
                    class="btn btn-default">List of College/Directorates</h5>
 
-                 
-                
-        
+
+
+
             <hr class="container">
 
             <a href="Add/directorate" style="margin-bottom: 20px;"
@@ -40,8 +40,8 @@ Directorate
                    <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
-                   
-                 
+
+
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -65,7 +65,7 @@ Directorate
                           @endforeach
                             </select>
                           </div>
-                        
+
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                           <button type="submit" class="btn btn-primary">Generate</button>
@@ -92,7 +92,7 @@ Directorate
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $directorate->directorate_description }}</td>
                             <td>{{ $directorate->name }}</td>
-                           
+
 
                             <td>
                                 <div class="row">
@@ -125,7 +125,7 @@ Directorate
                     </tbody>
                 </table>
                 <br>
-                
+
             </div>
 
 
@@ -142,9 +142,9 @@ Directorate
 
                 <form method="POST" action="edit/directorate" class="col">
                       @csrf
-                
 
-                      
+
+
                         <div class="form-group">
                             <label for="edirname">Directorate name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
@@ -218,21 +218,21 @@ Directorate
 
 
         function myfunc1(x, y, z,p) {
-			
-			
+
+
             document.getElementById("edepid").value = x;
             document.getElementById("edepname").value = y;
 
             document.getElementById("edepdesc").value = z;
-			
-			
+
+
 			 for(var i = 0;i < document.getElementById("editdirectoratefdep").length;i++){
             if(document.getElementById("editdirectoratefdep").options[i].value == p ){
                document.getElementById("editdirectoratefdep").selectedIndex = i;
             }
         }
-			
-			
+
+
         }
 
 
@@ -242,10 +242,10 @@ Directorate
 
             document.getElementById("esecdesc").value = z;
         }
-		
-		
-		
-		
+
+
+
+
 		var selecteddep = null;
 var selectedsection = null;
 function getDepartments(){
@@ -261,14 +261,14 @@ function getDepartments(){
         console.log(msg['departments']);
 		var object = JSON.parse(JSON.stringify(msg['departments']));
 		$('#department').empty();
-		
+
 		var option = document.createElement('option');
 			option.innerHTML = 'Choose...';
 			option.value = '';
 			document.getElementById('department').appendChild(option);
-			
-			
-		
+
+
+
 		for (var i = 0; i < object.length; i++) {
 			var option = document.createElement('option');
 			option.innerHTML = object[i].description;
@@ -280,5 +280,5 @@ function getDepartments(){
 
 
     </script>
-           
+
 @endSection

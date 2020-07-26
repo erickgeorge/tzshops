@@ -27,7 +27,7 @@
        <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"><b style="text-transform: uppercase;">Account settings - Signature</b></h5>
+            <h5 style="text-transform: capitalize;"  align="center"><b style="text-transform: capitalize;">Account settings - Signature</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -42,7 +42,7 @@
     <div class="all-content-wrapper" style="margin-top: 100px;">
     	<h1>Sign below</h1><br><br>
       <div id = 'msg' class="bg-success">
-     
+
       </div>
     	<div class="row">
     		<div class="col">
@@ -67,7 +67,7 @@
 </div>
 </center>
 </div>
- 
+
 
 <script src="https://szimek.github.io/signature_pad/js/signature_pad.umd.js"></script>
 <script type="text/javascript">
@@ -125,7 +125,7 @@ window.location.href = "{{ url('myprofile') }}";
 }
 });
 }
- 
+
 });
 
 /*document.getElementById('save-jpeg').addEventListener('click', function () {
@@ -136,7 +136,7 @@ window.location.href = "{{ url('myprofile') }}";
   var data = signaturePad.toDataURL('image/jpeg');
   console.log(data);
   window.open(data);
-}); 
+});
 
 document.getElementById('save-svg').addEventListener('click', function () {
   if (signaturePad.isEmpty()) {

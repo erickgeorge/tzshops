@@ -9,9 +9,9 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12" align="center">
-            <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Available materials in store </b></h5>
+            <h5 style="  "><b style="text-transform: capitalize;">Available materials in store </b></h5>
         </div>
-        
+
     </div>
     <br>
     <hr>
@@ -24,7 +24,7 @@
         </div>
     @endif
     </div>
-    
+
     <div class="container " >
         <div class="row ">
         <div class="col-lg-4">
@@ -40,13 +40,13 @@
        <!-- <div class="col" align="right">
             <a href="{{ url('work_order_material_missing') }}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Material requests <b style="color:red; background-color: grey; padding: 4px; border-radius: 5px;">90</b></button></a>
         </div> -->
-        
+
        <!-- <div class="col-md-3">
             <a href=""><button style="margin-bottom: 20px" type="button" class="btn btn-warning">View needed materials (10)</button></a>
         </div>  -->
         <!-- SOMETHING STRANGE HERE -->
              <?php
-use App\Material;?>  
+use App\Material;?>
  @if(count($items)>0) <div class="col" align="right">
            <a href="" data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
         </div>
@@ -125,7 +125,7 @@ use App\Material;?>
                 @if(auth()->user()->type == 'STORE')
                 <th >action</th>
                 @endif
-                
+
             </tr>
             </thead>
 
@@ -141,7 +141,7 @@ use App\Material;?>
                     <td id="wo-details">{{ $item->description }}</td>
                      <td>{{ $item->brand }}</td>
                     <td>{{ $item->type }}</td>
-                   
+
 
                     <td><?php echo  number_format($item->stock); ?></td>
                     <td><?php $time = strtotime($item->updated_at); echo date('d/m/Y',$time);  ?> </td>
@@ -151,7 +151,7 @@ use App\Material;?>
                         <!--<a style="color: black;" href="" data-toggle="tooltip" title="Track"><i class="fas fa-tasks"></i></a>-->
                         </td>
                         @endif
-                       
+
                     </tr>
                     @endforeach
             </tbody>

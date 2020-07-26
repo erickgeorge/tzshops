@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
 <style type="text/css" media="print">
-        
+
         #exclude1{
             display:none;
         }
-		
+
 		#exclude2{
             display:none;
         }
-		
+
     </style>
     @section('title')
     Technician on Progress
@@ -21,7 +21,7 @@
     <br>
     <div >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; "  class="container"><b style="text-transform: uppercase;">Available Technician on Progress</b></h5>
+            <h5 style=" "  class="container"><b style="text-transform: capitalize;">Available Technician on Progress</b></h5>
         </div>
 
         <!--<div class="col-md-6" align="right">
@@ -42,7 +42,7 @@
         </div>-->
 
 
-       
+
     </div>
     <br>
     <hr>
@@ -54,44 +54,44 @@
             </ul>
         </div>
     @endif
-   
+
 
     <div id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
-	
-	
 
-        
+
+
+
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
-                   
+
 					<th>Technician name</th>
                     <th>Total Works orders</th>
-                   
+
                 </tr>
                 </thead>
 
                 <tbody>
 
-             
+
                 @foreach($wo as $work)
-						
-						
-						
-                    
-                       
+
+
+
+
+
                         <tr>
-                            
-                           
-							
-							
-					
-							
-							
+
+
+
+
+
+
+
                             <td>{{ $work['technician_assigned']->fname.' '.$work['technician_assigned']->lname }}</td>
 							<td>{{ $work->total_wo }}  </td>
-							
-						  
+
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -113,9 +113,9 @@
 
 
         });
-		
-		
-		
+
+
+
 function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORKS ORDERS </h1>";

@@ -14,11 +14,11 @@
 
 <div id="div_print">
      <div class="container">
-            <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Available Materials in Store </b></h5>  
+            <h5 style=" "><b style="text-transform: capitalize;">Available Materials in Store </b></h5>
              <hr>
         </div>
     <br>
-   
+
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -27,9 +27,9 @@
         </div>
     @endif
 
-   
+
     <div class="container">
-     
+
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
@@ -55,14 +55,14 @@
                                   <td>{{ $item->description }}</td>
                                   <td>{{ $item->type }}</td>
                                   <td>{{ number_format($item->totalstock) }}</td>
-                                  <td>{{ $item->stock }}</td>    
+                                  <td>{{ $item->stock }}</td>
                                   </tr>
                     @endforeach
             </tbody>
 
-                
+
             </table>
-       
+
     </div>
-    
+
     @endSection

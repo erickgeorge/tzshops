@@ -8,7 +8,7 @@
 
 @section('body')
     <br>
-   
+
     @if(Session::has('message'))
 
         <div class="alert alert-success">
@@ -19,13 +19,13 @@
 
     @endif
 <div class="container">
-   
-             
+
+
          <div>
-          
-              <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Non-Building Assets </b></h5>
+
+              <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Non-Building Assets </b></h5>
                   <hr>
-                <a href="{{ route('registernonbuildingasset') }}" 
+                <a href="{{ route('registernonbuildingasset') }}"
                    class="btn btn-primary">Add New Non-Building Assets</a>
                    <br><br>
 
@@ -49,9 +49,9 @@
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            
+
                             <td>{{ $non->name_of_asset }}</td>
-                           
+
                             <td>{{ $non->total_asset }}</td>
                             <td>
                             <form method="Get" action="NonBuildAsset">
@@ -64,13 +64,13 @@
 
                     @endforeach
                 </tbody>
-                    
+
                 </table>
 
 
 
-        
-    
+
+
 
     <script>
         window.onload = function () {
@@ -89,11 +89,11 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
+            $('#myTableee').DataTable();
 
-                $('#myTable5').DataTable();                                            
+                $('#myTable5').DataTable();
 
- 
+
 
         });
 
@@ -105,7 +105,7 @@
             document.getElementById("edit_name").value = W;
 
            document.getElementById("edit_location").value = X;
-           
+
            document.getElementById("edit_type").value = Y;
 
            document.getElementById("edit_room").value = Z;
@@ -123,7 +123,7 @@
             document.getElementById("edit_campus").value = W;
 
            document.getElementById("edit_area").value = X;
-           
+
            document.getElementById("edit_type1").value = Y;
 
            document.getElementById("edit_location1").value = Z;
@@ -148,11 +148,11 @@
 
              document.getElementById("edit_zone").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 
@@ -163,11 +163,11 @@
 
              document.getElementById("edit_carea").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 

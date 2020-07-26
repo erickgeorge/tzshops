@@ -13,7 +13,7 @@
    <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b >WORKS ORDER NEEDS MATERIAL </b></h5>
+            <h5 style=" text-transform: capitalize;" align="center"><b >WORKS ORDER NEEDS MATERIAL </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -41,12 +41,12 @@
             <thead >
           <tr style="color: white;">
                 <th >#</th>
-              
+
                 <th >Works order ID</th>
                 <th >HoS name</th>
                 <th >Sent To</th>
                 <th >Action</th>
-                
+
             </tr>
             </thead>
 
@@ -58,14 +58,14 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>00{{ $item->work_order_id }}</td>
-                   
+
                     <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 
                     <td>{{ $item['iowzone']->zonename }}</td>
-                    
-                 
+
+
                       <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">View Material</a>&nbsp;
                         </td>
                     </tr>
@@ -74,11 +74,11 @@
         </table>
     </div>
 </div>
- @else       
+ @else
                <div class="container" align="center">
-                
+
                    <br><div> <h2 style="padding-top: 300px;">Currently no works order needs Material</h2></div>
-                
+
             </div>
 @endif
 @endif
@@ -117,12 +117,12 @@
             <thead >
            <tr style="color: white;">
                 <th >#</th>
-              
+
                 <th >Works order ID</th>
                 <th >HoS name</th>
-              
+
                 <th >Action</th>
-                
+
             </tr>
             </thead>
 
@@ -134,12 +134,12 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>00{{ $item->work_order_id }}</td>
-                   
+
                     <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
-                    
-                    
+
+
 
                       <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material"> View Material</a>&nbsp;
                         </td>
@@ -149,11 +149,11 @@
         </table>
     </div>
 </div>
- @else       
+ @else
                <div class="container" align="center">
-                
+
                    <br><div> <h2 style="padding-top: 300px;">Currently no works order needs Material</h2></div>
-                
+
             </div>
 @endif
 @endif

@@ -6,10 +6,10 @@
 
 @section('body')
 
-<?php 
+<?php
     use App\User;
- 
- 
+
+
 
  ?>
 
@@ -54,7 +54,7 @@ body {font-family: Arial;}
 }
 </style>
 
-    
+
 
 
 <style type="text/css">
@@ -70,7 +70,7 @@ var total=2;
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 align="center" style="text-transform: uppercase;">assessment form details</h5>
+            <h5 align="center" style="text-transform: capitalize;">assessment form details</h5>
         </div>
     </div>
     <hr>
@@ -90,7 +90,7 @@ var total=2;
             </ul>
         </div>
     @endif
- 
+
 
 
 
@@ -102,20 +102,20 @@ var total=2;
         <div class="input-group-prepend">
             <label class="input-group-text">Company name</label>
         </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="{{$company['companyname']->company_name}}" 
+        <input style="color: black" type="text" required class="form-control" placeholder="{{$company['companyname']->company_name}}"
                aria-describedby="emailHelp" value="" disabled>
     </div>
-    
-  
-        
+
+
+
     <div class="input-group mb-3 col">
         <div class="input-group-prepend">
             <label class="input-group-text">Cleaning area name</label>
         </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="{{$company['areaname']->cleaning_name}}" 
+        <input style="color: black" type="text" required class="form-control" placeholder="{{$company['areaname']->cleaning_name}}"
                aria-describedby="emailHelp" value="" disabled>
     </div>
-        
+
     </div>
 
     <br>
@@ -128,13 +128,13 @@ var total=2;
         <input style="color: black" type="text" required class="form-control" placeholder="{{$company->assessment_month}}"
                aria-describedby="emailHelp" value="" disabled>
     </div>
-    
-  
-        
+
+
+
     <div class="input-group mb-3 col">
-        
+
     </div>
-        
+
     </div>
 
     @endforeach
@@ -155,11 +155,11 @@ var total=2;
     <th style="width: 150px"><b>Score(%)</b></th>
      <th style="width: 300px"><b>Remark</b></th>
      </thead>
-     
+
 
 
   </tr>
-  <?php  
+  <?php
    $sum = 0;
    $summ = 0;
    ?>
@@ -182,7 +182,7 @@ var total=2;
 
   @if(($assesment->status == 4)||($assesment->status == 2)||($assesment->status == 3))
   <p><u>Payment description:  <?php echo number_format("$assesment->payment"); ?> Tshs</u><br>
-  
+
   <u>According to the tottal score of <?php echo $summ ?>% on this month {{$company['companyname']->company_name}} should be payed: <?php $erickpnd = $summ * $assesment->payment * 0.01; echo number_format("$erickpnd"); ?> Tshs</u></p>
   <b>Payment updated by Landscaping Supervisor : {{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}  on: {{ $assesment->payment_on }}</b><br>
   @endif
@@ -199,16 +199,16 @@ var total=2;
     @if($assesment->status == 3)
   <b>Approved by Estate Director : {{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  on: {{ $assesment->approved_on }}</b>
   <br>
- @endif 
-
- 
+ @endif
 
 
-  
 
 
-  
- 
+
+
+
+
+
 
  @else
      <br>
@@ -220,13 +220,13 @@ var total=2;
 
 
 
-    
-    
-    
-
-    
 
 
-                
+
+
+
+
+
+
   @endSection
 

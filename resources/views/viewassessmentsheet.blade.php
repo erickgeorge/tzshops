@@ -22,9 +22,9 @@ Assessment Sheet
             </ul>
         </div>
     @endif
- 
 
-<h5 align="center" style="text-transform: uppercase;">
+
+<h5 align="center" style="text-transform: capitalize;">
  ASSESSMENT SHEET DETAILS </h5>
 <hr>
 <div class="container">
@@ -40,7 +40,7 @@ Assessment Sheet
       </div>
 
 
- 
+
 
 <div class="col">
      <div class="input-group mb-3">
@@ -52,7 +52,7 @@ Assessment Sheet
         <input style="color: black" type="text" required class="form-control" placeholder="{{$assessmmentcompany->type}}" name="location"
                aria-describedby="emailHelp"  disabled>
     </div>
- </div>   
+ </div>
 
 
  </div>
@@ -63,7 +63,7 @@ Assessment Sheet
 <div class="container">
 
    <table class="table table-striped" id="myTable">
-       
+
          <thead style="color: white;">
             <tr>
              <th >#</th>
@@ -72,10 +72,10 @@ Assessment Sheet
         <th >Action</th>
          </tr>
       </thead>
-    
 
 
-       <?php  
+
+       <?php
    $summ = 0;
    $summm = 0;
    $i = 0;
@@ -84,16 +84,16 @@ Assessment Sheet
   @foreach($assessmmentactivity as $assesment)
    <?php $i++;   $summ += $assesment->percentage; ?>
 
- 
+
   <tr>
        <TD>{{$i}}</TD>
 
-      <TD  >{{$assesment->activity}}</TD> 
-           
-      <TD align="center">{{$assesment->percentage}}</TD> 
+      <TD  >{{$assesment->activity}}</TD>
+
+      <TD align="center">{{$assesment->percentage}}</TD>
 
            <td >
-                            
+
                             <div class="row">
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -119,19 +119,19 @@ Assessment Sheet
                                         </button>
                                     </form>
                                 </div>
-         </td>                  
-          
+         </td>
+
  </tr>
 
   @endforeach
    </tbody>
 
-     <tr><td  align="center" colspan="2" >TOTAL PERCENTAGE</td><td  align="center">{{ $summ}}% </td></tr>  
+     <tr><td  align="center" colspan="2" >TOTAL PERCENTAGE</td><td  align="center">{{ $summ}}% </td></tr>
 
 
      </table>
 
- 
+
 
 
 
@@ -141,7 +141,7 @@ Assessment Sheet
 
 </form>-->
 
- 
+
 
 
 
@@ -152,7 +152,7 @@ Assessment Sheet
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><b></b> Edit activity.</b></h5>
-                    
+
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -161,32 +161,32 @@ Assessment Sheet
                 <div class="modal-body">
 
                 <form method="POST" action="{{route('assessment.sheet.edit')}}" class="col-md-6">
-                  
+
                         @csrf
 
                     <div class="form-group" style="width: 440px">
                             <label for="name_of_house">Activity <sup style="color: red;">*</sup></label>
                             <textarea type="text" required class="form-control"
                                    id="activity"
-                                   name="activity" placeholder="Enter activity"></textarea> 
+                                   name="activity" placeholder="Enter activity"></textarea>
                             <input id="activity_id" name="activity_id" hidden>
                     </div>
-                       
+
 
                    <div class="form-group" style="width: 440px">
                             <label for="name_of_house">Percentage <sup style="color: red;">*</sup></label>
-                           <input   oninput="totalitem()" id="type"  min="1" max="100"  class="form-control" type="number" name="percentage" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   > 
+                           <input   oninput="totalitem()" id="type"  min="1" max="100"  class="form-control" type="number" name="percentage" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   >
 
-                          
+
                   </div>
-                                   <div style="float: left; width: 130px"> 
-                                                      
+                                   <div style="float: left; width: 130px">
+
                                                         <button  type="submit" class="btn btn-primary">Save
-                                                        </button> 
+                                                        </button>
                                                       </div>
-                  
-                                                       
-                 </form>                             
+
+
+                 </form>
                   </div>
               </div>
                 <div class="modal-footer">
@@ -212,37 +212,37 @@ Assessment Sheet
     <div >
 
             <div >
-                
+
             <label class="container" >
                 Please crosscheck the assessment sheet in the form below to make total percentage of 100% .</label>
 
                </div>
             </div>
-      
-           
-              
 
- 
+
+
+
+
                     @csrf
 
    <div align="center">
 
   <div class="jumbotron" style="width: 500px;">
-                 
+
 
      <table>
-    
+
       <tr>
      <thead style="color: white;">
         <th style="width: 25px"></th>
         <th style="width: 420px">Activity</th>
         <th style="width: 200px">Percentage(%)</th>
-     
+
      </thead>
       </tr>
 
      </table>
-      
+
 
      <form method="POST"  action="{{ route('edit.assessment.proceeding.two', [$assessmmentcompany->name , $assessmmentcompany->type]) }}" >
       @csrf
@@ -250,14 +250,14 @@ Assessment Sheet
     <TABLE id="dataTable" width="350px" border="1">
         <TR>
             <TD><INPUT type="checkbox" name="chk"/></TD>
-            <TD  ><textarea style="width: 250px; height: 60px;" class="form-control" type="text" name="activity[]"  placeholder ="activity..." required="required"  ></textarea></TD> 
-           
-            <TD><input style="width:150px;"  oninput="totalitem()" id="istock"  min="1" max="100"  class="form-control" type="number" name="percentage[]" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   >    </TD> 
-              
-          
+            <TD  ><textarea style="width: 250px; height: 60px;" class="form-control" type="text" name="activity[]"  placeholder ="activity..." required="required"  ></textarea></TD>
+
+            <TD><input style="width:150px;"  oninput="totalitem()" id="istock"  min="1" max="100"  class="form-control" type="number" name="percentage[]" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   >    </TD>
+
+
         </TR>
 
-      
+
 
     </TABLE>
    <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
@@ -279,7 +279,7 @@ Assessment Sheet
 
                 </div>
 
-     
+
 
 
         @endif
@@ -298,8 +298,8 @@ Assessment Sheet
             document.getElementById("activity").value = B;
 
            document.getElementById("type").value = C;
-           
-       
+
+
        }
 
 
@@ -310,31 +310,31 @@ Assessment Sheet
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
-             
+
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
             var colCount = table.rows[0].cells.length;
 
-       
+
 
             for(var i=0; i<colCount; i++)
              {
 
-              
+
                if(rowCount = 1) {
-                      
+
                           document.getElementById('deleterowbutton').style.display='inline-block';
 
 
 
                     }
 
-                
+
 
 
                 var newcell = row.insertCell(i);
-                 
+
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
 
                 //alert(newcell.childNodes);
@@ -352,11 +352,11 @@ Assessment Sheet
 
                 }
 
-                  
+
 
             }
 
-           
+
         }
 
 
@@ -373,14 +373,14 @@ Assessment Sheet
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");
                         break;
-                    } 
+                    }
 
 
                         if(rowCount <= 2) {
-                       
+
 
                         document.getElementById('deleterowbutton').style.display='none';
-                    } 
+                    }
 
                     table.deleteRow(i);
                     rowCount--;
@@ -399,8 +399,8 @@ Assessment Sheet
 
 
     </SCRIPT>
-                 
-           
+
+
 
 
 

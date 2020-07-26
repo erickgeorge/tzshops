@@ -22,19 +22,19 @@
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
-               <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep">Add new location</h5>
+    @endif
+               <h5 style="text-transform: capitalize;"  id="new_dep">Add new location</h5>
                 <hr>
                 <form method="POST" action="{{ route('iowzone.location.save' , [$iowuser->id , $iowuserzone->zone]) }}" class="col-md-6">
                     @csrf
-                   
+
                     <div class="form-group ">
                         <label for="dep_name" style="color: black;">Location Name</label>
-                        <input style="color: black" type="text" required class="form-control" id="dep_name"     
+                        <input style="color: black" type="text" required class="form-control" id="dep_name"
                                name="location" placeholder="Enter Location Name ">
                     </div>
 
-                    
+
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
                     <a href="{{route('view.location', [$iowuser->id , $iowuserzone->zone])}}" class="btn btn-danger">Cancel
@@ -44,6 +44,6 @@
 
 
 
-          
+
 
     @endSection

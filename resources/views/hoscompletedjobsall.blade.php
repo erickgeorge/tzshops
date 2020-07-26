@@ -19,7 +19,7 @@ use Carbon\Carbon;
         <div class="col-md-6">
           <?php $hosname = user::where('id',$hosid)->get(); ?>
           @foreach($hosname as $hosname) @endforeach
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">{{ $hosname->fname }} {{ $hosname->lname }}'s Completed Works orders </b></h5>
+            <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">{{ $hosname->fname }} {{ $hosname->lname }}'s Completed Works orders </b></h5>
         </div>
 @if(count($hosWo) > 0)
         <div class="col-md-6">
@@ -40,7 +40,7 @@ use Carbon\Carbon;
         </div>
 
 @endif
-       
+
     </div>
     <br>
     <hr class="container">
@@ -63,12 +63,12 @@ use Carbon\Carbon;
     @endif
 
     </div>
-    
+
 
     <div id="div_print" class="container">
         <div class="row ">
-           
- 
+
+
 <!-- SOMETHING STRANGE HERE -->
 
    <!--     <button style="max-height: 40px; " type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
@@ -87,19 +87,19 @@ use Carbon\Carbon;
         </button>
       </div>
       <div class="modal-body">
-        
+
       <div class="row">
 
          <div class="col">From <input name="start" value="<?php
                 if (request()->has('start')) {   echo $_GET['start'];   } ?>" class="form-control mr-sm-2" type="date" placeholder="Start Month"   max="<?php echo date('Y-m-d'); ?>">
             </div>
             <div class="col">   To <input value="<?php  if (request()->has('end')) {  echo $_GET['end'];   } ?>"   name="end" class="form-control mr--2" type="date" placeholder="End Month"   max="<?php echo date('Y-m-d'); ?>">
-             </div>  
+             </div>
       </div>
-      
+
       </div>
       <div class="modal-body">
-        
+
       <div class="row">
         <div class="col">
             <select name="problem_type" class="form-control mr-sm-2">
@@ -135,7 +135,7 @@ use Carbon\Carbon;
           <div class="col">
             <select name="userid" class="form-control mr-sm-2">
               <option value="<?php echo $hosid; ?>">user : {{ $hosname->fname }} {{ $hosname->lname }}</option>
-              
+
             </select>
           </div>
       </div>
@@ -158,7 +158,7 @@ use Carbon\Carbon;
   </div>
 </div>
           <!-- ---------------------- -->
-          
+
 
     </div>
         @if(count($hosWo) > 0)
@@ -219,10 +219,10 @@ use Carbon\Carbon;
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
-                                @endif 
+                                @endif
 
                             @elseif($work->status == 4)
-                                <td><span class="badge badge-info">transportation stage</span> 
+                                <td><span class="badge badge-info">transportation stage</span>
                                  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -232,41 +232,41 @@ use Carbon\Carbon;
                             @elseif($work->status == 6)
                               <td><span class="badge badge-info">post implementation</span></td>
                             @elseif($work->status == 7)
-            
+
                               <td><span class="badge badge-info">material requested</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                             @elseif($work->status == 40)
-            
+
                               <td><span class="badge badge-info">Material Requested Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                            @elseif($work->status == 52)
-            
+
                               <td><span class="badge badge-info">IoW is checking for Work Order</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
-                                @endif  
+                                @endif
                            @elseif($work->status == 53)
-            
+
                               <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
-                                @endif        
+                                @endif
 
                           @elseif($work->status == 25)
-            
+
                               <td><span class="badge badge-info">Work Order Succesifully approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
-                                @endif    
+                                @endif
                            @elseif($work->status == 8)
                                   @if(auth()->user()->type == 'CLIENT')
                               <td><span class="badge badge-warning">  Material requested on progress</span>
@@ -336,7 +336,7 @@ use Carbon\Carbon;
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
-                                                             @endif                           
+                                                             @endif
 
                                 @elseif($work->status == 16)
                                                           @if(auth()->user()->type != 'CLIENT')
@@ -351,12 +351,12 @@ use Carbon\Carbon;
                                 @endif
                                                              @endif
 
-                                                            
-                              
+
+
                               @else
-                                <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>               
+                                <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>
                               @endif
- 
+
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
                             <td>
@@ -368,7 +368,7 @@ use Carbon\Carbon;
                                 {{ $work->location }}
                             @endif
                                       <td>
-                             @if($work->status == 2) 
+                             @if($work->status == 2)
                              <?php $date = Carbon::parse($work->created_at);
 $now = Carbon::parse($work->updated_at);
 
@@ -385,27 +385,27 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
 
                                     @if($work->status == 2)
-                     
-                  
+
+
                      <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                                         @elseif($work->status == 12)
-                                        
+
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                                     <a onclick="myfunc('{{ $work->unsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
                                                                          class="badge badge-success">View reason</span></a>
                                                        @elseif($work->status == 53)
-                                         
+
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                                     <a onclick="myfunc('{{ $work->notsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
-                                                                         class="badge badge-success">View reason</span></a>                  
+                                                                         class="badge badge-success">View reason</span></a>
 
                                    @elseif($work->status == 30 )
                                     <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
-                                    
+
 
                                     @elseif($work->status == 9)
 
@@ -415,7 +415,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
 
 
-                                        
+
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                     @endif
@@ -428,7 +428,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         @if( $work['user']->id==Auth::user()->id)
                                         <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal{{ $work->id }}">Complaint</a>
 
-         
+
 <!-- SOMETHING STRANGE HERE -->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal{{ $work->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -461,7 +461,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
           <div class="col">
  <div class="input-group">
   <textarea class="form-control" name="message" aria-label="With textarea" required="">Message</textarea>
-</div> 
+</div>
           </div>
       </div>
       </div>
@@ -485,14 +485,14 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         <!--   <a href="#"><span data-toggle="modal" data-target="#redirect"
 
 
-                                       
+
                        &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $work->id }}','{{ $work->reason }}')"
                                        data-toggle="modal" data-target="#exampleModali" title="Edit"><i
                                                 class="fas fa-times-circle" style="color: red"></i></a>-->
 
-                               
-                                      &nbsp;&nbsp;&nbsp;&nbsp;                                  <a 
+
+                                      &nbsp;&nbsp;&nbsp;&nbsp;                                  <a
                                        onclick="myfunc5('{{$work->id}}','{{ $work->details }}' ,'{{ $work->p_type }}')"
                                        data-toggle="modal" data-target="#exampleModo"><i
                                   class="fas fa-recycle"  data-toggle="tooltip" data-placement="right" title="Redirect to Head of Section" style="color: blue"></i></a>
@@ -518,17 +518,17 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                 @if(auth()->user()->type == 'Inspector Of Works' )
                                   @if($work->status == 53)
-                                         
-                                     
+
+
                                                     <a onclick="myfunc('{{ $work->notsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
                                                                          class="badge badge-success">View reason</span></a>
 
                                    @endif
                                    @endif
                                 <br>
-                              
+
                             </td>
-                             
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -569,14 +569,14 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         </div>
     </div>
 
- 
+
 @foreach($hosWo as $work)
 
     <div class="modal fade" id="exampleModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
-          
-                <form method="POST" action="redirect/workorder/to/hos" 
+
+                <form method="POST" action="redirect/workorder/to/hos"
                   class="col-md-6">
                         @csrf
             <div class="modal-content" style="height: 430px; width: 400px;" >
@@ -588,7 +588,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                     </button>
                 </div>
 
-   
+
                 <div class="modal-body">
 
                      <div class="col">
@@ -600,10 +600,10 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 <option selected value="">Choose...</option>
                 <?php use App\workordersection; ?>
 <?php $sectionss = workordersection::get(); ?>
- @foreach($sectionss as $sectionss) 
+ @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>
                @endforeach
-                   
+
             </select>
              <!--<input  type="text" name="details"  id="details">-->
              <input hidden id="redirect_id" name="redirect_id" >
@@ -620,19 +620,19 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         </div>
     </div>
 
- 
 
- 
+
+
 
 
 
 
     @endforeach
-    
-    
+
+
     <script>
 
-        
+
 
         $(document).ready(function () {
 
@@ -653,7 +653,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
     </script>
 
           <script type="text/javascript">
-                       
+
                          function myfunc5(U, V , W) {
 
 
@@ -665,6 +665,6 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                 }
 
         </script>
-        
+
 
     @endSection

@@ -11,7 +11,7 @@
      @if(count($wo) > 0)
     <div class="row container-fluid"  style="margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Rejected works orders</h5>
+            <h5 style="text-transform: capitalize;" >Rejected works orders</h5>
         </div>
     </div>
     <hr>
@@ -19,8 +19,8 @@
 
 
 
-          
-   
+
+
         <table class="table table-hover table-striped table-condensed table-scrollable" id="myTable">
             <thead >
            <tr style="color: white;">
@@ -54,7 +54,7 @@
                         @if($work->location ==null)
                             {{ $work['room']['block']->location_of_block }}
                     @else
-                       
+
                             {{ $work->location }}
                     @endif
                     </td>

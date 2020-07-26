@@ -7,7 +7,7 @@
 @section('body')
     <br>
 
-   
+
 
     {{-- tabs --}}
     <div class="payment-section-margin" >
@@ -114,7 +114,7 @@
                     </tbody>
                 </table>
                 <br>
-               <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dir">Add new college/Directorate</h5>
+               <h5 style="text-transform: capitalize;"  id="new_dir">Add new college/Directorate</h5>
                 <hr>
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf
@@ -205,7 +205,7 @@
 
                 </div>
                 <br>
-               <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_dep">Add new department</h5>
+               <h5 style="text-transform: capitalize;"  id="new_dep">Add new department</h5>
                 <hr>
                 <form method="POST" action="{{ route('department.save') }}" class="col-md-6">
                     @csrf
@@ -231,7 +231,7 @@
                         <input style="color: black" type="text" required maxlength="8" class="form-control" id="dep_ab"
                                name="dep_ab" placeholder="Enter department abbreviation">
                     </div>
-                    
+
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
                     <a href="#" class="btn bg-danger btn-danger">Cancel
@@ -280,7 +280,7 @@
                             <td>{{ $sec->description }}</td>
                             <td>{{ $sec['department']->name }}</td>
                             <td><?php $time = strtotime($sec->created_at); echo date('d/m/Y',$time);  ?></td>
-                            
+
                             <td>
                                 <div class="row">
                                     <a style="color: green;"
@@ -308,16 +308,16 @@
 
                 </div>
                 <br>
-				
+
 				<!--<h4 style="color:red;" id="new_sec">NOT YET IMPLEMENTED</h4> -->
-				
-				 <h5 style="padding-left: 90px;  text-transform: uppercase;"  id="new_sec" >Add new section</h5>
-				
+
+				 <h5 style="text-transform: capitalize;"  id="new_sec" >Add new section</h5>
+
 			<!-- IN PROGRESS -->
-               
+
                 <hr>
-				
-				  
+
+
                 <form method="POST" action="{{ route('section.save') }}" class="col-md-6">
                     @csrf
                     <div class="input-group mb-3">
@@ -349,14 +349,14 @@
                         <input style="color: black" type="text" required maxlength="8" class="form-control" id="sec_ab"
                                name="sec_ab" placeholder="Enter section abbreviation">
                     </div>
-                    
+
                     <button type="submit" class="btn bg-primary btn-primary">Save
                     </button>
-                    
+
                     <a href="#" class="btn bg-danger btn-danger">Cancel
                     </a>
                 </form>
-			
+
             </div>
         </div>
     </div>
@@ -434,13 +434,13 @@
 
 
                         @csrf
-						
-						
-						
+
+
+
 						<div class="form-group">
-                       
+
                             <label for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
-                       
+
                         <select  style="color: black;"  required class="form-control" name="editdirectoratefdep" id="editdirectoratefdep">
                             <option value="">Choose...</option>
                             @foreach($directorates as $directorate)
@@ -449,7 +449,7 @@
 
                         </select>
                     </div>
-						
+
                         <div class="form-group">
                             <label for="edirname">Department name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
@@ -500,10 +500,10 @@
 
 
                         @csrf
-						
-						
-						
-						
+
+
+
+
                         <div class="form-group">
                             <label for="edirname">Section name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
@@ -568,21 +568,21 @@
 
 
         function myfunc1(x, y, z,p) {
-			
-			
+
+
             document.getElementById("edepid").value = x;
             document.getElementById("edepname").value = y;
 
             document.getElementById("edepdesc").value = z;
-			
-			
+
+
 			 for(var i = 0;i < document.getElementById("editdirectoratefdep").length;i++){
             if(document.getElementById("editdirectoratefdep").options[i].value == p ){
                document.getElementById("editdirectoratefdep").selectedIndex = i;
             }
         }
-			
-			
+
+
         }
 
 
@@ -592,10 +592,10 @@
 
             document.getElementById("esecdesc").value = z;
         }
-		
-		
-		
-		
+
+
+
+
 		var selecteddep = null;
 var selectedsection = null;
 function getDepartments(){
@@ -611,14 +611,14 @@ function getDepartments(){
         console.log(msg['departments']);
 		var object = JSON.parse(JSON.stringify(msg['departments']));
 		$('#department').empty();
-		
+
 		var option = document.createElement('option');
 			option.innerHTML = 'Choose...';
 			option.value = '';
 			document.getElementById('department').appendChild(option);
-			
-			
-		
+
+
+
 		for (var i = 0; i < object.length; i++) {
 			var option = document.createElement('option');
 			option.innerHTML = object[i].description;

@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  ><b style="text-transform: uppercase;">List of Landscaping works orders </b></h5>
+            <h5 style="text-transform: capitalize;"  ><b style="text-transform: capitalize;">List of Landscaping works orders </b></h5>
         </div>
 @if(count($wo) > 0)
         <div class="col-md-6">
@@ -31,7 +31,7 @@
         </div>
 
 @endif
-       
+
     </div>
     <br>
     <hr class="container">
@@ -54,7 +54,7 @@
     @endif
 
     </div>
-    
+
 
     <div id="div_print" class="container">
         <div class="row ">
@@ -70,8 +70,8 @@
             </a>
         </div>
 
-          
-           
+
+
          <?php
 use App\User;
 use App\Directorate;
@@ -105,19 +105,19 @@ use Carbon\Carbon;
         </button>
       </div>
       <div class="modal-body">
-        
+
       <div class="row">
 
          <div class="col">From <input name="start" value="<?php
                 if (request()->has('start')) {   echo $_GET['start'];   } ?>" class="form-control mr-sm-2" type="date" placeholder="Start Month"   max="<?php echo date('Y-m-d'); ?>">
             </div>
             <div class="col">   To <input value="<?php  if (request()->has('end')) {  echo $_GET['end'];   } ?>"   name="end" class="form-control mr--2" type="date" placeholder="End Month"   max="<?php echo date('Y-m-d'); ?>">
-             </div>  
+             </div>
       </div>
-      
+
       </div>
       <div class="modal-body">
-        
+
       <div class="row">
         <div class="col">
             <select name="problem_type" class="form-control mr-sm-2">
@@ -157,7 +157,7 @@ use Carbon\Carbon;
               @else
               <option value="">Select name</option>
 
- 
+
 
   <?php
 //
@@ -171,7 +171,7 @@ foreach($userwithid as $userwithid)
   {
       //echo '<option>yay</option>';
 
-    
+
 
       $departmentor = department::where('id',$userfetch->section_id)->get();
       foreach($departmentor as $departmentor)
@@ -183,7 +183,7 @@ foreach($userwithid as $userwithid)
           <?php }
       }
 
-    
+
   }
 }
 
@@ -223,7 +223,7 @@ foreach($userwithid as $userwithid)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
-     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}   
+     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
  }
      ?>
               </select>
@@ -238,8 +238,8 @@ foreach($userwithid as $userwithid)
 </form>
   </div>
 </div>
-          
-          
+
+
 
     </div>
         @if(count($wo) > 0)
@@ -288,7 +288,7 @@ foreach($userwithid as $userwithid)
                               @elseif($work->status == 7)
                              <td><span class="badge badge-success">Payment appdated by Accountant</span></td>
                             @endif
- 
+
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
                             <td>
 
@@ -299,7 +299,7 @@ foreach($userwithid as $userwithid)
                                 {{ $work->location }}
                             @endif
                                       <td>
-                             @if($work->status == 2) 
+                             @if($work->status == 2)
                              <?php $date = Carbon::parse($work->created_at);
 $now = Carbon::parse($work->updated_at);
 
@@ -315,12 +315,12 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                                     class="badge badge-success">View</span></a></td>
                              @else
                                <td> <a style="color: green;" href="{{ url('edit/work_order/landscaping', [$work->id]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a> 
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                             <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                            </td>
-                                          
-                              @endif                        
+
+                              @endif
                       @endif
                @endforeach
                 </tbody>
@@ -361,14 +361,14 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         </div>
     </div>
 
- 
+
 @foreach($wo as $work)
 
     <div class="modal fade" id="exampleModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
-          
-                <form method="POST" action="redirect/workorder/to/hos" 
+
+                <form method="POST" action="redirect/workorder/to/hos"
                   class="col-md-6">
                         @csrf
             <div class="modal-content" style="height: 430px; width: 400px;" >
@@ -380,7 +380,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                     </button>
                 </div>
 
-   
+
                 <div class="modal-body">
 
                      <div class="col">
@@ -411,19 +411,19 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         </div>
     </div>
 
- 
 
- 
+
+
 
 
 
 
     @endforeach
-    
-    
+
+
     <script>
 
-        
+
 
         $(document).ready(function () {
 
@@ -444,7 +444,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
     </script>
 
           <script type="text/javascript">
-                       
+
                          function myfunc5(U, V , W) {
 
 
@@ -456,6 +456,6 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                 }
 
         </script>
-        
+
 
     @endSection
