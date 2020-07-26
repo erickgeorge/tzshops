@@ -61,7 +61,7 @@ Assessment form
 
 
 
-                <a href="{{route('assessmentform.view.second')}}"><button style="max-height: 40px; " type="button" class="btn btn-outline-primary" >
+                <a href="{{route('assessmentform.view.second')}}"><button  style="max-height: 40px; " type="button" class="btn btn-outline-primary" >
                  All assessments
                 </button></a>
 

@@ -18,7 +18,7 @@ use App\assetsplantandmachinery;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h4 style="text-transform: uppercase;">
+            <h4 style="text-transform: capitalize;">
                 All @php
 
             if( $_GET['asset']=='PlantMachinery')

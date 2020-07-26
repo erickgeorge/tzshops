@@ -11,7 +11,7 @@
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: uppercase;">@php
+            <h5><b style="text-transform: capitalize;">@php
 
 
                 if ($_GET['condition']=='New') {
