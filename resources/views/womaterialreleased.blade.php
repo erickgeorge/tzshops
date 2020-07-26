@@ -9,9 +9,9 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Material released to work orders</b></h5>
+            <h5 style=" " align="center"><b style="text-transform: capitalize;">Material released to work orders</b></h5>
         </div>
-       
+
     </div>
     <br>
     <hr>
@@ -23,7 +23,7 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
@@ -35,15 +35,15 @@
 				<th >Material Description</th>
 				<th >Type</th>
 				<th >Quantity</th>
-				
-				
+
+
             </tr>
             </thead>
 
             <tbody>
 
             <?php $i=0;
-				
+
 				$c=-1;
 				$t=0;
 						?>
@@ -55,13 +55,13 @@
                 <tr>
                     <th scope="row"></th>
                     <td>  @if($t==$c)  @else  00{{ $item->work_order_id  }} @endif </td>
-                   
+
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
 					  <td>{{ $item->quantity }}</td>
-                   <?php 
+                   <?php
 				$c=$item->work_order_id;
 				?>
                     </tr>

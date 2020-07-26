@@ -11,7 +11,7 @@ Equipment Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 ><b style="text-transform: uppercase;">Equipment Asset</b></h5>
+            <h5 ><b style="text-transform: capitalize;">Equipment Asset</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -142,7 +142,9 @@ Equipment Asset
                           <div class="form-group">
                               <label for="my-input">Asset Condition</label>
                               <select id="assetnumber" required class="form-control" name="AssetCondition">
-                                  <option selected value="{{$landinfo->_condition}}">{{$landinfo->_condition}}</option>
+                                <option value="" selected style="color: red;">Choose...</option>
+
+                                <option  value="{{$landinfo->_condition}}">{{$landinfo->_condition}}</option>
                                   <option  value="New">New</option>
                                   <option value="Good">Good</option>
                                   <option value="Fair">Fair</option>

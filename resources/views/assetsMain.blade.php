@@ -24,7 +24,7 @@ use App\assetsworkinprogress;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5><b style="text-transform: uppercase;">Assets Management</b></h5>
+            <h5><b style="text-transform: capitalize;">Assets Management</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -55,7 +55,7 @@ use App\assetsworkinprogress;
                         <div class="col">
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               Add new Asset
+                               Add New Asset
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a href="{{url('assetsNewLand')}}" class="dropdown-item"><b>Land Asset</b></a>

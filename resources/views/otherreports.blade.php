@@ -7,7 +7,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"  >{{ $head }}</h5>
+            <h5 style="text-transform: capitalize;"  align="center"  >{{ $head }}</h5>
         </div>
     </div>
     @if(Session::has('message'))
@@ -27,8 +27,8 @@
     <hr>
 
     <div class="container">
-          
-           
+
+
          <?php
 use App\User;
 use App\Technician;
@@ -96,11 +96,11 @@ foreach ($hoos as $hous) {
         <div class="col">
           <select name="name" class="form-control mr-sm-2">
                 <option value="" selected="selected">select Name</option>
-                <option value="">All <?php 
-                if($v == 'technician'){ echo 'Technicians';}  
+                <option value="">All <?php
+                if($v == 'technician'){ echo 'Technicians';}
                 if($v == 'iow'){ echo 'Inspectors of Works';}
                 if($v == 'hos'){ echo 'Heads of Sections'; }
-                    
+
                      ?></option>
 @foreach($rle as $tech)
 <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
@@ -116,7 +116,7 @@ foreach ($hoos as $hous) {
               <select name="type" class="form-control mr-sm-2">
                 <option value='' selected="selected">Select Type/section</option>
                 <option value="">All Type/Sections</option>
-               
+
 
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ $too->type }}</option>
@@ -125,7 +125,7 @@ foreach ($hoos as $hous) {
           </div>
       </div>
       </div>
-      
+
       <input type="text" name="change"
       value="<?php echo $v; ?>" hidden>
       <div class="modal-footer">
@@ -176,14 +176,14 @@ foreach ($hoos as $hous) {
 
           $phonreplaced = ltrim($phonenumber,'0');
           echo '+255'.$phonreplaced;
-          
+
         }else { echo $tech->phone;}
 
-      ?></td>   
+      ?></td>
        <td>
-              <?php  
+              <?php
                echo strtoupper($tech->type);  ?></td>
-                
+
             </tr>
         @endforeach
         </tbody>
@@ -191,7 +191,7 @@ foreach ($hoos as $hous) {
 
         </table>
     </div>
-   
+
 
     <script>
         $(document).ready(function(){

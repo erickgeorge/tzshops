@@ -6,7 +6,7 @@
 
 @section('body')
     <br>
-   
+
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -15,15 +15,15 @@
         </div>
     @endif
 <div class="container">
-   
-             
+
+
          <div>
           <br>
           <br>
           <br>
-              <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Cleaning Zones </b></h5>
+              <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Available Cleaning Zones </b></h5>
               <hr>
-                <a href="{{ route('registercleaningzone') }}" 
+                <a href="{{ route('registercleaningzone') }}"
                    class="btn btn-primary">Add New CLeaning Zone</a>
 
                    <br><br>
@@ -76,15 +76,15 @@
                                 </div>
 
                          </td>
-                           
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
-                
+
             </div>
-            
+
 
 
 
@@ -111,7 +111,7 @@
 
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            
+
                             <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
@@ -121,7 +121,7 @@
                             @endforeach
 
                         </select>
-                    </div>   
+                    </div>
 
                         <div class="form-group ">
                             <label for="editlocation">Type <sup style="color: red;">*</sup></label>
@@ -129,20 +129,20 @@
                                    id="edit_type"
                                    name="type" placeholder="Enter Zone Type">
                         </div>
-                       
+
                          <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
-                                                      
+                                                <div style="float: left; width: 130px">
+
                                                         <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
-                                                        
+                                               <div style="float: right; width: 290px">
+
+
                                                   <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                                                 </div>
@@ -159,7 +159,7 @@
 
 
 
-        
+
     @endSection
 
 
@@ -180,9 +180,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                                                       
- 
+            $('#myTableee').DataTable();
+
+
 
         });
 
@@ -194,7 +194,7 @@
             document.getElementById("edit_name").value = W;
 
            document.getElementById("edit_location").value = X;
-           
+
            document.getElementById("edit_type").value = Y;
 
            document.getElementById("edit_room").value = Z;
@@ -212,7 +212,7 @@
             document.getElementById("edit_campus").value = W;
 
            document.getElementById("edit_area").value = X;
-           
+
            document.getElementById("edit_type1").value = Y;
 
            document.getElementById("edit_location1").value = Z;
@@ -237,11 +237,11 @@
 
              document.getElementById("edit_zone").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 
@@ -252,11 +252,11 @@
 
              document.getElementById("edit_carea").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 

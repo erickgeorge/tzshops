@@ -29,12 +29,12 @@ Workorder Section
 
     <div>
 <br><br>
-                <h4 style=" text-transform: unset;"
+                <h4 style="text-transform: capitalize;"
                     >List of available Sections</h4></div>
 
-               
-                
-        
+
+
+
             <hr class="container">
 
             <a href="Add/section" style="margin-bottom: 20px;"
@@ -48,19 +48,19 @@ Workorder Section
                     <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name of Section</th>
-                       
+
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                        
+
                     <?php $i = 0; ?>
                     @foreach($worksec as $dep)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                           
+
                             <td><?php echo ucwords(strtolower( $dep->section_name )); ?></td>
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;
@@ -78,7 +78,7 @@ Workorder Section
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -89,7 +89,7 @@ Workorder Section
                 <div class="text-center">
 
                 </div>
-       
+
             </div>
 
 
@@ -108,18 +108,18 @@ Workorder Section
 
 
                         @csrf
-						
-						
-						
-						
-						
+
+
+
+
+
                     <div class="form-group ">
                         <label for="dep_name">Section Name</label>
-                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
+                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"
                                name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc." >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
-                       
+
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
@@ -137,7 +137,7 @@ Workorder Section
     </div>
 
 
-           
+
 
                       <script>
         window.onload = function () {
@@ -162,21 +162,21 @@ Workorder Section
         });
 
 
-        
+
 
 
         function myfunc1(x,y) {
-			
-			
+
+
             document.getElementById("esecid").value = x;
             document.getElementById("sname").value = y;
 
-			
+
         }
 
 
-		
-		
+
+
 
 
 

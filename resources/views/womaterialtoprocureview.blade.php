@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Material to be purchased 
+    Material to be purchased
     @endSection
 
 @section('body')
@@ -9,14 +9,14 @@
 use App\User;
 use App\MinuteSheet; ?>
     <br>
-    
+
 
 
     <div>
         <div>
-            <h5 style="padding-left: 90px;" align="center"><b style="text-transform: uppercase;">Material to be purchased </b></h5>
+            <h5 style=" " align="center"><b style="text-transform: capitalize;">Material to be purchased </b></h5>
         </div>
-       
+
     </div>
 
 
@@ -31,13 +31,13 @@ use App\MinuteSheet; ?>
         </div>
     @endif
     </div>
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
             <tr style="color: white;">
                 <th >#</th>
-               
+
                 <th >Material Name</th>
                 <th >Material Description</th>
                 <th >Value/Capacity</th>
@@ -56,7 +56,7 @@ use App\MinuteSheet; ?>
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                  
+
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>
@@ -69,36 +69,36 @@ use App\MinuteSheet; ?>
                     @endforeach
             </tbody>
         </table>
-        
+
          @if(auth()->user()->type == 'Head Procurement')
 
         <h4  style="     color: #c9a8a5;"> Notify Store Manager to assign Good Receiving Note about material purchased.</h4>
 
-       
+
          <a class="btn btn-primary btn-sm" href="{{ route('store.materialafterpurchase', [$item->work_order_id]) }}" role="button">Notify Store Manager</a>
          @endif
-<?php 
+<?php
 $checkes = Minutesheet::where('Woid',$item->work_order_id)->get();
  ?>
  @if(count($checkes)>0)
   <b class="badge badge-info btn-sm">Minutes sheet already created</b> <a class="btn btn-success" href="{{ url('minutesheet',[$item->work_order_id]) }}">View</a>
-         
-  @else               
- 
+
+  @else
+
         </div>
-    @endif       
+    @endif
 
             @if(strpos(auth()->user()->type, "HOS") !== false)
-          {{-- <div class="col">     
+          {{-- <div class="col">
                                 <a href="{{ url('rejected/materials')}}">
                                     <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected materials
                                     </button>
                                 </a>
                             </div> --}}
             @endif
-                     
+
 <!-- SOMETHING STRANGE HERE -->
-          
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -113,10 +113,10 @@ $checkes = Minutesheet::where('Woid',$item->work_order_id)->get();
         </button>
       </div>
       <div class="modal-body">
-      
+
       </div>
       <div class="modal-body">
-        
+
       <div class="row">
         <div class="col">
             <select name="_to" class="form-control mr-sm-2" required="">
@@ -137,7 +137,7 @@ $checkes = Minutesheet::where('Woid',$item->work_order_id)->get();
       <div class="row">
         <div class="col">
           <textarea cols="12" rows="12" placeholder="Message" name="message" class="form-control mr-sm-2" required="">
-    
+
             </textarea>
       </div>
       </div>
@@ -161,9 +161,9 @@ $checkes = Minutesheet::where('Woid',$item->work_order_id)->get();
   </div>
 
           <!-- ---------------------- -->
-  
-               
+
+
     </div>
 
-    
+
     @endSection

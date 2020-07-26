@@ -11,7 +11,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works order with missing materials</b></h5>
+            <h5 style=" " align="center"><b style="text-transform: capitalize;">Works order with missing materials</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -32,39 +32,39 @@
         </div>
     @endif
       </div>
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
-                
-				
+
+
                 <th > # </th>
 				<th > Wo ID </th>
                 <th>HoS Name</th>
 				<th >Works order Detail</th>
-				
+
 				<th >Action</th>
-				
+
             </tr>
             </thead>
 
-          <tbody>                    
+          <tbody>
 
            <?php $i= 0; ?>
             @foreach($items as $item)
 
-               
+
                 <tr> <td>{{$i++}}</td>
                     <td>00{{ $item->work_order_id }}</td>
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     <td>{{ $item['workorder']->details }}</td>
-                    
+
                     <td>
-					
+
 					 <a class="btn btn-primary btn-sm" href="{{ route('store.material_to_procure_view', [$item->work_order_id]) }}" role="button">View Material</a></td>
-                  
-                      
+
+
                     </tr>
                     @endforeach
             </tbody>

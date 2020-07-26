@@ -11,7 +11,7 @@
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: uppercase;">@php
+            <h5><b style="text-transform: capitalize;">@php
 
 
                 if ($_GET['condition']=='New') {
@@ -67,7 +67,7 @@
 echo 'Plant and Machinery';
             }else if( $_GET['asset']=='motorvehicle')
             {
-echo 'Motorvehicle';
+echo 'Motor Vehicle';
             }else if( $_GET['asset']=='computerequipments')
             {
 echo 'Computer Equipments';

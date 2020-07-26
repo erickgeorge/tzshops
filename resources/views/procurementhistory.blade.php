@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-             <h5 style="padding-left: 90px;  text-transform: uppercase;  padding-left: 90px;"><b>@if(auth()->user()->type == 'Head Procurement') Procurement Entry History @else Procured Materials @endif </b></h5>
+             <h5 style="text-transform: capitalize;"><b>@if(auth()->user()->type == 'Head Procurement') Procurement Entry History @else Procured Materials @endif </b></h5>
         </div>
 @if(count($procured) > 0)
         <div class="col-md-6">
@@ -50,7 +50,7 @@
         </div>
 
 @endif
-       
+
     </div>
     <br>
     <hr class="container">
@@ -103,7 +103,7 @@
                 <?php $i = 0;  ?>
                 @foreach($procured as $material)
 
-                    
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -124,7 +124,7 @@
                             	@foreach($officer as $offier) {{ $offier->fname }} {{ $offier->lname }} @endforeach
                             </td>
  							<td><a href="{{ url('procuredMaterials',$material->tag_) }}"><button class="btn btn-success"><i class="fa fa-eye"></i></button></a></td>
-                             
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -142,7 +142,7 @@
         @endif
     </div>
 
-    
+
     <script>
     	$(document).ready(function () {
 

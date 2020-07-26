@@ -13,8 +13,8 @@ body {
 #content {
     width: 980px;
     margin: auto;
-   
-     
+
+
     width: 980px;
 height: auto;
 padding: 20 20 20 20;
@@ -24,7 +24,7 @@ padding: 20 20 20 20;
     width: 680px;
     height: 500px;
     float: left;
-   
+
 }
 
 #previous_update {
@@ -32,7 +32,7 @@ padding: 20 20 20 20;
     height: 500px;
     float: right;
     padding: 9px;
-   
+
 }}
 </style>
 
@@ -40,7 +40,7 @@ padding: 20 20 20 20;
 
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Profile Details</h5>
+            <h5 style="text-transform: capitalize;" >Profile Details</h5>
         </div>
     </div>
     <hr>
@@ -60,18 +60,18 @@ padding: 20 20 20 20;
             </ul>
         </div>
     @endif
- 
- 
+
+
 
     <div class="col-lg-12">
         <p style="color: red"></p>
 
         <form action="{{ route('profile.change') }}" method="POST">
             @csrf
-         
-	
-	
-	 
+
+
+
+
   <div id="content" align="center">
      <div id="package_update">
 
@@ -79,7 +79,7 @@ padding: 20 20 20 20;
 <div class="row">
     <div class="col">
         <div class="form-group" >
-               
+
         <label for="fname"> First Name </label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->fname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -89,7 +89,7 @@ padding: 20 20 20 20;
     </div>
     <div class="col">
         <div class="form-group">
-               
+
         <label for="phone">Last Name </label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->lname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -101,27 +101,27 @@ padding: 20 20 20 20;
 <div class="row">
     <div class="col">
        <div class="form-group">
-               
+
         <label for="phone">Phone number </label>
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->phone }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
          class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
-    </div> 
+    </div>
     </div>
     <div class="col">
         <div class="form-group">
         <label for="email">Email Address </label>
         <input disabled style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
-    </div> 
+    </div>
     </div>
 </div>
 
 
-	
+
 	 <div>
 			<a href="/changeprofile"  class="btn btn-primary">Edit profile</a>
-            
+
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </form>
         </div>
@@ -147,24 +147,24 @@ padding: 20 20 20 20;
     </div>
     </div>
 </div>
-    
+
 </div>
 
 
-        <div id="previous_update"> 
+        <div id="previous_update">
      <div class="row justify-content-center">
      <div class="profile-header-container">
                 <div class="profile-header-img">
 
                     <img class="rounded-circle" src="/storage/{{ $user->avatar }}" />
                     <!-- badge -->
-                  
+
                 </div>
             </div>
           </div>
         </div>
-        
 
-      
-    
+
+
+
     @endSection

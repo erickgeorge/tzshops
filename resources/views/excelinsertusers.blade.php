@@ -8,7 +8,7 @@
 <br>
     <div class="row" style=" margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h2 style="text-transform: uppercase;">Upload Excel user's Data</h2>
+            <h2 style="text-transform: capitalize;">Upload Excel user's Data</h2>
         </div>
     </div>
     <hr>

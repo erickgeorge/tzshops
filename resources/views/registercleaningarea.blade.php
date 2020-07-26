@@ -26,10 +26,12 @@ StaffHouse Registrartion
 
 <div class="container">
 
+
                 <h5  id="Add New House">Register  New Cleaning Area</h5>
+
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
-    
+
                 <form method="POST" action="{{ route('area.save') }}" class="col-lg-12">
                     @csrf
 
@@ -38,12 +40,13 @@ StaffHouse Registrartion
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:200px;" class="input-group-text" for="directorate">Cleaning Area Name </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="cleaning_name" placeholder="Enter Cleaning Area Name">
                     </div>
+
 
                                             <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
@@ -54,16 +57,16 @@ StaffHouse Registrartion
                                name="zone" placeholder="Enter LOT Name">
                     </div> 
 
-                
+
 
                     <button type="submit" class="btn btn-primary">Save
                     </button>
                       <a class="btn btn-danger" href="/manage_Cleaning_area" role="button">Cancel </a>
                   </div>
                 </form>
-                  
+
             </div>
-            
+
 
 
 @endSection

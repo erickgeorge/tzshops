@@ -5,13 +5,13 @@
     @endSection
 
 @section('body')
-   <?php use App\Block; ?> 
+   <?php use App\Block; ?>
     <br>
 <div class="container">
    <br>
    <br>
    <br>
-        
+
             @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -19,9 +19,9 @@
             </ul>
         </div>
             @endif
-        <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - <small>@foreach($aariya as $arriya) {{$arriya->name_of_area }} @endforeach </small></h5>
+        <h5 style="text-transform: capitalize;" ><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b> - <small>@foreach($aariya as $arriya) {{$arriya->name_of_area }} @endforeach </small></h5>
                   <hr>
-                <a href="{{ route('registernonbuildingasset') }}" 
+                <a href="{{ route('registernonbuildingasset') }}"
                    class="btn btn-primary">Add New Non-Building Assets</a>
                    <br><br>
 
@@ -43,19 +43,19 @@
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            
-                            <td> 
+
+                            <td>
                                 <?php $asset = Block::where('id',$non->block_id)->get();?>
                                 @foreach($asset as $asset)
                                 @endforeach
                                 {{ $asset->name_of_block }}
-                                
+
                             </td>
-                           
+
                             <td>{{ $non->total_asset }}</td>
                             <td>
                             <form method="Get" action="NonassetAt">
-                                
+
                                 <input type="text" name="asset" value="{{ $_GET['asset'] }}" hidden>
 
                                 <input type="text" value="{{ $non->block_id }}" hidden name="location">
@@ -68,16 +68,16 @@
 
                     @endforeach
                 </tbody>
-                    
+
                 </table>
                 <br>
-                
 
 
 
 
 
-        
+
+
     @endSection
 
 
@@ -98,9 +98,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 

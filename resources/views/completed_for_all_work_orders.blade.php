@@ -8,13 +8,14 @@
 
 
     <br>
-    <div class="row container-fluid" >
-        <div class="col-md-6">
+    <div class="container">
+    <div class="row" >
+        <div class="col">
             <h5 ><b>Completed Works Orders List </b></h5>
 
         </div>
 @if(count($wo) > 0)
-        <div class="col-md-6">
+        <div class="col">
             <form method="GET" action="completed_works_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -32,8 +33,10 @@
         </div>
 
 @endif
-
+</div>
     </div>
+
+
     <br>
     <hr class="container">
     <div class="container">

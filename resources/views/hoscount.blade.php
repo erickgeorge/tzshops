@@ -1,14 +1,14 @@
 @extends('layouts.master')
 <style type="text/css" media="print">
-        
+
         #exclude1{
             display:none;
         }
-		
+
 		#exclude2{
             display:none;
         }
-		
+
     </style>
 @section('title')
     HOS Completed Work order
@@ -20,7 +20,7 @@
 
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 class="container"><b style="text-transform: uppercase;">Number of Head of Sections Completed their Works orders  </b></h5>
+            <h5 class="container"><b style="text-transform: capitalize;">Number of Head of Sections Completed their Works orders  </b></h5>
         </div>
 
        <!-- <div class="col-md-6">
@@ -41,11 +41,11 @@
         </div>-->
 
 
-       
+
     </div>
     <br>
     <hr>
-    <div class="container"> 
+    <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -53,27 +53,27 @@
             </ul>
         </div>
     @endif
-   
+
 
     <!--<div id="div_print" class="container" align="center">-->
-	
-	
 
 
-       
+
+
+
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
 					<th>HOS name</th>
                     <th>Total Works orders Completed</th>
                     <th colspan="" rowspan="" headers="" scope="">Action</th>
-                   
+
                 </tr>
                 </thead>
 
                 <tbody>
 
-             
+
                 @foreach($wo as $work)
                         <tr>
                              <td>{{ $work['hos']->fname.' '.$work['hos']->lname }}</td>
@@ -100,9 +100,9 @@
 
 
         });
-		
-		
-		
+
+
+
 function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORK ORDERS </h1>";

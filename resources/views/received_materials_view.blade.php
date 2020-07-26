@@ -10,9 +10,9 @@
     <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type == 'STORE')
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"><b style="text-transform: uppercase;">List of Available Material required by Head of Section</b></h5>
+            <h5 style=" "  align="center"><b style="text-transform: capitalize;">List of Available Material required by Head of Section</b></h5>
             @else
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center" style="text-transform: uppercase;"><b>Available Material you requested  from Store </b></h5>
+            <h5 style=" "  align="center" style="text-transform: capitalize;"><b>Available Material you requested  from Store </b></h5>
             @endif
         </div>
 

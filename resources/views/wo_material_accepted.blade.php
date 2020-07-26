@@ -10,7 +10,7 @@
       @if(count($items) > 0)
     <div class="row container-fluid" >
         <div class="col-lg-12">
-           <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Material accepted for this works  order </b></h5>
+           <h5 style=" " align="center"><b style="text-transform: capitalize;">Material accepted for this works  order </b></h5>
         </div>
 
        <!-- <div style="padding-left: 650px;">
@@ -48,21 +48,21 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container">
         @if(count($items) > 0)
-             
+
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
-           			
+
 				<th >Material Name</th>
 				<th >Material Description</th>
 				<th >Type</th>
 				<th >Quantity</th>
 				<th >Status</th>
-				
+
             </tr>
             </thead>
 
@@ -74,8 +74,8 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
-                   
+
+
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
@@ -95,21 +95,21 @@
 
                        @endif
                     </tr>
-			
+
                     @endforeach
             </tbody>
         </table>
     </div>
-   
+
         @else
 
              <br><div> <h2 style="padding-top: 300px;">Currently no works order with accepted material</h2></div>
-             
-                
+
+
         @endif
     </div>
 	</div>
-	
+
 
     <script>
 

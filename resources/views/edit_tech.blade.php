@@ -7,7 +7,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Edit technician</h5>
+            <h5 style="text-transform: capitalize;" >Edit technician</h5>
         </div>
     </div>
     <hr class="container">
@@ -59,7 +59,7 @@
 
             <div style="padding-left: 500px;">
 
-            <button type="submit" class="btn btn-primary">save</button> &nbsp;  &nbsp;  &nbsp;  
+            <button type="submit" class="btn btn-primary">save</button> &nbsp;  &nbsp;  &nbsp;
 
 
             <a class="btn btn-danger" href="/technicians" role="button">Cancel </a>

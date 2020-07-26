@@ -8,7 +8,7 @@ Edit Building Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: uppercase;">Edit Building Asset</b></h5>
+            <h5><b style="text-transform: capitalize;">Edit Building Asset</b></h5>
         </div>
     </div>
     <hr class="container">

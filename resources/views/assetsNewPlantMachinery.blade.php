@@ -11,7 +11,7 @@ New Plant And Machinery Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: uppercase;">Add New Plant And Machinery Asset</b></h5>
+            <h5><b style="text-transform: capitalize;">Add New Plant And Machinery Asset</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -48,6 +48,8 @@ New Plant And Machinery Asset
                                <div class="form-group col">
                                    <label for="my-input">Site Location <sup class="text-danger">*</sup></label>
                                    <select id="location" required class="form-control" type="text" name="SiteLocation">
+                                    <option value="" selected style="color: red;">Choose...</option>
+
                                     @php
                                         $option = assetsidentifiedlocation::orderBy('abbreviation','ASC')->get();
                                     @endphp

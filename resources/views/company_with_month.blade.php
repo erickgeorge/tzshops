@@ -22,9 +22,9 @@ Cleaning company report
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
+    @endif
 
-     <h5 style=" text-transform: uppercase;" ><b style="text-transform: uppercase;">Months</b></h5>
+     <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Months</b></h5>
               <hr>
 
                    <br>
@@ -34,7 +34,7 @@ Cleaning company report
                    <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Assessment Month</th>
-                      
+
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -47,25 +47,25 @@ Cleaning company report
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                           
+
                             <td>{{ date('F Y', strtotime($comp->assessment_month))}}</td>
-                            
-                          
-                           
+
+
+
                             <td>@if(auth()->user()->type == 'Supervisor Landscaping')<a style="color: green;"  href="{{route('edit_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="Edit report"><i
                                                     class="fas fa-edit"></i></a>@else <a style="color: green;"  href="{{route('edit_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="view report"><i
                                                     class="fas fa-eye"></i></a>  @endif &nbsp; <a style="color: green;"  href="{{route('view_company_month' , [$comp->assessment_month])}}" data-toggle="tooltip" title="View report in bar graph"><i
                                                    class="fa fa-bar-chart"></i></a></td>
-                           
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
 
 
 
 
-          
+
 
     @endSection

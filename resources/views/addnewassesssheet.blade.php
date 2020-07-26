@@ -27,19 +27,19 @@ add new assessment sheet
 
 
 <div class="container">
-                <h5 style=" text-transform: uppercase;"   id="Add New House" >Assessmet Sheet</h5>
+                <h5 style="text-transform: capitalize;"   id="Add New House" >Assessmet Sheet</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
-          
+
                 <form method="POST" action="{{ route('addnew.sheet') }}" class="col-lg-12">
                     @csrf
 
                 <div align="center">
-     
-                    
+
+
                         <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">Name</label>
 
@@ -49,10 +49,10 @@ add new assessment sheet
                     </div>
 
 
-                                    
+
                         <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">Type</label>
 
@@ -66,37 +66,37 @@ add new assessment sheet
 
 
                     <div>
-  
+
 
    <div class="jumbotron" style="width: 500px;">
-                 
+
 
      <table>
-    
+
       <tr>
      <thead style="color: white;">
         <th style="width: 25px"></th>
         <th style="width: 420px">Activity</th>
         <th style="width: 200px">Percentage(%)</th>
-     
+
      </thead>
       </tr>
 
      </table>
 
-     
+
 
     <TABLE id="dataTable" width="350px" border="1">
         <TR>
             <TD><INPUT type="checkbox" name="chk"/></TD>
-            <TD  ><textarea style="width: 250px; height: 60px;" class="form-control" type="text" name="activity[]"  placeholder ="activity..." required="required"  ></textarea></TD> 
-           
-            <TD><input style="width:150px;"  oninput="totalitem()" id="istock"  min="1" max="100"  class="form-control" type="number" name="percentage[]" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   >    </TD> 
-              
-          
+            <TD  ><textarea style="width: 250px; height: 60px;" class="form-control" type="text" name="activity[]"  placeholder ="activity..." required="required"  ></textarea></TD>
+
+            <TD><input style="width:150px;"  oninput="totalitem()" id="istock"  min="1" max="100"  class="form-control" type="number" name="percentage[]" placeholder="Percentage" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required"   >    </TD>
+
+
         </TR>
 
-      
+
 
     </TABLE>
    <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
@@ -104,7 +104,7 @@ add new assessment sheet
     <INPUT id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
 
   </div>
-   
+
 
 
 
@@ -115,37 +115,37 @@ add new assessment sheet
                 </div>
    </form>
                  </div>
- 
+
 
 
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
-             
+
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
             var colCount = table.rows[0].cells.length;
 
-       
+
 
             for(var i=0; i<colCount; i++)
              {
 
-              
+
                if(rowCount = 1) {
-                      
+
                           document.getElementById('deleterowbutton').style.display='inline-block';
 
 
 
                     }
 
-                
+
 
 
                 var newcell = row.insertCell(i);
-                 
+
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
 
                 //alert(newcell.childNodes);
@@ -163,11 +163,11 @@ add new assessment sheet
 
                 }
 
-                  
+
 
             }
 
-           
+
         }
 
 
@@ -184,14 +184,14 @@ add new assessment sheet
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");
                         break;
-                    } 
+                    }
 
 
                         if(rowCount <= 2) {
-                       
+
 
                         document.getElementById('deleterowbutton').style.display='none';
-                    } 
+                    }
 
                     table.deleteRow(i);
                     rowCount--;
@@ -226,16 +226,16 @@ add new assessment sheet
 
 
 
-     
-
-   
 
 
 
 
-              
 
-       
+
+
+
+
+
 
 
 

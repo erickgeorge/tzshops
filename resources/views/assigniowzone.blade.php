@@ -11,14 +11,14 @@
 }
 
 
-    
-    
+
+
  </style>
 <div class="container">
     <br>
     <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
         <div class="col-lg-12" align="center">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Please assign zone for Inspector of Work</h5>
+            <h5 style="text-transform: capitalize;" >Please assign zone for Inspector of Work</h5>
         </div>
 
     </div>
@@ -81,7 +81,7 @@
                        name="email" onblur="validateEmail(this);" placeholder="Enter email address" value="{{ $user->email }}">
             </div>
     </div>
-    
+
     <div class="col">
         <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -93,7 +93,7 @@
                                 selected="selected"
                                 <?php } ?>
                                 value="{{ $directorate->id }}" disabled > {{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
-                    @endforeach 
+                    @endforeach
 
                 </select>
         </div>
@@ -107,13 +107,13 @@
                 <div class="input-group-prepend">
                     <label  style="height: 28px;" class="input-group-text" for="department">Department</label>
                 </div>
-                 
+
                 <select disabled class="custom-select" name="department" id="department" >
                      @foreach($departments as $dep)
                     <option value="{{ $dep->id }}">{{ $dep->description }}</option>
                      @endforeach
                 </select>
-                 
+
             </div>
     </div>
 
@@ -157,49 +157,49 @@
     <div class="row">
        <div class="col" >
         <label>Type of User</label><br>
-       
-              
+
+
                <select disabled class="custom-select" name="type[]" id="type">
                       <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose...</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
-                      
+
                       <option @if (in_array('CLIENT',$str_array)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
                       <option @if (in_array('DVC Admin',$str_array)) { selected="selected" } @else{} @endif  value="DVC Admin">DVC Admin</option>
                       <option @if (in_array('Estates Director',$str_array)) { selected="selected" } @else{} @endif   value="Estates Director">Estates Director</option>
                       <option @if (in_array('Head Procurement',$str_array)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
                       <option @if (in_array('Inspector Of Works',$str_array)) { selected="selected" } @else{} @endif  value="Inspector Of Works">Inspector Of Works</option>
-                      <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option> 
+                      <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option>
                       <option  @if (in_array('STORE',$str_array)) { selected="selected" } @else{} @endif value="STORE">Store Manager</option>
                       <option @if (in_array('Transport Officer',$str_array)) { selected="selected" } @else{} @endif  value="Transport Officer">Transport Officer</option>
                </select>
          </div>
-           
-          
+
+
          <div class="col">
                         <label for="dep_name">Section Zone <sup style="color: red;">compulsory</sup></label>
-                       
+
                         <select required style="width: 500px;"  name="zone" id="zone">
-           
+
                 <?php use App\iowzone; ?>
                <?php $iowzone = iowzone::get(); ?>
-               @foreach($iowzone as $zone) 
+               @foreach($iowzone as $zone)
                <option value="{{ $zone->zonename }}" ><?php echo strtoupper( $zone->zonename ); ?></option>
                @endforeach
-                   
+
                         </select>
           </div>
 
 
        </div>
-                   
+
       <br>
 
-                    
-               
-            
 
-        
-          
+
+
+
+
+
 
              <div align="center">
             <button type="submit" class="btn btn-primary">Save</button>
@@ -216,8 +216,8 @@
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
-		
-		
-		
+
+
+
     </script>
     @endSection

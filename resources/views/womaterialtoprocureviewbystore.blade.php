@@ -14,9 +14,9 @@
 
     <div>
         <div>
-            <h5 style="padding-left: 90px;" align="center" class="container"><b style="text-transform: uppercase;">Material Reserved for Works Order</b></h5>
+            <h5 style=" " align="center" class="container"><b style="text-transform: capitalize;">Material Reserved for Works Order</b></h5>
         </div>
-       
+
     </div>
 
 
@@ -30,13 +30,13 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
-       
+
                 <th >Material Name</th>
                 <th >Description</th>
                 <th >Unit Measure</th>
@@ -44,9 +44,9 @@
                 <th >Quantity Requested</th>
                 <th >Quantity Reserved</th>
                 <th >Status</th>
-               
-    
-                
+
+
+
             </tr>
             </thead>
 
@@ -58,7 +58,7 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>
@@ -72,25 +72,25 @@
                     @else
                     <td> <span class="badge badge-primary"> Reserved </span> </td>
                     @endif
-                   
+
 
                     </tr>
                     @endforeach
             </tbody>
         </table>
-        
-        
-                  
+
+
+
     </div>
     @else
         <div style="padding-top: 300px;">
         <div>
             <h3 align="center">No available Material Reserved by Works Orders</h3>
         </div>
-       
+
     </div>
 
     @endif
-    
-    
+
+
     @endSection

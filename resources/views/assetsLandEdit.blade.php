@@ -8,7 +8,7 @@ Edit Land Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: uppercase;">Edit Land Asset</b></h5>
+            <h5><b style="text-transform: capitalize;">Edit Land Asset</b></h5>
         </div>
     </div>
     <hr class="container">

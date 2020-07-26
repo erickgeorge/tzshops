@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-           <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Store Material Entry History </b></h5>
+           <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Store Material Entry History </b></h5>
         </div>
 @if(count($procured) > 0)
         <div class="col-md-6">
@@ -89,7 +89,7 @@
                 <?php $i = 0;  ?>
                 @foreach($procured as $material)
 
-                    
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -100,16 +100,16 @@
                                 <b class="badge badge-success">new entry</b>
                                 @else
                                 <b class="badge badge-primary">Incremetal entry</b>
- 
+
                                 @endif
 
                             </td>
-                           
+
                             <td><?php $officer = User::where('id',$material->added_by)->get(); ?>
                             	@foreach($officer as $offier) {{ $offier->fname }} {{ $offier->lname }} @endforeach
                             </td>
  							<td><a href="{{ url('materialEntry',$material->tag_) }}"><button class="btn btn-success"><i class="fa fa-eye"></i></button></a></td>
-                             
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -127,7 +127,7 @@
         @endif
     </div>
 
-    
+
     <script>
     	$(document).ready(function () {
 

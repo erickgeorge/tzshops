@@ -21,14 +21,14 @@
 <br>
 <div class="container" style="margin-top: 6%;">
   <div class="col-lg-4">
-    <h5 style="padding-left: 90px;  text-transform: uppercase;" >Add new Material</h5>
+    <h5 style="text-transform: capitalize;" >Add new Material</h5>
   </div>
 </div>
   @if(Session::has('message'))
     <br>
     <p class="alert alert-success">{{ Session::get('message') }}</p>
   @endif
-  
+
   @if ($errors->any())
         <div class="alert alert-danger">
              <ul class="alert alert-danger" style="list-style: none;">
@@ -44,7 +44,7 @@
     <p style="color: red;">* all fields are compulsory</p>
     <div class="row">
 <div class="col-sm-2">
-    
+
 </div>
 </div>  <br>
 <form method="POST" action="{{ route('material.create') }}" enctype="multipart/form-data">
@@ -58,7 +58,7 @@
             </div>
         </div><br>
         <div class="row">
-            
+
             <div class="col">
                 <button id="bt" type="submit" class="btn btn-primary" disabled>Submit</button>&nbsp;<a href="{{ url('ProcurementHistory') }}" class="btn btn-danger">Cancel</a>
             </div>
@@ -81,15 +81,15 @@
         var tr = MatForm.insertRow(-1);
 
         for (var h = 0; h < arrHead.length; h++) {
-            var th = document.createElement('th'); 
+            var th = document.createElement('th');
 
 
             if(h==5){
                     th.setAttribute('style','width:95px;')
                 }
-               
 
-                
+
+
 
                 if(h ==3){
                     th.setAttribute('style','width:100px;')
@@ -151,7 +151,7 @@
                     ele.setAttribute('type', 'text');
                 }
 
-                
+
                 if(c==3){
                     ele.setAttribute('style','width:100px;')
                 }
@@ -163,7 +163,7 @@
                 ele.setAttribute('class', 'form-control');
                 ele.setAttribute('name',c);
 
-               
+
 
     var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
@@ -199,7 +199,7 @@
             }
         }
 
-       
+
     }
 
     // ADD A NEW ROW TO THE TABLE.s
@@ -248,7 +248,7 @@
                     ele.setAttribute('type', 'text');
                 }
 
-                
+
 
                 if(c==3){
                     ele.setAttribute('style','width:100px;')
@@ -261,7 +261,7 @@
                 ele.setAttribute('class', 'form-control');
                 ele.setAttribute('name',c);
 
-               
+
 
     var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
@@ -297,7 +297,7 @@
             }
         }
 
-        
+
     }
 
     // DELETE TABLE ROW.
@@ -307,7 +307,7 @@
     value = isNaN(value) ? 0 : value;
     --value; --value; --value; --value; --value;
     document.getElementById('totalmaterials').value = value;
-        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); 
+        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);
 
 var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
@@ -337,7 +337,7 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
                 }
             }
         }
-        
+
         // SHOW THE RESULT IN THE CONSOLE WINDOW.
         console.log(values);
     }

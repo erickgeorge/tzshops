@@ -18,15 +18,15 @@
         </div>
     @endif
 </div>
-  
+
 <div class="container">
 
-<div style="text-align: center"><h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Material accepted by inspector of works</b></h5></div>
+<div style="text-align: center"><h5 style=" "><b style="text-transform: capitalize;">Material accepted by inspector of works</b></h5></div>
 
-<br>  
+<br>
 <hr>
 
-                         
+
                          <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
   <tr style="color: white;">
@@ -37,15 +37,15 @@
      <th>Quantity Requested</th>
       <th>Quantity in Store</th>
       <th>Quantity Reserved</th>
-      
+
        <th>Quantity to Purchase</th>
        <th>Action</th>
-       
-       
+
+
   </tr>
 </thead>
 
-  <?php $i=1; 
+  <?php $i=1;
   $p= array("t");
   ?>
 
@@ -64,7 +64,7 @@
       @else
       <td>{{number_format($matform['material']->stock  - $matform['material']->quantity_reserved) }}</td>
       @endif
-     
+
 
 
      @if(($matform['material']->stock- $matform['material']->quantity_reserved)>=($matform->quantity))
@@ -76,7 +76,7 @@
 
 
        @else
-      <?php 
+      <?php
        $p[$i]= "yes";
        $i++;
        ?>
@@ -95,22 +95,22 @@
                    </span> </td>
       @endif
 
-      
+
 
       </tr>
       @endforeach
-      </tbody>            
-</table> 
+      </tbody>
+</table>
 <br>
-          
-         
+
+
 
                     @if(in_array("yes", $p))
 
 
-                     <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > RESERVE AND SEND PURCHASING ORDER TO DES </a></button>  
+                     <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > RESERVE AND SEND PURCHASING ORDER TO DES </a></button>
                     @else
-                     
+
 
                       <button   class="btn btn-warning"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >NOTIFY HoS TO TAKE MATERIAL </a></button>
 

@@ -93,7 +93,7 @@ use App\MinuteConversation;
 <br>
     <div class="row container-fluid" style="margin-top: 6%; margin-left: 4%; margin-right: 4%;">
         <div class="col-md-5">
-            <h3><b style="text-transform: uppercase;">Minute Sheet - Conversation </b></h3>
+            <h3><b style="text-transform: capitalize;">Minute Sheet - Conversation </b></h3>
         </div>
         <div class="col-md-4"> <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
  Minute sheet Details
@@ -108,16 +108,16 @@ use App\MinuteConversation;
 
 
 <!-- SOMETHING STRANGE HERE -->
-         
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    
+
     <div class="modal-content">
-      
-     
-      
+
+
+
 
   <div class="modal-body">
       <div class="row">
@@ -132,10 +132,10 @@ use App\MinuteConversation;
             @endforeach
 
 
-            <?php $item= 
+            <?php $item=
 WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quantity) as quantity'))->where('status',5)->where('work_order_id',$name)->groupBy('material_id')->groupBy('work_order_id')->groupBy('staff_id')->get();
             ?>
-            @foreach($item as $item) 
+            @foreach($item as $item)
             <?php $tot = 0 -($item['material']->stock - $item->quantity); if($tot > 0){?>
             <tr>
 
@@ -149,12 +149,12 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
         </div>
       </div>
   </div>
-     
+
     </div>
   </div>
 </div>
           <!-- ---------------------- -->
-       
+
     </div>
     <br>
     <hr>
@@ -196,7 +196,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
 @if(($him->_From == auth()->user()->id)||($him->_To == auth()->user()->id)||($him->_With == auth()->user()->id))
 <div style="position: fixed; bottom: 0; left: 0; right: 0;">
 <div id="accordion">
- 
+
   <div class="card">
     <div class="card-header bg-success" id="headingThree" align="center">
       <h5 class="mb-0">
@@ -242,7 +242,7 @@ WorkOrderMaterial::select(DB::raw('work_order_id,staff_id,material_id,sum(quanti
   </div>
 
 </div>
- 
+
 </div>
 @endif
 @endforeach

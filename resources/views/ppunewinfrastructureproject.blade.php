@@ -8,7 +8,7 @@
 <br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">New Infrastructure Project </b></h5>
+            <h5  ><b style="text-transform: capitalize;">New Infrastructure Project </b></h5>
         </div>
 
     </div>

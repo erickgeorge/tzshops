@@ -8,7 +8,7 @@
     <br>
     <div class="row" style=" margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Create new works order for landscaping</h5>
+            <h5 style="text-transform: capitalize;" >Create new works order for landscaping</h5>
         </div>
     </div>
     <hr>
@@ -43,21 +43,21 @@
                 <option selected value="">Choose...</option>
                 <?php use App\landmaintainancesection; ?>
 <?php $sectionss = landmaintainancesection::get(); ?>
- @foreach($sectionss as $sectionss) 
+ @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section }}"><?php echo ucwords(strtolower($sectionss->section)); ?></option>
                @endforeach
-                   
+
             </select>
              </div>
             </div>
         <div class="col">
-                
+
         <?php
         use App\Location;
         $location = Location::where('name','<>',null)->orderby('name')->get();
         ?>
 
-       
+
 
         <div id="divmanual">
             <div class="input-group mb-3">
@@ -87,7 +87,7 @@
                     <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Location</label>
                 </div>
                 <select style="width:405px;" required class="custom-select" id="location" name="location" onchange="getAreas()">
-                    <option value="" selected>Choose... 
+                    <option value="" selected>Choose...
                     </option>
 
                     @foreach($location as $loc)
@@ -100,7 +100,7 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label style="height: 28px" class="input-group-text" for="area">Area 
+                    <label style="height: 28px" class="input-group-text" for="area">Area
                     </label>
                 </div>
                 <select style="width:430px;" required class="custom-select" id="area" name="area" onchange="getBlocks()">
@@ -113,7 +113,7 @@
             <div class="col">
                 <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label  style="height: 28px" class="input-group-text" for="block">Block 
+                    <label  style="height: 28px" class="input-group-text" for="block">Block
                     </label>
                 </div>
                 <select style="width:420px;" required class="custom-select" id="block" name="block" onchange="getRooms()">
@@ -124,7 +124,7 @@
             <div class="col">
                  <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label   style="height: 28px" class="input-group-text" for="room">Room 
+                    <label   style="height: 28px" class="input-group-text" for="room">Room
                     </label>
                 </div>
                 <select style="width:420px;" required class="custom-select" id="room" name="room">
@@ -135,7 +135,7 @@
         </div>
     </div>
      <br>
-     
+
       <br>
 
         <div class="form-group">

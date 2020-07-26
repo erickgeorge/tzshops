@@ -31,12 +31,12 @@ use app\department;
     @endif
 
        @if(count($directorates)>0)
-               <h5 style="padding-left: 90px;  text-transform: uppercase;" 
+               <h5 style="text-transform: capitalize;"
                    class="btn btn-default">List of Departments</h5>
 
-               
-                
-        
+
+
+
             <hr class="container">
 
             <a href="Add/department" style="margin-bottom: 20px;"
@@ -44,8 +44,8 @@ use app\department;
                    <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
 
-                   
-                 
+
+
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -63,7 +63,7 @@ use app\department;
                             <option value="">All Departments</option>
                             <?php
                             $dept = department::get();                            ?>
-                         
+
                           @foreach ($dept as $dept)
                               <option value="{{ $dept->id }}">{{ $dept->description }} - {{$dept->name}}</option>
                           @endforeach
@@ -81,7 +81,7 @@ use app\department;
                           @endforeach
                             </select>
                           </div>
-                        
+
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                           <button type="submit" class="btn btn-primary">Generate</button>
@@ -137,7 +137,7 @@ use app\department;
                 <div class="text-center">
 
                 </div>
-       
+
             </div>
 
 
@@ -153,17 +153,17 @@ use app\department;
                    <div class="modal-body">
 
                 <form method="POST" action="edit/department" class="col">
-                 
+
 
 
                         @csrf
-						
-						
-						
+
+
+
 						<div class="form-group">
-                       
+
                             <label for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
-                       
+
                         <select  style="color: black;"  required class="form-control" name="editdirectoratefdep" id="editdirectoratefdep">
                             <option value="">Choose...</option>
                             @foreach($directorates as $directorate)
@@ -172,7 +172,7 @@ use app\department;
 
                         </select>
                     </div>
-						
+
                         <div class="form-group">
                             <label for="edirname">Department name <sup style="color: red;">*</sup></label>
                             <input style="color: black;" type="text" required class="form-control"
@@ -194,7 +194,7 @@ use app\department;
                         <a href="/Manage/department" class="btn btn-danger">Cancel
                     </a>
 
-                   
+
                 </form>
 
                  </div>
@@ -247,21 +247,21 @@ use app\department;
 
 
         function myfunc1(x, y, z,p) {
-			
-			
+
+
             document.getElementById("edepid").value = x;
             document.getElementById("edepname").value = y;
 
             document.getElementById("edepdesc").value = z;
-			
-			
+
+
 			 for(var i = 0;i < document.getElementById("editdirectoratefdep").length;i++){
             if(document.getElementById("editdirectoratefdep").options[i].value == p ){
                document.getElementById("editdirectoratefdep").selectedIndex = i;
             }
         }
-			
-			
+
+
         }
 
 
@@ -271,10 +271,10 @@ use app\department;
 
             document.getElementById("esecdesc").value = z;
         }
-		
-		
-		
-		
+
+
+
+
 		var selecteddep = null;
 var selectedsection = null;
 function getDepartments(){
@@ -290,14 +290,14 @@ function getDepartments(){
         console.log(msg['departments']);
 		var object = JSON.parse(JSON.stringify(msg['departments']));
 		$('#department').empty();
-		
+
 		var option = document.createElement('option');
 			option.innerHTML = 'Choose...';
 			option.value = '';
 			document.getElementById('department').appendChild(option);
-			
-			
-		
+
+
+
 		for (var i = 0; i < object.length; i++) {
 			var option = document.createElement('option');
 			option.innerHTML = object[i].description;

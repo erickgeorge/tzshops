@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5 ><b style="text-transform: uppercase;">Building Assets</b></h5>
+            <h5 style="text-transform: capitalize;"><b >Building Assets</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\DB;
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
 
         <div class="col-md-5">
-            <a href="{{url('assetsNewBuilding')}}" class="btn btn-primary text-light" type="button"><b>Add new Building asset</b></a>
+            <a href="{{url('assetsNewBuilding')}}" class="btn btn-primary text-light" type="button"><b>Add New Building Asset</b></a>
         </div>
         @endif
     </div>

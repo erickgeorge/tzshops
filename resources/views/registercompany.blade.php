@@ -29,10 +29,14 @@ Company Registrartion
 
 
 <div class="container">
+
                 <h4  id="Add New House" >Register New Tender</h4>
+
+           
+
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
-          
+
                 <form method="POST" action="{{ route('company.save') }}" class="col-lg-12">
                     @csrf
 
@@ -41,42 +45,42 @@ Company Registrartion
 
 <div class="jumbotron" style="width: 500px;">
      <table>
-    
+
       <tr>
      <thead style="color: white;">
         <th style="width: 25px"></th>
         <th style="width: 250px">Area</th>
         <th style="width: 250px">Assessment sheet</th>
-     
+
      </thead>
       </tr>
 
      </table>
 
 
-         
+
        <TABLE id="dataTable" width="350px" border="1">
         <TR>
             <TD><INPUT type="checkbox" name="chk"/></TD>
             <TD  >
-                          
+
                             <select style="color: black; width:  200px;" required class="custom-select"  name="area[]"  required >
-                             <option value="" selected>Choose area... 
+                             <option value="" selected>Choose area...
                             </option>
-                         
+
                                 @foreach($carea as $carea)
                                     <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
                                     </option>
                                 @endforeach
-                            </select>      
-                      
-              </TD> 
-           
+                            </select>
+
+              </TD>
+
             <TD>
                          <select style="color: black; width:  200px;" required class="custom-select"  name="sheets[]"  required >
-                             <option value="" selected>Choose assessment sheet... 
+                             <option value="" selected>Choose assessment sheet...
                             </option>
-                         
+
                                 @foreach($sheets as $sheet)
                                 @if((auth()->user()->type == 'USAB') and ($sheet->type == 'Interior'))
 
@@ -93,20 +97,20 @@ Company Registrartion
                                     </option>
                                    @endif
 
-                                 @elseif($role['user_role']['role_id'] == 1)  
+                                 @elseif($role['user_role']['role_id'] == 1)
 
                                      @if($sheet->percentage == 100)
                                     <option value="{{ $sheet->name }}">{{ $sheet->name}}
                                     </option>
                                    @endif
-                                   
 
-                                @endif  
+
+                                @endif
                                 @endforeach
-                        </select> 
-           </TD> 
-              
-          
+                        </select>
+           </TD>
+
+
         </TR>
      </TABLE>
 
@@ -116,54 +120,54 @@ Company Registrartion
 
   </div>
 
-                
-                     
-                 
+
+
+
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">Company name</label>
 
                         </div>
-                          
+
 
                            <select  class="custom-select"  name="companyid" id="companyi"  onchange="getcompany()" required>
-                             <option value="" selected>Choose company... 
+                             <option value="" selected>Choose company...
                             </option>
-                         
+
                                 @foreach($companyall as $carea)
                                     <option value="{{ $carea->id }}">{{ $carea->company_name}}
                                     </option>
                                 @endforeach
-                          </select> 
+                          </select>
                      </div>
 
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">Tender number</label>
 
                         </div>
-                          
+
 
                            <select   class="custom-select"  name="tendern" id="tendernumber" required  >
-                             <option value="" selected>Choose tender number... 
+                             <option value="" selected>Choose tender number...
                             </option>
-                         
-                               
-                          </select> 
+
+
+                          </select>
                      </div>
 
 
 
- 
+
 
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate">Contract payment </label>
 
@@ -175,11 +179,11 @@ Company Registrartion
 
                   <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:150px;" class="input-group-text" for="directorate">Start of contract</label>
 
                         </div>
-                       
+
                         <input style="color: black" type="date" required class="form-control" id="type"
                                name="datecontract" required min="<?php echo date('Y-m-d', strtotime("-1 month")); ?>" max="<?php echo date('Y-m-d'); ?>" value="{{ old('datecontract') }}" >
 
@@ -188,7 +192,7 @@ Company Registrartion
 
                   <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
                           <label style="width:150px;" class="input-group-text" for="directorate">Contract Duration</label>
 
                         </div>
@@ -201,25 +205,27 @@ Company Registrartion
                             <option value="" selected>Choose contract duration...</option>
                              <option value="1">1 Year</option>
                              <option value="2">2 Years</option>
-                        
-                               
-                      </select> 
+
+
+
+                      </select>
+
 
                  </div>
 
 
-                
+
 
                          <br>
                          <br>
-             
-                    
-  
 
 
 
 
-              
+
+
+
+
             <button type="submit" class="btn btn-primary">Save
                     </button>
                     <a class="btn btn-danger" href="/tender" role="button">Cancel </a>
@@ -227,36 +233,36 @@ Company Registrartion
                 </form>
             </div>
 
-       
+
 
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
-             
+
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
             var colCount = table.rows[0].cells.length;
 
-       
+
 
             for(var i=0; i<colCount; i++)
              {
 
-              
+
                if(rowCount = 1) {
-                      
+
                           document.getElementById('deleterowbutton').style.display='inline-block';
 
 
 
                     }
 
-                
+
 
 
                 var newcell = row.insertCell(i);
-                 
+
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
 
                 //alert(newcell.childNodes);
@@ -274,11 +280,11 @@ Company Registrartion
 
                 }
 
-                  
+
 
             }
 
-           
+
         }
 
 
@@ -295,14 +301,14 @@ Company Registrartion
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");
                         break;
-                    } 
+                    }
 
 
                         if(rowCount <= 2) {
-                       
+
 
                         document.getElementById('deleterowbutton').style.display='none';
-                    } 
+                    }
 
                     table.deleteRow(i);
                     rowCount--;
@@ -339,14 +345,14 @@ function getcompany() {
         .done(function(msg){
             var object = JSON.parse(JSON.stringify(msg['companytender']));
             $('#tendernumber').empty();
-      
-      
+
+
       var option = document.createElement('option');
       option.innerHTML = 'Choose tender number...';
       option.value = '';
       document.getElementById('tendernumber').appendChild(option);
-      
-      
+
+
             for (var i = 0; i < object.length; i++) {
                 var option = document.createElement('option');
                 option.innerHTML = object[i].tender;

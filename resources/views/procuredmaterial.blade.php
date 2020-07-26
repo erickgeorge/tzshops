@@ -10,9 +10,9 @@
     <br>
     <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Procured materials list</b></h5>
+            <h5   ><b style="text-transform: capitalize;">Procured materials list</b></h5>
         </div>
-       
+
     </div>
     <br>
     <hr class="container">
@@ -50,7 +50,7 @@
 <div class="col"> on :
                             	<?php $time = strtotime($tag_); echo date('d/m/Y',$time);  ?>
  </div>
- <div class="col"> status: 
+ <div class="col"> status:
                             @if($store_received == 0)
                             	<div class="badge badge-warning">@if(auth()->user()->type == 'Head Procurement') Not Received by store @else Not Confirmed @endif</div>
                             	@else<div class="badge badge-success">@if(auth()->user()->type == 'Head Procurement') Received by store @else Received @endif</div>
@@ -80,7 +80,7 @@
                 <?php $i = 0;  ?>
                 @foreach($procured as $material)
 
-                    
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -90,7 +90,7 @@
                             <td> {{ number_format($material->total_input) }}</td>
                             <td>{{ $material->unit_measure }}</td>
  							<td>{{ number_format($material->price_tag) }}</td>
-                             
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-lg-8"></div>
             @if(auth()->user()->type == 'STORE')
-           
+
             @if($store_received != 0)
             <form method="POST" action="{{ url('AcceptProcuredMaterial') }}" enctype="multipart/form-data">
             		@csrf
@@ -126,7 +126,7 @@
                             @if($stored == null)
                             <b style="font-weight: bold;">Received? &nbsp;</b>
                             <button class="btn btn-primary">
-                                Confirm 
+                                Confirm
                             </button>
                             @endif
                         </div>
@@ -154,7 +154,7 @@
         @endif
     </div>
 
-    
+
     <script>
     	$(document).ready(function () {
 

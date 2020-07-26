@@ -8,7 +8,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >Change password</h5>
+            <h5 style="text-transform: capitalize;" >Change password</h5>
         </div>
     </div>
     <hr>
@@ -35,7 +35,7 @@
 
         <form action="{{ route('password.change') }}" method="POST">
             @csrf
-            
+
             <div class="form-group col-lg-6">
                     <div class="input-group ">
                   <div class="input-group-prepend">
@@ -64,7 +64,7 @@
                        placeholder="Confirm password">
                   </div>
                 </div>
-           
+
             <button type="submit" class="btn btn-primary">Change password</button>
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
 

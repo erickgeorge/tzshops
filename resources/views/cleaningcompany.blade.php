@@ -7,7 +7,7 @@
 @section('body')
     <br>
    <?php use Carbon\Carbon;?>
-   
+
 <div class="container">
 
       <div class="container">
@@ -29,9 +29,10 @@
     @endif
 
     </div>
-  
-       <div class="row">  
+
+       <div class="row">
       <div class="col">
+
             <h5 ><b >All Tenders</b></h5>
 
         </div>
@@ -76,13 +77,13 @@
           <span aria-hidden="true">Filter your data</span>
         </button>
       </div>
- 
+
   <div class="modal-body">
 
 
 
         <div class="row">
-          
+
 
                <div class="col">   From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -90,7 +91,7 @@
                 } ?>"  class="form-control mr-sm-2" type="date" placeholder="Start Month"
                                max="<?php echo date('Y-m-d'); ?>">
                 </div>
-              
+
                 <div class="col">
                 To<input value="<?php
                 if (request()->has('end')) {
@@ -98,10 +99,10 @@
                 } ?>"
                              name="end"  class="form-control mr-sm-2" type="date" placeholder="End Month"
                              max="<?php echo date('Y-m-d'); ?>">
-                </div>             
+                </div>
        </div>
 <br>
-             
+
 
         <div class="row">
           <div class="col">
@@ -110,12 +111,12 @@
                 @foreach($assessmmenttender as $astender)
                 <option value="{{$astender->tender }}">{{ $astender->tender }}</option>
                 @endforeach
-      
+
               </select>
           </div>
       </div>
-      
-      <br>    
+
+      <br>
 
               <div class="row">
           <div class="col">
@@ -124,12 +125,12 @@
                  @foreach($assessmmentcompany as $ascompany)
                 <option value="{{ $ascompany->company_name }}">{{ $ascompany['compantwo']->company_name }}</option>
                 @endforeach
-      
+
               </select>
           </div>
       </div>
-      
-      <br>  
+
+      <br>
 
               <div class="row">
           <div class="col">
@@ -138,12 +139,12 @@
                  @foreach($assessmmentareas as $asarea)
                 <option value="{{ $asarea->area }}">{{ $asarea['are_a']->cleaning_name }}</option>
                 @endforeach
-              
+
               </select>
           </div>
       </div>
-      
-      <br>     
+
+      <br>
 
 
 
@@ -161,28 +162,28 @@
   </div>
 </div>
 
-      
-  
+
+
 
        <div >
-   
-                
-                
+
+
+
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
                   <a href="{{ route('registercompany') }}"
                    class="btn btn-primary" >Add new tender</a> @endif
 
-                    &nbsp; &nbsp; 
+                    &nbsp; &nbsp;
                    <a href="{{ route('tenders_reached') }}"
                    class="btn btn-outline-warning" >Tenders with day reached for assessment</a>
 
 
                    <br>
                    <br>
-              
-    
+
+
                 <table id="myTableee" id="myTable" class="table table-striped">
-                      
+
                     <thead >
                    <tr style="color: white;">
                         <th scope="col">#</th>
@@ -200,14 +201,14 @@
 
                     <tbody>
 
-                
+
                     <?php $i = 0;  $ii = 0;  $iii = 0;?>
-                        @if(auth()->user()->type == 'Supervisor Landscaping')   
+                        @if(auth()->user()->type == 'Supervisor Landscaping')
                     @foreach($cleangcompanylandscaping as $house)
                         <?php $i++;?>
-                
+
                 <?php $now1 =  Carbon::now();
-                 
+
                 $next30day = strtotime($house->datecontract);
                 $next30days = date("Y-m-d", strtotime("+1 month", $next30day));
 
@@ -224,27 +225,27 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>
-                            
-                  @if($house->status == 2 ) 
+
+                  @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assigned yet </span><br>
                             @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
-                          
-                  
+
+
                   @else
 
                           <?php  $ddate = strtotime($house->nextmonth);
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td> 
-                  @endif 
-                            
+                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                  @endif
+
         @if($now1 > $endcont)
                            <td><span class="badge badge-danger">Can not assessed </span><br></td>
         @else
-                                   
+
 
                   @if($house->status == 1)
 
@@ -252,10 +253,10 @@
                            <td style="color: red">{{$date_next}} Days</td>
                   @else
                            <td>{{$date_next}} Days left</td>
-                  @endif 
+                  @endif
 
 
-                  
+
                   @else
 
 
@@ -263,15 +264,15 @@
                            <td style="color: red">{{$date_left}} Days</td>
                  @else
                            <td>{{$date_left}} Days left</td>
-                 @endif 
+                 @endif
 
 
-                   
+
                   @endif
-           @endif       
+           @endif
 
 
-           
+
                 <?php $date = Carbon::parse($house->datecontract);
                  $now = Carbon::parse($house->endcontract);
                  $diff = $date->diffInDays($now); ?>
@@ -283,41 +284,41 @@
         @else
 
                  @if($diff >= 365)
-     
-                           <td><?php 
-                            
+
+                           <td><?php
+
 
                              $start_date = new DateTime();
                              $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
                              $dd = date_diff($start_date,$end_date);
-                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>   
+                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>
 
 
 
-                         
+
                    @else
 
-                           <td><?php 
-                            
+                           <td><?php
+
 
                              $start_date = new DateTime();
                              $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
                              $dd = date_diff($start_date,$end_date);
-                             echo $dd->m." months ".$dd->d." days"; ?></td>   
+                             echo $dd->m." months ".$dd->d." days"; ?></td>
 
 
 
-                           
-                  @endif  
-               @endif   
-          
+
+                  @endif
+               @endif
+
 
              <td>
 
                    <div class="row">  &nbsp;&nbsp;
                    @if(auth()->user()->type != 'DVC Admin')
                    @if(auth()->user()->type != 'Estates Director')
-                                  
+
                                   <!--  <a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->company_name }}','{{ $house->type }}','{{$house->status}}','{{$house->registration}}','{{$house->tin}}','{{$house->vat}}','{{$house->license}}' )"
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
@@ -326,10 +327,10 @@
                         <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
                                                     class="fas fa-eye"></i></a>  &nbsp;
-                         <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->   
-        @else                                
-               
-               @if( $house->status == 2) 
+                         <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->
+        @else
+
+               @if( $house->status == 2)
 
 
                                     <form method="POST"
@@ -344,14 +345,14 @@
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
                                     </form>&nbsp;
-               
+
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
                  <?php $hou = Crypt::encrypt($house->tender); ?>
                 <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
                                                     class="fas fa-share"></i></a>  @endif
-                @endif       
-                @elseif( $house->status == 1 ) 
+                @endif
+                @elseif( $house->status == 1 )
 
                                            <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
@@ -362,33 +363,33 @@
                 <?php $hou = Crypt::encrypt($house->tender); ?>
                 <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
-                @endif 
+                @endif
 
-          
-               
 
-                @endif 
-        @endif                                   
+
+
+                @endif
+        @endif
                </div>
           </td>
 
 
 
-                           
+
                         </tr>
 
    @endforeach
    @endif
-     
 
 
 
-          @if(auth()->user()->type == 'USAB')   
+
+          @if(auth()->user()->type == 'USAB')
    @foreach($cleangcompanyusab as $house)
                         <?php $ii++;?>
-                
+
                 <?php $now1 =  Carbon::now();
-                 
+
                 $next30day = strtotime($house->datecontract);
                 $next30days = date("Y-m-d", strtotime("+1 month", $next30day));
 
@@ -405,27 +406,27 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>
-                            
-                  @if($house->status == 2 ) 
+
+                  @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assigned yet </span><br>
                             @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
-                          
-                  
+
+
                   @else
 
                           <?php  $ddate = strtotime($house->nextmonth);
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td> 
-                  @endif 
-                            
+                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                  @endif
+
         @if($now1 > $endcont)
                            <td><span class="badge badge-danger">Can not assessed </span><br></td>
         @else
-                                   
+
 
                   @if($house->status == 1)
 
@@ -433,10 +434,10 @@
                            <td style="color: red">{{$date_next}} Days</td>
                   @else
                            <td>{{$date_next}} Days left</td>
-                  @endif 
+                  @endif
 
 
-                  
+
                   @else
 
 
@@ -444,15 +445,15 @@
                            <td style="color: red">{{$date_left}} Days</td>
                  @else
                            <td>{{$date_left}} Days left</td>
-                 @endif 
+                 @endif
 
 
-                   
+
                   @endif
-           @endif       
+           @endif
 
 
-           
+
                 <?php $date = Carbon::parse($house->datecontract);
                  $now = Carbon::parse($house->endcontract);
                  $diff = $date->diffInDays($now); ?>
@@ -464,41 +465,41 @@
         @else
 
                  @if($diff >= 365)
-     
-                           <td><?php 
-                            
+
+                           <td><?php
+
 
                              $start_date = new DateTime();
                              $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
                              $dd = date_diff($start_date,$end_date);
-                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>   
+                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>
 
 
 
-                         
+
                    @else
 
-                           <td><?php 
-                            
+                           <td><?php
+
 
                              $start_date = new DateTime();
                              $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
                              $dd = date_diff($start_date,$end_date);
-                             echo $dd->m." months ".$dd->d." days"; ?></td>   
+                             echo $dd->m." months ".$dd->d." days"; ?></td>
 
 
 
-                           
-                  @endif  
-               @endif   
-          
+
+                  @endif
+               @endif
+
 
              <td>
 
                    <div class="row">  &nbsp;&nbsp;
                    @if(auth()->user()->type != 'DVC Admin')
                    @if(auth()->user()->type != 'Estates Director')
-                                  
+
                                   <!--  <a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->company_name }}','{{ $house->type }}','{{$house->status}}','{{$house->registration}}','{{$house->tin}}','{{$house->vat}}','{{$house->license}}' )"
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
@@ -507,10 +508,10 @@
                         <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
                                                     class="fas fa-eye"></i></a>  &nbsp;
-                         <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->   
-        @else                                
-               
-               @if( $house->status == 2) 
+                         <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->
+        @else
+
+               @if( $house->status == 2)
 
 
                                     <form method="POST"
@@ -525,14 +526,14 @@
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
                                     </form>&nbsp;
-               
+
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
                  <?php $hou = Crypt::encrypt($house->tender); ?>
                 <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
                                                     class="fas fa-share"></i></a>  @endif
-                @endif       
-                @elseif( $house->status == 1 ) 
+                @endif
+                @elseif( $house->status == 1 )
 
                                            <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
@@ -543,19 +544,19 @@
                 <?php $hou = Crypt::encrypt($house->tender); ?>
                 <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
-                @endif 
+                @endif
 
-          
-               
 
-                @endif 
-        @endif                                   
+
+
+                @endif
+        @endif
                </div>
           </td>
 
 
 
-                           
+
                         </tr>
 
 
@@ -566,9 +567,9 @@
     @if((auth()->user()->type != 'USAB') and (auth()->user()->type != 'Supervisor Landscaping') )
    @foreach($cleangcompanyadmin as $house)
                         <?php $iii++;?>
-                
+
                 <?php $now1 =  Carbon::now();
-                 
+
                 $next30day = strtotime($house->datecontract);
                 $next30days = date("Y-m-d", strtotime("+1 month", $next30day));
 
@@ -585,27 +586,27 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>
-                            
-                  @if($house->status == 2 ) 
+
+                  @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assigned yet </span><br>
                             @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
-                          
-                  
+
+
                   @else
 
                           <?php  $ddate = strtotime($house->nextmonth);
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td> 
-                  @endif 
-                            
+                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                  @endif
+
         @if($now1 > $endcont)
                            <td><span class="badge badge-danger">Can not assessed </span><br></td>
         @else
-                                   
+
 
                   @if($house->status == 1)
 
@@ -613,10 +614,10 @@
                            <td style="color: red">{{$date_next}} Days</td>
                   @else
                            <td>{{$date_next}} Days left</td>
-                  @endif 
+                  @endif
 
 
-                  
+
                   @else
 
 
@@ -624,15 +625,15 @@
                            <td style="color: red">{{$date_left}} Days</td>
                  @else
                            <td>{{$date_left}} Days left</td>
-                 @endif 
+                 @endif
 
 
-                   
+
                   @endif
-           @endif       
+           @endif
 
 
-           
+
                 <?php $date = Carbon::parse($house->datecontract);
                  $now = Carbon::parse($house->endcontract);
                  $diff = $date->diffInDays($now); ?>
@@ -644,41 +645,41 @@
         @else
 
                  @if($diff >= 365)
-     
-                           <td><?php 
-                            
+
+                           <td><?php
+
 
                              $start_date = new DateTime();
                              $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
                              $dd = date_diff($start_date,$end_date);
-                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>   
+                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>
 
 
 
-                         
+
                    @else
 
-                           <td><?php 
-                            
+                           <td><?php
+
 
                              $start_date = new DateTime();
                              $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
                              $dd = date_diff($start_date,$end_date);
-                             echo $dd->m." months ".$dd->d." days"; ?></td>   
+                             echo $dd->m." months ".$dd->d." days"; ?></td>
 
 
 
-                           
-                  @endif  
-               @endif   
-          
+
+                  @endif
+               @endif
+
 
              <td>
 
                    <div class="row">  &nbsp;&nbsp;
                    @if(auth()->user()->type != 'DVC Admin')
                    @if(auth()->user()->type != 'Estates Director')
-                                  
+
                                   <!--  <a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->company_name }}','{{ $house->type }}','{{$house->status}}','{{$house->registration}}','{{$house->tin}}','{{$house->vat}}','{{$house->license}}' )"
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
@@ -687,10 +688,10 @@
                         <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
                                                     class="fas fa-eye"></i></a>  &nbsp;
-                         <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->   
-        @else                                
-               
-               @if( $house->status == 2) 
+                         <!--<a style="color: green;"  href="{{route('renew_company_contract' , [$house->id])}}" data-toggle="tooltip" title="Renew the contract"><i class="fas fa-arrow-alt-circle-right"></i></a>-->
+        @else
+
+               @if( $house->status == 2)
 
                                    @if(auth()->user()->type != 'DVC Admin')
                                    @if(auth()->user()->type != 'Estates Director')
@@ -709,17 +710,17 @@
 
 
                                     @if(($role['user_role']['role_id'] != 1))
-                                  
+
                                   <span  class="badge badge-primary">Active <br>Contract </span>
                                     @endif
-               
+
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
                  <?php $hou = Crypt::encrypt($house->tender); ?>
                 <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
                                                     class="fas fa-share"></i></a>  @endif
-                @endif       
-                @elseif( $house->status == 1 ) 
+                @endif
+                @elseif( $house->status == 1 )
 
                                            <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
@@ -730,31 +731,31 @@
                 <?php $hou = Crypt::encrypt($house->tender); ?>
                 <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
-                @endif 
+                @endif
 
-          
-               
 
-                @endif 
-        @endif                                   
+
+
+                @endif
+        @endif
                </div>
           </td>
 
 
 
-                           
-                        </tr>                    
 
-                  
+                        </tr>
+
+
                     @endforeach
                     @endif
                     </tbody>
-                    
+
                 </table>
                 <br>
 
             </div>
-            
+
 
 
 
@@ -784,7 +785,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type"
                                    name="type" placeholder="Enter Company type">
-                          
+
                         </div>
 
 
@@ -793,7 +794,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_status"
                                    name="status" placeholder="Enter Company status">
-                          
+
                         </div>
 
                        <div class="form-group">
@@ -801,7 +802,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_registration"
                                    name="registration" placeholder="Enter Company Registration">
-                          
+
                         </div>
 
                         <div class="form-group">
@@ -809,7 +810,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_tin"
                                    name="tin" placeholder="Enter Company tin">
-                           
+
                         </div>
 
 
@@ -818,7 +819,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_vat"
                                    name="vat" placeholder="Enter Company vat">
-                            
+
                         </div>
 
                          <div class="form-group">
@@ -826,7 +827,7 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_License"
                                    name="license" placeholder="Enter Company License">
-                           
+
                         </div>
 
 
@@ -835,20 +836,20 @@
 
 
 
-                       
+
                          <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
-                                                      
+                                                <div style="float: left; width: 130px">
+
                                                         <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
-                                                        
+                                               <div style="float: right; width: 290px">
+
+
                                                   <a class="btn btn-danger" href="/cleaningcompany" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                          </div>
@@ -865,8 +866,8 @@
 
 
 
-        
-   
+
+
 
 
     <script>
@@ -886,9 +887,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 
@@ -900,7 +901,7 @@
             document.getElementById("edit_name").value = B;
 
            document.getElementById("edit_type").value = C;
-           
+
            document.getElementById("edit_status").value = D;
 
            document.getElementById("edit_registration").value = E;

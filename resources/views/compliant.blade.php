@@ -13,13 +13,13 @@
             use App\User;
 
      ?>
-   @if(count($compliant)>0) 
+   @if(count($compliant)>0)
 
         <div class="container">
-           <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Complaints </b></h5>
+           <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Complaints </b></h5>
         </div>
 
- 
+
     <hr class="container">
     <div class="container">
     @if(Session::has('message'))
@@ -39,7 +39,7 @@
         </div>
     @endif
 
- 
+
     <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">

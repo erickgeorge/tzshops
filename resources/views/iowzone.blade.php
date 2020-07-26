@@ -24,8 +24,8 @@
                 <li>{{ Session::get('message') }}</li>
             </ul>
         </div>
-    @endif 
-                <h5 style="text-transform: uppercase;" id="new_dep">Assign zone for Inspector of Work</h5>
+    @endif
+                <h5 style="text-transform: capitalize;" id="new_dep">Assign zone for Inspector of Work</h5>
                 <hr>
 
 
@@ -46,7 +46,7 @@
     </tr>
   </thead>
   <tbody>
-  <?php 
+  <?php
 
  if (isset($_GET['page'])){
 if ($_GET['page']==1){
@@ -74,7 +74,7 @@ else {
 
           $phonreplaced = ltrim($phonenumber,'0');
           echo '+255'.$phonreplaced;
-          
+
         }else { echo $user->phone;}
 
       ?></td>
@@ -83,17 +83,17 @@ else {
         <td>{{ $user['department']->name }}</td>
         <td>
        &nbsp;&nbsp;&nbsp;
-        <a style="color: green;" href="{{ route('iow.assign.zone', [$user->id]) }}"  data-toggle="tooltip" title="Assign Zone"><i class="fas fa-address-book"></i></a>  
- 
+        <a style="color: green;" href="{{ route('iow.assign.zone', [$user->id]) }}"  data-toggle="tooltip" title="Assign Zone"><i class="fas fa-address-book"></i></a>
 
-       
-         
+
+
+
       </td>
     </tr>
     @endforeach
   </tbody>
 
- 
+
 </table>
 
 
@@ -101,6 +101,6 @@ else {
 
 
 
-            
+
 
      @endSection

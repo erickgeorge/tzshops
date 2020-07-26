@@ -11,7 +11,7 @@ New Furniture Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: uppercase;">Add New Furniture Asset</b></h5>
+            <h5><b style="text-transform: capitalize;">Add New Furniture Asset</b></h5>
         </div>
     </div>
     <hr class="container">
@@ -49,7 +49,9 @@ New Furniture Asset
 
                                 <label for="my-input">Site Location <sup class="text-danger">*</sup></label>
                                 <select id="location" required class="form-control" type="text" name="SiteLocation">
-                                 @php
+                                    <option value="" selected style="color: red;">Choose...</option>
+
+                                @php
                                      $option = assetsidentifiedlocation::orderBy('abbreviation','ASC')->get();
                                  @endphp
                                  @foreach ($option as $opt)

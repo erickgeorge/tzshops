@@ -21,14 +21,14 @@
 <br>
 <div class="container" >
   <div class="col-lg-4">
-    <h5 style="padding-left: 90px;  text-transform: uppercase;" >Add procured materials</h5>
+    <h5 style="text-transform: capitalize;" >Add procured materials</h5>
   </div>
 </div>
   @if(Session::has('message'))
     <br>
     <p class="alert alert-success">{{ Session::get('message') }}</p>
   @endif
-  
+
   @if ($errors->any())
         <div class="alert alert-danger">
              <ul class="alert alert-danger" style="list-style: none;">
@@ -44,13 +44,13 @@
 	<p style="color: red;">* all fields are compulsory</p>
 	<div class="row">
 <div class="col-sm-2">
-	
+
 </div>
 </div>	<br>
 <form method="POST" action="{{ url('procuredmaterialsadding') }}" enctype="multipart/form-data" autocomplete="off">
 	@csrf
     <div id="cont">
-        
+
     </div>
     <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
     <p>
@@ -60,7 +60,7 @@
             </div>
         </div><br>
         <div class="row">
-			
+
 			<div class="col">
 				<button id="bt" type="submit" class="btn btn-primary" disabled>Submit</button>&nbsp;<a href="{{ url('ProcurementHistory') }}" class="btn btn-danger">Cancel</a>
 			</div>
@@ -86,13 +86,13 @@
         var tr = MatForm.insertRow(-1);
 
         for (var h = 0; h < arrHead.length; h++) {
-            var th = document.createElement('th'); 
+            var th = document.createElement('th');
 
 
             if(h==5){
                 	th.setAttribute('style','width:95px;')
                 }
-               
+
 
                 if(h==6){
                 	th.setAttribute('style','width:125px;')
@@ -188,7 +188,7 @@
                 }
                 ele.setAttribute('id',c);
 
-               
+
 
     var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
@@ -224,7 +224,7 @@
             }
         }
 
-       
+
     }
 
     // ADD A NEW ROW TO THE TABLE.s
@@ -303,7 +303,7 @@
                 }
                 ele.setAttribute('id',c);
 
-               
+
 
     var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
@@ -339,7 +339,7 @@
             }
         }
 
-        
+
     }
 
     // DELETE TABLE ROW.
@@ -349,7 +349,7 @@
     value = isNaN(value) ? 0 : value;
     --value; --value; --value; --value; --value; --value;
     document.getElementById('totalmaterials').value = value;
-        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); 
+        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);
 
 var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
@@ -379,7 +379,7 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
                 }
             }
         }
-        
+
         // SHOW THE RESULT IN THE CONSOLE WINDOW.
         console.log(values);
     }
@@ -391,7 +391,7 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
 function reply_click(clicked_id)
   {
       var clicked = clicked_id;
-  
+
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -500,11 +500,11 @@ autocomplete(document.getElementById(clicked), materials);
 
 </script>
 <script type="text/javascript">
-    
+
 function reply_click1(clicked_id)
   {
       var clicked = clicked_id;
-  
+
 function autocomplete1(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/

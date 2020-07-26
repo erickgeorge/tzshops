@@ -8,12 +8,12 @@
     <br>
 
 <div class="container">
-   
-     
-  
 
 
-       
+
+
+
+
          <div >
 
              @if(Session::has('message'))
@@ -23,13 +23,15 @@
             </ul>
         </div>
              @endif
-              <h5><b > Cleaning Areas </b></h5>
+
+              <h4><b > Cleaning Areas </b></h4>
+
               <hr>
 
                             <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
-                <a href="{{route('landscapingcleaningarea')}}" 
-                                                             
-                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF </a> 
+                <a href="{{route('landscapingcleaningarea')}}"
+
+                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF </a>
                 </button>
 
 
@@ -59,7 +61,7 @@
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            
+
                             <td>{{ $clean_area->cleaning_name }}</td>
                             <td>{{ $clean_area->zone_id }}</td>
 
@@ -98,17 +100,17 @@
 
 
 
-                            
-                                               
+
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
                 <br>
-                
+
             </div>
-            
+
 
 
 
@@ -131,7 +133,7 @@
                             <input id="editarea_id" name="editarea_id" hidden>
                         </div>
 
-                       
+
 
                     <div class="form-group">
                             <label for="name_of_house">LOT Name <sup style="color: red;">*</sup></label>
@@ -144,25 +146,25 @@
                     </div> 
                        
                         
-                
+                    
                                                <div style="width:600px;">
-                                                <div style="float: left;"> 
-                                                      
-                                                        <button  type="submit" class="btn btn-primary">Save 
+                                                <div style="float: left;">
+
+                                                        <button  type="submit" class="btn btn-primary">Save
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
 
-                                               <div> 
+                                               <div>
                                                       &nbsp;
-                                                        
+
                                                   <a class="btn btn-danger" href="/manage_Cleaning_area" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                                                 </div>
-      
+
 
               </form>
 
@@ -176,7 +178,7 @@
 
 
 
-        
+
     @endSection
 
 
@@ -197,13 +199,72 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 
 
+<<<<<<< HEAD
+=======
+        function myfunc(V, W, X, Y, Z) {
+
+            document.getElementById("edit_id").value = V;
+
+            document.getElementById("edit_name").value = W;
+
+           document.getElementById("edit_location").value = X;
+
+           document.getElementById("edit_type").value = Y;
+
+           document.getElementById("edit_room").value = Z;
+       }
+
+
+
+        function myfunc1(U, V, W, X, Y, Z) {
+
+
+            document.getElementById("edit_hallid").value = U;
+
+            document.getElementById("edit_hname").value = V;
+
+            document.getElementById("edit_campus").value = W;
+
+           document.getElementById("edit_area").value = X;
+
+           document.getElementById("edit_type1").value = Y;
+
+           document.getElementById("edit_location1").value = Z;
+       }
+
+
+        function myfunc8(A, B, C) {
+
+             document.getElementById("edit_cid").value = A;
+
+            document.getElementById("edit_campname").value = B;
+
+            document.getElementById("edit_location").value = C;
+       }
+
+
+
+        function myfunc5(U, V, W) {
+
+
+             document.getElementById("editzone_id").value = U;
+
+             document.getElementById("edit_zone").value = V;
+
+
+
+             document.getElementById("edit_type").value = W;
+
+
+       }
+>>>>>>> 03e0f386ce202eddb4b818ddd2d76bd5bc112b4e
 
 
        function myfunc9(U, V, W) {
@@ -213,11 +274,11 @@
 
              document.getElementById("edit_carea").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 

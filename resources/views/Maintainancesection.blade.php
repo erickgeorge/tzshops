@@ -27,12 +27,12 @@ Maintainance section
         </div>
     @endif
 
-                <h5 style="padding-left: 90px; margin-bottom: 20px; text-transform: uppercase;"
+                <h5 style="  margin-bottom: 20px; text-transform: capitalize;"
                    class="btn btn-default" >List of available Sections</h5>
 
-               
-                
-        
+
+
+
             <hr class="container">
 
             <a href="{{route('addmsection')}}" style="margin-bottom: 20px;"
@@ -47,19 +47,19 @@ Maintainance section
                     <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name of Section</th>
-                       
+
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                        
+
                     <?php $i = 0; ?>
                     @foreach($worksec as $dep)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                           
+
                            <td>{{ ucwords(strtolower($dep->section)) }}</td>
                             <td>
                                  <div class="row">
@@ -77,7 +77,7 @@ Maintainance section
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -88,7 +88,7 @@ Maintainance section
                 <div class="text-center">
 
                 </div>
-       
+
             </div>
 
 
@@ -107,18 +107,18 @@ Maintainance section
 
 
                         @csrf
-						
-						
-						
-						
-						
+
+
+
+
+
                     <div class="form-group ">
                         <label for="dep_name">Section Name</label>
-                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"  
+                        <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"
                                name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc." >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
-                       
+
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
@@ -136,7 +136,7 @@ Maintainance section
     </div>
 
 
-           
+
 
                       <script>
         window.onload = function () {
@@ -161,21 +161,21 @@ Maintainance section
         });
 
 
-        
+
 
 
         function myfunc1(x,y) {
-			
-			
+
+
             document.getElementById("esecid").value = x;
             document.getElementById("sname").value = y;
 
-			
+
         }
 
 
-		
-		
+
+
 
 
 

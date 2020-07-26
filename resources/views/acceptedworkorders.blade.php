@@ -17,8 +17,8 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
          <div class="container">
-            <h5 style="padding-left: 90px; text-transform: uppercase;"><b>Accepted works order in  @if(auth()->user()->type == 'Maintenance coordinator')
-<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else 
+            <h5 style="text-transform: capitalize;"><b>Accepted works order in  @if(auth()->user()->type == 'Maintenance coordinator')
+<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
 <?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
 @if(count($locations) > 0)
@@ -68,7 +68,7 @@
     <div id="div_print" class="container">
         <div class="row ">
         <div class="col">
-            
+
         </div>
            <!-- <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
@@ -106,7 +106,7 @@ use Carbon\Carbon;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button style="text-transform: capitalize;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">Filter your data</span>
         </button>
       </div>
@@ -256,7 +256,7 @@ foreach($userwithid as $userwithid)
         </div>
     <br>
 
-   
+
         <br/>
     <br/>
     <div class="tab-content">
@@ -289,10 +289,10 @@ foreach($userwithid as $userwithid)
 
                  ?>
                  @foreach($locations as $locations)
-                 
+
                    @if(isset($_GET['location']) && isset($_GET['year']))
                     @if($_GET['location']=='All')
-                
+
                 <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->get(); ?>
 
                     @else
@@ -600,8 +600,8 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
       </div>
       <input type="text" name="work" hidden value="{{ $work->id }}">
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button style="text-transform: capitalize;" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button style="text-transform: capitalize;" type="submit" class="btn btn-primary">Send</button>
       </div>
     </div>
 </form>
@@ -689,7 +689,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                     <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended work order.</h5>
                     <div></div>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button style="text-transform: capitalize;" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -717,7 +717,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="exampleModalLabel" ><b>Choose problem type as you want to redirect.</b></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button style="text-transform: capitalize;" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -747,7 +747,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 <div class="modal-footer">
                 </div>
 
-         <button type="submit" class="btn btn-primary ">Send to Head of Section</button>
+         <button style="text-transform: capitalize;" type="submit" class="btn btn-primary ">Send to Head of Section</button>
     </form>
             </div>
         </div>

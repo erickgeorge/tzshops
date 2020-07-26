@@ -6,7 +6,7 @@
 
 @section('body')
     <br>
-   
+
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -15,12 +15,12 @@
         </div>
     @endif
 <div class="container">
-  
-        
-           
-        <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Available Hall of Resdences </b></h5>
+
+
+
+        <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Available Hall of Resdences </b></h5>
                   <hr>
-                <a href="{{ route('registerhall') }}" 
+                <a href="{{ route('registerhall') }}"
                    class="btn btn-primary">Add new Hall of Resdence</a>
                    <br><br>
 
@@ -51,7 +51,7 @@
                             <td>{{ $hall->location }}</td>
 
 
-                            
+
                             <td>
                             <div class="row">
 
@@ -81,13 +81,13 @@
 
                     @endforeach
                 </tbody>
-                    
+
                 </table>
                 <br>
-                
 
 
-                    
+
+
                         <div class="modal fade" id="editHall" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -114,7 +114,7 @@
 
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            
+
                             <label class="input-group-text" for="directorate">Campus Name <sup style="color: red;">*</sup></label>
                         </div>
                         <select required class="custom-select" name="campus" id="campus">
@@ -124,17 +124,17 @@
                             @endforeach
 
                         </select>
-                    </div>   
+                    </div>
 
 
-                    
+
                         <div class="form-group ">
                             <label for="editlocation">Area <sup style="color: red;">*</sup></label>
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_area"
                                    name="area_name" placeholder="Enter House Type">
                         </div>
-                       
+
 
                          <div class="form-group ">
                             <label for="editlocation">Type <sup style="color: red;">*</sup></label>
@@ -151,18 +151,18 @@
                                    name="location" placeholder="Enter Number of Rooms">
                         </div>
                         <div style="width:600px;">
-                                                <div style="float: left; width: 130px"> 
-                                                      
+                                                <div style="float: left; width: 130px">
+
                                                         <button  type="submit" class="btn btn-primary">Save Changes
                                                         </button>
-                  
-                                                       
+
+
                                                </div>
-                                               <div style="float: right; width: 290px"> 
-                                                     
-                                                        
+                                               <div style="float: right; width: 290px">
+
+
                                                   <a class="btn btn-danger" href="/manage_Houses" role="button">Cancel </a>
-                                                     
+
                                                        </div>
                                             </div>
                                                 </div>
@@ -178,7 +178,7 @@
 
 
 
-        
+
     @endSection
 
 
@@ -199,9 +199,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 
@@ -213,7 +213,7 @@
             document.getElementById("edit_name").value = W;
 
            document.getElementById("edit_location").value = X;
-           
+
            document.getElementById("edit_type").value = Y;
 
            document.getElementById("edit_room").value = Z;
@@ -231,7 +231,7 @@
             document.getElementById("edit_campus").value = W;
 
            document.getElementById("edit_area").value = X;
-           
+
            document.getElementById("edit_type1").value = Y;
 
            document.getElementById("edit_location1").value = Z;
@@ -256,11 +256,11 @@
 
              document.getElementById("edit_zone").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 
@@ -271,11 +271,11 @@
 
              document.getElementById("edit_carea").value = V;
 
-            
+
 
              document.getElementById("edit_type").value = W;
 
-          
+
        }
 
 

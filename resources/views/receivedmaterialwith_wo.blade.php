@@ -11,9 +11,9 @@
     <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type =='STORE')
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"><b style="text-transform: uppercase;">Works orders with Material available and required by Head of Section</b></h5>
+            <h5 style=" "  align="center"><b style="text-transform: capitalize;">Works orders with Material available and required by Head of Section</b></h5>
             @else
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"><b style="text-transform: uppercase;"> Works orders with Material received From Store</b></h5>
+            <h5 style=" "  align="center"><b style="text-transform: capitalize;"> Works orders with Material received From Store</b></h5>
             @endif
 
         </div>
@@ -34,18 +34,18 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " >
-     
+
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
-              
+
 				<th >Works order ID</th>
 				<th >Store Manager</th>
 				<th >Action</th>
-				
+
             </tr>
             </thead>
 
@@ -57,12 +57,12 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>00{{ $item->work_order_id }}</td>
-                   
+
                     <td>Mr .{{ $item['userreceiver']->lname.' '.$item['userreceiver']->fname }}</td>
-					
-                 
+
+
                       <td>  <a style="color: green;" href="received/materials/from_store/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">View Material</a>&nbsp;
                         </td>
                     </tr>

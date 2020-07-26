@@ -11,7 +11,9 @@
     <div class="container">
     <div class="row container-fluid" >
         <div class="col-md-6">
+
             <h5 ><b>On Progress Works Orders List </b></h5>
+
 
         </div>
 @if(count($wo) > 0)

@@ -10,7 +10,7 @@
 <br>
 <div class="row container-fluid" >
     <div class="col-md-6">
-        <h5 ><b style="text-transform: uppercase;">Infrastructure Project Drawings</b></h5>
+        <h5 ><b style="text-transform: capitalize;">Infrastructure Project Drawings</b></h5>
     </div>
 </div>
 <hr class="container">

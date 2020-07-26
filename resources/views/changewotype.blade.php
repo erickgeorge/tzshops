@@ -9,12 +9,12 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" >CHANGE PROBLEM TYPE :</h5>
+            <h5 style="text-transform: capitalize;" >CHANGE PROBLEM TYPE :</h5>
         </div>
     </div>
     <hr>
-	
-	
+
+
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -22,10 +22,10 @@
             </ul>
         </div>
     @endif
-	
-	
-	
-	
+
+
+
+
 	 <form method="POST" action="/changewoType" >
         @csrf
         <div align="center" class="col-lg-12">
@@ -36,16 +36,16 @@
       <select required class="custom-select" id="inputGroupSelect01" name="p_type">
                <?php use App\workordersection; ?>
 <?php $sectionss = workordersection::get(); ?>
- @foreach($sectionss as $sectionss) 
+ @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section_name }}">{{ ucwords(strtolower($sectionss->section_name)) }}</option>
                @endforeach
-                   
+
             </select>
 			<input required class="form-control" name="wo_id"
             value="{{ $wo->id }}" hidden>
 			 <button type="submit" class="btn btn-success">Change type</button>
 
-     
+
     </div>
 	</form>
 	   <a class="btn btn-danger" href="/work_order" role="button">Cancel</a>
@@ -114,7 +114,7 @@
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
-	
+
 	<br>
-    
+
     @endSection

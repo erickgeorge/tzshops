@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works order with material purchased</b></h5>
+            <h5 align="center"><b style="text-transform: capitalize;">Works order with material purchased</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -28,17 +28,17 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >No</th>
-              
+
 				<th >Works order ID</th>
 				<th >HOS name</th>
 				<th >Action</th>
-				
+
             </tr>
             </thead>
 
@@ -50,12 +50,12 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>00{{ $item->work_order_id }}</td>
-                   
+
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
-					
-                 
+
+
                       <td>  <a style="color: green;" href="work_order_material_purchased/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">
                       Material</a>&nbsp;
                         </td>

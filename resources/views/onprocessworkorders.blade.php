@@ -17,8 +17,8 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
          <div class="container">
-            <h5 style="padding-left: 90px; text-transform: uppercase;"><b>Onprocess works order in  @if(auth()->user()->type == 'Maintenance coordinator')
-<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else 
+            <h5 style="text-transform: capitalize;"><b>Onprocess works order in  @if(auth()->user()->type == 'Maintenance coordinator')
+<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
 <?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
 @if(count($locations) > 0)
@@ -68,7 +68,7 @@
     <div id="div_print" class="container">
         <div class="row ">
         <div class="col">
-            
+
         </div>
            <!-- <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
@@ -272,7 +272,7 @@ foreach($userwithid as $userwithid)
              <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed <b class="badge badge-light"></b></b></a>
         </div>
     <br/>
-   
+
         <br/>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
@@ -307,7 +307,7 @@ foreach($userwithid as $userwithid)
 
                    @if(isset($_GET['location']) && isset($_GET['year']))
                     @if($_GET['location']=='All')
-                
+
                 <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->get(); ?>
 
                     @else

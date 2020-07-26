@@ -14,7 +14,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;"  align="center"><b style="text-transform: uppercase;">Materials needed for works order </b></h5>
+            <h5 style="text-transform: capitalize;"  align="center"><b style="text-transform: capitalize;">Materials needed for works order </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -33,13 +33,13 @@
         </div>
     @endif
 
-   
+
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
             <tr style="color: white;">
                 <th >#</th>
-              
+
                 <th >Material Name</th>
                 <th >Material Description</th>
                 <th>Unit Measure</th>
@@ -47,8 +47,8 @@
                 <th >Quantity</th>
                 <th >Action</th>
                 <th >Status</th>
-                
-                
+
+
             </tr>
             </thead>
 
@@ -56,7 +56,7 @@
 
             <?php $i=0;  ?>
 
-            
+
 
             @foreach($mcitems as $item)
 
@@ -69,12 +69,12 @@
 
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>   <span> 
+                    <td>   <span>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id }}','{{ $item->reason }}')"
 
-                                      
+
 
                                        data-toggle="modal" data-target="#exampleModali" title="reject"><i
                        class="fas fa-times-circle" style="color: red"></i></a>
@@ -94,7 +94,7 @@
                     <td><span class="badge badge-primary">Waiting</span></td>
                     @endif
                     </tr>
-                    @endforeach 
+                    @endforeach
                 </tbody>
                    </table>
                 </br>
@@ -102,28 +102,28 @@
                     <div>
               @if($item->check_return == NULL)
                      <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialacceptmc', [$item->work_order_id , $item->zone] ) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
-                   </span> 
-                
-                 &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
-                </span> 
+                   </span>
 
-              @endif   
-               
-              @if($item->check_return != NULL)  
+                 &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
+                </span>
+
+              @endif
+
+              @if($item->check_return != NULL)
 
                <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
-                   </span></h5>  
+                   </span></h5>
                    @endif
 
-                     
+
 
 
                    </h5> </div>
 
-                   <br>   <br>    <br>   
+                   <br>   <br>    <br>
 
 
-    
+
 
   <div class="modal fade" id="exampleModalu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -201,8 +201,8 @@
                           </textarea>
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
-                       
-                      
+
+
                         <br>
                         <button type="submit" class="btn btn-danger">Reject</button>
                     </form>
@@ -214,19 +214,19 @@
     </div>
 
 
-   @else       
+   @else
                <div class="container" align="center">
-                
+
                    <br><div> <h2 style="padding-top: 300px;">Currently No Material needed for Works order</h2></div>
-                
+
             </div>
                    @endif
-   
+
 
 
 
                    <script type="text/javascript">
-                       
+
                          function myfunc1(U, V, W) {
 
 
@@ -238,8 +238,8 @@
 
        }
                    </script>
-@endif                 
-@if(auth()->user()->type == 'Inspector Of Works')   
+@endif
+@if(auth()->user()->type == 'Inspector Of Works')
 @if(count($items) > 0)
 
 <div class="container">
@@ -265,13 +265,13 @@
         </div>
     @endif
 
-   
+
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
-              
+
                 <th >Material Name</th>
                 <th >Material Description</th>
                 <th>Unit Measure</th>
@@ -279,8 +279,8 @@
                 <th >Quantity</th>
                 <th >Action</th>
                 <th >Status</th>
-                
-                
+
+
             </tr>
             </thead>
 
@@ -288,7 +288,7 @@
 
             <?php $i=0;  ?>
 
-            
+
 
             @foreach($items as $item)
 
@@ -301,12 +301,12 @@
 
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>   <span> 
+                    <td>   <span>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $item->id }}','{{ $item->reason }}')"
 
-                                      
+
 
                                        data-toggle="modal" data-target="#exampleModali" title="reject"><i
                        class="fas fa-times-circle" style="color: red"></i></a>
@@ -326,7 +326,7 @@
                     <td><span class="badge badge-primary">Waiting</span></td>
                     @endif
                     </tr>
-                    @endforeach 
+                    @endforeach
                 </tbody>
                    </table>
 
@@ -334,41 +334,41 @@
                 </br>
 
                     <div>
-               
-                 
+
+
                   @if($item->check_return == NULL)
 
                      <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
-                   </span> 
+                   </span>
 
 
 
-                
+
                  &nbsp;&nbsp;&nbsp;&nbsp;  Reject all material <span> <a style="color: black;" title="Reject all Material" data-toggle="modal" data-toggle= "tooltip" data-target="#exampleModalu"><i class="fas fa-times-circle" style="color: red"></i></a>
-                </span>  
-             
+                </span>
+
               @endif
-              
-             
+
+
               @if($item->check_return != NULL)
-                 
+
                <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
-                   </span></h5>  
+                   </span></h5>
 
-              @endif     
+              @endif
 
-                     
-                
+
+
 
                    </h5> </div>
 
-                   <br>   <br>    <br>   
+                   <br>   <br>    <br>
 
 
-    
 
 
- 
+
+
 
 
   <div class="modal fade" id="exampleModalu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -447,8 +447,8 @@
                           </textarea>
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
-                       
-                      
+
+
                         <br>
                         <button type="submit" class="btn btn-danger">Reject</button>
                     </form>
@@ -460,19 +460,19 @@
     </div>
 
 
-   @else       
+   @else
                <div class="container" align="center">
-                
+
                    <br><div> <h2 style="padding-top: 300px;">Currently No Material needed for Works order</h2></div>
-                
+
             </div>
                    @endif
-   
+
 
 
 
                    <script type="text/javascript">
-                       
+
                          function myfunc1(U, V, W) {
 
 
@@ -483,6 +483,6 @@
              document.getElementById("material").value = W;
 
        }
-                   </script>      
- @endif 
+                   </script>
+ @endif
     @endSection

@@ -14,7 +14,7 @@
 
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b >Its your first time to log in into the system please change your password</b></h5>
+            <h5 style="text-transform: capitalize;" ><b >Its your first time to log in into the system please change your password</b></h5>
         </div>
     </div>
     <hr>
@@ -35,7 +35,7 @@
         </div>
     @endif
 
- 
+
         <div style="text-align: center" >
         <p style="color: red">All fields are compulsory</p>
 
@@ -71,14 +71,13 @@
 
 
             <button type="submit" class="btn btn-primary">Change password</button>
-            
+
             <!--<a href="{{ url('/') }}" style="background-color:#F9B100;border-color:#F9B100;" class="btn btn-danger">Cancel</a>-->
 
         </form>
         </div>
 
- 
-    
+
+
 </body>
 </html>
-   

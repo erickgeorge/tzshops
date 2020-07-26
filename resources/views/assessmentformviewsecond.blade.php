@@ -11,7 +11,7 @@ Assessment form
     <br>    
      <div class="row">  
       <div class="col">
-            <h5 ><b style="text-transform: uppercase;">All Assessment forms </b></h5>
+            <h5 ><b style="text-transform: capitalize;">All Assessment forms </b></h5>
 
         </div>
 

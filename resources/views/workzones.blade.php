@@ -9,7 +9,7 @@
     <br>
     <div >
         <div class="container">
-            <h5 style="padding-left: 90px;" ><b style="text-transform: uppercase;">List of zones and total locations with works order  </b></h5>
+            <h5 style=" " ><b style="text-transform: capitalize;">List of zones and total locations with works order  </b></h5>
         </div>
 
 
@@ -65,14 +65,14 @@ use App\iowzonelocation;
                     <th>#</th>
           			<th>Zone name</th>
                     <th>Total locations</th>
-                   
+
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
 
-              
+
                 <?php $i = 0; ?>
                  @foreach($workszones as $locations)
 
@@ -81,7 +81,7 @@ use App\iowzonelocation;
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $locations->zonename }}</td>
                             <td><?php $locationtotal = iowzonelocation::where('iowzone_id',$locations->id)->get(); echo count($locationtotal); ?> locations </td>
-                           
+
                             <td>@if(count($locationtotal)  < 1)<a class="btn text-light btn-primary" title="Can not view works order with zero locations" >No works order</a> @else<a href="myzone?zone={{ $locations->id }} " class="btn btn-primary">view works orders</a>@endif</td>
                         </tr>
                         @endforeach
@@ -89,11 +89,11 @@ use App\iowzonelocation;
             </table>
         @else
             <h1 class="text-center" style="margin-top: 150px">No Zones available</h1>
-            
+
         @endif
     </div>
 
-  
+
         </div>
     </div>
 

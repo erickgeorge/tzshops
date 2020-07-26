@@ -10,7 +10,7 @@
      @if(count($items)>0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works order with rejected Material </b></h5>
+            <h5 style="  " align="center"><b style="text-transform: capitalize;">Works order with rejected Material </b></h5>
         </div>
 
         <div style="padding-left: 650px;">
@@ -48,11 +48,11 @@
             </ul>
         </div>
     @endif
-  
+
 
     <div class="container">
         @if(count($items) > 0)
-             
+
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
@@ -65,7 +65,7 @@
 				<th >Quantity</th>
                 <th >Reason</th>
 				<th >Status</th>
-				
+
             </tr>
             </thead>
 
@@ -78,7 +78,7 @@
                 <tr>
                     <th scope="row">{{ $i }}</th>
                    <td>WO {{ $item->work_order_id }}</td>
-                   
+
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
@@ -93,7 +93,7 @@
             </tbody>
         </table>
     </div>
-   
+
         @else
 
                <br><div> <h2 style="padding-top: 300px;">Currently no works order with rejected material</h2></div>
@@ -136,8 +136,8 @@
 
 
         });
-    
-   
+
+
 
          function myfunc(x) {
             document.getElementById("reason").innerHTML = x;

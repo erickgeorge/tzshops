@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12" align="center">
-            <h5 style="padding-left: 90px; "><b style="text-transform: uppercase;">Available materials </b></h5>
+            <h5 style=" "><b style="text-transform: capitalize;">Available materials </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -35,7 +35,7 @@
         </div>
         <div class="col-md-6">
         </div>
-        
+
     </div>
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
         <table class="table table-striped display" id="myTable"  style="width:100%">
@@ -49,7 +49,7 @@
                 <th >Stock</th>
                 <th >Created date</th>
                 <th >Stock updated at</th>
-               
+
             </tr>
             </thead>
 
@@ -67,7 +67,7 @@
                     <td>{{ number_format($item->stock) }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>{{ $item->updated_at }}</td>
-                    
+
                     </tr>
                     @endforeach
             </tbody>

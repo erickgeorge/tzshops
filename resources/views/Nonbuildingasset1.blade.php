@@ -5,13 +5,13 @@
     @endSection
 
 @section('body')
-   <?php use App\Area; ?> 
+   <?php use App\Area; ?>
     <br>
 <div class="container">
    <br>
    <br>
    <br>
-        
+
             @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -19,9 +19,9 @@
             </ul>
         </div>
             @endif
-        <h5 style="padding-left: 90px;  text-transform: uppercase;"  ><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b></h5>
+        <h5 style="text-transform: capitalize;"  ><b>Non-Building Assets - ( {{ $_GET['asset'] }} )</b></h5>
                   <hr>
-                <a href="{{ route('registernonbuildingasset') }}" 
+                <a href="{{ route('registernonbuildingasset') }}"
                    class="btn btn-primary">Add New Non-Building Assets</a>
                    <br><br>
 
@@ -43,7 +43,7 @@
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            
+
                             <td> @if($non->area_id==null)
                                 {{ $non->location }}
                                 @else
@@ -53,7 +53,7 @@
                                 {{ $asset->name_of_area }}
                                 @endif
                             </td>
-                           
+
                             <td>{{ $non->total_asset }}</td>
                             <td>
                             <form method="Get" action="@if($non->area_id==null) @else NonassetIn @endif ">
@@ -67,16 +67,16 @@
 
                     @endforeach
                 </tbody>
-                    
+
                 </table>
                 <br>
-                
 
 
 
 
 
-        
+
+
     @endSection
 
 
@@ -97,9 +97,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                $('#myTable5').DataTable();                                            
- 
+            $('#myTableee').DataTable();
+                $('#myTable5').DataTable();
+
 
         });
 

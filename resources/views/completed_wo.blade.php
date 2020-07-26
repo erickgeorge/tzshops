@@ -16,9 +16,9 @@ use App\WorkOrder;
 
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
         <div class="col-md-6">
-            <h5 style="padding-left: 90px;  text-transform: uppercase;" ><b style="text-transform: uppercase;">Unattended Works orders</b></h5>
+            <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Unattended Works orders</b></h5>
         </div>
- 
+
         <div class="col-md-6">
             <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
@@ -37,12 +37,12 @@ use App\WorkOrder;
         </div>
 
 
-       
+
     </div>
     <br>
     <hr>
     <div class="container">
-        
+
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -51,15 +51,15 @@ use App\WorkOrder;
         </div>
     @endif
 
-    
-   
+
+
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
       <!-- SOMETHING STRANGE HERE -->
-      
+
                 <div class="col" align="right">
            <button data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </button>
         </div>
-     
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -83,28 +83,28 @@ use App\WorkOrder;
   $userwithid = WorkOrder::select('client_id')->Where('status','-1')->distinct()->get();
   foreach($userwithid as $userwithid)
   {
-  
+
     $userfetch = user::where('id',$userwithid->client_id)->get();
     foreach($userfetch as $userfetch)
     {
         //echo '<option>yay</option>';
-  
-      
-  
+
+
+
         $departmentor = department::where('id',$userfetch->section_id)->get();
         foreach($departmentor as $departmentor)
         {
-  
+
             $directora = directorate::where('id',$departmentor->directorate_id)->get();
             foreach($directora as $directora){?>
   <option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->lname }} - {{ $directora->name }}</option>
             <?php }
         }
-  
-      
+
+
     }
   }
-  
+
         ?>
                 </select>
             </div>
@@ -150,7 +150,7 @@ use App\WorkOrder;
   </div>
 </div>
           <!-- ---------------------- -->
-       
+
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
@@ -167,11 +167,11 @@ use App\WorkOrder;
 
                 <tbody>
 
-                
+
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
-                  
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -182,7 +182,7 @@ use App\WorkOrder;
                                 <td><span class="badge badge-warning">new</span></td>
                             @elseif($work->status == 1)
                                 <td><span class="badge badge-success">accepted</span></td>
-                                
+
                             @elseif($work->status == 2)
                                 <td><span class="badge badge-success">CLOSED</span></td>
                             @elseif($work->status == 3)
@@ -196,9 +196,9 @@ use App\WorkOrder;
                             @elseif($work->status == 7)
                                                             <td><span class="badge badge-info">material requested</span></td>
                             @else
-                                <td><span class="badge badge-success">procurement stage</span></td>                             
+                                <td><span class="badge badge-success">procurement stage</span></td>
                             @endif
-                            
+
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                             <td>
 
@@ -209,7 +209,7 @@ use App\WorkOrder;
                                 {{ $work->location }}
                             @endif
                             <td>
-                            
+
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
                                     @if($work->status == -1)
@@ -218,7 +218,7 @@ use App\WorkOrder;
                                     @elseif($work->status == 2)
                                          <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
-                                                    
+
                                     @else
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
@@ -234,7 +234,7 @@ use App\WorkOrder;
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>&nbsp;
                                     @endif
-                              
+
 
                                 @endif
                             </td>
@@ -259,8 +259,8 @@ use App\WorkOrder;
 
 
         });
-        
-        
+
+
         function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1> Completed Work orders list </h1>";

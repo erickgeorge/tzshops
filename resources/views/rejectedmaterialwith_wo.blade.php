@@ -5,14 +5,14 @@
     @endSection
 
 @section('body')
-<?php  
+<?php
       use App\zoneinspector;  ?>
     <br>
      @if(count($items) > 0)
-      
+
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="padding-left: 90px; " align="center"><b style="text-transform: uppercase;">Works orders with material rejected</b></h5>
+            <h5 style="  " align="center"><b style="text-transform: capitalize;">Works orders with material rejected</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -31,38 +31,38 @@
             </ul>
         </div>
     @endif
-   
+
     <div class="container " >
-       
+
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
-              
+
 				<th >Works order ID</th>
 				<th >HOS name</th>
                 <th>Work sorder Details</th>
 				<th >Action</th>
-				
+
             </tr>
             </thead>
 
             <tbody>
      @if(auth()->user()->type == 'Inspector Of Works')
-      
+
 <?php $i=0;  ?>
             @foreach($materialed as $item)
 
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>00{{ $item->work_order_id }}</td>
-                   
+
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     <td>{{$item['workorder']->details}}</td>
-                    
-                 
+
+
                       <td>  <a style="color: green;" href="rejected/materials/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">Material</a>&nbsp;
                         </td>
                     </tr>
@@ -74,13 +74,13 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   
+
                     <td>00{{ $item->work_order_id }}</td>
-                   
+
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     <td>{{$item['workorder']->details}}</td>
-					
-                 
+
+
                       <td>  <a style="color: green;" href="rejected/materials/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">Material</a>&nbsp;
                         </td>
                     </tr>
