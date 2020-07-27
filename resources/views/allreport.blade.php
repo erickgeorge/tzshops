@@ -1,5 +1,5 @@
 <div style="margin-top: 20px" align="center">
-    <h2>University of Dar es salaam</h2> 
+    <h2>University of Dar es salaam</h2>
     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
@@ -40,24 +40,73 @@ tr:nth-child(even) {
         <tbody>
           <?php $i = 1; ?>
         @foreach($fetch as $tech)
-            <tr>
-                <th scope="row">{{ $i++ }}</th>
-                <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
-                <td>{{ $tech->email }}</td>
-                <td>
 
-      <?php $phonenumber = $tech->phone;
-        if(substr($phonenumber,0,1) == '0'){
+         <?php   if($_GET['change']=='hos')
+            {
+                $hotype = $tech->type;
+        if(substr($hotype,0,4) == 'HOS '){
+                ?>
+                     <tr>
+                        <th scope="row">{{ $i++ }}</th>
+                        <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
+                        <td>{{ $tech->email }}</td>
+                        <td>
 
-          $phonreplaced = ltrim($phonenumber,'0');
-          echo '+255'.$phonreplaced;
+              <?php $phonenumber = $tech->phone;
+                if(substr($phonenumber,0,1) == '0'){
 
-        }else { echo $tech->phone;}
+                  $phonreplaced = ltrim($phonenumber,'0');
+                  echo '+255'.$phonreplaced;
 
-      ?></td>
-                @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+                }else { echo $tech->phone;}
 
-            </tr>
+              ?></td>
+                        @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+
+                    </tr>
+                <?php } }else if($_GET['change']=='iow')
+            {  $hotype = $tech->type;
+        if(substr($hotype,0,10) == 'Inspector '){ ?>
+                         <tr>
+                            <th scope="row">{{ $i++ }}</th>
+                            <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
+                            <td>{{ $tech->email }}</td>
+                            <td>
+
+                  <?php $phonenumber = $tech->phone;
+                    if(substr($phonenumber,0,1) == '0'){
+
+                      $phonreplaced = ltrim($phonenumber,'0');
+                      echo '+255'.$phonreplaced;
+
+                    }else { echo $tech->phone;}
+
+                  ?></td>
+                            @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+
+                        </tr>
+                <?php } } else if($_GET['change']=='technician')
+            { ?>
+                <tr>
+                    <th scope="row">{{ $i++ }}</th>
+                    <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
+                    <td>{{ $tech->email }}</td>
+                    <td>
+
+          <?php $phonenumber = $tech->phone;
+            if(substr($phonenumber,0,1) == '0'){
+
+              $phonreplaced = ltrim($phonenumber,'0');
+              echo '+255'.$phonreplaced;
+
+            }else { echo $tech->phone;}
+
+          ?></td>
+                    @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+
+                </tr>
+                <?php  } ?>
+
         @endforeach
         </tbody>
 
