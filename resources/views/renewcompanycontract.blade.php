@@ -91,9 +91,7 @@ Company Registrartion
 
    <!-- <div class="jumbotron" style="width: 500px;">
                 
-=======
-    <div class="jumbotron" style="width: 500px;">
->>>>>>> 03e0f386ce202eddb4b818ddd2d76bd5bc112b4e
+ 
 
 
 
