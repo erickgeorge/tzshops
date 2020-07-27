@@ -8,12 +8,12 @@
 
   <br>
   @if(count($items)>0)
-    <div class="row container-fluid" >
-        <div class="col-lg-12" align="center">
+  <div class="container">    <div class="row " >
+        <div class="col">
            <h5 style=" "><b style="text-transform: capitalize;">Accepted Requested Transport </b></h5>
+ </div>
 
-
-        <div class="container" style="padding-left: 500px;">
+        <div class="col" >
             <form method="GET" action="wo_transport_request_accepted" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
