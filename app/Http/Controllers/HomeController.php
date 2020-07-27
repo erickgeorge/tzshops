@@ -47,7 +47,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {  
+    {
 
            if ((Auth::user()->change_password == null)) {
                    $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -57,7 +57,7 @@ class HomeController extends Controller
         else{
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-            return redirect()->route('work_order');   
+            return redirect()->route('work_order');
         }
 
 
@@ -86,14 +86,14 @@ class HomeController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-            
+
             if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -101,7 +101,7 @@ class HomeController extends Controller
             $to=request('start');
         $from=request('end');
         }// start> end
-        
+
         return view('redirectedwo', [
                     'role' => $role,
                     'notifications' => $notifications,
@@ -122,15 +122,15 @@ class HomeController extends Controller
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //        return response()->json(WorkOrder::with('user')->with('room.block')->where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get());
-     
-    
+
+
     if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -138,7 +138,7 @@ class HomeController extends Controller
             $to=request('start');
         $from=request('end');
         }// start> end
-        
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         if ($role['user_role']->role_id == 1){
             return view('work_orders', [
@@ -171,29 +171,29 @@ class HomeController extends Controller
                     'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
                 ]);
             }
-            
-            
+
+
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
-            } 
+            }
             else if (auth()->user()->type == "DVC Admin"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
             }
 
 
-        
+
              else
-            
-        {// HOS and their work order type 
+
+        {// HOS and their work order type
 
         return view('work_orders', [
             'role' => $role,
             'notifications' => $notifications,
             'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
         ]);
-   
-        
-        
+
+
+
     }//
 
 }
@@ -718,13 +718,13 @@ $v5=$type[4];
 
 ////////// 1234 ///////////////////////////
 if(request()->has('year'))  { //date filter
-        
-        
+
+
         $from=request('year');
-        
-        
-        
-        
+
+
+
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         if ($role['user_role']->role_id == 1){
             return view('work_orders', [
@@ -757,29 +757,29 @@ if(request()->has('year'))  { //date filter
                     'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
                 ]);
             }
-            
-            
+
+
             else if (auth()->user()->type == "Estates Director"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()]);
-            } 
+            }
             else if (auth()->user()->type == "DVC Admin"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()]);
             }
 
 
-        
+
              else
-            
-        {// HOS and their work order type 
+
+        {// HOS and their work order type
 
         return view('work_orders', [
             'role' => $role,
             'notifications' => $notifications,
             'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
         ]);
-   
-        
-        
+
+
+
     }//
 
 }
@@ -1302,11 +1302,11 @@ $v5=$type[4];
 ////////// --1234-- ///////////////////////////
 
 
- 
+
 //lenght
-// end start 
+// end start
         else {//dtsrt fdate
-    
+
      $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
@@ -1330,14 +1330,14 @@ $v5=$type[4];
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
             }
 
-           
+
 
             else if (auth()->user()->type == "DVC Admin"){
                 return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
             }
-            
+
             else{
-                
+
         return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()]);
             }
    }
@@ -1870,7 +1870,7 @@ $v5=$type[4];
         $directorate = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get();
         $des = Des::where('name','<>',null)->OrderBy('name','ASC')->get();
         $departments = Department::where('directorate_id', 1)->get();
-       
+
         $desp = desdepartment::all();
         return view('create_user', [
             'directorates' => $directorate,
@@ -1892,29 +1892,29 @@ $v5=$type[4];
         return view('stores', ['role' => $role, 'items' => Material::where('stock','>=',0)->orderBy('name','ASC')->get(),'notifications' => $notifications]);
 
     }
-    
 
 
-    
-    
+
+
+
      public function storeshosView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('storeshos', ['role' => $role, 'items' => Material::all(),'notifications' => $notifications]);
     }
-    
+
 
     public function usersView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $users = User::where('id', '<>', auth()->user()->id)->where('status', '=', 1)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
 
 
-   
-        
+
+
+
 //        return response()->json($users);
         return view('viewusers', ['display_users' => $users, 'role' => $role,'notifications' => $notifications]);
 
@@ -1924,7 +1924,7 @@ $v5=$type[4];
         public function iowzone()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $IoW = User::where('id', '<>', auth()->user()->id)->where('status', '=', 1)->where('type', 'inspector of works')->where('IoW', 1)->get();
@@ -1944,7 +1944,7 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return redirect()->route('work_order');  
+        return redirect()->route('work_order');
     }
 
     public function notificationView()
@@ -1973,14 +1973,14 @@ public function profileView(){
          $user = Auth::user();
         return view('changeprofile', ['role' => $role,'notifications' => $notifications,'user' => $user]);
     }
-    
+
     public function myprofileView(){
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $user = Auth::user();
         return view('myprofile', ['role' => $role,'notifications' => $notifications,'user' => $user]);
     }
-   
+
    public function AddMaterialVO(){
 
      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -1989,6 +1989,7 @@ public function profileView(){
    }
 
    public function techniciansView(){
+    //
 
      $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -2008,9 +2009,9 @@ public function profileView(){
 
 
                    if($length==1){
- 
-          
-  
+
+
+
         return view('technicians', [
             'role' => $role,
             'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->orderBy('fname','ASC')->get(),
@@ -2035,14 +2036,14 @@ public function profileView(){
                     'role' => $role,
                     'notifications' => $notifications,
                      'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
-                    
+
                 ]);
             }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false) {
                 return view('technicians', [
                     'role' => $role,
                     'notifications' => $notifications,
                      'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
-                    
+
                 ]);
                 }
                 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false) {
@@ -2050,7 +2051,7 @@ public function profileView(){
                     'role' => $role,
                     'notifications' => $notifications,
                      'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
-                    
+
                 ]);
                  }
             else  if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false) {
@@ -2058,13 +2059,13 @@ public function profileView(){
                     'role' => $role,
                     'notifications' => $notifications,
                      'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get()
-                    
+
                 ]);
 
 }
 
-  
-   
+
+
     }
 
 
@@ -2085,7 +2086,7 @@ $v3=$type[2];
                     'role' => $role,
                     'notifications' => $notifications,
                     'techs' => Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get()
-                    
+
                 ]);
             }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
                 return view('technicians', [
@@ -2274,7 +2275,7 @@ $v4=$type[3];
                 ]);
             }
 
-  
+
 
 
 }
@@ -2538,6 +2539,8 @@ $v5=$type[4];
 
    }
    }
+
+//
     public function workOrderNeedMaterialView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -2545,14 +2548,14 @@ $v5=$type[4];
 
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
         $iozonename = iowzone::where('id',$iozone['zone'])->first();
-        
+
         $wo_material=   WorkOrderMaterial::where('zone', $iozone['zone'])->
                        select(DB::raw('work_order_id'),'hos_id' )
                      ->where('status',0)
                      ->orwhere('status', 9)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
-                     
+
                      ->get();
 
         $mc_material=   WorkOrderMaterial::
@@ -2563,7 +2566,7 @@ $v5=$type[4];
                      ->groupBy('hos_id')
                      ->groupBy('zone')
                      ->get();
-                      
+
         return view('womaterialneeded', ['role' => $role, 'items' => $wo_material, 'mcitems' => $mc_material,'notifications' => $notifications]);
     }
 
@@ -2576,7 +2579,7 @@ $v5=$type[4];
 
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
         $iozonename = iowzone::where('id',$iozone['zone'])->first();
-        
+
         $wo_materialed=   WorkOrderMaterial::where('zone', $iozone['zone'])->
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',-1)
@@ -2585,7 +2588,7 @@ $v5=$type[4];
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
-        
+
         $wo_material=   WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',-1)
@@ -2594,8 +2597,8 @@ $v5=$type[4];
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
-        
-        
+
+
         return view('rejectedmaterialwith_wo', ['role' => $role, 'materialed' => $wo_materialed,'items' => $wo_material,'notifications' => $notifications]);
     }
 
@@ -2603,15 +2606,15 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'receiver_id')
                      ->where('status',3)
                      ->groupBy('work_order_id')
                      ->groupBy('receiver_id')
                      ->get();
-        
-        
+
+
         return view('receivedmaterialwith_wo', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
 
@@ -2621,15 +2624,15 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
                        select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',15)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->get();
-        
-        
+
+
         return view('womaterialpurchased', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
 
@@ -2639,36 +2642,36 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 10)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',10)
-                    
+
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
                      ->get();
-        
-        
+
+
         return view('womaterialmissing', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
+
      public function workOrderMaterialInspectionView($id , $zoneid)
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
-        
+
         $wo_material=   WorkOrderMaterial::where('zone', $iozone['zone'])->
-                    
+
                      where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
                      ->get();
-        
+
         $mc_material=   WorkOrderMaterial::
-                     where('work_order_id',$id)->where('zone',$zoneid)->where('status',0)->orwhere('work_order_id',$id)->where('zone',$zoneid)->where('status',9)  
-                     ->get();  
+                     where('work_order_id',$id)->where('zone',$zoneid)->where('status',0)->orwhere('work_order_id',$id)->where('zone',$zoneid)->where('status',9)
+                     ->get();
 
 
- 
+
         return view('material_inspection_view', ['role' => $role, 'items' => $wo_material, 'mcitems' => $mc_material,'notifications' => $notifications ,  'wo' => WorkOrder::where('id', $id)->first(),]);
     }
 
@@ -2680,12 +2683,12 @@ $v5=$type[4];
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
-       
+
         $wo_material=   WorkOrderMaterial::where('zone', $iozone['zone'])->
-                    
+
                      where('work_order_id',$id)->where('status',0)->orwhere('work_order_id',$id)->where('status',9)
                      ->get();
- 
+
         return view('material_inspection_view', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications ,  'wo' => WorkOrder::where('id', $id)->first(),]);
     }
 
@@ -2694,12 +2697,12 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
-                    
+
                      where('work_order_id',$id)->where('status',15)
                     ->get();
-        
+
         return view('womaterialtoprocureviewbyheadprocurement', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
 
@@ -2708,34 +2711,34 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 10)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
-                    
+
                      where('work_order_id',$id)->where('status',10)
-                     
-            
+
+
                      ->get();
-        
-        
+
+
         return view('material_missing_inspection_view', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
+
     public function workOrderApprovedMaterialView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'))
                      ->where('status',3)
-                    
+
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-            
+
         return view('womaterialapproved', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
+
 
 
 
@@ -2743,56 +2746,56 @@ $v5=$type[4];
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',5)
-                    
+
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
-                     
+
                      ->get();
-               
+
         return view('womaterialtoprocure', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
+
 
        public function materialacceptedbyiow()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',1)
-                    
+
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
-                     
+
                      ->get();
-               
+
         return view('womaterialacceptedbyiowtostore', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
+
 
            public function material_reserved()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id')
                      ->where('status',5)->orwhere('reservestatus',1)
-                    
+
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
-                     
-                     
+
+
                      ->get();
-               
+
         return view('womaterialreserved', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
+
 
           public function material_accepted()
     {
@@ -2801,7 +2804,7 @@ $v5=$type[4];
 
          $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
         $iozonename = iowzone::where('id',$iozone['zone'])->first();
-        
+
         $wo_materiald=   WorkOrderMaterial::where('zone', $iozone['zone'])->
                        select(DB::raw('work_order_id'),'hos_id','accepted_by')
                      ->where('status',1)->orwhere('copyforeaccepted' , 1)
@@ -2809,100 +2812,100 @@ $v5=$type[4];
                     ->groupBy('work_order_id')
                     ->groupBy('hos_id')
                     ->groupBy('accepted_by')
-                     
+
                      ->get();
-        
+
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id','accepted_by')
                      ->where('status',1)->orwhere('copyforeaccepted' , 1)
-                    
+
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
                       ->groupBy('accepted_by')
-                     
-                     
+
+
                      ->get();
                //
         return view('womaterialaccepted', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications,'materls' => $wo_materiald]);
     }
 
 
-    
-    
+
+
     public function work_order_purchasing_requestView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   PurchasingOrder::
                      select(DB::raw('work_order_id'))
                      ->where('status',0)
-                    
+
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-            
-            
-        
-            
-            
+
+
+
+
+
         return view('wo_purchasing_request', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     public function wo_release_grn()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   PurchasingOrder::
                      select(DB::raw('work_order_id'))
                      ->where('status',2)
-                    
+
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-            
-            
-        
-            
-            
+
+
+
+
+
         return view('wo_release_grn', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
     public function workOrdergrnView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $wo_material=   PurchasingOrder::
                      select(DB::raw('work_order_id'))
                      ->where('status',1)
-                    
+
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-            
-            
-        
-            
-            
+
+
+
+
+
         return view('wo_grn', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
-    
-    
-    
+
+
+
+
     public function workOrderReleasedMaterialView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
-        
-        
+
+
+
         $wo_material = WorkOrderMaterial::
                      select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
                      ->where('status',2)
@@ -2911,32 +2914,32 @@ $v5=$type[4];
                      ->orderBy('work_order_id')
                      ->orderBy('updated_at','ASC')
                      ->get();
-        
-        
-        
-        
+
+
+
+
         return view('womaterialreleased', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
-    
-    
-    
+
+
+
+
     public function transport_request_View()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_trasport_request', ['role' => $role, 'items' => WorkOrderTransport::where('status', 0)->orderBy(DB::raw('ABS(DATEDIFF(time, NOW()))'))->get(),'notifications' => $notifications]);
     }
-    
-    
+
+
     public function woTransportAcceptedView()
     {
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
@@ -2944,25 +2947,25 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_trasport_accept', ['role' => $role, 'items' => WorkOrderTransport::where('status', 1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
-    
+
         }
-        
-        
-        
+
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_trasport_accept', ['role' => $role, 'items' => WorkOrderTransport::where('status', 1)->get(),'notifications' => $notifications]);
     }
-    
+
     public function woTransportRejectedView()
     {
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
@@ -2970,26 +2973,26 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_trasport_reject', ['role' => $role, 'items' => WorkOrderTransport::where('status', -1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
-    
+
         }
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_trasport_reject', ['role' => $role, 'items' => WorkOrderTransport::where('status', -1)->get(),'notifications' => $notifications]);
     }
-    
-    
-    
+
+
+
     public function woMaterialAcceptedView($id)
     {
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
@@ -2997,32 +3000,32 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->get(),'notifications' => $notifications]);
    }
-       
-     
 
 
 
-   
-   
-   
+
+
+
+
+
    public function woMaterialRejectedView()
     {
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
@@ -3030,29 +3033,29 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_material_rejected', ['role' => $role, 'items' => WorkOrderMaterial::where('status',-1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_material_rejected', ['role' => $role, 'items' => WorkOrderMaterial::where('status', -1)->get(),'notifications' => $notifications]);
    }
-   
-   
-   
-   
-   
+
+
+
+
+
     public function unattendedWorkOrdersView()
     {
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
@@ -3060,26 +3063,26 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('completed_wo', ['role' => $role, 'wo' => WorkOrder::where('status',-1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('completed_wo', ['role' => $role, 'wo' => WorkOrder::where('status',-1)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
    }
-   
-   
+
+
     public function completedWorkOrdersView()
     {
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
@@ -3087,42 +3090,42 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',30)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('unattended_wo', ['role' => $role, 'wo' => WorkOrder::where('status',30)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
    }
-   
-   
-   
+
+
+
     public function roomreportView()
     {
-        
+
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,count(location) as total_location, location,loc_id'))
-                     
+
                      ->groupBy('loc_id')
                      ->groupBy('location')
                      ->get();
-                     
-                     
-                     
-        
-        
+
+
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('roomreport', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
    }
-   
-   
+
+
       public function storereportView()
     {
-        
-  
+
+
 
 
              $tottal_item = Material::
@@ -3131,23 +3134,23 @@ $v5=$type[4];
                      ->groupBy('type')
                       ->groupBy('description')
                      ->get();
-        
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('storereport', ['role' => $role, 'items' => $tottal_item,'notifications' => $notifications, ]);
    }
 
-   
-   
+
+
     public function woduration()
     {
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
@@ -3155,16 +3158,16 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('woduration', ['role' => $role, 'wo' => WorkOrder::where('status',2)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('woduration', ['role' => $role, 'wo' => WorkOrder::where('status',2)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get(),'notifications' => $notifications]);
    }
-   
+
 
 
 
@@ -3174,44 +3177,44 @@ $v5=$type[4];
 
  public function techniciancount()
     {
-        
-        
+
+
         $wo_technician_count = WorkOrderStaff::
                      select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
                      ->where('status',0)
                      ->groupBy('staff_id')
-                     
+
                      ->get();
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
         }
-        
+
         $wo_technician_count = WorkOrderStaff::
                      select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
                      ->where('status',1)
                      ->whereBetween('created_at', [$from, $to])
                      ->groupBy('staff_id')
-                     
+
                      ->get();
-                     
-                    
-        
+
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('techniciancount', ['role' => $role, 'wo' => $wo_technician_count,'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('techniciancount', ['role' => $role, 'wo' =>$wo_technician_count ,'notifications' => $notifications]);
@@ -3225,108 +3228,108 @@ $v5=$type[4];
 
 public function techniciancountcomp()
     {
-        
-        
+
+
         $wo_technician_count = WorkOrderStaff::
                      select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
                      ->where('status',1)
                      ->groupBy('staff_id')
-                     
+
                      ->get();
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
         }
-        
+
         $wo_technician_count = WorkOrderStaff::
                      select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
                      ->where('status',1)
                      ->whereBetween('created_at', [$from, $to])
                      ->groupBy('staff_id')
-                     
+
                      ->get();
-                     
-                    
-        
+
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('techniciancountcomp', ['role' => $role, 'wo' => $wo_technician_count,'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('techniciancountcomp', ['role' => $role, 'wo' =>$wo_technician_count ,'notifications' => $notifications]);
    }
 
 
-   
+
     public function hoscount()
     {
-        
+
         $wo_hos_count = WorkOrder::
                      select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
                      ->where('status',30)
                      ->groupBy('staff_id')
-                     
+
                      ->get();
-        
+
         if(request()->has('start') && request()->has('end') )  {
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
+
         if(request('start')>request('end')){
             $to=request('start');
         $from=request('end');
         }
-        
+
         $wo_hos_count = WorkOrder::
                      select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
                      ->where('status',30)
                      ->whereBetween('created_at', [$from, $to])
                      ->groupBy('staff_id')
-                     
+
                      ->get();
-        
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('hoscount', ['role' => $role, 'wo' => $wo_hos_count,'notifications' => $notifications]);
- 
+
         }
-        
-        
-        
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('hoscount', ['role' => $role, 'wo' =>$wo_hos_count ,'notifications' => $notifications]);
    }
-   
-   
+
+
    public function wo_materialView($id)
-   
+
     {
-    
+
         $wo_material = WorkOrderMaterial::
                      select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
                      ->where('status',3)
                      ->where('work_order_id',$id)
                      ->groupBy('material_id')
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('womaterialView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
@@ -3334,18 +3337,18 @@ public function techniciancountcomp()
 
 
 
-   
+
      public function wo_material_to_purchaseView($id)
-   
+
     {
-    
+
         $wo_material = WorkOrderMaterial::
-                     
+
                      where('status',5) //status for material to procure
-                    
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('womaterialtoprocureview', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
@@ -3354,19 +3357,19 @@ public function techniciancountcomp()
 
 
 public function wo_material_acceptedbyIOWView($id)
-   
+
     {
         $wo_material = WorkOrderMaterial::
                      select(DB::raw('work_order_id,staff_id,material_id,sum(quantity) as quantity'))
                      ->where('status',1) //status for material to procure
                      ->where('work_order_id',$id)
                      ->groupBy('material_id')
-                     ->groupBy('work_order_id') 
-                     ->groupBy('staff_id')      
-                     
+                     ->groupBy('work_order_id')
+                     ->groupBy('staff_id')
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('requestedmaterialinstore', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications, 'wo_materials' =>WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get(),
@@ -3375,32 +3378,32 @@ public function wo_material_acceptedbyIOWView($id)
     }
 
 
-  
+
      public function wo_material_to_purchaseViewbystore($id)
-   
+
     {
-    
+
         $wo_material = WorkOrderMaterial::where('work_order_id',$id)->where('status', 5)->orwhere('work_order_id',$id)->where('reservestatus',1)
-                   
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('womaterialtoprocureviewbystore', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
 
- 
+
 
       public function wo_material_purchasedViewbyheadprocurement($id)
-   
+
     {
-    
+
         $wo_material = WorkOrderMaterial::where('status', 15)
-                   
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('womaterialtoprocureviewbyheadprocurement', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
@@ -3409,121 +3412,121 @@ public function wo_material_acceptedbyIOWView($id)
 
 
 
-    
+
       public function wo_materialmissingView($id)
-   
+
     {
-        
+
           $wo_material = WorkOrderMaterial::
                      select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
                      ->where('status',4)
                      ->where('work_order_id',$id)
                      ->groupBy('material_id')
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('womaterialView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-    
-   
-   
+
+
+
     public function wo_purchasing_orderView($id)
-   
+
     {
-         
+
         $wo_material = PurchasingOrder::
                      select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
                      ->where('status',1)
                      ->where('work_order_id',$id)
                      ->groupBy('material_list_id')
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('purchasingOrderView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-   
-   
 
-   
+
+
+
      public function wo_grn_listView($id)
-   
+
     {
-        
-     
+
+
         $wo_material = PurchasingOrder::
                      select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
                      ->where('status',1)
                      ->where('work_order_id',$id)
                      ->groupBy('material_list_id')
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('grnProcurementlist', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-   
-   
 
 
-   
+
+
+
     public function procureiow_list($id)
-   
+
     {
-        
+
         $wo_material = PurchasingOrder::
                      select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
                      ->where('status',0)
                      ->where('work_order_id',$id)
                      ->groupBy('material_list_id')
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('purchasingOrderView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-   
-   
-   
+
+
+
     public function wo_procurement_orderView($id)
-   
+
     {
-        
-        
-        
+
+
+
         $wo_material = PurchasingOrder::
                      select(DB::raw('work_order_id,material_list_id,sum(quantity) as quantity'))
                      ->where('status',1)
                      ->where('work_order_id',$id)
                      ->groupBy('material_list_id')
                      ->groupBy('work_order_id')
-                     
+
                      ->get();
-        
-        
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('procurementOrderView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
-   
+
 
          public function WorkorderReportView()
     {
-        
-         
+
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('workorderreport', ['role' => $role,'notifications' => $notifications, ]);
@@ -3539,10 +3542,420 @@ public function wo_material_acceptedbyIOWView($id)
    }
    public function alltechnicians(){
     $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
-    $all = Technician::orderby('fname')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+//
+// 
+   
+        if(($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Maintenance coordinator')) {
+
+              
+                $techs= Technician::orderby('fname')->get();
+        } else{
+
+               $type=explode(",",auth()->user()->type);
+                $length=count($type);
+
+
+                   if($length==1){
+
+
+
+                    $techs= Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->orderBy('fname','ASC')->get();
+           
+
+        
+        }
+
+        else if($length==2){
+
+
+
+
+    $v1=$type[0];
+    $v2=$type[1];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false) {
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get();
+
+                
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false) {
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get();
+
+                
+                }
+                else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false) {
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get();
+
+                
+                 }
+            else  if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false) {
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get();
+
+                 
+
+}
+
+
+
+    }
+
+
+    else if($length==3){
+
+
+
+
+$v1=$type[0];
+$v2=$type[1];
+$v3=$type[2];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") !== false) {
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+
+                
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+                else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") !== false){
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+            else  if(strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") !== false){
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") !== false){
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+             else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+
+}
+
+
+else if($length==4){
+
+
+$v1=$type[0];
+$v2=$type[1];
+$v3=$type[2];
+$v4=$type[3];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+                else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+            else  if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                
+                $techs = Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                 
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+            else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+            else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                  
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+          else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                 
+            $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+           else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
+                 
+            $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+          else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
+                 
+            $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+          else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
+                
+            $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+         else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
+                  
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+
+
+
+
+}
+
+          else if($length==5){
+
+
+$v1=$type[0];
+$v2=$type[1];
+$v3=$type[2];
+$v4=$type[3];
+$v5=$type[4];
+
+
+
+
+            if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                 
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+               else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+           else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                 
+            $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+             else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+           else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+            else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+          else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                
+            $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+          else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+         else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+         else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+       else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+               
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+               
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+               
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                 
+                $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+               
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
+                 
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                 
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
+                
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+               
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
+                
+                    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+               
+            }
+
+             else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
+                 
+                   $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
+                
+            }
+
+
+}
+
+   }
+
+
+
+//
+//
+
+
+
     $head = 'All Technicians Details';
-        return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
+        return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $techs,'notifications' => $notifications, ]);
    }
 
    public function alliow(){
@@ -3555,67 +3968,67 @@ public function wo_material_acceptedbyIOWView($id)
 
    public function anonymousroomreport()
     {
-        
+
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,area_id'))
-                     
+
                      ->groupBy('area_id')
                      ->where('loc_id',$_GET['room'])
                      ->get();
-                     
-                     
-                     
-        
-        
+
+
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('anonymousroom', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
    }
    public function anonymousroomreportextended()
     {
-        
+
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,block_id'))
-                     
+
                      ->groupBy('block_id')
                      ->where('area_id',$_GET['room'])
                      ->get();
-                     
-                     
-                     
-        
-        
+
+
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('anonymousroomextended', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
    }
     public function inroomreportextendedwithrooms()
     {
-        
+
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,room_id'))
-                     
+
                      ->groupBy('room_id')
                      ->where('block_id',$_GET['room'])
                      ->get();
-                     
-                     
-                     
-        
-        
+
+
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('foundrooms', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
    }
    public function knownroomreport()
     {
-        
+
         $wo_room = WorkOrder::where('location',$_GET['workorders'])->OrWhere('room_id',$_GET['workorders'])->get();
-                     
-                     
-                     
-        
-        
+
+
+
+
+
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('knownroom', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
@@ -3624,4 +4037,3 @@ public function wo_material_acceptedbyIOWView($id)
 
 }
 
-   
