@@ -611,55 +611,39 @@ public function transportforwork(Request $request, $id)
 
 	public function materialaddforwork(Request $request,$id)
     {
-		$y=1;
-		$totmat=$request['totalmaterials']/2;
-
-		/*
-		for ($x = 1; $x <= $totmat; $x++) {
-
-   $materialreq=Material::where('id',$request[$y])->first();
-	$limit=$materialreq->stock;
-	$mname=$materialreq->name;
-	$mdesc=$materialreq->description;
-
-	$y=$y+1;
-        if ($request[$y] > $limit) {
-
-
-            return redirect()->back()->withErrors(['message' => 'MATERIAL LIMIT EXCEEDED IN STOCK '.$mname.' ,   '.$mdesc.'   ,MAXIMUM LIMIT : '.$limit]);
-        }
-		$y=$y+1;
-
-		}
-
-
-	*/
+	
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
-			$z=1;
-			for ($x = 1; $x <= $totmat; $x++) {
 
-			$work_order_material = new  WorkOrderMaterial();
-            $work_order_material->work_order_id = $id;
-            $work_order_material->material_id = $request[$z];
-			$z=$z+1;
-			$work_order_material->quantity = $request[$z];
-			$z=$z+1;
-			$work_order_material->status = 20; //status for HOS to view material before sent to IoW
-			$work_order_material->hos_id = auth()->user()->id;
-            $work_order_material->staff_id = auth()->user()->id;
-            $work_order_material->zone = $request['zone'];
+            
+            $material = $request['material'];
+            $quantity = $request['quantity']; 
 
-            $work_order_material->save();
+
+
+          //  First Store data in $arr
+             $arr = array();
+                  foreach ($material as $mat) {
+                   $arr[] = $mat;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
+
+
+        $workordermat = new WorkOrderMaterial();
+        $workordermat->work_order_id = $id;
+        $workordermat->material_id = $material[$a];
+        $workordermat->quantity = $quantity[$a];
+        $workordermat->status = 20;  //status for HOS to view material before sent to IoW
+        $workordermat->hos_id = auth()->user()->id; 
+        $workordermat->zone = $request['zone'];
+        $workordermat->save();
+
 }
-
-
-
-
-
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -670,6 +654,8 @@ public function transportforwork(Request $request, $id)
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
+
+
 
 
         Public function editmaterialforwork(request $request, $id){

@@ -355,7 +355,7 @@ var total=2;
   <th>Status</th>
   <th>Message</th>
 
-    <th>Date Requested</th>
+    <th>Date</th>
   </thead>
   </tr>
     @foreach($tforms as $tform)
@@ -398,7 +398,7 @@ var total=2;
   @if(empty($wo['work_order_material']->id))
 
     @else
-    <h4><b>Material Requests </b></h4>
+    <h4><b>Materials Requests </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -529,7 +529,7 @@ var total=2;
   @if(empty($wo['work_order_material']->id))
 
     @else
-      <h4><b>Material Used </b></h4>
+      <h4><b>Materials Used </b></h4>
     <?php
 
   $idw=$wo->id;
@@ -1093,29 +1093,30 @@ var total=2;
                         ?>
                          @if($wo->statusmform == 4) 
 
-                            //
-
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign technician for inspection before work</p>
+                                <p>Select material for this works order</p>
                             </div>
                         </div>
                      
 
 
-                        <form method="POST" action="{{ route('work.assigntechnicianforinspection', [$wo->id]) }}">
-                        @csrf
                           <div class="form-group">
 
-          <TABLE id="dataTable" width="350px" >
+
+      
+          <TABLE id="dataTablemat" align="center" >
+
+           
                   <TR>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
+                        <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
                       
                        <TD>
 
 
-                            <select  required class="custom-select"  name="material" style="width: 400px">
-                                <option   selected value="" >Choose matrial...</option>
+                            <select  required class="custom-select"  name="material[]" >
+                                <option   selected value="" >Choose material...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
@@ -1125,7 +1126,7 @@ var total=2;
 
                        <TD>
 
-                          <input type="number" min="1" style="color: black; " name="quantity" required class="form-control"  rows="5"></input>
+                          <input placeholder="Enter quantity" type="number" max="100" style="color: black; " name="quantity[]" required class="form-control" >
                          
                        </TD>
 
@@ -1135,73 +1136,17 @@ var total=2;
         </TABLE>
 
                         </div>
+                        <div align="right">
 
-                        <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
+                        <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addmaterialrow('dataTablemat')" />
 
-                        <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
-                        <br><br>
+                        <INPUT   id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deletematerialrow('dataTablemat')" />
+                        <br><br> </div>
 
-                        <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
+                        <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                       
                     </form>
-
-
-          
-
-
-
-
-
-
-
-//////////////
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Select material for works order</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <select @if($wo->zone_location == null) disabled="" @endif required class="custom-select"  id="materialreq" name="1" style="width: 700px">
-                                <option   selected value="" >Choose...</option>
-                                @foreach($materials as $material)
-                                    <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-
-                         <p>Quantity</p>
-                        <div class="form-group">
-                            <input type="number" min="1" @if($wo->zone_location == null) disabled="" @endif style="color: black; width: 700px" name="2" required class="form-control"  rows="5" id="2"></input>
-                        </div>
-
-
-
-                        <div id="newmaterial" style="width: 700px">
-
-                        </div>
-                       <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                    @if($wo->zone_location != null)
-                    <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
-                    @endif
-
-             <br>
-             <br>
-
-
-
-                         <button @if($wo->zone_location == null) disabled="" @endif style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">Add New Material</button>
-                         <br> <br>
-
-                        <button @if($wo->zone_location == null) disabled="" @endif style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
-                    </form>
-
-
-
-
 
 
 
@@ -1521,85 +1466,6 @@ var total=2;
 
 
 
-      function newmaterial(){
-
-         total=total+1;
-
-
-         var myDiv = document.getElementById("newmaterial");
-
-
-         var node = document.createElement("label");
-  var textnode = document.createTextNode("Material");
-  node.appendChild(textnode);
-myDiv.appendChild(node);
-
-
-
-
-//Create array of options to be added
-//var array = ["Volvo","Saab","Mercades","Audi"];
-
-//Create and append select list
-var selectList = document.createElement("select");
-selectList.className = "custom-select";
-selectList.required = true;
-
-
-selectList.name = total;
-
-myDiv.appendChild(selectList);
-
-//Create and append the options
- var option = document.createElement("option");
-
-    option.text = 'Choose ...';
-     option.value = '';
-
-    selectList.appendChild(option);
-
-for (var i = 0; i < array.length; i++) {
-    var option = document.createElement("option");
-    option.value = arrayvalue[i];
-    option.text = array[i];
-    selectList.appendChild(option);
-}
-
- var node = document.createElement("label");
-  var textnode = document.createTextNode("Quantity");
-  node.appendChild(textnode);
-  myDiv.appendChild(node);
-
-
- var input = document.createElement("input");
-         input.setAttribute('type', 'number');
-         input.min=1;
-         input.required = true;
-
-         total=total+1;
-
-         input.name = total;
-         input.className = "form-control";
-         var parent = document.getElementById("newmaterial");
-
-
-        parent.appendChild(input);
-
-
-
-         var node = document.createElement("br");
-
-myDiv.appendChild(node);
-
-document.getElementById("totalmaterials").value=total;
-
-
-     }
-
-
-
-
-
 
     // getTechnician(5);
 
@@ -1616,6 +1482,7 @@ document.getElementById("totalmaterials").value=total;
 
        }
     </script>
+
 
     <script type="text/javascript">
 
@@ -1803,6 +1670,106 @@ document.getElementById("totalmaterials").value=total;
         }
 
     </SCRIPT>
+
+
+
+<SCRIPT language="javascript">
+        function addmaterialrow(tableID) {
+
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var colCount = table.rows[0].cells.length;
+
+
+
+            for(var i=0; i<colCount; i++)
+             {
+
+
+               if(rowCount = 1) {
+
+                          document.getElementById('deleterowbutton').style.display='inline-block';
+
+
+
+                    }
+
+
+
+
+                var newcell = row.insertCell(i);
+
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+
+
+                }
+
+
+
+            }
+
+
+        }
+
+
+
+        function deletematerialrow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+
+
+                        if(rowCount <= 2) {
+
+
+                        document.getElementById('deleterowbutton').style.display='none';
+                    }
+
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+
+            }catch(e) {
+                alert(e);
+            }
+        }
+
+
+
+
+    </SCRIPT>
+
+
+
+
+
+
 
 
 
