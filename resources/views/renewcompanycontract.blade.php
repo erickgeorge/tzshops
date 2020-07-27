@@ -53,7 +53,7 @@ Company Registrartion
 
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-                            
+
 
                           <label style="width:150px;" class="input-group-text" for="directorate"><b>Tender number</b></label>
 
@@ -90,8 +90,8 @@ Company Registrartion
 
 
    <!-- <div class="jumbotron" style="width: 500px;">
-                
- 
+
+
 
 
 
@@ -102,7 +102,7 @@ Company Registrartion
 
                      <TABLE id="dataTable" width="300px" border="1">
                             <TR>
-                       
+
                                  <TD>
                             <input style="color: black;" type="text" required class="form-control" id="type"
                                name="tender[]" placeholder="Enter tender number"  >

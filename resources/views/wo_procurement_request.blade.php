@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style=" " align="center"><b style="text-transform: capitalize;">Purchasing Order Requests</b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;">Purchasing Order Requests</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">

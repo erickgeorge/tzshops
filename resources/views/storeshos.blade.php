@@ -8,7 +8,7 @@
 
     <br>
     <div class="row container-fluid">
-        <div class="col-lg-12" align="center">
+        <div class="col-lg-12"  >
             <h5 style=" "><b style="text-transform: capitalize;">Available materials </b></h5>
         </div>
         {{--<div class="col-md-4">

@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style=" "  align="center"><b style="text-transform: capitalize;">PROCUREMENT REQUEST OF WORKs ORDER</b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;">PROCUREMENT REQUEST OF WORKs ORDER</b></h5>
         </div>
 
     </div>

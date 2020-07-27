@@ -17,7 +17,7 @@
 <div class="container">
     <br>
     <div class="row" style="margin-top: 6%; margin-right: 2%; margin-left: 2%;">
-        <div class="col-lg-12" align="center">
+        <div class="col-lg-12" >
             <h5 style="text-transform: capitalize;" >Please assign zone for Inspector of Work</h5>
         </div>
 

@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="  " align="center"><b style="text-transform: capitalize;">Room report - Location</b></h5>
+            <h5 style="  "  ><b style="text-transform: capitalize;">Room report - Location</b></h5>
         </div>
 
 

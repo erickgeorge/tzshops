@@ -12,7 +12,7 @@
 
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="  " align="center"><b style="text-transform: capitalize;">Works orders with material rejected</b></h5>
+            <h5 style="  " ><b style="text-transform: capitalize;">Works orders with material rejected</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">

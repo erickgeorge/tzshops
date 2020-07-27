@@ -11,9 +11,9 @@
     <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type =='STORE')
-            <h5 style=" "  align="center"><b style="text-transform: capitalize;">Works orders with Material available and required by Head of Section</b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;">Works orders with Material available and required by Head of Section</b></h5>
             @else
-            <h5 style=" "  align="center"><b style="text-transform: capitalize;"> Works orders with Material received From Store</b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;"> Works orders with Material received From Store</b></h5>
             @endif
 
         </div>

@@ -19,7 +19,7 @@
 
     <div>
         <div>
-            <h5 style=" " align="center"><b style="text-transform: capitalize;">Material Purchased by Head of Procurement </b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;">Material Purchased by Head of Procurement </b></h5>
 
         </div>
 

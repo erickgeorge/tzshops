@@ -14,7 +14,7 @@
 
     <div>
         <div>
-            <h5 style=" " align="center" class="container"><b style="text-transform: capitalize;">Material Reserved for Works Order</b></h5>
+            <h5 style=" "  class="container"><b style="text-transform: capitalize;">Material Reserved for Works Order</b></h5>
         </div>
 
     </div>

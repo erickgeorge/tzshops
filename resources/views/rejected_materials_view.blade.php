@@ -18,7 +18,7 @@
     <div class="row container-fluid">
        @if(auth()->user()->type != 'Inspector Of Works')
         <div class="col-lg-12">
-            <h5 style=" " align="center"><b style="text-transform: capitalize;">Material Rejected by Inspector of Works  </b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;">Material Rejected by Inspector of Works  </b></h5>
         </div>
         @else
         <div class="col-lg-12">

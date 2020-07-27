@@ -7,7 +7,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="text-transform: capitalize;"  align="center"  >{{ $head }}</h5>
+            <h5 style="text-transform: capitalize;"   >{{ $head }}</h5>
         </div>
     </div>
     @if(Session::has('message'))
@@ -77,13 +77,13 @@ foreach ($hoos as $hous) {
 @if($head == 'All HOS Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 @elseif($head == 'All Technicians Details')
-<?php 
+<?php
 
 
-   
+
 if(($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Maintenance coordinator')) {
 
-              
+
 $techs= Technician::orderby('fname')->get();
 } else{
 
@@ -129,7 +129,7 @@ else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false) {
 else  if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false) {
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orderBy('fname','ASC')->get();
 
- 
+
 
 }
 
@@ -174,7 +174,7 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 }
 else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") !== false){
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and strpos($v3, "HOS") == false){
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
@@ -182,11 +182,11 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 }
 else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") !== false){
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else  if(strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and strpos($v3, "HOS") == false){
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 
 }
@@ -205,7 +205,7 @@ $v4=$type[3];
 
 if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
 
@@ -223,12 +223,12 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
 
 $techs = Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
 
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
 
@@ -236,37 +236,37 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
- 
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
 
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
 
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false) {
-  
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
 
 }
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
- 
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false) {
- 
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false) {
- 
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
 
 }
@@ -276,9 +276,9 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 
 }
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false) {
-  
+
     $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 
 
@@ -299,7 +299,7 @@ $v5=$type[4];
 
 
 if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
- 
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
 
 }else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
@@ -311,18 +311,18 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
 
     $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
 
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
- 
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") !== false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
 
@@ -342,7 +342,7 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
 
     $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
 
@@ -362,7 +362,7 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
 
     $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
 
@@ -372,7 +372,7 @@ else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpo
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
 
     $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 else if (strpos($v1, "HOS") !== false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
 
@@ -443,19 +443,19 @@ $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', 
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") !== false ) {
 
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") !== false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
- 
+
 $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
 
 }
 
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") !== false ) {
- 
+
     $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
- 
+
 }
 
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") !== false and  strpos($v5, "HOS") == false ) {
@@ -471,7 +471,7 @@ else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos
 }
 
 else if (strpos($v1, "HOS") == false and strpos($v2, "HOS") == false and  strpos($v3, "HOS") == false and strpos($v4, "HOS") == false and  strpos($v5, "HOS") == false ) {
- 
+
    $techs= Technician::where('type', substr(strstr($v1, " "), 1))->orwhere('type', substr(strstr($v2, " "), 1))->orwhere('type', substr(strstr($v3, " "), 1))->orwhere('type', substr(strstr($v4, " "), 1))->orwhere('type', substr(strstr($v5, " "), 1))->orderBy('fname','ASC')->get();
 
 }
@@ -595,7 +595,7 @@ $to = $techs; $v='technician';?>
               <?php
                echo strtoupper($tech->type);  ?></td>
             @if($head == 'All Technicians Details')
-            @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1)) 
+            @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
                <td >
                 <div class="row text-center" >
                     <a style="color: green;" href="{{ route('tech.edit.view', [$tech->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>

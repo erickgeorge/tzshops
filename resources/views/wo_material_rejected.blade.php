@@ -10,7 +10,7 @@
      @if(count($items)>0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="  " align="center"><b style="text-transform: capitalize;">Works order with rejected Material </b></h5>
+            <h5 style="  "  ><b style="text-transform: capitalize;">Works order with rejected Material </b></h5>
         </div>
 
         <div style="padding-left: 650px;">

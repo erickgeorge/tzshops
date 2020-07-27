@@ -8,7 +8,7 @@
     <br>
     <div class="container">
     <div class="row" style="margin-top: 6%;">
-        <div class="col-lg-12" align="center">
+        <div class="col-lg-12" >
             <h5 style="text-transform: capitalize;" >Add Material in Store</h5>
         </div>
     </div>

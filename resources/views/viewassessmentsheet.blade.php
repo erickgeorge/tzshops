@@ -24,7 +24,7 @@ Assessment Sheet
     @endif
 
 
-<h5 align="center" style="text-transform: capitalize;">
+<h5   style="text-transform: capitalize;">
  ASSESSMENT SHEET DETAILS </h5>
 <hr>
 <div class="container">

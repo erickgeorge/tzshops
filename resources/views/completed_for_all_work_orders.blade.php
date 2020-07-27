@@ -11,7 +11,7 @@
     <div class="container">
     <div class="row" >
         <div class="col">
-            <h5 ><b>Completed Works Orders List </b></h5>
+            <h5 ><b style="text-transform: capitalize;">Completed Works Orders List </b></h5>
 
         </div>
 @if(count($wo) > 0)
@@ -289,11 +289,11 @@ foreach($userwithid as $userwithid)
 
                             <td id="wo-details">  <?php if (strlen($work->details) > 30) {
                              echo substr($work->details, 0, 30); echo "...";
-                            } 
+                            }
                               else{
                                 echo $work->details;
                               } ?>
-                                
+
                               </td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>

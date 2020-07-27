@@ -14,7 +14,7 @@ use App\MinuteSheet; ?>
 
     <div>
         <div>
-            <h5 style=" " align="center"><b style="text-transform: capitalize;">Material to be purchased </b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;">Material to be purchased </b></h5>
         </div>
 
     </div>
