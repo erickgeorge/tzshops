@@ -588,7 +588,7 @@ Print report
             <div>
                 <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-warning">Close works order temporalily</button>
+                    <button type="submit" class="btn btn-warning">Notify client about work completion</button>
                 </form>
             </div>
         @else

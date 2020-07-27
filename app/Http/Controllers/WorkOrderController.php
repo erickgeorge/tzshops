@@ -989,22 +989,42 @@ public function transportforwork(Request $request, $id)
     Directorate of Estates.';
 
 
-
-
-
-      /*   $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
-$client = new \Nexmo\Client($basic);
-
-$message = $client->message()->send([
-    'to' => '255762391602',
-    'from' => 'ESTATE STAFF',
-    'text' => ' Your workorder have been closed successfully'
-]);
-
-session::flash('message', ' Your workorder have been closed successfully');
+/*emails
 
 
 */
+
+
+         $emailReceiver = User::where('id', $wo->client_id)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+
+
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wo->created_at, of  Problem Type $wo->problem_type has been COMPLETED. Please login in the system for further information .",
+
+                    "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('WORKS ORDER COMPLETION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+
+      
+/* end email*/
+
+
 
         return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,
