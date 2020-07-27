@@ -6,12 +6,11 @@
 
 @section('body')
     <br>
-    <div class="row" style=" margin-left:2%; margin-right:2%;">
-        <div class="col-md-8">
-            <h5 style="text-transform: capitalize;" >Create new works order</h5>
+            <div class="container">
+            <h4 style="text-transform: capitalize;" >Create new works order</h4>
         </div>
-    </div>
-    <hr>
+ 
+    <hr class="container">
     @if ($errors->any())
         <div class="alert alert-danger">
              <ul class="alert alert-danger">
@@ -136,7 +135,7 @@
     </div>
      <br>
       <div style="color: red;">
-      <input type="checkbox" name="emergency" > This work order is emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>
+      <input type="checkbox" name="emergency" > This Work Order Is Emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>
       </div>
       <br>
 

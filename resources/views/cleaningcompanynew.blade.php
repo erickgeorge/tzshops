@@ -32,7 +32,9 @@ Companies
     @endif
 
     </div>
-                  <h5 style=" text-transform: capitalize;" ><b style="text-transform: capitalize;">Cleaning companies </b></h5>
+
+                  <h4 ><b >Cleaning Companies </b></h4>
+
                   <hr>
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >

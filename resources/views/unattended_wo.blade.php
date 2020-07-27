@@ -14,13 +14,18 @@ use App\WorkOrder;
  ?>
   @if(count($wo) > 0)
     <br>
-    <div class="row container-fluid" style="margin-left: 4%; margin-right: 4%;">
-        <div class="col-md-6">
-            <h5 style=" "><b style="text-transform: capitalize;">Completed Works orders</b></h5>
+
+     <div class="container">
+
+    <div class="row" >
+        <div class="col">
+
+            <h5 ><b >Completed Works Orders</b></h5>
+
         </div>
 
-        <div class="col-md-6">
-            <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
+        <div class="col">
+            <form method="GET" action="completed_work_orders" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];
@@ -36,12 +41,12 @@ use App\WorkOrder;
             </form>
         </div>
 
-@endif
 
     </div>
     <br>
-    <hr>
-    <div class="container">
+
+   
+      <hr>
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -51,13 +56,12 @@ use App\WorkOrder;
     @endif
 
 
-  @if(count($wo) > 0)
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
            <button data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
-        @endif
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -157,7 +161,7 @@ use App\WorkOrder;
   </div>
 </div>
           <!-- ---------------------- -->
-        @if(count($wo) > 0)
+ 
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
@@ -232,7 +236,7 @@ use App\WorkOrder;
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">You have no works order</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no completed works orders</h1>
         @endif
     </div>
     <script>

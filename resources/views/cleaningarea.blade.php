@@ -23,7 +23,9 @@
             </ul>
         </div>
              @endif
-              <h5 style=" text-transform: capitalize;" ><b style="text-transform: uppercase;"> Cleaning Areas </b></h5>
+
+              <h4><b > Cleaning Areas </b></h4>
+
               <hr>
 
                             <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
@@ -44,7 +46,7 @@
                 <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Area Name</th>
-                        <th scope="col">Zone Name</th>
+                        <th scope="col">LOT</th>
                           @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                         <th scope="col">Action</th>
                         @endif
@@ -73,7 +75,7 @@
 
 
                                     <a style="color: green;"
-                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->Zone_name }}' )"
+                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->zone_id }}' )"
                                        data-toggle="modal" data-target="#editarea" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                              &nbsp;
@@ -133,18 +135,18 @@
 
 
 
+                    <div class="form-group">
+                            <label for="name_of_house">LOT Name <sup style="color: red;">*</sup></label>
+                            <input style="color: black;width:350px" type="text" required class="form-control"
+                                   id="edit_type"
+                                   name="zone" placeholder="Enter LOT Name">
+                                <input id="editarea_id"  hidden>  
 
-                            <select style="color: black;width:350px"  class="custom-select" name="zone" >
-                            <option value="">Choose...</option>
-                               @foreach($newzone as $zone)
-                                <option value="{{ $zone->zonename }}">{{ $zone->zonename }}</option>
-                                @endforeach
-
-                        </select>
-                    </div>
-
-
-
+                        </div>
+                    </div> 
+                       
+                        
+                    
                                                <div style="width:600px;">
                                                 <div style="float: left;">
 

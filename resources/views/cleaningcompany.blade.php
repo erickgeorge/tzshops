@@ -32,7 +32,8 @@
 
        <div class="row">
       <div class="col">
-            <h5 ><b style="text-transform: capitalize;">All tenders</b></h5>
+
+            <h5 ><b >All Tenders</b></h5>
 
         </div>
 
@@ -220,7 +221,7 @@
 
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td>{{ $house->tender }}</td>
+                            <td>{{ $house->tender }} </td>
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>

@@ -8,12 +8,13 @@
 
     <br>
     @if(count($items)>0)
-    <div class="row container-fluid" >
-        <div class="col-lg-12" align="center">
+    <div class="container">
+    <div class="row" >
+        <div class="col">
             <h5 style=" "><b style="text-transform: capitalize;">Rejected Transport Requests</b></h5>
         </div>
 
-        <div class="container" style="padding-left: 500px;">
+        <div class="col">
             <form method="GET" action="wo_transport_request_rejected" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -30,10 +31,11 @@
             </form>
         </div>
 
-
+</div>
 
 
     </div>
+
     <br>
     <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">

@@ -410,12 +410,12 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             return redirect()->back()->withErrors(['message' => 'Status of Inspection form required required']);
         }
 
-		else if ($request['status'] == 'Report before work') {
+		else if ($request['status'] == 'Inspection report before work') {
            $statusfield=5;
 
             $tech_complete =techasigned::where('work_order_id', $id)->update(array('status' =>1)); 
         }
-		else if ($request['status'] == 'Report after Work') {
+		else if ($request['status'] == 'Report after work') {
 			 $statusfield=6;
 
             $tech_complete_work =WorkOrderStaff::where('work_order_id', $id)->update(array('status' =>1)); 
@@ -544,7 +544,7 @@ public function transportforwork(Request $request, $id)
         ]);
 
 
-		}  else { return redirect()->back()->withErrors(['message' => 'Technician Selected has already been assigned for this  work order,You can not assign him repeatedly']);}
+		}  else { return redirect()->back()->withErrors(['message' => 'Technician selected has already been assigned for this  works order,You can not assign him repeatedly']);}
 	}
 
 
@@ -611,55 +611,39 @@ public function transportforwork(Request $request, $id)
 
 	public function materialaddforwork(Request $request,$id)
     {
-		$y=1;
-		$totmat=$request['totalmaterials']/2;
-
-		/*
-		for ($x = 1; $x <= $totmat; $x++) {
-
-   $materialreq=Material::where('id',$request[$y])->first();
-	$limit=$materialreq->stock;
-	$mname=$materialreq->name;
-	$mdesc=$materialreq->description;
-
-	$y=$y+1;
-        if ($request[$y] > $limit) {
-
-
-            return redirect()->back()->withErrors(['message' => 'MATERIAL LIMIT EXCEEDED IN STOCK '.$mname.' ,   '.$mdesc.'   ,MAXIMUM LIMIT : '.$limit]);
-        }
-		$y=$y+1;
-
-		}
-
-
-	*/
+	
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
-			$z=1;
-			for ($x = 1; $x <= $totmat; $x++) {
 
-			$work_order_material = new  WorkOrderMaterial();
-            $work_order_material->work_order_id = $id;
-            $work_order_material->material_id = $request[$z];
-			$z=$z+1;
-			$work_order_material->quantity = $request[$z];
-			$z=$z+1;
-			$work_order_material->status = 20; //status for HOS to view material before sent to IoW
-			$work_order_material->hos_id = auth()->user()->id;
-            $work_order_material->staff_id = auth()->user()->id;
-            $work_order_material->zone = $request['zone'];
+            
+            $material = $request['material'];
+            $quantity = $request['quantity']; 
 
-            $work_order_material->save();
+
+
+          //  First Store data in $arr
+             $arr = array();
+                  foreach ($material as $mat) {
+                   $arr[] = $mat;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
+
+
+        $workordermat = new WorkOrderMaterial();
+        $workordermat->work_order_id = $id;
+        $workordermat->material_id = $material[$a];
+        $workordermat->quantity = $quantity[$a];
+        $workordermat->status = 20;  //status for HOS to view material before sent to IoW
+        $workordermat->hos_id = auth()->user()->id; 
+        $workordermat->zone = $request['zone'];
+        $workordermat->save();
+
 }
-
-
-
-
-
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -670,6 +654,8 @@ public function transportforwork(Request $request, $id)
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
+
+
 
 
         Public function editmaterialforwork(request $request, $id){
@@ -810,6 +796,9 @@ public function transportforwork(Request $request, $id)
         ]);
     }
 }
+
+
+
 
 
 
@@ -1000,22 +989,42 @@ public function transportforwork(Request $request, $id)
     Directorate of Estates.';
 
 
-
-
-
-      /*   $basic  = new \Nexmo\Client\Credentials\Basic('8f1c6b0f', 'NQSwu3iPSjgw275c');
-$client = new \Nexmo\Client($basic);
-
-$message = $client->message()->send([
-    'to' => '255762391602',
-    'from' => 'ESTATE STAFF',
-    'text' => ' Your workorder have been closed successfully'
-]);
-
-session::flash('message', ' Your workorder have been closed successfully');
+/*emails
 
 
 */
+
+
+         $emailReceiver = User::where('id', $wo->client_id)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+
+
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wo->created_at, of  Problem Type $wo->problem_type has been COMPLETED. Please login in the system for further information .",
+
+                    "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('WORKS ORDER COMPLETION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+
+      
+/* end email*/
+
+
 
         return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,

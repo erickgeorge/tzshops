@@ -117,6 +117,148 @@ class HomeController extends Controller
                 ]);
 
     }
+    
+
+
+        public function completed_work_orders()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+//        return response()->json(WorkOrder::with('user')->with('room.block')->where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get());
+     
+    
+    if(request()->has('start'))  { //date filter
+        
+        
+        $from=request('start');
+        $to=request('end');
+        
+        
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+        
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        if ($role['user_role']->role_id == 1){
+            return view('completed_for_all_work_orders', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', 30)->OrderBy('created_at', 'DESC')->get()
+            ]);
+        }//if role=1
+
+        else { //role role not 1
+
+
+
+            if (strpos(auth()->user()->type, "HOS") !== false) {
+                return view('completed_for_all_work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->whereBetween('created_at', [$from, $to])->where('status', '<>', 0)->where('status', 30)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (auth()->user()->type == "Maintenance coordinator"){
+                return view('completed_for_all_work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', 30)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            
+            
+            else if (auth()->user()->type == "Estates Director"){
+                return view('completed_for_all_work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', 30)->OrderBy('created_at', 'DESC')->get()]);
+            } 
+            else if (auth()->user()->type == "DVC Admin"){
+                return view('completed_for_all_work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', 30)->OrderBy('created_at', 'DESC')->get()]);
+            }
+
+
+        
+             else
+            
+        {// HOS and their work order type 
+
+        return view('completed_for_all_work_orders', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereBetween('created_at', [$from, $to])->where('status', 30)->OrderBy('created_at', 'DESC')->get()
+        ]);
+   
+        
+        
+    }//
+
+}
+
+}  else{
+
+
+               $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        if ($role['user_role']->role_id == 1){
+            return view('completed_for_all_work_orders', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'wo' => WorkOrder::where('status', 30)->OrderBy('created_at', 'DESC')->get()
+            ]);
+        }//if role=1
+
+        else { //role role not 1
+
+
+
+            if (strpos(auth()->user()->type, "HOS") !== false) {
+                return view('completed_for_all_work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->where('status', 30)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }else if (auth()->user()->type == "Maintenance coordinator"){
+                return view('completed_for_all_work_orders', [
+                    'role' => $role,
+                    'notifications' => $notifications,
+                    'wo' => WorkOrder::where('status', 30)->OrderBy('created_at', 'DESC')->get()
+                ]);
+            }
+            
+            
+            else if (auth()->user()->type == "Estates Director"){
+                return view('completed_for_all_work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('status',  30)->OrderBy('created_at', 'DESC')->get()]);
+            } 
+            else if (auth()->user()->type == "DVC Admin"){
+                return view('completed_for_all_work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('status', 30)->OrderBy('created_at', 'DESC')->get()]);
+            }
+
+
+        
+             else
+            
+        {// HOS and their work order type 
+
+        return view('completed_for_all_work_orders', [
+            'role' => $role,
+            'notifications' => $notifications,
+            'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status',  30)->OrderBy('created_at', 'DESC')->get()
+        ]);
+   
+        
+        
+    }//
+
+}
+
+
+}
+
+}
+
+
+
+
+
 
     public function WorkorderView()
     {
@@ -144,7 +286,7 @@ class HomeController extends Controller
             return view('work_orders', [
                 'role' => $role,
                 'notifications' => $notifications,
-                'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+                'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
             ]);
         }//if role=1
 
@@ -162,22 +304,22 @@ class HomeController extends Controller
                 return view('work_orders', [
                     'role' => $role,
                     'notifications' => $notifications,
-                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->whereBetween('created_at', [$from, $to])->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->whereBetween('created_at', [$from, $to])->where('status', '<>', 0)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
                 ]);
             }else if (auth()->user()->type == "Maintenance coordinator"){
                 return view('work_orders', [
                     'role' => $role,
                     'notifications' => $notifications,
-                    'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+                    'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
                 ]);
             }
 
 
             else if (auth()->user()->type == "Estates Director"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
-            }
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()]);
+            } 
             else if (auth()->user()->type == "DVC Admin"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()]);
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()]);
             }
 
 
@@ -189,7 +331,7 @@ class HomeController extends Controller
         return view('work_orders', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+            'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereBetween('created_at', [$from, $to])->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
         ]);
 
 
@@ -730,7 +872,7 @@ if(request()->has('year'))  { //date filter
             return view('work_orders', [
                 'role' => $role,
                 'notifications' => $notifications,
-                'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                'wo' => WorkOrder::whereYear('created_at',$from)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
             ]);
         }//if role=1
 
@@ -748,22 +890,22 @@ if(request()->has('year'))  { //date filter
                 return view('work_orders', [
                     'role' => $role,
                     'notifications' => $notifications,
-                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get()
+                    'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->whereYear('created_at',$from)->where('status', '<>', 0)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
                 ]);
             }else if (auth()->user()->type == "Maintenance coordinator"){
                 return view('work_orders', [
                     'role' => $role,
                     'notifications' => $notifications,
-                    'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+                    'wo' => WorkOrder::whereYear('created_at',$from)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
                 ]);
             }
 
 
             else if (auth()->user()->type == "Estates Director"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()]);
-            }
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()]);
+            } 
             else if (auth()->user()->type == "DVC Admin"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()]);
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::whereYear('created_at',$from)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()]);
             }
 
 
@@ -775,7 +917,7 @@ if(request()->has('year'))  { //date filter
         return view('work_orders', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereYear('created_at',$from)->OrderBy('created_at', 'DESC')->get()
+            'wo' => WorkOrder::where('client_id', auth()->user()->id)->whereYear('created_at',$from)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()
         ]);
 
 
@@ -1311,7 +1453,7 @@ $v5=$type[4];
 
 
         if ($role['user_role']->role_id == 1){
-            return view('work_orders', ['role' => $role, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET(),'notifications' => $notifications]);
+            return view('work_orders', ['role' => $role, 'wo' => WorkOrder::where('status', '<>', 30)->OrderBy('created_at', 'DESC')->GET(),'notifications' => $notifications]);
         }else{
 
 
@@ -1322,23 +1464,23 @@ $v5=$type[4];
                    if($length==1){
 
             if (strpos(auth()->user()->type, "HOS") !== false) {
-                return view('work_orders', ['role' => $role, 'notifications' => $notifications,'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->orwhere('client_id', auth()->user()->id, " ")->OrderBy('created_at', 'DESC')->get()]);
+                return view('work_orders', ['role' => $role, 'notifications' => $notifications,'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->where('status', '<>', 30)->orwhere('client_id', auth()->user()->id, " ")->OrderBy('created_at', 'DESC')->get()]);
             }else if (auth()->user()->type == "Maintenance coordinator"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->get()]);
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()]);
             }
             else if (auth()->user()->type == "Estates Director"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('status', '<>', 30)->OrderBy('created_at', 'DESC')->GET()]);
             }
 
 
 
             else if (auth()->user()->type == "DVC Admin"){
-                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET()]);
+                return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('status', '<>', 30)->OrderBy('created_at', 'DESC')->GET()]);
             }
 
             else{
-
-        return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()]);
+                
+        return view('work_orders', ['role' => $role,'notifications' => $notifications, 'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', '<>', 30)->OrderBy('created_at', 'DESC')->get()]);
             }
    }
 

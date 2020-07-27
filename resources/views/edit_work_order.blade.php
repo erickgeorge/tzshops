@@ -34,7 +34,7 @@ var total=2;
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 align="center" style="text-transform: capitalize;">Works order details</h5>
+            <h4>Works Order Details</h4>
         </div>
     </div>
     <hr>
@@ -59,7 +59,7 @@ var total=2;
     <div class="row">
         <div class="col">
             <h5>Submitted by  <span
-                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style=" font-weight: bold;">{{ date('F d Y', strtotime($wo->created_at)) }}</span></h5>
+                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5>
 
 
 
@@ -142,7 +142,7 @@ var total=2;
     <br>
 
      @if($wo->emergency == 1)
-   <h6 align="center" style="color:red;"><b> This Works order is Emergency &#9888;</b></h6>
+   <h6 align="center" style="color:red;"><b> This Works Order Is Emergency &#9888;</b></h6>
     @endif
 
 
@@ -151,7 +151,7 @@ var total=2;
     @if(empty($wo['work_order_staffassigned']->id))
 
     @else
-     <h4><b>Technician assigned for Inspection : </b></h4>
+     <h4><b>Assigned Technician for Inspection </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -164,7 +164,7 @@ var total=2;
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
-  <th>Complete work</th>
+  <th>Date Completed</th>
   <th>Leader</th>
      </thead>
 
@@ -174,15 +174,15 @@ var total=2;
 
      @if($techform['technician_assigned_for_inspection'] != null)
     <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
-  <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
+   <td class="text-primary">@if($techform->status==1) Completed  @else  On Progress   @endif</td>
+   <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
 
 
     @if($techform->created_at ==  $techform->updated_at)
-    <td> NOT COMPLETED</td>
+    <td style="color: red"> Not Completed Yet</td>
     @else
-      <td><?php $time = strtotime($techform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+      <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
 
     @endif
 
@@ -218,7 +218,7 @@ var total=2;
     @if(empty($wo['work_order_staff']->id))
 
     @else
-     <h4><b>Technician assigned for Work : </b></h4>
+     <h4><b>Assigned Technician for Work</b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -231,7 +231,7 @@ var total=2;
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
-  <th>Complete work</th>
+  <th>Date Completed</th>
   <th>Leader</th>
 </thead>
 
@@ -245,19 +245,18 @@ var total=2;
 
      @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) COMPLETED   @else  ON PROGRESS   @endif</td>
+   <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress   @endif</td>
 
 
-    <td><?php $time = strtotime($techform->created_at); echo date('d/m/Y',$time);  ?> </td>
+    <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
 
 
     @if($techform->created_at ==  $techform->updated_at)
 
 
-    <td> NOT COMPLETED</td>
+    <td style="color: red"> Not Completed Yet</td>
     @else
-    <td>{{
-   $techform->updated_at }}</td>
+    <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
     @endif
 
 @if($techform->leader == null )
@@ -299,7 +298,7 @@ var total=2;
     @if(empty($wo['work_order_inspection']->status))
 
     @else
-    <h4><b>Inspection Description: </b></h4>
+    <h4><b>Technician Report </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -309,10 +308,10 @@ var total=2;
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-    <th>STATUS</th>
-    <th>DESCRIPTION</th>
-  <th>TECHNICIAN RESPONSIBLE</th>
-    <th>DATE INSPECTED</th>
+    <th>Type</th>
+    <th>Description</th>
+  <th>Full Name</th>
+    <th>Date</th>
   </thead>
   </tr>
     @foreach($iforms as $iform)
@@ -320,9 +319,9 @@ var total=2;
 
   <tr>
     <td class="text-primary" >{{ $iform->status }}</td>
-    <td>{{ $iform->description }}</td>
+    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ $iform->date_inspected }}</td>
+    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
   </tr>
 
   @endforeach
@@ -340,7 +339,7 @@ var total=2;
   @if(empty($wo['work_order_transport']->work_order_id))
 
     @else
-    <h4><b>Transport Description: </b></h4>
+    <h4><b>Transport Description </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -350,32 +349,32 @@ var total=2;
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-    <th>Date</th>
+    <th>Date of Transport</th>
     <th>Time</th>
     <th>Details</th>
   <th>Status</th>
   <th>Message</th>
 
-    <th>Date Requested</th>
+    <th>Date</th>
   </thead>
   </tr>
     @foreach($tforms as $tform)
 
 
   <tr>
-    <td>{{ date('F d Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
      <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
                                                                          class="badge badge-success">View Details</span></a></td>
-    <td class="text-primary">@if($tform->status==0) WAITING   @elseif($tform->status==1) APPROVED @else REJECTED   @endif</td>
+    <td class="text-primary">@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
 
 
 
      <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
                                                                          class="badge badge-success">View Message</span></a></td>
 
- <td><?php $time = strtotime($tform->created_at); echo date('d/m/Y',$time);  ?> </td>
-                            <td>
+ <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
+                          
   </tr>
 
   @endforeach
@@ -399,7 +398,7 @@ var total=2;
   @if(empty($wo['work_order_material']->id))
 
     @else
-    <h4><b>Material Requests: </b></h4>
+    <h4><b>Materials Requests </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -410,7 +409,7 @@ var total=2;
   <tr>
      <thead style="color: white;">
 
-    <th>Material Name</th>
+    <th>Name</th>
 
   <th>Type</th>
    <th>Quantity</th>
@@ -439,9 +438,9 @@ var total=2;
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
 
-  <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
+  <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
 
-    <td><?php $time = strtotime($matform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+    <td>{{ date('d F Y', strtotime($matform->updated_at))  }} </td>
 
 
   </tr>
@@ -530,7 +529,7 @@ var total=2;
   @if(empty($wo['work_order_material']->id))
 
     @else
-      <h4><b>Material Used: </b></h4>
+      <h4><b>Materials Used </b></h4>
     <?php
 
   $idw=$wo->id;
@@ -541,8 +540,8 @@ var total=2;
   <tr>
      <thead style="color: white;">
 
-    <th>Material Name</th>
-    <th>Material Description</th>
+    <th>Name</th>
+    <th> Description</th>
      <th>Type</th>
      <th>Quantity</th>
    </thead>
@@ -564,21 +563,21 @@ var total=2;
   <hr>
 
     @endif
-
+ 
 
 
          <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
-
+        
             <div class="form-group ">
-
+             
                 @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This work order is emergency</b>
+                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This works order is emergency</b>
                 @else
-                    <input type="checkbox" name="emergency"> <b style="color:red;">This work order is emergency</b>
+                    <input type="checkbox" name="emergency"> <b style="color:red;">This works order is emergency</b>
                 @endif
             </div>
-
+            
             <button type="submit" class="btn btn-primary">Save</button>
           </form>
 
@@ -616,12 +615,12 @@ var total=2;
             </div>
             </div>
         </div>
-       @if($wo->zonelocationtwo == null)
+       @if($wo->zonelocationtwo == null) 
             <button type="submit" class="btn btn-primary">Save</button>
-       @endif
+       @endif  
 
           </form>
-     @endif
+     @endif     
 
      @if($wo->zonelocationtwo != null)
 
@@ -634,7 +633,7 @@ var total=2;
                     <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
                 <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
-
+                 
                   @if($wo->zonelocationtwo != null) <?php
                         $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
                         $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
@@ -659,24 +658,24 @@ var total=2;
             </div>
             </div>
         </div>
-       @if($wo->zone_location == null)
+       @if($wo->zone_location == null) 
             <button type="submit" class="btn btn-primary">Save</button>
-       @endif
+       @endif  
 
           </form>
 
-     @endif
+     @endif     
 
 
        </div>
-
+        
 
 
 
        @if($wo->zone_location != null)
 
         <br>
-        <h4>Work order forms.</h4>
+        <h4>Works order forms</h4>
         {{-- tabs --}}
         <div class="payment-section-margin">
             <div class="tab">
@@ -699,8 +698,8 @@ var total=2;
                     </div>
                 </div>
        @else
-         <div align="center" style="color: red;"> Please assign zone location for further Steps. </div>
-       @endif
+         <div align="center" style="color: red;"> Please assign zone location for further Steps. </div>         
+       @endif         
 
 
 
@@ -708,16 +707,16 @@ var total=2;
 
             {{-- ASSIGN TECHNICIAN tab--}}
 
-
+                  
                     <div id="assigntechnician" class="tabcontent">
 
 
                  @if(($wo->statusmform == 3) || ($wo->statusmform == 4))
 
-
+                  
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign Technician for this works order</p>
+                                <p>Assign Technician For This Works Order</p>
                             </div>
                         </div>
                         <div >
@@ -737,7 +736,7 @@ var total=2;
               <TABLE id="dataTable1" width="350px" >
                   <TR>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
-
+                      
                        <TD>
                             <select   id="techidc" required class="custom-select"  name="technician_work[]" style="width: 700px;">
 
@@ -800,14 +799,14 @@ var total=2;
                                 }}}
 
                                     for($x=0;$x<=$p;$x++){
-                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Workorders'}} </option>
+                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Works Orders'}} </option>
                                     <?php }  ?>
 
 
                             </select>
                               </TD>
 
-
+           
                   </TR>
         </TABLE>
 
@@ -822,10 +821,10 @@ var total=2;
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
 
-
+                  
                 @else
                <div align="center" style="color: red;"> Please assign inspection form before work before assigning technician for work. </div>
-                @endif
+                @endif  
                     </div>
 
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -842,7 +841,7 @@ var total=2;
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign Technician for inspection before Work</p>
+                                <p>Assign technician for inspection before work</p>
                             </div>
                         </div>
                         <div >
@@ -861,9 +860,9 @@ var total=2;
           <TABLE id="dataTable" width="350px" >
                   <TR>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
-
+                      
                        <TD>
-
+                           
                             <select   id="techidfoxrinspection" required class="custom-select"  name="technician_work[]" style="width: 700px;">
 
 
@@ -918,14 +917,14 @@ var total=2;
                                 }}}
 
                                     for($x=0;$x<=$p;$x++){
-                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Workorders'}} </option>
+                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Works orders'}} </option>
                                     <?php }  ?>
 
 
                             </select>
                        </TD>
 
-
+           
                   </TR>
         </TABLE>
 
@@ -966,10 +965,10 @@ var total=2;
                          <div class="form-group">
 
                             <select class="custom-select" required name="status" style="color: black; width:  700px;">
-                                <option selected value="" >Choose...</option>
+                              
                                    @if($wo->status == 70)
-                                    <option value="Report before work">Report before Work</option> @else
-                                       <option value="Report after Work">Report after Work</option>@endif
+                                    <option selected value="Inspection report before work">Inspection report before work</option> @else
+                                       <option selected value="Report after work">Report after work</option>@endif
 
                             </select>
 
@@ -978,9 +977,9 @@ var total=2;
 
 
 
-                        <p>Inspection description</p>
+                        <p>Description</p>
                         <div class="form-group">
-                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="200" class="form-control"  rows="5" id="comment"></textarea>
                         </div>
 
                         </br>
@@ -1020,7 +1019,7 @@ var total=2;
                             </select>
                         </div>
 
-
+      
 
                         <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
@@ -1038,10 +1037,10 @@ var total=2;
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div id="request_transport" class="tabcontent">
-                  @if($wo->statusmform != 1)
+                  @if($wo->statusmform != 1)  
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Work order Transport Request Form</p>
+                                <p>Works Order Transport Request Form</p>
                             </div>
                         </div>
                 </br>
@@ -1052,10 +1051,10 @@ var total=2;
 
                           <p>Transport time</p>
                         <div class="form-group">
-                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  rows="5" id="time"></input>
+                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  id="time"></input>
                         </div>
 
-                         <p>Transport Details</p>
+                         <p>Transport details</p>
                         <div class="form-group">
                             <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
                         </div>
@@ -1083,7 +1082,7 @@ var total=2;
                 <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
                     @csrf
 
-
+                       
 
                         <?php
 
@@ -1092,54 +1091,69 @@ var total=2;
 
 
                         ?>
-                         @if($wo->statusmform == 4)
+                         @if($wo->statusmform == 4) 
+
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Select material for works order</p>
+                                <p>Select material for this works order</p>
                             </div>
                         </div>
-{{--  --}}
-                        <div class="form-group">
+                     
 
-                            <select @if($wo->zone_location == null) disabled="" @endif required class="custom-select"  id="materialreq" name="1" style="width: 700px">
-                                <option   selected value="" >Choose...</option>
+
+                          <div class="form-group">
+
+
+      
+          <TABLE id="dataTablemat" align="center" >
+
+           
+                  <TR>
+                       <TD><INPUT type="checkbox" name="chk[]"/></TD>
+                        <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
+                      
+                       <TD>
+
+
+                            <select  required class="custom-select"  name="material[]" >
+                                <option   selected value="" >Choose material...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
                             </select>
+
+                       </TD>
+
+                       <TD>
+
+                          <input placeholder="Enter quantity" type="number" max="100" style="color: black; " name="quantity[]" required class="form-control" >
+                         
+                       </TD>
+
+           
+                  </TR>
+
+        </TABLE>
+
                         </div>
+                        <div align="right">
 
+                        <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addmaterialrow('dataTablemat')" />
 
-                         <p>Quantity</p>
-                        <div class="form-group">
-                            <input type="number" min="1" @if($wo->zone_location == null) disabled="" @endif style="color: black; width: 700px" name="2" required class="form-control"  rows="5" id="2"></input>
-                        </div>
+                        <INPUT   id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deletematerialrow('dataTablemat')" />
+                        <br><br> </div>
 
-
-
-                        <div id="newmaterial" style="width: 700px">
-
-                        </div>
-                       <input  type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
-                    @if($wo->zone_location != null)
-                    <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
-                    @endif
-
-             <br>
-             <br>
-
-
-
-                         <button @if($wo->zone_location == null) disabled="" @endif style="background-color: blue; color: white" onclick="newmaterial()" class="btn btn-success">Add New Material</button>
-                         <br> <br>
-
-                        <button @if($wo->zone_location == null) disabled="" @endif style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                       
                     </form>
+
+
+
                 @else
                <div align="center" style="color: red;"> Please assign technician for inspection before requesting material for work. </div>
                 @endif
-                 </div>
+                 </div> 
                 {{-- end material_request  --}}
 
 
@@ -1219,7 +1233,7 @@ var total=2;
 </table>
 
 
-    <button class="btn btn-success" style="color: white" > <a  href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button>
+    <button class="btn btn-success" > <a  style="color: white" href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button>
 
 
 
@@ -1452,85 +1466,6 @@ var total=2;
 
 
 
-      function newmaterial(){
-
-         total=total+1;
-
-
-         var myDiv = document.getElementById("newmaterial");
-
-
-         var node = document.createElement("label");
-  var textnode = document.createTextNode("Material");
-  node.appendChild(textnode);
-myDiv.appendChild(node);
-
-
-
-
-//Create array of options to be added
-//var array = ["Volvo","Saab","Mercades","Audi"];
-
-//Create and append select list
-var selectList = document.createElement("select");
-selectList.className = "custom-select";
-selectList.required = true;
-
-
-selectList.name = total;
-
-myDiv.appendChild(selectList);
-
-//Create and append the options
- var option = document.createElement("option");
-
-    option.text = 'Choose ...';
-     option.value = '';
-
-    selectList.appendChild(option);
-
-for (var i = 0; i < array.length; i++) {
-    var option = document.createElement("option");
-    option.value = arrayvalue[i];
-    option.text = array[i];
-    selectList.appendChild(option);
-}
-
- var node = document.createElement("label");
-  var textnode = document.createTextNode("Quantity");
-  node.appendChild(textnode);
-  myDiv.appendChild(node);
-
-
- var input = document.createElement("input");
-         input.setAttribute('type', 'number');
-         input.min=1;
-         input.required = true;
-
-         total=total+1;
-
-         input.name = total;
-         input.className = "form-control";
-         var parent = document.getElementById("newmaterial");
-
-
-        parent.appendChild(input);
-
-
-
-         var node = document.createElement("br");
-
-myDiv.appendChild(node);
-
-document.getElementById("totalmaterials").value=total;
-
-
-     }
-
-
-
-
-
 
     // getTechnician(5);
 
@@ -1548,6 +1483,7 @@ document.getElementById("totalmaterials").value=total;
        }
     </script>
 
+
     <script type="text/javascript">
 
       $("#newmaterial").select2({
@@ -1564,7 +1500,7 @@ document.getElementById("totalmaterials").value=total;
 
          function myfunc6(x) {
             document.getElementById("details").innerHTML = x;
-  }
+  }  
    </script>
 
 
@@ -1592,7 +1528,7 @@ document.getElementById("totalmaterials").value=total;
 
 
 
-
+  
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
@@ -1608,9 +1544,9 @@ document.getElementById("totalmaterials").value=total;
              {
 
                 var newcell = row.insertCell(i);
-
-
-
+                 
+               
+              
 
 
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
@@ -1630,11 +1566,11 @@ document.getElementById("totalmaterials").value=total;
 
                 }
 
-
+                  
 
             }
 
-
+           
         }
 
         function deleteRow(tableID) {
@@ -1679,9 +1615,9 @@ document.getElementById("totalmaterials").value=total;
              {
 
                 var newcell = row.insertCell(i);
-
-
-
+                 
+               
+              
 
 
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
@@ -1701,11 +1637,11 @@ document.getElementById("totalmaterials").value=total;
 
                 }
 
-
+                  
 
             }
 
-
+           
         }
 
         function deleteRow1(tableID) {
@@ -1734,6 +1670,106 @@ document.getElementById("totalmaterials").value=total;
         }
 
     </SCRIPT>
+
+
+
+<SCRIPT language="javascript">
+        function addmaterialrow(tableID) {
+
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var colCount = table.rows[0].cells.length;
+
+
+
+            for(var i=0; i<colCount; i++)
+             {
+
+
+               if(rowCount = 1) {
+
+                          document.getElementById('deleterowbutton').style.display='inline-block';
+
+
+
+                    }
+
+
+
+
+                var newcell = row.insertCell(i);
+
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+
+
+                }
+
+
+
+            }
+
+
+        }
+
+
+
+        function deletematerialrow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+
+
+                        if(rowCount <= 2) {
+
+
+                        document.getElementById('deleterowbutton').style.display='none';
+                    }
+
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+
+            }catch(e) {
+                alert(e);
+            }
+        }
+
+
+
+
+    </SCRIPT>
+
+
+
+
+
+
 
 
 
