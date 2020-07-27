@@ -10,14 +10,14 @@
  <style>
    .container{
     padding: 5%;
-   } 
+   }
 </style>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-12">
-           <a style="text-transform: uppercase;" href="{{ url('pdf') }}" class="btn btn-outline-primary mb-2"><i class="fa fa-file-pdf-o"></i> PDF</a>
+           <a style="text-transform: uppercase;" href="{{ url('pdf') }}" class="btn btn-primary mb-2">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
           <table class="table table-bordered" id="laravel_crud">
            <thead>
               <tr>
@@ -39,7 +39,7 @@
            </tbody>
           </table>
           {!! $wo->links() !!}
-       </div> 
+       </div>
    </div>
 </div>
 </body>

@@ -40,7 +40,7 @@ IoW Zones
                    class="btn btn-primary">Add new Location</a>
 
                    <a href="{{ url('iowwithlocation',[$userid->id])}}" style="margin-bottom: 20px; float:right;"
-                   class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
+                   class="btn btn-primary">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
                 <table id="myTablee" class="table table-striped">
                     <thead >

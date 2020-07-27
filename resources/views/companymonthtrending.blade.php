@@ -42,10 +42,10 @@ Company report
 
   <?php $tenders = Crypt::encrypt($company->company); ?>
 
-                       <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
+                       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                <a  href="{{route('trendingscore_report_company' , [ $tenders , $company->assessment_month])}}"
                                                             style="color: green;"
-                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF</a>
+                                           data-toggle="tooltip" title="Print report"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
 

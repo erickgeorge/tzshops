@@ -199,12 +199,12 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
-@endif 
+@endif
 
    @if(auth()->user()->type == 'Estates Director')
-    
+
     <li style="width: 80px;">
-                    
+
                     </li>
 
        <li class="nav-item dropdown">
@@ -237,7 +237,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 
 
-                    @endif                   
+                    @endif
 
 
 
@@ -246,7 +246,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 
                <li style="width: 80px;">
-                    
+
                     </li>
 
                       <li class="nav-item dropdown">
@@ -435,7 +435,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
               @if($role['user_role']['role_id'] == 1)
 
                <li style="width: 80px;">
-                    
+
                     </li>
 
 
@@ -499,20 +499,20 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                             @if(auth()->user()->type == 'USAB')
 
 
-        
-               
-                    
+
+
+
                 <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                 </li>
 
 
-               
-              @endif  
+
+              @endif
 
 
 
-  
+
 
 
 
@@ -668,7 +668,7 @@ use App\Section;
 
 
   </div>
- 
+
   {{--<div class="col-md-5">
     <form class="form-inline my-2 my-lg-0">
       <input style="width:220px;" class="form-control mr-sm-2" type="search" placeholder="Search by Fullname, email" aria-label="Search">
@@ -680,7 +680,7 @@ use App\Section;
     <br>
     <p class="alert alert-success">{{ Session::get('message') }}</p>
   @endif
-  
+
   @if ($errors->any())
         <div class="alert alert-danger">
              <ul class="alert alert-danger" style="list-style: none;">
@@ -693,13 +693,13 @@ use App\Section;
 
 <hr>
 
-  
-    
-  
-  
+
+
+
+
     <div id="div_print" style="margin-left: 2%; margin-right: 2%;">
-  
-  
+
+
   <div class="row">
      <div class="col-md-5">
     <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
@@ -712,7 +712,7 @@ use App\Section;
 
 <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
-           <a href="" data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
+           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
         </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -732,12 +732,12 @@ use App\Section;
                 <select name="college" class="form-control mr-sm-2">
                     <option selected="selected" value="">select name</option>
                     <option value="">All users</option>
-        <?php 
+        <?php
                  $userfetch = user::get();
   foreach($userfetch as $userfetch)
   {
 
-    
+
 
       $departmentor = department::where('id',$userfetch->section_id)->get();
       foreach($departmentor as $departmentor)
@@ -749,11 +749,11 @@ use App\Section;
           <?php }
       }
 
-    
+
   }
         ?>
 
- 
+
                 </select>
             </div>
         </div>
@@ -785,7 +785,7 @@ use App\Section;
 </div>
           <!-- ---------------------- -->
   </div>
-  
+
 <table class="table table-striped" id="myTable">
   <thead >
     <tr style="color: white;">
@@ -802,7 +802,7 @@ use App\Section;
     </tr>
   </thead>
   <tbody>
-  <?php 
+  <?php
 
  if (isset($_GET['page'])){
 if ($_GET['page']==1){
@@ -830,18 +830,18 @@ else {
 
           $phonreplaced = ltrim($phonenumber,'0');
           echo '+255'.$phonreplaced;
-          
+
         }else { echo $user->phone;}
 
       ?></td>
 
       @if( $user->type == "Inspector Of Works")
       <td style="text-transform: lowercase;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
-       
+
       @else
 
              <td style="text-transform: lowercase;">{{ $user->type }} </td>
-      
+
       @endif
 
 
@@ -850,7 +850,7 @@ else {
         <td>
         <div class="row"> &nbsp; &nbsp; &nbsp;
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
- 
+
 
          <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')" action="{{ route('user.delete', [$user->id]) }}" >
           {{csrf_field()}}
@@ -867,7 +867,7 @@ else {
     @endforeach
   </tbody>
 
- 
+
 </table>
 
 </div>
@@ -883,9 +883,9 @@ else {
 <script>
 $(document).ready(function(){
 
-  $('[data-toggle="tooltip"]').tooltip();   
-  
- 
+  $('[data-toggle="tooltip"]').tooltip();
+
+
 
 $('#myTable').DataTable({
    "drawCallback": function ( settings ) {
@@ -893,29 +893,29 @@ $('#myTable').DataTable({
     /*show pager if only necessary
     console.log(this.fnSettings());*/
     if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) > 1) {
-        $('#dataTable_ListeUser_paginate').css("display", "block");     
-    } else {                
+        $('#dataTable_ListeUser_paginate').css("display", "block");
+    } else {
         $('#dataTable_ListeUser_paginate').css("display", "none");
     }
 
     }
 });
-  
-  
+
+
   jQuery('#myTable').DataTable({
     fnDrawCallback: function(oSettings) {
         var totalPages = this.api().page.info().pages;
-        if(totalPages == 1){ 
-            jQuery('.dataTables_paginate').hide(); 
+        if(totalPages == 1){
+            jQuery('.dataTables_paginate').hide();
         }
-        else { 
-            jQuery('.dataTables_paginate').show(); 
+        else {
+            jQuery('.dataTables_paginate').show();
         }
     }
 });
-  
-  
-  
+
+
+
 });
 
 
@@ -1447,4 +1447,3 @@ for (i = 0; i < dropdown.length; i++) {
 
 </body>
 </html>
-  

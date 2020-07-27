@@ -35,10 +35,10 @@ Companies
                   <h5 style=" text-transform: capitalize;" ><b style="text-transform: capitalize;">Cleaning companies </b></h5>
                   <hr>
 
-                       <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
+                       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                 <a href="{{route('landscapingcleaningcompanyreport')}}"
 
-                                           data-toggle="tooltip" title="Print report"><i class="fas fa-file" ></i>PDF </a>
+                                           data-toggle="tooltip" title="Print report"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))

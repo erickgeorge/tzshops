@@ -6,7 +6,7 @@
 
 @section('body')
     <br>
-   
+
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -22,7 +22,7 @@
                 <div class="tab-group row">
 
 
-                   
+
                    <button id="modal" class="tablinks active col-md-4" onclick="openTab(event, 'techcomplete')">
                         Technician Completed Work
                     </button>
@@ -31,13 +31,13 @@
                         Technician on Progress
                     </button>
 
-                    
-                    
+
+
 
                 </div>
             </div>
-     
-     
+
+
 
         {{-- techprogress --}}
 
@@ -59,45 +59,45 @@
         </div>
     @endif
      @if(count($wo) > 0)
-       <button   name="b_print" type="button" class="btn btn-outline-primary mb-2"   onClick="printdiv('div_print');"  ><i class="fa fa-file-pdf-o"></i> PDF</button>
+       <button   name="b_print" type="button" class="btn btn-primary mb-2"   onClick="printdiv('div_print');"  >  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
     @endif
 
     <div id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
-    
-              
- 
+
+
+
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTableee" style="width:100%">
                 <thead >
                 <tr style="color: white;">
-                   
+
                     <th>Technician name</th>
                     <th>Total Works orders</th>
-                   
+
                 </tr>
                 </thead>
 
                 <tbody>
 
-             
+
                 @foreach($wo as $work)
-                        
-                        
-                        
-                    
-                       
+
+
+
+
+
                         <tr>
-                            
-                           
-                            
-                            
-                    
-                            
-                            
+
+
+
+
+
+
+
                             <td>{{ $work['technician_assigned']->fname.' '.$work['technician_assigned']->lname }}</td>
                             <td>{{ $work->total_wo }}  </td>
-                            
-                          
+
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -106,7 +106,7 @@
             <h1 class="text-center" style="margin-top: 150px">No Technicians Available</h1>
         @endif
     </div>
-           
+
 
                 <div class="modal-footer">
                 </div>
@@ -136,46 +136,46 @@
             </ul>
         </div>
     @endif
-       <button   name="b_print" type="button" class="btn btn-outline-primary mb-2"   onClick="printdiv('div_print');"  ><i class="fa fa-file-pdf-o"></i> PDF</button>
-       
-   
+       <button   name="b_print" type="button" class="btn btn-primary mb-2"   onClick="printdiv('div_print');"  >  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+
+
 
     <div id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
-    
-     
+
+
 
         @if(count($wo) > 0)
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead class="thead-dark">
                 <tr>
-                   
+
                     <th>Technician name</th>
                     <th>Total Works orders Completed</th>
-                   
+
                 </tr>
                 </thead>
 
                 <tbody>
 
-             
+
                 @foreach($wo as $work)
-                        
-                        
-                        
-                    
-                       
+
+
+
+
+
                         <tr>
-                            
-                           
-                            
-                            
-                    
-                            
-                            
+
+
+
+
+
+
+
                             <td>{{ $work['technician_assigned']->fname.' '.$work['technician_assigned']->lname }}</td>
                             <td>{{ $work->total_wo }}  </td>
-                            
-                          
+
+
                         </tr>
                         @endforeach
                 </tbody>
@@ -184,7 +184,7 @@
             <h1 class="text-center" style="margin-top: 150px">No Technicians Available</h1>
         @endif
     </div>
-             
+
 
 
                 <div class="modal-footer">
@@ -199,7 +199,7 @@
 
 
 
-        
+
 
 
 
@@ -220,9 +220,9 @@
             });
 
             $('#myTablee').DataTable();
-            $('#myTableee').DataTable();     
-                                                 
- 
+            $('#myTableee').DataTable();
+
+
 
         });
 
@@ -238,9 +238,9 @@
 
 
         });
-        
-        
-        
+
+
+
 function printdiv(printpage)
 {
 var headstr = "<html><head><title></title></head><body><h1>HOS COUNT ON WORKs ORDERS </h1>";

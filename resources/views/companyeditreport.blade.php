@@ -38,8 +38,8 @@ Company report
 
  ?>
 
-  <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
-                 <i class="fa fa-file"></i> PDF
+  <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                   PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 </button>
 
 
@@ -51,7 +51,7 @@ Company report
              @csrf
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Export To   PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">Filter your data</span>
         </button>

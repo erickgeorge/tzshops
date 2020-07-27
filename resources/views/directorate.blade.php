@@ -38,7 +38,7 @@ Directorate
             <a href="Add/directorate" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new College/Directorate</a>
                    <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
-                   class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
+                   class="btn btn-primary">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
 
@@ -46,7 +46,7 @@ Directorate
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf"></i> Generate Report</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">X</span>
                           </button>

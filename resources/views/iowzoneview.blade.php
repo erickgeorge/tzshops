@@ -37,7 +37,7 @@ IoW Zones
             <a href="Add/iowzone" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new zone for IoW</a>
                    <a href="{{ url('iowonlyzones')}}" style="margin-bottom: 20px; float:right;"
-                   class="btn btn-primary"><i class="fa fa-file-pdf"></i> PDF</a>
+                   class="btn btn-primary">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
                 <table id="myTablee" class="table table-striped">

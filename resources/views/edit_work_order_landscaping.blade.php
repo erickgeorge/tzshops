@@ -6,10 +6,10 @@
 
 @section('body')
 
-<?php 
+<?php
     use App\User;
-    use App\assessmentsheet;  
-    use App\landassessmentactivityform; 
+    use App\assessmentsheet;
+    use App\landassessmentactivityform;
     use App\landcrosschecklandassessmentactivity;
     use App\company;
  ?>
@@ -49,7 +49,7 @@ var total=2;
 
 
 
-     <?php 
+     <?php
     $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
      ?>
       @foreach($crosscheckassessmmentactivity as $assesment)
@@ -62,24 +62,24 @@ var total=2;
 <table>
   <tr>
     <th>Full name</th>
-      <th>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</th> 
+      <th>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</th>
   </tr>
 
     <tr>
     <th>Phone</th>
-      <th>{{ $assesment['initiated']->phone }}</th> 
+      <th>{{ $assesment['initiated']->phone }}</th>
   </tr>
 
     <tr>
     <th>Email</th>
-      <th> {{ $assesment['initiated']->email}}</th> 
+      <th> {{ $assesment['initiated']->email}}</th>
   </tr>
 
     <tr>
     <th>Initiated on </th>
-      <th>{{ $assesment->created_at }}</th> 
+      <th>{{ $assesment->created_at }}</th>
   </tr>
-  
+
 </table>
 
 </h6>
@@ -97,7 +97,7 @@ var total=2;
 
   <div class="row container-fluid">
         <div class="col-lg-12">
-          
+
             <h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details</b></h5>
         </div>
     </div>
@@ -105,19 +105,19 @@ var total=2;
 
    <div class="row">
      <div class="col">
-       
+
 
     <div class="input-group mb-3 col">
         <div class="input-group-prepend">
             <label class="input-group-text">Company name</label>
         </div>
-        <input  required class="form-control" placeholder="{{$company['companyname']['compantwo']->company_name}} " 
+        <input  required class="form-control" placeholder="{{$company['companyname']['compantwo']->company_name}} "
                aria-describedby="emailHelp" disabled="disabled" >
     </div>
 
      </div>
      <div class="col">
-       
+
    <div class="input-group mb-3 col">
         <div class="input-group-prepend">
             <label class="input-group-text">Assessment period</label>
@@ -151,37 +151,37 @@ var total=2;
 
     <div class="row container-fluid">
         <div class="col-lg-12">
-          
+
             <h5><b>Sheet No:0{{$ii}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  sheet name: {{$company->assessment_name}}</b></h5>
         </div>
     </div>
     <hr>
 
-   
 
- 
+
+
 
     <br>
      <div class="row">
 
-    
-  
-        
+
+
+
     <div class="input-group mb-3 col">
         <div class="input-group-prepend">
             <label class="input-group-text">Area name</label>
         </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="{{$company['areaname']->cleaning_name}}" 
+        <input style="color: black" type="text" required class="form-control" placeholder="{{$company['areaname']->cleaning_name}}"
                aria-describedby="emailHelp" value="" disabled>
     </div>
-        
+
     </div>
 
     <br>
 
-  
 
-    <?php 
+
+    <?php
       $companypayment = company::where('tender', $company->company)->first();
       $assessmentsheetview = assessmentsheet::where('name', $company->assessment_name)->get();
       $assessmmentactivity = landassessmentactivityform::where('companynew', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
@@ -191,7 +191,7 @@ var total=2;
      ?>
 
 
-  
+
     <br>
 
      @foreach($crosscheckassessmmentactivity as $statuscheck)
@@ -199,21 +199,21 @@ var total=2;
 
 
   @if(count($crosscheckassessmmentactivity) == 0)
-  
-   
+
+
   @if(count($assessmmentactivity) == 0)
 
       <table class="table table-striped">
       <tr>
          <thead style="color: white;">
-        <th style="width:20px" >#</th>  
+        <th style="width:20px" >#</th>
         <th style="width:400px" >Activity</th>
         <th style="width:40px">Percentage(%)</th>
         <th style="width:110px">Score(%)</th>
         <th>Remark</th>
       </thead>
       </tr>
-    
+
      <tbody>
 
       @foreach($assessmentsheetview as $assess)
@@ -221,36 +221,36 @@ var total=2;
        <?php $cmp = Crypt::encrypt($company->company); ?>
        <form method="POST" action="{{ route('work.assessment.activity.landscaping', [$company->id , $cmp , $company->assessment_month]) }}">
                     @csrf
-  
+
     <TABLE >
-     
+
         <TR>
-          
-            <input  name="assessment_sheet[]" value="{{$assess->name}}"  hidden > 
-              <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden > 
-       
-             <TD><input   style="width: 559px; height: 65px;" class="form-control" type="text" name="activity[]" placeholder="{{$assess->activity}}" value="{{$assess->activity}}"  readonly="readonly" ></TD> 
-           
 
-                  
-             <TD><input style="width: 112px; text-align: center;" class="form-control" type="number"   name="percentage[]" placeholder="{{$assess->percentage}}" value="{{$assess->percentage}}" readonly="readonly"></TD> 
-                  
-              
-            <TD><input style="width: 112px; text-align: center;" class="form-control" type="number" id="tstock"   name="score[]" placeholder="Score" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required" min="0" max="{{$assess->percentage}}"></TD> 
-                  
+            <input  name="assessment_sheet[]" value="{{$assess->name}}"  hidden >
+              <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden >
 
-           <TD><textarea  style="width: 300px;" class="form-control" type="text" name="remark[]" placeholder="Remark"  ></textarea></TD> 
-            
+             <TD><input   style="width: 559px; height: 65px;" class="form-control" type="text" name="activity[]" placeholder="{{$assess->activity}}" value="{{$assess->activity}}"  readonly="readonly" ></TD>
+
+
+
+             <TD><input style="width: 112px; text-align: center;" class="form-control" type="number"   name="percentage[]" placeholder="{{$assess->percentage}}" value="{{$assess->percentage}}" readonly="readonly"></TD>
+
+
+            <TD><input style="width: 112px; text-align: center;" class="form-control" type="number" id="tstock"   name="score[]" placeholder="Score" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required" min="0" max="{{$assess->percentage}}"></TD>
+
+
+           <TD><textarea  style="width: 300px;" class="form-control" type="text" name="remark[]" placeholder="Remark"  ></textarea></TD>
+
         </TR>
 
 
     @endforeach
           </tbody>
 
-    
-       
-             
-     
+
+
+
+
     </TABLE>
 
     @else
@@ -261,21 +261,21 @@ var total=2;
     <table class="table table-striped">
       <tr>
          <thead style="color: white;">
-        <th style="width:20px" >#</th>  
+        <th style="width:20px" >#</th>
         <th style="width:400px" >Activity</th>
         <th style="width:40px">Percentage(%)</th>
         <th style="width:110px">Score(%)</th>
         <th>Remark</th>
       </thead>
       </tr>
-    
+
      <tbody>
- 
+
    <?php $cmp = Crypt::encrypt($company->company); ?>
      <form method="POST" action="{{ route('croscheck.assessment.activity.landscapingsecond', [$company->id  , $cmp , $company->assessment_month]) }}">
                     @csrf
 
-   <?php  
+   <?php
    $summ = 0;
    $summm = 0;
    ?>
@@ -288,15 +288,15 @@ var total=2;
   <tr>
       <input  name="assessment_sheet[]" value ="{{$assesment->assessment_sheet}}" hidden="hidden">
       <input  name="areaid[]" value ="{{$company->area_id}}" hidden="hidden">
-      <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden > 
-     
-      <TD  ><input  style="width: 559px;" class="form-control" type="text" name="activity[]" placeholder="activity..." value="{{$assesment->activity}}" required="required" readonly="readonly" ></TD> 
-           
-      <TD><input style="width: 112px; text-align: center;"    min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD> 
-              
-      <TD><input style="width: 112px; text-align: center;" class="form-control" type="number"  name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" min="0" max="{{$assesment->percentage}}" ></TD> 
-                  
-       <TD><input  style="width: 300px;" class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD> 
+      <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden >
+
+      <TD  ><input  style="width: 559px;" class="form-control" type="text" name="activity[]" placeholder="activity..." value="{{$assesment->activity}}" required="required" readonly="readonly" ></TD>
+
+      <TD><input style="width: 112px; text-align: center;"    min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD>
+
+      <TD><input style="width: 112px; text-align: center;" class="form-control" type="number"  name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" min="0" max="{{$assesment->percentage}}" ></TD>
+
+       <TD><input  style="width: 300px;" class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD>
 
  </tr>
 
@@ -307,8 +307,8 @@ var total=2;
   <td align="center" ><b><?php echo $summ ?>%</b></td>
   <td align="center"><b><?php echo $summm ?>%</b></td>
 
- 
- 
+
+
   </table>
 
 
@@ -330,17 +330,17 @@ var total=2;
    <table class="table table-striped">
       <tr>
          <thead style="color: white;">
-        <th style="width:20px" >#</th>  
+        <th style="width:20px" >#</th>
         <th style="width:400px" >Activity</th>
         <th style="width:40px">Percentage(%)</th>
         <th style="width:110px">Score(%)</th>
         <th>Remark</th>
       </thead>
       </tr>
-    
+
      <tbody>
 
- 
+
    <?php $i=0; ?>
   @foreach($crosscheckassessmmentactivity as $assesment)
   <?php $i++; ?>
@@ -354,17 +354,17 @@ var total=2;
     <td>{{$i}}</td>
         <input  name="assessment_sheet[]" value ="{{$assesment->assessment_sheet}}" hidden="hidden">
          <input  name="areaid[]" value ="{{$company->area_id}}" hidden="hidden">
-        <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden > 
-        <input  name="activity[]" value="{{$assesment->activity}}"  hidden > 
+        <input  name="area[]" value="{{$company['areaname']->cleaning_name}}"  hidden >
+        <input  name="activity[]" value="{{$assesment->activity}}"  hidden >
 
-      
-      <TD  ><textarea class="form-control" type="text"  placeholder="{{$assesment->activity}}" required="required" readonly="readonly"></textarea> </TD> 
-           
-      <TD><input oninput="totalitem()"  id="istock"  min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD> 
-              
-      <TD><input class="form-control" type="number" id="tstock" name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" max="{{$assesment->percentage}}" ></TD> 
-                  
-       <TD><input class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD> 
+
+      <TD  ><textarea class="form-control" type="text"  placeholder="{{$assesment->activity}}" required="required" readonly="readonly"></textarea> </TD>
+
+      <TD><input oninput="totalitem()"  id="istock"  min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD>
+
+      <TD><input class="form-control" type="number" id="tstock" name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" max="{{$assesment->percentage}}" ></TD>
+
+       <TD><input class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD>
 
 
 
@@ -375,7 +375,7 @@ var total=2;
   @endforeach
 
  </tbody>
- 
+
   </table>
 
 
@@ -387,41 +387,41 @@ var total=2;
 
  @else
  <!--crosscheck-->
-  
+
 
 <table class="table table-striped">
       <tr>
          <thead style="color: white;">
-        <th style="width:20px" >#</th>  
+        <th style="width:20px" >#</th>
         <th style="width:400px" >Activity</th>
         <th style="width:40px">Percentage(%)</th>
         <th style="width:110px">Score(%)</th>
         <th>Remark</th>
       </thead>
       </tr>
-    
+
      <tbody>
-     
+
 
 
   </tr>
-  <?php  
+  <?php
    $sum = 0;
    $summ = 0;
     $i = 0;
-  
+
    ?>
    <tbody>
   @foreach($crosscheckassessmmentactivity as $assesment)
   <?php  $i++;   $sum += $assesment->percentage;  $summ += $assesment->score;?>
-  
+
   <tr>
     <td>{{$i}}</td>
    <td>{{$assesment->activity}}</td>
    <td align="center">{{$assesment->percentage}}</td>
     <td align="center">{{$assesment->score}}</td>
     <td>{{$assesment->remark}}</td>
-    
+
  </tr>
 
   @endforeach
@@ -441,11 +441,11 @@ var total=2;
 
 
 <br>
-   
+
     @foreach($assessmmentactivity as $assesmentstatus)
     @endforeach
       @if(auth()->user()->type == 'Supervisor Landscaping')
-      @if(count($assessmmentactivity) == 0) <button id="bt" type="submit" class="btn btn-primary">Save</button> 
+      @if(count($assessmmentactivity) == 0) <button id="bt" type="submit" class="btn btn-primary">Save</button>
       @elseif($assesmentstatus->status == 1)
        <button id="bt" type="submit" class="btn btn-primary" title="You will not able to edit after final save">Final save</button>
        @elseif(($statuscheck->status == 10)||($statuscheck->status == 11)||($statuscheck->status == 12))
@@ -473,7 +473,7 @@ var total=2;
 @elseif($percent < 50)
 <?php $pay0=$companypayment->payment*0;  echo number_format($pay0);?> Tshs
 @endif</td></tr>
-   
+
  </tbody>
 </table>
 
@@ -490,7 +490,7 @@ var total=2;
 
 
 </form>
-   
+
 <br>
 
 
@@ -513,16 +513,16 @@ var total=2;
 
 
    @if(($assesment->es_rejected_by != null))
- 
+
   <b>Rejected by Estates Director : {{ $assesment['rejectionestate']->fname .' ' . $assesment['rejectionestate']->lname }}  on: {{ date('d F Y', strtotime($assesment->esrejected_on)) }}     <td> <a onclick="myfunc6('{{$assesment->reasonestate}}')"><span data-toggle="modal" data-target="#viewreasonestate"
-                                                                         class="badge badge-danger">View Reason</span></a></td></b> @endif  
+                                                                         class="badge badge-danger">View Reason</span></a></td></b> @endif
   @if(($assesment->dvc_rejected_by != null))
   <br>
   <b>Rejected by DVC Admin : {{ $assesment['rejectiondvc']->fname .' ' . $assesment['rejectiondvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvcrejected_on)) }}     <td> <a onclick="myfunc7('{{$assesment->reasondvc}}')"><span data-toggle="modal" data-target="#viewreasondvc"
                                                                          class="badge badge-danger">View Reason</span></a></td></b><br>@endif
 
-                        
-                                                         
+
+
 
 
 
@@ -539,13 +539,13 @@ var total=2;
   <b>Approved by Head PPU : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
   @endif
   <br>
-  
+
   @if(auth()->user()->type == 'Head PPU')
   @if($assesment->status == 1)
   <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 800px;">Approve <a href="{{route('approveassessment', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
      <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#rejectppu"
-                                                            style="color: green;" 
+                                                            style="color: green;"
                                            data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
   @endif
   @endif
@@ -559,34 +559,34 @@ var total=2;
    @if($assesment->status == 2)
     <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 800px;">Approve<a href="{{route('approveassessmentforpayment', [$assesment->assessment_id , $tender  , $assesment->month])}}" title="Approve assessment form "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#rejectestate"
-                                                            style="color: green;" 
+                                                            style="color: green;"
                                            data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
    @endif
    @endif
-  
+
   @if(($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
   <b>Approved by Estate Director : {{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  on: {{ date('d F Y', strtotime($assesment->approved_on))}}</b>
   <br>
- @endif 
+ @endif
 
  @if(($assesment->status == 4)||($assesment->status == 5))
   <b>Approved by DVC Admin : {{ $assesment['approvaldvc']->fname .' ' . $assesment['approvaldvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b>
   <br>
- @endif 
+ @endif
 
 
 
  @if($assesment->status == 5)
   <b>Company paid and updated by : {{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b>
   <br>
- @endif 
+ @endif
 
-  
- 
+
+
      @if(auth()->user()->type == 'Supervisor Landscaping')
    @if($assesment->status == 1)
   <!--<b style="padding-left: 800px;">Update payment <a data-toggle="modal" data-target="#payment"
-                                                            style="color: green;" 
+                                                            style="color: green;"
                                            data-toggle="tooltip" title="Update payment"><i class="fas fa-edit"></i></a> </b>-->
    @endif
    @endif
@@ -596,9 +596,9 @@ var total=2;
   @if($assesment->status == 3)
    <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 750px;">Approve<a href="{{route('approveassessmentformbydvc', [$assesment->assessment_id , $tender  , $assesment->month])}}" title="Approve assessment form "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">Reject <a data-toggle="modal" data-target="#rejectdvc"
-                                                            style="color: green;" 
+                                                            style="color: green;"
                                            data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
-                                           
+
 
   @endif
   @endif
@@ -616,8 +616,8 @@ var total=2;
   <?php $tender = Crypt::encrypt($assesment->company); ?>
 
 
-      <button style="max-height: 40px; float:right;" type="button" class="btn btn-outline-primary" >
-                 <a href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"><i class="fa fa-file-pdf-o"></i> PDF </a> 
+      <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
+                 <a href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
                 <br>
@@ -626,9 +626,9 @@ var total=2;
 
 
 
-  
-  
-  
+
+
+
     <!--Update Payment-->
     <div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -636,7 +636,7 @@ var total=2;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" align="center" style="color: black"><b></b>UPDATE PAYMENT</b></h5>
-                   
+
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -645,9 +645,9 @@ var total=2;
                 <div class="modal-body">
 
                    <form method="POST" action="{{route('updatepayment', [$assesment->assessment_id])}}">
-                             @csrf                   
-                        
-                        <input style="color: black" type="number" required class="form-control"   maxlength = "30"  
+                             @csrf
+
+                        <input style="color: black" type="number" required class="form-control"   maxlength = "30"
                                name="payment" placeholder="Update Payment ..." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
                                <br>
 
@@ -655,7 +655,7 @@ var total=2;
                                <button type="submit" class="btn btn-primary">Save</button>
                     </form>
 
-                    
+
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -673,7 +673,7 @@ var total=2;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" align="center" style="color: black"><b></b>REJECT ASSESSMENT FORM</b></h5>
-                   
+
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -682,17 +682,17 @@ var total=2;
                 <div class="modal-body">
                      <?php $tender = Crypt::encrypt($assesment->company); ?>
                    <form method="POST" action="{{route('rejectwithreasonassessment', [$assesment->assessment_id , $tender , $assesment->month])}}">
-                             @csrf                   
-                        
-                        <textarea style="color: black" type="number" required class="form-control"     
-                               name="reason" placeholder="Give reason ..."  required></textarea> 
+                             @csrf
+
+                        <textarea style="color: black" type="number" required class="form-control"
+                               name="reason" placeholder="Give reason ..."  required></textarea>
                                <br>
 
 
                                <button type="submit" class="btn btn-danger">Reject</button>
                     </form>
 
-                    
+
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -735,7 +735,7 @@ var total=2;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" align="center" style="color: black"><b></b>REJECT ASSESSMENT FORM</b></h5>
-                   
+
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -744,17 +744,17 @@ var total=2;
                 <div class="modal-body">
                     <?php $tender = Crypt::encrypt($assesment->company); ?>
                    <form method="POST" action="{{route('rejectwithreasonassessmentestate', [$assesment->assessment_id , $tender , $assesment->month])}}">
-                             @csrf                   
-                        
-                        <textarea style="color: black" type="number" required class="form-control"     
-                               name="reason" placeholder="Give reason ..."  required></textarea> 
+                             @csrf
+
+                        <textarea style="color: black" type="number" required class="form-control"
+                               name="reason" placeholder="Give reason ..."  required></textarea>
                                <br>
 
 
                                <button type="submit" class="btn btn-danger">Reject</button>
                     </form>
 
-                    
+
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -795,7 +795,7 @@ var total=2;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" align="center" style="color: black"><b></b>REJECT ASSESSMENT FORM</b></h5>
-                   
+
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -804,17 +804,17 @@ var total=2;
                 <div class="modal-body">
                      <?php $tender = Crypt::encrypt($assesment->company); ?>
                    <form method="POST" action="{{route('rejectwithreasonassessmentdvc', [$assesment->assessment_id , $tender , $assesment->month])}}">
-                             @csrf                   
-                        
-                        <textarea style="color: black" type="number" required class="form-control"     
-                               name="reason" placeholder="Give reason ..."  required></textarea> 
+                             @csrf
+
+                        <textarea style="color: black" type="number" required class="form-control"
+                               name="reason" placeholder="Give reason ..."  required></textarea>
                                <br>
 
 
                                <button type="submit" class="btn btn-danger">Reject</button>
                     </form>
 
-                    
+
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -853,15 +853,15 @@ var total=2;
 
  @else
     @if(auth()->user()->type != 'Supervisor Landscaping')
-<p style="color: red;">No assessment form submitted yet</p> 
+<p style="color: red;">No assessment form submitted yet</p>
      @endif
   @endif
     <br>
 
 
 
-    
-     
+
+
 
 
 
@@ -890,7 +890,7 @@ function openCity(evt, cityName) {
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
-             
+
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
@@ -902,7 +902,7 @@ function openCity(evt, cityName) {
              {
 
                 var newcell = row.insertCell(i);
-                 
+
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
 
                 //alert(newcell.childNodes);
@@ -920,11 +920,11 @@ function openCity(evt, cityName) {
 
                 }
 
-                  
+
 
             }
 
-           
+
         }
 
 
@@ -964,12 +964,12 @@ function openCity(evt, cityName) {
         }
 
          function myfunc6(x) {
-            document.getElementById("resonestates").innerHTML = x;  
-  }  
+            document.getElementById("resonestates").innerHTML = x;
+  }
 
 
         function myfunc7(x) {
-            document.getElementById("resondvc").innerHTML = x;  
+            document.getElementById("resondvc").innerHTML = x;
   }
    </script>
 
@@ -987,13 +987,13 @@ function totalitem() {
 
 
 
-    
-    
-    
-
-    
 
 
-                
+
+
+
+
+
+
   @endSection
 

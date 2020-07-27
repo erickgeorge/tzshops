@@ -260,9 +260,9 @@ Assessment Sheet
 
 
     </TABLE>
-   <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
+   <div style="padding-left: 300px;">  <INPUT  class="btn btn-primary" type="button" value="Add" onclick="addRow('dataTable')" />
 
-    <INPUT id="deleterowbutton" style="display: none;"  class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
+    <INPUT id="deleterowbutton" style="display: none;"  class="btn btn-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
 
 <br>
                     <button type="submit" class="btn btn-primary float-right">Save

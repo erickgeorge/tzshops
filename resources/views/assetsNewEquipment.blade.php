@@ -60,8 +60,8 @@ New Equipment Asset
                              </select>
                                </div>
                                <div class="form-group col">
-                                   <label for="my-input">. <sup class="text-danger">*</sup></label>
-                                   <input id="location" required class="form-control" placeholder="Site Location" type="text" name="SiteLocation2">
+                                   <label for="my-input">Block/Plot/Room <sup class="text-danger">*</sup></label>
+                                   <input id="location" required class="form-control" placeholder="Block/Plot/Room" type="text" name="SiteLocation2">
                                </div>
                             </div>
                             <div class="row">

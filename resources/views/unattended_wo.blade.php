@@ -55,7 +55,7 @@ use App\WorkOrder;
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
-           <button data-toggle="modal" class="btn btn-outline-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </button>
+           <button data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         @endif
 <!-- Modal -->
@@ -64,7 +64,7 @@ use App\WorkOrder;
     <form method="GET" action="{{ url('completewopdf') }}">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Export To   PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">Filter your data</span>
         </button>
