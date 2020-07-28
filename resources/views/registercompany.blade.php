@@ -69,7 +69,7 @@ Company Registrartion
                             </option>
 
                                 @foreach($carea as $carea)
-                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
+                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name .' - '.  $carea->zone_id }}
                                     </option>
                                 @endforeach
                             </select>

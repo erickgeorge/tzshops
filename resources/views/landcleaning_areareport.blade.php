@@ -84,7 +84,7 @@ tr:nth-child(even) {
                    <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Area Name</th>
-                        <th scope="col">Zone Name</th>
+                        <th scope="col">LOT</th>
                   
                     </tr>
                     </thead>

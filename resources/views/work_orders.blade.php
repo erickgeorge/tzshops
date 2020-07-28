@@ -221,7 +221,7 @@ foreach($userwithid as $userwithid)
       {echo "<option value='".$statusname->status."'>Accepted</option>";}
      elseif($statusname->status == 0)
       {echo"<option value='".$statusname->status."'>Rejected</option>";}
-     elseif($statusname->status == 2)
+     elseif($statusname->status == 30)
       {echo"<option value='".$statusname->status."'>Closed</option>";}
      elseif($statusname->status == 3)
       {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
@@ -235,6 +235,8 @@ foreach($userwithid as $userwithid)
       {echo"<option value='".$statusname->status."'>Material requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
+     elseif($statusname->status == 2)
+      {echo"<option value='".$statusname->status."'>waiting response from client</option>";}
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
      else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
@@ -314,7 +316,7 @@ foreach($userwithid as $userwithid)
                             @elseif($work->status == 0)
                                 <td><span class="badge badge-danger">Rejected</span></td>
                             @elseif($work->status == 2)
-                                <td><span class="badge badge-success">Temporally Closed</span></td>
+                                <td><span class="badge badge-success">Waiting response from client</span></td>
 
                             @elseif($work->status == 30)
                                 <td><span class="badge badge-success">Completely Closed</span></td>

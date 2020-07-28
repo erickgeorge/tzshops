@@ -63,6 +63,8 @@ class NotesController extends Controller
   }elseif ($status == 0) {
       $statusvalue = 'Rejected';
   }elseif ($status == 2) {
+      $statusvalue = 'waiting response from client';
+  }elseif ($status == 30) {
       $statusvalue = 'Closed';
   }elseif ($status == 3) {
       $statusvalue = 'Technician assigned';

@@ -108,7 +108,7 @@ tr:nth-child(even) {
 
     <tr>
     <th>Initiated on </th>
-      <th>{{ $assesment->created_at }}</th> 
+      <th>{{ date('d F Y', strtotime($assesment->created_at))}}</th> 
   </tr>
   
 </table>
@@ -128,7 +128,7 @@ tr:nth-child(even) {
   <div class="row container-fluid">
         <div class="col-lg-12">
           
-           <u> <h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details</b></h5></u>
+           <u> <h5 align="center" style="text-transform: capitalize; color: black;"><b>  assessment Sheet details</b></h5></u>
         </div>
     </div>
    
@@ -163,7 +163,7 @@ tr:nth-child(even) {
     <div class="row container-fluid">
         <div class="col-lg-12">
           
-            <p><h5><b><u>Sheet No:0{{$ii}}</u></b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b><u>sheet name:  &nbsp; {{$company->assessment_name}}</u></b></h5></u>
+            <p><h5><b><u>Sheet No:0{{$ii}}</u></b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b><u>sheet name:  &nbsp; {{$company->assessment_name}}</u></b></h5></u>
         </div>
     </div>
    <br>

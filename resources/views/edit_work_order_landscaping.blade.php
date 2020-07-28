@@ -77,7 +77,7 @@ var total=2;
 
     <tr>
     <th>Initiated on </th>
-      <th>{{ $assesment->created_at }}</th>
+      <th>{{ date('d F Y', strtotime($assesment->created_at))}}</th>
   </tr>
 
 </table>
@@ -98,7 +98,7 @@ var total=2;
   <div class="row container-fluid">
         <div class="col-lg-12">
 
-            <h5 align="center" style="text-transform: uppercase; color: black;"><b>  assessment Sheet details</b></h5>
+            <h5 align="center" style="text-transform: capitalize; color: black;"><b>  assessment Sheet details</b></h5>
         </div>
     </div>
     <hr>
@@ -152,7 +152,7 @@ var total=2;
     <div class="row container-fluid">
         <div class="col-lg-12">
 
-            <h5><b>Sheet No:0{{$ii}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  sheet name: {{$company->assessment_name}}</b></h5>
+            <h5><b>Sheet No:0{{$ii}}</b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b>  sheet name: {{$company->assessment_name}}</b></h5>
         </div>
     </div>
     <hr>
@@ -617,7 +617,7 @@ var total=2;
 
 
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
                 <br>

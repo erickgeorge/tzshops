@@ -228,8 +228,8 @@
                             <td>{{ $house->sheet }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
+                           <td><span class="badge badge-danger">Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
 
@@ -240,7 +240,7 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span class="badge badge-primary">Assessed for {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
@@ -350,7 +350,7 @@
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                  <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @elseif( $house->status == 1 )
@@ -362,7 +362,7 @@
                 @if($now1 >= $dnext)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                 <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @endif
@@ -388,8 +388,8 @@
                             <td>{{ $house->sheet }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
+                           <td><span class="badge badge-danger">Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
 
@@ -400,7 +400,7 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span class="badge badge-primary">Assessed for {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
@@ -510,7 +510,7 @@
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                  <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @elseif( $house->status == 1 )
@@ -522,7 +522,7 @@
                 @if($now1 >= $dnext)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                 <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @endif
@@ -572,8 +572,8 @@
                             <td>{{ $house->sheet }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
+                           <td><span class="badge badge-danger">Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
 
@@ -584,7 +584,7 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span class="badge badge-primary">Assessed for {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
@@ -694,7 +694,7 @@
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB') )
                  <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @elseif( $house->status == 1 )
@@ -706,7 +706,7 @@
                 @if($now1 >= $dnext)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB') )
                 <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @endif
@@ -732,8 +732,8 @@
                             <td>{{ $house->sheet }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
+                           <td><span class="badge badge-danger">Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
 
@@ -744,7 +744,7 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span class="badge badge-primary">Assessed for {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
@@ -854,7 +854,7 @@
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB') )
                  <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @elseif( $house->status == 1 )
@@ -866,7 +866,7 @@
                 @if($now1 >= $dnext)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB') )
                 <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @endif
@@ -917,8 +917,8 @@
                             <td>{{ $house->sheet }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
+                           <td><span class="badge badge-danger">Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assessed</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
 
@@ -929,7 +929,7 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span class="badge badge-primary">Assessed for {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
@@ -1049,7 +1049,7 @@
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                  <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @elseif( $house->status == 1 )
@@ -1061,7 +1061,7 @@
                 @if($now1 >= $dnext)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                 <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @endif
@@ -1087,8 +1087,8 @@
                             <td>{{ $house->sheet }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
+                           <td><span class="badge badge-danger">Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
                            <td><span class="badge badge-warning">Contract Expired </span><br>
 
@@ -1099,7 +1099,7 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assigned for {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span class="badge badge-primary">Assessed for {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
@@ -1209,7 +1209,7 @@
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                  <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @elseif( $house->status == 1 )
@@ -1221,7 +1221,7 @@
                 @if($now1 >= $dnext)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                 <?php $hou = Crypt::encrypt($house->tender); ?>
-                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assign this company again"><i
+                <a style="color: green;"  href="{{route('addcompanytoassess' , [$house->id , $hou])}}" data-toggle="tooltip" title="Please assess this company again"><i
                                                     class="fas fa-share"></i></a>  @endif
                 @endif
                 @endif

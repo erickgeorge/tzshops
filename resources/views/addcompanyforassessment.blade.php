@@ -91,7 +91,7 @@
     <div class="row container-fluid">
         <div class="col-lg-12">
 
-            <h5><b>Sheet No: {{$ii}}</b></h5><h5 align="center" style="text-transform: uppercase; color: black;"><b>  Sheet name: &nbsp; {{ $companyiii->sheet  }}</b></h5>
+            <h5><b>Sheet No: {{$ii}}</b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b>  Sheet name: &nbsp; {{ $companyiii->sheet  }}</b></h5>
         </div>
     </div>
     <hr>

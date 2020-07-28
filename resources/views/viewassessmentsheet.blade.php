@@ -23,9 +23,9 @@ Assessment Sheet
         </div>
     @endif
 
-
-<h5   style="text-transform: capitalize;">
- ASSESSMENT SHEET DETAILS </h5>
+<div class="container">
+<h5   style="text-transform: capitalize;"><b>
+ Assessment Sheet Details</b></h5>
 <hr>
 <div class="container">
 <div class="row">
@@ -285,6 +285,8 @@ Assessment Sheet
         @endif
 
       </div>
+
+     </div>
 
 
 

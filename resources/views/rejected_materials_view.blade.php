@@ -143,7 +143,7 @@
         <br>
           @if($item->check_return == NULL)
           @if(auth()->user()->type != 'Inspector Of Works')
-           <div style="color: black; "> <h5> Request material back to inspector of works <span> <a style="color: green;" href="/send/material_rejected_again/{{$item->work_order_id}}"  data-toggle="tooltip" title="Request back to inspector of works"><i class="far fa-check-circle"></i></a>
+           <div style="color: black; "> <h5> Resend material request back to inspector of works <span> <a style="color: green;" href="/send/material_rejected_again/{{$item->work_order_id}}"  data-toggle="tooltip" title="Request back to inspector of works"><i class="far fa-check-circle"></i></a>
                    </span> </h5></div>  @endif
                    @endif
 
@@ -198,8 +198,7 @@
                     </div>
                   </div>
                 <div class="modal-body">
-                    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-
+             
 
 
 
@@ -210,16 +209,16 @@
                        <div class="form-group">
                             <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
                                 <option   selected value=" @foreach($items as $item)
-  {{ $item['material']->id }}"> {{$item['material']->name }}, Brand: ({{ $item['material']->description }}), Value: ({{ $item['material']->brand }}), Type: ({{ $item['material']->type }})@endforeach</option>
+  {{ $item['material']->id }}"> {{$item['material']->name }}, Description: ({{ $item['material']->description }}), Value: ({{ $item['material']->brand }}), Type: ({{ $item['material']->type }})@endforeach</option>
                                 @foreach($materials as $material)
-                                   <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
+                                   <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
                                 @endforeach
                             </select>
                         </div>
 
 
                          <div class="form-group">
-                            <label for="name_of_house">Quantity </label>
+                            <label for="name_of_house">Quantity  </label>
                             <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
                                    name="quantity" placeholder="Enter quantity again">
                             <input id="edit_mat" name="edit_mat" hidden>
@@ -234,17 +233,9 @@
 
 
 
-                                                       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+                                       
 
 
-     <script type="text/javascript">
-
-      $("#materialedit").select2({
-            placeholder: "Choose materia..",
-            allowClear: true
-        });
-     </script>
 
 
                 </div>
@@ -389,7 +380,7 @@
 
             $('[data-toggle="tooltip"]').tooltip();
 
-            $('#myTable').dataTable({
+            $('#myTableeee').dataTable({
                 "dom": '<"top"i>rt<"bottom"flp><"clear">'
             });
 

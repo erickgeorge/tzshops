@@ -57,7 +57,14 @@ class HomeController extends Controller
         else{
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-            return redirect()->route('work_order');
+            if((auth()->user()->type == 'Supervisor Landscaping' )||(auth()->user()->type == 'USAB' ))
+            {
+                 return redirect()->route('assessmentform.view');
+            }
+                else{
+                     return redirect()->route('work_order');
+                }
+           
         }
 
 

@@ -409,7 +409,9 @@ class UserController extends Controller
         $user = User::find(auth()->user()->id);
         if (Hash::check($request['old-pass'], Auth::User()->password)){
             $user->password = bcrypt($request['new-pass']);
-            $user->change_password = \Carbon\Carbon::now();
+
+          //  $user->change_password = \Carbon\Carbon::now();
+            $user->change_password = 2;
             $user->save();
             return redirect()->route('myprofile')->with(['message' => 'Password changed successfully']);
         }

@@ -1534,7 +1534,59 @@ class LandscapingController extends Controller
          'assessmmentcompany' => landassessmentform::where('assessment_month', $id)->get()
        
         ]);
-         }     
+         }  
+
+
+         public function companylinereport($tender , $company , $area){
+
+         $tender = Crypt::decrypt($tender);
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+               
+               return view('companylinereport', [
+            'role' => $role,
+            'notifications' => $notifications, 
+            'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('sum(score) as erick  , month'))
+                    ->groupBy('month')->orderby('month','DESC')->get() ,  
+
+             'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('area'))
+                    ->groupBy('area')->get()     
+
+
+        // 'assessmmentcompany' => landassessmentform::where('company_id', $id)->select(DB::raw('sum(score) as erick , assessment_month'))
+                    //->groupBy('assessment_month')->get()
+       
+        ])->with(['tender'=>$tender , 'compa'=>$company]);
+         }
+
+         
+
+
+
+          
+     public function viewcompanyreportfor_company($tender , $company ){
+
+         $tender = Crypt::decrypt($tender);
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+               
+               return view('view_companyreport_for_company', [
+            'role' => $role,
+            'notifications' => $notifications, 
+            'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('sum(score) as erick  , month'))
+                    ->groupBy('month')->orderby('month','DESC')->get() ,  
+
+             'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('area'))
+                    ->groupBy('area')->get()     
+
+
+        // 'assessmmentcompany' => landassessmentform::where('company_id', $id)->select(DB::raw('sum(score) as erick , assessment_month'))
+                    //->groupBy('assessment_month')->get()
+       
+        ])->with(['tender'=>$tender , 'compa'=>$company]);
+         }
+
+
 
          public function viewcompanyreport($tender , $company , $area){
 

@@ -79,7 +79,12 @@
 
                             <?php $tender = Crypt::encrypt($house->tender ); ?>
                           <td><a style="color: green;"  href="{{route('view_company_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a></td>
+                                                    class="fas fa-eye"></i></a>
+
+&nbsp;
+
+                                                    <a style="color: green;"  href="{{route('view_company_line_report' , [ $tender,  $house['compantwo']->company_name , $house['are_a']->cleaning_name])}}" data-toggle="tooltip" title="View report in line graph"><i
+                                                   class="fa fa-line-chart"></i></a></td>
 
 
 
