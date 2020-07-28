@@ -76,28 +76,13 @@ class AssetsController extends Controller
       public function Registercompany(Request $request)
     {
 
-    //checktender
 
-        $start = date("Y" , strtotime( $request['datecontract']) ); 
-        $durass = strtotime($request['datecontract']);
-        $dura = $request['duration'];
-        $endd = date('Y-m-d' , strtotime("+$dura year" , $durass));
+    $checktender = company::where('tender', $request['tendern'])->where('company_name', $request['companyid'])->first();
 
+    if (empty($checktender)) {
 
-        $end = date("Y" , strtotime( $endd) ); 
-       
-        $checkemptyy = $request['tendern'] .'/'.$start.'/'.$end.'';
-
-
-    //endchecktender
-    $checktender = company::where('tender', $checkemptyy)->where('company_name', $request['companyid'])->first();
-
-     if (empty($checktender)) {
-
-          
-            
             $area = $request['area'];
-            $sheet = $request['sheets']; 
+            $sheet = $request['sheets'];
 
 
 
@@ -123,21 +108,19 @@ class AssetsController extends Controller
         }
 
 
-
         $company->company_name = $request['companyid'];
-      
+        $company->tender = $request['tendern'];
         $company->status = 2;
         $company->payment = $request['payment'];
         $company->datecontract = $request['datecontract'];
         $company->nextmonth = $request['datecontract'];
+   
+
+
         $durass = strtotime($company->datecontract);
         $dura = $request['duration'];
         $company->endcontract = date('Y-m-d' , strtotime("+$dura year" , $durass));
-        
-        $start = date("Y" , strtotime( $company->datecontract) ); 
-        $end = date("Y" , strtotime( $company->endcontract) ); 
-       
-        $company->tender = $request['tendern'] .'/'.$start.'/'.$end.'';
+
 
 
 
@@ -159,9 +142,7 @@ class AssetsController extends Controller
 
 
 
-     $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $request['tendern'])->first();
-
-     $companynew->tender =  $company->tender;
+     $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $company->tender)->first();
      $companynew->payment = $request['payment'];
      $companynew->datecontract = $request['datecontract'];
      $durass = strtotime($companynew->datecontract);
@@ -197,37 +178,42 @@ class AssetsController extends Controller
 
 
 
-
       public function Renewcompany(Request $request )
     {
 
 
 
-     $checkforempty = companywitharea::where('company_name', $request['company_name'])->first();
-
-         if (empty($checkforempty)) {
 
         $company = new companywitharea();
         $company->company_name = $request['company_name'];
         $company->save();
 
-           }
 
-    else{
+       $tendernu = $request['tender'];
 
-     return redirect()->back()->withErrors(['message' => 'The same company name already registered. ']);
+             //  First Store data in $arr
+             $arr = array();
+                  foreach ($tendernu as $address) {
+                   $arr[] = $address;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
 
+          $checktender = tendernumber::where('tender', $tendernu[$a])->first();
 
-    }
-
+       if (empty($checktender)) {
 
         $tender = new tendernumber();
-        $tender->tender = 'PA/011/NC/'.$request['tender'];
+        $tender->tender = $tendernu[$a];
         $tender->company = $company->id;
-        $tender->save(); 
- 
+        $tender->save(); }
+           else {
 
-      
+        return redirect()->back()->withErrors(['message' => 'The tender number selected has already been assigned for another company, Please select another tender number']);
+       }
+
+         }
 
         return redirect()->route('cleaning_company')->with(['message' => 'Company registered successfully']);
 
@@ -419,6 +405,80 @@ class AssetsController extends Controller
 
 
 
+       public function cleaningcompanywithexpirecontract(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+            if(request()->has('start'))  { //date filter
+
+
+        $from=request('start');
+        $to=request('end');
+
+
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+
+
+         return view('cleaningcompanyexpired', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+             'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+            'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
+          ]);
+
+         }
+         else{
+
+             return view('cleaningcompanyexpired', [
+            'role' => $role,
+            'notifications' => $notifications,
+             
+             'cleangcompanylandscaping' => company::where('type','Exterior')->orderby('created_at','DESC')->get(),
+
+             'cleangcompanyusab' => company::where('type','Interior')->orderby('created_at','DESC')->get(),
+
+             'cleangcompanyadmin' => company::orderby('created_at','DESC')->get(),
+
+             'assessmmentcompany' => company::select(DB::raw('company_name'))
+                    ->groupBy('company_name')->get(),
+            'assessmmenttender' => company::select(DB::raw('tender'))
+                    ->groupBy('tender')->get(),
+
+            'assessmmentareas' => company::select(DB::raw('area'))
+                    ->groupBy('area')->get(),
+
+          ]);
+
+         }
+
+       }
+
+
+
+
+
+
+
        public function cleaningcompanyreached(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -487,6 +547,20 @@ class AssetsController extends Controller
        }
 
 
+
+             public function cleaningcompanyexpired(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+         return view('cleaningcompanynewexpired', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => tendernumber::all()
+
+          ]);
+
+         }
 
 
 

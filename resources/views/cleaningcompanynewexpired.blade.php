@@ -33,21 +33,21 @@ Companies
 
     </div>
 
-                  <h4 ><b >Cleaning Companies </b></h4>
+                  <h4 ><b >Companies With Expired Contract </b></h4>
 
                   <hr>
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                 <a href="{{route('landscapingcleaningcompanyreport')}}"
 
-                                          style="color: white;" data-toggle="tooltip" title="Print report"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
+                                         style="color: white;"  data-toggle="tooltip" title="Print report"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                    <div class="row"><div class="col">
                   <a href="{{ route('renew_company_contract') }}"
-                   class="btn btn-primary" >Add new company</a> @endif <a href="{{ route('cleaning_company_expired') }}"
-                   class="btn btn-primary" >Companies with expired contract</a> </div> 
+                   class="btn btn-primary" >Add new company</a> @endif <a href="{{ route('cleaning_company') }}"
+                   class="btn btn-primary" >Active Companies</a> </div> 
 
 
 
@@ -75,17 +75,19 @@ Companies
                         <?php $i++; ?>
 
 
-
-      <?php $date = Carbon::parse($house->datecontract);
+                 <?php $date = Carbon::parse($house->datecontract);
                  $now = Carbon::parse($house->endcontract);
-                 $diff = $date->diffInDays($now);
+                 $diff = $date->diffInDays($now); 
+
                  $now1 =  Carbon::now();
 
-                             $endcont = Carbon::parse($house->endcontract);?>
-              
+                 $endcont = Carbon::parse($house->endcontract);?>
+          
           <!--expired contract-->
-             @if($now1 < $endcont)
+             @if($now1 > $endcont)
           <!--expired contract-->
+
+
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->tender }}</td>
@@ -101,7 +103,6 @@ Companies
                             @if($house->status == 1)
 
 
-           
 
                  @if($diff >= 365)
 
@@ -142,7 +143,9 @@ Companies
 
                             @if($house->status == 1)
 
-                           
+                             <?php $now1 =  Carbon::now();
+
+                             $endcont = Carbon::parse($house->endcontract);?>
 
 
 
@@ -213,8 +216,7 @@ Companies
 
 
 
-  
-          <!--expired contract-->
+     <!--expired contract-->
              @endif
           <!--expired contract-->
 

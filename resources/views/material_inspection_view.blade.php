@@ -14,7 +14,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="text-transform: capitalize;"  ><b style="text-transform: capitalize;">Materials needed for works order </b></h5>
+            <h5  ><b>Materials Needed For Works Order </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -246,7 +246,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h4 align="center"><b>MATERIALS NEEDED FOR WORKS ORDER </b></h4>
+             <h5  ><b>Materials Needed For Works Order </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -267,7 +267,7 @@
 
 
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
-        <table class="table table-striped display" id="myTable"  style="width:100%">
+        <table class="table table-striped display" id="myTablee"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>

@@ -12,37 +12,36 @@ Company Registrartion
 <div class="container">
 @if ($errors->any())
 <div class="alert alert-danger" >
-	<ul>
-		@foreach ($errors->all() as $error)
-			<li>{{ $error }}</li>
-		@endforeach
-	</ul>
+  <ul>
+    @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+    @endforeach
+  </ul>
 </div>
 @endif
 @if(Session::has('message'))
 <div class="alert alert-success" style="margin-top: 6%;">
-	<ul>
-		<li>{{ Session::get('message') }}</li>
-	</ul>
+  <ul>
+    <li>{{ Session::get('message') }}</li>
+  </ul>
 </div>
 @endif
 
 
 <div class="container">
-  <h5   id="Add New House" >Register New Company</h5>
-
+                <h5 style=" text-transform: capitalize;"   id="Add New House" >Register new company</h5>
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
-
+          
                 <form method="POST" action="{{ route('company.save.renew') }}" class="col-lg-12">
                     @csrf
 
                 <div align="center">
-
-
+     
+                    
                     <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-
+                            
 
                           <label style="width:150px;" class="input-group-text" for="directorate"><b>Company name</b></label>
 
@@ -51,76 +50,62 @@ Company Registrartion
                                name="company_name"  placeholder="Enter company name"  >
                     </div>
 
-                     <div class="input-group mb-3 col-lg-6">
-                        <div class="input-group-prepend">
 
 
-                          <label style="width:150px;" class="input-group-text" for="directorate"><b>Tender number</b></label>
-
-                        </div>
-                       <input maxlength="2" style="color: black;" type="number" required class="form-control" id="type"
-                               name="tender" placeholder="Enter tender number" min="0" max="99" >
-                    </div>
-
-
-
-
-
+             
                <!-- <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
-
+                            
                           <label style="width:150px;" class="input-group-text" for="directorate">Area</label>
 
                         </div>
-
+                                            
                      <select style="color: black; width:  310px;" required class="custom-select"  name="area"  required >
-                             <option value="" selected>Choose area...
+                             <option value="" selected>Choose area... 
                             </option>
-
+                         
                                 @foreach($carea as $carea)
                                     <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
                                     </option>
                                 @endforeach
                             </select>
-
-
-
-
+           
+          
+                    
+                      
                  </div>-->
 
 
-   <!-- <div class="jumbotron" style="width: 500px;">
+    <div class="jumbotron" style="width: 500px;">
+                
 
-
-
-
-
+                    
                         <div class="input-group-prepend">
-
+                            
 
                           <label style="width:150px;" class="input-group-text" for="directorate"><b>Tender number</b> </label>
 
                      <TABLE id="dataTable" width="300px" border="1">
                             <TR>
-
+                          <TD><INPUT type="checkbox" name="chk"/></TD>
                                  <TD>
                             <input style="color: black;" type="text" required class="form-control" id="type"
                                name="tender[]" placeholder="Enter tender number"  >
-
-                                 </TD>
+   
+                                 </TD> 
                            </TR>
-                      </TABLE>
+                     </TABLE>
                         </div>
+                  
 
-
-    <div style="padding-left: 300px;">  <INPUT  class="btn btn-primary" type="button" value="Add" onclick="addRow('dataTable')" />
+    <div style="padding-left: 300px;">  <INPUT  class="btn btn-outline-primary" type="button" value="Add" onclick="addRow('dataTable')" />
 
     <INPUT id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
-    </div>-->
+    </div>
 
 
 
-    <br>
+    <br>  
 
 
             <button type="submit" class="btn btn-primary">Save
@@ -139,31 +124,31 @@ Company Registrartion
 
 <SCRIPT language="javascript">
         function addRow(tableID) {
-
+             
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
             var colCount = table.rows[0].cells.length;
 
-
+       
 
             for(var i=0; i<colCount; i++)
              {
 
-
+              
                if(rowCount = 1) {
-
+                      
                           document.getElementById('deleterowbutton').style.display='inline-block';
 
 
 
                     }
 
-
+                
 
 
                 var newcell = row.insertCell(i);
-
+                 
                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
 
                 //alert(newcell.childNodes);
@@ -181,11 +166,11 @@ Company Registrartion
 
                 }
 
-
+                  
 
             }
 
-
+           
         }
 
 
@@ -202,14 +187,14 @@ Company Registrartion
                     if(rowCount <= 1) {
                         alert("Cannot delete all the rows.");
                         break;
-                    }
+                    } 
 
 
                         if(rowCount <= 2) {
-
+                       
 
                         document.getElementById('deleterowbutton').style.display='none';
-                    }
+                    } 
 
                     table.deleteRow(i);
                     rowCount--;
@@ -230,7 +215,7 @@ Company Registrartion
     </SCRIPT>
 
 
-
+       
 
 
 

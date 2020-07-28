@@ -789,15 +789,20 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
+
+      <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Companies</h6></a>
+    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Areas</h6></a>
+    <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
+     <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheets </h6></a>
    <!-- <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
     <a  href="{{ url('Maintainance/section')}}" ><h6> Maintenance  section </h6></a>-->
     <a  href="{{ url('Assessment/form')}}" ><h6>Assessment Forms</h6></a>
 
-    <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheets </h6></a>
+   
 
 
 
-   <button class="dropdown-btn"><h6>Company Report
+   <button class="dropdown-btn"><h6>Companies Report
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
@@ -809,9 +814,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
     
 
   
-    <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Companies</h6></a>
-    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Areas</h6></a>
-    <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
+  
 
 
 

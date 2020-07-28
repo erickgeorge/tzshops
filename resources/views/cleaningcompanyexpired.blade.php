@@ -33,7 +33,7 @@
        <div class="row">
       <div class="col">
 
-            <h5 ><b >Tenders With Active Contract</b></h5>
+            <h5 ><b >Tenders With Expired Contract </b></h5>
 
         </div>
 
@@ -174,13 +174,11 @@
                    class="btn btn-primary" >Add new tender</a> @endif
 
                     &nbsp; &nbsp;
-                   <a href="{{ route('tenders_reached') }}"
-                   class="btn btn-success" >Tenders with day reached for assessment</a>
+                   <a href="{{ route('cleaningcompany') }}"
+                   class="btn btn-outline-primary" >All tenders</a>
 
 
-                    &nbsp; &nbsp;
-                   <a href="{{ route('cleaningcompanywithexpiredcontract') }}"
-                   class="btn btn-warning" >Tenders with expired contract</a>
+                  
 
 
 
@@ -209,6 +207,7 @@
 
 
                     <?php $i = 0;  $ii = 0;  $iii = 0;?>
+
                         @if(auth()->user()->type == 'Supervisor Landscaping')
                     @foreach($cleangcompanylandscaping as $house)
                         <?php $i++;?>
@@ -226,10 +225,9 @@
                 $date_next = $now1->diffInDays($dnext); ?>
 
 
-
-                    <!--activecontract-->
-                @if($now1 < $endcont)
-                 <!--activecontract-->
+                    <!--expiredcontract-->
+                @if($now1 > $endcont)
+                 <!--expiredcontract-->
 
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -390,9 +388,9 @@
 
                         </tr>
 
-                                                  <!--activecontract-->
+                            <!--expiredcontract-->
                 @endif
-                 <!--activecontract-->
+                 <!--expiredcontract-->
 
    @endforeach
    @endif
@@ -416,9 +414,10 @@
                 $date_left = $now1->diffInDays($next30days);
                 $date_next = $now1->diffInDays($dnext); ?>
 
-                       <!--activecontract-->
-                @if($now1 < $endcont)
-                 <!--activecontract-->
+
+                    <!--expiredcontract-->
+                @if($now1 > $endcont)
+                 <!--expiredcontract-->
 
                         <tr>
                             <th scope="row">{{ $ii }}</th>
@@ -578,9 +577,10 @@
 
 
                         </tr>
-                                                  <!--activecontract-->
-                @endif
-                 <!--activecontract-->
+
+                            <!--expiredcontract-->
+               @endif
+                 <!--expiredcontract-->
 
 
    @endforeach
@@ -603,9 +603,10 @@
                 $date_left = $now1->diffInDays($next30days);
                 $date_next = $now1->diffInDays($dnext); ?>
 
-                       <!--activecontract-->
-                @if($now1 < $endcont)
-                 <!--activecontract-->
+
+                <!--expiredcontract-->
+                @if($now1 > $endcont)
+                 <!--expiredcontract-->
 
                         <tr>
                             <th scope="row">{{ $iii }}</th>
@@ -772,11 +773,9 @@
 
 
                         </tr>
-
-                               <!--activecontract-->
-                @endif
-                 <!--activecontract-->
-
+      <!--expiredcontract-->
+                 @endif
+                 <!--expiredcontract-->
 
                     @endforeach
                     @endif

@@ -1537,6 +1537,14 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 
+     <script type="text/javascript">
+
+      $("#materialedit").select2({
+            placeholder: "Choose material..",
+            allowClear: true
+        });
+     </script>
+
 
 
 

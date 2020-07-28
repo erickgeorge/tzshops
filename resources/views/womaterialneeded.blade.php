@@ -89,7 +89,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h4 align="center"><b>WORKS ORDER NEEDS MATERIAL </b></h4>
+          <h5 style=" text-transform: capitalize;"  ><b >Works Order Needs Material </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">

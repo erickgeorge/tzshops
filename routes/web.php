@@ -592,13 +592,18 @@ Route::get('nonbuildingasset','AssetsController@nonbuildingasset')->name('nonbui
 
 Route::get('tender','AssetsController@cleaningcompany')->name('cleaningcompany')->middleware('auth');
 
+Route::get('tender_with_expired_contract','AssetsController@cleaningcompanywithexpirecontract')->name('cleaningcompanywithexpiredcontract')->middleware('auth');
+
 Route::get('tenders_with_reached_assessment_day','AssetsController@cleaningcompanyreached')->name('tenders_reached')->middleware('auth');
 
 
 
-
+Route::get('cleaningcompanywithexpired','AssetsController@cleaningcompanynew')->name('cleaning_company')->middleware('auth');
 
 Route::get('cleaningcompany','AssetsController@cleaningcompanynew')->name('cleaning_company')->middleware('auth');
+
+Route::get('cleaningcompanyexpired','AssetsController@cleaningcompanyexpired')->name('cleaning_company_expired')->middleware('auth');
+
 Route::get('cleaningcompanyreport','AssetsController@cleaningcompanyreport')->name('cleaningcompanyreport')->middleware('auth');
 Route::get('assessmentsheet','AssetsController@assessmentsheet')->name('assessment_sheet')->middleware('auth');
 
@@ -696,7 +701,20 @@ Route::get('track/company/forms/{id}', 'LandscapingController@trackcompanyview')
 Route::get('company_report_with_month/', 'LandscapingController@companywithmonth')->name('comapy_view_month')->middleware('auth');
 Route::get('track/company/assessment/forms/{id}', 'LandscapingController@trackcompanyassessmentview')->name('track_company_assessment')->middleware('auth');
 Route::get('companyreportview/{id}', 'LandscapingController@companyreport')->name('view_company_month')->middleware('auth');
+
+
+
+Route::get('viewcompanyreportlinegraph/{tender}/{company}/{area}', 'LandscapingController@companylinereport')->name('view_company_line_report')->middleware('auth');
+
+
 Route::get('viewcompanyreportview/{tender}/{company}/{area}', 'LandscapingController@viewcompanyreport')->name('view_company_report')->middleware('auth');
+
+
+Route::get('viewcompanyreportforcompany/{tender}/{company}', 'LandscapingController@viewcompanyreportfor_company')->name('view_company_report_for_company')->middleware('auth');
+
+
+
+
 Route::get('viewassessmentsheet/{id}', 'LandscapingController@viewassessmentsheet')->name('view_assessment_sheet')->middleware('auth');
 Route::get('companyreporteditview/{id}', 'LandscapingController@companyeditreport')->name('edit_company_month')->middleware('auth');
 Route::post('companyreporteditview/edit/comment/new' , 'LandscapingController@updatecomments')->name('update.comment');

@@ -6,7 +6,7 @@ Company report
 <br>
 <div class="container">
 
-<h5 style="text-transform: capitalize;"><B>TRENDING SCORE FOR "{{$compa}}" WITH DIFFERENT MONTHS </B>
+<h5 style="text-transform: capitalize;"><B>Trending Score For "{{$compa}}" With Different Months </B>
  </h5>
 <hr>
 
