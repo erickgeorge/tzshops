@@ -72,7 +72,7 @@ Edit Building Asset
                             <div class="row">
                                <div class="form-group col">
                                    <label for="my-input">Cost/Repairing Cost <sup class="text-danger">*</sup></label>
-;/                                   <input id="quantity" value="{{$item->Cost}}" required min="1" class="form-control" type="number" name="cost">
+                                   <input id="quantity" value="{{$item->Cost}}" required min="1" class="form-control" type="number" name="cost">
                                </div>
                                <div class="form-group col">
                                    <label for="my-input">Date of Acquisition <sup class="text-danger">*</sup></label>
