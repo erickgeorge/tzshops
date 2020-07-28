@@ -12,6 +12,7 @@ use App\Department;
 use App\Section;
 use App\WorkOrder;
 use Carbon\Carbon;
+ use App\workordersection; 
  ?>
 
     <br>
@@ -598,7 +599,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
             </div>
             <select  style="width: 300px;min-width: 150px;" id="p_type" name="p_type">
                 <option selected value="">Choose...</option>
-                <?php use App\workordersection; ?>
+              
 <?php $sectionss = workordersection::get(); ?>
  @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>

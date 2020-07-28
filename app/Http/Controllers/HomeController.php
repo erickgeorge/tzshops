@@ -2057,7 +2057,7 @@ $v5=$type[4];
     public function usersView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        $users = User::where('id', '<>', auth()->user()->id)->where('status', '=', 1)->get();
+        $users = User::where('status', '=', 1)->orderBy('fname','ASC')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 

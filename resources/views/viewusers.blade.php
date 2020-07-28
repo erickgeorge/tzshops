@@ -664,7 +664,7 @@ use App\Section;
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5 style=" text-transform: uppercase;">Available Registered Users</h5>
+    <h5 style=" text-transform: capitalize;">Available Registered Users</h5>
 
 
   </div>
@@ -836,11 +836,14 @@ else {
       ?></td>
 
       @if( $user->type == "Inspector Of Works")
-      <td style="text-transform: lowercase;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+      <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
 
       @else
-
-             <td style="text-transform: lowercase;">{{ $user->type }} </td>
+         @if(strpos( $user->type, "HOS") !== false)
+             <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>
+             @else
+               <td style="text-transform: capitalize;">{{strtolower( $user->type) }} </td>
+             @endif
 
       @endif
 
