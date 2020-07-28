@@ -149,9 +149,9 @@ Land Asset
                                       <option value="Good">Good</option>
                                       <option value="Fair">Fair</option>
                                       <option value="Poor">Poor</option>
-                                      <option value="Very Poor">Very Poor</option>
+                                      {{-- <option value="Very Poor">Very Poor</option>
                                       <option value="Obsolete">Obsolete</option>
-                                      <option value="Disposed">Disposed</option>
+                                      <option value="Disposed">Disposed</option> --}}
                                       <option value="Sold">Sold</option>
                                   </select>
                               </div>

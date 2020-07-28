@@ -63,9 +63,9 @@ Edit Land Asset
                                        <option  value="New">New</option>
                                        <option value="Good">Good</option>
                                        <option value="Fair">Fair</option>
-                                       <option value="Poor">Poor</option>
+                                       {{-- <option value="Poor">Poor</option>
                                        <option value="Very Poor">Very Poor</option>
-                                       <option value="Obsolete">Obsolete</option>
+                                       <option value="Obsolete">Obsolete</option> --}}
                                    </select>
                                </div>
                             </div>
