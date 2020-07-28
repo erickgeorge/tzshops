@@ -1025,9 +1025,16 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 </div>
 
+
 <div class="main">
- @yield('body')
+     @if(auth()->user()->change_password == 2)
+        @yield('body')
+
+     @endif
+
+     
 </div>
+
 
 
 <style type="text/css">
