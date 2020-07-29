@@ -45,9 +45,10 @@ use Carbon\Carbon;
 $hoos = user::select('type')->where('id',auth()->user()->id)->get();
 foreach ($hoos as $hous) {
    $hotype = $hous->type;
+   if($head == 'All Technicians Details'){
         if(substr($hotype,0,4) == 'HOS '){
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
 
-          echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
           }
           elseif($hotype == 'Maintenance coordinator'){
             echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
@@ -57,6 +58,7 @@ foreach ($hoos as $hous) {
             echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
 
           }
+}
 }
 ?>
 <!-- SOMETHING STRANGE HERE -->
@@ -550,7 +552,7 @@ $to = $techs; $v='technician';?>
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
-            <th scope="col">@if($head == 'All Technicians Details') section @else  type @endif </th>
+            @if($head = 'All Inspectors of work Details') @else <th scope="col">@if($head == 'All Technicians Details') section @endif  type @endif </th>
 
             @if($head == 'All Technicians Details')
             @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
@@ -591,9 +593,10 @@ $to = $techs; $v='technician';?>
         }else { echo $tech->phone;}
 
       ?></td>
+       @if($head = 'All Inspectors of work Details') @else
        <td>
               <?php
-               echo strtoupper($tech->type);  ?></td>
+               echo strtoupper($tech->type);  ?> </td>@endif
             @if($head == 'All Technicians Details')
             @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
                <td >
