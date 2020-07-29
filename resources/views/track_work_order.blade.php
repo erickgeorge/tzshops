@@ -588,7 +588,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             <div>
                 <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-warning">Notify client about work completion</button>
+                    <button type="submit" class="btn btn-warning">Provisional Close</button>
                 </form>
             </div>
         @else

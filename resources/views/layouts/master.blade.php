@@ -814,8 +814,8 @@
   </button>
   <div class="dropdown-container">
     <a href="{{ url('/alltechnicians')}}"><h6>All Technicians details</h6></a>
-    <a href="{{ url('/techniciancount')}}"><h6>Technician on Work(duty)</h6></a>
-    <a href="{{ url('/techniciancountcomp')}}"><h6>Technician completed work</h6></a>
+    <a href="{{ url('/techniciancount')}}"><h6>Technicians on Work(duty)</h6></a>
+    <a href="{{ url('/techniciancountcomp')}}"><h6>Technicians completed work</h6></a>
   </div>
 
 
