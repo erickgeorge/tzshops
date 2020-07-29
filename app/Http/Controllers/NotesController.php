@@ -578,22 +578,145 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
       //////////////////////////////////////////
      $data['header'] = $username.''.$type;
      //////////////////////////////////////////
-     if (($_GET['type']=='')&&($_GET['college']=='')) {
+     if (($_GET['type']=='')&&($_GET['college']=='')&&($_GET['directorate']=='')&&($_GET['department']=='')) {
          $data['display_users'] =  user::orderBy('fname','asc')->get();
      }
-     if (($_GET['type']=='')&&($_GET['college']!='')) {
+     if (($_GET['type']=='')&&($_GET['college']!='')&&($_GET['directorate']=='')&&($_GET['department']=='')) {
          $data['display_users'] =  user::
          Where('id',$_GET['college'])->orderBy('fname','asc')->get();
      }
-      if (($_GET['type']!='')&&($_GET['college']=='')) {
+      if (($_GET['type']!='')&&($_GET['college']=='')&&($_GET['directorate']=='')&&($_GET['department']=='')) {
          $data['display_users'] =  user::
          Where('type',$_GET['type'])->orderBy('fname','asc')->get();
      }
-      if (($_GET['type']!='')&&($_GET['college']!='')) {
+      if (($_GET['type']!='')&&($_GET['college']!='')&&($_GET['directorate']=='')&&($_GET['department']=='')) {
          $data['display_users'] =  user::
          Where('id',$_GET['college'])->
          Where('type',$_GET['type'])->orderBy('fname','asc')->get();
      }
+
+
+     if (($_GET['type']=='')&&($_GET['college']=='')&&($_GET['directorate']!='')&&($_GET['department']=='')) {
+
+        $directora = Directorate::where('id',$_GET['directorate'])->first();
+        $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+        $data['display_users'] =  user::where('section_id',$dept['id'])->orderBy('fname','asc')->get();
+
+
+    }
+    if (($_GET['type']=='')&&($_GET['college']!='')&&($_GET['directorate']!='')&&($_GET['department']=='')) {
+
+        $directora = Directorate::where('id',$_GET['directorate'])->first();
+        $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+        $data['display_users'] =  user::where('section_id',$dept['id'])->
+        Where('id',$_GET['college'])->orderBy('fname','asc')->get();
+    }
+     if (($_GET['type']!='')&&($_GET['college']=='')&&($_GET['directorate']!='')&&($_GET['department']=='')) {
+
+        $directora = Directorate::where('id',$_GET['directorate'])->first();
+        $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+        $data['display_users'] =  user::where('section_id',$dept['id'])->
+        Where('type',$_GET['type'])->orderBy('fname','asc')->get();
+    }
+     if (($_GET['type']!='')&&($_GET['college']!='')&&($_GET['directorate']!='')&&($_GET['department']=='')) {
+
+        $directora = Directorate::where('id',$_GET['directorate'])->first();
+        $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+        $data['display_users'] =  user::where('section_id',$dept['id'])->
+        Where('id',$_GET['college'])->
+        Where('type',$_GET['type'])->orderBy('fname','asc')->get();
+    }
+
+    if (($_GET['type']=='')&&($_GET['college']=='')&&($_GET['directorate']=='')&&($_GET['department']!='')) {
+
+        $data['display_users'] =  user::where('section_id',$_GET['department'])->orderBy('fname','asc')->get();
+    }
+    if (($_GET['type']=='')&&($_GET['college']!='')&&($_GET['directorate']=='')&&($_GET['department']!='')) {
+        $data['display_users'] =  user::where('section_id',$_GET['department'])->
+        Where('id',$_GET['college'])->orderBy('fname','asc')->get();
+    }
+     if (($_GET['type']!='')&&($_GET['college']=='')&&($_GET['directorate']=='')&&($_GET['department']!='')) {
+        $data['display_users'] =  user::where('section_id',$_GET['department'])->
+        Where('type',$_GET['type'])->orderBy('fname','asc')->get();
+    }
+     if (($_GET['type']!='')&&($_GET['college']!='')&&($_GET['directorate']=='')&&($_GET['department']!='')) {
+        $data['display_users'] =  user::where('section_id',$_GET['department'])->
+        Where('id',$_GET['college'])->
+        Where('type',$_GET['type'])->orderBy('fname','asc')->get();
+    }
+
+    if (($_GET['type']=='')&&($_GET['college']=='')&&($_GET['directorate']!='')&&($_GET['department']!='')) {
+
+        $directora = Directorate::where('id',$_GET['directorate'])->first();
+        $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+        if($dept['id']==$_GET['department'])
+        {
+            $data['display_users'] =  user::where('section_id',$_GET['department'])->orderBy('fname','asc')->get();
+        }else
+        {
+            $data['display_users'] = user::where('id',0)->get();;
+
+        }
+
+
+    }
+    if (($_GET['type']=='')&&($_GET['college']!='')&&($_GET['directorate']!='')&&($_GET['department']!='')) {
+
+       $directora = Directorate::where('id',$_GET['directorate'])->first();
+            $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+            if($dept['id']==$_GET['department'])
+            {
+                $data['display_users'] =  user::where('section_id',$_GET['department'])->
+                Where('id',$_GET['college'])->orderBy('fname','asc')->get();
+            }else
+            {
+                $data['display_users'] = user::where('id',0)->get();;
+
+            }
+
+
+    }
+     if (($_GET['type']!='')&&($_GET['college']=='')&&($_GET['directorate']!='')&&($_GET['department']!='')) {
+
+        $directora = Directorate::where('id',$_GET['directorate'])->first();
+        $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+        if($dept['id']==$_GET['department'])
+        {
+            $data['display_users'] =  user::where('section_id',$_GET['department'])->
+            Where('type',$_GET['type'])->orderBy('fname','asc')->get();
+        }else
+        {
+            $data['display_users'] = user::where('id',0)->get();;
+
+        }
+
+
+    }
+     if (($_GET['type']!='')&&($_GET['college']!='')&&($_GET['directorate']!='')&&($_GET['department']!='')) {
+
+        $directora = Directorate::where('id',$_GET['directorate'])->first();
+        $dept  = Department::where('directorate_id',$directora['id'])->first();
+
+        if($dept['id']==$_GET['department'])
+        {
+             $data['display_users'] =  user::where('section_id',$_GET['department'])->
+            Where('id',$_GET['college'])->
+            Where('type',$_GET['type'])->orderBy('fname','asc')->get();
+        }else
+        {
+            $data['display_users'] = user::where('id',0)->get();
+
+        }
+
+
+    }
   //////////////////////////////////////////////
  if($data['display_users'] ->isEmpty()){
 
