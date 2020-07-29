@@ -67,11 +67,11 @@
             </tbody>
         </table>
     @else
-        <h1 class="text-center" style="margin-top: 150px">You have no rejected work orders</h1>
+        <h1 class="text-center" style="margin-top: 150px">You have no rejected works orders</h1>
         <div class="container" align="center">
             <br>
             <div class="col-sm-3">
-              <a href="{{ url('work_order') }}" class="btn btn-primary">Return to work orders</a>
+              <a href="{{ url('work_order') }}" class="btn btn-primary">Return to works orders</a>
             </div>
           </div>
         </div>

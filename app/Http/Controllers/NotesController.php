@@ -574,7 +574,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         {$username = $usedid['fname'].' '.$usedid['lname']; }
       }
       }else{$username = 'All';}
-      if($_GET['type']!=''){$type=' '.$_GET['type'].' Details Report';}else{$type=' Users Report';}
+      if($_GET['type']!=''){$type=' '.$_GET['type'].' Details Report';}else{$type=' User Report';}
       //////////////////////////////////////////
      $data['header'] = $username.''.$type;
      //////////////////////////////////////////

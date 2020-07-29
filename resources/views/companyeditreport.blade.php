@@ -7,7 +7,7 @@ Company report
 <br>
 @foreach($assessmmentcompany as $company)
 @endforeach
-<h5 style="text-transform: capitalize;"><b>MONTHLY REPORT FOR COMPANIES ASSESSED FOR {{ date('F Y', strtotime($company->assessment_month))}}</b></h5>
+<h5 ><b>Monthly Report For Companies Assessed For {{ date('F Y', strtotime($company->assessment_month))}}</b></h5>
 <hr>
 
 <div class="container">

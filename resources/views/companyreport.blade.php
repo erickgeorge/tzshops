@@ -6,7 +6,7 @@ Company report
 <br>
 @foreach($assessmmentcompany as $company)
 @endforeach
-<h5 style="text-transform: capitalize;">COMPANIES SCORES(%) IN {{ date('F Y', strtotime($company->assessment_month))}}</h5>
+<h5><b>Companies Scores(%) For {{ date('F Y', strtotime($company->assessment_month))}}</b></h5>
 <hr>
 
 <html lang="en">

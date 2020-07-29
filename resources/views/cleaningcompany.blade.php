@@ -180,7 +180,7 @@
 
                     &nbsp; &nbsp;
                    <a style="color:white; " href="{{ route('cleaningcompanywithexpiredcontract') }}"
-                   class="btn btn-warning" >Tenders with expired contract</a>
+                   class="btn btn-secondary" >Tenders with expired contract</a>
 
 
 
