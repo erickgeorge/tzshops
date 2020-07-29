@@ -730,7 +730,7 @@ use App\Section;
         <div class="row">
             <div class="col">
                 <select name="college" class="form-control mr-sm-2">
-                    <option selected="selected" value="">select name</option>
+                    <option selected="selected" value="">Select name</option>
                     <option value="">All users</option>
         <?php
                  $userfetch = user::get();
@@ -762,15 +762,57 @@ use App\Section;
         <div class="row">
             <div class="col">
                 <select name="type" class="form-control mr-sm-2">
-                    <option selected="selected" value="">select Type</option>
+                    <option selected="selected" value="">Select Type</option>
                     <option value="">All Types</option>
-
                     <?php
-                      $type = User::select('type')->distinct()->get();
-                      foreach ($type as $typed) {
-                        echo " <option  value='".$typed->type."'>".$typed->type."</option>";
-                      }
-                     ?>
+                    $type = User::select('type')->distinct()->get();
+                    foreach ($type as $typed) {
+                      echo " <option  value='".$typed->type."'>".$typed->type."</option>";
+                    }
+                   ?>
+
+                </select>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="directorate" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select Directorate</option>
+                    <option value="">All Directorates</option>
+                    <?php
+
+                    $directoras = directorate::orderBy('name','ASC')->get();
+                    foreach($directoras as $directoras){?>
+            <option value=" {{ $directoras->id }}">{{ $directoras->name }}</option>
+                    <?php }
+                               ?>
+
+                </select>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="department" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select Department</option>
+                    <option value="">All Departments</option>
+                    <?php
+                    $departmen  = department::orderBy('name','ASC')->get();
+    foreach($departmen  as $departm )
+    {
+
+        $director  = directorate::where('id',$departm ->directorate_id)->get();
+        foreach($director  as $director ){?>
+<option value="{{ $departm ->id }} ">  {{ $departm ->description }} - {{ $director ->name }}</option>
+        <?php }
+    }
+                   ?>
+
                 </select>
             </div>
         </div>
