@@ -20,7 +20,7 @@
     <br>
     <div class="row container-fluid ">
         <div class="col-lg-12">
-           <h5 style=" " class="container"><b style="text-transform: capitalize;">Available Technician Completed their works order</b></h5>
+           <h5 style=" " class="container"><b style="text-transform: capitalize;">Available Technicians Completed their works orders</b></h5>
         </div>
 
 
