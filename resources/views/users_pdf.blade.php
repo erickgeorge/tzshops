@@ -60,8 +60,35 @@ else {
       <td>{{ $user->fname . ' ' . $user->lname }}</td>
 
       <td><a style="color: #000;" href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-      <td>{{ $user->phone }}</td>
-      <td>{{ $user->type }}</td>
+     
+
+
+       <td>
+
+      <?php $phonenumber = $user->phone;
+        if(substr($phonenumber,0,1) == '0'){
+
+          $phonreplaced = ltrim($phonenumber,'0');
+          echo '+255'.$phonreplaced;
+
+        }else { echo $user->phone;}
+
+      ?></td>
+
+      @if( $user->type == "Inspector Of Works")
+      <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+
+      @else
+         @if(strpos( $user->type, "HOS") !== false)
+             <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>
+             @else
+               <td style="text-transform: capitalize;">{{strtolower( $user->type) }} </td>
+             @endif
+
+      @endif
+
+
+
          <td>{{ $user['department']['directorate']->name }}</td>
         <td>{{ $user['department']->name }}</td>
 

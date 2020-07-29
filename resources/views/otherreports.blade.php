@@ -591,9 +591,9 @@ $to = $techs; $v='technician';?>
         }else { echo $tech->phone;}
 
       ?></td>
-       <td>
+       <td style="text-transform: capitalize;">
               <?php
-               echo strtoupper($tech->type);  ?></td>
+               echo strtolower($tech->type);  ?></td>
             @if($head == 'All Technicians Details')
             @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
                <td >
