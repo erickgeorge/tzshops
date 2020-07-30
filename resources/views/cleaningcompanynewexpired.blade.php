@@ -33,7 +33,7 @@ Companies
 
     </div>
 
-                  <h4 ><b >Companies With Expired Contract </b></h4>
+                  <h4 ><b >Companies With Previous Contract </b></h4>
 
                   <hr>
 
@@ -45,8 +45,8 @@ Companies
 
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                    <div class="row"><div class="col">
-                  <a href="{{ route('renew_company_contract') }}"
-                   class="btn btn-primary" >Add new company</a> @endif <a href="{{ route('cleaning_company') }}"
+                  <!--<a href="{{ route('renew_company_contract') }}"
+                   class="btn btn-primary" >Add new company</a> -->@endif <a href="{{ route('cleaning_company') }}"
                    class="btn btn-primary" >Active Companies</a> </div> 
 
 

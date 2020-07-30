@@ -47,7 +47,7 @@ Companies
                    <div class="row"><div class="col">
                   <a href="{{ route('renew_company_contract') }}"
                    class="btn btn-primary" >Add new company</a> @endif <a href="{{ route('cleaning_company_expired') }}"
-                   class="btn btn-primary" >Companies with expired contract</a> </div> 
+                   class="btn btn-primary" >Previous contract</a> </div> 
 
 
 

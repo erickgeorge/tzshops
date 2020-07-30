@@ -102,9 +102,9 @@
                 <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label style="color:red;" class="input-group-text" for="inputGroupSelect01">Total Quantity</label>
+                    <label  class="input-group-text" for="inputGroupSelect01">Total Quantity</label>
                 </div>
-                <input  style="color: black"  type="number"  class="form-control" id="tstock"
+                <input  readonly style="color: black"  type="number"  class="form-control" id="tstock"
                        aria-describedby="emailHelp" name="tstock" placeholder="Total Stock">
             </div>
         </div>

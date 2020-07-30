@@ -67,8 +67,7 @@ tr:nth-child(even) {
         <th >Material Description</th>
         <th >Type</th>
         <th >Quantity Received</th>
-        <th >Status</th>
-
+       
             </tr>
             </thead>
 
@@ -87,8 +86,7 @@ tr:nth-child(even) {
             <td>{{ $item->quantity }}</td>
 
 
-                    <td style="color: blue"><span class="badge badge-info">  RECEIVED</span>
-                      </td>
+                    
                     </tr>
                     @endforeach
             </tbody>
@@ -133,7 +131,9 @@ tr:nth-child(even) {
 
 
       <br>
-
+    
+     <div  style="color: blue"> Status: <span class="badge badge-info">  Received</span>
+                    </div><br>
 
           <div> Remark </div><br>
 
