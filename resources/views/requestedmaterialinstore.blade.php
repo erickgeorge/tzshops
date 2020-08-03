@@ -21,7 +21,7 @@
 
 <div class="container">
 
-<div style="text-align: center"><h5 style=" "><b style="text-transform: capitalize;">Material accepted by inspector of works</b></h5></div>
+<div ><h5 style=" "><b style="text-transform: capitalize;">Material accepted by inspector of works</b></h5></div>
 
 <br>
 <hr>
@@ -45,15 +45,16 @@
   </tr>
 </thead>
 
-  <?php $i=1;
+  <?php $k=0; $i=1;
   $p= array("t");
   ?>
 
   <tbody>
 
     @foreach($wo_materials as $matform)
+    <?php $k++?>
      <tr>
-    <td>{{$i++}}</td>
+    <td>{{$k}}</td>
     <td>{{$matform['material']->name }}</td>
      <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
@@ -69,6 +70,8 @@
 
      @if(($matform['material']->stock- $matform['material']->quantity_reserved)>=($matform->quantity))
           <td>{{number_format($matform->quantity) }}</td>
+
+
        <?php $procured=0;
        $p[$i]= "no";
        $i++;
@@ -105,20 +108,24 @@
 
 
 
-                    @if(in_array("yes", $p))
+                    @if(in_array("yes", $p) and (in_array("no", $p)))
 
 
-                     <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > RESERVE AND SEND PURCHASING ORDER TO DES </a></button>
+                    
+                    @elseif(in_array("yes", $p))
+
+                     <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > Reserve and send purchasing order </a></button>
+                     
                     @else
 
 
-                      <button   class="btn btn-warning"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >NOTIFY HoS TO TAKE MATERIAL </a></button>
+                      <button   class="btn btn-success"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >Notify HoS to take material in store</a></button>
 
 
-                        @endif
+                     @endif
 
                         <br><br><br><br><br><br><br>
-                        @else
+                     @else
 <br>
 <br>
 <br>

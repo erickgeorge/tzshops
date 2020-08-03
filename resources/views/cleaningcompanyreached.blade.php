@@ -32,7 +32,7 @@
 
        <div class="row">
       <div class="col">
-            <h5 ><b style="text-transform: capitalize;">Tenders with day reached for assessment</b></h5>
+            <h5 ><b style="text-transform: capitalize;">Tenders with days reached for assessment</b></h5>
 
         </div>
 
@@ -169,9 +169,8 @@
 
 
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
-                  <a href="{{ route('registercompany') }}"
-                   class="btn btn-primary" >Add new tender</a> @endif
-                    &nbsp; &nbsp;
+                  @endif
+                   
                    <a href="{{ route('cleaningcompany') }}"
                    class="btn btn-outline-primary" >All tenders</a>
                    <br>

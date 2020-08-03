@@ -126,8 +126,8 @@
          <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>   @endif
          @else
          @if($item->status == 3)
-         <h5  style="     color: #733703;"><b>  Please Approve if you have received Material.</b></h5>
-         <a class="btn btn-primary btn-sm"  href="tick/material_received/{{$item->work_order_id}}" role="button">Approve (&#10004;)</a>
+         <h5  style="     color: #733703;"><b>  Please confirm if you have received Material.</b></h5>
+         <a class="btn btn-primary btn-sm"  href="tick/material_received/{{$item->work_order_id}}" role="button">Confirm (&#10004;)</a>
          @endif
 
          @endif

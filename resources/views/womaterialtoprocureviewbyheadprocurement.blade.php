@@ -76,7 +76,7 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   <!-- <td>{{ $item['staff']->fname.' '.$item['staff']->lname }}</td>-->
+                  
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>
@@ -93,12 +93,12 @@
 
                            @elseif($item->currentaddedmat == 1)
                             <a style="color: green;"
-                                       onclick="myfunc1( '{{ $item->id}}','{{ $item->reserved_material}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
+                                       onclick="myfunc1( '{{ $item->id}}','{{$item['material']->description}}' )"
                                        data-toggle="modal" data-target="#exampleModali" title="Increment Material"><i
                                                 class="fas fa-plus"></i></a>
                                                 @else
                                                  <a style="color: green;"
-                                       onclick="myfunc( '{{ $item->id}}','{{ $item->reserved_material}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
+                                       onclick="myfunc( '{{ $item->id}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
                                        data-toggle="modal" data-target="#exampleModal2" title="Increment Material"><i
                                                 class="fas fa-plus"></i></a>
                                                 @endif
@@ -158,17 +158,18 @@
           <div class="input-group mb-3">
                 <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="description"
                        aria-describedby="emailHelp" name="description"  >
+                       <input hidden id="istock" name="istock">
           </div>
 
-            <div>
+           <!-- <div>
             <label style="width: 777px;" >Current Reserved Material </label>
 
             <div class="input-group mb-3">
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
                        id="stock" >
-                       <input hidden id="istock" name="istock">
+                       
             </div>
-            </div>
+            </div>-->
 
             <div>
              <label style="width: 777px;" >Add Material in Quantity</label>
@@ -179,12 +180,12 @@
             </div>
 
             <div>
-             <label style="width: 777px; "   ><b style="color: black;">Tottal Material requested</b></label>
+             <label style="width: 777px; "   ><b style="color: black;">Tottal Material Purchased</b></label>
 
              <div class="input-group mb-3">
 
-                <input  style="width: 565px;"  required type="number"  class="form-control" id="tstock"
-                        name="tstock" placeholder="Total Material requested">
+                <input readonly style="width: 565px;"  required type="number"  class="form-control" id="tstock"
+                        name="tstock" placeholder="Total Material Purchased">
 
               </div>
               </div>
@@ -210,16 +211,11 @@
 
      <script type="text/javascript">
 
-          function myfunc1( U , V , W , X  ) {
+          function myfunc1( U ,  X  ) {
 
 
 
             document.getElementById("istock").value = U;
-
-            document.getElementById("stock").value = V;
-
-            document.getElementById("tstock").value = W;
-
 
             document.getElementById("description").value = X;
 
@@ -230,8 +226,8 @@
 
     function totalitem() {
          var x = document.getElementById("kstock").value;
-         var y = document.getElementById("stock").value;
-         var z  = parseInt(x) + parseInt(y);
+       
+         var z  = parseInt(x);
          document.getElementById("tstock").value=z;
          document.getElementById("tstock").innerHTML = z;
      }
@@ -292,6 +288,7 @@
           <div class="input-group mb-3">
                 <input style="width: 565px;"  disabled style="color: black" required type="text" maxlength="35" class="form-control" id="descriptiony"
                        aria-describedby="emailHelp" name="description"  >
+                       <input  hidden id="estock" name="estock">
           </div>
 
              <div>
@@ -300,7 +297,7 @@
             <div class="input-group mb-3">
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
                        id="mstock"  >
-                       <input  hidden id="estock" name="estock">
+                       
             </div>
             </div>
 
@@ -313,12 +310,12 @@
             </div>
 
                <div>
-             <label style="width: 777px; "   ><b style="color: black;">Tottal Material requested</b></label>
+             <label style="width: 777px; "   ><b style="color: black;">Tottal Material Purchased</b></label>
 
              <div class="input-group mb-3">
 
-                <input  style="width: 565px;"  required type="number"  class="form-control" id="pstock"
-                        name="pstock" placeholder="Total Material requested">
+                <input readonly style="width: 565px;"  required type="number"  class="form-control" id="pstock"
+                        name="pstock" placeholder="Total Material Purchased">
 
               </div>
               </div>
@@ -345,13 +342,13 @@
     <script type="text/javascript">
 
 
-          function myfunc( U , V , W , X  ) {
+          function myfunc( U , W , X  ) {
 
 
 
             document.getElementById("estock").value = U;
 
-            document.getElementById("stock").value = V;
+         
 
             document.getElementById("mstock").value = W;
 

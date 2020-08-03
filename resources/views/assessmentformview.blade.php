@@ -12,8 +12,8 @@ Assessment form
      <div class="row">
       <div class="col">
           @foreach($assessmmentcompany as $assesment)
-         @endforeach
-            <h5 ><b style="text-transform: capitalize;">assessment forms assessed for this month </b></h5>
+          @endforeach
+            <h5 ><b style="text-transform: capitalize;">assessment forms assessed for last month </b></h5>
 
         </div>
 

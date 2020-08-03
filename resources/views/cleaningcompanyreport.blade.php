@@ -32,7 +32,7 @@
                         <th scope="col">Tender Number</th>
                         <th scope="col">Company Name</th>
                         <th scope="col">Area Name</th>
-                        <th scope="col">Status</th>
+                       <!-- <th scope="col">Status</th>-->
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -58,20 +58,7 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
 
 
-                  @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assigned yet </span><br>
-                            @if($now1 >= $dcont)<span class="badge badge-danger">Days reached please assign</span>@endif </td>
-
-
-                  @else
-
-                          <?php  $ddate = strtotime($house->nextmonth);
-                              $newDate = date("Y-m-d", strtotime("-1 month", $ddate));
-                                                                                    ?>
-
-
-                           <td><span class="badge badge-primary">Current assessment on {{ date('F Y', strtotime($newDate))}}</span> </td>
-                  @endif
+     
 
 
 

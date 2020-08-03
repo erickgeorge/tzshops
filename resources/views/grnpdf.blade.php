@@ -76,7 +76,7 @@ tr:nth-child(even) {
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['staff']->fname.' '.$item['staff']->lname }}</td>
+                    <td>{{ $item['usermaterial']->fname.' '.$item['usermaterial']->lname }}</td>
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>

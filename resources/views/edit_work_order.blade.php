@@ -1087,7 +1087,7 @@ var total=2;
                         <?php
 
                         use App\Material;
-                        $materials= Material::get();
+                        $materials= Material::orderby('name', 'ASC')->get();
 
 
                         ?>
