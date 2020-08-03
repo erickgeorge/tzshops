@@ -124,7 +124,7 @@ Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary'
 
 
 
- 
+
 
 Route::get('direct_torate/{id}', 'UserController@getdepedit')->name('get_depa')->middleware('auth');
 

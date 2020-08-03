@@ -38,7 +38,7 @@ Directorate
             <a href="Add/directorate" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add new College/Directorate</a>
                    <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
-                   class="btn btn-primary">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                   class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
 

@@ -48,7 +48,7 @@
                             	<?php $time = strtotime($tag_); echo date('d/m/Y',$time);  ?>
  </div>
 <div class="col-lg-2">
-    		<a href="{{ url('materialEntrypdf',$tag_) }}" class="btn btn-primary"> <i class="fa fa-file-pdf-o"></i> PDF</a>
+    		<a href="{{ url('materialEntrypdf',$tag_) }}" class="btn btn-primary"> Export <i class="fa fa-file-pdf-o"></i> </a>
     	</div>
     </div>
 </div>

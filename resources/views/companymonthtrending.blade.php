@@ -44,8 +44,8 @@ Company report
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                <a  href="{{route('trendingscore_report_company' , [ $tenders , $company->assessment_month])}}"
-                                                           
-                                          style="color: white;" data-toggle="tooltip" title="Print report"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+
+                                          style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
 

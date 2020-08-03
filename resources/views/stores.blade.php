@@ -48,7 +48,7 @@
              <?php
 use App\Material;?>
  @if(count($items)>0) <div class="col" align="right">
-           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
+           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
         </div>
         @endif
 <!-- Modal -->

@@ -59,7 +59,7 @@
 
 
                  <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 </button>
 
 

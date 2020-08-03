@@ -31,7 +31,7 @@
                             <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                 <a href="{{route('landscapingcleaningarea')}}"
 
-                                          style="color: white;" data-toggle="tooltip" title="Print report"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
+                                          style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
 
@@ -140,13 +140,13 @@
                             <input style="color: black;width:350px" type="text" required class="form-control"
                                    id="edit_type"
                                    name="zone" placeholder="Enter LOT Name">
-                                <input id="editarea_id"  hidden>  
+                                <input id="editarea_id"  hidden>
 
                         </div>
-                    </div> 
-                       
-                        
-                    
+                    </div>
+
+
+
                                                <div style="width:600px;">
                                                 <div style="float: left;">
 

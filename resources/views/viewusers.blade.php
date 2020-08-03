@@ -712,7 +712,7 @@ use App\Section;
 
 <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
-           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
+           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o"></i></a>
         </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
