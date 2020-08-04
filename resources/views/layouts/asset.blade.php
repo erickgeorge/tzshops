@@ -80,6 +80,23 @@
                 use App\WorkOrderTransport;
                 use App\Material;
                 use App\WorkOrder;
+        use Carbon\Carbon;
+
+        // closing work order by default
+        $woclo = WorkOrder::where('status',2)->get();
+        $leohii = Carbon::now();
+
+        foreach ($woclo as $woclo) {
+            $sikuhii = Carbon::parse($woclo->updated_at);
+            $tofautihii = $sikuhii->diffInDays($leohii);
+
+            if ($tofautihii > 6) {
+                $wokioda = WorkOrder::where('id',$woclo->id)->first();
+                $wokioda->status = 30;
+                $wokioda->save();
+            }
+        }
+        //
                 use App\zoneinspector;
                 use App\ppuproject;
                 $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();

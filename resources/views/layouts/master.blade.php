@@ -54,7 +54,7 @@
     </style>
 
 
- 
+
 
 
 
@@ -85,6 +85,23 @@
 
 
         use App\zoneinspector;
+        use Carbon\Carbon;
+
+        // closing work order by default
+        $woclo = WorkOrder::where('status',2)->get();
+        $leohii = Carbon::now();
+
+        foreach ($woclo as $woclo) {
+            $sikuhii = Carbon::parse($woclo->updated_at);
+            $tofautihii = $sikuhii->diffInDays($leohii);
+
+            if ($tofautihii > 6) {
+                $wokioda = WorkOrder::where('id',$woclo->id)->first();
+                $wokioda->status = 30;
+                $wokioda->save();
+            }
+        }
+        //
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
 
                 $w = WorkOrder::select(DB::raw('id'))->get();
@@ -164,12 +181,12 @@
                   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
-@endif 
+@endif
 
    @if(auth()->user()->type == 'Estates Director')
-    
+
     <li style="width: 80px;">
-                    
+
                     </li>
 
        <li class="nav-item dropdown">
@@ -202,7 +219,7 @@
 
 
 
-                    @endif                   
+                    @endif
 
 
 
@@ -211,7 +228,7 @@
 
 
                <li style="width: 80px;">
-                    
+
                     </li>
 
                       <li class="nav-item dropdown">
@@ -400,7 +417,7 @@
               @if($role['user_role']['role_id'] == 1)
 
                <li style="width: 80px;">
-                    
+
                     </li>
 
 
@@ -464,20 +481,20 @@
                             @if(auth()->user()->type == 'USAB')
 
 
-        
-               
-                    
+
+
+
                 <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                 </li>
 
 
-               
-              @endif  
+
+              @endif
 
 
 
-  
+
 
 
 
@@ -998,7 +1015,7 @@
 
      @endif
 
-     
+
 </div>
 
 
@@ -1524,4 +1541,3 @@ for (i = 0; i < dropdown.length; i++) {
 
 </body>
 </html>
-  

@@ -545,7 +545,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                 @else
                                     @if($work->status == -1)
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
-                                        @if($diff > 2)
+                                        @if($diff > 6)
                                         @if( $work['user']->id==Auth::user()->id)
                                         <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal{{ $work->id }}">Complaint</a>
 

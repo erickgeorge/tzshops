@@ -485,4 +485,9 @@ use App\assetsassesmotorvehicle;
       </div>
     </div>
   </div>
+
+  <p>
+      <a class="btn btn-primary"  href="{{route('yearlymotorvehicle')}}">Yearly Assessment Summary</a>
+  
+    </p>
 @endSection

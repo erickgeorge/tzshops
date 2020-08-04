@@ -385,6 +385,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
 
 
 <p>
+    
   <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Latest Assets Assessment Summary</a>
 
 </p>
@@ -494,91 +495,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
 </div>
 
 <p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Yearly Assessment Summary</a>
+    <a class="btn btn-primary"  href="{{route('yearlybuilding')}}">Yearly Assessment Summary</a>
 
   </p>
-<div class="row">
-    <div class="col">
-      <div class="collapse multi-collapse" id="multiCollapseExample2">
-        <div class="card card-body">
-  <div>
-          <div class="row">
-
-      <form class="col-md-8" action="{{route('assetsSummaryFiltered')}}" method="get">
-          <div class="row"><div class="form-group  col">
-                  <select id="my-select" class="form-control" name="year">
-                      <option selected value="">Choose Year</option>
-                      @php
-                          $dates = assetsassesbuilding::select(DB::raw('YEAR(assesmentYear) as year'))->distinct()->orderBy('assesmentyear','Desc')->get();
-                      @endphp
-                      @foreach ($dates as $dated)
-                  <option value="{{$dated->year}}">  {{$dated->year  }}</option>
-                      @endforeach
-                  </select>
-              </div>
-              <input name="asset" type="text" value="Building" hidden>
-              <div class="col">
-                  <button class="btn btn-primary" type="submit">Filter</button>
-              </div>
-
-
-          </div>
-      </form>
-              <div class="col">
-
-              </div>
-              <div class="col-md-3 text-right">
-                  <form action="{{route('assetreportfromsummary')}}" method="get" enctype="multipart/form-data">
-                      @csrf
-                      <input type="text" name="asset" value="Building" hidden>
-                      <input type="text" name="date" value="latest" hidden>
-                      <button class="btn btn-primary" type="submit"> Export <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
-                  </form>
-              </div>
-          </div>
-  </div>
-          <table class="table table-striped display text-center" id="myTableAssesment" style="width:100%">
-              <thead>
-                  <tr style="color:white;">
-                      <th>#</th>
-                      <th>Asset Number</th>
-                      <th>Assessment date</th>
-                      <th>Total Depreciated Years</th>
-                      <th style="text-align:right;">Accumulated Depreciation (Tshs)</th>
-                      <th style="text-align:right;">Impairment Loss (Tshs)</th>
-                      <th  style="text-align:right;">Disposal Cost (Tshs)</th>
-                  </tr>
-              </thead>
-              @php
-                  $u = 1;
-                  $assed = assetsassesbuilding::orderBy('assesmentYear','Desc') ->select('assetID')->distinct()->get();
-
-              @endphp
-              <tbody>
-                  @foreach ($assed as $assed)
-                  <tr>
-                      <td>{{$u}}</td>
-                      @php
-                          $assetid = assetsbuilding::where('id',$assed->assetID)->first();
-                          $asseted = assetsassesbuilding::orderBy('assesmentYear','Desc') ->where('assetID',$assed->assetID)->first();
-
-                      @endphp
-                      <td>{{$assetid['assetNumber']}}</td>
-                      <td><?php  $time = strtotime($asseted['assesmentYear'])?>  {{date('d/m/Y',$time)  }}</td>
-                      <td>{{$asseted['totalDepreciatedYears']}}</td>
-                      <td style="text-align:right;">{{number_format($asseted['accumulatedDepreciation'])}}  </td>
-                      <td style="text-align:right;">{{number_format($asseted['impairmentLoss'])}}  </td>
-                      <td style="text-align:right;">{{number_format($asseted['DisposalCost'])}}  </td>
-
-                  </tr>
-                  @php
-                      $u++;
-                  @endphp
-                  @endforeach
-              </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
 @endSection

@@ -487,4 +487,9 @@ Computer Equipment Assets
       </div>
     </div>
   </div>
+
+<p>
+    <a class="btn btn-primary"  href="{{route('yearlycomputerequipment')}}">Yearly Assessment Summary</a>
+
+  </p>
 @endSection

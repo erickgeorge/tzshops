@@ -103,8 +103,8 @@ class AssetsController extends Controller
         $assesssheet = assessmentsheet::where('name' , $sheet[$a])->get();
         foreach ($assesssheet as $as) {
 
-             $company->type = $as->type;    
-      
+             $company->type = $as->type;
+
         }
 
 
@@ -114,7 +114,7 @@ class AssetsController extends Controller
         $company->payment = $request['payment'];
         $company->datecontract = $request['datecontract'];
         $company->nextmonth = $request['datecontract'];
-   
+
 
 
         $durass = strtotime($company->datecontract);
@@ -228,7 +228,7 @@ class AssetsController extends Controller
          public function addnewsheetc(Request $request )
     {
 
-   
+
       $checkforempty = assessmentsheet::where('name', $request['name'])->first();
 
          if (empty($checkforempty)) {
@@ -249,7 +249,7 @@ class AssetsController extends Controller
 
         $company->save();  }
 
-          if($summ != 100) { 
+          if($summ != 100) {
 
               return redirect()->route('view_sheet_before_proceeding' , [$company->name])->withErrors(['message' => 'Value must be greater than zero and less or equal to 100']);
            }
@@ -263,7 +263,7 @@ class AssetsController extends Controller
          }
 
          else {
-           
+
             return redirect()->back()->withErrors(['message' => 'The assessment sheet name already exist.']);
 
          }
@@ -271,7 +271,7 @@ class AssetsController extends Controller
 
 
 
-   
+
 
 
 
@@ -380,7 +380,7 @@ class AssetsController extends Controller
              return view('cleaningcompany', [
             'role' => $role,
             'notifications' => $notifications,
-             
+
              'cleangcompanylandscaping' => company::where('type','Exterior')->orderby('created_at','DESC')->get(),
 
              'cleangcompanyusab' => company::where('type','Interior')->orderby('created_at','DESC')->get(),
@@ -452,7 +452,7 @@ class AssetsController extends Controller
              return view('cleaningcompanyexpired', [
             'role' => $role,
             'notifications' => $notifications,
-             
+
              'cleangcompanylandscaping' => company::where('type','Exterior')->orderby('created_at','DESC')->get(),
 
              'cleangcompanyusab' => company::where('type','Interior')->orderby('created_at','DESC')->get(),
@@ -504,7 +504,7 @@ class AssetsController extends Controller
             'notifications' => $notifications,
 
             'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
-             
+
              'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
 
             'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
@@ -851,7 +851,7 @@ class AssetsController extends Controller
 
   public function RegisterCleaningArea(Request $request)
     {
-    
+
         $cleanarea = new cleaningarea();
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];
@@ -4523,4 +4523,198 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
          }
 
      }
+
+
+
+   public function yearlyplantmachinery()
+   {
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassesplantandmachinery::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassesplantandmachinery::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyPlantMachinery',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+   }
+   public function yearlymotorvehicle()
+   {
+
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassesmotorvehicle::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassesmotorvehicle::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyMotorVehicle',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+  
+   }
+   public function yearlycomputerequipment()
+   {
+
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassescomputerequipment::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassescomputerequipment::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyComputerEquipment',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+  
+   }
+   public function yearlyequipment()
+   {
+
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassesequipment::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassesequipment::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyEquipment',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+  
+   }
+   public function yearlyfurniture()
+   {
+
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassesfurniture::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassesfurniture::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyFurniture',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+  
+   }
+   public function yearlyintangible()
+   {
+
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassesintangible::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassesintangible::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyIntangible',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+  
+   }
+   public function yearlyland()
+   {
+
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassesland::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassesland::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyLand',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+  
+   }
+   public function yearlybuilding()
+   {
+   
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    if (request()->has('year'))
+    {
+        if(request('year')=='')
+        {
+            return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
+ 
+        }
+        $year=request('year');
+        $asset = assetsassesbuilding::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
+
+    }else
+    {
+        $year=date('Y');
+        $asset = assetsassesbuilding::whereYear('assesmentYear',date('Y'))->orderBy('created_at','Desc')->get();
+
+    }
+    return view('assetsYearlyBuilding',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+    
+   }
+// 
 }

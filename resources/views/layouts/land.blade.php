@@ -79,6 +79,23 @@
                 use App\WorkOrderTransport;
                 use App\Material;
                 use App\WorkOrder;
+        use Carbon\Carbon;
+
+        // closing work order by default
+        $woclo = WorkOrder::where('status',2)->get();
+        $leohii = Carbon::now();
+
+        foreach ($woclo as $woclo) {
+            $sikuhii = Carbon::parse($woclo->updated_at);
+            $tofautihii = $sikuhii->diffInDays($leohii);
+
+            if ($tofautihii > 6) {
+                $wokioda = WorkOrder::where('id',$woclo->id)->first();
+                $wokioda->status = 30;
+                $wokioda->save();
+            }
+        }
+        //
                 use App\zoneinspector;
                 use App\ppuproject;
                 $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
@@ -185,7 +202,7 @@
                     </li>
                        @endif
 
-                
+
               @if(auth()->user()->type == 'USAB')
 
 
@@ -201,8 +218,8 @@
                 <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                 </li>
-               
-              @endif      
+
+              @endif
 
                 @if(auth()->user()->type == 'Accountant')
 
@@ -466,7 +483,7 @@
 
 
 
-      
+
 
 
 
@@ -491,7 +508,7 @@
               @if(($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
 
                 <li style="width: 80px;">
-                    
+
                     </li>
 
 
@@ -514,7 +531,7 @@
        </li>
 
 
-      
+
                                   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
@@ -754,7 +771,7 @@
     <a  href="{{ url('Maintainance/section')}}" ><h6> Maintenance  section </h6></a>-->
     <a  href="{{ url('Assessment/form')}}" ><h6>Assessment Forms</h6></a>
 
-   
+
 
 
 
@@ -767,10 +784,10 @@
 
   </div>
 
-    
 
-  
-  
+
+
+
 
 
 
