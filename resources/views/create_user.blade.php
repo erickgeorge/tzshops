@@ -194,7 +194,7 @@ User Registration
 
                        @endforeach
 
-	                  <option value="Head PPU">Head PPU</option>
+	                  <option value="Head PPU">Estate Officer</option>
                     <option value="Housing Officer">Housing Officer</option>
 
                       <option value="Maintenance coordinator">Maintenance Coordinator</option>
@@ -253,7 +253,7 @@ User Registration
 
                        @endforeach
 
-	                  <option value="Head PPU">Head PPU</option>
+	                  <option value="Head PPU">Estate Officer</option>
 
 
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>

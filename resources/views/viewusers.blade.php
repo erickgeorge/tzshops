@@ -1,4 +1,53 @@
 
+
+
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+
+  <style> 
+    #loader { 
+      border: 12px solid #376ad3; 
+      border-radius: 50%; 
+      border-top: 12px solid #444444; 
+      width: 70px; 
+      height: 70px; 
+      animation: spin 1s linear infinite; 
+    } 
+    
+    @keyframes spin { 
+      100% { 
+        transform: rotate(360deg); 
+      } 
+    } 
+    
+    .center { 
+      position: absolute; 
+      top: 0; 
+      bottom: 0; 
+      left: 0; 
+      right: 0; 
+      margin: auto; 
+    } 
+  </style> 
+</head> 
+
+<body> 
+  <div id="loader" class="center"></div> 
+  
+
+
+
+
+
+
+
+
+
+
+
+
     <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -54,42 +103,6 @@
 
     </style>
 
-
-    <style type="text/css">
-
-input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
-  color: #fff;
-  position: relative;
-}
-
-input[type="date"]::-webkit-datetime-edit-year-field{
-  position: absolute !important;
-  border-left:1px solid #8c8c8c;
-  padding: 2px;
-  color:#000;
-  left: 56px;
-}
-
-input[type="date"]::-webkit-datetime-edit-month-field{
-  position: absolute !important;
-  border-left:1px solid #8c8c8c;
-  padding: 2px;
-  color:#000;
-  left: 26px;
-
-}
-
-
-input[type="date"]::-webkit-datetime-edit-day-field{
-  position: absolute !important;
-  color:#000;
-  padding: 2px;
-  left: 4px;
-
-}
-
-
-</style>
 
 
 
@@ -828,8 +841,8 @@ use App\Section;
           <!-- ---------------------- -->
   </div>
 
-<table class="table table-striped" id="myTable">
-  <thead >
+<table class="table table-striped" id="myTablee">
+  <thead style="background-color: #376ad3" >
     <tr style="color: white;">
       <th scope="col">#</th>
       <th scope="col">Full Name</th>
@@ -897,11 +910,11 @@ else {
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
 
 
-         <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')" action="{{ route('user.delete', [$user->id]) }}" >
+         <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('user.delete', [$user->id]) }}" >
           {{csrf_field()}}
 
 
-        <button type="submit" data-toggle="tooltip" title="Delete"   > <a style="color: red;" href=""  data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
+        <button type="submit" data-toggle="tooltip" title="Deactivate"   > <a style="color: red;" href=""  data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
 
 
        </button>
@@ -919,6 +932,9 @@ else {
   @endif
 
   @endif
+</div>
+
+  
 
 
 
@@ -1492,3 +1508,47 @@ for (i = 0; i < dropdown.length; i++) {
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script> 
+    document.onreadystatechange = function() { 
+      if (document.readyState !== "complete") { 
+        document.querySelector( 
+        "body").style.visibility = "hidden"; 
+        document.querySelector( 
+        "#loader").style.visibility = "visible"; 
+      } else { 
+        document.querySelector( 
+        "#loader").style.display = "none"; 
+        document.querySelector( 
+        "body").style.visibility = "visible"; 
+      } 
+    }; 
+  </script> 
+</body> 
+
+</html> 
+
+
+<script type="text/javascript">
+  document.onreadystatechange = function() { 
+  if (document.readyState !== "complete") { 
+    document.querySelector("body").style.visibility = "hidden"; 
+    document.querySelector("#loader").style.visibility = "visible"; 
+  } else { 
+    document.querySelector("#loader").style.display = "none"; 
+    document.querySelector("body").style.visibility = "visible"; 
+  } 
+}; 
+
+</script>

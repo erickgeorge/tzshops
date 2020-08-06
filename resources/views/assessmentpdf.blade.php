@@ -168,7 +168,11 @@ tr:nth-child(even) {
     </div>
    <br>
 
-   
+        
+       
+     Area Name:<b><u> {{$company['areaname']->cleaning_name}} </u> </b>
+              
+<br><br>
 
 
     <?php 
@@ -222,30 +226,50 @@ tr:nth-child(even) {
    <br>
 
    <!--crosscheck-->
-@endforeach
-<table>
+
+
+
+   <table>
   <thead style=" background-color: #376ad3; color: white;">
-  <tr style="color:white;"><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
+  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
  </thead>
+
+ 
  <tbody>
-  <tr><td><?php $totalscore = $sumscore->sum_score; $countdata = count($assessmmentcompanyname); $percent = $totalscore/$countdata; echo number_format($percent , 2);  ?>%</td><td><?php $paym=$companypayment->payment; echo number_format($paym); ?> Tshs</td><td>@if($percent >= 90)
-<?php $payall=$companypayment->payment; echo number_format($payall); ?> Tshs
-@elseif($percent >= 80 )
-<?php $pay9=$companypayment->payment*0.9;  echo number_format($pay9); ?> Tshs
-@elseif($percent >= 70 )
-<?php  $pay8=$companypayment->payment*0.8;  echo number_format($pay8);?> Tshs
-@elseif($percent >= 65 )
-<?php $pay7=$companypayment->payment*0.7;  echo number_format($pay7);?> Tshs
-@elseif($percent >= 50 )
-<?php $pay5=$companypayment->payment*0.5;  echo number_format($pay5);?>  Tshs
-@elseif($percent < 50)
-<?php $pay0=$companypayment->payment*0;  echo number_format($pay0);?> Tshs
-@endif</td></tr>
-   
+  <tr>
+<td>{{$company['areaname']->cleaning_name}}</td><td><?php echo $summ ?>%</td><td><?php $paym=$company->paymentone; echo number_format($paym); ?>
+ Tshs</td>
+
+<td>@if($summ >= 90)
+<?php $payall=$company->paymentone; echo number_format($payall); ?> Tshs
+@elseif($summ >= 80 )
+<?php $pay9=$company->paymentone*0.9;  echo number_format($pay9); ?> Tshs
+@elseif($summ >= 70 )
+<?php  $pay8=$company->paymentone*0.8;  echo number_format($pay8);?> Tshs
+@elseif($summ >= 65 )
+<?php $pay7=$company->paymentone*0.7;  echo number_format($pay7);?> Tshs
+@elseif($summ >= 50 )
+<?php $pay5=$company->paymentone*0.5;  echo number_format($pay5);?>  Tshs
+@elseif($summ < 50)
+<?php $pay0=$company->paymentone*0;  echo number_format($pay0);?> Tshs
+@endif</td>
+
+
+
+
+</tr>
+
  </tbody>
+
 </table>
 
-</br>
+<br>
+<hr>
+
+
+
+@endforeach
+
 
 
 <br><br><br>
@@ -255,7 +279,7 @@ tr:nth-child(even) {
     @if(($assesment->a_rejected_by != null))
   <tr>
     <td>Rejected by </td>
-     <td> Head PPU </td>
+     <td> Estate Officer </td>
       <td> {{ $assesment['rejection']->fname .' ' . $assesment['rejection']->lname }}</td>
        <td>On: {{ date('d F Y', strtotime($assesment->rejected_on))}} </td>
           <td>Reason: {{$assesment->reason}}</td>
@@ -270,15 +294,7 @@ tr:nth-child(even) {
          <td>Reason: {{$assesment->reasonestate}}</td>
   </tr>
   @endif
-  @if(($assesment->dvc_rejected_by != null))
-   <tr>
-     <td>Rejected by </td>
-    <td> DVC Admin</td>
-    <td>{{ $assesment['rejectiondvc']->fname .' ' . $assesment['rejectiondvc']->lname }}</td>
-    <td>On: {{ date('d F Y', strtotime($assesment->dvcrejected_on)) }}</td>
-    <td>Reason: {{$assesment->reasondvc}}</td>
-  </tr>
-  @endif
+
 </table>
 
 
@@ -290,7 +306,7 @@ tr:nth-child(even) {
 
 
   @if($assesment->status == 1)
-  <b>status:</b><b style="color: blue;">  Not Approved</b>
+  <b>status:</b><b style="color: blue;">  Not Yet Approved!</b>
   @elseif(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
 
 
@@ -309,7 +325,7 @@ tr:nth-child(even) {
 <br>
 
        <div class="container-name">
-     <div class="div1">Approved by Head PPU :&nbsp;  &nbsp;<b>{{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} </b><u style="padding-left: 12px;"> </u></div>
+     <div class="div1">Approved by Estate Officer :&nbsp;  &nbsp;<b>{{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} </b><u style="padding-left: 12px;"> </u></div>
     <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->accepted_on)) }}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>    
@@ -328,18 +344,7 @@ tr:nth-child(even) {
 
  @endif 
 
- @if(($assesment->status == 4)||($assesment->status == 5))
 
-
-      <div class="container-name">
-     <div class="div1">Approved by DVC Admin :&nbsp;  <b>{{ $assesment['approvaldvc']->fname .' ' . $assesment['approvaldvc']->lname }}  </b><u style="padding-left: 12px;"> </u></div>
-    <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
-    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
-   </div>    
-<br>
-
-
- @endif 
 
 
  @if($assesment->status == 5)
@@ -350,7 +355,7 @@ tr:nth-child(even) {
       <div class="container-name">
      <div class="div1">Company paid and verified by :&nbsp;  <b>{{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}</b><u style="padding-left: 12px;"> </u></div>
     <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
-    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
+    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->payment_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>    
 <br>
 
@@ -359,19 +364,6 @@ tr:nth-child(even) {
 
 
 
-  <div class="container-name">
-     <div class="div1">Name of company Supervisor: &nbsp;  &nbsp;&nbsp;..................................<u style="padding-left: 12px;"> </u></div>
-    <div class="div2"> Title: &nbsp;  &nbsp; ........................................  <u style="padding-left: 40px;">   </u> </div>
-    <div class="div2"> Signature: &nbsp;  &nbsp;   ................................  <u style="padding-left: 40px;">   </u> </div>
-   </div>
-
-<br>
-   <div class="container-name">
-     <div class="div1">Payment: &nbsp;  &nbsp;&nbsp;  &nbsp;..................................................................<u style="padding-left: 12px;"> </u></div>
-     <div class="div2"> Signature:  .................................... <u style="padding-left: 40px;">   </u> </div>
-    <div class="div2">Date: &nbsp;  &nbsp;  &nbsp;  &nbsp;   .................................... <u style="padding-left: 40px;"> </u> </div>
-   
-   </div>  
 
   
       

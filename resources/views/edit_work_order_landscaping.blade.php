@@ -141,9 +141,9 @@ var total=2;
 
 
 
-<?php $ii = 0; ?>
+<?php   $ii = 0; ?>
  @foreach($assessmmentcompanyname as $company)
- <?php $ii++ ?>
+ <?php $ii++;  ?>
 
 
 <br>
@@ -187,12 +187,12 @@ var total=2;
       $assessmmentactivity = landassessmentactivityform::where('companynew', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
       $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
 
-      $sumscore = landcrosschecklandassessmentactivity::where('company', $company->company)->where('month',$company->assessment_month)->select(DB::raw('sum(score) as sum_score'))->first();
+      $sumscore = landcrosschecklandassessmentactivity::where('company', $company->company)->where('month',$company->assessment_month)->where('area', $company['areaname']->cleaning_name)->select(DB::raw('sum(score) as sum_score'))->first();
      ?>
 
 
 
-    <br>
+  <br>
 
      @foreach($crosscheckassessmmentactivity as $statuscheck)
      @endforeach
@@ -248,16 +248,12 @@ var total=2;
           </tbody>
 
 
-
-
-
     </TABLE>
 
     @else
 
 
 <div>
-
     <table class="table table-striped">
       <tr>
          <thead style="color: white;">
@@ -341,9 +337,13 @@ var total=2;
      <tbody>
 
 
-   <?php $i=0; ?>
+   <?php $i=0; 
+
+   $summ = 0;
+   
+  ?>
   @foreach($crosscheckassessmmentactivity as $assesment)
-  <?php $i++; ?>
+  <?php $i++; $summ += $assesment->score; ?>
 
    <?php $tender = Crypt::encrypt($company->company); ?>
      <form method="POST" action="{{ route('edited.assessment.activity.landscaping', [$assesment->assessment_id , $tender , $company->assessment_month]) }}">
@@ -437,7 +437,53 @@ var total=2;
 
 
  @endif
+
+
+
+<table>
+  <thead>
+  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
+ </thead>
+
+ 
+ <tbody>
+  <tr>
+<td>{{$company['areaname']->cleaning_name}}</td><td><?php echo $summ ?>%</td><td><?php $paym=$company->paymentone; echo number_format($paym); ?>
+ Tshs</td>
+
+<td>@if($summ >= 90)
+<?php $payall=$company->paymentone; echo number_format($payall); ?> Tshs
+@elseif($summ >= 80 )
+<?php $pay9=$company->paymentone*0.9;  echo number_format($pay9); ?> Tshs
+@elseif($summ >= 70 )
+<?php  $pay8=$company->paymentone*0.8;  echo number_format($pay8);?> Tshs
+@elseif($summ >= 65 )
+<?php $pay7=$company->paymentone*0.7;  echo number_format($pay7);?> Tshs
+@elseif($summ >= 50 )
+<?php $pay5=$company->paymentone*0.5;  echo number_format($pay5);?>  Tshs
+@elseif($summ < 50)
+<?php $pay0=$company->paymentone*0;  echo number_format($pay0);?> Tshs
+@endif</td>
+
+
+
+
+</tr>
+
+ </tbody>
+
+</table>
+
+<br>
+<hr>
+
+
+
+
  @endforeach
+
+
+
 
 
 <br>
@@ -451,31 +497,13 @@ var total=2;
        @elseif(($statuscheck->status == 10)||($statuscheck->status == 11)||($statuscheck->status == 12))
            <button id="bt" type="submit" class="btn btn-primary">Save</button> @endif @endif
 
-@if(count($crosscheckassessmmentactivity) > 0)
+   @if(count($crosscheckassessmmentactivity) > 0)
 <!--avarage-->
 </br>
 
-<table>
-  <thead>
-  <tr style="color:white;"><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
- </thead>
- <tbody>
-  <tr><td><?php $totalscore = $sumscore->sum_score; $countdata = count($assessmmentcompanyname); $percent = $totalscore/$countdata; echo number_format($percent , 2);  ?>%</td><td><?php $paym=$companypayment->payment; echo number_format($paym); ?> Tshs</td><td>@if($percent >= 90)
-<?php $payall=$companypayment->payment; echo number_format($payall); ?> Tshs
-@elseif($percent >= 80 )
-<?php $pay9=$companypayment->payment*0.9;  echo number_format($pay9); ?> Tshs
-@elseif($percent >= 70 )
-<?php  $pay8=$companypayment->payment*0.8;  echo number_format($pay8);?> Tshs
-@elseif($percent >= 65 )
-<?php $pay7=$companypayment->payment*0.7;  echo number_format($pay7);?> Tshs
-@elseif($percent >= 50 )
-<?php $pay5=$companypayment->payment*0.5;  echo number_format($pay5);?>  Tshs
-@elseif($percent < 50)
-<?php $pay0=$companypayment->payment*0;  echo number_format($pay0);?> Tshs
-@endif</td></tr>
 
- </tbody>
-</table>
+
+
 
 </br>
 
@@ -508,7 +536,7 @@ var total=2;
 
 
   @if(($assesment->a_rejected_by != null))
-  <b>Rejected by Head PPU : {{ $assesment['rejection']->fname .' ' . $assesment['rejection']->lname }}  on:  {{ date('d F Y', strtotime($assesment->rejected_on))}}   <td> <a onclick="myfunc5('{{$assesment->reason}}')"><span data-toggle="modal" data-target="#viewreason"
+  <b>Rejected by Estate Officer : {{ $assesment['rejection']->fname .' ' . $assesment['rejection']->lname }}  on:  {{ date('d F Y', strtotime($assesment->rejected_on))}}   <td> <a onclick="myfunc5('{{$assesment->reason}}')"><span data-toggle="modal" data-target="#viewreason"
                                                                          class="badge badge-danger">View Reason</span></a></td></b><br>@endif
 
 
@@ -516,10 +544,7 @@ var total=2;
 
   <b>Rejected by Estates Director : {{ $assesment['rejectionestate']->fname .' ' . $assesment['rejectionestate']->lname }}  on: {{ date('d F Y', strtotime($assesment->esrejected_on)) }}     <td> <a onclick="myfunc6('{{$assesment->reasonestate}}')"><span data-toggle="modal" data-target="#viewreasonestate"
                                                                          class="badge badge-danger">View Reason</span></a></td></b> @endif
-  @if(($assesment->dvc_rejected_by != null))
-  <br>
-  <b>Rejected by DVC Admin : {{ $assesment['rejectiondvc']->fname .' ' . $assesment['rejectiondvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvcrejected_on)) }}     <td> <a onclick="myfunc7('{{$assesment->reasondvc}}')"><span data-toggle="modal" data-target="#viewreasondvc"
-                                                                         class="badge badge-danger">View Reason</span></a></td></b><br>@endif
+
 
 
 
@@ -536,7 +561,7 @@ var total=2;
   @if($assesment->status == 1)
   <b>status:</b><b style="color: blue;">  Not yet approved</b>
   @elseif(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
-  <b>Approved by Head PPU : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
+  <b>Approved by Estate Officer : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
   @endif
   <br>
 
@@ -569,15 +594,12 @@ var total=2;
   <br>
  @endif
 
- @if(($assesment->status == 4)||($assesment->status == 5))
-  <b>Approved by DVC Admin : {{ $assesment['approvaldvc']->fname .' ' . $assesment['approvaldvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b>
-  <br>
- @endif
+
 
 
 
  @if($assesment->status == 5)
-  <b>Company paid and updated by : {{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvaccepted_on))}}</b>
+  <b>Company paid and updated by : {{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}  on: {{ date('d F Y', strtotime($assesment->payment_on))}}</b>
   <br>
  @endif
 
@@ -592,21 +614,12 @@ var total=2;
    @endif
 
 <br>
-     @if(auth()->user()->type == 'DVC Admin')
-  @if($assesment->status == 3)
-   <?php $tender = Crypt::encrypt($assesment->company); ?>
-  <b style="padding-left: 750px;">Approve<a href="{{route('approveassessmentformbydvc', [$assesment->assessment_id , $tender  , $assesment->month])}}" title="Approve assessment form "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">Reject <a data-toggle="modal" data-target="#rejectdvc"
-                                                            style="color: green;"
-                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
 
-
-  @endif
-  @endif
 
 
   <br>
      @if(auth()->user()->type == 'Dvc Accountant')
-  @if($assesment->status == 4)
+  @if($assesment->status == 3)
    <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 750px;">verify if company is paid<a href="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve company if paid "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">
 
@@ -708,7 +721,7 @@ var total=2;
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;"><b></b> Rejection reason from Head PPU .</b></h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;"><b></b> Rejection reason from Estate Officer .</b></h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

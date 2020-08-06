@@ -166,17 +166,17 @@ Assessment form
                              @elseif($assesment->status == 2)
                            </option value='2'> <span class="badge badge-primary">Crosscheck assessment form</span> </option>
                              @elseif($assesment->status == 3)
-                           <option value='3'>  <span class="badge badge-warning">Submitted to Head PPU<br> for approval</span> </option>
+                           <option value='3'>  <span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span> </option>
                              @elseif($assesment->status == 4)
-                            <option value='4'>  <span class="badge badge-primary">Approved by Head PPU</span> </option>
+                            <option value='4'>  <span class="badge badge-primary">Approved by Estate Officer</span> </option>
                              @elseif($assesment->status == 5)
                             <option value='5' > <span class="badge badge-primary">Approved by Estate Director</span> </option>
                              @elseif($assesment->status == 6)
-                           <option value='6'>  <span class="badge badge-primary">Submitted to Head PPU<br> for approval</span> </option>
+                           <option value='6'>  <span class="badge badge-primary">Submitted to Estate Officer<br> for approval</span> </option>
                              @elseif($assesment->status == 7)
                            <option value='7'> <span class="badge badge-danger">Closed</span> </option>
                              @elseif($assesment->status == 10)
-                           <option value='10'> <span class="badge badge-danger">Rejected by Head PPU</span> </option>
+                           <option value='10'> <span class="badge badge-danger">Rejected by Estate Officer</span> </option>
                              @elseif($assesment->status == 11)
                            <option value='11'> <span class="badge badge-danger">Rejected by Estate Director</span> </option>
                              @elseif($assesment->status == 12)
@@ -256,17 +256,17 @@ Assessment form
                              @elseif($assesment->status == 2)
                              <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
                              @elseif($assesment->status == 3)
-                             <td><span class="badge badge-warning">Submitted to Head PPU<br> for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Head PPU , <br>fowarded to Estate director for approval</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Admin for approval</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Head PPU <br>for approval</span></td>
+                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
                              <td><span class="badge badge-danger">Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Head PPU</span></td>
+                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
                              <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)
@@ -306,17 +306,17 @@ Assessment form
                              @elseif($assesment->status == 2)
                              <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
                              @elseif($assesment->status == 3)
-                             <td><span class="badge badge-warning">Submitted to Head PPU<br> for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Head PPU , <br>fowarded to Estate director for approval</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Admin for approval</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Head PPU <br>for approval</span></td>
+                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
                              <td><span class="badge badge-danger">Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Head PPU</span></td>
+                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
                              <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)
@@ -357,17 +357,17 @@ Assessment form
                              @elseif($assesment->status == 2)
                              <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
                              @elseif($assesment->status == 3)
-                             <td><span class="badge badge-warning">Submitted to Head PPU<br> for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Head PPU , <br>fowarded to Estate director for approval</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Admin for approval</span></td>
+                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Head PPU <br>for approval</span></td>
+                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
                              <td><span class="badge badge-danger">Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Head PPU</span></td>
+                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
                              <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)

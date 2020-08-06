@@ -60,7 +60,7 @@ Companies
                         <th scope="col">#</th>
                         <th scope="col">Tender Number</th>
                         <th scope="col">Company Name</th>
-                        <th scope="col">Monthly Payment (Tshs)</th>
+                       <!-- <th scope="col">Monthly Payment (Tshs)</th>-->
 
                         <th scope="col">Contract Duration</th>
                         <th scope="col">Status</th>
@@ -93,9 +93,9 @@ Companies
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['tendercompany']->company_name }}</td>
                             @if($house->status == 1)
-                            <td align="right"><?php echo number_format($house->payment) ?></td>
+                           <!-- <td align="right"><?php echo number_format($house->payment) ?></td>-->
                             @else
-                            <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
+                            <!--<td> <span class="badge badge-warning"> Not yet Updated</span> </td>-->
                             @endif
 
 

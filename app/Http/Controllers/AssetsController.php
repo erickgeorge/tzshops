@@ -83,6 +83,7 @@ class AssetsController extends Controller
 
             $area = $request['area'];
             $sheet = $request['sheets'];
+            $payments = $request['payment'];
 
 
 
@@ -111,7 +112,7 @@ class AssetsController extends Controller
         $company->company_name = $request['companyid'];
         $company->tender = $request['tendern'];
         $company->status = 2;
-        $company->payment = $request['payment'];
+        $company->payment = $payments[$a];
         $company->datecontract = $request['datecontract'];
         $company->nextmonth = $request['datecontract'];
    
@@ -143,7 +144,7 @@ class AssetsController extends Controller
 
 
      $companynew =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $company->tender)->first();
-     $companynew->payment = $request['payment'];
+   //  $companynew->payment = $request['payment'];
      $companynew->datecontract = $request['datecontract'];
      $durass = strtotime($companynew->datecontract);
      $dura = $request['duration'];

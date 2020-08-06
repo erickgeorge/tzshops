@@ -1267,6 +1267,35 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
 
 
 
+
+
+      public function addassessmentpdf($id , $tender ){
+        
+        $tender = Crypt::decrypt($tender);
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+           $data = [
+
+            'title' => 'Notes List' ,
+            'role' => $role,
+            'notifications' => $notifications,
+            'company' =>company::where('tender', $tender)->get(),
+            'companyname' =>company::where('id', $id)->first(),
+
+
+          ];
+         $pdf = PDF::loadView('addassessmentpdf', $data);
+
+     return $pdf->stream('Assessmentform - '.$id.'- '.date('d-m-Y Hi').'.pdf');
+    }
+
+
+
+
+
+
+
       public function assessmentpdf($id , $tender , $month){
          $company = Crypt::decrypt($tender);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();

@@ -663,6 +663,11 @@ Route::post('edit_sheet_proceeding/{id}/{type}', 'LandscapingController@editasse
 Route::get('finalsave/sheet/{name}', 'LandscapingController@finalsave_sheet')->name('finalsavesheet')->middleware('auth');
 
 
+Route::post('companysupervisorsatisfied/{id}/{company}/{sheet}/{month}/', 'LandscapingController@supervisorsatisfied')->name('supervisorsatisfied')->middleware('auth');
+
+Route::post('crosscheck/assessment/activity/form/forsignature/{id}/{type}/{company}/{date}/{status}/{nextmonth}', 'LandscapingController@crosschecklandassessmentactivityforsignature')->name('croscheck.assessment.activity.landscaping.beforesignature')->middleware('auth');
+
+
 Route::post('crosscheck/assessment/activity/form/{id}/{type}/{company}/{date}/{status}/{nextmonth}', 'LandscapingController@crosschecklandassessmentactivity')->name('croscheck.assessment.activity.landscaping')->middleware('auth');
 Route::post('crosscheck/assessment/activity/form/second/{id}/{company}/{month}', 'LandscapingController@crosschecklandassessmentactivitysecond')->name('croscheck.assessment.activity.landscapingsecond')->middleware('auth');
 
@@ -682,6 +687,8 @@ Route::post('rejectassessmentwithreasonestate/{id}/{tender}/{month}', 'Landscapi
 
 Route::post('rejectassessmentwithreasondvc/{id}/{tender}/{month}', 'LandscapingController@rejectassessmentwithreasondvcadmin')->name('rejectwithreasonassessmentdvc')->middleware('auth');
 
+
+Route::get('addassessmentpdf/{id}/{tender}','NotesController@addassessmentpdf')->name('addassessmentpdfform')->middleware('auth');
 
 Route::get('assessmentpdf/{id}/{tender}/{month}','NotesController@assessmentpdf')->name('assessmentpdfform')->middleware('auth');
 Route::get('Maintainance/section', 'LandscapingController@maintainancesection')->name('section.maintenance')->middleware('auth');

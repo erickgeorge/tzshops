@@ -43,14 +43,15 @@ Company Registrartion
                 <div align="center">
 
 
-<div class="jumbotron" style="width: 500px;">
+<div class="jumbotron" style="width: 700px;">
      <table>
 
       <tr>
      <thead style="color: white;">
-        <th style="width: 25px"></th>
-        <th style="width: 250px">Area</th>
+        <th style="width: 29px"></th>
+        <th style="width: 270px">Area</th>
         <th style="width: 250px">Assessment sheet</th>
+        <th style="width: 250px">Monthly payment</th>
 
      </thead>
       </tr>
@@ -109,6 +110,8 @@ Company Registrartion
                                 @endforeach
                         </select>
            </TD>
+           <TD>  <input style="color: black; width:  200px;"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  style="color: black" type="number" required class="form-control" id="type"
+                               name="payment[]" placeholder="Enter monthly payment" value="{{ old('payment') }}" max="100000000"></TD>
 
 
         </TR>
@@ -123,7 +126,7 @@ Company Registrartion
 
 
 
-                    <div class="input-group mb-3 col-lg-6">
+                    <div  class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
 
 
@@ -165,7 +168,7 @@ Company Registrartion
 
 
 
-                    <div class="input-group mb-3 col-lg-6">
+                  <!--  <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
 
 
@@ -174,7 +177,7 @@ Company Registrartion
                         </div>
                         <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  style="color: black" type="number" required class="form-control" id="type"
                                name="payment" placeholder="Enter monthly payment" value="{{ old('payment') }}" >
-                    </div>
+                    </div>-->
 
 
                   <div class="input-group mb-3 col-lg-6">

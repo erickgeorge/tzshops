@@ -22,6 +22,7 @@ use App\landcrosschecklandassessmentactivity;
 use Carbon\Carbon;
 use App\companywitharea;
 use App\assessmentsheet;
+use App\landassessmentbeforesignature;
 
 
 
@@ -476,7 +477,7 @@ class LandscapingController extends Controller
            foreach($score as $a => $b){
 
 
-            $matr = new landassessmentactivityform();
+            $matr = new landassessmentbeforesignature();
             
             $matr->activity = $activity[$a];
             $matr->percentage = $percentage[$a];
@@ -687,7 +688,107 @@ class LandscapingController extends Controller
 
 
 
+
+
+
+
+  public function supervisorsatisfied(Request $request, $id , $company ,$sheet , $month  )
+    {
+         $company = Crypt::decrypt($company);
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+          
+
+
+
+
+         
+            $satisfied = landassessmentactivityform::where('assessment_id', $id)->where('companynew',$company)->where('assessment_sheet' , $sheet)->where('month' , $month)->get();
+
+            foreach ($satisfied as  $sat) {
+              
+              $satify = landassessmentactivityform::where('id', $sat->id)->first();
+            
+            $satify->status2 = 2;
+             
+            $satify->save(); 
+
+              }
+      
+        
+       
+        return redirect()->back()->with([
+            'role' => $role,
+            'notifications' => $notifications,  
+            'message' => 'Assessment activity form is successfully updated also Company supevisor is satisfied with the scores given.  ',
+          
+        ]); 
+             }
+
+
+
+
   
+
+  public function crosschecklandassessmentactivityforsignature(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
+    {
+         $company = Crypt::decrypt($company);
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+          
+
+            $txtbox = $request['activity'];
+            $perce = $request['percentage'];
+            $scor = $request['score'];
+            $remar = $request['remark'];
+            $assessment = $request['assessment_sheet'];
+            $area = $request['area'];
+            
+            $sum = 0;
+            $summ = 0;
+                       $summm = 0;
+  
+           foreach($txtbox as $a => $b){
+            
+             $sum += $perce[$a];
+             $summ += $scor[$a];
+
+
+         
+            $matr =new landassessmentactivityform();
+            $matr->activity = $txtbox[$a] ;
+            $matr->percentage = $perce[$a] ;
+            $matr->score = $scor[$a] ;
+            $matr->remark = $remar[$a] ;
+            $matr->assessment_sheet = $assessment[$a] ;
+            $matr->area = $area[$a] ;
+            $matr->month = $request['assessmment'];
+           
+            $matr->companynew = $company ;
+            $matr->assessment_id = $id ;
+          //  $matr->tottal_percent = $sum;
+           // $matr->initiated_by = auth()->user()->id;
+            
+           // $matr->tottal_score = $summ;
+            $matr->status = 1;
+             
+            $matr->save(); } 
+
+
+        
+       
+        return redirect()->back()->with([
+            'role' => $role,
+            'notifications' => $notifications,  
+            'message' => 'Assessment activity form is successfully created , please print out the document so as company supervisor to sign and proceed with the further steps',
+            'wo' => landworkorders::where('id', $id)->first()
+        ]); 
+             }
+
+
+
+
+
 
 
          public function crosschecklandassessmentactivity(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
@@ -700,11 +801,13 @@ class LandscapingController extends Controller
          $tenderfetch = company::where('tender', $company)->get();
 
  
-   
+            
             $areas = $request['myarea'];
             $sheet = $request['mysheet'];
             $tenders = $request['mytender'];
-            
+            $paymentss = $request['payments'];
+
+
              foreach($areas as $a => $b){
 
        $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first(); 
@@ -713,10 +816,13 @@ class LandscapingController extends Controller
  
              
             $form = new landassessmentform();
+           
             $form->area_id = $areas[$a];
             $form->company_id = $id;
             $form->company = $tenders[$a];
+            $form->paymentone = $paymentss[$a];
             $form->assessment_name = $sheet[$a];
+           
             $form->type = $type;
 
             $form->status =  1;
@@ -784,6 +890,7 @@ class LandscapingController extends Controller
             $assessment = $request['assessment_sheet'];
             $area = $request['area'];
             $areas = $request['areaid'];
+            
             $sum = 0;
             $summ = 0;
                        $summm = 0;
@@ -795,7 +902,9 @@ class LandscapingController extends Controller
 
 
          
-            $matr =new landcrosschecklandassessmentactivity();
+            $matr = new landcrosschecklandassessmentactivity();
+
+           
             $matr->activity = $txtbox[$a] ;
             $matr->percentage = $perce[$a] ;
             $matr->score = $scor[$a] ;
@@ -844,6 +953,11 @@ class LandscapingController extends Controller
             'wo' => landworkorders::where('id', $id)->first()
         ]); 
              }
+
+
+
+
+
 
 
 
@@ -1055,7 +1169,7 @@ class LandscapingController extends Controller
       public function approveassessmentifpaid($id , $tender , $month)
     {
      $tender = Crypt::decrypt($tender);
-     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',4)->get();
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',3)->get();
 
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   

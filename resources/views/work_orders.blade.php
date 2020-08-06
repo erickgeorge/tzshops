@@ -327,7 +327,7 @@ foreach($userwithid as $userwithid)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                              @elseif($work->status == 70)
-                                <td><span class="badge badge-info">technician assigned for inspection</span>
+                                <td><span class="badge badge-info">technician assigned <br> for inspection</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -352,7 +352,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                             @elseif($work->status == 40)
 
-                              <td><span class="badge badge-info">Material Requested Approved Succesifully</span>
+                              <td><span class="badge badge-info">Material Requested <br>Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -366,7 +366,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                            @elseif($work->status == 53)
 
-                              <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
+                              <td><span class="badge badge-danger">Works Order not  approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -374,7 +374,7 @@ foreach($userwithid as $userwithid)
 
                           @elseif($work->status == 25)
 
-                              <td><span class="badge badge-info">Work Order Succesifully approved by IoW</span>
+                              <td><span class="badge badge-info">Works Order Succesifully <br> approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -408,12 +408,12 @@ foreach($userwithid as $userwithid)
 
                              @elseif($work->status == 19)
                                @if(auth()->user()->type != 'CLIENT')
-                              <td><span class="badge badge-info">Material missing in store also DES notified</span>  <br>
+                              <td><span class="badge badge-info">Material missing in store, <br>Head Procurement  notified</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                               @else
-                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                               <td><span class="badge badge-warning">  Material requested on progress <br> please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-danger">Emergency</span></td>
                                 @endif
@@ -498,25 +498,41 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                     @if($work->status == -1)
 
+                                         @if($work->client_id == auth()->user()->id )
+                                        <a href="#"><span class="badge badge-success">Waiting...</span></a>
+                                         @else
+
                                         <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a>
+
+                                         @endif               
                                      @elseif($work->status == 2)
 
+                                       @if($work->client_id != auth()->user()->id )
+                            
                      <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                          &nbsp; @endif
 
                      <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                                         @elseif($work->status == 12)
+
+                                                         @if($work->client_id != auth()->user()->id )
                                          <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+
+                                           &nbsp; @endif
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                                     <a onclick="myfunc('{{ $work->unsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
                                                                          class="badge badge-success">View reason</span></a>
                                                        @elseif($work->status == 53)
+
+                                                        @if($work->client_id != auth()->user()->id )
                                          <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                           &nbsp; @endif
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                                     <a onclick="myfunc('{{ $work->notsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
@@ -534,9 +550,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                       @else
 
 
-
+                                           @if($work->client_id != auth()->user()->id )
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp; @endif
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
                                     @endif
@@ -548,7 +564,6 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         @if($diff > 2)
                                         @if( $work['user']->id==Auth::user()->id)
                                         <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal{{ $work->id }}">Complaint</a>
-
 
 <!-- SOMETHING STRANGE HERE -->
 <!-- Modal -->

@@ -206,7 +206,7 @@
 
                       <option @if (in_array('Head Procurement',$str_array)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
 
-                       <option @if (in_array('Head PPU',$str_array)) { selected="selected" } @else{} @endif  value="Head PPU">Head PPU</option>
+                       <option @if (in_array('Head PPU',$str_array)) { selected="selected" } @else{} @endif  value="Head PPU">Estate Officer</option>
 
                        @foreach($worksec as $dep)
 
@@ -295,7 +295,7 @@
 
                       <option @if (in_array('Head Procurement',$strarray)) { selected="selected" } @else{} @endif  value="Head Procurement">Head of Procurement</option>
 
-                       <option @if (in_array('Head PPU',$strarray)) { selected="selected" } @else{} @endif  value="Head PPU">Head PPU</option>
+                       <option @if (in_array('Head PPU',$strarray)) { selected="selected" } @else{} @endif  value="Head PPU">Estate Officer</option>
 
                        @foreach($worksec as $dep)
 
