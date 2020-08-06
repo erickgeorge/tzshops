@@ -806,12 +806,12 @@ Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                  <div class="row">
                     <form method="POST" action="{{ route('workorder.iowapprove', [$wo->id]) }}">
                         @csrf
-                        <button type="submit" class="btn btn-success">Appprove</button>
+                        <button type="submit" class="btn btn-success">Approve</button>
                     </form>
                      </div>
                      &nbsp;&nbsp;&nbsp;&nbsp;
                      <div class="col">
-                     <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#iowapproval">Not Satisfied</button>
+                     <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#iowapproval">Not satisfied</button>
 
                         </div>
                         </div>
