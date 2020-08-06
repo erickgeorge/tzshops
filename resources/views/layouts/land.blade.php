@@ -198,7 +198,7 @@
                             </li>-->
 
                         <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                     </li>
                        @endif
 
@@ -216,7 +216,7 @@
 
 
                 <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                 </li>
 
               @endif
@@ -228,7 +228,7 @@
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                 </li>
                 @endif
 
@@ -241,7 +241,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                     </li>
 
                     @endif
@@ -550,7 +550,7 @@
             </li>
 
              <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
             </li>
 
 

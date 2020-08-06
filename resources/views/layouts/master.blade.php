@@ -213,7 +213,7 @@
 
 
   <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                     </li>
 
 
@@ -371,7 +371,7 @@
                        </li>-->
 
                         <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                     </li>
                        @endif
 
@@ -384,7 +384,7 @@
                        </li>-->
 
                         <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                     </li>
                        @endif
 
@@ -393,7 +393,7 @@
                     @if((auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Supervisor Landscaping'))
 
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                     </li>
 
                     @endif
@@ -459,7 +459,7 @@
 
 
              <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
             </li>
 
 
@@ -471,7 +471,7 @@
 
                 @if(auth()->user()->type == 'Accountant')
                 <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                 </li>
                 @endif
 
@@ -485,7 +485,7 @@
 
 
                 <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
+                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                 </li>
 
 
