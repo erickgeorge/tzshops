@@ -385,6 +385,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
 
 
 <p>
+    
   <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Latest Assets Assessment Summary</a>
 
 </p>
@@ -463,6 +464,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
             </thead>
             @php
                 $u = 1;
+
             @endphp
             <tbody>
                 @foreach ($asses as $asses)
@@ -491,4 +493,9 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
     </div>
   </div>
 </div>
+
+<p>
+    <a class="btn btn-primary"  href="{{route('yearlybuilding')}}">Yearly Assessment Summary</a>
+
+  </p>
 @endSection

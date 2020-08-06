@@ -630,7 +630,7 @@ var total=2;
 
 
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
                 <br>

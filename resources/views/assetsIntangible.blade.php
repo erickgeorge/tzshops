@@ -483,4 +483,9 @@ Intangible Assets
     </div>
   </div>
 </div>
+
+<p>
+    <a class="btn btn-primary"  href="{{route('yearlyintangible')}}">Yearly Assessment Summary</a>
+
+  </p>
 @endSection

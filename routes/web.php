@@ -124,7 +124,7 @@ Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary'
 
 
 
- 
+
 
 Route::get('direct_torate/{id}', 'UserController@getdepedit')->name('get_depa')->middleware('auth');
 
@@ -870,3 +870,13 @@ Route::post('printreportm/{id}','NotesController@printmonthreport')->name('print
 
 Route::post('ppuprojectdraftsman','PhysicalPlanningController@ppuprojectdraftsman')->name('ppuprojectdraftsman')->middleware('auth');
 
+Route::get('yearlyplantmachinery','AssetsController@yearlyplantmachinery')->name('yearlyplantmachinery')->middleware('auth');
+Route::get('yearlymotorvehicle','AssetsController@yearlymotorvehicle')->name('yearlymotorvehicle')->middleware('auth');
+Route::get('yearlycomputerequipment','AssetsController@yearlycomputerequipment')->name('yearlycomputerequipment')->middleware('auth');
+Route::get('yearlyequipment','AssetsController@yearlyequipment')->name('yearlyequipment')->middleware('auth');
+Route::get('yearlyfurniture','AssetsController@yearlyfurniture')->name('yearlyfurniture')->middleware('auth');
+Route::get('yearlyintangible','AssetsController@yearlyintangible')->name('yearlyintangible')->middleware('auth');
+Route::get('yearlyland','AssetsController@yearlyland')->name('yearlyland')->middleware('auth');
+Route::get('yearlybuilding','AssetsController@yearlybuilding')->name('yearlybuilding')->middleware('auth');
+
+Route::get('yearlyexport','ExcelController@yearlyexport')->name('yearlyexport')->middleware('auth');

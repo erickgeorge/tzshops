@@ -98,11 +98,11 @@ use Carbon\Carbon;
 @if(count($wo) > 0)
           @if(auth()->user()->type == 'CLIENT')
           <button style="max-height: 40px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+    Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button>
        @else
           <button style="max-height: 40px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+    Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button>
 @endif
 @endif
@@ -293,11 +293,11 @@ foreach($userwithid as $userwithid)
 
                             <td id="wo-details">  <?php if (strlen($work->details) > 20) {
                              echo substr($work->details, 0, 20); echo "...";
-                            } 
+                            }
                               else{
                                 echo $work->details;
                               } ?>
-                                
+
                               </td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
@@ -561,7 +561,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                 @else
                                     @if($work->status == -1)
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
-                                        @if($diff > 2)
+                                        @if($diff > 6)
                                         @if( $work['user']->id==Auth::user()->id)
                                         <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal{{ $work->id }}">Complaint</a>
 

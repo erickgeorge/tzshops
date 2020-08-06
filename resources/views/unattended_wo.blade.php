@@ -45,7 +45,7 @@ use App\WorkOrder;
     </div>
     <br>
 
-   
+
       <hr>
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -59,7 +59,7 @@ use App\WorkOrder;
     <div  id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
         <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
-           <button data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+           <button data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
 
 <!-- Modal -->
@@ -161,7 +161,7 @@ use App\WorkOrder;
   </div>
 </div>
           <!-- ---------------------- -->
- 
+
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">

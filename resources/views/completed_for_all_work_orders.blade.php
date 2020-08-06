@@ -97,11 +97,11 @@ use Carbon\Carbon;
 @if(count($wo) > 0)
           @if(auth()->user()->type == 'CLIENT')
           <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
-  <i class="fa fa-file-pdf-o"></i> PDF
+   Export <i class="fa fa-file-pdf-o"></i>
 </button>
        @else
           <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
-  <i class="fa fa-file-pdf-o"></i> PDF
+   Export <i class="fa fa-file-pdf-o"></i>
 </button>
 @endif
 @endif

@@ -40,14 +40,14 @@ Companies
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                 <a href="{{route('landscapingcleaningcompanyreport')}}"
 
-                                          style="color: white;" data-toggle="tooltip" title="Print report"> PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
+                                          style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                    <div class="row"><div class="col">
                   <a href="{{ route('renew_company_contract') }}"
                    class="btn btn-primary" >Add new company</a> @endif <a href="{{ route('cleaning_company_expired') }}"
-                   class="btn btn-primary" >Previous contract</a> </div> 
+                   class="btn btn-primary" >Previous contract</a> </div>
 
 
 
@@ -82,7 +82,7 @@ Companies
                  $now1 =  Carbon::now();
 
                              $endcont = Carbon::parse($house->endcontract);?>
-              
+
           <!--expired contract-->
              @if($now1 < $endcont)
           <!--expired contract-->
@@ -101,7 +101,7 @@ Companies
                             @if($house->status == 1)
 
 
-           
+
 
                  @if($diff >= 365)
 
@@ -142,7 +142,7 @@ Companies
 
                             @if($house->status == 1)
 
-                           
+
 
 
 
@@ -213,7 +213,7 @@ Companies
 
 
 
-  
+
           <!--expired contract-->
              @endif
           <!--expired contract-->

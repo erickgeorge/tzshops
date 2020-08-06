@@ -48,6 +48,10 @@
         div{
             font-weight: bold;
         }
+        .btn-secondary{
+            background-color: #007bff;
+            border: #007bff;
+        }
     </style>
 
 
@@ -76,6 +80,23 @@
                 use App\WorkOrderTransport;
                 use App\Material;
                 use App\WorkOrder;
+        use Carbon\Carbon;
+
+        // closing work order by default
+        $woclo = WorkOrder::where('status',2)->get();
+        $leohii = Carbon::now();
+
+        foreach ($woclo as $woclo) {
+            $sikuhii = Carbon::parse($woclo->updated_at);
+            $tofautihii = $sikuhii->diffInDays($leohii);
+
+            if ($tofautihii > 6) {
+                $wokioda = WorkOrder::where('id',$woclo->id)->first();
+                $wokioda->status = 30;
+                $wokioda->save();
+            }
+        }
+        //
                 use App\zoneinspector;
                 use App\ppuproject;
                 $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
@@ -156,7 +177,7 @@
                   @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
 
                        <li style="width: 80px;">
-                    
+
                     </li>
 
 
@@ -179,8 +200,8 @@
         </div>
        </li>
 
-       
-               
+
+
 
 
                                   <li class="nav-item">
@@ -441,21 +462,21 @@
                 @endif
 
 
-  
+
                             @if(auth()->user()->type == 'USAB')
 
 
-            
 
-            
-                    
+
+
+
                 <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Landscaping</a>
                 </li>
 
 
-               
-              @endif  
+
+              @endif
 
 
 
@@ -486,9 +507,9 @@
 
 
                 <li style="width: 80px;">
-                    
+
                     </li>
-             
+
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
            data-toggle="dropdown"
@@ -1093,7 +1114,9 @@ for (i = 0; i < dropdown.length; i++) {
     $('#myTable').DataTable();
     $('#myTable4').DataTable({
         dom: 'Bfrtip',
-        buttons: ['excel']
+        buttons: [{
+            extend:'excel',
+            text:'Export <i class="fa fa-file-excel-o"></i>'}]
     });
     $('#myTablee').DataTable();
     $('#myTableee').DataTable();

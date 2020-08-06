@@ -184,7 +184,7 @@
     <td> Not completed yet!</td>
     @else
    <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
-                          
+
     @endif
 
    <!-- @if($techform->status!=1)
@@ -373,7 +373,7 @@
                                                                          class="badge badge-success">View Message</span></a></td>
 
   <td><?php $time = strtotime($tform->created_at); echo date('d/m/Y',$time);  ?> </td>
-                         
+
 
   @endforeach
   </table>
@@ -546,14 +546,14 @@
 @if(auth()->user()->type == 'Estates Director')
 <div style="padding: 1em;">
   <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
-PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 @endif
 @if(auth()->user()->type == "CLIENT")
 <div style="padding: 1em;">
   <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
-PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 @endif
@@ -605,7 +605,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         @endif
         <div style="padding: 1em;">
          <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
-    PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+    Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   </button></a>
         </div>
 

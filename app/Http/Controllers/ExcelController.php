@@ -39,6 +39,7 @@ use App\assetsassesplantandmachinery;
 use Illuminate\Support\Carbon;
 use App\Exports\ExcelExport;
 use App\Exports\OtherSummaryExport;
+use App\Exports\yearlySummary;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
@@ -25319,4 +25320,33 @@ class ExcelController extends Controller
             return Excel::download(new OtherSummaryExport, $_GET['asset'].' Assets Assesment Report - latest : generated on '.date('d-m-Y H-i').'.xlsx');
         }
     }
+
+
+        public function yearlyexport()
+        {
+            if(request()->has('year'))
+            {
+                if (request('year')!='')
+                {
+                    if(request()->has('asset'))
+                    {
+                        if (request('asset')!='')
+                        {
+
+                            return Excel::download(new yearlySummary, request('asset').' Assets Assesment Report for year '.request('year').' : generated on '.date('d-m-Y H-i').'.xlsx');
+
+
+                        }else{
+                            return redirect()->back();
+                        }
+                    }else{
+                        return redirect()->back();
+                    }
+                }else{
+                    return redirect()->back();
+                }
+            }else{
+                return redirect()->back();
+            }
+        }
 }

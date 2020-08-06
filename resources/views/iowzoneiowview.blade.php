@@ -35,7 +35,7 @@ IoW Zones
             <a href="{{route('manage.IoWZones')}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Manage zone</a>
                    <a href="{{ url('iowwithzones')}}" style="margin-bottom: 20px; float:right;"
-                   class="btn btn-primary">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                   class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
                 <table id="myTablee" class="table table-striped">

@@ -51,12 +51,12 @@
                             	<?php $time = strtotime($tag_); echo date('d/m/Y',$time);  ?>
  </div>
  <div class="col"> status:
-                            @if($store_received == 0)
+                            @if($store_received != 0)
                             	<div class="badge badge-warning">@if(auth()->user()->type == 'Head Procurement') Not Received by store @else Not Confirmed @endif</div>
                             	@else<div class="badge badge-success">@if(auth()->user()->type == 'Head Procurement') Received by store @else Received @endif</div>
                             	@endif
                             </div><div class="col-lg-2">
-    		<a href="{{ url('exportProcure',$tag_) }}" class="btn btn-primary"> <i class="fa fa-file-pdf-o"></i> PDF</a>
+    		<a href="{{ url('exportProcure',$tag_) }}" class="btn btn-primary"> Export <i class="fa fa-file-pdf-o"></i> </a>
     	</div>
     </div>
 </div>
@@ -107,16 +107,17 @@
             		<input type="text" name="store_received" value="{{ $store_received }}" hidden >
            			<div align="right">
 		            	<div class="col">
-		            		@if($stored == null)
-                            <button class="btn btn-primary">
-                                Add in stock
+                            @if($stored == null)
+                            <b style="font-weight: bold;">Received? &nbsp;</b>
+                            <button type="submit" class="btn btn-primary">
+                                Confirm
                             </button>
 		            		@endif
 		            	</div>
 	            	</div>
             </form>
             @else
-            <form method="POST" action="{{ url('ReceivedProcurement') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('AcceptProcuredMaterial') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="text" name="added_by" value="{{ $procured_by }}" hidden >
                     <input type="text" name="tag_" value="{{ $tag_  }}" hidden >

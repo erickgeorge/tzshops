@@ -132,6 +132,23 @@
                 use App\ppuproject;
 
 
+                use Carbon\Carbon;
+
+// closing work order by default
+$woclo = WorkOrder::where('status',2)->get();
+$leohii = Carbon::now();
+
+foreach ($woclo as $woclo) {
+    $sikuhii = Carbon::parse($woclo->updated_at);
+    $tofautihii = $sikuhii->diffInDays($leohii);
+
+    if ($tofautihii > 6) {
+        $wokioda = WorkOrder::where('id',$woclo->id)->first();
+        $wokioda->status = 30;
+        $wokioda->save();
+    }
+}
+//
         use App\zoneinspector;
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
 
@@ -725,7 +742,7 @@ use App\Section;
 
 <!-- SOMETHING STRANGE HERE -->
                 <div class="col" align="right">
-           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"><i class="fa fa-file-pdf-o"></i> PDF </a>
+           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o"></i></a>
         </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

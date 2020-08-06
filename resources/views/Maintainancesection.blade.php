@@ -39,7 +39,7 @@ Maintainance section
                    class="btn btn-primary">Add new section</a>
 
                    <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
-                   class="btn btn-primary">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                   class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
                 <table id="myTablee" class="table table-striped">

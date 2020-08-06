@@ -58,7 +58,7 @@ use App\WorkOrder;
          <!-- SOMETHING STRANGE HERE -->
          @if(count($wo) > 0)
                 <div class="col" align="right">
-           <button data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+           <button data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
         </div>
         @endif
 <!-- Modal -->

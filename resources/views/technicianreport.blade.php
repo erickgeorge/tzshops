@@ -59,7 +59,7 @@
         </div>
     @endif
      @if(count($wo) > 0)
-       <button   name="b_print" type="button" class="btn btn-primary mb-2"   onClick="printdiv('div_print');"  >  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+       <button   name="b_print" type="button" class="btn btn-primary mb-2"   onClick="printdiv('div_print');"  >  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
     @endif
 
     <div id="div_print" class="container" style="margin-right: 2%; margin-left: 2%;">
@@ -136,7 +136,7 @@
             </ul>
         </div>
     @endif
-       <button   name="b_print" type="button" class="btn btn-primary mb-2"   onClick="printdiv('div_print');"  >  PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+       <button   name="b_print" type="button" class="btn btn-primary mb-2"   onClick="printdiv('div_print');"  >  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
 
 
 

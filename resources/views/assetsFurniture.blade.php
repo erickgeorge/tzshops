@@ -484,4 +484,9 @@ Furniture Assets
       </div>
     </div>
   </div>
+
+  <p>
+      <a class="btn btn-primary"  href="{{route('yearlyfurniture')}}">Yearly Assessment Summary</a>
+  
+    </p>
 @endSection
