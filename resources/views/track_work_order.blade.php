@@ -546,14 +546,14 @@
 @if(auth()->user()->type == 'Estates Director')
 <div style="padding: 1em;">
   <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
-Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 @endif
 @if(auth()->user()->type == "CLIENT")
 <div style="padding: 1em;">
   <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
-Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 @endif
@@ -605,7 +605,7 @@ Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         @endif
         <div style="padding: 1em;">
          <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
-    Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+    PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   </button></a>
         </div>
 
