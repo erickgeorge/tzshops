@@ -1254,7 +1254,7 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
     {
         $data['procure'] = Procurement::where('tag_',$id)->orderBy('material_name','Asc')->orderBy('type','Asc')->get();
         $data['header'] = "Procured Materials Receiving Document";
-        $pdf = PDF::loadView('procurementReceiving',$data);
+        $pdf = PDF::loadView('procurementReceiving',$data)->setPaper('a4', 'landscape');
         return $pdf->stream(' Procured Materials Receiving Document - '.date('d-m-Y H:i').'.pdf');
     }
      public function materialEntrypdf($id)

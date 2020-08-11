@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c7da29-8ef0-4506-84a6-5a8c6d9538b9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/grnpdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/grnpdf.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/procurementReceiving.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/procurementReceiving.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +164,7 @@
       <option name="presentableId" value="Default" />
       <updated>1597129830121</updated>
       <workItem from="1597129833928" duration="1378000" />
-      <workItem from="1597133687176" duration="5869000" />
+      <workItem from="1597133687176" duration="8086000" />
     </task>
     <servers />
   </component>

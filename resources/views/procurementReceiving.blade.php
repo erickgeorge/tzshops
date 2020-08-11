@@ -1,9 +1,13 @@
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h4>Directorate of Estates Services</h4></p><p><b><?php
      echo $header;
       ?></b></p>
+
 </div><br>
+<p>This is to confirm that we have today received the following goods in good condition</p>
+<p>UNLESS OTHERWISE STATED IN THE "REMARKS" COLUMN from (NAME OF SUPPLIER)___________________________________</p>
+<br>
 <style>
 table {
   border-collapse: collapse;
@@ -47,38 +51,37 @@ tr:nth-child(even) {
     $store_received = $produced->store_received
 ?>
        @endforeach
-      <div>
+{{--      <div>--}}
         <?php $officer = User::where('id',$procured_by )->get(); ?>
 
- Materials Sent on :
-   <?php $time = strtotime($tag_); echo date('d/m/Y',$time);  ?>
- &nbsp;&nbsp;&nbsp;
- @if($store_received == 0)
-  @if(auth()->user()->type == 'Head Procurement') status: Not Received by store
-  @else status: Not Confirmed
-  @endif
-@else
-   Received by :
-    <?php $store =  User::where('id',$store_received )->get(); ?>
-@foreach($store as $officcer) {{ $officcer->fname }} {{ $officcer->lname }}
-@endforeach
-   @endif</div><br>
+{{-- Materials Sent on :--}}
+{{--   <?php $time = strtotime($tag_); echo date('d/m/Y',$time);  ?>--}}
+{{-- &nbsp;&nbsp;&nbsp;--}}
+{{-- @if($store_received == 0)--}}
+
+{{--@else--}}
+{{--   Received by :--}}
+{{--    <?php $store =  User::where('id',$store_received )->get(); ?>--}}
+{{--@foreach($store as $officcer) {{ $officcer->fname }} {{ $officcer->lname }}--}}
+{{--@endforeach--}}
+{{--   @endif</div><br>--}}
 
 
 
 <table>
   <thead style=" background-color: #376ad3; color: white; ">
    <tr style="color: white;">
-      <th scope="col">#</th>
-      <th scope="col">Material Name</th>
-
-      <th scope="col">Description</th>
-      <th scope="col">Type</th>
-      <th scope="col">Total</th>
-    <th scope="col">Unit Measure</th>
-      <th scope="col">Price</th>
-
-
+       <th>#</th>
+       <th>MATERIAL NAME</th>
+       <th>QUANTITY</th>
+       <th>UNIT OF QUANTITY</th>
+       <th>DESCRIPTION OF GOODS</th>
+       <th>SUPPLIER'S INVOICE No.</th>
+       <th>UNIT RATE</th>
+       <th>VALUE</th>
+       <th>L.P.O No.</th>
+       <th>CODE No.</th>
+       <th>REMARKS</th>
     </tr>
   </thead>
   <tbody align="center">
@@ -101,12 +104,19 @@ else {
     <tr>
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $procure->material_name }}</td>
+        <td>{{ number_format($procure->total_input) }}</td>
+        <td>{{ $procure->unit_measure }}</td>
 
       <td>{{ $procure->material_description }}</td>
+        <td></td>
+        <td>{{ number_format($procure->price_tag) }}</td>
+{{--        @php--}}
+{{--        $var = --}}
+{{--        @endphp--}}
+        <td>{{ number_format($procure->price_tag*$procure->total_input) }}</td>
+        <td></td>
+        <td></td>
       <td>{{ $procure->type }}</td>
-      <td>{{ number_format($procure->total_input) }}</td>
-         <td>{{ $procure->unit_measure }}</td>
-        <td>{{ $procure->price_tag }}</td>
 
 
       </td>
@@ -133,14 +143,16 @@ else {
 
 
    </div>
+<div class="container-name">
+    <div class="div1"></div>
 
+    <div class="div2">Date<u style="padding-left: 65px; width: 55px"> </u>         .................................</div>
+</div>
 
  <br>
 
       <div>
-          <div> Remark </div><br>
-
-        <div> ..................................................................................................................................................................................
+          <div> Remarks : ..................................................................................................................................................................................
           </div>
       </div>
       <br>
