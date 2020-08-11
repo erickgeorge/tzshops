@@ -51,20 +51,10 @@ tr:nth-child(even) {
     $store_received = $produced->store_received
 ?>
        @endforeach
-{{--      <div>--}}
+
         <?php $officer = User::where('id',$procured_by )->get(); ?>
 
-{{-- Materials Sent on :--}}
-{{--   <?php $time = strtotime($tag_); echo date('d/m/Y',$time);  ?>--}}
-{{-- &nbsp;&nbsp;&nbsp;--}}
-{{-- @if($store_received == 0)--}}
 
-{{--@else--}}
-{{--   Received by :--}}
-{{--    <?php $store =  User::where('id',$store_received )->get(); ?>--}}
-{{--@foreach($store as $officcer) {{ $officcer->fname }} {{ $officcer->lname }}--}}
-{{--@endforeach--}}
-{{--   @endif</div><br>--}}
 
 
 
@@ -110,9 +100,7 @@ else {
       <td>{{ $procure->material_description }}</td>
         <td></td>
         <td>{{ number_format($procure->price_tag) }}</td>
-{{--        @php--}}
-{{--        $var = --}}
-{{--        @endphp--}}
+
         <td>{{ number_format($procure->price_tag*$procure->total_input) }}</td>
         <td></td>
         <td></td>
