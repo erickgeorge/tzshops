@@ -1098,7 +1098,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
            $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',15)
                     ->get()];
-         $pdf = PDF::loadView('grnpdf', $data);
+         $pdf = PDF::loadView('grnpdf', $data)->setPaper('a4', 'landscape');
 
      return $pdf->stream('Goods received Note - '.$id.'- '.date('d-m-Y Hi').'.pdf');
     }
@@ -1270,7 +1270,7 @@ return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
 
 
       public function addassessmentpdf($id , $tender ){
-        
+
         $tender = Crypt::decrypt($tender);
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();

@@ -1,7 +1,9 @@
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
     <p><b><u>GOODS RECEIVED NOTE</u></b></p>
+    <p>This is to confirm that we have today received the following goods in good condition</p>
+    <p>UNLESS OTHERWISE STATED IN THE "REMARKS" COLUMN from (NAME OF SUPPLIER)________________________________________________________________</p>
 </div>
 <style>
     body { background-image:  url('/images/estategrn.jpg');
@@ -57,17 +59,20 @@ tr:nth-child(even) {
 
 
    <body>
-      <table border = "2" cellpadding = "5" cellspacing = "5">
-         <tr >
-             <th >No</th>
-                <th >HoS Name</th>
-                <th >Material Name</th>
-                <th >Description</th>
-                <th >Value/Capacity</th>
-                <th >Type</th>
 
-                <th >Quantity Purchased</th>>
-         </tr>
+      <table border = "2" cellpadding = "5" cellspacing = "5">
+          <tr>
+              <th>#</th>
+              <th>QUANTITY</th>
+              <th>UNIT OF QUANTITY</th>
+              <th>DESCRIPTION OF GOODS</th>
+              <th>SUPPLIER'S INVOICE No.</th>
+              <th>UNIT RATE</th>
+              <th>VALUE</th>
+              <th>L.P.O No.</th>
+              <th>CODE No.</th>
+              <th>REMARKS</th>
+          </tr>
           <tbody>
 
             <?php $i=0;  ?>
@@ -76,15 +81,16 @@ tr:nth-child(even) {
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['usermaterial']->fname.' '.$item['usermaterial']->lname }}</td>
-                    <td>{{ $item['material']->name }}</td>
+                    <td>{{ $item->quantity - $item->reserved_material }}</td>
+                    <td style="'min-width:20px;"></td>
                     <td>{{ $item['material']->description }}</td>
+                    <td style="'min-width:40px;"></td>
+                    <td style="'min-width:40px;"></td>
                     <td>{{ $item['material']->brand }}</td>
+                    <td style="'min-width:40px;"></td>
+                    <td style="'min-width:40px;"></td>
                     <td>{{ $item['material']->type }}</td>
-
-                   <td style="color: blue"> {{ $item->quantity - $item->reserved_material }}</td>
-
-                    </tr>
+                </tr>
 
             </tbody>
             @endforeach
@@ -100,29 +106,27 @@ tr:nth-child(even) {
      <div class="div1">Material Purchased By: <u style="padding-left: 12px;"> {{ $item['user']->fname.' '.$item['user']->lname }}</u></div>
     <div class="div2"> Store Manager:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}  </u> </div>
    </div>
-
+<br>
    <div class="container-name">
     <div class="div1">Signature  <u style="padding-left: 85px; width: 55px"> </u>  .................................</div>
     <div class="div2">Signature  <u style="padding-left: 65px; width: 55px"> </u>         .................................</div>
 
 
    </div>
-
+<br>
 
      <div class="container-name">
      <div  class="div1" > Works Order No:<u style="padding-left: 65px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
 
 
-     <div class="div2">Purchased at:<u style="padding-left: 100px; width: 80px">    <?php $time = strtotime($item['material']->updated_at); echo date('d/m/Y',$time);  ?> </u> </div>
+         <div class="div2">Date:<i style="padding-left: 100px; width: 80px">...........................</i>   </div>
     </div>
 
 
       <br>
 
       <div>
-          <div> Remark </div><br>
-
-        <div> ..................................................................................................................................................................................
+          <div> Remarks : ..................................................................................................................................................................................................................................................
           </div>
       </div>
       <br>
