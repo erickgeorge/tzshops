@@ -1,7 +1,7 @@
 <div style="margin-top: 20px" align="center">
-    
-    <p><h2>University of Dar es salaam</h2> <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
-   
+
+    <p><h2>University of Dar es salaam</h2> <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
+
 </div>
 <style>
     body { background-image:  url('/images/estatfegrn.jpg');
@@ -15,7 +15,7 @@
   background-size: cover;
 
     }
-   
+
    .box{
     width:710px;
     height: 130px;
@@ -29,12 +29,12 @@
   display: inline-block;
   width: 400px;
   min-height: 50px;
- 
+
   height: auto;
   }
 
 
-     
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -58,16 +58,16 @@ tr:nth-child(even) {
 
 
 
-<?php 
+<?php
     use App\User;
-    use App\assessmentsheet;  
-    use App\landassessmentactivityform; 
+    use App\assessmentsheet;
+    use App\landassessmentactivityform;
     use App\landcrosschecklandassessmentactivity;
     use App\company;
  ?>
 
 
-    
+
 
 
 
@@ -78,7 +78,7 @@ tr:nth-child(even) {
  @endforeach
 
 
-      <?php 
+      <?php
     $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
      ?>
       @foreach($crosscheckassessmmentactivity as $assesment)
@@ -93,24 +93,24 @@ tr:nth-child(even) {
 <table>
   <tr>
     <th>Full name</th>
-      <th>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</th> 
+      <th>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</th>
   </tr>
 
     <tr>
     <th>Phone</th>
-      <th>{{ $assesment['initiated']->phone }}</th> 
+      <th>{{ $assesment['initiated']->phone }}</th>
   </tr>
 
     <tr>
     <th>Email</th>
-      <th> {{ $assesment['initiated']->email}}</th> 
+      <th> {{ $assesment['initiated']->email}}</th>
   </tr>
 
     <tr>
     <th>Initiated on </th>
-      <th>{{ date('d F Y', strtotime($assesment->created_at))}}</th> 
+      <th>{{ date('d F Y', strtotime($assesment->created_at))}}</th>
   </tr>
-  
+
 </table>
 </b>
 </h4>
@@ -127,22 +127,22 @@ tr:nth-child(even) {
 
   <div class="row container-fluid">
         <div class="col-lg-12">
-          
+
            <u> <h5 align="center" style="text-transform: capitalize; color: black;"><b>  assessment Sheet details</b></h5></u>
         </div>
     </div>
-   
+
 
 <br>
-       
+
 
    <div class="container-name">
      <div class="div1">Company Name:&nbsp;&nbsp;  &nbsp; <b>{{$company['companyname']['compantwo']->company_name}}</b></div>
     <div class="div2"> Assessment Period:<b><?php  $dnext = strtotime($company->enddate); ?> {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
-   </div> 
-    <hr> 
-   
-  
+   </div>
+    <hr>
+
+
 
 
 
@@ -162,20 +162,20 @@ tr:nth-child(even) {
 
     <div class="row container-fluid">
         <div class="col-lg-12">
-          
+
             <p><h5><b><u>Sheet No:0{{$ii}}</u></b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b><u>sheet name:  &nbsp; {{$company->assessment_name}}</u></b></h5></u>
         </div>
     </div>
    <br>
 
-        
-       
+
+
      Area Name:<b><u> {{$company['areaname']->cleaning_name}} </u> </b>
-              
+
 <br><br>
 
 
-    <?php 
+    <?php
       $companypayment = company::where('tender', $company->company)->first();
       $assessmentsheetview = assessmentsheet::where('name', $company->assessment_name)->get();
       $assessmmentactivity = landassessmentactivityform::where('companynew', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
@@ -199,12 +199,12 @@ tr:nth-child(even) {
      <th ><b>Remark</b></th>
      </tr>
      </thead>
-     
-  <?php  
+
+  <?php
    $sum = 0;
    $summ = 0;
    $i = 0;
-  
+
    ?>
   @foreach($crosscheckassessmmentactivity as $assesment)
   <?php    $i++;   $sum += $assesment->percentage;  $summ += $assesment->score;?>
@@ -215,7 +215,7 @@ tr:nth-child(even) {
    <td style="text-align: center">{{$assesment->percentage}}</td>
     <td  style="text-align: center">{{$assesment->score}}</td>
     <td>{{$assesment->remark}}</td>
-    
+
  </tr>
  </tbody>
   @endforeach
@@ -234,7 +234,7 @@ tr:nth-child(even) {
   <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
  </thead>
 
- 
+
  <tbody>
   <tr>
 <td>{{$company['areaname']->cleaning_name}}</td><td><?php echo $summ ?>%</td><td><?php $paym=$company->paymentone; echo number_format($paym); ?>
@@ -321,17 +321,17 @@ tr:nth-child(even) {
      <div class="div1">Name of Assessor:&nbsp;  &nbsp;<b>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</b><u style="padding-left: 12px;"> </u></div>
     <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->created_at)) }}</b> <u style="padding-left: 40px;">   </u> </div>
-   </div>    
+   </div>
 <br>
 
        <div class="container-name">
      <div class="div1">Approved by Estate Officer :&nbsp;  &nbsp;<b>{{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} </b><u style="padding-left: 12px;"> </u></div>
     <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->accepted_on)) }}</b> <u style="padding-left: 40px;">   </u> </div>
-   </div>    
+   </div>
 <br>
 @endif
-  
+
   @if(($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
 
 
@@ -339,10 +339,10 @@ tr:nth-child(even) {
      <div class="div1">Approved by Estate Director :&nbsp;  <b>{{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  </b><u style="padding-left: 12px;"> </u></div>
     <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->approved_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
-   </div>    
+   </div>
 <br>
 
- @endif 
+ @endif
 
 
 
@@ -356,24 +356,24 @@ tr:nth-child(even) {
      <div class="div1">Company paid and verified by :&nbsp;  <b>{{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}</b><u style="padding-left: 12px;"> </u></div>
     <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->payment_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
-   </div>    
+   </div>
 <br>
 
 
- @endif 
+ @endif
 
 
 
 
-  
-      
+
+
    </body>
 
 
 
-             
+
 
 
 <div id='footer'>
     <p class="page">page</p>
-</div>   
+</div>

@@ -1,7 +1,7 @@
 <div style="margin-top: 20px" align="center">
-   
+
     <p><h2>University of Dar es salaam</h2>
-     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
+     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
 <p style="text-transform: uppercase; text-align: center;"><B><u> CLEANING AREAS </u></B>
  </p>
@@ -18,7 +18,7 @@
   background-size: cover;
 
     }
-   
+
    .box{
     width:710px;
     height: 130px;
@@ -32,12 +32,12 @@
   display: inline-block;
   width: 400px;
   min-height: 50px;
- 
+
   height: auto;
   }
 
 
-     
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -56,9 +56,9 @@ tr:nth-child(even) {
 #footer .page:after{content:counter(page, decimal);}
 @page {margin:20px 30px 40px 50px;}
 </style>
- 
 
-    
+
+
    <body>
 
 
@@ -75,9 +75,9 @@ tr:nth-child(even) {
 
 
    <?php use Carbon\Carbon;?>
-   
+
 <div class="container">
-  
+
 
             <table id="myTable" id="myTable" class="table table-striped">
                    <thead style="background-color: #376ad3;">
@@ -85,7 +85,7 @@ tr:nth-child(even) {
                         <th scope="col">#</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">LOT</th>
-                  
+
                     </tr>
                     </thead>
 
@@ -97,19 +97,19 @@ tr:nth-child(even) {
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            
+
                             <td>{{ $clean_area->cleaning_name }}</td>
                             <td>{{ $clean_area->zone_id }}</td>
 
 
 
 
-                            
-                                               
+
+
                         </tr>
                     @endforeach
                     </tbody>
-                    
+
                 </table>
 
 
@@ -123,14 +123,14 @@ tr:nth-child(even) {
 
 
 
-      
+
    </body>
 
 
 
-             
+
 
 
 <div id='footer'>
     <p class="page">page</p>
-</div>   
+</div>

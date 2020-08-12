@@ -1,9 +1,9 @@
 <div style="margin-top: 20px" align="center">
-  
+
 
 
     <p><h2>University of Dar es salaam</h2>
-      <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> 
+      <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');"> <h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"> Assessment Details</b></p>
 </div><br>
 
@@ -28,7 +28,7 @@ tr:nth-child(even) {
 #footer{position:fixed; right:0px; bottom:10px; text-align:center; border-top:1px solid black; }
 #footer .page:before { content: "Page " counter(page); } @page {margin:20px 30px 40px 50px;}
 </style>
-         
+
 
 
 
@@ -41,13 +41,13 @@ tr:nth-child(even) {
                         <th scope="col">Company Name</th>
                         <th scope="col">Assessment Month</th>
                         <th scope="col">Assessment Sheet</th>
-                        <th scope="col">Status</th>  
-                      
+                        <th scope="col">Status</th>
+
                     </tr>
                     </thead>
                     <tbody>
 
-                        
+
                     <?php $i = 0; ?>
                     @foreach($assessmmentcompany as $assesment)
                           <?php $i++; ?>
@@ -84,7 +84,7 @@ tr:nth-child(even) {
                              <td><span class="badge badge-success">Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
-                            
+
                          </tr>
 
                       @endforeach

@@ -1,7 +1,7 @@
 <div style="margin-top: 20px" align="center">
-   
+
     <p><h2>University of Dar es salaam</h2>
-     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
+     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
 <p style="text-transform: uppercase; text-align: center;"><B><u>TRENDING SCORE FOR "{{$compa}}" WITH DIFFERENT MONTHS </u></B>
  </p>
@@ -18,7 +18,7 @@
   background-size: cover;
 
     }
-   
+
    .box{
     width:710px;
     height: 130px;
@@ -32,12 +32,12 @@
   display: inline-block;
   width: 400px;
   min-height: 50px;
- 
+
   height: auto;
   }
 
 
-     
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -56,9 +56,9 @@ tr:nth-child(even) {
 #footer .page:after{content:counter(page, decimal);}
 @page {margin:20px 30px 40px 50px;}
 </style>
- 
 
-    
+
+
    <body>
 
 
@@ -81,8 +81,8 @@ tr:nth-child(even) {
                <th >#</th>
                 <th >Month</th>
                 <th >Total percentage(%)</th>
-              
-                
+
+
             </tr>
             </thead>
 
@@ -97,10 +97,10 @@ tr:nth-child(even) {
                     <th scope="row">{{ $i }}</th>
                     <td>{{ date('F Y', strtotime($company->month))}}</td>
                      <td > <?php echo number_format($company->erick / count($crosscheckassessmmentactivitygroupbyarea) , 2) ?> </td>
-                  
 
-                 
-                       
+
+
+
                     </tr>
                     @endforeach
             </tbody>
@@ -116,14 +116,14 @@ tr:nth-child(even) {
 
 
 
-      
+
    </body>
 
 
 
-             
+
 
 
 <div id='footer'>
     <p class="page">page</p>
-</div>   
+</div>

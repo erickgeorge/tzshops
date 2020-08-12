@@ -1,5 +1,5 @@
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+    <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>DIRECTORATE OF ESTATE SERVICES</h5></p>
     <p><b style="text-transform: uppercase;"><u>ISSUE NOTE</u></b></p>
 </div>
@@ -67,7 +67,7 @@ tr:nth-child(even) {
         <th >Material Description</th>
         <th >Type</th>
         <th >Quantity Received</th>
-       
+
             </tr>
             </thead>
 
@@ -86,7 +86,7 @@ tr:nth-child(even) {
             <td>{{ $item->quantity }}</td>
 
 
-                    
+
                     </tr>
                     @endforeach
             </tbody>
@@ -131,7 +131,7 @@ tr:nth-child(even) {
 
 
       <br>
-    
+
      <div  style="color: blue"> Status: <span class="badge badge-info">  Received</span>
                     </div><br>
 

@@ -1,5 +1,5 @@
 <div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p> <h5>Directorate of Estates Services</h5></p><p><b style="text-transform: uppercase;"><?php
      echo $header;
      ?></b></p>

@@ -1,5 +1,5 @@
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2> 
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+    <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h4>Directorate of Estates Services</h4></p><p><b ><?php
      echo $header;
       ?></b></p>
@@ -60,7 +60,7 @@ else {
       <td>{{ $user->fname . ' ' . $user->lname }}</td>
 
       <td><a style="color: #000;" href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-     
+
 
 
        <td>

@@ -15,10 +15,12 @@
     </head>
     <body style="background-color: #fff">
 
+
+
 <style>
-    
+
 .jumbotron{
- 
+
 background-color:  #376ad3;
 
     color: white;
@@ -27,7 +29,7 @@ background-color:  #376ad3;
 
  }
 
- 
+
 </style>
 
 <div  class="row " style="background-color:  #376ad3">
@@ -40,23 +42,21 @@ background-color:  #376ad3;
 
 <br>
 
- 
-
                 <div class=" container col-md-4 jumbotron ">
                     <div align="center" style="font-size: 18px;">LOGIN<hr></div>
                 <div>
                      @guest
                     <form method="POST" action="{{ route('login')}}" class="">
                          @csrf
-                         
+
 
                      <div >
-                    
+
                          <i class="fa fa-user icon"></i>
                             <label for="email" ><strong  > {{ __('
                              User Name') }}</strong></label>
 
-                           
+
                                 <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('email') }}" required autofocus placeholder="Enter User Name">
                                  <!-- <small id="emailHelp" class="form-text text-muted">Your Name is Handled Privately.</small>-->
 
@@ -66,7 +66,7 @@ background-color:  #376ad3;
                                     </span>
                                 @endif
                          </div>
-                     
+
                         <br>
                         <div class="form-group">
                             <i class="fa fa-key icon"></i>
@@ -119,5 +119,5 @@ background-color:  #376ad3;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 
 </body>
-   
+
 </html>

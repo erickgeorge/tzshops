@@ -19,7 +19,7 @@
   background-size: cover;
 
     }
-   
+
    .box{
     width:710px;
     height: 130px;
@@ -33,12 +33,12 @@
   display: inline-block;
   width: 400px;
   min-height: 50px;
- 
+
   height: auto;
   }
 
 
-     
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -61,7 +61,7 @@ tr:nth-child(even) {
 
     <br>
     <div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
-    <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
+    <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>Directorate of Estates Services</h5></p><p><b style="text-transform: uppercase;"><?php
      echo $header;
      ?></b></p>
@@ -73,7 +73,7 @@ tr:nth-child(even) {
 
 
 
-<?php 
+<?php
     use App\techasigned;
 
 
@@ -93,18 +93,18 @@ tr:nth-child(even) {
      <div class="div2"> On:  <span style=" font-weight: bold; color: green;">{{ date('d F Y', strtotime($wo->created_at)) }}</span>  </div>
   <br>
   <br>
-   
-   </div>  
+
+   </div>
 
           <div class="container-name">
      <div class="div1">Also @if($wo->status == 0)rejected@elseif($wo->status == 1) accepted @else processed @endif by <span
                 style=" font-weight: bold; color: green;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span>
-            
+
      </div>
      <div class="div2"> Mobile number:  <span style=" font-weight: bold; color: green;">{{ $wo['user']->phone }}</span>  </div>
     <div class="div2">Emai: <span style=" font-weight: bold; color: green;"> {{ $wo['user']->email }} </span> </div>
-   
-   </div>  
+
+   </div>
 
 
 
@@ -124,7 +124,7 @@ tr:nth-child(even) {
         @endif</span>  </div>
   <br>
   <br>
-   
+
    </div>
 
 
@@ -144,7 +144,7 @@ tr:nth-child(even) {
         @endif</span>  </div>
   <br>
   <br>
-   
+
    </div>
 
           <div class="container-name">
@@ -159,7 +159,7 @@ tr:nth-child(even) {
      <div class="div2"> Details  <span style=" font-weight: bold; color: green;">{{ $wo->details }}</span>  </div>
   <br>
   <br>
-   
+
    </div>
 
 
@@ -213,7 +213,7 @@ tr:nth-child(even) {
     <td> Not completed yet!</td>
     @else
    <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
-                          
+
     @endif
 
    <!-- @if($techform->status!=1)
@@ -386,7 +386,7 @@ tr:nth-child(even) {
 
 <table style="width:100%">
    <thead style=" background-color: #376ad3; color: white; ">
-  
+
   <tr>
     <th>Date</th>
     <th>Time</th>
@@ -414,10 +414,10 @@ tr:nth-child(even) {
      <td> <a onclick="myfunc2('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
                                                                          class="badge badge-success">View Message</span></a></td>
 
-  
+
 
   <td>{{ date('d F Y', strtotime($tform->created_at )) }}</td>
-                         
+
 </tr>
   @endforeach
 

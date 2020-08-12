@@ -1,7 +1,7 @@
 <div style="margin-top: 20px" align="center">
-    
-    <p><h2>University of Dar es salaam</h2> <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm"> <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
-   
+
+    <p><h2>University of Dar es salaam</h2> <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
+
 </div>
 <style>
     body { background-image:  url('/images/estatfegrn.jpg');
@@ -15,7 +15,7 @@
   background-size: cover;
 
     }
-   
+
    .box{
     width:710px;
     height: 130px;
@@ -29,12 +29,12 @@
   display: inline-block;
   width: 400px;
   min-height: 50px;
- 
+
   height: auto;
   }
 
 
-     
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -80,20 +80,20 @@ tr:nth-child(even) {
 
     <div class="row container-fluid">
         <div class="col-lg-12">
-          
+
            <u> <h5 align="center" style="text-transform: capitalize; color: black;"><b>  assessment Sheet details</b></h5></u>
         </div>
     </div>
-   
+
 
 <br>
-       
+
 
    <div class="container-name">
      <div class="div1">Company Name:&nbsp;&nbsp;  &nbsp; <b>{{$companyname['compantwo']->company_name}}</b></div>
     <div class="div2"> Assessment Period:<b> <?php  $dnext = strtotime($companyiii->nextmonth); ?> {{ date('d F Y', strtotime($companyiii->nextmonth))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
-   </div> 
-    <hr> 
+   </div>
+    <hr>
 
 
 
@@ -116,7 +116,7 @@ tr:nth-child(even) {
             <h5><b>Sheet No: {{$ii}}</b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b> <u> Sheet name: &nbsp; {{ $companyiii->sheet  }}</u></b></h5>
         </div>
     </div>
-  
+
 
 
 
@@ -128,16 +128,16 @@ tr:nth-child(even) {
 
 
     <div class="input-group mb-3 col">
-       
+
      Area Name:<b><u> {{$companyiii['are_a']->cleaning_name }}</u> </b>
-              
+
     </div>
 
     </div>
 
     <br>
 
-  
+
 
    <div class="row">
 
@@ -157,7 +157,7 @@ tr:nth-child(even) {
 
 
     <table class="table table-striped">
-      
+
 
     <thead style=" background-color: #376ad3; color: white; ">
       <tr>
@@ -168,7 +168,7 @@ tr:nth-child(even) {
      <th ><b>Remark</b></th>
      </tr>
      </thead>
-    
+
 
 
 
@@ -185,8 +185,8 @@ tr:nth-child(even) {
    <?php  $i++;  $summ += $assesment->percentage;  $summm += $assesment->score;?>
 
   <tr>
-     
-   
+
+
 
       <td>{{$i}}</td>
       <TD  >{{$assesment->activity}} </TD>
@@ -243,8 +243,8 @@ tr:nth-child(even) {
      <div class="div1">Name of assessor: &nbsp;  &nbsp;&nbsp;  &nbsp;......................................................<u style="padding-left: 12px;"> </u></div>
      <div class="div2"> Signature:  .................................... <u style="padding-left: 40px;">   </u> </div>
     <div class="div2">Date: &nbsp;  &nbsp;  &nbsp;  &nbsp;   .................................... <u style="padding-left: 40px;"> </u> </div>
-   
-   </div>  
+
+   </div>
 <br>
 
   <div class="container-name">
@@ -256,15 +256,15 @@ tr:nth-child(even) {
 <br>
 
 
-  
-      
+
+
    </body>
 
 
 
-            
+
 
 
 <div id='footer'>
     <p class="page">page</p>
-</div>   
+</div>

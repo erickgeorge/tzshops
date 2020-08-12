@@ -72,7 +72,7 @@
               <li class="nav-item" style="margin-top: -10px;">
 
                 <a class="nav-link" style="color:white" >
-                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
+                    <img src="{{ asset('images/logo_ud.png') }}" style="height: 45px; width: 45px;"></a>
               </li>
 
 <?php

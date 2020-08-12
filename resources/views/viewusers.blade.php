@@ -1,41 +1,41 @@
 
 
 
-<!DOCTYPE html> 
-<html lang="en"> 
+<!DOCTYPE html>
+<html lang="en">
 
-<head> 
+<head>
 
-  <style> 
-    #loader { 
-      border: 12px solid #376ad3; 
-      border-radius: 50%; 
-      border-top: 12px solid #444444; 
-      width: 70px; 
-      height: 70px; 
-      animation: spin 1s linear infinite; 
-    } 
-    
-    @keyframes spin { 
-      100% { 
-        transform: rotate(360deg); 
-      } 
-    } 
-    
-    .center { 
-      position: absolute; 
-      top: 0; 
-      bottom: 0; 
-      left: 0; 
-      right: 0; 
-      margin: auto; 
-    } 
-  </style> 
-</head> 
+  <style>
+    #loader {
+      border: 12px solid #376ad3;
+      border-radius: 50%;
+      border-top: 12px solid #444444;
+      width: 70px;
+      height: 70px;
+      animation: spin 1s linear infinite;
+    }
 
-<body> 
-  <div id="loader" class="center"></div> 
-  
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .center {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loader" class="center"></div>
+
 
 
 
@@ -120,7 +120,7 @@
               <li class="nav-item" style="margin-top: -10px;">
 
                 <a class="nav-link" style="color:white" >
-                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
+                    <img src="{{ asset('images/logo_ud.png') }}" style="height: 45px; width: 45px;"></a>
               </li>
 
 <?php
@@ -951,7 +951,7 @@ else {
   @endif
 </div>
 
-  
+
 
 
 
@@ -1536,36 +1536,36 @@ for (i = 0; i < dropdown.length; i++) {
 
 
 
-  
-  <script> 
-    document.onreadystatechange = function() { 
-      if (document.readyState !== "complete") { 
-        document.querySelector( 
-        "body").style.visibility = "hidden"; 
-        document.querySelector( 
-        "#loader").style.visibility = "visible"; 
-      } else { 
-        document.querySelector( 
-        "#loader").style.display = "none"; 
-        document.querySelector( 
-        "body").style.visibility = "visible"; 
-      } 
-    }; 
-  </script> 
-</body> 
 
-</html> 
+  <script>
+    document.onreadystatechange = function() {
+      if (document.readyState !== "complete") {
+        document.querySelector(
+        "body").style.visibility = "hidden";
+        document.querySelector(
+        "#loader").style.visibility = "visible";
+      } else {
+        document.querySelector(
+        "#loader").style.display = "none";
+        document.querySelector(
+        "body").style.visibility = "visible";
+      }
+    };
+  </script>
+</body>
+
+</html>
 
 
 <script type="text/javascript">
-  document.onreadystatechange = function() { 
-  if (document.readyState !== "complete") { 
-    document.querySelector("body").style.visibility = "hidden"; 
-    document.querySelector("#loader").style.visibility = "visible"; 
-  } else { 
-    document.querySelector("#loader").style.display = "none"; 
-    document.querySelector("body").style.visibility = "visible"; 
-  } 
-}; 
+  document.onreadystatechange = function() {
+  if (document.readyState !== "complete") {
+    document.querySelector("body").style.visibility = "hidden";
+    document.querySelector("#loader").style.visibility = "visible";
+  } else {
+    document.querySelector("#loader").style.display = "none";
+    document.querySelector("body").style.visibility = "visible";
+  }
+};
 
 </script>
