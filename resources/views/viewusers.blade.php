@@ -120,7 +120,7 @@
               <li class="nav-item" style="margin-top: -10px;">
 
                 <a class="nav-link" style="color:white" >
-                    <img src="{{ asset('images/logo_ud.png') }}" style="height: 45px; width: 45px;"></a>
+                    <img src="{{ asset('images/udsmlogo.jpg') }}" style="height: 45px; width: 45px;"></a>
               </li>
 
 <?php
@@ -727,7 +727,7 @@ use App\Section;
 
 
 
-    <div id="div_print" style="margin-left: 2%; margin-right: 2%;">
+    <div>
 
 
   <div class="row">
@@ -858,7 +858,7 @@ use App\Section;
           <!-- ---------------------- -->
   </div>
 
-<table class="table table-striped" id="myTablee">
+<table class="table table-striped" id="myTablee" >
   <thead style="background-color: #376ad3" >
     <tr style="color: white;">
       <th scope="col">#</th>
