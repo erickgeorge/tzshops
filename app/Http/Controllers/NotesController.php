@@ -1121,10 +1121,27 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     $data['header'] = 'Works Order Report (WO#'.$id.')';
 ///////////////////////////////////////////////
 
-$pdf = PDF::loadView('trackworkreport', $data);
-return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
+     $pdf = PDF::loadView('trackworkreport', $data);
+      return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
 ///////////////////////////////////////////////////
     }
+
+
+    
+
+        public function techforreport (Request $request, $id)
+    {
+    $data['wo'] = WorkOrder::where('id', $id)->with('work_order_inspection')->first();
+    $data['header'] = 'Works Order Technician Inspection (WO#'.$id.')';
+///////////////////////////////////////////////
+
+    $pdf = PDF::loadView('techforreport', $data);
+     return $pdf->stream(''.$data['header'].'-  '.date('d-m-Y Hi').'.pdf');
+///////////////////////////////////////////////////
+    }
+
+
+
     public function colgenerate()
     {
      if($_GET['college']=='')

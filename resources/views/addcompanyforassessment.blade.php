@@ -260,6 +260,8 @@
     <br>
     <br>
 
+
+
                             @else
 
 
@@ -367,7 +369,7 @@
 
       @if($assesment->status2 == 2)
 
-      <p style="color: blue;" align="center">Company Supervisor is satisfied with the scores given you can now foward to Estate Officer for the further processes.</p>
+      <p style="color: blue;" align="center">Company Supervisor is satisfied with the scores given you can now forward to Estate Officer for the further processes.</p>
       <button id="bt" type="submit" class="btn btn-primary">Foward to Estate Officer</button>
     
 

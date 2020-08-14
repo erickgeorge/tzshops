@@ -43,7 +43,7 @@ Companies
                                           style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
-                     @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+                     @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
                    <div class="row"><div class="col">
                   <a href="{{ route('renew_company_contract') }}"
                    class="btn btn-primary" >Add new company</a> @endif <a href="{{ route('cleaning_company_expired') }}"

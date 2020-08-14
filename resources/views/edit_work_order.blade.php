@@ -179,11 +179,13 @@ var total=2;
 
 
 
-    @if($techform->created_at ==  $techform->updated_at)
-    <td style="color: red"> Not Completed Yet</td>
-    @else
-      <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
+   @if($techform->status==1)
 
+  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
+    @else
+   
+
+      <td style="color: red"> Not Completed Yet</td>
     @endif
 
     @if($techform->leader == null )
@@ -203,8 +205,26 @@ var total=2;
   </tr>
     @endforeach
   </table>
-   <br>
 
+
+
+@if($techform->status==1)
+@else
+   <br>
+<div class="row">
+   <div class="col">
+
+</div>
+<div >
+  <a href="{{ url('techforreport/'.$wo->id) }}" ><button class="btn btn-primary">
+PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+</button></a>
+</div>
+</div>
+
+@endif
+
+<br>
    <hr>
     <br>
 
@@ -251,12 +271,13 @@ var total=2;
     <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
 
 
-    @if($techform->created_at ==  $techform->updated_at)
+   @if($techform->status==1)
 
-
-    <td style="color: red"> Not Completed Yet</td>
+  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
     @else
-    <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
+   
+
+      <td style="color: red"> Not Completed Yet</td>
     @endif
 
 @if($techform->leader == null )
