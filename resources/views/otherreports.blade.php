@@ -552,9 +552,14 @@ $to = $techs; $v='technician';?>
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
-            @if($head = 'All Inspectors of work Details') @else <th scope="col">@if($head == 'All Technicians Details') section @endif  type @endif </th>
+            <th scope="col">
+            @if($head = 'All Inspectors of work Details') type
+             @elseif($head == 'All Technicians Details') section
+                 @else  type
+                 @endif </th>
 
             @if($head == 'All Technicians Details')
+             <th>Action</th>
             @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
                <th>Action</th>
             @endif
@@ -593,10 +598,17 @@ $to = $techs; $v='technician';?>
         }else { echo $tech->phone;}
 
       ?></td>
-       @if($head = 'All Inspectors of work Details') @else
+
        <td>
-              <?php
-               echo strtoupper($tech->type);  ?> </td>@endif
+        @if($head = 'All Inspectors of work Details')
+        <?php echo strtoupper($tech->type);  ?>
+        @elseif($head = 'All Inspectors of work Details')
+              <?php echo strtoupper($tech->type);  ?>
+              @endif
+            </td>
+            @php
+                
+            @endphp
             @if($head == 'All Technicians Details')
             @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
                <td >
