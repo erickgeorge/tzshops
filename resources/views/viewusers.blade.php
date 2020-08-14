@@ -727,7 +727,7 @@ use App\Section;
 
 
 
-    <div id="div_print" style="margin-left: 2%; margin-right: 2%;">
+    <div>
 
 
   <div class="row">
@@ -858,7 +858,7 @@ use App\Section;
           <!-- ---------------------- -->
   </div>
 
-<table class="table table-striped" id="myTablee">
+<table class="table table-striped" id="myTablee" >
   <thead style="background-color: #376ad3" >
     <tr style="color: white;">
       <th scope="col">#</th>

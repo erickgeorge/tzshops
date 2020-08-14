@@ -13,40 +13,103 @@
     <link rel="stylesheet" href="{{ asset('/fontawesome/css/all.css') }}">
 <link rel="stylesheet" href="/css/main.css">
     </head>
-    <body style="background-color: #fff">
-
-
+    <style>
+        body{
+            background-position:center;
+    /* background-image:url(../images/images2.jpg) no-repeat; */
+            background-image: linear-gradient(#376bd39d,#376bd39d), url("/images/UDSM.jpg") !important;
+        }
+    </style>
+    <body>
 
 <style>
 
-.jumbotron{
+    .jumbotron{
 
-background-color:  #376ad3;
+    background-color:  #376ad3;
 
-    color: white;
-
-    border-radius: 10px;
-
- }
+        color: white;
 
 
-</style>
+     }
+     /* Split the screen in half */
+    .split1,.split2 {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    }
+    .split1{
 
-<div  class="row " style="background-color:  #376ad3">
-<div >
-  <img src="{{ url('/images/udsmlogo.jpg') }}" alt="udsm logo" style="height: 150px; width: 150px;">
- </div>
-<div class="col"> <h2 style="color: white;" align="center"><b><br>UNIVERSITY OF DAR ES SALAAM</b><br><b>Estates Services Management Information System</b></h2></div>
-</div>
+    width: 60%;
+    }
+    .split2{
 
+    width: 40%;
+    }
 
-<br>
+    /* Control the left side */
+    .left {
+    left: 0;
+    }
 
-                <div class=" container col-md-4 jumbotron ">
+    /* Control the right side */
+    .right {
+    right: 0;
+    background-color: #376ad3;
+    }
+
+    </style>
+    <div style="padding-top:10%;">
+
+     <div class="split1 left">
+        <div class="centered">
+            <div class="container"  style="padding-top:13%;">
+                <div class="row">
+                    <div class="col" align="center">
+                        <div class="row">
+                            <h1 class="col">
+                                <b style="color: #fff;">University of Dar es salaam</b>
+                            </h1>
+                        </div>
+                        <br>
+                        <div class="row" >
+                            <div class="col">
+                                <img src="{{ url('/images/logo_ud.png') }}" alt="udsm logo" style="height: 150px; width: 150px;">
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <h3 class="col">
+                                <b style="color: #fff;">Direcorate of Estates Services</b>
+                                </h3>
+
+                        </div>
+                        <div class="row">
+                            <h4 class="col">
+                                <b style="color: #fff;">Estates Services Management Information System</b>
+                                </h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="split2 right">
+        <div class="centered">
+            <div class="container">
+                <div class="row">
+            <div class="col"  style="padding-top:13%;">
+                <div class=" container col-md-9 jumbotron ">
                     <div align="center" style="font-size: 18px;">LOGIN<hr></div>
                 <div>
                      @guest
-                    <form method="POST" action="{{ route('login')}}" class="">
+                    <form method="POST" action="{{ route('login')}}" class="" autocomplete="off">
                          @csrf
 
 
@@ -57,7 +120,7 @@ background-color:  #376ad3;
                              User Name') }}</strong></label>
 
 
-                                <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('email') }}" required autofocus placeholder="Enter User Name">
+                                <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" required autofocus placeholder="Enter User Name">
                                  <!-- <small id="emailHelp" class="form-text text-muted">Your Name is Handled Privately.</small>-->
 
                                 @if ($errors->has('email'))
@@ -95,24 +158,28 @@ background-color:  #376ad3;
                             </div>
 
                             @else
-                           <a href="{{ route('login') }}"><h1 class="text-center">HOME</h1></a>
+                           <a  href="{{ route('login') }}" ><h1 class="text-center" style="color: blanchedalmond;">HOME</h1></a>
                          @endguest
 
                         </div>
                     </form>
                     </div>
-
-
-
-<div style="  background-color:#ebe9e6;
-  overflow: hidden;
-  position: fixed;
-  color: black;
-  bottom: 0;
-  width: 100%;">
-  <div align="center">© 2020 ESTATE. All Rights Reserved.</div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+<div class="container" >
 
 </div>
+
+
+
+        </div>
+
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
