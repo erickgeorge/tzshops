@@ -52,6 +52,10 @@ class landcrosschecklandassessmentactivity extends Model
         public function initiated(){
         return $this->belongsTo('App\User', 'initiated_by');
     } 
+
+        public function deanstudent(){
+        return $this->belongsTo('App\User', 'dean');
+    } 
   
   
   

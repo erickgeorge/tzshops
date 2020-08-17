@@ -344,7 +344,9 @@
 
                @if( $house->status == 2)
 
-
+                                  @if(auth()->user()->type != 'DVC Admin')
+                                   @if(auth()->user()->type != 'Estates Director')
+                                    @if(auth()->user()->type != 'Estates officer')
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
                                           action="{{ route('cleaning.company.delete', [$house->id]) }}">
@@ -356,7 +358,7 @@
                                                                                         data-toggle="tooltip"><i
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
-                                    </form>&nbsp;
+                                    </form> @endif @endif @endif &nbsp;
 
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
@@ -534,6 +536,9 @@
                @if( $house->status == 2)
 
 
+                                                     @if(auth()->user()->type != 'DVC Admin')
+                                   @if(auth()->user()->type != 'Estates Director')
+                                    @if(auth()->user()->type != 'Estates officer')
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
                                           action="{{ route('cleaning.company.delete', [$house->id]) }}">
@@ -545,7 +550,7 @@
                                                                                         data-toggle="tooltip"><i
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
-                                    </form>&nbsp;
+                                    </form> @endif @endif @endif &nbsp;
 
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB'))
@@ -722,6 +727,7 @@
 
                                    @if(auth()->user()->type != 'DVC Admin')
                                    @if(auth()->user()->type != 'Estates Director')
+                                    @if(auth()->user()->type != 'Estates officer')
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
                                           action="{{ route('cleaning.company.delete', [$house->id]) }}">
@@ -733,7 +739,7 @@
                                                                                         data-toggle="tooltip"><i
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
-                                    </form> @endif @endif &nbsp;
+                                    </form> @endif @endif @endif &nbsp;
 
 
                                     @if(($role['user_role']['role_id'] != 1))

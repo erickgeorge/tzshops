@@ -276,7 +276,7 @@
 </li>
 @endif
 
-@if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
+@if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
 
 <!--<li class="nav-item">
     <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">
@@ -294,7 +294,7 @@
                 @php
                     $statusPPU = ppuproject::where('status','0')->orwhere('status','-1')->get();
                 @endphp
-            @elseif(auth()->user()->type == 'Head PPU')
+            @elseif(auth()->user()->type == 'Estates officer')
                 @php
                     $statusPPU = ppuproject::where('status','3')->orwhere('status','5')->orwhere('status','12')->orwhere('status','9')->get();
                 @endphp
@@ -364,7 +364,7 @@
 
 
 
-                     @if(auth()->user()->type == 'DVC Admin')
+                     @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer'))
 
                       <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
@@ -390,7 +390,7 @@
 
 
 
-                    @if((auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Supervisor Landscaping'))
+                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping'))
 
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>

@@ -179,7 +179,7 @@ User Registration
                       <option value="Assets Officer">Assets Officer</option>
                       <option value="Bursar">Bursar</option>
                       <option value="CLIENT">Client</option>
-
+                       <option value="Dean of Student">Dean of Student</option>
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
 	                   <option value="Dvc Accountant">Dvc Accountant</option>
@@ -194,8 +194,8 @@ User Registration
 
                        @endforeach
 
-	                  <option value="Head PPU">Estate Officer</option>
-                    <option value="Housing Officer">Housing Officer</option>
+	                  <option value="Head PPU">Head PPU</option>
+                      <option value="Housing Officer">Housing Officer</option>
 
                       <option value="Maintenance coordinator">Maintenance Coordinator</option>
                       <option value="Quality Surveyor">Quality Surveyor</option>
@@ -240,7 +240,7 @@ User Registration
 	                  <option value="Accountant">Accountant</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
 	                  <option value="CLIENT">Client</option>
-
+                      <option value="Dean of Student">Dean of Student</option>
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
 	                  <option value="Estates officer">Estates officer</option>
@@ -253,7 +253,7 @@ User Registration
 
                        @endforeach
 
-	                  <option value="Head PPU">Estate Officer</option>
+	                  <option value="Head PPU">Head PPU</option>
 
 
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>

@@ -791,7 +791,7 @@ class LandscapingController extends Controller
 
 
 
-         public function crosschecklandassessmentactivity(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
+         public function crosschecklandassessmentactivitysupervisor(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
     {
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -953,6 +953,348 @@ class LandscapingController extends Controller
             'wo' => landworkorders::where('id', $id)->first()
         ]); 
              }
+
+
+
+    
+
+
+
+         public function crosschecklandassessmentactivityusab(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
+    {
+         $company = Crypt::decrypt($company);
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+          
+      //forfirstadding month
+         $tenderfetch = company::where('tender', $company)->get();
+
+ 
+            
+            $areas = $request['myarea'];
+            $sheet = $request['mysheet'];
+            $tenders = $request['mytender'];
+            $paymentss = $request['payments'];
+
+
+             foreach($areas as $a => $b){
+
+       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first(); 
+
+       if (empty($checkforempty)) {
+ 
+             
+            $form = new landassessmentform();
+           
+            $form->area_id = $areas[$a];
+            $form->company_id = $id;
+            $form->company = $tenders[$a];
+            $form->paymentone = $paymentss[$a];
+            $form->assessment_name = $sheet[$a];
+           
+            $form->type = $type;
+
+            $form->status =  1;
+            $form->status5 =  2;
+            $form->assessment_month = $request['assessmment'];
+
+            $monthh = strtotime($form->assessment_month );
+            $lessmonthh = date("Y-m", strtotime("+1 month",  $monthh));
+
+            $form->lessmonth = $lessmonthh;
+            $form->startdate = $date;
+            $form->enddate = $nextmonth;
+
+
+ 
+             foreach ($tenderfetch as $tender) {
+
+
+                 if ($status == 1) {
+              
+           $comp = company::where('id',  $tender->id)->first();
+           
+            $ddate = strtotime($nextmonth);
+            $newDate = date("Y-m-d", strtotime("+1 month", $ddate));
+
+            $comp->nextmonth = $newDate;  
+             $comp->status =  1 ; 
+            $comp->save();
+          
+
+
+            }
+
+            else{
+
+           $comp = company::where('id',  $tender->id)->first();
+            $comp->status =  1 ;
+            $ddate = strtotime($date);
+            $newDate = date("Y-m-d", strtotime("+2 month", $ddate));
+
+            $comp->nextmonth = $newDate;   
+            $comp->save();
+
+            }
+              
+
+           
+           
+            $comp->save(); }
+
+            $form->save();   
+              }
+                   else {
+
+        return redirect()->back()->withErrors(['message' => 'The selected month already exists please select another month']);
+       }
+
+
+             }
+
+    //endaddingmonth
+            $txtbox = $request['activity'];
+            $perce = $request['percentage'];
+            $scor = $request['score'];
+            $remar = $request['remark'];
+            $assessment = $request['assessment_sheet'];
+            $area = $request['area'];
+            $areas = $request['areaid'];
+            
+            $sum = 0;
+            $summ = 0;
+                       $summm = 0;
+  
+           foreach($txtbox as $a => $b){
+            
+             $sum += $perce[$a];
+             $summ += $scor[$a];
+
+
+         
+            $matr = new landcrosschecklandassessmentactivity();
+
+           
+            $matr->activity = $txtbox[$a] ;
+            $matr->percentage = $perce[$a] ;
+            $matr->score = $scor[$a] ;
+            $matr->remark = $remar[$a] ;
+            $matr->assessment_sheet = $assessment[$a] ;
+            $matr->area = $area[$a] ;
+            $matr->month = $request['assessmment'];
+            $matr->area_id = $areas[$a] ;
+            $matr->company = $company ;
+            $matr->assessment_id = $id ;
+            $matr->tottal_percent = $sum;
+            $matr->initiated_by = auth()->user()->id;
+            
+           // $matr->tottal_score = $summ;
+            $matr->status = 1;
+             
+            $matr->save(); } 
+
+        
+
+
+           $erick =landassessmentform::where('company', $company)->get();
+
+           foreach($erick as $asympt) {
+           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo->status = 3;
+           $pndo->save();
+            }
+
+
+
+           $erick =landassessmentactivityform::where('companynew', $company)->get();
+
+           foreach($erick as $asympt) {
+           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();     
+           $pndo->status = 2;
+           $pndo->save();
+            }
+        
+        
+       
+        return redirect()->route('assessmentform.view')->with([
+            'role' => $role,
+            'notifications' => $notifications,  
+            'message' => 'Assessment activity form is successfully created',
+            'wo' => landworkorders::where('id', $id)->first()
+        ]); 
+             }
+
+
+
+
+
+
+
+         public function crosschecklandassessmentactivityadofficer(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
+    {
+         $company = Crypt::decrypt($company);
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+          
+      //forfirstadding month
+         $tenderfetch = company::where('tender', $company)->get();
+
+ 
+            
+            $areas = $request['myarea'];
+            $sheet = $request['mysheet'];
+            $tenders = $request['mytender'];
+            $paymentss = $request['payments'];
+
+
+             foreach($areas as $a => $b){
+
+       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first(); 
+
+       if (empty($checkforempty)) {
+ 
+             
+            $form = new landassessmentform();
+           
+            $form->area_id = $areas[$a];
+            $form->company_id = $id;
+            $form->company = $tenders[$a];
+            $form->paymentone = $paymentss[$a];
+            $form->assessment_name = $sheet[$a];
+           
+            $form->type = $type;
+
+            $form->status =  1;
+            $form->status5 =  3;
+            $form->assessment_month = $request['assessmment'];
+
+            $monthh = strtotime($form->assessment_month );
+            $lessmonthh = date("Y-m", strtotime("+1 month",  $monthh));
+
+            $form->lessmonth = $lessmonthh;
+            $form->startdate = $date;
+            $form->enddate = $nextmonth;
+
+
+ 
+             foreach ($tenderfetch as $tender) {
+
+
+                 if ($status == 1) {
+              
+           $comp = company::where('id',  $tender->id)->first();
+           
+            $ddate = strtotime($nextmonth);
+            $newDate = date("Y-m-d", strtotime("+1 month", $ddate));
+
+            $comp->nextmonth = $newDate;  
+             $comp->status =  1 ; 
+            $comp->save();
+          
+
+
+            }
+
+            else{
+
+           $comp = company::where('id',  $tender->id)->first();
+            $comp->status =  1 ;
+            $ddate = strtotime($date);
+            $newDate = date("Y-m-d", strtotime("+2 month", $ddate));
+
+            $comp->nextmonth = $newDate;   
+            $comp->save();
+
+            }
+              
+
+           
+           
+            $comp->save(); }
+
+            $form->save();   
+              }
+                   else {
+
+        return redirect()->back()->withErrors(['message' => 'The selected month already exists please select another month']);
+       }
+
+
+             }
+
+    //endaddingmonth
+            $txtbox = $request['activity'];
+            $perce = $request['percentage'];
+            $scor = $request['score'];
+            $remar = $request['remark'];
+            $assessment = $request['assessment_sheet'];
+            $area = $request['area'];
+            $areas = $request['areaid'];
+            
+            $sum = 0;
+            $summ = 0;
+                       $summm = 0;
+  
+           foreach($txtbox as $a => $b){
+            
+             $sum += $perce[$a];
+             $summ += $scor[$a];
+
+
+         
+            $matr = new landcrosschecklandassessmentactivity();
+
+           
+            $matr->activity = $txtbox[$a] ;
+            $matr->percentage = $perce[$a] ;
+            $matr->score = $scor[$a] ;
+            $matr->remark = $remar[$a] ;
+            $matr->assessment_sheet = $assessment[$a] ;
+            $matr->area = $area[$a] ;
+            $matr->month = $request['assessmment'];
+            $matr->area_id = $areas[$a] ;
+            $matr->company = $company ;
+            $matr->assessment_id = $id ;
+            $matr->tottal_percent = $sum;
+            $matr->initiated_by = auth()->user()->id;
+            
+           // $matr->tottal_score = $summ;
+            $matr->status = 1;
+             
+            $matr->save(); } 
+
+        
+
+
+           $erick =landassessmentform::where('company', $company)->get();
+
+           foreach($erick as $asympt) {
+           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo->status = 3;
+           $pndo->save();
+            }
+
+
+
+           $erick =landassessmentactivityform::where('companynew', $company)->get();
+
+           foreach($erick as $asympt) {
+           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();     
+           $pndo->status = 2;
+           $pndo->save();
+            }
+        
+        
+       
+        return redirect()->route('assessmentform.view')->with([
+            'role' => $role,
+            'notifications' => $notifications,  
+            'message' => 'Assessment activity form is successfully created',
+            'wo' => landworkorders::where('id', $id)->first()
+        ]); 
+             }
+
+
 
 
 
@@ -1133,6 +1475,41 @@ class LandscapingController extends Controller
 
        return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
     }
+
+
+
+
+    
+      public function approveassessmentdean($id , $tender , $month)
+    {
+
+     $tenders = Crypt::decrypt($tender);
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
+
+     foreach($assessment_approve as $wo_assessment) {
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment->status = 1;
+     $assessment->status2 = 2;
+     $assessment->dean = auth()->user()->id;
+     $assessment->dean_date = $assessment->updated_at;
+     $assessment->save();
+     }
+
+     
+     
+           $erick =landassessmentform::where('company', $tenders)->where('assessment_month', $month)->get();
+           foreach($erick as $asympt) {
+           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo->status = 3;
+           $pndo->status5 = 1;
+           $pndo->status6 = 2;
+           $pndo->save();
+            }
+
+
+       return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
+    }
+
 
 
 
@@ -1408,6 +1785,8 @@ class LandscapingController extends Controller
             'assessmmentcompanylandscaping' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
              'assessmmentcompanyusab' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
+              'assessmmentcompanyestateofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
+
              'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
 
         ]);
@@ -1437,6 +1816,10 @@ class LandscapingController extends Controller
             'assessmmentcompanylandscaping' => landassessmentform::where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
 
             'assessmmentcompanyusab' => landassessmentform::where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanyestateofficer' => landassessmentform::where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanydean' => landassessmentform::where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
 
             'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
         ]);

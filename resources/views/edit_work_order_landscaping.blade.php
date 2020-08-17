@@ -490,7 +490,7 @@ var total=2;
 
     @foreach($assessmmentactivity as $assesmentstatus)
     @endforeach
-      @if(auth()->user()->type == 'Supervisor Landscaping')
+      @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'USAB'))
       @if(count($assessmmentactivity) == 0) <button id="bt" type="submit" class="btn btn-primary">Save</button>
       @elseif($assesmentstatus->status == 1)
        <button id="bt" type="submit" class="btn btn-primary" title="You will not able to edit after final save">Final save</button>
@@ -558,14 +558,37 @@ var total=2;
 
 
 
-  @if($assesment->status == 1)
+  @if(($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 2))
+
+  <b>Approved by Dean of Student : {{ $assesment['deanstudent']->fname .' ' . $assesment['deanstudent']->lname }} on:  {{ date('d F Y', strtotime($assesment->dean_date))}}  </b> <br>
+  @else
   <b>status:</b><b style="color: blue;">  Not yet approved</b>
-  @elseif(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
+  @endif
+
+
+  @if(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
   <b>Approved by Estate Officer : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
   @endif
   <br>
 
-  @if(auth()->user()->type == 'Head PPU')
+
+  @if(auth()->user()->type == 'Dean of Student')
+  @if(($assesment->status == 1) and ($assesment->status2 == 1) )
+  <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 800px;">Approve <a href="{{route('approveassessmentdean', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
+     <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#rejectppu"
+                                                            style="color: green;"
+                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
+ @endif
+ @endif
+
+
+
+    
+
+
+
+  @if(auth()->user()->type == 'Estates officer')
   @if($assesment->status == 1)
   <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 800px;">Approve <a href="{{route('approveassessment', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
@@ -679,7 +702,7 @@ var total=2;
 
 
 
-    <!--reject by Head PPU-->
+    <!--reject by Estates officer-->
     <div class="modal fade" id="rejectppu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
