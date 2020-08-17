@@ -11,11 +11,24 @@
         </div>
     </div>
     <div class="container">
-    @if(Session::has('message'))
-        <br>
-        <p class="alert alert-success">{{ Session::get('message') }}</p>
-    @endif
-    </div>
+        @if(Session::has('message'))
+            <div class="alert alert-success">
+                <ul>
+                    <li>{{ Session::get('message') }}</li>
+                </ul>
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                 <ul class="alert alert-danger" style="list-style: none;">
+                    @foreach ($errors->all() as $error)
+                        <li><?php echo $error; ?></li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        </div>
 
     <hr class="container">
     <div class="container">

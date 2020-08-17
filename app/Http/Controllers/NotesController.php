@@ -1083,7 +1083,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
        if($data['fetch'] ->isEmpty()){
 
-return redirect()->back()->withErrors(['message' => 'No data Found Matching your search ']);
+return redirect()->back()->withErrors(['message' => 'No data Found Matching your Filter ']);
 }else{
 
 $pdf = PDF::loadView('allreport', $data);
@@ -1127,7 +1127,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 
 
-    
+
 
         public function techforreport (Request $request, $id)
     {

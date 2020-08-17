@@ -5,7 +5,9 @@
 
     <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of zones assigned to Inspector of Work</b></p>
 </div><br>
-
+@php
+    use App\User;
+@endphp
 <style>
 table {
   border-collapse: collapse;
@@ -33,7 +35,7 @@ tr:nth-child(even) {
     <tr>
                     <th>#</th>
                     <th>Name of zone</th>
-
+                    <th>Inspector of work</th>
 
 
     </tr>
@@ -46,7 +48,12 @@ tr:nth-child(even) {
                        <?php $i++;?>
                         <td>{{$i}}</td>
                        <td class="nameee"> {{$sect->zone}}</td>
+                            <td> @php
+                                $him = User::where('zone', $sect->zone)->get();
+                             @endphp @foreach ($him as $him)
+                                         {{$him->fname}} {{$him->mid_name}} {{$him->lname}} <br>
 
+                             @endforeach </td>
                        </tr>
                         @endforeach
                 </tbody>
