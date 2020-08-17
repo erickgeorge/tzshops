@@ -10,6 +10,7 @@ use App\assetsassesmotorvehicle;
 use App\assetsassesplantandmachinery;
 
 @endphp
+<title>@php echo ' Asset Assessment Records'; @endphp</title>
 <style>
     table {
   border-collapse: collapse;

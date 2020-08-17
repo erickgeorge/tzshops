@@ -113,48 +113,29 @@ foreach ($hoos as $hous) {
 
  @if(($role['user_role']['role_id'] == 1))
 
-<option selected="">All Sections</option>
- @if($head == 'All HOS Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
-@elseif($head == 'All Technicians Details')
+<option value="" selected="">All Sections</option>
+ @if($head == 'All Technicians Details')
 <?php $to = Technician::select('type')->distinct()->get(); $v='technician';
-
 ?>
-@elseif($head == 'All Inspectors of work Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
 @endif
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
-
 @endforeach
  @elseif($maintenance_coordinator == 1)
-  <option selected="">All</option>
- @if($head == 'All HOS Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
-@elseif($head == 'All Technicians Details')
+  <option value="" selected="">All</option>
+ @if($head == 'All Technicians Details')
 <?php $to = Technician::select('type')->distinct()->get(); $v='technician';
-
-?>
-@elseif($head == 'All Inspectors of work Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
-@endif
+?>@endif
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
-
 @endforeach
  @else
-@if($head == 'All HOS Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
-@elseif($head == 'All Technicians Details')
+@if($head == 'All Technicians Details')
 <?php $to = Technician::select('type')->distinct()->where('type','like','%'.$placed.'%')->get(); $v='technician';
-
 ?>
-@elseif($head == 'All Inspectors of work Details')
-<?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
 @endif
 @foreach($to as $too)
-<option selected="selected" value="{{ $too->type }}">{{ $too->type }}</option>
-
+<option value="{{ $too->type }}">{{ $too->type }}</option>
 @endforeach
 @endif          </select>
           </div>
@@ -162,7 +143,7 @@ foreach ($hoos as $hous) {
       </div>
 
       <input type="text" name="change"
-      value="<?php echo $v; ?>" hidden>
+      value="technician" hidden>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>

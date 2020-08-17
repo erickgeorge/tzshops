@@ -10,6 +10,7 @@ use App\assetsassesmotorvehicle;
 use App\assetsassesplantandmachinery;
 
 @endphp
+<title>Asset Assessment Report</title>
 <center>
     <h1>University of Dar es salaam</h1>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">

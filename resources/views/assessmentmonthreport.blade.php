@@ -1,9 +1,11 @@
+@foreach($assessmmentcompany as $company)
+@endforeach
+<title>ASSESSMENT REPORT ON  {{ date('F Y', strtotime($company->assessment_month))}} </title>
 <div style="margin-top: 20px" align="center">
 
     <p><h2>University of Dar es salaam</h2>
      <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
-    @foreach($assessmmentcompany as $company)
-@endforeach
+
     <p><b><u style="text-transform: uppercase;" >ASSESSMENT REPORT ON  {{ date('F Y', strtotime($company->assessment_month))}} </u></b></p>
 </div>
 <style>

@@ -45,6 +45,8 @@ use App\assetsassesplantandmachinery;
             }
 
 @endphp
+<title><?php  $time = strtotime($_GET['date'])?>
+    LATEST {{strtoupper($_GET['asset'])}} ASSETS ASSESSMENT RECORDS</title>
 <style>
     table {
   border-collapse: collapse;
@@ -186,7 +188,7 @@ tr:nth-child(even) {
                     @php
                         $net = $data['Cost'] - $asseted['accumulatedDepreciation'];
                     @endphp
-                    {{number_format($net)}}  
+                    {{number_format($net)}}
                 </td>
             </tr>
             @php

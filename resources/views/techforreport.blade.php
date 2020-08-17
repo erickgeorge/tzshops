@@ -1,4 +1,4 @@
-  <title><?php echo $header; ?></title>
+  <title><?php echo $header; ?> </title>
 <?php use App\WorkOrderInspectionForm;
     use App\WorkOrderTransport;
     use App\WorkOrderStaff;
@@ -213,7 +213,7 @@ tr:nth-child(even) {
 
   <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
     @else
-   
+
 
       <td style="color: red"> Not Completed Yet</td>
     @endif
@@ -249,9 +249,9 @@ W
    <hr>
     <br>
     <br>
- 
+
 <div>Inspection Description:</div>
-   <div  style=" 
+   <div  style="
   width: 520px;
   border: 2px solid #376ad3;
   padding: 50px;
@@ -284,7 +284,7 @@ W
   <div class="container-name">
      <div class="div1"></div>
      <div class="div2"> Official Stamp: <u style="padding-left: 40px;">   </u> </div>
-   
+
 
    </div>
 
@@ -292,4 +292,4 @@ W
 
 
   <br>
-  
+

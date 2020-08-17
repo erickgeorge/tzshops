@@ -1,3 +1,4 @@
+<title>unattended works order report</title>
 <h1 style="text-align: center"> ESTATE </h1>
 <h1 style="text-align: center" style="text-transform: uppercase;">unattended works order report</h1>
 <style>
@@ -41,7 +42,7 @@ tr:nth-child(even) {
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
-                  
+
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -52,7 +53,7 @@ tr:nth-child(even) {
                                 <td><span class="badge badge-warning">new</span></td>
                             @elseif($work->status == 1)
                                 <td><span class="badge badge-success">accepted</span></td>
-                                
+
                             @elseif($work->status == 2)
                                 <td><span class="badge badge-success">CLOSED</span></td>
                             @elseif($work->status == 3)
@@ -66,9 +67,9 @@ tr:nth-child(even) {
                             @elseif($work->status == 7)
                                                             <td><span class="badge badge-info">material requested</span></td>
                             @else
-                                <td><span class="badge badge-success">procurement stage</span></td>                             
+                                <td><span class="badge badge-success">procurement stage</span></td>
                             @endif
-                            
+
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                             <td>
 
@@ -79,7 +80,7 @@ tr:nth-child(even) {
                                 {{ $work->location }}
                             @endif
                             <td>
-                            
+
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
                                     @if($work->status == -1)
@@ -88,7 +89,7 @@ tr:nth-child(even) {
                                     @elseif($work->status == 2)
                                          <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>
-                                                    
+
                                     @else
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
@@ -104,7 +105,7 @@ tr:nth-child(even) {
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>&nbsp;
                                     @endif
-                              
+
 
                                 @endif
                             </td>

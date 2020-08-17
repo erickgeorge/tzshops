@@ -8,6 +8,8 @@ use App\assetsintangible;
 use App\assetsmotorvehicle;
 use App\assetsplantandmachinery;
 @endphp
+<title>ALL {{strtoupper($_GET['asset'])}} ASSETS ASSESSMENT RECORDS FOR YEAR {{$_GET['year']}}
+</title>
 <style>
     table {
   border-collapse: collapse;

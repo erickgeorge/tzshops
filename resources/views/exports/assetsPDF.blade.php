@@ -1,3 +1,4 @@
+<title>NON - CURRENT ASSET REGISTER AS ON @php echo date('d F, Y'); @endphp</title>
 <style>
     table {
   border-collapse: collapse;

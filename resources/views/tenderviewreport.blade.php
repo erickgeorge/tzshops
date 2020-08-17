@@ -1,3 +1,4 @@
+<title>tenders Details</title>
 <div style="margin-top: 20px" align="center">
 
 

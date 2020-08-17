@@ -1,4 +1,4 @@
-  <title><?php echo $header; ?></title>
+  <title><?php echo $header; ?> </title>
 <?php use App\WorkOrderInspectionForm;
     use App\WorkOrderTransport;
     use App\WorkOrderStaff;
