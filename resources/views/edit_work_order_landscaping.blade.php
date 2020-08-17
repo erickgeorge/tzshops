@@ -503,13 +503,7 @@ var total=2;
 
 
 
-
-
 </br>
-
-
-
-
 
 <!--avarage-->
 @endif

@@ -175,6 +175,7 @@ User Registration
                <select  required style="width: 500px;" class="custom-select" name="type" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>
+	                  <option value="Administrative officer">Administrative officer</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
                       <option value="Assets Officer">Assets Officer</option>
                       <option value="Bursar">Bursar</option>
@@ -237,6 +238,7 @@ User Registration
 
                 <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
 	                  <option value="" selected>Choose...</option>
+	                  <option value="Administrative officer">Administrative officer</option>
 	                  <option value="Accountant">Accountant</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
 	                  <option value="CLIENT">Client</option>

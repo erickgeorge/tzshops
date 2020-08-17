@@ -183,12 +183,13 @@
             </div>
 
 
-              <div id="locationdiv" >
+              <div id="locationdiv" > 
 
 
                       <select class="custom-select" name="type" id="type" required>
                       <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif value="" selected>Choose user type...</option>
-                      <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
+                     <option @if (in_array('Administrative officer',$str_array)) { selected="selected" } @else{} @endif   value="Administrative officer">Administrative officer</option>
+                      <option @if (in_array('Accountant',$str_array)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
 
                       <option @if (in_array('Bursar',$str_array)) { selected="selected" } @else{} @endif  value="Bursar">Bursar</option>
 
@@ -280,6 +281,8 @@
 
 
                       <option @if (in_array('Accountant',$strarray)) { selected="selected" } @else{} @endif value="" selected>Choose user type...</option>
+                      <option @if (in_array('Administrative officer',$strarray)) { selected="selected" } @else{} @endif   value="Administrative officer">Administrative officer</option>
+
                       <option @if (in_array('Maintenance coordinator',$strarray)) { selected="selected" } @else{} @endif   value="Accountant">Accountant</option>
 
                       <option @if (in_array('Bursar',$strarray)) { selected="selected" } @else{} @endif  value="Bursar">Bursar</option>
