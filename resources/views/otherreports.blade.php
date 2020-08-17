@@ -551,6 +551,7 @@ $to = $techs; $v='technician';?>
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
+              <th scope="col">Type</th>
             <th title="phone" scope="col">Phone</th>
             <th scope="col">
             @if($head = 'All Inspectors of work Details') type
@@ -587,6 +588,7 @@ $to = $techs; $v='technician';?>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
                 <td>{{ $tech->email }}</td>
+                 <td>{{ ucwords(strtolower($tech->type)) }}</td>
                 <td>
 
       <?php $phonenumber = $tech->phone;

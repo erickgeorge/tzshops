@@ -567,8 +567,8 @@ Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@
 
  Route::post('delete/material/{id}/{woid}', 'StoreController@deletematerial')->name('material.delete')->middleware('auth');
  Route::get('trackreport/{id}','NotesController@trackreport')->name('trackreport')->middleware('auth');
+ Route::get('techforreport/{id}','NotesController@techforreport')->name('techforreport')->middleware('auth');
  Route::get('hoscompletedjob/{id}','WorkOrderController@hoscompletedjob')->name('hoscompletedjob')->middleware('auth');
-
  Route::get('inroomreport','HomeController@anonymousroomreport')->name('inroomreport')->middleware('auth');
 
  Route::get('inroomreportextended','HomeController@anonymousroomreportextended')->name('inroomreportextended')->middleware('auth');
