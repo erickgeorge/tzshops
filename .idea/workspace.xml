@@ -3,46 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a3c7da29-8ef0-4506-84a6-5a8c6d9538b9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/addassessmentpdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/addassessmentpdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/allreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/assessmentmonthreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/assessmentmonthreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/assessmentpdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/assessmentpdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/assessmentviewreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/assessmentviewreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/collegesreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/collegesreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/completewopdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/completewopdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/departmentsreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/departmentsreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/desdeptsreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/desdeptsreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/exports/assetassessmentsingle.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exports/assetassessmentsingle.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/exports/assetsAssesment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exports/assetsAssesment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/exports/assetsInfo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exports/assetsInfo.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/exports/assetsPDF.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exports/assetsPDF.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/exports/assetsallsummary.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exports/assetsallsummary.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/grnpdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/grnpdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/iowfromzonereport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/iowfromzonereport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/iowlocationreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/iowlocationreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/iowonlyzonereport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/iowonlyzonereport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/iowzonereport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/iowzonereport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/issuenotepdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/issuenotepdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landcleaning_areareport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landcleaning_areareport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landcleaning_companyreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landcleaning_companyreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/asset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/asset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/land.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/land.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/ppu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/ppu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/materialEntrypdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/materialEntrypdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/material_pdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/material_pdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/notes_pdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/notes_pdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/roomreportpdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/roomreportpdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/tenderviewreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tenderviewreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trackworkreport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trackworkreport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trendingscorereport.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trendingscorereport.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trendingscorereportcompany.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trendingscorereportcompany.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/unattendedwopdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/unattendedwopdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users_pdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users_pdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/viewusers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/viewusers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/wowithdurationpdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wowithdurationpdf.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,6 +165,8 @@
       <workItem from="1597151391505" duration="621000" />
       <workItem from="1597170876795" duration="26000" />
       <workItem from="1597211956342" duration="4130000" />
+      <workItem from="1597481872201" duration="14000" />
+      <workItem from="1597482253093" duration="250000" />
     </task>
     <servers />
   </component>
@@ -221,6 +183,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="155" width="424" height="491" key="FileChooserDialogImpl" timestamp="1597170900366">

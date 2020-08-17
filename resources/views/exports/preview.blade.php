@@ -112,7 +112,7 @@ echo 'Computer Equipments';
 </div>
 <div class="container">
 
-    <table class="table table-striped display text-center" id="myTable4" style="width:100%">
+    <table class="table table-responsive table-striped display text-center" id="myTable4" style="width:100%">
         <thead>
             <tr style="color:white;">
                 <th><b >Sn</b></th>

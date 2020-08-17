@@ -27,7 +27,7 @@
 <hr>
 
 
-                         <table class="table table-striped display" id="myTable" style="width:100%">
+                         <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
                 <thead >
   <tr style="color: white;">
     <th>No</th>
@@ -111,11 +111,11 @@
                     @if(in_array("yes", $p) and (in_array("no", $p)))
 
 
-                    
+
                     @elseif(in_array("yes", $p))
 
                      <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > Reserve and send purchasing order </a></button>
-                     
+
                     @else
 
 

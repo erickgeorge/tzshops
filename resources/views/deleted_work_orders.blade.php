@@ -21,7 +21,7 @@
 
 
 
-        <table class="table table-hover table-striped table-condensed table-scrollable" id="myTable">
+        <table class="table table-hover  table-responsive table-striped table-condensed table-scrollable" id="myTable">
             <thead >
            <tr style="color: white;">
                 <th scope="col">#</th>

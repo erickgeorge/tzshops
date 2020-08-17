@@ -35,7 +35,7 @@
 
 
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
-        <table class="table table-striped display" id="myTable"  style="width:100%">
+        <table class="table table-responsive table-striped display" id="myTable"  style="width:100%">
             <thead >
             <tr style="color: white;">
                 <th >#</th>
@@ -267,7 +267,7 @@
 
 
     <div class="container " style="margin-right: 2%; margin-left: 2%;">
-        <table class="table table-striped display" id="myTablee"  style="width:100%">
+        <table class="table table-responsive table-striped display" id="myTablee"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>

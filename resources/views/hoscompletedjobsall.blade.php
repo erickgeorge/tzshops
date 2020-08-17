@@ -12,7 +12,7 @@ use App\Department;
 use App\Section;
 use App\WorkOrder;
 use Carbon\Carbon;
- use App\workordersection; 
+ use App\workordersection;
  ?>
 
     <br>
@@ -163,7 +163,7 @@ use Carbon\Carbon;
 
     </div>
         @if(count($hosWo) > 0)
-            <table class="table table-striped display" id="myTable" style="width:100%">
+            <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
@@ -599,7 +599,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
             </div>
             <select  style="width: 300px;min-width: 150px;" id="p_type" name="p_type">
                 <option selected value="">Choose...</option>
-              
+
 <?php $sectionss = workordersection::get(); ?>
  @foreach($sectionss as $sectionss)
                <option value="{{ $sectionss->section_name }}">{{ $sectionss->section_name }}</option>

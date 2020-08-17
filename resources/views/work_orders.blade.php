@@ -262,7 +262,7 @@ foreach($userwithid as $userwithid)
 
         @if(count($wo) > 0)
         <div class="container">
-            <table class="table table-striped display" id="myTable" style="width:100%">
+            <table class="table table-striped table-responsive display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
@@ -505,11 +505,11 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
                                                     class="badge badge-success">View</span></a>
 
-                                         @endif               
+                                         @endif
                                      @elseif($work->status == 2)
 
                                        @if($work->client_id != auth()->user()->id )
-                            
+
                      <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                                           &nbsp; @endif

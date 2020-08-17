@@ -25,7 +25,7 @@ tr:nth-child(even) {
 }
 </style>
 
-<table class="table table-light">
+<table class="table table-responsive table-light">
     <thead class="thead-light">
         <tr>
             <th colspan="18">

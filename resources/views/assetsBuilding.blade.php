@@ -53,7 +53,7 @@ use Illuminate\Support\Facades\DB;
     <div class="card">
         <div class="card-body">
             <p class="card-text">
-                <table class="table table-striped display text-center">
+                <table class="table table-responsive  table-striped display text-center">
                     <thead>
                         <tr style="color:white;">
                             <th>New</th>
@@ -330,7 +330,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
     <br>
     <div id="accordion">
         @if (count($land)>0)
-        <table class="table table-striped display text-center" id="myTable" style="width:100%">
+        <table class="table table-striped  table-responsive display text-center" id="myTable" style="width:100%">
             <thead>
                 <tr style="color:white;">
                     <th>#</th>
@@ -385,7 +385,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
 
 
 <p>
-    
+
   <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Latest Assets Assessment Summary</a>
 
 </p>
@@ -450,7 +450,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
             </div>
         </div>
 </div>
-        <table class="table table-striped display text-center" id="myTableAssesment" style="width:100%">
+        <table class="table table-striped table-responsive  display text-center" id="myTableAssesment" style="width:100%">
             <thead>
                 <tr style="color:white;">
                     <th>#</th>

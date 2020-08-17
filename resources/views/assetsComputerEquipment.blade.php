@@ -54,7 +54,7 @@ Computer Equipment Assets
         <div class="card-body">
             <p class="card-text">
 
-                <table class="table table-striped display text-center">
+                <table class="table table-striped table-responsive  display text-center">
                     <thead  >
                         <tr style="color:white;">
                             <th>New</th>
@@ -328,7 +328,7 @@ Computer Equipment Assets
 
     <div id="accordion">
     @if (count($land)>0)
-    <table class="table table-striped display text-center" id="myTable" style="width:100%">
+    <table class="table table-striped display text-center table-responsive " id="myTable" style="width:100%">
         <thead>
             <tr style="color:white;">
                 <th>#</th>
@@ -445,7 +445,7 @@ Computer Equipment Assets
             </div>
           </div>
   </div>
-          <table class="table table-striped display text-center" id="myTableAssesment" style="width:100%">
+          <table class="table table-striped display table-responsive  text-center" id="myTableAssesment" style="width:100%">
               <thead >
                   <tr style="color:white;">
                       <th>#</th>

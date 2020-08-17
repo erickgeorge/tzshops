@@ -263,7 +263,7 @@ foreach($userwithid as $userwithid)
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
             @if(count($locations) > 0)
-            <table class="table table-striped display" id="myTable" style="width:100%">
+            <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
                 <thead>
                 <tr style="color: white;">
                     <th>#</th>

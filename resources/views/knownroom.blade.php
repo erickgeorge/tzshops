@@ -243,7 +243,7 @@ foreach($userwithid as $userwithid)
 
     </div>
         @if(count($wo) > 0)
-            <table class="table table-striped display" id="myTable" style="width:100%">
+            <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>

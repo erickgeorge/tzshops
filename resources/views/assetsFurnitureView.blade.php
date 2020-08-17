@@ -226,7 +226,7 @@ Furniture Asset
                 <a href="{{route('asset/assesment/export/',[$type])}}?type=furniture" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
             </div>
         </div><br>
-        <table class="table table-striped display text-center" id="myTable" style="width:100%">
+        <table class="table table-striped table-responsive  display text-center" id="myTable" style="width:100%">
             <thead  >
                 <tr style="color:white;">
                     <th>#</th>

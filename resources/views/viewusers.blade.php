@@ -858,7 +858,7 @@ use App\Section;
           <!-- ---------------------- -->
   </div>
 
-<table class="table table-striped" id="myTablee" >
+<table class="table table-responsive  table-striped" id="myTablee" >
   <thead style="background-color: #376ad3" >
     <tr style="color: white;">
       <th scope="col">#</th>

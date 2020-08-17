@@ -122,7 +122,7 @@ use App\MinuteConversation;
   <div class="modal-body">
       <div class="row">
         <div class="col">
-        <table class="table table-striped display">
+        <table class="table table-responsive table-striped display">
             <th>From</th>
             <th>Material name</th>
             <th>Type</th>

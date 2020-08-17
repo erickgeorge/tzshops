@@ -24,7 +24,7 @@
                    class="btn btn-primary">Add new Hall of Resdence</a>
                    <br><br>
 
-                <table id="myTablee" id="myTable" class="table table-striped">
+                <table id="myTablee" id="myTable" class="table table-responsive table-striped">
                     <thead >
                    <tr style="color: white;">
                         <th scope="col">#</th>

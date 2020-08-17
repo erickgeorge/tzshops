@@ -226,7 +226,7 @@ Building Asset
                 <a href="{{route('asset/assesment/export/',[$type])}}?type=building" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
             </div>
         </div><br>
-        <table class="table table-striped display text-center" id="myTable" style="width:100%">
+        <table class="table table-striped display table-responsive  text-center" id="myTable" style="width:100%">
             <thead >
                 <tr style="color:white;">
                     <th>#</th>

@@ -607,7 +607,7 @@ $to = $techs; $v='technician';?>
               @endif
             </td>
             @php
-                
+
             @endphp
             @if($head == 'All Technicians Details')
             @if((substr($hotype,0,4) == 'HOS ')||($hotype == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))

@@ -14,10 +14,11 @@
 <link rel="stylesheet" href="/css/main.css">
     </head>
     <style>
-        body{
+        .left{
             background-position:center;
+            background-size: cover;
     /* background-image:url(../images/images2.jpg) no-repeat; */
-            background-image: linear-gradient(#376bd39d,#376bd39d), url("/images/UDSM.jpg") !important;
+            background-image: linear-gradient(#376bd369,#376bd369), url("/images/image.jpg") !important;
         }
     </style>
     <body>
@@ -39,7 +40,6 @@
     z-index: 1;
     top: 0;
     overflow-x: hidden;
-    padding-top: 20px;
     }
     .split1{
 
@@ -47,6 +47,7 @@
     }
     .split2{
 
+    padding-top: 20px;
     width: 40%;
     }
 
@@ -66,7 +67,7 @@
 
      <div class="split1 left">
         <div class="centered">
-            <div class="container"  style="padding-top:13%;">
+            <div class="container"  style="padding-top:8%;">
                 <div class="row">
                     <div class="col" align="center">
                         <div class="row">
@@ -75,17 +76,42 @@
                             </h1>
                         </div>
                         <br>
-                        <div class="row" >
+                        {{-- <div class="row" >
                             <div class="col">
                                 <img src="{{ url('/images/logo_ud.png') }}" alt="udsm logo" style="height: 150px; width: 150px;">
 
                             </div>
 
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <h3 class="col">
-                                <b style="color: #fff;">Direcorate of Estates Services</b>
+                                <b style="color: #fff;">Directorate of Estates Services</b>
                                 </h3>
+
+                        </div>
+                        {{-- <div class="row">
+                            <h4 class="col">
+                                <b style="color: #fff;">Estates Services Management Information System</b>
+                                </h4>
+
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="split2 right">
+        <div class="centered">
+            <div class="container">
+                <div class="row"   style="padding-top:8%;">
+                    <div class="col" align="center">
+
+                        <div class="row" >
+                            <div class="col">
+                                <img src="{{ url('/images/logo_ud.png') }}" alt="udsm logo" style="height: 150px; width: 150px;">
+
+                            </div>
 
                         </div>
                         <div class="row">
@@ -96,15 +122,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="split2 right">
-        <div class="centered">
-            <div class="container">
                 <div class="row">
-            <div class="col"  style="padding-top:13%;">
+            <div class="col">
                 <div class=" container col-md-9 jumbotron ">
                     <div align="center" style="font-size: 18px;">LOGIN<hr></div>
                 <div>
