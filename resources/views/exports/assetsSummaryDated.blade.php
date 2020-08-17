@@ -8,6 +8,9 @@ use App\assetsintangible;
 use App\assetsmotorvehicle;
 use App\assetsplantandmachinery;
 @endphp
+<title> <?php  $time = strtotime($_GET['date'])?>
+    ALL {{strtoupper($_GET['asset'])}} ASSETS ASSESSMENT RECORDS AS ON {{date('d/m/Y',$time)  }}
+</title>
 <style>
     table {
   border-collapse: collapse;

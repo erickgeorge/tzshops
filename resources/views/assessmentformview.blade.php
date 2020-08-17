@@ -222,7 +222,7 @@ Assessment form
 
 
 
-                <table id="myTablee" class="table table-striped">
+                <table id="myTablee" class="table table-responsive  table-striped">
                     <thead >
                     <tr style="color: white;">
                         <th scope="col">#</th>

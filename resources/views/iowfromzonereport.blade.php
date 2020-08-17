@@ -1,9 +1,11 @@
+@foreach($iowzone as $zonename)
+     @endforeach
+<title>List of Inspector of Work in {{ $zonename->zone }}</title>
 <div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
-     @foreach($iowzone as $zonename)
-     @endforeach
+
 
 
     <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of Inspector of Work in {{ $zonename->zone }}</b></p>

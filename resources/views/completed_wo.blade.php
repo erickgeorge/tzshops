@@ -151,7 +151,7 @@ use App\WorkOrder;
 </div>
           <!-- ---------------------- -->
 
-            <table class="table table-striped display" id="myTable" style="width:100%">
+            <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>

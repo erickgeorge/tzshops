@@ -170,14 +170,14 @@
 
                      @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                   @endif
-                   
+
                    <a href="{{ route('cleaningcompany') }}"
                    class="btn btn-outline-primary" >All tenders</a>
                    <br>
                    <br>
 
 
-                <table id="myTableee" id="myTable" class="table table-striped">
+                <table id="myTableee" id="myTable" class="table table-responsive table-striped">
 
                     <thead >
                    <tr style="color: white;">

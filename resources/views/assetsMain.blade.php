@@ -89,7 +89,7 @@ use App\assetsworkinprogress;
         <div class="card">
             <div class="card-body">
                 <p class="card-text">
-                    <table class="table table-striped display text-center" id="myTable" style="width:100%">
+                    <table class="table table-responsive  table-striped display text-center" id="myTable" style="width:100%">
                         <thead  >
                             <tr style="color:white;">
                                 <th>#</th>

@@ -15,8 +15,8 @@ Plant & Machinery Assets Yearly Assessment
             <h5><b style="text-transform: capitalize;">Plant & Machinery Assets Yearly Assessment</b></h5>
         </div>
         <div class="col">
-            
-       
+
+
             <form action="{{route('yearlybuilding')}}" method="get">
                 <div class="row">
                     <div class="form-group  col">
@@ -35,7 +35,7 @@ Plant & Machinery Assets Yearly Assessment
                     </div>
                 </div>
             </form>
-           
+
         </div>
     </div>
     <hr class="container">
@@ -75,7 +75,7 @@ Plant & Machinery Assets Yearly Assessment
         </div>
     </div>
     <br>
-    <table class="table table-striped display text-center" id="myTable" style="width:100%">
+    <table class="table table-striped table-responsive display text-center" id="myTable" style="width:100%">
         <thead  >
             <tr style="color:white;">
                 <th>#</th>
@@ -111,7 +111,7 @@ Plant & Machinery Assets Yearly Assessment
                     $d++;
                 @endphp
             @endforeach
-            
+
         </tbody>
     </table>
 </div>

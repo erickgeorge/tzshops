@@ -5,7 +5,9 @@ IoW Zones
 @endSection
 
 @section('body')
-
+@php
+   use App\User;
+@endphp
 
 <div class="container" >
 
@@ -44,6 +46,7 @@ IoW Zones
                         <th scope="col">#</th>
                         <th scope="col">Name of Zone</th>
                         <th>Inspector of Work</th>
+                        <th>Action</th>
 
 
                     </tr>
@@ -58,8 +61,15 @@ IoW Zones
                             <th scope="row">{{ $i }}</th>
 
                             <td><?php echo strtoupper( $iow->zone ); ?></td>
-
-                            <td><a class="btn btn-primary" href="{{route('view.iowwithloc', [$iow->zone])}}" >view</a></td>
+                            <td> @php
+                               $him = User::where('zone', $iow->zone)->get();
+                            @endphp @foreach ($him as $him)
+                                        {{$him->fname}} {{$him->mid_name}} {{$him->lname}} <br>
+                                        @php
+                                            $gfd = $him->id;
+                                        @endphp
+                            @endforeach </td>
+                            <td><a class="btn btn-primary" href="{{route('view.location', [$gfd , $iow->zone])}}" >view</a></td>
 
 
                         </tr>

@@ -42,7 +42,7 @@
     <div class="container">
 
 
-        <table class="table table-striped display" id="myTable"  style="width:100%">
+        <table class="table table-responsive table-striped display" id="myTable"  style="width:100%">
             <thead>
            <tr style="color: white;">
         <th >No</th>
@@ -198,7 +198,7 @@
                     </div>
                   </div>
                 <div class="modal-body">
-             
+
 
 
 
@@ -233,7 +233,7 @@
 
 
 
-                                       
+
 
 
 
@@ -308,7 +308,7 @@
                         ?>
                         @if(count($wo_materials) > 0)
 
-                        <table class="table table-striped" style="width:100%">
+                        <table class="table table-responsive table-striped" style="width:100%">
   <tr>
      <th>No</th>
     <th>Material Name</th>

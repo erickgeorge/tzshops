@@ -188,7 +188,7 @@
                    <br>
 
 
-                <table id="myTableee" id="myTable" class="table table-striped">
+                <table id="myTableee" id="myTable" class="table table-responsive table-striped">
 
                     <thead >
                    <tr style="color: white;">

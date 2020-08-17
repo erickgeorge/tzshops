@@ -21,6 +21,7 @@ $plantmachinery = assetsplantandmachinery::get();
 $workinprogress = assetsworkinprogress::get();
 
 @endphp
+<title>All Assets Summary Report</title>
 <style>
     table {
   border-collapse: collapse;

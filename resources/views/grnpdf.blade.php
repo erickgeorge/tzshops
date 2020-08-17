@@ -1,3 +1,4 @@
+<title>GOODS RECEIVED NOTE</title>
 <div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>

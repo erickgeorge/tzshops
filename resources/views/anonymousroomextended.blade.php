@@ -5,7 +5,7 @@
     @endSection
 
 @section('body')
-<?php use App\block; ?>
+<?php use App\Block; ?>
 <div class="container">
     <br>
     <div class="row container-fluid" >

@@ -8,6 +8,8 @@ use App\assetsintangible;
 use App\assetsmotorvehicle;
 use App\assetsplantandmachinery;
 @endphp
+<title>ALL {{strtoupper($_GET['asset'])}} ASSETS ASSESSMENT RECORDS FOR YEAR {{$_GET['year']}}
+</title>
 <style>
     table {
   border-collapse: collapse;
@@ -25,7 +27,7 @@ tr:nth-child(even) {
 }
 </style>
 
-<table class="table table-light">
+<table class="table table-responsive table-light">
     <thead class="thead-light">
         <tr>
             <th colspan="18">

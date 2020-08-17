@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <div class="container " style="margin-right: 2%; margin-left: 2%;">
+    <div class="container ">
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead>
             <tr style="color: white;">

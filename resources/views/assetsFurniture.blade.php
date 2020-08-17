@@ -54,7 +54,7 @@ Furniture Assets
         <div class="card-body">
             <p class="card-text">
 
-                <table class="table table-striped display text-center">
+                <table class="table table-responsive  table-striped display text-center">
                     <thead  >
                         <tr style="color:white;">
                             <th>New</th>
@@ -326,7 +326,7 @@ Furniture Assets
     </div>
     <br>
     @if (count($land)>0)
-    <table class="table table-striped display text-center" id="myTable" style="width:100%">
+    <table class="table table-striped table-responsive  display text-center" id="myTable" style="width:100%">
         <thead  >
             <tr style="color:white;">
                 <th>#</th>
@@ -442,7 +442,7 @@ Furniture Assets
             </div>
           </div>
   </div>
-          <table class="table table-striped display text-center" id="myTableAssesment" style="width:100%">
+          <table class="table table-striped table-responsive  display text-center" id="myTableAssesment" style="width:100%">
               <thead  >
                   <tr style="color:white;">
                       <th>#</th>
@@ -487,6 +487,6 @@ Furniture Assets
 
   <p>
       <a class="btn btn-primary"  href="{{route('yearlyfurniture')}}">Yearly Assessment Summary</a>
-  
+
     </p>
 @endSection

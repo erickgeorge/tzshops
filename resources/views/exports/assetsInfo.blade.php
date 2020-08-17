@@ -1,3 +1,4 @@
+<title>Asset Summary</title>
 <style>
     table {
   border-collapse: collapse;

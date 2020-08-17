@@ -48,7 +48,7 @@
     </div>
 
     <div class="container " >
-        <table class="table table-striped display" id="myTable"  style="width:100%">
+        <table class="table table-responsive table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
@@ -76,7 +76,7 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                  
+
                     <td>{{ $item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->brand }}</td>
@@ -167,7 +167,7 @@
             <div class="input-group mb-3">
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
                        id="stock" >
-                       
+
             </div>
             </div>-->
 
@@ -226,7 +226,7 @@
 
     function totalitem() {
          var x = document.getElementById("kstock").value;
-       
+
          var z  = parseInt(x);
          document.getElementById("tstock").value=z;
          document.getElementById("tstock").innerHTML = z;
@@ -297,7 +297,7 @@
             <div class="input-group mb-3">
                 <input style="width: 565px;" disabled style="color: black" required type="number" min="1"  class="form-control"
                        id="mstock"  >
-                       
+
             </div>
             </div>
 
@@ -348,7 +348,7 @@
 
             document.getElementById("estock").value = U;
 
-         
+
 
             document.getElementById("mstock").value = W;
 
