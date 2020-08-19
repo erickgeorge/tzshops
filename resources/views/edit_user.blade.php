@@ -196,6 +196,7 @@
                       <option @if (in_array('CLIENT',$str_array)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
 
 
+                      <option @if (in_array('Directorate Director',$str_array)) { selected="selected" } @else{} @endif  value="Directorate Director">Directorate Director</option>
                       
                       <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
 
@@ -224,6 +225,7 @@
 
                       <option @if (in_array('Inspector Of Works',$str_array)) { selected="selected" } @else{} @endif  value="Inspector Of Works">Inspector Of Works</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option>
+                       <option @if (in_array('Principle',$str_array)) { selected="selected" } @else{} @endif value="Principle">Principle</option>
 
                        <option @if (in_array('Quality Surveyor',$str_array)) { selected="selected" } @else{} @endif value="Quality Surveyor">Quality Surveyor</option>
 
@@ -292,6 +294,8 @@
 
                       <option @if (in_array('Dean of Student',$strarray)) { selected="selected" } @else{} @endif  value="Dean of Student">Dean of Student</option>
 
+                      <option @if (in_array('Directorate Director',$strarray)) { selected="selected" } @else{} @endif  value="Directorate Director">Directorate Director</option>
+
                       <option @if (in_array('Director DPI',$strarray)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
 
                           <option @if (in_array('DVC Accountant',$strarray)) { selected="selected" } @else{} @endif  value="DVC Accountant">DVC Accountant</option>
@@ -316,6 +320,8 @@
                         <option @if (in_array('Housing Officer',$strarray)) { selected="selected" } @else{} @endif  value="Housing Officer">Housing Officer</option>
 
                       <option @if (in_array('Maintenance coordinator',$strarray)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option>
+
+                        <option @if (in_array('Principle',$strarray)) { selected="selected" } @else{} @endif value="Principle">Principle</option>
 
                        <option @if (in_array('Quality Surveyor',$strarray)) { selected="selected" } @else{} @endif value="Quality Surveyor">Quality Surveyor</option>
 

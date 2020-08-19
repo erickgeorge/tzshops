@@ -56,7 +56,15 @@ class landcrosschecklandassessmentactivity extends Model
         public function deanstudent(){
         return $this->belongsTo('App\User', 'dean');
     } 
+
+            public function principles(){
+        return $this->belongsTo('App\User', 'principle');
+    } 
+
+            public function deanreject(){
+        return $this->belongsTo('App\User', 'dean_rejected_by');
+    } 
   
-  
+
   
 }

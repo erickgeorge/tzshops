@@ -9,11 +9,6 @@
 
 <div class="container">
 
-
-
-
-
-
          <div >
 
              @if(Session::has('message'))

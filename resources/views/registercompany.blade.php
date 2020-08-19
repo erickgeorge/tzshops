@@ -98,6 +98,15 @@ Company Registrartion
                                     </option>
                                    @endif
 
+
+
+                                 @elseif((auth()->user()->type == 'Administrative officer') and ($sheet->type == 'Interior'))
+
+                                   @if($sheet->percentage == 100)
+                                    <option value="{{ $sheet->name }}">{{ $sheet->name}}
+                                    </option>
+                                   @endif
+
                                  @elseif($role['user_role']['role_id'] == 1)
 
                                      @if($sheet->percentage == 100)

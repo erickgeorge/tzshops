@@ -1260,6 +1260,7 @@ class LandscapingController extends Controller
             
            // $matr->tottal_score = $summ;
             $matr->status = 1;
+             $matr->status2 = 3;
              
             $matr->save(); } 
 
@@ -1405,7 +1406,7 @@ class LandscapingController extends Controller
              $summ += $scor[$a];
 
 
-              $assessment_edit =landcrosschecklandassessmentactivity::where('month', $month)->where('company', $tender)->where('assessment_id', $id)->where('status',10)->orwhere('status',11)->orwhere('status',12)->get();
+              $assessment_edit =landcrosschecklandassessmentactivity::where('month', $month)->where('company', $tender)->where('assessment_id', $id)->where('status',10)->orwhere('status',11)->orwhere('status',12)->orwhere('status',30)->get();
                foreach($assessment_edit as $edit_assessment) {
  
             $matr =landcrosschecklandassessmentactivity::where('id', $edit_assessment->id)->first();
@@ -1509,6 +1510,39 @@ class LandscapingController extends Controller
 
        return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
     }
+
+
+
+          public function approveassessmentprinciple($id , $tender , $month)
+    {
+
+     $tenders = Crypt::decrypt($tender);
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
+
+     foreach($assessment_approve as $wo_assessment) {
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment->status = 1;
+     $assessment->status2 = 4;
+     $assessment->principle = auth()->user()->id;
+     $assessment->principle_date = $assessment->updated_at;
+     $assessment->save();
+     }
+
+     
+     
+           $erick =landassessmentform::where('company', $tenders)->where('assessment_month', $month)->get();
+           foreach($erick as $asympt) {
+           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo->status = 3;
+           $pndo->status5 = 1;
+           $pndo->status6 = 3;
+           $pndo->save();
+            }
+
+
+       return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
+    }
+
 
 
 
@@ -1684,14 +1718,15 @@ class LandscapingController extends Controller
     }  
 
 
+
    
 
 
-        public function rejectassessmentwithreasondvcadmin(Request $request, $id , $tender , $month)
+        public function rejectassessmentwithreasondean(Request $request, $id , $tender , $month)
     {
     
      $tender = Crypt::decrypt($tender);
-     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',3)->orwhere('status', 2)->get();
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
 
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
@@ -1711,8 +1746,41 @@ class LandscapingController extends Controller
      $pndo->save();
             }
 
-       return redirect()->back()->with(['message' => 'Assessment rejected succesifully ']);
+       return redirect()->back()->with(['message' => 'Assessment form rejected succesifully ']);
     }  
+
+
+
+
+
+        public function rejectassessmentwithreasondeanonly(Request $request, $id , $tender , $month)
+    {
+    
+     $tender = Crypt::decrypt($tender);
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
+
+     foreach($assessment_approve as $wo_assessment) {
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment->status = 30;
+     $assessment->dean_rejected_by = auth()->user()->id;
+     $assessment->deanrejected_on = $assessment->updated_at;
+     $assessment->reasondean = $request['reason'];
+     $assessment->save();
+        }
+
+
+
+     $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
+     foreach($erick as $asympt) {
+     $pndo =landassessmentform::where('id', $asympt->id)->first();     
+     $pndo->status = 30;   
+     $pndo->save();
+            }
+
+       return redirect()->back()->with(['message' => 'Assessment form rejected succesifully ']);
+    }  
+
+
 
 
 
@@ -1821,7 +1889,9 @@ class LandscapingController extends Controller
 
             'assessmmentcompanydean' => landassessmentform::where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
+            'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(), 
+
+             'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
         ]);
     } }
 

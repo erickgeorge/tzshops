@@ -221,7 +221,7 @@
 
               @endif
 
-                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer'))
+                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principle')||(auth()->user()->type == 'Directorate Director'))
 
 
                <li class="nav-item">
