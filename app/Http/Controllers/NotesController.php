@@ -1011,7 +1011,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
  $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::where('type',$_GET['type'])->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('status',0)->where('type',$_GET['type'])->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
              $data['header'] = 'All Technicians Details';
              $data['section'] ='0';
             }
@@ -1030,7 +1030,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                $data['section'] =$_GET['type'];
             }else
             {
-                 $data['fetch'] = Technician::where('type',$_GET['type'])->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('status',0)->where('type',$_GET['type'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'All '.$_GET['type'].'  Technicians Details';
                 $data['section'] = $_GET['type'];
             }
@@ -1049,7 +1049,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                 $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('status',0)->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
                  $data['header'] = 'Technician Details';
                  $data['section'] ='0';
             }
@@ -1068,7 +1068,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
  $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::OrderBy('type','asc')->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('status',0)->OrderBy('type','asc')->OrderBy('fname','asc')->get();
 
              $data['header'] = 'All Technician Details';
               $data['section'] ='0';
