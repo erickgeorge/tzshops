@@ -36,9 +36,9 @@ class TechnicianController extends Controller
 		if($request['role']==1){
         $type = $request['typetechadmin'];
 		}
-        
+
 		else {
-			
+
 			 $type = $request['typetechhos'];
 		}
 		$tech->type=$type;
@@ -49,7 +49,7 @@ class TechnicianController extends Controller
         return redirect()->route('technicians')->with([
             'role' => $role,
             'message' => 'Technician Created Successfully',
-            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
+            'techs' => Technician::where('status',0)->where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
             'notifications' => $notifications
         ]);
     }
@@ -58,7 +58,7 @@ class TechnicianController extends Controller
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('edit_tech', [
-            'tech' => Technician::find($id),
+            'tech' => Technician::where('status',0)->find($id),
             'role' => $role,
             'notifications' => $notifications
         ]);
@@ -72,7 +72,7 @@ class TechnicianController extends Controller
             'email' => 'required'
         ]);
 
-        $tech = Technician::find($id);
+        $tech = Technician::where('status',0)->find($id);
         $tech->fname = $request['fname'];
         $tech->lname = $request['lname'];
         $tech->phone = $request['phone'];
@@ -89,21 +89,24 @@ class TechnicianController extends Controller
     }
 
     public function deleteTech($id){
-        Technician::find($id)->delete();
+       $disable = Technician::where('status',0)->where('id',$id)->first();
+       $disable->status = '1';
+       $disable->save();
+
         return redirect()->back()->with(['message', 'Technician deleted Successfully']);
     }
-	
-	
-	
+
+
+
 	 public function getTechnicianDetails($id){
-      
+
       $status=0;
         $tech = WorkOrderStaff::where('staff_id',($id))->where('status',($status))->get()->toArray();
-		
-		$user= Technician::where('id',($id))->first()->toArray();
-	
+
+		$user= Technician::where('status',0)->where('id',($id))->first()->toArray();
+
 		 return response()->json(array('workorderstaff'=>$tech,'technician'=>$user));
 	 }
-	
-	
+
+
 }

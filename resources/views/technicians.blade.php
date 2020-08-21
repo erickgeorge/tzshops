@@ -5,7 +5,7 @@
     @endSection
 @section('body')
 
-    <div class="row container-fluid" >
+    <div class="container" >
         <div class="col-lg-12">
              <h5 style="text-transform: capitalize;">Available Technicians</h5>
         </div>
@@ -32,7 +32,8 @@
 
     <hr class="container">
     <div class="container">
-    <a style="margin-left: 2%;" href="{{ url('add/technician') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a>    <?php
+        <br><br>
+   <?php
 use App\User;
 use App\Technician;
 use App\Directorate;
@@ -41,22 +42,50 @@ use App\Section;
 use App\WorkOrder;
 use Carbon\Carbon;
 
-$rle = Technician::get();
+$rle = Technician::where('status',0)->get();
 $head = 'All Technicians Details';
 
  ?>
+
+ @php
+       $maintenance_coordinator = '';
+$hoos = user::select('type')->where('id',auth()->user()->id)->get();
+foreach ($hoos as $hous) {
+   $hotype = $hous->type;
+        if(substr($hotype,0,4) == 'HOS '){
+
+          $placed = ltrim($hotype,'HOS ');
+          }
+          elseif(substr($hotype,0,4) != 'HOS '){
+            $maintenance_coordinator = 1;
+          }
+
+          if(substr($hotype,0,4) == 'HOS '){
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+
+          }
+          elseif($hotype == 'Maintenance coordinator'){
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+
+          }elseif($role['user_role']['role_id'] == 1){
+
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+
+          }else {
+            $techs= Technician::where('status',0)->orderby('fname')->get();
+          }
+}
+
+
+ @endphp
+ <br>
 <!-- SOMETHING STRANGE HERE -->
  @if(!$techs->isEmpty())
 <div align="right" style="margin-top: -60px;">
-          @if(auth()->user()->type == 'CLIENT')
-          <button style="max-height: 40px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-</button>
-       @else
+
           <button style="max-height: 40px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
    Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button>
-@endif
 </div>
 @endif
 <!-- Modal -->
@@ -70,36 +99,24 @@ $head = 'All Technicians Details';
           <span aria-hidden="true">X</span>
         </button>
       </div>
-      <?php
-      $maintenance_coordinator = '';
-$hoos = user::select('type')->where('id',auth()->user()->id)->get();
-foreach ($hoos as $hous) {
-   $hotype = $hous->type;
-        if(substr($hotype,0,4) == 'HOS '){
 
-          $placed = ltrim($hotype,'HOS ');
-          }
-          elseif($hotype == 'Maintenance coordinator'){
-            $maintenance_coordinator = 1;
-          }
-}
-?>
     <div class="modal-body">
       <div class="row">
         <div class="col">
           <select name="name" class="form-control mr-sm-2">
-                <option value="" selected="selected">All Technicians</option>
-@foreach($rle as $tech)
- @if(($role['user_role']['role_id'] == 1))
- <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
- @elseif($maintenance_coordinator == 1)
-  <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
- @else
-@if($tech->type == $placed)
 
-<option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
-@endif
-@endif
+           <option value="" selected="selected">All Technicians</option>
+@foreach($rle as $tech)
+    @if(($role['user_role']['role_id'] == 1))
+        <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
+    @elseif($maintenance_coordinator == 1)
+        <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
+    @else
+        @if(strtolower($tech->type) == strtolower($placed))
+
+        <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} </option>
+        @endif
+    @endif
 @endforeach
             </select>
       </div>
@@ -115,23 +132,23 @@ foreach ($hoos as $hous) {
 
 <option value="" selected="">All Sections</option>
  @if($head == 'All Technicians Details')
-<?php $to = Technician::select('type')->distinct()->get(); $v='technician';
+<?php $to = Technician::where('status',0)->select('type')->distinct()->get(); $v='technician';
 ?>
 @endif
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
 @endforeach
  @elseif($maintenance_coordinator == 1)
-  <option value="" selected="">All</option>
+  <option value="" selected="">All Sections</option>
  @if($head == 'All Technicians Details')
-<?php $to = Technician::select('type')->distinct()->get(); $v='technician';
+<?php $to = Technician::where('status',0)->select('type')->distinct()->get(); $v='technician';
 ?>@endif
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
 @endforeach
  @else
 @if($head == 'All Technicians Details')
-<?php $to = Technician::select('type')->distinct()->where('type','like','%'.$placed.'%')->get(); $v='technician';
+<?php $to = Technician::where('status',0)->select('type')->distinct()->where('type','like','%'.$placed.'%')->get(); $v='technician';
 ?>
 @endif
 @foreach($to as $too)
@@ -153,7 +170,7 @@ foreach ($hoos as $hous) {
   </div>
 </div>
           <!-- ---------------------- -->
-
+<br>
     @if(!$techs->isEmpty())
         <table class="table table-responsive table-striped" id="myTable">
         <thead >
@@ -162,8 +179,16 @@ foreach ($hoos as $hous) {
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
-            <th scope="col">Section</th>
-            <th scope="col">Actions</th>
+            @if(substr(auth()->user()->type,0,4) == 'HOS ') @else
+            <th scope="col">Section</th>@endif
+        @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
+
+         <th scope="col">Actions</th>
+          @else
+
+           @endif
+
+
         </tr>
         </thead>
         <tbody>
@@ -198,8 +223,10 @@ foreach ($hoos as $hous) {
         }else { echo $tech->phone;}
 
       ?></td>
-                <td>{{ ucwords(strtolower($tech->type)) }}</td>
-                <td>
+              @if(substr(auth()->user()->type,0,4) == 'HOS ')  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+                @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
+
+                <td class="text-center">
                     <div class="row">
                         <a style="color: green;" href="{{ route('tech.edit.view', [$tech->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
 
@@ -209,6 +236,10 @@ foreach ($hoos as $hous) {
                         </form>
                     </div>
                 </td>
+                 @else
+
+                  @endif
+
             </tr>
         @endforeach
         </tbody>

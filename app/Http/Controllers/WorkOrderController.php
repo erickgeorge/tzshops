@@ -318,7 +318,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
     }
 
 
-    
+
 
     public function editWO(Request $request, $id)
     {
@@ -354,14 +354,14 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         ]);
     }
 
-    
- 
+
+
        public function editWOzonetwo(Request $request, $id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
-      
+
         if (isset($request['location'])) {
             $wo->zonelocationtwo = $request['location'];
         } else {
@@ -382,7 +382,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
-      
+
         if (isset($request['location'])) {
             $wo->zone_location = $request['location'];
         } else {
@@ -413,12 +413,12 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 		else if ($request['status'] == 'Inspection report before work') {
            $statusfield=5;
 
-            $tech_complete =techasigned::where('work_order_id', $id)->update(array('status' =>1)); 
+            $tech_complete =techasigned::where('work_order_id', $id)->update(array('status' =>1));
         }
 		else if ($request['status'] == 'Report after work') {
 			 $statusfield=6;
 
-            $tech_complete_work =WorkOrderStaff::where('work_order_id', $id)->update(array('status' =>1)); 
+            $tech_complete_work =WorkOrderStaff::where('work_order_id', $id)->update(array('status' =>1));
 		}
 
 
@@ -439,9 +439,9 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $form->save();
 
             $w = WorkOrder::where('id', $id)->first();
-       
+
              $w->statusmform = 3;
-         
+
              $w->save();
 
 
@@ -509,7 +509,7 @@ public function transportforwork(Request $request, $id)
 
 		if (empty($checkstaff)) {
 
-          
+
                 //  First Store data in $arr
              $arr = array();
                   foreach ($txtbox as $address) {
@@ -522,7 +522,7 @@ public function transportforwork(Request $request, $id)
 
 
              $work_order_staff = new  WorkOrderStaff();
-     
+
 
             $work_order_staff->staff_id = $txtbox[ $a ];
 			$work_order_staff->status =0;
@@ -552,7 +552,7 @@ public function transportforwork(Request $request, $id)
 
 
     public function assigntechnicianforinspection(Request $request, $id)
-    {  
+    {
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -578,7 +578,7 @@ public function transportforwork(Request $request, $id)
             $unique_data = array_unique($arr);
             // now use foreach loop on unique data
             foreach($unique_data as $a => $b) {
- 
+
             $work_order_staffassign = new  techasigned();
             $work_order_staffassign->staff_id = $txtbox[ $a ];
             $work_order_staffassign->status =0;
@@ -611,16 +611,16 @@ public function transportforwork(Request $request, $id)
 
 	public function materialaddforwork(Request $request,$id)
     {
-	
+
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
 
-            
+
             $material = $request['material'];
-            $quantity = $request['quantity']; 
+            $quantity = $request['quantity'];
 
 
 
@@ -639,7 +639,7 @@ public function transportforwork(Request $request, $id)
         $workordermat->material_id = $material[$a];
         $workordermat->quantity = $quantity[$a];
         $workordermat->status = 20;  //status for HOS to view material before sent to IoW
-        $workordermat->hos_id = auth()->user()->id; 
+        $workordermat->hos_id = auth()->user()->id;
         $workordermat->zone = $request['zone'];
         $workordermat->save();
 
@@ -672,8 +672,8 @@ public function transportforwork(Request $request, $id)
 
             public function editmaterial(Request $request, $id )
     {
-        $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 17)->orwhere('status', -1)->update(array('check_return' =>null));   
-    
+        $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 17)->orwhere('status', -1)->update(array('check_return' =>null));
+
        $p=$request['edit_mat'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
        $matir->material_id = $request['material'];
@@ -772,7 +772,7 @@ public function transportforwork(Request $request, $id)
             'notifications' => $notifications,
             'wo' => WorkOrder::where('client_id', auth()->user()->id)->where('status', 0)->whereYear('created_at',$from)->get()
         ]);
-    } 
+    }
     else
     {
         if ($role['user_role']['role_id'] == 1) {
@@ -1021,7 +1021,7 @@ public function transportforwork(Request $request, $id)
        });
 
 
-      
+
 /* end email*/
 
 
@@ -1301,7 +1301,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
          return redirect()->back()->with(['message' => 'Technician leader assigned successifully']);
 
-         }     
+         }
 
 
        public function Technicianassignleaderinspection($id , $id2)
@@ -1315,7 +1315,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
          return redirect()->back()->with(['message' => 'Technician leader assigned successifully you can fill inspection before work']);
 
-         }     
+         }
 
 
 
@@ -1370,13 +1370,13 @@ session::flash('message', ' Your workorder have been closed successfully');
     else{
         $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
-        
+
 
 
        return view('zonesiow', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
     }
 
-    
+
 
     public function acceptedworkorders()
     {
@@ -1450,7 +1450,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     }
 
-    
+
 
     public function workzones()
     {
