@@ -46,6 +46,8 @@ Company report
 
   chart-data="${[
 
+    [, 0],
+
    @foreach($assessmmentcompany as $company)
 
      <?php
@@ -57,6 +59,7 @@ Company report
     @if(count($crosscheckassessmmentactivity)>0)
 
 
+  
 
   @foreach($crosscheckassessmmentactivity as $assesment)
   <?php  $summ += $assesment->score;  ?>

@@ -172,7 +172,7 @@ foreach ($hoos as $hous) {
           <!-- ---------------------- -->
 <br>
     @if(!$techs->isEmpty())
-        <table class="table table-responsive table-striped" id="myTable">
+        <table class="table table-striped" id="myTable">
         <thead >
        <tr style="color: white;">
             <th scope="col">#</th>

@@ -174,7 +174,7 @@
 
 
 
-                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU'))
+                @if((auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Estates officer'))
                   <!--<li class="nav-item">
                                         <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
                             </li>-->
@@ -221,7 +221,7 @@
 
               @endif
 
-                @if(auth()->user()->type == 'Accountant')
+                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principle')||(auth()->user()->type == 'Directorate Director'))
 
 
                <li class="nav-item">
@@ -234,7 +234,7 @@
 
 
 
-                    @if((auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Supervisor Landscaping'))
+                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping'))
 
                         <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>

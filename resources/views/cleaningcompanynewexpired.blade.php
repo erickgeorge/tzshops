@@ -52,6 +52,7 @@ Companies
 
 
                    </div><br>
+                   <div  class="container">
 
                 <table id="myTableee" id="myTable" class="table table-striped">
 
@@ -230,7 +231,7 @@ Companies
 
 
 
-
+         </div>
 
 
             </div>

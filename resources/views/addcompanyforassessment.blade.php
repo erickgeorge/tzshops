@@ -267,8 +267,21 @@
 
 
    <?php $cmp = Crypt::encrypt($companyiii->tender); ?>
+
+    @if(auth()->user()->type == 'Supervisor Landscaping')
      <form method="POST" action="{{ route('croscheck.assessment.activity.landscaping', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
                     @csrf
+    @endif   
+    
+    @if(auth()->user()->type == 'USAB')
+     <form method="POST" action="{{ route('croscheck.assessment.activity.usab', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
+                    @csrf
+    @endif      
+
+    @if(auth()->user()->type == 'Administrative officer')
+     <form method="POST" action="{{ route('croscheck.assessment.activity.adoficer', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
+                    @csrf
+    @endif           
 
      <input  name="mytender[]"  value="{{$companyiii->tender}}" hidden>
      <input  name="myarea[]"    value ="{{$companyiii->area}}"  hidden>
@@ -365,12 +378,26 @@
 
      @endif
 
- @if(count($assessmmentactivity) > 0)
+    @if(count($assessmmentactivity) > 0)
 
-      @if($assesment->status2 == 2)
+    @if($assesment->status2 == 2)
 
       <p style="color: blue;" align="center">Company Supervisor is satisfied with the scores given you can now forward to Estate Officer for the further processes.</p>
+        @if(auth()->user()->type == 'Supervisor Landscaping')
       <button id="bt" type="submit" class="btn btn-primary">Foward to Estate Officer</button>
+        @endif
+
+        @if(auth()->user()->type == 'USAB')
+      <button id="bt" type="submit" class="btn btn-primary">Foward to Dean of Student</button>
+        @endif
+
+
+       @if(auth()->user()->type == 'Administrative officer')
+      <button id="bt" type="submit" class="btn btn-primary">Foward to Principal/Dean/Directorates Director</button>
+        @endif
+
+      
+
     
 
             <a href="{{route('cleaningcompany')}}" onclick="closeTab()"><button type="button"
@@ -385,10 +412,10 @@
    </form>
 
 
- @if(count($assessmmentactivity) > 0)
+  @if(count($assessmmentactivity) > 0)
 
- @if($assesment->status2 == 1)
-  <?php $cmp = Crypt::encrypt($assesment->companynew); ?>
+  @if($assesment->status2 == 1)
+   <?php $cmp = Crypt::encrypt($assesment->companynew); ?>
          <form method="POST" onsubmit="return confirm('Are you sure company supervisor is already signed and satisfied with the scores given ?')" action="{{ route('supervisorsatisfied', [$assesment->assessment_id , $cmp , $assesment->assessment_sheet , $assesment->month ])}}" >
             @csrf
 
@@ -400,7 +427,8 @@
             
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button> <a href="{{route('cleaningcompany')}}" onclick="closeTab()"><button type="button"
+            <button type="submit" class="btn btn-primary">Save</button> <a href="{{route('cleaningcompany')}}" onclick="closeTab()">
+            <button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
             <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>

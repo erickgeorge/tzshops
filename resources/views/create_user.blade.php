@@ -175,13 +175,15 @@ User Registration
                <select  required style="width: 500px;" class="custom-select" name="type" id="type">
 	                  <option value="" selected>Choose...</option>
 	                  <option value="Accountant">Accountant</option>
+	                  <option value="Administrative officer">Administrative officer</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
                       <option value="Assets Officer">Assets Officer</option>
                       <option value="Bursar">Bursar</option>
                       <option value="CLIENT">Client</option>
-
+                       <option value="Dean of Student">Dean of Student</option>
 	                  <option value="DVC Admin">DVC Admin</option>
 	                  <option value="Director DPI">Director DPI</option>
+	                  <option value="Directorate Director">Directorate Director</option>
 	                   <option value="Dvc Accountant">Dvc Accountant</option>
 	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
@@ -194,10 +196,11 @@ User Registration
 
                        @endforeach
 
-	                  <option value="Head PPU">Estate Officer</option>
-                    <option value="Housing Officer">Housing Officer</option>
+	                  <option value="Head PPU">Head PPU</option>
+                      <option value="Housing Officer">Housing Officer</option>
 
                       <option value="Maintenance coordinator">Maintenance Coordinator</option>
+                      <option value="Principle">Principle</option>
                       <option value="Quality Surveyor">Quality Surveyor</option>
 	                  <option value="STORE">Store Manager</option>
 
@@ -237,11 +240,13 @@ User Registration
 
                 <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
 	                  <option value="" selected>Choose...</option>
+	                  <option value="Administrative officer">Administrative officer</option>
 	                  <option value="Accountant">Accountant</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
 	                  <option value="CLIENT">Client</option>
-
+                      <option value="Dean of Student">Dean of Student</option>
 	                  <option value="DVC Admin">DVC Admin</option>
+	                  <option value="Directorate Director">Directorate Director</option>
 	                  <option value="Director DPI">Director DPI</option>
 	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
@@ -253,10 +258,11 @@ User Registration
 
                        @endforeach
 
-	                  <option value="Head PPU">Estate Officer</option>
+	                  <option value="Head PPU">Head PPU</option>
 
 
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
+	                  <option value="Principle">Principle</option>
 	                  <option value="STORE">Store Manager</option>
 
 	                  <option value="Secretary to Council">Secretary to Council</option>

@@ -39,6 +39,11 @@ Company report
 
 
             <?php $i=0; $sumu = 0; ?>
+
+                   [' Start ', 0 ],
+
+
+
           @foreach($crosscheckassessmmentactivity as $company)
 
 
@@ -46,7 +51,7 @@ Company report
                 
     
 
-     [' {{ date('F Y', strtotime($company->month))}} ', <?php echo number_format($company->erick / count($crosscheckassessmmentactivitygroupbyarea) , 2) ?> ],
+                  [' {{ date('F Y', strtotime($company->month))}} ', <?php echo number_format($company->erick / count($crosscheckassessmmentactivitygroupbyarea) , 2) ?> ],
 
       
 
