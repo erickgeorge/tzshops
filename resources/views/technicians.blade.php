@@ -49,11 +49,13 @@ $head = 'All Technicians Details';
 
  @php
        $maintenance_coordinator = '';
+       $niyeye = '1';
 $hoos = user::select('type')->where('id',auth()->user()->id)->get();
 foreach ($hoos as $hous) {
    $hotype = $hous->type;
         if(substr($hotype,0,4) == 'HOS '){
 
+            $niyeye = '0';
           $placed = ltrim($hotype,'HOS ');
           }
           elseif(substr($hotype,0,4) != 'HOS '){
@@ -68,11 +70,12 @@ foreach ($hoos as $hous) {
             echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
 
           }elseif($role['user_role']['role_id'] == 1){
-
+            $niyeye = '1';
             echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
 
           }else {
             $techs= Technician::where('status',0)->orderby('fname')->get();
+            $niyeye = '1';
           }
 }
 
@@ -179,7 +182,8 @@ foreach ($hoos as $hous) {
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
-            @if(substr(auth()->user()->type,0,4) == 'HOS ') @else
+            @if($niyeye = '0')
+            @else
             <th scope="col">Section</th>@endif
         @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
 
@@ -223,7 +227,7 @@ foreach ($hoos as $hous) {
         }else { echo $tech->phone;}
 
       ?></td>
-              @if(substr(auth()->user()->type,0,4) == 'HOS ')  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+              @if($niyeye = '0')  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
                 @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
 
                 <td class="text-center">
