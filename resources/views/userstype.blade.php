@@ -734,81 +734,13 @@ use App\Section;
      <div class="col-md-5">
     <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
   </div>
-  <div class="col-md-3" align="right">
+  <div class="col-md-5" align="right">
 
 
 </div>
 @if(!$display_users->isEmpty())
 
 <!-- SOMETHING STRANGE HERE -->
-
-<div class="col">
-    <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModals"> Filter Users <i class="fa fa-search" aria-hidden="true"></i></a>
- </div>
- {{--  --}}
- <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Filter to Search Users <i class="fa fa-search" aria-hidden="true"></i> </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-              <label for="my-select">Type</label>
-              <select id="my-select" class="custom-select" name="">
-                  <option>All Types</option>
-                  <?php
-                      $allofem = User::select('type')->distinct()->where('type','<>','')->orderBy('type','ASC')->get();
-                      foreach($allofem as $alls){?>
-                        <option value="{{$alls->type}}">{{$alls->type}}</option>
-                      <?php }?>
-
-              </select>
-          </div>
-
-          <div class="form-group">
-            <label for="my-select">College/School/Directorate</label>
-            <select id="my-select" class="custom-select" name="">
-                <option>All Colleges/Schools/Directorates</option>
-                <?php
-
-                    $directoras = directorate::orderBy('name','ASC')->get();
-                    foreach($directoras as $directoras){?>
-            <option style="text-transform: capitalize;" value=" {{ $directoras->id }}"> {{$directoras->directorate_description}} - ({{ $directoras->name }})</option>
-                    <?php }
-                               ?>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="my-select">Department</label>
-            <select id="my-select" class="custom-select" name="">
-                <option>All Departments</option>
-                <?php
-                    $departmen  = department::orderBy('name','ASC')->get();
-    foreach($departmen  as $departm )
-    {
-
-        $director  = directorate::where('id',$departm ->directorate_id)->get();
-        foreach($director  as $director ){?>
-<option value="{{ $departm ->id }} ">  {{ $departm ->description }} - {{ $director ->name }}</option>
-        <?php }
-    }
-                   ?>
-            </select>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Search <i class="fa fa-search" aria-hidden="true"></i> </button>
-        </div>
-      </div>
-    </div>
-  </div>
- {{--  --}}
                 <div class="col" align="right">
            <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o"></i></a>
         </div>

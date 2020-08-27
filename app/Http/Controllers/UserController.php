@@ -30,8 +30,8 @@ class UserController extends Controller
 {
     public function create(Request $request)
     {
-        
-    
+
+
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -39,7 +39,7 @@ class UserController extends Controller
             'name' => 'required|unique:users',
             'phone' => 'required|max:15|min:10',
             'email' => 'required|unique:users',
-            
+
         ]);
 
         if ($request['role'] == 'Choose...') {
@@ -55,14 +55,14 @@ class UserController extends Controller
         $user->lname = $request['lname'];
         $user->name = $request['name'];
         $user->phone = $request['phone'];
-        $user->email = $request['email']; 
-        $user->college = $request['college']; 
+        $user->email = $request['email'];
+        $user->college = $request['college'];
 
          if ($request['checkdiv'] == 'yesmanual') {
 
              $user->zone = $request['zone'];
              $user->type = 'Inspector Of Works';
-             
+
 
         } else {
 
@@ -70,7 +70,7 @@ class UserController extends Controller
         }
 
 
-       
+
         $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
         $user->IoW = 2;
@@ -110,7 +110,7 @@ class UserController extends Controller
         //     'sections' => $sections,
         //     'departments' => $departments, 'role' => $role
         // ]);
-        
+
 
 
         return redirect()->route('users.view')->with([
@@ -120,7 +120,7 @@ class UserController extends Controller
     }
 
 
-    
+
     public function createuseriow(Request $request )
     {
         $iow=User::where('id', $id)->first();
@@ -135,10 +135,10 @@ class UserController extends Controller
         $user=User::where('id', $check)->first();
         $user->type=$request['usertype'];
         $user->save();
-       
+
         return redirect()->back()->with([
             'message' => 'The user role changed successfully'
-        
+
         ]);
     }
 
@@ -273,7 +273,7 @@ class UserController extends Controller
             //'section' => 'required',
             'phone' => 'required|max:15|min:10',
             'email' => 'required'
-           
+
         ]);
 
         if ($request['role'] == 'Choose...') {
@@ -291,13 +291,13 @@ class UserController extends Controller
         $user->phone = $request['phone'];
         $user->email = $request['email'];
         $user->section_id = $request['department'];
-      
-      
+
+
       if ($request['checkdiv'] == 'yesmanual') {
 
              $user->zone = $request['zone'];
              $user->type = 'Inspector Of Works';
-             
+
 
         } else {
 
@@ -311,7 +311,7 @@ class UserController extends Controller
 
             if($user->type=='Inspector Of Works'){
 
-           $checkemptyzoneinspector = zoneinspector::where('inspector',$user->id)->first(); 
+           $checkemptyzoneinspector = zoneinspector::where('inspector',$user->id)->first();
 
        if (empty($checkemptyzoneinspector)) {
 
@@ -328,7 +328,7 @@ class UserController extends Controller
             $zoneinspector =  zoneinspector::where('inspector',$user->id)->first();
             $zoneinspector->zone =  $zonename['id'];
             $zoneinspector->inspector = $user->id;
-            $zoneinspector->save(); 
+            $zoneinspector->save();
             }
 
 
@@ -340,8 +340,8 @@ class UserController extends Controller
         $type->user_id = $user->id;
         $type->type2 = $request['secondtype'];
         $type->type = $user->type;
-        $type->save();    
-           
+        $type->save();
+
 
         $role = UserRole::where('user_id', $id)->first();
         $role->user_id = $user->id;
@@ -361,12 +361,12 @@ class UserController extends Controller
     {
 
 
-  
+
         $user = User::where('id', $id)->first();
         $user->zone = $request['zone'];
         $user->IoW = 2;
         $user->save();
-       
+
 
         return redirect()->route('users.view')->with([
             'message' => 'User created and zone assigned successfully',
@@ -377,18 +377,18 @@ class UserController extends Controller
 
     public function changePassword(Request $request){
 
-        
+
       $rules=[
 
             'old-pass' => 'required',
             'new-pass' => 'required',
             'confirm-pass' => 'required|same:new-pass'
 
-            
-          
+
+
         ];
         $error_messages=[
-            
+
             'confirm-pass.same'=>'New password and Confirm password must match please enter the password again',
 
 
@@ -406,7 +406,7 @@ class UserController extends Controller
 
 
 
-        
+
         $user = User::find(auth()->user()->id);
         if (Hash::check($request['old-pass'], Auth::User()->password)){
             $user->password = bcrypt($request['new-pass']);
@@ -418,8 +418,8 @@ class UserController extends Controller
         }
         return redirect()->back()->withErrors(['message' => 'You entered the wrong old password']);
     }
-    
-    
+
+
          public function changeProfile(Request $request){
             if ($request->Image!='') {
         $request->validate(['Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
@@ -427,16 +427,16 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required',
             'phone' => 'required',
-            
-            
+
+
         ]);
         $user = User::find(auth()->user()->id);
-        
+
          $user->email = $request['email'];
         $user->phone = $request['phone'];
             $user->save();
-            
-             
+
+
 
        $user = Auth::user();
      if ($request->Image!='') {
@@ -462,7 +462,7 @@ public function Complaint(Request $request)
             $request->validate([
             'name' => 'required',
             'message' => 'required',
-            
+
         ]);
 
         $compliant = new Complaint();
@@ -471,7 +471,7 @@ public function Complaint(Request $request)
         $compliant->receiver = $request['name'];
         $compliant->work = $request['work'];
         $compliant->message = $request['message'];
-       
+
         $compliant->save();
 
 return redirect()->route('work_order')->with(['message' => 'Compliant sent successfully']);
@@ -486,7 +486,7 @@ return view('compliant', ['role' => $role,'compliant' => $compliant,'notificatio
 }
 public function complian(request $request, $id){
 $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get(); 
+$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 $single = Complaint::where('id',$id)->get();
 return view('complaint', ['role' => $role,'compliant' => $single,'notifications' => $notifications
         ]);
@@ -517,6 +517,14 @@ Public function savesign(Request $request){
  $msg = "Signature Saved successfully <a class='btn btn-success' href='/myprofile'>Ok</a><br>";
     return response()->json(array('msg'=> $msg), 200);
        //return redirect()->route('myprofile')->with(['message' => 'Signature saved succesfully']);
+}
+
+public function usersoptions()
+{
+//     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+// $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+//     return view('usersoptions',['role' => $role,'notifications' => $notifications]);
 }
 
 }

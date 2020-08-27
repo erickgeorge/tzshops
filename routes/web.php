@@ -893,3 +893,4 @@ Route::get('yearlyland','AssetsController@yearlyland')->name('yearlyland')->midd
 Route::get('yearlybuilding','AssetsController@yearlybuilding')->name('yearlybuilding')->middleware('auth');
 
 Route::get('yearlyexport','ExcelController@yearlyexport')->name('yearlyexport')->middleware('auth');
+Route::get('usersoptions','UserController@usersoptions')->name('usersoptions')->middleware('usersoptions');
