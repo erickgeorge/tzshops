@@ -39,6 +39,7 @@
 
 
 
+
    @foreach($company as $companyiii)
    @endforeach
 
@@ -149,7 +150,6 @@
         <th>Remark</th>
       </thead>
       </tr>
-
      <tbody>
 
 
@@ -181,7 +181,21 @@
              <TD><input style=" text-align: center;" class="form-control" type="number"   name="percentage[]" placeholder="{{$assess->percentage}}" value="{{$assess->percentage}}" readonly="readonly"></TD>
 
 
-            <TD><input style="text-align: center;" class="form-control" type="number" id="tstock"   name="score[]" placeholder="Score" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required" min="0" max="{{$assess->percentage}}"></TD>
+            <TD><input style="text-align: center;" class="form-control" type="text" id="tstock{{$i}}"   name="score[]" placeholder="Score"
+            onblur="if(document.getElementById('tstock{{$i}}').value>{{$assess->percentage}}){  var message=document.getElementById('error{{$i}}');
+           message.style.color='red';
+           message.innerHTML= 'Score must be less than or equal to {{$assess->percentage}}';
+
+
+        //    some here
+
+            } else{
+              var message=document.getElementById('error{{$i}}');
+           message.style.color='red';
+           message.innerHTML= '';
+            }
+        checkinfo{{$i}}()
+            " required="required" min="0" max="{{$assess->percentage}}"> <span id="error{{$i}}"></span></TD>
 
 
            <TD><textarea   class="form-control" type="text" name="remark[]" placeholder="Remark"  ></textarea></TD>
@@ -246,7 +260,7 @@
   @endforeach
    </tbody>
 
- <th><b>Tottal</b></th>
+ <th><b>Total</b></th>
  <td></td>
   <td align="center" ><b><?php echo $summ ?>%</b></td>
   <td align="center"><b><?php echo $summm ?>%</b></td>
@@ -271,17 +285,17 @@
     @if(auth()->user()->type == 'Supervisor Landscaping')
      <form method="POST" action="{{ route('croscheck.assessment.activity.landscaping', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
                     @csrf
-    @endif   
-    
+    @endif
+
     @if(auth()->user()->type == 'USAB')
      <form method="POST" action="{{ route('croscheck.assessment.activity.usab', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
                     @csrf
-    @endif      
+    @endif
 
     @if(auth()->user()->type == 'Administrative officer')
      <form method="POST" action="{{ route('croscheck.assessment.activity.adoficer', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
                     @csrf
-    @endif           
+    @endif
 
      <input  name="mytender[]"  value="{{$companyiii->tender}}" hidden>
      <input  name="myarea[]"    value ="{{$companyiii->area}}"  hidden>
@@ -321,7 +335,7 @@
   @endforeach
    </tbody>
 
- <th><b>Tottal</b></th>
+ <th><b>Total</b></th>
  <td></td>
   <td align="center" ><b><?php echo $summ ?>%</b></td>
   <td align="center"><b><?php echo $summm ?>%</b></td>
@@ -355,7 +369,7 @@
   @if($assesment->status != 1)
 
  <p align="center"><span class="badge badge-primary">Company supervisor is satisfied and signed the document.</span> </p>
-  
+
   @endif
 
 
@@ -364,12 +378,12 @@
 
    @if($assesment->status != 1)
           <button id="bt" type="submit" class="btn btn-primary">Save</button>
-   @endif  
-   @endif   
+   @endif
+   @endif
 
      @if(count($assessmmentactivity) == 0)
      <button id="bt" type="submit" class="btn btn-primary">Save</button>
-    
+
 
             <a href="{{route('cleaningcompany')}}" onclick="closeTab()"><button type="button"
                          class="btn btn-danger">Cancel</button></a>
@@ -396,16 +410,16 @@
       <button id="bt" type="submit" class="btn btn-primary">Foward to Principal/Dean/Directorates Director</button>
         @endif
 
-      
 
-    
+
+
 
             <a href="{{route('cleaningcompany')}}" onclick="closeTab()"><button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
       <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>
- 
-    @endif   
+
+    @endif
     @endif
 
 <br>
@@ -421,13 +435,13 @@
 
             <div class="form-group ">
 
-               
+
                     <input type="checkbox" name="emergency"  required> <b style="color:blue;">Please click the checkbox and save if company supervisor is already signed the document and satisfied.</b>
-            
-            
+
+
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button> <a href="{{route('cleaningcompany')}}" onclick="closeTab()">
+            <button id="thisshouldbedisabled" disabled='' type="submit" class="btn btn-primary">Save</button> <a href="{{route('cleaningcompany')}}" onclick="closeTab()">
             <button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
@@ -452,5 +466,14 @@
 <br>
 <br>
 <br>
+@while ()
+
+@endwhile
+<script>
+    for (var h = 0; h <= {{$i}}; h++)
+    {
+        function checkinfo{{}}
+    }
+</script>
 
     @endSection

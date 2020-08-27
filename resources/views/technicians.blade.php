@@ -4,7 +4,7 @@
     technicians
     @endSection
 @section('body')
-
+<br>
     <div class="container" >
         <div class="col-lg-12">
              <h5 style="text-transform: capitalize;">Available Technicians</h5>
@@ -32,7 +32,7 @@
 
     <hr class="container">
     <div class="container">
-        <br><br>
+        
    <?php
 use App\User;
 use App\Technician;

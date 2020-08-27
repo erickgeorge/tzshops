@@ -14,18 +14,18 @@
 <link rel="stylesheet" href="/css/main.css">
     </head>
     <style>
-        .left{
+        .here{
             background-position:center;
             background-size: cover;
     /* background-image:url(../images/images2.jpg) no-repeat; */
-            background-image: linear-gradient(#376bd369,#376bd369), url("/images/image.jpg") !important;
-        }
+            background-image: linear-gradient(#376bd317,#376bd317), url("/images/image.jpg") !important;
+         }
     </style>
     <body>
 
 <style>
 
-    .jumbotron{
+     .jumbotron{
 
     background-color:  #376ad3;
 
@@ -34,7 +34,7 @@
 
      }
      /* Split the screen in half */
-    .split1,.split2 {
+    /* .split1,.split2 {
     height: 100%;
     position: fixed;
     z-index: 1;
@@ -49,152 +49,107 @@
 
     padding-top: 20px;
     width: 40%;
-    }
+    } */
 
     /* Control the left side */
-    .left {
+    /* .left {
     left: 0;
-    }
+    } */
 
     /* Control the right side */
-    .right {
+    /* .right {
     right: 0;
     background-color: #376ad3;
-    }
+    } */
 
     </style>
-    <div style="padding-top:10%;">
+    <div class="container " style="padding: 5%;">
 
-     <div class="split1 left">
-        <div class="centered">
-            <div class="container"  style="padding-top:8%;">
-                <div class="row">
-                    <div class="col" align="center">
-                        <div class="row">
-                            <h1 class="col">
-                                <b style="color: #fff;">University of Dar es salaam</b>
-                            </h1>
-                        </div>
-                        <br>
-                        {{-- <div class="row" >
-                            <div class="col">
-                                <img src="{{ url('/images/logo_ud.png') }}" alt="udsm logo" style="height: 150px; width: 150px;">
 
+    <div class="row" style="background-color: yellow;">
+        <div class="col">
+            <div class="card border-0" >
+                <div class="row" style="background-color:#376ad3; ">
+                    <div class="col-md-2">
+                        <img src="{{ url('/images/logo_ud.png') }}" alt="udsm logo" style="height: 150px; width: 150px;">
+
+                    </div>
+                    <div class="col" style="padding-top: 25px;">
+                        <h1><b style="color:  #fff;">University of Dar es salaam</b></h1>
+                <h3 ><b style="color:  #fff;">Estates Services Management Information System</b></h3>
+
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col here">
+
+                    </div>
+                    <div class="col-md-4" style=" background-color: #376ad3;">
+                        <div class="jumbotron ">
+                            <div align="center" style="font-size: 18px;">LOGIN<hr></div>
+                        <div>
+                             @guest
+                            <form method="POST" action="{{ route('login')}}" class="" autocomplete="off">
+                                 @csrf
+
+
+                             <div >
+
+                                 <i class="fa fa-user icon"></i>
+                                    <label for="email" ><strong  > {{ __('
+                                     User Name') }}</strong></label>
+
+
+                                        <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" required autofocus placeholder="Enter User Name">
+                                         <!-- <small id="emailHelp" class="form-text text-muted">Your Name is Handled Privately.</small>-->
+
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                        @endif
+                                 </div>
+
+                                <br>
+                                <div class="form-group">
+                                    <i class="fa fa-key icon"></i>
+                                    <label for="password" ><strong>{{ __('Password') }}</label></strong>
+
+                                    <div>
+
+                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Enter Password">
+
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <br>
+                                </div>
+
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Login') }}
+                                        </button>
+                                    </div>
+
+                                    @else
+                                   <a  href="{{ route('login') }}" ><h1 class="text-center" style="color: blanchedalmond;">HOME</h1></a>
+                                 @endguest
+
+                                </div>
+                            </form>
                             </div>
-
-                        </div> --}}
-                        <div class="row">
-                            <h3 class="col">
-                                <b style="color: #fff;">Directorate of Estates Services</b>
-                                </h3>
-
-                        </div>
-                        {{-- <div class="row">
-                            <h4 class="col">
-                                <b style="color: #fff;">Estates Services Management Information System</b>
-                                </h4>
-
-                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
-      </div>
-
-      <div class="split2 right">
-        <div class="centered">
-            <div class="container">
-                <div class="row"   style="padding-top:8%;">
-                    <div class="col" align="center">
-
-                        <div class="row" >
-                            <div class="col">
-                                <img src="{{ url('/images/logo_ud.png') }}" alt="udsm logo" style="height: 150px; width: 150px;">
-
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <h4 class="col">
-                                <b style="color: #fff;">Estates Services Management Information System</b>
-                                </h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-            <div class="col">
-                <div class=" container col-md-9 jumbotron ">
-                    <div align="center" style="font-size: 18px;">LOGIN<hr></div>
-                <div>
-                     @guest
-                    <form method="POST" action="{{ route('login')}}" class="" autocomplete="off">
-                         @csrf
-
-
-                     <div >
-
-                         <i class="fa fa-user icon"></i>
-                            <label for="email" ><strong  > {{ __('
-                             User Name') }}</strong></label>
-
-
-                                <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" required autofocus placeholder="Enter User Name">
-                                 <!-- <small id="emailHelp" class="form-text text-muted">Your Name is Handled Privately.</small>-->
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                         </div>
-
-                        <br>
-                        <div class="form-group">
-                            <i class="fa fa-key icon"></i>
-                            <label for="password" ><strong>{{ __('Password') }}</label></strong>
-
-                            <div>
-
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Enter Password">
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <br>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                            </div>
-
-                            @else
-                           <a  href="{{ route('login') }}" ><h1 class="text-center" style="color: blanchedalmond;">HOME</h1></a>
-                         @endguest
-
-                        </div>
-                    </form>
-                    </div>
-            </div>
-        </div>
-        </div>
-      </div>
     </div>
-<div class="container" >
-
-</div>
-
-
-
-        </div>
+    </div>
 
 
 
