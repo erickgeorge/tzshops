@@ -40,10 +40,11 @@ tr:nth-child(even) {
                         <th scope="col">Tender Number</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">Company Name</th>
+                         <th scope="col">Contract type</th>
                         <th scope="col">Starting of Tender</th>
                         <th scope="col">Ending of Tender</th>
 
-                        <th scope="col">Next Assessment</th>
+                      <!--  <th scope="col">Next Assessment</th>-->
                         <th scope="col">Contract Duration</th>
 
                     </tr>
@@ -73,40 +74,12 @@ tr:nth-child(even) {
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
+                             <td>{{ $house->type }}</td>
                             <td>{{ $house->datecontract }}</td>
                              <td>{{ $house->endcontract }}</td>
 
 
 
-
-        @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Can not assessed </span><br></td>
-        @else
-
-
-                  @if($house->status == 1)
-
-                  @if($now1 >= $dnext)
-                           <td style="color: red">{{$date_next}} Days</td>
-                  @else
-                           <td>{{$date_next}} Days left</td>
-                  @endif
-
-
-
-                  @else
-
-
-                 @if($now1 >= $next30days)
-                           <td style="color: red">{{$date_left}} Days</td>
-                 @else
-                           <td>{{$date_left}} Days left</td>
-                 @endif
-
-
-
-                  @endif
-           @endif
 
 
 

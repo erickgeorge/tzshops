@@ -200,7 +200,7 @@ User Registration
                       <option value="Housing Officer">Housing Officer</option>
 
                       <option value="Maintenance coordinator">Maintenance Coordinator</option>
-                      <option value="Principle">Principle</option>
+                      <option value="Principal">Principal</option>
                       <option value="Quality Surveyor">Quality Surveyor</option>
 	                  <option value="STORE">Store Manager</option>
 
@@ -262,7 +262,7 @@ User Registration
 
 
 	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
-	                  <option value="Principle">Principle</option>
+	                  <option value="Principal">Principal</option>
 	                  <option value="STORE">Store Manager</option>
 
 	                  <option value="Secretary to Council">Secretary to Council</option>

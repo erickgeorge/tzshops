@@ -1145,6 +1145,7 @@ class LandscapingController extends Controller
             $sheet = $request['mysheet'];
             $tenders = $request['mytender'];
             $paymentss = $request['payments'];
+            $colleg = $request['college'];
 
 
              foreach($areas as $a => $b){
@@ -1157,6 +1158,7 @@ class LandscapingController extends Controller
             $form = new landassessmentform();
            
             $form->area_id = $areas[$a];
+            $form->college = $colleg[$a];
             $form->company_id = $id;
             $form->company = $tenders[$a];
             $form->paymentone = $paymentss[$a];
@@ -1833,8 +1835,8 @@ class LandscapingController extends Controller
                  return view('assessmentformview', [
             'role' => $role,
             'notifications' => $notifications,
-             'assessmmentstatus' => landassessmentform::select(DB::raw('status'))
-                    ->groupBy('status')->get(),
+             'type' => landassessmentform::select(DB::raw('type'))
+                    ->groupBy('type')->get(),
 
            'assessmmentsheet' => landassessmentform::select(DB::raw('assessment_name'))
                     ->groupBy('assessment_name')->get(),
@@ -1857,6 +1859,15 @@ class LandscapingController extends Controller
 
              'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
 
+               'assessmmentcompanyestateofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanydean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(), 
+
+            'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get() 
+
+
         ]);
         
             }
@@ -1866,8 +1877,8 @@ class LandscapingController extends Controller
      return view('assessmentformview', [
             'role' => $role,
             'notifications' => $notifications,
-             'assessmmentstatus' => landassessmentform::select(DB::raw('status'))
-                    ->groupBy('status')->get(),
+             'type' => landassessmentform::select(DB::raw('type'))
+                    ->groupBy('type')->get(),
 
            'assessmmentsheet' => landassessmentform::select(DB::raw('assessment_name'))
                     ->groupBy('assessment_name')->get(),
@@ -1890,6 +1901,10 @@ class LandscapingController extends Controller
             'assessmmentcompanydean' => landassessmentform::where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
 
             'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(), 
+
+
+            'assessmmentcompanyprincipal' => landassessmentform::where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(), 
+
 
              'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
         ]);

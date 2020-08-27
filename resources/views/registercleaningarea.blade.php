@@ -27,7 +27,7 @@ StaffHouse Registrartion
 <div class="container">
 
 
-                <h5  id="Add New House">Register  New Cleaning Area</h5>
+                <h5  id="Add New House">Register New Cleaning Area</h5>
 
                       <hr>
                  <p align="center" style="color: red">All fields are compulsory</p>
@@ -48,7 +48,7 @@ StaffHouse Registrartion
                     </div>
 
 
-                                            <div class="input-group mb-3 col-lg-6" >
+                    <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
                             <label style="width:200px;" class="input-group-text" for="directorate">LOT Name </label>
@@ -56,6 +56,21 @@ StaffHouse Registrartion
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="zone" placeholder="Enter LOT Name">
                     </div> 
+
+
+                     <div class="input-group mb-3 col-lg-6" >
+                        <div class="input-group-prepend">
+                            
+                            <label style="width:200px;height: 28px;" class="input-group-text" > Directorate/College </label>
+                        </div>
+                         <select required style="color: black;" class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+                                  <option selected value="" >Choose...</option>
+                                   @foreach($directorates as $directorate)
+                                  <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+                                   @endforeach
+                         </select>
+                    </div> 
+
 
 
 

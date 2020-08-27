@@ -225,7 +225,7 @@
 
                       <option @if (in_array('Inspector Of Works',$str_array)) { selected="selected" } @else{} @endif  value="Inspector Of Works">Inspector Of Works</option>
                       <option @if (in_array('Maintenance coordinator',$str_array)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option>
-                       <option @if (in_array('Principle',$str_array)) { selected="selected" } @else{} @endif value="Principle">Principle</option>
+                       <option @if (in_array('Principal',$str_array)) { selected="selected" } @else{} @endif value="Principal">Principal</option>
 
                        <option @if (in_array('Quality Surveyor',$str_array)) { selected="selected" } @else{} @endif value="Quality Surveyor">Quality Surveyor</option>
 
@@ -321,7 +321,7 @@
 
                       <option @if (in_array('Maintenance coordinator',$strarray)) { selected="selected" } @else{} @endif value="Maintenance coordinator">Maintenance Coordinator</option>
 
-                        <option @if (in_array('Principle',$strarray)) { selected="selected" } @else{} @endif value="Principle">Principle</option>
+                        <option @if (in_array('Principal',$strarray)) { selected="selected" } @else{} @endif value="Principal">Principal</option>
 
                        <option @if (in_array('Quality Surveyor',$strarray)) { selected="selected" } @else{} @endif value="Quality Surveyor">Quality Surveyor</option>
 

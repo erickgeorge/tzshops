@@ -30,7 +30,7 @@
                 </button>
 
 
-               @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+               @if((auth()->user()->type == 'USAB')||(auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                 <a href="{{ route('Registercleaningarea') }}"
                    class="btn btn-primary">Add new cleaning area</a>
                    <br><br>@endif

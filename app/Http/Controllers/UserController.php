@@ -56,6 +56,7 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->phone = $request['phone'];
         $user->email = $request['email']; 
+        $user->college = $request['college']; 
 
          if ($request['checkdiv'] == 'yesmanual') {
 

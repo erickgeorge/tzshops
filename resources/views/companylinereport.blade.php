@@ -40,7 +40,7 @@ Company report
 
             <?php $i=0; $sumu = 0; ?>
 
-                   [' Start ', 0 ],
+                  
 
 
 

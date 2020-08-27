@@ -46,6 +46,7 @@ use App\iowzone;
 use App\companywitharea;
 use App\assessmentsheet;
 use App\areacompany;
+use App\Directorate;
 use App\tendernumber;
 
 class AssetsController extends Controller
@@ -856,6 +857,7 @@ class AssetsController extends Controller
         $cleanarea = new cleaningarea();
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];
+        $cleanarea->college = $request['college'];
 
         $cleanarea->save();
         return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area is registered successfully']);
@@ -970,15 +972,15 @@ class AssetsController extends Controller
 
 
 
-
     public function Registercleaningareaview(){
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registercleaningarea', [
-            'role' => $role,
-            'notifications' => $notifications,
-            'campuses' => Campus::all(),
+                'role' => $role,
+                'notifications' => $notifications,
+                'campuses' => Campus::all(),
                 'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
+                'directorates' => Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(),
           ]);
      }
 
@@ -987,10 +989,8 @@ class AssetsController extends Controller
       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-
-$assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_asset')) ->OrderBy('name_of_asset','ASC')
-->groupBy('name_of_asset')
-->get();
+        $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_asset')) ->OrderBy('name_of_asset','ASC')
+        ->groupBy('name_of_asset')->get();
 
         return view('Nonbuildingasset', [
             'role' => $role,

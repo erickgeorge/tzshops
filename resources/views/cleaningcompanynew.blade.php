@@ -33,7 +33,7 @@ Companies
 
     </div>
 
-                  <h4 ><b >Cleaning Companies With Active Contract </b></h4>
+                  <h4 ><b >Active Cleaning Companies </b></h4>
 
                   <hr>
 

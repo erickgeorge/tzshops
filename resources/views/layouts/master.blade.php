@@ -364,7 +364,7 @@
 
 
 
-                     @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principle') ||(auth()->user()->type == 'Directorate Director'))
+                     @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principal') ||(auth()->user()->type == 'Directorate Director'))
 
                       <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>

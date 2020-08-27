@@ -33,7 +33,7 @@
        <div class="row">
       <div class="col">
 
-            <h5 ><b >Tenders With Active Contract</b></h5>
+            <h5 ><b >Active Tenders</b></h5>
 
         </div>
 
@@ -144,6 +144,21 @@
           </div>
       </div>
 
+<br>
+
+              <div class="row">
+          <div class="col">
+              <select name="type" class="form-control mr-sm-2">
+                <option value='' selected="selected">Select type of contract</option>
+                
+                <option value="Interior">Interior</option>
+                <option value="Exterior">Exterior</option>
+
+            
+              </select>
+          </div>
+      </div>
+
       <br>
 
 
@@ -180,7 +195,7 @@
 
                     &nbsp; &nbsp;
                    <a style="color:white; " href="{{ route('cleaningcompanywithexpiredcontract') }}"
-                   class="btn btn-secondary" >Tenders with expired contract</a>
+                   class="btn btn-secondary" >Previous Tenders</a>
 
 
 
@@ -196,7 +211,8 @@
                         <th scope="col">Tender Number</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">Company Name</th>
-                        <th scope="col">Assessment sheet</th>
+                         <th scope="col">Assessment sheet</th>
+                         <th scope="col">Contract Type</th>
                         <th scope="col">Status</th>
                         <th scope="col">Next Assessment</th>
                         <th scope="col">Contract Duration</th>
@@ -237,6 +253,7 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>
+                             <td>{{ $house->type }}</td>
 
                   @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assessed yet </span><br>
@@ -430,6 +447,7 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>
+                              <td>{{ $house->type }}</td>
 
                   @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assessed yet </span><br>
@@ -627,6 +645,7 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>
+                              <td>{{ $house->type }}</td>
 
                   @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assessed yet </span><br>
@@ -822,6 +841,7 @@
                             <td>{{ $house['are_a']->cleaning_name }}</td>
                             <td>{{ $house['compantwo']->company_name }}</td>
                             <td>{{ $house->sheet }}</td>
+                              <td>{{ $house->type }}</td>
 
                   @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assessed yet </span><br>
