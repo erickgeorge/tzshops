@@ -307,28 +307,48 @@ tr:nth-child(even) {
 
 
 
-  @if($assesment->status == 1)
-  <b>status:</b><b style="color: blue;">  Not Yet Approved!</b>
-  @elseif(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
-
+  @if(($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 2))
 
 
     <div class="container-name">
-     <div class="div1">ASSESSED BY<u style="padding-left: 12px;">  </u></div>
-    <div class="div2"> </div>
+     <div class="div1">Approved by Dean of Student:&nbsp;  &nbsp;<b>{{ $assesment['deanstudent']->fname .' ' . $assesment['deanstudent']->lname }}</b><u style="padding-left: 12px;"> </u></div>
+  
+    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->dean_date))}}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
+<br>
+ 
+
+   @elseif(($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 4))
+
+       <div class="container-name">
+     <div class="div1">Approved by {{ $assesment['principles']->type }}:&nbsp;  &nbsp;<b>{{ $assesment['principles']->fname .' ' . $assesment['principles']->lname }}</b><u style="padding-left: 12px;"> </u></div>
+  
+    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->principle_date))}}</b> <u style="padding-left: 40px;">   </u> </div>
+   </div>
+
+
+  @else
+  <b>status:</b><b style="color: blue;">  Not yet approved</b>
+  @endif
+
+
+  @if(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
+
+
+
+  
      <br>
 
     <div class="container-name">
      <div class="div1">Name of Assessor:&nbsp;  &nbsp;<b>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</b><u style="padding-left: 12px;"> </u></div>
-    <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
+  
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->created_at)) }}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 <br>
 
        <div class="container-name">
      <div class="div1">Approved by Estate Officer :&nbsp;  &nbsp;<b>{{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} </b><u style="padding-left: 12px;"> </u></div>
-    <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
+    
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->accepted_on)) }}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 <br>

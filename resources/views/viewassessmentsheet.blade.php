@@ -69,7 +69,9 @@ Assessment Sheet
              <th >#</th>
         <th style="width: 950px">Activity</th>
         <th style="width: 200px">Percentage(%)</th>
+         @if((auth()->user()->type == 'USAB') || (auth()->user()->type == 'Supervisor Landscaping')  || (auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1))
         <th >Action</th>
+         @endif
          </tr>
       </thead>
 
@@ -92,6 +94,8 @@ Assessment Sheet
 
       <TD align="center">{{$assesment->percentage}}</TD>
 
+
+ @if((auth()->user()->type == 'USAB') || (auth()->user()->type == 'Supervisor Landscaping')  || (auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1))
            <td >
 
                             <div class="row">
@@ -120,6 +124,9 @@ Assessment Sheet
                                     </form>
                                 </div>
          </td>
+
+
+      @endif   
 
  </tr>
 

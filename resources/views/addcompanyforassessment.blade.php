@@ -6,6 +6,16 @@
 @section('body')
 
 
+
+
+
+
+
+
+
+
+
+
 <div  class="container">
             <br>
               @if ($errors->any())
@@ -181,21 +191,21 @@
              <TD><input style=" text-align: center;" class="form-control" type="number"   name="percentage[]" placeholder="{{$assess->percentage}}" value="{{$assess->percentage}}" readonly="readonly"></TD>
 
 
-            <TD><input style="text-align: center;" class="form-control" type="text" id="tstock{{$i}}"   name="score[]" placeholder="Score"
-            onblur="if(document.getElementById('tstock{{$i}}').value>{{$assess->percentage}}){  var message=document.getElementById('error{{$i}}');
-           message.style.color='red';
-           message.innerHTML= 'Score must be less than or equal to {{$assess->percentage}}';
+            <TD>  <input required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="score[]" id="txthour{{$i}}" onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#txthour{{$i}}').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
 
+                            if (isNaN(newString))
+                            {
 
-        //    some here
+                            }
 
-            } else{
-              var message=document.getElementById('error{{$i}}');
-           message.style.color='red';
-           message.innerHTML= '';
-            }
-        checkinfo{{$i}}()
-            " required="required" min="0" max="{{$assess->percentage}}"> <span id="error{{$i}}"></span></TD>
+                            if (newString > {{$assess->percentage}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"></TD>
 
 
            <TD><textarea   class="form-control" type="text" name="remark[]" placeholder="Remark"  ></textarea></TD>
@@ -249,7 +259,21 @@
 
       <TD><input style="text-align: center;"    min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD>
 
-      <TD><input style=" text-align: center;" class="form-control" type="number"  name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" min="0" max="{{$assesment->percentage}}" ></TD>
+        <TD>  <input style=" text-align: center;" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="score[]" id="txthour{{$i}}" onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#txthour{{$i}}').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+
+                            }
+
+                            if (newString > {{$assesment->percentage}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="{{$assesment->score}}"  value="{{$assesment->score}}" ></TD>
 
       <TD><input style="height:50px;"  class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD>
 
@@ -301,6 +325,7 @@
      <input  name="myarea[]"    value ="{{$companyiii->area}}"  hidden>
      <input  name="mysheet[]"   value ="{{$companyiii->sheet}}" hidden>
       <input  name="payments[]" value="{{$companyiii->payment}}"  hidden >
+       <input  name="college[]" value="{{$companyiii['are_a']->college}}"  hidden >
 
    <?php
    $summ = 0;
@@ -430,13 +455,13 @@
 
   @if($assesment->status2 == 1)
    <?php $cmp = Crypt::encrypt($assesment->companynew); ?>
-         <form method="POST" onsubmit="return confirm('Are you sure company supervisor is already signed and satisfied with the scores given ?')" action="{{ route('supervisorsatisfied', [$assesment->assessment_id , $cmp , $assesment->assessment_sheet , $assesment->month ])}}" >
+         <form method="POST" onsubmit="return confirm('Are you sure company supervisor has already signed and satisfied with the scores given ?')" action="{{ route('supervisorsatisfied', [$assesment->assessment_id , $cmp , $assesment->assessment_sheet , $assesment->month ])}}" >
             @csrf
 
             <div class="form-group ">
 
 
-                    <input type="checkbox" name="emergency"  required> <b style="color:blue;">Please click the checkbox and save if company supervisor is already signed the document and satisfied.</b>
+                    <input type="checkbox" name="emergency"  required> <b style="color:blue;">Save if company supervisor has already signed the document and satisfied.</b>
 
 
             </div>
@@ -466,14 +491,6 @@
 <br>
 <br>
 <br>
-@while ()
 
-@endwhile
-<script>
-    for (var h = 0; h <= {{$i}}; h++)
-    {
-        function checkinfo{{}}
-    }
-</script>
 
     @endSection

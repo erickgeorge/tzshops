@@ -41,7 +41,7 @@ class NotesController extends Controller
 
     /////////////////////////////////////////
      $username = '';
-     $statusvalue = '';
+     $typevalue = '';
     if($_GET['userid'] != ''){
       $userinid = User::get();
 
@@ -53,278 +53,278 @@ class NotesController extends Controller
              }
       }
   }
-        //fetch status
-  if($_GET['status'] !=''){
-  $status = $_GET['status'];
-  if ($status == -1) {
-      $statusvalue = 'New';
-  }elseif ($status == 1) {
-      $statusvalue = 'Accepted';
-  }elseif ($status == 0) {
-      $statusvalue = 'Rejected';
-  }elseif ($status == 2) {
-      $statusvalue = 'waiting response from client';
-  }elseif ($status == 30) {
-      $statusvalue = 'Closed';
-  }elseif ($status == 3) {
-      $statusvalue = 'Technician assigned';
-  }elseif ($status == 4) {
-      $statusvalue = 'Transportation stage';
-  }elseif ($status == 5) {
-      $statusvalue = 'Pre-implementation';
-  }elseif ($status == 6) {
-      $statusvalue = 'Post-implementation';
-  }elseif ($status == 7) {
-      $statusvalue = 'Material Requested';
-  }elseif ($status == 8) {
-      $statusvalue = 'Procurement stage';
-  }elseif ($status == 9) {
-      $statusvalue = 'Closed - satisfied by client';
-  }elseif($status == 15){
-    $statusvalue = 'Material Accepted by IoW';
-  }elseif($status == 16){
-    $statusvalue = 'Material rejected by IoW';
+        //fetch type
+  if($_GET['type'] !=''){
+  $type = $_GET['type'];
+  if ($type == -1) {
+      $typevalue = 'New';
+  }elseif ($type == 1) {
+      $typevalue = 'Accepted';
+  }elseif ($type == 0) {
+      $typevalue = 'Rejected';
+  }elseif ($type == 2) {
+      $typevalue = 'waiting response from client';
+  }elseif ($type == 30) {
+      $typevalue = 'Closed';
+  }elseif ($type == 3) {
+      $typevalue = 'Technician assigned';
+  }elseif ($type == 4) {
+      $typevalue = 'Transportation stage';
+  }elseif ($type == 5) {
+      $typevalue = 'Pre-implementation';
+  }elseif ($type == 6) {
+      $typevalue = 'Post-implementation';
+  }elseif ($type == 7) {
+      $typevalue = 'Material Requested';
+  }elseif ($type == 8) {
+      $typevalue = 'Procurement stage';
+  }elseif ($type == 9) {
+      $typevalue = 'Closed - satisfied by client';
+  }elseif($type == 15){
+    $typevalue = 'Material Accepted by IoW';
+  }elseif($type == 16){
+    $typevalue = 'Material rejected by IoW';
   }
   else{
-      $statusvalue = 'Closed - not satisfied by client';
+      $typevalue = 'Closed - not satisfied by client';
   }
 }
 if($_GET['problem_type']!= ''){$probleme = 'All '.$_GET['problem_type'];}else{$probleme='All ';}
 if($_GET['userid']!=''){$usere = ' Works Orders From '.$username;}else{$usere =' WorkOrders ';}
 if($_GET['start']!=''){$starte = ' <date> from'.$_GET['start'];}else{$starte ='<date>';}
 if($_GET['end']!=''){$ende = ' to '.$_GET['end'].'</date>';}else{$ende ='</date>';}
-if($_GET['status']!= ''){$statuse = '<br> Status :'.$statusvalue;} else{$statuse ='';}
-if(($_GET['problem_type']== '')&&($_GET['userid']=='')&&($_GET['start']=='')&&($_GET['end']=='')&&($_GET['status']== '')) {$data['header'] = 'All WorkOrders Report'; }
+if($_GET['type']!= ''){$typee = '<br> type :'.$typevalue;} else{$typee ='';}
+if(($_GET['problem_type']== '')&&($_GET['userid']=='')&&($_GET['start']=='')&&($_GET['end']=='')&&($_GET['type']== '')) {$data['header'] = 'All WorkOrders Report'; }
 
-$data['header'] = $probleme.''.$usere.''.$starte.''.$ende.''.$statuse;
+$data['header'] = $probleme.''.$usere.''.$starte.''.$ende.''.$typee;
     /////////////////////////////////////////
 
 
 //if all inserted
-if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
 
     }
 //if only ->from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if only status not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if only type not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if status and ->from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+//if type and ->from not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if only name no inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if name and from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if name and status not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if name and type not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if name, status, from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+//if name, type, from not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if end not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end and from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if end and status not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if end and type not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if end, status, from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+//if end, type, from not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if end, name not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end, name, from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if end, name, status not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if end, name, type not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if end,name,status,from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+//if end,name,type,from not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if start not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if start, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if start, status, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+//if start, type, from not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, name not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, name, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if start, name, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if start, name, status, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+//if start, name, type, from not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, end not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, end, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if start, end, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if start, end, status, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+//if start, end, type, from not inserted
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, end, name, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
+//if start, end, name, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']=='')){
         $data['wo'] =  Workorder::
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if only ->from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if only status not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if only type not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
@@ -332,8 +332,8 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','<=',$_GET['end'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if status and ->from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+//if type and ->from not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
@@ -341,210 +341,210 @@ if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if only name no inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if name and from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if name and status not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if name and type not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if name, status, from not inserted
-    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+//if name, type, from not inserted
+    if(($_GET['start']!='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if end not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end and from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if end and status not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if end and type not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if end, status, from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+//if end, type, from not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('location',$_GET['location'])->
         Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if end, name not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if end, name, from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if end, name, status not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if end, name, type not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','>=',$_GET['start'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if end,name,status,from not inserted
-    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+//if end,name,type,from not inserted
+    if(($_GET['start']!='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
         Where('created_at','>=',$_GET['start'])->orderBy('created_at','Desc')->get();
     }
 //if start not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if start, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if start, status, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+//if start, type, from not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('location',$_GET['location'])->
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, name not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, name, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, name, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if start, name, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('created_at','<=',$_GET['end'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if start, name, status, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+//if start, name, type, from not inserted
+    if(($_GET['start']=='')&&($_GET['end']!='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
         Where('created_at','<=',$_GET['end'])->orderBy('created_at','Desc')->get();
     }
 //if start, end not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, end, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if start, end, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('problem_type',$_GET['problem_type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-//if start, end, status, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+//if start, end, type, from not inserted
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']!='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
         Where('problem_type',$_GET['problem_type'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->
+        Where('type',$_GET['type'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
 //if start, end, name, from not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']!='')&&($_GET['userid']=='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
-        Where('status',$_GET['status'])->orderBy('created_at','Desc')->get();
+        Where('type',$_GET['type'])->orderBy('created_at','Desc')->get();
     }
-//if start, end, name, status not inserted
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
+//if start, end, name, type not inserted
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']!='')&&($_GET['location']!='')){
         $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->
         Where('client_id',$_GET['userid'])->orderBy('created_at','Desc')->get();
     }
-    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
+    if(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']!='')){
           $data['wo'] =  Workorder::
         Where('location',$_GET['location'])->orderBy('created_at','Desc')->get();
         //$header = $_GET['problem_type'].' Works orders ';
 }
 //if all empty
-    elseif(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['status']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
+    elseif(($_GET['start']=='')&&($_GET['end']=='')&&($_GET['problem_type']=='')&&($_GET['type']=='')&&($_GET['userid']=='')&&($_GET['location']=='')){
           $data['wo'] =  Workorder::orderBy('created_at','Desc')->get();
 }
 ////////////////////////////////////////////////////
@@ -803,9 +803,9 @@ return $pdf->stream(''.$data['header'].' -  '.date('d-m-Y Hi').'.pdf');
         }
 
 
-     $wo =  WorkOrder::where('status',2)->whereBetween('updated_at', [$_GET['userid'], $to])->get();
+     $wo =  WorkOrder::where('type',2)->whereBetween('updated_at', [$_GET['userid'], $to])->get();
 
-     $wo =  WorkOrder::where('status',2)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get();
+     $wo =  WorkOrder::where('type',2)-> orderBy(DB::raw('ABS(DATEDIFF(created_at, NOW()))'))->  get();
 ///////////////////////////////////////////////
      if($wo ->isEmpty()){
 
@@ -825,40 +825,40 @@ public function unattendedwopdf(){
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          Where('location',$_GET['location'])->
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','-1')->OrderBy('created_at','Desc')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('type','-1')->OrderBy('created_at','Desc')->get();
       }
 
         if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
             $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
                              Where('location',$_GET['location'])->
-                             Where('status','-1')->OrderBy('created_at','Desc')->get();
+                             Where('type','-1')->OrderBy('created_at','Desc')->get();
          }
 
         if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','-1')->OrderBy('created_at','Desc')->get();
+         Where('type','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
-          Where('status','-1')->OrderBy('created_at','Desc')->get();
+          Where('type','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','-1')->OrderBy('created_at','Desc')->get();
+         Where('type','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
-         Where('status','-1')->OrderBy('created_at','Desc')->get();
+         Where('type','-1')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','-1')->OrderBy('created_at','Desc')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('type','-1')->OrderBy('created_at','Desc')->get();
       }
 
        if(($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']=='')){
-            $data['unattended_work'] =  WorkOrder::Where('status','-1')->OrderBy('created_at','Desc')->get();
+            $data['unattended_work'] =  WorkOrder::Where('type','-1')->OrderBy('created_at','Desc')->get();
        }
 ////////////////////////////////////////////////////////
      if($data['unattended_work'] ->isEmpty()){
@@ -877,40 +877,40 @@ return redirect()->back()->withErrors(['message' => 'No data Found For Your Sear
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          Where('location',$_GET['location'])->
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('type','2')->OrderBy('created_at','Desc')->get();
       }
 
         if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
             $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
                              Where('location',$_GET['location'])->
-                             Where('status','2')->OrderBy('created_at','Desc')->get();
+                             Where('type','2')->OrderBy('created_at','Desc')->get();
          }
 
         if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->OrderBy('created_at','Desc')->get();
+         Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
-          Where('status','2')->OrderBy('created_at','Desc')->get();
+          Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->OrderBy('created_at','Desc')->get();
+         Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
-         Where('status','2')->OrderBy('created_at','Desc')->get();
+         Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('type','2')->OrderBy('created_at','Desc')->get();
       }
 
        if(($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']=='')){
-            $data['unattended_work'] =  WorkOrder::Where('status','2')->OrderBy('created_at','Desc')->get();
+            $data['unattended_work'] =  WorkOrder::Where('type','2')->OrderBy('created_at','Desc')->get();
        }
 
 //////////////////////////////////////////////
@@ -927,40 +927,40 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
       if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          Where('location',$_GET['location'])->
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('type','2')->OrderBy('created_at','Desc')->get();
       }
 
         if (($_GET['name']!='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
             $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
                              Where('location',$_GET['location'])->
-                             Where('status','2')->OrderBy('created_at','Desc')->get();
+                             Where('type','2')->OrderBy('created_at','Desc')->get();
          }
 
         if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->OrderBy('created_at','Desc')->get();
+         Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']!='')&&($_GET['location']=='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('client_id',$_GET['name'])->
-          Where('status','2')->OrderBy('created_at','Desc')->get();
+          Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
          WHERE('problem_type',$_GET['problem_type'])->
-         Where('status','2')->OrderBy('created_at','Desc')->get();
+         Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']!='')&&($_GET['problem_type']=='')) {
           $data['unattended_work'] =  WorkOrder::Where('location',$_GET['location'])->
-         Where('status','2')->OrderBy('created_at','Desc')->get();
+         Where('type','2')->OrderBy('created_at','Desc')->get();
 
       }if (($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']!='')) {
           $data['unattended_work'] =  WorkOrder::
-         WHERE('problem_type',$_GET['problem_type'])->Where('status','2')->OrderBy('created_at','Desc')->get();
+         WHERE('problem_type',$_GET['problem_type'])->Where('type','2')->OrderBy('created_at','Desc')->get();
       }
 
        if(($_GET['name']=='')&&($_GET['location']=='')&&($_GET['problem_type']=='')){
-            $data['unattended_work'] =  WorkOrder::Where('status','2')->OrderBy('created_at','Desc')->get();
+            $data['unattended_work'] =  WorkOrder::Where('type','2')->OrderBy('created_at','Desc')->get();
        }
 
 /////////////////////////////////////////////////
@@ -1011,7 +1011,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
  $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::where('status',0)->where('type',$_GET['type'])->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('type',0)->where('type',$_GET['type'])->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
              $data['header'] = 'All Technicians Details';
              $data['section'] ='0';
             }
@@ -1030,7 +1030,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                $data['section'] =$_GET['type'];
             }else
             {
-                 $data['fetch'] = Technician::where('status',0)->where('type',$_GET['type'])->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('type',0)->where('type',$_GET['type'])->OrderBy('fname','asc')->get();
                 $data['header'] = 'All '.$_GET['type'].'  Technicians Details';
                 $data['section'] = $_GET['type'];
             }
@@ -1049,7 +1049,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                 $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::where('status',0)->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('type',0)->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
                  $data['header'] = 'Technician Details';
                  $data['section'] ='0';
             }
@@ -1068,7 +1068,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
  $data['section'] ='0';
             }else
             {
-                 $data['fetch'] = Technician::where('status',0)->OrderBy('type','asc')->OrderBy('fname','asc')->get();
+                 $data['fetch'] = Technician::where('type',0)->OrderBy('type','asc')->OrderBy('fname','asc')->get();
 
              $data['header'] = 'All Technician Details';
               $data['section'] ='0';
@@ -1096,7 +1096,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
     public function grnotepdf($id){
 
-           $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',15)
+           $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('type',15)
                     ->get()];
          $pdf = PDF::loadView('grnpdf', $data)->setPaper('a4', 'landscape');
 
@@ -1108,7 +1108,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     public function issuenotepdf($id){
 
 
-         $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',3)
+         $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('type',3)
                     ->get()];
          $pdf = PDF::loadView('issuenotepdf', $data);
 
@@ -1226,7 +1226,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     {
         $data['iowzone'] =  User::where('type', 'Inspector Of Works')->
                        select(DB::raw('zone') )
-                       ->where('status', 1)
+                       ->where('type', 1)
                        ->where('zone','<>', 'NULL')
                      ->groupBy('zone')
                      ->get();
@@ -1605,170 +1605,170 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
 
 
-          if($request['statuses']=='' and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+          if($request['typees']=='' and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
 
              $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-          if($request['statuses']==''  and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender'] ){
+          if($request['typees']==''  and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender'] ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company', $request['tender'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-        if($request['statuses']=='' and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender']=='' ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        } if($request['statuses']=='' and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender'] ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender']=='' ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company', $request['tender'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-         if($request['statuses']=='' and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender'] ){
+        if($request['typees']=='' and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company', $request['tender'])->where('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        } if($request['typees']=='' and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender'] ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender']=='' ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-         if($request['statuses']=='' and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender']=='' ){
+         if($request['typees']=='' and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender'] ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender'] ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet'] and $request['company']=='' and $request['area']=='' and $request['tender']=='' ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('assessment_name', $request['sheet'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet'] and $request['company']=='' and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']=='' ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender']=='' ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('status', $request['statuses'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses']=='' and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender'] ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company', $request['tender'])->where('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-         if($request['statuses']=='' and $request['sheet'] and $request['company'] and $request['area'] and $request['tender']=='' ){
+         if($request['typees']=='' and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender'] ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet'] and $request['company']=='' and $request['area']=='' and $request['tender']=='' ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('assessment_name', $request['sheet'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet'] and $request['company']=='' and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']=='' ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender']=='' ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('type', $request['typees'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees']=='' and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender'] ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-         if($request['statuses']=='' and $request['sheet'] and $request['company'] and $request['area'] and $request['tender'] ){
+         if($request['typees']=='' and $request['sheet'] and $request['company'] and $request['area'] and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+         if($request['typees']=='' and $request['sheet'] and $request['company'] and $request['area'] and $request['tender'] ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-         if($request['statuses'] and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses'] and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses'] and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender'] ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses'] and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->where('company', $request['tender'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company']=='' and $request['area'] and $request['tender'] ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses'] and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender'] ){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet'] and $request['company']=='' and $request['area']=='' and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses'] and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender'] ){
-
-              $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company'] and $request['area']=='' and $request['tender']){
 
-           $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses'] and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->where('company', $request['tender'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-         if($request['statuses'] and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet'] and $request['company'] and $request['area'] and $request['tender']=='' ){
+         if($request['typees'] and $request['sheet']=='' and $request['company'] and $request['area'] and $request['tender'] ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
-         if($request['statuses'] and $request['sheet'] and $request['company'] and $request['area'] and $request['tender'] ){
+         if($request['typees'] and $request['sheet'] and $request['company']=='' and $request['area']=='' and $request['tender']=='' ){
 
-             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('assessment_name', $request['sheet'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees'] and $request['sheet']=='' and $request['company']=='' and $request['area']=='' and $request['tender'] ){
+
+              $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees'] and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']=='' ){
+
+           $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees'] and $request['sheet'] and $request['company']=='' and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees'] and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender']=='' ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees'] and $request['sheet'] and $request['company'] and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees'] and $request['sheet'] and $request['company'] and $request['area'] and $request['tender']=='' ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+         if($request['typees'] and $request['sheet'] and $request['company'] and $request['area'] and $request['tender'] ){
+
+             $data['assessmmentcompany'] = landassessmentform::whereBetween('assessment_month', [$from, $to])->where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
@@ -1788,443 +1788,443 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
             else {
 
-          if($request['statuses']=='' and $request['sheet']=='' and $request['start']==''  and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+          if($request['typees']=='' and $request['sheet']=='' and $request['start']==''  and $request['company']=='' and $request['area']=='' and $request['tender']==''){
 
              $data['assessmmentcompany'] = landassessmentform::OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-         if($request['statuses']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
+         if($request['typees']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-           if($request['statuses']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
+           if($request['typees']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
 
-          if($request['statuses']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-             if($request['statuses']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
+          if($request['typees']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-          if($request['statuses']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
+             if($request['typees']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
 
-
-         if($request['statuses']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
+          if($request['typees']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
 
-            if($request['statuses']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-              if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
-              if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
+         if($request['typees']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-               if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                  if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+            if($request['typees']=='' and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-              if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                      if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+              if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                    if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                   if($request['statuses']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
-                   if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+              if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+               if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                  if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+              if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                      if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                    if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                   if($request['typees']=='' and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+
+                   if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
 
-                   if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
+                   if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                   if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                    if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
+                   if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                   if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                   if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
+                    if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                      if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                    if($request['statuses']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
+                   if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-                  if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-                    if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-              if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-              if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+                   if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-               if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-            if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+                      if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                    if($request['typees']=='' and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+                  if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+                    if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+              if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+              if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+               if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+            if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
-            if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
+            if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('status', $request['statuses'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('type', $request['typees'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-            if($request['statuses']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
+            if($request['typees']=='' and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('status', $request['statuses'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('type', $request['typees'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
      ///
-                    if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+                    if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->orwhere('assessment_name', $request['sheet'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-                 if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-           if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->orwhere('assessment_name', $request['sheet'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-          if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
+                 if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+           if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-             if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
+          if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('company_id', $request['company'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+             if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])
              ->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
-          if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
+          if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-
-         if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-            if($request['statuses'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-              if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
-              if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
+         if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-               if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                  if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+            if($request['typees'] and $request['sheet']=='' and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-              if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                      if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+              if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                    if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                   if($request['statuses'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
-                   if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+              if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+               if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                  if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+              if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                      if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                    if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                   if($request['typees'] and $request['sheet']=='' and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->where('area_id', $request['area'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('assessment_name', $request['sheet'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+
+                   if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
 
-                   if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
+                   if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area']=='' and $request['tender']){
 
              $data['assessmmentcompany'] = landassessmentform::where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('area_id', $request['area'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                   if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
+                   if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                    if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                   if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
+                    if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company']=='' and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                   if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('area_id', $request['area'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-                      if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
+                   if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-
-                    if($request['statuses'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-                  if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-                    if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-              if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-              if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+                   if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area']=='' and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
-
-        }
-
-               if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
-
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-            if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+                      if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('assessment_month', $request['start'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+                    if($request['typees'] and $request['sheet'] and  $request['start']=='' and $request['company'] and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company_id', $request['company'])->where('assessment_name', $request['sheet'])->where('area_id', $request['area'])->where('company', $request['tender'])->orwhere('assessment_month', $request['start'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+                  if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+                    if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->orwhere('area_id', $request['area'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+              if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('company_id', $request['company'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+              if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company']=='' and $request['area'] and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('area_id', $request['area'])->orwhere('company_id', $request['company'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+               if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']==''){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+
+        }
+
+
+            if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area']=='' and $request['tender']){
+
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('company', $request['tender'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->orwhere('area_id', $request['area'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
 
-            if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
+            if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']==''){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->orwhere('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
 
-            if($request['statuses'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
+            if($request['typees'] and $request['sheet'] and  $request['start'] and $request['company'] and $request['area'] and $request['tender']){
 
-             $data['assessmmentcompany'] = landassessmentform::where('status', $request['statuses'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
+             $data['assessmmentcompany'] = landassessmentform::where('type', $request['typees'])->where('assessment_name', $request['sheet'])->where('assessment_month', $request['start'])->where('company_id', $request['company'])->where('area_id', $request['area'])->where('company', $request['tender'])->OrderBy('assessment_month', 'DESC')->get();
 
         }
 
@@ -2314,9 +2314,64 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
         }
 
-            if($request['tender'] and $request['area'] and $request['company']){
+            if($request['tender'] and $request['area'] and $request['company'] ){
 
              $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('area', $request['area'])->where('company_name', $request['company'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+        
+        if($request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+         if($request['tender'] and $request['area'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('area', $request['area'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+          
+          
+
+          if($request['tender']  and $request['company'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('company_name', $request['company'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+         if($request['area'] and $request['company'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('area', $request['area'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+         
+
+         if($request['company'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+          if($request['area'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('area', $request['area'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+            if($request['tender'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+            if($request['tender'] and $request['area'] and $request['company'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('area', $request['area'])->where('company_name', $request['company'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
 
         }
 
@@ -2432,6 +2487,130 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
              $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('tender', $request['tender'])->where('area', $request['area'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
 
         }
+
+        if($request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+        if( $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+        if($request['area'] and  $request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->where('area', $request['area'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+         if( $request['tender'] and  $request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+         if($request['start']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+        if($request['start'] and $request['tender']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+
+        if($request['start']  and $request['area']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('area', $request['area'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+
+          if($request['start'] and  $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+           
+           if( $request['tender'] and $request['area'] and $request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->where('tender', $request['tender'])->where('area', $request['area'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+          if( $request['tender'] and $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->where('tender', $request['tender'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+        if( $request['area'] and $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->where('area', $request['area'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+          if($request['start'] and $request['tender'] and $request['area']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('tender', $request['tender'])->where('area', $request['area'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+         if($request['start'] and $request['tender']  and $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('tender', $request['tender'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+            if($request['start'] and $request['area'] and $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('area', $request['area'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+
+
+               if($request['tender'] and $request['area'] and $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::where('type', $request['type'])->where('tender', $request['tender'])->where('area', $request['area'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
+
+               if($request['start'] and $request['tender'] and $request['area'] and $request['company']  and $request['type'] ){
+
+             $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('tender', $request['tender'])->where('area', $request['area'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
+
+        }
+
 
 
 

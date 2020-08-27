@@ -221,7 +221,7 @@
 
               @endif
 
-                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principle')||(auth()->user()->type == 'Directorate Director'))
+                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principal')||(auth()->user()->type == 'Directorate Director'))
 
 
                <li class="nav-item">
@@ -765,7 +765,12 @@
 
       <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Companies</h6></a>
     <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Areas</h6></a>
+
+     @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'USAB'))
+
     <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
+
+     @endif
      <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheets </h6></a>
    <!-- <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
     <a  href="{{ url('Maintainance/section')}}" ><h6> Maintenance  section </h6></a>-->

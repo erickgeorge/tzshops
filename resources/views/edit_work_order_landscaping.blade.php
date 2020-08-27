@@ -362,7 +362,24 @@ var total=2;
 
       <TD><input oninput="totalitem()"  id="istock"  min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD>
 
-      <TD><input class="form-control" type="number" id="tstock" name="score[]" placeholder="{{$assesment->score}}" value="{{$assesment->score}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required="required" max="{{$assesment->percentage}}" ></TD>
+   
+
+
+        <TD>  <input style=" text-align: center;" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="score[]" id="txthour{{$i}}" onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#txthour{{$i}}').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+                               
+                            }
+
+                            if (newString > {{$assesment->percentage}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="{{$assesment->score}}"  value="{{$assesment->score}}" ></TD>
 
        <TD><input class="form-control" type="text" name="remark[]" placeholder="{{$assesment->remark}}" value="{{$assesment->remark}}" ></TD>
 
@@ -508,7 +525,7 @@ var total=2;
 <!--avarage-->
 @endif
 
- <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>
+ <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Back to Top</button></a>
 
 
 </form>
@@ -591,7 +608,7 @@ var total=2;
  @endif
 
 
- @if((auth()->user()->type == 'Principle') || (auth()->user()->type == 'Directorate Director') || (auth()->user()->type == 'Dean of Student'))
+ @if((auth()->user()->type == 'Principal') || (auth()->user()->type == 'Directorate Director') || (auth()->user()->type == 'Dean of Student'))
   @if(($assesment->status == 1) and ($assesment->status2 == 3) )
   <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 800px;">Approve <a href="{{route('approveassessmentprinciple', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
@@ -816,7 +833,7 @@ var total=2;
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;"><b></b> Rejection reason from Dean/Principle/Directorates Director.</b></h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;"><b></b> Rejection reason from Dean/Principal/Directorates Director.</b></h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

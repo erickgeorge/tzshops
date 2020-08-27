@@ -13,7 +13,7 @@ Assessment form
       <div class="col">
           @foreach($assessmmentcompany as $assesment)
           @endforeach
-            <h5 ><b style="text-transform: capitalize;">assessment forms assessed for last month </b></h5>
+            <h5 ><b style="text-transform: capitalize;">assessment forms assessed For {{ date('F Y', strtotime($assesment->assessment_month))}}</b></h5>
 
         </div>
 
@@ -158,40 +158,12 @@ Assessment form
 
       <div class="row">
           <div class="col">
-              <select name="statuses" class="form-control mr-sm-2">
-                <option value='' selected="selected">Select status</option>
-                 @foreach($assessmmentstatus as $assesment)
-                                            @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
-                             @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
-                             @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
-                             @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
-                             @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principle/Dean/<br> Directorates Director for approval</span></td>
-                             @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
-                             @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
-                             @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
-                             @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
-                             @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
-                             @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
-                             @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
-                              @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Student </span></td>
-                             @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
-                             @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
-                             @endif
+              <select name="typees" class="form-control mr-sm-2">
+                <option value='' selected="selected">Select type of contract</option>
+                 @foreach($type as $assesment)
+
+                   <option value='{{$assesment->type}}'>{{$assesment->type}}</option>
+                                          
                  @endforeach
               </select>
           </div>
@@ -237,6 +209,7 @@ Assessment form
                         <th scope="col">Assessment Area</th>
                         <th scope="col">Company Name</th>
                         <th scope="col">Assessment Month</th>
+                         <th scope="col">Contract Type</th>
                         <th scope="col">Assessment Sheet</th>
                         <th scope="col">Status</th>
                         <th scope="col">Actions</th>
@@ -257,6 +230,7 @@ Assessment form
                              <td>{{$assesment['areaname']->cleaning_name}}</td>
                                 <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                              <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                                                         @if($assesment->status == 1)
                              <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
@@ -267,7 +241,7 @@ Assessment form
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
                              <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principle/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
                              <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
@@ -313,6 +287,7 @@ Assessment form
                              <td>{{$assesment['areaname']->cleaning_name}}</td>
                                 <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                              <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
                              <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
@@ -323,7 +298,7 @@ Assessment form
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
                              <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principle/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
                              <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
@@ -358,7 +333,7 @@ Assessment form
 
 
 
-@if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'Principle') || (auth()->user()->type == 'Directorate Director') || (auth()->user()->type == 'Dean of Student'))
+@if((auth()->user()->type == 'Administrative officer') || (auth()->user()->type == 'Directorate Director') || (auth()->user()->type == 'Dean of Student'))
                     @foreach($assessmmentcompanyadofficer as $assesment)
                      @if($assesment->lessmonth == date("Y-m") )
                           <?php $ii++; ?>
@@ -368,6 +343,7 @@ Assessment form
                              <td>{{$assesment['areaname']->cleaning_name}}</td>
                                 <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                              <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
                              <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
@@ -378,7 +354,7 @@ Assessment form
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
                              <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principle/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
                              <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
@@ -410,6 +386,65 @@ Assessment form
            @endif
                       @endforeach
 @endif
+
+
+
+@if((auth()->user()->type == 'Principal'))
+                    @foreach($assessmmentcompanyprincipal as $assesment)
+                     @if($assesment->lessmonth == date("Y-m") )
+                          <?php $ii++; ?>
+                         <tr>
+                             <td>{{ $ii }}</td>
+                              <td>{{$assesment->company}}</td>
+                             <td>{{$assesment['areaname']->cleaning_name}}</td>
+                                <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
+                             <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                              <td>{{$assesment->type}}</td>
+                              <td>{{$assesment->assessment_name}}</td>
+                             @if($assesment->status == 1)
+                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             @elseif($assesment->status == 2)
+                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
+                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
+                             @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
+                             <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
+                             @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
+                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             @elseif($assesment->status == 4)
+                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
+                             @elseif($assesment->status == 5)
+                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
+                             @elseif($assesment->status == 6)
+                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
+                             @elseif($assesment->status == 7)
+                             <td><span class="badge badge-danger">Closed</span></td>
+                             @elseif($assesment->status == 10)
+                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
+                             @elseif($assesment->status == 11)
+                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
+                             @elseif($assesment->status == 12)
+                             <td><span class="badge badge-danger">Rejected</span></td>
+                              @elseif($assesment->status == 30)
+                             <td><span class="badge badge-danger">Rejected by Dean of Student </span></td>
+                             @elseif($assesment->status == 13)
+                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             @elseif($assesment->status == 25)
+                             <td><span class="badge badge-success">Company paid </span></td>
+                             @endif
+                               <?php $tender = Crypt::encrypt($assesment->company); ?>
+                             <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                           <!-- <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$assesment->id]) }}" data-toggle="tooltip" title="Track"><i
+                                                    class="fas fa-tasks"></i></a>-->
+                           </td>
+                         </tr>
+           @endif
+                      @endforeach
+@endif
+
+
+
 
 
 
@@ -424,6 +459,7 @@ Assessment form
                              <td>{{$assesment['areaname']->cleaning_name}}</td>
                                 <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                              <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
                              <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
@@ -434,7 +470,7 @@ Assessment form
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
                              <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principle/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
                              <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
@@ -458,7 +494,7 @@ Assessment form
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                           data-toggle="tooltip" title="view"><i class="fas fa-eye"></i></a>
                            <!-- <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$assesment->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>-->
                            </td>
@@ -480,6 +516,7 @@ Assessment form
                              <td>{{$assesment['areaname']->cleaning_name}}</td>
                                 <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                              <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
                              <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
@@ -490,7 +527,7 @@ Assessment form
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
                              <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principle/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
                              <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
@@ -514,7 +551,7 @@ Assessment form
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                           data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
                            <!-- <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$assesment->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>-->
                            </td>
@@ -526,7 +563,7 @@ Assessment form
 
 
 
-@if((auth()->user()->type != 'USAB') and (auth()->user()->type != 'Supervisor Landscaping') and (auth()->user()->type != 'Estates officer') and (auth()->user()->type != 'Dean of Student') and (auth()->user()->type != 'Principle') and (auth()->user()->type != 'Administrative officer') and (auth()->user()->type != 'Directorate Director'))
+@if((auth()->user()->type != 'USAB') and (auth()->user()->type != 'Supervisor Landscaping') and (auth()->user()->type != 'Estates officer') and (auth()->user()->type != 'Dean of Student') and (auth()->user()->type != 'Principal') and (auth()->user()->type != 'Administrative officer') and (auth()->user()->type != 'Directorate Director'))
                     @foreach($assessmmentcompany as $assesment)
                      @if($assesment->lessmonth == date("Y-m") )
                           <?php $iii++; ?>
@@ -536,7 +573,9 @@ Assessment form
                              <td>{{$assesment['areaname']->cleaning_name}}</td>
                                 <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
+
                                                            @if($assesment->status == 1)
                              <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
@@ -546,7 +585,7 @@ Assessment form
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
                              <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principle/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
                              <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
@@ -570,7 +609,7 @@ Assessment form
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
-                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                           data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
                            <!-- <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$assesment->id]) }}" data-toggle="tooltip" title="Track"><i
                                                     class="fas fa-tasks"></i></a>-->
                            </td>
