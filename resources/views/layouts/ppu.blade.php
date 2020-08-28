@@ -606,7 +606,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
         <li>
              @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
+                        <a class="nav-link" style="color:white " href="{{ url('usersoptions')}}">Users</a>
                     </li>
                @endif
                </li>

@@ -694,7 +694,54 @@ use App\Section;
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5 style=" text-transform: capitalize;">Available Registered Users</h5>
+    <h5 style=" text-transform: capitalize;">Available Registered Users -
+
+    @php
+    $dirsf = '';
+        if(($_GET['dep']=='')&&($_GET['typ']!=''))
+    {
+
+        echo strtolower('<b> Type :</b>  '.$_GET['typ']);
+        if($_GET['col']!='')
+        {
+            $directora = Directorate::where('id',$_GET['col'])->first();
+            echo ', <b> School/College/Directorate : </b>'.$directora->name;
+            $dirsf = $directora->name;
+        }
+    }
+    else if(($_GET['dep']!='')&&($_GET['typ']==''))
+    {
+
+        $departmentor = Department::where('id',$_GET['dep'])->first();
+        echo strtolower(' <b> Department : </b>'.$departmentor->name);
+        if($_GET['col']!='')
+        {
+            $directora = Directorate::where('id',$_GET['col'])->first();
+            echo ', <b> School/College/Directorate : </b>'.$directora->name;
+            $dirsf = $directora->name;
+        }
+    }
+    else if(($_GET['dep']!='')&&($_GET['typ']!=''))
+    {
+
+        $departmentor = Department::where('id',$_GET['dep'])->first();
+        echo strtolower('<b> Type :</b>  '.($_GET['typ']).', <b> Department : </b>'.$departmentor->description);
+        if($_GET['col']!='')
+        {
+            $directora = Directorate::where('id',$_GET['col'])->first();
+            echo ', <b> School/College/Directorate : </b>'.$directora->name;
+            $dirsf = $directora->name;
+        }
+
+    }else if($_GET['col']!='')
+        {
+            $directora = Directorate::where('id',$_GET['col'])->first();
+            echo ', <b> School/College/Directorate : </b>'.$directora->name;
+            $dirsf = $directora->name;
+        }
+    // 456
+    @endphp
+    </h5>
 
 
   </div>
@@ -734,13 +781,86 @@ use App\Section;
      <div class="col-md-5">
     <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
   </div>
-  <div class="col-md-5" align="right">
+  <div class="col-md-3" align="right">
 
 
 </div>
 @if(!$display_users->isEmpty())
 
+
 <!-- SOMETHING STRANGE HERE -->
+
+<div class="col">
+    <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModals"> Filter Users <i class="fa fa-search" aria-hidden="true"></i></a>
+ </div>
+ {{--  --}}
+ <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Filter to Search Users <i class="fa fa-search" aria-hidden="true"></i> </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {{--  --}}
+        <form action="{{route('usersfiltered')}}" method="get">
+            <p class="card-text">
+                <a href="{{ url('viewusers')}}" class="btn btn-primary" type="button">All Users</a>
+                <div class="form-group">
+                    <label for="my-input">Filter By School/College/Directorate</label>
+                    <select id="my-select" class="form-control" name="col">
+                        <option value="" >Select School/College/Directorate</option>
+                        <?php
+
+                        $directoras = directorate::orderBy('name','ASC')->get();
+                        foreach($directoras as $directoras){?>
+                <option style="text-transform: capitalize;" value="{{ $directoras->id }}"> {{$directoras->directorate_description}} - ({{ $directoras->name }})</option>
+                        <?php }
+                                   ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="my-input">Filter By Department</label>
+                    <select id="my-select" class="form-control" name="dep">
+                        <option value="" >Select Department</option>
+                        <?php
+                        $departmen  = department::orderBy('name','ASC')->get();
+        foreach($departmen  as $departm )
+        {
+
+            $director  = directorate::where('id',$departm ->directorate_id)->get();
+            foreach($director  as $director ){?>
+    <option value="{{ $departm ->id }}">  {{ $departm ->description }} - {{ $director ->name }}</option>
+            <?php }
+        }
+                       ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="my-input">Filter By User Type</label>
+                    <select id="my-select" class="custom-select" name="typ">
+                        <option value="">All Types</option>
+                        <?php
+                            $allofem = User::select('type')->distinct()->where('type','<>','')->orderBy('type','ASC')->get();
+                            foreach($allofem as $alls){?>
+                              <option value="{{$alls->type}}">{{$alls->type}}</option>
+                            <?php }?>
+
+                    </select>
+                </div>
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Search <i class="fa fa-search" aria-hidden="true"></i> </button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+ {{--  --}}
                 <div class="col" align="right">
            <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o"></i></a>
         </div>
@@ -890,60 +1010,120 @@ else {
 
    ?>
     @foreach($display_users as $user)
+    @if ($_GET['col']!='')
+    @if ( $user['department']['directorate']->name == $dirsf)
     <tr>
-      <th scope="row">{{ $i++ }}</th>
-      <td>{{ $user->fname . ' ' . $user->lname }}</td>
-      <td>{{ $user->name }}</td>
-      <td>{{ $user->email }}</td>
-      <td>
-
-      <?php $phonenumber = $user->phone;
-        if(substr($phonenumber,0,1) == '0'){
-
-          $phonreplaced = ltrim($phonenumber,'0');
-          echo '+255'.$phonreplaced;
-
-        }else { echo $user->phone;}
-
-      ?></td>
-
-      @if( $user->type == "Inspector Of Works")
-      <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
-
-      @else
-         @if(strpos( $user->type, "HOS") !== false)
-             <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>
-             @else
-               <td style="text-transform: capitalize;">{{strtolower( $user->type) }} </td>
-             @endif
-
-      @endif
-
-
-         <td>{{ $user['department']['directorate']->name }}</td>
-        <td>{{ $user['department']->name }}</td>
+        <th scope="row">{{ $i++ }}</th>
+        <td>{{ $user->fname . ' ' . $user->lname }}</td>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->email }}</td>
         <td>
-        <div class="row"> &nbsp; &nbsp; &nbsp;
-        <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
+
+        <?php $phonenumber = $user->phone;
+          if(substr($phonenumber,0,1) == '0'){
+
+            $phonreplaced = ltrim($phonenumber,'0');
+            echo '+255'.$phonreplaced;
+
+          }else { echo $user->phone;}
+
+        ?></td>
+
+        @if( $user->type == "Inspector Of Works")
+        <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+
+        @else
+           @if(strpos( $user->type, "HOS") !== false)
+               <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>
+               @else
+                 <td style="text-transform: capitalize;">{{strtolower( $user->type) }} </td>
+               @endif
+
+        @endif
 
 
-         <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('user.delete', [$user->id]) }}" >
-          {{csrf_field()}}
+           <td>{{ $user['department']['directorate']->name }}</td>
+          <td>{{ $user['department']->name }}</td>
+          <td>
+          <div class="row"> &nbsp; &nbsp; &nbsp;
+          <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
 
 
-        <button type="submit" data-toggle="tooltip" title="Deactivate"   > <a style="color: red;" href=""  data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
+           <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('user.delete', [$user->id]) }}" >
+            {{csrf_field()}}
 
 
-       </button>
-     </form>
-   </div>
-      </td>
-    </tr>
+          <button type="submit" data-toggle="tooltip" title="Deactivate"   > <a style="color: red;" href=""  data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
+
+
+         </button>
+       </form>
+     </div>
+        </td>
+      </tr>
+    @endif
+
+    @else
+    <tr>
+        <th scope="row">{{ $i++ }}</th>
+        <td>{{ $user->fname . ' ' . $user->lname }}</td>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->email }}</td>
+        <td>
+
+        <?php $phonenumber = $user->phone;
+          if(substr($phonenumber,0,1) == '0'){
+
+            $phonreplaced = ltrim($phonenumber,'0');
+            echo '+255'.$phonreplaced;
+
+          }else { echo $user->phone;}
+
+        ?></td>
+
+        @if( $user->type == "Inspector Of Works")
+        <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+
+        @else
+           @if(strpos( $user->type, "HOS") !== false)
+               <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>
+               @else
+                 <td style="text-transform: capitalize;">{{strtolower( $user->type) }} </td>
+               @endif
+
+        @endif
+
+
+           <td>{{ $user['department']['directorate']->name }}</td>
+          <td>{{ $user['department']->name }}</td>
+          <td>
+          <div class="row"> &nbsp; &nbsp; &nbsp;
+          <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
+
+
+           <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('user.delete', [$user->id]) }}" >
+            {{csrf_field()}}
+
+
+          <button type="submit" data-toggle="tooltip" title="Deactivate"   > <a style="color: red;" href=""  data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
+
+
+         </button>
+       </form>
+     </div>
+        </td>
+      </tr>
+    @endif
+
     @endforeach
   </tbody>
 
 
 </table>
+
+</div>@else
+<div >
+    <h3 >No Users Found from your selection</h3>
 
 </div>
   @endif

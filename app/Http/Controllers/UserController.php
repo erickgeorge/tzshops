@@ -521,10 +521,40 @@ Public function savesign(Request $request){
 
 public function usersoptions()
 {
-//     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-// $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $users = User::where('status', '=', 1)->orderBy('fname','ASC')->get();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
-//     return view('usersoptions',['role' => $role,'notifications' => $notifications]);
+    return view('usersoptions',['role' => $role,'notifications' => $notifications,'display_users' => $users]);
+}
+
+public function usersfiltered()
+{
+    if(($_GET['col']=='')&&($_GET['dep']=='')&&($_GET['typ']==''))
+    {
+        return redirect()->route('users.view');
+    }
+    else if(($_GET['dep']=='')&&($_GET['typ']!=''))
+    {
+        $users = User::where('status', '=', 1)->where('type',$_GET['typ'])->orderBy('fname','ASC')->get();
+    }
+    else if(($_GET['dep']!='')&&($_GET['typ']==''))
+    {
+        $users = User::where('status', '=', 1)->where('section_id',$_GET['dep'])->orderBy('fname','ASC')->get();
+    }
+    else if(($_GET['dep']!='')&&($_GET['typ']!=''))
+    {
+        $users = User::where('status', '=', 1)->where('section_id',$_GET['dep'])->where('type',$_GET['typ'])->orderBy('fname','ASC')->get();
+    }
+
+    else{
+        $users = User::where('status', '=', 1)->orderBy('fname','ASC')->get();
+
+    }
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+return view('usersfiltered',['role' => $role,'notifications' => $notifications,'display_users' => $users]);
+
 }
 
 }

@@ -586,7 +586,7 @@ foreach ($woclo as $woclo) {
         <li>
              @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
+                        <a class="nav-link" style="color:white " href="{{ url('usersoptions')}}">Users</a>
                     </li>
                @endif
                </li>
@@ -694,7 +694,7 @@ use App\Section;
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5 style=" text-transform: capitalize;">Available Registered Users</h5>
+    <h5 style=" text-transform: capitalize;">Available Registered Users - All Users</h5>
 
 
   </div>
@@ -756,55 +756,58 @@ use App\Section;
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-              <label for="my-select">Type</label>
-              <select id="my-select" class="custom-select" name="">
-                  <option>All Types</option>
-                  <?php
-                      $allofem = User::select('type')->distinct()->where('type','<>','')->orderBy('type','ASC')->get();
-                      foreach($allofem as $alls){?>
-                        <option value="{{$alls->type}}">{{$alls->type}}</option>
-                      <?php }?>
+            {{--  --}}
+        <form action="{{route('usersfiltered')}}" method="get">
+            <p class="card-text">
+                <div class="form-group">
+                    <label for="my-input">Filter By School/College/Directorate</label>
+                    <select id="my-select" class="form-control" name="col">
+                        <option value="" >Select School/College/Directorate</option>
+                        <?php
 
-              </select>
-          </div>
+                        $directoras = directorate::orderBy('name','ASC')->get();
+                        foreach($directoras as $directoras){?>
+                <option style="text-transform: capitalize;" value="{{ $directoras->id }}"> {{$directoras->directorate_description}} - ({{ $directoras->name }})</option>
+                        <?php }
+                                   ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="my-input">Filter By Department</label>
+                    <select id="my-select" class="form-control" name="dep">
+                        <option value="" >Select Department</option>
+                        <?php
+                        $departmen  = department::orderBy('name','ASC')->get();
+        foreach($departmen  as $departm )
+        {
 
-          <div class="form-group">
-            <label for="my-select">College/School/Directorate</label>
-            <select id="my-select" class="custom-select" name="">
-                <option>All Colleges/Schools/Directorates</option>
-                <?php
+            $director  = directorate::where('id',$departm ->directorate_id)->get();
+            foreach($director  as $director ){?>
+    <option value="{{ $departm ->id }}">  {{ $departm ->description }} - {{ $director ->name }}</option>
+            <?php }
+        }
+                       ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="my-input">Filter By User Type</label>
+                    <select id="my-select" class="custom-select" name="typ">
+                        <option value="">All Types</option>
+                        <?php
+                            $allofem = User::select('type')->distinct()->where('type','<>','')->orderBy('type','ASC')->get();
+                            foreach($allofem as $alls){?>
+                              <option value="{{$alls->type}}">{{$alls->type}}</option>
+                            <?php }?>
 
-                    $directoras = directorate::orderBy('name','ASC')->get();
-                    foreach($directoras as $directoras){?>
-            <option style="text-transform: capitalize;" value=" {{ $directoras->id }}"> {{$directoras->directorate_description}} - ({{ $directoras->name }})</option>
-                    <?php }
-                               ?>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="my-select">Department</label>
-            <select id="my-select" class="custom-select" name="">
-                <option>All Departments</option>
-                <?php
-                    $departmen  = department::orderBy('name','ASC')->get();
-    foreach($departmen  as $departm )
-    {
-
-        $director  = directorate::where('id',$departm ->directorate_id)->get();
-        foreach($director  as $director ){?>
-<option value="{{ $departm ->id }} ">  {{ $departm ->description }} - {{ $director ->name }}</option>
-        <?php }
-    }
-                   ?>
-            </select>
-        </div>
+                    </select>
+                </div>
+            </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Search <i class="fa fa-search" aria-hidden="true"></i> </button>
+          <button type="submit" class="btn btn-primary">Search <i class="fa fa-search" aria-hidden="true"></i> </button>
         </div>
+    </form>
       </div>
     </div>
   </div>
