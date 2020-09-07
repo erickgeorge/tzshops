@@ -225,7 +225,7 @@
 
 
                     <?php $i = 0;  $ii = 0;  $iii = 0;?>
-                        @if(auth()->user()->type == 'Supervisor Landscaping')
+    @if(auth()->user()->type == 'Supervisor Landscaping')
                     @foreach($cleangcompanylandscaping as $house)
                         <?php $i++;?>
 
@@ -421,8 +421,13 @@
 
 
 
-          @if(auth()->user()->type == 'USAB')
+
+
+  @if(auth()->user()->type == 'USAB')
    @foreach($cleangcompanyusab as $house)
+
+    @if($house->hostel == 2)
+
                         <?php $ii++;?>
 
                 <?php $now1 =  Carbon::now();
@@ -610,6 +615,8 @@
                 @endif
                  <!--activecontract-->
 
+          @endif
+
 
    @endforeach
 
@@ -619,8 +626,11 @@
 
 
 
-          @if(auth()->user()->type == 'Administrative officer')
+  @if(auth()->user()->type == 'Administrative officer')
    @foreach($cleangcompanyusab as $house)
+
+   @if((auth()->user()->college ==  $house['are_a']->college ) and ($house->hostel == 1))
+
                         <?php $ii++;?>
 
                 <?php $now1 =  Carbon::now();
@@ -805,6 +815,8 @@
                 @endif
                  <!--activecontract-->
 
+
+    @endif
 
    @endforeach
 

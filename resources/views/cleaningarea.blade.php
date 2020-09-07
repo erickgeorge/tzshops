@@ -30,7 +30,7 @@
                 </button>
 
 
-               @if((auth()->user()->type == 'USAB')||(auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+               @if((auth()->user()->type == 'USAB')||(auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer'))
                 <a href="{{ route('Registercleaningarea') }}"
                    class="btn btn-primary">Add new cleaning area</a>
                    <br><br>@endif
@@ -42,7 +42,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Area Name</th>
                         <th scope="col">LOT</th>
-                          @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+                             <th scope="col">Type</th>
+                          @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
                         <th scope="col">Action</th>
                         @endif
                     </tr>
@@ -59,8 +60,10 @@
 
                             <td>{{ $clean_area->cleaning_name }}</td>
                             <td>{{ $clean_area->zone_id }}</td>
+                             <td>{{ $clean_area->type }}</td>
 
-  @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
+
+                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
 
                             <td>
 

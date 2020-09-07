@@ -605,7 +605,11 @@ Route::get('cleaningcompany','AssetsController@cleaningcompanynew')->name('clean
 Route::get('cleaningcompanyexpired','AssetsController@cleaningcompanyexpired')->name('cleaning_company_expired')->middleware('auth');
 
 Route::get('cleaningcompanyreport','AssetsController@cleaningcompanyreport')->name('cleaningcompanyreport')->middleware('auth');
+
 Route::get('assessmentsheet','AssetsController@assessmentsheet')->name('assessment_sheet')->middleware('auth');
+
+
+Route::get('incomplete_assessment_sheet','AssetsController@incompleteassessmentsheet')->name('incomplete_assessment_sheet')->middleware('auth');
 
 Route::get('registernonbuildingasset','AssetsController@registernonbuildingasset')->name('registernonbuildingasset')->middleware('auth');
 Route::post('submitnonAsset','AssetsController@SubmitnonAsset')->name('nonbuildingasset.create')->middleware('auth');

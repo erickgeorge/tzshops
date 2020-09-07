@@ -86,7 +86,7 @@ tr:nth-child(even) {
 
 
        <div class="container-name">
-     <div class="div1">This works order is submitted by <span
+     <div class="div1">This works order is submitted by: <span
                 style=" font-weight: bold; color: green;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>
 
      </div>
@@ -96,23 +96,7 @@ tr:nth-child(even) {
 
    </div>
 
-          <div class="container-name">
-     <div class="div1">Also @if($wo->status == 0)rejected@elseif($wo->status == 1) accepted @else processed @endif by <span
-                style=" font-weight: bold; color: green;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span>
-
-     </div>
-     <div class="div2"> Mobile number:  <span style=" font-weight: bold; color: green;">{{ $wo['user']->phone }}</span>  </div>
-    <div class="div2">Emai: <span style=" font-weight: bold; color: green;"> {{ $wo['user']->email }} </span> </div>
-
-   </div>
-
-
-
-
-    <hr>
-
-<br>
-
+   
        <div class="container-name">
      <div class="div1">Type of Problem: <span
                 style=" font-weight: bold; color: green;">{{ ucwords(strtolower($wo->problem_type)) }}</span>
@@ -148,7 +132,7 @@ tr:nth-child(even) {
    </div>
 
           <div class="container-name">
-     <div class="div1">Room <span
+     <div class="div1">Room: <span
                 style=" font-weight: bold; color: green;"> @if(empty($wo->room_id))
           {{ $wo->location }}
         @else
@@ -156,11 +140,27 @@ tr:nth-child(even) {
         @endif</span>
 
      </div>
-     <div class="div2"> Details  <span style=" font-weight: bold; color: green;">{{ $wo->details }}</span>  </div>
-  <br>
+     <br>
+     <br>
+     <div class="div2"> Details:  <span style=" font-weight: bold; color: green;">{{ $wo->details }}</span>  </div>
   <br>
 
+
    </div>
+   <hr>
+
+     <br>
+
+          <div class="container-name">
+     <div class="div1"> @if($wo->status == 0)rejected @elseif($wo->status == 1) Accepted @else Processed @endif by:  <span
+                style=" font-weight: bold; color: green;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span>
+
+     </div>
+     <div class="div2"> Mobile number:  <span style=" font-weight: bold; color: green;">{{ $wo['user']->phone }}</span>  </div>
+    <div class="div2">Emai: <span style=" font-weight: bold; color: green;"> {{ $wo['user']->email }} </span> </div>
+
+   </div>
+
 
 
 
@@ -175,7 +175,7 @@ tr:nth-child(even) {
 
 
 
-    <h4><b>Assigned Technician for Inspection</b></h4>
+    <h4><b>Assigned Technician(s) for Inspection</b></h4>
     @if(empty($wo['work_order_staffassigned']->id))
        <p class="text-primary">No Technician assigned yet</p>
     @else
@@ -185,15 +185,17 @@ tr:nth-child(even) {
 
   $idwo=$wo->id;
   $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
+
+   $leaders = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->where('leader2', 3)->first();
 ?>
 
 <table style="width:100%">
    <thead style=" background-color: #376ad3; color: white; ">
   <tr>
     <th>Full Name</th>
-  <th>Status</th>
+  <!--<th>Status</th>-->
     <th>Date Assigned</th>
-  <th>Date Completed Inspection</th>
+ <!--<th>Date Completed Inspection</th>-->
    <th>Leader</th>
 
 
@@ -205,28 +207,28 @@ tr:nth-child(even) {
 
      @if($techform['technician_assigned_for_inspection'] != null)
     <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress  @endif</td>
+  <!-- <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress  @endif</td>-->
 
  <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
-   @if($techform->status==1)
+   <!--@if($techform->status==1)
 
   <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
     @else
 
 
       <td style="color: red"> Not Completed Yet</td>
-    @endif
+    @endif -->
 
  @if($techform->leader == null )
 
 <td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
                                                     class="fas fa-user-tie large"></i></a></td>
                                                    @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Leader<i
+ <td style="color: black;"  data-toggle="tooltip" >Yes<i
                                                     class="fas fa-user-tie large"></i></td>
                                                     @else
-<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
 W
 
@@ -264,7 +266,7 @@ W
 
 <br>
    <div class="container-name">
-     <div class="div1">Name of Technician Leader: &nbsp;  &nbsp;&nbsp;  &nbsp;..........................................<u style="padding-left: 12px;"> </u></div>
+     <div class="div1">Name of Technician Leader: &nbsp;  {{$leaders['technician_assigned_for_inspection']->lname.' '.$leaders['technician_assigned_for_inspection']->fname}} <u style="padding-left: 12px;"> </u></div>
      <div class="div2"> Signature:  .................................... <u style="padding-left: 40px;">   </u> </div>
     <div class="div2">Date: &nbsp;  &nbsp;  &nbsp;  &nbsp;   .................................... <u style="padding-left: 40px;"> </u> </div>
 
@@ -272,7 +274,7 @@ W
 <br>
 <br><br>
    <div class="container-name">
-     <div class="div1">Name of Head of Section: &nbsp;  &nbsp;&nbsp;  &nbsp;..........................................<u style="padding-left: 12px;"> </u></div>
+     <div class="div1">Name of Head of Section: &nbsp;  {{ $wo['hos']->fname.' '.$wo['hos']->lname }}<u style="padding-left: 12px;"> </u></div>
      <div class="div2"> Signature:  .................................... <u style="padding-left: 40px;">   </u> </div>
     <div class="div2">Date: &nbsp;  &nbsp;  &nbsp;  &nbsp;   .................................... <u style="padding-left: 40px;"> </u> </div>
 

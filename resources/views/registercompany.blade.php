@@ -42,6 +42,14 @@ Company Registrartion
 
                 <div align="center">
 
+                   @if(auth()->user()->type == 'USAB')
+                
+
+                               <input type="number" name="hostel" value="2" hidden>
+                  
+
+                       @endif
+
 
 <div class="jumbotron" style="width: 700px;">
      <table>
@@ -69,10 +77,54 @@ Company Registrartion
                              <option value="" selected>Choose area...
                             </option>
 
-                                @foreach($carea as $carea)
+
+
+                        @if(auth()->user()->type == 'Supervisor Landscaping')
+                                
+
+                                 @foreach($careaexterior as $carea)
                                     <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
                                     </option>
                                 @endforeach
+
+
+                        @endif
+
+                        @if(auth()->user()->type == 'Administrative officer')
+                                 
+                                   @foreach($careainterior as $carea)
+                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
+                                    </option>
+                                   @endforeach
+                                   
+                        @endif
+
+
+                         @if(auth()->user()->type == 'USAB')
+                                 
+                                   @foreach($careainteriorusab as $carea)
+                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
+                                    </option>
+                                   @endforeach
+                                   
+                        @endif
+
+
+                         @if($role['user_role']['role_id'] == 1)
+
+                           @foreach($careaadmin as $carea)
+                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
+                                    </option>
+                           @endforeach
+
+                         @endif
+
+
+
+                            
+
+
+                                
                             </select>
 
               </TD>
@@ -147,11 +199,34 @@ Company Registrartion
                            <select  class="custom-select"  name="companyid" id="companyi"  onchange="getcompany()" required>
                              <option value="" selected>Choose company...
                             </option>
-
-                                @foreach($companyall as $carea)
+                              
+                              @if((auth()->user()->type == 'USAB') || (auth()->user()->type == 'Administrative officer') )
+                                @foreach($companyinterior as $carea)
                                     <option value="{{ $carea->id }}">{{ $carea->company_name}}
                                     </option>
                                 @endforeach
+                              @endif 
+
+                              @if(auth()->user()->type == 'Supervisor Landscaping')
+                                @foreach($companyexterior as $carea)
+                                    <option value="{{ $carea->id }}">{{ $carea->company_name}}
+                                    </option>
+                                @endforeach
+                              @endif
+
+
+
+                         @if($role['user_role']['role_id'] == 1)
+
+                           @foreach($companyall as $carea)
+                                   <option value="{{ $carea->id }}">{{ $carea->company_name}}
+                                    </option>
+                           @endforeach
+
+                         @endif
+
+
+
                           </select>
                      </div>
 

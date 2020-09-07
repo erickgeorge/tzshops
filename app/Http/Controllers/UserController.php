@@ -290,6 +290,8 @@ class UserController extends Controller
         // $user->name = $request['uname'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];
+        $user->college = $request['college']; 
+
         $user->section_id = $request['department'];
       
       
@@ -438,11 +440,11 @@ class UserController extends Controller
             
              
 
-       $user = Auth::user();
-     if ($request->Image!='') {
-    $cover = $request->file('Image');
-    $extension = $cover->getClientOriginalExtension();
-    Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+        $user = Auth::user();
+        if ($request->Image!='') {
+        $cover = $request->file('Image');
+        $extension = $cover->getClientOriginalExtension();
+        Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
 
         $user->avatar = $cover->getFilename().'.'.$extension;
         $user->save();

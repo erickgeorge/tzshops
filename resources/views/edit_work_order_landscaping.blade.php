@@ -57,7 +57,7 @@ var total=2;
  <br>
 <div class="jumbotron">
   <div class="row">
-<div class="col"><h6 ><b>This assessment sheet with tender number: {{$assesment->company}} is initiated by:</b></h6></div>
+<div class="col"><h6 ><b>Assessment sheet for tender number: {{$assesment->company}} is initiated by:</b></h6></div>
 <div class="col"><h6 >
 <table>
   <tr>
@@ -299,7 +299,7 @@ var total=2;
   @endforeach
    </tbody>
 
- <th><b>Tottal</b></th>
+ <th><b>Total</b></th>
   <td align="center" ><b><?php echo $summ ?>%</b></td>
   <td align="center"><b><?php echo $summm ?>%</b></td>
 
@@ -443,7 +443,7 @@ var total=2;
 
   @endforeach
    </tbody>
-  <td align="center" colspan="2"><b>Tottal</b></td>
+  <td align="center" colspan="2"><b>Total</b></td>
   <td align="center"><b><?php echo $sum ?>%</b></td>
   <td align="center"><b><?php echo $summ ?>%</b></td>
   </table>
@@ -459,7 +459,7 @@ var total=2;
 
 <table>
   <thead>
-  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
+  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
  </thead>
 
  
@@ -545,7 +545,7 @@ var total=2;
 
 
   @if(($assesment->a_rejected_by != null))
-  <b>Rejected by Estate Officer : {{ $assesment['rejection']->fname .' ' . $assesment['rejection']->lname }}  on:  {{ date('d F Y', strtotime($assesment->rejected_on))}}   <td> <a onclick="myfunc5('{{$assesment->reason}}')"><span data-toggle="modal" data-target="#viewreason"
+  <b>Rejected by Estates Officer : {{ $assesment['rejection']->fname .' ' . $assesment['rejection']->lname }}  on:  {{ date('d F Y', strtotime($assesment->rejected_on))}}   <td> <a onclick="myfunc5('{{$assesment->reason}}')"><span data-toggle="modal" data-target="#viewreason"
                                                                          class="badge badge-danger">View Reason</span></a></td></b><br>@endif
 
    @if(($assesment->es_rejected_by != null))
@@ -587,12 +587,14 @@ var total=2;
   <b>Approved by {{ $assesment['principles']->type }} : {{ $assesment['principles']->fname .' ' . $assesment['principles']->lname }} on:  {{ date('d F Y', strtotime($assesment->principle_date))}}  </b> <br>
 
   @else
-  <b>status:</b><b style="color: blue;">  Not yet approved</b>
+   @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'USAB') || (auth()->user()->type == 'Administrative officer'))
+  <!--<b>status:</b><b style="color: blue;">  Not yet approved.</b>-->
+  @endif
   @endif
 
 
   @if(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
-  <b>Approved by Estate Officer : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
+  <b>Approved by Estates Officer : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
   @endif
   <br>
 
@@ -640,7 +642,7 @@ var total=2;
    @endif
 
   @if(($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
-  <b>Approved by Estate Director : {{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  on: {{ date('d F Y', strtotime($assesment->approved_on))}}</b>
+  <b>Approved by Estates Director : {{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  on: {{ date('d F Y', strtotime($assesment->approved_on))}}</b>
   <br>
  @endif
 
@@ -664,27 +666,43 @@ var total=2;
    @endif
 
 <br>
+   @if(auth()->user()->type == 'Dvc Accountant')
+          @if($assesment->status == 5)
+    <?php $tender = Crypt::encrypt($assesment->company); ?>
 
+      <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
+                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                </button>
+           @else
+  <?php $tender = Crypt::encrypt($assesment->company); ?>
 
+      <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
+                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Download for Signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                </button>
+            @endif    
+   @endif
 
+ <br>
+ <br>
   <br>
      @if(auth()->user()->type == 'Dvc Accountant')
   @if($assesment->status == 3)
    <?php $tender = Crypt::encrypt($assesment->company); ?>
-  <b style="padding-left: 750px;">verify if company is paid<a href="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve company if paid "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">
+  <b style="padding-left: 750px;">Company is paid<a href="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}" title="please proceed if company is already paid "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">
 
   @endif
   @endif
 <br>
-  <?php $tender = Crypt::encrypt($assesment->company); ?>
 
-
+@if(auth()->user()->type != 'Dvc Accountant')
+ <?php $tender = Crypt::encrypt($assesment->company); ?>
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                  <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
                 <br>
                 <br>
+@endif
 
 
 
