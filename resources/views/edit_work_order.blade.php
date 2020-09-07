@@ -164,7 +164,7 @@ var total=2;
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
-  <!--<th>Date Completed</th>-->
+  <th>Date Completed</th>
   <th>Leader</th>
      </thead>
 
@@ -178,7 +178,7 @@ var total=2;
    <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
 
-<!--
+
    @if($techform->status==1)
 
   <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
@@ -186,26 +186,31 @@ var total=2;
    
 
       <td style="color: red"> Not Completed Yet</td>
-    @endif -->
+    @endif
 
     @if($techform->leader == null )
 
 <td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
                                                     class="fas fa-user-tie large"></i></a></td>
                                                    @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Yes </td>
+ <td style="color: black;"  data-toggle="tooltip" >Leader<i
+                                                    class="fas fa-user-tie large"></i></td>
                                                     @else
-<td style="color: black;"  data-toggle="tooltip" >No</i></td>
+<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
                                                     @endif
       @endif
+
+
+
   </tr>
     @endforeach
   </table>
 
 
 
-@if(($techform->status==0) and ($techform->leader==1))
-  <br>
+@if($techform->status==1)
+@else
+   <br>
 <div class="row">
    <div class="col">
 
@@ -216,6 +221,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 </div>
+
 @endif
 
 <br>
@@ -232,23 +238,16 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @if(empty($wo['work_order_staff']->id))
 
     @else
-    
+     <h4><b>Assigned Technician for Work</b></h4>
     <?php
 
   $idwo=$wo->id;
   $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
 ?>
- @foreach($techforms as $status)
- @endforeach
-
-@if($status->status5 == 22)
-
- <h4><b>Assigned Technician for Work</b></h4>
 
 <table style="width:100%">
   <tr>
-
-<thead style="color: white;">
+     <thead style="color: white;">
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
@@ -258,6 +257,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   </tr>
     @foreach($techforms as $techform)
+
+
+
 
   <tr>
 
@@ -309,8 +311,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
    <hr>
     <br>
- @endif
-@endif
+
+    @endif
 
 
 
@@ -1010,18 +1012,18 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             <label>Select technician leader</label>
                             <br>
                             <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
-                              
+                                <option  selected value="" >Choose...</option>
                                 @if($wo->status == 70)
 
                                 <?php
 
-                                $tech = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->first();
+                                $techassigned = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->get();
                                 ?>
 
-                               
-                                    <option selected value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                                @foreach($techassigned as $tech)
+                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
                                     </option>
-                          
+                                @endforeach
 
                                 @else
 
@@ -1031,7 +1033,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 ?>
 
                                 @foreach($techassigned as $tech)
-                                    <option  value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}
+                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}
                                     </option>
                                 @endforeach
                                 @endif
