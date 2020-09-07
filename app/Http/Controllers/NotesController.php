@@ -2319,7 +2319,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
              $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('area', $request['area'])->where('company_name', $request['company'])->where('tender', $request['tender'])->OrderBy('created_at', 'DESC')->get();
 
         }
-        
+
         if($request['type'] ){
 
              $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->OrderBy('created_at', 'DESC')->get();
@@ -2334,8 +2334,8 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
         }
 
-          
-          
+
+
 
           if($request['tender']  and $request['company'] and $request['type'] ){
 
@@ -2348,7 +2348,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
              $data['tenderpdf'] = company::whereBetween('created_at', [$from, $to])->where('type', $request['type'])->where('area', $request['area'])->where('company_name', $request['company'])->OrderBy('created_at', 'DESC')->get();
 
         }
-         
+
 
          if($request['company'] and $request['type'] ){
 
@@ -2550,7 +2550,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         }
 
 
-           
+
            if( $request['tender'] and $request['area'] and $request['type'] ){
 
              $data['tenderpdf'] = company::where('type', $request['type'])->where('tender', $request['tender'])->where('area', $request['area'])->OrderBy('created_at', 'DESC')->get();

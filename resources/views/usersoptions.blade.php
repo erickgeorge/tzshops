@@ -1,10 +1,60 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <style>
+    #loader {
+      border: 12px solid #376ad3;
+      border-radius: 50%;
+      border-top: 12px solid #444444;
+      width: 70px;
+      height: 70px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .center {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loader" class="center"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ESMIS - @yield('title')</title>
+    <title>ESMIS - Users</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -56,8 +106,6 @@
 
 
 
-
-
 <div>
      <nav class="navbar fixed-top navbar-expand-lg "  style="border-bottom: #ebe9e6 8px solid; background-color: #376ad3;">
 
@@ -84,24 +132,24 @@
                 use App\ppuproject;
 
 
+                use Carbon\Carbon;
+
+// closing work order by default
+$woclo = WorkOrder::where('status',2)->get();
+$leohii = Carbon::now();
+
+foreach ($woclo as $woclo) {
+    $sikuhii = Carbon::parse($woclo->updated_at);
+    $tofautihii = $sikuhii->diffInDays($leohii);
+
+    if ($tofautihii > 6) {
+        $wokioda = WorkOrder::where('id',$woclo->id)->first();
+        $wokioda->status = 30;
+        $wokioda->save();
+    }
+}
+//
         use App\zoneinspector;
-        use Carbon\Carbon;
-
-        // closing work order by default
-        $woclo = WorkOrder::where('status',2)->get();
-        $leohii = Carbon::now();
-
-        foreach ($woclo as $woclo) {
-            $sikuhii = Carbon::parse($woclo->updated_at);
-            $tofautihii = $sikuhii->diffInDays($leohii);
-
-            if ($tofautihii > 6) {
-                $wokioda = WorkOrder::where('id',$woclo->id)->first();
-                $wokioda->status = 30;
-                $wokioda->save();
-            }
-        }
-        //
         $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
 
                 $w = WorkOrder::select(DB::raw('id'))->get();
@@ -276,7 +324,7 @@
 </li>
 @endif
 
-@if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
+@if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
 
 <!--<li class="nav-item">
     <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">
@@ -294,7 +342,7 @@
                 @php
                     $statusPPU = ppuproject::where('status','0')->orwhere('status','-1')->get();
                 @endphp
-            @elseif(auth()->user()->type == 'Estates officer')
+            @elseif(auth()->user()->type == 'Head PPU')
                 @php
                     $statusPPU = ppuproject::where('status','3')->orwhere('status','5')->orwhere('status','12')->orwhere('status','9')->get();
                 @endphp
@@ -364,7 +412,7 @@
 
 
 
-                     @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principal') ||(auth()->user()->type == 'Directorate Director'))
+                     @if(auth()->user()->type == 'DVC Admin')
 
                       <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
@@ -390,7 +438,7 @@
 
 
 
-                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping'))
+                    @if((auth()->user()->type == 'Head PPU')||(auth()->user()->type == 'Supervisor Landscaping'))
 
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
@@ -538,7 +586,7 @@
         <li>
              @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white " href="{{ url('usersoptions')}}">Users</a>
+                        <a class="nav-link" style="color:white " href="{{ url('viewusers')}}">Users</a>
                     </li>
                @endif
                </li>
@@ -621,385 +669,418 @@
 
 
 
-<style>
-
-
-/* Fixed sidenav, full height */
-.sidenav {
-  height: 100%;
-  width: 150px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: none;
-  background-color: none;
-  overflow-x: hidden;
-  padding-top: 20px;
-  border-right: #ebe9e6 8px solid
-}
-
-/* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
-  padding: 4px 6px 4px 10px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
 
 
 
 
 
-}
-
-.sidenav button{
-  color: white;
-}
-
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
-   background: #046475;
-}
+<div  class="container">
 
 
 
-.sidenav a {
-  background-color: #c2bebe;
-  color: white;
 
 
 
-}
 
-.sidenav a, .dropdown-btn, .sidenav button {
-  color: #f1f1f1;
-  border: none;
-   background: #376ad3;
-    margin-top: 2px;
-}
+<?php
+use App\Technician;
+use App\User;
+use App\Directorate;
+use App\Department;
+use App\Section;
+ ?>
 
-
-/* Main content */
-.main {
-  margin-left: 150px; /* Same as the width of the sidenav */
-
-  padding: 0px 10px;
-}
-
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: #046475;
-  color: white;
-
-  border: 2px solid white;
-
-
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: white;
-
-
-
-}
-
-.dropdown-container a {
-  background-color: black;
-
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
-}
-
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-</head>
-<body>
-
-<div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('work_order')}}" ><h6>Works order </h6></a>
  @if($role['user_role']['role_id'] == 1)
-
-
-   <a  href="{{ url('Manage/section')}}"><h6>DES Sections</h6></a>
- @endif
-
- @if(strpos(auth()->user()->type, "HOS") !== false )
-  @if($role['user_role']['role_id'] != 1)
- <a  href="{{ url('technicians') }}"><h6>Technicians</h6></a>
- @endif
- <button class="dropdown-btn"><h6>Material Update
-    <i class="fa fa-caret-down"></i></h6>
-  </button>
-  <div class="dropdown-container">
-    <a  href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</h6></span></a>
-    <a  href="{{ url('material_received_with_workorder')}}"><h6>Received Material from Store</h6><span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
-
-  </div>
-
- @endif
-
-
- @if(auth()->user()->type == 'Maintenance coordinator')
-
-  <a  href="{{ url('redirected_work_order')}}"><h6>Redirected Works order</h6></a>
-
-  <a  href="{{ url('roomreport')}}"><h6>Room Report</h6></a>
-
-   <a  href="{{ url('comp') }}" ><h6>Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i></h6></a>
-   <a  href="{{ url('technicians') }}"><h6>Technicians</h6></a>
-   <a  href="{{ url('workzones')}}"><h6>Zones</h6></a>
-
-    <button  class="dropdown-btn"><h6>Material Requests Update
-    <i class="fa fa-caret-down"></i></h6>
-  </button>
-  <div class="dropdown-container">
-    <a  href="{{ url('work_order_material_needed')}}"><h6>Work order needs material <span
-                                    class="badge badge-light">{{ count($material_requestsmc) }}</span></h6></a>
-    <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}"><h6>Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></h6></a>
-     <a  href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials
-                        <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></h6></a>
+<br>
+<div class="row container-fluid" >
+  <div class="col">
+    <h5 style=" text-transform: capitalize;">Available Registered Users - Directorate of Estates Services</h5>
 
 
   </div>
 
-
-
+  {{--<div class="col-md-5">
+    <form class="form-inline my-2 my-lg-0">
+      <input style="width:220px;" class="form-control mr-sm-2" type="search" placeholder="Search by Fullname, email" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>--}}
+</div>
+  @if(Session::has('message'))
+    <br>
+    <p class="alert alert-success">{{ Session::get('message') }}</p>
   @endif
 
-
-
-                @if((auth()->user()->type == 'Estates Director')||@(auth()->user()->type == 'DVC Admin')||($role['user_role']['role_id'] == 1))
-
-
-
-                 <!--    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('completed_work_orders')}}">Completed Work-orders</a>
-                    </li>
-
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
-                    </li>
-                    -->
-
-
-  <button  class="dropdown-btn"><h6>Works orders Reports
-    <i class="fa fa-caret-down"></i></h6>
-  </button>
-  <div class="dropdown-container">
-    <a class="btn" href="{{ url('/unattended_work_orders')}}"><h6>Unattended Works orders</h6></a>
-    <a class="btn" href="{{ url('/completed_work_orders')}}"><h6>Completed Works orders</h6></a>
-    <!--<a class="btn" href="{{ url('/woduration')}}"><h6>Works orders Duration</h6></a>-->
-
-
-  </div>
-
-  <button
-
-  class="dropdown-btn"><h6>Head of Sections
-    <i class="fa fa-caret-down"></i></h6>
-  </button>
-  <div class="dropdown-container">
-    <a  href="{{ url('/allhos')}}"><h6>All Head of sections Details</h6></a>
-    <a  href="{{ url('hoscount')}}"><h6>HoS with completed works orders</h6></a>
-  </div>
-
-
-   <button class="dropdown-btn"><h6>Technicians
-    <i class="fa fa-caret-down"></i></h6>
-  </button>
-  <div class="dropdown-container">
-    <a href="{{ url('/alltechnicians')}}"><h6>All Technicians details</h6></a>
-    <a href="{{ url('/techniciancount')}}"><h6>Technicians on Work(duty)</h6></a>
-    <a href="{{ url('/techniciancountcomp')}}"><h6>Technicians completed work</h6></a>
-  </div>
-
-
-   <a  href="{{ url('/alliow')}}"><h6>Inspectors of work</h6></a>
-
-
-   <button  class="dropdown-btn"><h6>store
-    <i class="fa fa-caret-down"></i></h6>
-  </button>
-  <div class="dropdown-container">
-    <a href="{{ url('stores')}}"><h6>All Materials in Store<span
-                            class="badge badge-light">{{ count($m) }}</span></h6></a>
-    <a href="{{ url('work_order_with_missing_material')}}"><h6>Purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></h6></a>
-  </div>
-
-
-
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician Report</a>
-                    </li>-->
-
-
-
-                        <a  href="{{ url('roomreport')}}"><h6>Room Report</h6></a>
-
-
-                        <!--<a href="{{ url('minutesheets')}}"><h6>Minutesheets</h6></a>-->
-
-     <a href="{{ url('comp') }}" title="Complaints" style="color:white" ><h6>Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i></h6></a>
-
-
-
+  @if ($errors->any())
+        <div class="alert alert-danger">
+             <ul class="alert alert-danger" style="list-style: none;">
+                @foreach ($errors->all() as $error)
+                    <li><?php echo $error; ?></li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
-
-
-    @if(auth()->user()->type == 'STORE')
-
-
-
-                   <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
-                                    class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
-                    </li>-->
-
-                    <!--<li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
-                    </li>-->
-
-
-                        <a  href="{{ url('material_received_with_workorder')}}" ><h6>Material Taken From Store <span
-                                    class="badge badge-light">{{ count($material_used) }}</span></h6></a>
-
-
-                        <a href="{{ url('wo_material_reserved') }}" ><h6>Reserved Materials <span
-                                    class="badge badge-light">{{ count($woMaterialreserved) }}</span></h6></a>
-
-
-
-                        <a  href="{{ url('wo_material_accepted_by_iow')}}"><h6>Material requests<span
-                                    class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span></h6></a>
+<hr>
 
 
 
 
 
-                    <!--<li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_purchased_by_head_of_procurement') }}" >Material Purchased <span
-                                    class="badge badge-light">{{ count($wo_material_procured_by_iow) }}</span></a>
-                    </li>-->
+    <div>
+
+
+  <div class="row">
+     <div class="col-md-5">
+    <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
+  </div>
+  <div class="col-md-3" align="right">
+
+
+</div>
+@if(!$display_users->isEmpty())
+
+<!-- SOMETHING STRANGE HERE -->
+
+<div class="col">
+    <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModals"> Filter Users <i class="fa fa-search" aria-hidden="true"></i></a>
+ </div>
+ {{--  --}}
+ <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Filter to Search Users <i class="fa fa-search" aria-hidden="true"></i> </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {{--  --}}
+        <form action="{{route('usersfiltered')}}" method="get">
+            <p class="card-text">
+                <a href="{{ url('viewusers')}}" class="btn btn-primary" type="button">All Users</a>
+                <div class="form-group">
+                    <label for="my-input">Filter By School/College/Directorate</label>
+                    <select id="my-select" class="form-control" name="col">
+                        <option value="" >Select School/College/Directorate</option>
+                        <?php
+
+                        $directoras = directorate::orderBy('name','ASC')->get();
+                        foreach($directoras as $directoras){?>
+                <option style="text-transform: capitalize;" value="{{ $directoras->id }}"> {{$directoras->directorate_description}} - ({{ $directoras->name }})</option>
+                        <?php }
+                                   ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="my-input">Filter By Department</label>
+                    <select id="my-select" class="form-control" name="dep">
+                        <option value="" >Select Department</option>
+                        <?php
+                        $departmen  = department::orderBy('name','ASC')->get();
+        foreach($departmen  as $departm )
+        {
+
+            $director  = directorate::where('id',$departm ->directorate_id)->get();
+            foreach($director  as $director ){?>
+    <option value="{{ $departm ->id }}">  {{ $departm ->description }} - {{ $director ->name }}</option>
+            <?php }
+        }
+                       ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="my-input">Filter By User Type</label>
+                    <select id="my-select" class="custom-select" name="typ">
+                        <option value="">All Types</option>
+                        <?php
+                            $allofem = User::select('type')->distinct()->where('type','<>','')->orderBy('type','ASC')->get();
+                            foreach($allofem as $alls){?>
+                              <option value="{{$alls->type}}">{{$alls->type}}</option>
+                            <?php }?>
+
+                    </select>
+                </div>
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Search <i class="fa fa-search" aria-hidden="true"></i> </button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+ {{--  --}}
+                <div class="col" align="right">
+           <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o"></i></a>
+        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="GET" action="{{ url('userpdf') }}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Export To <i class="fa fa-file-pdf-o"></i> PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">Filter your data</span>
+        </button>
+      </div>
+
+  <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="college" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select name</option>
+                    <option value="">All users</option>
+        <?php
+                 $userfetch = user::get();
+  foreach($userfetch as $userfetch)
+  {
 
 
 
-                        <a href="{{ url('work_order_material_purchased') }}" ><h6>Material Purchased <span
-                                    class="badge badge-light">{{ count($material_to_purchased) }}</span></h6></a>
+      $departmentor = department::where('id',$userfetch->section_id)->get();
+      foreach($departmentor as $departmentor)
+      {
+
+          $directora = directorate::where('id',$departmentor->directorate_id)->get();
+          foreach($directora as $directora){?>
+<option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->lname }} - ( {{ $departmentor->name }}, {{ $directora->name }})</option>
+          <?php }
+      }
 
 
-                      <a href="{{ url('ProcurementHistory') }}"><h6>Procurement</h6></a>
+  }
+        ?>
 
 
-           <!--
-           <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
-                    </li>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="type" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select Type</option>
+                    <option value="">All Types</option>
+                    <?php
+                    $type = User::select('type')->distinct()->get();
+                    foreach ($type as $typed) {
+                      echo " <option  value='".$typed->type."'>".$typed->type."</option>";
+                    }
+                   ?>
 
-           <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
-                    </li>
-          -->
-               @endif
+                </select>
+            </div>
+        </div>
+      </div>
 
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="directorate" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select Directorate</option>
+                    <option value="">All Directorates</option>
+                    <?php
 
+                    $directoras = directorate::orderBy('name','ASC')->get();
+                    foreach($directoras as $directoras){?>
+            <option value=" {{ $directoras->id }}">{{ $directoras->name }}</option>
+                    <?php }
+                               ?>
 
+                </select>
+            </div>
+        </div>
+      </div>
 
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="department" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select Department</option>
+                    <option value="">All Departments</option>
+                    <?php
+                    $departmen  = department::orderBy('name','ASC')->get();
+    foreach($departmen  as $departm )
+    {
 
+        $director  = directorate::where('id',$departm ->directorate_id)->get();
+        foreach($director  as $director ){?>
+<option value="{{ $departm ->id }} ">  {{ $departm ->description }} - {{ $director ->name }}</option>
+        <?php }
+    }
+                   ?>
 
-  @if(auth()->user()->type == 'Head Procurement')
-
-<a href="{{ url('work_order_with_missing_material')}}"><h6>Materials to purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></h6></a>
-<!--<a href="{{ url('minutesheets')}}"><h6>Minutesheets</h6></a>-->
-
-<a href="{{ url('stores')}}"><h6>Store</h6></a>
-
-  <button  class="dropdown-btn"><h6>Procurement
-    <i class="fa fa-caret-down"></h6></i>
-  </button>
-  <div class="dropdown-container">
-    <a href=" {{ url('procurementAddMaterial') }}"><h6>Add new procurement list</h6></a>
-    <a href="{{ url('ProcurementHistory') }}"><h6>View Procurement History</h6></a>
-
-
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Export</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+          <!-- ---------------------- -->
   </div>
 
+<table class="table table-responsive  table-striped" id="myTablee" >
+  <thead style="background-color: #376ad3" >
+    <tr style="color: white;">
+      <th scope="col">#</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th title="phone" scope="col">Phone</th>
+      <th scope="col">Type</th>
+    <th scope="col">Directorate</th>
+      <th scope="col">Department</th>
+      <!--<th scope="col">Section</th>-->
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
 
+ if (isset($_GET['page'])){
+if ($_GET['page']==1){
 
-   @endif
+  $i=1;
+}else{
+  $i = ($_GET['page']-1)*5+1; }
+}
+else {
+ $i=1;
+}
+ $i=1;
 
-
-       @if(auth()->user()->type == 'Transport Officer')
-
-                        <a  href="{{ url('wo_transport_request')}}"><h6>Transport Requests <span
-                                    class="badge badge-light">{{ count($wo_transport) }}</h6>
-
-                        <a href="{{ url('wo_transport_request_accepted')}}"><h6>Accepted Transports</h6></a>
-
-
-                        <a href="{{ url('wo_transport_request_rejected')}}"><h6>Rejected Transports</h6></a>
-
-
-
-                @endif
-
-
-
-    @if(auth()->user()->type == 'Inspector Of Works')
-
-     <a href="{{ url('myzone')}}"><h6>My Zone </h6></a>
-
-
-                        <a href="{{ url('work_order_material_needed')}}"><h6>Works orders needs material <span
-                                    class="badge badge-light">{{ count($material_requests) }}</span></h6></a>
-
-
-
-
-                        <a href="{{ url('wo_material_accepted')}}"><h6>Accepted Materials<span
-                                    class="badge badge-light">{{ count($woMaterialAccepted) }}</span></h6></a>
-
-
-
-                        <a  href="{{ url('material_rejected_with_workorder')}}"><h6>Rejected Materials
-                        <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></h6></a>
+   ?>
+    @foreach($display_users as $user)
+    @if ($user['department']['directorate']->name=='DES')
 
 
 
-                    <!--
-           <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_purchasing_request')}}">Procurement Requests <span
-                                    class="badge badge-light">{{ count($procurement_request) }}</span></a>
-                    </li>
-                    -->
+    <tr>
+      <th scope="row">{{ $i++ }}</th>
+      <td>{{ $user->fname . ' ' . $user->lname }}</td>
+      <td>{{ $user->name }}</td>
+      <td>{{ $user->email }}</td>
+      <td>
 
-                @endif
+      <?php $phonenumber = $user->phone;
+        if(substr($phonenumber,0,1) == '0'){
+
+          $phonreplaced = ltrim($phonenumber,'0');
+          echo '+255'.$phonreplaced;
+
+        }else { echo $user->phone;}
+
+      ?></td>
+
+      @if( $user->type == "Inspector Of Works")
+      <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+
+      @else
+         @if(strpos( $user->type, "HOS") !== false)
+             <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>
+             @else
+               <td style="text-transform: capitalize;">{{strtolower( $user->type) }} </td>
+             @endif
+
+      @endif
+
+
+         <td>{{ $user['department']['directorate']->name }}</td>
+        <td>{{ $user['department']->name }}</td>
+        <td>
+        <div class="row"> &nbsp; &nbsp; &nbsp;
+        <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
+
+
+         <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('user.delete', [$user->id]) }}" >
+          {{csrf_field()}}
+
+
+        <button type="submit" data-toggle="tooltip" title="Deactivate"   > <a style="color: red;" href=""  data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a>
+
+
+       </button>
+     </form>
+   </div>
+      </td>
+    </tr>
+    @else
+    @endif
+    @endforeach
+  </tbody>
+
+
+</table>
+
+</div>
+  @endif
+
+  @endif
+</div>
+
+
+
+
+
+
+
+
+<script>
+$(document).ready(function(){
+
+  $('[data-toggle="tooltip"]').tooltip();
+
+
+
+$('#myTable').DataTable({
+   "drawCallback": function ( settings ) {
+
+    /*show pager if only necessary
+    console.log(this.fnSettings());*/
+    if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) > 1) {
+        $('#dataTable_ListeUser_paginate').css("display", "block");
+    } else {
+        $('#dataTable_ListeUser_paginate').css("display", "none");
+    }
+
+    }
+});
+
+
+  jQuery('#myTable').DataTable({
+    fnDrawCallback: function(oSettings) {
+        var totalPages = this.api().page.info().pages;
+        if(totalPages == 1){
+            jQuery('.dataTables_paginate').hide();
+        }
+        else {
+            jQuery('.dataTables_paginate').show();
+        }
+    }
+});
+
+
+
+});
+
+
+function warning (){
+  alert("Are you sure you want to delete this?");
+}
+</script>
+
+
 
 
 
@@ -1007,17 +1088,6 @@
 
 
 </div>
-
-
-<div class="main">
-     @if(auth()->user()->change_password == 2)
-        @yield('body')
-
-     @endif
-
-
-</div>
-
 
 
 <style type="text/css">
@@ -1527,17 +1597,53 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 
-     <script type="text/javascript">
-
-      $("#materialedit").select2({
-            placeholder: "Choose material..",
-            allowClear: true
-        });
-     </script>
-
 
 
 
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    document.onreadystatechange = function() {
+      if (document.readyState !== "complete") {
+        document.querySelector(
+        "body").style.visibility = "hidden";
+        document.querySelector(
+        "#loader").style.visibility = "visible";
+      } else {
+        document.querySelector(
+        "#loader").style.display = "none";
+        document.querySelector(
+        "body").style.visibility = "visible";
+      }
+    };
+  </script>
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+  document.onreadystatechange = function() {
+  if (document.readyState !== "complete") {
+    document.querySelector("body").style.visibility = "hidden";
+    document.querySelector("#loader").style.visibility = "visible";
+  } else {
+    document.querySelector("#loader").style.display = "none";
+    document.querySelector("body").style.visibility = "visible";
+  }
+};
+
+</script>
