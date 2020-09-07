@@ -18,14 +18,14 @@
             </ul>
         </div>
               @endif
-                  <h5 style=" text-transform: capitalize;" ><b >Available assessment sheets </b></h5>
+                  <h5 style=" text-transform: capitalize;" ><b >Incomplete assessment sheets </b></h5>
                   <hr>
 
 
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1))
                    <a href="{{ route('add_new_sheet') }}"
-                   class="btn btn-primary" >Add new assessment sheet</a>   @endif    <a href="{{ route('incomplete_assessment_sheet') }}"
-                   class="btn btn-secondary" >Incomplete assessment sheets</a> <br> <br>
+                   class="btn btn-primary" >Add new assessment sheet</a>   @endif    <a href="{{ route('assessment_sheet') }}"
+                   class="btn btn-secondary" >Available assessment sheets</a> <br> <br>
 
 
 
@@ -45,30 +45,28 @@
 
 
                     <tbody>
+                     
+
                     <?php $i = 0; ?>
                     @foreach($cleangcompany as $house)
-
-                      @if($house->percentage == 100)
-
+                     @if($house->percentage != 100)
 
                         <?php $i++; ?>
+                    
 
-              
-                           
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->name }}</td>
                             <td>{{ $house->type}}</td>
 
-                            
-                              <td>{{ $house->percentage}} </td>
+                             
+                             <td title="Please edit to 100%" style="color: red">{{ $house->percentage}}</td> 
 
                           <td> <a style="color: green;"  href="{{route('view_assessment_sheet' , [$house->name])}}" data-toggle="tooltip" title="View and edit assessment sheet"><i
                                                     class="fas fa-eye"></i></a> </td>
 
                         </tr>
-
-                        @endif
+                     @endif   
                     @endforeach
                     </tbody>
 

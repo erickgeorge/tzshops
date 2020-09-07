@@ -88,7 +88,7 @@
 					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="return transportrequest('{{$idt}}','-1');" href="#" role="button">Reject</a> </td>
 
 						@else
-				 EXPIRED REQUEST
+				          EXPIRED REQUEST
 						@endif
 				   </tr>
                     @endforeach

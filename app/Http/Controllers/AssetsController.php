@@ -69,7 +69,7 @@ class AssetsController extends Controller
         $staffhouse->no_room = $request['no_room'];
         $staffhouse->campus_id = $request['campus'];
         $staffhouse->save();
-        return redirect()->route('register.house')->with(['message' => 'New house is registered successfully']);
+        return redirect()->route('register.house')->with(['message' => 'New house registered successfully']);
     }
 
 
@@ -112,6 +112,7 @@ class AssetsController extends Controller
 
         $company->company_name = $request['companyid'];
         $company->tender = $request['tendern'];
+        $company->hostel = $request['hostel'];
         $company->status = 2;
         $company->payment = $payments[$a];
         $company->datecontract = $request['datecontract'];
@@ -122,8 +123,6 @@ class AssetsController extends Controller
         $durass = strtotime($company->datecontract);
         $dura = $request['duration'];
         $company->endcontract = date('Y-m-d' , strtotime("+$dura year" , $durass));
-
-
 
 
      if ($company->datecontract >= $company->endcontract) {
@@ -188,6 +187,7 @@ class AssetsController extends Controller
 
         $company = new companywitharea();
         $company->company_name = $request['company_name'];
+        $company->type = $request['type'];
         $company->save();
 
 
@@ -597,6 +597,26 @@ class AssetsController extends Controller
          }
 
 
+
+             public function incompleteassessmentsheet(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+         return view('incompleteassessmentsheet', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => assessmentsheet::select(DB::raw('name , type ,sum(percentage) as percentage')) ->where('status',2)->OrderBy('name','ASC')
+              ->groupBy('name')->groupBy('type')
+             ->get()
+
+          ]);
+
+         }
+
+
+
+
              public function assessmentsheet(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -612,6 +632,7 @@ class AssetsController extends Controller
           ]);
 
          }
+
 
 
 
@@ -671,7 +692,7 @@ class AssetsController extends Controller
        {
            $House=House::where('id', $id)->first();
            $House->delete();
-           return redirect()->route('register.house')->with(['message' => 'Respective house is deleted successfully']);
+           return redirect()->route('register.house')->with(['message' => 'Respective house deleted successfully']);
        }
 
 
@@ -728,7 +749,7 @@ class AssetsController extends Controller
         $HallofResdence->location = $request['location'];
         $HallofResdence->save();
 
-        return redirect()->route('register.hallofres')->with(['message' => 'New Hall of Residence is registered successfully']);
+        return redirect()->route('register.hallofres')->with(['message' => 'New Hall of Residence registered successfully']);
     }
 
 
@@ -738,7 +759,7 @@ class AssetsController extends Controller
        {
            $HallofRes=Hall::where('id', $id)->first();
            $HallofRes->delete();
-           return redirect()->route('register.hallofres')->with(['message' => 'Respective hall is deleted successfully']);
+           return redirect()->route('register.hallofres')->with(['message' => 'Respective hall of Residence deleted successfully']);
        }
 
 
@@ -791,7 +812,7 @@ class AssetsController extends Controller
         $campuses->campus_name = $request['campus_name'];
         $campuses->location = $request['location'];
         $campuses->save();
-        return redirect()->route('register.campus')->with(['message' => 'New campus is registered successfully']);
+        return redirect()->route('register.campus')->with(['message' => 'New campus registered successfully']);
 
     }
 
@@ -812,7 +833,7 @@ class AssetsController extends Controller
        {
            $HallofRes=Campus::where('id', $id)->first();
            $HallofRes->delete();
-           return redirect()->route('register.campus')->with(['message' => 'Respective campus is deleted successfully']);
+           return redirect()->route('register.campus')->with(['message' => 'Respective campus deleted successfully']);
        }
 
 
@@ -825,7 +846,7 @@ class AssetsController extends Controller
         $newzone->campus_id = $request['campus'];
         $newzone->type = $request['type'];
         $newzone->save();
-        return redirect()->route('register.cleanningzone')->with(['message' => 'New Zones is registered successfully']);
+        return redirect()->route('register.cleanningzone')->with(['message' => 'New Zones registered successfully']);
     }
 
 
@@ -833,7 +854,7 @@ class AssetsController extends Controller
        {
            $newzone=zone::where('id', $id)->first();
            $newzone->delete();
-           return redirect()->route('register.cleanningzone')->with(['message' => 'Respective Zone is deleted successfully']);
+           return redirect()->route('register.cleanningzone')->with(['message' => 'Respective Zone deleted successfully']);
        }
 
 
@@ -853,14 +874,15 @@ class AssetsController extends Controller
 
   public function RegisterCleaningArea(Request $request)
     {
-
+      
         $cleanarea = new cleaningarea();
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];
         $cleanarea->college = $request['college'];
-
+        $cleanarea->type = $request['areatype'];
+        $cleanarea->hostel = $request['hostel'];
         $cleanarea->save();
-        return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area is registered successfully']);
+        return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area registered successfully']);
     }
 
 
@@ -869,7 +891,7 @@ class AssetsController extends Controller
        {
            $cleanareaa=cleaningarea::where('id', $id)->first();
            $cleanareaa->delete();
-           return redirect()->route('register.cleaningareas')->with(['message' => 'Respective Clean Area is deleted successfully']);
+           return redirect()->route('register.cleaningareas')->with(['message' => 'Respective Clean area  deleted successfully']);
        }
 
 
@@ -911,11 +933,20 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
             'campuses' => Campus::all(),
-             'carea' =>cleaningarea::all(),
+             'careainterior' =>cleaningarea::where('type','Interior')->where('college',auth()->user()->college)->where('hostel',2)->get(),
+              'careainteriorusab' =>cleaningarea::where('type','Interior')->where('hostel',1)->get(),
+
+              'careaadmin' =>cleaningarea::all(),
+
+              'careaexterior' =>cleaningarea::where('type','Exterior')->get(),
               'sheets' =>assessmentsheet::select(DB::raw('name , type , sum(percentage) as percentage'))
                     ->where('status', 2)->groupBy('name')->groupBy('type')->OrderBy('name')->get(),
 
-                      'companyall' => companywitharea::OrderBy('company_name', 'ASC')->get()
+                      'companyinterior' => companywitharea::where('type','Interior')->OrderBy('company_name', 'ASC')->get(),
+
+                        'companyexterior' => companywitharea::where('type','Exterior')->OrderBy('company_name', 'ASC')->get(),
+
+                          'companyall' => companywitharea::all()
 
           ]);
      }

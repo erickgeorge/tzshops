@@ -1308,6 +1308,14 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 
+     <script type="text/javascript">
+
+      $("#areatype").select2({
+            placeholder: "Choose type...",
+            allowClear: true
+        });
+     </script>
+
 
 
 

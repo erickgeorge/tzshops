@@ -63,7 +63,7 @@ class LandscapingController extends Controller
             $work_order->loc_id = $request['location'];
 
         }
-        
+
         $work_order->status = 1;
         $work_order->client_id = auth()->user()->id;
         $work_order->maintenance_section = $request['p_type'];
@@ -84,20 +84,20 @@ class LandscapingController extends Controller
         return view('createlandworkorder', ['role' => $role,'notifications' => $notifications]);
     }
 
-   
+
 
       public function landworkorderview()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-    
+
     if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -113,23 +113,23 @@ class LandscapingController extends Controller
                      'wo' => landworkorders::where('maintenance_section', substr(strstr(auth()->user()->type, " "), 1))->whereBetween('created_at', [$from, $to])->where('status', '<>', 0)->OrderBy('created_at', 'DESC')->get(),
                     'notifications' => $notifications
                 ]);
-            } 
+            }
 
             else {
-        
+
             return view('land_work_orders', [
                 'role' => $role,
                 'notifications' => $notifications,
                 'wo' => landworkorders::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
             ]);
-        
+
            } }
 
 
 
 
             else
-            
+
         {
              if (strpos(auth()->user()->type, "Supervisor") !== false) {
                 return view('land_work_orders', ['role' => $role, 'notifications' => $notifications,'wo' => landworkorders::where('maintenance_section', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->orwhere('client_id', auth()->user()->id, " ")->OrderBy('created_at', 'DESC')->get()]); }
@@ -140,9 +140,9 @@ class LandscapingController extends Controller
             'notifications' => $notifications,
             'wo' => landworkorders::OrderBy('created_at', 'DESC')->get()
         ]); }
-   
-        
-        
+
+
+
     }//
 
 
@@ -156,20 +156,20 @@ class LandscapingController extends Controller
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         return view('track_work_order_landscaping', [
             'notifications' => $notifications,
-            
-            'role' => $role, 
+
+            'role' => $role,
             'wo' => landworkorders::where('id', $id)->first(),
             'slecc' =>User::where('type', 'Supervisor Landscaping')->get(),
             'company' =>company::all(),
             'carea' =>cleaningarea::all(),
-           
+
             'assessmmentcompany' => landassessmentform::where('id', $id)->get(),
             'assessmmentactivity' => landassessmentactivityform::where('assessment_id', $id)->get(),
-            'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('assessment_id', $id)->get(), 
+            'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('assessment_id', $id)->get(),
         ]);
-       
+
     }
-  
+
 
 
       public function viewwolandsc($id)
@@ -217,7 +217,7 @@ class LandscapingController extends Controller
         $time = strtotime($wO->created_at);
         $timed = date('d/m/Y',$time);
         $msg='Dear  '. $cfirstname.'  '.$clastname.'. Your landscaping work order with Ref No: WO-'.$wO->id.' sent to Estate Directorate on  ' . $timed . ' of  maintenance section :' . $wO->maintenance_section . '  about '.$wO->details.' has been ACCEPTED .              Thanks   Directorate of Estates Services.';
-  
+
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
@@ -234,21 +234,21 @@ class LandscapingController extends Controller
         $section=auth()->user()->type;
 
 
-    
+
 
         $data = array('name'=>$userName, "body" => "Your Landscaping Work-Order No : $wO->id sent to Directorate of Estates on : ".$timed.", of  maintenance section : $wO->maintenance_section has been ACCEPTED.Please login in the system for further information .",
 
                      "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
-    
+
        Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
-       
+
        $message->to($toEmail,$userName)
             ->subject('LANDSCAPING WORK ORDER ACCEPTANCE.');
        $message->from('udsmestates@gmail.com',$sender);
        });
-        
-    
+
+
 
         return redirect()->route('workOrder.edit.landscaping', [$wO->id])->with([
             'role' => $role,
@@ -266,21 +266,21 @@ class LandscapingController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
 
-    
+
         return view('edit_work_order_landscaping', [
-           
+
             'notifications' => $notifications,
-            
-            'role' => $role, 
-          
+
+            'role' => $role,
+
             'company' =>company::all(),
             'carea' =>cleaningarea::all(),
-           
+
             'assessmmentcompany' => landassessmentform::where('id', $id)->get(),
              'assessmmentcompanyname' => landassessmentform::where('company', $company)->where('assessment_month', $month)->get(),
-           
-          
-           
+
+
+
 
         ]);
     }
@@ -293,9 +293,9 @@ class LandscapingController extends Controller
 
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-   
-           
- 
+
+
+
             $form = new landscapinginspectionform();
             $form->status = $request['status'];
             $form->date = $request['inspectiondate'];
@@ -308,11 +308,11 @@ class LandscapingController extends Controller
             $inspectionForm = landworkorders::where('id', $id)->first();
             $inspectionForm->status =3;
             $inspectionForm->save();
-        
+
 
         return redirect()->route('workOrder.edit.landscaping', [$id])->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Inspection form successfully updated',
             'wo' => landworkorders::where('id', $id)->first()
         ]);
@@ -330,19 +330,19 @@ class LandscapingController extends Controller
             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
             $tenderfetch = company::where('tender', $comp)->get();
 
- 
-   
+
+
             $areas = $request['area'];
             $sheet = $request['sheet'];
             $tenders = $request['tendernumber'];
-            
+
              foreach($areas as $a => $b){
 
-       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->first(); 
+       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->first();
 
        if (empty($checkforempty)) {
- 
-             
+
+
             $form = new landassessmentform();
             $form->area_id = $areas[$a];
             $form->company_id = $id;
@@ -359,21 +359,21 @@ class LandscapingController extends Controller
             $form->enddate = $nextmonth;
 
 
- 
+
              foreach ($tenderfetch as $tender) {
 
 
                  if ($status == 1) {
-              
+
            $comp = company::where('id',  $tender->id)->first();
-           
+
             $ddate = strtotime($nextmonth);
             $newDate = date("Y-m-d", strtotime("+1 month", $ddate));
 
-            $comp->nextmonth = $newDate;  
-             $comp->status =  1 ; 
+            $comp->nextmonth = $newDate;
+             $comp->status =  1 ;
             $comp->save();
-          
+
 
 
             }
@@ -385,17 +385,17 @@ class LandscapingController extends Controller
             $ddate = strtotime($date);
             $newDate = date("Y-m-d", strtotime("+2 month", $ddate));
 
-            $comp->nextmonth = $newDate;   
+            $comp->nextmonth = $newDate;
             $comp->save();
 
             }
-              
 
-           
-           
+
+
+
             $comp->save(); }
 
-            $form->save();   
+            $form->save();
               }
                    else {
 
@@ -405,19 +405,19 @@ class LandscapingController extends Controller
 
              }
 
-         
+
 
             return redirect()->route('assessmentform.view')->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Area for assessment added successfully',
-           
+
         ]);
 
 
-              
 
-    
+
+
     }
 
 
@@ -431,9 +431,9 @@ class LandscapingController extends Controller
 
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-   
-           
- 
+
+
+
             $form = landassessmentform::where('id' , $asid)->first();
             $form->company_id = $request['company'];
             $form->area_id = $request['area'];
@@ -449,7 +449,7 @@ class LandscapingController extends Controller
 
         return redirect()->route('workOrder.edit.landscaping', [$id])->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment company form successfully updated',
             'wo' => landworkorders::where('id', $id)->first()
         ]);
@@ -462,23 +462,23 @@ class LandscapingController extends Controller
          $companysd = Crypt::decrypt($companys);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-         
-        
-         
-            
+
+
+
+
             $score = $request['score'];
             $remark = $request['remark'];
             $sheet = $request['assessment_sheet'];
             $area = $request['area'];
             $activity = $request['activity'];
             $percentage = $request['percentage'];
-           
- 
+
+
            foreach($score as $a => $b){
 
 
             $matr = new landassessmentbeforesignature();
-            
+
             $matr->activity = $activity[$a];
             $matr->percentage = $percentage[$a];
             $matr->score = $score[$a];
@@ -488,22 +488,22 @@ class LandscapingController extends Controller
             $matr->area = $area[$a] ;
             $matr->month = $request['assessmment'];
             $matr->companynew = $companysd;
-         
+
             $matr->status = 1;
-            $matr->save(); 
+            $matr->save();
             }
-           
+
 
 
 
         return redirect()->back()->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Please crosscheck the assessment form and submitt again',
             'wo' => landworkorders::where('id', $id)->first()
-        ]); 
+        ]);
     }
-              
+
 
 
 
@@ -512,21 +512,21 @@ class LandscapingController extends Controller
 
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
-      
+
+
             $activityi = $request['activity'];
             $percent = $request['percentage'];
-          
-  
+
+
            foreach($activityi as $a => $b){
-            
+
            $assessment_edit = assessmentsheet::where('name', $id)->get();
-               
+
                foreach($assessment_edit as $edit_assessment) {
-         
+
             $matr = assessmentsheet::where('name', $edit_assessment->name)->first();
             $matr->activity = $activityi[$a] ;
-            $matr->percentage = $percent[$a] ;   }   
+            $matr->percentage = $percent[$a] ;   }
 
             $matr->save();
              }
@@ -535,33 +535,33 @@ class LandscapingController extends Controller
 
         return redirect()->back()->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => ' Assessment sheet edited successifully'
-           
-        ]); 
+
+        ]);
              }
 
-   
+
 
            public function editassessmentsheetproceeding(Request $request, $id , $type)
     {
 
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
-      
+
+
             $activityi = $request['activity'];
             $percent = $request['percentage'];
-          
-  
+
+
            foreach($activityi as $a => $b){
- 
+
             $matr = new assessmentsheet();
             $matr->name = $id;
             $matr->type = $type;
             $matr->status = 1;
             $matr->activity = $activityi[$a] ;
-            $matr->percentage = $percent[$a] ;    
+            $matr->percentage = $percent[$a] ;
 
             $matr->save();
              }
@@ -570,34 +570,34 @@ class LandscapingController extends Controller
 
         return redirect()->back()->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => ' Assessment sheet updated successifully'
-           
-        ]); 
+
+        ]);
              }
 
 
-   
+
 
            public function editassessmentsheetproceedingtwo(Request $request, $id , $type)
     {
 
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
-      
+
+
             $activityi = $request['activity'];
             $percent = $request['percentage'];
-          
-  
+
+
            foreach($activityi as $a => $b){
- 
+
             $matr = new assessmentsheet();
             $matr->name = $id;
             $matr->type = $type;
             $matr->status = 2;
             $matr->activity = $activityi[$a] ;
-            $matr->percentage = $percent[$a] ;    
+            $matr->percentage = $percent[$a] ;
 
             $matr->save();
              }
@@ -606,28 +606,28 @@ class LandscapingController extends Controller
 
         return redirect()->back()->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => ' Assessment sheet updated successifully'
-           
-        ]); 
-             }         
+
+        ]);
+             }
 
 
-   
+
 
            public function finalsave_sheet($name)
     {
 
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
-      
+
+
          $finalsave = assessmentsheet::where('name', $name)->get();
 
            foreach($finalsave as $final){
- 
+
             $matr = assessmentsheet::where('id',$final->id)->first();
-        
+
             $matr->status = 2;
 
             $matr->save();
@@ -637,27 +637,27 @@ class LandscapingController extends Controller
 
         return redirect()->route('assessment_sheet')->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => ' Assessment sheet updated successifully'
-           
-        ]); 
+
+        ]);
              }
 
 
-             
 
-             
+
+
 
 
       public function deleteassessmentsheet($id , $name)
-       {   
+       {
            $checkforemptysheet=assessmentsheet::where('name', $name)->get();
 
             if (count($checkforemptysheet) == 1) {
 
            $cleanareaa=assessmentsheet::where('id', $id)->first();
            $cleanareaa->delete();
-        
+
 
            return redirect()->route('add_new_sheet')->with(['message' => 'Respective assesment sheet deleted successfully']);
           }
@@ -666,14 +666,14 @@ class LandscapingController extends Controller
 
         $cleanareaa=assessmentsheet::where('id', $id)->first();
         $cleanareaa->delete();
-        
+
 
         return redirect()->back()->with(['message' => 'Respective activity and percentage successfully']);
 
        }
 
      }
-      
+
 
             public function editassessmentsheeeet(Request $request)
     {
@@ -682,7 +682,7 @@ class LandscapingController extends Controller
            $company->activity = $request['activity'];
            $company->percentage = $request['percentage'];
            $company->save();
-  
+
         return redirect()->back()->with(['message' => 'Assessment sheet edited successfully']);
     }
 
@@ -697,45 +697,45 @@ class LandscapingController extends Controller
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
 
 
 
 
-         
+
+
             $satisfied = landassessmentactivityform::where('assessment_id', $id)->where('companynew',$company)->where('assessment_sheet' , $sheet)->where('month' , $month)->get();
 
             foreach ($satisfied as  $sat) {
-              
+
               $satify = landassessmentactivityform::where('id', $sat->id)->first();
-            
+
             $satify->status2 = 2;
-             
-            $satify->save(); 
+
+            $satify->save();
 
               }
-      
-        
-       
+
+
+
         return redirect()->back()->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment activity form is successfully updated also Company supevisor is satisfied with the scores given.  ',
-          
-        ]); 
+
+        ]);
              }
 
 
 
 
-  
+
 
   public function crosschecklandassessmentactivityforsignature(Request $request, $id , $type , $company ,$date ,$status , $nextmonth )
     {
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
+
 
             $txtbox = $request['activity'];
             $perce = $request['percentage'];
@@ -743,18 +743,18 @@ class LandscapingController extends Controller
             $remar = $request['remark'];
             $assessment = $request['assessment_sheet'];
             $area = $request['area'];
-            
+
             $sum = 0;
             $summ = 0;
                        $summm = 0;
-  
+
            foreach($txtbox as $a => $b){
-            
+
              $sum += $perce[$a];
              $summ += $scor[$a];
 
 
-         
+
             $matr =new landassessmentactivityform();
             $matr->activity = $txtbox[$a] ;
             $matr->percentage = $perce[$a] ;
@@ -763,26 +763,26 @@ class LandscapingController extends Controller
             $matr->assessment_sheet = $assessment[$a] ;
             $matr->area = $area[$a] ;
             $matr->month = $request['assessmment'];
-           
+
             $matr->companynew = $company ;
             $matr->assessment_id = $id ;
           //  $matr->tottal_percent = $sum;
            // $matr->initiated_by = auth()->user()->id;
-            
+
            // $matr->tottal_score = $summ;
             $matr->status = 1;
-             
-            $matr->save(); } 
+
+            $matr->save(); }
 
 
-        
-       
+
+
         return redirect()->back()->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment activity form is successfully created , please print out the document so as company supervisor to sign and proceed with the further steps',
             'wo' => landworkorders::where('id', $id)->first()
-        ]); 
+        ]);
              }
 
 
@@ -796,12 +796,12 @@ class LandscapingController extends Controller
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
+
       //forfirstadding month
          $tenderfetch = company::where('tender', $company)->get();
 
- 
-            
+
+
             $areas = $request['myarea'];
             $sheet = $request['mysheet'];
             $tenders = $request['mytender'];
@@ -810,19 +810,19 @@ class LandscapingController extends Controller
 
              foreach($areas as $a => $b){
 
-       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first(); 
+       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first();
 
        if (empty($checkforempty)) {
- 
-             
+
+
             $form = new landassessmentform();
-           
+
             $form->area_id = $areas[$a];
             $form->company_id = $id;
             $form->company = $tenders[$a];
             $form->paymentone = $paymentss[$a];
             $form->assessment_name = $sheet[$a];
-           
+
             $form->type = $type;
 
             $form->status =  1;
@@ -836,21 +836,21 @@ class LandscapingController extends Controller
             $form->enddate = $nextmonth;
 
 
- 
+
              foreach ($tenderfetch as $tender) {
 
 
                  if ($status == 1) {
-              
+
            $comp = company::where('id',  $tender->id)->first();
-           
+
             $ddate = strtotime($nextmonth);
             $newDate = date("Y-m-d", strtotime("+1 month", $ddate));
 
-            $comp->nextmonth = $newDate;  
-             $comp->status =  1 ; 
+            $comp->nextmonth = $newDate;
+             $comp->status =  1 ;
             $comp->save();
-          
+
 
 
             }
@@ -862,17 +862,17 @@ class LandscapingController extends Controller
             $ddate = strtotime($date);
             $newDate = date("Y-m-d", strtotime("+2 month", $ddate));
 
-            $comp->nextmonth = $newDate;   
+            $comp->nextmonth = $newDate;
             $comp->save();
 
             }
-              
 
-           
-           
+
+
+
             $comp->save(); }
 
-            $form->save();   
+            $form->save();
               }
                    else {
 
@@ -890,21 +890,21 @@ class LandscapingController extends Controller
             $assessment = $request['assessment_sheet'];
             $area = $request['area'];
             $areas = $request['areaid'];
-            
+
             $sum = 0;
             $summ = 0;
                        $summm = 0;
-  
+
            foreach($txtbox as $a => $b){
-            
+
              $sum += $perce[$a];
              $summ += $scor[$a];
 
 
-         
+
             $matr = new landcrosschecklandassessmentactivity();
 
-           
+
             $matr->activity = $txtbox[$a] ;
             $matr->percentage = $perce[$a] ;
             $matr->score = $scor[$a] ;
@@ -917,19 +917,19 @@ class LandscapingController extends Controller
             $matr->assessment_id = $id ;
             $matr->tottal_percent = $sum;
             $matr->initiated_by = auth()->user()->id;
-            
+
            // $matr->tottal_score = $summ;
             $matr->status = 1;
-             
-            $matr->save(); } 
 
-        
+            $matr->save(); }
+
+
 
 
            $erick =landassessmentform::where('company', $company)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 3;
            $pndo->save();
             }
@@ -939,24 +939,24 @@ class LandscapingController extends Controller
            $erick =landassessmentactivityform::where('companynew', $company)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();
            $pndo->status = 2;
            $pndo->save();
             }
-        
-        
-       
+
+
+
         return redirect()->route('assessmentform.view')->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment activity form is successfully created',
             'wo' => landworkorders::where('id', $id)->first()
-        ]); 
+        ]);
              }
 
 
 
-    
+
 
 
 
@@ -965,12 +965,12 @@ class LandscapingController extends Controller
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
+
       //forfirstadding month
          $tenderfetch = company::where('tender', $company)->get();
 
- 
-            
+
+
             $areas = $request['myarea'];
             $sheet = $request['mysheet'];
             $tenders = $request['mytender'];
@@ -979,19 +979,19 @@ class LandscapingController extends Controller
 
              foreach($areas as $a => $b){
 
-       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first(); 
+       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first();
 
        if (empty($checkforempty)) {
- 
-             
+
+
             $form = new landassessmentform();
-           
+
             $form->area_id = $areas[$a];
             $form->company_id = $id;
             $form->company = $tenders[$a];
             $form->paymentone = $paymentss[$a];
             $form->assessment_name = $sheet[$a];
-           
+
             $form->type = $type;
 
             $form->status =  1;
@@ -1006,21 +1006,21 @@ class LandscapingController extends Controller
             $form->enddate = $nextmonth;
 
 
- 
+
              foreach ($tenderfetch as $tender) {
 
 
                  if ($status == 1) {
-              
+
            $comp = company::where('id',  $tender->id)->first();
-           
+
             $ddate = strtotime($nextmonth);
             $newDate = date("Y-m-d", strtotime("+1 month", $ddate));
 
-            $comp->nextmonth = $newDate;  
-             $comp->status =  1 ; 
+            $comp->nextmonth = $newDate;
+             $comp->status =  1 ;
             $comp->save();
-          
+
 
 
             }
@@ -1032,17 +1032,17 @@ class LandscapingController extends Controller
             $ddate = strtotime($date);
             $newDate = date("Y-m-d", strtotime("+2 month", $ddate));
 
-            $comp->nextmonth = $newDate;   
+            $comp->nextmonth = $newDate;
             $comp->save();
 
             }
-              
 
-           
-           
+
+
+
             $comp->save(); }
 
-            $form->save();   
+            $form->save();
               }
                    else {
 
@@ -1060,21 +1060,21 @@ class LandscapingController extends Controller
             $assessment = $request['assessment_sheet'];
             $area = $request['area'];
             $areas = $request['areaid'];
-            
+
             $sum = 0;
             $summ = 0;
                        $summm = 0;
-  
+
            foreach($txtbox as $a => $b){
-            
+
              $sum += $perce[$a];
              $summ += $scor[$a];
 
 
-         
+
             $matr = new landcrosschecklandassessmentactivity();
 
-           
+
             $matr->activity = $txtbox[$a] ;
             $matr->percentage = $perce[$a] ;
             $matr->score = $scor[$a] ;
@@ -1087,19 +1087,19 @@ class LandscapingController extends Controller
             $matr->assessment_id = $id ;
             $matr->tottal_percent = $sum;
             $matr->initiated_by = auth()->user()->id;
-            
+
            // $matr->tottal_score = $summ;
             $matr->status = 1;
-             
-            $matr->save(); } 
 
-        
+            $matr->save(); }
+
+
 
 
            $erick =landassessmentform::where('company', $company)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 3;
            $pndo->save();
             }
@@ -1109,19 +1109,19 @@ class LandscapingController extends Controller
            $erick =landassessmentactivityform::where('companynew', $company)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();
            $pndo->status = 2;
            $pndo->save();
             }
-        
-        
-       
+
+
+
         return redirect()->route('assessmentform.view')->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment activity form is successfully created',
             'wo' => landworkorders::where('id', $id)->first()
-        ]); 
+        ]);
              }
 
 
@@ -1135,12 +1135,12 @@ class LandscapingController extends Controller
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
+
       //forfirstadding month
          $tenderfetch = company::where('tender', $company)->get();
 
- 
-            
+
+
             $areas = $request['myarea'];
             $sheet = $request['mysheet'];
             $tenders = $request['mytender'];
@@ -1150,20 +1150,20 @@ class LandscapingController extends Controller
 
              foreach($areas as $a => $b){
 
-       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first(); 
+       $checkforempty = landassessmentform::where('company', $tenders[$a])->where('area_id', $areas[$a])->where('company_id', $id)->where('assessment_month', $request['assessmment'])->where('status','<>',1)->first();
 
        if (empty($checkforempty)) {
- 
-             
+
+
             $form = new landassessmentform();
-           
+
             $form->area_id = $areas[$a];
             $form->college = $colleg[$a];
             $form->company_id = $id;
             $form->company = $tenders[$a];
             $form->paymentone = $paymentss[$a];
             $form->assessment_name = $sheet[$a];
-           
+
             $form->type = $type;
 
             $form->status =  1;
@@ -1178,21 +1178,21 @@ class LandscapingController extends Controller
             $form->enddate = $nextmonth;
 
 
- 
+
              foreach ($tenderfetch as $tender) {
 
 
                  if ($status == 1) {
-              
+
            $comp = company::where('id',  $tender->id)->first();
-           
+
             $ddate = strtotime($nextmonth);
             $newDate = date("Y-m-d", strtotime("+1 month", $ddate));
 
-            $comp->nextmonth = $newDate;  
-             $comp->status =  1 ; 
+            $comp->nextmonth = $newDate;
+             $comp->status =  1 ;
             $comp->save();
-          
+
 
 
             }
@@ -1204,17 +1204,17 @@ class LandscapingController extends Controller
             $ddate = strtotime($date);
             $newDate = date("Y-m-d", strtotime("+2 month", $ddate));
 
-            $comp->nextmonth = $newDate;   
+            $comp->nextmonth = $newDate;
             $comp->save();
 
             }
-              
 
-           
-           
+
+
+
             $comp->save(); }
 
-            $form->save();   
+            $form->save();
               }
                    else {
 
@@ -1232,21 +1232,21 @@ class LandscapingController extends Controller
             $assessment = $request['assessment_sheet'];
             $area = $request['area'];
             $areas = $request['areaid'];
-            
+
             $sum = 0;
             $summ = 0;
                        $summm = 0;
-  
+
            foreach($txtbox as $a => $b){
-            
+
              $sum += $perce[$a];
              $summ += $scor[$a];
 
 
-         
+
             $matr = new landcrosschecklandassessmentactivity();
 
-           
+
             $matr->activity = $txtbox[$a] ;
             $matr->percentage = $perce[$a] ;
             $matr->score = $scor[$a] ;
@@ -1259,20 +1259,20 @@ class LandscapingController extends Controller
             $matr->assessment_id = $id ;
             $matr->tottal_percent = $sum;
             $matr->initiated_by = auth()->user()->id;
-            
+
            // $matr->tottal_score = $summ;
             $matr->status = 1;
              $matr->status2 = 3;
-             
-            $matr->save(); } 
 
-        
+            $matr->save(); }
+
+
 
 
            $erick =landassessmentform::where('company', $company)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 3;
            $pndo->save();
             }
@@ -1282,19 +1282,19 @@ class LandscapingController extends Controller
            $erick =landassessmentactivityform::where('companynew', $company)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();
            $pndo->status = 2;
            $pndo->save();
             }
-        
-        
-       
+
+
+
         return redirect()->route('assessmentform.view')->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment activity form is successfully created',
             'wo' => landworkorders::where('id', $id)->first()
-        ]); 
+        ]);
              }
 
 
@@ -1311,8 +1311,8 @@ class LandscapingController extends Controller
          $company = Crypt::decrypt($company);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-          
-   
+
+
             $txtbox = $request['activity'];
             $perce = $request['percentage'];
             $scor = $request['score'];
@@ -1323,14 +1323,14 @@ class LandscapingController extends Controller
             $sum = 0;
             $summ = 0;
                        $summm = 0;
-  
+
            foreach($txtbox as $a => $b){
-            
+
              $sum += $perce[$a];
              $summ += $scor[$a];
 
 
-         
+
             $matr =new landcrosschecklandassessmentactivity();
             $matr->activity = $txtbox[$a] ;
             $matr->percentage = $perce[$a] ;
@@ -1345,16 +1345,16 @@ class LandscapingController extends Controller
             $matr->tottal_percent = $sum;
            // $matr->tottal_score = $summ;
             $matr->status = 1;
-             
-            $matr->save(); } 
 
-        
+            $matr->save(); }
+
+
 
 
            $erick =landassessmentform::where('company', $company)->where('assessment_month',$month)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 3;
            $pndo->save();
             }
@@ -1364,19 +1364,19 @@ class LandscapingController extends Controller
            $erick =landassessmentactivityform::where('companynew', $company)->where('assessment_month',$month)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentactivityform::where('id', $asympt->id)->first();
            $pndo->status = 2;
            $pndo->save();
             }
-        
-        
-       
+
+
+
         return redirect()->route('assessmentform.view')->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment activity form is successfully created',
             'wo' => landworkorders::where('id', $id)->first()
-        ]); 
+        ]);
              }
 
 
@@ -1384,12 +1384,12 @@ class LandscapingController extends Controller
 
     public function editedlandassessmentactivity(Request $request, $id, $tender , $month)
     {
-        
+
 
          $tender = Crypt::decrypt($tender);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-       
+
 
             $txtbox = $request['activity'];
             $perce = $request['percentage'];
@@ -1401,16 +1401,16 @@ class LandscapingController extends Controller
             $sum = 0;
             $summ = 0;
             $erick = 0;
-  
+
            foreach($txtbox as $a => $b){
-            
+
              $sum += $perce[$a];
              $summ += $scor[$a];
 
 
               $assessment_edit =landcrosschecklandassessmentactivity::where('month', $month)->where('company', $tender)->where('assessment_id', $id)->where('status',10)->orwhere('status',11)->orwhere('status',12)->orwhere('status',30)->get();
                foreach($assessment_edit as $edit_assessment) {
- 
+
             $matr =landcrosschecklandassessmentactivity::where('id', $edit_assessment->id)->first();
             $matr->activity = $txtbox[$a] ;
             $matr->percentage = $perce[$a] ;
@@ -1423,35 +1423,35 @@ class LandscapingController extends Controller
              $erick = $summ;
             //$matr->tottal_score = $erick;
             $matr->status = 1; }
-             
-            $matr->save(); 
 
-         } 
+            $matr->save();
+
+         }
 
 
 
              $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
 
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 6;
            $pndo->score =  $summ;
            $pndo->save();
             }
 
-              
+
         return redirect()->back()->with([
             'role' => $role,
-            'notifications' => $notifications,  
+            'notifications' => $notifications,
             'message' => 'Assessment activity form is successfully edited and updated',
             'wo' => landworkorders::where('id', $id)->first()
-        ]); 
+        ]);
              }
 
 
 
 
-    
+
       public function approveassessment($id , $tender , $month)
     {
 
@@ -1459,18 +1459,18 @@ class LandscapingController extends Controller
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 2;
      $assessment->accepted_by = auth()->user()->id;
-     $assessment->accepted_on = $assessment->updated_at;
+     $assessment->accepted_on =Carbon::now();
      $assessment->save();
      }
 
-     
-     
+
+
            $erick =landassessmentform::where('company', $tenders)->where('assessment_month', $month)->get();
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 4;
            $pndo->save();
             }
@@ -1482,7 +1482,7 @@ class LandscapingController extends Controller
 
 
 
-    
+
       public function approveassessmentdean($id , $tender , $month)
     {
 
@@ -1490,19 +1490,19 @@ class LandscapingController extends Controller
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 1;
      $assessment->status2 = 2;
      $assessment->dean = auth()->user()->id;
-     $assessment->dean_date = $assessment->updated_at;
+     $assessment->dean_date = Carbon::now();
      $assessment->save();
      }
 
-     
-     
+
+
            $erick =landassessmentform::where('company', $tenders)->where('assessment_month', $month)->get();
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 3;
            $pndo->status5 = 1;
            $pndo->status6 = 2;
@@ -1522,19 +1522,19 @@ class LandscapingController extends Controller
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 1;
      $assessment->status2 = 4;
      $assessment->principle = auth()->user()->id;
-     $assessment->principle_date = $assessment->updated_at;
+     $assessment->principle_date = Carbon::now();
      $assessment->save();
      }
 
-     
-     
+
+
            $erick =landassessmentform::where('company', $tenders)->where('assessment_month', $month)->get();
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 3;
            $pndo->status5 = 1;
            $pndo->status6 = 3;
@@ -1555,24 +1555,24 @@ class LandscapingController extends Controller
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',2)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 3;
      $assessment->approved_by = auth()->user()->id;
-     $assessment->approved_on = $assessment->updated_at;
+     $assessment->approved_on = Carbon::now();
      $assessment->save();
      }
 
- 
+
            $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 5;
            $pndo->save();
             }
 
 
-         
-     
+
+
        return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
     }
 
@@ -1585,54 +1585,54 @@ class LandscapingController extends Controller
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',3)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 5;
      $assessment->payment_by = auth()->user()->id;
-     $assessment->payment_on = $assessment->updated_at;
+     $assessment->payment_on = Carbon::now();
      $assessment->save();
      }
 
- 
+
            $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 25;
            $pndo->save();
             }
 
 
-         
-     
+
+
        return redirect()->back()->with(['message' => 'Assessment for payment updated succesifully ']);
     }
 
 
 
-     
+
       public function approveassessmentformbydvc($id , $tender , $month)
     {
      $tender = Crypt::decrypt($tender);
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',3)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 4;
      $assessment->dvc_accepted_by = auth()->user()->id;
-     $assessment->dvaccepted_on = $assessment->updated_at;
+     $assessment->dvaccepted_on = Carbon::now();
      $assessment->save();
      }
 
- 
+
            $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
            foreach($erick as $asympt) {
-           $pndo =landassessmentform::where('id', $asympt->id)->first();     
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
            $pndo->status = 13;
            $pndo->save();
             }
 
 
-         
-     
+
+
        return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
     }
 
@@ -1644,10 +1644,10 @@ class LandscapingController extends Controller
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 4;
      $assessment->payment_by = auth()->user()->id;
-     $assessment->payment_on = $assessment->updated_at;
+     $assessment->payment_on = Carbon::now();
      $assessment->payment = $request['payment'];
      $assessment->save();
         }
@@ -1659,7 +1659,7 @@ class LandscapingController extends Controller
      $company->save();
 
        return redirect()->back()->with(['message' => 'Payment appdated succesifully ']);
-    }  
+    }
 
 
 
@@ -1669,18 +1669,18 @@ class LandscapingController extends Controller
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 10;
      $assessment->a_rejected_by = auth()->user()->id;
-     $assessment->rejected_on = $assessment->updated_at;
+     $assessment->rejected_on = Carbon::now();
      $assessment->reason = $request['reason'];
      $assessment->save();
         }
 
      $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
      foreach($erick as $asympt) {
-     $pndo =landassessmentform::where('id', $asympt->id)->first();     
-     $pndo->status = 10;   
+     $pndo =landassessmentform::where('id', $asympt->id)->first();
+     $pndo->status = 10;
      $pndo->save();
             }
 
@@ -1689,21 +1689,21 @@ class LandscapingController extends Controller
 
 
        return redirect()->back()->with(['message' => 'Assessment rejected succesifully ']);
-    }  
+    }
 
 
 
         public function rejectassessmentwithreasonestate(Request $request,$id , $tender , $month)
     {
-     
+
       $tender = Crypt::decrypt($tender);
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',4)->orwhere('status', 2)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 11;
      $assessment->es_rejected_by = auth()->user()->id;
-     $assessment->esrejected_on = $assessment->updated_at;
+     $assessment->esrejected_on = Carbon::now();
      $assessment->reasonestate = $request['reason'];
      $assessment->save();
         }
@@ -1711,30 +1711,30 @@ class LandscapingController extends Controller
 
      $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
      foreach($erick as $asympt) {
-     $pndo =landassessmentform::where('id', $asympt->id)->first();     
-     $pndo->status = 11;   
+     $pndo =landassessmentform::where('id', $asympt->id)->first();
+     $pndo->status = 11;
      $pndo->save();
             }
 
        return redirect()->back()->with(['message' => 'Assessment rejected succesifully ']);
-    }  
+    }
 
 
 
-   
+
 
 
         public function rejectassessmentwithreasondean(Request $request, $id , $tender , $month)
     {
-    
+
      $tender = Crypt::decrypt($tender);
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 12;
      $assessment->dvc_rejected_by = auth()->user()->id;
-     $assessment->dvcrejected_on = $assessment->updated_at;
+     $assessment->dvcrejected_on = Carbon::now();
      $assessment->reasondvc = $request['reason'];
      $assessment->save();
         }
@@ -1743,13 +1743,13 @@ class LandscapingController extends Controller
 
      $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
      foreach($erick as $asympt) {
-     $pndo =landassessmentform::where('id', $asympt->id)->first();     
-     $pndo->status = 12;   
+     $pndo =landassessmentform::where('id', $asympt->id)->first();
+     $pndo->status = 12;
      $pndo->save();
             }
 
        return redirect()->back()->with(['message' => 'Assessment form rejected succesifully ']);
-    }  
+    }
 
 
 
@@ -1757,15 +1757,15 @@ class LandscapingController extends Controller
 
         public function rejectassessmentwithreasondeanonly(Request $request, $id , $tender , $month)
     {
-    
+
      $tender = Crypt::decrypt($tender);
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
 
      foreach($assessment_approve as $wo_assessment) {
-     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();   
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 30;
      $assessment->dean_rejected_by = auth()->user()->id;
-     $assessment->deanrejected_on = $assessment->updated_at;
+     $assessment->deanrejected_on = Carbon::now();
      $assessment->reasondean = $request['reason'];
      $assessment->save();
         }
@@ -1774,20 +1774,20 @@ class LandscapingController extends Controller
 
      $erick =landassessmentform::where('company', $tender)->where('assessment_month', $month)->get();
      foreach($erick as $asympt) {
-     $pndo =landassessmentform::where('id', $asympt->id)->first();     
-     $pndo->status = 30;   
+     $pndo =landassessmentform::where('id', $asympt->id)->first();
+     $pndo->status = 30;
      $pndo->save();
             }
 
        return redirect()->back()->with(['message' => 'Assessment form rejected succesifully ']);
-    }  
+    }
 
 
 
 
 
 
-    
+
 
 
 
@@ -1811,17 +1811,13 @@ class LandscapingController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-
-
-
-
     if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -1850,26 +1846,29 @@ class LandscapingController extends Controller
 
             'assessmmentareass' => landassessmentform::select(DB::raw('area_id'))
                     ->groupBy('area_id')->get(),
-      
+
 
             'assessmmentcompanylandscaping' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
              'assessmmentcompanyusab' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
-              'assessmmentcompanyestateofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
-
-             'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
-
-               'assessmmentcompanyestateofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
+              'assessmmentcompanyestateofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 1)->OrderBy('created_at', 'ASC')->get(),
 
             'assessmmentcompanydean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(), 
+            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get() 
+            'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanyestatedirector' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'ASC')->get(),
+          
+            'assessmmentcompanydvcaccountant' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'ASC')->get(),
+
+             'dean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
 
 
         ]);
-        
+
             }
 
       else {
@@ -1884,29 +1883,37 @@ class LandscapingController extends Controller
                     ->groupBy('assessment_name')->get(),
 
            'assessmmentcompanygr' => landassessmentform::select(DB::raw('company_id'))
-                    ->groupBy('company_id')->get(),  
+                    ->groupBy('company_id')->get(),
             'assessmmenttender' => landassessmentform::select(DB::raw('company'))
                     ->groupBy('company')->get(),
 
             'assessmmentareass' => landassessmentform::select(DB::raw('area_id'))
-                    ->groupBy('area_id')->get(),     
-      
+                    ->groupBy('area_id')->get(),
+
 
             'assessmmentcompanylandscaping' => landassessmentform::where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
 
             'assessmmentcompanyusab' => landassessmentform::where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompanyestateofficer' => landassessmentform::where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanyestateofficer' => landassessmentform::where('status5', 1)->OrderBy('created_at', 'ASC')->get(),
 
             'assessmmentcompanydean' => landassessmentform::where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(), 
+            'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
 
-            'assessmmentcompanyprincipal' => landassessmentform::where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(), 
+            'assessmmentcompanyestatedirector' => landassessmentform::OrderBy('created_at', 'ASC')->get(),
 
 
-             'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
+            'assessmmentcompanydvcaccountant' => landassessmentform::OrderBy('created_at', 'ASC')->get(),
+
+
+            'assessmmentcompanyprincipal' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+
+                'dean' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+
+            
         ]);
     } }
 
@@ -1923,12 +1930,12 @@ class LandscapingController extends Controller
 
 
     if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -1942,9 +1949,8 @@ class LandscapingController extends Controller
                  return view('assessmentformviewsecond', [
             'role' => $role,
             'notifications' => $notifications,
-             'assessmmentstatus' => landassessmentform::select(DB::raw('status'))
-                    ->groupBy('status')->get(),
-
+            'type' => landassessmentform::select(DB::raw('type'))
+                    ->groupBy('type')->get(),
            'assessmmentsheet' => landassessmentform::select(DB::raw('assessment_name'))
                     ->groupBy('assessment_name')->get(),
 
@@ -1957,16 +1963,30 @@ class LandscapingController extends Controller
 
             'assessmmentareass' => landassessmentform::select(DB::raw('area_id'))
                     ->groupBy('area_id')->get(),
-      
 
-           
+
+
             'assessmmentcompanylandscaping' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
              'assessmmentcompanyusab' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+               'assessmmentcompanyestateofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
 
-             'assessmmentcompany' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+                'assessmmentcompanyestatedirector' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+
+               'assessmmentcompanydvcaccountant' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
+
+                 'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+
+              
+            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+
+
+            'dean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+              'assessmmentcompanydean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
+
 
         ]);
-        
+
             }
 
       else {
@@ -1974,27 +1994,41 @@ class LandscapingController extends Controller
      return view('assessmentformviewsecond', [
             'role' => $role,
             'notifications' => $notifications,
-             'assessmmentstatus' => landassessmentform::select(DB::raw('status'))
-                    ->groupBy('status')->get(),
-
+              'type' => landassessmentform::select(DB::raw('type'))
+                    ->groupBy('type')->get(),
            'assessmmentsheet' => landassessmentform::select(DB::raw('assessment_name'))
                     ->groupBy('assessment_name')->get(),
 
            'assessmmentcompanygr' => landassessmentform::select(DB::raw('company_id'))
-                    ->groupBy('company_id')->get(),  
+                    ->groupBy('company_id')->get(),
             'assessmmenttender' => landassessmentform::select(DB::raw('company'))
                     ->groupBy('company')->get(),
 
             'assessmmentareass' => landassessmentform::select(DB::raw('area_id'))
-                    ->groupBy('area_id')->get(),     
-      
+                    ->groupBy('area_id')->get(),
 
-           
             'assessmmentcompanylandscaping' => landassessmentform::where('type', 'Exterior')->OrderBy('created_at', 'DESC')->get(),
 
             'assessmmentcompanyusab' => landassessmentform::where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompany' => landassessmentform::OrderBy('created_at', 'DESC')->get()
+              'assessmmentcompanyestatedirector' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
+
+               'assessmmentcompanydvcaccountant' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanyestateofficer' => landassessmentform::where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
+
+              'assessmmentcompanyprincipal' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+
+
+            'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+
+
+            'dean' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+
+                 'assessmmentcompanydean' => landassessmentform::where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
+
+
+
         ]);
     } }
 
@@ -2008,19 +2042,19 @@ class LandscapingController extends Controller
         return view('add_maintainancesection', [
             'role' => $role,
             'notifications' => $notifications
-           
+
         ]);
 
 
      }
-          
+
 
         public function addcompanyforassessment($id , $tender){
 
         $tender = Crypt::decrypt($tender);
         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
 
         return view('addcompanyforassessment', [
             'role' => $role,
@@ -2028,7 +2062,7 @@ class LandscapingController extends Controller
             'company' =>company::where('tender', $tender)->get(),
             'companyname' =>company::where('id', $id)->first(),
 
-           
+
         ]);
 
 
@@ -2036,14 +2070,14 @@ class LandscapingController extends Controller
 
          public function createmaintainancesection(Request $request)
     {
-        
+
          if (!empty(landmaintainancesection::where('section',$request['section_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Maitainance Section already exist']);
         }
 
         $wsection = new landmaintainancesection();
         $wsection->section = $request['section_name' ];
-       
+
         $wsection->save();
 
         return redirect()->route('section.maintenance')->with(['message' => 'Maintainance section added successfully']);
@@ -2054,12 +2088,12 @@ class LandscapingController extends Controller
     {
 
           $sec=landmaintainancesection::where('id', $id)->first();
-        
+
           $sec->delete();
-          
-          
+
+
           return redirect()->route('section.maintenance')->with(['message' => 'Maintainance section deleted successfully']);
-      
+
     }
 
 
@@ -2068,7 +2102,7 @@ class LandscapingController extends Controller
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $companywo = landassessmentform::where('company_id' , $id)->get();
 
-            
+
          return view('trackcompany', [
             'role' => $role,
             'notifications' => $notifications, 'company' => $companywo ]);
@@ -2078,12 +2112,12 @@ class LandscapingController extends Controller
           public function companywithmonth(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-         
+
 
          $companyi = landassessmentform::select(DB::raw('assessment_month'))
                     ->groupBy('assessment_month')->OrderBy('assessment_month','DESC')->get();
 
-            
+
          return view('company_with_month', [
             'role' => $role,
             'notifications' => $notifications, 'company' => $companyi ]);
@@ -2091,15 +2125,15 @@ class LandscapingController extends Controller
 
 
 
-        
+
         public function trackcompanyassessmentview($id){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
-            
+
+
          return view('trackcompanyassessment', [
             'role' => $role,
-            'notifications' => $notifications,           
+            'notifications' => $notifications,
          'assessmmentcompany' => landassessmentform::where('id', $id)->get(),
          'assessmmentactivity' => landcrosschecklandassessmentactivity::where('assessment_id', $id)->get(),
          'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('assessment_id', $id)->get(),  ]);
@@ -2109,14 +2143,14 @@ class LandscapingController extends Controller
          public function companyreport($id){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('companyreport', [
             'role' => $role,
-            'notifications' => $notifications,           
+            'notifications' => $notifications,
          'assessmmentcompany' => landassessmentform::where('assessment_month', $id)->get()
-       
+
         ]);
-         }  
+         }
 
 
          public function companylinereport($tender , $company , $area){
@@ -2124,47 +2158,47 @@ class LandscapingController extends Controller
          $tender = Crypt::decrypt($tender);
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('companylinereport', [
             'role' => $role,
-            'notifications' => $notifications, 
+            'notifications' => $notifications,
             'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('sum(score) as erick  , month'))
-                    ->groupBy('month')->orderby('month','DESC')->get() ,  
+                    ->groupBy('month')->orderby('month','DESC')->get() ,
 
              'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('area'))
-                    ->groupBy('area')->get()     
+                    ->groupBy('area')->get()
 
 
         // 'assessmmentcompany' => landassessmentform::where('company_id', $id)->select(DB::raw('sum(score) as erick , assessment_month'))
                     //->groupBy('assessment_month')->get()
-       
+
         ])->with(['tender'=>$tender , 'compa'=>$company]);
          }
 
-         
 
 
 
-          
+
+
      public function viewcompanyreportfor_company($tender , $company ){
 
          $tender = Crypt::decrypt($tender);
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('view_companyreport_for_company', [
             'role' => $role,
-            'notifications' => $notifications, 
+            'notifications' => $notifications,
             'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('sum(score) as erick  , month'))
-                    ->groupBy('month')->orderby('month','DESC')->get() ,  
+                    ->groupBy('month')->orderby('month','DESC')->get() ,
 
              'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('area'))
-                    ->groupBy('area')->get()     
+                    ->groupBy('area')->get()
 
 
         // 'assessmmentcompany' => landassessmentform::where('company_id', $id)->select(DB::raw('sum(score) as erick , assessment_month'))
                     //->groupBy('assessment_month')->get()
-       
+
         ])->with(['tender'=>$tender , 'compa'=>$company]);
          }
 
@@ -2175,20 +2209,20 @@ class LandscapingController extends Controller
          $tender = Crypt::decrypt($tender);
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('viewcompanyreport', [
             'role' => $role,
-            'notifications' => $notifications, 
+            'notifications' => $notifications,
             'crosscheckassessmmentactivity' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('sum(score) as erick  , month'))
-                    ->groupBy('month')->orderby('month','DESC')->get() ,  
+                    ->groupBy('month')->orderby('month','DESC')->get() ,
 
              'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tender)->select(DB::raw('area'))
-                    ->groupBy('area')->get()     
+                    ->groupBy('area')->get()
 
 
         // 'assessmmentcompany' => landassessmentform::where('company_id', $id)->select(DB::raw('sum(score) as erick , assessment_month'))
                     //->groupBy('assessment_month')->get()
-       
+
         ])->with(['tender'=>$tender , 'compa'=>$company]);
          }
 
@@ -2196,10 +2230,10 @@ class LandscapingController extends Controller
          public function viewassessmentsheet($id){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('viewassessmentsheet', [
             'role' => $role,
-            'notifications' => $notifications,           
+            'notifications' => $notifications,
          'assessmmentcompany' => assessmentsheet::where('name', $id)->first(),
          'assessmmentactivity' => assessmentsheet::where('name', $id)->get()
         ]);
@@ -2210,10 +2244,10 @@ class LandscapingController extends Controller
          public function viewsheetbeforeproceeding($id){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('viewsheetbeforeproceed', [
             'role' => $role,
-            'notifications' => $notifications,           
+            'notifications' => $notifications,
          'assessmmentcompany' => assessmentsheet::where('name', $id)->where('status',2)->first(),
          'assessmmentactivity' => assessmentsheet::where('name', $id)->where('status',2)->get()
         ]);
@@ -2224,27 +2258,27 @@ class LandscapingController extends Controller
          public function companyeditreport($id){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('companyeditreport', [
             'role' => $role,
-            'notifications' => $notifications,           
+            'notifications' => $notifications,
          'assessmmentcompany' => landassessmentform::where('assessment_month', $id)->OrderBy('company_id')->get(),
           'assessmmentgrouptender' => landassessmentform::where('assessment_month', $id)->select(DB::raw('company'))
-                    ->groupBy('company')->get(), 
+                    ->groupBy('company')->get(),
            'assessmmentgroupcompany' => landassessmentform::where('assessment_month', $id)->select(DB::raw('company_id'))
-                    ->groupBy('company_id')->get(),     
+                    ->groupBy('company_id')->get(),
           'assessmmentgrouparea' => landassessmentform::where('assessment_month', $id)->select(DB::raw('area_id'))
-                    ->groupBy('area_id')->get(),  
+                    ->groupBy('area_id')->get(),
         'assessmmentgroupsheets' => landassessmentform::where('assessment_month', $id)->select(DB::raw('assessment_name'))
-                    ->groupBy('assessment_name')->get(),  
-                        
-          
+                    ->groupBy('assessment_name')->get(),
+
+
         // 'companygroup' => landassessmentform::where('assessment_month', $id)->select(DB::raw('sum(score) as erick , count(company_id) as pnd , company_id'))
                    // ->groupBy('company_id')->get(),
 
         'assessmmentcompanyname' => landassessmentform::where('assessment_month', $id)->get()
 
-       
+
         ]);
          }
 
@@ -2254,33 +2288,33 @@ class LandscapingController extends Controller
          $tender = Crypt::decrypt($tender);
          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-               
+
                return view('companymonthtrending', [
             'role' => $role,
-            'notifications' => $notifications,           
+            'notifications' => $notifications,
          'assessmmentcompany' => landassessmentform::where('assessment_month', $id)->where('company', $tender)->OrderBy('company_id')->get(),
-          
+
         // 'companygroup' => landassessmentform::where('assessment_month', $id)->select(DB::raw('sum(score) as erick , count(company_id) as pnd , company_id'))
                    // ->groupBy('company_id')->get(),
 
         'assessmmentcompanyname' => landassessmentform::where('assessment_month', $id)->where('company', $tender)->get()
 
-       
+
         ]);
          }
 
 
 
          public function updatecomments(request $request){
-           
+
 
            $p=$request['edit_id'];
            $comment = landcrosschecklandassessmentactivity::where('id',$p)->first();
            $comment->comment = $request['comment'];
 
            $comment->save();
-  
- 
+
+
 
            return  redirect()->back()->with(['message'=>'Comment updated succesifully']);
          }
@@ -2292,8 +2326,8 @@ class LandscapingController extends Controller
         public function fowardtodvc($id){
                $commentall = landassessmentform::where('assessment_month', $id)->get();
                foreach ($commentall as $comm) {
-                   
-               
+
+
                   $comment = landassessmentform::where('id', $comm->id)->first();
                   $comment->assessor = auth()->user()->id;
                   $comment->assessordate = $comment->updated_at;
@@ -2304,11 +2338,11 @@ class LandscapingController extends Controller
          }
 
 
-       
 
 
 
-          
- 
+
+
+
 }
 

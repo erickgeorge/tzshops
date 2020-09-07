@@ -8,14 +8,6 @@
 
 
 
-
-
-
-
-
-
-
-
 <div  class="container">
             <br>
               @if ($errors->any())
@@ -110,13 +102,8 @@
 
 
 
-
-
     <br>
      <div class="row">
-
-
-
 
     <div class="input-group mb-3 col">
         <div class="input-group-prepend">
@@ -131,11 +118,6 @@
     <br>
 
          <div class="row">
-
-
-
-
-
 
     </div>
 
@@ -191,7 +173,7 @@
              <TD><input style=" text-align: center;" class="form-control" type="number"   name="percentage[]" placeholder="{{$assess->percentage}}" value="{{$assess->percentage}}" readonly="readonly"></TD>
 
 
-            <TD>  <input required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="score[]" id="txthour{{$i}}" onkeypress="return isNumberKey(event);  function isNumberKey(e)
+            <TD>  <input placeholder="score" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="score[]" id="txthour{{$i}}" onkeypress="return isNumberKey(event);  function isNumberKey(e)
                         {
                             var exString = $('#txthour{{$i}}').val();
                             var newString = exString + String.fromCharCode(e.keyCode);
@@ -421,9 +403,9 @@
 
     @if($assesment->status2 == 2)
 
-      <p style="color: blue;" align="center">Company Supervisor is satisfied with the scores given you can now forward to Estate Officer for the further processes.</p>
+      <p style="color: blue;" align="center">Company Supervisor is satisfied with the scores given you can now forward to Estates Officer for the further processes.</p>
         @if(auth()->user()->type == 'Supervisor Landscaping')
-      <button id="bt" type="submit" class="btn btn-primary">Foward to Estate Officer</button>
+      <button id="bt" type="submit" class="btn btn-primary">Foward to Estates Officer</button>
         @endif
 
         @if(auth()->user()->type == 'USAB')
@@ -442,7 +424,7 @@
             <a href="{{route('cleaningcompany')}}" onclick="closeTab()"><button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
-      <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>
+      <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Back to Top</button></a>
 
     @endif
     @endif
@@ -466,7 +448,7 @@
 
             </div>
 
-            <button id="thisshouldbedisabled" disabled='' type="submit" class="btn btn-primary">Save</button> <a href="{{route('cleaningcompany')}}" onclick="closeTab()">
+            <button  type="submit" class="btn btn-primary">Save</button> <a href="{{route('cleaningcompany')}}" onclick="closeTab()">
             <button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
@@ -483,7 +465,7 @@
 
 
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a style="color: white;" href="{{route('addassessmentpdfform', [$companyname->id, $cmp ])}}" title="Assessment sheet pdf"> Print for signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                 <a style="color: white;" href="{{route('addassessmentpdfform', [$companyname->id, $cmp ])}}" title="Assessment sheet pdf"> Download for signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
 @endif

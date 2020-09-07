@@ -89,11 +89,11 @@ tr:nth-child(even) {
                         <th scope="col">#</th>
                         <th scope="col">Tender Number</th>
                         <th scope="col">Company Name</th>
-                        <th scope="col">Monthly Payment(Tshs)</th>
+                        
 
                         <th scope="col">Contract Duration</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                      
                     </tr>
                     </thead>
 
@@ -109,11 +109,7 @@ tr:nth-child(even) {
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['tendercompany']->company_name }}</td>
-                            @if($house->status == 1)
-                            <td  style="text-align: right"><?php echo number_format($house->payment) ?>  </td>
-                            @else
-                            <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
-                            @endif
+                           
 
 
 
@@ -181,22 +177,7 @@ tr:nth-child(even) {
                             <td> <span class="badge badge-primary"> New</span> </td>
                             @endif
 
-                            @if($house->status == 1)
-
-
-                             @if($now1 > $endcont)
-                           <td><span class="badge badge-danger"> Expired </span></td>
-                             @else
-                           <td><span class="badge badge-success">Active  </span></td>
-                             @endif
-
-                            @else
-
-
-                                 <td> <span class="badge badge-primary"> New</span> </td>
-
-                            @endif
-
+                           
 
                         </tr>
 

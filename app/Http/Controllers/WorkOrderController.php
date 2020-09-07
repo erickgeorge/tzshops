@@ -583,7 +583,15 @@ public function transportforwork(Request $request, $id)
             $work_order_staffassign->staff_id = $txtbox[ $a ];
             $work_order_staffassign->status =0;
             $work_order_staffassign->work_order_id = $id;
-            $work_order_staffassign->save();  }
+            $work_order_staffassign->save(); 
+
+
+            $work_order_staff = new  WorkOrderStaff();
+            $work_order_staff->staff_id = $txtbox[$a];
+            $work_order_staff->status = 0;
+            $work_order_staff->work_order_id = $id;
+            $work_order_staff->save();
+             }
 
 
             $mForm = WorkOrder::where('id', $id)->first();

@@ -62,7 +62,7 @@ Companies
                         <th scope="col">Tender Number</th>
                         <th scope="col">Company Name</th>
                        <!-- <th scope="col">Monthly Payment (Tshs)</th>-->
-
+                        <th scope="col">Contract Type</th>
                         <th scope="col">Contract Duration</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
@@ -72,7 +72,13 @@ Companies
 
                     <tbody>
                     <?php $i = 0; ?>
+
+      @if(auth()->user()->type == 'Supervisor Landscaping')  
+
                     @foreach($cleangcompany as $house)
+
+                      @if( $house['tendercompany']->type == 'Exterior')
+
                         <?php $i++; ?>
 
 
@@ -93,6 +99,7 @@ Companies
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['tendercompany']->company_name }}</td>
+                              <td>{{ $house['tendercompany']->type }}</td>
                             @if($house->status == 1)
                            <!-- <td align="right"><?php echo number_format($house->payment) ?></td>-->
                             @else
@@ -221,9 +228,340 @@ Companies
              @endif
           <!--expired contract-->
 
-
+                @endif
 
                     @endforeach
+
+ @endif     
+
+
+
+
+@if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB')||(auth()->user()->type == 'Principal'))
+
+                    @foreach($cleangcompany as $house)
+
+                       @if( $house['tendercompany']->type == 'Interior')
+
+                        <?php $i++; ?>
+
+
+                 <?php $date = Carbon::parse($house->datecontract);
+                 $now = Carbon::parse($house->endcontract);
+                 $diff = $date->diffInDays($now);
+
+                 $now1 =  Carbon::now();
+
+                 $endcont = Carbon::parse($house->endcontract);?>
+
+          <!--expired contract-->
+             @if($now1 > $endcont)
+          <!--expired contract-->
+
+
+                        <tr>
+                            <th scope="row">{{ $i }}</th>
+                            <td>{{ $house->tender }}</td>
+                            <td>{{ $house['tendercompany']->company_name }}</td>
+                              <td>{{ $house['tendercompany']->type }}</td>
+                            @if($house->status == 1)
+                           <!-- <td align="right"><?php echo number_format($house->payment) ?></td>-->
+                            @else
+                            <!--<td> <span class="badge badge-warning"> Not yet Updated</span> </td>-->
+                            @endif
+
+
+
+                            @if($house->status == 1)
+
+
+
+                 @if($diff >= 365)
+
+                           <td><?php
+
+
+                             $start_date = new DateTime();
+                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
+                             $dd = date_diff($start_date,$end_date);
+                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>
+
+
+
+
+                   @else
+
+                           <td><?php
+
+
+                             $start_date = new DateTime();
+                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
+                             $dd = date_diff($start_date,$end_date);
+                             echo $dd->m." months ".$dd->d." days"; ?></td>
+
+
+
+
+                  @endif
+
+
+
+
+
+                            @else
+                            <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
+                            @endif
+
+
+                            @if($house->status == 1)
+
+                             <?php $now1 =  Carbon::now();
+
+                             $endcont = Carbon::parse($house->endcontract);?>
+
+
+
+                             @if($now1 > $endcont)
+                           <td><span class="badge badge-danger">Contract expired </span></td>
+                             @else
+                           <td><span class="badge badge-success">Active Contract </span></td>
+                             @endif
+
+
+
+                            @else
+                            <td> <span class="badge badge-primary"> New</span> </td>
+                            @endif
+
+                            @if($house->status == 1)
+
+
+
+
+                             @if($now1 > $endcont)
+                           <td>
+
+
+
+                            <?php $tender = Crypt::encrypt($house->tender ); ?>
+                          <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
+                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
+
+
+
+
+                           </td>
+                             @else
+                           <td><?php $tender = Crypt::encrypt($house->tender ); ?>
+                          <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
+                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
+</td>
+                             @endif
+
+
+
+                            @else
+
+                            <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
+                                       onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
+                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+
+                                      <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this company Completely? ')"
+                                          action="{{ route('company.delete', [$house->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form> </div>
+
+                                     </td>
+                            @endif
+
+
+                        </tr>
+
+
+
+     <!--expired contract-->
+             @endif
+          <!--expired contract-->
+
+                @endif
+
+                    @endforeach
+
+ @endif                   
+
+
+
+
+  @if((auth()->user()->type != 'Supervisor Landscaping') and (auth()->user()->type != 'Administrative officer') and (auth()->user()->type != 'USAB') and (auth()->user()->type != 'Principal'))
+
+                    @foreach($cleangcompany as $house)
+
+
+                        <?php $i++; ?>
+
+
+                 <?php $date = Carbon::parse($house->datecontract);
+                 $now = Carbon::parse($house->endcontract);
+                 $diff = $date->diffInDays($now);
+
+                 $now1 =  Carbon::now();
+
+                 $endcont = Carbon::parse($house->endcontract);?>
+
+          <!--expired contract-->
+             @if($now1 > $endcont)
+          <!--expired contract-->
+
+
+                        <tr>
+                            <th scope="row">{{ $i }}</th>
+                            <td>{{ $house->tender }}</td>
+                            <td>{{ $house['tendercompany']->company_name }}</td>
+                              <td>{{ $house['tendercompany']->type }}</td>
+                            @if($house->status == 1)
+                           <!-- <td align="right"><?php echo number_format($house->payment) ?></td>-->
+                            @else
+                            <!--<td> <span class="badge badge-warning"> Not yet Updated</span> </td>-->
+                            @endif
+
+
+
+                            @if($house->status == 1)
+
+
+
+                 @if($diff >= 365)
+
+                           <td><?php
+
+
+                             $start_date = new DateTime();
+                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
+                             $dd = date_diff($start_date,$end_date);
+                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>
+
+
+
+
+                   @else
+
+                           <td><?php
+
+
+                             $start_date = new DateTime();
+                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
+                             $dd = date_diff($start_date,$end_date);
+                             echo $dd->m." months ".$dd->d." days"; ?></td>
+
+
+
+
+                  @endif
+
+
+
+
+
+                            @else
+                            <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
+                            @endif
+
+
+                            @if($house->status == 1)
+
+                             <?php $now1 =  Carbon::now();
+
+                             $endcont = Carbon::parse($house->endcontract);?>
+
+
+
+                             @if($now1 > $endcont)
+                           <td><span class="badge badge-danger">Contract expired </span></td>
+                             @else
+                           <td><span class="badge badge-success">Active Contract </span></td>
+                             @endif
+
+
+
+                            @else
+                            <td> <span class="badge badge-primary"> New</span> </td>
+                            @endif
+
+                            @if($house->status == 1)
+
+
+
+
+                             @if($now1 > $endcont)
+                           <td>
+
+
+
+                            <?php $tender = Crypt::encrypt($house->tender ); ?>
+                          <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
+                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
+
+
+
+
+                           </td>
+                             @else
+                           <td><?php $tender = Crypt::encrypt($house->tender ); ?>
+                          <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
+                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
+</td>
+                             @endif
+
+
+
+                            @else
+
+                            <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
+                                       onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
+                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+
+                                      <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this company Completely? ')"
+                                          action="{{ route('company.delete', [$house->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form> </div>
+
+                                     </td>
+                            @endif
+
+
+                        </tr>
+
+
+
+     <!--expired contract-->
+             @endif
+          <!--expired contract-->
+
+               
+
+                    @endforeach
+
+ @endif                   
+
+
                     </tbody>
 
                 </table>

@@ -143,7 +143,7 @@ User Registration
 		<div class="col">
 		<div class="input-group mb-3">
 	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="department">Department </label>
+	    <label style="height: 28px" class="input-group-text" for="department">Department</label>
 	  </div>
 	  <select required style="color: black; width: 380px;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
 	  </select>

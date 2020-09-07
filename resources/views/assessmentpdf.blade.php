@@ -6,6 +6,7 @@ use App\assessmentsheet;
 use App\landassessmentactivityform;
 use App\landcrosschecklandassessmentactivity;
 use App\company;
+use Carbon\Carbon;
 ?>
 <title>Assessment Sheet</title>
 <div style="margin-top: 20px" align="center">
@@ -80,7 +81,7 @@ tr:nth-child(even) {
  @endforeach
 
 
-      <?php
+    <?php
     $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
      ?>
       @foreach($crosscheckassessmmentactivity as $assesment)
@@ -90,7 +91,9 @@ tr:nth-child(even) {
  <br>
 <div class="jumbotron">
   <div class="row">
-<div class="col"><h4 ><b>This assessment sheet with tender number: {{$assesment->company}} is initiated by:</b></h4></div>
+<div class="col"><h4 ><b>Assessment sheet for tender number: {{$assesment->company}}.</b></h4></div>
+
+<b>Initiated by:</b></h4>
 <div class="col"><h4><b>
 <table>
   <tr>
@@ -139,8 +142,8 @@ tr:nth-child(even) {
 
 
    <div class="container-name">
-     <div class="div1">Company Name:&nbsp;&nbsp;  &nbsp; <b>{{$company['companyname']['compantwo']->company_name}}</b></div>
-    <div class="div2"> Assessment Period:<b><?php  $dnext = strtotime($company->enddate); ?> {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
+     <div class="div1">Company Name:&nbsp;&nbsp; <b>{{$company['companyname']['compantwo']->company_name}}</b></div>
+    <div class="div2">Assessment Period:<b><br><?php  $dnext = strtotime($company->enddate); ?> {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
    </div>
     <hr>
 
@@ -221,7 +224,7 @@ tr:nth-child(even) {
  </tr>
  </tbody>
   @endforeach
-  <th colspan="2"><b>Tottal</b></th>
+  <th colspan="2"><b>Total</b></th>
   <td  style="text-align: center"><b><?php echo $sum ?>%</b></td>
   <td style="text-align: center"><b><?php echo $summ ?>%</b></td>
   </table>
@@ -233,7 +236,7 @@ tr:nth-child(even) {
 
    <table>
   <thead style=" background-color: #376ad3; color: white;">
-  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Payment according to average</th></tr>
+  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
  </thead>
 
 
@@ -305,6 +308,22 @@ tr:nth-child(even) {
 
 <br><br>
 
+  @if(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
+
+
+
+  
+     <br>
+
+    <div class="container-name">
+     <div class="div1">Name of Assessor:&nbsp;  &nbsp;<b>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</b><u style="padding-left: 12px;"> </u></div>
+  
+    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->created_at)) }}</b> <u style="padding-left: 40px;">   </u> </div>
+   </div>
+<br>
+
+@endif
+
 
 
   @if(($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 2))
@@ -328,7 +347,9 @@ tr:nth-child(even) {
 
 
   @else
-  <b>status:</b><b style="color: blue;">  Not yet approved</b>
+    @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'USAB') || (auth()->user()->type == 'Administrative officer'))
+  <!--<b>status:</b><b style="color: blue;">Not yet approved.</b>-->
+  @endif
   @endif
 
 
@@ -337,13 +358,7 @@ tr:nth-child(even) {
 
 
   
-     <br>
 
-    <div class="container-name">
-     <div class="div1">Name of Assessor:&nbsp;  &nbsp;<b>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</b><u style="padding-left: 12px;"> </u></div>
-  
-    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->created_at)) }}</b> <u style="padding-left: 40px;">   </u> </div>
-   </div>
 <br>
 
        <div class="container-name">
@@ -359,7 +374,6 @@ tr:nth-child(even) {
 
          <div class="container-name">
      <div class="div1">Approved by Estate Director :&nbsp;  <b>{{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  </b><u style="padding-left: 12px;"> </u></div>
-    <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->approved_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 <br>
@@ -368,24 +382,42 @@ tr:nth-child(even) {
 
 
 
-
+@if(auth()->user()->type == 'Dvc Accountant')
  @if($assesment->status == 5)
 
-
-
-
-      <div class="container-name">
-     <div class="div1">Company paid and verified by :&nbsp;  <b>{{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}</b><u style="padding-left: 12px;"> </u></div>
-    <div class="div2"> Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
+     <div class="container-name">
+     <div class="div1">Payment Updated by Dvc Accountant :&nbsp;  <b>{{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}</b><u style="padding-left: 12px;"> </u></div>
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->payment_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 <br>
 
 
+ @else
+   
+        <?php $now1 =  Carbon::now(); ?>
+      <div class="container-name">
+     <div class="div1">Name of DVC Accountant :&nbsp;  <b>{{ auth()->user()->fname .' ' . auth()->user()->lname }}</b><u style="padding-left: 12px;"> </u></div>
+    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($now1))}}</b> <u style="padding-left: 40px;">   </u> </div>
+   </div>
+  <br>
+  <div class="div2">DVC Accountant Signature:  &nbsp;  .................................. <u style="padding-left: 40px;">   </u> </div>
+
+@endif
+@endif
+
+
+@if(auth()->user()->type != 'Dvc Accountant')
+ @if($assesment->status == 5)
+
+
+      <div class="container-name">
+     <div class="div1">Dvc Accountant :&nbsp;  <b>{{ $assesment['paymentaccountant']->fname .' ' . $assesment['paymentaccountant']->lname }}</b><u style="padding-left: 12px;"> </u></div>
+    <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->payment_on))}}</b> <u style="padding-left: 40px;">   </u> </div>
+   </div>
+<br>
+
  @endif
-
-
-
+ @endif
 
 
 
@@ -397,5 +429,5 @@ tr:nth-child(even) {
 
 
 <div id='footer'>
-    <p class="page">page</p>
+    <p class="page">Page</p>
 </div>

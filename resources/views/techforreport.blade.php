@@ -209,8 +209,8 @@ td, th {
 
 <table>
     <tr>
-        <td>Head of Section : ___________________________</td>
-        <td>Lead Technician : ___________________________</td>
+        <td>Head of Section : <b style="text-transform: capitalize;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</b></td>
+        <td>Lead Technician : <b style="text-transform: capitalize;">{{$leaders['technician_assigned_for_inspection']->lname.' '.$leaders['technician_assigned_for_inspection']->fname}}</b></td>
     </tr>
     <tr>
         <td>Signature : __________________ <br>

@@ -76,6 +76,28 @@ Company Registrartion
                  </div>-->
 
 
+
+
+                    <div class="input-group mb-3 col-lg-6" >
+                        <div class="input-group-prepend">
+                            
+                            <label style="width:150px;" class="input-group-text" for="directorate">Type </label>
+                        </div>
+                         <select required style="color: black;" class="custom-select" name="type" >
+                                
+                                 @if(auth()->user()->type == 'Supervisor Landscaping')
+                                  <option value="Exterior">Exterior</option>
+                                  @endif
+
+                                    @if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+                                   <option selected value="Interior">Interior</option>
+                                   @endif
+
+                         </select>
+                    </div> 
+
+
+
     <div class="jumbotron" style="width: 500px;">
                 
 

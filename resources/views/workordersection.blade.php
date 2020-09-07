@@ -29,8 +29,8 @@ Workorder Section
 
     <div>
 <br><br>
-                <h4 style="text-transform: capitalize;"
-                    >List of available Sections</h4></div>
+                <h4 
+                    >List of Available Sections</h4></div>
 
 
 
