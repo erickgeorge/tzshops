@@ -519,13 +519,12 @@ public function transportforwork(Request $request, $id)
             // now use foreach loop on unique data
             foreach($unique_data as $a => $b) {
 
-
-
-             $work_order_staff = new  WorkOrderStaff();
-
-
+            $wo_staff =WorkOrderStaff::where('work_order_id', $id)->update(array('status5' =>22));
+ 
+            $work_order_staff = new  WorkOrderStaff();
             $work_order_staff->staff_id = $txtbox[ $a ];
 			$work_order_staff->status =0;
+            $work_order_staff->status5 =22;
             $work_order_staff->work_order_id = $id;
             $work_order_staff->save(); }
 
@@ -1296,6 +1295,20 @@ session::flash('message', ' Your workorder have been closed successfully');
         $wo_staff->save();
          return redirect()->back()->with(['message' => 'Status of Technician is changed successfully']);
          }
+
+
+
+      public function Techniciandeletefromlist($id)
+    {
+        $wo_delete =WorkOrderStaff::where('id', $id)->first();
+        $wo_delete->delete();
+
+         return redirect()->back()->with(['message' => 'Specific technician deleted from the list successifully']);
+
+         }
+
+
+
 
 
       public function Technicianassignleader($id , $id2)

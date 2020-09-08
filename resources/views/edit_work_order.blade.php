@@ -151,7 +151,7 @@ var total=2;
     @if(empty($wo['work_order_staffassigned']->id))
 
     @else
-     <h4><b>Assigned Technician for Inspection </b></h4>
+     <h4><b>Assigned Technician(s) for Inspection </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -164,7 +164,7 @@ var total=2;
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
-  <th>Date Completed</th>
+  <!--<th>Date Completed</th>-->
   <th>Leader</th>
      </thead>
 
@@ -178,7 +178,7 @@ var total=2;
    <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
 
-
+<!--
    @if($techform->status==1)
 
   <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
@@ -186,31 +186,26 @@ var total=2;
    
 
       <td style="color: red"> Not Completed Yet</td>
-    @endif
+    @endif -->
 
     @if($techform->leader == null )
 
 <td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
                                                     class="fas fa-user-tie large"></i></a></td>
                                                    @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Leader<i
-                                                    class="fas fa-user-tie large"></i></td>
+ <td style="color: black;"  data-toggle="tooltip" >Yes </td>
                                                     @else
-<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
       @endif
-
-
-
   </tr>
     @endforeach
   </table>
 
 
 
-@if($techform->status==1)
-@else
-   <br>
+@if(($techform->status==0) and ($techform->leader==1))
+  <br>
 <div class="row">
    <div class="col">
 
@@ -221,7 +216,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 </div>
-
 @endif
 
 <br>
@@ -234,96 +228,16 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-
-    @if(empty($wo['work_order_staff']->id))
-
-    @else
-     <h4><b>Assigned Technician for Work</b></h4>
-    <?php
-
-  $idwo=$wo->id;
-  $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
-?>
-
-<table style="width:100%">
-  <tr>
-     <thead style="color: white;">
-    <th>Full Name</th>
-  <th>Status</th>
-    <th>Date Assigned</th>
-  <th>Date Completed</th>
-  <th>Leader</th>
-</thead>
-
-  </tr>
-    @foreach($techforms as $techform)
-
-
-
-
-  <tr>
-
-     @if($techform['technician_assigned'] != null)
-    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress   @endif</td>
-
-
-    <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
-
-
-   @if($techform->status==1)
-
-  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
-    @else
-   
-
-      <td style="color: red"> Not Completed Yet</td>
-    @endif
-
-@if($techform->leader == null )
-
-<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
-                                                    class="fas fa-user-tie large"></i></a></td>
-                                                   @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Leader<i
-                                                    class="fas fa-user-tie large"></i></td>
-                                                    @else
-<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
-                                                    @endif
-
-
-
-
-
-
-
-
-
-
-      @endif
-
-
-
-  </tr>
-    @endforeach
-  </table>
-   <br>
-
-   <hr>
-    <br>
-
-    @endif
-
-
+<!--report before work-->
 
     @if(empty($wo['work_order_inspection']->status))
 
     @else
-    <h4><b>Technician Report </b></h4>
+    <h4><b>Inspection Report Before Work </b></h4>
     <?php
 
   $idwo=$wo->id;
-  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
         ?>
 
 <table style="width:100%">
@@ -356,6 +270,140 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <br>
 
     @endif
+
+<!--report before work-->
+
+
+
+
+
+
+
+
+
+
+    @if(empty($wo['work_order_staff']->id))
+
+    @else
+    
+    <?php
+
+  $idwo=$wo->id;
+  $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
+?>
+ @foreach($techforms as $status)
+ @endforeach
+
+@if($status->status5 == 22)
+
+ <h4><b>Assigned Technician(s) for Work</b></h4>
+
+<table style="width:100%">
+  <tr>
+
+<thead style="color: white;">
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date Assigned</th>
+ <!-- <th>Date Completed</th>-->
+  <th>Leader</th>
+</thead>
+
+  </tr>
+    @foreach($techforms as $techform)
+
+  <tr>
+
+     @if($techform['technician_assigned'] != null)
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
+   <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress   @endif</td>
+
+
+    <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
+
+
+ <!--  @if($techform->status==1)
+
+  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
+    @else
+   
+
+      <td style="color: red"> Not Completed Yet</td>
+    @endif -->
+
+@if($techform->leader == null )
+
+<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
+                                                    class="fas fa-user-tie large"></i></a></td>
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Yes </i></td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
+                                                    @endif
+
+      @endif
+
+
+
+  </tr>
+    @endforeach
+  </table>
+   <br>
+
+   <hr>
+    <br>
+ @endif
+@endif
+
+
+
+<!--report after work-->
+
+    @if(empty($wo['work_order_inspection']->status))
+
+    @else
+    <h4><b>Inspection After Before Work </b></h4>
+    <?php
+
+  $idwo=$wo->id;
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Report after work')->get();
+        ?>
+
+<table style="width:100%">
+  <tr>
+     <thead style="color: white;">
+    <th>Type</th>
+    <th>Description</th>
+  <th>Full Name</th>
+    <th>Date</th>
+  </thead>
+  </tr>
+    @foreach($iforms as $iform)
+
+
+  <tr>
+    <td class="text-primary" >{{ $iform->status }}</td>
+    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
+      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
+  </tr>
+
+  @endforeach
+  </table>
+  <br>
+    <hr>
+      <br>
+
+
+
+  <br>
+
+    @endif
+
+<!--report after work-->
+
+
+
 
   @if(empty($wo['work_order_transport']->work_order_id))
 
@@ -737,15 +785,59 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign Technician For This Works Order</p>
+                                <p>Assign Technician(s) For This Works Order</p>
                             </div>
                         </div>
-                        <div >
-                        <p id="alltechdetails">  </p>
+                      
+
+ <!--techniciantable-->
+ @if($wo->status == 5)
+
+ <table style="width:100%">
+  <tr>
+
+<thead style="color: white;">
+    <th>Full Name</th>
+  <th>Action</th>
+   
+</thead>
+
+  </tr>
+    @foreach($techforms as $techform)
+
+  <tr>
+
+     @if($techform['technician_assigned'] != null)
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
+  
+                                                    <td>  
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this technician from the list? ')"
+                                          action="{{ route('workOrder.techniciandelete', [$techform->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form>
+                                </div></td>
+                                                 
+
+      @endif
 
 
 
-                        </div>
+  </tr>
+    @endforeach
+  </table>
+@endif
+
+ <!--techniciantable-->
+
+ <br>                      
 
 
 
@@ -860,6 +952,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     @csrf
                     <div id="assigntechnicianforinspection" class="tabcontent">
 
+                       @if($wo->statusmform == 1)
+
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Assign technician for inspection before work</p>
@@ -867,9 +961,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         </div>
                         <div >
                         <p id="alltechdetails">  </p>
-
-
-
                         </div>
 
 
@@ -959,14 +1050,15 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
-
+                              @else
+               <div align="center" style="color: red;"> You have already assigned technician for inspection for this works order.</div>
+                @endif
 
                     </div>
 
+     
+
                 {{-- end ASSIGN TECHNICIAN  --}}
-
-
-
 
 
 
@@ -1012,30 +1104,35 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             <label>Select technician leader</label>
                             <br>
                             <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
-                                <option  selected value="" >Choose...</option>
+                              
                                 @if($wo->status == 70)
 
                                 <?php
 
-                                $techassigned = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->get();
+                                $tech = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->first();
                                 ?>
-
-                                @foreach($techassigned as $tech)
-                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                                   @if(empty($tech))
+                                   @else
+          
+                                    <option selected value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
                                     </option>
-                                @endforeach
+
+                                    @endif
+                          
 
                                 @else
 
                                 <?php
 
-                                $techassigned = WorkOrderStaff::where('work_order_id',$wo->id)->where('leader2', 3)->get();
+                                $tech = WorkOrderStaff::where('work_order_id',$wo->id)->where('leader2', 3)->first();
                                 ?>
 
-                                @foreach($techassigned as $tech)
-                                    <option value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}
+                                 @if(empty($tech))
+                                   @else
+                                    <option  value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}
                                     </option>
-                                @endforeach
+                                   @endif 
+                            
                                 @endif
                             </select>
                         </div>
