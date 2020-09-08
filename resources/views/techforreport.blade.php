@@ -165,7 +165,9 @@ td, th {
 
     $idwo=$wo->id;
     $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
-  ?>
+
+   $leaders = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->where('leader2', 3)->first();
+ ?>
    @foreach($techforms as $techform)
    @php
        $ad = 1;
@@ -173,7 +175,7 @@ td, th {
         <tr>
         <td> {{$ad}}</td>
             <td colspan="2">
-              <b>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</b>
+              <b style="text-transform: capitalize;">{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</b>
             </td>
             <td colspan="1">
                 @if($techform->leader2 == 3 )
