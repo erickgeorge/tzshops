@@ -45,14 +45,11 @@ table {
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #000;
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 #footer{position:fixed; right:0px; bottom:10px; text-align:center; border-top:1px solid black; }
 #footer .page:after{content:counter(page, decimal);}
 @page {margin:20px 30px 40px 50px;}
@@ -80,218 +77,150 @@ tr:nth-child(even) {
  ?>
  <div class="container">
 
-<hr>
-
-<br>
 
 
-       <div class="container-name">
-     <div class="div1">This works order is submitted by: <span
-                style=" font-weight: bold; color: green;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th colspan="4">Works Order Summary</th>
+        </tr>
+    </thead>
+    <tbody>
 
-     </div>
-     <div class="div2"> On:  <span style=" font-weight: bold; color: green;">{{ date('d F Y', strtotime($wo->created_at)) }}</span>  </div>
-  <br>
-  <br>
-
-   </div>
-
-   
-       <div class="container-name">
-     <div class="div1">Type of Problem: <span
-                style=" font-weight: bold; color: green;">{{ ucwords(strtolower($wo->problem_type)) }}</span>
-
-     </div>
-     <div class="div2"> Location:  <span style=" font-weight: bold; color: green;">@if(empty($wo->room_id)) {{ $wo->location }}
-        @else
-           {{ $wo['room']['block']->location_of_block }}
-        @endif</span>  </div>
-  <br>
-  <br>
-
-   </div>
+        <tr>
+            <td colspan="2">Sumitted By: <b>{{ $wo['user']->fname.' '.$wo['user']->lname }}</b>
 
 
-          <div class="container-name">
-     <div class="div1">Area: <span
-                style=" font-weight: bold; color: green;"> @if(empty($wo->room_id))
-      {{ $wo->room_id }}
+     </td>
+            <td >On : <b>{{ date('d F Y', strtotime($wo->created_at)) }}</b></td>
 
+            <td>Problem Type : <b>{{ ucwords(strtolower($wo->problem_type)) }}</b> </td>
+        </tr>
+        <tr>
+
+            <td> Location : <b>@if(empty($wo->room_id)) {{ $wo->location }}
                 @else
-         {{ $wo['room']['block']['area']->name_of_area }}
-                @endif</span>
+                   {{ $wo['room']['block']->location_of_block }}
+                @endif </b> </td>
+                <td>
+                    Area : <b>@if(empty($wo->room_id))
+                        {{ $wo->room_id }}
 
-     </div>
-     <div class="div2"> Block:  <span style=" font-weight: bold; color: green;">@if(empty($wo->room_id)) {{ $wo->location }}
-        @else
-           {{ $wo['room']['block']->location_of_block }}
-        @endif</span>  </div>
-  <br>
-  <br>
-
-   </div>
-
-          <div class="container-name">
-     <div class="div1">Room: <span
-                style=" font-weight: bold; color: green;"> @if(empty($wo->room_id))
-          {{ $wo->location }}
-        @else
-            {{ $wo['room']->name_of_room }}
-        @endif</span>
-
-     </div>
-     <br>
-     <br>
-     <div class="div2"> Details:  <span style=" font-weight: bold; color: green;">{{ $wo->details }}</span>  </div>
-  <br>
-
-
-   </div>
-   <hr>
-
-     <br>
-
-          <div class="container-name">
-     <div class="div1"> @if($wo->status == 0)rejected @elseif($wo->status == 1) Accepted @else Processed @endif by:  <span
-                style=" font-weight: bold; color: green;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span>
-
-     </div>
-     <div class="div2"> Mobile number:  <span style=" font-weight: bold; color: green;">{{ $wo['user']->phone }}</span>  </div>
-    <div class="div2">Emai: <span style=" font-weight: bold; color: green;"> {{ $wo['user']->email }} </span> </div>
-
-   </div>
-
-
-
-
-  <hr>
+                                  @else
+                           {{ $wo['room']['block']['area']->name_of_area }}
+                                  @endif</b>
+                </td>
+                <td>
+                    Block : <b>@if(empty($wo->room_id)) {{ $wo->location }}
+                        @else
+                           {{ $wo['room']['block']->location_of_block }}
+                        @endif</b>
+                </td>
+                <td>
+                    Room : <b>@if(empty($wo->room_id))
+                        {{ $wo->location }}
+                      @else
+                          {{ $wo['room']->name_of_room }}
+                      @endif</b>
+                </td>
+        </tr>
+        <tr>
+            <td colspan="4">Details :
+            <b>{{ $wo->details }}</b></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-transform: capitalize;">
+                @if($wo->status == 0)rejected@elseif($wo->status == 1) accepted @else processed  by : @endif <b>{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</b>
+            </td>
+            <td> Mobile Number :  <b>{{ $wo['user']->phone }}</b></td>
+            <td>Email : <b> {{ $wo['user']->email }} </b></td>
+        </tr>
+    </tbody>
+</table>
+<br>
  @if($wo->emergency == 1)
-
- <br>
-   <h6 align="center" style="color: red;"><b> This Works Order Is Emergency</b></h6>
-   <br>
-   <hr>
+    <table>
+        <tr>
+            <td colspan="4">   <h6 align="center" style="color: red;"><b> This Works Order Is Emergency</b></h6>
+            </td>
+        </tr>
+    </table>
+    <br>
  @endif
 
-
-
-    <h4><b>Assigned Technician(s) for Inspection</b></h4>
-    @if(empty($wo['work_order_staffassigned']->id))
-       <p class="text-primary">No Technician assigned yet</p>
-    @else
-
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th colspan="4" style="text-transform: capitalize;"> Assigned technicians for inspection </th>
+        </tr>
+        <tr>
+            <th>#</th>
+            <th colspan="2">Name</th>
+            <th colspan="1">Leader</th>
+        </tr>
+    </thead>
+    <tbody>
 
     <?php
 
-  $idwo=$wo->id;
-  $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
+    $idwo=$wo->id;
+    $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
 
    $leaders = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->where('leader2', 3)->first();
-?>
-
-<table style="width:100%">
-   <thead style=" background-color: #376ad3; color: white; ">
-  <tr>
-    <th>Full Name</th>
-  <!--<th>Status</th>-->
-    <th>Date Assigned</th>
- <!--<th>Date Completed Inspection</th>-->
-   <th>Leader</th>
-
-
-  </tr>
-  <thead>
-    <tbody>
-    @foreach($techforms as $techform)
-  <tr>
-
-     @if($techform['technician_assigned_for_inspection'] != null)
-    <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
-  <!-- <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress  @endif</td>-->
-
- <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
-
-   <!--@if($techform->status==1)
-
-  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
-    @else
-
-
-      <td style="color: red"> Not Completed Yet</td>
-    @endif -->
-
- @if($techform->leader == null )
-
-<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
-                                                    class="fas fa-user-tie large"></i></a></td>
-                                                   @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Yes<i
-                                                    class="fas fa-user-tie large"></i></td>
-                                                    @else
-<td style="color: black;"  data-toggle="tooltip" >No</i></td>
-                                                    @endif
-W
-
-
-
-
-      @endif
-
-
-
-  </tr>
-  </tbody>
+ ?>
+   @foreach($techforms as $techform)
+   @php
+       $ad = 1;
+   @endphp
+        <tr>
+        <td> {{$ad}}</td>
+            <td colspan="2">
+              <b style="text-transform: capitalize;">{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</b>
+            </td>
+            <td colspan="1">
+                @if($techform->leader2 == 3 )
+                Yes
+                @else
+                No
+                @endif
+            </td>
+        </tr>
+        @php
+            $ad++;
+        @endphp
     @endforeach
-  </table>
+    </tbody>
+</table>
+<br>
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>Inspection Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="height: 200px;">
 
-
-    @endif
-   <br>
-
-   <hr>
-    <br>
-    <br>
-
-<div>Inspection Description:</div>
-   <div  style="
-  width: 520px;
-  border: 2px solid #376ad3;
-  padding: 50px;
-  height: 200px;
-  margin: 20px;"></h1>
-
-    </div>
-
-
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 <br>
-   <div class="container-name">
-     <div class="div1">Name of Technician Leader: &nbsp;  {{$leaders['technician_assigned_for_inspection']->lname.' '.$leaders['technician_assigned_for_inspection']->fname}} <u style="padding-left: 12px;"> </u></div>
-     <div class="div2"> Signature:  .................................... <u style="padding-left: 40px;">   </u> </div>
-    <div class="div2">Date: &nbsp;  &nbsp;  &nbsp;  &nbsp;   .................................... <u style="padding-left: 40px;"> </u> </div>
 
-   </div>
-<br>
-<br><br>
-   <div class="container-name">
-     <div class="div1">Name of Head of Section: &nbsp;  {{ $wo['hos']->fname.' '.$wo['hos']->lname }}<u style="padding-left: 12px;"> </u></div>
-     <div class="div2"> Signature:  .................................... <u style="padding-left: 40px;">   </u> </div>
-    <div class="div2">Date: &nbsp;  &nbsp;  &nbsp;  &nbsp;   .................................... <u style="padding-left: 40px;"> </u> </div>
+<table>
+    <tr>
+        <td>Head of Section : <b style="text-transform: capitalize;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</b></td>
+        <td>Lead Technician : <b style="text-transform: capitalize;">{{$leaders['technician_assigned_for_inspection']->lname.' '.$leaders['technician_assigned_for_inspection']->fname}}</b></td>
+    </tr>
+    <tr>
+        <td>Signature : __________________ <br>
+            Date : _________________________ </td>
+        <td>Signature : __________________ <br>
+        Date : _________________________ </td>
+    </tr>
 
-   </div>
+</table>
 
-<br><br>
-
-
-  <div class="container-name">
-     <div class="div1"></div>
-     <div class="div2"> Official Stamp: <u style="padding-left: 40px;">   </u> </div>
-
-
-   </div>
-
-
-
-
-  <br>
 
