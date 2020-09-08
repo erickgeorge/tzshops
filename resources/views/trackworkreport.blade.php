@@ -529,7 +529,7 @@ td, th {
     <div>
 
 </div>
-@if ($wo->systemclosed=='1')
+@if ($wo->systemclosed!='null')
 
 <table class="table table-light">
     <tbody>
