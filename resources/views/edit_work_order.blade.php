@@ -142,7 +142,7 @@ var total=2;
     <br>
 
      @if($wo->emergency == 1)
-   <h6 align="center" style="color:red;"><b> This Works Order Is Emergency &#9888;</b></h6>
+   <h6 align="center" style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
     @endif
 
 
@@ -362,12 +362,18 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @if(empty($wo['work_order_inspection']->status))
 
     @else
-    <h4><b>Inspection After Before Work </b></h4>
+
+   
     <?php
 
   $idwo=$wo->id;
   $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Report after work')->get();
         ?>
+
+
+
+
+ <h4><b>Inspection Report After Work </b></h4>
 
 <table style="width:100%">
   <tr>
@@ -390,6 +396,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   @endforeach
   </table>
+
   <br>
     <hr>
       <br>
