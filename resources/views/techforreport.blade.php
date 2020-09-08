@@ -168,10 +168,11 @@ td, th {
 
    $leaders = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->where('leader2', 3)->first();
  ?>
+  @php
+  $ad = 1;
+@endphp
    @foreach($techforms as $techform)
-   @php
-       $ad = 1;
-   @endphp
+
         <tr>
         <td> {{$ad}}</td>
             <td colspan="2">

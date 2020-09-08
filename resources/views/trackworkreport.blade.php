@@ -45,21 +45,17 @@ table {
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #000;
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 #footer{position:fixed; right:0px; bottom:10px; text-align:center; border-top:1px solid black; }
 #footer .page:after{content:counter(page, decimal);}
 @page {margin:20px 30px 40px 50px;}
 </style>
  <div class="container">
 
-    <br>
     <div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>Directorate of Estates Services</h5></p><p><b style="text-transform: uppercase;"><?php
@@ -80,98 +76,67 @@ tr:nth-child(even) {
  ?>
  <div class="container">
 
-<hr>
-
-<br>
-
-
-       <div class="container-name">
-     <div class="div1">This works order is submitted by <span
-                style=" font-weight: bold; color: green;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>
-
-     </div>
-     <div class="div2"> On:  <span style=" font-weight: bold; color: green;">{{ date('d F Y', strtotime($wo->created_at)) }}</span>  </div>
-  <br>
-  <br>
-
-   </div>
-
-          <div class="container-name">
-     <div class="div1">Also @if($wo->status == 0)rejected@elseif($wo->status == 1) accepted @else processed @endif by <span
-                style=" font-weight: bold; color: green;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span>
-
-     </div>
-     <div class="div2"> Mobile number:  <span style=" font-weight: bold; color: green;">{{ $wo['user']->phone }}</span>  </div>
-    <div class="div2">Emai: <span style=" font-weight: bold; color: green;"> {{ $wo['user']->email }} </span> </div>
-
-   </div>
-
-
-
-
-    <hr>
-
-<br>
-
-       <div class="container-name">
-     <div class="div1">Type of Problem: <span
-                style=" font-weight: bold; color: green;">{{ ucwords(strtolower($wo->problem_type)) }}</span>
-
-     </div>
-     <div class="div2"> Location:  <span style=" font-weight: bold; color: green;">@if(empty($wo->room_id)) {{ $wo->location }}
-        @else
-           {{ $wo['room']['block']->location_of_block }}
-        @endif</span>  </div>
-  <br>
-  <br>
-
-   </div>
-
-
-          <div class="container-name">
-     <div class="div1">Area: <span
-                style=" font-weight: bold; color: green;"> @if(empty($wo->room_id))
-      {{ $wo->room_id }}
-
+<table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th colspan="4">Works Order Summary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="2">Submitted By : <b style="text-transform: capitalize;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</b></td>
+            <td>On : <b>{{ date('d F Y', strtotime($wo->created_at)) }}</b> </td>
+            <td>Problem Type: <b style="text-transform: capitalize;">{{ ucwords(strtolower($wo->problem_type)) }}</b> </td>
+        </tr>
+        <tr>
+            <td>Location : <b>@if(empty($wo->room_id)) {{ $wo->location }}
                 @else
-         {{ $wo['room']['block']['area']->name_of_area }}
-                @endif</span>
+                   {{ $wo['room']['block']->location_of_block }}
+                @endif</b> </td>
+            <td>Area : <b>@if(empty($wo->room_id))
+                {{ $wo->room_id }}
 
-     </div>
-     <div class="div2"> Block:  <span style=" font-weight: bold; color: green;">@if(empty($wo->room_id)) {{ $wo->location }}
-        @else
-           {{ $wo['room']['block']->location_of_block }}
-        @endif</span>  </div>
-  <br>
-  <br>
+                          @else
+                   {{ $wo['room']['block']['area']->name_of_area }}
+                          @endif</b></td>
+            <td>Block : <b>@if(empty($wo->room_id)) {{ $wo->location }}
+                @else
+                   {{ $wo['room']['block']->location_of_block }}
+                @endif</b> </td>
+            <td>Room : <b>@if(empty($wo->room_id))
+                {{ $wo->location }}
+              @else
+                  {{ $wo['room']->name_of_room }}
+              @endif</b></td>
+        </tr>
+        <tr>
+            <td colspan="4">Description : <b style="text-transform: capitalize;">{{ $wo->details }}</b> </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-transform: capitalize;"> @if($wo->status == 0)rejected@elseif($wo->status == 1) accepted @else processed @endif by : <b style="text-transform: capitalize;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</b> </td>
+            <td>Mobile Number : <b>{{ $wo['user']->phone }}</b></td>
+            <td>Email : <b>{{ $wo['user']->email }}</b></td>
+        </tr>
+    </tbody>
+</table>
+
 
    </div>
 
-          <div class="container-name">
-     <div class="div1">Room <span
-                style=" font-weight: bold; color: green;"> @if(empty($wo->room_id))
-          {{ $wo->location }}
-        @else
-            {{ $wo['room']->name_of_room }}
-        @endif</span>
-
-     </div>
-     <div class="div2"> Details  <span style=" font-weight: bold; color: green;">{{ $wo->details }}</span>  </div>
-  <br>
-  <br>
-
-   </div>
 
 
 
-  <hr>
- @if($wo->emergency == 1)
 
- <br>
-   <h6 align="center" style="color: red;"><b> This Works Order Is Emergency</b></h6>
-   <br>
-   <hr>
- @endif
+
+
+@if($wo->emergency == 1)
+   <table>
+       <tr>
+           <td colspan="4">   <h6 align="center" style="color: red;"><b> This Works Order Is Emergency</b></h6>
+           </td>
+       </tr>
+   </table>
+@endif
 
 
 
@@ -202,7 +167,7 @@ tr:nth-child(even) {
   <tr>
 
      @if($techform['technician_assigned_for_inspection'] != null)
-    <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
+    <td style="text-transform: capitalize;">{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
    <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress  @endif</td>
 
  <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
@@ -240,10 +205,7 @@ tr:nth-child(even) {
 
 
     @endif
-   <br>
 
-   <hr>
-    <br>
 
 
 
@@ -278,7 +240,7 @@ tr:nth-child(even) {
   <tr>
 
    @if($techform['technician_assigned'] != null)
-    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
+    <td style="text-transform: capitalize;">{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
    <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress  @endif</td>
 
 
@@ -329,11 +291,7 @@ tr:nth-child(even) {
     @endforeach
   </table>
     @endif
-    <br>
-     <br>
-   <hr>
 
-     <br>
     <h4><b>Technician Report</b></h4>
     @if(empty($wo['work_order_inspection']->status))
         <p class="text-primary">Not inspected yet</p>
@@ -360,7 +318,7 @@ tr:nth-child(even) {
   <tr>
     <td class="text-primary" >{{ $iform->status }}</td>
       <td><?php $erick = $iform->description; echo wordwrap($erick, 20, "<br />\n"); ?></td>
-      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+      <td style="text-transform: capitalize;">{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
  <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
   </tr>
 
@@ -368,12 +326,6 @@ tr:nth-child(even) {
 </tbody>
   </table>
     @endif
-    <br>
-    <br>
-    <hr>
-
-
-  <br>
     <h4><b>Transport Description </b></h4>
   @if(empty($wo['work_order_transport']->work_order_id))
         <p class="text-primary">No Transport requested</p>
@@ -424,17 +376,10 @@ tr:nth-child(even) {
 </tbody>
   </table>
     @endif
-    <br>
 
 
 
 
-  <br>
-
-     <br>
-     <hr>
-
-  <br>
   @if(auth()->user()->type != 'CLIENT')
     <h4><b>Materials Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
@@ -466,7 +411,7 @@ tr:nth-child(even) {
     @foreach($matforms as $matform)
   <tr>
 
-    <td>{{$matform['material']->name }}</td>
+    <td style="text-transform: capitalize;">{{$matform['material']->name }}</td>
 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
@@ -495,11 +440,6 @@ tr:nth-child(even) {
 
   </table>
     @endif
-
-    <br>
-
-  <br>
-  <hr>
    @elseif(auth()->user()->type == 'CLIENT')
       <h4><b>Materials Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
@@ -529,7 +469,7 @@ tr:nth-child(even) {
     @foreach($matforms as $matform)
   <tr>
 
-    <td>{{$matform['material']->name }}</td>
+    <td style="text-transform: capitalize;">{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
@@ -548,12 +488,7 @@ tr:nth-child(even) {
   </table>
     @endif
 
-    <br>
-
-  <br>
-  <hr>
    @endif
-     <br>  <br>
 
      <h4><b>Materials Used </b></h4>
 
@@ -579,7 +514,7 @@ tr:nth-child(even) {
 <tbody>
     @foreach($matforms as $matform)
   <tr>
-   <td>{{$matform['material']->name }}</td>
+   <td style="text-transform: capitalize;">{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
    <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
@@ -591,13 +526,16 @@ tr:nth-child(even) {
 
   </table>
     @endif
-    <br>
-
-
-    <br>
-
-
-    <hr>
     <div>
 
 </div>
+@if ($wo->systemclosed=='1')
+
+<table class="table table-light">
+    <tbody>
+        <tr>
+            <td style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days</td>
+        </tr>
+    </tbody>
+</table>
+@endif

@@ -98,6 +98,7 @@
             if ($tofautihii > 6) {
                 $wokioda = WorkOrder::where('id',$woclo->id)->first();
                 $wokioda->status = 30;
+                $wokioda->systemclosed = 1;
                 $wokioda->save();
             }
         }
@@ -972,7 +973,7 @@
 
     @if(auth()->user()->type == 'Inspector Of Works')
 
-     <a href="{{ url('myzone')}}"><h6>My Zone </h6></a>
+     <a href="{{ route('onprocessworkorders')}}"><h6>My Zone </h6></a>
 
 
                         <a href="{{ url('work_order_material_needed')}}"><h6>Works orders needs material <span
