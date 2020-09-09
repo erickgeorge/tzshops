@@ -383,7 +383,7 @@ td, th {
   @if(auth()->user()->type != 'CLIENT')
     <h4><b>Materials Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
-        <p class="text-primary">No Material have been requested yet</p>
+        <p class="text-primary">No Material have been requested</p>
     @else
     <?php
 
@@ -443,7 +443,7 @@ td, th {
    @elseif(auth()->user()->type == 'CLIENT')
       <h4><b>Materials Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
-        <p class="text-primary">No Material have been requested yet</p>
+        <p class="text-primary">No Material have been requested </p>
     @else
     <?php
 

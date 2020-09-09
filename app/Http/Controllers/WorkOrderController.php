@@ -149,7 +149,7 @@ $message = $client->message()->send([
  */
 
 
-     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system so as to check the reason of rejection.",
 
                   "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -258,7 +258,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 //for email that currently working disabled partially
 
 
-     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED, and  given identification number 00$wO->id. Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -297,7 +297,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
         return view('edit_work_order', [
-            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->get(),
+            'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get(),
             'notifications' => $notifications,
 			'staff' => $staff,
             'role' => $role, 'wo' => WorkOrder::where('id', $id)->first(),
@@ -320,7 +320,24 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
 
-    public function editWO(Request $request, $id)
+    public function requirematerial($id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $wo = WorkOrder::where('id', $id)->first();
+        $wo->requirematerial = 1;
+        $wo->save();
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'changes saved successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+
+
+
+  public function editWO(Request $request, $id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -353,6 +370,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'wo' => WorkOrder::where('id', $id)->first()
         ]);
     }
+
 
 
 
@@ -978,7 +996,7 @@ public function transportforwork(Request $request, $id)
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $receiver_id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been temporally closed closed!.';
+        $notify->message = 'Your works order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been temporally closed closed!.';
         $notify->save();
 
 
@@ -990,7 +1008,7 @@ public function transportforwork(Request $request, $id)
   $clastname=$work['user']->lname;
   $cmobile=$work['user']->phone;
 
-    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your work order No '.$wo->id.' sent to Estate Directorate on  ' . $wo->created_at . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed.
+    $msg='Dear  '. $cfirstname.'  '.$clastname.' Your works order No '.$wo->id.' sent to Estate Directorate on  ' . $wo->created_at . ' of  Problem Type' . $wo->problem_type . 'about '.$wo->details.' has been Closed.
  Please Visit the system for more informations. Thanks
 
     Directorate of Estates.';
@@ -1015,7 +1033,7 @@ public function transportforwork(Request $request, $id)
         $section=auth()->user()->type;
 
 
-     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wo->created_at, of  Problem Type $wo->problem_type has been COMPLETED. Please login in the system for further information .",
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wo->created_at, of  Problem Type $wo->problem_type has been COMPLETED. Please login in the system so as to close your works order otherwise your works order will be closed by the system after 7 days.",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -1141,7 +1159,7 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $us->id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' is satisfied by client!.';
+        $notify->message = 'Your works order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' is satisfied by client!.';
         $notify->save();
 
         return redirect()->route('workOrder.track', [$id])->with([
@@ -1175,7 +1193,7 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $us->id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' is not satisfied by client!.';
+        $notify->message = 'Your works order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' is not satisfied by client!.';
         $notify->save();
 
 
