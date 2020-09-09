@@ -529,8 +529,8 @@ td, th {
     <div>
 
 </div>
-@if ($wo->systemclosed!='null')
-
+@if ($wo->systemclosed!=0)
+<br>
 <table class="table table-light">
     <tbody>
         <tr>
