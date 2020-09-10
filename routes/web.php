@@ -79,11 +79,7 @@ Route::post('workorder/reject/{id}', 'WorkOrderController@rejectWO')->name('work
 Route::post('workorder/accept/{id}', 'WorkOrderController@acceptWO')->name('workorder.accept');
 Route::get('edit/work_order/view/{ids}', 'WorkOrderController@editWOView')->name('workOrder.edit.view');
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view');
-
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit');
-
-Route::post('work_order/require/material/{id}', 'WorkOrderController@requirematerial')->name('workOrder.requirematerial');
-
 Route::post('edit/work_order/zone/two/{id}', 'WorkOrderController@editWOzonetwo')->name('workOrder.edit.zoneloctwo');
 Route::post('edit/work_order/zone/{id}', 'WorkOrderController@editWOzone')->name('workOrder.edit.zoneloc');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
@@ -904,3 +900,8 @@ Route::get('yearlybuilding','AssetsController@yearlybuilding')->name('yearlybuil
 Route::get('yearlyexport','ExcelController@yearlyexport')->name('yearlyexport')->middleware('auth');
 Route::get('usersoptions','UserController@usersoptions')->name('usersoptions')->middleware('auth');
 Route::get('usersfiltered','UserController@usersfiltered')->name('usersfiltered')->middleware('auth');
+Route::post('restorepassword/{id}','UserController@restorepassword')->name('restorepassword')->middleware('auth');
+Route::get('downloads','HomeController@downloads')->name('downloads')->middleware('auth');
+Route::get('newdownloads','HomeController@newdownloads')->name('newdownloads')->middleware('auth');
+Route::post('savedownloads','HomeController@savedownloads')->name('savedownloads')->middleware('auth');
+Route::get('viewdownloads/{id}','HomeController@viewdownloads')->name('viewdownloads')->middleware('auth');

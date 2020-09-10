@@ -559,4 +559,13 @@ return view('usersfiltered',['role' => $role,'notifications' => $notifications,'
 
 }
 
+public function restorepassword(Request $Request, $id)
+{
+    $data = User::where('id',$id)->first();
+    $data->password = bcrypt($data['name'].'@esmis');
+    $data->save();
+
+    return redirect()->back()->with(['message' => 'Password restored successfully']);
+}
+
 }
