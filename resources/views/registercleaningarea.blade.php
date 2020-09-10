@@ -45,6 +45,11 @@ StaffHouse Registrartion
 
                        @endif
 
+                       @if(auth()->user()->type == 'Administrative officer')
+
+                               <input type="number" name="hostel" value="2" hidden>
+                       @endif
+
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
 
@@ -96,6 +101,20 @@ StaffHouse Registrartion
 
 
 
+                   @if(auth()->user()->type == 'Administrative officer')
+                     <div class="input-group mb-3 col-lg-6" >
+                        <div class="input-group-prepend">
+                            
+                            <label style="width:200px;height: 28px;" class="input-group-text" > Directorate/College </label>
+                        </div>
+                         <select required style="color: black;" class="custom-select" name="college" id="directorate" >
+                                  
+                                   @foreach($directoratesadofficer as $directorate)
+                                  <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+                                   @endforeach
+                         </select>
+                     </div> 
+                     @else
 
                      <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
@@ -109,6 +128,8 @@ StaffHouse Registrartion
                                    @endforeach
                          </select>
                      </div> 
+
+                     @endif
 
 
 

@@ -27,7 +27,8 @@ use Redirect;
 use PDF;
 
 use App\zoneinspector;
-
+use App\download;
+use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
@@ -4183,6 +4184,67 @@ $v5=$type[4];
         return view('knownroom', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
    }
 
+   public function downloads()
+   {
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $data = download::get();
+    return view('download', ['role' => $role,'notifications' => $notifications,'data'=>$data]);
+   }
+
+   public function newdownloads()
+   {
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    return view('downloadsnew', ['role' => $role,'notifications' => $notifications]);
+   }
+
+   public function savedownloads(Request $request)
+   {
+    $request->validate([
+        "file" => "required|mimes:pdf",
+        'name' => 'required',
+
+    ]);
+
+    $path = public_path('download/'.date('Y.m.d H:i:s'));
+      if(!File::isDirectory($path))
+      {
+        File::makeDirectory($path,$mode = 0777, true, true);
+      }
+
+      if($file = $request->file('file'))
+      {
+          $filename = time().'-'.$request['name'].'.'.$file->getClientOriginalExtension();
+          $targetpath = $path;
+
+          if($file->move($targetpath, $filename))
+          {
+            $data = new download();
+            $data->name = $request['name'];
+            $data->document = $filename;
+            $data->date = date('Y.m.d H:i:s');
+            $data->uploadedBy = auth()->user()->id;
+            $data->save();
+
+            return redirect()->route('downloads')->with(['message'=>'document uploaded succesfully!']);
+          }
+      }else{
+          return redirect()->back()->withErrors(['message'=>'Oops, something is wrong. try again!']);
+      }
+
+    
+
+
+   }
+
+   public function viewdownloads($id)
+   {
+       $data = download::where('id',$id)->first();
+       $path = public_path('download/'.$data['date'].'/'.$data['document']);
+
+        return response()->file($path);
+   }
 
 }
 

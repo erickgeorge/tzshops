@@ -1012,6 +1012,7 @@ class AssetsController extends Controller
                 'campuses' => Campus::all(),
                 'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
                 'directorates' => Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(),
+                'directoratesadofficer' => Directorate::where('id', auth()->user()->college)->where('name','<>',null)->OrderBy('name','ASC')->get(),
           ]);
      }
 
