@@ -365,6 +365,17 @@
             </div>
 
         </form>
+        <div class="card" style="width:18rem;">
+            <div class="card-body">
+                <form  method="POST" onsubmit="return confirm('Are you sure you want to Restore password to default for: {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('restorepassword', [$user->id]) }}" >
+                    {{csrf_field()}}
+          
+          
+                  <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Restore Password to default : username@esmis"   > Restore Password</button>
+               </form>
+          
+          </div>
+        </div>
 
     </div>
     <br>

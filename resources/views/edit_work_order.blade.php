@@ -147,26 +147,6 @@ var total=2;
 
 
 
-         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
-            @csrf
-
-            <div class="form-group ">
-
-                @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This works order is emergency</b>
-                @else
-                    <input type="checkbox" name="emergency"> <b style="color:red;">This works order is emergency</b>
-                @endif
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
-
-          <br>
-
-
-
-
 
     @if(empty($wo['work_order_staffassigned']->id))
 
@@ -208,8 +188,9 @@ var total=2;
       <td style="color: red"> Not Completed Yet</td>
     @endif -->
 
-    @if($techform->leader == null)
-<td><a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
+    @if($techform->leader == null )
+
+<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
                                                     class="fas fa-user-tie large"></i></a></td>
                                                    @elseif($techform->leader2 == 3 )
  <td style="color: black;"  data-toggle="tooltip" >Yes </td>
@@ -262,7 +243,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-  
+    <th>Type</th>
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -272,7 +253,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
   <tr>
-   
+    <td class="text-primary" >{{ $iform->status }}</td>
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -397,7 +378,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-   
+    <th>Type</th>
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -407,7 +388,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
   <tr>
-  
+    <td class="text-primary" >{{ $iform->status }}</td>
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -493,7 +474,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @if(empty($wo['work_order_material']->id))
 
     @else
-    <h4><b>Material(s) Request </b></h4>
+    <h4><b>Materials Requests </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -624,7 +605,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @if(empty($wo['work_order_material']->id))
 
     @else
-      <h4><b>Material(s) Used </b></h4>
+      <h4><b>Materials Used </b></h4>
     <?php
 
   $idw=$wo->id;
@@ -660,6 +641,23 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @endif
 
 
+
+         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
+            @csrf
+
+            <div class="form-group ">
+
+                @if($wo->emergency == 1)
+                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This works order is emergency</b>
+                @else
+                    <input type="checkbox" name="emergency"> <b style="color:red;">This works order is emergency</b>
+                @endif
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+
+
         <div class="row">
             <div class="col">
                  <div class="checkbox">
@@ -668,22 +666,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                </div>
             </div>
         </div>
-
-@if(($wo->status == 5) and ($wo->requirematerial == NULL))
-<div align="center">
-         <form method="POST" action="{{ route('workOrder.requirematerial', [$wo->id]) }}">
-            @csrf
-
-            <div class="form-group ">
-
-                    <input type="checkbox" name="emergency"> <b style="color:blue;">This works order needs material(s)</b>
-              
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
-</div>
-@endif
 
 
        <div id="divmanual">
@@ -805,7 +787,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     <div id="assigntechnician" class="tabcontent">
 
 
-                 @if(((($wo->statusmform == 3) || ($wo->statusmform == 4)) and ($wo->requirematerial == NULL) )  or ($wo->status == 40 ))
+                 @if(($wo->statusmform == 3) || ($wo->statusmform == 4))
 
 
                         <div class="row">
@@ -816,7 +798,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                       
 
  <!--techniciantable-->
- @if(($wo->status == 5)||($wo->status == 40))
+ @if($wo->status == 5)
 
  <table style="width:100%">
   <tr>
@@ -916,6 +898,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
+
                                 @endforeach
                                 <?php
                                 for($i=0;$i<=$p-1;$i++){
@@ -960,7 +943,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                 @else
-               <div align="center" style="color: red;">@if($wo->requirematerial == NULL)  @else   @endif</div>
+               <div align="center" style="color: red;"> Please assign inspection form before work before assigning technician for work. </div>
                 @endif
                     </div>
 
@@ -1233,7 +1216,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                         ?>
-                         @if(($wo->statusmform == 3) and ($wo->requirematerial == 1))
+                         @if($wo->statusmform == 4)
 
                         <div class="row">
                             <div class="col-md-6">
@@ -1293,7 +1276,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                 @else
-               <div align="center" style="color: red;"></div>
+               <div align="center" style="color: red;"> Please assign technician for inspection before requesting material for work. </div>
                 @endif
                  </div>
                 {{-- end material_request  --}}

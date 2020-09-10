@@ -606,7 +606,9 @@
             </ul>
             <span class="navbar-text">
 
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto"><li class="nav-item">
+        <a class="nav-link text-light" href="{{route('downloads')}}"> <i class="fas fa-cloud-download-alt    "></i> Downloads </a>
+        </li>
         <li>
              @if($role['user_role']['role_id'] == 1)
                     <li class="nav-item">
