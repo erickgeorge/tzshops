@@ -53,6 +53,172 @@
 
                     <tbody>
                   <?php $i = 0; ?>
+                   @if(auth()->user()->type == 'Supervisor Landscaping')
+                    @foreach($cleanareaexterial as $clean_area)
+                        <?php $i++; ?>
+                        <tr>
+                            <th scope="row">{{ $i }}</th>
+
+                            <td>{{ $clean_area->cleaning_name }}</td>
+                            <td>{{ $clean_area->zone_id }}</td>
+                             <td>{{ $clean_area->type }}</td>
+
+
+                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+
+                            <td>
+
+
+                            <div class="row">
+                              &nbsp; &nbsp; &nbsp;
+
+
+                                    <a style="color: green;"
+                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->zone_id }}' )"
+                                       data-toggle="modal" data-target="#editarea" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+                             &nbsp;
+
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Cleaning Area Completely? ')"
+                                          action="{{ route('cleanarea.delete', [$clean_area->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form>
+                                </div>
+
+                         </td>
+
+                         @endif
+
+
+
+
+
+                        </tr>
+                    @endforeach
+                    @endif
+
+
+
+                     @if(auth()->user()->type == 'Administrative officer')
+                    @foreach($cleanareainterior as $clean_area)
+                        <?php $i++; ?>
+                        <tr>
+                            <th scope="row">{{ $i }}</th>
+
+                            <td>{{ $clean_area->cleaning_name }}</td>
+                            <td>{{ $clean_area->zone_id }}</td>
+                             <td>{{ $clean_area->type }}</td>
+
+
+                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+
+                            <td>
+
+
+                            <div class="row">
+                              &nbsp; &nbsp; &nbsp;
+
+
+                                    <a style="color: green;"
+                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->zone_id }}' )"
+                                       data-toggle="modal" data-target="#editarea" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+                             &nbsp;
+
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Cleaning Area Completely? ')"
+                                          action="{{ route('cleanarea.delete', [$clean_area->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form>
+                                </div>
+
+                         </td>
+
+                         @endif
+
+
+
+
+
+                        </tr>
+                    @endforeach
+                    @endif
+
+
+
+
+
+                     @if(auth()->user()->type == 'USAB')
+                    @foreach($cleanareausab as $clean_area)
+                        <?php $i++; ?>
+                        <tr>
+                            <th scope="row">{{ $i }}</th>
+
+                            <td>{{ $clean_area->cleaning_name }}</td>
+                            <td>{{ $clean_area->zone_id }}</td>
+                             <td>{{ $clean_area->type }}</td>
+
+
+                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+
+                            <td>
+
+
+                            <div class="row">
+                              &nbsp; &nbsp; &nbsp;
+
+
+                                    <a style="color: green;"
+                                       onclick="myfunc9('{{ $clean_area->id }}','{{ $clean_area->cleaning_name }}','{{ $clean_area->zone_id }}' )"
+                                       data-toggle="modal" data-target="#editarea" title="Edit"><i
+                                                class="fas fa-edit"></i></a>
+                             &nbsp;
+
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this Cleaning Area Completely? ')"
+                                          action="{{ route('cleanarea.delete', [$clean_area->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form>
+                                </div>
+
+                         </td>
+
+                         @endif
+
+
+
+
+
+                        </tr>
+                    @endforeach
+                    @endif
+
+
+
+
+                     @if($role['user_role']['role_id'] == 1)
                     @foreach($cleanarea as $clean_area)
                         <?php $i++; ?>
                         <tr>
@@ -102,6 +268,8 @@
 
                         </tr>
                     @endforeach
+                    @endif
+
                     </tbody>
 
                 </table>
