@@ -206,7 +206,40 @@ td, th {
 
     @endif
 
+    <h4><b style="text-transform: capitalize;">Technician Inspection Report</b></h4>
+    @if(empty($wo['work_order_inspection']->status))
+        <p class="text-primary">Not inspected yet</p>
+    @else
+    <?php
 
+  $idwo=$wo->id;
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
+        ?>
+
+<table style="width:100%">
+   <thead style=" background-color: #376ad3; color: white; ">
+  <tr>
+    <th>Status</th>
+    <th  >Description</th>
+  <th>Full Name</th>
+    <th>Date </th>
+  </tr>
+</thead>
+<tbody>
+    @foreach($iforms as $iform)
+
+
+  <tr>
+    <td class="text-primary" >{{ $iform->status }}</td>
+      <td><?php $erick = $iform->description; echo wordwrap($erick, 20, "<br />\n"); ?></td>
+      <td style="text-transform: capitalize;">{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+ <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
+  </tr>
+
+  @endforeach
+</tbody>
+  </table>
+    @endif
 
 
 
@@ -292,14 +325,14 @@ td, th {
   </table>
     @endif
 
-    <h4><b>Technician Report</b></h4>
+    <h4><b style="text-transform: capitalize;">Technician Report after work</b></h4>
     @if(empty($wo['work_order_inspection']->status))
         <p class="text-primary">Not inspected yet</p>
     @else
     <?php
 
   $idwo=$wo->id;
-  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Report after work')->get();
         ?>
 
 <table style="width:100%">
