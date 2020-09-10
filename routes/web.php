@@ -905,3 +905,4 @@ Route::get('downloads','HomeController@downloads')->name('downloads')->middlewar
 Route::get('newdownloads','HomeController@newdownloads')->name('newdownloads')->middleware('auth');
 Route::post('savedownloads','HomeController@savedownloads')->name('savedownloads')->middleware('auth');
 Route::get('viewdownloads/{id}','HomeController@viewdownloads')->name('viewdownloads')->middleware('auth');
+Route::get('deletedownload/{id}','HomeController@deletedownload')->name('deletedownload')->middleware('auth');

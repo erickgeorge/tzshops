@@ -4246,5 +4246,11 @@ $v5=$type[4];
         return response()->file($path);
    }
 
+   public function deletedownload($id)
+   {
+    download::find($id)->delete();
+    return redirect()->back()->with(['message'=>'Document deleted successfully!']);
+   }
+
 }
 

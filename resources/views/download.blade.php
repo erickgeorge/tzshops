@@ -31,7 +31,6 @@
             </ul>
         </div>
     @endif
-</div>
 <div class="row">
     @if($role['user_role']['role_id'] == 1)
     <div class="col-md-4">
@@ -60,7 +59,12 @@
                     <tr>
                         <td>{{$f}}</td>
                         <td> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{$item->name}}</td>
-                        <td> <a class="btn btn-primary" href="{{route('viewdownloads',[$item->id])}}" role="button"> <i class="fa fa-eye" aria-hidden="true"></i> View </a>  </td>
+                        <td> 
+                            <a class="btn btn-primary" href="{{route('viewdownloads',[$item->id])}}" role="button"> <i class="fa fa-eye" aria-hidden="true"></i> View </a> 
+                            @if($role['user_role']['role_id'] == 1)
+                            <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this document?')" href="{{route('deletedownload',[$item->id])}}" role="button"> <i class="fa fa-trash" aria-hidden="true"></i> Delete </a>
+                            @endif
+                        </td>
                     </tr>
                     @php
                         $f++;
@@ -75,5 +79,6 @@
             @endif
         </p>
     </div>
+</div>
 </div>
 @endsection
