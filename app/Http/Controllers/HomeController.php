@@ -4207,7 +4207,7 @@ $v5=$type[4];
 
     ]);
 
-    $path = public_path('download/'.date('Y.m.d H:i:s'));
+    $path = public_path('download/'.date('Y.m.d.H.i.s'));
       if(!File::isDirectory($path))
       {
         File::makeDirectory($path,$mode = 0777, true, true);
@@ -4223,7 +4223,7 @@ $v5=$type[4];
             $data = new download();
             $data->name = $request['name'];
             $data->document = $filename;
-            $data->date = date('Y.m.d H:i:s');
+            $data->date = date('Y.m.d.H.i.s');
             $data->uploadedBy = auth()->user()->id;
             $data->save();
 
