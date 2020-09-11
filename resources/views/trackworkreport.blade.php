@@ -567,8 +567,17 @@ td, th {
 <table class="table table-light">
     <tbody>
         <tr>
-            <td style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days</td>
+            <td style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </td>
         </tr>
     </tbody>
 </table>
-@endif
+@elseif($wo->status == 30)
+<br>
+<table class="table table-light">
+    <tbody>
+        <tr>
+            <td style="text-transform: capitalize;">This Works Order Was Closed on : {{ date('d F Y', strtotime($wo->updated_at))  }}  By Head of section</td>
+        </tr>
+    </tbody>
+</table>
+ @endif
