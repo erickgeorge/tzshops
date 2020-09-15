@@ -696,7 +696,7 @@ use App\Section;
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5 style=" text-transform: capitalize;">Available Registered Users -
+    <h5 style=" text-transform: capitalize;">Available Registered Users - <b>
 
     @php
     $dirsf = '';
@@ -742,7 +742,7 @@ use App\Section;
             $dirsf = $directora->name;
         }
     // 456
-    @endphp
+    @endphp </b>
     </h5>
 
 
@@ -793,14 +793,14 @@ use App\Section;
 <!-- SOMETHING STRANGE HERE -->
 
 <div class="col">
-    <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModals"> Filter Users <i class="fa fa-search" aria-hidden="true"></i></a>
+    <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModals"> Filter Users </a>
  </div>
  {{--  --}}
  <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Filter to Search Users <i class="fa fa-search" aria-hidden="true"></i> </h5>
+          <h5 class="modal-title" id="exampleModalLabel">Filter Users </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -856,7 +856,7 @@ use App\Section;
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Search <i class="fa fa-search" aria-hidden="true"></i> </button>
+          <button type="submit" class="btn btn-primary">Filter  </button>
         </div>
     </form>
       </div>

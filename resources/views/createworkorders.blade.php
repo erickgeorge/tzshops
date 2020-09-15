@@ -9,7 +9,7 @@
             <div class="container">
             <h4 style="text-transform: capitalize;" >Create new works order</h4>
         </div>
- 
+
     <hr class="container">
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -57,27 +57,28 @@
         $location = Location::where('name','<>',null)->orderby('name')->get();
         ?>
 
+<div class="row">
+    <div class="col">
+         <div class="checkbox">
+    <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+        Enter Location manually</label>
+       </div>
+    </div>
+</div>
+
         <div id="divmanual">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label  class="input-group-text" for="inputGroupSelect01">Enter Location in text</label>
+                    <label  class="input-group-text" for="inputGroupSelect01">Enter Location </label>
                 </div>
-                <input   style="color: black; width: 265px;" type="text" maxlength="35" id="manual"
-                       aria-describedby="emailHelp" name="manual" placeholder="Type Location Address">
+                <input   style="color: black; width:80%;" type="text" maxlength="35" id="manual"
+                       aria-describedby="emailHelp" name="manual" placeholder="Type Location Address Here">
             </div>
         </div>
 
             </div>
 
 
-        <div class="row">
-            <div class="col">
-                 <div class="checkbox">
-            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
-                Enter Location manually</label>
-               </div>
-            </div>
-        </div>
 
         <div id="locationdiv"><div class="row">
             <div class="col">

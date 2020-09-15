@@ -174,7 +174,7 @@ var total=2;
 
      @if($techform['technician_assigned_for_inspection'] != null)
     <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) Completed  @else  On Progress   @endif</td>
+   <td >@if($techform->status==1) Completed  @else  On Progress   @endif</td>
    <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
 
@@ -183,15 +183,15 @@ var total=2;
 
   <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
     @else
-   
+
 
       <td style="color: red"> Not Completed Yet</td>
     @endif -->
 
     @if($techform->leader == null )
 
-<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
-                                                    class="fas fa-user-tie large"></i></a></td>
+<td>   <a title="Assign as Lead technician" class="btn btn-primary" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader">
+    Select</a></td>
                                                    @elseif($techform->leader2 == 3 )
  <td style="color: black;"  data-toggle="tooltip" >Yes </td>
                                                     @else
@@ -253,7 +253,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
   <tr>
-    <td class="text-primary" >{{ $iform->status }}</td>
+    <td  >{{ $iform->status }}</td>
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -285,7 +285,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @if(empty($wo['work_order_staff']->id))
 
     @else
-    
+
     <?php
 
   $idwo=$wo->id;
@@ -316,7 +316,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
      @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress   @endif</td>
+   <td >@if($techform->status==1) Completed   @else  On Progress   @endif</td>
 
 
     <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
@@ -326,15 +326,15 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
     @else
-   
+
 
       <td style="color: red"> Not Completed Yet</td>
     @endif -->
 
 @if($techform->leader == null )
 
-<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
-                                                    class="fas fa-user-tie large"></i></a></td>
+<td>   <a title="Assign as Lead technician" class="btn btn-primary" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader">
+    Select</a></td>
                                                    @elseif($techform->leader2 == 3 )
  <td style="color: black;"  data-toggle="tooltip" >Yes </i></td>
                                                     @else
@@ -363,7 +363,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
     @else
 
-   
+
     <?php
 
   $idwo=$wo->id;
@@ -388,7 +388,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
   <tr>
-    <td class="text-primary" >{{ $iform->status }}</td>
+    <td  >{{ $iform->status }}</td>
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -442,7 +442,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
      <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
                                                                          class="badge badge-success">View Details</span></a></td>
-    <td class="text-primary">@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
+    <td >@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
 
 
 
@@ -510,7 +510,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td class="text-primary">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
 
@@ -576,7 +576,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td class="text-primary">@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
        @endif</td>
 
@@ -658,19 +658,13 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
           </form>
 
 
-        <div class="row">
-            <div class="col">
-                 <div class="checkbox">
-            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
-                Assign Zone Location</label>
-               </div>
-            </div>
-        </div>
 
 
-       <div id="divmanual">
+       <div id="div-manual">
 
      @if($wo->zonelocationtwo == null)
+
+     Assign Zone Location
 
                  <form method="POST" action="{{ route('workOrder.edit.zoneloctwo', [$wo->id]) }}">
             @csrf
@@ -682,7 +676,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 </div>
                 <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" >
 
-
+<option value="">Select Zone Location</option>
                @foreach($iowzone as $user)
                <option value="{{ $user->id }}" >{{ $user->location }}</option>
                @endforeach
@@ -795,7 +789,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 <p>Assign Technician(s) For This Works Order</p>
                             </div>
                         </div>
-                      
+
 
  <!--techniciantable-->
  @if($wo->status == 5)
@@ -806,7 +800,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <thead style="color: white;">
     <th>Full Name</th>
   <th>Action</th>
-   
+
 </thead>
 
   </tr>
@@ -816,8 +810,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
      @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-  
-                                                    <td>  
+
+                                                    <td>
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this technician from the list? ')"
                                           action="{{ route('workOrder.techniciandelete', [$techform->id]) }}">
@@ -831,7 +825,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </div></td>
-                                                 
+
 
       @endif
 
@@ -844,7 +838,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <!--techniciantable-->
 
- <br>                      
+ <br>
 
 
 
@@ -1063,7 +1057,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                     </div>
 
-     
+
 
                 {{-- end ASSIGN TECHNICIAN  --}}
 
@@ -1111,7 +1105,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             <label>Select technician leader</label>
                             <br>
                             <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
-                              
+
                                 @if($wo->status == 70)
 
                                 <?php
@@ -1120,12 +1114,12 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 ?>
                                    @if(empty($tech))
                                    @else
-          
+
                                     <option selected value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
                                     </option>
 
                                     @endif
-                          
+
 
                                 @else
 
@@ -1138,8 +1132,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                    @else
                                     <option  value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}
                                     </option>
-                                   @endif 
-                            
+                                   @endif
+
                                 @endif
                             </select>
                         </div>
@@ -1165,7 +1159,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   @if($wo->statusmform != 1)
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Works Order Transport Request Form</p>
+                                <p style="text-transform: capitalize;">Works Order transport request details</p>
                             </div>
                         </div>
                 </br>

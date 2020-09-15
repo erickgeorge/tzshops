@@ -56,6 +56,10 @@ class HomeController extends Controller
         return view('changepassword2', ['role' => $role,'notifications' => $notifications]);
         }
         else{
+            if (auth()->user()->type == 'Inspector Of Works'){
+                return redirect()->route('onprocessworkorders');
+                }
+                
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
             if((auth()->user()->type == 'Supervisor Landscaping' )||(auth()->user()->type == 'USAB' ))
@@ -74,6 +78,7 @@ class HomeController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //         return response()->json($role);
+
         if ($role['user_role']->role_id == 1){
             return view('work_orders', ['role' => $role, 'wo' => WorkOrder::OrderBy('created_at', 'DESC')->GET(), 'notifications' => $notifications]);
         }else{
