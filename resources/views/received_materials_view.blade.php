@@ -10,9 +10,9 @@
     <div class="row container-fluid" >
         <div class="col-lg-12">
             @if(auth()->user()->type == 'STORE')
-            <h5 style=" "  ><b style="text-transform: capitalize;">List of Available Material required by Head of Section</b></h5>
+            <h5 class="container"><b>List of Available Material(s) Required by Head of Section</b></h5>
             @else
-            <h5 style=" "  style="text-transform: capitalize;"><b>Available Material you requested  from Store </b></h5>
+            <h5 class="container"><b>Available Material(s) You Requested  From Store </b></h5>
             @endif
         </div>
 
@@ -72,7 +72,7 @@
                 @endif
 
         <th >Status</th>
-        <th >HoS Approval</th>
+        <th >Received Status</th>
 
             </tr>
             </thead>
@@ -92,18 +92,18 @@
                     <td>{{ $item->quantity }}</td>
 
                        @if($item->checkreserve == 1)
-                       <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span> <br><span class="badge badge-light">purchased</span>
+                       <td style="color: blue"><span class="badge badge-info">Available</span> <br><span class="badge badge-light">purchased</span>
                       </td>
                        @else
-                       <td style="color: blue"><span class="badge badge-info">  AVAILABLE</span>
+                       <td style="color: blue"><span class="badge badge-info">Available</span>
                       </td>
                        @endif
 
                        @if( $item->secondstatus == null)
 
-                       <td><span class="badge badge-danger">  NOT APPROVED</span></td>
+                       <td><span class="badge badge-danger">Not Received</span></td>
                         @else
-                       <td><span class="badge badge-success">  APPROVED</span></td>
+                       <td><span class="badge badge-success">Received</span></td>
                        @endif
 
 
@@ -122,10 +122,10 @@
           <br>
           @if($item->secondstatus == 1)
 
-          <h5  style="     color: #733703;"><b> Please assign Issue Note for materials requested so as Head of Section to Sign.</b></h5>
+          <h5  style="     color: #733703;"><b> Please download Issue Note for material(s) requested so as Head of Section to Sign.</b></h5>
          <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>   @endif
          @else
-         @if($item->status == 3)
+         @if(($item->status == 3) and ($item->secondstatus != 1))
          <h5  style="     color: #733703;"><b>  Please confirm if you have received Material.</b></h5>
          <a class="btn btn-primary btn-sm"  href="tick/material_received/{{$item->work_order_id}}" role="button">Confirm (&#10004;)</a>
          @endif

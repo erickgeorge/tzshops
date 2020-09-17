@@ -21,7 +21,7 @@
 
 <div class="container">
 
-<div ><h5 style=" "><b style="text-transform: capitalize;">Material accepted by inspector of works</b></h5></div>
+<div ><h5 class="container"><b>Material(s) Accepted by Inspector of Works</b></h5></div>
 
 <br>
 <hr>
@@ -91,10 +91,13 @@
 
 
       @if(($matform['material']->stock- $matform['material']->quantity_reserved)<($matform->quantity))
-      <td style="color: blue;"><span> <a style="color: blue;"  href="{{ route('store.material.reserve', [$matform->id]) }}" data-toggle="tooltip" title="Reserve and Send to Head of Procurement"><i class="fas fa-retweet"></i></a>
+      <td style="color: blue;"><span> <a style="color: blue;"  href="{{ route('store.material.reserve', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Procurement"><i class="fas fa-retweet"></i></a>
                    </span> </td>
       @else
       <td><span> <a style="color: green;"  href="{{ route('store.materialtohos', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
+                   </span> 
+      &nbsp;
+                   <span> <a style="color: blue;"  href="{{ route('store.materialtoreserves', [$matform->id , $wo->id]) }}" data-toggle="tooltip" title="Researve"><i class="fa fa-refresh"></i></i></a>
                    </span> </td>
       @endif
 
@@ -114,7 +117,7 @@
 
                     @elseif(in_array("yes", $p))
 
-                     <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > Reserve and send purchasing order </a></button>
+                     <button class="btn btn-primary" > <a  href="/store/material_reserve/{{$wo->id}}"  style="color: white" > Send purchasing order </a></button>
 
                     @else
 

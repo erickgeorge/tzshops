@@ -14,7 +14,7 @@
     use App\User;
     use App\iowzone;
     use App\iowzonelocation;
-
+    use App\Material;
 
  ?>
 
@@ -147,6 +147,26 @@ var total=2;
 
 
 
+         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
+            @csrf
+
+            <div class="form-group ">
+
+                @if($wo->emergency == 1)
+                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This works order is emergency</b>
+                @else
+                    <input type="checkbox" name="emergency"> <b style="color:red;">This works order is emergency</b>
+                @endif
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+
+          <br>
+
+
+
+
 
     @if(empty($wo['work_order_staffassigned']->id))
 
@@ -188,9 +208,8 @@ var total=2;
       <td style="color: red"> Not Completed Yet</td>
     @endif -->
 
-    @if($techform->leader == null )
-
-<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
+    @if($techform->leader == null)
+<td><a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
                                                     class="fas fa-user-tie large"></i></a></td>
                                                    @elseif($techform->leader2 == 3 )
  <td style="color: black;"  data-toggle="tooltip" >Yes </td>
@@ -230,20 +249,21 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 <!--report before work-->
 
-    @if(empty($wo['work_order_inspection']->status))
-
-    @else
-    <h4><b>Inspection Report Before Work </b></h4>
+   
+   
     <?php
 
   $idwo=$wo->id;
   $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
         ?>
+ @if(count($iforms)>0)
+
+ <h4><b>Inspection Report Before Work </b></h4>
 
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-    <th>Type</th>
+  
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -253,7 +273,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
   <tr>
-    <td class="text-primary" >{{ $iform->status }}</td>
+   
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -359,10 +379,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 <!--report after work-->
 
-    @if(empty($wo['work_order_inspection']->status))
-
-    @else
-
    
     <?php
 
@@ -372,13 +388,15 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
+    @if(count($iforms)>0)
 
- <h4><b>Inspection Report After Work </b></h4>
+
+ <h4><b>Technician(s) Report After Work </b></h4>
 
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-    <th>Type</th>
+   
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -388,7 +406,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
   <tr>
-    <td class="text-primary" >{{ $iform->status }}</td>
+  
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -412,15 +430,19 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-  @if(empty($wo['work_order_transport']->work_order_id))
 
-    @else
-    <h4><b>Transport Description </b></h4>
+<!-- transport for inspection -->
+    
+   
     <?php
 
   $idwo=$wo->id;
-  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->get();
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 0)->get();
 ?>
+
+    @if(count($tforms)>0)
+
+ <h4><b>Transport Description for Inspection</b></h4>
 
 <table style="width:100%">
   <tr>
@@ -464,6 +486,68 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <br>
     @endif
     <br>
+<!-- transport for inspection -->
+
+
+
+<!-- transport for work -->
+    
+   
+    <?php
+
+  $idwo=$wo->id;
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 1)->get();
+?>
+
+    @if(count($tforms)>0)
+
+ <h4><b>Transport Description for Work</b></h4>
+
+<table style="width:100%">
+  <tr>
+     <thead style="color: white;">
+    <th>Date of Transport</th>
+    <th>Time</th>
+    <th>Details</th>
+  <th>Status</th>
+  <th>Message</th>
+
+    <th>Date</th>
+  </thead>
+  </tr>
+    @foreach($tforms as $tform)
+
+
+  <tr>
+    <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
+     <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
+                                                                         class="badge badge-success">View Details</span></a></td>
+    <td class="text-primary">@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
+
+
+
+     <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
+                                                                         class="badge badge-success">View Message</span></a></td>
+
+ <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
+
+  </tr>
+
+  @endforeach
+  </table>
+  <br>
+     <hr>
+       <br>
+
+
+
+  <br>
+    @endif
+    <br>
+<!-- transport for work -->
+
+
 
 
 
@@ -474,7 +558,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @if(empty($wo['work_order_material']->id))
 
     @else
-    <h4><b>Materials Requests </b></h4>
+    <h4><b>Material(s) Request </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -602,15 +686,17 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-  @if(empty($wo['work_order_material']->id))
-
-    @else
-      <h4><b>Materials Used </b></h4>
+    
     <?php
 
   $idw=$wo->id;
   $matforms = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
 ?>
+
+
+  @if(count($matforms) > 0)
+
+  <h4><b>Material(s) Used </b></h4>
 
 <table style="width:100%">
   <tr>
@@ -641,23 +727,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @endif
 
 
-
-         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
-            @csrf
-
-            <div class="form-group ">
-
-                @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This works order is emergency</b>
-                @else
-                    <input type="checkbox" name="emergency"> <b style="color:red;">This works order is emergency</b>
-                @endif
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
-
-
         <div class="row">
             <div class="col">
                  <div class="checkbox">
@@ -666,6 +735,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                </div>
             </div>
         </div>
+
+
 
 
        <div id="divmanual">
@@ -750,14 +821,16 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
        @if($wo->zone_location != null)
 
-        <br>
-        <h4>Works order forms</h4>
+ <!--       <br>
+        <h4>WORKS ORDER FORMS</h4>
+        <hr> -->
+   
         {{-- tabs --}}
         <div class="payment-section-margin">
-            <div class="tab">
+           <!--
                 <div class="container-fluid">
                     <div class="tab-group row">
-                       <button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnicianforinspection')"><b style="color:black">ASSIGN TECHNICIAN FOR INSPECTION</b></button>
+                      <button required class="tablinks col-md-3" onclick="openTab(event, 'assigntechnicianforinspection')"><b style="color:black">ASSIGN TECHNICIAN FOR INSPECTION</b></button>
 
                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'customer')">INSPECTION FORMS</button>
 
@@ -767,15 +840,42 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         </button>
                         <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request')" id="defaultOpen">MATERIAL REQUEST FORM</button>
 
-                        <!--<button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>-->
+                        <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'material_request_store')" id="defaultOpen">MATERIAL REQUEST FROM STORE</button>
                         <button style="color:black" class="tablinks col-md-2" onclick="openTab(event, 'crosscheck_material_requested')" id="defaultOpen">CROSS CHECK MATERIAL REQUESTED</button>
 
 
                     </div>
                 </div>
-       @else
-         <div align="center" style="color: red;"> Please assign zone location for further Steps. </div>
-       @endif
+
+              -->
+      
+
+   
+
+
+
+
+            {{-- Require Material  --}}
+                @if(($wo->status == 5) and ($wo->requirematerial == NULL))
+                <div>If this works order requires material(s) please proceed by clicking the button named <b style="color: blue">Yes</b> , else if this works order does not require material(s) then you can proceed by assigning technician(s) for performing this works order.</div>
+
+                <br>
+                    <div>
+                             <form method="POST" action="{{ route('workOrder.requirematerial', [$wo->id]) }}">
+                                @csrf
+
+                                <div class="form-group ">
+
+                                        <input required type="checkbox" name="emergency"> <b style="color:blue;">This works order needs material(s) ?</b>
+                                  
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Yes</button>
+                              </form>
+                    </div>
+                @endif
+           {{-- Require Material  --}}
+
 
 
 
@@ -784,21 +884,22 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             {{-- ASSIGN TECHNICIAN tab--}}
 
 
-                    <div id="assigntechnician" class="tabcontent">
+                    <div >
+   @if(($wo->status == 5)||($wo->status == 40)) {{--Status for assigning technician if requires and not requires materials--}}                    
 
 
-                 @if(($wo->statusmform == 3) || ($wo->statusmform == 4))
+                 @if(((($wo->statusmform == 3) || ($wo->statusmform == 4)) and ($wo->requirematerial == NULL) )  or ($wo->status == 40 ))
 
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign Technician(s) For This Works Order</p>
+                                <p><u>ASSIGN TECHNICIAN(S) FOR THIS WORKS ORDER</u></p>
                             </div>
                         </div>
                       
 
  <!--techniciantable-->
- @if($wo->status == 5)
+ @if(($wo->status == 5)||($wo->status == 40))
 
  <table style="width:100%">
   <tr>
@@ -859,6 +960,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                        <TD>
                             <select   id="techidc" required class="custom-select"  name="technician_work[]" style="width: 700px;">
+                              <option selected value="">Choose technician ...</option>
 
 
 
@@ -898,7 +1000,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-
                                 @endforeach
                                 <?php
                                 for($i=0;$i<=$p-1;$i++){
@@ -932,42 +1033,45 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                         </div>
 
-                        <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow1('dataTable1')" />
+                        <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow1('dataTable1')" />
 
-                        <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow1('dataTable1')" />
+                        <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow1('dataTable1')" />
                         <br><br>
 
-                        <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
+                        <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
 
 
                 @else
-               <div align="center" style="color: red;"> Please assign inspection form before work before assigning technician for work. </div>
+               <div align="center" style="color: red;">@if($wo->requirematerial == NULL)  @else   @endif</div>
                 @endif
                     </div>
+@endif
+
+
 
                 {{-- end ASSIGN TECHNICIAN  --}}
 
+          
 
 
 
-
-
-                       {{-- ASSIGN TECHNICIAN tab--}}
+                {{-- ASSIGN TECHNICIAN tab--}}
 
                     @csrf
-                    <div id="assigntechnicianforinspection" class="tabcontent">
+                    <div >
 
                        @if($wo->statusmform == 1)
+                       <br>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Assign technician for inspection before work</p>
+                                <p><u>ASSIGN TECHNICIAN(S) FOR INSPECTION</u></p>
                             </div>
                         </div>
                         <div >
-                        <p id="alltechdetails">  </p>
+                        <p id="alltechdetails"> </p>
                         </div>
 
 
@@ -983,6 +1087,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD>
 
                             <select   id="techidfoxrinspection" required class="custom-select"  name="technician_work[]" style="width: 700px;">
+                              <option selected value="">Choose technician...</option>
 
 
                                <?php
@@ -1049,21 +1154,23 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                         </div>
 
-                        <INPUT class="btn badge-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
+                        <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
 
-                        <INPUT class="btn badge-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
+                        <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
                         <br><br>
 
-                        <button  type="submit" class="btn btn-primary bg-primary">Assign Technician</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                       <div style="padding-left: 600px;"> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a> </div>
                     </form>
                               @else
-               <div align="center" style="color: red;"> You have already assigned technician for inspection for this works order.</div>
+               <div align="center" style="color: red;"><!-- You have already assigned technician for inspection for this works order.--></div>
                 @endif
 
                     </div>
 
-     
+      @else
+         <div align="center" style="color: red;"> Please assign zone location for further Steps. </div>
+       @endif
 
                 {{-- end ASSIGN TECHNICIAN  --}}
 
@@ -1071,104 +1178,29 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                 {{-- INSPECTION tab--}}
-                <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
-                    @csrf
-                    <div id="customer" class="tabcontent">
-                      @if($wo->statusmform != 1)
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Works order status</p>
-                            </div>
-                        </div>
+              
+
+  @if(($wo->status == 70) || ($wo->status == 3) || ($wo->status == 4) || ($wo->status == 101))  <!--status for inspection report before work and after work-->
+    
 
 
-                         <div class="form-group">
-
-                            <select class="custom-select" required name="status" style="color: black; width:  700px;">
-
-                                   @if($wo->status == 70)
-                                    <option selected value="Inspection report before work">Inspection report before work</option> @else
-                                       <option selected value="Report after work">Report after work</option>@endif
-
-                            </select>
-
-                        </div>
-
-
-
-
-                        <p>Description</p>
-                        <div class="form-group">
-                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="200" class="form-control"  rows="5" id="comment"></textarea>
-                        </div>
-
-                        </br>
-                        <p>Inspection date</p>
-                        <div class="form-group">
-                            <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
-                        </div>
-                        <div class="form-group">
-                            <label>Select technician leader</label>
-                            <br>
-                            <select style="color: black; width:  700px;" required class="custom-select"  name="technician" >
-                              
-                                @if($wo->status == 70)
-
-                                <?php
-
-                                $tech = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->first();
-                                ?>
-                                   @if(empty($tech))
-                                   @else
-          
-                                    <option selected value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
-                                    </option>
-
-                                    @endif
-                          
-
-                                @else
-
-                                <?php
-
-                                $tech = WorkOrderStaff::where('work_order_id',$wo->id)->where('leader2', 3)->first();
-                                ?>
-
-                                 @if(empty($tech))
-                                   @else
-                                    <option  value="{{ $tech->staff_id }}">{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}
-                                    </option>
-                                   @endif 
-                            
-                                @endif
-                            </select>
-                        </div>
-
-
-
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
-                    </div>
-                </form>
-               @else
-               <div align="center" style="color: red;"> Please assign technician for inspection before filling inspection form. </div>
-                @endif
-                 </div>
-                {{-- end inspection --}}
-
-
-
-                 {{-- request_transport form--}}
+     {{-- request_transport form--}}
+     @if($wo->status == 70)
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
-                    <div id="request_transport" class="tabcontent">
+                    <div >
                   @if($wo->statusmform != 1)
+                  <br>
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Works Order Transport Request Form</p>
+                                <p><u>INSPECTION TRANSPORT REQUEST FORM</u></p>
                             </div>
                         </div>
-                </br>
+                </br>   
+
+                        <input  value="0" name="inspection" hidden></input>
+                        <input  value="4" name="status" hidden></input>
+
                         <p>Transport date</p>
                         <div class="form-group">
                             <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
@@ -1196,31 +1228,203 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 @endif
 
                 </div>
-                {{-- end request_transport form --}}
+
+                @endif
+                {{-- end request_transport form for inspection --}}
+
+
+
+                  {{-- request_transport form for work--}}
+
+     @if($wo->status == 3)
+                <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
+                    @csrf
+                    <div >
+                  @if($wo->statusmform != 1)
+                  <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><u>WORK TRANSPORT REQUEST FORM</u></p>
+                            </div>
+                        </div>
+                </br>   
+
+                         <input  value="1" name="inspection" hidden></input>
+                         <input  value="101" name="status" hidden></input>
+
+                        <p>Transport date</p>
+                        <div class="form-group">
+                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
+                        </div>
+
+                          <p>Transport time</p>
+                        <div class="form-group">
+                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  id="time"></input>
+                        </div>
+
+                         <p>Transport details</p>
+                        <div class="form-group">
+                            <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+                        <br>
+
+
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                    </div>
+                </form>
+
+                @else
+               <div align="center" style="color: red;"> Please assign technician for inspection before requesting transport. </div>
+                @endif
+
+                </div>
+
+                @endif
+                {{-- end request_transport form for work --}}
+
+
+
+
+
+                <br>
+                <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+                    @csrf
+                    <div >
+                      @if($wo->statusmform != 1)
+                        <div class="row">
+                            <div class="col-md-6">
+                                @if((($wo->status == 70) || ($wo->status == 4) )) 
+                                <p><b><u>INSPECTION REPORT BEFORE WORK</u></b></p>
+                                @endif
+
+                                @if((($wo->status == 3) || ($wo->status == 101) ) ) 
+                                <p><b><u>TECHNICIAN REPORT AFTER WORK</u></b></p>
+                                @endif
+                               
+                            </div>
+                        </div>
+
+
+                         <div class="form-group">
+
+                          <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
+
+                                   @if(($wo->status == 70)|| ($wo->status == 4)) 
+                                    <option selected value="Inspection report before work">Inspection report before work</option> @endif
+
+                                       @if((($wo->status == 3) || ($wo->status == 101) ) ) 
+                                       <option selected value="Report after work">Report after work</option>@endif
+
+                         </select>
+                        
+
+                          </div>
+
+                        <p>Description</p>
+                        <div class="form-group">
+                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="200" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+
+                        </br>
+                        <p>Inspection date</p>
+                        <div class="form-group">
+                            <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
+                        </div>
+                        <div class="form-group">
+                            <label>Technician leader</label>
+                            <br>
+                           
+                                
+                                  @if(($wo->status == 70 || ($wo->status == 4) ) ) 
+
+                                <?php
+
+                                $tech = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->first();
+                                ?>
+                                   @if(empty($tech))
+
+                                   <input class="form-control" required="" type="text" name="" style="color: black; width:  700px;" placeholder="Assign technician leader from the list of technician(s).">
+                                   @else
+          
+                                   <!-- <option selected value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
+                                    </option>-->
+
+                                      <input hidden class="form-control" required value="{{ $tech->staff_id }}"  name="technician" >
+
+                                       <input disabled class="form-control"  style="color: black; width:  700px;" value="{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}">
+
+                                    @endif
+                          
+
+                                @endif
+
+                               
+
+                                @if((($wo->status == 3) || ($wo->status == 101) ) ) 
+
+                               
+
+                                <?php
+
+                                $tech = WorkOrderStaff::where('work_order_id',$wo->id)->where('leader2', 3)->first();
+                                ?>
+
+                                 @if(empty($tech))
+                                   @else
+
+                                     <input hidden class="form-control" required value="{{ $tech->staff_id }}"  name="technician" >
+
+                                       <input disabled class="form-control"  style="color: black; width:  700px;" value="{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}">
+
+                                   @endif 
+                          
+                                @endif
+                         
+                        </div>
+
+
+
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                    </div>
+                </form>
+               @else
+               <div align="center" style="color: red;"> Please assign technician for inspection before filling inspection form. </div>
+                @endif
+                 </div>
+ @endif
+
+
+ {{-- end inspection --}}
+
+
+
+                
 
 
 
 
                 {{-- material_request tab--}}
 
-                 <div id="material_request" class="tabcontent">
+         
+                 <div >
                 <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
                     @csrf
 
 
 
                         <?php
-
-                        use App\Material;
-                        $materials= Material::orderby('name', 'ASC')->get();
-
-
+                        $materials = Material::orderby('name', 'ASC')->get();
                         ?>
-                         @if($wo->statusmform == 4)
+
+                    @if($wo->status == 5)
+
+                         @if(($wo->statusmform == 3) and ($wo->requirematerial == 1))
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p>Select material for this works order</p>
+                                <p><u>MATERIAL(S) REQUEST FORM</u></p>
                             </div>
                         </div>
 
@@ -1276,10 +1480,18 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                 @else
-               <div align="center" style="color: red;"> Please assign technician for inspection before requesting material for work. </div>
+               <div align="center" style="color: red;"></div>
                 @endif
+
+                 @endif
                  </div>
+
+                    
+
                 {{-- end material_request  --}}
+
+
+            
 
 
 
@@ -1291,7 +1503,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
      {{-- crosscheck material--}}
                 <div class="container">
-                 <div id="crosscheck_material_requested" class="tabcontent">
+                 <div >
                         <?php
 
 
@@ -1301,7 +1513,17 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                          @if(COUNT($wo_materials)!=0)
 
+
+
         <br>
+
+                <div class="row">
+                           
+                                <p><u>CROSSCHECK MATERIAL(S) BEFORE REQUESTING TO STORE </u></p>
+                            
+                 </div>
+
+
                         <table class="table table-striped" style="width:100%">
   <tr>
     <th>No</th>
@@ -1889,12 +2111,4 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
     </SCRIPT>
-
-
-
-
-
-
-
-
 

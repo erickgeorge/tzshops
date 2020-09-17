@@ -226,7 +226,9 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 3)
       {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
      elseif($statusname->status == 4)
-      {echo"<option value='".$statusname->status."'>Transportation stage</option>";}
+      {echo"<option value='".$statusname->status."'>Transportation stage for inspection</option>";}
+     elseif($statusname->status == 101)
+      {echo"<option value='".$statusname->status."'>Transportation stage for work</option>";}
      elseif($statusname->status == 5)
       {echo"<option value='".$statusname->status."'>Pre-implementation</option>";}
      elseif($statusname->status == 6)
@@ -334,11 +336,18 @@ foreach($userwithid as $userwithid)
                                 @endif
 
                             @elseif($work->status == 4)
-                                <td><span class="badge badge-info">transportation stage</span>
+                                <td><span class="badge badge-info">transportation stage for inspection</span>
                                  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
+
+                             @elseif($work->status == 101)
+                                <td><span class="badge badge-info">transportation stage for work</span>
+                                 <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif    
                             @elseif($work->status == 5)
                               <td><span class="badge badge-info">pre-implementation</span></td>
                             @elseif($work->status == 6)

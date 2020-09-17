@@ -321,7 +321,7 @@ Route::get('wo_release_grn', 'HomeController@wo_release_grn')->name('wo_release_
 Route::get('grn_release_list/{id}', 'PurchasingOrderController@grn_release_list')->name('grn_release_list')->middleware('auth');
 Route::get('procurement_release/{id}', 'PurchasingOrderController@procurement_release')->name('procurement.release')->middleware('auth');
 
-
+Route::get('material/to/reserve/in/store/{id}/{woid}', 'StoreController@materialtoreserveinstore')->name('store.materialtoreserves')->middleware('auth');
 
 Route::get('material/not/material/{id}', 'StoreController@materialnotreserve')->name('store.materialtohos')->middleware('auth');
 
@@ -906,3 +906,5 @@ Route::get('newdownloads','HomeController@newdownloads')->name('newdownloads')->
 Route::post('savedownloads','HomeController@savedownloads')->name('savedownloads')->middleware('auth');
 Route::get('viewdownloads/{id}','HomeController@viewdownloads')->name('viewdownloads')->middleware('auth');
 Route::get('deletedownload/{id}','HomeController@deletedownload')->name('deletedownload')->middleware('auth');
+
+Route::post('work_order/require/material/{id}', 'WorkOrderController@requirematerial')->name('workOrder.requirematerial');
