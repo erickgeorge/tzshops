@@ -582,7 +582,7 @@ foreach ($woclo as $woclo) {
 
 
              <li class="nav-item">
-              <a class="nav-link text-light" href="{{route('downloads')}}"> <i class="fas fa-cloud-download-alt    "></i> Downloads </a>
+              <a class="nav-link text-light" href="{{route('downloads')}}">  Documents </a>
               </li>
 
         <li>

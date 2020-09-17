@@ -134,7 +134,7 @@ use Carbon\Carbon;
 
       <div class="row">
         <div class="col">
-            <select name="problem_type" class="form-control mr-sm-2">
+            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2" onchange="getlocation1()">
                 <option value="" selected="selected">Select Problem Type</option>
                 <?php
                   $prob = WorkOrder::select('problem_type')->distinct()->get();
@@ -149,13 +149,13 @@ use Carbon\Carbon;
     <div class="modal-body">
       <div class="row">
         <div class="col">
-          <select name="location" class="form-control mr-sm-2">
+          <select id="locationselector1" name="location" class="form-control mr-sm-2">
                 <option value="" selected="selected">Select Location</option>
-                <?php
-                  $loca = WorkOrder::select('location')->Where('location','<>',null)->distinct()->get();
-                  foreach ($loca as $location) {
-                    echo "<option value='".$location->location."'>".$location->location."</option>";
-                  }
+<?php
+                 $loca = WorkOrder::select('location')->Where('location','<>',null)->distinct()->get();
+                 foreach ($loca as $location) {
+                   echo "<option value='".$location->location."'>".$location->location."</option>";
+                 }
                  ?>
             </select>
       </div>
@@ -165,7 +165,7 @@ use Carbon\Carbon;
   <div class="modal-body">
       <div class="row">
           <div class="col">
-            <select name="userid" class="form-control mr-sm-2">
+            <select name="userid" id="nameselector1" class="form-control mr-sm-2">
               @if(auth()->user()->type == 'CLIENT')
               <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
               @else
@@ -210,7 +210,7 @@ foreach($userwithid as $userwithid)
   <div class="modal-body">
       <div class="row">
           <div class="col">
-              <select name="status" class="form-control mr-sm-2">
+              <select id="statusselector1" name="status" class="form-control mr-sm-2">
                 <option value='' selected="selected">Select status</option>
     <?php $statusago = WorkOrder::select('status')->distinct()->get();
     foreach ($statusago as $statusname) {

@@ -197,6 +197,10 @@ class UserController extends Controller
         return response()->json(['rooms' => Room::where('block_id', $request->get('id'))->orderby('name_of_room','ASC')->get()]);
     }
 
+    public function sendreturnlocation(Request $request)
+    {
+        return response()->json(['returnlocation' => WorkOrder::where('problem_type', $request->get('problem_type'))->orderby('location','ASC')->get()]);
+    }
 
     public function getSections(Request $request)
     {
@@ -290,7 +294,7 @@ class UserController extends Controller
         // $user->name = $request['uname'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];
-        $user->college = $request['college']; 
+        $user->college = $request['college'];
 
         $user->section_id = $request['department'];
 

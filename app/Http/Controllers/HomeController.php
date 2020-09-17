@@ -59,7 +59,7 @@ class HomeController extends Controller
             if (auth()->user()->type == 'Inspector Of Works'){
                 return redirect()->route('onprocessworkorders');
                 }
-                
+
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
             if((auth()->user()->type == 'Supervisor Landscaping' )||(auth()->user()->type == 'USAB' ))
@@ -3691,7 +3691,7 @@ public function wo_material_acceptedbyIOWView($id)
     $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
     $all = User::where('type','like','%HOS%')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-    $head = 'All HOS Details';
+    $head = 'All Heads Of Sections Details';
         return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
 
    }
@@ -4258,6 +4258,64 @@ $v5=$type[4];
    {
     download::find($id)->delete();
     return redirect()->back()->with(['message'=>'Document deleted successfully!']);
+   }
+
+   public function editdownloads($id)
+   {
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $data = download::where('id',$id)->first();
+    return view('downloadsedit', ['role' => $role,'notifications' => $notifications,'data'=>$data]);
+
+   }
+
+   public function saveheaddownloads(Request $request)
+   {
+    $data = download::where('id',$request['id'])->first();
+    $data->name = $request['name'];
+    $data->save();
+
+    return redirect()->route('downloads')->with(['message'=>'document heading updated succesfully!']);
+
+   }
+
+   public function savefiledownloads(Request $request)
+   {
+
+    $request->validate([
+        "file" => "required|mimes:pdf",
+    ]);
+
+    $data = download::where('id',$request['id'])->first();
+
+    $path = public_path('download/'.date('s.i.H.d.m.Y'));
+
+      if(!File::isDirectory($path))
+      {
+        File::makeDirectory($path,$mode = 0777, true, true);
+      }
+
+      if($file = $request->file('file'))
+      {
+          $filename = time().'-'.$data['name'].'.'.$file->getClientOriginalExtension();
+          $targetpath = $path;
+
+          if($file->move($targetpath, $filename))
+          {
+
+
+            $data->document = $filename;
+
+            $data->date = date('s.i.H.d.m.Y');
+            $data->uploadedBy = auth()->user()->id;
+            $data->save();
+
+            return redirect()->route('downloads')->with(['message'=>'document updated succesfully!']);
+          }
+      }else{
+          return redirect()->back()->withErrors(['message'=>'Oops, something is wrong. try again!']);
+      }
+
    }
 
 }

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Downloads
+    Documents
     @endSection
 @section('body')
 
@@ -9,7 +9,7 @@
     <br>
     <div class="row">
         <div class="col-lg-12" >
-            <h4 style="text-transform: capitalize;" >Downloads</h4>
+            <h4 style="text-transform: capitalize;" >Documents</h4>
         </div>
 
     </div>
@@ -34,7 +34,7 @@
 <div class="row">
     @if($role['user_role']['role_id'] == 1)
     <div class="col-md-4">
-        <a href="{{route('newdownloads')}}" class="btn btn-primary">Add New Download</a>
+        <a href="{{route('newdownloads')}}" class="btn btn-primary">Add New Document</a>
     </div>
     @endif
 </div>
@@ -59,9 +59,11 @@
                     <tr>
                         <td>{{$f}}</td>
                         <td> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{$item->name}}</td>
-                        <td> 
-                            <a class="btn btn-primary" href="{{route('viewdownloads',[$item->id])}}" role="button"> <i class="fa fa-eye" aria-hidden="true"></i> View </a> 
+                        <td>
+                            <a class="btn btn-primary" href="{{route('viewdownloads',[$item->id])}}" role="button"> <i class="fa fa-eye" aria-hidden="true"></i> View </a>
                             @if($role['user_role']['role_id'] == 1)
+                            &nbsp;
+                            <a href="{{route('editdownloads',[$item->id])  }}" class="btn btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
                             <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this document?')" href="{{route('deletedownload',[$item->id])}}" role="button"> <i class="fa fa-trash" aria-hidden="true"></i> Delete </a>
                             @endif
                         </td>
@@ -71,14 +73,15 @@
                     @endphp
                     @endforeach
 
-                   
+
                 </tbody>
             </table>
             @else
-            <h4>No Downloads Currently Available</h4>
+            <h4>No Documents Currently Available</h4>
             @endif
         </p>
     </div>
 </div>
 </div>
 @endsection
+
