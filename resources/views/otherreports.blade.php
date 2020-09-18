@@ -176,7 +176,7 @@ foreach ($hoos as $hous) {
             <tr>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
-                @if($v == 'iow')  @else <td>{{ ucwords(substr($tech->type,4,12)) }}</td>@endif  <td>
+                @if($v == 'iow')  @else <td>{{ ucwords(strtolower(substr($tech->type,4,12))) }}</td>@endif  <td>
 
                     <?php $phonenumber = $tech->phone;
                     if(substr($phonenumber,0,1) == '0'){
