@@ -1096,7 +1096,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
     public function grnotepdf($id){
 
-           $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('type',15)
+           $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',15)
                     ->get()];
          $pdf = PDF::loadView('grnpdf', $data)->setPaper('a4', 'landscape');
 
@@ -1108,7 +1108,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     public function issuenotepdf($id){
 
 
-         $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('type',3)
+         $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status',3)
                     ->get()];
          $pdf = PDF::loadView('issuenotepdf', $data);
 

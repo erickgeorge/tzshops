@@ -60,6 +60,14 @@ class HomeController extends Controller
                 return redirect()->route('onprocessworkorders');
                 }
 
+            if (auth()->user()->type == 'STORE'){
+                return redirect()->route('wo_material_accepted_by_iow');
+            }
+
+            if (auth()->user()->type == 'Head Procurement'){
+                return redirect()->route('work_order_with_missing_material');
+            }
+
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
             if((auth()->user()->type == 'Supervisor Landscaping' )||(auth()->user()->type == 'USAB' ))

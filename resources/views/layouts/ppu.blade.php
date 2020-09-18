@@ -125,7 +125,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
             if ($tofautihii > 6) {
                 $wokioda = WorkOrder::where('id',$woclo->id)->first();
                 $wokioda->status = 30;
-                $wokioda->systemclosed = 1;
+                $wokioda->systemclosed = date('Y-m-d');
                 $wokioda->save();
             }
         }

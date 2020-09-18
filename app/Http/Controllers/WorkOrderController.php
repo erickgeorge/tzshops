@@ -520,7 +520,7 @@ public function transportforwork(Request $request, $id)
             foreach($unique_data as $a => $b) {
 
             $wo_staff =WorkOrderStaff::where('work_order_id', $id)->update(array('status5' =>22));
- 
+
             $work_order_staff = new  WorkOrderStaff();
             $work_order_staff->staff_id = $txtbox[ $a ];
 			$work_order_staff->status =0;
@@ -582,7 +582,7 @@ public function transportforwork(Request $request, $id)
             $work_order_staffassign->staff_id = $txtbox[ $a ];
             $work_order_staffassign->status =0;
             $work_order_staffassign->work_order_id = $id;
-            $work_order_staffassign->save(); 
+            $work_order_staffassign->save();
 
 
             $work_order_staff = new  WorkOrderStaff();
@@ -1479,5 +1479,20 @@ session::flash('message', ' Your workorder have been closed successfully');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $inspectorzone = iowzone::orderBy('zonename','ASC')->get();
         return view('workzones', [ 'role' => $role, 'notifications' => $notifications, 'workszones' => $inspectorzone]);
+    }
+
+    public function requirematerial($id)
+    {
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $wo = WorkOrder::where('id', $id)->first();
+        $wo->requirematerial = 1;
+        $wo->save();
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'changes saved successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
     }
 }

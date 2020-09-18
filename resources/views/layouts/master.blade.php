@@ -98,7 +98,7 @@
             if ($tofautihii > 6) {
                 $wokioda = WorkOrder::where('id',$woclo->id)->first();
                 $wokioda->status = 30;
-                $wokioda->systemclosed = 1;
+                $wokioda->systemclosed = date('Y-m-d');
                 $wokioda->save();
             }
         }
@@ -1538,6 +1538,14 @@ for (i = 0; i < dropdown.length; i++) {
             allowClear: true
         });
      </script>
+
+<script type="text/javascript">
+
+    $("#materialsselect").select2({
+          placeholder: "Choose material..",
+          allowClear: true
+      });
+   </script>
 
 
 
