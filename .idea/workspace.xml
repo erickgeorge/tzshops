@@ -2,18 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c7da29-8ef0-4506-84a6-5a8c6d9538b9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/estate.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/estate.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/download.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/download.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/downloadsnew.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/downloadsnew.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/otherreports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/otherreports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/usersfiltered.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usersfiltered.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/usersoptions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usersoptions.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/viewusers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/viewusers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cleaningarea.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cleaningarea.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/edit_work_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/edit_work_order.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/material_inspection_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/material_inspection_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/received_materials_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/received_materials_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/receivedmaterialwith_wo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/receivedmaterialwith_wo.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/requestedmaterialinstore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/requestedmaterialinstore.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/track_work_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/track_work_order.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/womaterialacceptedbyiowtostore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/womaterialacceptedbyiowtostore.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/work_orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/work_orders.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -35,6 +33,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -192,6 +193,7 @@
       <workItem from="1600244240823" duration="11368000" />
       <workItem from="1600320893264" duration="4120000" />
       <workItem from="1600331625246" duration="1795000" />
+      <workItem from="1600408580056" duration="6680000" />
     </task>
     <servers />
   </component>
@@ -211,6 +213,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="405" y="209" width="546" height="344" key="#Notifications" timestamp="1600408593979">
+      <screen x="0" y="26" width="1366" height="716" />
+    </state>
+    <state x="405" y="209" width="546" height="344" key="#Notifications/0.26.1366.716/1366.0.1280.1024@0.26.1366.716" timestamp="1600408593979" />
     <state x="1721" y="95" width="800" height="711" key="#Plugins" timestamp="1600244787372">
       <screen x="1366" y="0" width="1280" height="1024" />
     </state>

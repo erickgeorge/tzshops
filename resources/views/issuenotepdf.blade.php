@@ -98,23 +98,6 @@ tr:nth-child(even) {
     <br>
 
 
-    <div class="container-name">
-
-    <div class="div1"> Material Received By:<u style="padding-left: 40px;"> {{ $item['userreceiver']->fname.' '.$item['userreceiver']->lname }} </u> </div>
-    <div class="div2"> Store Manager:  <u style="padding-left: 12px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }} </u></div>
-   </div>
-   <br>
-
-
-   <div class="container-name">
-     <div  class="div1" >  Signature:      .........................................</div>
-
-
-      <div  class="div2" >  Signature:      ........................................</div>
-
-
-    </div>
-
 
 
 
@@ -136,6 +119,23 @@ tr:nth-child(even) {
      <div  style="color: blue"> Status: <span class="badge badge-info">  Received</span>
                     </div><br>
 
+
+    <div class="container-name">
+
+        <div class="div1"> Material Received By:<u style="padding-left: 40px;"> {{ $item['userreceiver']->fname.' '.$item['userreceiver']->mid_name.' '.$item['userreceiver']->lname }} </u> </div>
+        <div class="div2"> Store Manager:  <u style="padding-left: 12px;"> {{ Auth::user()->fname }} {{ Auth::user()->mid_name }} {{ Auth::user()->lname }} </u></div>
+    </div>
+    <br>
+
+
+    <div class="container-name">
+        <div  class="div1" >  Signature:      .........................................</div>
+
+
+        <div  class="div2" >  Signature:      ........................................</div>
+
+
+    </div>
           <div> Remark </div><br>
 
         <div> ..................................................................................................................................................................................
@@ -159,5 +159,5 @@ tr:nth-child(even) {
 
 
 <div id='footer'>
-    <p class="page">page</p>
+    <p class="page">Page-</p>
 </div>

@@ -140,10 +140,60 @@ var total=2;
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
     <br>
+    <div class="row">
+        <div class="col">
+            @if($wo->emergency == 1)
+            <h6 align="center" style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
+             @endif
+        </div>
+        <div class="col">
+            @if($wo->zonelocationtwo != null)
 
-     @if($wo->emergency == 1)
-   <h6 align="center" style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
-    @endif
+            <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
+               @csrf
+               <div class="row">
+               <div class="container" >
+                   <div class="input-group mb-3">
+                   <div class="input-group-prepend">
+                       <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
+                   </div>
+                   <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
+
+                     @if($wo->zonelocationtwo != null) <?php
+                           $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
+                           $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
+                            ?>
+                            @endif
+                            @if($wo->zonelocationtwo != null)
+                          <option value="{{ $wo->zonelocationtwo }}" selected>
+
+                             {{ $zonelocation->location }}, {{ $zoned->zonename }}
+                           </option>
+                       @else
+                       <option value="" selected>Choose... </option>
+                       @endif
+
+
+
+                  @foreach($iowzone as $user)
+                  <option value="{{ $user->id }}" >{{ $user->location }}</option>
+                  @endforeach
+
+                   </select>
+               </div>
+               </div>
+           </div>
+          @if($wo->zone_location == null)
+               <button type="submit" class="btn btn-primary">Save</button>
+          @endif
+
+             </form>
+
+        @endif
+        </div>
+    </div>
+
+
 
 
 
@@ -253,8 +303,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 <!--report before work-->
 
-   
-   
+
+
     <?php
 
   $idwo=$wo->id;
@@ -267,7 +317,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-  
+
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -400,7 +450,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-   
+
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -436,8 +486,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 <!-- transport for inspection -->
-    
-   
+
+
     <?php
 
   $idwo=$wo->id;
@@ -495,8 +545,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 <!-- transport for work -->
-    
-   
+
+
     <?php
 
   $idwo=$wo->id;
@@ -690,7 +740,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-    
+
     <?php
 
   $idw=$wo->id;
@@ -751,7 +801,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 <div class="input-group-prepend">
                     <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
-                <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" >
+                <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" >
 
             <option value="">Select Zone Location</option>
                @foreach($iowzone as $user)
@@ -769,49 +819,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
           </form>
      @endif
 
-     @if($wo->zonelocationtwo != null)
 
-         <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
-            @csrf
-            <div class="row">
-            <div class="container" >
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
-                </div>
-                <select style="width: 400px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
-
-                  @if($wo->zonelocationtwo != null) <?php
-                        $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
-                        $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
-                         ?>
-                         @endif
-                         @if($wo->zonelocationtwo != null)
-                       <option value="{{ $wo->zonelocationtwo }}" selected>
-
-                          {{ $zonelocation->location }}, {{ $zoned->zonename }}
-                        </option>
-                    @else
-                    <option value="" selected>Choose... </option>
-                    @endif
-
-
-
-               @foreach($iowzone as $user)
-               <option value="{{ $user->id }}" >{{ $user->location }}</option>
-               @endforeach
-
-                </select>
-            </div>
-            </div>
-        </div>
-       @if($wo->zone_location == null)
-            <button type="submit" class="btn btn-primary">Save</button>
-       @endif
-
-          </form>
-
-     @endif
 
 
        </div>
@@ -822,7 +830,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
  <!--       <br>
         <h4>WORKS ORDER FORMS</h4>
         <hr> -->
-   
+
         {{-- tabs --}}
         <div class="payment-section-margin">
            <!--
@@ -846,9 +854,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 </div>
 
               -->
-      
 
-   
+
+
 
 
 
@@ -865,7 +873,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 <div class="form-group ">
 
                                         <input required type="checkbox" name="emergency"> <b style="color:blue;">This works order needs material(s) ?</b>
-                                  
+
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Yes</button>
@@ -880,7 +888,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                     <div >
-   @if(($wo->status == 5)||($wo->status == 40)) {{--Status for assigning technician if requires and not requires materials--}}                    
+   @if(($wo->status == 5)||($wo->status == 40)) {{--Status for assigning technician if requires and not requires materials--}}
 
 
                  @if(((($wo->statusmform == 3) || ($wo->statusmform == 4)) and ($wo->requirematerial == NULL) )  or ($wo->status == 40 ))
@@ -1048,7 +1056,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 {{-- end ASSIGN TECHNICIAN  --}}
 
-          
+
 
 
                 {{-- ASSIGN TECHNICIAN tab--}}
@@ -1163,7 +1171,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </div>
 
 
-   
+
 
 
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -1171,14 +1179,14 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                 {{-- INSPECTION tab--}}
-              
+
 
   @if(($wo->status == 70) || ($wo->status == 3) || ($wo->status == 4) || ($wo->status == 101))  <!--status for inspection report before work and after work-->
-    
+
 
 
      {{-- request_transport form--}}
-     @if($wo->status == 70) 
+     @if($wo->status == 70)
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
@@ -1189,7 +1197,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 <p><u>INSPECTION TRANSPORT REQUEST FORM</u></p>
                             </div>
                         </div>
-                </br>   
+                </br>
 
                         <input  value="0" name="inspection" hidden></input>
                         <input  value="4" name="status" hidden></input>
@@ -1239,7 +1247,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                 <p><u>WORK TRANSPORT REQUEST FORM</u></p>
                             </div>
                         </div>
-                </br>   
+                </br>
 
                          <input  value="1" name="inspection" hidden></input>
                          <input  value="101" name="status" hidden></input>
@@ -1285,7 +1293,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     @csrf
                     <div >
  @if($wo->statusmform != 1)
- @if((($wo->status == 70) || ($wo->status == 4) )) 
+ @if((($wo->status == 70) || ($wo->status == 4) ))
 
  <?php
  $tech = techasigned::where('work_order_id',$wo->id)->where('leader2', 3)->first();
@@ -1295,9 +1303,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @else
                         <div class="row">
                             <div class="col-md-6">
-                                
+
                                 <p><b><u>INSPECTION REPORT BEFORE WORK</u></b></p>
-                               
+
 
                             </div>
                         </div>
@@ -1307,11 +1315,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                           <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
 
-                                   
+
                                     <option selected value="Inspection report before work">Inspection report before work</option>
 
                          </select>
-                        
+
 
                           </div>
 
@@ -1329,7 +1337,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             <label>Technician leader</label>
                             <br>
 
-       
+
                                    <!-- <option selected value="{{ $tech->staff_id }}">{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}
                                     </option>-->
 
@@ -1338,11 +1346,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                        <input disabled class="form-control"  style="color: black; width:  700px;" value="{{ $tech['technician_assigned_for_inspection']->lname.' '.$tech['technician_assigned_for_inspection']->fname }}">
 
 
-                                  
 
 
-   
-                         
+
+
+
                         </div>
 
 
@@ -1350,14 +1358,14 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
-    @endif 
+    @endif
     @endif
                @else
                <div align="center" style="color: red;"> Please assign technician for inspection before filling inspection form. </div>
                 @endif
                  </div>
 
- 
+
 
     {{-- end inspection before work--}}
 
@@ -1370,7 +1378,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     @csrf
                     <div >
 @if($wo->statusmform != 1)
-@if((($wo->status == 3) || ($wo->status == 101) ) ) 
+@if((($wo->status == 3) || ($wo->status == 101) ) )
  <?php
  $tech = WorkOrderStaff::where('work_order_id',$wo->id)->where('leader2', 3)->first();
  ?>
@@ -1380,8 +1388,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             <div class="col-md-6">
 
                                 <p><b><u>TECHNICIAN REPORT AFTER WORK</u></b></p>
-                               
-                               
+
+
                             </div>
                         </div>
 
@@ -1390,13 +1398,13 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                           <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
 
-                                 
 
-                                      
+
+
                                        <option selected value="Report after work">Report after work</option>
 
                          </select>
-                        
+
 
                           </div>
 
@@ -1417,7 +1425,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                                        <input disabled class="form-control"  style="color: black; width:  700px;" value="{{ $tech['technician_assigned']->lname.' '.$tech['technician_assigned']->fname }}">
 
-                         
+
                         </div>
 
 
@@ -1426,7 +1434,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
-  @endif 
+  @endif
   @endif
 
                @else
@@ -1434,7 +1442,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 @endif
                  </div>
 
- 
+
 
     {{-- end inspection after work--}}
 
@@ -1470,7 +1478,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 {{-- material_request tab--}}
 
-         
+
                  <div >
                 <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
                     @csrf
@@ -1549,7 +1557,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                  @endif
                  </div>
 
-                    
+
 
                 {{-- end material_request  --}}
 
@@ -1572,9 +1580,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         <br>
 
                 <div class="row">
-                           
+
                                 <p><u>CROSSCHECK MATERIAL(S) BEFORE REQUESTING TO STORE </u></p>
-                            
+
                  </div>
 
 
@@ -2173,4 +2181,3 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
     </SCRIPT>
-

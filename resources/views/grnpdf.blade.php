@@ -105,8 +105,8 @@ tr:nth-child(even) {
 
 
     <div class="container-name">
-     <div class="div1">Material Purchased By: <u style="padding-left: 12px;"> {{ $item['user']->fname.' '.$item['user']->lname }}</u></div>
-    <div class="div2"> Store Manager:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->lname }}  </u> </div>
+     <div class="div1">Material Purchased By: <u style="padding-left: 12px;"> {{ $item['user']->fname.' '.$item['user']->mid_name.' '.$item['user']->lname }}</u></div>
+    <div class="div2"> Store Manager:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->mid_name }}  {{ Auth::user()->lname }}  </u> </div>
    </div>
 <br>
    <div class="container-name">
@@ -149,5 +149,5 @@ tr:nth-child(even) {
 
 
 <div id='footer'>
-    <p class="page">page</p>
+    <p class="page">Page-</p>
 </div>

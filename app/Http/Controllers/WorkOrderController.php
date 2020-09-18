@@ -539,7 +539,7 @@ public function transportforwork(Request $request, $id)
             foreach($unique_data as $a => $b) {
 
             $wo_staff =WorkOrderStaff::where('work_order_id', $id)->update(array('status5' =>22));
- 
+
             $work_order_staff = new  WorkOrderStaff();
             $work_order_staff->staff_id = $txtbox[ $a ];
             $work_order_staff->status =0;
@@ -601,7 +601,7 @@ public function transportforwork(Request $request, $id)
             $work_order_staffassign->staff_id = $txtbox[ $a ];
             $work_order_staffassign->status =0;
             $work_order_staffassign->work_order_id = $id;
-            $work_order_staffassign->save(); 
+            $work_order_staffassign->save();
 
 
             $work_order_staff = new  WorkOrderStaff();
@@ -1499,4 +1499,6 @@ session::flash('message', ' Your workorder have been closed successfully');
         $inspectorzone = iowzone::orderBy('zonename','ASC')->get();
         return view('workzones', [ 'role' => $role, 'notifications' => $notifications, 'workszones' => $inspectorzone]);
     }
+
+   
 }

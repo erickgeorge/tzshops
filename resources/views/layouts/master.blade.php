@@ -98,7 +98,7 @@
             if ($tofautihii > 6) {
                 $wokioda = WorkOrder::where('id',$woclo->id)->first();
                 $wokioda->status = 30;
-                $wokioda->systemclosed = 1;
+                $wokioda->systemclosed = date('Y-m-d');
                 $wokioda->save();
             }
         }
@@ -821,11 +821,11 @@
 
   <button
 
-  class="dropdown-btn"><h6>Head of Sections
+  class="dropdown-btn"><h6>Heads of Sections
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a  href="{{ url('/allhos')}}"><h6>All Head of sections Details</h6></a>
+    <a  href="{{ url('/allhos')}}"><h6>All Heads of sections Details</h6></a>
     <a  href="{{ url('hoscount')}}"><h6>HoS with completed works orders</h6></a>
   </div>
 
@@ -1538,6 +1538,14 @@ for (i = 0; i < dropdown.length; i++) {
             allowClear: true
         });
      </script>
+
+<script type="text/javascript">
+
+    $("#materialsselect").select2({
+          placeholder: "Choose material..",
+          allowClear: true
+      });
+   </script>
 
 
 
