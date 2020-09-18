@@ -11,7 +11,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style=" "  ><b style="text-transform: capitalize;">Works order with missing materials</b></h5>
+            <h5 class="container" ><b>Works order with Missing Materials</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -51,7 +51,7 @@
 
           <tbody>
 
-           <?php $i= 0; ?>
+           <?php $i= 1; ?>
             @foreach($items as $item)
 
 

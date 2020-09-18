@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style=" " ><b style="text-transform: capitalize;"> Work order with material reserved</b></h5>
+            <h5 class="container" ><b> Works Order with Material(s) Reserved</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -39,11 +39,13 @@
 
 
                 <th > No </th>
-				<th >Works order ID </th>
+                <th >Works order ID </th>
                 <th >HoS Name </th>
-				<th >Works order Detail</th>
+                <th >Works order Detail</th>
+                <th >Status</th>
 
-				<th >Action</th>
+
+                <th >Action</th>
 
             </tr>
             </thead>
@@ -59,12 +61,15 @@
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 
                     <td>{{ $item['workorder']->details }}</td>
+                     @if($item->status == 5)
+                     <td><span class="badge badge-primary">Reserved to be purchased </span></td>
+                     @endif
+                     @if($item->status == 100) 
+                      <td><span class="badge badge-success">Available, reserved for missing materials</span></td>
+                     @endif
 
                     <td>
-
-					 <a class="btn btn-primary btn-sm" href="{{ route('wo.reserved.material', [$item->work_order_id]) }}" role="button">View Material</a></td>
-
-
+                     <a class="btn btn-primary btn-sm" href="{{ route('wo.reserved.material', [$item->work_order_id]) }}" role="button">View Material</a></td>
                     </tr>
                     @endforeach
             </tbody>
@@ -75,7 +80,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h1> No Works order Material accepted by Inspector of Work </h1></div>
+<div style="padding-top: 300px;" align="center"><h1> No Works order Material(s) accepted by Inspector of Work </h1></div>
 
 @endif
     @endSection
