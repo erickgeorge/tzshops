@@ -908,3 +908,11 @@ Route::get('viewdownloads/{id}','HomeController@viewdownloads')->name('viewdownl
 Route::get('deletedownload/{id}','HomeController@deletedownload')->name('deletedownload')->middleware('auth');
 
 Route::post('work_order/require/material/{id}', 'WorkOrderController@requirematerial')->name('workOrder.requirematerial');
+
+Route::get('editdownloads/{id}','HomeController@editdownloads')->name('editdownloads')->middleware('auth');
+Route::post('saveheaddownloads','HomeController@saveheaddownloads')->name('saveheaddownloads')->middleware('auth');
+Route::post('savefiledownloads','HomeController@savefiledownloads')->name('savefiledownloads')->middleware('auth');
+
+Route::get('sendreturnlocation','UserController@sendreturnlocation')->name('sendreturnlocation')->middleware('auth');
+Route::get('fetchstatus1','UserController@fetchstatus1')->name('fetchstatus1')->middleware('auth');
+

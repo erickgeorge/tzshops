@@ -142,7 +142,7 @@ td, th {
 
     <h4><b>Assigned Technician for Inspection</b></h4>
     @if(empty($wo['work_order_staffassigned']->id))
-       <p class="text-primary">No Technician assigned yet</p>
+       <p >No Technician assigned yet</p>
     @else
 
 
@@ -168,7 +168,7 @@ td, th {
 
      @if($techform['technician_assigned_for_inspection'] != null)
     <td style="text-transform: capitalize;">{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress  @endif</td>
+   <td >@if($techform->status==1) Completed   @else  On Progress  @endif</td>
 
  <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
@@ -208,7 +208,7 @@ td, th {
 
     <h4><b style="text-transform: capitalize;">Technician Inspection Report</b></h4>
     @if(empty($wo['work_order_inspection']->status))
-        <p class="text-primary">Not inspected yet</p>
+        <p >Not inspected yet</p>
     @else
     <?php
 
@@ -230,7 +230,7 @@ td, th {
 
 
   <tr>
-    <td class="text-primary" >{{ $iform->status }}</td>
+    <td  >{{ $iform->status }}</td>
       <td><?php $erick = $iform->description; echo wordwrap($erick, 20, "<br />\n"); ?></td>
       <td style="text-transform: capitalize;">{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
  <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -246,7 +246,7 @@ td, th {
 
   <h4><b>Assigned Technician for Work </b></h4>
 @if(empty($wo['work_order_staff']->id))
-        <p class="text-primary">No Technician assigned yet</p>
+        <p >No Technician assigned yet</p>
     @else
     <?php
 
@@ -274,7 +274,7 @@ td, th {
 
    @if($techform['technician_assigned'] != null)
     <td style="text-transform: capitalize;">{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td class="text-primary">@if($techform->status==1) Completed   @else  On Progress  @endif</td>
+   <td >@if($techform->status==1) Completed   @else  On Progress  @endif</td>
 
 
 
@@ -314,7 +314,7 @@ td, th {
 
 
           @else
-          <td class="text-primary">No technician assigned yet</td>
+          <td >No technician(s) assigned yet</td>
       @endif
 
 
@@ -327,7 +327,7 @@ td, th {
 
     <h4><b style="text-transform: capitalize;">Technician Report after work</b></h4>
     @if(empty($wo['work_order_inspection']->status))
-        <p class="text-primary">Not inspected yet</p>
+        <p >Not inspected yet</p>
     @else
     <?php
 
@@ -349,7 +349,7 @@ td, th {
 
 
   <tr>
-    <td class="text-primary" >{{ $iform->status }}</td>
+    <td  >{{ $iform->status }}</td>
       <td><?php $erick = $iform->description; echo wordwrap($erick, 20, "<br />\n"); ?></td>
       <td style="text-transform: capitalize;">{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
  <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -361,7 +361,7 @@ td, th {
     @endif
     <h4><b>Transport Description </b></h4>
   @if(empty($wo['work_order_transport']->work_order_id))
-        <p class="text-primary">No Transport requested</p>
+        <p>No Transport requested</p>
     @else
     <?php
 
@@ -392,7 +392,7 @@ td, th {
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
      <td> <a onclick="myfunc('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
                                                                          class="badge badge-success">View Details</span></a></td>
-    <td class="text-primary">@if($tform->status==0) Waiting   @elseif($tform->status==1) Approved @else Rejected   @endif</td>
+    <td >@if($tform->status==0) Waiting   @elseif($tform->status==1) Approved @else Rejected   @endif</td>
 
 
 
@@ -416,7 +416,7 @@ td, th {
   @if(auth()->user()->type != 'CLIENT')
     <h4><b>Materials Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
-        <p class="text-primary">No Material have been requested yet</p>
+        <p >No Material have been requested yet</p>
     @else
     <?php
 
@@ -456,7 +456,7 @@ td, th {
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td class="text-primary">@if($matform->status==0)<span class="badge badge-success"> Waiting for material approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from store</span> @elseif($matform->status==20) <span class="badge badge-success">Please crosscheck material </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of material rejected </span> @elseif($matform->status== 5)<span class="badge badge-success">Material on procurement stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material taken from store</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+   <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for material approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from store</span> @elseif($matform->status==20) <span class="badge badge-success">Please crosscheck material </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of material rejected </span> @elseif($matform->status== 5)<span class="badge badge-success">Material on procurement stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material taken from store</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
     Rejected by IoW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material purchased</span>
        @endif</td>
 
@@ -476,7 +476,7 @@ td, th {
    @elseif(auth()->user()->type == 'CLIENT')
       <h4><b>Materials Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
-        <p class="text-primary">No Material have been requested yet</p>
+        <p>No Material have been requested yet</p>
     @else
     <?php
 
@@ -506,7 +506,7 @@ td, th {
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td class="text-primary">@if($matform->status==0)<span class="badge badge-success"> Waiting for material approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW  </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from store </span> @elseif($matform->status==20) <span class="badge badge-success">Material Requested </span> @elseif($matform->status==17) <span class="badge badge-warning">Material on check by IoW </span>  @elseif($matform->status== 3)<span class="badge badge-primary">Material taken from store</span>  @elseif($matform->status== 5)<span class="badge badge-success">Material on procurement stage</span> @elseif($matform->status == -1)<span class="badge badge-warning">Material on check by IoW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material Purchased</span>
+   <td>@if($matform->status==0)<span class="badge badge-success"> Waiting for material approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW  </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from store </span> @elseif($matform->status==20) <span class="badge badge-success">Material Requested </span> @elseif($matform->status==17) <span class="badge badge-warning">Material on check by IoW </span>  @elseif($matform->status== 3)<span class="badge badge-primary">Material taken from store</span>  @elseif($matform->status== 5)<span class="badge badge-success">Material on procurement stage</span> @elseif($matform->status == -1)<span class="badge badge-warning">Material on check by IoW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material Purchased</span>
        @endif</td>
 
   <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
@@ -526,7 +526,7 @@ td, th {
      <h4><b>Materials Used </b></h4>
 
   @if(empty($wo['work_order_material']->id))
-        <p class="text-primary">No Material Used for this Works order</p>
+        <p >No Material Used for this Works order</p>
     @else
     <?php
 
@@ -567,8 +567,17 @@ td, th {
 <table class="table table-light">
     <tbody>
         <tr>
-            <td style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days</td>
+            <td style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </td>
         </tr>
     </tbody>
 </table>
-@endif
+@elseif($wo->status == 30)
+<br>
+<table class="table table-light">
+    <tbody>
+        <tr>
+            <td style="text-transform: capitalize;">This Works Order Was Closed on : {{ date('d F Y', strtotime($wo->updated_at))  }}  By Head of section</td>
+        </tr>
+    </tbody>
+</table>
+ @endif

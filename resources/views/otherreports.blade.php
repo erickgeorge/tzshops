@@ -76,7 +76,7 @@ foreach ($hoos as $hous) {
 </div>
 @endif
 <!-- Modal -->
-@if($head == 'All HOS Details')
+@if($head == 'All Heads Of Sections Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 
 @elseif($head == 'All Inspectors of work Details')
@@ -115,12 +115,12 @@ foreach ($hoos as $hous) {
       <div class="row">
           <div class="col">
               <select name="type" class="form-control mr-sm-2">
-                @if($v == 'iow')  @else  <option value='' selected="selected">Select Type/section</option>
-                <option value="">All Type/Sections</option> @endif
+                @if($v == 'iow')  @else  <option value='' selected="selected">Select section</option>
+                <option value="">All Sections</option> @endif
 
 
 @foreach($to as $too)
-<option  @if($v == 'iow') selected @endif value="{{ $too->type }}">{{ $too->type }}</option>
+<option  @if($v == 'iow') selected @endif value="{{ $too->type }}">{{ substr($too->type,4,12) }}</option>
 @endforeach
               </select>
           </div>
@@ -144,9 +144,9 @@ foreach ($hoos as $hous) {
         <tr style="color: white;">
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
-            <th scope="col">Email</th>
-            @if($v == 'iow')  @else<th scope="col">Type</th>@endif
+            @if($v == 'iow')  @else<th scope="col">Section</th>@endif
             <th title="phone" scope="col">Phone</th>
+            <th scope="col">Email</th>
 
             @if($head == 'All Technicians Details')
              <th>Action</th>
@@ -176,19 +176,19 @@ foreach ($hoos as $hous) {
             <tr>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
+                @if($v == 'iow')  @else <td>{{ ucwords(substr($tech->type,4,12)) }}</td>@endif  <td>
+
+                    <?php $phonenumber = $tech->phone;
+                    if(substr($phonenumber,0,1) == '0'){
+
+                        $phonreplaced = ltrim($phonenumber,'0');
+                        echo '+255'.$phonreplaced;
+
+                    }else { echo $tech->phone;}
+
+                    ?></td>
                 <td>{{ $tech->email }}</td>
-                @if($v == 'iow')  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
-                <td>
 
-      <?php $phonenumber = $tech->phone;
-        if(substr($phonenumber,0,1) == '0'){
-
-          $phonreplaced = ltrim($phonenumber,'0');
-          echo '+255'.$phonreplaced;
-
-        }else { echo $tech->phone;}
-
-      ?></td>
 
             @php
 

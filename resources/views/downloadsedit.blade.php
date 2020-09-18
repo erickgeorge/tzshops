@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-   New Document
+   Edit Document
     @endSection
 @section('body')
 
@@ -9,7 +9,7 @@
     <br>
     <div class="row">
         <div class="col-lg-12" >
-            <h4 style="text-transform: capitalize;" >Add New Document</h4>
+            <h4 style="text-transform: capitalize;" >Edit Document</h4>
         </div>
 
     </div>
@@ -35,15 +35,29 @@
 <div class="card">
     <div class="card-body">
         <p class="card-text">
-            <form action="{{route('savedownloads')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('saveheaddownloads')}}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="text" name="id" value="{{ $data['id'] }}" hidden>
                 <div class="form-group">
-                  <label for="">Document Name</label>
-                  <input required type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                  <label for="">Update Document Name</label>
+                  <input required type="text" value="{{ $data['name'] }}" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId">
                   <small id="helpId" class="text-danger">Required</small>
                 </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <a class="btn btn-danger" href="{{route('downloads')}}" role="button"> Cancel </a>
+            </form>
+        </p>
+    </div>
+</div>
+{{-- <br>
+<div class="card">
+    <div class="card-body">
+        <p class="card-text">
+            <form action="{{route('savefiledownloads')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="text" name="id" value="{{ $data['id'] }}" hidden>
                 <div class="form-group">
-                  <label for="">Document File</label>
+                  <label for="">Update Document File</label>
                   <input required type="file" name="file" accept="application/pdf" id="" class="form-control" placeholder="" aria-describedby="helpId"></textarea>
                   <small id="helpId" class="text-danger">Required, File should only be in PDF format</small>
                 </div>
@@ -52,5 +66,5 @@
             </form>
         </p>
     </div>
-</div>
+</div> --}}
 @endsection
