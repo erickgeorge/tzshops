@@ -163,10 +163,12 @@
 
 <table style="width:100%">
   <tr>
+    <thead style="color: white;">
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
-  <th>Date Completed Inspection</th>
+    <th>Leader</th>
+    </thead>
 
   </tr>
     @foreach($techforms as $techform)
@@ -178,14 +180,17 @@
 
  <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
-    @if($techform->created_at ==  $techform->updated_at)
+  @if($techform->leader == null)
+<td><a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
+                                                    class="fas fa-user-tie large"></i></a></td>
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Yes </td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
+                                                    @endif
+ 
 
-
-    <td> Not completed yet!</td>
-    @else
-   <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
-
-    @endif
+   
 
    <!-- @if($techform->status!=1)
    <td>   <a style="color: black;" href="{{ route('workOrder.technicianCompleteinspection', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE INSPECTION"><i
@@ -204,6 +209,8 @@
 
 
 
+
+
   </tr>
     @endforeach
   </table>
@@ -219,6 +226,57 @@
 
 
 
+<<<<<<< HEAD
+<!--report before work-->
+
+    @if(empty($wo['work_order_inspection']->status))
+
+    @else
+    <h4><b>Inspection Report Before Work </b></h4>
+    <?php
+
+  $idwo=$wo->id;
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
+        ?>
+
+<table style="width:100%">
+  <tr>
+     <thead style="color: white;">
+  
+    <th>Description</th>
+  <th>Full Name</th>
+    <th>Date</th>
+  </thead>
+  </tr>
+    @foreach($iforms as $iform)
+
+
+  <tr>
+   
+    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
+      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
+    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
+  </tr>
+
+  @endforeach
+  </table>
+  <br>
+    <hr>
+      <br>
+
+
+
+  <br>
+
+    @endif
+
+<!--report before work-->
+
+
+
+
+=======
+>>>>>>> 6e631d0e747ea7874fdb2dcb5b22f7d5b05cf2cb
   <h4><b>Assigned Technician(s) for Work </b></h4>
 @if(empty($wo['work_order_staff']->id))
         <p >No Technician(s) assigned yet</p>
@@ -231,11 +289,13 @@
 
 <table style="width:100%">
   <tr>
+<thead style="color: white;">
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
-  <th>Date Completed work</th>
+ 
   <th>Leader</th>
+</thead>
 
   </tr>
     @foreach($techforms as $techform)
@@ -252,23 +312,15 @@
 
 
    <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
-    @if($techform->created_at ==  $techform->updated_at)
-
-
-    <td> NOT COMPLETED</td>
-    @else
-     <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
-    @endif
-
+   
     @if($techform->leader == null )
 
 <td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
                                                     class="fas fa-user-tie large"></i></a></td>
                                                    @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Leader<i
-                                                    class="fas fa-user-tie large"></i></td>
+ <td style="color: black;"  data-toggle="tooltip" >Yes</td>
                                                     @else
-<td style="color: black;"  data-toggle="tooltip" >Normal technician</i></td>
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
 
 
@@ -300,40 +352,71 @@
      <br>
    <hr>
 
-     <br>
-    <h4><b>Technician Report</b></h4>
+
+
+<!--report after work-->
+
     @if(empty($wo['work_order_inspection']->status))
+<<<<<<< HEAD
+
+=======
         <p >Not inspected yet</p>
+>>>>>>> 6e631d0e747ea7874fdb2dcb5b22f7d5b05cf2cb
     @else
+
+   
     <?php
 
   $idwo=$wo->id;
-  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->get();
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Report after work')->get();
         ?>
+
+
+
+
+ <h4><b>Inspection Report After Work </b></h4>
 
 <table style="width:100%">
   <tr>
-    <th>Status</th>
+     <thead style="color: white;">
+   
     <th>Description</th>
   <th>Full Name</th>
-    <th>Date </th>
+    <th>Date</th>
+  </thead>
   </tr>
     @foreach($iforms as $iform)
 
 
   <tr>
+<<<<<<< HEAD
+   
+    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
+=======
     <td  >{{ $iform->status }}</td>
       <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
+>>>>>>> 6e631d0e747ea7874fdb2dcb5b22f7d5b05cf2cb
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
- <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
+    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
   </tr>
 
   @endforeach
   </table>
-    @endif
-    <br>
-    <br>
+
+  <br>
     <hr>
+      <br>
+
+
+
+  <br>
+
+    @endif
+
+<!--report after work-->
+
+   
+
 
 
   <br>
@@ -349,6 +432,7 @@
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
     <th>Date</th>
     <th>Time</th>
     <th>Details</th>
@@ -356,6 +440,7 @@
   <th>Message</th>
 
     <th>Date Requested</th>
+  </thead>
   </tr>
     @foreach($tforms as $tform)
 
@@ -390,9 +475,13 @@
 
   <br>
   @if(auth()->user()->type != 'CLIENT')
-    <h4><b>Materials Requests </b></h4>
+    <h4><b>Material(s) Request </b></h4>
   @if(empty($wo['work_order_material']->id))
+<<<<<<< HEAD
+        <p class="text-primary">No Material have been requested</p>
+=======
         <p >No Material have been requested yet</p>
+>>>>>>> 6e631d0e747ea7874fdb2dcb5b22f7d5b05cf2cb
     @else
     <?php
 
@@ -402,6 +491,7 @@
 
 <table style="width:100%">
   <tr>
+     <thead style="color: white;">
 
     <th>Materials Name</th>
 
@@ -412,6 +502,7 @@
     <th>Status</th>
      <th>Date Requested</th>
       <th>Date Updated</th>
+       </thead>
 
   </tr>
     @foreach($matforms as $matform)
@@ -451,9 +542,13 @@
   <br>
   <hr>
    @elseif(auth()->user()->type == 'CLIENT')
-      <h4><b>Material Requests: </b></h4>
+      <h4><b>Material(s) Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
+<<<<<<< HEAD
+        <p class="text-primary">No Material have been requested</p>
+=======
         <p >No Material have been requested yet</p>
+>>>>>>> 6e631d0e747ea7874fdb2dcb5b22f7d5b05cf2cb
     @else
     <?php
 
@@ -463,7 +558,7 @@
 
 <table style="width:100%">
   <tr>
-
+<thead style="color: white;">
     <th>Material Name</th>
     <th>Material Description</th>
     <th>Type</th>
@@ -471,7 +566,7 @@
     <th>Status</th>
     <th>Date Requested</th>
     <th>Date Updated</th>
-
+</thead>
   </tr>
     @foreach($matforms as $matform)
   <tr>
@@ -501,7 +596,7 @@
    @endif
      <br>  <br>
 
-     <h4><b>Materials Used </b></h4>
+     <h4><b>Material(s) Used </b></h4>
 
   @if(empty($wo['work_order_material']->id))
         <p >No Material Used for this Works order</p>
@@ -514,11 +609,12 @@
 
 <table style="width:100%">
   <tr>
-
+ <thead style="color: white;">
     <th>Material Name</th>
     <th>Material Description</th>
      <th>Type</th>
      <th>Quantity</th>
+  </thead>  
   </tr>
     @foreach($matforms as $matform)
   <tr>

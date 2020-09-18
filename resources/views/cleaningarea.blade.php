@@ -1,7 +1,7 @@
 @extends('layouts.land')
 
 @section('title')
-    manage cleaning area
+    Manage cleaning area
     @endSection
 
 @section('body')
@@ -218,7 +218,7 @@
 
 
 
-                     @if($role['user_role']['role_id'] == 1)
+                     @if(($role['user_role']['role_id'] == 1) || (auth()->user()->type != 'DVC Admin') || (auth()->user()->type != 'Estates Director') || (auth()->user()->type == 'Estates officer'))
                     @foreach($cleanarea as $clean_area)
                         <?php $i++; ?>
                         <tr>

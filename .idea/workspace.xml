@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c7da29-8ef0-4506-84a6-5a8c6d9538b9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cleaningarea.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cleaningarea.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/edit_work_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/edit_work_order.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/grnpdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/grnpdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/issuenotepdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/issuenotepdf.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/asset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/asset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/land.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/land.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/ppu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/ppu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/onprocessworkorders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/onprocessworkorders.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/wo_material_accepted.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wo_material_accepted.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/womaterialaccepted.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/womaterialaccepted.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/material_inspection_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/material_inspection_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/received_materials_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/received_materials_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/receivedmaterialwith_wo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/receivedmaterialwith_wo.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/requestedmaterialinstore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/requestedmaterialinstore.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/track_work_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/track_work_order.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/womaterialacceptedbyiowtostore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/womaterialacceptedbyiowtostore.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/work_orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/work_orders.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +193,7 @@
       <workItem from="1600244240823" duration="11368000" />
       <workItem from="1600320893264" duration="4120000" />
       <workItem from="1600331625246" duration="1795000" />
-      <workItem from="1600408580056" duration="5953000" />
+      <workItem from="1600408580056" duration="6680000" />
     </task>
     <servers />
   </component>

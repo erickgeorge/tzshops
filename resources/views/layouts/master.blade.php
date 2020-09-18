@@ -821,11 +821,11 @@
 
   <button
 
-  class="dropdown-btn"><h6>Head of Sections
+  class="dropdown-btn"><h6>Heads of Sections
     <i class="fa fa-caret-down"></i></h6>
   </button>
   <div class="dropdown-container">
-    <a  href="{{ url('/allhos')}}"><h6>All Head of sections Details</h6></a>
+    <a  href="{{ url('/allhos')}}"><h6>All Heads of sections Details</h6></a>
     <a  href="{{ url('hoscount')}}"><h6>HoS with completed works orders</h6></a>
   </div>
 
