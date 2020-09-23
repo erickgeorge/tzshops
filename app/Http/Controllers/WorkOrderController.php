@@ -273,10 +273,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
 
-
-
-
-
         return redirect()->route('workOrder.edit.view', [$wO->id])->with([
             'role' => $role,
             'notifications' => $notifications,
@@ -643,8 +639,6 @@ public function transportforwork(Request $request, $id)
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
-
-
             $material = $request['material'];
             $quantity = $request['quantity'];
 
@@ -671,8 +665,7 @@ public function transportforwork(Request $request, $id)
 
 }
 
-
-        return redirect()->route('workOrder.edit.view', [$id])->with([
+     return redirect()->route('workOrder.edit.view', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
           'message' => 'Material request for Work order is submitted, Please crosscheck the list if successfully then send again to Store Manager. ',
@@ -958,7 +951,8 @@ public function transportforwork(Request $request, $id)
         return view('track_work_order', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => WorkOrder::where('id', $id)->with('work_order_inspection')->first()
+            'wo' => WorkOrder::where('id', $id)->with('work_order_inspection')->first(),
+             'iowzone' => iowzonelocation::orderby('location','asc')->orderby('iowzone_id','asc')->get()
         ]);
     }
 

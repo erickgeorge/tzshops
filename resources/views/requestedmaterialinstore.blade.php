@@ -52,6 +52,8 @@
   <tbody>
 
     @foreach($wo_materials as $matform)
+
+     @if(($matform['material']->stock- $matform['material']->quantity_reserved)>($matform->quantity))
     <?php $k++?>
      <tr>
     <td>{{$k}}</td>
@@ -65,8 +67,6 @@
       @else
       <td>{{number_format($matform['material']->stock  - $matform['material']->quantity_reserved) }}</td>
       @endif
-
-
 
      @if(($matform['material']->stock- $matform['material']->quantity_reserved)>=($matform->quantity))
           <td>{{number_format($matform->quantity) }}</td>
@@ -88,22 +88,26 @@
          <td style="color:blue">{{$matform['material']->stock-  $matform['material']->quantity_reserved}}</td>
       @endif
       <td>{{$procured }}</td>
-
-
       @if(($matform['material']->stock- $matform['material']->quantity_reserved)<($matform->quantity))
       <td style="color: blue;"><span> <a style="color: blue;"  href="{{ route('store.material.reserve', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Procurement"><i class="fas fa-retweet"></i></a>
                    </span> </td>
       @else
       <td><span> <a style="color: green;"  href="{{ route('store.materialtohos', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
                    </span> 
-      &nbsp;
+         &nbsp;
+            @if(in_array("yes", $p))
                    <span> <a style="color: blue;"  href="{{ route('store.materialtoreserves', [$matform->id , $wo->id]) }}" data-toggle="tooltip" title="Researve"><i class="fa fa-refresh"></i></i></a>
                    </span> </td>
+           @endif
+
+      @endif  
+
+      </tr>
+
       @endif
 
 
-
-      </tr>
+     
       @endforeach
       </tbody>
 </table>
@@ -122,7 +126,7 @@
                     @else
 
 
-                      <button   class="btn btn-success"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >Notify HoS to take material in store</a></button>
+                      <button   class="btn btn-primary"> <a href="/store/material_request/{{$wo->id}}" style="color: white" >Notify HoS to take material(s) in store</a></button>
 
 
                      @endif
