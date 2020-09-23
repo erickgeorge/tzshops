@@ -69,7 +69,8 @@ class WorkOrderController extends Controller
             $work_order->emergency = 0;
         }
 
-
+        $work_order->year_ = date('y');
+        $work_order->month_ = date('m');
         $work_order->save();
 
         return redirect()->route('work_order')->with(['message' => 'Works order successfully created']);
@@ -1500,5 +1501,5 @@ session::flash('message', ' Your workorder have been closed successfully');
         return view('workzones', [ 'role' => $role, 'notifications' => $notifications, 'workszones' => $inspectorzone]);
     }
 
-   
+
 }

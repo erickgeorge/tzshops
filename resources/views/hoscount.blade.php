@@ -15,7 +15,21 @@
     @endSection
 
 @section('body')
+@php
+    // $simple =  WorkOrder::select(DB::raw('YEAR(created_at) as year'))->distinct() ->where('status',30)->get();
 
+    use App\WorkOrder;
+    $simple1 =  WorkOrder::select('year_')
+    ->distinct()
+    ->where('status',30)
+    ->where('year_','<>','NULL')
+    ->get();
+    $simple2 =  WorkOrder::select('month_')
+    ->distinct()
+    ->where('status',30)
+    ->where('month_','<>','NULL')
+    ->get();
+@endphp
  @if(count($wo) > 0)
 
     <div class="row container-fluid" style="margin-top: 6%;">
@@ -45,6 +59,58 @@
     </div>
     <br>
     <hr>
+<div class="card">
+    <div class="card-body">
+        <form action="{{route('filterhos')}}" method="get" enctype="multipart/form-data">
+            <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="my-addon">Year</span>
+                    </div>
+                    <select class="form-control" type="text" name="year" aria-describedby="my-addon">
+                        @if (isset($_GET['year']))
+                            @if ($_GET['year']!='')
+                            <option  value="{{ $_GET['year'] }}">{{ $_GET['year'] }}</option>
+
+                            @endif
+                        @endif
+                        @foreach ($simple1 as $ic1)
+                            <option value="{{$ic1->year_}}">{{$ic1->year_}}</option>
+
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="my-addon">Month</span>
+                    </div>
+                    <select class="form-control" type="text" name="month" placeholder="Recipient's text" aria-label="Recipient's " aria-describedby="my-addon">
+                        @if (isset($_GET['month']))
+                            @if ($_GET['month']!='')
+                            <option  value="{{ $_GET['month'] }}">{{ $_GET['month'] }}</option>
+
+                            @endif
+                        @endif
+                        <option value="">Select Month</option>
+
+                        @foreach ($simple2 as $ic)
+                            <option value="{{$ic->month_}}">{{$ic->month_}}</option>
+
+                        @endforeach                  </select>
+
+                </div>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Filter</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div><br>
+
     <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">

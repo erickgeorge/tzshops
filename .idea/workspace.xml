@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3c7da29-8ef0-4506-84a6-5a8c6d9538b9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkOrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/cleaningarea.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cleaningarea.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/edit_work_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/edit_work_order.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/material_inspection_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/material_inspection_view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/received_materials_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/received_materials_view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/receivedmaterialwith_wo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/receivedmaterialwith_wo.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/requestedmaterialinstore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/requestedmaterialinstore.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/track_work_order.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/track_work_order.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/womaterialacceptedbyiowtostore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/womaterialacceptedbyiowtostore.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/work_orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/work_orders.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/hoscount.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/hoscount.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +187,10 @@
       <workItem from="1600244240823" duration="11368000" />
       <workItem from="1600320893264" duration="4120000" />
       <workItem from="1600331625246" duration="1795000" />
-      <workItem from="1600408580056" duration="6680000" />
+      <workItem from="1600408580056" duration="7479000" />
+      <workItem from="1600674559355" duration="5549000" />
+      <workItem from="1600756363539" duration="769000" />
+      <workItem from="1600771272383" duration="2057000" />
     </task>
     <servers />
   </component>
@@ -217,10 +214,10 @@
       <screen x="0" y="26" width="1366" height="716" />
     </state>
     <state x="405" y="209" width="546" height="344" key="#Notifications/0.26.1366.716/1366.0.1280.1024@0.26.1366.716" timestamp="1600408593979" />
-    <state x="1721" y="95" width="800" height="711" key="#Plugins" timestamp="1600244787372">
+    <state x="1721" y="95" width="800" height="711" key="#Plugins" timestamp="1600675335378">
       <screen x="1366" y="0" width="1280" height="1024" />
     </state>
-    <state x="1721" y="95" width="800" height="711" key="#Plugins/0.26.1366.716/1366.0.1280.1024@0.26.1366.716" timestamp="1600244787372" />
+    <state x="1721" y="95" width="800" height="711" key="#Plugins/0.26.1366.716/1366.0.1280.1024@0.26.1366.716" timestamp="1600675335378" />
     <state x="466" y="155" width="424" height="491" key="FileChooserDialogImpl" timestamp="1597170900366">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -254,10 +251,10 @@
     </state>
     <state x="176" y="26" width="1091" height="716" key="SettingsEditor/0.26.1366.716/1366.0.1280.1024@0.26.1366.716" timestamp="1600244667568" />
     <state x="1531" y="147" width="1022" height="737" key="SettingsEditor/0.27.1366.741/1366.0.1280.1024@1366.0.1280.1024" timestamp="1597141512696" />
-    <state x="362" y="183" width="718" height="475" key="search.everywhere.popup" timestamp="1600245317229">
+    <state x="362" y="183" width="718" height="475" key="search.everywhere.popup" timestamp="1600675133197">
       <screen x="0" y="26" width="1366" height="716" />
     </state>
-    <state x="362" y="183" width="718" height="475" key="search.everywhere.popup/0.26.1366.716/1366.0.1280.1024@0.26.1366.716" timestamp="1600245317229" />
+    <state x="362" y="183" width="718" height="475" key="search.everywhere.popup/0.26.1366.716/1366.0.1280.1024@0.26.1366.716" timestamp="1600675133197" />
     <state x="1705" y="225" width="672" height="678" key="search.everywhere.popup/0.27.1366.741/1366.0.1280.1024@1366.0.1280.1024" timestamp="1597141306381" />
   </component>
 </project>

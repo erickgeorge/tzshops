@@ -4326,5 +4326,45 @@ $v5=$type[4];
 
    }
 
+   public function filterhos(){
+        if(isset($_GET['year'])&&isset($_GET['month'])){
+        if(($_GET['year']!='')&&($_GET['month']!='')){
+            $wo_hos_count = WorkOrder::
+            select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
+                ->where('status',30)
+                ->whereYear('created_at', $_GET['year'])
+                ->whereMonth('created_at', $_GET['month'])
+                ->groupBy('staff_id')
+
+                ->get();
+
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('hoscount', ['role' => $role, 'wo' => $wo_hos_count,'notifications' => $notifications]);
+        }
+        else if(($_GET['year']!='')&&($_GET['month']==''))
+        {
+            $wo_hos_count = WorkOrder::
+            select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
+                ->where('status',30)
+                ->whereYear('created_at', $_GET['year'])
+                ->groupBy('staff_id')
+
+                ->get();
+
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('hoscount', ['role' => $role, 'wo' => $wo_hos_count,'notifications' => $notifications]);
+        }
+        else{
+            return redirect()->route('hoscount');
+        }
+        }
+        else{
+            return redirect()->route('hoscount');
+        }
+
+   }
+
 }
 
