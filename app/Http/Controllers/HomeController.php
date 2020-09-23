@@ -3701,7 +3701,7 @@ public function wo_material_acceptedbyIOWView($id)
     $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
     $all = User::where('type','like','%HOS%')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-    $head = 'All Heads Of Sections Details';
+    $head = 'All Heads of Sections Details';
         return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
 
    }

@@ -7,7 +7,7 @@
 <br>
     <div class="container" >
         <div class="col-lg-12">
-             <h5 style="text-transform: capitalize;">Available Technicians</h5>
+             <h5 style="text-transform: capitalize;">All Technicians Details @if(((substr(auth()->user()->type,0,4) == 'HOS ')&&($role['user_role']['role_id'] != 1))) - {{ substr(auth()->user()->type,4,12) }} Section @endif</h5>
         </div>
     </div>
     <div class="container">
@@ -32,7 +32,7 @@
 
     <hr class="container">
     <div class="container">
-        
+
    <?php
 use App\User;
 use App\Technician;
@@ -182,7 +182,7 @@ foreach ($hoos as $hous) {
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
-            @if($niyeye = '0')
+            @if($role['user_role']['role_id'] != 1)
             @else
             <th scope="col">Section</th>@endif
         @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
@@ -227,7 +227,7 @@ foreach ($hoos as $hous) {
         }else { echo $tech->phone;}
 
       ?></td>
-              @if($niyeye = '0')  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+             @if($role['user_role']['role_id'] != 1)  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
                 @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
 
                 <td class="text-center">

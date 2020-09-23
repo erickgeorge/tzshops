@@ -7,7 +7,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="text-transform: capitalize;"   >{{ $head }}</h5>
+            <h5   >{{ $head }}</h5>
         </div>
     </div>
     @if(Session::has('message'))
@@ -76,7 +76,7 @@ foreach ($hoos as $hous) {
 </div>
 @endif
 <!-- Modal -->
-@if($head == 'All Heads Of Sections Details')
+@if($head == 'All Heads of Sections Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 
 @elseif($head == 'All Inspectors of work Details')
