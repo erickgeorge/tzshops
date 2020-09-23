@@ -3701,7 +3701,7 @@ public function wo_material_acceptedbyIOWView($id)
     $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
     $all = User::where('type','like','%HOS%')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-    $head = 'All Heads Of Sections Details';
+    $head = 'All Heads of Sections Details';
         return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
 
    }
@@ -4325,6 +4325,46 @@ $v5=$type[4];
       }else{
           return redirect()->back()->withErrors(['message'=>'Oops, something is wrong. try again!']);
       }
+
+   }
+
+   public function filterhos(){
+        if(isset($_GET['year'])&&isset($_GET['month'])){
+        if(($_GET['year']!='')&&($_GET['month']!='')){
+            $wo_hos_count = WorkOrder::
+            select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
+                ->where('status',30)
+                ->whereYear('created_at', $_GET['year'])
+                ->whereMonth('created_at', $_GET['month'])
+                ->groupBy('staff_id')
+
+                ->get();
+
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('hoscount', ['role' => $role, 'wo' => $wo_hos_count,'notifications' => $notifications]);
+        }
+        else if(($_GET['year']!='')&&($_GET['month']==''))
+        {
+            $wo_hos_count = WorkOrder::
+            select(DB::raw('count(id) as total_wo,staff_id as staff_id'))
+                ->where('status',30)
+                ->whereYear('created_at', $_GET['year'])
+                ->groupBy('staff_id')
+
+                ->get();
+
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('hoscount', ['role' => $role, 'wo' => $wo_hos_count,'notifications' => $notifications]);
+        }
+        else{
+            return redirect()->route('hoscount');
+        }
+        }
+        else{
+            return redirect()->route('hoscount');
+        }
 
    }
 

@@ -840,7 +840,7 @@
   </div>
 
 
-   <a  href="{{ url('/alliow')}}"><h6>Inspectors of work</h6></a>
+   <a  href="{{ url('/alliow')}}"><h6>Inspectors of works</h6></a>
 
 
    <button  class="dropdown-btn"><h6>store
