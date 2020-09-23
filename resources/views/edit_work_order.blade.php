@@ -1780,11 +1780,12 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         </div>
     <br>
 
-
     {{-- TECHNICIAN DETAILS FORM  --}}
 
 
 @endif
+
+
 
 
 

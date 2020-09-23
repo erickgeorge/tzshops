@@ -14,7 +14,7 @@ use App\MinuteSheet; ?>
 
     <div>
         <div>
-            <h5 style=" "  ><b style="text-transform: capitalize;">Material to be purchased </b></h5>
+            <h5 class="container"><b>Material(s) to be Purchased </b></h5>
         </div>
 
     </div>
@@ -64,7 +64,7 @@ use App\MinuteSheet; ?>
                     <td>{{ $item->quantity }}</td>
                     <td>{{ $item->reserved_material }}</td>
 
-                    <td style="color: blue"> {{ $item->quantity- $item->reserved_material  }}</td>
+                    <td> {{ $item->quantity- $item->reserved_material  }}</td>
                     </tr>
                     @endforeach
             </tbody>
@@ -72,10 +72,12 @@ use App\MinuteSheet; ?>
 
          @if(auth()->user()->type == 'Head Procurement')
 
-        <h4  style="     color: #c9a8a5;"> Notify Store Manager to assign Good Receiving Note about material purchased.</h4>
+        <h4> Notify Store Manager to assign good receiving note about material purchased.</h4>
 
 
          <a class="btn btn-primary btn-sm" href="{{ route('store.materialafterpurchase', [$item->work_order_id]) }}" role="button">Notify Store Manager</a>
+      
+
          @endif
 <?php
 $checkes = Minutesheet::where('Woid',$item->work_order_id)->get();

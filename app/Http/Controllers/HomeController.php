@@ -2863,7 +2863,7 @@ $v5=$type[4];
 
         $wo_material=   WorkOrderMaterial::
 
-                     where('work_order_id',$id)->where('status',15)
+                     where('work_order_id',$id)->where('status',15)->orwhere('work_order_id',$id)->where('status',100)
                     ->get();
 
         return view('womaterialtoprocureviewbyheadprocurement', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
@@ -2941,23 +2941,26 @@ $v5=$type[4];
     }
 
 
+
            public function material_reserved()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $wo_material=   WorkOrderMaterial::
-                     select(DB::raw('work_order_id'),'hos_id')
-                     ->where('status',5)->orwhere('reservestatus',1)
+                     select(DB::raw('work_order_id'),'hos_id' ,'status')
+                     ->where('status',5)->orwhere('status',100)
 
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
+                         ->groupBy('status')
 
 
                      ->get();
 
         return view('womaterialreserved', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
+
 
 
           public function material_accepted()
@@ -3504,8 +3507,7 @@ public function techniciancountcomp()
      public function wo_material_to_purchaseView($id)
 
     {
-
-        $wo_material = WorkOrderMaterial::
+         $wo_material = WorkOrderMaterial::
 
                      where('status',5) //status for material to procure
 
@@ -3546,7 +3548,7 @@ public function wo_material_acceptedbyIOWView($id)
 
     {
 
-        $wo_material = WorkOrderMaterial::where('work_order_id',$id)->where('status', 5)->orwhere('work_order_id',$id)->where('reservestatus',1)
+        $wo_material = WorkOrderMaterial::where('work_order_id',$id)->where('status', 5)->orwhere('work_order_id',$id)->where('status',100)
 
                      ->get();
 

@@ -14,7 +14,7 @@
 
     <div>
         <div>
-            <h5 style=" "  class="container"><b style="text-transform: capitalize;">Material Reserved for Works Order</b></h5>
+            <h5 class="container"><b >Material(s) Reserved for Works Order</b></h5>
         </div>
 
     </div>
@@ -32,7 +32,7 @@
     @endif
 
     <div class="container " >
-        <table class="table table-responsive table-striped display" id="myTable"  style="width:100%">
+        <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
                 <th >#</th>
@@ -64,12 +64,11 @@
                     <td>{{ $item['material']->brand }}</td>
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td style="color: blue;">{{ $item->reserved_material }}</td>
+                    <td>{{ $item->reserved_material }}</td>
                     @if($item->status == 15 )
                     <td> <span class="badge badge-warning"> Purchased </span> </td>
-                    @elseif($item->status == 3)
-                    <td> <span class="badge badge-info"> Sent to Head of Section </span> </td>
-                    @else
+                    @endif
+                    @if($item->status == 100)
                     <td> <span class="badge badge-primary"> Reserved </span> </td>
                     @endif
 

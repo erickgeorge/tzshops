@@ -19,7 +19,7 @@
 
     <div>
         <div>
-            <h5 style=" "  ><b style="text-transform: capitalize;">Material Purchased by Head of Procurement </b></h5>
+            <h5 class="container"><b>Material(s) Purchased by Head of Procurement </b></h5>
 
         </div>
 
@@ -84,11 +84,11 @@
                     <td>{{$item->quantity}}</td>
                     <td>{{$item->reserved_material}}</td>
 
-                   <td style="color: blue" > {{ $item->quantity - $item->reserved_material}}</td>
+                   <td > {{ $item->quantity - $item->reserved_material}}</td>
                    <td>{{ $item->newstock }}</td>
                     <td>
                    @if($item->newstock == ($item->quantity - $item->reserved_material))
-                      <a style="color: green;"  href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
+                      <a href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
 
 
                            @elseif($item->currentaddedmat == 1)
@@ -113,7 +113,7 @@
         </table>
 
 
-         <h4  style="     color: #c9a8a5;"> Please add material in Store and assign Good Receiving Note for received material.</h4>
+         <h4> Please add material(s) in Store and assign Good Receiving Note for received material(s).</h4>
          <a class="btn btn-primary btn-sm"  href="grnpdf/{{$item->work_order_id}}" role="button">Assign GRN</a>
 
 

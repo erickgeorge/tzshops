@@ -883,4 +883,30 @@ return view('materialEntryHistory', [ 'notifications' => $notifications, 'role' 
 return view('materialEntry', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
   }
 
+
+
+    public function materialtoreserveinstore( $id , $woid)
+    {
+
+    
+      $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $woid)->update(array('status2' =>2));   
+
+
+      $mat = WorkOrderMaterial::where('id', $id)->first();
+      $mat->status = 100;
+        $material_id=$mat->material_id;
+        $material_quantity=$mat->quantity;
+        $material=Material::where('id', $material_id)->first();
+        $stock=$material->stock;
+        $rem=$stock-$material_quantity;
+        $material->stock=$rem;
+        $material->save();
+
+      $mat->reserved_material = $mat->quantity;
+      $mat->save();
+
+       return redirect()->back()->with(['message' => 'Material Reserved Succesifully']);
+    }
+
+
 }
