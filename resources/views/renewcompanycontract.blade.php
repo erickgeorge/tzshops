@@ -1,7 +1,7 @@
 @extends('layouts.land')
 
 @section('title')
-Company Registrartion
+Company Registration
 @endSection
 
 @section('body')
@@ -85,13 +85,10 @@ Company Registrartion
                         </div>
                          <select required style="color: black;" class="custom-select" name="type" >
                                 
-                                 @if(auth()->user()->type == 'Supervisor Landscaping')
+                              <option selected="" value="">Choose...</option>
                                   <option value="Exterior">Exterior</option>
-                                  @endif
-
-                                    @if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
-                                   <option selected value="Interior">Interior</option>
-                                   @endif
+                                   <option  value="Interior">Interior</option>
+                                
 
                          </select>
                     </div> 

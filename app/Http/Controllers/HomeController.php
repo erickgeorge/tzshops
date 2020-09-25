@@ -4127,7 +4127,7 @@ $v5=$type[4];
     $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
     $all = User::where('type','like','%Inspector%')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-    $head = 'All Inspectors of work Details';
+    $head = 'All Inspectors of Works Details';
         return view('otherreports', ['role' => $role,'head'=>$head,'rle' => $all,'notifications' => $notifications, ]);
    }
 

@@ -43,7 +43,7 @@ Companies
                                           style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
-                     @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB') || (auth()->user()->type == 'Administrative officer')  )
+                     @if($role['user_role']['role_id'] == 1)
                    <div class="row"><div class="col">
                   <a href="{{ route('renew_company_contract') }}"
                    class="btn btn-primary" >Add new company</a> @endif <a href="{{ route('cleaning_company_expired') }}"
@@ -185,13 +185,14 @@ Companies
                            <td><?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
                                                     class="fas fa-eye"></i></a>&nbsp;&nbsp;
-</td>
+                           </td>
                              @endif
 
 
 
                             @else
-
+                          
+                            @if($role['user_role']['role_id'] == 1)
                             <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
@@ -211,6 +212,9 @@ Companies
                                     </form> </div>
 
                                      </td>
+                                     @else
+                                     <td></td>
+                                  @endif   
                             @endif
 
 
@@ -353,6 +357,8 @@ Companies
 
                             @else
 
+                              @if($role['user_role']['role_id'] == 1)
+
                             <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
@@ -372,6 +378,9 @@ Companies
                                     </form> </div>
 
                                      </td>
+                                     @else
+                                     <td></td>
+                                 @endif    
                             @endif
 
 
@@ -510,7 +519,8 @@ Companies
 
 
                             @else
-
+                      
+                        @if($role['user_role']['role_id'] == 1)
                             <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
                                        data-toggle="modal" data-target="#editHouse" title="Edit"><i
@@ -530,6 +540,9 @@ Companies
                                     </form> </div>
 
                                      </td>
+                                     @else
+                                     <td></td>
+                                 @endif    
                             @endif
 
 

@@ -1185,10 +1185,28 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
      {{-- request_transport form--}}
      @if($wo->status == 70)
-                <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
+
+       <h5 style="color: blue"> Does this works order needs transport for inspection ? </h5> 
+        <div class="row">
+            <div class="col">
+                 <div class="checkbox">
+            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+                YES</label>
+               </div>
+            </div>
+        </div>
+
+         <div id="divmanual">
+       
+
+                     <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
-                  @if($wo->statusmform != 1)
+                   @if($wo->statusmform != 1)
+
+
+   
+
                   <br>
                         <div class="row">
                             <div class="col-md-6">
@@ -1228,6 +1246,13 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 </div>
 
+
+        </div>
+
+
+
+  
+
                 @endif
                 {{-- end request_transport form for inspection --}}
 
@@ -1235,6 +1260,18 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 {{-- request_transport form for work--}}
 
      @if($wo->status == 3)
+
+       <h5 style="color: blue"> Does this works order needs transport for work ? </h5> 
+        <div class="row">
+            <div class="col">
+                 <div class="checkbox">
+            <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
+                YES</label>
+               </div>
+            </div>
+        </div>
+
+         <div id="divmanual">
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
@@ -1277,6 +1314,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 @endif
 
                 </div>
+              </div>
 
                 @endif
                 {{-- end request_transport form for work --}}

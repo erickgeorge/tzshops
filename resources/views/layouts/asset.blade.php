@@ -696,16 +696,16 @@
 
 <style>
 
+
 /* Fixed sidenav, full height */
 .sidenav {
   height: 100%;
-  width: 150px;
+  width: 180px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: none;
-  background-color: none;
+  background-color: #e5e5e5;
   overflow-x: hidden;
   padding-top: 20px;
   border-right: #ebe9e6 8px solid
@@ -747,15 +747,19 @@
   background-color: #c2bebe;
   color: white;
 
-
-
 }
 
 .sidenav a, .dropdown-btn, .sidenav button {
-  color: #f1f1f1;
-  border: none;
-   background: #376ad3;
+  color: black;
+
+   background: #e5e5e5;
     margin-top: 2px;
+
+    border-bottom: 2px solid #bdb8d7;
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+  border-top: 2px solid rgba(255,255,255,0.05);
+
+   border: 2px solid white;
 }
 
 
@@ -786,8 +790,7 @@
 }
 
 .dropdown-container a {
-  background-color: black;
-
+  background-color: white;
 }
 
 /* Optional: Style the caret down icon */
@@ -806,17 +809,17 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('assetsManager')}}" ><h6>All Assets </h6></a>
+  <a  href="{{ url('assetsManager')}}" ><h5>All Assets </h5></a>
 
-    <a  href="{{ url('assetsLand')}}"><h6>Land</h6></a>
-    <a  href="{{ url('assetsBuilding')}}"><h6>Buildings</h6></a>
-    <a  href="{{ url('assetsPlantMachinery')}}"><h6>Plant & Machinery</h6></a>
-    <a  href="{{ url('assetsMotorVehicle')}}"><h6>Motorvehicles</h6></a>
-    <a  href="{{ url('assetsComputerEquipment')}}"><h6>Computer Equipments</h6></a>
-    <a  href="{{ url('assetsEquipment')}}"><h6>Equipment</h6></a>
-    <a  href="{{ url('assetsFurniture')}}"><h6>Furniture</h6></a>
-    <a  href="{{ url('assetsWorkinProgress')}}"><h6>Work in Progress</h6></a>
-    <a  href="{{ url('assetsIntangible')}}"><h6>Intangibles</h6></a>
+    <a  href="{{ url('assetsLand')}}"><h5>Land</h5></a>
+    <a  href="{{ url('assetsBuilding')}}"><h5>Buildings</h5></a>
+    <a  href="{{ url('assetsPlantMachinery')}}"><h5>Plant & Machinery</h5></a>
+    <a  href="{{ url('assetsMotorVehicle')}}"><h5>Motorvehicles</h5></a>
+    <a  href="{{ url('assetsComputerEquipment')}}"><h5>Computer Equipments</h5></a>
+    <a  href="{{ url('assetsEquipment')}}"><h5>Equipment</h5></a>
+    <a  href="{{ url('assetsFurniture')}}"><h5>Furniture</h5></a>
+    <a  href="{{ url('assetsWorkinProgress')}}"><h5>Work in Progress</h5></a>
+    <a  href="{{ url('assetsIntangible')}}"><h5>Intangibles</h5></a>
 
 </div>
 

@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style="text-transform: capitalize;" >Add new Technician</h5>
+            <h5 class="container" style="text-transform: capitalize;" >Add new Technician</h5>
         </div>
     </div>
     <hr class="container">

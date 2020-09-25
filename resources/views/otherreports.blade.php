@@ -4,6 +4,7 @@
     {{ $head }}
     @endSection
 @section('body')
+<div class="container">
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
@@ -40,6 +41,8 @@ use Carbon\Carbon;
 
 
  ?>
+
+ <div class="container">
  <?php
       $maintenance_coordinator = '';
 $hoos = user::select('type')->where('id',auth()->user()->id)->get();
@@ -61,6 +64,7 @@ foreach ($hoos as $hous) {
 }
 }
 ?>
+</div>
 <!-- SOMETHING STRANGE HERE -->
 @if(count($rle)>0)
 <div align="right">
@@ -79,7 +83,7 @@ foreach ($hoos as $hous) {
 @if($head == 'All Heads of Sections Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%HOS%')->get(); $v='hos'; ?>
 
-@elseif($head == 'All Inspectors of work Details')
+@elseif($head == 'All Inspectors of Works Details')
 <?php $to = user::select('type')->distinct()->where('type','like','%Inspector%')->get(); $v = 'iow';?>
 @endif
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -215,7 +219,7 @@ foreach ($hoos as $hous) {
 
         </table>
     </div>
-
+</div>
 
     <script>
         $(document).ready(function(){

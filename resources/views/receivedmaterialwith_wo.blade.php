@@ -70,10 +70,10 @@
             </tbody>
         </table>
         @elseif(auth()->user()->type =='STORE')
-            <h1 class="text-center" style="margin-top: 350px">You have no Works order with material taken from store</h1>
+            <h3 class="text-center" style="margin-top: 350px">You have no Works order with material taken from store</h3>
         @else
 
-         <h1 class="text-center" style="margin-top: 350px">You have no Works order with material rejected by Inspector of Work</h1>
+         <h3 class="text-center" style="margin-top: 350px">You have no Works order with material rejected by Inspector of Work</h3>
         @endif
 
 

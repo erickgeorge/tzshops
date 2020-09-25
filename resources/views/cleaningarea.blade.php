@@ -30,7 +30,7 @@
                 </button>
 
 
-               @if((auth()->user()->type == 'USAB')||(auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer'))
+               @if($role['user_role']['role_id'] == 1)
                 <a href="{{ route('Registercleaningarea') }}"
                    class="btn btn-primary">Add new cleaning area</a>
                    <br><br>@endif
@@ -43,7 +43,7 @@
                         <th scope="col">Area Name</th>
                         <th scope="col">LOT</th>
                              <th scope="col">Type</th>
-                          @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+                          @if($role['user_role']['role_id'] == 1)
                         <th scope="col">Action</th>
                         @endif
                     </tr>
@@ -64,7 +64,7 @@
                              <td>{{ $clean_area->type }}</td>
 
 
-                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+                            @if($role['user_role']['role_id'] == 1)
 
                             <td>
 
@@ -118,7 +118,7 @@
                              <td>{{ $clean_area->type }}</td>
 
 
-                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+                            @if($role['user_role']['role_id'] == 1)
 
                             <td>
 
@@ -174,7 +174,7 @@
                              <td>{{ $clean_area->type }}</td>
 
 
-                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+                            @if($role['user_role']['role_id'] == 1)
 
                             <td>
 
@@ -229,8 +229,7 @@
                              <td>{{ $clean_area->type }}</td>
 
 
-                            @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
-
+                            @if($role['user_role']['role_id'] == 1)
                             <td>
 
 

@@ -80,7 +80,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h1> No Works order Material(s) accepted by Inspector of Work </h1></div>
+<div style="padding-top: 300px;" align="center"><h3> No Works order Material(s) accepted by Inspector of Works </h3></div>
 
 @endif
     @endSection

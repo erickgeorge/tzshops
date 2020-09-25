@@ -2276,7 +2276,11 @@ class LandscapingController extends Controller
         // 'companygroup' => landassessmentform::where('assessment_month', $id)->select(DB::raw('sum(score) as erick , count(company_id) as pnd , company_id'))
                    // ->groupBy('company_id')->get(),
 
-        'assessmmentcompanyname' => landassessmentform::where('assessment_month', $id)->get()
+        'assessmmentcompanyname' => landassessmentform::where('assessment_month', $id)->get(),
+
+         'assessmmentcompanynamelandscaping' => landassessmentform::where('type','Exterior')->where('assessment_month', $id)->get(),
+
+          'assessmmentcompanynameadofficer' => landassessmentform::where('assessment_month', $id)->get()
 
 
         ]);

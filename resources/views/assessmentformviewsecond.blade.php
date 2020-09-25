@@ -229,7 +229,36 @@ Assessment form
 
 
 <?php $i = 0;  $ii = 0;  $iii = 0;?>
- @if(auth()->user()->type == 'Supervisor Landscaping')
+@if($role['user_role']['role_id'] == 1)
+                    @foreach($assessmmentcompanyestatedirector as $assesment)
+                        @if($assesment->status == 25 )
+
+                          <?php $i++; ?>
+                         <tr>
+                             <td>{{ $i }}</td>
+                              <td>{{$assesment->company}}</td>
+                             <td>{{$assesment['areaname']->cleaning_name}}</td>
+                                <td>{{$assesment['companyname']['compantwo']->company_name}}</td>
+                             <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
+                              <td>{{$assesment->type}}</td>
+                               <td>{{$assesment->assessment_name}}</td>
+                             @if($assesment->status == 25)
+                             <td><span class="badge badge-success">Company paid </span></td>
+                             @endif
+                               <?php $tender = Crypt::encrypt($assesment->company); ?>
+                             <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
+                                           data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
+                           <!-- <a style="color: black;" href="{{ route('workOrder.track.landscaping', [$assesment->id]) }}" data-toggle="tooltip" title="Track"><i
+                                                    class="fas fa-tasks"></i></a>-->
+                           </td>
+                         </tr>
+                  @endif
+                      @endforeach
+@endif
+
+
+
+@if(auth()->user()->type == 'Supervisor Landscaping')
                     @foreach($assessmmentcompanylandscaping as $assesment)
                         @if($assesment->status == 25 )
 
@@ -255,6 +284,8 @@ Assessment form
                   @endif
                       @endforeach
 @endif
+
+
 
 
 

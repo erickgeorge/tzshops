@@ -50,10 +50,22 @@
   ?>
 
   <tbody>
-
+@php
+$isnotmissing = 0;
+foreach($wo_materials as $matmissing){
+  if(($matmissing['material']->stock- $matmissing['material']->quantity_reserved)<($matmissing->quantity))
+  {
+ $isnotmissing++;
+  }else
+  {
+   
+  }
+}
+ @endphp
+ 
     @foreach($wo_materials as $matform)
 
-     @if(($matform['material']->stock- $matform['material']->quantity_reserved)>($matform->quantity))
+    
     <?php $k++?>
      <tr>
     <td>{{$k}}</td>
@@ -95,21 +107,24 @@
       <td><span> <a style="color: green;"  href="{{ route('store.materialtohos', [$matform->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
                    </span> 
          &nbsp;
-            @if(in_array("yes", $p))
-                   <span> <a style="color: blue;"  href="{{ route('store.materialtoreserves', [$matform->id , $wo->id]) }}" data-toggle="tooltip" title="Researve"><i class="fa fa-refresh"></i></i></a>
-                   </span> </td>
-           @endif
+           @if($isnotmissing < 1)
+           @else
+                   <span> <a style="color: blue;"  href="{{ route('store.materialtoreserves', [$matform->id , $wo->id]) }}" data-toggle="tooltip" title="Reserve"><i class="fa fa-refresh"></i></i></a>
+                   </span>
+               
 
+        @endif
       @endif  
-
+ </td>
       </tr>
 
-      @endif
+   
 
 
      
       @endforeach
       </tbody>
+
 </table>
 <br>
 

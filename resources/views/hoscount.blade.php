@@ -150,7 +150,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no available Head of Section completed the work order.</h1>
+            <h4 class="text-center" style="margin-top: 150px">Currently no available Head of Section completed the works order.</h4>
         @endif
     </div>
     <script>

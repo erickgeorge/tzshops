@@ -7,7 +7,14 @@ Company report
 <br>
 @foreach($assessmmentcompany as $company)
 @endforeach
-<h5 ><b>Monthly Report For Companies Assessed For {{ date('F Y', strtotime($company->assessment_month))}}</b></h5>
+
+ @if(auth()->user()->type == 'Supervisor Landscaping')
+<h5 ><b>Monthly Report for Exterial Companies Assessed for {{ date('F Y', strtotime($company->assessment_month))}}</b></h5>
+ @endif
+
+  @if(auth()->user()->type != 'Supervisor Landscaping')
+<h5 ><b>Monthly Report for All Companies Assessed for {{ date('F Y', strtotime($company->assessment_month))}}</b></h5>
+ @endif
 <hr>
 
 <div class="container">
@@ -161,7 +168,10 @@ Company report
 
 <?php $i = 0; $sum = 0; $summ2= 0; ?>
 
-           @foreach($assessmmentcompanyname as $company)
+ @if(auth()->user()->type == 'Supervisor Landscaping')
+
+           @foreach($assessmmentcompanynamelandscaping as $company)
+     
            <?php $i++;   ?>
      <?php
    //   $companypayment = company::where('tender', $company->company)->first();
@@ -198,12 +208,75 @@ Company report
 
  @endif
 
+
+
  @endforeach
-   </tbody>
+
+  @endif   
+
+
+  @if(auth()->user()->type != 'Supervisor Landscaping')
+
+           @foreach($assessmmentcompanyname as $company)
+     
+           <?php $i++;   ?>
+     <?php
+   //   $companypayment = company::where('tender', $company->company)->first();
+
+     $crosscheckassessmmentactivity = landcrosschecklandassessmentactivity::where('company', $company->company)->where('area', $company['areaname']->cleaning_name)->where('assessment_sheet', $company->assessment_name)->where('month',$company->assessment_month)->get();
+       $summ = 0;
+     ?>
+     @if(count($crosscheckassessmmentactivity)>0)
+
+  @foreach($crosscheckassessmmentactivity as $assesment)
+  <?php  $summ += $assesment->score; $summ2 += $assesment->score; ?>
+  @endforeach
+
+  <?php  ?>
+
+     <tr>
+     <td >{{$i}}</td>
+     <td >{{$assesment->company}}</td>
+     <td >{{$assesment['assessmentid']['compantwo']->company_name}}</td>
+     <td >{{$assesment['cleaningarea']->cleaning_name}}</td>
+     <td >{{$assesment->assessment_sheet}}</td>
+     <td align="center"><b><?php echo $summ ?></b></td>
+     <td>{{$assesment->comment}}</td>
+
+                               @if(auth()->user()->type == 'Supervisor Landscaping')
+                           <td><b> &nbsp;&nbsp;
+                                           <a style="color: green;"
+                                       onclick="myfunc('{{ $assesment->id }}','{{ $assesment->comment }}')"
+                                       data-toggle="modal" data-target="#payment"  title="Update comment"><i
+                                                class="fas fa-pen"></i></a> </td>@endif
+
+     </tr>
+
+
+ @endif
+
+
+
+ @endforeach
+
+  @endif     
+    </tbody>
+
+      @if(auth()->user()->type == 'Supervisor Landscaping')
+      <?php $erpnd = $summ2/count($assessmmentcompanynamelandscaping);   ?>
+
+
+                    <tr><td align="center" colspan="5" >AVERAGE SCORE</td><td align="center"> <?php   echo number_format((float)$erpnd, 2, '.', '')  ?>% </td></tr>
+
+      @endif    
+
+       @if(auth()->user()->type != 'Supervisor Landscaping')
       <?php $erpnd = $summ2/count($assessmmentcompanyname);   ?>
 
 
                     <tr><td align="center" colspan="5" >AVERAGE SCORE</td><td align="center"> <?php   echo number_format((float)$erpnd, 2, '.', '')  ?>% </td></tr>
+
+      @endif            
 
     </table>
 
@@ -216,9 +289,9 @@ Company report
       @if(auth()->user()->type == 'Supervisor Landscaping')
 
       @if($company->status2 == NULL)
-                <b style="padding-left: 800px;">Foward to DVC ADMIN <a href="{{route('foward.dvc.adimin' , $company->assessment_month)}}"
+                <!--<b style="padding-left: 800px;">Foward to DVC ADMIN <a href="{{route('foward.dvc.adimin' , $company->assessment_month)}}"
                                                             style="color: green;"
-                                           data-toggle="tooltip" title="Foward to DVC ADMIN"><i class="fas fa-share" ></i></a> </b>
+                                           data-toggle="tooltip" title="Foward to DVC ADMIN"><i class="fas fa-share" ></i></a> </b>-->
                                            @elseif($company->status2 == 2)
 
       @endif

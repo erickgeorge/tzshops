@@ -5,7 +5,7 @@
     @endSection
 
 @section('body')
-
+<div class="container">
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12"  >
@@ -112,7 +112,7 @@ use App\Material;?>
 </div>
           <!-- ---------------------- -->
     </div>
-        <table class="table table-responsive table-striped display" id="myTable"  style="width:100%">
+        <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
           <tr style="color: white;">
                <th >#</th>
@@ -157,4 +157,6 @@ use App\Material;?>
             </tbody>
         </table>
     </div>
+</div>
+
     @endSection

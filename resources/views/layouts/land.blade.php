@@ -652,19 +652,18 @@
     </nav>
     <div>
     <div style="padding-top:78px;">
-
 <style>
+
 
 /* Fixed sidenav, full height */
 .sidenav {
   height: 100%;
-  width: 150px;
+  width: 180px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: none;
-  background-color: none;
+  background-color: #e5e5e5;
   overflow-x: hidden;
   padding-top: 20px;
   border-right: #ebe9e6 8px solid
@@ -706,15 +705,19 @@
   background-color: #c2bebe;
   color: white;
 
-
-
 }
 
 .sidenav a, .dropdown-btn, .sidenav button {
-  color: #f1f1f1;
-  border: none;
-   background: #376ad3;
+  color: black;
+
+   background: #e5e5e5;
     margin-top: 2px;
+
+    border-bottom: 2px solid #bdb8d7;
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+  border-top: 2px solid rgba(255,255,255,0.05);
+
+   border: 2px solid white;
 }
 
 
@@ -745,8 +748,7 @@
 }
 
 .dropdown-container a {
-  background-color: black;
-
+  background-color: white;
 }
 
 /* Optional: Style the caret down icon */
@@ -766,29 +768,29 @@
 
 <div class="sidenav" style="padding-top:90px;">
 
-      <a  href="{{ url('cleaningcompany')}}"><h6>Cleaning Companies</h6></a>
-    <a  href="{{ url('manage_Cleaning_area')}}"><h6>Cleaning Areas</h6></a>
+      <a  href="{{ url('cleaningcompany')}}"><h5>Cleaning Companies</h5></a>
+    <a  href="{{ url('manage_Cleaning_area')}}"><h5>Cleaning Areas</h5></a>
 
      @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'USAB'))
 
-    <a  href="{{ url('tender')}}"><h6>Tenders</h6></a>
+    <a  href="{{ url('tender')}}"><h5>Tenders</h5></a>
 
      @endif
-     <a href="{{ url('assessmentsheet')}}"><h6>Assessment Sheets </h6></a>
-   <!-- <a  href="{{ url('Land/work_order')}}" ><h6>Land works order </h6></a>
-    <a  href="{{ url('Maintainance/section')}}" ><h6> Maintenance  section </h6></a>-->
-    <a  href="{{ url('Assessment/form')}}" ><h6>Assessment Forms</h6></a>
+     <a href="{{ url('assessmentsheet')}}"><h5>Assessment Sheets </h5></a>
+   <!-- <a  href="{{ url('Land/work_order')}}" ><h5>Land works order </h5></a>
+    <a  href="{{ url('Maintainance/section')}}" ><h5> Maintenance  section </h5></a>-->
+    <a  href="{{ url('Assessment/form')}}" ><h5>Assessment Forms</h5></a>
 
 
 
 
 
-   <button class="dropdown-btn"><h6>Companies Report
-    <i class="fa fa-caret-down"></i></h6>
+   <button class="dropdown-btn"><h5>Companies Report
+    <i class="fa fa-caret-down"></i></h5>
   </button>
   <div class="dropdown-container">
-    <a href="{{ route('comapy_view_month')}}"><h6>Monthly Assessment Report</h6></a>
-    <a href="{{ url('cleaningcompanyreport')}}"><h6>Companies Trending </h6></a>
+    <a href="{{ route('comapy_view_month')}}"><h5>Monthly Assessment Report</h5></a>
+    <a href="{{ url('cleaningcompanyreport')}}"><h5>Companies Trending </h5></a>
 
   </div>
 
