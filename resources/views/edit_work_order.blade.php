@@ -35,6 +35,9 @@ var total=2;
             <h4>Works Order Details</h4>
         </div>
     </div>
+    @php
+    $iflead = 0;
+    @endphp
     <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -210,15 +213,39 @@ var total=2;
             @csrf
 
             <div class="form-group ">
-
-                @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This works order is emergency</b>
-                @else
-                    <input type="checkbox" name="emergency"> <b style="color:red;">This works order is emergency</b>
-                @endif
+                <div class="row">
+                    <div class="col">
+                        <div class="checkbox">
+                            <label>
+                                @if($wo->emergency == 1)
+                                <input id="checkdiv" name="emergency" type="checkbox" onclick="ShowHideDiv(this)" checked>
+                               <b style="color: red;"> This Works Order is Emergency</b>
+                               @else
+                               <input id="checkdiv" name="emergency" type="checkbox" onclick="ShowHideDiv(this)">
+                              <b style="color: red;"> This Works Order is Emergency</b>
+                               @endif
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+
+
+                    <div id="divmanual">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                        </div>
+
+
+
+                    <div id="locationdiv">
+                    <div class="row">
+
+                    </div>
+                </div>
+
           </form>
 @endif
           <br>
@@ -275,7 +302,9 @@ var total=2;
     Select</a></td>
 
                                                    @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Yes </td>
+ <td style="color: black;"  data-toggle="tooltip" >Yes @php
+    $iflead =1;
+    @endphp </td>
                                                     @else
 <td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
@@ -419,7 +448,10 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <td>   <a title="Assign as Lead technician" class="btn btn-primary" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader">
     Select</a></td>
                                                    @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Yes </i></td>
+
+ <td style="color: black;"  data-toggle="tooltip" >Yes @php
+    $iflead = 1;
+    @endphp </i></td>
                                                     @else
 <td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
@@ -657,8 +689,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
-    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL(S) APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL(S) </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL(S) REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL(S) ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL(S) TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL(S) PURCHASED</span>
        @endif</td>
 
   <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
@@ -685,7 +717,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @if(empty($wo['work_order_material']->id))
 
     @else
-     <h4><b>Material Requests: </b></h4>
+     <h4><b>Material(s) Requests: </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -723,8 +755,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
-    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL(S) APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL(S) </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL(S) REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL(S) ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL(S) TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL(S) PURCHASED</span>
        @endif</td>
 
   <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
@@ -905,7 +937,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p><u>ASSIGN TECHNICIAN(S) FOR THIS WORKS ORDER</u></p>
+                                <p>ASSIGN TECHNICIAN(S) FOR THIS WORKS ORDER</p>
                             </div>
                         </div>
 
@@ -1078,7 +1110,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p><u>ASSIGN TECHNICIAN(S) FOR INSPECTION</u></p>
+                                <p>ASSIGN TECHNICIAN(S) FOR INSPECTION</p>
                             </div>
                         </div>
                         <div >
@@ -1200,38 +1232,46 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     @csrf
                     <div >
                   @if($wo->statusmform != 1)
-                  <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p><u>INSPECTION TRANSPORT REQUEST FORM</u></p>
-                            </div>
-                        </div>
-                </br>
 
-                        <input  value="0" name="inspection" hidden></input>
-                        <input  value="4" name="status" hidden></input>
+                  @if( $iflead == 0)
+                  <b style="color:red;"> Please Assign Lead Technician Before Continuing </b>  <br> <br>
+                  @endif
+                  @if($iflead == 1)
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>INSPECTION TRANSPORT REQUEST FORM</p>
+                                    </div>
+                                </div>
+                                </br>
 
-                        <p>Transport date</p>
-                        <div class="form-group">
-                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
-                        </div>
+                                <input  value="0" name="inspection" hidden></input>
+                                <input  value="4" name="status" hidden></input>
 
-                          <p>Transport time</p>
-                        <div class="form-group">
-                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  id="time"></input>
-                        </div>
+                                <p>Transport date</p>
+                                <div class="form-group">
+                                    <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
+                                </div>
 
-                         <p>Transport details</p>
-                        <div class="form-group">
-                            <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
-                        </div>
-                        <br>
+                                <p>Transport time</p>
+                                <div class="form-group">
+                                    <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  id="time"></input>
+                                </div>
+
+                                <p>Transport details</p>
+                                <div class="form-group">
+                                    <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                                </div>
+                                <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                                <button  type="submit" class="btn btn-primary">Save</button>
+                                <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
+                  @endif
+
+
 
                 @else
                <div align="center" style="color: red;"> Please assign technician for inspection before requesting transport. </div>
@@ -1253,13 +1293,13 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   <br>
                         <div class="row">
                             <div class="col-md-6">
-                                <p><u>WORK TRANSPORT REQUEST FORM</u></p>
+                                <p>WORK TRANSPORT REQUEST FORM</p>
                             </div>
                         </div>
                 </br>
 
-                         <input  value="1" name="inspection" hidden></input>
-                         <input  value="101" name="status" hidden></input>
+                         <input  value="1" name="inspection" hidden>
+                         <input  value="101" name="status" hidden>
 
                         <p>Transport date</p>
                         <div class="form-group">
@@ -1278,8 +1318,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
 
@@ -1313,7 +1353,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <div class="row">
                             <div class="col-md-6">
 
-                                <p><b><u>INSPECTION REPORT BEFORE WORK</u></b></p>
+                                <p><b>INSPECTION REPORT BEFORE WORK</b></p>
 
 
                             </div>
@@ -1363,8 +1403,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         </div>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                        <button  type="submit" class="btn btn-primary">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
     @endif
@@ -1396,7 +1436,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <div class="row">
                             <div class="col-md-6">
 
-                                <p><b><u>TECHNICIAN REPORT AFTER WORK</u></b></p>
+                                <p><b>TECHNICIAN REPORT AFTER WORK</b></p>
 
 
                             </div>
@@ -1439,8 +1479,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
   @endif
@@ -1504,7 +1544,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <p><u>MATERIAL(S) REQUEST FORM</u></p>
+                                <p>MATERIAL(S) REQUEST FORM</p>
                             </div>
                         </div>
 
@@ -1554,7 +1594,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br><br> </div>
 
                         <button  type="submit" class="btn btn-primary bg-primary">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" class="btn btn-danger">Cancel</button></a>
 
                     </form>
 
@@ -1591,7 +1631,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 <div class="row">
 
-                                <p><u>CROSSCHECK MATERIAL(S) BEFORE REQUESTING TO STORE </u></p>
+                                <p>CROSSCHECK MATERIAL(S) BEFORE REQUESTING TO STORE </p>
 
                  </div>
 
@@ -1652,7 +1692,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </table>
 
 
-    <button class="btn btn-success" > <a  style="color: white" href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL(S) </a></button>
+    <button class="btn btn-primary" > <a  class="btn btn-primary" style="color: white" href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL(S) </a></button>
 
 
 
@@ -1705,7 +1745,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div>
-                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       <button  type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
 
@@ -1771,11 +1811,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         </div>
                     <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
-                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                        <button type="submit" class="btn btn-primary">Save Material</button>
+                        <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-danger">Cancel</button></a>
 
                 </form>
-                    <button style="background-color: blue; color: white" onclick="newmaterialproc()" class="btn btn-success">New Material</button>
+                    <button onclick="newmaterialproc()" class="btn btn-primary">New Material</button>
 
 
                 </div>

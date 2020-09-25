@@ -424,7 +424,7 @@
             <a href="{{route('cleaningcompany')}}" onclick="closeTab()"><button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
-      <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Back to Top</button></a>
+      <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning"> <i class="fa fa-angle-up" aria-hidden="true"></i> Back to Top</button></a>
 
     @endif
     @endif
@@ -452,7 +452,7 @@
             <button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
-            <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>
+            <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning"> <i class="fa fa-arrow-up" aria-hidden="true"></i> Scroll up</button></a>
 
           </form>
 

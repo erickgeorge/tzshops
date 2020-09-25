@@ -36,7 +36,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn bg-primary btn-primary">Save
+                    <button type="submit" class="btn btn-primary">Save
                     </button>
                     <a href="/Maintainance/section" class="btn btn-danger">Cancel
                     </a>

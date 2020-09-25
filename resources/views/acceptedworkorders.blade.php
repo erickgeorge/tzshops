@@ -236,8 +236,9 @@ foreach($userwithid as $userwithid)
       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
 </form>
@@ -600,8 +601,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
       </div>
       <input type="text" name="work" hidden value="{{ $work->id }}">
       <div class="modal-footer">
-        <button style="text-transform: capitalize;" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button style="text-transform: capitalize;" type="submit" class="btn btn-primary">Send</button>
+        <button style="text-transform: capitalize;" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
       </div>
     </div>
 </form>

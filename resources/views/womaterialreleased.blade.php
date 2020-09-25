@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style=" "  ><b style="text-transform: capitalize;">Material released to work orders</b></h5>
+            <h5 style=" "  ><b style="text-transform: capitalize;">Material(s) released to work orders</b></h5>
         </div>
 
     </div>

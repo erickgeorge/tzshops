@@ -10,7 +10,7 @@
      @if(count($items)>0)
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="  "  ><b style="text-transform: capitalize;">Works order with rejected Material </b></h5>
+            <h5 style="  "  ><b style="text-transform: capitalize;">Works order with rejected Material(s) </b></h5>
         </div>
 
         <div style="padding-left: 650px;">
@@ -96,7 +96,7 @@
 
         @else
 
-               <br><div> <h2 style="padding-top: 300px;">Currently no works order with rejected material</h2></div>
+               <br><div> <h2 style="padding-top: 300px;">Currently no works order with rejected material(s)</h2></div>
         @endif
     </div>
 
@@ -106,7 +106,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Inspector of Work Rejected Material Request.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Inspector of Work Rejected Material(s) Request.</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
