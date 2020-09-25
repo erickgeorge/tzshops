@@ -1245,9 +1245,10 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                      <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
+<<<<<<< HEAD
+                   @if($wo->statusmform != 1)
 
 
- @if($wo->statusmform != 1)
    
 
                   <br>
@@ -1257,8 +1258,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </div>
                         </div>
                 </br>
-
-                 
+=======
+                  @if($wo->statusmform != 1)
+>>>>>>> a542aa4ef912d1af0e4771be23d621f9081da2d7
 
                   @if( $iflead == 0)
                   <b style="color:red;"> Please Assign Lead Technician Before Continuing </b>  <br> <br>
