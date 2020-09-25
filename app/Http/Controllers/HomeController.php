@@ -3692,13 +3692,13 @@ public function wo_material_acceptedbyIOWView($id)
     {
 
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('workorderreport', ['role' => $role,'notifications' => $notifications, ]);
    }
 
    public function allhos(){
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $all = User::where('type','like','%HOS%')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     $head = 'All Heads of Sections Details';
@@ -3706,7 +3706,7 @@ public function wo_material_acceptedbyIOWView($id)
 
    }
    public function alltechnicians(){
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 //
@@ -4124,7 +4124,7 @@ $v5=$type[4];
    }
 
    public function alliow(){
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $all = User::where('type','like','%Inspector%')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     $head = 'All Inspectors of work Details';

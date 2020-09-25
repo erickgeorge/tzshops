@@ -51,6 +51,10 @@
         }
 
 
+        label{
+            font-weight: bold;
+            color: #000;
+        }
     </style>
 
 
@@ -86,6 +90,10 @@
 
         use App\zoneinspector;
         use Carbon\Carbon;
+
+        use App\Notification;
+
+               $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         // closing work order by default
         $woclo = WorkOrder::where('status',2)->get();
@@ -1542,6 +1550,14 @@ for (i = 0; i < dropdown.length; i++) {
 <script type="text/javascript">
 
     $("#materialsselect").select2({
+          placeholder: "Choose material..",
+          allowClear: true
+      });
+   </script>
+
+<script type="text/javascript">
+
+    $(".materialsselect").select2({
           placeholder: "Choose material..",
           allowClear: true
       });

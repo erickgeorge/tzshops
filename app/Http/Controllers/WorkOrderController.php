@@ -123,7 +123,7 @@ $message = $client->message()->send([
 
 //        return response()->json('success');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
          $emailReceiver = User::where('id', $wO->client_id)->first();
 
@@ -192,7 +192,9 @@ $message = $client->message()->send([
         $notify->receiver_id = $wO->client_id;
         $notify->type = 'wo_accepted';
         $notify->status = 0;
-        $notify->message = 'Your works order of ' . $wO->created_at . ' about ' . $wO->problem_type . ' has been accepted.';
+        $time = strtotime($wO->created_at);
+        $timed = date('d/m/Y',$time);
+        $notify->message = 'Your works order of ' . $timed . ' about ' . $wO->problem_type . ' has been accepted.';
         $notify->save();
 
 
@@ -223,7 +225,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
 
 
@@ -290,7 +292,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
     public function   editWOView($id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 //        return response()->json(WorkOrder::where('id', $id)->first());
 
 
@@ -460,7 +462,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $w = WorkOrder::where('id', $id)->first();
 
              $w->statusmform = 3;
-
+            $w->emerg = 1;
              $w->save();
 
 
@@ -1074,7 +1076,9 @@ public function transportforwork(Request $request, $id)
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $receiver_id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your work order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been closed!.';
+        $time = strtotime($wo->created_at);
+        $timed = date('d/m/Y',$time);
+        $notify->message = 'Your work order of ' . $timed . ' about ' . $wo->problem_type . ' has been closed!.';
         $notify->save();
 
 
@@ -1392,7 +1396,7 @@ session::flash('message', ' Your workorder have been closed successfully');
     {
         $hosWO = Workorder::where('staff_id',$id)->where('status','30')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
       return view('hoscompletedjobsall', [ 'hosWo' => $hosWO, 'notifications' => $notifications,
             'role' => $role,'hosid'=>$id, 'wo' => WorkOrder::where('id', $id)->first()
         ]);
@@ -1401,7 +1405,7 @@ session::flash('message', ' Your workorder have been closed successfully');
     public function myzone()
     {
 
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
     if(auth()->user()->type == 'Maintenance coordinator')
@@ -1421,7 +1425,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     public function acceptedworkorders()
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
        if(auth()->user()->type == 'Maintenance coordinator')
@@ -1439,7 +1443,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     public function onprocessworkorders()
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
       if(auth()->user()->type == 'Maintenance coordinator')
@@ -1457,7 +1461,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     public function closedworkorders()
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
        if(auth()->user()->type == 'Maintenance coordinator')
@@ -1475,7 +1479,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     public function completedworkorders()
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
        if(auth()->user()->type == 'Maintenance coordinator')
@@ -1495,7 +1499,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     public function workzones()
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $inspectorzone = iowzone::orderBy('zonename','ASC')->get();
         return view('workzones', [ 'role' => $role, 'notifications' => $notifications, 'workszones' => $inspectorzone]);

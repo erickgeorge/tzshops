@@ -131,7 +131,11 @@
                 // SET INPUT ATTRIBUTE.
                 button.setAttribute('type', 'button');
                 button.setAttribute('class', 'btn btn-danger')
+                if(c==0)
+                {
+                    button.setAttribute('disabled', 'true');
 
+                }
                 // ADD THE BUTTON's 'onclick' EVENT.
                 button.setAttribute('onclick', 'removeRow(this)');
 
