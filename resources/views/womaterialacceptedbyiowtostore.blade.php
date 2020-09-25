@@ -72,7 +72,11 @@
 
 @else
 
+<<<<<<< HEAD
 <div style="padding-top: 300px;" align="center"><h3>Currently no works order material accepted by Inspector of Works </h3></div>
+=======
+<div style="padding-top: 300px;" align="center"><h1>Currently no works order material(s) accepted by Inspector of Works </h1></div>
+>>>>>>> a542aa4ef912d1af0e4771be23d621f9081da2d7
 
 @endif
     @endSection

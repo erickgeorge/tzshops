@@ -37,7 +37,7 @@
                         <input style="color: black" type="text" required class="form-control" id="dir_abb"
                                name="dir_abb" placeholder="Enter College/directorate abbreviation">
                     </div>
-                    <button type="submit" class="btn bg-primary btn-primary">Save
+                    <button type="submit" class="btn btn-primary">Save
                     </button>
                     <a href="/Manage/directorate" class="btn bg-danger btn-danger">Cancel
                     </a>

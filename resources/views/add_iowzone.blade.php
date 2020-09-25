@@ -40,7 +40,7 @@
 
 
 
-                    <button type="submit" class="btn bg-primary btn-primary">Save
+                    <button type="submit" class="btn btn-primary">Save
                     </button>
                     <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
                     </a>

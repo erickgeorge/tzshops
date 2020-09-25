@@ -312,12 +312,12 @@ tr:nth-child(even) {
 
 
 
-  
+
      <br>
 
     <div class="container-name">
      <div class="div1">Name of Assessor:&nbsp;  &nbsp;<b>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</b><u style="padding-left: 12px;"> </u></div>
-  
+
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->created_at)) }}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 <br>
@@ -331,17 +331,17 @@ tr:nth-child(even) {
 
     <div class="container-name">
      <div class="div1">Approved by Dean of Student:&nbsp;  &nbsp;<b>{{ $assesment['deanstudent']->fname .' ' . $assesment['deanstudent']->lname }}</b><u style="padding-left: 12px;"> </u></div>
-  
+
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->dean_date))}}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 <br>
- 
+
 
    @elseif(($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 4))
 
        <div class="container-name">
      <div class="div1">Approved by {{ $assesment['principles']->type }}:&nbsp;  &nbsp;<b>{{ $assesment['principles']->fname .' ' . $assesment['principles']->lname }}</b><u style="padding-left: 12px;"> </u></div>
-  
+
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->principle_date))}}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 
@@ -357,13 +357,13 @@ tr:nth-child(even) {
 
 
 
-  
+
 
 <br>
 
        <div class="container-name">
      <div class="div1">Approved by Estate Officer :&nbsp;  &nbsp;<b>{{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} </b><u style="padding-left: 12px;"> </u></div>
-    
+
     <div class="div2"> Date: &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;    <b>{{ date('d F Y', strtotime($assesment->accepted_on)) }}</b> <u style="padding-left: 40px;">   </u> </div>
    </div>
 <br>
@@ -393,7 +393,7 @@ tr:nth-child(even) {
 
 
  @else
-   
+
         <?php $now1 =  Carbon::now(); ?>
       <div class="container-name">
      <div class="div1">Name of DVC Accountant :&nbsp;  <b>{{ auth()->user()->fname .' ' . auth()->user()->lname }}</b><u style="padding-left: 12px;"> </u></div>
@@ -429,5 +429,5 @@ tr:nth-child(even) {
 
 
 <div id='footer'>
-    <p class="page">Page</p>
+    <p class="page">Page-</p>
 </div>

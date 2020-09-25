@@ -1,7 +1,7 @@
 <title><?php
     echo $header;
     ?></title>
-    
+
 <div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>Directorate of Estates Services</h5></p><p><b><?php
@@ -70,7 +70,7 @@ tr:nth-child(even) {
               @elseif($work->status == 6)
                               <td><span class="badge badge-info">post=implementation</span></td>
               @elseif($work->status == 7)
-                              <td><span class="badge badge-info">material requested</span></td>
+                              <td><span class="badge badge-info">material(s) requested</span></td>
               @else
                                 <td><span class="badge badge-success">procurement stage</span></td>
                             @endif

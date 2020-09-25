@@ -35,7 +35,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn bg-primary btn-primary">Save
+                    <button type="submit" class="btn btn-primary">Save
                     </button>
                     <a href="{{route('view.location', [$iowuser->id , $iowuserzone->zone])}}" class="btn btn-danger">Cancel
                     </a>

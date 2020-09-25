@@ -107,7 +107,7 @@
 
 
 
-                     @if(auth()->user()->type == 'Administrative officer')
+                     @if((auth()->user()->type == 'Administrative officer') || (auth()->user()->type == 'Principal'))
                     @foreach($cleanareainterior as $clean_area)
                         <?php $i++; ?>
                         <tr>
@@ -218,7 +218,7 @@
 
 
 
-                     @if(($role['user_role']['role_id'] == 1) || (auth()->user()->type != 'DVC Admin') || (auth()->user()->type != 'Estates Director') || (auth()->user()->type == 'Estates officer'))
+                     @if(($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin') || (auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Estates officer'))
                     @foreach($cleanarea as $clean_area)
                         <?php $i++; ?>
                         <tr>

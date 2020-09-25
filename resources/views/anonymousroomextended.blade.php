@@ -66,7 +66,8 @@
 
                                 <td>
                                     {{ $work->total_room }}  </td>
-                                    <td><form method="get" action="inroomreporwithrooms"><button class="btn btn-primary" name="room" value="{{ $work->block_id }}" style="text-transform: capitalize;"><i class="fa fa-eye"></i> view</button></form></td>
+                                    <td><form method="get" action="inroomreporwithrooms">
+                                        <button class="btn btn-primary" name="room" value="{{ $work->block_id }}" style="text-transform: capitalize;"><i class="fa fa-eye"></i> view</button></form></td>
 
 
 
