@@ -239,9 +239,9 @@
                                                     @else
 <td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
- 
 
-   
+
+
 
    <!-- @if($techform->status!=1)
    <td>   <a style="color: black;" href="{{ route('workOrder.technicianCompleteinspection', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE INSPECTION"><i
@@ -292,7 +292,7 @@
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-  
+
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -302,7 +302,7 @@
 
 
   <tr>
-   
+
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
@@ -325,8 +325,6 @@
 
 
 
-
-
   <h4><b>Assigned Technician(s) for Work </b></h4>
 @if(empty($wo['work_order_staff']->id))
         <p >No Technician(s) assigned yet</p>
@@ -343,7 +341,7 @@
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
- 
+
   <th>Leader</th>
 </thead>
 
@@ -362,7 +360,7 @@
 
 
    <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
-   
+
     @if($techform->leader == null )
 
 <td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
@@ -414,7 +412,7 @@
 
     @else
 
-   
+
     <?php
 
   $idwo=$wo->id;
@@ -429,7 +427,7 @@
 <table style="width:100%">
   <tr>
      <thead style="color: white;">
-   
+
     <th>Description</th>
   <th>Full Name</th>
     <th>Date</th>
@@ -440,10 +438,10 @@
 
   <tr>
 
-   
+
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
 
-  
+
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
   </tr>
@@ -463,7 +461,7 @@
 
 <!--report after work-->
 
-   
+
 
 
 
@@ -590,9 +588,7 @@
    @elseif(auth()->user()->type == 'CLIENT')
       <h4><b>Material(s) Requests </b></h4>
   @if(empty($wo['work_order_material']->id))
-
         <p class="text-primary">No Material have been requested</p>
-
     @else
     <?php
 
@@ -658,7 +654,7 @@
     <th>Material Description</th>
      <th>Type</th>
      <th>Quantity</th>
-  </thead>  
+  </thead>
   </tr>
     @foreach($matforms as $matform)
   <tr>

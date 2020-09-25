@@ -15,8 +15,8 @@
     use App\iowzone;
     use App\iowzonelocation;
     use App\Material;
-
- ?>
+    use App\workordersection;
+?>
 
 
 <style type="text/css">
@@ -146,14 +146,23 @@ var total=2;
         </div>
         <div class="col">
             @if($wo->zonelocationtwo != null)
-
+            @if($wo->zone_location == null)
+            <i class="text-danger">Please Re-save Location - Zone to confirm</i>  <br> <br>
+            @endif
             <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
                @csrf
                <div class="row">
+                @if(($wo->zonelocationtwo != null)&&($wo->zone_location != null))
+                @php
+                    $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
+                    $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
+                @endphp
+                Location - Zone : &nbsp; <b> {{ $zonelocation->location }}, {{ $zoned->zonename }}</b>
+                @else
                <div class="container" >
                    <div class="input-group mb-3">
                    <div class="input-group-prepend">
-                       <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
+                       <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone/Location</label>
                    </div>
                    <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
 
@@ -180,6 +189,7 @@ var total=2;
                    </select>
                </div>
                </div>
+               @endif
            </div>
           @if($wo->zone_location == null)
                <button type="submit" class="btn btn-primary">Save</button>
@@ -194,7 +204,8 @@ var total=2;
 
 
 
-
+@if($wo->emerg == 1)
+@else
          <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
 
@@ -209,7 +220,7 @@ var total=2;
 
             <button type="submit" class="btn btn-primary">Save</button>
           </form>
-
+@endif
           <br>
 
 
@@ -1551,7 +1562,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD>
 
 
-                            <select  required class="custom-select"  name="material[]" >
+                            <select  required class="custom-select materialsselect"  name="material[]" >
                                 <option   selected value="" >Choose material...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
@@ -1568,6 +1579,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                   </TR>
+
 
         </TABLE>
 
@@ -1983,7 +1995,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-<SCRIPT language="javascript">
+<script language="javascript">
         function addRow(tableID) {
 
             var table = document.getElementById(tableID);
@@ -2051,10 +2063,10 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             }
         }
 
-    </SCRIPT>
+    </script>
 
 
-    <SCRIPT language="javascript">
+    <script language="javascript">
         function addRow1(tableID) {
 
             var table = document.getElementById(tableID);
@@ -2122,11 +2134,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             }
         }
 
-    </SCRIPT>
+    </script>
 
 
 
-<SCRIPT language="javascript">
+<script language="javascript">
         function addmaterialrow(tableID) {
 
             var table = document.getElementById(tableID);
@@ -2216,4 +2228,4 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-    </SCRIPT>
+    </script>

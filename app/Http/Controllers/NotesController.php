@@ -1287,7 +1287,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
       public function addassessmentpdf($id , $tender ){
 
         $tender = Crypt::decrypt($tender);
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
            $data = [
@@ -1314,7 +1314,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
       public function assessmentpdf($id , $tender , $month){
          $company = Crypt::decrypt($tender);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
            $data = [
 
@@ -1341,7 +1341,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
           public function trendingscorereport(request $request ,$tender , $company){
          $tenders = Crypt::decrypt($tender);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
          if($request['start'] and $request['end']){
 
@@ -1422,7 +1422,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
               public function trendingscorereportcompany($tender , $month){
          $tenders = Crypt::decrypt($tender);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
            $data = [
             'notifications' => $notifications,
@@ -1444,7 +1444,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
          public function landcleaningcompanyreport(){
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
            $data = [
             'notifications' => $notifications,
@@ -1461,7 +1461,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     public function landcleaningareareport(){
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
            $data = [
             'notifications' => $notifications,

@@ -25,7 +25,7 @@ class DirectorateController extends Controller
     
      public function IoWZonesview(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
        return view('iowzoneview', [
@@ -40,7 +40,7 @@ class DirectorateController extends Controller
 
     public function IoWZoneswithiowview(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
        return view('iowzoneiowview', [
@@ -59,7 +59,7 @@ class DirectorateController extends Controller
 
      public function IoWZonesviewlocation($id, $zone){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
        return view('iowzonelocationview', [
@@ -74,7 +74,7 @@ class DirectorateController extends Controller
 
      public function IoWZonesviewinspector($zone){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         
        return view('iowzonewithinspector', [
@@ -91,7 +91,7 @@ class DirectorateController extends Controller
 
     public function workordersectionView(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('workordersection', [
@@ -106,7 +106,7 @@ class DirectorateController extends Controller
 
     public function departmentsView(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         if(request()->has('start'))  { //date filter
@@ -146,7 +146,7 @@ class DirectorateController extends Controller
 
  public function directorateView(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         if(request()->has('start'))  { //date filter
@@ -183,7 +183,7 @@ class DirectorateController extends Controller
 
 
      public function adddirectorateView(){
-          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('add_directorate', [
@@ -199,7 +199,7 @@ class DirectorateController extends Controller
 
 
      public function adddepartmentView(){
-          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('add_dipartment', [
@@ -214,7 +214,7 @@ class DirectorateController extends Controller
 
 
    public function addsectionView(){
-          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('add_workordersection', [
@@ -229,7 +229,7 @@ class DirectorateController extends Controller
 
 
         public function addiowzoneView(){
-          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('add_iowzone', [
@@ -245,7 +245,7 @@ class DirectorateController extends Controller
 
 
         public function addiowzonelocationView($id , $zone){
-          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('add_iowzone_location', [

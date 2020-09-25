@@ -62,7 +62,7 @@ $sheet = MinuteSheet::select('Woid')->distinct()->Where('Woid','<>',null)->Disti
     public function minutesheet($id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
 
         $conversation=MinuteSheet::where('Woid', $id)->get();
@@ -93,7 +93,7 @@ $sheet = MinuteSheet::select('Woid')->distinct()->Where('Woid','<>',null)->Disti
 ////////////////////////////////////////////////////////
 
 $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
 $conversation=MinuteSheet::where('Woid', $request['id'])->get();
 $worked=MinuteSheet::Select('Woid')->distinct()->where('Woid', $request['id'])->get();
@@ -109,7 +109,7 @@ $last = MinuteSheet::where('Woid',$request['id'])->OrderBy('id','DESC')->Limit(1
     
 public function sminutesheet(){
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
     return view('minutesheetsignature',['notifications' => $notifications,
 'role' => $role]);

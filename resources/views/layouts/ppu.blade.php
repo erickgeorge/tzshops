@@ -49,6 +49,10 @@
         div{
             font-weight: bold;
         }
+        label{
+            font-weight: bold;
+            color: #000;
+        }
     </style>
 
 
@@ -117,6 +121,10 @@ input[type="date"]::-webkit-datetime-edit-day-field{
         // closing work order by default
         $woclo = WorkOrder::where('status',2)->get();
         $leohii = Carbon::now();
+
+        use App\Notification;
+
+               $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         foreach ($woclo as $woclo) {
             $sikuhii = Carbon::parse($woclo->updated_at);

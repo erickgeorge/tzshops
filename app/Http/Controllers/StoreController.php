@@ -343,7 +343,7 @@ class StoreController extends Controller
 
              public function MaterialrequestView($id){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('requestedmaterialinstore', [
             'role' => $role,
@@ -689,7 +689,7 @@ public function deletematerial($id , $woid)
     {
       
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
  return view('procurementstostore', [ 'notifications' => $notifications, 'role' => $role ]);
 
     }

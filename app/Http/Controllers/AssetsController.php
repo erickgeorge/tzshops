@@ -283,7 +283,7 @@ class AssetsController extends Controller
  public function TecnicianView(Request $request)
     {
 
-       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+       $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
@@ -300,7 +300,7 @@ class AssetsController extends Controller
 
 
        public function HousesView(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('houses', [
             'role' => $role,
@@ -316,7 +316,7 @@ class AssetsController extends Controller
 
 
          public function managecampus(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
          return view('managecampus', [
@@ -336,7 +336,7 @@ class AssetsController extends Controller
 
 
        public function cleaningcompany(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if(request()->has('start'))  { //date filter
@@ -408,7 +408,7 @@ class AssetsController extends Controller
 
 
        public function cleaningcompanywithexpirecontract(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if(request()->has('start'))  { //date filter
@@ -482,7 +482,7 @@ class AssetsController extends Controller
 
 
        public function cleaningcompanyreached(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if(request()->has('start'))  { //date filter
@@ -551,7 +551,7 @@ class AssetsController extends Controller
 
 
              public function cleaningcompanyexpired(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
          return view('cleaningcompanynewexpired', [
@@ -567,7 +567,7 @@ class AssetsController extends Controller
 
 
         public function cleaningcompanynew(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
          return view('cleaningcompanynew', [
@@ -583,7 +583,7 @@ class AssetsController extends Controller
 
 
         public function cleaningcompanyreport(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
          return view('cleaningcompanyreport', [
@@ -599,7 +599,7 @@ class AssetsController extends Controller
 
 
              public function incompleteassessmentsheet(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
          return view('incompleteassessmentsheet', [
@@ -618,7 +618,7 @@ class AssetsController extends Controller
 
 
              public function assessmentsheet(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
          return view('assessmentsheet', [
@@ -641,7 +641,7 @@ class AssetsController extends Controller
 
 
        public function Hallofresdence(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('hallofresdence', [
             'role' => $role,
@@ -656,7 +656,7 @@ class AssetsController extends Controller
          }
 
            public function Cleaningarea(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('cleaningarea', [
             'role' => $role,
@@ -674,7 +674,7 @@ class AssetsController extends Controller
          }
 
            public function cleaningzone(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('cleaningzone', [
             'role' => $role,
@@ -877,7 +877,7 @@ class AssetsController extends Controller
 
   public function RegisterCleaningArea(Request $request)
     {
-      
+
         $cleanarea = new cleaningarea();
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];
@@ -910,7 +910,7 @@ class AssetsController extends Controller
 
 
    public function Registercampusview(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registercampus', [
             'role' => $role,
@@ -919,7 +919,7 @@ class AssetsController extends Controller
      }
 
    public function Registerstaffhouseview(){
-       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+       $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registerstaffhouse', [
             'role' => $role,
@@ -930,7 +930,7 @@ class AssetsController extends Controller
 
 
     public function Registercompanyview(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registercompany', [
             'role' => $role,
@@ -956,7 +956,7 @@ class AssetsController extends Controller
 
 
     public function Renewcompanycontract(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('renewcompanycontract', [
             'role' => $role,
@@ -969,7 +969,7 @@ class AssetsController extends Controller
 
 
          public function addnewsheet(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('addnewassesssheet', [
             'role' => $role,
@@ -983,7 +983,7 @@ class AssetsController extends Controller
 
 
    public function Registerhallview(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registerhall', [
             'role' => $role,
@@ -995,7 +995,7 @@ class AssetsController extends Controller
 
 
      public function Registercleanzoneview(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registercleaningzone', [
             'role' => $role,
@@ -1007,7 +1007,7 @@ class AssetsController extends Controller
 
 
     public function Registercleaningareaview(){
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registercleaningarea', [
                 'role' => $role,
@@ -1021,7 +1021,7 @@ class AssetsController extends Controller
 
      public function nonbuildingasset(){
 
-      $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+      $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $assets = NonBuildingAsset:: select(DB::raw('count(id) as total_asset,name_of_asset')) ->OrderBy('name_of_asset','ASC')
@@ -1040,7 +1040,7 @@ class AssetsController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('registernonbuildingasset', ['role' => $role,'notifications' => $notifications]);
 
-       $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+       $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return redirect()->route('nonbuildingasset')->with(['message' => 'Asset Added Succesfully']);
 
@@ -1102,7 +1102,7 @@ class AssetsController extends Controller
                      ->groupBy('location')
                      ->get();
 
-  $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+  $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
  return view('Nonbuildingasset1', [
@@ -1123,7 +1123,7 @@ class AssetsController extends Controller
                      ->groupBy('block_id')
                      ->get();
 
-  $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+  $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
  return view('Nonbuildingasset2', [
@@ -1145,7 +1145,7 @@ $coll = NonBuildingAsset::select('area_id')->distinct()->where('name_of_asset',$
 
 
 $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
-  $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+  $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
  return view('Nonbuildingasset3', [
@@ -1158,7 +1158,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsManager()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsMain',['role'=>$role,'notifications'=>$notifications]);
@@ -1166,7 +1166,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewLand()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewLand',['role'=>$role,'notifications'=>$notifications]);
@@ -1210,7 +1210,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsLand()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsland::get();
 
@@ -1218,7 +1218,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      }
      public function assetsLandView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsland::where('id',$id)->get();
         $asses = assetsassesland::where('assetID',$id)->get();
@@ -1227,7 +1227,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsLandEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsland::where('id',$id)->get();
         return view('assetsLandEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -1264,7 +1264,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      //
      public function assetsNewPlantMachinery()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewPlantMachinery',['role'=>$role,'notifications'=>$notifications]);
@@ -1565,14 +1565,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsPlantMachinery()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsplantandmachinery::get();
         return view('assetsPlantMachinery',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsPlantMachineryView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsplantandmachinery::where('id',$id)->get();
         $asses = assetsassesplantandmachinery::where('assetID',$id)->get();
@@ -1581,7 +1581,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsPlantMachineryEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsplantandmachinery::where('id',$id)->get();
         return view('assetsPlantMachineryEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -1881,7 +1881,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewIntangible()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewIntangible',['role'=>$role,'notifications'=>$notifications]);
@@ -1921,14 +1921,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsIntangible()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsintangible::get();
         return view('assetsIntangible',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsIntangibleView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsintangible::where('id',$id)->get();
         $asses = assetsassesintangible::where('assetID',$id)->get();
@@ -1937,7 +1937,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsIntangibleEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsintangible::where('id',$id)->get();
         return view('assetsIntangibleEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -1976,7 +1976,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewMotorVehicle()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewMotorVehicle',['role'=>$role,'notifications'=>$notifications]);
@@ -2017,14 +2017,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsMotorVehicle()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsmotorvehicle::get();
         return view('assetsMotorVehicle',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsMotorVehicleView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsmotorvehicle::where('id',$id)->get();
         $asses = assetsassesmotorvehicle::where('assetID',$id)->get();
@@ -2033,7 +2033,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsMotorVehicleEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsmotorvehicle::where('id',$id)->get();
         return view('assetsMotorVehicleEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -2073,7 +2073,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewFurniture()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewFurniture',['role'=>$role,'notifications'=>$notifications]);
@@ -2373,14 +2373,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsFurniture()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsfurniture::get();
         return view('assetsFurniture',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsFurnitureView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsfurniture::where('id',$id)->get();
         $asses = assetsassesfurniture::where('assetID',$id)->get();
@@ -2389,7 +2389,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsFurnitureEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsfurniture::where('id',$id)->get();
         return view('assetsFurnitureEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -2688,7 +2688,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewEquipment()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewEquipment',['role'=>$role,'notifications'=>$notifications]);
@@ -2989,14 +2989,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsEquipment()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsequipment::get();
         return view('assetsEquipment',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsEquipmentView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsequipment::where('id',$id)->get();
         $asses = assetsassesequipment::where('assetID',$id)->get();
@@ -3005,7 +3005,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsEquipmentEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsequipment::where('id',$id)->get();
         return view('assetsEquipmentEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -3305,7 +3305,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewComputerEquipment()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewComputerEquipment',['role'=>$role,'notifications'=>$notifications]);
@@ -3606,14 +3606,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsComputerEquipment()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetscomputerequipment::get();
         return view('assetsComputerEquipment',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsComputerEquipmentView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetscomputerequipment::where('id',$id)->get();
         $asses = assetsassescomputerequipment::where('assetID',$id)->get();
@@ -3622,7 +3622,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsComputerEquipmentEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetscomputerequipment::where('id',$id)->get();
         return view('assetsComputerEquipmentEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -3924,7 +3924,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewBuilding()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewBuilding',['role'=>$role,'notifications'=>$notifications]);
@@ -3964,14 +3964,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsBuilding()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsbuilding::get();
         return view('assetsBuilding',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsBuildingView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsbuilding::where('id',$id)->get();
         $asses = assetsassesbuilding::where('assetID',$id)->get();
@@ -3980,7 +3980,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsBuildingEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsbuilding::where('id',$id)->get();
         return view('assetsBuildingEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -4017,7 +4017,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsNewWorkinProgress()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('assetsNewWorkinProgress',['role'=>$role,'notifications'=>$notifications]);
@@ -4047,14 +4047,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsWorkinProgress()
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsworkinprogress::where('_status',0)->get();
         return view('assetsWorkinProgress',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsWorkinProgressView($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsworkinprogress::where('id',$id)->where('_status',0)->get();
         return view('assetsWorkinProgressView',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -4062,7 +4062,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsWorkinProgressEdit($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsworkinprogress::where('id',$id)->where('_status',0)->get();
         return view('assetsWorkinProgressEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -4087,7 +4087,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
      public function assetsWorkinProgressReallocate($id)
      {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $land = assetsworkinprogress::where('id',$id)->where('_status',0)->get();
         return view('assetsWorkinProgressReallocate',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
@@ -4503,7 +4503,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
                     $datyer = date('Y-m-d',$time);
                     // echo $datyer;
 
-            $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if($_GET['asset']=='Land')
@@ -4564,14 +4564,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
    public function yearlyplantmachinery()
    {
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassesplantandmachinery::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4587,14 +4587,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
    public function yearlymotorvehicle()
    {
 
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassesmotorvehicle::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4606,19 +4606,19 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyMotorVehicle',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
-  
+
    }
    public function yearlycomputerequipment()
    {
 
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassescomputerequipment::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4630,19 +4630,19 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyComputerEquipment',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
-  
+
    }
    public function yearlyequipment()
    {
 
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassesequipment::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4654,19 +4654,19 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyEquipment',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
-  
+
    }
    public function yearlyfurniture()
    {
 
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassesfurniture::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4678,19 +4678,19 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyFurniture',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
-  
+
    }
    public function yearlyintangible()
    {
 
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassesintangible::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4702,19 +4702,19 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyIntangible',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
-  
+
    }
    public function yearlyland()
    {
 
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassesland::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4726,19 +4726,19 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyLand',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
-  
+
    }
    public function yearlybuilding()
    {
-   
-    $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if (request()->has('year'))
     {
         if(request('year')=='')
         {
             return redirect()->back()->withErrors(['message' => 'Please Choose Assessment Year!']);
- 
+
         }
         $year=request('year');
         $asset = assetsassesbuilding::whereYear('assesmentYear',$year)->orderBy('created_at','Desc')->get();
@@ -4750,7 +4750,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyBuilding',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
-    
+
    }
-// 
+//
 }

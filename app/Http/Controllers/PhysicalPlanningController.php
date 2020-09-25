@@ -41,7 +41,7 @@ class PhysicalPlanningController extends Controller
 
 	public function physicalplanning()
 	{
-		 $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+		 $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
@@ -51,7 +51,7 @@ class PhysicalPlanningController extends Controller
 
 	public function infrastructureproject()
 	{
-		$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 		$project = ppuproject::orderby('id','DESC')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
        return view('ppuinfrastructureprojects', [ 'role' => $role, 'notifications' => $notifications,'projects'=>$project]);
@@ -59,7 +59,7 @@ class PhysicalPlanningController extends Controller
 
 	public function newinfrastructureproject()
 	{
-		$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
  $role = User::where('id', auth()->user()->id)->with('user_role')->first();
        return view('ppunewinfrastructureproject', [ 'role' => $role, 'notifications' => $notifications]);
 	}
@@ -92,7 +92,7 @@ class PhysicalPlanningController extends Controller
 
 	public function ppuprojectview($id)
 	{
-		$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 		$project = ppuproject::where('id',$id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
        return view('ppuprojectview', [ 'role' => $role, 'notifications' => $notifications,'projects'=>$project]);
@@ -115,7 +115,7 @@ class PhysicalPlanningController extends Controller
 	}
 	public function ppueditproject($id)
 	{
-		$notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+		$notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 		$project = ppuproject::where('id',$id)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
        return view('ppueditproject', [ 'role' => $role, 'notifications' => $notifications,'projects'=>$project]);
@@ -416,7 +416,7 @@ class PhysicalPlanningController extends Controller
 
     public function pputrack($id)
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $project = ppuproject::where('id',$id)->first();
@@ -496,7 +496,7 @@ class PhysicalPlanningController extends Controller
 
     public function ppudrawingslibrary()
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $projectdrawing = ppuprojectdrawing::orderby('id','DESC')->get();
 
@@ -506,7 +506,7 @@ class PhysicalPlanningController extends Controller
 
     public function ppudrawingsview($id)
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $projectdrawing = ppuprojectdrawing::where('id',$id)->first();
         $projectfile = ppudocument::where('document_identifier',$projectdrawing['document_identifier'])->get();
@@ -520,7 +520,7 @@ class PhysicalPlanningController extends Controller
 
     public function ppubudgetlibrary()
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $projectbudget = ppuprojectbudget::select('project_id')->distinct()->get();
 
@@ -530,7 +530,7 @@ class PhysicalPlanningController extends Controller
 
     public function ppubudgetview($id)
     {
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $projectbudget = ppuprojectbudget::where('project_id',$id)->get();
 

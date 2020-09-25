@@ -220,7 +220,7 @@ class LandscapingController extends Controller
 
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $emailReceiver = User::where('id', $wO->client_id)->first();
 
         $toEmail = $emailReceiver->email;
@@ -264,7 +264,7 @@ class LandscapingController extends Controller
     {
         $company = Crypt::decrypt($company);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
 
         return view('edit_work_order_landscaping', [
@@ -1794,7 +1794,7 @@ class LandscapingController extends Controller
 
      public function maintainancesection(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
      return view('Maintainancesection', [
@@ -1809,7 +1809,7 @@ class LandscapingController extends Controller
 
     public function assessmentformview(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
     if(request()->has('start'))  { //date filter
 
@@ -1923,7 +1923,7 @@ class LandscapingController extends Controller
 
     public function assessmentformviewsecond(){
 
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
@@ -2036,7 +2036,7 @@ class LandscapingController extends Controller
 
 
        public function addsection(){
-          $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         return view('add_maintainancesection', [
@@ -2052,7 +2052,7 @@ class LandscapingController extends Controller
         public function addcompanyforassessment($id , $tender){
 
         $tender = Crypt::decrypt($tender);
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
@@ -2098,7 +2098,7 @@ class LandscapingController extends Controller
 
 
          public function trackcompanyview($id){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $companywo = landassessmentform::where('company_id' , $id)->get();
 
@@ -2110,7 +2110,7 @@ class LandscapingController extends Controller
 
 
           public function companywithmonth(){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
@@ -2127,7 +2127,7 @@ class LandscapingController extends Controller
 
 
         public function trackcompanyassessmentview($id){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
@@ -2141,7 +2141,7 @@ class LandscapingController extends Controller
 
 
          public function companyreport($id){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('companyreport', [
@@ -2156,7 +2156,7 @@ class LandscapingController extends Controller
          public function companylinereport($tender , $company , $area){
 
          $tender = Crypt::decrypt($tender);
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('companylinereport', [
@@ -2183,7 +2183,7 @@ class LandscapingController extends Controller
      public function viewcompanyreportfor_company($tender , $company ){
 
          $tender = Crypt::decrypt($tender);
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('view_companyreport_for_company', [
@@ -2207,7 +2207,7 @@ class LandscapingController extends Controller
          public function viewcompanyreport($tender , $company , $area){
 
          $tender = Crypt::decrypt($tender);
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('viewcompanyreport', [
@@ -2228,7 +2228,7 @@ class LandscapingController extends Controller
 
 
          public function viewassessmentsheet($id){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('viewassessmentsheet', [
@@ -2242,7 +2242,7 @@ class LandscapingController extends Controller
 
 
          public function viewsheetbeforeproceeding($id){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('viewsheetbeforeproceed', [
@@ -2256,7 +2256,7 @@ class LandscapingController extends Controller
 
 
          public function companyeditreport($id){
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('companyeditreport', [
@@ -2290,7 +2290,7 @@ class LandscapingController extends Controller
 
       public function companytenderformonthreport($id , $tender){
          $tender = Crypt::decrypt($tender);
-         $notifications = Notification::where('receiver_id', auth()->user()->id)->get();
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
                return view('companymonthtrending', [
