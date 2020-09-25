@@ -172,8 +172,4 @@ document.getElementById("totalmaterials").value=total;
 
 	 }
 
-
-
-
-
 </script>

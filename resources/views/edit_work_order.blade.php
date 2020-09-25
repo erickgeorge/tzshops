@@ -19,8 +19,6 @@
 ?>
 
 
-
-
 <style type="text/css">
 .label{
     width: 700px;
@@ -874,7 +872,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
             {{-- Require Material  --}}
                 @if(($wo->status == 5) and ($wo->requirematerial == NULL))
-                <div>If this works order requires material(s) please proceed by clicking the button named <b style="color: blue">Yes</b> , else if this works order does not require material(s) then you can proceed by assigning technician(s) for performing this works order.</div>
+                <div>If this works order requires material(s) please proceed by clicking the button named <b style="color: blue">Yes</b> , else if this works order does not require any material then you can proceed by assigning technician(s) for performing this works order.</div>
 
                 <br>
                     <div>
@@ -1654,7 +1652,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </table>
 
 
-    <button class="btn btn-success" > <a  style="color: white" href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL </a></button>
+    <button class="btn btn-success" > <a  style="color: white" href="/send/material_again/{{$wo->id}}"   > REQUEST MATERIAL(S) </a></button>
 
 
 

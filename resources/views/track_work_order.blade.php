@@ -10,7 +10,8 @@
     use App\WorkOrderStaff;
     use App\WorkOrderMaterial;
     use App\techasigned;
-
+    use App\iowzonelocation;
+      use App\iowzone;
 
  ?>
  <div class="container">
@@ -143,9 +144,59 @@
     </div>
 
   <br>
- @if($wo->emergency == 1)
-   <h6 align="center" style="color: red;"><b> This Works Order Is Emergency &#9888;</b></h6>
- @endif
+     <div class="row">
+        <div class="col">
+            @if($wo->emergency == 1)
+            <h6 align="center" style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
+             @endif
+        </div>
+        <div class="col">
+            @if($wo->zonelocationtwo != null)
+
+            <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
+               @csrf
+               <div class="row">
+               <div class="container" >
+                   <div class="input-group mb-3">
+                   <div class="input-group-prepend">
+                       <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
+                   </div>
+                   <select  required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
+
+                     @if($wo->zonelocationtwo != null) <?php
+                           $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
+                           $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
+                            ?>
+                            @endif
+                            @if($wo->zonelocationtwo != null)
+                          <option value="{{ $wo->zonelocationtwo }}" selected>
+
+                             {{ $zonelocation->location }}, {{ $zoned->zonename }}
+                           </option>
+                       @else
+                       <option value="" selected>Choose... </option>
+                       @endif
+
+
+
+                  @foreach($iowzone as $user)
+                  <option value="{{ $user->id }}" >{{ $user->location }}</option>
+                  @endforeach
+
+                   </select>
+               </div>
+               </div>
+           </div>
+          @if($wo->zone_location == null)
+               <button type="submit" class="btn btn-primary">Save</button>
+          @endif
+
+             </form>
+
+        @endif
+        </div>
+    </div>
+
 
 
 
@@ -354,6 +405,11 @@
 <!--report after work-->
 
     @if(empty($wo['work_order_inspection']->status))
+
+
+
+        <p >Not inspected yet</p>
+
     @else
 
 
@@ -382,7 +438,10 @@
 
   <tr>
 
+
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
+
+
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
   </tr>
@@ -464,7 +523,9 @@
   @if(auth()->user()->type != 'CLIENT')
     <h4><b>Material(s) Request </b></h4>
   @if(empty($wo['work_order_material']->id))
-        <p class="text-primary">No Material have been requested</p>
+
+        <p >No Material have been requested</p>
+
     @else
     <?php
 
