@@ -27,7 +27,8 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 #footer{position:fixed; right:0px; bottom:10px; text-align:center; border-top:1px solid black; }
-#footer .page:before { content: "Page " counter(page); } @page {margin:20px 30px 40px 50px;}
+#footer .page:after{content:counter(page, decimal);}
+@page {margin:20px 30px 40px 50px;}
 </style>
 <table>
  <thead class="thead-dark" align="center">
@@ -119,6 +120,10 @@ tr:nth-child(even) {
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
+                                <div id='footer'>
+                                  <p class="page"></p>
+                              </div>
+
                            @elseif($work->status == 53)
 
                               <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
@@ -239,5 +244,5 @@ tr:nth-child(even) {
                 </tbody>
 </table>
 <div id='footer'>
-    <p class="page"></p>
+    <p class="page">Page-</p>
 </div>

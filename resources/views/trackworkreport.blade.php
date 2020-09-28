@@ -581,3 +581,7 @@ td, th {
     </tbody>
 </table>
  @endif
+
+ <div id='footer'>
+    <p class="page">Page-</p>
+</div>

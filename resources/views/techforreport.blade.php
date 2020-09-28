@@ -225,3 +225,7 @@ td, th {
 </table>
 
 
+
+<div id='footer'>
+    <p class="page">Page-</p>
+</div>

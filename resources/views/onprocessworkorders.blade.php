@@ -133,7 +133,7 @@ use Carbon\Carbon;
                   orwhere('status',4)->orwhere('status',5)->orwhere('status',6)->orwhere('status',7)->
                   orwhere('status',8)->orwhere('status',70)->orwhere('status',40)->orwhere('status',52)->
                   orwhere('status',53)->orwhere('status',25)->orwhere('status',18)->orwhere('status',19)->
-                  orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->get();
+                  orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->orderBy('id','DESC')->get();
                   foreach ($prob as $problem) {
                     echo "<option value='".$problem->problem_type."'>".$problem->problem_type."</option>";
                   }
@@ -152,7 +152,7 @@ use Carbon\Carbon;
                   orwhere('status',4)->orwhere('status',5)->orwhere('status',6)->orwhere('status',7)->
                   orwhere('status',8)->orwhere('status',70)->orwhere('status',40)->orwhere('status',52)->
                   orwhere('status',53)->orwhere('status',25)->orwhere('status',18)->orwhere('status',19)->
-                  orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->distinct()->get();
+                  orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->distinct()->orderBy('id','DESC')->get();
                   foreach ($loca as $location) {
                     echo "<option value='".$location->location."'>".$location->location."</option>";
                   }
@@ -177,10 +177,10 @@ use Carbon\Carbon;
 //
 
   $userwithid = WorkOrder::select('client_id')->distinct()->where('status',3)->
-                  orwhere('status',4)->orwhere('status',5)->orwhere('status',6)->orwhere('status',7)->
-                  orwhere('status',8)->orwhere('status',70)->orwhere('status',40)->orwhere('status',52)->
+                  orwhere('status',4)->orwhere('status',5)->orwhere('status',6)->orwhere('status',7)->orwhere('status',1)->
+                  orwhere('status',8)->orwhere('status',70)->orwhere('status',40)->orwhere('status',52)->orwhere('status',2)->
                   orwhere('status',53)->orwhere('status',25)->orwhere('status',18)->orwhere('status',19)->
-                  orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->get();
+                  orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->orderBy('id','DESC')->get();
 foreach($userwithid as $userwithid)
 {
 
@@ -220,7 +220,7 @@ foreach($userwithid as $userwithid)
     orwhere('status',4)->orwhere('status',5)->orwhere('status',6)->orwhere('status',7)->
     orwhere('status',8)->orwhere('status',70)->orwhere('status',40)->orwhere('status',52)->
     orwhere('status',53)->orwhere('status',25)->orwhere('status',18)->orwhere('status',19)->
-    orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->get();
+    orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->orderBy('id','DESC')->get();
     foreach ($statusago as $statusname) {
 
      if($statusname->status == -1)
@@ -263,12 +263,13 @@ foreach($userwithid as $userwithid)
           <!-- ---------------------- -->
 
     </div>
+    <br>
     <div class="bs-example">
         <div class=" row nav nav-tabs text-center">
             <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All <b class="badge badge-light"></b></b></a>
-            <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Accepted <b class="badge badge-light"></b></b></a>
+            {{-- <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Accepted <b class="badge badge-light"></b></b></a> --}}
              <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On-process <b class="badge badge-light"></b></b></a>
-             <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Closed <b class="badge badge-light"></b></b></a>
+             {{-- <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Closed <b class="badge badge-light"></b></b></a> --}}
              <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed <b class="badge badge-light"></b></b></a>
         </div>
     <br/>
@@ -308,15 +309,15 @@ foreach($userwithid as $userwithid)
                    @if(isset($_GET['location']) && isset($_GET['year']))
                     @if($_GET['location']=='All')
 
-                <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->get(); ?>
+                <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
 
                     @else
 
-                <?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->get(); ?>
+                <?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
                   @endif
 
                 @else
-                    <?php $workorders = Workorder::where('zone_location',$locations->id)->get(); ?>
+                    <?php $workorders = Workorder::where('zone_location',$locations->id)->orderBy('id','DESC')->get(); ?>
                 @endif
 
                 @foreach($workorders as $work)

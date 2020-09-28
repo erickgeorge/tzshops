@@ -4281,24 +4281,26 @@ $v5=$type[4];
 
    public function saveheaddownloads(Request $request)
    {
-    $data = download::where('id',$request['id'])->first();
-    $data->name = $request['name'];
-    $data->save();
 
-    return redirect()->route('downloads')->with(['message'=>'document heading updated succesfully!']);
 
-   }
-
-   public function savefiledownloads(Request $request)
-   {
 
     $request->validate([
-        "file" => "required|mimes:pdf",
+        'name' => 'required',
+
     ]);
 
-    $data = download::where('id',$request['id'])->first();
+        $data = download::where('id',$request['id'])->first();
+        $data->name = $request['name'];
 
-    $path = public_path('download/'.date('s.i.H.d.m.Y'));
+    if($request['file']!='')
+    {
+    $request->validate([
+            "file" => "required|mimes:pdf",
+        ]);
+
+        // upload file
+
+        $path = public_path('download/'.date('Y.m.d.H.i.s'));
 
       if(!File::isDirectory($path))
       {
@@ -4307,24 +4309,29 @@ $v5=$type[4];
 
       if($file = $request->file('file'))
       {
-          $filename = time().'-'.$data['name'].'.'.$file->getClientOriginalExtension();
+          $filename = date('Y.m.d.H.i.s').'-'.$request['name'].'.'.$file->getClientOriginalExtension();
           $targetpath = $path;
 
           if($file->move($targetpath, $filename))
           {
 
-
             $data->document = $filename;
 
-            $data->date = date('s.i.H.d.m.Y');
+            $data->date = date('Y.m.d.H.i.s');
             $data->uploadedBy = auth()->user()->id;
             $data->save();
 
-            return redirect()->route('downloads')->with(['message'=>'document updated succesfully!']);
+            return redirect()->route('downloads')->with(['message'=>'document uploaded succesfully!']);
           }
       }else{
           return redirect()->back()->withErrors(['message'=>'Oops, something is wrong. try again!']);
       }
+
+    }
+
+    $data->save();
+    return redirect()->route('downloads')->with(['message'=>'Changes saved succesfully!']);
+
 
    }
 

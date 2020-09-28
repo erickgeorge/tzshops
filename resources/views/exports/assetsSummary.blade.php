@@ -197,10 +197,5 @@ tr:nth-child(even) {
         @endforeach
 
     </tbody>
-    <tfoot>
-        <tr>
-            <th>#</th>
-        </tr>
-    </tfoot>
 </table>
 

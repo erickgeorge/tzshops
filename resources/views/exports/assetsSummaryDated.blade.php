@@ -145,9 +145,4 @@ tr:nth-child(even) {
             @endphp
         @endforeach
     </tbody>
-    <tfoot>
-        <tr>
-            <th>#</th>
-        </tr>
-    </tfoot>
 </table>

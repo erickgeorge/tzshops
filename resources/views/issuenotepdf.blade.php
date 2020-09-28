@@ -156,8 +156,6 @@ tr:nth-child(even) {
 
 
 
-
-
-<div id='footer'>
+   <div id='footer'>
     <p class="page">Page-</p>
 </div>

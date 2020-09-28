@@ -89,11 +89,11 @@ tr:nth-child(even) {
                         <th scope="col">#</th>
                         <th scope="col">Tender Number</th>
                         <th scope="col">Company Name</th>
-                        
+
 
                         <th scope="col">Contract Duration</th>
                         <th scope="col">Status</th>
-                      
+
                     </tr>
                     </thead>
 
@@ -109,7 +109,7 @@ tr:nth-child(even) {
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->tender }}</td>
                             <td>{{ $house['tendercompany']->company_name }}</td>
-                           
+
 
 
 
@@ -177,7 +177,7 @@ tr:nth-child(even) {
                             <td> <span class="badge badge-primary"> New</span> </td>
                             @endif
 
-                           
+
 
                         </tr>
 
@@ -208,9 +208,7 @@ tr:nth-child(even) {
 
 
 
-
-
-
-<div id='footer'>
-    <p class="page">page</p>
+   <div id='footer'>
+    <p class="page">Page-</p>
 </div>
+

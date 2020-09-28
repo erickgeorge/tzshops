@@ -57,6 +57,8 @@ use App\Directorate;
                     @endforeach
                     </tbody>
     </table>
-    <div id='footer'>
-        <p class="page"></p>
-    </div>
+
+<div id='footer'>
+    <p class="page">Page-</p>
+</div>
+

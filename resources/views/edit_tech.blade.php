@@ -53,19 +53,25 @@
                 <label for="email">Email Address <sup style="color: red;">*</sup></label>
                                 <input style="color: black; " required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" onblur="validateEmail(this);" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ $tech->email }}">
             </div>
+
+            <div class="form-group col-lg-6">
+                <label for="lname">Section <sup style="color: red;">*</sup></label>
+                <input type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="liiiname" placeholder="Enter last name"  value="{{ $tech->type }}" disabled>
+            </div>
             <br>
             <br>
             <br>
             <br>
 
-            <div style="padding-left: 500px;">
+
+           </div>
+
+           <div>
 
             <button type="submit" class="btn btn-primary">save</button> &nbsp;  &nbsp;  &nbsp;
 
 
             <a class="btn btn-danger" href="/technicians" role="button">Cancel </a>
-           </div>
-
            </div>
         </form>
     </div>

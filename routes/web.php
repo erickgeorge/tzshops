@@ -405,9 +405,9 @@ Route::get('allpdf','NotesController@allpdf')->name('allpdf')->middleware('auth'
 
 // iow myzone ////////
 Route::get('newworkorders','WorkOrderController@newworkorders')->name('newworkorders')->middleware('auth');
-Route::get('acceptedworkorders','WorkOrderController@acceptedworkorders')->name('acceptedworkorders')->middleware('auth');
+// Route::get('acceptedworkorders','WorkOrderController@acceptedworkorders')->name('acceptedworkorders')->middleware('auth');
 Route::get('onprocessworkorders','WorkOrderController@onprocessworkorders')->name('onprocessworkorders')->middleware('auth');
-Route::get('closedworkorders','WorkOrderController@closedworkorders')->name('closedworkorders')->middleware('auth');
+// Route::get('closedworkorders','WorkOrderController@closedworkorders')->name('closedworkorders')->middleware('auth');
 Route::get('completedworkorders','WorkOrderController@completedworkorders')->name('completedworkorders')->middleware('auth');
 Route::get('rejectedworkorders','WorkOrderController@rejectedworkorders')->name('rejectedworkorders')->middleware('auth');
 

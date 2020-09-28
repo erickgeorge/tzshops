@@ -697,7 +697,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
           @if($wo->status == 30)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Works order completely closed!</span>
+                <span class="badge badge-warning" style="padding: 20px ">Works order completely closed!</span>
             </div>
 
         @elseif($wo->status == 2)
@@ -717,14 +717,14 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
               <div>
                 <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Close works order completely</button>
+                    <button type="submit" class="btn btn-primary">Close works order completely</button>
                 </form>
             </div>
         @elseif($wo->status == 25)
             <div>
                 <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-warning">Provisional Close</button>
+                    <button type="submit" class="btn btn-primary">Provisional Close</button>
                 </form>
             </div>
         @else
@@ -733,7 +733,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             <div>
                 <form method="POST" action="{{ route('workorder.inspector', [$wo->id, $wo->client_id]) }}">
                     @csrf
-                    <button type="submit" class="btn btn-warning">Notify Inspector of work to approve work done</button>
+                    <button type="submit" class="btn btn-primary">Notify Inspector of work to approve work done</button>
                 </form>
             </div>
           @endif
@@ -753,7 +753,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                     <!--<form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->updated_by]) }}">
                         @csrf
-                        <button type="submit" class="btn btn-success">Close work order</button>
+                        <button type="submit" class="btn btn-primary">Close work order</button>
                     </form>-->
                 @endif
             </div>
@@ -913,7 +913,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                  <div class="row">
                     <form method="POST" action="{{ route('workorder.satisfied', [$wo->id]) }}">
                         @csrf
-                        <button type="submit" class="btn btn-success">SATISFIED</button>
+                        <button type="submit" class="btn btn-primary">SATISFIED</button>
                     </form>
                      </div>
                      &nbsp;&nbsp;&nbsp;&nbsp;
@@ -942,7 +942,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                  <div class="row">
                     <form method="POST" action="{{ route('workorder.iowapprove', [$wo->id]) }}">
                         @csrf
-                        <button type="submit" class="btn btn-success">Approve</button>
+                        <button type="submit" class="btn btn-primary">Approve</button>
                     </form>
                      </div>
                      &nbsp;&nbsp;&nbsp;&nbsp;

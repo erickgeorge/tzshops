@@ -236,7 +236,6 @@ var total=2;
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
 
-                        </div>
 
 
 
@@ -904,7 +903,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
             {{-- Require Material  --}}
                 @if(($wo->status == 5) and ($wo->requirematerial == NULL))
-                <div>If this works order requires material(s) please proceed by clicking the button named <b style="color: blue">Yes</b> , else if this works order does not require any material then you can proceed by assigning technician(s) for performing this works order.</div>
+                <div>If Works Order requires material click <b class="text-primary"> YES </b>, or continue with other steps if not. </div>
 
                 <br>
                     <div>
@@ -1213,8 +1212,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-
-
                 {{-- end ASSIGN TECHNICIAN  --}}
 
 
@@ -1228,8 +1225,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
      {{-- request_transport form--}}
      @if($wo->status == 70)
-
-       <h5 style="color: blue"> Does this works order needs transport for inspection ? </h5> 
+     @if( $iflead == 0)
+     @else
+       <h5 style="color: blue"> Does this works order needs transport for inspection ? </h5>
         <div class="row">
             <div class="col">
                  <div class="checkbox">
@@ -1238,29 +1236,14 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                </div>
             </div>
         </div>
-
+@endif
          <div id="divmanual">
-       
+
 
                      <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
-<<<<<<< HEAD
-                   @if($wo->statusmform != 1)
-
-
-   
-
-                  <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p><u>INSPECTION TRANSPORT REQUEST FORM</u></p>
-                            </div>
-                        </div>
-                </br>
-=======
                   @if($wo->statusmform != 1)
->>>>>>> a542aa4ef912d1af0e4771be23d621f9081da2d7
 
                   @if( $iflead == 0)
                   <b style="color:red;"> Please Assign Lead Technician Before Continuing </b>  <br> <br>
@@ -1313,7 +1296,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-  
+
 
                 @endif
                 {{-- end request_transport form for inspection --}}
@@ -1323,7 +1306,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
      @if($wo->status == 3)
 
-       <h5 style="color: blue"> Does this works order needs transport for work ? </h5> 
+
+<div class="container">
+       <h5 style="color: blue;"> Does this works order needs transport for work ? </h5>
         <div class="row">
             <div class="col">
                  <div class="checkbox">
@@ -1336,7 +1321,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
          <div id="divmanual">
                 <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
-                    <div >
                   @if($wo->statusmform != 1)
                   <br>
                         <div class="row">
@@ -1351,12 +1335,12 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                         <p>Transport date</p>
                         <div class="form-group">
-                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date"></input>
+                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date">
                         </div>
 
                           <p>Transport time</p>
                         <div class="form-group">
-                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  id="time"></input>
+                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  id="time">
                         </div>
 
                          <p>Transport details</p>
@@ -1597,13 +1581,14 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </div>
                         </div>
 
+                        <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
 
 
-                          <div class="form-group">
+                          <div id="customatedtable">
 
 
 
-          <TABLE id="dataTablemat" align="center" >
+          <!-- <TABLE id="dataTablemat" align="center" >
 
 
                   <TR>
@@ -1613,7 +1598,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD>
 
 
-                            <select  required class="custom-select materialsselect"  name="material[]" >
+                            <select  required class="custom-select "  name="material[]" >
                                 <option   selected value="" >Choose material...</option>
                                 @foreach($materials as $material)
                                     <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
@@ -1632,10 +1617,28 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   </TR>
 
 
-        </TABLE>
+        </TABLE> -->
+
+        <div id="cont">
+
+    </div>
+    <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
+    <p>
+        <div class="row">
+            <div class="col">
+                <a id="addRow" onclick="addRow()" class="btn btn-outline-info"><i class="fa fa-plus"></i> Add New Row</a>
+            </div>
+        </div><br>
+        <div class="row">
+
+      <div class="col">
+        <button id="bt" type="submit" class="btn btn-primary" disabled>Save</button>&nbsp;<a href="#" onclick="closeTab()"><button type="button" class="btn btn-danger">Cancel</button></a>
+      </div>
+    </div>
+    </p>
 
                         </div>
-                        <div align="right">
+                       <!--  <div align="right">
 
                         <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addmaterialrow('dataTablemat')" />
 
@@ -1643,11 +1646,297 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br><br> </div>
 
                         <button  type="submit" class="btn btn-primary bg-primary">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" class="btn btn-danger">Cancel</button></a>
+                        <a href="#" onclick="closeTab()"><button type="button" class="btn btn-danger">Cancel</button></a> -->
 
                     </form>
 
+<script>
+    // ARRAY FOR HEADER.
+    var arrHead = new Array();
+    arrHead = ['','Material', 'Quantity', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
 
+    // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
+    // ADD THE TABLE TO YOUR WEB PAGE.
+    function createTable() {
+        var MatForm = document.createElement('table');
+        MatForm.setAttribute('id', 'dataTablemat');      
+        MatForm.setAttribute('class', 'table');     
+        MatForm.setAttribute('align', 'center');                     // SET THE TABLE ID.
+
+        var tr = MatForm.insertRow(-1);
+
+        for (var h = 0; h < arrHead.length; h++) {
+            var th = document.createElement('th');
+
+
+            if(h==0){
+                  th.setAttribute('style','width:5px;')
+                }
+
+
+                if(h==1){
+                  th.setAttribute('style','width:300px;')
+                }
+
+                if(h ==2){
+                    th.setAttribute('style','width:100px;')
+                }
+
+                     // TABLE HEADER.
+            th.innerHTML = arrHead[h];
+            tr.appendChild(th);
+        }
+
+        var div = document.getElementById('cont');
+        div.appendChild(MatForm);    // ADD THE TABLE TO YOUR WEB PAGE.
+
+        var empTab = document.getElementById('dataTablemat');
+
+        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+        tr = empTab.insertRow(rowCnt);
+
+        for (var c = 0; c < arrHead.length; c++) {
+            var td = document.createElement('td');          // TABLE DEFINITION.
+            td = tr.insertCell(c);
+
+            if (c == 0) {           // FIRST COLUMN.
+                 // ADD A BUTTON.
+                var button = document.createElement('button');
+
+                // SET INPUT ATTRIBUTE.
+                button.setAttribute('type', 'button');
+                button.setAttribute('class', 'btn btn-danger')
+                if(c==0)
+                {
+                    button.setAttribute('disabled', 'true');
+
+                }
+                // ADD THE BUTTON's 'onclick' EVENT.
+                button.setAttribute('onclick', 'removeRow(this)');
+
+                td.appendChild(button);
+
+                var i = document.createElement('i');
+                  i.setAttribute('class', 'fa fa-trash');
+                  button.appendChild(i);
+            }
+            else {
+                // CREATE AND ADD TEXTBOX IN EACH CELL.
+               if(c==1)
+                {
+                        var ele = document.createElement('select');
+                        ele.setAttribute('name','material[]');
+                        ele.setAttribute('class','custom-select');
+                }else
+                {
+                    var ele = document.createElement('input');
+                        ele.setAttribute('name','quantity[]');
+                        ele.setAttribute('max','100');
+                        ele.setAttribute('min','1');
+                        ele.setAttribute('class', 'form-control');
+                        ele.setAttribute('type', 'number');
+                }
+ 
+                ele.setAttribute('required', '');
+                
+
+
+
+    var value = parseInt(document.getElementById('totalmaterials').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('totalmaterials').value = value;
+
+    var hide = document.getElementById('bt');
+        if (value > 1) {
+            hide.disabled = false;
+        }
+        else {
+            hide.disabled = true;
+        }
+
+            // ele.setAttribute('value', '');
+            // ele.setAttribute('name',value);
+            ele.setAttribute('id',value);
+            td.appendChild(ele);
+
+            
+            if(c==1)
+                {
+                    var option = document.getElementById(value);
+
+                    var options = document.createElement('option');
+
+                    options.setAttribute('selected','selected');
+                    options.text = 'Choose Material';
+                    option.appendChild(options);
+                   
+                     @foreach($materials as $material)
+
+                    var options = document.createElement('option');
+                    options.setAttribute('value','<?php echo $material->id; ?>');
+                    options.text = "<?php echo $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )'; ?>";
+                    option.appendChild(options);
+                    @endforeach
+
+                    $(".custom-select").select2({
+                        placeholder: "Choose material..",
+                        allowClear: true
+                    });
+                }
+
+
+            }
+        }
+
+
+    }
+
+    // ADD A NEW ROW TO THE TABLE.s
+    function addRow() {
+        var empTab = document.getElementById('dataTablemat');
+
+        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+        tr = empTab.insertRow(rowCnt);
+
+        for (var c = 0; c < arrHead.length; c++) {
+            var td = document.createElement('td');          // TABLE DEFINITION.
+            td = tr.insertCell(c);
+
+            if (c == 0) {           // FIRST COLUMN.
+                // ADD A BUTTON.
+                var button = document.createElement('button');
+
+                // SET INPUT ATTRIBUTE.
+                button.setAttribute('type', 'button');
+                button.setAttribute('class', 'btn btn-danger')
+
+                // ADD THE BUTTON's 'onclick' EVENT.
+                button.setAttribute('onclick', 'removeRow(this)');
+
+                td.appendChild(button);
+
+                var i = document.createElement('i');
+                  i.setAttribute('class', 'fa fa-trash');
+                  button.appendChild(i);
+            }
+   else {
+                // CREATE AND ADD TEXTBOX IN EACH CELL.
+               if(c==1)
+                {
+                        var ele = document.createElement('select');
+                        ele.setAttribute('name','material[]');
+                        ele.setAttribute('class','custom-select');
+                }else
+                {
+                    var ele = document.createElement('input');
+                        ele.setAttribute('name','quantity[]');
+                        ele.setAttribute('max','100');
+                        ele.setAttribute('min','1');
+                        ele.setAttribute('class', 'form-control');
+                        ele.setAttribute('type', 'number');
+                }
+ 
+                ele.setAttribute('required', '');
+                
+
+
+
+    var value = parseInt(document.getElementById('totalmaterials').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('totalmaterials').value = value;
+
+    var hide = document.getElementById('bt');
+        if (value > 1) {
+            hide.disabled = false;
+        }
+        else {
+            hide.disabled = true;
+        }
+
+            // ele.setAttribute('value', '');
+            // ele.setAttribute('name',value);
+            ele.setAttribute('id',value);
+            td.appendChild(ele);
+
+            
+            if(c==1)
+                {
+                    var option = document.getElementById(value);
+
+                    var options = document.createElement('option');
+
+                    options.setAttribute('selected','selected');
+                    options.text = 'Choose Material';
+                    option.appendChild(options);
+
+                     @foreach($materials as $material)                    
+
+                    var options = document.createElement('option');
+                    options.setAttribute('value','<?php echo $material->id; ?>');
+                    options.text = "<?php echo $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )'; ?>";
+                    option.appendChild(options);
+                    @endforeach
+
+                    $(".custom-select").select2({
+                        placeholder: "Choose material..",
+                        allowClear: true
+                    });
+                }
+            }
+        }
+
+
+    }
+
+    // DELETE TABLE ROW.
+    function removeRow(oButton) {
+        var empTab = document.getElementById('dataTablemat');
+    var value = parseInt(document.getElementById('totalmaterials').value, 10);
+    value = isNaN(value) ? 0 : value;
+    --value; --value; --value; --value; --value; --value;
+    document.getElementById('totalmaterials').value = value;
+        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);
+
+var value = parseInt(document.getElementById('totalmaterials').value, 10);
+    value = isNaN(value) ? 0 : value;
+
+    var hide = document.getElementById('bt');
+        if (value > 1) {
+            hide.disabled = false;
+        }
+        else {
+            hide.disabled = true;
+        }
+              // BUTTON -> TD -> TR.
+    }
+
+    // EXTRACT AND SUBMIT TABLE DATA.
+    function submit() {
+        var myTab = document.getElementById('dataTablemat');
+        var values = new Array();
+
+        // LOOP THROUGH EACH ROW OF THE TABLE.
+        for (row = 1; row < myTab.rows.length - 1; row++) {
+            for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                var element = myTab.rows.item(row).cells[c];
+                if (element.childNodes[0].getAttribute('type') == 'text') {
+                    values.push("'" + element.childNodes[0].value + "'");
+                }
+            }
+        }
+
+        // SHOW THE RESULT IN THE CONSOLE WINDOW.
+        console.log(values);
+    }
+
+
+
+</script>
 
                 @else
                <div align="center" style="color: red;"></div>
@@ -1937,6 +2226,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             </div>
         </div>
     </div>
+
+
+
+
+
   @endSection
 
      <?php
@@ -2280,3 +2574,4 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
     </script>
+
