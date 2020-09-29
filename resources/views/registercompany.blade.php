@@ -42,18 +42,17 @@ Company Registrartion
 
                 <div align="center">
 
-                   @if(auth()->user()->type == 'USAB')
+                   <!-- @if(auth()->user()->type == 'USAB')
                 
 
                                <input type="number" name="hostel" value="2" hidden>
                   
 
-                       @endif
+                       @endif -->
 
 
 <div class="jumbotron" style="width: 700px;">
      <table>
-
       <tr>
      <thead style="color: white;">
         <th style="width: 29px"></th>
@@ -77,39 +76,6 @@ Company Registrartion
                              <option value="" selected>Choose area...
                             </option>
 
-
-
-                        @if(auth()->user()->type == 'Supervisor Landscaping')
-                                
-
-                                 @foreach($careaexterior as $carea)
-                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
-                                    </option>
-                                @endforeach
-
-
-                        @endif
-
-                        @if(auth()->user()->type == 'Administrative officer')
-                                 
-                                   @foreach($careainterior as $carea)
-                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
-                                    </option>
-                                   @endforeach
-                                   
-                        @endif
-
-
-                         @if(auth()->user()->type == 'USAB')
-                                 
-                                   @foreach($careainteriorusab as $carea)
-                                    <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
-                                    </option>
-                                   @endforeach
-                                   
-                        @endif
-
-
                          @if($role['user_role']['role_id'] == 1)
 
                            @foreach($careaadmin as $carea)
@@ -118,13 +84,7 @@ Company Registrartion
                            @endforeach
 
                          @endif
-
-
-
-                            
-
-
-                                
+               
                             </select>
 
               </TD>
@@ -159,7 +119,7 @@ Company Registrartion
                                     </option>
                                    @endif
 
-                                 @elseif($role['user_role']['role_id'] == 1)
+                                    @elseif($role['user_role']['role_id'] == 1)
 
                                      @if($sheet->percentage == 100)
                                     <option value="{{ $sheet->name }}">{{ $sheet->name}}
@@ -292,17 +252,8 @@ Company Registrartion
                             <option value="" selected>Choose contract duration...</option>
                              <option value="1">1 Year</option>
                              <option value="2">2 Years</option>
-
-
-
-                      </select>
-
-
+                       </select>
                  </div>
-
-
-
-
                          <br>
                          <br>
 

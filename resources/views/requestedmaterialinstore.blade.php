@@ -109,7 +109,7 @@ foreach($wo_materials as $matmissing){
          &nbsp;
            @if($isnotmissing < 1)
            @else
-                   <span> <a style="color: blue;"  href="{{ route('store.materialtoreserves', [$matform->id , $wo->id]) }}" data-toggle="tooltip" title="Reserve"><i class="fa fa-refresh"></i></i></a>
+              <span> <a style="color: blue;"  href="{{ route('store.materialtoreserves', [$matform->id , $wo->id]) }}" data-toggle="tooltip" title="Reserve"><i class="fa fa-refresh"></i></i></a>
                    </span>
                
 

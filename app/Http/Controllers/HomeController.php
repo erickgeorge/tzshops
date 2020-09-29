@@ -2948,13 +2948,11 @@ $v5=$type[4];
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $wo_material=   WorkOrderMaterial::
-                     select(DB::raw('work_order_id'),'hos_id' ,'status')
+                     select(DB::raw('work_order_id'),'hos_id' )
                      ->where('status',5)->orwhere('status',100)
 
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
-                         ->groupBy('status')
-
 
                      ->get();
 

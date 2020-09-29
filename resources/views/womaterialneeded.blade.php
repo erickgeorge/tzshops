@@ -10,10 +10,12 @@
 @if(auth()->user()->type == 'Maintenance coordinator')
 @if(count($mcitems) > 0)
 
+<div class="container">
+
    <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style=" text-transform: capitalize;"  ><b >WORKS ORDER NEEDS MATERIAL(S) </b></h5>
+            <h5><b >Works Order needs material(s) </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -85,11 +87,11 @@
 
 @if(auth()->user()->type == 'Inspector Of Works')
 @if(count($items) > 0)
-
+<div class="container">
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-          <h5 style=" text-transform: capitalize;"  ><b >Works Order Needs Material </b></h5>
+          <h5><b >Works Order Needs Material(s) </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -152,7 +154,7 @@
  @else
                <div class="container" align="center">
 
-                   <br><div> <h2 style="padding-top: 300px;">Currently no works order needs Material</h2></div>
+                   <br><div> <h3 style="padding-top: 300px;">Currently no works order needs Material(s)</h3></div>
 
             </div>
 @endif

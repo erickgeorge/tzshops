@@ -9,10 +9,10 @@
       use App\zoneinspector;  ?>
     <br>
      @if(count($items) > 0)
-
+<div class="container">
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 style="  " ><b style="text-transform: capitalize;">Works orders with material rejected</b></h5>
+            <h5 style="  " ><b>Works orders with Material(s) Rejected</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -89,7 +89,7 @@
             </tbody>
         </table>
         @else
-            <h2 class="text-center" style="margin-top: 150px">You have no works order with material rejected by Inspector of Work</h2>
+            <h3 class="text-center" style="margin-top: 150px">You have no works order with material(s) rejected by Inspector of Works</h3>
         @endif
     </div>
 </div>

@@ -24,6 +24,8 @@ StaffHouse Registrartion
 </div>
 @endif
 
+
+  @if($role['user_role']['role_id'] == 1)
 <div class="container">
 
 
@@ -37,18 +39,8 @@ StaffHouse Registrartion
 
 <div align="center">
 
-                       @if(auth()->user()->type == 'USAB')
-                
 
-                               <input type="number" name="hostel" value="1" hidden>
-                  
 
-                       @endif
-
-                       @if(auth()->user()->type == 'Administrative officer')
-
-                               <input type="number" name="hostel" value="2" hidden>
-                       @endif
 
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
@@ -59,9 +51,22 @@ StaffHouse Registrartion
                                name="cleaning_name" placeholder="Enter Cleaning Area Name">
                     </div>
 
-             
+
+                     <div class="input-group mb-3 col-lg-6" >
+                        <div class="input-group-prepend">
+                            
+                            <label style="width:200px;" class="input-group-text" for="directorate">Hostel </label>
+                        </div>
+                         <select required style="color: black;" class="custom-select" name="hostel" >
+                                <option selected value=""> Choose... </option>
+                                <option  value="2">No</option>
+                                <option  value="1">Yes</option>
+                             
+                         </select>
+                       </div> 
 
 
+            
                     <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
@@ -73,48 +78,20 @@ StaffHouse Registrartion
 
 
 
-                    <div class="input-group mb-3 col-lg-6" >
+                <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
                             <label style="width:200px;" class="input-group-text" for="directorate">Type </label>
                         </div>
                          <select required style="color: black;" class="custom-select" name="areatype" >
-
-
-                              @if($role['user_role']['role_id'] == 1)
                                 <option selected value=""> Choose .. </option>
                                 <option  value="Exterior">Exterior</option>
                                 <option  value="Interior">Interior</option>
-
-                               @endif
-                                
-                                 @if(auth()->user()->type == 'Supervisor Landscaping')
-                                  <option selected value="Exterior">Exterior</option>
-                                  @endif
-
-                                    @if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
-                                   <option selected value="Interior">Interior</option>
-                                   @endif
-
+                             
                          </select>
-                    </div> 
+                    </div>
 
 
-
-                   @if(auth()->user()->type == 'Administrative officer')
-                     <div class="input-group mb-3 col-lg-6" >
-                        <div class="input-group-prepend">
-                            
-                            <label style="width:200px;height: 28px;" class="input-group-text" > Directorate/College </label>
-                        </div>
-                         <select required style="color: black;" class="custom-select" name="college" id="directorate" >
-                                  
-                                   @foreach($directoratesadofficer as $directorate)
-                                  <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
-                                   @endforeach
-                         </select>
-                     </div> 
-                     @else
 
                      <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
@@ -129,7 +106,7 @@ StaffHouse Registrartion
                          </select>
                      </div> 
 
-                     @endif
+             
 
 
 
@@ -141,7 +118,7 @@ StaffHouse Registrartion
                 </form>
 
             </div>
-
+@endif
 
 
 @endSection

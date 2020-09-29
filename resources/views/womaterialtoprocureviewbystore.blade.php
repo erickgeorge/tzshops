@@ -65,11 +65,11 @@
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td>{{ $item->reserved_material }}</td>
-                    @if($item->status == 15 )
-                    <td> <span class="badge badge-warning"> Purchased </span> </td>
+                    @if($item->status == 5 )
+                    <td> <span class="badge badge-warning"> Missing and Reserved </span> </td>
                     @endif
                     @if($item->status == 100)
-                    <td> <span class="badge badge-primary"> Reserved </span> </td>
+                    <td> <span class="badge badge-primary"> Available and Reserved </span> </td>
                     @endif
 
 

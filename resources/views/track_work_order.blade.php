@@ -697,20 +697,20 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
           @if($wo->status == 30)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Works order completely closed!</span>
+                <span class="badge badge-success" style="padding: 20px">Works order completely closed!</span>
             </div>
 
         @elseif($wo->status == 2)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Works order tempolary closed!</span>
+                <span class="badge badge-success" style="padding: 20px">Works order is Provisional closed!</span>
             </div>
         @elseif($wo->status == 52)
             <div>
-                <span class="badge badge-warning" style="padding: 20px">Works order is on check by IoW!</span>
+                <span class="badge badge-success" style="padding: 20px">Works order is on check by IoW!</span>
             </div>
         @elseif($wo->status == 53)
             <div>
-                <span class="badge badge-danger" style="padding: 20px">Works order is not approved by IoW!</span>
+                <span class="badge badge-success" style="padding: 20px">Works order is not approved by IoW!</span>
             </div>
 
         @elseif($wo->status == 9)
@@ -913,12 +913,12 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                  <div class="row">
                     <form method="POST" action="{{ route('workorder.satisfied', [$wo->id]) }}">
                         @csrf
-                        <button type="submit" class="btn btn-success">SATISFIED</button>
+                        <button type="submit" class="btn btn-success">Satisfied</button>
                     </form>
                      </div>
                      &nbsp;&nbsp;&nbsp;&nbsp;
                      <div class="col">
-                     <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalu">NOT SATISFIED</button>
+                     <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalu">Not Satisfied</button>
 
                         </div>
                         </div>
@@ -934,7 +934,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-        @if(auth()->user()->type=='Inspector Of Works')
+        @if((auth()->user()->type=='Inspector Of Works')||(auth()->user()->type == 'Maintenance coordinator'))
 
           @if($wo->status == 52)
         <div style="padding-left:  800px;">

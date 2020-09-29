@@ -5,7 +5,7 @@
     @endSection
 
 @section('body')
-
+<div class="container">
     <br>
 
 
@@ -40,7 +40,7 @@
     @endif
 
 
-    <table class="table table-striped table-responsive display" id="myTable" style="width:100%">
+    <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>

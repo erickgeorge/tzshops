@@ -1463,11 +1463,27 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
+       if(($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Estates officer')){
+                  $cleanarea = cleaningarea::OrderBy('cleaning_name', 'ASC')->get();
+        }
+        if (auth()->user()->type == 'USAB') {
+                  $cleanarea  = cleaningarea::where('hostel', 1)->OrderBy('cleaning_name', 'ASC')->get();
+        }
+
+        if (auth()->user()->type == 'Supervisor Landscaping') {
+                $cleanarea = cleaningarea::where('type', 'Exterior')->OrderBy('cleaning_name', 'ASC')->get();
+        }
+
+        if ((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'Principal')) {
+          $cleanarea = cleaningarea::where('type', 'Interior')->where('college',auth()->user()->college)->where('hostel', 2)->OrderBy('cleaning_name', 'ASC')->get();
+        }
+
            $data = [
             'notifications' => $notifications,
             'role' => $role,
                            'newzone' => iowzone::OrderBy('zonename', 'ASC')->get(),
-               'cleanarea' => cleaningarea::OrderBy('cleaning_name', 'ASC')->get()
+             'cleanarea' => $cleanarea  
+        
                ];
          $pdf = PDF::loadView('landcleaning_areareport', $data);
 

@@ -93,7 +93,7 @@ Route::get('edit/work_order/view/{id}', 'WorkOrderController@editWOView')->name(
 Route::get('view/work_order/{id}', 'WorkOrderController@viewWO')->name('workOrder.view')->middleware('auth');
 Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrder.edit')->middleware('auth');
 Route::post('edit/work_order/zone/{id}', 'WorkOrderController@editWOzone')->name('workOrder.edit.zoneloc')->middleware('auth');
-Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection')->middleware('auth');
+//Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection')->middleware('auth');
 Route::get('myzone','WorkOrderController@myzone')->name('myzone')->middleware('auth');
 
 Route::post('assigntech/work_order/{id}', 'WorkOrderController@assigntechnicianforwork')->name('work.assigntechnician')->middleware('auth');

@@ -6,6 +6,7 @@
 
 @section('body')
 
+<div class="container">
     <br>
      @if(count($items)>0)
     <div class="row container-fluid" style="margin-top: 6%;">

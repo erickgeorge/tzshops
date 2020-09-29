@@ -109,7 +109,6 @@ class AssetsController extends Controller
 
         }
 
-
         $company->company_name = $request['companyid'];
         $company->tender = $request['tendern'];
         $company->hostel = $request['hostel'];
@@ -375,6 +374,8 @@ class AssetsController extends Controller
                     ->groupBy('area')->get(),
 
           ]);
+
+         
 
          }
          else{
@@ -882,8 +883,8 @@ class AssetsController extends Controller
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];
         $cleanarea->college = $request['college'];
-        $cleanarea->type = $request['areatype'];
         $cleanarea->hostel = $request['hostel'];
+        $cleanarea->type = $request['areatype'];
         $cleanarea->save();
         return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area registered successfully']);
     }

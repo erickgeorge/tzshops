@@ -35,7 +35,7 @@ padding: 20 20 20 20;
 
 }}
 </style>
-
+<div class="container">
 
     <br>
     <div class="row container-fluid" >

@@ -5,6 +5,8 @@
     @endSection
 
 @section('body')
+
+<div class="container">
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">

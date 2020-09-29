@@ -477,10 +477,10 @@ class StoreController extends Controller
 		$notify = new Notification();
 		$u = auth()->user();;
         $notify->sender_id = $u->id;
-        $notify->receiver_id = $item->staff_id;
+        $notify->receiver_id = $item->hos_id;
         $notify->type = 'mat_received';
         $notify->status = 5;
-        $notify->message = 'Your material named:' . $item['material']->name . ' requested for Workorder No:00' . $item->work_order_id . ' with quantity of: ' . $item->quantity. ' has been released by Store Manager named:' . $u->fname.' '.$u->lname . '' ;
+        $notify->message = 'Your material named:' . $item['material']->name . ' requested for Works order No:00' . $item->work_order_id . ' with quantity of: ' . $item->quantity. ' has been released by Store Manager:' . $u->fname.' '.$u->lname . '' ;
         $notify->save();
 
         }
