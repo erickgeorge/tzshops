@@ -42,7 +42,7 @@
                 <th >Works order ID </th>
                 <th >HoS Name </th>
                 <th >Works order Detail</th>
-                <th >Status</th>
+              
 
 
                 <th >Action</th>
@@ -61,13 +61,6 @@
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 
                     <td>{{ $item['workorder']->details }}</td>
-                     @if($item->status == 5)
-                     <td><span class="badge badge-primary">Reserved to be purchased </span></td>
-                     @endif
-                     @if($item->status == 100) 
-                      <td><span class="badge badge-success">Available, reserved for missing materials</span></td>
-                     @endif
-
                     <td>
                      <a class="btn btn-primary btn-sm" href="{{ route('wo.reserved.material', [$item->work_order_id]) }}" role="button">View Material</a></td>
                     </tr>
@@ -80,7 +73,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h3> No Works order Material(s) accepted by Inspector of Works </h3></div>
+<div style="padding-top: 300px;" align="center"><h3> No Works order Material(s) Reserved </h3></div>
 
 @endif
     @endSection

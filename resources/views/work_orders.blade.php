@@ -263,7 +263,7 @@ foreach($userwithid as $userwithid)
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
-                    <th>Status</th>
+                    <th style="width: 100px;">Status</th>
                     <th>Created date</th>
                     <th>Location</th>
                     <th>Duration</th>
@@ -689,7 +689,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended work order.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: blue">Reason as why client not satisfied with attended works order.</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1024,7 +1024,7 @@ foreach($userwithid as $userwithid)
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
-                    <th>Status</th>
+                    <th style="width: 100px;">Status</th>
                     <th>Created date</th>
                     <th>Location</th>
                     <th>Duration</th>
@@ -1450,7 +1450,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended work order.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: blue">Reason as why client not satisfied with attended works order.</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

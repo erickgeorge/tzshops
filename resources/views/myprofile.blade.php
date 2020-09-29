@@ -37,7 +37,7 @@ padding: 20 20 20 20;
 </style>
 
     <br>
-
+<div class="container">
     <div class="row container-fluid" >
         <div class="col-lg-12">
             <h5 style="text-transform: capitalize;" >Profile Details</h5>

@@ -8,7 +8,7 @@
 <p>UNLESS OTHERWISE STATED IN THE "REMARKS" COLUMN from (NAME OF SUPPLIER)___________________________________</p>
 
 <style>
-    body { background-image:  url('/images/estategrn.jpg');
+    body { /*background-image:  url('/images/estategrn.jpg');*/
 
     /* Full height */
   height: 100%;

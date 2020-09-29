@@ -775,16 +775,20 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-
+ @if(auth()->user()->type != 'Dvc Accountant')
       <a  href="{{ url('cleaningcompany')}}"><h5>Cleaning Companies</h5></a>
     <a  href="{{ url('manage_Cleaning_area')}}"><h5>Cleaning Areas</h5></a>
-
+@endif
      @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'USAB'))
 
     <a  href="{{ url('tender')}}"><h5>Tenders</h5></a>
 
      @endif
+
+      @if(auth()->user()->type != 'Dvc Accountant')
      <a href="{{ url('assessmentsheet')}}"><h5>Assessment Sheets </h5></a>
+
+     @endif
    <!-- <a  href="{{ url('Land/work_order')}}" ><h5>Land works order </h5></a>
     <a  href="{{ url('Maintainance/section')}}" ><h5> Maintenance  section </h5></a>-->
     <a  href="{{ url('Assessment/form')}}" ><h5>Assessment Forms</h5></a>
@@ -792,7 +796,7 @@
 
 
 
-
+ @if(auth()->user()->type != 'Dvc Accountant')
    <button class="dropdown-btn"><h5>Companies Report
     <i class="fa fa-caret-down"></i></h5>
   </button>
@@ -801,6 +805,8 @@
     <a href="{{ url('cleaningcompanyreport')}}"><h5>Companies Trending </h5></a>
 
   </div>
+
+  @endif
 
 
 

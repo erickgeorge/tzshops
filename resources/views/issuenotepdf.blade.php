@@ -5,7 +5,7 @@
     <p><b style="text-transform: uppercase;"><u>ISSUE NOTE</u></b></p>
 </div>
 <style>
-    body { background-image:  url('/images/essuenote.jpg');
+    body { /* background-image:  url('/images/essuenote.jpg');*/
 
     /* Full height */
   height: 100%;

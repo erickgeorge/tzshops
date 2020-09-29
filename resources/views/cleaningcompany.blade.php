@@ -162,11 +162,6 @@
       <br>
 
 
-
-
-
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -176,15 +171,11 @@
 </form>
   </div>
 </div>
+ <div >
 
 
 
-
-       <div >
-
-
-
-                     @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB')||(auth()->user()->type == 'Administrative officer'))
+                    @if($role['user_role']['role_id'] == 1)
                   <a href="{{ route('registercompany') }}"
                    class="btn btn-primary" >Add new tender</a> @endif
 
@@ -225,7 +216,7 @@
 
 
                     <?php $i = 0;  $ii = 0;  $iii = 0;?>
-    @if(auth()->user()->type == 'Supervisor Landscaping')
+                  @if(auth()->user()->type == 'Supervisor Landscaping')
                     @foreach($cleangcompanylandscaping as $house)
                         <?php $i++;?>
 
@@ -426,7 +417,7 @@
   @if(auth()->user()->type == 'USAB')
    @foreach($cleangcompanyusab as $house)
 
-    @if($house->hostel == 2)
+    @if($house['are_a']->hostel == 1)
 
                         <?php $ii++;?>
 
@@ -629,7 +620,7 @@
   @if(auth()->user()->type == 'Administrative officer')
    @foreach($cleangcompanyusab as $house)
 
-   @if((auth()->user()->college ==  $house['are_a']->college ) and ($house->hostel == 1))
+   @if((auth()->user()->college == $house['are_a']->college ) and ($house['are_a']->hostel == 2))
 
                         <?php $ii++;?>
 

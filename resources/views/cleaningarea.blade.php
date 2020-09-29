@@ -45,7 +45,7 @@
                              <th scope="col">Type</th>
                           @if($role['user_role']['role_id'] == 1)
                         <th scope="col">Action</th>
-                        @endif
+                           @endif
                     </tr>
                     </thead>
 

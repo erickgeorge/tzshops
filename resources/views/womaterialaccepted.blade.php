@@ -7,11 +7,12 @@
 @section('body')
 
 @if(count($items)>0)
+<div class="container">
 
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style=" "  ><b style="text-transform: capitalize;">Works order with material(s) accepted</b></h5>
+            <h5 style=" "  ><b>Works order with Material(s) Accepted</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -98,7 +99,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h1> No Works order Material(s) accepted by Inspector of Work </h1></div>
+<div style="padding-top: 300px;" align="center"><h3> No Works order Material(s) accepted by Inspector of Works </h3></div>
 
 @endif
     @endSection

@@ -330,7 +330,7 @@ foreach($userwithid as $userwithid)
                             <td id="wo-details">{{ $work->details }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                            @if($work->status == -1)
+                    @if($work->status == -1)
                                 <td><span class="badge badge-warning">new</span>
                                 <br>
                                 @if($work->emergency == 1)
@@ -345,7 +345,7 @@ foreach($userwithid as $userwithid)
                             @elseif($work->status == 0)
                                 <td><span class="badge badge-danger">Rejected</span></td>
                             @elseif($work->status == 2)
-                                <td><span class="badge badge-success">Temporally Closed</span></td>
+                                <td><span class="badge badge-success">Waiting response from client</span></td>
 
                             @elseif($work->status == 30)
                                 <td><span class="badge badge-success">Completely Closed</span></td>
@@ -356,14 +356,21 @@ foreach($userwithid as $userwithid)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                              @elseif($work->status == 70)
-                                <td><span class="badge badge-info">technician assigned for inspection</span>
+                                <td><span class="badge badge-info">technician assigned <br> for inspection</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
 
                             @elseif($work->status == 4)
-                                <td><span class="badge badge-info">transportation stage</span>
+                                <td><span class="badge badge-info">transportation stage for inspection</span>
+                                 <br>
+                                @if($work->emergency == 1)
+                                <span class="badge badge-warning">Emergency</span></td>
+                                @endif
+
+                             @elseif($work->status == 101)
+                                <td><span class="badge badge-info">transportation stage for work</span>
                                  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -381,7 +388,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                             @elseif($work->status == 40)
 
-                              <td><span class="badge badge-info">Material Requested Approved Succesifully</span>
+                              <td><span class="badge badge-info">Material Requested <br>Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -395,7 +402,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                            @elseif($work->status == 53)
 
-                              <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
+                              <td><span class="badge badge-danger">Works Order not  approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -403,7 +410,7 @@ foreach($userwithid as $userwithid)
 
                           @elseif($work->status == 25)
 
-                              <td><span class="badge badge-info">Work Order Succesifully approved by IoW</span>
+                              <td><span class="badge badge-info">Works Order Succesifully <br> approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -437,12 +444,12 @@ foreach($userwithid as $userwithid)
 
                              @elseif($work->status == 19)
                                @if(auth()->user()->type != 'CLIENT')
-                              <td><span class="badge badge-info">Material missing in store also DES notified</span>  <br>
+                              <td><span class="badge badge-info">Material missing in store, <br>Head Procurement  notified</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                               @else
-                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                               <td><span class="badge badge-warning">  Material requested on progress <br> please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-danger">Emergency</span></td>
                                 @endif
@@ -491,6 +498,8 @@ foreach($userwithid as $userwithid)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                                              @endif
+
+
 
 
 

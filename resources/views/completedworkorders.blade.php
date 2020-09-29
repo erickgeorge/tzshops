@@ -297,6 +297,7 @@ foreach($userwithid as $userwithid)
                                 <td id="wo-id">00{{ $work->id }}</td>
                                 <td id="wo-details">{{ $work->details }}</td>
                                 <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
+                                <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
 
 
                                 @if($work->status == 30)

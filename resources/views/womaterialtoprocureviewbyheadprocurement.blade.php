@@ -9,8 +9,6 @@
 
 
 
-
-
  @if(count($items) > 0)
 
     <br>
@@ -48,6 +46,8 @@
     </div>
 
     <div class="container " >
+
+
         <table class="table table-responsive table-striped display" id="myTable"  style="width:100%">
             <thead >
            <tr style="color: white;">
@@ -71,6 +71,8 @@
             <tbody>
 
             <?php $i=0;  ?>
+
+
             @foreach($items as $item)
 
                 <?php $i++ ?>
@@ -88,6 +90,9 @@
                    <td>{{ $item->newstock }}</td>
                     <td>
                    @if($item->newstock == ($item->quantity - $item->reserved_material))
+
+                  
+
                       <a href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
 
 
@@ -101,7 +106,7 @@
                                        onclick="myfunc( '{{ $item->id}}','{{ $item->newstock }}' , '{{$item['material']->description}}' )"
                                        data-toggle="modal" data-target="#exampleModal2" title="Increment Material"><i
                                                 class="fas fa-plus"></i></a>
-                                                @endif
+                 @endif
 
 
 
@@ -113,8 +118,12 @@
         </table>
 
 
-         <h4> Please add material(s) in Store and assign Good Receiving Note for received material(s).</h4>
+
+         <h4> Please assign Good Receiving Note for received material(s).</h4>
          <a class="btn btn-primary btn-sm"  href="grnpdf/{{$item->work_order_id}}" role="button">Assign GRN</a>
+
+
+
 
 
     </div>

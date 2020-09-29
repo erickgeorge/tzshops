@@ -433,17 +433,21 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $tech_complete =techasigned::where('work_order_id', $id)->update(array('status' =>1));
         }
         else if ($request['status'] == 'Report after work') {
-             $statusfield=6;
+             $statusfield= 52;
 
             $tech_complete_work =WorkOrderStaff::where('work_order_id', $id)->update(array('status' =>1));
         }
 
 
-            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-            $mForm = WorkOrder::where('id', $id)->first();
+             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
+             $mForm = WorkOrder::where('id', $id)->first();
              $mForm->status = $statusfield;
+                   if ($request['fixed'] == 1) {
+                       $mForm->status = 52; //close wo temporalilly
+                   }
+
              $mForm->save();
 
             $form = new WorkOrderInspectionForm();
@@ -458,7 +462,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $w = WorkOrder::where('id', $id)->first();
 
              $w->statusmform = 3;
-            $w->emerg = 1;
+             $w->emerg = 1;
              $w->save();
 
 
@@ -665,6 +669,11 @@ public function transportforwork(Request $request, $id)
         $workordermat->hos_id = auth()->user()->id;
         $workordermat->zone = $request['zone'];
         $workordermat->save();
+
+
+        $ireneri = Workorder::where('id',$id)->first();
+        $ireneri->requirematerial = 1;
+        $ireneri->save();
 
 }
 

@@ -74,7 +74,7 @@
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h1> No Works order with material to be purchased.</h1></div>
+<div style="padding-top: 300px;" align="center"><h3> No Works order with material(s) to be purchased.</h3></div>
 
 @endif
     @endSection
