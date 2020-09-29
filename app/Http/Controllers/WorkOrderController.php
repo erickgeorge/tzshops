@@ -1123,15 +1123,15 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $wo = WorkOrder::find($id);
-        $wo->status = 25;
-
+        $wo->status = 2;
+//i updated iow to bypass hos to client closing works order.
         $wo->save();
 
 
         return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order is Successfully Approved',
+            'message' => 'Work order Approved  Successfully ',
             'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }

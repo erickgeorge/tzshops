@@ -156,12 +156,7 @@
             <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
                @csrf
                <div class="row">
-               <div class="container" >
-                   <div class="input-group mb-3">
-                   <div class="input-group-prepend">
-                       <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
-                   </div>
-                   <select  required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
+               <div class="container" >Location - Zone :
 
                      @if($wo->zonelocationtwo != null) <?php
                            $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
@@ -169,33 +164,21 @@
                             ?>
                             @endif
                             @if($wo->zonelocationtwo != null)
-                          <option value="{{ $wo->zonelocationtwo }}" selected>
 
                              {{ $zonelocation->location }}, {{ $zoned->zonename }}
-                           </option>
-                       @else
-                       <option value="" selected>Choose... </option>
+                       @else Not Assigned
                        @endif
 
 
-
-                  @foreach($iowzone as $user)
-                  <option value="{{ $user->id }}" >{{ $user->location }}</option>
-                  @endforeach
-
-                   </select>
                </div>
                </div>
-           </div>
-          @if($wo->zone_location == null)
-               <button type="submit" class="btn btn-primary">Save</button>
-          @endif
+
 
              </form>
+           </div>
 
         @endif
         </div>
-    </div>
 
 
 
@@ -363,8 +346,7 @@
 
     @if($techform->leader == null )
 
-<td>   <a style="color: black;" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
-                                                    class="fas fa-user-tie large"></i></a></td>
+<td>  ? </td>
                                                    @elseif($techform->leader2 == 3 )
  <td style="color: black;"  data-toggle="tooltip" >Yes</td>
                                                     @else

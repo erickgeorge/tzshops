@@ -46,6 +46,7 @@
                <option value="{{ $sectionss->section_name }}"><?php echo ucwords(strtolower( $sectionss->section_name )); ?></option>
                @endforeach
 
+               <option value="others">others</option>
             </select>
              </div>
             </div>
