@@ -157,7 +157,7 @@ var total=2;
 
 
     <div class="form-group ">
-        <label for="">Details:</label>
+        <label for="">Description of the problem:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
@@ -229,7 +229,7 @@ var total=2;
 
 
 
-         <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
+       <!--  <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
 
             <div class="form-group ">
@@ -242,24 +242,48 @@ var total=2;
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
-          </form>
+          </form>-->
 
-          <br>
-
-
+                    
 
 
+<script>
+function autoSubmit()
+{
+    var formObject = document.forms['theForm'];
+    formObject.submit();
+}
+</script>
+
+<form id='theForm' method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
+            @csrf
+
+    <input name="emergency" <?php if ($wo->emergency == 1) { ?>checked='checked' <?php }?>   type="radio" value="emergency" onChange="autoSubmit();" /> &nbsp;This works order is emergency<br>
+    <input name="emergency" <?php if ($wo->emergency == 0) { ?>checked='checked' <?php }?>  type="radio" value="notemergency" onChange="autoSubmit();" />&nbsp; This works order is not emergency
+   
+</form>
+
+<br>
+<br>
 
 
     @if(empty($wo['work_order_staffassigned']->id))
 
     @else
-     <h4><b>Assigned Technician(s) for Inspection </b></h4>
-    <?php
+
+      <?php
 
   $idwo=$wo->id;
   $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
 ?>
+
+  @if(count($techforms) == 1)
+    <h4><b>1 Assigned Technician for Inspection </b></h4>
+    @else
+    <h4><b>{{ count($techforms) }} Assigned Technicians for Inspection  </b></h4>
+    @endif
+
+  
 
 <table style="width:100%">
   <tr>
@@ -340,33 +364,22 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <?php
 
   $idwo=$wo->id;
-  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
+  $iformsbefore = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
         ?>
- @if(count($iforms)>0)
+  @if(count($iformsbefore)>0)
 
- <h4><b>Inspection Report Before Work </b></h4>
-
-<table style="width:100%">
-  <tr>
-     <thead style="color: white;">
-
-    <th>Description</th>
-  <th>Full Name</th>
-    <th>Date</th>
-  </thead>
-  </tr>
-    @foreach($iforms as $iform)
-
-
-  <tr>
-
-    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
-      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
-  </tr>
-
+  @foreach($iformsbefore as $iformb)
   @endforeach
-  </table>
+
+ <h4><b>Inspection Report Before Work , Reported on: {{ date('d F Y', strtotime($iformb->date_inspected )) }} </b></h4>
+
+    <div class="form-group ">
+        <label for="">Description:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{ $iformb->description }}</textarea>
+    </div>
+  
+
   <br>
     <hr>
       <br>
@@ -402,7 +415,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 @if($status->status5 == 22)
 
- <h4><b>Assigned Technician(s) for Work</b></h4>
+  @if(count($techforms) == 1)
+    <h4><b>1 Assigned Technician for Work </b></h4>
+    @else
+    <h4><b>{{ count($techforms) }} Assigned Technicians for Work  </b></h4>
+    @endif
 
 <table style="width:100%">
   <tr>
@@ -644,12 +661,17 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @if(empty($wo['work_order_material']->id))
 
     @else
-    <h4><b>Material(s) Requested </b></h4>
-    <?php
+     <?php
 
   $idwo=$wo->id;
   $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
     ?>
+    @if(count($matforms) == 1)
+    <h4><b>1 Material Requested </b></h4>
+    @else
+    <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
+    @endif
+   
 
 <table style="width:100%">
   <tr>
@@ -680,8 +702,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
-    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+   <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for Material Approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from Store </span> @elseif($matform->status==20) <span class="badge badge-success">Please Crosscheck Material(s) </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of Material Rejected</span> @elseif($matform->status== 5)<span class="badge badge-success">Material on Procurement Stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material Taken From Store</span>  
+   @elseif($matform->status== 100)<span class="badge badge-primary">Reserved</span> @elseif($matform->status == -1)<span class="badge badge-danger">
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material Purchased</span>
        @endif</td>
 
   <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
@@ -708,7 +731,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @if(empty($wo['work_order_material']->id))
 
     @else
-     <h4><b>Material Requests: </b></h4>
+     <h4><b>Material(s) Requested: </b></h4>
     <?php
 
   $idwo=$wo->id;
@@ -782,7 +805,13 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   @if(count($matforms) > 0)
 
-  <h4><b>Material(s) Used </b></h4>
+   @if(count($matforms) == 1)
+    <h4><b>1 Material Used and Approved </b></h4>
+    @else
+    <h4><b>{{ count($matforms) }} Materials Used and Approved  </b></h4>
+    @endif
+
+ 
 
 <table style="width:100%">
   <tr>
@@ -810,7 +839,15 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <br>
   <hr>
 
-    @endif
+  @endif
+
+
+
+   @if($wo->status == 52)
+            <div>
+                <span class="badge badge-success" style="padding: 20px">Works order is on check by Inspector of Works</span>
+            </div>
+   @endif
 
 
 
@@ -988,7 +1025,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
 
                        <TD>
-                            <select   id="techidc" required class="custom-select"  name="technician_work[]" style="width: 700px;">
+                            <select   id="techidc" required  name="technician_work[]" style="width: 700px;">
                               <option selected value="">Choose technician ...</option>
 
 
@@ -1076,9 +1113,185 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                <div align="center" style="color: red;">@if($wo->requirematerial == NULL)  @else   @endif</div>
                 @endif
                     </div>
+
+
+
+
+
 @endif
 
 <div>
+
+<!--after material corrected from store-->
+
+
+   @if((($wo->status == 40)) and ($wo->requirematerial == 1))
+
+
+         
+<br>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>ASSIGN TECHNICIAN(S) FOR THIS WORKS ORDER</p>
+                            </div>
+                        </div>
+
+
+ <!--techniciantable-->
+
+
+ <table style="width:100%">
+  <tr>
+
+<thead style="color: white;">
+    <th>Full Name</th>
+  <th>Action</th>
+
+</thead>
+
+  </tr>
+    @foreach($techforms as $techform)
+
+  <tr>
+
+     @if($techform['technician_assigned'] != null)
+    <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
+
+                                                    <td>
+                                    <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this technician from the list? ')"
+                                          action="{{ route('workOrder.techniciandelete', [$techform->id]) }}">
+                                        {{csrf_field()}}
+
+
+                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
+                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
+                                                                                        data-toggle="tooltip"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                        </button>
+                                    </form>
+                                </div></td>
+
+
+      @endif
+
+
+
+  </tr>
+    @endforeach
+  </table>
+
+
+ <!--techniciantable-->
+
+ <br>
+
+
+
+                        <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
+                        @csrf
+                          <div class="form-group">
+                          <!-- <input  id="technician_work"  type="text" hidden> </input>  -->
+
+              <TABLE id="dataTable22" width="350px" >
+                  <TR>
+                       <TD><INPUT type="checkbox" name="chk[]"/></TD>
+
+                       <TD>
+                            <select   id="techidc" required class="custom-select"  name="technician_work[]" style="width: 700px;">
+                              <option selected value="">Choose technician ...</option>
+
+
+
+
+
+
+                               <?php
+                $p=-1;
+      ?>
+
+                                @foreach($techs as $tech)
+                                <?php
+
+                                $wo_technician_count = WorkOrderStaff::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',0)
+                     ->where('staff_id',$tech->id)
+                     ->groupBy('staff_id')
+                     ->first();
+
+                               ?>
+                               @if(empty($wo_technician_count->total_wo))
+                                   <?php $t=0;?>
+
+                               @else
+                                    <?php $t=$wo_technician_count->total_wo;?>
+
+                                @endif
+
+                              <?php
+                             $p++;
+                              $name[$p]=$tech->fname.' '.$tech->lname;
+                              $ident[$p]=$tech->id;
+                              $cwo[$p]=$t;
+
+                              ?>
+
+
+
+                                @endforeach
+                                <?php
+                                for($i=0;$i<=$p-1;$i++){
+                                    for($j=$i+1 ;$j<=$p;$j++){
+                                        if($cwo[$i]>$cwo[$j]){
+                                            $t1=$name[$i];
+                                            $t2=$ident[$i];
+                                            $t3=$cwo[$i];
+
+                                            $name[$i]=$name[$j];
+                                            $ident[$i]=$ident[$j];
+                                            $cwo[$i]=$cwo[$j];
+
+
+                                            $name[$j]=$t1;
+                                            $ident[$j]=$t2;
+                                            $cwo[$j]=$t3;
+                                }}}
+
+                                    for($x=0;$x<=$p;$x++){
+                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Works Orders'}} </option>
+                                    <?php }  ?>
+
+
+                            </select>
+                              </TD>
+
+
+                  </TR>
+        </TABLE>
+
+                        </div>
+
+                        <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow22('dataTable22')" />
+
+                        <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow22('dataTable22')" />
+                        <br><br>
+
+                        <button  type="submit" class="btn btn-primary bg-primary">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                    </form>
+
+
+@endif
+
+<div>
+
+
+<!--after material corrected from store-->
+
+
+
 
 
                 {{-- end ASSIGN TECHNICIAN  --}}
@@ -1232,8 +1445,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     @csrf
                     <div >
                    @if($wo->statusmform != 1)
-
-
 
 
                   <br>
@@ -1453,6 +1664,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         </div>
 
                <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+                 @csrf
                          <div class="form-group">
 
                           <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
@@ -2130,14 +2342,32 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
       <br>
 
 
+<!--Requesting material again after crosschecking
+        <div id="cont">
 
+    </div>
+    <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
+    <p>
+        <div class="row">
+            <div class="col">
+                <a id="addRow" onclick="addRow()" class="btn btn-outline-info"><i class="fa fa-plus"></i> Add New Row</a>
+            </div>
+        </div><br>
+        <div class="row">
 
+      <div class="col">
+        <button id="bt" type="submit" class="btn btn-primary" disabled>Save</button>&nbsp;<a href="#" onclick="closeTab()"></a>
+      </div>
+    </div>
+    </p>
+
+Requesting material again after crosschecking-->
 
 
         <br>
 
                 <div class="row">
-<br>
+        <br>
                                 <p>CROSSCHECK MATERIAL(S) BEFORE REQUESTING TO STORE</p>
 
                  </div>
@@ -2650,6 +2880,79 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
         }
 
     </SCRIPT>
+
+
+
+        <SCRIPT language="javascript">
+        function addRow22(tableID) {
+
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var colCount = table.rows[0].cells.length;
+
+
+
+            for(var i=0; i<colCount; i++)
+             {
+
+                var newcell = row.insertCell(i);
+
+
+
+
+
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+
+
+                }
+
+
+
+            }
+
+
+        }
+
+        function deleteRow22(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+
+
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+
+    </SCRIPT>
+
 
 
 

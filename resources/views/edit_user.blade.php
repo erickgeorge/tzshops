@@ -50,6 +50,8 @@
         </div>
     @endif
     <div class="col-lg-12">
+
+      
         <form method="POST" action="{{ route('user.edit', [$user->id]) }}">
             @csrf
 <div class="row">

@@ -341,25 +341,11 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
-        if (isset($request['emergency'])) {
+        if ($request['emergency'] == 'emergency') {
             $wo->emergency = 1;
-        } else {
+        } 
+        if ($request['emergency'] == 'notemergency') {
             $wo->emergency = 0;
-        }
-        if (isset($request['labour'])) {
-            $wo->needs_laboured = 1;
-        } else {
-            $wo->needs_laboured = 0;
-        }
-        if (isset($request['contractor'])) {
-            $wo->needs_contractor = 1;
-        } else {
-            $wo->needs_contractor = 0;
-        }
-        if (isset($request['location'])) {
-            $wo->zone_location = $request['location'];
-        } else {
-            $wo->zone_location = null;
         }
         $wo->save();
         return redirect()->route('workOrder.edit.view', [$id])->with([

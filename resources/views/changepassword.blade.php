@@ -33,7 +33,7 @@
 
     <div class="col-lg-12">
         <div align="center">
-        <p style="color: red">All fields are compulsory</p>
+      <!--  <p style="color: red">All fields are compulsory</p>-->
 
         <form action="{{ route('password.change') }}" method="POST">
             @csrf
@@ -41,7 +41,7 @@
             <div class="form-group col-lg-6">
                     <div class="input-group ">
                   <div class="input-group-prepend">
-                    <label style="width:200px;" class="input-group-text" for="Email">Old password </label>
+                    <label style="width:200px;" class="input-group-text" for="Email">Old password <sup style="color: red;">*</sup></label>
                   </div>
                   <input type="password" required class="form-control" id="old-pass" name="old-pass"
                   placeholder="Enter old password">  </div>
@@ -50,7 +50,7 @@
                 <div class="form-group col-lg-6">
                     <div class="input-group ">
                   <div class="input-group-prepend">
-                    <label style="width:200px;" class="input-group-text" for="Email">New password </label>
+                    <label style="width:200px;" class="input-group-text" for="Email">New password <sup style="color: red;">*</sup> </label>
                   </div>
                   <input type="password" required class="form-control" id="new-pass" name="new-pass"
                   placeholder="Enter new password">
@@ -60,14 +60,14 @@
                 <div class="form-group col-lg-6">
                     <div class="input-group ">
                   <div class="input-group-prepend">
-                    <label style="width:200px;" class="input-group-text" for="Email">Confirm New password </label>
+                    <label style="width:200px;" class="input-group-text" for="Email">Confirm New password <sup style="color: red;">*</sup> </label>
                   </div>
                   <input type="password" required class="form-control" id="confirm-pass" name="confirm-pass"
                        placeholder="Confirm password">
                   </div>
                 </div>
 
-            <button type="submit" class="btn btn-primary">Change password</button>
+            <button type="submit" class="btn btn-primary">Change</button>
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
 
         </form>

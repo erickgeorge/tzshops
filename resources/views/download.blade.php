@@ -44,7 +44,7 @@
         <p class="card-text">
             @if(count($data)>0)
             <table id="myTable" class="table table-striped" style="width: 100%;">
-                <thead>
+                <thead style="color: white;">
                     <tr>
                         <th>#</th>
                         <th>Name</th>

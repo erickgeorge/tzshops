@@ -138,7 +138,7 @@
 
 
     <div class="form-group ">
-        <label for="">Details:</label>
+        <label for="">Description of the Problem:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
@@ -156,7 +156,7 @@
             <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
                @csrf
                <div class="row">
-               <div class="container" >Location - Zone :
+               <div class="container" >Location - Zone : &nbsp;
 
                      @if($wo->zonelocationtwo != null) <?php
                            $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
@@ -165,7 +165,7 @@
                             @endif
                             @if($wo->zonelocationtwo != null)
 
-                             {{ $zonelocation->location }}, {{ $zoned->zonename }}
+                             {{ $zonelocation->location }} - {{ $zoned->zonename }}
                        @else Not Assigned
                        @endif
 
@@ -179,7 +179,6 @@
 
         @endif
         </div>
-
 
 
 
@@ -618,7 +617,7 @@
    @endif
      <br>  <br>
 
-     <h4><b>Material(s) Used </b></h4>
+     <h4><b>Material(s) Used and Verified</b></h4>
 
   @if(empty($wo['work_order_material']->id))
         <p >No Material Used for this Works order</p>

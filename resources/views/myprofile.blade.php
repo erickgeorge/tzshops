@@ -72,7 +72,7 @@ padding: 20 20 20 20;
 
 
 
-  <div id="content" align="center">
+  <div id="content">
      <div id="package_update">
 
 
@@ -120,12 +120,17 @@ padding: 20 20 20 20;
 
 
 	 <div>
+        <br>
+        <br>
+        <br>    
 			<a href="/changeprofile"  class="btn btn-primary">Edit profile</a>
 
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </form>
         </div>
-        <div class="row">
+
+        <br>
+   <!--     <div class="row">
     <div class="col border-dark">
         <div class="form-group">
        @if(auth()->user()->signature_ == null)
@@ -146,7 +151,7 @@ padding: 20 20 20 20;
         @endif
     </div>
     </div>
-</div>
+</div>-->
 
 </div>
 

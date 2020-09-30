@@ -25,10 +25,10 @@ User Registration
 
  </style>
 <br>
-<div class="CONTAINER">
-	<div class="col-md-8">
-		<h5 style="text-transform: capitalize;" >Create new user</h5>
-	</div>
+<div class="container">
+	
+		<h4 style="text-transform: capitalize;" >Create new user</h4>
+
 
 	<!-- <div class="col-md-4">
 		<a href="{{ url('viewusers') }}" > <button type="" class="btn btn-primary">View all users</button></a>

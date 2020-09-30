@@ -74,7 +74,7 @@ Route::post('/viewusers/delete/{id}', 'UserController@deleteUser')->name('user.d
 
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/create_user', 'HomeController@createUserView')->name('createUserView')->middleware('auth');
-Route::post('workorder/create', 'WorkOrderController@create')->name('workorder.create');
+//Route::post('workorder/create', 'WorkOrderController@create')->name('workorder.create');
 Route::post('workorder/reject/{id}', 'WorkOrderController@rejectWO')->name('workorder.reject');
 Route::post('workorder/accept/{id}', 'WorkOrderController@acceptWO')->name('workorder.accept');
 Route::get('edit/work_order/view/{ids}', 'WorkOrderController@editWOView')->name('workOrder.edit.view');

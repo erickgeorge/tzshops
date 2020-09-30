@@ -137,12 +137,12 @@
     </div>
      <br>
       <div style="color: red;">
-      <input type="checkbox" name="emergency" > This Work Order Is Emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>
+      <input type="checkbox" name="emergency" >This Works Order Is Emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>
       </div>
       <br>
 
         <div class="form-group">
-            <label for="comment">Details:
+            <label for="comment">Description of the Problem:
             </label>
             <textarea name="details" value="{{ old('details') }}" required maxlength="100" class="form-control" rows="5"
                       id="comment"></textarea>
