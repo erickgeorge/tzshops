@@ -84,9 +84,21 @@ padding: 20 20 20 20;
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->fname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
-         class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
+         class="form-control" id="phone" aria-describedby="emailHelp" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
+    </div>
+    <div class="row">
+    <div class="col">
+        <div class="form-group">
+
+        <label for="phone">Middle Name </label>
+        <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->mid_name }}"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           maxlength = "13"  minlength = "10"
+         class="form-control" id="phone" aria-describedby="emailHelp" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
     </div>
     </div>
+</div>
+    <div class="row">
     <div class="col">
         <div class="form-group">
 
@@ -94,7 +106,7 @@ padding: 20 20 20 20;
         <input disabled style="color: black"  required type="text"     name="phone"  value="{{ auth()->user()->lname }}"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "13"  minlength = "10"
-         class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
+         class="form-control" id="phone" aria-describedby="emailHelp"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
     </div>
     </div>
 </div>
@@ -122,7 +134,7 @@ padding: 20 20 20 20;
 	 <div>
         <br>
         <br>
-        <br>    
+        <br>
 			<a href="/changeprofile"  class="btn btn-primary">Edit profile</a>
 
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>

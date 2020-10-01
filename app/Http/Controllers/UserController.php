@@ -52,6 +52,11 @@ class UserController extends Controller
 
         $user = new User();
         $user->fname = $request['fname'];
+        if($request['mname']!='')
+        {
+
+        $user->mid_name = $request['mname'];
+        }
         $user->lname = $request['lname'];
         $user->name = $request['name'];
         $user->phone = $request['phone'];
@@ -291,6 +296,11 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         $user->fname = $request['fname'];
         $user->lname = $request['lname'];
+        if($request['mname']!='')
+        {
+
+        $user->mid_name = $request['mname'];
+        }
         // $user->name = $request['uname'];
         $user->phone = $request['phone'];
         $user->email = $request['email'];

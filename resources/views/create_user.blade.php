@@ -26,7 +26,7 @@ User Registration
  </style>
 <br>
 <div class="container">
-	
+
 		<h4 style="text-transform: capitalize;" >Create new user</h4>
 
 
@@ -54,7 +54,6 @@ User Registration
 </div>
 @endif
 <div class="col-lg-12">
-<p style="color: red">All fields are compulsory except second type of user</p>
 
 
 
@@ -63,61 +62,60 @@ User Registration
 <div class="row">
 	<div class="col">
 		<div class="form-group ">
-	    <label for="fname">First name</label>
+	    <label for="fname">First name <sup class="text-danger">*</sup> </label>
 	    <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp" name="fname" placeholder="Enter first name" onkeypress="return  event.charCode > 57 " value="{{ old('fname') }}" >
 	 </div>
 	</div>
 	<div class="col">
 		<div class="form-group ">
-	    <label for="lname">Last name </label>
-	    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
+	    <label for="lname">Middle name </label>
+	    <input style="color: black" type="text"  maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="mname" value="" placeholder="Enter middle name" onkeypress="return  event.charCode > 57 " value="{{ old('mname') }}">
 	</div>
+    </div>
+</div>
+<div class="row">
+
+	<div class="col">
+		<div class="form-group ">
+	    <label for="lname">Last name  <sup class="text-danger">*</sup></label>
+	    <input style="color: black" type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 " value="{{ old('lname') }}">
+    </div>
 	</div>
 	<div class="col">
 		<div class="form-group ">
-	    <label for="phone">Phone number </label>
-	    <input style="color: black; width: 340px;"  required type="text"     name="phone"
+	    <label for="phone">Phone number  <sup class="text-danger">*</sup></label>
+	    <input style="color: black;"  required type="text"     name="phone"
 	    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            maxlength = "10"  minlength = "10"
 	     class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 "  value="{{ old('phone') }}">
 	</div>
-	</div>
+    </div>
 </div>
 <div class="row">
 	<div class="col">
-		<div class="input-group ">
-	  <div class="input-group-prepend">
-	    <label style="height:28px;" class="input-group-text" for="Email">Email </label>
-	  </div>
-	    <input style="color: black; height: 28px; width: 80px;" required   type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="29" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+        <div class="form-group ">
+            <label for="phone">Email  <sup class="text-danger">*</sup></label>
+            <input style="color: black;"  required type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="29" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+        </div>
 	</div>
-	</div>
-
-
-	     <div class="col">
-	<div class="align-content-center">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label  style="height: 28px;" class="input-group-text" for="username">Username </label>
-	  </div>
-	     <input style="color: black; width:200px; height: 28PX;"  required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
-	 </div>
-	</div>
+    <div class="col">
+        <div class="form-group ">
+            <label for="phone">Username  <sup class="text-danger">*</sup></label>
+            <input style="color: black;"  required required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+        </div>
 	</div>
 </div>
 <div class="row">
-	<div class="col">
-	<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label  style="height: 28px" class="input-group-text" for="inputGroupSelect01">Role</label>
-	  </div>
-	  <select style="color: black; width: 430  px" required class="custom-select" name="role" id="role">
-	    <option value="" selected>Choose...</option>
-	    <option value="1">Admin</option>
-	    <option value="2">Staff</option>
-	  </select>
+
+    <div class="col-md-6">
+        <div class="form-group ">
+            <label for="phone">Role  <sup class="text-danger">*</sup></label>
+            <select style="color: black;" required class="custom-select" name="role" id="role">
+                <option value="" selected>Choose...</option>
+                <option value="1">Admin</option>
+                <option value="2">Staff</option>
+              </select>        </div>
 	</div>
-</div>
 
 </div>
 
@@ -125,30 +123,27 @@ User Registration
 
 
 <div class="row">
-	<div  class="col">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="directorate">Directorate/College </label>
-	  </div>
-	  <select required style="color: black; width: 330px;" class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
-		  <option selected value="" >Choose...</option>
-	    @foreach($directorates as $directorate)
-	    <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
-	    @endforeach
-	  </select>
-	</div>
+
+    <div class="col-md-6">
+        <div class="form-group ">
+            <label for="phone">Directorate/College  <sup class="text-danger">*</sup></label>
+            <select required style="color: black; " class="custom-select" name="college" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+                <option selected value="" >Choose...</option>
+              @foreach($directorates as $directorate)
+              <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+              @endforeach
+            </select>
+        </div>
 	</div>
 
-
-		<div class="col">
-		<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <label style="height: 28px" class="input-group-text" for="department">Department</label>
-	  </div>
-	  <select required style="color: black; width: 380px;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
-	  </select>
-	    </div>
+    <div class="col-md-6">
+        <div class="form-group ">
+            <label for="phone">Department  <sup class="text-danger">*</sup></label>
+            <select required style="color: black;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
+            </select>
+        </div>
 	</div>
+
 
 </div>
 
@@ -158,8 +153,13 @@ User Registration
 
 
 
+<div class="row">
+    <div class="col">
+        Type of User  <sup class="text-danger">*</sup>
 
-	    <label>Type of User</label><br>
+    </div>
+
+</div>
 
 	  <div class="row">
 	  <div class="col">

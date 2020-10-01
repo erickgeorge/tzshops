@@ -337,10 +337,10 @@ var total=2;
      <tbody>
 
 
-   <?php $i=0; 
+   <?php $i=0;
 
    $summ = 0;
-   
+
   ?>
   @foreach($crosscheckassessmmentactivity as $assesment)
   <?php $i++; $summ += $assesment->score; ?>
@@ -362,7 +362,7 @@ var total=2;
 
       <TD><input oninput="totalitem()"  id="istock"  min="0" max="100"  class="form-control" type="number" name="percentage[]" placeholder="{{$assesment->percentage}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  value="{{$assesment->percentage}}" required="required" readonly="readonly">    </TD>
 
-   
+
 
 
         <TD>  <input style=" text-align: center;" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="score[]" id="txthour{{$i}}" onkeypress="return isNumberKey(event);  function isNumberKey(e)
@@ -372,7 +372,7 @@ var total=2;
 
                             if (isNaN(newString))
                             {
-                               
+
                             }
 
                             if (newString > {{$assesment->percentage}})
@@ -462,7 +462,7 @@ var total=2;
   <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
  </thead>
 
- 
+
  <tbody>
   <tr>
 <td>{{$company['areaname']->cleaning_name}}</td><td><?php echo $summ ?>%</td><td><?php $paym=$company->paymentone; echo number_format($paym); ?>
@@ -562,7 +562,7 @@ var total=2;
 
   <b>Rejected by {{$assesment['rejectiondvc']->type}} : {{ $assesment['rejectiondvc']->fname .' ' . $assesment['rejectiondvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvcrejected_on)) }}     <td> <a onclick="myfunc7('{{$assesment->reasondvc}}')"><span data-toggle="modal" data-target="#viewreasondean"
                                                                          class="badge badge-danger">View Reason</span></a></td></b> @endif
-                                                                       
+
 
   <br>
   <br>
@@ -679,7 +679,7 @@ var total=2;
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                  <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Download for Signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
-            @endif    
+            @endif
    @endif
 
  <br>

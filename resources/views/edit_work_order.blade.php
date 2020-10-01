@@ -244,7 +244,7 @@ var total=2;
             <button type="submit" class="btn btn-primary">Save</button>
           </form>-->
 
-                    
+
 
 
 <script>
@@ -260,7 +260,7 @@ function autoSubmit()
 
     <input name="emergency" <?php if ($wo->emergency == 1) { ?>checked='checked' <?php }?>   type="radio" value="emergency" onChange="autoSubmit();" /> &nbsp;This works order is emergency<br>
     <input name="emergency" <?php if ($wo->emergency == 0) { ?>checked='checked' <?php }?>  type="radio" value="notemergency" onChange="autoSubmit();" />&nbsp; This works order is not emergency
-   
+
 </form>
 
 <br>
@@ -283,7 +283,7 @@ function autoSubmit()
     <h4><b>{{ count($techforms) }} Assigned Technicians for Inspection  </b></h4>
     @endif
 
-  
+
 
 <table style="width:100%">
   <tr>
@@ -378,7 +378,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $iformb->description }}</textarea>
     </div>
-  
+
 
   <br>
     <hr>
@@ -671,7 +671,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @else
     <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
     @endif
-   
+
 
 <table style="width:100%">
   <tr>
@@ -702,7 +702,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for Material Approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from Store </span> @elseif($matform->status==20) <span class="badge badge-success">Please Crosscheck Material(s) </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of Material Rejected</span> @elseif($matform->status== 5)<span class="badge badge-success">Material on Procurement Stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material Taken From Store</span>  
+   <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for Material Approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from Store </span> @elseif($matform->status==20) <span class="badge badge-success">Please Crosscheck Material(s) </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of Material Rejected</span> @elseif($matform->status== 5)<span class="badge badge-success">Material on Procurement Stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material Taken From Store</span>
    @elseif($matform->status== 100)<span class="badge badge-primary">Reserved</span> @elseif($matform->status == -1)<span class="badge badge-danger">
     REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material Purchased</span>
        @endif</td>
@@ -811,7 +811,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <h4><b>{{ count($matforms) }} Materials Used and Approved  </b></h4>
     @endif
 
- 
+
 
 <table style="width:100%">
   <tr>
@@ -1128,7 +1128,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
    @if((($wo->status == 40)) and ($wo->requirematerial == 1))
 
 
-         
+
 <br>
 
                         <div class="row">

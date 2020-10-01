@@ -51,7 +51,7 @@
     @endif
     <div class="col-lg-12">
 
-      
+
         <form method="POST" action="{{ route('user.edit', [$user->id]) }}">
             @csrf
 <div class="row">
@@ -63,6 +63,16 @@
                        onkeypress="return  event.charCode > 57 " value="{{ $user->fname }}">
             </div>
     </div>
+    <div class="col">
+        <div class="form-group ">
+                <label for="fname">Middle name <sup style="color: red;">*</sup></label>
+                <input style="color: black" type="text" maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
+                       name="mname" placeholder="Enter middle name"
+                       onkeypress="return  event.charCode > 57 " value="{{ $user->mname }}">
+            </div>
+    </div>
+</div>
+<div class="row">
     <div class="col">
         <div class="form-group ">
                 <label for="lname">Last name <sup style="color: red;">*</sup></label>
@@ -84,62 +94,15 @@
 </div>
  <div class="row">
     <div class="col">
-         <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label style="height: 28px;" class="input-group-text" for="email">Email</label>
-                </div>
-                <input style="height: 28px;" style="color: black" required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
-                       name="email" onblur="validateEmail(this);" placeholder="Enter email address" value="{{ $user->email }}">
+        <div class="form-group ">
+                <label for="phone">Email <sup style="color: red;">*</sup></label>
+                <input  style="color: black" required required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
+                name="email" onblur="validateEmail(this);" placeholder="Enter email address" value="{{ $user->email }}">
             </div>
     </div>
-
     <div class="col">
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label style="height: 28px;" class="input-group-text" for="directorate">Directorate/College <sup style="color: red;"></label>
-                </div>
-                <select style="width: 350px;" class="custom-select" name="college" id="directorate" onchange="getdepedit()">
-                    @foreach($directorates as $directorate)
-                        <option <?php if(($user['department']['directorate']->name) == $directorate->name) {?>
-                                selected="selected"
-                                <?php } ?>
-                                value="{{ $directorate->id }}" > {{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
-                    @endforeach
-
-                </select>
-        </div>
-    </div>
-</div>
-
-
-  <div class="row">
-    <div class="col">
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label  style="height: 28px;" class="input-group-text" for="department">Department</label>
-                </div>
-
-                <select class="custom-select" name="department" id="department" >
-                      @foreach($departments as $dep)
-                        <option <?php if(($user['department']->name) == $dep->name) {?>
-                                selected="selected"
-                                <?php } ?>
-                                value="{{ $dep->id }}" > {{ '('.$dep->name . ') ' . $dep->description }}</option>
-                    @endforeach
-
-                </select>
-
-            </div>
-    </div>
-
-
-</div>
-
-    <div >
-        <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label  class="input-group-text" for="inputGroupSelect01">Role</label>
-                </div>
+        <div class="form-group ">
+                <label for="phone">Role <sup style="color: red;">*</sup></label>
                 <select class="custom-select" name="role" id="inputGroupSelect02">
 
                     <option
@@ -162,6 +125,41 @@
                 </select>
             </div>
     </div>
+    </div>
+    <div class="row">
+
+    <div class="col">
+        <div class="form-group ">
+                <label for="phone">Directorate/College <sup style="color: red;">*</sup></label>
+                <select class="custom-select" name="college" id="directorate" onchange="getdepedit()">
+                    @foreach($directorates as $directorate)
+                        <option <?php if(($user['department']['directorate']->name) == $directorate->name) {?>
+                                selected="selected"
+                                <?php } ?>
+                                value="{{ $directorate->id }}" > {{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+    </div>
+    <div class="col">
+        <div class="form-group ">
+                <label for="phone">Department <sup style="color: red;">*</sup></label>
+                <select class="custom-select" name="department" id="department" >
+                    @foreach($departments as $dep)
+                      <option <?php if(($user['department']->name) == $dep->name) {?>
+                              selected="selected"
+                              <?php } ?>
+                              value="{{ $dep->id }}" > {{ '('.$dep->name . ') ' . $dep->description }}</option>
+                  @endforeach
+
+              </select>
+            </div>
+    </div>
+
+
+</div>
+
 
 
     <?php $string = $user->type;
@@ -185,7 +183,7 @@
             </div>
 
 
-              <div id="locationdiv" > 
+              <div id="locationdiv" >
 
 
                       <select class="custom-select" name="type" id="type" required>
@@ -199,7 +197,7 @@
 
 
                       <option @if (in_array('Directorate Director',$str_array)) { selected="selected" } @else{} @endif  value="Directorate Director">Directorate Director</option>
-                      
+
                       <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
 
                        <option @if (in_array('Dean of Student',$str_array)) { selected="selected" } @else{} @endif  value="Dean of Student">Dean of Student</option>
@@ -371,11 +369,11 @@
             <div class="card-body">
                 <form  method="POST" onsubmit="return confirm('Are you sure you want to Restore password to default for: {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('restorepassword', [$user->id]) }}" >
                     {{csrf_field()}}
-          
-          
+
+
                   <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Restore Password to default : username@esmis"   > Restore Password</button>
                </form>
-          
+
           </div>
         </div>
 
