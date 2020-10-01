@@ -181,60 +181,68 @@
         </div>
 
 
+  
+    <br>
+    <br>
 
-    <h4><b>Assigned Technician(s) for Inspection</b></h4>
+
+<!--assigned technician for inspection-->
+
+
     @if(empty($wo['work_order_staffassigned']->id))
-       <p >No Technician(s) assigned yet</p>
+
     @else
 
-
-    <?php
+      <?php
 
   $idwo=$wo->id;
   $techforms = techasigned::with('technician_assigned_for_inspection')->where('work_order_id',$idwo)->get();
 ?>
 
-<table style="width:100%">
-  <tr>
-    <thead style="color: white;">
-    <th>Full Name</th>
-  <th>Status</th>
-    <th>Date Assigned</th>
-    <th>Leader</th>
-    </thead>
+  @if(count($techforms) == 1)
+    <h4><b>1 Assigned Technician for Inspection </b></h4>
+    @else
+    <h4><b>{{ count($techforms) }} Assigned Technicians for Inspection  </b></h4>
+    @endif
 
+  
+
+
+<table style="width:100%">
+
+    <thead style=" background-color: #376ad3; color: white; ">
+  <tr>
+ 
+  <th>Full Name</th>
+     <th>Status </th>
+    <th>Date Assigned </th>
+     @foreach($techforms as $techform)
+     @endforeach
+     @if($techform->leader != null )
+      <th>Leader </th>
+      @endif
   </tr>
+</thead>
+
+  <tbody>
     @foreach($techforms as $techform)
   <tr>
 
      @if($techform['technician_assigned_for_inspection'] != null)
     <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
-   <td >@if($techform->status==1) Completed   @else  On Progress  @endif</td>
-
- <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
-
-  @if($techform->leader == null)
-<td><a style="color: black;" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader"><i
-                                                    class="fas fa-user-tie large"></i></a></td>
-                                                   @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Yes </td>
-                                                    @else
-<td style="color: black;"  data-toggle="tooltip" >No</i></td>
-                                                    @endif
+   <td >@if($techform->status==1) Completed  @else  On Progress   @endif</td>
+   <td>{{ date('d F Y', strtotime($techform->created_at)) }} </td>
 
 
+<!--
+   @if($techform->status==1)
+
+  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
+    @else
 
 
-   <!-- @if($techform->status!=1)
-   <td>   <a style="color: black;" href="{{ route('workOrder.technicianCompleteinspection', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE INSPECTION"><i
-                                                    class="fas fa-clipboard-check large"></i></a></td>
-
-    </td>
-   @endif-->
-
-
-
-
+      <td style="color: red"> Not Completed Yet</td>
+    @endif -->
 
 
 
@@ -242,18 +250,33 @@
 
 
 
+    @if($techform->leader == null )
 
 
+
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Yes </td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
+                                                    @endif
+    
   </tr>
     @endforeach
+    </tbody>
   </table>
 
 
-    @endif
-   <br>
 
+
+<br>
    <hr>
     <br>
+
+    @endif
+
+<!--assigned technician for inspection-->
+
+
 
 
 
@@ -261,37 +284,27 @@
 
 <!--report before work-->
 
-    @if(empty($wo['work_order_inspection']->status))
 
-    @else
-    <h4><b>Inspection Report Before Work </b></h4>
+
     <?php
 
   $idwo=$wo->id;
-  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
+  $iformsbefore = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Inspection report before work')->get();
         ?>
+  @if(count($iformsbefore)>0)
 
-<table style="width:100%">
-  <tr>
-     <thead style="color: white;">
-
-    <th>Description</th>
-  <th>Full Name</th>
-    <th>Date</th>
-  </thead>
-  </tr>
-    @foreach($iforms as $iform)
-
-
-  <tr>
-
-    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
-      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
-  </tr>
-
+  @foreach($iformsbefore as $iformb)
   @endforeach
-  </table>
+
+ <h4><b>Inspection Report Before Work , Reported on: {{ date('d F Y', strtotime($iformb->date_inspected )) }} </b></h4>
+
+    <div class="form-group ">
+        <label for="">Description:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{ $iformb->description }}</textarea>
+    </div>
+  
+
   <br>
     <hr>
       <br>
@@ -305,70 +318,138 @@
 <!--report before work-->
 
 
+<!--report after work-->
 
 
-  <h4><b>Assigned Technician(s) for Work </b></h4>
-@if(empty($wo['work_order_staff']->id))
-        <p >No Technician(s) assigned yet</p>
+
+  
+
+<!-- transport for inspection -->
+
+
+    <?php
+
+  $idwo=$wo->id;
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 0)->get();
+?>
+
+    @if(count($tforms)>0)
+
+ <h4><b>Transport Description for Inspection</b></h4>
+
+<table style="width:100%">
+  <tr>
+     <thead style="color: white;">
+    <th>Date of Transport</th>
+    <th>Time</th>
+    <th>Details</th>
+  <th>Status</th>
+  <th>Message</th>
+
+    <th>Date</th>
+  </thead>
+  </tr>
+    @foreach($tforms as $tform)
+
+
+  <tr>
+    <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
+     <td> <textarea class="form-control" disabled>{{$tform->coments}}</textarea></td>
+    <td>@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
+
+
+
+     <td><textarea class="form-control" disabled>@if($tform->details == NULL) No message from transport officer @else{{$tform->details}}@endif</textarea></td>
+
+ <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
+
+  </tr>
+
+  @endforeach
+  </table>
+  <br>
+     <hr>
+       <br>
+
+
+
+  <br>
+    @endif
+    <br>
+<!-- transport for inspection -->
+
+
+
+
+<!--assigned technician for work-->
+
+ @if(empty($wo['work_order_staff']->id))
+
     @else
+
     <?php
 
   $idwo=$wo->id;
   $techforms = WorkOrderStaff::with('technician_assigned')->where('work_order_id',$idwo)->get();
 ?>
+ @foreach($techforms as $status)
+ @endforeach
+
+@if($status->status5 == 22)
+
+  @if(count($techforms) == 1)
+    <h4><b>1 Assigned Technician for Work </b></h4>
+    @else
+    <h4><b>{{ count($techforms) }} Assigned Technicians for Work  </b></h4>
+    @endif
 
 <table style="width:100%">
   <tr>
+
 <thead style="color: white;">
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
-
+ <!-- <th>Date Completed</th>-->
+  @foreach($techforms as $techform)
+  @endforeach
+  @if($techform->leader != null )
   <th>Leader</th>
+  @endif
 </thead>
 
   </tr>
     @foreach($techforms as $techform)
 
-
-
-
   <tr>
 
-   @if($techform['technician_assigned'] != null)
+     @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
-   <td >@if($techform->status==1) Completed   @else  On Progress  @endif</td>
+   <td >@if($techform->status==1) Completed   @else  On Progress   @endif</td>
 
 
+    <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
 
-   <td>{{ date('d F Y', strtotime($techform->created_at)) }}</td>
 
-    @if($techform->leader == null )
+ <!--  @if($techform->status==1)
 
-<td>  ? </td>
+  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
+    @else
+
+
+      <td style="color: red"> Not Completed Yet</td>
+    @endif -->
+
+@if($techform->leader == null )
+
+
                                                    @elseif($techform->leader2 == 3 )
- <td style="color: black;"  data-toggle="tooltip" >Yes</td>
+ <td style="color: black;"  data-toggle="tooltip" >Yes </i></td>
                                                     @else
 <td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
 
-
-  <!--  @if(auth()->user()->type != 'CLIENT')
-   @if($techform->status!=1)
-   <td>   <a style="color: black;" href="{{ route('workOrder.technicianComplete', [$techform->id]) }}" data-toggle="tooltip" title="COMPLETE WORK"><i
-                                                    class="fas fa-clipboard-check large"></i></a></td>
-
-    </td>
-   @endif
-    @endif-->
-
-
-
-
-
-
-          @else
-          <td >No technician(s) assigned yet</td>
       @endif
 
 
@@ -376,22 +457,79 @@
   </tr>
     @endforeach
   </table>
+   <br>
+
+   <hr>
+    <br>
+ @endif
+@endif
+
+
+<!--assigned technician for work-->
+
+
+
+<!-- transport for work -->
+
+
+    <?php
+
+  $idwo=$wo->id;
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 1)->get();
+?>
+
+    @if(count($tforms)>0)
+
+ <h4><b>Transport Description for Work</b></h4>
+
+<table style="width:100%">
+  <tr>
+     <thead style="color: white;">
+    <th>Date of Transport</th>
+    <th>Time</th>
+    <th>Details</th>
+  <th>Status</th>
+  <th>Message</th>
+
+    <th>Date</th>
+  </thead>
+  </tr>
+    @foreach($tforms as $tform)
+
+
+  <tr>
+    <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
+     <td><textarea class="form-control" disabled> {{$tform->coments}}</textarea></td>
+    <td >@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
+
+
+
+     <td><textarea class="form-control" disabled>@if($tform->details == NULL) No message from transport officer @else{{$tform->details}}@endif</textarea></td>
+
+
+ <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
+
+  </tr>
+
+  @endforeach
+  </table>
+  <br>
+     <hr>
+       <br>
+
+
+
+  <br>
     @endif
     <br>
-     <br>
-   <hr>
+
+
+<!-- transport for work -->
 
 
 
 <!--report after work-->
-
-    @if(empty($wo['work_order_inspection']->status))
-
-
-
-        <p >Not inspected yet</p>
-
-    @else
 
 
     <?php
@@ -402,8 +540,10 @@
 
 
 
+    @if(count($iforms)>0)
 
- <h4><b>Inspection Report After Work </b></h4>
+
+ <h4><b>Technician(s) Report After Work </b></h4>
 
 <table style="width:100%">
   <tr>
@@ -419,10 +559,7 @@
 
   <tr>
 
-
     <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
-
-
       <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
     <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
   </tr>
@@ -445,74 +582,31 @@
 
 
 
-
-  <br>
-    <h4><b>Transport Description </b></h4>
-  @if(empty($wo['work_order_transport']->work_order_id))
-        <p >No Transport requested</p>
-    @else
-    <?php
-
-  $idwo=$wo->id;
-  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->get();
-?>
-
-<table style="width:100%">
-  <tr>
-     <thead style="color: white;">
-    <th>Date</th>
-    <th>Time</th>
-    <th>Details</th>
-  <th>Status</th>
-  <th>Message</th>
-
-    <th>Date Requested</th>
-  </thead>
-  </tr>
-    @foreach($tforms as $tform)
-
-
-  <tr>
-    <td>{{ date('F d Y', strtotime($tform->time))  }}</td>
-    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
-     <td> <a onclick="myfunc('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
-                                                                         class="badge badge-success">View Details</span></a></td>
-    <td >@if($tform->status==0) Waiting   @elseif($tform->status==1) Approved @else Rejected   @endif</td>
-
-
-
-     <td> <a onclick="myfunc2('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
-                                                                         class="badge badge-success">View Message</span></a></td>
-
-  <td><?php $time = strtotime($tform->created_at); echo date('d/m/Y',$time);  ?> </td>
-
-
-  @endforeach
-  </table>
-    @endif
-    <br>
-
-
-
-
-  <br>
-
-     <br>
-     <hr>
+<!--material requests-->
 
   <br>
   @if(auth()->user()->type != 'CLIENT')
-    <h4><b>Material(s) Request </b></h4>
+  
   @if(empty($wo['work_order_material']->id))
 
-        <p >No Material have been requested</p>
+
+
+       <!-- <p >No Material have been requested</p>-->
 
     @else
-    <?php
+
+       <?php
 
   $idwo=$wo->id;
   $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
-?>
+    ?>
+    @if(count($matforms) == 1)
+    <h4><b>1 Material Requested </b></h4>
+    @else
+    <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
+    @endif
+
+   
 
 <table style="width:100%">
   <tr>
@@ -522,7 +616,7 @@
 
   <th>Type</th>
    <th>Quantity</th>
-   <th>IoW</th>
+   <!--<th>IoW</th>-->
    <th>Approved By</th>
     <th>Status</th>
      <th>Date Requested</th>
@@ -537,7 +631,7 @@
 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td>{{$matform['iowzone']->name }}</td>
+  <!-- <td>{{$matform['iowzone']->name }}</td>-->
        <td>
        @if($matform->accepted_by == NULL)
       <span class="badge badge-warning">Not accepted Yet.</span>
@@ -545,8 +639,8 @@
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-    <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for material approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from store</span> @elseif($matform->status==20) <span class="badge badge-success">Please crosscheck material </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of material rejected </span> @elseif($matform->status== 5)<span class="badge badge-success">Material on procurement stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material taken from store</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
-    Rejected by IoW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material purchased</span>
+    <td >@if($matform->status==0)<span> Waiting for Approval </span> @elseif($matform->status== 1)<span>Approved by IoW </span> @elseif($matform->status== 2) <span>Released from store</span> @elseif($matform->status==20) <span >Please crosscheck material </span> @elseif($matform->status==17) <span>Some of material rejected </span> @elseif($matform->status== 5)<span>Material on procurement stage</span> @elseif($matform->status== 3)<span>Material taken from store</span>  @elseif($matform->status == -1)<span>
+    Rejected by IoW</span>@elseif($matform->status== 15)<span>Material purchased</span>
        @endif</td>
 
  <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
@@ -560,17 +654,32 @@
   @endforeach
 
   </table>
-    @endif
 
-    <br>
+      <br>
 
   <br>
   <hr>
+    @endif
+
+
    @elseif(auth()->user()->type == 'CLIENT')
-      <h4><b>Material(s) Requests </b></h4>
+     
   @if(empty($wo['work_order_material']->id))
-        <p class="text-primary">No Material have been requested</p>
+     <!--   <p class="text-primary">No Material have been requested</p>-->
+      
     @else
+
+    <?php
+
+  $idwo=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+    ?>
+    @if(count($matforms) == 1)
+    <h4><b>1 Material Requested </b></h4>
+    @else
+    <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
+    @endif
+
     <?php
 
   $idwo=$wo->id;
@@ -596,7 +705,8 @@
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-     <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for material approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW  </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from store </span> @elseif($matform->status==20) <span class="badge badge-success">Material Requested </span> @elseif($matform->status==17) <span class="badge badge-warning">Material on check by IoW </span>  @elseif($matform->status== 3)<span class="badge badge-primary">Material taken from store</span>  @elseif($matform->status== 5)<span class="badge badge-success">Material on procurement stage</span> @elseif($matform->status == -1)<span class="badge badge-warning">Material on check by IoW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material Purchased</span>
+  <td >@if($matform->status==0)<span> Waiting for Approval </span> @elseif($matform->status== 1)<span >Approved by IoW </span> @elseif($matform->status== 2) <span>Released from Store </span> @elseif($matform->status==20) <span>Requested to store</span> @elseif($matform->status==17) <span>Some of material rejected </span> @elseif($matform->status== 5)<span>Material on Procurement Stage</span> @elseif($matform->status== 3)<span>Material taken from store</span>  @elseif($matform->status == -1)<span >
+    Rejected by IOW</span>@elseif($matform->status== 15)<span>Material Purchased</span>
        @endif</td>
 
   <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
@@ -608,25 +718,38 @@
   @endforeach
 
   </table>
-    @endif
 
-    <br>
+      <br>
 
   <br>
   <hr>
+    @endif
+
+
    @endif
      <br>  <br>
 
-     <h4><b>Material(s) Used and Verified</b></h4>
+<!--material requests-->
 
+
+
+    
   @if(empty($wo['work_order_material']->id))
-        <p >No Material Used for this Works order</p>
+        <!--<p >No Material Used for this Works order</p>-->
     @else
+
+   
     <?php
 
   $idw=$wo->id;
   $matforms = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
 ?>
+
+ @if(count($matforms) == 1)
+    <h4><b>1 Material Used and Approved </b></h4>
+    @else
+    <h4><b>{{ count($matforms) }} Materials Used and Approved  </b></h4>
+    @endif
 
 <table style="width:100%">
   <tr>
@@ -649,14 +772,14 @@
 
 
   </table>
-    @endif
     <br>
-
 
     <br>
 
 
     <hr>
+    @endif
+  
     <div>
 
 </div>
@@ -879,9 +1002,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             </div>
         </div>
     </div>
-
-
-
 
 
 

@@ -565,14 +565,12 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <tr>
     <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
-     <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
-                                                                         class="badge badge-success">View Details</span></a></td>
-    <td class="text-primary">@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
+     <td><textarea class="form-control" disabled>{{$tform->coments}}</textarea></td>
+    <td>@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
 
 
 
-     <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
-                                                                         class="badge badge-success">View Message</span></a></td>
+    <td><textarea class="form-control" disabled>@if($tform->details == NULL) No message from transport officer @else{{$tform->details}}@endif</textarea></td>
 
  <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
 
@@ -624,14 +622,12 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <tr>
     <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
     <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
-     <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
-                                                                         class="badge badge-success">View Details</span></a></td>
+     <td> <textarea class="form-control" disabled>{{$tform->coments}}</textarea></td>
     <td >@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
 
 
 
-     <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
-                                                                         class="badge badge-success">View Message</span></a></td>
+      <td><textarea class="form-control" disabled>@if($tform->details == NULL) No message from transport officer @else{{$tform->details}}@endif</textarea></td>
 
  <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
 
@@ -697,14 +693,14 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
    <td>{{$matform->quantity }}</td>
        <td>
        @if($matform->accepted_by == NULL)
-      <span class="badge badge-warning">Not accepted Yet.</span>
+      <span >Not accepted Yet.</span>
        @else
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for Material Approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from Store </span> @elseif($matform->status==20) <span class="badge badge-success">Please Crosscheck Material(s) </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of Material Rejected</span> @elseif($matform->status== 5)<span class="badge badge-success">Material on Procurement Stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material Taken From Store</span>
-   @elseif($matform->status== 100)<span class="badge badge-primary">Reserved</span> @elseif($matform->status == -1)<span class="badge badge-danger">
-    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material Purchased</span>
+   <td >@if($matform->status==0)<span> Waiting for Approval </span> @elseif($matform->status== 1)<span >Approved by IoW </span> @elseif($matform->status== 2) <span >Released from Store </span> @elseif($matform->status==20) <span >Please Crosscheck Material(s) </span> @elseif($matform->status==17) <span >Some of Material Rejected</span> @elseif($matform->status== 5)<span>Material on Procurement Stage</span> @elseif($matform->status== 3)<span>Material Taken From Store</span>
+   @elseif($matform->status== 100)<span>Reserved</span> @elseif($matform->status == -1)<span>
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span>Material Purchased</span>
        @endif</td>
 
   <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
@@ -764,13 +760,13 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
    <td>{{$matform['iowzone']->name }}</td>
        <td>
        @if($matform->accepted_by == NULL)
-      <span class="badge badge-warning">Not accepted Yet.</span>
+      <span >Not accepted Yet.</span>
        @else
        {{ $matform['acceptedby']->name }}
        @endif
        </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
-    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
+   <td >@if($matform->status==0)<span> Waiting for material Approval </span> @elseif($matform->status== 1)<span >Approved by IoW </span> @elseif($matform->status== 2) <span>Released from Store </span> @elseif($matform->status==20) <span>Requested to store </span> @elseif($matform->status==17) <span>Some of material rejected </span> @elseif($matform->status== 5)<span>Material on Procurement Stage</span> @elseif($matform->status== 3)<span>Material taken from store</span>  @elseif($matform->status == -1)<span >
+    Rejected by IOW</span>@elseif($matform->status== 15)<span>Material Purchased</span>
        @endif</td>
 
   <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
@@ -1399,9 +1395,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
 
                         <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
-                        <br><br>
+                        <br><br><br>
 
-                       <div style="padding-left: 600px;"> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
+                       <div> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a> </div>
                     </form>
                               @else
@@ -1475,7 +1471,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
@@ -1565,7 +1561,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
              </form>
@@ -1645,7 +1641,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1701,7 +1697,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1807,7 +1803,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1887,7 +1883,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style="color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -2483,7 +2479,7 @@ Requesting material again after crosschecking-->
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div>
-                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       <button style="color: white; width: 205px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
 
@@ -2549,7 +2545,7 @@ Requesting material again after crosschecking-->
                         </div>
                     <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save Material</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
