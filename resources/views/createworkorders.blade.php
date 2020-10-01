@@ -147,7 +147,7 @@
             <textarea name="details" value="{{ old('details') }}" required maxlength="100" class="form-control" rows="5"
                       id="comment"></textarea>
         </div>
-        <div align="center">
+        <div >
         <button type="submit" class="btn btn-primary">Submit</button>
 
         <a class="btn btn-danger" href="/work_order" role="button">Cancel</a>
