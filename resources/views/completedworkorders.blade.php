@@ -301,7 +301,7 @@ foreach($userwithid as $userwithid)
 
 
                                 @if($work->status == 30)
-                                    <td><span class="badge badge-success">Completely Closed</span></td>
+                                    <td><span>Completely Closed</span></td>
 
                                   @endif
 

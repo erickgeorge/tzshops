@@ -456,7 +456,7 @@ class UserController extends Controller
 }
 
 
-return redirect()->route('myprofile')->with(['message' => 'Profile has changed successfully']);
+return redirect()->route('myprofile')->with(['message' => 'Profile updated successfully']);
         }
 
 

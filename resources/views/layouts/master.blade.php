@@ -192,29 +192,14 @@
                     </li>
 @endif
 
+
    @if(auth()->user()->type == 'Estates Director')
 
     <li style="width: 80px;">
 
                     </li>
 
-       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
-
-        </div>
-       </li>
 
 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
@@ -231,8 +216,11 @@
                     @endif
 
 
+  
 
-  @if((auth()->user()->type == 'Maintenance coordinator')||(auth()->user()->type == 'DVC Admin'))
+
+
+  @if((auth()->user()->type == 'Maintenance coordinator'))
 
 
 
@@ -267,6 +255,25 @@
 
 
        @endif
+
+
+
+         @if((auth()->user()->type == 'DVC Admin'))
+
+         <li style="width: 80px;">
+
+                    </li>
+
+
+       <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                    </li>
+
+
+       @endif
+
+
+
 
 
  @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))

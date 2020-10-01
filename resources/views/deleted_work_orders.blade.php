@@ -48,7 +48,7 @@
                     <td id="wo-details">{{ $work->details }}</td>
                     <td>{{ $work->problem_type }}</td>
                     <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                    <td><span class="badge badge-danger">rejected</span></td>
+                    <td><span>rejected</span></td>
                     <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                     <td>
                         @if($work->location ==null)
