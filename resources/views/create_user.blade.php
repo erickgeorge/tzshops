@@ -182,7 +182,6 @@ User Registration
                       <option value="CLIENT">Client</option>
                        <option value="Dean of Student">Dean of Student</option>
 	                  <option value="DVC Admin">DVC Admin</option>
-	                  <option value="Director DPI">Director DPI</option>
 	                  <option value="Directorate Director">Directorate Director</option>
 	                   <option value="Dvc Accountant">Dvc Accountant</option>
 	                  <option value="Estates officer">Estates officer</option>
