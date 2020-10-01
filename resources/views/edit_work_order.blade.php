@@ -1565,7 +1565,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-primary">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
              </form>
