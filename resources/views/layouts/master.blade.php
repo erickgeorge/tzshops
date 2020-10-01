@@ -755,7 +755,7 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('work_order')}}" ><h5>Works order </h5></a>
+  <a  href="{{ url('work_order')}}" ><h5>Works orders </h5></a>
  @if($role['user_role']['role_id'] == 1)
 
 
