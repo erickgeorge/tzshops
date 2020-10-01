@@ -1399,9 +1399,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
 
                         <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
-                        <br><br>
+                        <br><br><br>
 
-                       <div style="padding-left: 600px;"> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
+                       <div> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a> </div>
                     </form>
                               @else
@@ -1475,7 +1475,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
@@ -1565,7 +1565,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
              </form>
@@ -1645,7 +1645,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1701,7 +1701,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1807,7 +1807,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1887,7 +1887,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style="color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -2483,7 +2483,7 @@ Requesting material again after crosschecking-->
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div>
-                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       <button style="color: white; width: 205px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
 
@@ -2549,7 +2549,7 @@ Requesting material again after crosschecking-->
                         </div>
                     <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save Material</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
