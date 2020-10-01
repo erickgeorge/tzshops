@@ -110,7 +110,7 @@ td, th {
               @endif</b></td>
         </tr>
         <tr>
-            <td colspan="4">Description : <b style="text-transform: capitalize;">{{ $wo->details }}</b> </td>
+            <td colspan="4">Description of the problem: <b style="text-transform: capitalize;">{{ $wo->details }}</b> </td>
         </tr>
         <tr>
             <td colspan="2" style="text-transform: capitalize;"> @if($wo->status == 0)rejected@elseif($wo->status == 1) accepted @else processed @endif by : <b style="text-transform: capitalize;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</b> </td>

@@ -866,7 +866,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 <div class="input-group-prepend">
                     <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
-                <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" >
+                <select style="width: 300px;" required class="custom-select" id="iowzone" name="location" >
 
             <option value="">Select Zone Location</option>
                @foreach($iowzone as $user)
@@ -932,8 +932,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 <div>  <h5 style="color: blue"><b> Does this works order need material(s)? </b></h5></div>
 
                 <div>
-                     <label><input type="radio" name="colorRadio" value="greeno"> YES</label> &nbsp;
-                     <label><input type="radio" name="colorRadio" value="redo"> NO</label>
+                     <label><input type="radio" name="colorRadio" value="greeno"> Yes</label> &nbsp;
+                     <label><input type="radio" name="colorRadio" value="redo"> No</label>
                 </div>
 
                 @endif
@@ -1432,8 +1432,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
           <h5 style="color: blue"><b> Does this works order need transport for inspection? </b></h5>
 
-         <label><input type="radio" name="colorRadio" value="red"> YES</label> &nbsp;
-         <label><input type="radio" name="colorRadio" value="green"> NO</label>
+         <label><input type="radio" name="colorRadio" value="red"> Yes</label> &nbsp;
+         <label><input type="radio" name="colorRadio" value="green"> No</label>
 
            <div class="red box">
 
@@ -1537,8 +1537,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                       <h6 style="color: blue"><b>Was this works order fixed and completed? </b></h6>
                      <div class="form-group options">
-                       <input  class="example" type="checkbox" name="fixed" value="1" required /> YES &nbsp;
-                       <input  class="example" type="checkbox" name="notfixed" required /> NO
+                       <input  class="example" type="checkbox" name="fixed" value="1" required /> Yes &nbsp;
+                       <input  class="example" type="checkbox" name="notfixed" required /> No
                      </div>
 <!--script for checkbox-->
                                     <script type="text/javascript">
@@ -1605,8 +1605,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
           <div>  <h5 style="color: blue"><b> Does this works order need transport for work? </b></h5></div>
 
                 <div>
-                     <label><input type="radio" name="colorRadio" value="greetra"> YES</label> &nbsp;
-                     <label><input type="radio" name="colorRadio" value="redtra"> NO</label>
+                     <label><input type="radio" name="colorRadio" value="greetra"> Yes</label> &nbsp;
+                     <label><input type="radio" name="colorRadio" value="redtra"> No</label>
                 </div>
 
    <div class="greetra box">
@@ -1779,8 +1779,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                     <h6 style="color: blue"><b>Was this works order fixed and completed? </b></h6>
                      <div class="form-group options">
-                       <input  class="example" type="checkbox" name="fixed" value="1" required /> YES &nbsp;
-                       <input  class="example" type="checkbox" name="notfixed"  required /> NO
+                       <input  class="example" type="checkbox" name="fixed" value="1" required /> Yes &nbsp;
+                       <input  class="example" type="checkbox" name="notfixed"  required /> No
                      </div>
 <!--script for checkbox-->
                                     <script type="text/javascript">
