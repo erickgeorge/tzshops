@@ -165,7 +165,19 @@ var total=2;
             <h6 align="center" style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
              @endif
         </div>
- <div class="col">
+        <div class="col">
+
+             @if(($wo->zonelocationtwo != null)&&($wo->zone_location != null))
+                @php
+                    $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
+                    $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
+                @endphp
+                Location - Zone : &nbsp; <b> {{ $zonelocation->location }} - {{ $zoned->zonename }}</b>
+                @else
+             @endif   
+
+        </div>
+   </div>
             @if($wo->zonelocationtwo != null)
             @if($wo->zone_location == null)
             <i class="text-danger">Please Re-save Location - Zone to confirm</i>  <br> <br>
@@ -178,14 +190,14 @@ var total=2;
                     $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
                     $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
                 @endphp
-                Location - Zone : &nbsp; <b> {{ $zonelocation->location }} - {{ $zoned->zonename }}</b>
+              
                 @else
                <div class="container" >
                    <div class="input-group mb-3">
                    <div class="input-group-prepend">
                        <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone, Location</label>
                    </div>
-                   <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
+                   <select style="width: 350px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
 
                      @if($wo->zonelocationtwo != null) <?php
                            $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
@@ -220,7 +232,7 @@ var total=2;
 
         @endif
         </div>
-    </div>
+  
 
 
 
@@ -313,14 +325,15 @@ var total=2;
 
 
 @if(($techform->status==0) and ($techform->leader==1))
-  <br>
+
+<br>
 <div class="row">
    <div class="col">
-
+<p>Please download Works order inspection so as Head of Section and Lead Technician to sign.</p>
 </div>
 <div >
   <a href="{{ url('techforreport/'.$wo->id) }}" ><button class="btn btn-primary">
-PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 </div>
@@ -328,7 +341,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 <br>
    <hr>
-    <br>
+  
 
     @endif
 
@@ -849,7 +862,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 <div class="input-group-prepend">
                     <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
-                <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" >
+                <select style="width: 350px;" required class="custom-select" id="iowzone" name="location" >
 
             <option value="">Select Zone Location</option>
                @foreach($iowzone as $user)
@@ -1380,7 +1393,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
                         <br><br>
 
-                       <div style="padding-left: 600px;"> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
+                       <div> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a> </div>
                     </form>
                               @else
@@ -1454,7 +1467,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
@@ -1544,7 +1557,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
              </form>
@@ -1624,7 +1637,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style="color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1680,7 +1693,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1786,7 +1799,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1866,7 +1879,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -2462,7 +2475,7 @@ Requesting material again after crosschecking-->
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div>
-                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       <button style=" color: white; width: 205px;" type="submit" class="btn btn-success">Save
                                                        </button>
                                                     </div>
 
@@ -2528,7 +2541,7 @@ Requesting material again after crosschecking-->
                         </div>
                     <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save Material</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>

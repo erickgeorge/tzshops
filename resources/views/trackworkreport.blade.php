@@ -172,6 +172,11 @@ td, th {
   <th>Full Name</th>
      <th>Status </th>
     <th>Date Assigned </th>
+    @foreach($techforms as $techform)
+    @endforeach
+      @if($techform->leader != null )
+      <th>Leader </th>
+      @endif
   </tr>
 </thead>
 
@@ -195,7 +200,15 @@ td, th {
       <td style="color: red"> Not Completed Yet</td>
     @endif -->
 
+    @if($techform->leader == null )
 
+
+
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Yes </td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
+                                                    @endif
 
       @endif
   </tr>
