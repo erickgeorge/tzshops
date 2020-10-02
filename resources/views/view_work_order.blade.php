@@ -96,12 +96,29 @@
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
-    <br>
-    <div class="row">
-        <div>
-            <form method="POST" action="{{ route('workorder.accept', [$wo->id]) }}">
+
+<br>
+
+<script>
+function autoSubmit()
+{
+    var formObject = document.forms['theForm'];
+    formObject.submit();
+}
+</script>
+
+  <form  id='theForm1' method="POST" action="{{ route('workorder.accept', [$wo->id]) }}">
                 @csrf
-                <button type="submit" class="btn btn-success">Accept</button>
+
+    <input name="emergency" <?php if ($wo->emergency == 1) { ?>checked='checked' <?php }?>   type="radio" value="emergency" onChange="autoSubmit();" /> &nbsp;This works order is emergency<br>
+    <input name="emergency" <?php if ($wo->emergency == 0) { ?>checked='checked' <?php }?>  type="radio" value="notemergency" onChange="autoSubmit();" />&nbsp; This works order is not emergency
+
+<br>
+    <br>
+     <div class="row">
+        <div>
+          
+        <button type="submit" class="btn btn-primary">Accept</button>
             </form>
         </div>
         <p> &nbsp;&nbsp;</p>

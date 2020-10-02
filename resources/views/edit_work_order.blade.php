@@ -18,9 +18,6 @@
 
  ?>
 
-
-
-
 <style type="text/css">
 .label{
     width: 700px;
@@ -173,7 +170,7 @@ var total=2;
                     $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
                     $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
                 @endphp
-                Location - Zone : &nbsp; <b> {{ $zonelocation->location }} - {{ $zoned->zonename }}</b>
+
                 @else
                <div class="container" >
                    <div class="input-group mb-3">
@@ -296,14 +293,13 @@ var total=2;
 
 
 @if(($techform->status==0) and ($techform->leader==1))
- 
 <div class="row">
    <div class="col">
-
+<p>Please download Works order inspection so as Head of Section and Lead Technician to sign.</p>
 </div>
 <div >
   <a href="{{ url('techforreport/'.$wo->id) }}" ><button class="btn btn-primary">
-PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 </div>
@@ -828,13 +824,13 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             formObject.submit();
         }
         </script>
-        
+
         <form id='theForm' method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
                     @csrf
-        
+
             <input name="emergency" <?php if ($wo->emergency == 1) { ?>checked='checked' <?php }?>   type="radio" value="emergency" onChange="autoSubmit();" /> &nbsp;This works order is emergency<br>
             <input name="emergency" <?php if ($wo->emergency == 0) { ?>checked='checked' <?php }?>  type="radio" value="notemergency" onChange="autoSubmit();" />&nbsp; This works order is not emergency
-        
+
         </form>
  @if($wo->zone_location  != null)
 
@@ -966,7 +962,15 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
 
                        <TD>
-                            <select   id="techidc" required  name="technician_work[]" style="width: 700px;">
+                            <select  required  name="technician_work[]" style="background-color:white; width: 700px;
+
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  ">
                               <option selected value="">Choose technician ...</option>
 
 
@@ -1245,7 +1249,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     <div >
 
                        @if($wo->statusmform == 1)
-                      
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -1341,7 +1345,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
                         <br>
 
-                       <div style="padding-left: 600px;"> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
+                       <div> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a> </div>
                     </form>
                               @else
@@ -1415,7 +1419,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
@@ -1505,7 +1509,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
              </form>
@@ -1585,7 +1589,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style="color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1640,7 +1644,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1745,7 +1749,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1825,7 +1829,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1933,7 +1937,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
         <div id="cont">
 
-    </div>
+        </div>
     <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
     <p>
         <div class="row">
@@ -2421,7 +2425,7 @@ Requesting material again after crosschecking-->
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div>
-                                                       <button style="background-color: darkgreen; color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       <button style=" color: white; width: 205px;" type="submit" class="btn btn-success">Save
                                                        </button>
                                                     </div>
 
@@ -2442,7 +2446,7 @@ Requesting material again after crosschecking-->
 
                 </div>
                 <div class="modal-footer">
-                    
+
                 </div>
             </div>
         </div>
@@ -2488,7 +2492,7 @@ Requesting material again after crosschecking-->
                         </div>
                     <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
 
-                        <button style="background-color: darkgreen; color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <button style=" color: white" type="submit" class="btn btn-success">Save Material</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>

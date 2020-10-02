@@ -88,27 +88,29 @@ td, th {
             <td>On : <b>{{ date('d F Y', strtotime($wo->created_at)) }}</b> </td>
             <td>Problem Type: <b style="text-transform: capitalize;">{{ ucwords(strtolower($wo->problem_type)) }}</b> </td>
         </tr>
-        <tr>
-            <td>Location : <b>@if(empty($wo->room_id)) {{ $wo->location }}
-                @else
-                   {{ $wo['room']['block']->location_of_block }}
-                @endif</b> </td>
-            <td>Area : <b>@if(empty($wo->room_id))
-                {{ $wo->room_id }}
+        
+          @if(empty($wo->room_id)) 
+          <tr>
+            <td colspan="4">Location : <b>{{ $wo->location }} </b></td> </tr>
+           
+         @else
 
-                          @else
-                   {{ $wo['room']['block']['area']->name_of_area }}
-                          @endif</b></td>
-            <td>Block : <b>@if(empty($wo->room_id)) {{ $wo->location }}
-                @else
+         <tr>
                    {{ $wo['room']['block']->location_of_block }}
-                @endif</b> </td>
-            <td>Room : <b>@if(empty($wo->room_id))
-                {{ $wo->location }}
-              @else
+            </b> </td>
+            <td colspan="2">Area : <b>
+                        
+                   {{ $wo['room']['block']['area']->name_of_area }}
+                          </b></td>
+            <td>Block : <b>
+                   {{ $wo['room']['block']->location_of_block }}
+                </b> </td>
+            <td>Room : <b>
                   {{ $wo['room']->name_of_room }}
-              @endif</b></td>
-        </tr>
+             </b></td>
+       </tr>
+              @endif
+        
         <tr>
             <td colspan="4">Description of the problem: <b style="text-transform: capitalize;">{{ $wo->details }}</b> </td>
         </tr>
@@ -170,6 +172,11 @@ td, th {
   <th>Full Name</th>
      <th>Status </th>
     <th>Date Assigned </th>
+    @foreach($techforms as $techform)
+    @endforeach
+      @if($techform->leader != null )
+      <th>Leader </th>
+      @endif
   </tr>
 </thead>
 
@@ -193,7 +200,15 @@ td, th {
       <td style="color: red"> Not Completed Yet</td>
     @endif -->
 
+    @if($techform->leader == null )
 
+
+
+                                                   @elseif($techform->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Yes </td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
+                                                    @endif
 
       @endif
   </tr>
