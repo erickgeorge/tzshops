@@ -23,7 +23,6 @@
   <div class="col-lg-4">
     <h5 style="text-transform: capitalize;" >Add procured materials</h5>
   </div>
-</div>
   @if(Session::has('message'))
     <br>
     <p class="alert alert-success">{{ Session::get('message') }}</p>

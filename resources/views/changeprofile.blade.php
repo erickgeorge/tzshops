@@ -104,6 +104,8 @@ padding: 20 20 20 20;
          class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
     </div>
     </div>
+</div>
+<div class="row">
     <div class="col">
         <div class="form-group">
 
@@ -127,6 +129,8 @@ padding: 20 20 20 20;
          class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
     </div>
     </div>
+</div>
+<div class="row">
     <div class="col">
         <div class="form-group">
         <label for="email">Email Address </label>
@@ -151,7 +155,7 @@ padding: 20 20 20 20;
                     <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
                 </div>
                 <div>
-                    <br>    
+                    <br>
             <button type="submit"  class="btn btn-primary">Save</button>
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </div>
@@ -160,15 +164,31 @@ padding: 20 20 20 20;
 
     </div>
 </div>
-<div id="previous_update" align="center">   <div class="row justify-content-center">
+<div id="previous_update" align="center">
+      <div class="row justify-content-center">
        <div class="profile-header-container">
                 <div class="profile-header-img">
-                    <img class="rounded-circle" src="/storage/{{ $user->avatar }}" />
-                    <!-- badge -->
+                    @if (auth()->user()->avatar == 'user.png')
+                                    <img class="rounded-circle" src="{{asset('/images/user.png')}}" />
+                                    @else
+                                    <img class="rounded-circle" src="/storage/{{ $user->avatar }}" height="100" />
+
+                                    @endif
 
                 </div>
             </div>
           </div>
+          @if (auth()->user()->avatar != 'user.png')
+          <br><br><br>
+          <div class="row">
+              <div class="col">
+              <form action="{{route('deleteprofilepicture')}}" method="post">
+                @csrf
+                      <button type="submit" class="btn btn-danger">Delete Profile Picture</button>
+                  </form>
+              </div>
+          </div>
+          @endif
     </div>
 </div>
 

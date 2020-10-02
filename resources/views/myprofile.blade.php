@@ -121,6 +121,8 @@ padding: 20 20 20 20;
          class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 " >
     </div>
     </div>
+</div>
+<div class="row">
     <div class="col">
         <div class="form-group">
         <label for="email">Email Address </label>
@@ -172,8 +174,13 @@ padding: 20 20 20 20;
      <div class="row justify-content-center">
      <div class="profile-header-container">
                 <div class="profile-header-img">
-
+                    @if ($user->avatar == 'user.png')
+                    <img class="rounded-circle" src="{{asset('/images/user.png')}}" />
+                    @else
                     <img class="rounded-circle" src="/storage/{{ $user->avatar }}" />
+
+                    @endif
+
                     <!-- badge -->
 
                 </div>
