@@ -18,9 +18,6 @@
 
  ?>
 
-
-
-
 <style type="text/css">
 .label{
     width: 700px;
@@ -247,24 +244,6 @@ var total=2;
 
 
 
-<script>
-function autoSubmit()
-{
-    var formObject = document.forms['theForm'];
-    formObject.submit();
-}
-</script>
-
-<form id='theForm' method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
-            @csrf
-
-    <input name="emergency" <?php if ($wo->emergency == 1) { ?>checked='checked' <?php }?>   type="radio" value="emergency" onChange="autoSubmit();" /> &nbsp;This works order is emergency<br>
-    <input name="emergency" <?php if ($wo->emergency == 0) { ?>checked='checked' <?php }?>  type="radio" value="notemergency" onChange="autoSubmit();" />&nbsp; This works order is not emergency
-
-</form>
-
-<br>
-<br>
 
 
     @if(empty($wo['work_order_staffassigned']->id))
@@ -1021,7 +1000,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
 
                        <TD>
-                            <select   id="techidc" required  name="technician_work[]" style="width: 700px;">
+                            <select  required  name="technician_work[]" style="background-color:white; width: 700px;">
                               <option selected value="">Choose technician ...</option>
 
 
@@ -1991,7 +1970,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
         <div id="cont">
 
-    </div>
+        </div>
     <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
     <p>
         <div class="row">
