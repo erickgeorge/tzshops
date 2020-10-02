@@ -917,3 +917,5 @@ Route::get('sendreturnlocation','UserController@sendreturnlocation')->name('send
 Route::get('fetchstatus1','UserController@fetchstatus1')->name('fetchstatus1')->middleware('auth');
 Route::post('work_order/require/material/{id}', 'WorkOrderController@requirematerial')->name('workOrder.requirematerial');
 Route::get('filterhos','HomeController@filterhos')->name('filterhos')->middleware('auth');
+Route::POST('deleteprofilepicture','UserController@deleteprofilepicture')->name('deleteprofilepicture')->middleware('auth');
+

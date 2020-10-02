@@ -61,7 +61,7 @@ else {
     @foreach($display_users as $user)
     <tr>
       <th scope="row">{{ $i++ }}</th>
-      <td>{{ $user->fname . ' ' . $user->lname }}</td>
+      <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
 
       <td><a style="color: #000;" href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
 

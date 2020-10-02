@@ -174,8 +174,13 @@ padding: 20 20 20 20;
      <div class="row justify-content-center">
      <div class="profile-header-container">
                 <div class="profile-header-img">
-
+                    @if ($user->avatar == 'user.png')
+                    <img class="rounded-circle" src="{{asset('/images/user.png')}}" />
+                    @else
                     <img class="rounded-circle" src="/storage/{{ $user->avatar }}" />
+
+                    @endif
+
                     <!-- badge -->
 
                 </div>

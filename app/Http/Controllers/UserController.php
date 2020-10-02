@@ -583,5 +583,16 @@ public function restorepassword(Request $Request, $id)
     return redirect()->back()->with(['message' => 'Password restored successfully']);
 }
 
+public function deleteprofilepicture(Request $request)
+{
+    $data = User::where('id',auth()->user()->id)->first();
+    $data->avatar = 'user.png';
+    $data->save();
+
+    return redirect()->route('myprofile')->with(['message' => 'Profile Picture Deleted successfully']);
+
+
+}
+
 }
 

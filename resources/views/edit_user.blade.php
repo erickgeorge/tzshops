@@ -49,49 +49,77 @@
             </ul>
         </div>
     @endif
+
     <div class="col-lg-12">
 
 
         <form method="POST" action="{{ route('user.edit', [$user->id]) }}">
             @csrf
-<div class="row">
-    <div class="col">
-        <div class="form-group ">
-                <label for="fname">First name <sup style="color: red;">*</sup></label>
-                <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
-                       name="fname" placeholder="Enter first name"
-                       onkeypress="return  event.charCode > 57 " value="{{ $user->fname }}">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group ">
+                                <label for="fname">First name <sup style="color: red;">*</sup></label>
+                                <input style="color: black" type="text" required maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
+                                       name="fname" placeholder="Enter first name"
+                                       onkeypress="return  event.charCode > 57 " value="{{ $user->fname }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group ">
+                                <label for="fname">Middle name <sup style="color: red;">*</sup></label>
+                                <input style="color: black" type="text" maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
+                                       name="mname" placeholder="Enter middle name"
+                                       onkeypress="return  event.charCode > 57 " value="{{ $user->mname }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group ">
+                                <label for="lname">Last name <sup style="color: red;">*</sup></label>
+                                <input style="color: black" type="text" required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp"
+                                       name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 "
+                                       value="{{ $user->lname }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group ">
+                                <label for="phone">Phone number <sup style="color: red;">*</sup></label>
+                                <input  style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
+                                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                       maxlength="10" minlength="10"
+                                       class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number"
+                                       onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col">
+                            <div class="profile-header-container">
+                                <div class="profile-header-img">
+                                    @if ($user->avatar == 'user.png')
+                                    <img class="rounded-circle" src="{{asset('/images/user.png')}}" />
+                                    @else
+                                    <img class="rounded-circle" src="/storage/{{ $user->avatar }}" height="100" />
+
+                                    @endif
+
+                                    <!-- badge -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-    </div>
-    <div class="col">
-        <div class="form-group ">
-                <label for="fname">Middle name <sup style="color: red;">*</sup></label>
-                <input style="color: black" type="text" maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
-                       name="mname" placeholder="Enter middle name"
-                       onkeypress="return  event.charCode > 57 " value="{{ $user->mname }}">
-            </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <div class="form-group ">
-                <label for="lname">Last name <sup style="color: red;">*</sup></label>
-                <input style="color: black" type="text" required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp"
-                       name="lname" placeholder="Enter last name" onkeypress="return  event.charCode > 57 "
-                       value="{{ $user->lname }}">
-            </div>
-    </div>
-    <div class="col">
-        <div class="form-group ">
-                <label for="phone">Phone number <sup style="color: red;">*</sup></label>
-                <input  style="color: black" required type="text" name="phone" value="{{ $user->phone }}"
-                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                       maxlength="10" minlength="10"
-                       class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number"
-                       onkeypress="return (event.charCode >= 48 && event.charCode <= 57 ) || event.charCode==43 ">
-            </div>
-    </div>
-</div>
  <div class="row">
     <div class="col">
         <div class="form-group ">
@@ -172,9 +200,9 @@
 
 
       <label>Type of User</label><br>
-
+<br>
     <div class="row">
-    <div class="col">
+    <div class="col-md-5">
             <div >
                  <div class="checkbox">
             <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
@@ -359,7 +387,7 @@
 
 			-->
 
-      <div align="center">
+      <div>
             <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-danger" href="/viewusers" role="button">Cancel</a>
             </div>

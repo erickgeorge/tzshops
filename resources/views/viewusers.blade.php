@@ -848,7 +848,7 @@ use App\Section;
 
           $directora = directorate::where('id',$departmentor->directorate_id)->get();
           foreach($directora as $directora){?>
-<option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->lname }} - ( {{ $departmentor->name }}, {{ $directora->name }})</option>
+<option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->mid_name }} {{ $userfetch->lname }} - ( {{ $departmentor->name }}, {{ $directora->name }})</option>
           <?php }
       }
 
@@ -965,7 +965,7 @@ else {
     @foreach($display_users as $user)
     <tr>
       <th scope="row">{{ $i++ }}</th>
-      <td>{{ $user->fname . ' ' . $user->lname }}</td>
+      <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
       <td>
@@ -1000,7 +1000,7 @@ else {
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
 
 
-         <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate {{ $user->fname . ' ' . $user->lname }}?')" action="{{ route('user.delete', [$user->id]) }}" >
+         <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate {{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}?')" action="{{ route('user.delete', [$user->id]) }}" >
           {{csrf_field()}}
 
 
