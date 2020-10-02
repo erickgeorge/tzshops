@@ -1017,7 +1017,15 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD><INPUT type="checkbox" name="chk[]"/></TD>
 
                        <TD>
-                            <select  required  name="technician_work[]" style="background-color:white; width: 700px;">
+                            <select  required  name="technician_work[]" style="background-color:white; width: 700px;
+  
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  ">
                               <option selected value="">Choose technician ...</option>
 
 
