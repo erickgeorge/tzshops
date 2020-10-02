@@ -173,12 +173,20 @@ $message = $client->message()->send([
 
 
 
-    public function acceptWO($id)
+    public function acceptWO(Request $request , $id)
     {
 //        return response()->json($id);
         $wO = WorkOrder::where('id', $id)->first();
         $wO->staff_id = auth()->user()->id;
         $wO->status = 1;
+
+         if ($request['emergency'] == 'emergency') {
+            $wO->emergency = 1;
+        } 
+        if ($request['emergency'] == 'notemergency') {
+            $wO->emergency = 0;
+        }
+
         $wO->save();
 
         $progress = new WorkOrderProgress();
@@ -259,12 +267,22 @@ session::flash('message', ' Your workorder have been accepted successfully ');
  */
 
 //for email that currently working disabled partially
+        if ($wO->emergency == 1) {
 
-
-     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
+                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
+        }
+   
+        if ($wO->emergency == 0) {
+            
+                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
+
+                    "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+        }
+
 
        Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
 

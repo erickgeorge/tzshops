@@ -64,77 +64,76 @@
                aria-describedby="emailHelp" value="{{ ucwords(strtolower($wo->problem_type)) }}" disabled>
     </div>
     </div>
-    <div class="col">
-        <div class="input-group mb-3">
+    
+</div>
+ @if(empty($wo->room_id) )
+
+
+     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Location</label>
         </div>
-        @if(empty($wo->room_id))
-            <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
-                   name="location"
-                   aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
-        @else
-            <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
-                   name="location"
-                   aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}"
-                   disabled>
-        @endif
+
+
+        <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
+               aria-describedby="emailHelp" value="{{ $wo->location }}" disabled>
     </div>
-    </div>
-</div>
+
+
+
+
+    @else
+
 <div class="row">
-    <div class="col">
-        <div class="input-group mb-3">
+  <div class="col">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text">Location</label>
+        </div>
+
+
+        <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
+               aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']['location']->name }}" disabled>
+    </div>
+
+  </div>  
+  <div class="col">
+    <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Area</label>
         </div>
-         @if(empty($wo->room_id))
-        <input style="color: black" type="text" required class="form-control" placeholder="area" name="area"
-               aria-describedby="emailHelp"
-               value="{{ $wo->room_id }}" disabled>
-
-                @else
-            <input style="color: black" type="text" required class="form-control" placeholder="location not defined"
-                   name="area"
-                   aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']->name_of_area }}"
-                   disabled>
-                @endif
-
+        <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
+               value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
     </div>
-    </div>
-    <div class="col">
-        <div class="input-group mb-3">
+  </div>  
+</div>
+
+
+<div class="row">
+  <div class="col">    
+    <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
-        @if(empty($wo->room_id))
-            <input style="color: black" type="text" required class="form-control" placeholder="block" name="block"
-                   aria-describedby="emailHelp"
-                   value="{{ $wo->location }}" disabled>
-        @else
-            <input style="color: black" type="text" required class="form-control" placeholder="block" name="block"
-                   aria-describedby="emailHelp"
-                   value="{{ $wo['room']['block']->name_of_block }}" disabled>
-        @endif
+        <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
+               value="{{ $wo['room']['block']->name_of_block }}" disabled>
     </div>
-    </div>
-    <div class="col">
-        <div class="input-group mb-3">
+  </div>
+
+  <div class="col">
+    <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Room</label>
         </div>
-        @if(empty($wo->room_id))
-            <input style="color: black" type="text" required class="form-control" placeholder="room" name="room"
-                   aria-describedby="emailHelp"
-                   value="{{ $wo->location }}" disabled>
-        @else
-            <input style="color: black" type="text" required class="form-control" placeholder="room" name="room"
-                   aria-describedby="emailHelp"
-                   value="{{ $wo['room']->name_of_room }}" disabled>
-        @endif
+        <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
+               value="{{ $wo['room']->name_of_room }}" disabled>
     </div>
-    </div>
+  </div>
 </div>
+
+    @endif
+
+
 
 
     <div class="form-group ">
