@@ -53,7 +53,6 @@ $(document).ready(function(){
 var total=2;
 
 </script>
-    <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
             <h4>Works Order Details</h4>
@@ -94,7 +93,6 @@ var total=2;
         </div>
     </div>
 
-    <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Type of a problem</label>
@@ -161,17 +159,11 @@ var total=2;
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
-    <br>
     <div class="row">
-        <div class="col">
-            @if($wo->emergency == 1)
-            <h6 align="center" style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
-             @endif
-        </div>
  <div class="col">
             @if($wo->zonelocationtwo != null)
             @if($wo->zone_location == null)
-            <i class="text-danger">Please Re-save Location - Zone to confirm</i>  <br> <br>
+            <i class="text-danger">Please Re-save Location - Zone to confirm</i>  <br>
             @endif
             <form method="POST" action="{{ route('workOrder.edit.zoneloc', [$wo->id]) }}">
                @csrf
@@ -188,7 +180,7 @@ var total=2;
                    <div class="input-group-prepend">
                        <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone, Location</label>
                    </div>
-                   <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
+                   <select required class="custom-select form-control" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
 
                      @if($wo->zonelocationtwo != null) <?php
                            $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
@@ -222,50 +214,20 @@ var total=2;
              </form>
 
         @endif
+
+        <div class="row">
+            <div class="col">
+                @if($wo->emergency == 1)
+                <h6 style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
+                 @endif
+            </div>
+        </div>
+        <br>
         </div>
     </div>
 
 
-
-
-
-       <!--  <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
-            @csrf
-
-            <div class="form-group ">
-
-                @if($wo->emergency == 1)
-                    <input type="checkbox" name="emergency" checked> <b style="color:red;">This works order is emergency</b>
-                @else
-                    <input type="checkbox" name="emergency"> <b style="color:red;">This works order is emergency</b>
-                @endif
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>-->
-
-
-
-
-<script>
-function autoSubmit()
-{
-    var formObject = document.forms['theForm'];
-    formObject.submit();
-}
-</script>
-
-<form id='theForm' method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
-            @csrf
-
-    <input name="emergency" <?php if ($wo->emergency == 1) { ?>checked='checked' <?php }?>   type="radio" value="emergency" onChange="autoSubmit();" /> &nbsp;This works order is emergency<br>
-    <input name="emergency" <?php if ($wo->emergency == 0) { ?>checked='checked' <?php }?>  type="radio" value="notemergency" onChange="autoSubmit();" />&nbsp; This works order is not emergency
-
-</form>
-
-<br>
-<br>
-
+    <br><br>
 
     @if(empty($wo['work_order_staffassigned']->id))
 
@@ -334,7 +296,7 @@ function autoSubmit()
 
 
 @if(($techform->status==0) and ($techform->leader==1))
-  <br>
+ 
 <div class="row">
    <div class="col">
 
@@ -347,9 +309,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </div>
 @endif
 
-<br>
    <hr>
-    <br>
 
     @endif
 
@@ -380,13 +340,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     </div>
 
 
-  <br>
     <hr>
-      <br>
-
-
-
-  <br>
 
     @endif
 
@@ -471,10 +425,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   </tr>
     @endforeach
   </table>
-   <br>
 
    <hr>
-    <br>
  @endif
 @endif
 
@@ -518,13 +470,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @endforeach
   </table>
 
-  <br>
     <hr>
-      <br>
-
-
-
-  <br>
 
     @endif
 
@@ -580,15 +526,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   @endforeach
   </table>
-  <br>
      <hr>
-       <br>
 
 
 
-  <br>
     @endif
-    <br>
 <!-- transport for inspection -->
 
 
@@ -639,15 +581,11 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   @endforeach
   </table>
-  <br>
      <hr>
-       <br>
 
 
 
-  <br>
     @endif
-    <br>
 <!-- transport for work -->
 
 
@@ -717,9 +655,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @endforeach
 
   </table>
-  <br>
     <hr>
-    <br>
     @endif
 
 
@@ -785,11 +721,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   </table>
     @endif
 
-    <br>
-
-  <br>
   <hr>
-    <br>  <br>
    @endif
 
 
@@ -835,8 +767,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
   </table>
-  <br>
-    <br>
   <hr>
 
   @endif
@@ -845,11 +775,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
    @if($wo->status == 52)
             <div>
-                <span class="badge badge-success" style="padding: 20px">Works order is on check by Inspector of Works</span>
+                <span class="btn btn-success">Works order is on check by Inspector of Works</span>
             </div>
    @endif
-
-
 
 
 
@@ -860,7 +788,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
      Assign Zone Location
      <br>
-     <br>
 
                  <form method="POST" action="{{ route('workOrder.edit.zoneloctwo', [$wo->id]) }}">
             @csrf
@@ -870,7 +797,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 <div class="input-group-prepend">
                     <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone Location</label>
                 </div>
-                <select style="width: 200px;" required class="custom-select" id="iowzone" name="location" >
+                <select required class="custom-select form-control" id="iowzone" name="location" >
 
             <option value="">Select Zone Location</option>
                @foreach($iowzone as $user)
@@ -894,6 +821,21 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
        </div>
 
 
+       <script>
+        function autoSubmit()
+        {
+            var formObject = document.forms['theForm'];
+            formObject.submit();
+        }
+        </script>
+        
+        <form id='theForm' method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
+                    @csrf
+        
+            <input name="emergency" <?php if ($wo->emergency == 1) { ?>checked='checked' <?php }?>   type="radio" value="emergency" onChange="autoSubmit();" /> &nbsp;This works order is emergency<br>
+            <input name="emergency" <?php if ($wo->emergency == 0) { ?>checked='checked' <?php }?>  type="radio" value="notemergency" onChange="autoSubmit();" />&nbsp; This works order is not emergency
+        
+        </form>
  @if($wo->zone_location  != null)
 
  <!--       <br>
@@ -1011,7 +953,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <!--techniciantable-->
 
- <br>
 
 
 
@@ -1102,7 +1043,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow1('dataTable1')" />
 
                         <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow1('dataTable1')" />
-                        <br><br>
+                        <br>
 
                         <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
@@ -1129,7 +1070,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-<br>
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -1185,7 +1126,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <!--techniciantable-->
 
- <br>
 
 
 
@@ -1276,7 +1216,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow22('dataTable22')" />
 
                         <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow22('dataTable22')" />
-                        <br><br>
+                        <br>
 
                         <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
@@ -1305,7 +1245,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     <div >
 
                        @if($wo->statusmform == 1)
-                       <br>
+                      
 
                         <div class="row">
                             <div class="col-md-6">
@@ -1399,7 +1339,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow('dataTable')" />
 
                         <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
-                        <br><br>
+                        <br>
 
                        <div style="padding-left: 600px;"> <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a> </div>
@@ -1511,7 +1451,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                           </div>
 
-                        <p>Description <sup style="color: red;">*</sup></p>
+                        <p>Description of the problem<sup style="color: red;">*</sup></p>
                         <div class="form-group">
                             <textarea   style="color: black; width:  700px;" name="details" required maxlength="200" class="form-control"  rows="5" id="comment"></textarea>
                         </div>
@@ -1653,7 +1593,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 <div class="redtra box">
-<br>
   <div class="row">
                             <div class="col-md-6">
 
@@ -1723,7 +1662,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 {{--inspection before work--}}
 
-                <br>
                 <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
                     @csrf
                     <div >
@@ -2504,6 +2442,7 @@ Requesting material again after crosschecking-->
 
                 </div>
                 <div class="modal-footer">
+                    
                 </div>
             </div>
         </div>
@@ -2628,7 +2567,11 @@ Requesting material again after crosschecking-->
     </div>
 
 
-
+<div class="container">
+    <br>
+<a href="{{ route('workOrder.track', [$wo->id]) }}" class="btn btn-primary">Track</a>
+<br>
+</div>
 
 
   @endSection
