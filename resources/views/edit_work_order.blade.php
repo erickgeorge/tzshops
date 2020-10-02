@@ -1783,8 +1783,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                     <h6 style="color: blue"><b>Was this works order fixed and completed? </b></h6>
                      <div class="form-group options">
-                       <input  class="example" type="radio" name="fixed?" value="1" required /> Yes &nbsp;
-                       <input  class="example" type="radio" name="fixed?"  required /> No
+                       <input  class="example" type="checkbox" name="fixed" value="1" required /> Yes &nbsp;
+                       <input  class="example" type="checkbox" name="notfixed"  required /> No
                      </div>
 <!--script for checkbox-->
                                     <script type="text/javascript">
@@ -1795,7 +1795,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                                     <script type="text/javascript">
                                       $(function(){
-                                        var requiredCheckboxes = $('.options :radio[required]');
+                                        var requiredCheckboxes = $('.options :checkbox[required]');
                                         requiredCheckboxes.change(function(){
                                             if(requiredCheckboxes.is(':checked')) {
                                                 requiredCheckboxes.removeAttr('required');
