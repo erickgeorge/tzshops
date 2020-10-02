@@ -15,9 +15,7 @@ use App\WorkOrder;
 use Carbon\Carbon;
  ?>
 @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
-@php
-    $wo = WorkOrder::where('client_id',auth()->user()->id)->orderBy('id','Desc')->get();
-@endphp
+<!--  -->
 <br>
     <div class="container">
     <div class="row container-fluid" >

@@ -285,8 +285,10 @@ class HomeController extends Controller
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 //        return response()->json(WorkOrder::with('user')->with('room.block')->where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get());
+$role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-
+if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
+{
     if(request()->has('start'))  { //date filter
 
 
@@ -302,7 +304,36 @@ class HomeController extends Controller
         $from=request('end');
         }// start> end
 
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('work_orders', [
+                'role' => $role,
+                'notifications' => $notifications,
+                'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+            ]);
+
+
+}else{
+    return view('work_orders', [
+        'role' => $role,
+        'notifications' => $notifications,
+        'wo' => WorkOrder::OrderBy('created_at', 'DESC')->get()
+    ]);
+}
+}
+    if(request()->has('start'))  { //date filter
+
+
+        $from=request('start');
+        $to=request('end');
+
+
+        $nextday = date("Y-m-d", strtotime("$to +1 day"));
+
+        $to=$nextday;
+        if(request('start')>request('end')){
+            $to=request('start');
+        $from=request('end');
+        }// start> end
+
         if ($role['user_role']->role_id == 1){
             return view('work_orders', [
                 'role' => $role,
