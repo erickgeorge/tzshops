@@ -307,7 +307,7 @@ if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
             return view('work_orders', [
                 'role' => $role,
                 'notifications' => $notifications,
-                'wo' => WorkOrder::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
+                'wo' => WorkOrder::where('client_id',auth()->user()->id)->whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get()
             ]);
 
 
@@ -315,7 +315,7 @@ if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
     return view('work_orders', [
         'role' => $role,
         'notifications' => $notifications,
-        'wo' => WorkOrder::OrderBy('created_at', 'DESC')->get()
+        'wo' => WorkOrder::where('client_id',auth()->user()->id)->OrderBy('created_at', 'DESC')->get()
     ]);
 }
 }
