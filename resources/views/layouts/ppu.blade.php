@@ -707,6 +707,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
   width: 150px;
   position: fixed;
   z-index: 1;
+  text-decoration: none;
   top: 0;
   left: 0;
   overflow-x: hidden;
@@ -717,9 +718,9 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 .sidenav a, .dropdown-btn {
   padding: 4px 6px 4px 10px;
   text-decoration: none;
-  font-size: 20px;
   display: block;
   border: none;
+  text-decoration: none;
   background: none;
   width: 100%;
   text-align: left;
@@ -734,11 +735,13 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 .sidenav button{
   color: white;
+  text-decoration: none;
 }
 
 /* On mouse-over */
 .sidenav a:hover, .dropdown-btn:hover {
   color: #f1f1f1;
+  text-decoration: none;
 }
 
 
@@ -746,7 +749,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 .sidenav a {
   background-color: #c2bebe;
   color: white;
-
+  text-decoration: none;
 
 
 
@@ -757,6 +760,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 .sidenav a, .dropdown-btn, .sidenav button {
   color: #f1f1f1;
     margin-top: 2px;
+    text-decoration: none;
 }
 
 
@@ -773,6 +777,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
   color: white;
 
   border: 2px solid white;
+  text-decoration: none;
 
 
 }
@@ -781,6 +786,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 .dropdown-container {
   display: none;
   background-color: white;
+  text-decoration: none;
 
 
 
@@ -803,16 +809,28 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 <div class="sidenav bg-light" style="padding-top:90px;">
 
-  <a class="bg-primary" href="{{ url('infrastructureproject')}}" ><h6>Infrastructure Projects <span class="badge badge-light">{{ count($statusPPU) }}</span></h6></a>
+  <a class="bg-primary" href="{{ url('infrastructureproject')}}" >
+    Infrastructure Projects <span class="badge badge-light">{{ count($statusPPU) }}</span>
+</a>
   @if(auth()->user()->type == 'Architect & Draftsman')
-  <a class="bg-primary" href="{{ url('ppudrawingslibrary')}}" ><h6>Drawings Library</h6></a>
+  <a class="bg-primary" href="{{ url('ppudrawingslibrary')}}" >
+    Drawings Library
+</a>
     @endif
     @if(auth()->user()->type == 'Quality Surveyor')
-  <a class="bg-primary" href="{{ url('ppubudgetlibrary')}}" ><h6>Budgets Library</h6></a>
+  <a class="bg-primary" href="{{ url('ppubudgetlibrary')}}" >
+    Budgets Library
+</a>
     @endif
-    <a class="bg-primary" href=" "><h6>Tender Documents</h6></a>
-    <a class="bg-primary" href=" "><h6>Consultant ToRs</h6></a>
-    <a class="bg-primary" href=" "><h6>Reports</h6></a>
+    <a class="bg-primary" href=" ">
+        Tender Documents
+    </a>
+    <a class="bg-primary" href=" ">
+        Consultant ToRs
+    </a>
+    <a class="bg-primary" href=" ">
+        Reports
+    </a>
 
 </div>
 

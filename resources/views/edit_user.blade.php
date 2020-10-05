@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group ">
-                                <label for="fname">Middle name <sup style="color: red;">*</sup></label>
+                                <label for="fname">Middle name </label>
                                 <input style="color: black" type="text" maxlength="20" class="form-control" id="fname" aria-describedby="emailHelp"
                                        name="mname" placeholder="Enter middle name"
                                        onkeypress="return  event.charCode > 57 " value="{{ $user->mname }}">

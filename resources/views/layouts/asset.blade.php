@@ -723,7 +723,6 @@
 .sidenav a, .dropdown-btn {
   padding: 4px 6px 4px 10px;
   text-decoration: none;
-  font-size: 20px;
   color: #818181;
   display: block;
   border: none;
@@ -817,17 +816,17 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('assetsManager')}}" ><h5>All Assets </h5></a>
+  <a  href="{{ url('assetsManager')}}" >All Assets </a>
 
-    <a  href="{{ url('assetsLand')}}"><h5>Land</h5></a>
-    <a  href="{{ url('assetsBuilding')}}"><h5>Buildings</h5></a>
-    <a  href="{{ url('assetsPlantMachinery')}}"><h5>Plant & Machinery</h5></a>
-    <a  href="{{ url('assetsMotorVehicle')}}"><h5>Motorvehicles</h5></a>
-    <a  href="{{ url('assetsComputerEquipment')}}"><h5>Computer Equipments</h5></a>
-    <a  href="{{ url('assetsEquipment')}}"><h5>Equipment</h5></a>
-    <a  href="{{ url('assetsFurniture')}}"><h5>Furniture</h5></a>
-    <a  href="{{ url('assetsWorkinProgress')}}"><h5>Work in Progress</h5></a>
-    <a  href="{{ url('assetsIntangible')}}"><h5>Intangibles</h5></a>
+    <a  href="{{ url('assetsLand')}}">Land</a>
+    <a  href="{{ url('assetsBuilding')}}">Buildings</a>
+    <a  href="{{ url('assetsPlantMachinery')}}">Plant & Machinery</a>
+    <a  href="{{ url('assetsMotorVehicle')}}">Motorvehicles</a>
+    <a  href="{{ url('assetsComputerEquipment')}}">Computer Equipments</a>
+    <a  href="{{ url('assetsEquipment')}}">Equipment</a>
+    <a  href="{{ url('assetsFurniture')}}">Furniture</a>
+    <a  href="{{ url('assetsWorkinProgress')}}">Work in Progress</a>
+    <a  href="{{ url('assetsIntangible')}}">Intangibles</a>
 
 </div>
 

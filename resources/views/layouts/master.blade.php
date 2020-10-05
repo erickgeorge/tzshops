@@ -216,7 +216,7 @@
                     @endif
 
 
-  
+
 
 
 
@@ -661,7 +661,6 @@
 .sidenav a, .dropdown-btn {
   padding: 4px 6px 4px 10px;
   text-decoration: none;
-  font-size: 20px;
   color: #818181;
   display: block;
   border: none;
@@ -755,24 +754,24 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('work_order')}}" ><h5>Works orders </h5></a>
+  <a  href="{{ url('work_order')}}" >Works orders </a>
  @if($role['user_role']['role_id'] == 1)
 
 
-   <a  href="{{ url('Manage/section')}}"><h5>DES Sections</h5></a>
+   <a  href="{{ url('Manage/section')}}">DES Sections</a>
  @endif
 
  @if(strpos(auth()->user()->type, "HOS") !== false )
   @if($role['user_role']['role_id'] != 1)
- <a  href="{{ url('technicians') }}"><h5>Technicians</h5></a>
+ <a  href="{{ url('technicians') }}">Technicians</a>
  @endif
- <button class="dropdown-btn"><h5>Material Update
-    <i class="fa fa-caret-down"></i></h5>
+ <button class="dropdown-btn">Material Update
+    <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a  href="{{ url('material_rejected_with_workorder')}}"><h5>Rejected Materials <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</h5></span></a>
-    <a  href="{{ url('material_received_with_workorder')}}"><h5>Received Material from Store</h5><span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
+    <a  href="{{ url('material_rejected_with_workorder')}}">Rejected Materials <span
+                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
+    <a  href="{{ url('material_received_with_workorder')}}">Received Material from Store<span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
 
   </div>
 
@@ -781,24 +780,27 @@
 
  @if(auth()->user()->type == 'Maintenance coordinator')
 
-  <a  href="{{ url('redirected_work_order')}}"><h5>Redirected Works order</h5></a>
+  <a  href="{{ url('redirected_work_order')}}">Redirected Works order</a>
 
-  <a  href="{{ url('roomreport')}}"><h5>Room Report</h5></a>
+  <a  href="{{ url('roomreport')}}">Room Report</a>
 
-   <a  href="{{ url('comp') }}" ><h5>Complaints <i style="color: yellow;" class="fa fa-exclamation-triangle"></i></h5></a>
-   <a  href="{{ url('technicians') }}"><h5>Technicians</h5></a>
-   <a  href="{{ url('workzones')}}"><h5>Zones</h5></a>
+   <a  href="{{ url('comp') }}" >
+    Complaints <i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
+   <a  href="{{ url('technicians') }}">Technicians</a>
+   <a  href="{{ url('workzones')}}">Zones</a>
 
-    <button  class="dropdown-btn"><h5>Material Requests Update
-    <i class="fa fa-caret-down"></i></h5>
+    <button  class="dropdown-btn">Material Requests Update
+    <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a  href="{{ url('work_order_material_needed')}}"><h5>Work order needs material <span
-                                    class="badge badge-light">{{ count($material_requestsmc) }}</span></h5></a>
-    <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}"><h5>Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></h5></a>
-     <a  href="{{ url('material_rejected_with_workorder')}}"><h5>Rejected Materials
+    <a  href="{{ url('work_order_material_needed')}}">
+        Work order needs material <span
+                                    class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
+    <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}">
+        Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
+     <a  href="{{ url('material_rejected_with_workorder')}}">Rejected Materials
                         <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></h5></a>
+                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
 
 
   </div>
@@ -825,12 +827,12 @@
                     -->
 
 
-  <button  class="dropdown-btn"><h5>Works orders Reports
-    <i class="fa fa-caret-down"></i></h5>
+  <button  class="dropdown-btn">Works orders Reports
+    <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a class="btn" href="{{ url('/unattended_work_orders')}}"><h5>Unattended <br> Works orders</h5></a>
-    <a class="btn" href="{{ url('/completed_work_orders')}}"><h5>Completed <br> Works orders</h5></a>
+    <a class="btn" href="{{ url('/unattended_work_orders')}}">Unattended <br> Works orders</a>
+    <a class="btn" href="{{ url('/completed_work_orders')}}">Completed <br> Works orders</a>
     <!--<a class="btn" href="{{ url('/woduration')}}"><h6>Works orders Duration</h6></a>-->
 
 
@@ -838,36 +840,37 @@
 
   <button
 
-  class="dropdown-btn"><h5>Heads of Sections
-    <i class="fa fa-caret-down"></i></h5>
+  class="dropdown-btn">Heads of Sections
+    <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a  href="{{ url('/allhos')}}"><h5>All Heads of sections Details</h5></a>
-    <a  href="{{ url('hoscount')}}"><h5>HoS with completed works orders</h5></a>
+    <a  href="{{ url('/allhos')}}">All Heads of sections Details</a>
+    <a  href="{{ url('hoscount')}}">HoS with completed works orders</a>
   </div>
 
 
-   <button class="dropdown-btn"><h5>Technicians
-    <i class="fa fa-caret-down"></i></h5>
+   <button class="dropdown-btn">Technicians
+    <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="{{ url('/alltechnicians')}}"><h5>All Technicians details</h5></a>
-    <a href="{{ url('/techniciancount')}}"><h5>Technicians on Work(duty)</h5></a>
-    <a href="{{ url('/techniciancountcomp')}}"><h5>Technicians completed work</h5></a>
+    <a href="{{ url('/alltechnicians')}}">All Technicians details</a>
+    <a href="{{ url('/techniciancount')}}">Technicians on Work(duty)</a>
+    <a href="{{ url('/techniciancountcomp')}}">Technicians completed work</a>
   </div>
 
 
-   <a  href="{{ url('/alliow')}}"><h5>Inspectors of works</h5></a>
+   <a  href="{{ url('/alliow')}}">Inspectors of works</a>
 
 
-   <button  class="dropdown-btn"><h5>store
-    <i class="fa fa-caret-down"></i></h5>
+   <button  class="dropdown-btn">store
+    <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="{{ url('stores')}}"><h5>All Materials in Store<span
-                            class="badge badge-light">{{ count($m) }}</span></h5></a>
-    <a href="{{ url('work_order_with_missing_material')}}"><h5>Purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></h5></a>
+    <a href="{{ url('stores')}}">All Materials in Store<span
+                            class="badge badge-light">{{ count($m) }}</span></a>
+    <a href="{{ url('work_order_with_missing_material')}}">
+        Purchase <span
+                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
   </div>
 
 
@@ -879,12 +882,14 @@
 
 
 
-                        <a  href="{{ url('roomreport')}}"><h5>Room Report</h5></a>
+                        <a  href="{{ url('roomreport')}}">Room Report</a>
 
 
                         <!--<a href="{{ url('minutesheets')}}"><h6>Minutesheets</h6></a>-->
 
-     <a href="{{ url('comp') }}" title="Complaints" style="color:black;" ><h5>Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i></h5></a>
+     <a href="{{ url('comp') }}" title="Complaints" style="color:black;" >
+        Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i>
+    </a>
 
 
 
@@ -906,17 +911,23 @@
                     </li>-->
 
 
-                        <a  href="{{ url('material_received_with_workorder')}}" ><h5>Material Taken From Store <span
-                                    class="badge badge-light">{{ count($material_used) }}</span></h5></a>
+                        <a  href="{{ url('material_received_with_workorder')}}" >
+                            Material Taken From Store <span
+                                    class="badge badge-light">{{ count($material_used) }}</span>
+                                </a>
 
 
-                        <a href="{{ url('wo_material_reserved') }}" ><h5>Reserved Materials <span
-                                    class="badge badge-light">{{ count($woMaterialreserved) }}</span></h5></a>
+                        <a href="{{ url('wo_material_reserved') }}" >
+                            Reserved Materials <span
+                                    class="badge badge-light">{{ count($woMaterialreserved) }}</span>
+                                </a>
 
 
 
-                        <a  href="{{ url('wo_material_accepted_by_iow')}}"><h5>Material requests<span
-                                    class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span></h5></a>
+                        <a  href="{{ url('wo_material_accepted_by_iow')}}">
+                            Material requests<span
+                                    class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span>
+                                </a>
 
 
 
@@ -929,11 +940,15 @@
 
 
 
-                        <a href="{{ url('work_order_material_purchased') }}" ><h5>Material Purchased <span
-                                    class="badge badge-light">{{ count($material_to_purchased) }}</span></h5></a>
+                        <a href="{{ url('work_order_material_purchased') }}" >
+                            Material Purchased <span
+                                    class="badge badge-light">{{ count($material_to_purchased) }}</span>
+                                </a>
 
 
-                      <a href="{{ url('ProcurementHistory') }}"><h5>Procurement</h5></a>
+                      <a href="{{ url('ProcurementHistory') }}">
+                        Procurement
+                    </a>
 
 
            <!--
@@ -954,18 +969,29 @@
 
   @if(auth()->user()->type == 'Head Procurement')
 
-<a href="{{ url('work_order_with_missing_material')}}"><h5>Materials to purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></h5></a>
+<a href="{{ url('work_order_with_missing_material')}}">
+    Materials to purchase <span
+                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span>
+                                </a>
 <!--<a href="{{ url('minutesheets')}}"><h6>Minutesheets</h6></a>-->
 
-<a href="{{ url('stores')}}"><h5>Store</h5></a>
+<a href="{{ url('stores')}}">
+    Store
+</a>
 
-  <button  class="dropdown-btn"><h5>Procurement
-    <i class="fa fa-caret-down"></h5></i>
+  <button  class="dropdown-btn">
+      Procurement
+    <i class="fa fa-caret-down">
+
+    </i>
   </button>
   <div class="dropdown-container">
-    <a href=" {{ url('procurementAddMaterial') }}"><h5>Add new procurement list</h5></a>
-    <a href="{{ url('ProcurementHistory') }}"><h5>View Procurement History</h5></a>
+    <a href=" {{ url('procurementAddMaterial') }}">
+        Add new procurement list
+    </a>
+    <a href="{{ url('ProcurementHistory') }}">
+        View Procurement History
+    </a>
 
 
   </div>
@@ -977,13 +1003,19 @@
 
        @if(auth()->user()->type == 'Transport Officer')
 
-                        <a  href="{{ url('wo_transport_request')}}"><h5>Transport Requests <span
-                                    class="badge badge-light">{{ count($wo_transport) }}</h5>
+                        <a  href="{{ url('wo_transport_request')}}">
+                            Transport Requests <span
+                                    class="badge badge-light">{{ count($wo_transport) }}
 
-                        <a href="{{ url('wo_transport_request_accepted')}}"><h5>Accepted Transports</h5></a>
+
+                        <a href="{{ url('wo_transport_request_accepted')}}">
+                            Accepted Transports
+                        </a>
 
 
-                        <a href="{{ url('wo_transport_request_rejected')}}"><h5>Rejected Transports</h5></a>
+                        <a href="{{ url('wo_transport_request_rejected')}}">
+                            Rejected Transports
+                        </a>
 
 
 
@@ -993,23 +1025,31 @@
 
     @if(auth()->user()->type == 'Inspector Of Works')
 
-     <a href="{{ route('onprocessworkorders')}}"><h5>My Zone </h5></a>
+     <a href="{{ route('onprocessworkorders')}}">
+        My Zone
+    </a>
 
 
-                        <a href="{{ url('work_order_material_needed')}}"><h5>Works orders needs material <span
-                                    class="badge badge-light">{{ count($material_requests) }}</span></h5></a>
+                        <a href="{{ url('work_order_material_needed')}}">
+                            Works orders needs material <span
+                                    class="badge badge-light">{{ count($material_requests) }}</span>
+                                </a>
 
 
 
 
-                        <a href="{{ url('wo_material_accepted')}}"><h5>Accepted Materials<span
-                                    class="badge badge-light">{{ count($woMaterialAccepted) }}</span></h5></a>
+                        <a href="{{ url('wo_material_accepted')}}">
+                            Accepted Materials<span
+                                    class="badge badge-light">{{ count($woMaterialAccepted) }}</span>
+                                </a>
 
 
 
-                        <a  href="{{ url('material_rejected_with_workorder')}}"><h5>Rejected Materials
+                        <a  href="{{ url('material_rejected_with_workorder')}}">
+                            Rejected Materials
                         <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></h5></a>
+                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span>
+                                </a>
 
 
 

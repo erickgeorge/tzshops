@@ -681,7 +681,6 @@
 .sidenav a, .dropdown-btn {
   padding: 4px 6px 4px 10px;
   text-decoration: none;
-  font-size: 20px;
   color: #818181;
   display: block;
   border: none;
@@ -776,33 +775,53 @@
 
 <div class="sidenav" style="padding-top:90px;">
  @if(auth()->user()->type != 'Dvc Accountant')
-      <a  href="{{ url('cleaningcompany')}}"><h5>Cleaning Companies</h5></a>
-    <a  href="{{ url('manage_Cleaning_area')}}"><h5>Cleaning Areas</h5></a>
+      <a  href="{{ url('cleaningcompany')}}">
+        Cleaning Companies
+    </a>
+    <a  href="{{ url('manage_Cleaning_area')}}">
+        Cleaning Areas
+    </a>
 @endif
      @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'USAB'))
 
-    <a  href="{{ url('tender')}}"><h5>Tenders</h5></a>
+    <a  href="{{ url('tender')}}">
+        Tenders
+    </a>
 
      @endif
 
-      @if(auth()->user()->type != 'Dvc Accountant')
-     <a href="{{ url('assessmentsheet')}}"><h5>Assessment Sheets </h5></a>
+      @if(auth()->user()->type != 'Dvc Accounta
+      nt')
+     <a href="{{ url('assessmentsheet')}}">Assessment Sheets
+    </a>
 
      @endif
-   <!-- <a  href="{{ url('Land/work_order')}}" ><h5>Land works order </h5></a>
-    <a  href="{{ url('Maintainance/section')}}" ><h5> Maintenance  section </h5></a>-->
-    <a  href="{{ url('Assessment/form')}}" ><h5>Assessment Forms</h5></a>
+   <!-- <a  href="{{ url('Land/work_order')}}" >
+    Land works order
+</a>
+    <a  href="{{ url('Maintainance/section')}}" >
+         Maintenance  section
+        </a>-->
+    <a  href="{{ url('Assessment/form')}}" >
+        Assessment Forms
+    </a>
 
 
 
 
  @if(auth()->user()->type != 'Dvc Accountant')
-   <button class="dropdown-btn"><h5>Companies Report
-    <i class="fa fa-caret-down"></i></h5>
+   <button class="dropdown-btn">
+       Companies Report
+    <i class="fa fa-caret-down"></i>
+
   </button>
   <div class="dropdown-container">
-    <a href="{{ route('comapy_view_month')}}"><h5>Monthly Assessment Report</h5></a>
-    <a href="{{ url('cleaningcompanyreport')}}"><h5>Companies Trending </h5></a>
+    <a href="{{ route('comapy_view_month')}}">
+        Monthly Assessment Report
+    </a>
+    <a href="{{ url('cleaningcompanyreport')}}">
+        Companies Trending
+    </a>
 
   </div>
 
