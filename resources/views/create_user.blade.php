@@ -68,7 +68,7 @@ User Registration
 	</div>
 	<div class="col">
 		<div class="form-group ">
-	    <label for="lname">Middle name <sup class="text-danger">*</sup></label>
+	    <label for="lname">Middle name </label>
 	    <input style="color: black" type="text"  maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="mname" value="" placeholder="Enter middle name" onkeypress="return  event.charCode > 57 " value="{{ old('mname') }}">
 	</div>
     </div>
