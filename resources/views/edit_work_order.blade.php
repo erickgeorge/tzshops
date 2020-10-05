@@ -15,6 +15,8 @@
     use App\iowzone;
     use App\iowzonelocation;
     use App\Material;
+    use App\techwork;
+    use App\WoInspectionForm;
 
  ?>
 
@@ -77,7 +79,7 @@ var total=2;
     <div style="margin-right: 2%; margin-left: 2%;">
     <div class="row">
         <div class="col">
-            <h5>Submitted by  <span
+            <h5>Submited by  <span
                 style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5>
 
 
@@ -309,9 +311,8 @@ var total=2;
 
     @if($techform->leader == null )
 
-<td>   <a title="Assign as Lead technician" class="btn btn-primary" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader">
+<td><a title="Assign as Lead technician" class="btn btn-primary" href="{{ route('workOrder.technicianassignleaderinspection', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader">
     Select</a></td>
-
                                                    @elseif($techform->leader2 == 3 )
  <td style="color: black;"  data-toggle="tooltip" >Yes </td>
                                                     @else
@@ -321,7 +322,6 @@ var total=2;
   </tr>
     @endforeach
   </table>
-
 
 
 @if(($techform->status==0) and ($techform->leader==1))
@@ -340,6 +340,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 @endif
 
 <br>
+   @if($techform->leader == null )
+<h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5>
+   @endif
    <hr>
   
 
@@ -450,7 +453,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 <td>   <a title="Assign as Lead technician" class="btn btn-primary" href="{{ route('workOrder.technicianassignleader', [$idwo ,$techform->id ]) }}" data-toggle="tooltip" title="Assign leader">
     Select</a></td>
-                                                   @elseif($techform->leader2 == 3 )
+                                                    @elseif($techform->leader2 == 3 )
  <td style="color: black;"  data-toggle="tooltip" >Yes </i></td>
                                                     @else
 <td style="color: black;"  data-toggle="tooltip" >No</i></td>
@@ -464,7 +467,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @endforeach
   </table>
    <br>
-
+   @if($techform->leader == null )
+   <div>  <h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5></div>
+   @endif
    <hr>
     <br>
  @endif
@@ -480,35 +485,18 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   $idwo=$wo->id;
   $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Report after work')->get();
         ?>
-
-
-
     @if(count($iforms)>0)
 
-
- <h4><b>Technician(s) Report After Work </b></h4>
-
-<table style="width:100%">
-  <tr>
-     <thead style="color: white;">
-
-    <th>Description</th>
-  <th>Full Name</th>
-    <th>Date</th>
-  </thead>
-  </tr>
-    @foreach($iforms as $iform)
-
-
-  <tr>
-
-    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
-      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
-  </tr>
-
+  @foreach($iforms as $iform)
   @endforeach
-  </table>
+
+ <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
+
+ <div class="form-group ">
+        <label for="">Description:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{ $iform->description }}</textarea>
+    </div>
 
   <br>
     <hr>
@@ -591,7 +579,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <?php
 
   $idwo=$wo->id;
-  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 1)->get();
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 1)->where('statusreje', 0)->get();
 ?>
 
     @if(count($tforms)>0)
@@ -828,16 +816,198 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   </table>
   <br>
-    <br>
+
   <hr>
 
   @endif
 
 
+  <!--tracking after work rejected-->
+  @if(($wo->status == 53) and ($wo->iowreject != 0))
+  <h5 align="center"><b>Works order processes after being rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} .</b></h5>
+  <hr>
+  <br>
+  @endif
 
-   @if($wo->status == 52)
+<!--assigned technician-->
+
+   
+
+    <?php
+
+  $idwo=$wo->id;
+  $techwork = techwork::where('wo_id',$idwo)->get();
+?>
+
+  @if(count($techwork) == 0 )
+
+  @else
+
+  @if(count($techwork) == 1)
+    <h4><b>1 Assigned Technician for Work </b></h4>
+    @else
+    <h4><b>{{ count($techwork) }} Assigned Technicians for Work  </b></h4>
+    @endif
+
+<table style="width:100%">
+  <tr>
+
+<thead style="color: white;">
+    <th>Full Name</th>
+  <th>Status</th>
+    <th>Date Assigned</th>
+ <!-- <th>Date Completed</th>-->
+  <th>Leader</th>
+</thead>
+
+  </tr>
+    @foreach($techwork as $techworks)
+
+  <tr>
+
+     @if($techworks['technician_work'] != null)
+    <td>{{$techworks['technician_work']->fname.' '.$techworks['technician_work']->lname}}</td>
+   <td >@if($techworks->status==1) Completed   @else  On Progress   @endif</td>
+
+
+    <td>{{ date('d F Y', strtotime($techworks->created_at)) }}</td>
+
+
+ <!--  @if($techform->status==1)
+
+  <td>{{ date('d F Y', strtotime($techform->updated_at)) }}</td>
+    @else
+
+
+      <td style="color: red"> Not Completed Yet</td>
+    @endif -->
+
+     @if($techworks->leader == null )
+
+<td>   <a title="Assign as Lead technician" class="btn btn-primary" href="{{ route('workOrder.assignleaderafterrejectiow', [$idwo ,$techworks->id ]) }}" data-toggle="tooltip" title="Assign leader">
+    Select</a></td>
+                                                   @elseif($techworks->leader2 == 3 )
+ <td style="color: black;"  data-toggle="tooltip" >Yes </i></td>
+                                                    @else
+<td style="color: black;"  data-toggle="tooltip" >No</i></td>
+                                                    @endif
+
+      @endif
+
+
+
+  </tr>
+    @endforeach
+  </table>
+   <br>
+   @if($techworks->leader == null )
+   <div>  <h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5></div>
+    @endif
+   <hr>
+    <br>
+ @endif
+
+<!--assigned technician-->
+
+
+
+<!-- transport for work -->
+
+
+    <?php
+
+  $idwo=$wo->id;
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 1)->where('statusreje', 1)->get();
+?>
+
+    @if(count($tforms)>0)
+
+ <h4><b>Transport Description for Work</b></h4>
+
+<table style="width:100%">
+  <tr>
+     <thead style="color: white;">
+    <th>Date of Transport</th>
+    <th>Time</th>
+    <th>Details</th>
+  <th>Status</th>
+  <th>Message</th>
+
+    <th>Date</th>
+  </thead>
+  </tr>
+    @foreach($tforms as $tform)
+
+
+  <tr>
+    <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
+     <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
+                                                                         class="badge badge-success">View Details</span></a></td>
+    <td >@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
+
+
+
+     <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
+                                                                         class="badge badge-success">View Message</span></a></td>
+
+ <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
+
+  </tr>
+
+  @endforeach
+  </table>
+  <br>
+     <hr>
+       <br>
+
+
+
+  <br>
+    @endif
+    <br>
+<!-- transport for work -->
+
+
+<!--report after work-->
+
+
+    <?php
+
+  $idwo=$wo->id;
+  $report = WoInspectionForm::where('wo_id',$idwo)->get();
+        ?>
+    @if(count($report)>0)
+
+  @foreach($report as $rp)
+  @endforeach
+
+ <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($rp->date_inspected )) }} </b></h4>
+
+ <div class="form-group ">
+        <label for="">Description:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{ $rp->description }}</textarea>
+    </div>
+
+  <br>
+    <hr>
+      <br>
+
+  <br>
+
+    @endif
+
+<!--report after work-->
+
+
+  <!--tracking after work rejected-->
+
+
+   @if($wo->hosclosedate != null)
             <div>
-                <span class="badge badge-success" style="padding: 20px">Works order is on check by Inspector of Works</span>
+               <h5><b>This works order is provisionaly closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }} @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed permanently by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
+               <hr>
             </div>
    @endif
 
@@ -1005,8 +1175,48 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <br>
 
+<p style="color: blue;">Do you want to add another Technician(s) for work?</p>
+<style type="text/css"> 
+    .selectt { 
+      display: none; 
+   }
+  </style> 
+  <script type="text/javascript"> 
+      $(document).ready(function() { 
+        $('input[type="checkbox"]').click(function() { 
+          var inputValue = $(this).attr("value"); 
+             
+        var targetBox = $("." + inputValue);
+        $(".selectt").not(targetBox).hide();
+        $(targetBox).show();
+          
+        }); 
+      }); 
+</script>
+                                     
+<div> 
+      <label> 
+        <input class="example" type="checkbox" name="colorCheckbox"
+          value="C">&nbsp;Yes   </label> 
+      <label> &nbsp;
+        <input class="example" type="checkbox" name="colorCheckbox"
+          value="Cplus">&nbsp;No</label> 
+    </div> 
+    <script type="text/javascript">
+                                      $('input.example').on('change', function() {
+                                        $('input.example').not(this).prop('checked', false);
+                                    });
+                                    </script>
 
+    <div class="Cplus selectt"> 
+    Satisfied with already assigned Technician(s)
+  <form  method="POST" action="{{ route('satisfiedwithtechnician', [$wo->id]) }}">
+            @csrf
+     <button  type="submit" class="btn btn-primary bg-primary">Submit</button>
 
+  </form></div> 
+    <div class="C selectt">
+  <!--addtech-->
                         <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
                         @csrf
                           <div class="form-group">
@@ -1019,33 +1229,27 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                        <TD>
                             <select  required  name="technician_work[]" style="background-color:white; width: 700px;
   
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
-  font-size: 1.25rem;
-  cursor: pointer;
-  line-height: 1.1;
-  ">
+                              border: 1px solid var(--select-border);
+                              border-radius: 0.25em;
+                              padding: 0.25em 0.5em;
+                              font-size: 1.25rem;
+                              cursor: pointer;
+                              line-height: 1.1;
+                              ">
                               <option selected value="">Choose technician ...</option>
-
-
-
-
-
-
                                <?php
                 $p=-1;
       ?>
 
-                                @foreach($techs as $tech)
+                                @foreach($techswork as $tech)
                                 <?php
 
-                                $wo_technician_count = WorkOrderStaff::
-                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
-                     ->where('status',0)
-                     ->where('staff_id',$tech->id)
-                     ->groupBy('staff_id')
-                     ->first();
+                                   $wo_technician_count = WorkOrderStaff::
+                                   select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                                   ->where('status',0)
+                                   ->where('staff_id',$tech->id)
+                                   ->groupBy('staff_id')
+                                   ->first();
 
                                ?>
                                @if(empty($wo_technician_count->total_wo))
@@ -1107,6 +1311,12 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <button  type="submit" class="btn btn-primary bg-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
+
+
+<!--addtech-->
+</div>
+
+
 
 
                 @else
@@ -1185,10 +1395,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <!--techniciantable-->
 
- <br>
-
-
-
                         <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
                         @csrf
                           <div class="form-group">
@@ -1211,7 +1417,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 $p=-1;
       ?>
 
-                                @foreach($techs as $tech)
+                                @foreach($techswork as $tech)
                                 <?php
 
                                 $wo_technician_count = WorkOrderStaff::
@@ -1431,7 +1637,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
      @if($wo->status == 70)
 
          @if(empty($tech))
-          <h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5>
+     <!--     <h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5>-->
          @else
 
           <h5 style="color: blue"><b> Does this works order need transport for inspection? </b></h5>
@@ -1602,7 +1808,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
    ?>
    @if(empty($techafter))
 
-      <div>  <h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5></div>
+     <!-- <div>  <h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5></div>-->
 
    @else
 
@@ -1993,7 +2199,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
         </TABLE> -->
 
-        <div id="cont">
+  <div id="cont">
 
         </div>
     <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
@@ -2572,14 +2778,303 @@ Requesting material again after crosschecking-->
 
 
 @endif
-
-
-
-
-
-
-
 </div>
+
+
+
+<!--wo after rejected by Inspector of work-->
+
+
+
+ {{-- Require Material question  --}}
+                @if(($wo->status == 53) and ($wo->iowreject == 0))
+              <p>This works order have been rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} Please restart processing works order again.</p>  
+
+                <div>  <h5 style="color: blue"><b> Does this works order need material(s)? </b></h5></div>
+
+                <div>
+                     <label><input type="radio" name="colorRadio" value="Yes"> Yes</label> &nbsp;
+                     <label><input type="radio" name="colorRadio" value="No"> No</label>
+                </div>
+
+
+           <!--No-->
+<div class="No box">
+            <!--addtech-->
+             <div class="row">
+                            <div class="col-md-6">
+                                <p>ASSIGN TECHNICIAN(S) WORK</p>
+                            </div>
+                        </div>
+                        <form method="POST" action="{{ route('work.assigntechnician.afterreject', [$wo->id]) }}">
+                        @csrf
+                          <div class="form-group">
+                          <!-- <input  id="technician_work"  type="text" hidden> </input>  -->
+
+              <TABLE id="dataTable1" width="350px" >
+                  <TR>
+                       <TD><INPUT type="checkbox" name="chk[]"/></TD>
+
+                       <TD>
+                            <select  required  name="technician_work[]" style="background-color:white; width: 700px;
+  
+                              border: 1px solid var(--select-border);
+                              border-radius: 0.25em;
+                              padding: 0.25em 0.5em;
+                              font-size: 1.25rem;
+                              cursor: pointer;
+                              line-height: 1.1;
+                              ">
+                              <option selected value="">Choose technician ...</option>
+                               <?php
+                $p=-1;
+      ?>
+
+                                @foreach($techs as $tech)
+                                <?php
+
+                                   $wo_technician_count = WorkOrderStaff::
+                                   select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                                   ->where('status',0)
+                                   ->where('staff_id',$tech->id)
+                                   ->groupBy('staff_id')
+                                   ->first();
+
+                               ?>
+                               @if(empty($wo_technician_count->total_wo))
+                                   <?php $t=0;?>
+
+                               @else
+                                    <?php $t=$wo_technician_count->total_wo;?>
+
+                                @endif
+
+                              <?php
+                             $p++;
+                              $name[$p]=$tech->fname.' '.$tech->lname;
+                              $ident[$p]=$tech->id;
+                              $cwo[$p]=$t;
+
+                              ?>
+
+
+
+                                @endforeach
+                                <?php
+                                for($i=0;$i<=$p-1;$i++){
+                                    for($j=$i+1 ;$j<=$p;$j++){
+                                        if($cwo[$i]>$cwo[$j]){
+                                            $t1=$name[$i];
+                                            $t2=$ident[$i];
+                                            $t3=$cwo[$i];
+
+                                            $name[$i]=$name[$j];
+                                            $ident[$i]=$ident[$j];
+                                            $cwo[$i]=$cwo[$j];
+
+
+                                            $name[$j]=$t1;
+                                            $ident[$j]=$t2;
+                                            $cwo[$j]=$t3;
+                                }}}
+
+                                    for($x=0;$x<=$p;$x++){
+                                    ?><option  value="{{ $ident[$x] }}"> {{$name[$x].'        - assigned ('.$cwo[$x].') Works Orders'}} </option>
+                                    <?php }  ?>
+
+
+                            </select>
+                              </TD>
+
+
+                  </TR>
+        </TABLE>
+
+                        </div>
+
+                        <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addRow1('dataTable1')" />
+
+                        <INPUT class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deleteRow1('dataTable1')" />
+                        <br><br>
+
+                        <button  type="submit" class="btn btn-primary bg-primary">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                    </form>
+</div>
+
+<!--addtech-->
+
+
+           <!--EndNo-->
+
+
+
+                @endif
+{{-- Require Material  --}}
+
+
+
+{{-- need transport  --}}
+
+  @if($wo->iowreject == 4)
+
+
+   <?php
+   $techafterreje = techwork::where('wo_id',$wo->id)->where('leader2', 3)->first();
+   ?>
+                                      <div class="col-md-6">
+                                <p><b>TECHNICIAN REPORT AFTER WORK</b></p>
+                            </div>
+
+
+            <form method="POST" action="{{ route('work.inspection.afterioreject', [$wo->id]) }}">
+                    @csrf
+                         <div class="form-group">
+
+                          <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
+                          
+                                <option selected value="1">Report after work</option>
+
+                         </select>
+
+                          </div>
+
+                        <p>Description <sup style="color: red;">*</sup></p>
+                        <div class="form-group">
+                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="200" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+
+                        </br>
+                        <p>Inspection date  <sup style="color: red;">*</sup></p>
+                        <div class="form-group">
+                            <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
+                        </div>
+                        <div class="form-group">
+                            <label>Technician leader</label>
+                            <br>
+                                     <input hidden class="form-control" required value="{{ $techafterreje->staff_id }}"  name="technician" >
+
+                                       <input disabled class="form-control"  style="color: black; width:  700px;" value="{{ $techafterreje['technician_work']->lname.' '.$techafterreje['technician_work']->fname }}">
+
+
+                        </div>
+
+
+
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                    </div>
+                </form>
+  @else
+
+  @if($wo->iowreject == 2 )
+
+
+          <div>  <h5 style="color: blue"><b> Does this works order need transport for work? </b></h5></div>
+
+                <div>
+                     <label><input type="radio" name="colorRadio" value="yestrans"> Yes</label> &nbsp;
+                     <label><input type="radio" name="colorRadio" value="notrans"> No</label>
+                </div>
+
+   <div class="yestrans box">
+                <form method="POST" action="{{ route('work.transportiowreje', [$wo->id]) }}">
+                    @csrf
+            
+                  <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>WORK TRANSPORT REQUEST FORM</p>
+                            </div>
+                        </div>
+                  </br>
+
+                         <input  value="1" name="inspection" hidden></input>
+                         <input  value="101" name="status" hidden></input>
+
+                        <p>Transport date <sup style="color: red;">*</sup></p>
+                        <div class="form-group">
+                            <input type="date" style="color: black; width:  700px;" name="date" required class="form-control" min="<?php echo date('Y-m-d'); ?>"  rows="5" id="date">
+                        </div>
+
+                          <p>Transport time <sup style="color: red;">*</sup></p>
+                        <div class="form-group">
+                            <input type="time" style="color: black; width:  700px;" name="time" required class="form-control"  id="time">
+                        </div>
+
+                         <p>Transport details <sup style="color: red;">*</sup></p>
+                        <div class="form-group">
+                            <textarea  style="color: black;width: 700px;" name="coments" required maxlength="500" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+                        <br>
+
+
+                        <button style="color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                    </div>
+                </form>
+</div>
+  
+  <div class="notrans box">
+
+    
+           
+   <?php
+   $techafterreje = techwork::where('wo_id',$wo->id)->where('leader2', 3)->first();
+   ?>
+      <div class="row">
+                            <div class="col-md-6">
+                                <p><b>TECHNICIAN REPORT AFTER WORK</b></p>
+                            </div>
+                        </div>
+
+            <form method="POST" action="{{ route('work.inspection.afterioreject', [$wo->id]) }}">
+                    @csrf
+                         <div class="form-group">
+
+                          <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
+                          
+                                <option selected value="1">Report after work</option>
+
+                         </select>
+
+                          </div>
+
+                        <p>Description <sup style="color: red;">*</sup></p>
+                        <div class="form-group">
+                            <textarea   style="color: black; width:  700px;" name="details" required maxlength="200" class="form-control"  rows="5" id="comment"></textarea>
+                        </div>
+
+                        </br>
+                        <p>Inspection date  <sup style="color: red;">*</sup></p>
+                        <div class="form-group">
+                            <input type="date" style="color: black; width:  700px;"  min="<?php echo date('Y-m-d', strtotime($wo->created_at)); ?>" max="<?php echo date('Y-m-d'); ?>"  name="inspectiondate" required class="form-control"  rows="5" id="date"></input>
+                        </div>
+                        <div class="form-group">
+                            <label>Technician leader</label>
+                            <br>
+                                     <input hidden class="form-control" required value="{{ $techafterreje->staff_id }}"  name="technician" >
+
+                                       <input disabled class="form-control"  style="color: black; width:  700px;" value="{{ $techafterreje['technician_work']->lname.' '.$techafterreje['technician_work']->fname }}">
+
+
+                        </div>
+
+
+
+                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
+                    </div>
+                </form>
+</div>
+
+  @endif
+  @endif
+
+{{-- Need transport  --}}
+
+
+<!--wo after rejected by inspector of work-->
 
  <!-- Modal for view Details -->
     <div class="modal fade" id="viewMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

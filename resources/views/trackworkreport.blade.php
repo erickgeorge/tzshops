@@ -432,33 +432,16 @@ td, th {
     @if(count($iforms)>0)
 
 
- <h4><b>Technician(s) Report After Work </b></h4>
-
-<table style="width:100%">
-
-   <thead style="background-color: #376ad3;color: white;">
-        <tr>
-
-    <th>Description</th>
-  <th>Full Name</th>
-    <th>Date</th>
-     </tr>
-  </thead>
-  <tbody>
- 
-    @foreach($iforms as $iform)
-
-
-  <tr>
-
-    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
-      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
-  </tr>
-
+  @foreach($iforms as $iform)
   @endforeach
-  </tbody>
-  </table>
+
+ <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
+
+ <div class="form-group ">
+        <label for="">Description:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{ $iform->description }}</textarea>
+    </div>
 
   <br>
     <hr>
@@ -467,6 +450,13 @@ td, th {
 
 
   <br>
+
+
+
+  <br>
+
+ 
+
 
     @endif
 
@@ -683,24 +673,27 @@ td, th {
 
   <!--MATERIALS-->
 
+     @if($wo->hosclosedate != null)
+            <div>
+               <h4><b>This works order is provisionaly closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }} @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed permanently by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h4>
+               <hr>
+            </div>
+      @endif
+
 
 
 
 @if ($wo->systemclosed!=0)
 <br>
-<table class="table table-light">
-    <tbody>
-        <tr>
-            <td style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </td>
-        </tr>
-    </tbody>
-</table>
+
+            <h4 style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </h4>
+
 @elseif($wo->status == 30)
 <br>
 <table class="table table-light">
     <tbody>
         <tr>
-            <td style="text-transform: capitalize;">This Works Order Was Closed on : {{ date('d F Y', strtotime($wo->updated_at))  }}  By Head of section</td>
+          <!--  <td style="text-transform: capitalize;">This Works Order Was Closed on : {{ date('d F Y', strtotime($wo->updated_at))  }}  By Head of section</td>-->
         </tr>
     </tbody>
 </table>

@@ -83,6 +83,7 @@ Route::post('edit/work_order/{id}', 'WorkOrderController@editWO')->name('workOrd
 Route::post('edit/work_order/zone/two/{id}', 'WorkOrderController@editWOzonetwo')->name('workOrder.edit.zoneloctwo');
 Route::post('edit/work_order/zone/{id}', 'WorkOrderController@editWOzone')->name('workOrder.edit.zoneloc');
 Route::post('inspect/work_order/{id}', 'WorkOrderController@fillInspectionForm')->name('work.inspection');
+Route::post('fillinspection/work/afteriow{id}', 'WorkOrderController@fillInspectionFormafterrejectiow')->name('work.inspection.afterioreject');
 Route::get('myzone','WorkOrderController@myzone')->name('myzone');
 
 
@@ -97,9 +98,15 @@ Route::post('edit/work_order/zone/{id}', 'WorkOrderController@editWOzone')->name
 Route::get('myzone','WorkOrderController@myzone')->name('myzone')->middleware('auth');
 
 Route::post('assigntech/work_order/{id}', 'WorkOrderController@assigntechnicianforwork')->name('work.assigntechnician')->middleware('auth');
+
+Route::post('assigntechafterreject/work_order/{id}', 'WorkOrderController@assigntechnicianafterreject')->name('work.assigntechnician.afterreject')->middleware('auth');
+
+Route::post('satisfiedwithtechnician/{id}', 'WorkOrderController@satisfiedwithtech')->name('satisfiedwithtechnician')->middleware('auth');
 Route::post('assigntechforinspection/work_order/{id}', 'WorkOrderController@assigntechnicianforinspection')->name('work.assigntechnicianforinspection')->middleware('auth');
 
 Route::post('transportrequest/work_order/{id}', 'WorkOrderController@transportforwork')->name('work.transport')->middleware('auth');
+
+Route::post('transrequest/work_order/{id}', 'WorkOrderController@transportforworkiowreje')->name('work.transportiowreje')->middleware('auth');
 
 Route::post('materialadd/work_order/{id}', 'WorkOrderController@materialaddforwork')->name('work.materialadd')->middleware('auth');
 
@@ -429,6 +436,8 @@ Route::get('work_order_technician_complete_inspection/{id}', 'WorkOrderControlle
 Route::post('work_order_technician_delete/{id}', 'WorkOrderController@Techniciandeletefromlist')->name('workOrder.techniciandelete')->middleware('auth');
 Route::get('work_order_technician_assign_leader/{id}/{id2}', 'WorkOrderController@Technicianassignleader')->name('workOrder.technicianassignleader')->middleware('auth');
 Route::get('work_order_technician_assign_leader_inspection/{id}/{id2}', 'WorkOrderController@Technicianassignleaderinspection')->name('workOrder.technicianassignleaderinspection')->middleware('auth');
+
+Route::get('work_order_technician_assign_leader_after_reject_iow/{id}/{id2}', 'WorkOrderController@Technicianassignleaderafteriowreject')->name('workOrder.assignleaderafterrejectiow')->middleware('auth');
 
 
 

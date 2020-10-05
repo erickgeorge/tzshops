@@ -362,13 +362,20 @@ foreach($userwithid as $userwithid)
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
-                           @elseif($work->status == 53)
+                           @elseif(($work->status == 53) and ($work->iowreject != 3))
 
                               <td><span>Works Order not  approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
+                            @elseif(($work->status == 53) and ($work->iowreject == 3))
+
+                              <td><span>Works order is on check by IoW</span>
+                                  <br>
+                                @if($work->emergency == 1)
+                                <span>Emergency</span></td>
+                                @endif    
 
                           @elseif($work->status == 25)
 
@@ -1123,13 +1130,20 @@ foreach($userwithid as $userwithid)
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
-                           @elseif($work->status == 53)
+                           @elseif(($work->status == 53) and ($work->iowreject != 3))
 
                               <td><span>Works Order not  approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
+                            @elseif(($work->status == 53) and ($work->iowreject == 3))
+
+                              <td><span>Works order is on check by IoW</span>
+                                  <br>
+                                @if($work->emergency == 1)
+                                <span>Emergency</span></td>
+                                @endif    
 
                           @elseif($work->status == 25)
 

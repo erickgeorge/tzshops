@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Mail;
 use App\iowzonelocation;
 use App\iowzone;
 use App\zoneinspector;
+use App\techwork;
+use App\WoInspectionForm;
+use Carbon\Carbon;
 
 
 class WorkOrderController extends Controller
@@ -312,10 +315,12 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
         $staff=WorkOrderStaff::where('work_order_id', $id)->get();
 
+        $techswork = Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->where('woid','<>',$id)->get();
 
         return view('edit_work_order', [
             'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get(),
             'notifications' => $notifications,
+            'techswork' => $techswork,
             'staff' => $staff,
             'role' => $role, 'wo' => WorkOrder::where('id', $id)->first(),
             'iowzone' => iowzonelocation::orderby('location','asc')->orderby('iowzone_id','asc')->get()
@@ -419,6 +424,43 @@ session::flash('message', ' Your workorder have been accepted successfully ');
     }
 
 
+
+
+    public function fillInspectionFormafterrejectiow(Request $request, $id)
+    {
+
+
+             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+
+            $form = new WoInspectionForm();
+            $form->status = $request['status'];
+            $form->date_inspected = $request['inspectiondate'];
+
+            $form->description = $request['details'];
+            $form->technician_id = $request['technician'];
+            $form->wo_id = $id;
+            $form->save();
+
+             $mForm = WorkOrder::where('id', $id)->first();
+             $mForm->iowreject = 3;
+             // $mForm->statusmform=4;
+             $mForm->save();
+
+
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role, 
+            'notifications' => $notifications,
+            'message' => 'Inspection form updated successfully.',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+
+
+
+
+
     public function fillInspectionForm(Request $request, $id)
     {
 
@@ -451,7 +493,8 @@ session::flash('message', ' Your workorder have been accepted successfully ');
                    if ($request['fixed'] == 1) {
                        $mForm->status = 52; //close wo temporalilly
                    }
-
+             $mForm->hosclose = auth()->user()->id;
+             $mForm->hosclosedate = Carbon::now();
              $mForm->save();
 
             $form = new WorkOrderInspectionForm();
@@ -480,7 +523,41 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
 
-public function transportforwork(Request $request, $id)
+       public function transportforworkiowreje(Request $request, $id)
+    {
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $transport = new WorkOrderTransport();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+            $transport->time = $request['date'].' '.$request['time'];
+            $transport->status = 0;
+            $transport->statusreje = 1;
+            $transport->inspection = $request['inspection'];
+            $transport->coments = $request['coments'];
+            $transport->work_order_id = $id;
+            $transport->requestor_id = auth()->user()->id;
+            $transport->save();
+
+
+             $w = WorkOrder::where('id', $id)->first();
+             $w->iowreject = 4;
+             $w->save();
+
+     
+
+
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Transport request sent successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+
+
+
+    public function transportforwork(Request $request, $id)
     {
 
 
@@ -516,6 +593,88 @@ public function transportforwork(Request $request, $id)
 
 
 
+    public function satisfiedwithtech(Request $request, $id)
+    {
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+         $wo_staff =WorkOrderStaff::where('work_order_id', $id)->update(array('status5' =>22));
+
+
+            $mForm = WorkOrder::where('id', $id)->first();
+            $mForm->status =3;
+            $mForm->statusmform=4;
+            $mForm->save();
+
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Technician for performing this works order assigned successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+    }
+
+
+
+ public function assigntechnicianafterreject(Request $request, $id)
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        if ($request['technician_work'] == 'Choose...') {
+            return redirect()->back()->withErrors(['message' => 'Technician for work order is required']);
+        }
+
+        $txtbox = $request['technician_work'];
+
+              foreach($txtbox as $a => $b){
+            $checkstaff = techwork::where('staff_id', $txtbox[$a])->where('wo_id', $id)->first(); }
+
+
+        if (empty($checkstaff)) {
+
+
+                //  First Store data in $arr
+             $arr = array();
+                  foreach ($txtbox as $address) {
+                   $arr[] = $address;
+             }
+            $unique_data = array_unique($arr);
+            // now use foreach loop on unique data
+            foreach($unique_data as $a => $b) {
+
+            //$wo_staff =WorkOrderStaff::where('work_order_id', $id)->update(array('status5' =>22));
+
+            $work_order_staff = new  techwork();
+            $work_order_staff->staff_id = $txtbox[ $a ];
+            $work_order_staff->status =0;
+           // $work_order_staff->status5 =22;
+            $work_order_staff->wo_id = $id;
+            $work_order_staff->save();
+            
+
+             }
+
+
+            $mForm = WorkOrder::where('id', $id)->first();
+            $mForm->iowreject = 1;
+           // $mForm->statusmform=4;
+            $mForm->save();
+
+
+        return redirect()->route('workOrder.edit.view', [$id])->with([
+            'role' => $role,
+            'notifications' => $notifications,
+            'message' => 'Technician for performing this works order assigned successfully',
+            'wo' => WorkOrder::where('id', $id)->first()
+        ]);
+
+
+        }  else { return redirect()->back()->withErrors(['message' => 'Technician selected has already been assigned for this  works order,You can not assign him repeatedly']);}
+    }
+
+
 
     public function assigntechnicianforwork(Request $request, $id)
     {
@@ -530,7 +689,7 @@ public function transportforwork(Request $request, $id)
              $txtbox = $request['technician_work'];
 
               foreach($txtbox as $a => $b){
-            $checkstaff = WorkOrderStaff::where('staff_id', $txtbox[ $a ])->where('work_order_id', $id)->first(); }
+            $checkstaff = WorkOrderStaff::where('staff_id', $txtbox[$a])->where('work_order_id', $id)->first(); }
 
 
         if (empty($checkstaff)) {
@@ -552,7 +711,10 @@ public function transportforwork(Request $request, $id)
             $work_order_staff->status =0;
             $work_order_staff->status5 =22;
             $work_order_staff->work_order_id = $id;
-            $work_order_staff->save(); }
+            $work_order_staff->save();
+            
+
+             }
 
 
             $mForm = WorkOrder::where('id', $id)->first();
@@ -571,6 +733,9 @@ public function transportforwork(Request $request, $id)
 
         }  else { return redirect()->back()->withErrors(['message' => 'Technician selected has already been assigned for this  works order,You can not assign him repeatedly']);}
     }
+
+
+
 
 
 
@@ -616,6 +781,11 @@ public function transportforwork(Request $request, $id)
             $work_order_staff->status = 0;
             $work_order_staff->work_order_id = $id;
             $work_order_staff->save();
+
+            $techwrk = technician::where('id', $txtbox[$a])->first();
+            $techwrk->status2 = 2;
+            $techwrk->woid = $id;
+            $techwrk->save();
              }
 
 
@@ -1137,7 +1307,9 @@ session::flash('message', ' Your workorder have been closed successfully');
 
         $wo = WorkOrder::find($id);
         $wo->status = 2;
-//i updated iow to bypass hos to client closing works order.
+        $wo->iowclose = auth()->user()->id;
+        $wo->iowclosedate = Carbon::now();
+       //i updated iow to bypass hos to client closing works order.
         $wo->save();
 
 
@@ -1162,6 +1334,8 @@ session::flash('message', ' Your workorder have been closed successfully');
 
         $wo = WorkOrder::find($id);
         $wo->status = 9;
+        $wo->clientclose = auth()->user()->id;
+        $wo->clientclosedate = Carbon::now();
         $p_type= $wo->problem_type;
         $wo->save();
 
@@ -1235,40 +1409,19 @@ session::flash('message', ' Your workorder have been closed successfully');
 
         $wo = WorkOrder::find($id);
         $wo->status = 53;
+        $wo->iowsatisfied = auth()->user()->id;
+        $wo->iowdate = Carbon::now();
         $wo->notsatisfiedreason = $request['notsatisfiedreason'];
         $wo->save();
 
 
-        return redirect()->route('workOrder.track', [$id])->with([
+       return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
             'message' => 'Work order is not approved successifully by Inspector of Work',
             'wo' => WorkOrder::where('id', $id)->with('work_order_progress')->first()
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1331,7 +1484,13 @@ session::flash('message', ' Your workorder have been closed successfully');
 
       public function Techniciandeletefromlist($id)
     {
+
         $wo_delete =WorkOrderStaff::where('id', $id)->first();
+
+        $wotechnician = technician::where('id', $wo_delete->staff_id)->first();
+        $wotechnician->woid = 'ok';
+        $wotechnician->save();
+
         $wo_delete->delete();
 
          return redirect()->back()->with(['message' => 'Specific technician deleted from the list successifully']);
@@ -1339,6 +1498,24 @@ session::flash('message', ' Your workorder have been closed successfully');
          }
 
 
+
+
+   public function Technicianassignleaderafteriowreject($id , $id2)
+    {
+
+        $wo_staff =techwork::where('wo_id', $id)->update(array('leader' =>1));
+
+        $wo_leader =techwork::where('id', $id2)->first();
+        $wo_leader->leader2 = 3;
+        $wo_leader->save();
+
+        $wostatus =Workorder::where('id', $id)->first();
+        $wostatus->iowreject = 2;
+        $wostatus->save();
+
+         return redirect()->back()->with(['message' => 'Technician leader assigned successifully']);
+
+         }
 
 
 

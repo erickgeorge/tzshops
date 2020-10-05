@@ -9,6 +9,8 @@
   @if(count($items)>0)
 
     <br>
+
+    <div class="container">
     <div class="row container-fluid" >
         <div class="col-lg-12">
             <h5 style=" "  ><b style="text-transform: capitalize;">All transport Requests</b></h5>
@@ -34,7 +36,7 @@
     </div>
 
     <div class="container " >
-        <table class="table table-responsive table-striped display" id="myTable"  style="width:100%">
+        <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
           <tr style="color: white;">
                 <th >#</th>

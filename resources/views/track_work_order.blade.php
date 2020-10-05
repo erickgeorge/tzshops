@@ -542,37 +542,21 @@
     @if(count($iforms)>0)
 
 
- <h4><b>Technician(s) Report After Work </b></h4>
-
-<table style="width:100%">
-  <tr>
-     <thead style="color: white;">
-
-    <th>Description</th>
-  <th>Full Name</th>
-    <th>Date</th>
-  </thead>
-  </tr>
-    @foreach($iforms as $iform)
-
-
-  <tr>
-
-    <td><textarea class="form-control" disabled>{{ $iform->description }}</textarea></td>
-      <td>{{$iform['technician']->lname.' '.$iform['technician']->fname }}</td>
-    <td>{{ date('d F Y', strtotime($iform->date_inspected )) }}</td>
-  </tr>
-
+  @foreach($iforms as $iform)
   @endforeach
-  </table>
+
+ <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
+
+ <div class="form-group ">
+        <label for="">Description:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{ $iform->description }}</textarea>
+    </div>
 
   <br>
     <hr>
-      <br>
 
 
-
-  <br>
 
     @endif
 
@@ -583,7 +567,7 @@
 
 <!--material requests-->
 
-  <br>
+
   @if(auth()->user()->type != 'CLIENT')
   
   @if(empty($wo['work_order_material']->id))
@@ -654,7 +638,7 @@
 
   </table>
 
-      <br>
+   
 
   <br>
   <hr>
@@ -726,7 +710,7 @@
 
 
    @endif
-     <br>  <br>
+     <br>  
 
 <!--material requests-->
 
@@ -779,9 +763,18 @@
     <hr>
     @endif
   
-    <div>
+  
+   @if($wo->hosclosedate != null)
+            <div>
+               <h5><b>This works order is provisionaly closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }} @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed permanently by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
+               <hr>
+            </div>
+   @endif
 
-</div>
+
+
+
+
 @if(auth()->user()->type == 'Estates Director')
 <div style="padding: 1em;">
   <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
@@ -842,6 +835,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
           @endif
 
         @endif
+
+
         <div style="padding: 1em;">
          <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
     PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
@@ -871,6 +866,9 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             </div>
         </div>
     @endif
+
+
+
 
 
 
@@ -1027,16 +1025,12 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
               @endif
         @endif
 
-                  <br>
-                   <br>
-                    <br>
-
-
+  
 
 
         @if((auth()->user()->type=='Inspector Of Works')||(auth()->user()->type == 'Maintenance coordinator'))
 
-          @if($wo->status == 52)
+          @if(($wo->status == 52) or ($wo->iowreject == 3))
         <div style="padding-left:  800px;">
         <div class="row">
                  <div class="row">

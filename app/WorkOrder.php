@@ -47,9 +47,22 @@ class WorkOrder extends Model
         return $this->hasOne('App\techasigned');
     }   
 
+    public function iowrejected(){
+        return $this->belongsTo('App\User', 'iowsatisfied');
+    }
 
 
+    public function hoscloses(){
+        return $this->belongsTo('App\User','hosclose');
+    }
 
+    public function iowcloses(){
+        return $this->belongsTo('App\User','iowclose');
+    }
+
+      public function clientcloses(){
+        return $this->belongsTo('App\User','clientclose');
+    }
 
 
 
