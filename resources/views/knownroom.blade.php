@@ -13,22 +13,7 @@
             <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Works orders list </b></h5>
         </div>
 @if(count($wo) > 0)
-        <div class="col-md-6">
-            <form method="GET" action="work_order" class="form-inline my-2 my-lg-0">
-                From <input name="start" value="<?php
-                if (request()->has('start')) {
-                    echo $_GET['start'];
-                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php echo date('Y-m-d'); ?>">
-                To <input value="<?php
-                if (request()->has('end')) {
-                    echo $_GET['end'];
-                } ?>"
-                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             max="<?php echo date('Y-m-d'); ?>">
-                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
-            </form>
-        </div>
+       
 
 @endif
 
@@ -60,7 +45,7 @@
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-success">Create new Works Order</button>
+                <button style="margin-bottom: 20px" type="button" class="btn btn-primary">Create new Works Order</button>
             </a>
         </div>
             <div class="col">
@@ -275,167 +260,167 @@ foreach($userwithid as $userwithid)
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
                             @if($work->status == -1)
-                                <td><span class="badge badge-warning">new</span></td>
+                                <td><span >new</span></td>
                             @elseif($work->status == 1)
-                                <td><span class="badge badge-success">Accepted</span>
+                                <td><span >Accepted</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
                             @elseif($work->status == 0)
-                                <td><span class="badge badge-danger">Rejected</span></td>
+                                <td><span >Rejected</span></td>
                             @elseif($work->status == 2)
-                                <td><span class="badge badge-success">Temporally Closed</span></td>
+                                <td><span >Temporally Closed</span></td>
 
                             @elseif($work->status == 30)
-                                <td><span class="badge badge-success">Completely Closed</span></td>
+                                <td><span >Completely Closed</span></td>
                             @elseif($work->status == 3)
-                                <td><span class="badge badge-info">technician assigned for work</span>
+                                <td><span >technician assigned for work</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span>Emergency</span></td>
                                 @endif
                              @elseif($work->status == 70)
-                                <td><span class="badge badge-info">technician assigned for inspection</span>
+                                <td><span >technician assigned for inspection</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
 
                             @elseif($work->status == 4)
-                                <td><span class="badge badge-info">transportation stage</span>
+                                <td><span >transportation stage</span>
                                  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
                             @elseif($work->status == 5)
-                              <td><span class="badge badge-info">pre-implementation</span></td>
+                              <td><span >pre-implementation</span></td>
                             @elseif($work->status == 6)
-                              <td><span class="badge badge-info">post implementation</span></td>
+                              <td><span >post implementation</span></td>
                             @elseif($work->status == 7)
 
-                              <td><span class="badge badge-info">material requested</span>
+                              <td><span >material requested</span>
                                 <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span>Emergency</span></td>
                                 @endif
                             @elseif($work->status == 40)
 
-                              <td><span class="badge badge-info">Material Requested Approved Succesifully</span>
+                              <td><span >Material Requested Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
                            @elseif($work->status == 52)
 
-                              <td><span class="badge badge-info">IoW is checking for Work Order</span>
+                              <td><span >IoW is checking for Work Order</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                            @elseif($work->status == 53)
 
-                              <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
+                              <td><span  >Work Order is not approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
 
                           @elseif($work->status == 25)
 
-                              <td><span class="badge badge-info">Work Order Succesifully approved by IoW</span>
+                              <td><span  >Work Order Succesifully approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
                            @elseif($work->status == 8)
                                   @if(auth()->user()->type == 'CLIENT')
-                              <td><span class="badge badge-warning">  Material requested on progress</span>
+                              <td><span >  Material requested on progress</span>
                                   <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-danger">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
                                   @else
-                              <td><span class="badge badge-info">procurement stage</span>  <br>
+                              <td><span >procurement stage</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                               @endif
                             @elseif($work->status == 9)
-                              <td><span class="badge badge-info">Closed Satisfied by Client</span></td>
+                              <td><span  >Closed Satisfied by Client</span></td>
 
                             @elseif($work->status == 18)
                               @if(auth()->user()->type != 'CLIENT')
 
-                               <td><span class="badge badge-info">Please correct your material</span>  <br>
+                               <td><span >Please correct your material</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                                @else
-                               <td><span class="badge badge-primary">  Material received from store!</span></td>
+                               <td><span >  Material received from store!</span></td>
                                                              @endif
 
                              @elseif($work->status == 19)
                                @if(auth()->user()->type != 'CLIENT')
-                              <td><span class="badge badge-info">Material missing in store also DES notified</span>  <br>
+                              <td><span >Material missing in store also DES notified</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                               @else
-                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                               <td><span  >  Material requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-danger">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
                                                              @endif
                                @elseif($work->status == 15)
-                                                            <td><span class="badge badge-info">Material Accepted by IoW</span>  <br>
+                                                            <td><span  >Material Accepted by IoW</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
 
                                 @elseif($work->status == 55)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Some of Material Rejected</span>  <br>
+                                                            <td><span  >Some of Material Rejected</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span >Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">Material on Check by IoW</span>  <br>
+                                                             <td><span  >Material on Check by IoW</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                                                              @endif
 
                                 @elseif($work->status == 57)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-primary">Material Requested Again</span>  <br>
+                                                            <td><span  >Material Requested Again</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">Material on Check by IoW and HoS</span>  <br>
+                                                             <td><span  >Material on Check by IoW and HoS</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                                                              @endif
 
                                 @elseif($work->status == 16)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Material rejected by IoW</span>  <br>
+                                                            <td><span >Material rejected by IoW</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                                                             <td><span >  Material requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
+                                <span  >Emergency</span></td>
                                 @endif
                                                              @endif
 
 
 
                               @else
-                                <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>
+                                <td><span  >Closed NOT SATISFIED BY CLIENT</span></td>
                               @endif
 
 
@@ -700,9 +685,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
             </div>
             </div>
                 <div class="modal-footer">
-                </div>
 
          <button type="submit" class="btn btn-primary ">Send to Head of Section</button>
+                </div>
     </form>
             </div>
         </div>
