@@ -1490,7 +1490,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 <form method="POST" action="redirect/workorder/to/hos"
                   class="col-md-6">
                         @csrf
-            <div class="modal-content" style="height: 430px; width: 400px;" >
+            <div class="modal-content" style=" width: 400px;" >
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="exampleModalLabel" ><b>Choose problem type as you want to redirect.</b></h5>
@@ -1505,7 +1505,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                      <div class="col">
                 <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label style="height: 28px" class="input-group-text" for="inputGroupSelect01">Type of problem</label>
+                <label style="height: 28px"  for="inputGroupSelect01">Type of problem</label>
             </div>
             <select  style="width: 300px;min-width: 150px;" id="p_type" name="p_type">
                 <option selected value="">Choose...</option>
@@ -1520,11 +1520,13 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
              </div>
             </div>
+              <button type="submit" class="btn btn-primary ">Submit</button>
+              <a href="{{url('work_order')}}" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
             </div>
                 <div class="modal-footer">
                 </div>
 
-         <button type="submit" class="btn btn-primary ">Send to Head of Section</button>
+       
     </form>
             </div>
         </div>

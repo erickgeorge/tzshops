@@ -1005,10 +1005,13 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
    @if($wo->hosclosedate != null)
+   @if(($wo->status == 52) or ($wo->status == 2))
             <div>
-               <h5><b>This works order is provisionaly closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }} @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed permanently by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
-               <hr>
+               <h5><b> This works order is provisionaly closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }}  @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed permanently by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
+           <hr>
             </div>
+
+    @endif
    @endif
 
 
@@ -1392,9 +1395,54 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @endforeach
   </table>
 
+   <br>
+
+<p style="color: blue;">Do you want to add another Technician(s) for work?</p>
+<style type="text/css">
+    .selectt {
+      display: none;
+   }
+  </style>
+  <script type="text/javascript">
+      $(document).ready(function() {
+        $('input[type="checkbox"]').click(function() {
+          var inputValue = $(this).attr("value");
+
+        var targetBox = $("." + inputValue);
+        $(".selectt").not(targetBox).hide();
+        $(targetBox).show();
+
+        });
+      });
+</script>
+
+<div>
+      <label>
+        <input class="example" type="checkbox" name="colorCheckbox"
+          value="C">&nbsp;Yes   </label>
+      <label> &nbsp;
+        <input class="example" type="checkbox" name="colorCheckbox"
+          value="Cplus">&nbsp;No</label>
+</div>
+    <script type="text/javascript">
+                                      $('input.example').on('change', function() {
+                                        $('input.example').not(this).prop('checked', false);
+                                    });
+                                    </script>
+
+    <div class="Cplus selectt">
+    Satisfied with already assigned Technician(s)
+  <form  method="POST" action="{{ route('satisfiedwithtechnician', [$wo->id]) }}">
+            @csrf
+     <button  type="submit" class="btn btn-primary bg-primary">Submit</button>
+
+  </form></div>
+
+
 
  <!--techniciantable-->
 
+            <div class="C selectt">
                         <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
                         @csrf
                           <div class="form-group">
@@ -1488,6 +1536,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </form>
 
+                  </div>
 
 @endif
 
@@ -2165,7 +2214,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                           <div id="customatedtable">
-
 
 
 
