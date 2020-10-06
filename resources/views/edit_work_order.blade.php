@@ -176,7 +176,7 @@ var total=2;
                 @endphp
                 Location - Zone : &nbsp; <b> {{ $zonelocation->location }} - {{ $zoned->zonename }}</b>
                 @else
-             @endif   
+             @endif
 
         </div>
    </div>
@@ -192,7 +192,7 @@ var total=2;
                     $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
                     $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
                 @endphp
-              
+
                 @else
                <div class="container" >
                    <div class="input-group mb-3">
@@ -234,7 +234,7 @@ var total=2;
 
         @endif
         </div>
-  
+
 
 
 
@@ -344,7 +344,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <h5 style="color: blue"><b> Please select lead technician before continuing. </b></h5>
    @endif
    <hr>
-  
+
 
     @endif
 
@@ -831,7 +831,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 <!--assigned technician-->
 
-   
+
 
     <?php
 
@@ -1176,45 +1176,45 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
  <br>
 
 <p style="color: blue;">Do you want to add another Technician(s) for work?</p>
-<style type="text/css"> 
-    .selectt { 
-      display: none; 
+<style type="text/css">
+    .selectt {
+      display: none;
    }
-  </style> 
-  <script type="text/javascript"> 
-      $(document).ready(function() { 
-        $('input[type="checkbox"]').click(function() { 
-          var inputValue = $(this).attr("value"); 
-             
+  </style>
+  <script type="text/javascript">
+      $(document).ready(function() {
+        $('input[type="checkbox"]').click(function() {
+          var inputValue = $(this).attr("value");
+
         var targetBox = $("." + inputValue);
         $(".selectt").not(targetBox).hide();
         $(targetBox).show();
-          
-        }); 
-      }); 
+
+        });
+      });
 </script>
-                                     
-<div> 
-      <label> 
+
+<div>
+      <label>
         <input class="example" type="checkbox" name="colorCheckbox"
-          value="C">&nbsp;Yes   </label> 
+          value="C">&nbsp;Yes   </label>
       <label> &nbsp;
         <input class="example" type="checkbox" name="colorCheckbox"
-          value="Cplus">&nbsp;No</label> 
-    </div> 
+          value="Cplus">&nbsp;No</label>
+    </div>
     <script type="text/javascript">
                                       $('input.example').on('change', function() {
                                         $('input.example').not(this).prop('checked', false);
                                     });
                                     </script>
 
-    <div class="Cplus selectt"> 
+    <div class="Cplus selectt">
     Satisfied with already assigned Technician(s)
   <form  method="POST" action="{{ route('satisfiedwithtechnician', [$wo->id]) }}">
             @csrf
      <button  type="submit" class="btn btn-primary bg-primary">Submit</button>
 
-  </form></div> 
+  </form></div>
     <div class="C selectt">
   <!--addtech-->
                         <form method="POST" action="{{ route('work.assigntechnician', [$wo->id]) }}">
@@ -1228,7 +1228,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                        <TD>
                             <select  required  name="technician_work[]" style="background-color:white; width: 700px;
-  
+
                               border: 1px solid var(--select-border);
                               border-radius: 0.25em;
                               padding: 0.25em 0.5em;
@@ -2148,7 +2148,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                         <?php
-                        $materials = Material::orderby('name', 'ASC')->get();
+                         $materials = Material::orderby('description', 'ASC')->get();
                         ?>
 
                     @if($wo->status == 5)
@@ -2168,36 +2168,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-          <!-- <TABLE id="dataTablemat" align="center" >
 
-
-                  <TR>
-                       <TD><INPUT type="checkbox" name="chk[]"/></TD>
-                        <input type="text" name="zone" value="{{ $zoned->id }}" hidden>
-
-                       <TD>
-
-
-                            <select  required class="custom-select"  name="material[]" >
-                                <option   selected value="" >Choose material...</option>
-                                @foreach($materials as $material)
-                                    <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
-                                @endforeach
-                            </select>
-
-                       </TD>
-
-                       <TD>
-
-                          <input placeholder="Enter quantity" type="number" max="100" style="color: black; " name="quantity[]" required class="form-control" >
-
-                       </TD>
-
-
-                  </TR>
-
-
-        </TABLE> -->
 
   <div id="cont">
 
@@ -2218,17 +2189,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     </p>
 
                         </div>
-                       <!--  <div align="right">
-
-                        <INPUT class="btn btn-outline-primary" type="button" value="Add Row" onclick="addmaterialrow('dataTablemat')" />
-
-                        <INPUT   id="deleterowbutton" style="display: none;" class="btn btn-outline-danger" type="button" value="Delete Row" onclick="deletematerialrow('dataTablemat')" />
-                        <br><br> </div>
-
-                        <button  type="submit" class="btn btn-primary bg-primary">Save</button>
-                        <a href="#" onclick="closeTab()"><button type="button" class="btn btn-danger">Cancel</button></a> -->
-
-                    </form>
+                     </form>
 
 <script>
     // ARRAY FOR HEADER.
@@ -2250,16 +2211,16 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
             if(h==0){
-                  th.setAttribute('style','width:5px;')
+                  th.setAttribute('style','width:5px;');
                 }
 
 
                 if(h==1){
-                  th.setAttribute('style','width:300px;')
+                  th.setAttribute('style','width:300px;');
                 }
 
                 if(h ==2){
-                    th.setAttribute('style','width:100px;')
+                    th.setAttribute('style','width:100px;');
                 }
 
                      // TABLE HEADER.
@@ -2286,7 +2247,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 // SET INPUT ATTRIBUTE.
                 button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger')
+                button.setAttribute('class', 'btn btn-danger');
                 if(c==0)
                 {
                     button.setAttribute('disabled', 'true');
@@ -2347,20 +2308,20 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 {
                     var option = document.getElementById(value);
 
+                    var optionse = document.createElement('option');
+                    optionse.setAttribute('value','');
+                    optionse.setAttribute('selected','selected');
+                    optionse.text = "Choose Material...";
+                    option.appendChild(optionse);
+
+                    var option1 = document.getElementById(value);
+                    @foreach($materials as $materialsg)
                     var options = document.createElement('option');
+                    options.setAttribute('value','{{$materialsg->id}}');
+                    options.text = "{{ucwords(strtolower($materialsg->description))}}, [ {{ ' Description : '.ucwords(strtolower($materialsg->brand))}}, {{ ' Type : '.ucwords(strtolower($materialsg->type))}} ]";
 
-                    options.setAttribute('selected','selected');
-                    options.text = 'Choose Material';
-                    option.appendChild(options);
-
-                     @foreach($materials as $material)
-
-                    var options = document.createElement('option');
-                    options.setAttribute('value','<?php echo $material->id; ?>');
-                    options.text = "<?php echo $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )'; ?>";
-                    option.appendChild(options);
+                    option1.appendChild(options);
                     @endforeach
-
                     $(".custom-select").select2({
                         placeholder: "Choose material..",
                         allowClear: true
@@ -2392,7 +2353,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 // SET INPUT ATTRIBUTE.
                 button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger')
+                button.setAttribute('class', 'btn btn-danger');
 
                 // ADD THE BUTTON's 'onclick' EVENT.
                 button.setAttribute('onclick', 'removeRow(this)');
@@ -2449,18 +2410,19 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 {
                     var option = document.getElementById(value);
 
+                    var optionse = document.createElement('option');
+                    optionse.setAttribute('value','');
+                    optionse.setAttribute('selected','selected');
+                    optionse.text = "Choose Material...";
+                    option.appendChild(optionse);
+
+                    var option1 = document.getElementById(value);
+
+                    @foreach($materials as $materialsf)
                     var options = document.createElement('option');
-
-                    options.setAttribute('selected','selected');
-                    options.text = 'Choose Material';
-                    option.appendChild(options);
-
-                     @foreach($materials as $material)
-
-                    var options = document.createElement('option');
-                    options.setAttribute('value','<?php echo $material->id; ?>');
-                    options.text = "<?php echo $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )'; ?>";
-                    option.appendChild(options);
+                    options.setAttribute('value','{{$materialsf->id}}');
+                    options.text = "{{ucwords(strtolower($materialsf->description))}}, [ {{ ' Description : '.ucwords(strtolower($materialsf->brand))}}, {{ ' Type : '.ucwords(strtolower($materialsf->type))}} ]";
+                    option1.appendChild(options);
                     @endforeach
 
                     $(".custom-select").select2({
@@ -2788,7 +2750,7 @@ Requesting material again after crosschecking-->
 
  {{-- Require Material question  --}}
                 @if(($wo->status == 53) and ($wo->iowreject == 0))
-              <p>This works order have been rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} Please restart processing works order again.</p>  
+              <p>This works order have been rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} Please restart processing works order again.</p>
 
                 <div>  <h5 style="color: blue"><b> Does this works order need material(s)? </b></h5></div>
 
@@ -2817,7 +2779,7 @@ Requesting material again after crosschecking-->
 
                        <TD>
                             <select  required  name="technician_work[]" style="background-color:white; width: 700px;
-  
+
                               border: 1px solid var(--select-border);
                               border-radius: 0.25em;
                               padding: 0.25em 0.5em;
@@ -2932,7 +2894,7 @@ Requesting material again after crosschecking-->
                          <div class="form-group">
 
                           <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
-                          
+
                                 <option selected value="1">Report after work</option>
 
                          </select>
@@ -2980,7 +2942,7 @@ Requesting material again after crosschecking-->
    <div class="yestrans box">
                 <form method="POST" action="{{ route('work.transportiowreje', [$wo->id]) }}">
                     @csrf
-            
+
                   <br>
                         <div class="row">
                             <div class="col-md-6">
@@ -3014,11 +2976,11 @@ Requesting material again after crosschecking-->
                     </div>
                 </form>
 </div>
-  
+
   <div class="notrans box">
 
-    
-           
+
+
    <?php
    $techafterreje = techwork::where('wo_id',$wo->id)->where('leader2', 3)->first();
    ?>
@@ -3033,7 +2995,7 @@ Requesting material again after crosschecking-->
                          <div class="form-group">
 
                           <select hidden class="custom-select" required name="status" style="color: black; width:  700px;">
-                          
+
                                 <option selected value="1">Report after work</option>
 
                          </select>
