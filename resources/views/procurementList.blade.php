@@ -62,7 +62,7 @@ tr:nth-child(even) {
   <thead style=" background-color: #376ad3; color: white; ">
    <tr style="color: white;">
       <th scope="col">#</th>
-      <th scope="col">Material Name</th>
+      <th scope="col">Material ID</th>
 
       <th scope="col">Description</th>
       <th scope="col">Type</th>

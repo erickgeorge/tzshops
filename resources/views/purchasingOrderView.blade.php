@@ -29,7 +29,7 @@
            <tr style="color: white;">
                 <th >#</th>
 
-				<th >Material Name</th>
+				<th >Material ID</th>
 				<th >Material Description</th>
 				<th >Type</th>
 				<th >Quantity</th>

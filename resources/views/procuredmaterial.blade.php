@@ -66,7 +66,7 @@
                 <thead >
               <tr style="color: white;">
                     <th>#</th>
-          			<th>Material name</th>
+          			<th>Material ID</th>
                     <th>Description</th>
                     <th>Type</th>
                     <th>Total</th>

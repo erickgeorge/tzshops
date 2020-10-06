@@ -32,8 +32,8 @@ tr:nth-child(even) {
             <thead align="center">
             <tr>
                <th >#</th>
-                <th >Name</th>
-                <th >Brand</th>
+                <th >ItemID</th>
+                <th >Description</th>
                 <th >Value/Capacity</th>
                 <th >Type</th>
                 <th >Stock</th>

@@ -23,6 +23,15 @@
             </ul>
         </div>
     @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     </div>
 
     <div class="container " >
@@ -67,10 +76,23 @@ use App\Material;?>
         <div class="row">
             <div class="col">
                 <select name="name" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Material name</option>
+                    <option selected="selected" value="">Item ID</option>
                     <?php $name = Material::select('name')->distinct()->get();
                     foreach ($name as $named) {
-                     echo"   <option value='".$named->name."'>".$named->name."</option>";
+                     echo"   <option value='".$named->name."'>".ucwords(strtolower($named->name))."</option>";
+                    } ?>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <select name="description" class="form-control mr-sm-2">
+                    <option selected="selected" value=""> Material Description</option>
+                    <?php $brand = Material::select('description')->distinct()->get();
+                    foreach ($brand as $branded) {
+                     echo"   <option value='".$branded->description."'>".ucwords(strtolower($branded->description))."</option>";
                     } ?>
                 </select>
             </div>
@@ -80,10 +102,10 @@ use App\Material;?>
         <div class="row">
             <div class="col">
                 <select name="brand" class="form-control mr-sm-2">
-                    <option selected="selected" value=""> material brand</option>
-                    <?php $brand = Material::select('description')->distinct()->get();
-                    foreach ($brand as $branded) {
-                     echo"   <option value='".$branded->description."'>".$branded->description."</option>";
+                    <option selected="selected" value=""> Unit Measure</option>
+                    <?php $brand = Material::select('brand')->distinct()->get();
+                    foreach ($brand as $item) {
+                     echo"   <option value='".$item->brand."'>".ucwords(strtolower($item->brand))."</option>";
                     } ?>
                 </select>
             </div>
@@ -93,17 +115,17 @@ use App\Material;?>
         <div class="row">
             <div class="col">
                 <select name="type" class="form-control mr-sm-2">
-                    <option value="">material type</option>
+                    <option value="">Material Type</option>
                     <?php $type = Material::select('type')->distinct()->get();
                     foreach ($type as $typed) {
-                     echo"   <option value='".$typed->type."'>".$typed->type."</option>";
+                     echo"   <option value='".$typed->type."'>".ucwords(strtolower($typed->type))."</option>";
                     } ?>
                 </select>
             </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-primary">Export</button>
       </div>
     </div>
@@ -116,9 +138,9 @@ use App\Material;?>
             <thead >
           <tr style="color: white;">
                <th >#</th>
-                <th >Name</th>
+                <th >ItemID</th>
                 <th >Description</th>
-                <th >Unit Measure</th>
+                <th >Value/Capacity</th>
                 <th >Type</th>
                 <th >Current Stock</th>
                 <th >Stock updated on</th>
@@ -137,9 +159,9 @@ use App\Material;?>
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item->name }}</td>
-                    <td id="wo-details">{{ $item->description }}</td>
-                     <td>{{ $item->brand }}</td>
+                    <td>{{ ucwords(strtolower($item->name)) }}</td>
+                    <td id="wo-details">{{ ucwords(strtolower($item->description)) }}</td>
+                     <td>{{ ucwords(strtolower($item->brand)) }}</td>
                     <td>{{ $item->type }}</td>
 
 

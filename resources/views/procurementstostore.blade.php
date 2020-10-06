@@ -74,7 +74,7 @@
 <script>
     // ARRAY FOR HEADER.
     var arrHead = new Array();
-    arrHead = ['','Material Name', 'Description','Type', 'Unit Measure','Total','Price', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+    arrHead = ['','Material ID', 'Description','Type', 'Unit Measure','Total','Price', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
 
     // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
     // ADD THE TABLE TO YOUR WEB PAGE.
