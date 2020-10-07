@@ -76,7 +76,7 @@ class WorkOrderController extends Controller
         $work_order->month_ = date('m');
         $work_order->save();
 
-        return redirect()->route('work_order')->with(['message' => 'Works order successfully created']);
+        return redirect()->route('work_order')->with(['message' => 'Works order successfully sent to DES']);
     }
 
     public function rejectWO(Request $request, $id)
@@ -1121,7 +1121,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         return redirect()->route('work_order')->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order successfully sent to Maintenance coordinator',
+            'message' => 'Works order successfully sent to Maintenance coordinator',
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()
         ]);
     }
@@ -1333,7 +1333,7 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $wo = WorkOrder::find($id);
-        $wo->status = 9;
+        $wo->status = 30;
         $wo->clientclose = auth()->user()->id;
         $wo->clientclosedate = Carbon::now();
         $p_type= $wo->problem_type;

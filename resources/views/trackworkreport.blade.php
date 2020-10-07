@@ -89,16 +89,16 @@ td, th {
             <td>Problem Type: <b style="text-transform: capitalize;">{{ ucwords(strtolower($wo->problem_type)) }}</b> </td>
         </tr>
         
-          @if(empty($wo->room_id)) 
+           @if(empty($wo->room_id)) 
           <tr>
             <td colspan="4">Location : <b>{{ $wo->location }} </b></td> </tr>
            
          @else
 
-         <tr>
+         <tr><td> Location: <b>
                    {{ $wo['room']['block']->location_of_block }}
             </b> </td>
-            <td colspan="2">Area : <b>
+            <td >Area : <b>
                         
                    {{ $wo['room']['block']['area']->name_of_area }}
                           </b></td>
@@ -110,7 +110,6 @@ td, th {
              </b></td>
        </tr>
               @endif
-        
         <tr>
             <td colspan="4">Description of the problem: <b style="text-transform: capitalize;">{{ $wo->details }}</b> </td>
         </tr>
@@ -674,9 +673,9 @@ td, th {
   <!--MATERIALS-->
 
  @if($wo->hosclosedate != null)
-   @if(($wo->status == 52) or ($wo->status == 2))
+   @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30))
             <div>
-               <h5><b> This works order is provisionaly closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }}  @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed permanently by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
+               <h5><b> This works order is provisionaly closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }}  @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed completely by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
            <hr>
             </div>
 
