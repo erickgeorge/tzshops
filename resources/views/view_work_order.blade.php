@@ -92,12 +92,20 @@
 
          @endif
     <div class="form-group ">
-        <label for="">Details:</label>
+        <label for="">Description of the problem:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
 
 <br>
+
+ <h4>Wrong problem type?</h4>
+    <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
+        @csrf
+        <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
+    </form>
+    <br>
+    
 
 <script>
 function autoSubmit()
@@ -128,12 +136,7 @@ function autoSubmit()
         </div>
     </div>
     <br>
-    <h4>Wrong problem type?</h4>
-    <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
-        @csrf
-        <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
-    </form>
-    <br>
+   
 
 
     <!-- Modal -->

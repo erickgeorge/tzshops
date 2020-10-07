@@ -35,7 +35,8 @@
             <div class="col">
                 <div class="form-group ">
                         <label  for="inputGroupSelect01">Type of problem <sup style="color: red;">*</sup></label>
-                        <select class="form-control" required  id="nameid" name="p_type">
+                        <br>
+                        <select  style="width: 500px;" class="form-control" required  id="nameid" name="p_type">
                             <option selected value="">Choose... <sup style="color: red;">*</sup></option>
                             <?php use App\workordersection; ?>
                   <?php $sectionss = workordersection::get(); ?>
@@ -43,7 +44,7 @@
                            <option value="{{ $sectionss->section_name }}"><?php echo ucwords(strtolower( $sectionss->section_name )); ?></option>
                            @endforeach
 
-                           <option value="others">others</option>
+                           <option value="others">Others</option>
                         </select>
                     </div>
             </div>
@@ -59,7 +60,7 @@
     <div class="col">
          <div class="checkbox">
     <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
-        Enter Location manually</label>
+        Enter location manually</label>
        </div>
     </div>
 </div>
@@ -67,7 +68,7 @@
         <div id="divmanual">
             <div class="col">
                 <div class="form-group ">
-                    <input   style="color: black;" type="text" class="form-control" maxlength="35" id="manual"
+                    <input style="width: 490px;"  style="color: black;" type="text" class="form-control" maxlength="60" id="manual"
                     aria-describedby="emailHelp" name="manual" placeholder="Type Location Address Here">
                     </div>
             </div>
@@ -80,7 +81,8 @@
                 <div class="col">
                     <div class="form-group ">
                             <label  for="inputGroupSelect01">Location <sup style="color: red;">*</sup></label>
-                            <select required class="custom-select" id="location" name="location" onchange="getAreas()">
+                            <br>
+                            <select style="width: 500px;" required class="custom-select" id="location" name="location" onchange="getAreas()">
                                 <option value="" selected>Choose...
                                 </option>
 
@@ -96,7 +98,8 @@
                 <div class="col">
                     <div class="form-group ">
                             <label  for="inputGroupSelect01">Area <sup style="color: red;">*</sup></label>
-                            <select required class="custom-select" id="area" name="area" onchange="getBlocks()">
+                            <br>
+                            <select style="width: 500px;" required class="custom-select" id="area" name="area" onchange="getBlocks()">
                                 <!-- <option selected>Choose...</option> -->
                             </select>
                         </div>
@@ -106,7 +109,8 @@
                 <div class="col">
                     <div class="form-group ">
                             <label  for="inputGroupSelect01">Block <sup style="color: red;">*</sup></label>
-                            <select required class="custom-select" id="block" name="block" onchange="getRooms()">
+                            <br>
+                            <select  style="width: 500px;" required class="custom-select" id="block" name="block" onchange="getRooms()">
                                 <!-- <option selected>Choose...</option> -->
                             </select>
                         </div>
@@ -116,7 +120,8 @@
                 <div class="col">
                     <div class="form-group ">
                             <label  for="inputGroupSelect01">Room <sup style="color: red;">*</sup></label>
-                            <select required class="custom-select" id="room" name="room">
+                            <br>
+                            <select style="width: 500px;" required class="custom-select" id="room" name="room">
                                 <!-- <option selected>Choose...</option> -->
                             </select>
                         </div>
@@ -130,9 +135,10 @@
       <br>
 
         <div class="form-group">
-            <label for="comment">Description of the Problem:
+            <label for="comment">Description of the Problem <sup style="color: red;">*</sup>
             </label>
-            <textarea name="details" value="{{ old('details') }}" required maxlength="100" class="form-control" rows="5"
+            <br>
+            <textarea style="width: 500px;" name="details" value="{{ old('details') }}" required maxlength="100" class="form-control" rows="5"
                       id="comment"></textarea>
         </div>
         <div >
