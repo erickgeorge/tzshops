@@ -98,6 +98,29 @@
     </div>
 
 <br>
+ @if(auth()->user()->type == 'Maintenance coordinator')
+  @if($wo->problem_type == 'Others')  
+  <p>Choose  problem type if you want to redirect to right section</p>
+
+   <form method="POST" action="{{route('redirect_wo',[$wo->id])}}"
+                  class="col-md-6">
+                        @csrf
+     
+       <div class="form-group ">
+                        <label for="dep_name">Problem Type</label>
+                        <br>
+                        <select style="width: 500px" required class="custom-select" name="p_type">
+                           <option selected value="" >Choose problem type</option>
+                                @foreach($sections as $section)
+                                  <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
+                                @endforeach
+                        </select>
+      </div>
+         <button type="submit" class="btn btn-primary">Save</button>
+ </form>  
+  @endif
+@endif  
+
 
  <h4>Wrong problem type?</h4>
     <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
@@ -105,7 +128,9 @@
         <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
     </form>
     <br>
-    
+   
+  
+<br>
 
 <script>
 function autoSubmit()

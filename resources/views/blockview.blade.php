@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Workorder Section
+Blocks
 @endSection
 
 @section('body')
@@ -30,16 +30,16 @@ Workorder Section
     <div>
 <br><br>
                 <h4 
-                    >List of Available Sections</h4></div>
+                    >List of Available Blocks</h4></div>
 
 
 
 
             <hr class="container">
 
-            <a href="Add/section" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add New Section</a>
-                   <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
+            <a href="{{route('manageblocks')}}" style="margin-bottom: 20px;"
+                   class="btn btn-primary">Add New Block</a>
+                   <a href="{{ url('blockpdf')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
@@ -47,8 +47,9 @@ Workorder Section
                     <thead >
                     <tr style="color: white;">
                         <th scope="col">#</th>
-                        <th scope="col">Name of Section</th>
-
+                        <th scope="col">Name of Block</th>
+                        <th scope="col">Name of Area</th>
+                      <!--  <th scope="col">Name of Location</th>-->
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -56,25 +57,27 @@ Workorder Section
 
 
                     <?php $i = 0; ?>
-                    @foreach($worksec as $dep)
+                    @foreach($block as $dep)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
 
-                            <td><?php echo ucwords(strtolower( $dep->section_name )); ?></td>
+                            <td><?php echo ucwords(strtolower( $dep->name_of_block )); ?></td>
+                             <td><?php echo ucwords(strtolower( $dep['area']->name_of_area )); ?></td>
+                         
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;
                                     <a style="color: green;"
-                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->section_name }}')"
-                                       data-toggle="modal" data-target="#editsection" title="Edit"><i
+                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->name_of_block }}')"
+                                       data-toggle="modal" data-target="#editDepartment" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Workorder Section Completely? \n\n {{   $dep->section_name }} \n\n')"
-                                          action="{{ route('worksection.delete', [$dep->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to delete this Block Completely? \n\n {{   $dep->name_of_block }} \n\n')"
+                                          action="{{ route('blocks.delete', [$dep->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                title="Delete" style="color: red;" data-toggle="tooltip"><i
+                                                title="Deactivate" style="color: red;" data-toggle="tooltip"><i
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
@@ -93,20 +96,20 @@ Workorder Section
             </div>
 
 
-              <div class="modal fade" id="editsection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              <div class="modal fade" id="editDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Section</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Block</h5>
 
 
                 </div>
 
-             
+               
                     <div class="modal-body">
+                    <form method="POST" action="edit/Blocks" class="col">
 
-   <form method="POST" action="edit/workordersection" class="col">
                         @csrf
 
 
@@ -114,20 +117,20 @@ Workorder Section
 
 
                     <div class="form-group ">
-                        <label for="dep_name">Section Name</label>
+                        <label for="dep_name">Block Name</label>
                         <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"
-                               name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc." >
+                               name="sec_name" placeholder="Enter Block Name" >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
 
 
                         <button type="submit" class="btn btn-primary">save
                         </button>
-                        <a href="/Manage/section" class="btn btn-danger">Cancel
+                        <a href="/Manage/Blocks" class="btn btn-danger">Cancel
                     </a>
-      </form>
+                  </form>
                     </div>
-          
+              
 
 
                 <div class="modal-footer">

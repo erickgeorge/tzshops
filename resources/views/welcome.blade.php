@@ -97,7 +97,7 @@
 
                                  <i class="fa fa-user icon"></i>
                                     <label for="email" ><strong  > {{ __('
-                                     User Name') }}</strong></label>
+                                     Username') }}</strong></label>
 
 
                                         <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" required autofocus placeholder="Enter User Name">

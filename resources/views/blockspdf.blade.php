@@ -3,7 +3,7 @@
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">All Sections List</b></p>
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">All Blocks</b></p>
 </div><br>
 
 <style>
@@ -33,19 +33,21 @@ tr:nth-child(even) {
 
     <tr>
                     <th>#</th>
-                    <th>Name</th>
-
+                      <th scope="col">Name of Block</th>
+                        <th scope="col">Name of Area</th>
 
     </tr>
  </thead>
  <tbody align="center">
 
                 <?php $i = 0;  ?>
-                @foreach($sects as $sect)
+                @foreach($sects as $dep)
                         <tr>
                        <?php $i++;?>
                         <td>{{$i}}</td>
-                       <td class="nameee"> {{$sect->section_name}}</td>
+                     <td><?php echo ucwords(strtolower( $dep->name_of_block )); ?></td>
+                             <td><?php echo ucwords(strtolower( $dep['area']->name_of_area )); ?></td>
+                         
                        </tr>
                         @endforeach
                 </tbody>

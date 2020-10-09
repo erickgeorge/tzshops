@@ -202,7 +202,7 @@ foreach($userwithid as $userwithid)
               <select id="statusselector1" name="status" class="form-control mr-sm-2">
                 <option value='' selected="selected">Select status</option>
     <?php $statusago = WorkOrder::select('status')->where('client_id',auth()->user()->id)->distinct()->get();
-    foreach ($statusago as $statusname) {
+ foreach ($statusago as $statusname) {
 
      if($statusname->status == -1)
       { echo "<option value='".$statusname->status."'>New</option>";}
@@ -210,14 +210,12 @@ foreach($userwithid as $userwithid)
       {echo "<option value='".$statusname->status."'>Accepted</option>";}
      elseif($statusname->status == 0)
       {echo"<option value='".$statusname->status."'>Rejected</option>";}
-     elseif($statusname->status == 30)
+     elseif($statusname->status == 2)
       {echo"<option value='".$statusname->status."'>Closed</option>";}
      elseif($statusname->status == 3)
-      {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
+      {echo"<option value='".$statusname->status."'>Technician assigned for work</option>";}
      elseif($statusname->status == 4)
-      {echo"<option value='".$statusname->status."'>Transportation stage for inspection</option>";}
-     elseif($statusname->status == 101)
-      {echo"<option value='".$statusname->status."'>Transportation stage for work</option>";}
+      {echo"<option value='".$statusname->status."'>Transportation stage</option>";}
      elseif($statusname->status == 5)
       {echo"<option value='".$statusname->status."'>Pre-implementation</option>";}
      elseif($statusname->status == 6)
@@ -226,11 +224,31 @@ foreach($userwithid as $userwithid)
       {echo"<option value='".$statusname->status."'>Material requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
-     elseif($statusname->status == 2)
-      {echo"<option value='".$statusname->status."'>waiting response from client</option>";}
+    elseif($statusname->status == 30)
+      { echo "<option value='".$statusname->status."'>Completly Closed</option>";}
+     elseif($statusname->status == 70)
+      { echo "<option value='".$statusname->status."'>Technician assigned for Inspection</option>";}
+     elseif($statusname->status == 40)
+      { echo "<option value='".$statusname->status."'>Material Requested Approved Succesifully</option>";}
+     elseif($statusname->status == 52)
+      { echo "<option value='".$statusname->status."'>Iow is checking for Works Order</option>";}
+     elseif($statusname->status == 53)
+      { echo "<option value='".$statusname->status."'>Works Order is not approved by IoW</option>";}
+     elseif($statusname->status == 25)
+      { echo "<option value='".$statusname->status."'>Succesifully approved by IoW</option>";}
+     elseif($statusname->status == 18)
+      { echo "<option value='".$statusname->status."'>Correct your Material</option>";}
+     elseif($statusname->status == 19)
+      { echo "<option value='".$statusname->status."'>Material missing in store</option>";}
+     elseif($statusname->status == 15)
+      { echo "<option value='".$statusname->status."'>Material accepted by IoW</option>";}
+     elseif($statusname->status == 55)
+      { echo "<option value='".$statusname->status."'>Materia on check by IoW</option>";}
+     elseif($statusname->status == 57)
+      { echo "<option value='".$statusname->status."'>Material on check by IoW by HoS</option>";}
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
-     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
+    
  }
      ?>
               </select>
@@ -978,14 +996,12 @@ foreach($userwithid as $userwithid)
       {echo "<option value='".$statusname->status."'>Accepted</option>";}
      elseif($statusname->status == 0)
       {echo"<option value='".$statusname->status."'>Rejected</option>";}
-     elseif($statusname->status == 30)
+     elseif($statusname->status == 2)
       {echo"<option value='".$statusname->status."'>Closed</option>";}
      elseif($statusname->status == 3)
-      {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
+      {echo"<option value='".$statusname->status."'>Technician assigned for work</option>";}
      elseif($statusname->status == 4)
-      {echo"<option value='".$statusname->status."'>Transportation stage for inspection</option>";}
-     elseif($statusname->status == 101)
-      {echo"<option value='".$statusname->status."'>Transportation stage for work</option>";}
+      {echo"<option value='".$statusname->status."'>Transportation stage</option>";}
      elseif($statusname->status == 5)
       {echo"<option value='".$statusname->status."'>Pre-implementation</option>";}
      elseif($statusname->status == 6)
@@ -994,11 +1010,31 @@ foreach($userwithid as $userwithid)
       {echo"<option value='".$statusname->status."'>Material requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
-     elseif($statusname->status == 2)
-      {echo"<option value='".$statusname->status."'>waiting response from client</option>";}
+    elseif($statusname->status == 30)
+      { echo "<option value='".$statusname->status."'>Completly Closed</option>";}
+     elseif($statusname->status == 70)
+      { echo "<option value='".$statusname->status."'>Technician assigned for Inspection</option>";}
+     elseif($statusname->status == 40)
+      { echo "<option value='".$statusname->status."'>Material Requested Approved Succesifully</option>";}
+     elseif($statusname->status == 52)
+      { echo "<option value='".$statusname->status."'>Iow is checking for Works Order</option>";}
+     elseif($statusname->status == 53)
+      { echo "<option value='".$statusname->status."'>Works Order is not approved by IoW</option>";}
+     elseif($statusname->status == 25)
+      { echo "<option value='".$statusname->status."'>Succesifully approved by IoW</option>";}
+     elseif($statusname->status == 18)
+      { echo "<option value='".$statusname->status."'>Correct your Material</option>";}
+     elseif($statusname->status == 19)
+      { echo "<option value='".$statusname->status."'>Material missing in store</option>";}
+     elseif($statusname->status == 15)
+      { echo "<option value='".$statusname->status."'>Material accepted by IoW</option>";}
+     elseif($statusname->status == 55)
+      { echo "<option value='".$statusname->status."'>Materia on check by IoW</option>";}
+     elseif($statusname->status == 57)
+      { echo "<option value='".$statusname->status."'>Material on check by IoW by HoS</option>";}
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
-     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
+    
  }
      ?>
               </select>
@@ -1060,8 +1096,17 @@ foreach($userwithid as $userwithid)
                               </td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                                                  @if($work->status == -1)
-                                <td><span>new</span>
+                          @if($work->status == -1)
+                                <td><span>new</span> <br>
+                               @if(auth()->user()->type == 'Maintenance coordinator')
+                                 @if($work->problem_type == 'Others')
+                                   @if($work->redirectedhos == null)
+                                      <span>From HoS</span>
+                                      @else
+                                      <span>Redirected by HoS</span>
+                                      @endif
+                                  @endif
+                               @endif    
                                 <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
@@ -1267,10 +1312,16 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                             </td>
 
                             <td>
+                               @if(auth()->user()->type == 'Maintenance coordinator')
+                               @if(($work->status != -1) and ($work->status != 53) )
+                                <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
+                                           data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                               @endif
+                               @endif
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
 
-                                    @if($work->status == -1)
+                                        @if($work->status == -1)
 
                                          @if($work->client_id == auth()->user()->id )
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
@@ -1280,9 +1331,10 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                                     class="badge badge-success">View</span></a>
 
                                          @endif
-                                     @elseif($work->status == 2)
+                                
+                               @elseif($work->status == 2)
 
-                                       @if($work->client_id != auth()->user()->id )
+                               @if($work->client_id != auth()->user()->id )
 
                      <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
@@ -1334,7 +1386,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                 @else
                                     @if($work->status == -1)
+                                      @if(auth()->user()->type != 'Maintenance coordinator')
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
+                                     @endif   
                                         @if($diff > 6)
                                         @if( $work['user']->id==Auth::user()->id)
                                         <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#exampleModal{{ $work->id }}">Complaint</a>
@@ -1388,27 +1442,40 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                         @endif
                                         <br>
                                           @if(auth()->user()->type == 'Maintenance coordinator')
+                                             @if($work->client_id == auth()->user()->id )
+                                              <a href="#"><span class="badge badge-success">Waiting...</span></a>
+                                              @else
+                                                 @if($work->status == -1)
+                                                <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
+                                                    class="badge badge-success">View</span></a>
+                                                 @endif
 
-                                          @if($work->redirectwo == 1)
-                                                                         <span class="badge badge-warning">Redirected</span>
-                                                                         @else
+                                             @endif
+
+
+                                          <!--@if($work->redirectwo == 1)
+                                                                         <span class="badge badge-primary">Redirected</span>
+                                          @endif -->
+                                          
+                                          @if($work->problem_type == 'Others')                             
+                                                                        
                                         <!--   <a href="#"><span data-toggle="modal" data-target="#redirect"
 
 
 
-                       &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
+                                   &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc1( '{{ $work->id }}','{{ $work->reason }}')"
                                        data-toggle="modal" data-target="#exampleModali" title="Edit"><i
                                                 class="fas fa-times-circle" style="color: red"></i></a>-->
 
 
-                                      &nbsp;&nbsp;&nbsp;&nbsp;                                  <a
+                                    <!--  &nbsp;&nbsp;&nbsp;&nbsp;                                  <a
                                        onclick="myfunc5('{{$work->id}}','{{ $work->details }}' ,'{{ $work->p_type }}')"
                                        data-toggle="modal" data-target="#exampleModo"><i
-                                  class="fas fa-recycle"  data-toggle="tooltip" data-placement="right" title="Redirect to Head of Section" style="color: blue"></i></a>
+                                  class="fas fa-recycle"  data-toggle="tooltip" data-placement="right" title="Redirect to Head of Section" style="color: blue"></i></a>-->
 
-                                                                         @endif
-                                          @endif
+                                         @endif
+                                         @endif
 
 
                                                 @elseif($work->status == 12)
@@ -1481,65 +1548,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
     </div>
 
 
-@foreach($wo as $work)
 
-    <div class="modal fade" id="exampleModo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-
-                <form method="POST" action="redirect/workorder/to/hos"
-                  class="col-md-6">
-                        @csrf
-            <div class="modal-content" style=" width: 400px;" >
-                <div class="modal-header">
-
-                    <h5 class="modal-title" id="exampleModalLabel" ><b>Choose problem type as you want to redirect.</b></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-
-                <div class="modal-body">
-
-                     <div class="col">
-                <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label style="height: 28px"  for="inputGroupSelect01">Type of problem</label>
-            </div>
-            <select  style="width: 300px;min-width: 150px;" id="p_type" name="p_type">
-                <option selected value="">Choose...</option>
-                <option value="Carpentry/Painting">Carpentry/Painting</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Masonry/Road">Masonry/Road</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Plumbing">Plumbing</option>
-            </select>
-             <!--<input  type="text" name="details"  id="details">-->
-             <input hidden id="redirect_id" name="redirect_id" >
-
-             </div>
-            </div>
-              <button type="submit" class="btn btn-primary ">Submit</button>
-              <a href="{{url('work_order')}}" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
-            </div>
-                <div class="modal-footer">
-                </div>
-
-       
-    </form>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-    @endforeach
 
 
     @endif

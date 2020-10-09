@@ -62,7 +62,7 @@
 </div>
     <div class="container">
         @if(count($procured) > 0)
-            <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
+            <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
               <tr style="color: white;">
                     <th>#</th>
@@ -72,7 +72,7 @@
                     <th>Total</th>
                     <th>Unit Measure</th>
                     <th>Price</th>
-
+    
                 </tr>
                 </thead>
 

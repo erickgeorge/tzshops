@@ -27,6 +27,7 @@ use App\zoneinspector;
 use App\techwork;
 use App\WoInspectionForm;
 use Carbon\Carbon;
+use App\workordersection;
 
 
 class WorkOrderController extends Controller
@@ -335,7 +336,8 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         return view('view_work_order', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => WorkOrder::where('id', $id)->first()
+            'wo' => WorkOrder::where('id', $id)->first(),
+            'sections' => workordersection::OrderBy('section_name', 'ASC')->get()
         ]);
     }
 
@@ -1117,6 +1119,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
         $wo->problem_type = 'Others';
+        $wo->redirectedhos = auth()->user()->id;
         $wo->save();
         return redirect()->route('work_order')->with([
             'role' => $role,
@@ -1125,8 +1128,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()
         ]);
     }
-
-
 
 
     public function trackWO($id)

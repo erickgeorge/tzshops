@@ -410,11 +410,10 @@ class StoreController extends Controller
 
 
 
-     public function redirectworkordertohos(Request $request )
+     public function redirectworkordertohos(Request $request ,$id )
     {
-       $p=$request['redirect_id'];
-
-       $matir = WorkOrder::where('id',$p)->first();
+  
+       $matir = WorkOrder::where('id',$id)->first();
        $matir->problem_type = $request['p_type'];
        $matir->redirectwo = 1 ;
        //$matir->details = $request['details'];

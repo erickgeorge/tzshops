@@ -53,7 +53,7 @@
 
         <?php
         use App\Location;
-        $location = Location::where('name','<>',null)->orderby('name')->get();
+        $location = Location::where('status', 1)->where('name','<>',null)->orderby('name')->get();
         ?>
 
 <div class="row">

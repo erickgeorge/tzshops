@@ -179,7 +179,7 @@ class UserController extends Controller
 
     public function getAreas(Request $request)
     {
-        return response()->json(['areas' => Area::where('location_id', $request->get('id'))->orderby('name_of_area','ASC')->get()]);
+        return response()->json(['areas' => Area::where('status', 1)->where('location_id', $request->get('id'))->orderby('name_of_area','ASC')->get()]);
     }
 
 
@@ -193,13 +193,13 @@ class UserController extends Controller
 
     public function getBlocks(Request $request)
     {
-        return response()->json(['blocks' => Block::where('area_id', $request->get('id'))->orderby('name_of_block','ASC')->get()]);
+        return response()->json(['blocks' => Block::where('status', 1)->where('area_id', $request->get('id'))->orderby('name_of_block','ASC')->get()]);
     }
 
 
     public function getRooms(Request $request)
     {
-        return response()->json(['rooms' => Room::where('block_id', $request->get('id'))->orderby('name_of_room','ASC')->get()]);
+        return response()->json(['rooms' => Room::where('status', 1)->where('block_id', $request->get('id'))->orderby('name_of_room','ASC')->get()]);
     }
 
     public function sendreturnlocation(Request $request)

@@ -59,6 +59,7 @@
     </div>
     <br>
     <hr>
+    <div class="container">
 <div class="card">
     <div class="card-body">
         <form action="{{route('filterhos')}}" method="get" enctype="multipart/form-data">
@@ -109,6 +110,7 @@
         </div>
         </form>
     </div>
+</div>
 </div><br>
 
     <div class="container">
