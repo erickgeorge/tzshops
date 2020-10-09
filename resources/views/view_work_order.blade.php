@@ -119,7 +119,8 @@
          <button type="submit" class="btn btn-primary">Save</button>
  </form>  
   @endif
-@endif  
+  @else
+ 
 
 
  <h4>Wrong problem type?</h4>
@@ -128,7 +129,7 @@
         <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
     </form>
     <br>
-   
+   @endif 
   
 <br>
 
