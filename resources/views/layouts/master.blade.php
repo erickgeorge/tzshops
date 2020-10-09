@@ -799,7 +799,7 @@
     <a  href="{{ url('hoscount')}}">HoS with Completed Works Orders</a>
   </div>
 
-   <a  href="{{ url('/alliow')}}">Inspectors of Wrks</a>
+   <a  href="{{ url('/alliow')}}">Inspectors of Works</a>
 
 
    <a  href="{{ url('technicians') }}">Technicians</a>

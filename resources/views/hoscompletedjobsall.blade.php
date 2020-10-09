@@ -169,7 +169,7 @@ use Carbon\Carbon;
                     <th>#</th>
           <th>WorkOrder ID</th>
                     <th>Details</th>
-                    <th>Type</th>
+                    <th>Section</th>
                     <th>From</th>
                     <th>Status</th>
                     <th>Created date</th>
@@ -208,7 +208,7 @@ use Carbon\Carbon;
                                 <td><span class="badge badge-success">Temporally Closed</span></td>
 
                             @elseif($work->status == 30)
-                                <td><span class="badge badge-success">Completely Closed</span></td>
+                                <td><span>Completely Closed</span></td>
                             @elseif($work->status == 3)
                                 <td><span class="badge badge-info">technician assigned for work</span>
                                   <br>

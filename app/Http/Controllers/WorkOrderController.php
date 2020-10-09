@@ -152,9 +152,9 @@ $message = $client->message()->send([
       }
 
  */
+     $createddate = date('d F Y', strtotime($wO->created_at));
 
-
-     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system so as to check the reason of rejection.",
+     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on  $createddate, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system so as to check the reason of rejection.",
 
                   "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -271,9 +271,12 @@ session::flash('message', ' Your workorder have been accepted successfully ');
  */
 
 //for email that currently working disabled partially
+
+       $createddate = date('d F Y', strtotime($wO->created_at));
+
         if ($wO->emergency == 1) {
 
-                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
+                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $createddate, of  Problem Type $wO->problem_type has been ACCEPTED as EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -281,7 +284,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
    
         if ($wO->emergency == 0) {
             
-                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
+                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $createddate, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
