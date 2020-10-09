@@ -671,10 +671,72 @@ td, th {
   
 
   <!--MATERIALS-->
+ 
  @if($wo->hosclosedate != null)
    @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30))
             <div>
-               <h5><b> This works order is closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }}  @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed completely by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
+
+<h5><b>Closing Works Order</b></h5>
+             <table class="table table-striped  display" style="width:100%">
+                
+                  <thead style="background-color: #376ad3;color: white;">
+                    <tr>
+                  <th>Status</th>
+                  <th>Full Name</th>
+                  <th>Type</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                     </tr>
+                  </thead>
+             
+                <tbody>
+                  <tr>
+                    <td>Intetion to close</td>
+                    <td> {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}}</td>
+                  @if(strpos( $wo['hoscloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hoscloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['hoscloses']->type) }} </td>
+                 @endif
+                       <td>{{$wo['hoscloses']->phone}}</td>
+                       <td>{{$wo['hoscloses']->email}}</td>
+                        <td>{{ date('d F Y', strtotime($wo->iowclosedate)) }}</td>
+                  </tr>
+                  @if($wo->iowclosedate != null)
+                  <tr>
+                    <td>Approved by</td>
+                    <td>{{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}}</td>
+                     @if(strpos( $wo['iowcloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['iowcloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['iowcloses']->type) }} </td>
+                 @endif
+                      <td>{{$wo['iowcloses']->phone}}</td>
+                    <td>{{$wo['iowcloses']->email}}</td>
+                    <td>{{ date('d F Y', strtotime($wo->iowclosedate)) }}</td>
+
+                  </tr>
+                  @endif
+
+                 @if($wo->clientclosedate != null)
+                  <tr>
+                    <td>Closed Completely</td>
+                    <td>{{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}}</td>
+                     @if(strpos( $wo['clientcloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['clientcloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['clientcloses']->type) }} </td>
+                 @endif
+                     <td>{{$wo['clientcloses']->phone}}</td>
+                      <td>{{$wo['clientcloses']->email}}</td>
+                    <td>{{ date('d F Y', strtotime($wo->clientclosedate)) }}</td>
+                  </tr>
+                  @endif
+
+                </tbody>
+              </table>
+            
            <hr>
             </div>
 

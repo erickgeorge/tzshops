@@ -290,7 +290,7 @@ var total=2;
 
 
 
-<table style="width:100%">
+ <table class="table table-striped  display" style="width:100%">
   <tr>
      <thead style="color: white;">
     <th>Full Name</th>
@@ -428,7 +428,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <h4><b>{{ count($techforms) }} Assigned Technicians for Work  </b></h4>
     @endif
 
-<table style="width:100%">
+ <table class="table table-striped  display" style="width:100%">
   <tr>
 
 <thead style="color: white;">
@@ -539,8 +539,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <h4><b>Transport Description for Inspection</b></h4>
 
-<table style="width:100%">
-  <tr>
+<table style="width:100%"> <table class="table table-striped  display" style="width:100%">  <tr>
      <thead style="color: white;">
     <th>Date of Transport</th>
     <th>Time</th>
@@ -598,7 +597,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <h4><b>Transport Description for Work</b></h4>
 
-<table style="width:100%">
+ <table class="table table-striped  display" style="width:100%">
   <tr>
      <thead style="color: white;">
     <th>Date of Transport</th>
@@ -730,7 +729,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
   ?>
 
-<table style="width:100%">
+ <table class="table table-striped  display" style="width:100%">
   <tr>
      <thead style="color: white;">
 
@@ -805,7 +804,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-<table style="width:100%">
+ <table class="table table-striped  display" style="width:100%">
   <tr>
      <thead style="color: white;">
 
@@ -936,7 +935,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
  <h4><b>Transport Description for Work</b></h4>
 
-<table style="width:100%">
+ <table class="table table-striped  display" style="width:100%">
   <tr>
      <thead style="color: white;">
     <th>Date of Transport</th>
@@ -1015,15 +1014,117 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   <!--tracking after work rejected-->
 
+  
  @if($wo->hosclosedate != null)
    @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30))
             <div>
-               <h5><b> This works order is closed by {{$wo['hoscloses']->type}} {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}} on {{ date('d F Y', strtotime($wo->hosclosedate)) }}  @if($wo->iowclosedate != null) , Also approved by {{$wo['iowcloses']->type}}  {{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}} on {{ date('d F Y', strtotime($wo->iowclosedate)) }} .   @endif  @if($wo->clientclosedate != null) And closed completely by {{$wo['clientcloses']->type}}  {{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}} on {{ date('d F Y', strtotime($wo->clientclosedate)) }}.   @endif</b></h5>
+
+<h5><b>Closing Works Order</b></h5>
+             <table class="table table-striped  display" style="width:100%">
+                <tr>
+                  <thead style="color: white;">
+                  <th>Status</th>
+                  <th>Full Name</th>
+                  <th>Type</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  </thead>
+                </tr>
+                <tbody>
+                  <tr>
+                    <td>Intetion to close</td>
+                    <td> {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}}</td>
+                  @if(strpos( $wo['hoscloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hoscloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['hoscloses']->type) }} </td>
+                 @endif
+                       <td>{{$wo['hoscloses']->phone}}</td>
+                       <td>{{$wo['hoscloses']->email}}</td>
+                        <td>{{ date('d F Y', strtotime($wo->iowclosedate)) }}</td>
+                  </tr>
+                  @if($wo->iowclosedate != null)
+                  <tr>
+                    <td>Approved by</td>
+                    <td>{{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}}</td>
+                     @if(strpos( $wo['iowcloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['iowcloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['iowcloses']->type) }} </td>
+                 @endif
+                      <td>{{$wo['iowcloses']->phone}}</td>
+                    <td>{{$wo['iowcloses']->email}}</td>
+                    <td>{{ date('d F Y', strtotime($wo->iowclosedate)) }}</td>
+
+                  </tr>
+                  @endif
+
+                 @if($wo->clientclosedate != null)
+                  <tr>
+                    <td>Closed Completely</td>
+                    <td>{{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}}</td>
+                     @if(strpos( $wo['clientcloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['clientcloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['clientcloses']->type) }} </td>
+                 @endif
+                     <td>{{$wo['clientcloses']->phone}}</td>
+                      <td>{{$wo['clientcloses']->email}}</td>
+                    <td>{{ date('d F Y', strtotime($wo->clientclosedate)) }}</td>
+                  </tr>
+                  @endif
+
+                </tbody>
+              </table>
+            
            <hr>
             </div>
 
     @endif
    @endif
+
+
+       @if(strpos(auth()->user()->type, "HOS") !== false)
+
+          @if($wo->status == 30)
+            <div>
+                <h4 align="center">Works order completely closed!</h4>
+            </div>
+
+        @elseif($wo->status == 2)
+            <div>
+                <h4 align="center" style="padding: 20px">Works order is Provisional closed!</h4>
+            </div>
+        @elseif($wo->status == 52)
+            <div>
+              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done!</h4>
+            </div>
+        @elseif($wo->status == 53)
+            <div>
+               <h4 align="center" style="padding: 20px">Works order is not approved by IoW!</h4>
+            </div>
+
+        @elseif($wo->status == 9)
+              <div>
+                <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Close works order completely</button>
+                </form>
+            </div>
+        @elseif($wo->status == 25)
+            <div>
+                <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Provisional Close</button>
+                </form>
+            </div>
+        @else
+
+         
+
+        @endif
+        @endif
 
 
 
