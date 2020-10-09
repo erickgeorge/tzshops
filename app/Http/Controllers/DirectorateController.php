@@ -756,12 +756,12 @@ class DirectorateController extends Controller
             return redirect()->back()->withErrors(['message' => 'Zone already exist']);
         }
         
-       $p=$request['esecid'];
+         $p=$request['esecid'];
         
         
         $wsec = iowzone::where('id',$p)->first();
         
-        $wsec->zonename = $request['sec_name' ];
+        $wsec->zonename = $request['sec_name'];
        
         $wsec->save();
         

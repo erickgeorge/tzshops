@@ -165,9 +165,7 @@ var total=2;
         <div class="col">
             @if($wo->emergency == 1)
             <h6 align="center" style="color:red;"><b>This Works Order Is Emergency &#9888;</b></h6>
-             @endif
-        </div>
-        <div class="col">
+            @else
 
              @if(($wo->zonelocationtwo != null)&&($wo->zone_location != null))
                 @php
@@ -177,6 +175,20 @@ var total=2;
                 Location - Zone : &nbsp; <b> {{ $zonelocation->location }} - {{ $zoned->zonename }}</b>
                 @else
              @endif
+
+             @endif
+        </div>
+        <div class="col">
+        @if($wo->emergency == 1)
+             @if(($wo->zonelocationtwo != null)&&($wo->zone_location != null))
+                @php
+                    $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
+                    $zoned = iowzone::where('id',$zonelocation->iowzone_id)->first();
+                @endphp
+                Location - Zone : &nbsp; <b> {{ $zonelocation->location }} - {{ $zoned->zonename }}</b>
+                @else
+             @endif
+         @endif     
 
         </div>
    </div>
