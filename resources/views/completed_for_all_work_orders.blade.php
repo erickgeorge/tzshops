@@ -214,35 +214,11 @@ foreach($userwithid as $userwithid)
     <?php $statusago = WorkOrder::select('status')->distinct()->get();
     foreach ($statusago as $statusname) {
 
-<<<<<<< HEAD
-     if($statusname->status == -1)
-      { echo "<option value='".$statusname->status."'>New</option>";}
-     elseif($statusname->status == 1)
-      {echo "<option value='".$statusname->status."'>Accepted</option>";}
-     elseif($statusname->status == 0)
-      {echo"<option value='".$statusname->status."'>Rejected</option>";}
-     elseif($statusname->status == 2)
-      {echo"<option value='".$statusname->status."'>Closed</option>";}
-     elseif($statusname->status == 3)
-      {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
-     elseif($statusname->status == 4)
-      {echo"<option value='".$statusname->status."'>Transportation stage</option>";}
-     elseif($statusname->status == 5)
-      {echo"<option value='".$statusname->status."'>Pre-implementation</option>";}
-     elseif($statusname->status == 6)
-      {echo"<option value='".$statusname->status."'>Post implementation</option>";}
-     elseif($statusname->status == 7)
-      {echo"<option value='".$statusname->status."'>Material(s) requested</option>";}
-     elseif($statusname->status == 8)
-      {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
-     elseif($statusname->status == 9)
-      {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
-     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
-=======
+
      if($statusname->status == 30)
       { echo "<option value='".$statusname->status."'>Completely Closed</option>";}
     
->>>>>>> 56f5bba7208640f59ac1946c93822a459ea3d9b7
+
  }
      ?>
               </select>
@@ -303,178 +279,13 @@ foreach($userwithid as $userwithid)
                               </td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                          <!--  @if($work->status == 30)
+                        <!--  @if($work->status == 30)
                                 <td><span class="badge badge-warning">Completely Closed</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-<<<<<<< HEAD
-                            @elseif($work->status == 1)
-                                <td><span class="badge badge-success">Accepted</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                            @elseif($work->status == 0)
-                                <td><span class="badge badge-danger">Rejected</span></td>
-                            @elseif($work->status == 2)
-                                <td><span class="badge badge-success">Temporally Closed</span></td>
-
-                            @elseif($work->status == 30)
-                                <td><span class="badge badge-success">Completely Closed</span></td>
-                            @elseif($work->status == 3)
-                                <td><span class="badge badge-info">technician assigned for work</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                             @elseif($work->status == 70)
-                                <td><span class="badge badge-info">technician assigned for inspection</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-
-                            @elseif($work->status == 4)
-                                <td><span class="badge badge-info">transportation stage</span>
-                                 <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                            @elseif($work->status == 5)
-                              <td><span class="badge badge-info">pre-implementation</span></td>
-                            @elseif($work->status == 6)
-                              <td><span class="badge badge-info">post implementation</span></td>
-                            @elseif($work->status == 7)
-
-                              <td><span class="badge badge-info">Material(s) requested</span>
-                                <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                            @elseif($work->status == 40)
-
-                              <td><span class="badge badge-info">Material(s) Requested Approved Succesifully</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                           @elseif($work->status == 52)
-
-                              <td><span class="badge badge-info">IoW is checking for Work Order</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                           @elseif($work->status == 53)
-
-                              <td><span class="badge badge-danger">Work Order is not approved by IoW</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-
-                          @elseif($work->status == 25)
-
-                              <td><span class="badge badge-info">Work Order Succesifully approved by IoW</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                           @elseif($work->status == 8)
-                                  @if(auth()->user()->type == 'CLIENT')
-                              <td><span class="badge badge-warning">  Material(s) requested on progress</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-danger">Emergency</span></td>
-                                @endif
-                                  @else
-                              <td><span class="badge badge-info">procurement stage</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                              @endif
-                            @elseif($work->status == 9)
-                              <td><span class="badge badge-info">Closed Satisfied by Client</span></td>
-
-                            @elseif($work->status == 18)
-                              @if(auth()->user()->type != 'CLIENT')
-
-                               <td><span class="badge badge-info">Please correct your material</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                               @else
-                               <td><span class="badge badge-primary">  Material(s) received from store!</span></td>
-                                                             @endif
-
-                             @elseif($work->status == 19)
-                               @if(auth()->user()->type != 'CLIENT')
-                              <td><span class="badge badge-info">Material(s) missing in store also DES notified</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                              @else
-                               <td><span class="badge badge-warning">  Material(s) requested on progress please wait!</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-danger">Emergency</span></td>
-                                @endif
-                                                             @endif
-                               @elseif($work->status == 15)
-                                                            <td><span class="badge badge-info">Material(s) Accepted by IoW</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-
-                                @elseif($work->status == 55)
-                                                          @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Some of Material(s) Rejected</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                                                            @else
-                                                             <td><span class="badge badge-warning">Material(s) on Check by IoW</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                                                             @endif
-
-                                @elseif($work->status == 57)
-                                                          @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-primary">Material(s) Requested Again</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                                                            @else
-                                                             <td><span class="badge badge-warning">Material(s) on Check by IoW and HoS</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                                                             @endif
-
-                                @elseif($work->status == 16)
-                                                          @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Material(s) rejected by IoW</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                                                            @else
-                                                             <td><span class="badge badge-warning">  Material(s) requested on progress please wait!</span>  <br>
-                                @if($work->emergency == 1)
-                                <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-                                                             @endif
-
-
-
-                              @else
-                                <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>
-                              @endif
-=======
-                            
-                              @endif -->
->>>>>>> 56f5bba7208640f59ac1946c93822a459ea3d9b7
+                                @endif 
+                            @endif   --> 
 
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>

@@ -49,7 +49,7 @@ Blocks
                         <th scope="col">#</th>
                         <th scope="col">Name of Block</th>
                         <th scope="col">Name of Area</th>
-                      <!--  <th scope="col">Name of Location</th>-->
+                      <th scope="col">Name of Location</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -64,6 +64,7 @@ Blocks
 
                             <td><?php echo ucwords(strtolower( $dep->name_of_block )); ?></td>
                              <td><?php echo ucwords(strtolower( $dep['area']->name_of_area )); ?></td>
+                               <td><?php echo ucwords(strtolower( $dep->location_of_block )); ?></td>
                          
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;

@@ -8,6 +8,7 @@
 	use App\WorkOrder;
    use App\iowzone;
  ?>
+
 @section('body')
 @if(auth()->user()->type == 'Maintenance coordinator')
 <?php  $locations = iowzonelocation::where('iowzone_id',$_GET['zone'])->get(); ?>
@@ -15,7 +16,8 @@
 <?php  $locations = iowzonelocation::where('iowzone_id',$workszon['zone'])->get(); ?>
 @endif
     <br>
-    <div class="row container">
+    <div class="container">
+    <div class="row">
          <div class="col">
             <h5 style="text-transform: capitalize;"><b>Completed works order in  @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
@@ -510,12 +512,12 @@ foreach($userwithid as $userwithid)
 
                                     @endif
 
-                                    @if(auth()->user()->type == 'Inspector Of Works' )
+                                      @if(auth()->user()->type == 'Inspector Of Works' )
                                       @if($work->status == 53)
 
 
-                                                        <a onclick="myfunc('{{ $work->notsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
-                                                                             class="badge badge-success">View reason</span></a>
+                                                     <!--   <a onclick="myfunc('{{ $work->notsatisfiedreason }}')"><span data-toggle="modal" data-target="#viewReason"
+                                                                             class="badge badge-success">View reason</span></a>-->
 
                                        @endif
                                        @endif
