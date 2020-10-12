@@ -29,7 +29,7 @@ add new assessment sheet
 <div class="container">
                 <h5 style="text-transform: capitalize;"   id="Add New House" >Assessmet Sheet</h5>
                       <hr>
-                 <p align="center" style="color: red">All fields are compulsory</p>
+                <!-- <p align="center" style="color: red">All fields are compulsory</p>-->
 
                 <form method="POST" action="{{ route('addnew.sheet') }}" class="col-lg-12">
                     @csrf
@@ -41,7 +41,7 @@ add new assessment sheet
                         <div class="input-group-prepend">
 
 
-                          <label style="width:150px;" class="input-group-text" for="directorate">Name</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Name <sup style="color: red;">*</sup></label>
 
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="name"
@@ -54,7 +54,7 @@ add new assessment sheet
                         <div class="input-group-prepend">
 
 
-                          <label style="width:150px;" class="input-group-text" for="directorate">Type</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Type <sup style="color: red;">*</sup></label>
 
                         </div>
                        <select  class="form-control" name="type" required="required">
@@ -76,15 +76,13 @@ add new assessment sheet
       <tr>
      <thead style="color: white;">
         <th style="width: 25px"></th>
-        <th style="width: 420px">Activity</th>
-        <th style="width: 200px">Percentage(%)</th>
+        <th style="width: 420px">Activity <sup style="color: red;">*</sup></th>
+        <th style="width: 200px">Percentage(%) <sup style="color: red;">*</sup></th>
 
      </thead>
       </tr>
 
      </table>
-
-
 
     <TABLE id="dataTable" width="350px" border="1">
         <TR>

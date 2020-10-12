@@ -128,13 +128,7 @@ Route::post('savesign','UserController@savesign')->name('savesign')->middleware(
 ///////////////////////////////////////////////////////////////
 
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder')->middleware('auth');
-
-
-
-
-
 Route::get('direct_torate/{id}', 'UserController@getdepedit')->name('get_depa')->middleware('auth');
-
 Route::get('departments', 'UserController@getDepartments')->name('departments.view')->middleware('auth');
 Route::get('companytender', 'UserController@getcompany')->name('companyies.view')->middleware('auth');
 Route::get('areas', 'UserController@getAreas')->name('areas.view')->middleware('auth');
@@ -144,6 +138,32 @@ Route::get('sections', 'UserController@getSections')->name('departments.view')->
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view')->middleware('auth');
 Route::get('assign/iow/zone/{id}', 'UserController@assigniowzoneview')->name('iow.assign.zone')->middleware('auth');
 Route::get('Manage/department', 'DirectorateController@departmentsView')->name('dipartment.manage')->middleware('auth');
+Route::get('Manage/locations', 'DirectorateController@LocationView')->name('location.manage')->middleware('auth');
+Route::get('Manage/Blocks', 'DirectorateController@BlocksView')->name('Blocks.manage')->middleware('auth');
+Route::get('Manage/Areas', 'DirectorateController@AreasView')->name('Areas.manage')->middleware('auth');
+Route::get('Manage/Rooms', 'DirectorateController@RoomsView')->name('Rooms.manage')->middleware('auth');
+Route::post('deactivate/Location/{id}', 'DirectorateController@deactivateLocation')->name('Location.delete')->middleware('auth');
+Route::post('deactivate/Arrea/{id}', 'DirectorateController@deactivateArea')->name('areass.delete')->middleware('auth');
+Route::post('deactivate/room/{id}', 'DirectorateController@deactivateroom')->name('roomnumber.delete')->middleware('auth');
+Route::post('deactivate/block/{id}', 'DirectorateController@deactivateBlock')->name('blocks.delete')->middleware('auth');
+Route::POST('Manage/edit/locationn', 'DirectorateController@editlocationns')->name('Location.edit')->middleware('auth');
+Route::POST('Manage/edit/Areass', 'DirectorateController@editAreass')->name('Area.edit')->middleware('auth');
+
+Route::POST('Manage/edit/Blocks', 'DirectorateController@editBlocks')->name('Block.edit')->middleware('auth');
+
+Route::POST('Manage/edit/rooms', 'DirectorateController@editRooms')->name('Room.edit')->middleware('auth');
+
+
+Route::get('Manage/Add/locations', 'DirectorateController@addLocationView')->middleware('auth');
+Route::get('Manage/Add/Areass', 'DirectorateController@addAreassView')->middleware('auth');
+Route::get('/blockss', 'DirectorateController@addBlockssView')->name('manageblocks')->middleware('auth');
+Route::get('/Roomss', 'DirectorateController@addRoomsView')->name('managerooms')->middleware('auth');
+
+Route::post('save/locationss', 'DirectorateController@createlocations')->name('add.location')->middleware('auth');
+Route::post('save/Areass', 'DirectorateController@createreass')->name('add.areass')->middleware('auth');
+Route::post('save/Blockss', 'DirectorateController@createblockss')->name('add.blockss')->middleware('auth');
+Route::post('save/Roomss', 'DirectorateController@createrooms')->name('add.roomss')->middleware('auth');
+
 Route::get('Manage/section', 'DirectorateController@workordersectionView')->name('section.manage')->middleware('auth');
 
 Route::get('Manage/IoWZones', 'DirectorateController@IoWZonesview')->name('manage.IoWZones')->middleware('auth');
@@ -557,7 +577,7 @@ Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@mat
 Route::POST('rwork_order_material_iow/reject/Material/{id}', 'StoreController@redirecttohos')->name('redirect.workorder')->middleware('auth');
 
 
-Route::POST('/redirect/workorder/to/hos', 'StoreController@redirectworkordertohos')->middleware('auth');
+Route::POST('redirectwotohos{id}', 'StoreController@redirectworkordertohos')->name('redirect_wo')->middleware('auth');
 
 
 Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@editmaterialhos')->name('material.edit')->middleware('auth');
@@ -586,6 +606,11 @@ Route::get('inroomreporwithrooms','HomeController@inroomreportextendedwithrooms'
 
 Route::get('thisroomreport','HomeController@knownroomreport')->name('thisroomreport')->middleware('auth');
 Route::get('desdepts','NotesController@desdepts')->name('desdepts')->middleware('auth');
+
+Route::get('locationpdf','NotesController@locationpdfs')->name('locationpdfs')->middleware('auth');
+Route::get('areapdf','NotesController@areapdfs')->name('areapdfs')->middleware('auth');
+Route::get('blockpdf','NotesController@blockpdfs')->name('blockpdfs')->middleware('auth');
+Route::get('roomspdf','NotesController@roomspdfs')->name('roomspdfs')->middleware('auth');
 
 
 Route::get('iowwithzones','NotesController@iowzones')->name('zones')->middleware('auth');
@@ -762,6 +787,7 @@ Route::post('tenderreports','NotesController@tenderviewpdf')->name('tendersrepor
 Route::post('viewtrendingscorereport/{tender}/{company}','NotesController@trendingscorereport')->name('trendingscore_report')->middleware('auth');
 Route::get('viewtrendingscorereportforcompany/{tender}/{month}','NotesController@trendingscorereportcompany')->name('trendingscore_report_company')->middleware('auth');
 Route::get('cleaning_company_report','NotesController@landcleaningcompanyreport')->name('landscapingcleaningcompanyreport')->middleware('auth');
+Route::get('cleaning_company_report_expired','NotesController@landcleaningcompanyreportexpired')->name('landscapingcleaningcompanyreportexpired')->middleware('auth');
 
 Route::get('cleaning_area_report','NotesController@landcleaningareareport')->name('landscapingcleaningarea')->middleware('auth');
 

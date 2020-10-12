@@ -96,11 +96,11 @@ use Carbon\Carbon;
 <!-- SOMETHING STRANGE HERE -->
 @if(count($wo) > 0)
           @if(auth()->user()->type == 'CLIENT')
-          <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+          <button style="max-height: 40px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
    Export <i class="fa fa-file-pdf-o"></i>
 </button>
        @else
-          <button style="max-height: 40px;" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+          <button style="max-height: 40px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
    Export <i class="fa fa-file-pdf-o"></i>
 </button>
 @endif
@@ -214,6 +214,7 @@ foreach($userwithid as $userwithid)
     <?php $statusago = WorkOrder::select('status')->distinct()->get();
     foreach ($statusago as $statusname) {
 
+<<<<<<< HEAD
      if($statusname->status == -1)
       { echo "<option value='".$statusname->status."'>New</option>";}
      elseif($statusname->status == 1)
@@ -237,6 +238,11 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
      else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
+=======
+     if($statusname->status == 30)
+      { echo "<option value='".$statusname->status."'>Completely Closed</option>";}
+    
+>>>>>>> 56f5bba7208640f59ac1946c93822a459ea3d9b7
  }
      ?>
               </select>
@@ -258,7 +264,7 @@ foreach($userwithid as $userwithid)
 
 
         @if(count($wo) > 0)
-            <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
+            <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
@@ -266,7 +272,7 @@ foreach($userwithid as $userwithid)
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
-                    <th>Status</th>
+                   <!-- <th>Status</th>-->
                     <th>Created date</th>
                     <th>Location</th>
                     <th>Duration</th>
@@ -297,12 +303,13 @@ foreach($userwithid as $userwithid)
                               </td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                            @if($work->status == -1)
-                                <td><span class="badge badge-warning">new</span>
+                          <!--  @if($work->status == 30)
+                                <td><span class="badge badge-warning">Completely Closed</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
+<<<<<<< HEAD
                             @elseif($work->status == 1)
                                 <td><span class="badge badge-success">Accepted</span>
                                   <br>
@@ -464,6 +471,10 @@ foreach($userwithid as $userwithid)
                               @else
                                 <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>
                               @endif
+=======
+                            
+                              @endif -->
+>>>>>>> 56f5bba7208640f59ac1946c93822a459ea3d9b7
 
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>

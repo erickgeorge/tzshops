@@ -72,7 +72,7 @@
                     <th>Total</th>
                     <th>Unit Measure</th>
                     <th>Price</th>
-
+    
                 </tr>
                 </thead>
 

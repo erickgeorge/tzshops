@@ -1,4 +1,9 @@
 @extends('layouts.master')
+@section('title')
+    Technician on Progress
+@endSection
+@section('body')
+@if(count($wo) > 0)
 
 <style type="text/css" media="print">
 
@@ -6,22 +11,16 @@
             display:none;
         }
 
-		#exclude2{
+        #exclude2{
             display:none;
         }
 
     </style>
-    @section('title')
-    Technician on Progress
-    @endSection
-
-@section('body')
-@if(count($wo) > 0)
 
     <br>
     <div >
         <div class="col-lg-12">
-            <h5 style=" "  class="container"><b style="text-transform: capitalize;">Available Technician on Progress</b></h5>
+            <h5 style=" "  class="container"><b style="text-transform: capitalize;">Technicians with Works Order on Progress</b></h5>
         </div>
 
         <!--<div class="col-md-6" align="right">
@@ -45,7 +44,7 @@
 
     </div>
     <br>
-    <hr>
+    <hr class="container">
     <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
@@ -64,31 +63,30 @@
             <table class="table table-striped display" id="myTable" style="width:100%">
                 <thead >
                <tr style="color: white;">
-
+                     
+                    <th>#</th>
 					<th>Technician name</th>
-                    <th>Total Works orders</th>
+                    <th>Section</th>
+                    <th>Total Works Orders</th>
 
                 </tr>
                 </thead>
 
                 <tbody>
 
-
+          <?php $i=0; ?>
                 @foreach($wo as $work)
-
+                       <?php $i++; ?>
 
 
 
 
                         <tr>
 
-
-
-
-
-
+                             <td>{{$i}}</td>
 
                             <td>{{ $work['technician_assigned']->fname.' '.$work['technician_assigned']->lname }}</td>
+                             <td>{{ $work['technician_assigned']->type }}</td>
 							<td>{{ $work->total_wo }}  </td>
 
 

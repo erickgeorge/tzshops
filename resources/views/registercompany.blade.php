@@ -35,7 +35,7 @@ Company Registrartion
            
 
                       <hr>
-                 <p align="center" style="color: red">All fields are compulsory</p>
+                 <!--<p align="center" style="color: red">All fields are compulsory</p>-->
 
                 <form method="POST" action="{{ route('company.save') }}" class="col-lg-12">
                     @csrf
@@ -56,9 +56,9 @@ Company Registrartion
       <tr>
      <thead style="color: white;">
         <th style="width: 29px"></th>
-        <th style="width: 270px">Area</th>
-        <th style="width: 250px">Assessment sheet</th>
-        <th style="width: 250px">Monthly payment</th>
+        <th style="width: 270px">Area <sup style="color: red;">*</sup></th>
+        <th style="width: 250px">Assessment sheet <sup style="color: red;">*</sup></th>
+        <th style="width: 250px">Monthly payment <sup style="color: red;">*</sup></th>
 
      </thead>
       </tr>
@@ -151,7 +151,7 @@ Company Registrartion
                         <div class="input-group-prepend">
 
 
-                          <label style="width:150px;" class="input-group-text" for="directorate">Company name</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Company Name <sup style="color: red;">*</sup></label>
 
                         </div>
 
@@ -195,7 +195,7 @@ Company Registrartion
                         <div class="input-group-prepend">
 
 
-                          <label style="width:150px;" class="input-group-text" for="directorate">Tender number</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Tender Number <sup style="color: red;">*</sup></label>
 
                         </div>
 
@@ -227,7 +227,7 @@ Company Registrartion
                   <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
 
-                          <label style="width:150px;" class="input-group-text" for="directorate">Start of contract</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Start of Contract <sup style="color: red;">*</sup></label>
 
                         </div>
 
@@ -240,7 +240,7 @@ Company Registrartion
                   <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
 
-                          <label style="width:150px;" class="input-group-text" for="directorate">Contract Duration</label>
+                          <label style="width:150px;" class="input-group-text" for="directorate">Contract Duration <sup style="color: red;">*</sup></label>
 
                         </div>
                        <!-- <input style="color: black" type="date" required class="form-control" id="type"

@@ -221,7 +221,7 @@ foreach($userwithid as $userwithid)
     orwhere('status',8)->orwhere('status',70)->orwhere('status',40)->orwhere('status',52)->
     orwhere('status',53)->orwhere('status',25)->orwhere('status',18)->orwhere('status',19)->
     orwhere('status',15)->orwhere('status',55)->orwhere('status',57)->orwhere('status',16)->orderBy('id','DESC')->get();
-    foreach ($statusago as $statusname) {
+       foreach ($statusago as $statusname) {
 
      if($statusname->status == -1)
       { echo "<option value='".$statusname->status."'>New</option>";}
@@ -232,7 +232,7 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 2)
       {echo"<option value='".$statusname->status."'>Closed</option>";}
      elseif($statusname->status == 3)
-      {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
+      {echo"<option value='".$statusname->status."'>Technician assigned for work</option>";}
      elseif($statusname->status == 4)
       {echo"<option value='".$statusname->status."'>Transportation stage</option>";}
      elseif($statusname->status == 5)
@@ -243,9 +243,31 @@ foreach($userwithid as $userwithid)
       {echo"<option value='".$statusname->status."'>Material(s) requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
+    elseif($statusname->status == 30)
+      { echo "<option value='".$statusname->status."'>Completly Closed</option>";}
+     elseif($statusname->status == 70)
+      { echo "<option value='".$statusname->status."'>Technician assigned for Inspection</option>";}
+     elseif($statusname->status == 40)
+      { echo "<option value='".$statusname->status."'>Material Requested Approved Succesifully</option>";}
+     elseif($statusname->status == 52)
+      { echo "<option value='".$statusname->status."'>Iow is checking for Works Order</option>";}
+     elseif($statusname->status == 53)
+      { echo "<option value='".$statusname->status."'>Works Order is not approved by IoW</option>";}
+     elseif($statusname->status == 25)
+      { echo "<option value='".$statusname->status."'>Succesifully approved by IoW</option>";}
+     elseif($statusname->status == 18)
+      { echo "<option value='".$statusname->status."'>Correct your Material</option>";}
+     elseif($statusname->status == 19)
+      { echo "<option value='".$statusname->status."'>Material missing in store</option>";}
+     elseif($statusname->status == 15)
+      { echo "<option value='".$statusname->status."'>Material accepted by IoW</option>";}
+     elseif($statusname->status == 55)
+      { echo "<option value='".$statusname->status."'>Materia on check by IoW</option>";}
+     elseif($statusname->status == 57)
+      { echo "<option value='".$statusname->status."'>Material on check by IoW by HoS</option>";}
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
-     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
+    
  }
      ?>
               </select>
@@ -422,13 +444,21 @@ foreach($userwithid as $userwithid)
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
-                           @elseif($work->status == 53)
+                           @elseif(($work->status == 53)and($work->iowreject != 3))
 
                               <td><span>Works Order not  approved by IoW</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
+
+                             @elseif(($work->status == 53)and($work->iowreject == 3))
+
+                              <td><span>Submitted again after rejected by IoW</span>
+                                  <br>
+                                @if($work->emergency == 1)
+                                <span>Emergency</span></td>
+                                @endif    
 
                           @elseif($work->status == 25)
 

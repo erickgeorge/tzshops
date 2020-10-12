@@ -29,6 +29,10 @@ use App\landassessmentform;
 use App\landcrosschecklandassessmentactivity;
  use Carbon\Carbon;
  use App\tendernumber;
+ use App\Room;
+ use App\Location;
+ use App\Area;
+ use App\Block;
 
 
 class NotesController extends Controller
@@ -1302,6 +1306,33 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         return $pdf->stream('All sections report - '.date('d-m-Y Hi').'.pdf');
     }
 
+       public function locationpdfs()
+    {
+        $data['sects'] = Location::where('status',1)->OrderBy('name', 'ASC')->get();
+        $pdf = PDF::loadView('locationspdf', $data);
+        return $pdf->stream('All Locations - '.date('d-m-Y Hi').'.pdf');
+    }
+
+        public function areapdfs()
+    {
+        $data['sects'] = Area::where('status', 1)->OrderBy('name_of_area', 'ASC')->get();
+        $pdf = PDF::loadView('areaspdf', $data);
+        return $pdf->stream('All Areas - '.date('d-m-Y Hi').'.pdf');
+    }
+
+        public function blockpdfs()
+    {
+        $data['sects'] = Block::where('status', 1)->OrderBy('name_of_block', 'ASC')->get();
+        $pdf = PDF::loadView('blockspdf', $data);
+        return $pdf->stream('All Blocks - '.date('d-m-Y Hi').'.pdf');
+    }
+
+        public function roomspdfs()
+    {
+        $data['sects'] = Room::where('status', 1)->OrderBy('name_of_room', 'ASC')->get();
+        $pdf = PDF::loadView('roomspdf', $data);
+        return $pdf->stream('All Rooms - '.date('d-m-Y Hi').'.pdf');
+    }
 
     public function iowzones()
     {
@@ -1538,6 +1569,24 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
      return $pdf->stream('cleaning_company_report - '.date('d-m-Y Hi').'.pdf');
     }
+
+
+
+         public function landcleaningcompanyreportexpired(){
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+
+           $data = [
+            'notifications' => $notifications,
+            'role' => $role,
+                'cleangcompany' => tendernumber::all()
+               ];
+         $pdf = PDF::loadView('landcleaning_companyreportexpired', $data);
+
+     return $pdf->stream('cleaning_company_report_expired - '.date('d-m-Y Hi').'.pdf');
+    }
+
 
 
 

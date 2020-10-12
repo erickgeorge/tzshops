@@ -92,11 +92,47 @@
 
          @endif
     <div class="form-group ">
-        <label for="">Details:</label>
+        <label for="">Description of the problem:</label>
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $wo->details }}</textarea>
     </div>
 
+<br>
+ @if(auth()->user()->type == 'Maintenance coordinator')
+  @if($wo->problem_type == 'Others')  
+  <p>Choose  problem type if you want to redirect to right section</p>
+
+   <form method="POST" action="{{route('redirect_wo',[$wo->id])}}"
+                  class="col-md-6">
+                        @csrf
+     
+       <div class="form-group ">
+                        <label for="dep_name">Problem Type</label>
+                        <br>
+                        <select style="width: 500px" required class="custom-select" name="p_type">
+                           <option selected value="" >Choose problem type</option>
+                                @foreach($sections as $section)
+                                  <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
+                                @endforeach
+                        </select>
+      </div>
+         <button type="submit" class="btn btn-primary">Save</button>
+ </form>  
+  @endif
+
+  
+  @else
+ 
+
+
+ <h4>Wrong problem type?</h4>
+    <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
+        @csrf
+        <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
+    </form>
+    <br>
+   @endif 
+  
 <br>
 
 <script>
@@ -128,12 +164,7 @@ function autoSubmit()
         </div>
     </div>
     <br>
-    <h4>Wrong problem type?</h4>
-    <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
-        @csrf
-        <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
-    </form>
-    <br>
+   
 
 
     <!-- Modal -->

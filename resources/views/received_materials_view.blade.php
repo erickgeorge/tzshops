@@ -65,13 +65,9 @@
         <th >Material Name</th>
         <th >Material Description</th>
         <th >Type</th>
-                @if(auth()->user()->type =='STORE')
-                <th>Available Quantity</th>
-                @else
-                <th >Available Quantity</th>
-                @endif
+        <th>Quantity</th>
 
-        <th >Status</th>
+      <!--  <th >Status</th>-->
         <th >Received Status</th>
 
             </tr>
@@ -91,13 +87,13 @@
                     <td>{{ $item['material']->type }}</td>
                     <td>{{ $item->quantity }}</td>
 
-                       @if($item->checkreserve == 1)
+                     <!--  @if($item->checkreserve == 1)
                        <td style="color: blue"><span class="badge badge-info">Available</span> <br><span class="badge badge-light">purchased</span>
                       </td>
                        @else
                        <td style="color: blue"><span class="badge badge-info">Available</span>
                       </td>
-                       @endif
+                       @endif -->
 
                        @if( $item->secondstatus == null)
 
@@ -126,7 +122,7 @@
          <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>   @endif
          @else
          @if(($item->status == 3) and ($item->secondstatus != 1))
-         <h5  style="     color: #733703;"><b>  Please confirm if you have received Material.</b></h5>
+         <h5  style="     color: #733703;"><b>  Please confirm if you have received Material(s).</b></h5>
          <a class="btn btn-primary btn-sm"  href="tick/material_received/{{$item->work_order_id}}" role="button">Confirm (&#10004;)</a>
          @endif
 

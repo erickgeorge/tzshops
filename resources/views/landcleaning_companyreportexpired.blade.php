@@ -4,7 +4,7 @@
     <p><h2>University of Dar es Salaam</h2>
      <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
-<p style="text-align: center;"><B> List of Companies with Active Tenders </B>
+<p style="text-align: center;"><B> Companies with Expired/Terminated Contracts </B>
  </p>
 </div>
 <style>
@@ -101,18 +101,19 @@ tr:nth-child(even) {
                     <tbody>
                     <?php $i = 0; ?>
                     @foreach($cleangcompany as $house)
-                        <?php $i++; ?>
 
-                     @if($house->status == 1)
-
-                             <?php $now1 =  Carbon::now();
+                    <?php $now1 =  Carbon::now();
 
                              $endcont = Carbon::parse($house->endcontract);?>
+
+
+
                             @if($now1 > $endcont)
-                         
-                             @else
-                          
-  
+                           
+                           
+
+
+                        <?php $i++; ?>
 
 
 
@@ -195,66 +196,8 @@ tr:nth-child(even) {
 
 
 
+  @endif
 
-                   @endif
-                    @else
-
-
-
-                        <tr>
-                            <th scope="row">{{ $i }}</th>
-                            <td>{{ $house->tender }}</td>
-                            <td>{{ $house['tendercompany']->company_name }}</td>
-
-
-
-
-                            @if($house->status == 1)
-
-
-                 <?php $date = Carbon::parse($house->datecontract);
-                 $now = Carbon::parse($house->endcontract);
-                 $diff = $date->diffInDays($now); ?>
-
-                 @if($diff >= 365)
-
-                           <td><?php
-
-
-                             $start_date = new DateTime();
-                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
-                             $dd = date_diff($start_date,$end_date);
-                             echo $dd->y." years ".$dd->m." months ".$dd->d." days"; ?></td>
-
-
-
-
-                   @else
-
-                           <td><?php
-
-
-                             $start_date = new DateTime();
-                             $end_date = (new $start_date)->add(new DateInterval("P{$diff}D") );
-                             $dd = date_diff($start_date,$end_date);
-                             echo $dd->m." months ".$dd->d." days"; ?></td>
-
-
-
-
-                  @endif
-
-
-
-
-
-                            @else
-                            <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
-                            @endif
-
-
-
-                     @endif
 
                     @endforeach
                     </tbody>

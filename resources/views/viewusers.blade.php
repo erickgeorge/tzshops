@@ -41,13 +41,6 @@
 
 
 
-
-
-
-
-
-
-
     <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -692,6 +685,8 @@ use App\Department;
 use App\Section;
  ?>
 
+<?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>  
+
  @if($role['user_role']['role_id'] == 1)
 <br>
 <div class="row container-fluid" >
@@ -829,14 +824,47 @@ use App\Section;
         </button>
       </div>
 
-  <div class="modal-body">
+
+
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+               
+
+
+            <select  style="color: black; " class="custom-select" name="directorate" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+                <option selected="selected" value="">Select Directorate</option>
+                <option selected value="" >All Directorates</option>
+              @foreach($directoratenew as $directorate)
+              <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+              @endforeach
+            </select>
+
+
+
+
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+              <select  style="color: black;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
+                 <option selected value="" >All Directorates</option>
+            </select>
+            </div>
+        </div>
+      </div>
+
+        <div class="modal-body">
         <div class="row">
             <div class="col">
                 <select name="college" class="form-control mr-sm-2">
                     <option selected="selected" value="">Select name</option>
                     <option value="">All users</option>
         <?php
-                 $userfetch = user::get();
+  $userfetch = user::get();
   foreach($userfetch as $userfetch)
   {
 
@@ -879,47 +907,7 @@ use App\Section;
         </div>
       </div>
 
-      <div class="modal-body">
-        <div class="row">
-            <div class="col">
-                <select name="directorate" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select Directorate</option>
-                    <option value="">All Directorates</option>
-                    <?php
 
-                    $directoras = directorate::orderBy('name','ASC')->get();
-                    foreach($directoras as $directoras){?>
-            <option value=" {{ $directoras->id }}">{{ $directoras->name }}</option>
-                    <?php }
-                               ?>
-
-                </select>
-            </div>
-        </div>
-      </div>
-
-      <div class="modal-body">
-        <div class="row">
-            <div class="col">
-                <select name="department" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select Department</option>
-                    <option value="">All Departments</option>
-                    <?php
-                    $departmen  = department::orderBy('name','ASC')->get();
-    foreach($departmen  as $departm )
-    {
-
-        $director  = directorate::where('id',$departm ->directorate_id)->get();
-        foreach($director  as $director ){?>
-<option value="{{ $departm ->id }} ">  {{ $departm ->description }} - {{ $director ->name }}</option>
-        <?php }
-    }
-                   ?>
-
-                </select>
-            </div>
-        </div>
-      </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Export</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -1461,7 +1449,7 @@ for (i = 0; i < dropdown.length; i++) {
 
 <script type="text/javascript">
 
-      $("#directorate").select2({
+      $("#directoraterr").select2({
             placeholder: "Choose College...",
             allowClear: true
         });
@@ -1477,7 +1465,7 @@ for (i = 0; i < dropdown.length; i++) {
 
 <script type="text/javascript">
 
-      $("#department").select2({
+      $("#departmentrr").select2({
             placeholder: "Choose Department...",
             allowClear: true
         });
@@ -1640,5 +1628,47 @@ for (i = 0; i < dropdown.length; i++) {
     document.querySelector("body").style.visibility = "visible";
   }
 };
+
+</script>
+
+
+<script type="text/javascript">
+  
+
+var selecteddep = null;
+var selectedsection = null;
+
+function getDepartments() {
+    selecteddep = document.getElementById('directorate').value;
+
+    console.log('ID: ' + selecteddep);
+    $.ajax({
+            method: 'GET',
+            url: 'departments/',
+            data: { id: selecteddep }
+        })
+        .done(function(msg) {
+            console.log(msg['departments']);
+            var object = JSON.parse(JSON.stringify(msg['departments']));
+            $('#department').empty();
+
+            var option = document.createElement('option');
+            option.innerHTML = 'Choose...';
+            option.value = '';
+            document.getElementById('department').appendChild(option);
+
+
+
+
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].description;
+                option.value = object[i].id;
+                document.getElementById('department').appendChild(option);
+            }
+        });
+}
+
+
 
 </script>

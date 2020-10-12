@@ -96,36 +96,30 @@ td, th {
 
             <td>Problem Type : <b>{{ ucwords(strtolower($wo->problem_type)) }}</b> </td>
         </tr>
-        <tr>
+       
+          @if(empty($wo->room_id)) 
+          <tr>
+            <td colspan="4">Location : <b>{{ $wo->location }} </b></td> </tr>
+           
+         @else
 
-            <td> Location : <b>@if(empty($wo->room_id)) {{ $wo->location }}
-                @else
+         <tr><td> Location: <b>
                    {{ $wo['room']['block']->location_of_block }}
-                @endif </b> </td>
-                <td>
-                    Area : <b>@if(empty($wo->room_id))
-                        {{ $wo->room_id }}
-
-                                  @else
-                           {{ $wo['room']['block']['area']->name_of_area }}
-                                  @endif</b>
-                </td>
-                <td>
-                    Block : <b>@if(empty($wo->room_id)) {{ $wo->location }}
-                        @else
-                           {{ $wo['room']['block']->location_of_block }}
-                        @endif</b>
-                </td>
-                <td>
-                    Room : <b>@if(empty($wo->room_id))
-                        {{ $wo->location }}
-                      @else
-                          {{ $wo['room']->name_of_room }}
-                      @endif</b>
-                </td>
-        </tr>
+            </b> </td>
+            <td >Area : <b>
+                        
+                   {{ $wo['room']['block']['area']->name_of_area }}
+                          </b></td>
+            <td>Block : <b>
+                   {{ $wo['room']['block']->location_of_block }}
+                </b> </td>
+            <td>Room : <b>
+                  {{ $wo['room']->name_of_room }}
+             </b></td>
+       </tr>
+              @endif
         <tr>
-            <td colspan="4">Details :
+            <td colspan="4">Description of the problem :
             <b>{{ $wo->details }}</b></td>
         </tr>
         <tr>

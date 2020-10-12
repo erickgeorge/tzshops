@@ -29,9 +29,9 @@ Company Registration
 
 
 <div class="container">
-                <h5 style=" text-transform: capitalize;"   id="Add New House" >Register new company</h5>
+                <h5 style=" text-transform: capitalize;"   id="Add New House" >Register New Company</h5>
                       <hr>
-                 <p align="center" style="color: red">All fields are compulsory</p>
+                <!-- <p align="center" style="color: red">All fields are compulsory</p>-->
           
                 <form method="POST" action="{{ route('company.save.renew') }}" class="col-lg-12">
                     @csrf
@@ -43,7 +43,7 @@ Company Registration
                         <div class="input-group-prepend">
                             
 
-                          <label style="width:150px;" class="input-group-text" for="directorate"><b>Company name</b></label>
+                          <label style="width:150px;" class="input-group-text" for="directorate"><b>Company Name <sup style="color: red;">*</sup></b></label>
 
                         </div>
                         <input style="color: black;" type="text" required class="form-control" id="name"
@@ -81,7 +81,7 @@ Company Registration
                     <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
-                            <label style="width:150px;" class="input-group-text" for="directorate">Type </label>
+                            <label style="width:150px;" class="input-group-text" for="directorate">Type <sup style="color: red;">*</sup></label>
                         </div>
                          <select required style="color: black;" class="custom-select" name="type" >
                                 
@@ -102,7 +102,7 @@ Company Registration
                         <div class="input-group-prepend">
                             
 
-                          <label style="width:150px;" class="input-group-text" for="directorate"><b>Tender number</b> </label>
+                          <label style="width:150px;" class="input-group-text" for="directorate"><b>Tender Number <sup style="color: red;">*</sup></b> </label>
 
                      <TABLE id="dataTable" width="300px" border="1">
                             <TR>

@@ -64,6 +64,10 @@ class WorkOrder extends Model
         return $this->belongsTo('App\User','clientclose');
     }
 
+          public function hos2close(){
+        return $this->belongsTo('App\User','hosclose2');
+    }
+
 
 
 }

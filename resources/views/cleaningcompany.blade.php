@@ -181,12 +181,12 @@
 
                     &nbsp; &nbsp;
                    <a href="{{ route('tenders_reached') }}"
-                   class="btn btn-success" >Tenders with day reached for assessment</a>
+                   class="btn btn-success" >Tenders Due for Assessment</a>
 
 
                     &nbsp; &nbsp;
                    <a style="color:white; " href="{{ route('cleaningcompanywithexpiredcontract') }}"
-                   class="btn btn-secondary" >Previous Tenders</a>
+                   class="btn btn-secondary" >Expired/Terminated Tenders</a>
 
 
 
@@ -216,7 +216,7 @@
 
 
                     <?php $i = 0;  $ii = 0;  $iii = 0;?>
-                  @if(auth()->user()->type == 'Supervisor Landscaping')
+  @if(auth()->user()->type == 'Supervisor Landscaping')
                     @foreach($cleangcompanylandscaping as $house)
                         <?php $i++;?>
 
@@ -247,10 +247,10 @@
                              <td>{{ $house->type }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assessed yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
+                           <td><span >Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span >Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
-                           <td><span class="badge badge-warning">Contract Expired </span><br>
+                           <td><span>Contract Expired </span><br>
 
 
                   @else
@@ -259,11 +259,11 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span >Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Can not assessed </span><br></td>
+                           <td><span>Can not assessed </span><br></td>
         @else
 
 
@@ -300,7 +300,7 @@
 
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
+                           <td><span>Contract expired </span></td>
         @else
 
                  @if($diff >= 365)
@@ -446,10 +446,10 @@
                               <td>{{ $house->type }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assessed yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
+                           <td><span >Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span>Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
-                           <td><span class="badge badge-warning">Contract Expired </span><br>
+                           <td><span >Contract Expired </span><br>
 
 
                   @else
@@ -458,11 +458,11 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span>Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Can not assessed </span><br></td>
+                           <td><span>Can not assessed </span><br></td>
         @else
 
 
@@ -499,7 +499,7 @@
 
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
+                           <td><span>Contract expired </span></td>
         @else
 
                  @if($diff >= 365)
@@ -650,9 +650,9 @@
 
                   @if($house->status == 2 )
                            <td><span class="badge badge-danger">Not assessed yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
+                            @if($now1 >= $next30days)<span>Days reached please assess</span>@endif </td>
                   @elseif($now1 > $endcont)
-                           <td><span class="badge badge-warning">Contract Expired </span><br>
+                           <td><span>Contract Expired </span><br>
 
 
                   @else
@@ -661,11 +661,11 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span>Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Can not assessed </span><br></td>
+                           <td><span>Can not assessed </span><br></td>
         @else
 
 
@@ -702,7 +702,7 @@
 
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
+                           <td><span>Contract expired </span></td>
         @else
 
                  @if($diff >= 365)
@@ -847,10 +847,10 @@
                               <td>{{ $house->type }}</td>
 
                   @if($house->status == 2 )
-                           <td><span class="badge badge-danger">Not assessed yet </span><br>
-                            @if($now1 >= $next30days)<span class="badge badge-danger">Days reached please assess</span>@endif </td>
+                           <td><span>Not assessed yet </span><br>
+                            @if($now1 >= $next30days)<span>Days reached for assessment</span>@endif </td>
                   @elseif($now1 > $endcont)
-                           <td><span class="badge badge-warning">Contract Expired </span><br>
+                           <td><span>Contract Expired </span><br>
 
 
                   @else
@@ -859,11 +859,11 @@
                               $newDate = date("Y-m-d", strtotime("-2 month", $ddate));
                                                                                     ?>
 
-                           <td><span class="badge badge-primary">Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
+                           <td><span>Assessed in {{ date('F Y', strtotime($newDate))}}</span> </td>
                   @endif
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Can not assessed </span><br></td>
+                           <td><span>Can not assessed </span><br></td>
         @else
 
 
@@ -900,7 +900,7 @@
 
 
         @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
+                           <td><span>Contract expired </span></td>
         @else
 
                  @if($diff >= 365)

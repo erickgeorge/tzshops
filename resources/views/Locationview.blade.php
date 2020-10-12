@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Workorder Section
+Locations
 @endSection
 
 @section('body')
@@ -9,7 +9,7 @@ Workorder Section
 
 <div class="container" >
 
-
+<br>
 	 @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -29,17 +29,17 @@ Workorder Section
 
     <div>
 <br><br>
-                <h4
-                    >List of Available Sections</h4></div>
+                <h4 
+                    >List of Available Locations</h4></div>
 
 
 
 
             <hr class="container">
 
-            <a href="Add/section" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add New Section</a>
-                   <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
+            <a href="Add/locations" style="margin-bottom: 20px;"
+                   class="btn btn-primary">Add New Location</a>
+                   <a href="{{ url('locationpdf')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
@@ -47,7 +47,7 @@ Workorder Section
                     <thead >
                     <tr style="color: white;">
                         <th scope="col">#</th>
-                        <th scope="col">Name of Section</th>
+                        <th scope="col">Name of Location</th>
 
                         <th scope="col">Actions</th>
                     </tr>
@@ -56,25 +56,25 @@ Workorder Section
 
 
                     <?php $i = 0; ?>
-                    @foreach($worksec as $dep)
+                    @foreach($Loc as $dep)
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
 
-                            <td><?php echo ucwords(strtolower( $dep->section_name )); ?></td>
+                            <td><?php echo ucwords(strtolower( $dep->name )); ?></td>
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;
                                     <a style="color: green;"
-                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->section_name }}')"
-                                       data-toggle="modal" data-target="#editsection" title="Edit"><i
+                                       onclick="myfunc1('{{ $dep->id }}','{{ $dep->name }}')"
+                                       data-toggle="modal" data-target="#editloc" title="Edit"><i
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this Workorder Section Completely? \n\n {{   $dep->section_name }} \n\n')"
-                                          action="{{ route('worksection.delete', [$dep->id]) }}">
+                                          onsubmit="return confirm('Are you sure you want to deactivate this Location  Completely? \n\n {{   $dep->name }} \n\n')"
+                                          action="{{ route('Location.delete', [$dep->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                title="Delete" style="color: red;" data-toggle="tooltip"><i
+                                                title="deactivate" style="color: red;" data-toggle="tooltip"><i
                                                     class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </div>
@@ -93,41 +93,37 @@ Workorder Section
             </div>
 
 
-              <div class="modal fade" id="editsection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              <div class="modal fade" id="editloc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Section</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Location</h5>
 
 
                 </div>
 
-             
+              
                     <div class="modal-body">
 
-   <form method="POST" action="edit/workordersection" class="col">
+         <form method="POST" action="edit/locationn" class="col">
                         @csrf
 
-
-
-
-
                     <div class="form-group ">
-                        <label for="dep_name">Section Name</label>
+                        <label for="dep_name">Location Name</label>
                         <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"
-                               name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc." >
+                               name="sec_name" placeholder="Enter location name" >
                                  <input id="esecid" name="esecid" hidden>
                     </div>
 
 
-                        <button type="submit" class="btn btn-primary">Save
+                        <button type="submit" class="btn btn-primary">save
                         </button>
-                        <a href="/Manage/section" class="btn btn-danger">Cancel
+                        <a href="/Manage/locations" class="btn btn-danger">Cancel
                     </a>
-      </form>
+          </form>
                     </div>
-          
+      
 
 
                 <div class="modal-footer">

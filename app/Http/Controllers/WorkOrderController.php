@@ -27,6 +27,7 @@ use App\zoneinspector;
 use App\techwork;
 use App\WoInspectionForm;
 use Carbon\Carbon;
+use App\workordersection;
 
 
 class WorkOrderController extends Controller
@@ -76,7 +77,7 @@ class WorkOrderController extends Controller
         $work_order->month_ = date('m');
         $work_order->save();
 
-        return redirect()->route('work_order')->with(['message' => 'Works order successfully created']);
+        return redirect()->route('work_order')->with(['message' => 'Works order successfully sent to DES']);
     }
 
     public function rejectWO(Request $request, $id)
@@ -151,9 +152,9 @@ $message = $client->message()->send([
       }
 
  */
+     $createddate = date('d F Y', strtotime($wO->created_at));
 
-
-     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system so as to check the reason of rejection.",
+     $data = array('name'=>$userName, "body" => "Your Works order sent to Directorate of Estates Services on  $createddate, of  Problem Type $wO->problem_type, has been REJECTED and given identification number 00$wO->id. Please login in the system so as to check the reason of rejection.",
 
                   "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -270,17 +271,25 @@ session::flash('message', ' Your workorder have been accepted successfully ');
  */
 
 //for email that currently working disabled partially
+
+       $createddate = date('d F Y', strtotime($wO->created_at));
+
         if ($wO->emergency == 1) {
 
-                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
+                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $createddate, of  Problem Type $wO->problem_type has been ACCEPTED as EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
         }
 
         if ($wO->emergency == 0) {
+<<<<<<< HEAD
 
                 $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
+=======
+            
+                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $createddate, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
+>>>>>>> 56f5bba7208640f59ac1946c93822a459ea3d9b7
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
@@ -335,7 +344,8 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         return view('view_work_order', [
             'role' => $role,
             'notifications' => $notifications,
-            'wo' => WorkOrder::where('id', $id)->first()
+            'wo' => WorkOrder::where('id', $id)->first(),
+            'sections' => workordersection::OrderBy('section_name', 'ASC')->get()
         ]);
     }
 
@@ -445,8 +455,12 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
              $mForm = WorkOrder::where('id', $id)->first();
              $mForm->iowreject = 3;
+             $mForm->hosclose2 = auth()->user()->id;
+             $mForm->hosclose2date = Carbon::now();
              // $mForm->statusmform=4;
              $mForm->save();
+
+             $tech_complete_work =techwork::where('wo_id', $id)->update(array('status' =>1));
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -1117,16 +1131,15 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $wo = WorkOrder::where('id', $id)->first();
         $wo->problem_type = 'Others';
+        $wo->redirectedhos = auth()->user()->id;
         $wo->save();
         return redirect()->route('work_order')->with([
             'role' => $role,
             'notifications' => $notifications,
-            'message' => 'Work order successfully sent to Maintenance coordinator',
+            'message' => 'Works order successfully sent to Maintenance coordinator',
             'wo' => WorkOrder::where('problem_type', substr(strstr(auth()->user()->type, " "), 1))->where('status', '<>', 0)->get()
         ]);
     }
-
-
 
 
     public function trackWO($id)
@@ -1177,7 +1190,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $receiver_id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your works order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been temporally closed closed!.';
+        $notify->message = 'Your works order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been temporally closed!.';
         $notify->save();
 
 
@@ -1313,6 +1326,36 @@ session::flash('message', ' Your workorder have been closed successfully');
         $wo->save();
 
 
+       $emailReceiver = User::where('id', $wo->client_id)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+
+        $createddate = date('d F Y', strtotime($wo->created_at));
+
+
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on  $createddate, of  Problem Type $wo->problem_type has been COMPLETED. Please login in the system so as to close your works order otherwise your works order will be closed automatically after 7 days.",
+
+                    "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('WORKS ORDER COMPLETION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+
+
+
         return redirect()->route('workOrder.track', [$id])->with([
             'role' => $role,
             'notifications' => $notifications,
@@ -1333,7 +1376,7 @@ session::flash('message', ' Your workorder have been closed successfully');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $wo = WorkOrder::find($id);
-        $wo->status = 9;
+        $wo->status = 30;
         $wo->clientclose = auth()->user()->id;
         $wo->clientclosedate = Carbon::now();
         $p_type= $wo->problem_type;

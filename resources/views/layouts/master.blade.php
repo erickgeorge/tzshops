@@ -238,6 +238,10 @@
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
 
@@ -445,15 +449,13 @@
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
-
-
-
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorates</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
         </div>
        </li>
 
@@ -754,7 +756,7 @@
 <body>
 
 <div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('work_order')}}" >Works orders </a>
+  <a  href="{{ url('work_order')}}" >Works Orders </a>
  @if($role['user_role']['role_id'] == 1)
 
 
@@ -765,13 +767,13 @@
   @if($role['user_role']['role_id'] != 1)
  <a  href="{{ url('technicians') }}">Technicians</a>
  @endif
- <button class="dropdown-btn">Material Update
+ <button class="dropdown-btn">Materials Update
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
     <a  href="{{ url('material_rejected_with_workorder')}}">Rejected Materials <span
                                     class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
-    <a  href="{{ url('material_received_with_workorder')}}">Received Material from Store<span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
+    <a  href="{{ url('material_received_with_workorder')}}">Received Materials from Store<span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
 
   </div>
 
@@ -780,21 +782,35 @@
 
  @if(auth()->user()->type == 'Maintenance coordinator')
 
-  <a  href="{{ url('redirected_work_order')}}">Redirected Works order</a>
+  <a  href="{{ url('redirected_work_order')}}">Redirected Works Order</a>
 
   <a  href="{{ url('roomreport')}}">Room Report</a>
 
    <a  href="{{ url('comp') }}" >
     Complaints <i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
+
+      <button
+
+  class="dropdown-btn">Heads of Sections
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a  href="{{ url('/allhos')}}">All Heads of sections Details</a>
+    <a  href="{{ url('hoscount')}}">HoS with Completed Works Orders</a>
+  </div>
+
+   <a  href="{{ url('/alliow')}}">Inspectors of Works</a>
+
+
    <a  href="{{ url('technicians') }}">Technicians</a>
    <a  href="{{ url('workzones')}}">Zones</a>
 
-    <button  class="dropdown-btn">Material Requests Update
+    <button  class="dropdown-btn">Materials Requests Update
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
     <a  href="{{ url('work_order_material_needed')}}">
-        Work order needs material <span
+        Works Order needs materials <span
                                     class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
     <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}">
         Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
@@ -831,8 +847,8 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a class="btn" href="{{ url('/unattended_work_orders')}}">Unattended <br> Works orders</a>
-    <a class="btn" href="{{ url('/completed_work_orders')}}">Completed <br> Works orders</a>
+    <a class="btn" href="{{ url('/unattended_work_orders')}}">Unattended <br> Works Orders</a>
+    <a class="btn" href="{{ url('/completed_work_orders')}}">Completed <br> Works Orders</a>
     <!--<a class="btn" href="{{ url('/woduration')}}"><h6>Works orders Duration</h6></a>-->
 
 
@@ -845,7 +861,7 @@
   </button>
   <div class="dropdown-container">
     <a  href="{{ url('/allhos')}}">All Heads of sections Details</a>
-    <a  href="{{ url('hoscount')}}">HoS with completed works orders</a>
+    <a  href="{{ url('hoscount')}}">HoS with completed Works Orders</a>
   </div>
 
 
@@ -869,7 +885,7 @@
     <a href="{{ url('stores')}}">All Materials in Store<span
                             class="badge badge-light">{{ count($m) }}</span></a>
     <a href="{{ url('work_order_with_missing_material')}}">
-        Purchase <span
+        Materials to be purchased <span
                                     class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
   </div>
 
@@ -912,7 +928,7 @@
 
 
                         <a  href="{{ url('material_received_with_workorder')}}" >
-                            Material Taken From Store <span
+                            Materials Taken From Store <span
                                     class="badge badge-light">{{ count($material_used) }}</span>
                                 </a>
 
@@ -925,7 +941,7 @@
 
 
                         <a  href="{{ url('wo_material_accepted_by_iow')}}">
-                            Material requests<span
+                            Materials Requests<span
                                     class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span>
                                 </a>
 
@@ -941,7 +957,7 @@
 
 
                         <a href="{{ url('work_order_material_purchased') }}" >
-                            Material Purchased <span
+                            Materials Purchased <span
                                     class="badge badge-light">{{ count($material_to_purchased) }}</span>
                                 </a>
 
@@ -1031,7 +1047,7 @@
 
 
                         <a href="{{ url('work_order_material_needed')}}">
-                            Works orders needs material <span
+                            Works orders needs Materials <span
                                     class="badge badge-light">{{ count($material_requests) }}</span>
                                 </a>
 
