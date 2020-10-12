@@ -32,7 +32,7 @@ StaffHouse Registrartion
                 <h5  id="Add New House">Register New Cleaning Area</h5>
 
                       <hr>
-                 <p align="center" style="color: red">All fields are compulsory</p>
+                <!-- <p align="center" style="color: red">All fields are compulsory</p>-->
 
                 <form method="POST" action="{{ route('area.save') }}" class="col-lg-12">
                     @csrf
@@ -45,7 +45,7 @@ StaffHouse Registrartion
                      <div class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
 
-                          <label style="width:200px;" class="input-group-text" for="directorate">Cleaning Area Name </label>
+                          <label style="width:200px;" class="input-group-text" for="directorate">Cleaning Area Name <sup style="color: red;">*</sup> </label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="cleaning_name" placeholder="Enter Cleaning Area Name">
@@ -55,7 +55,7 @@ StaffHouse Registrartion
                      <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
-                            <label style="width:200px;" class="input-group-text" for="directorate">Hostel </label>
+                            <label style="width:200px;" class="input-group-text" for="directorate">Hostel <sup style="color: red;">*</sup> </label>
                         </div>
                          <select required style="color: black;" class="custom-select" name="hostel" >
                                 <option selected value=""> Choose... </option>
@@ -70,7 +70,7 @@ StaffHouse Registrartion
                     <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
-                            <label style="width:200px;" class="input-group-text" for="directorate">LOT Name </label>
+                            <label style="width:200px;" class="input-group-text" for="directorate">LOT Name <sup style="color: red;">*</sup></label>
                         </div>
                         <input style="color: black" type="text" required class="form-control" id="Housename"
                                name="zone" placeholder="Enter LOT Name">
@@ -81,7 +81,7 @@ StaffHouse Registrartion
                 <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
-                            <label style="width:200px;" class="input-group-text" for="directorate">Type </label>
+                            <label style="width:200px;" class="input-group-text" for="directorate">Type <sup style="color: red;">*</sup></label>
                         </div>
                          <select required style="color: black;" class="custom-select" name="areatype" >
                                 <option selected value=""> Choose .. </option>
@@ -96,7 +96,7 @@ StaffHouse Registrartion
                      <div class="input-group mb-3 col-lg-6" >
                         <div class="input-group-prepend">
                             
-                            <label style="width:200px;height: 28px;" class="input-group-text" > Directorate/College </label>
+                            <label style="width:200px;height: 28px;" class="input-group-text" > Directorate/College <sup style="color: red;">*</sup></label>
                         </div>
                          <select required style="color: black;" class="custom-select" name="college" id="directorate" >
                                   <option selected value="" >Choose ...</option>

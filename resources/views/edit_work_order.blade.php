@@ -363,6 +363,66 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
+<!-- transport for inspection -->
+
+
+    <?php
+
+  $idwo=$wo->id;
+  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 0)->get();
+?>
+
+    @if(count($tforms)>0)
+
+ <h4><b>Transport Description for Inspection</b></h4>
+
+<table style="width:100%"> <table class="table table-striped  display" style="width:100%">  <tr>
+     <thead style="color: white;">
+    <th>Date of Transport</th>
+    <th>Time</th>
+    <th>Details</th>
+  <th>Status</th>
+  <th>Message</th>
+
+    <th>Date</th>
+  </thead>
+  </tr>
+    @foreach($tforms as $tform)
+
+
+  <tr>
+    <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
+    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
+     <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
+                                                                         class="badge badge-success">View Details</span></a></td>
+    <td class="text-primary">@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
+
+
+
+     <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
+                                                                         class="badge badge-success">View Message</span></a></td>
+
+ <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
+
+  </tr>
+
+  @endforeach
+  </table>
+  <br>
+     <hr>
+       <br>
+
+
+
+  <br>
+    @endif
+    <br>
+<!-- transport for inspection -->
+
+
+
+
+
 
 <!--report before work-->
 
@@ -402,9 +462,205 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
+<!--material used and requested-->
+
+
+  @if(auth()->user()->type != 'CLIENT')
+
+  @if(empty($wo['work_order_material']->id))
+
+    @else
+     <?php
+
+  $idwo=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+    ?>
+    @if(count($matforms) == 1)
+    <h4><b>1 Material Requested </b></h4>
+    @else
+    <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
+    @endif
+
+
+<table class="table table-striped  display" style="width:100%">
+  <tr>
+     <thead style="color: white;">
+
+    <th>Name</th>
+
+  <th>Type</th>
+   <th>Quantity</th>
+   <th>Approved By</th>
+    <th>Status</th>
+     <th>Date Requested</th>
+      <th>Date Updated</th>
+    </thead>
+
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+
+    <td>{{$matform['material']->name }}</td>
+
+    <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+       <td>
+       @if($matform->accepted_by == NULL)
+      <span >Not accepted Yet.</span>
+       @else
+       {{ $matform['acceptedby']->name }}
+       @endif
+       </td>
+   <td >@if($matform->status==0)<span > Waiting for Material Approval </span> @elseif($matform->status== 1)<span >Approved by IoW </span> @elseif($matform->status== 2) <span >Released from Store </span> @elseif($matform->status==20) <span >Please Crosscheck Material(s) </span> @elseif($matform->status==17) <span >Some of Material Rejected</span> @elseif($matform->status== 5)<span >Material on Procurement Stage</span> @elseif($matform->status== 3)<span >Material Taken From Store</span>
+   @elseif($matform->status== 100)<span >Reserved</span> @elseif($matform->status == -1)<span >
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span >Material Purchased</span>
+       @endif</td>
+
+  <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
+
+    <td>{{ date('d F Y', strtotime($matform->updated_at))  }} </td>
+
+
+  </tr>
+
+  @endforeach
+
+  </table>
+  <br>
+    <hr>
+    <br>
+    @endif
 
 
 
+
+  
+
+   @elseif(auth()->user()->type == 'CLIENT')
+
+  @if(empty($wo['work_order_material']->id))
+
+    @else
+     <h4><b>Material(s) Requested: </b></h4>
+    <?php
+
+  $idwo=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+  ?>
+
+ <table class="table table-striped  display" style="width:100%">
+  <tr>
+     <thead style="color: white;">
+
+    <th>Material Name</th>
+
+  <th>Type</th>
+   <th>Quantity</th>
+   <th>IoW</th>
+   <th>Approved By</th>
+    <th>Status</th>
+     <th>Date Requested</th>
+      <th>Date Updated</th>
+    </thead>
+
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+
+    <td>{{$matform['material']->name }}</td>
+
+    <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+   <td>{{$matform['iowzone']->name }}</td>
+       <td>
+       @if($matform->accepted_by == NULL)
+      <span >Not accepted Yet.</span>
+       @else
+       {{ $matform['acceptedby']->name }}
+       @endif
+       </td>
+   <td >@if($matform->status==0)<span > WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span >APPROVED BY IOW </span> @elseif($matform->status== 2) <span >RELEASED FROM STORE </span> @elseif($matform->status==20) <span >PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span >SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span >MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span >MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span >
+    REJECTED BY IOW</span>@elseif($matform->status== 15)<span >MATERIAL PURCHASED</span>
+       @endif</td>
+
+  <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
+
+    <td><?php $time = strtotime($matform->updated_at); echo date('d/m/Y',$time);  ?> </td>
+
+
+  </tr>
+
+  @endforeach
+
+  </table>
+    @endif
+
+    <br>
+
+  <br>
+  <hr>
+    <br>  <br>
+   @endif
+
+
+
+
+
+    <?php
+
+  $idw=$wo->id;
+  $matforms = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
+?>
+
+
+  @if(count($matforms) > 0)
+
+   @if(count($matforms) == 1)
+    <h4><b>1 Material Used and Approved </b></h4>
+    @else
+    <h4><b>{{ count($matforms) }} Materials Used and Approved  </b></h4>
+    @endif
+
+
+
+ <table class="table table-striped  display" style="width:100%">
+  <tr>
+     <thead style="color: white;">
+
+    <th>Name</th>
+    <th> Description</th>
+     <th>Type</th>
+     <th>Quantity</th>
+   </thead>
+  </tr>
+    @foreach($matforms as $matform)
+  <tr>
+   <td>{{$matform['material']->name }}</td>
+   <td>{{$matform['material']->description }}</td>
+   <td>{{$matform['material']->type }}</td>
+   <td>{{$matform->quantity }}</td>
+  </tr>
+
+  @endforeach
+
+
+  </table>
+  <br>
+
+  <hr>
+
+  @endif
+
+    <!--material used and requested-->
+
+
+
+
+<br>
+
+
+
+  <!--Technician Assigned for work-->
 
 
 
@@ -486,101 +742,8 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <br>
  @endif
 @endif
+  <!--Technician Assigned for work-->
 
-
-
-<!--report after work-->
-
-
-    <?php
-
-  $idwo=$wo->id;
-  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Report after work')->get();
-        ?>
-    @if(count($iforms)>0)
-
-  @foreach($iforms as $iform)
-  @endforeach
-
- <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
-
- <div class="form-group ">
-        <label for="">Description:</label>
-        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
-                  id="comment" disabled>{{ $iform->description }}</textarea>
-    </div>
-
-  <br>
-    <hr>
-      <br>
-
-
-
-  <br>
-
-    @endif
-
-<!--report after work-->
-
-
-
-
-
-<!-- transport for inspection -->
-
-
-    <?php
-
-  $idwo=$wo->id;
-  $tforms = WorkOrderTransport::where('work_order_id',$idwo)->where('inspection', 0)->get();
-?>
-
-    @if(count($tforms)>0)
-
- <h4><b>Transport Description for Inspection</b></h4>
-
-<table style="width:100%"> <table class="table table-striped  display" style="width:100%">  <tr>
-     <thead style="color: white;">
-    <th>Date of Transport</th>
-    <th>Time</th>
-    <th>Details</th>
-  <th>Status</th>
-  <th>Message</th>
-
-    <th>Date</th>
-  </thead>
-  </tr>
-    @foreach($tforms as $tform)
-
-
-  <tr>
-    <td>{{ date('d F Y', strtotime($tform->time))  }}</td>
-    <td>{{ date('h:i:s A', strtotime($tform->time)) }}</td>
-     <td> <a onclick="myfunc5('{{$tform->coments}}')"><span data-toggle="modal" data-target="#viewMessage"
-                                                                         class="badge badge-success">View Details</span></a></td>
-    <td class="text-primary">@if($tform->status==0) Waiting  @elseif($tform->status==1) Approved @else REJECTED   @endif</td>
-
-
-
-     <td> <a onclick="myfunc6('{{$tform->details}}')"><span data-toggle="modal" data-target="#viewdetails"
-                                                                         class="badge badge-success">View Message</span></a></td>
-
- <td>{{ date('d F Y', strtotime($tform->created_at))  }} </td>
-
-  </tr>
-
-  @endforeach
-  </table>
-  <br>
-     <hr>
-       <br>
-
-
-
-  <br>
-    @endif
-    <br>
-<!-- transport for inspection -->
 
 
 
@@ -632,7 +795,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   </table>
   <br>
      <hr>
-       <br>
+     
 
 
 
@@ -644,201 +807,178 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
+<!--report after work-->
 
 
-
-  @if(auth()->user()->type != 'CLIENT')
-
-  @if(empty($wo['work_order_material']->id))
-
-    @else
-     <?php
-
-  $idwo=$wo->id;
-  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
-    ?>
-    @if(count($matforms) == 1)
-    <h4><b>1 Material Requested </b></h4>
-    @else
-    <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
-    @endif
-
-
-<table style="width:100%">
-  <tr>
-     <thead style="color: white;">
-
-    <th>Name</th>
-
-  <th>Type</th>
-   <th>Quantity</th>
-   <th>Approved By</th>
-    <th>Status</th>
-     <th>Date Requested</th>
-      <th>Date Updated</th>
-    </thead>
-
-  </tr>
-    @foreach($matforms as $matform)
-  <tr>
-
-    <td>{{$matform['material']->name }}</td>
-
-    <td>{{$matform['material']->type }}</td>
-   <td>{{$matform->quantity }}</td>
-       <td>
-       @if($matform->accepted_by == NULL)
-      <span class="badge badge-warning">Not accepted Yet.</span>
-       @else
-       {{ $matform['acceptedby']->name }}
-       @endif
-       </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> Waiting for Material Approval </span> @elseif($matform->status== 1)<span class="badge badge-success">Approved by IoW </span> @elseif($matform->status== 2) <span class="badge badge-primary">Released from Store </span> @elseif($matform->status==20) <span class="badge badge-success">Please Crosscheck Material(s) </span> @elseif($matform->status==17) <span class="badge badge-warning">Some of Material Rejected</span> @elseif($matform->status== 5)<span class="badge badge-success">Material on Procurement Stage</span> @elseif($matform->status== 3)<span class="badge badge-primary">Material Taken From Store</span>
-   @elseif($matform->status== 100)<span class="badge badge-primary">Reserved</span> @elseif($matform->status == -1)<span class="badge badge-danger">
-    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">Material Purchased</span>
-       @endif</td>
-
-  <td> {{ date('d F Y', strtotime($matform->created_at))  }}</td>
-
-    <td>{{ date('d F Y', strtotime($matform->updated_at))  }} </td>
-
-
-  </tr>
-
-  @endforeach
-
-  </table>
-  <br>
-    <hr>
-    <br>
-    @endif
-
-
-
-
-
-   @elseif(auth()->user()->type == 'CLIENT')
-
-  @if(empty($wo['work_order_material']->id))
-
-    @else
-     <h4><b>Material(s) Requested: </b></h4>
     <?php
 
   $idwo=$wo->id;
-  $matforms = WorkOrderMaterial::where('work_order_id',$idwo)->get();
-  ?>
+  $iforms = WorkOrderInspectionForm::where('work_order_id',$idwo)->where('status','Report after work')->get();
+        ?>
+    @if(count($iforms)>0)
 
- <table class="table table-striped  display" style="width:100%">
-  <tr>
-     <thead style="color: white;">
-
-    <th>Material Name</th>
-
-  <th>Type</th>
-   <th>Quantity</th>
-   <th>IoW</th>
-   <th>Approved By</th>
-    <th>Status</th>
-     <th>Date Requested</th>
-      <th>Date Updated</th>
-    </thead>
-
-  </tr>
-    @foreach($matforms as $matform)
-  <tr>
-
-    <td>{{$matform['material']->name }}</td>
-
-    <td>{{$matform['material']->type }}</td>
-   <td>{{$matform->quantity }}</td>
-   <td>{{$matform['iowzone']->name }}</td>
-       <td>
-       @if($matform->accepted_by == NULL)
-      <span class="badge badge-warning">Not accepted Yet.</span>
-       @else
-       {{ $matform['acceptedby']->name }}
-       @endif
-       </td>
-   <td >@if($matform->status==0)<span class="badge badge-success"> WAITING FOR MATERIAL APPROVAL </span> @elseif($matform->status== 1)<span class="badge badge-success">APPROVED BY IOW </span> @elseif($matform->status== 2) <span class="badge badge-primary">RELEASED FROM STORE </span> @elseif($matform->status==20) <span class="badge badge-success">PLEASE CROSSCHECK MATERIAL </span> @elseif($matform->status==17) <span class="badge badge-warning">SOME OF MATERIAL REJECTED </span> @elseif($matform->status== 5)<span class="badge badge-success">MATERIAL ON PROCUREMENT STAGE</span> @elseif($matform->status== 3)<span class="badge badge-primary">MATERIAL TAKEN FROM STORE</span>  @elseif($matform->status == -1)<span class="badge badge-danger">
-    REJECTED BY IOW</span>@elseif($matform->status== 15)<span class="badge badge-success">MATERIAL PURCHASED</span>
-       @endif</td>
-
-  <td><?php $time = strtotime($matform->created_at); echo date('d/m/Y',$time);  ?> </td>
-
-    <td><?php $time = strtotime($matform->updated_at); echo date('d/m/Y',$time);  ?> </td>
-
-
-  </tr>
-
+  @foreach($iforms as $iform)
   @endforeach
 
-  </table>
-    @endif
+ <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
 
-    <br>
+ <div class="form-group ">
+        <label for="">Description:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{ $iform->description }}</textarea>
+    </div>
 
   <br>
-  <hr>
-    <br>  <br>
+    <hr>
+      <br>
+
+
+
+  <br>
+
+    @endif
+
+<!--report after work-->
+
+
+
+
+
+<!--works order first closing-->
+
+ @if($wo->hosclosedate != null)
+   @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30) or ($wo->status == 12) or ($wo->status == 53) )
+            <div>
+
+<h5><b>Closing Works Order</b></h5>
+             <table class="table table-striped  display" style="width:100%">
+                <tr>
+                  <thead style="color: white;">
+                  <th>Status</th>
+                  <th>Full Name</th>
+                  <th>Type</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  </thead>
+                </tr>
+                <tbody>
+                  <tr>
+                    <td>Intetion to close</td>
+                    <td> {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}}</td>
+                  @if(strpos( $wo['hoscloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hoscloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['hoscloses']->type) }} </td>
+                 @endif
+                       <td>{{$wo['hoscloses']->phone}}</td>
+                       <td>{{$wo['hoscloses']->email}}</td>
+                        <td>{{ date('d F Y', strtotime($wo->hosclosedate)) }}</td>
+                  </tr>
+                   @if($wo->hosclose2date == null)<!--if rejected by iow-->
+                  @if($wo->iowclosedate != null)
+                  <tr>
+                    <td>Approved by</td>
+                    <td>{{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}}</td>
+                     @if(strpos( $wo['iowcloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['iowcloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['iowcloses']->type) }} </td>
+                 @endif
+                      <td>{{$wo['iowcloses']->phone}}</td>
+                    <td>{{$wo['iowcloses']->email}}</td>
+                    <td>{{ date('d F Y', strtotime($wo->iowclosedate)) }}</td>
+
+                  </tr>
+                  @endif
+                  @endif
+                @if($wo->hosclose2date == null)<!--if rejected by iow-->
+                 @if($wo->clientclosedate != null)
+                  <tr>
+                    <td>Closed Completely</td>
+                    <td>{{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}}</td>
+                     @if(strpos( $wo['clientcloses']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['clientcloses']->type), 4, 14)?> </td>
+                  @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['clientcloses']->type) }} </td>
+                 @endif
+                     <td>{{$wo['clientcloses']->phone}}</td>
+                      <td>{{$wo['clientcloses']->email}}</td>
+                    <td>{{ date('d F Y', strtotime($wo->clientclosedate)) }}</td>
+                  </tr>
+                  @endif
+                  @endif
+
+                </tbody>
+              </table>
+            
+           <hr>
+            </div>
+
+    @endif
    @endif
 
 
+       
+
+          @if($wo->status == 30)
+            <div>
+                <h4 align="center">Works order completely closed!</h4>
+            </div>
+
+        @elseif($wo->status == 2)
+            <div>
+                <h4 align="center" style="padding: 20px">Works order is Provisional closed!</h4>
+            </div>
+        @elseif($wo->status == 52)
+            <div>
+              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done!</h4>
+            </div>
+        @elseif($wo->status == 53)
+            <div>
+               <h4 align="center" style="padding: 20px">Works order is not approved by IoW!</h4>
+            </div>
+
+        @elseif($wo->status == 9)
+             <!-- <div>
+                <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Close works order completely</button>
+                </form>
+            </div>-->
+        @elseif($wo->status == 25)
+          <!--  <div>
+                <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Provisional Close</button>
+                </form>
+            </div>-->
+        @else
+
+         
+
+        @endif
+  
+<!--works order first closing-->
 
 
 
-    <?php
-
-  $idw=$wo->id;
-  $matforms = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
-?>
 
 
-  @if(count($matforms) > 0)
-
-   @if(count($matforms) == 1)
-    <h4><b>1 Material Used and Approved </b></h4>
-    @else
-    <h4><b>{{ count($matforms) }} Materials Used and Approved  </b></h4>
-    @endif
-
-
-
- <table class="table table-striped  display" style="width:100%">
-  <tr>
-     <thead style="color: white;">
-
-    <th>Name</th>
-    <th> Description</th>
-     <th>Type</th>
-     <th>Quantity</th>
-   </thead>
-  </tr>
-    @foreach($matforms as $matform)
-  <tr>
-   <td>{{$matform['material']->name }}</td>
-   <td>{{$matform['material']->description }}</td>
-   <td>{{$matform['material']->type }}</td>
-   <td>{{$matform->quantity }}</td>
-  </tr>
-
-  @endforeach
-
-
-  </table>
-  <br>
-
-  <hr>
-
-  @endif
 
 
   <!--tracking after work rejected-->
+
+
+
   @if(($wo->status == 53) and ($wo->iowreject != 0))
   <h5 align="center"><b>Works order processes after being rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} .</b></h5>
   <hr>
   <br>
   @endif
+
+
+
 
 <!--assigned technician-->
 
@@ -860,7 +1000,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <h4><b>{{ count($techwork) }} Assigned Technicians for Work  </b></h4>
     @endif
 
-<table style="width:100%">
+ <table class="table table-striped  display" style="width:100%">
   <tr>
 
 <thead style="color: white;">
@@ -1012,11 +1152,10 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <!--report after work-->
 
 
-  <!--tracking after work rejected-->
+<!--closing works order after reje-->
 
-  
- @if($wo->hosclosedate != null)
-   @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30))
+ @if($wo->hosclose2date != null)
+     @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30) or ($wo->status == 12) or ($wo->status == 53) )
             <div>
 
 <h5><b>Closing Works Order</b></h5>
@@ -1034,15 +1173,15 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 <tbody>
                   <tr>
                     <td>Intetion to close</td>
-                    <td> {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}}</td>
-                  @if(strpos( $wo['hoscloses']->type, "HOS") !== false)
-                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hoscloses']->type), 4, 14)?> </td>
+                    <td> {{$wo['hos2close']->fname.' '.$wo['hos2close']->lname}}</td>
+                  @if(strpos( $wo['hos2close']->type, "HOS") !== false)
+                <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hos2close']->type), 4, 14)?> </td>
                   @else
-                <td style="text-transform: capitalize;">{{strtolower( $wo['hoscloses']->type) }} </td>
+                <td style="text-transform: capitalize;">{{strtolower( $wo['hos2close']->type) }} </td>
                  @endif
-                       <td>{{$wo['hoscloses']->phone}}</td>
-                       <td>{{$wo['hoscloses']->email}}</td>
-                        <td>{{ date('d F Y', strtotime($wo->iowclosedate)) }}</td>
+                       <td>{{$wo['hos2close']->phone}}</td>
+                       <td>{{$wo['hos2close']->email}}</td>
+                        <td>{{ date('d F Y', strtotime($wo->hosclose2date)) }}</td>
                   </tr>
                   @if($wo->iowclosedate != null)
                   <tr>
@@ -1084,48 +1223,11 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @endif
    @endif
 
+  <!--Closing works order after reje-->
 
-       @if(strpos(auth()->user()->type, "HOS") !== false)
+  <!--tracking after work rejected-->
 
-          @if($wo->status == 30)
-            <div>
-                <h4 align="center">Works order completely closed!</h4>
-            </div>
-
-        @elseif($wo->status == 2)
-            <div>
-                <h4 align="center" style="padding: 20px">Works order is Provisional closed!</h4>
-            </div>
-        @elseif($wo->status == 52)
-            <div>
-              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done!</h4>
-            </div>
-        @elseif($wo->status == 53)
-            <div>
-               <h4 align="center" style="padding: 20px">Works order is not approved by IoW!</h4>
-            </div>
-
-        @elseif($wo->status == 9)
-              <div>
-                <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Close works order completely</button>
-                </form>
-            </div>
-        @elseif($wo->status == 25)
-            <div>
-                <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Provisional Close</button>
-                </form>
-            </div>
-        @else
-
-         
-
-        @endif
-        @endif
-
+  
 
 
 
@@ -2910,19 +3012,23 @@ Requesting material again after crosschecking-->
 
  {{-- Require Material question  --}}
                 @if(($wo->status == 53) and ($wo->iowreject == 0))
-              <p>This works order have been rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} Please restart processing works order again.</p>
+              <h5><b>This works order have been rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} Please restart processing works order again.</b></h5>
 
-                <div>  <h5 style="color: blue"><b> Does this works order need material(s)? </b></h5></div>
+              <!--  <div>  <h5 style="color: blue"><b> Does this works order need material(s)? </b></h5></div>
 
                 <div>
                      <label><input type="radio" name="colorRadio" value="Yes"> Yes</label> &nbsp;
                      <label><input type="radio" name="colorRadio" value="No"> No</label>
-                </div>
+                </div>-->
 
 
            <!--No-->
-<div class="No box">
-            <!--addtech-->
+<!--<div class="No box">-->
+
+   <!--addtech-->
+   <br>
+  <div>
+           
              <div class="row">
                             <div class="col-md-6">
                                 <p>ASSIGN TECHNICIAN(S) WORK</p>

@@ -577,7 +577,7 @@ Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@mat
 Route::POST('rwork_order_material_iow/reject/Material/{id}', 'StoreController@redirecttohos')->name('redirect.workorder')->middleware('auth');
 
 
-Route::POST('redirect/workorder/tohos{id}', 'StoreController@redirectworkordertohos')->name('redirect_wo')->middleware('auth');
+Route::POST('redirectwotohos{id}', 'StoreController@redirectworkordertohos')->name('redirect_wo')->middleware('auth');
 
 
 Route::POST('edit/work_order/view/edit/Material_hos/{id}', 'WorkOrderController@editmaterialhos')->name('material.edit')->middleware('auth');
@@ -787,6 +787,7 @@ Route::post('tenderreports','NotesController@tenderviewpdf')->name('tendersrepor
 Route::post('viewtrendingscorereport/{tender}/{company}','NotesController@trendingscorereport')->name('trendingscore_report')->middleware('auth');
 Route::get('viewtrendingscorereportforcompany/{tender}/{month}','NotesController@trendingscorereportcompany')->name('trendingscore_report_company')->middleware('auth');
 Route::get('cleaning_company_report','NotesController@landcleaningcompanyreport')->name('landscapingcleaningcompanyreport')->middleware('auth');
+Route::get('cleaning_company_report_expired','NotesController@landcleaningcompanyreportexpired')->name('landscapingcleaningcompanyreportexpired')->middleware('auth');
 
 Route::get('cleaning_area_report','NotesController@landcleaningareareport')->name('landscapingcleaningarea')->middleware('auth');
 

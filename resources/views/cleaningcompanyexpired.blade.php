@@ -33,7 +33,7 @@
        <div class="row">
       <div class="col">
 
-            <h5 ><b > Expired Tender Contracts </b></h5>
+            <h5 ><b > Expired/Terminated Tenders Contracts </b></h5>
 
         </div>
 

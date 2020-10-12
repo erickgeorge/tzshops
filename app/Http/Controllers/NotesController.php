@@ -1571,6 +1571,24 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
 
 
+         public function landcleaningcompanyreportexpired(){
+
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+
+           $data = [
+            'notifications' => $notifications,
+            'role' => $role,
+                'cleangcompany' => tendernumber::all()
+               ];
+         $pdf = PDF::loadView('landcleaning_companyreportexpired', $data);
+
+     return $pdf->stream('cleaning_company_report_expired - '.date('d-m-Y Hi').'.pdf');
+    }
+
+
+
+
     public function landcleaningareareport(){
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();

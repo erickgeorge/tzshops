@@ -68,7 +68,7 @@
                     <td>{{ $item['iowzone']->zonename }}</td>
 
 
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">View Material</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">View Materials</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach
@@ -143,7 +143,7 @@
 
 
 
-                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material"> View Material</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_iow/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material"> View Materials</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach

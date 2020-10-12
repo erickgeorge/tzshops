@@ -963,8 +963,6 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
              'carea' =>cleaningarea::all()
-
-
           ]);
      }
 

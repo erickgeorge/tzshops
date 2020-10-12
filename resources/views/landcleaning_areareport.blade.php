@@ -4,7 +4,14 @@
     <p><h2>University of Dar es salaam</h2>
      <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
-<p style="text-transform: uppercase; text-align: center;"><B><u> CLEANING AREAS </u></B>
+<p style="text-align: center;"><b>@if(($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Estates officer')) All Cleaning Areas @endif
+
+ @if(auth()->user()->type == 'USAB') All Hostels
+ @endif
+@if(auth()->user()->type == 'Supervisor Landscaping') All Exterior Cleaning Areas
+@endif
+ @if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'Principal')) All Interior Cleaning Areas
+ @endif</b>
  </p>
 </div>
 <style>

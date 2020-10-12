@@ -2106,9 +2106,6 @@ $v5=$type[4];
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
 
-
-
-
 //        return response()->json($users);
         return view('viewusers', ['display_users' => $users, 'role' => $role,'notifications' => $notifications]);
 

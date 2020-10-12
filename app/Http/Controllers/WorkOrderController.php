@@ -450,8 +450,12 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
              $mForm = WorkOrder::where('id', $id)->first();
              $mForm->iowreject = 3;
+             $mForm->hosclose2 = auth()->user()->id;
+             $mForm->hosclose2date = Carbon::now();
              // $mForm->statusmform=4;
              $mForm->save();
+
+             $tech_complete_work =techwork::where('wo_id', $id)->update(array('status' =>1));
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -1181,7 +1185,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notify->sender_id = auth()->user()->id;
         $notify->receiver_id = $receiver_id;
         $notify->type = 'wo_closed';
-        $notify->message = 'Your works order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been temporally closed closed!.';
+        $notify->message = 'Your works order of ' . $wo->created_at . ' about ' . $wo->problem_type . ' has been temporally closed!.';
         $notify->save();
 
 
@@ -1315,6 +1319,36 @@ session::flash('message', ' Your workorder have been closed successfully');
         $wo->iowclosedate = Carbon::now();
        //i updated iow to bypass hos to client closing works order.
         $wo->save();
+
+
+       $emailReceiver = User::where('id', $wo->client_id)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+
+        $createddate = date('d F Y', strtotime($wo->created_at));
+
+
+     $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on  $createddate, of  Problem Type $wo->problem_type has been COMPLETED. Please login in the system so as to close your works order otherwise your works order will be closed automatically after 7 days.",
+
+                    "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('WORKS ORDER COMPLETION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+
 
 
         return redirect()->route('workOrder.track', [$id])->with([

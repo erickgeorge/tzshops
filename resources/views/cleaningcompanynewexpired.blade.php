@@ -33,12 +33,12 @@ Companies
 
     </div>
 
-                  <h4 ><b >Companies With Previous Contract </b></h4>
+                  <h4 ><b >Companies with Expired/Terminated Contracts</b></h4>
 
                   <hr>
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                <a href="{{route('landscapingcleaningcompanyreport')}}"
+                <a href="{{route('landscapingcleaningcompanyreportexpired')}}"
 
                                          style="color: white;"  data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>

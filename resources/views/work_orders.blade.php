@@ -1106,7 +1106,10 @@ foreach($userwithid as $userwithid)
                                       <span>Redirected by HoS</span>
                                       @endif
                                   @endif
-                               @endif    
+                                 @endif 
+                                 @if($work->redirectwo == 1)  
+                                  <span>Redirected from Maintainance Coordinator</span>
+                                 @endif 
                                 <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
