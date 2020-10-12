@@ -366,7 +366,7 @@ foreach($userwithid as $userwithid)
 
                 @foreach($workorders as $work)
 
-                    @if($work->status != 0 && (($work->status != -1) || ($work->status != 1) || ($work->status !=2) || ($work->status !=9)||($work->status != 30)))
+                    @if($work->status != 0 && (($work->status != -1) &&  ($work->status != 1) &&  ($work->status !=2) &&  ($work->status !=9)&& ($work->status != 30)))
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
