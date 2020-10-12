@@ -111,7 +111,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('addLocationView', [
             'role' => $role,
             'notifications' => $notifications,
@@ -123,7 +123,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('addAreassView', [
             'role' => $role,
             'notifications' => $notifications,
@@ -136,7 +136,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('addBlockssView', [
             'role' => $role,
             'notifications' => $notifications,
@@ -149,7 +149,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('addRoomsView', [
             'role' => $role,
             'notifications' => $notifications,
@@ -158,10 +158,10 @@ class DirectorateController extends Controller
     }
 
 
-   
+
     public function createlocations(Request $request)
     {
-        
+
          if (!empty(Location::where('name',$request['loc_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Location already exist']);
         }
@@ -177,7 +177,7 @@ class DirectorateController extends Controller
 
     public function createreass(Request $request)
     {
-        
+
         $wsection = new Area();
         $wsection->name_of_area = $request['name_of_area'];
          $wsection->location_id = $request['Location'];
@@ -189,7 +189,7 @@ class DirectorateController extends Controller
 
         public function createblockss(Request $request)
     {
-        
+
          $wsection = new Block();
          $wsection->name_of_block = $request['name_of_block'];
          $wsection->location_of_block = $request['Location'];
@@ -199,10 +199,10 @@ class DirectorateController extends Controller
         return redirect()->route('Blocks.manage')->with(['message' => 'Block added successfully']);
     }
 
-    
+
         public function createrooms(Request $request)
     {
-        
+
          $wsection = new Room();
          $wsection->name_of_room = $request['name_of_room'];
          $wsection->block_id = $request['block'];
@@ -213,12 +213,12 @@ class DirectorateController extends Controller
     }
 
 
-    
+
     public function LocationView(){
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('locationview', [
             'role' => $role,
             'notifications' => $notifications,
@@ -233,9 +233,9 @@ class DirectorateController extends Controller
           $Loc=Location::where('id', $id)->first();
           $Loc->status = 2;
           $Loc->save();
-        
+
           return redirect()->route('location.manage')->with(['message' => 'Location deactivated successfully']);
-      
+
     }
 
 
@@ -245,16 +245,16 @@ class DirectorateController extends Controller
           if (!empty(Location::where('name',$request['sec_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Location already exist']);
         }
-        
+
        $p=$request['esecid'];
-        
-        
+
+
         $wsec = Location::where('id',$p)->first();
-        
+
         $wsec->name = $request['sec_name' ];
-       
+
         $wsec->save();
-        
+
 
         return redirect()->route('location.manage')->with(['message' => 'Location edited successfully']);
     }
@@ -264,7 +264,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('areaview', [
             'role' => $role,
             'notifications' => $notifications,
@@ -280,9 +280,9 @@ class DirectorateController extends Controller
           $Loc=Area::where('id', $id)->first();
           $Loc->status = 2;
           $Loc->save();
-        
+
           return redirect()->route('Areas.manage')->with(['message' => 'Area deactivated successfully']);
-      
+
     }
 
 
@@ -293,16 +293,16 @@ class DirectorateController extends Controller
           if (!empty(Area::where('name_of_area',$request['sec_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Area already exist']);
         }
-        
+
        $p=$request['esecid'];
-        
-        
+
+
         $wsec = Area::where('id',$p)->first();
-        
+
         $wsec->name_of_area = $request['sec_name' ];
-       
+
         $wsec->save();
-        
+
 
         return redirect()->route('Areas.manage')->with(['message' => 'Area edited successfully']);
     }
@@ -312,7 +312,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('blockview', [
             'role' => $role,
             'notifications' => $notifications,
@@ -327,9 +327,9 @@ class DirectorateController extends Controller
           $Loc=Block::where('id', $id)->first();
           $Loc->status = 2;
           $Loc->save();
-        
+
           return redirect()->route('Blocks.manage')->with(['message' => 'Block deactivated successfully']);
-      
+
     }
 
 
@@ -337,16 +337,16 @@ class DirectorateController extends Controller
     {
 
 
-        
+
        $p=$request['esecid'];
-        
-        
+
+
         $wsec = Block::where('id',$p)->first();
-        
+
         $wsec->name_of_block = $request['sec_name' ];
-       
+
         $wsec->save();
-        
+
 
         return redirect()->route('Blocks.manage')->with(['message' => 'Block edited successfully']);
     }
@@ -357,7 +357,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-       
+
          return view('roomview', [
             'role' => $role,
             'notifications' => $notifications,
@@ -365,7 +365,7 @@ class DirectorateController extends Controller
         ]);
     }
 
-  
+
 
     public function deactivateroom($id)
     {
@@ -373,25 +373,25 @@ class DirectorateController extends Controller
           $Loc=Room::where('id', $id)->first();
           $Loc->status = 2;
           $Loc->save();
-        
+
           return redirect()->route('Rooms.manage')->with(['message' => 'Room Number deactivated successfully']);
-      
+
     }
 
 
    public function editRooms(Request $request)
     {
 
-        
+
        $p=$request['esecid'];
-        
-        
+
+
         $wsec = Room::where('id',$p)->first();
-        
+
         $wsec->name_of_room = $request['sec_name' ];
-       
+
         $wsec->save();
-        
+
 
         return redirect()->route('Rooms.manage')->with(['message' => 'Room Number edited successfully']);
     }
@@ -756,25 +756,14 @@ class DirectorateController extends Controller
           if (!empty(iowzone::where('zonename',$request['sec_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Zone already exist']);
         }
-<<<<<<< HEAD
-
-       $p=$request['esecid'];
-
-
-        $wsec = iowzone::where('id',$p)->first();
-
-        $wsec->zonename = $request['sec_name' ];
-
-=======
-        
+  
          $p=$request['esecid'];
-        
-        
+
+
         $wsec = iowzone::where('id',$p)->first();
-        
+
         $wsec->zonename = $request['sec_name'];
-       
->>>>>>> 56f5bba7208640f59ac1946c93822a459ea3d9b7
+
         $wsec->save();
 
 
