@@ -253,11 +253,9 @@ foreach($userwithid as $userwithid)
     <br>
     <div class="bs-example">
         <div class=" row nav nav-tabs text-center">
-            <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All <b class="badge badge-light"></b></b></a>
-            {{-- <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Accepted <b class="badge badge-light"></b></b></a> --}}
-             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On Progress <b class="badge badge-light"></b></b></a>
-             {{-- <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Closed <b class="badge badge-light"></b></b></a> --}}
-             <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed <b class="badge badge-light"></b></b></a>
+            <a class="col btn-info nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All </b></a>
+             <a class="col btn btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On Progress</b></a>
+             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed </b></a>
         </div>
     <br>
 
