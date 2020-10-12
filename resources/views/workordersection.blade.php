@@ -29,7 +29,7 @@ Workorder Section
 
     <div>
 <br><br>
-                <h4 
+                <h4
                     >List of Available Sections</h4></div>
 
 
@@ -121,7 +121,7 @@ Workorder Section
                     </div>
 
 
-                        <button type="submit" class="btn btn-primary">save
+                        <button type="submit" class="btn btn-primary">Save
                         </button>
                         <a href="/Manage/section" class="btn btn-danger">Cancel
                     </a>

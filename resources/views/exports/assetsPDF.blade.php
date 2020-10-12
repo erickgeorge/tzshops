@@ -18,7 +18,7 @@ tr:nth-child(even) {
 <div>
     <center>
 
-        <h1>University of Dar es salaam</h1>
+        <h1>University of Dar es Salaam</h1>
         <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
         <h2>Direcorate of Estates Services</h2>
         <h3>NON - CURRENT ASSET REGISTER AS ON @php echo date('d F, Y'); @endphp</h3>

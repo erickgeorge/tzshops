@@ -185,7 +185,7 @@ $message = $client->message()->send([
 
          if ($request['emergency'] == 'emergency') {
             $wO->emergency = 1;
-        } 
+        }
         if ($request['emergency'] == 'notemergency') {
             $wO->emergency = 0;
         }
@@ -277,9 +277,9 @@ session::flash('message', ' Your workorder have been accepted successfully ');
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
         }
-   
+
         if ($wO->emergency == 0) {
-            
+
                 $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
@@ -366,7 +366,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $wo = WorkOrder::where('id', $id)->first();
         if ($request['emergency'] == 'emergency') {
             $wo->emergency = 1;
-        } 
+        }
         if ($request['emergency'] == 'notemergency') {
             $wo->emergency = 0;
         }
@@ -450,7 +450,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
-            'role' => $role, 
+            'role' => $role,
             'notifications' => $notifications,
             'message' => 'Inspection form updated successfully.',
             'wo' => WorkOrder::where('id', $id)->first()
@@ -544,7 +544,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
              $w->iowreject = 4;
              $w->save();
 
-     
+
 
 
         return redirect()->route('workOrder.edit.view', [$id])->with([
@@ -652,7 +652,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
            // $work_order_staff->status5 =22;
             $work_order_staff->wo_id = $id;
             $work_order_staff->save();
-            
+
 
              }
 
@@ -712,7 +712,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
             $work_order_staff->status5 =22;
             $work_order_staff->work_order_id = $id;
             $work_order_staff->save();
-            
+
 
              }
 
@@ -1578,6 +1578,26 @@ session::flash('message', ' Your workorder have been closed successfully');
 
     public function hoscompletedjob($id)
     {
+        if(request()->has('start') && request()->has('end') )  {
+
+
+            $from=request('start');
+            $to=request('end');
+
+            if(request('start')>request('end')){
+                $to=request('start');
+            $from=request('end');
+            }
+
+
+                         $hosWO = Workorder::where('staff_id',$id)->where('status','30')->
+                         whereBetween('created_at', [$from, $to])->get();
+                         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+                        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+                      return view('hoscompletedjobsall', [ 'hosWo' => $hosWO, 'notifications' => $notifications,
+                            'role' => $role,'hosid'=>$id, 'wo' => WorkOrder::where('id', $id)->first()
+                        ]);
+            }
         $hosWO = Workorder::where('staff_id',$id)->where('status','30')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();

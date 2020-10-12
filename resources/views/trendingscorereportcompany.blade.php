@@ -3,7 +3,7 @@
 <title>TRENDING SCORE FOR "{{$company['companyname']['compantwo']->company_name}}" ON {{ date('F Y', strtotime($company->assessment_month))}}</title>
 <div style="margin-top: 20px" align="center">
 
-    <p><h2>University of Dar es salaam</h2>
+    <p><h2>University of Dar es Salaam</h2>
      <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
 

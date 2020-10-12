@@ -227,8 +227,8 @@
                           </div>
                         </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                           </div>
                         </div>
                     </form>
@@ -266,8 +266,8 @@
                           </div>
                         </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                           </div>
                         </div>
                     </form>
@@ -349,8 +349,8 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                   <button id="bt" type="submit" class="btn btn-primary">Submit & Send Plans to Head PPU</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
           </form>
@@ -936,8 +936,8 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                       <button id="bt" type="submit" class="btn btn-primary">Send</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
               </form>

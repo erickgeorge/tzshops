@@ -55,7 +55,7 @@
             </div>
 
             <div class="form-group col-lg-6">
-                <label for="lname">Section <sup style="color: red;">*</sup></label>
+                <label for="lname">Section </label>
                 <input type="text"  required maxlength="20" class="form-control" id="lname" aria-describedby="emailHelp" name="liiiname" placeholder="Enter last name"  value="{{ $tech->type }}" disabled>
             </div>
             <br>
@@ -68,7 +68,7 @@
 
            <div>
 
-            <button type="submit" class="btn btn-primary">save</button> &nbsp;  &nbsp;  &nbsp;
+            <button type="submit" class="btn btn-primary">Save</button> &nbsp;  &nbsp;  &nbsp;
 
 
             <a class="btn btn-danger" href="/technicians" role="button">Cancel </a>

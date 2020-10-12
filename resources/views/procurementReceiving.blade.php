@@ -2,7 +2,7 @@
 <title><?php
     echo $header;
      ?></title>
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+<div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/index.jpg') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h4>Directorate of Estates Services</h4></p><p><b><?php
      echo $header;
@@ -63,7 +63,7 @@ tr:nth-child(even) {
 
 
 
-<table>
+<table class="table">
   <thead style=" background-color: #376ad3; color: white; ">
    <tr style="color: white;">
        <th>#</th>
@@ -131,15 +131,15 @@ else {
    </div>
 
 <div class="container-name">
-    <div class="div1">Signature  <u style="padding-left: 85px; width: 55px"> </u>  .................................</div>
+    <div class="div1">Signature  <u style="padding-left: 65px; width: 55px"> </u>  .................................</div>
     <div class="div2">Signature  <u style="padding-left: 65px; width: 55px"> </u>         .................................</div>
 
 
    </div>
 <div class="container-name">
-    <div class="div1"></div>
+    <div class="div1">Date<u style="padding-left: 100px; width: 55px"> </u>         .................................</div>
 
-    <div class="div2">Date<u style="padding-left: 65px; width: 55px"> </u>         .................................</div>
+    <div class="div2">Date<u style="padding-left: 100px; width: 55px"> </u>         .................................</div>
 </div>
 
  <br>

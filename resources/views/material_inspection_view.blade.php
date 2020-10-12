@@ -451,6 +451,8 @@
 
                         <br>
                         <button type="submit" class="btn btn-danger">Reject</button>
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </form>
                 </div>
                 <div class="modal-footer">

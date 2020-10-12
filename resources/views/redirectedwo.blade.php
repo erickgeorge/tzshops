@@ -218,7 +218,7 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 6)
       {echo"<option value='".$statusname->status."'>Post implementation</option>";}
      elseif($statusname->status == 7)
-      {echo"<option value='".$statusname->status."'>Material requested</option>";}
+      {echo"<option value='".$statusname->status."'>Material(s) requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
      elseif($statusname->status == 9)
@@ -231,8 +231,8 @@ foreach($userwithid as $userwithid)
       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -318,14 +318,14 @@ foreach($userwithid as $userwithid)
                               <td><span class="badge badge-info">post implementation</span></td>
                             @elseif($work->status == 7)
 
-                              <td><span class="badge badge-info">material requested</span>
+                              <td><span class="badge badge-info">Material(s) requested</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                             @elseif($work->status == 40)
 
-                              <td><span class="badge badge-info">Material Requested Approved Succesifully</span>
+                              <td><span class="badge badge-info">Material(s) Requested Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -354,7 +354,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                            @elseif($work->status == 8)
                                   @if(auth()->user()->type == 'CLIENT')
-                              <td><span class="badge badge-warning">  Material requested on progress</span>
+                              <td><span class="badge badge-warning">  Material(s) requested on progress</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-danger">Emergency</span></td>
@@ -371,40 +371,40 @@ foreach($userwithid as $userwithid)
                             @elseif($work->status == 18)
                               @if(auth()->user()->type != 'CLIENT')
 
-                               <td><span class="badge badge-info">Please correct your material</span>  <br>
+                               <td><span class="badge badge-info">Please correct your Material(s)</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                @else
-                               <td><span class="badge badge-primary">  Material received from store!</span></td>
+                               <td><span class="badge badge-primary">  Material(s) received from store!</span></td>
                                                              @endif
 
                              @elseif($work->status == 19)
                                @if(auth()->user()->type != 'CLIENT')
-                              <td><span class="badge badge-info">Material missing in store also DES notified</span>  <br>
+                              <td><span class="badge badge-info">Material(s) missing in store also DES notified</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                               @else
-                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                               <td><span class="badge badge-warning">  Material(s) requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-danger">Emergency</span></td>
                                 @endif
                                                              @endif
                                @elseif($work->status == 15)
-                                                            <td><span class="badge badge-info">Material Accepted by IoW</span>  <br>
+                                                            <td><span class="badge badge-info">Material(s) Accepted by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
 
                                 @elseif($work->status == 55)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Some of Material Rejected</span>  <br>
+                                                            <td><span class="badge badge-danger">Some of Material(s) Rejected</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">Material on Check by IoW</span>  <br>
+                                                             <td><span class="badge badge-warning">Material(s) on Check by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
@@ -412,12 +412,12 @@ foreach($userwithid as $userwithid)
 
                                 @elseif($work->status == 57)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-primary">Material Requested Again</span>  <br>
+                                                            <td><span class="badge badge-primary">Material(s) Requested Again</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">Material on Check by IoW and HoS</span>  <br>
+                                                             <td><span class="badge badge-warning">Material(s) on Check by IoW and HoS</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
@@ -425,12 +425,12 @@ foreach($userwithid as $userwithid)
 
                                 @elseif($work->status == 16)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Material rejected by IoW</span>  <br>
+                                                            <td><span class="badge badge-danger">Material(s) rejected by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                                                             <td><span class="badge badge-warning">  Material(s) requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
@@ -560,8 +560,8 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
       </div>
       <input type="text" name="work" hidden value="{{ $work->id }}">
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-primary">Send</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>

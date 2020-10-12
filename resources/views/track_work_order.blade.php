@@ -64,7 +64,7 @@
                aria-describedby="emailHelp" value="{{ ucwords(strtolower($wo->problem_type)) }}" disabled>
     </div>
     </div>
-    
+
 </div>
  @if(empty($wo->room_id) )
 
@@ -96,7 +96,7 @@
                aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']['location']->name }}" disabled>
     </div>
 
-  </div>  
+  </div>
   <div class="col">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -105,12 +105,12 @@
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
                value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
     </div>
-  </div>  
+  </div>
 </div>
 
 
 <div class="row">
-  <div class="col">    
+  <div class="col">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
@@ -180,7 +180,7 @@
         </div>
 
 
-  
+
     <br>
     <br>
 
@@ -204,14 +204,14 @@
     <h4><b>{{ count($techforms) }} Assigned Technicians for Inspection  </b></h4>
     @endif
 
-  
+
 
 
 <table style="width:100%">
 
     <thead style=" background-color: #376ad3; color: white; ">
   <tr>
- 
+
   <th>Full Name</th>
      <th>Status </th>
     <th>Date Assigned </th>
@@ -258,7 +258,7 @@
                                                     @else
 <td style="color: black;"  data-toggle="tooltip" >No</i></td>
                                                     @endif
-    
+
   </tr>
     @endforeach
     </tbody>
@@ -302,7 +302,7 @@
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $iformb->description }}</textarea>
     </div>
-  
+
 
   <br>
     <hr>
@@ -321,7 +321,7 @@
 
 
 
-  
+
 
 <!-- transport for inspection -->
 
@@ -569,7 +569,7 @@
 
 
   @if(auth()->user()->type != 'CLIENT')
-  
+
   @if(empty($wo['work_order_material']->id))
 
 
@@ -589,7 +589,7 @@
     <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
     @endif
 
-   
+
 
 <table style="width:100%">
   <tr>
@@ -638,7 +638,7 @@
 
   </table>
 
-   
+
 
   <br>
   <hr>
@@ -646,10 +646,10 @@
 
 
    @elseif(auth()->user()->type == 'CLIENT')
-     
+
   @if(empty($wo['work_order_material']->id))
      <!--   <p class="text-primary">No Material have been requested</p>-->
-      
+
     @else
 
     <?php
@@ -710,18 +710,18 @@
 
 
    @endif
-     <br>  
+     <br>
 
 <!--material requests-->
 
 
 
-    
+
   @if(empty($wo['work_order_material']->id))
         <!--<p >No Material Used for this Works order</p>-->
     @else
 
-   
+
     <?php
 
   $idw=$wo->id;
@@ -762,8 +762,8 @@
 
     <hr>
     @endif
-  
-  
+
+
  @if($wo->hosclosedate != null)
    @if(($wo->status == 52) or ($wo->status == 2))
             <div>
@@ -894,6 +894,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                   id="reason"></textarea>
                         <br>
                         <button type="submit" class="btn btn-danger">Reject</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -920,7 +921,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         @csrf
                         <textarea name="notsatisfiedreason" required maxlength="400" class="form-control"  rows="5" id="notsatisfiedreason"></textarea>
                         <br>
-                        <button type="submit" class="btn btn-primary">submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -947,7 +949,8 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         @csrf
                         <textarea name="unsatisfiedreason" required maxlength="400" class="form-control"  rows="5" id="unsatisfiedreason"></textarea>
                         <br>
-                        <button type="submit" class="btn btn-primary">submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -1028,7 +1031,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
               @endif
         @endif
 
-  
+
 
 
         @if((auth()->user()->type=='Inspector Of Works')||(auth()->user()->type == 'Maintenance coordinator'))

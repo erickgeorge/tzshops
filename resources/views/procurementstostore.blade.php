@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Add procured materials
+Add New Procured Material
     @endSection
 
 @section('body')
@@ -21,7 +21,7 @@
 <br>
 <div class="container" >
   <div class="col-lg-4">
-    <h5 style="text-transform: capitalize;" >Add procured materials</h5>
+    <h5 style="text-transform: capitalize;" >Add New Procured Material</h5>
   </div>
   @if(Session::has('message'))
     <br>
@@ -40,7 +40,7 @@
 
 <hr>
 <div style="margin: 1.5%;">
-	<p style="color: red;">* all fields are compulsory</p>
+	<p style="color: red;"> all fields are compulsory</p>
 	<div class="row">
 <div class="col-sm-2">
 
@@ -89,20 +89,20 @@
 
 
             if(h==5){
-                	th.setAttribute('style','width:95px;')
+                	th.setAttribute('style','width:95px;');
                 }
 
 
                 if(h==6){
-                	th.setAttribute('style','width:125px;')
+                	th.setAttribute('style','width:125px;');
                 }
 
                 if(h ==3){
-                    th.setAttribute('style','width:100px;')
+                    th.setAttribute('style','width:100px;');
                 }
 
                 if(h==4){
-                	th.setAttribute('style','width:125px;')
+                	th.setAttribute('style','width:125px;');
                 }
 
                      // TABLE HEADER.
@@ -129,7 +129,7 @@
 
                 // SET INPUT ATTRIBUTE.
                 button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger')
+                button.setAttribute('class', 'btn btn-danger');
                 if(c==0)
                 {
                     button.setAttribute('disabled', 'true');
@@ -163,21 +163,25 @@
                 ele.setAttribute('id',c);
                 if(c==5){
                     ele.setAttribute('type', 'number');
-                    ele.setAttribute('style','width:90px;')
+                    ele.setAttribute('min', '1');
+                    ele.setAttribute('style','width:90px;');
+                } else
+                 if(c==6){
+                    ele.setAttribute('type', 'number');
+                    ele.setAttribute('min', '1');
+                    ele.setAttribute('style','width:120px;');
                 }
                 else{
                     ele.setAttribute('type', 'text');
                 }
 
-                if(c==6){
-                    ele.setAttribute('style','width:120px;')
-                }
+
 
                 if(c==3){
-                    ele.setAttribute('style','width:100px;')
+                    ele.setAttribute('style','width:100px;');
                 }
                 if(c==4){
-                    ele.setAttribute('style','width:120px;')
+                    ele.setAttribute('style','width:120px;');
                 }
 
                 ele.setAttribute('required', '');
@@ -248,7 +252,7 @@
 
                 // SET INPUT ATTRIBUTE.
                 button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger')
+                button.setAttribute('class', 'btn btn-danger');
 
                 // ADD THE BUTTON's 'onclick' EVENT.
                 button.setAttribute('onclick', 'removeRow(this)');
@@ -278,21 +282,25 @@
                 ele.setAttribute('id',c);
                 if(c==5){
                     ele.setAttribute('type', 'number');
-                    ele.setAttribute('style','width:90px;')
+                    ele.setAttribute('min', '1');
+                    ele.setAttribute('style','width:90px;');
+                } else
+                 if(c==6){
+                    ele.setAttribute('type', 'number');
+                    ele.setAttribute('min', '1');
+                    ele.setAttribute('style','width:120px;');
                 }
                 else{
                     ele.setAttribute('type', 'text');
                 }
 
-                if(c==6){
-                    ele.setAttribute('style','width:120px;')
-                }
+
 
                 if(c==3){
-                    ele.setAttribute('style','width:100px;')
+                    ele.setAttribute('style','width:100px;');
                 }
                 if(c==4){
-                    ele.setAttribute('style','width:120px;')
+                    ele.setAttribute('style','width:120px;');
                 }
 
                 ele.setAttribute('required', '');

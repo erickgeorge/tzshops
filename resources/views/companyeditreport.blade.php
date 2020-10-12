@@ -171,7 +171,7 @@ Company report
  @if(auth()->user()->type == 'Supervisor Landscaping')
 
            @foreach($assessmmentcompanynamelandscaping as $company)
-     
+
            <?php $i++;   ?>
      <?php
    //   $companypayment = company::where('tender', $company->company)->first();
@@ -212,13 +212,13 @@ Company report
 
  @endforeach
 
-  @endif   
+  @endif
 
 
   @if(auth()->user()->type != 'Supervisor Landscaping')
 
            @foreach($assessmmentcompanyname as $company)
-     
+
            <?php $i++;   ?>
      <?php
    //   $companypayment = company::where('tender', $company->company)->first();
@@ -259,7 +259,7 @@ Company report
 
  @endforeach
 
-  @endif     
+  @endif
     </tbody>
 
       @if(auth()->user()->type == 'Supervisor Landscaping')
@@ -268,7 +268,7 @@ Company report
 
                     <tr><td align="center" colspan="5" >AVERAGE SCORE</td><td align="center"> <?php   echo number_format((float)$erpnd, 2, '.', '')  ?>% </td></tr>
 
-      @endif    
+      @endif
 
        @if(auth()->user()->type != 'Supervisor Landscaping')
       <?php $erpnd = $summ2/count($assessmmentcompanyname);   ?>
@@ -276,7 +276,7 @@ Company report
 
                     <tr><td align="center" colspan="5" >AVERAGE SCORE</td><td align="center"> <?php   echo number_format((float)$erpnd, 2, '.', '')  ?>% </td></tr>
 
-      @endif            
+      @endif
 
     </table>
 
@@ -328,27 +328,30 @@ Company report
 
                     </div>
 
-                    <div class="modal-body"   >
 
                              <form method="POST" action="edit/comment/new" >
                              @csrf
+
+                    <div class="modal-body"   >
 
                         <textarea   id="edit_name" style="color: black" type="text" required class="form-control"
                                name="comment" placeholder="Update Comment ..." required></textarea>
                                  <input id="edit_id" name="edit_id" hidden>
                                <br>
 
-
-                               <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                               <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                              </div>
                              </form>
 
 
-                    </div>
+
 
                     <br>
 
-                <div class="modal-footer">
-                </div>
+                
             </div>
         </div>
         </div>

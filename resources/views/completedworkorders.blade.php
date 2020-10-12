@@ -15,13 +15,31 @@
 <?php  $locations = iowzonelocation::where('iowzone_id',$workszon['zone'])->get(); ?>
 @endif
     <br>
-    <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
-         <div class="container">
+    <div class="row container">
+         <div class="col">
             <h5 style="text-transform: capitalize;"><b>Completed works order in  @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
 <?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
+        @if(count($locations) > 0)
+        <div class="col-md-6">
+            <form method="GET" action="" class="form-inline my-2 my-lg-0">
+                From <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
+            </form>
+        </div>
 
+@endif
 
     </div>
     <br>
@@ -205,7 +223,7 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 6)
       {echo"<option value='".$statusname->status."'>Post implementation</option>";}
      elseif($statusname->status == 7)
-      {echo"<option value='".$statusname->status."'>Material requested</option>";}
+      {echo"<option value='".$statusname->status."'>Material(s) requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
       elseif($statusname->status == 30)
@@ -220,8 +238,8 @@ foreach($userwithid as $userwithid)
       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -235,7 +253,7 @@ foreach($userwithid as $userwithid)
         <div class=" row nav nav-tabs text-center">
             <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All <b class="badge badge-light"></b></b></a>
             {{-- <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Accepted <b class="badge badge-light"></b></b></a> --}}
-             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On-process <b class="badge badge-light"></b></b></a>
+             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On Progress <b class="badge badge-light"></b></b></a>
              {{-- <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Closed <b class="badge badge-light"></b></b></a> --}}
              <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed <b class="badge badge-light"></b></b></a>
         </div>
@@ -270,21 +288,42 @@ foreach($userwithid as $userwithid)
 
 
 
-                     ?>
+                     ?>@if(request()->has('start') && request()->has('end') )
+                 @php
+                     $from=request('start');
+           $to=request('end');
+                 @endphp
+                 @endif
                      @foreach($locations as $locations)
 
                       @if(isset($_GET['location']) && isset($_GET['year']))
                           @if($_GET['location']=='All')
+@if (request()->has('start') && request()->has('end') )
+<?php $workorders = Workorder::where('zone_location',$locations->id)-> whereBetween('created_at', [$from, $to])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
 
-                    <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+@else
+<?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+
+@endif
 
                           @else
+@if (request()->has('start') && request()->has('end') )
+<?php $workorders = Workorder::where('zone_location',$_GET['location'])-> whereBetween('created_at', [$from, $to])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
 
-                    <?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+@else
+<?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+
+@endif
                         @endif
 
                     @else
-                        <?php $workorders = Workorder::where('zone_location',$locations->id)->orderBy('id','DESC')->get(); ?>
+                    @if (request()->has('start') && request()->has('end') )
+                    <?php $workorders = Workorder::where('zone_location',$locations->id)-> whereBetween('created_at', [$from, $to])->orderBy('id','DESC')->get(); ?>
+
+                    @else
+                    <?php $workorders = Workorder::where('zone_location',$locations->id)->orderBy('id','DESC')->get(); ?>
+
+                    @endif
                     @endif
 
 
@@ -423,8 +462,8 @@ foreach($userwithid as $userwithid)
           </div>
           <input type="text" name="work" hidden value="{{ $work->id }}">
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-primary">Send</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           </div>
         </div>
     </form>

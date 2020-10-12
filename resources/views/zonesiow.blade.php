@@ -19,9 +19,32 @@
     <br>
     <div >
         <div class="container">
-            <h5 style="text-transform: capitalize;"><b>All works order in  @if(auth()->user()->type == 'Maintenance coordinator')
-<?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
-<?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
+            <div class="row">
+                <div class="col">
+                    <h5 style="text-transform: capitalize;"><b>All works order in  @if(auth()->user()->type == 'Maintenance coordinator')
+                        <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
+                        <?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
+                </div>
+                    @if(count($locations) > 0)
+                    <div class="col-md-6">
+                        <form method="GET" action="" class="form-inline my-2 my-lg-0">
+                            From <input name="start" value="<?php
+                            if (request()->has('start')) {
+                                echo $_GET['start'];
+                            } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                                           max="<?php echo date('Y-m-d'); ?>">
+                            To <input value="<?php
+                            if (request()->has('end')) {
+                                echo $_GET['end'];
+                            } ?>"
+                                         name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                                         max="<?php echo date('Y-m-d'); ?>">
+                            <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
+                        </form>
+                    </div>
+                    @endif
+            </div>
+
         </div>
 
 
@@ -208,7 +231,7 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 6)
       {echo"<option value='".$statusname->status."'>Post implementation</option>";}
      elseif($statusname->status == 7)
-      {echo"<option value='".$statusname->status."'>Material requested</option>";}
+      {echo"<option value='".$statusname->status."'>Material(s) requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
      elseif($statusname->status == 9)
@@ -221,8 +244,8 @@ foreach($userwithid as $userwithid)
       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -237,7 +260,7 @@ foreach($userwithid as $userwithid)
         <div class=" row nav nav-tabs text-center">
             <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All <b class="badge badge-light"></b></b></a>
             {{-- <a class="col btn-warning nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('acceptedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Accepted <b class="badge badge-light"></b></b></a> --}}
-             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On-process <b class="badge badge-light"></b></b></a>
+             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On Progress <b class="badge badge-light"></b></b></a>
              {{-- <a class="col btn-secondary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('closedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Closed <b class="badge badge-light"></b></b></a> --}}
              <a class="col btn-dark nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed <b class="badge badge-light"></b></b></a>
         </div>
@@ -273,20 +296,44 @@ foreach($userwithid as $userwithid)
 
 
                  ?>
+                  @if(request()->has('start') && request()->has('end') )
+                  @php
+                      $from=request('start');
+            $to=request('end');
+                  @endphp
+                  @endif
                  @foreach($locations as $locations)
 
                   @if(isset($_GET['location']) && isset($_GET['year']))
-                  	@if($_GET['location']=='All')
+                      @if($_GET['location']=='All')
+                      @if(request()->has('start') && request()->has('end') )
 
-                <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+                      @else
+                      <?php $workorders = Workorder::where('zone_location',$locations->id)-> whereBetween('created_at', [$from, $to])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+
+                      @endif
+                      <?php $workorders = Workorder::where('zone_location',$locations->id)->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+
 
                   	@else
 
-                <?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+                      @if (request()->has('start') && request()->has('end') )
+                      <?php $workorders = Workorder::where('zone_location',$_GET['location'])-> whereBetween('created_at', [$from, $to])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+
+                      @else
+                      <?php $workorders = Workorder::where('zone_location',$_GET['location'])->whereYear('created_at',$_GET['year'])->orderBy('id','DESC')->get(); ?>
+
+                      @endif
                 	@endif
 
                 @else
-                    <?php $workorders = Workorder::where('zone_location',$locations->id)->orderBy('id','DESC')->get(); ?>
+                @if (request()->has('start') && request()->has('end') )
+                <?php $workorders = Workorder::where('zone_location',$locations->id)-> whereBetween('created_at', [$from, $to])->orderBy('id','DESC')->get(); ?>
+
+                @else
+                <?php $workorders = Workorder::where('zone_location',$locations->id)->orderBy('id','DESC')->get(); ?>
+
+                @endif
                 @endif
 
 
@@ -351,14 +398,14 @@ foreach($userwithid as $userwithid)
                               <td><span>post implementation</span></td>
                             @elseif($work->status == 7)
 
-                              <td><span>material requested</span>
+                              <td><span>Material(s) requested</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                             @elseif($work->status == 40)
 
-                              <td><span>Material Requested <br>Approved Succesifully</span>
+                              <td><span>Material(s) Requested <br>Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
@@ -387,7 +434,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                            @elseif($work->status == 8)
                                   @if(auth()->user()->type == 'CLIENT')
-                              <td><span>  Material requested on progress</span>
+                              <td><span>  Material(s) requested on progress</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
@@ -409,35 +456,35 @@ foreach($userwithid as $userwithid)
                                 <span>Emergency</span></td>
                                 @endif
                                @else
-                               <td><span>  Material received from store!</span></td>
+                               <td><span>  Material(s) received from store!</span></td>
                                                              @endif
 
                              @elseif($work->status == 19)
                                @if(auth()->user()->type != 'CLIENT')
-                              <td><span>Material missing in store, <br>Head Procurement  notified</span>  <br>
+                              <td><span>Material(s) missing in store, <br>Head Procurement  notified</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                               @else
-                               <td><span>  Material requested on progress <br> please wait!</span>  <br>
+                               <td><span>  Material(s) requested on progress <br> please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                              @endif
                                @elseif($work->status == 15)
-                                                            <td><span>Material Accepted by IoW</span>  <br>
+                                                            <td><span>Material(s) Accepted by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
 
                                 @elseif($work->status == 55)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Some of Material Rejected</span>  <br>
+                                                            <td><span>Some of Material(s) Rejected</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span>Material on Check by IoW</span>  <br>
+                                                             <td><span>Material(s) on Check by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
@@ -445,12 +492,12 @@ foreach($userwithid as $userwithid)
 
                                 @elseif($work->status == 57)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Material Requested Again</span>  <br>
+                                                            <td><span>Material(s) Requested Again</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span>Material on Check by IoW and HoS</span>  <br>
+                                                             <td><span>Material(s) on Check by IoW and HoS</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
@@ -458,12 +505,12 @@ foreach($userwithid as $userwithid)
 
                                 @elseif($work->status == 16)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Material rejected by IoW</span>  <br>
+                                                            <td><span>Material(s) rejected by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span>  Material requested on progress please wait!</span>  <br>
+                                                             <td><span>  Material(s) requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
@@ -740,6 +787,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 </div>
 
          <button type="submit" class="btn btn-primary ">Send to Head of Section</button>
+         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
     </form>
             </div>
         </div>

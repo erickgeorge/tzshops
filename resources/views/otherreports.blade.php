@@ -96,6 +96,23 @@ foreach ($hoos as $hous) {
           <span aria-hidden="true">X</span>
         </button>
       </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+              @if($v == 'iow') <input name="type" value="" type="text" hidden>  @else
+                <select name="type" class="form-control mr-sm-2">
+                  @if($v == 'iow')  @else  <option value='' selected="selected">Select section</option>
+                  <option value="">All sections</option> @endif
+
+
+  @foreach($to as $too)
+  <option  @if($v == 'iow') selected @endif value="{{ $too->type }}">{{ ucwords(strtolower(substr($too->type,4,12))) }}</option>
+  @endforeach
+                </select>
+                @endif
+            </div>
+        </div>
+        </div>
     <div class="modal-body">
       <div class="row">
         <div class="col">
@@ -115,27 +132,13 @@ foreach ($hoos as $hous) {
       </div>
   </div>
 
-  <div class="modal-body">
-      <div class="row">
-          <div class="col">
-              <select name="type" class="form-control mr-sm-2">
-                @if($v == 'iow')  @else  <option value='' selected="selected">Select section</option>
-                <option value="">All Sections</option> @endif
 
-
-@foreach($to as $too)
-<option  @if($v == 'iow') selected @endif value="{{ $too->type }}">{{ substr($too->type,4,12) }}</option>
-@endforeach
-              </select>
-          </div>
-      </div>
-      </div>
 
       <input type="text" name="change"
       value="<?php echo $v; ?>" hidden>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -148,7 +151,10 @@ foreach ($hoos as $hous) {
         <tr style="color: white;">
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
-            @if($v == 'iow')  @else<th scope="col">Section</th>@endif
+            @if($v == 'iow')
+            <th scope="col">Assigned Zone</th>
+
+            @else<th scope="col">Section</th>@endif
             <th title="phone" scope="col">Phone</th>
             <th scope="col">Email</th>
 
@@ -180,7 +186,10 @@ foreach ($hoos as $hous) {
             <tr>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
-                @if($v == 'iow')  @else <td>{{ ucwords(strtolower(substr($tech->type,4,12))) }}</td>@endif  <td>
+                @if($v == 'iow')
+            <td>{{$tech->zone}}</td>
+
+                @else <td>{{ ucwords(strtolower(substr($tech->type,4,12))) }}</td>@endif  <td>
 
                     <?php $phonenumber = $tech->phone;
                     if(substr($phonenumber,0,1) == '0'){

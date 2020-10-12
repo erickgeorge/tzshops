@@ -20,7 +20,7 @@ Assessment form
          @endif
 
 
-           
+
         </div>
 
         <div>
@@ -65,7 +65,7 @@ Assessment form
 
     </div>
 
-                
+
 
               @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
                 <a href="{{route('assessmentform.view')}}"><button style="max-height: 40px; " type="button" class="btn btn-primary" >
@@ -199,8 +199,8 @@ Assessment form
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
 </form>
@@ -393,7 +393,7 @@ Assessment form
                              @elseif($assesment->status == 25)
                              <td><span class="badge badge-success">Company paid </span></td>
                              @endif
-                            
+
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
                                            data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
@@ -451,7 +451,7 @@ Assessment form
                              @elseif($assesment->status == 25)
                              <td><span class="badge badge-success">Company paid </span></td>
                              @endif
-                            
+
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
                                            data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
@@ -584,9 +584,9 @@ Assessment form
 
 @if(auth()->user()->type == 'Administrative officer')
 
-   
+
      @foreach($assessmmentcompanyadofficer as $assesment)
-                      
+
                           <?php $i++; ?>
                          <tr>
                              <td>{{ $i }}</td>
@@ -634,7 +634,7 @@ Assessment form
                                                     class="fas fa-tasks"></i></a>-->
                            </td>
                          </tr>
-                
+
       @endforeach
 
 
@@ -647,9 +647,9 @@ Assessment form
 
  @if(auth()->user()->type == 'USAB')
                     @foreach($assessmmentcompanyusab as $assesment)
-                    
+
                      @if(($assesment['areaname']->hostel == 1 ) and ($assesment->status == 25))
-                       
+
 
                           <?php $i++; ?>
                          <tr>

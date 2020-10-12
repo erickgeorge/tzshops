@@ -164,6 +164,7 @@ Company report
 
                                                         <button  type="submit" class="btn btn-primary">Save
                                                         </button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 
 
                  </form>                              </div>

@@ -92,10 +92,10 @@ New Building Asset
             <br>
             <div class="row">
                 <div class="form-group col-md-2">
-                    <button id="newcard" class="form-control btn btn-primary" name="newcard">Save</button>
+                    <button id="newcard" class=" btn btn-primary" name="newcard">Save</button>
                 </div>
                 <div class="form-group col-md-2">
-                    <a href="{{route('assetsBuilding')}}" id="newcard" class="form-control btn btn-danger text-light" name="newcard">Cancel</a>
+                    <a href="{{route('assetsBuilding')}}" id="newcard" class=" btn btn-danger text-light" name="newcard">Cancel</a>
                 </div>
             </div>
         </form>

@@ -22,19 +22,19 @@ class DirectorateController extends Controller
     }
 
 
-    
+
      public function IoWZonesview(){
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
        return view('iowzoneview', [
             'role' => $role,
             'notifications' => $notifications,
             'iowzone' => iowzone::OrderBy('zonename', 'ASC')->get()
-            
+
         ]);
-   
+
     }
 
 
@@ -42,7 +42,7 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
        return view('iowzoneiowview', [
             'role' => $role,
             'notifications' => $notifications,
@@ -53,7 +53,7 @@ class DirectorateController extends Controller
                      ->groupBy('zone')
                      ->get()
         ]);
-   
+
     }
 
 
@@ -61,11 +61,12 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
        return view('iowzonelocationview', [
             'role' => $role,
             'notifications' => $notifications,
             'userid' =>  User::where('id', $id)->first(),
+            'zoneyake' => $zone,
             'userzone' =>  User::where('zone', $zone)->first(),
             'iowzone' => iowzonelocation::where('iow_id', $id)->OrderBy('location', 'ASC')->get()
         ]);
@@ -76,14 +77,14 @@ class DirectorateController extends Controller
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
        return view('iowzonewithinspector', [
             'role' => $role,
             'notifications' => $notifications,
             'zone' =>  User::where('zone', $zone)->get()
-           
+
         ]);
-   
+
     }
 
 
@@ -110,12 +111,12 @@ class DirectorateController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -123,7 +124,7 @@ class DirectorateController extends Controller
             $to=request('start');
         $from=request('end');
         }// start> end
-        
+
        return view('department', [
             'role' => $role,
             'notifications' => $notifications,
@@ -131,7 +132,7 @@ class DirectorateController extends Controller
             'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
 
-        
+
     }
         return view('department', [
             'role' => $role,
@@ -150,12 +151,12 @@ class DirectorateController extends Controller
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -163,7 +164,7 @@ class DirectorateController extends Controller
             $to=request('start');
         $from=request('end');
         }// start> end
-        
+
        return view('directorate', [
             'role' => $role,
             'notifications' => $notifications,
@@ -171,7 +172,7 @@ class DirectorateController extends Controller
             'deps' => Department::whereBetween('created_at', [$from, $to])->OrderBy('name', 'ASC')->with('directorate')->get()
         ]);
 
-        
+
     }
         return view('directorate', [
             'role' => $role,
@@ -235,9 +236,9 @@ class DirectorateController extends Controller
         return view('add_iowzone', [
             'role' => $role,
             'notifications' => $notifications,
-            
+
             'iows' => User::where('type' , 'Inspector Of Works')->get()
-            
+
         ]);
 
 
@@ -250,13 +251,13 @@ class DirectorateController extends Controller
 
         return view('add_iowzone_location', [
             'role' => $role,
-            'notifications' => $notifications, 
+            'notifications' => $notifications,
             'iowuser' => User::where('id' , $id)->first(),
             'iowuserzone' => User::where('zone' , $zone)->first()
-            
+
         ]);
      }
-   
+
 
     public function createDirectorate(Request $request)
     {
@@ -265,7 +266,7 @@ class DirectorateController extends Controller
             'dir_abb' => 'required|unique:directorates'
         ]);*/
 
-     
+
         if ($request['location'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Campus is required']);
         }
@@ -286,19 +287,19 @@ class DirectorateController extends Controller
 	public function editDirectorate(Request $request)
     {
        $p=$request['edirid'];
-        
-		
+
+
         $directoratee = Directorate::where('id',$p)->first();
-		
+
 		$directoratee->name = $request['edirname'];
         $directoratee->directorate_description = $request['edirabb'];
-        
+
         $directoratee->campus_id = 1;
         $directoratee->save();
 
         return redirect()->route('dir.manage')->with(['message' => 'Directorate Edited successfully']);
     }
-	
+
 
 	public function deleteDirectorate($id)
     {
@@ -307,23 +308,23 @@ class DirectorateController extends Controller
         $deps = Department::where('directorate_id', $directorate->id)->get();
 
         $deps_id = Department::select('id')->where('directorate_id', $directorate->id)->get();
-       
-       
+
+
         foreach ($deps as $dep){
             $dep->delete();
         }
         $directorate->delete();
-		  
-		  
-        return redirect()->route('dir.manage')->with(['message' => 'Directorate and its children Deleted successfully']);
-  
 
-      
+
+        return redirect()->route('dir.manage')->with(['message' => 'Directorate and its children Deleted successfully']);
+
+
+
     }
 
     public function createDepartment(Request $request)
     {
-        
+
 
         if ($request['directorate'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Directorate is required']);
@@ -341,54 +342,54 @@ class DirectorateController extends Controller
 
         return redirect()->route('dipartment.manage')->with(['message' => 'Department added successfully']);
     }
-	
-	
+
+
 	public function editDepartment(Request $request)
     {
        $p=$request['edepid'];
-        
-		
+
+
         $dep = Department::where('id',$p)->first();
-		
+
 		$dep->name = $request['edepname'];
         $dep->description = $request['edepdesc'];
 		 $dep->directorate_id = $request['editdirectoratefdep'];
-        
+
         //$directoratee->campus_id = 1;
         $dep->save();
 
         return redirect()->route('dipartment.manage')->with(['message' => 'Department Edited successfully']);
     }
-	
-	
-	
+
+
+
 	public function deleteDepartment($id)
     {
 
         $dep=Department::where('id', $id)->first();
-		
-		  $dep->delete();
-		  
-		  
-		  return redirect()->route('dipartment.manage')->with(['message' => 'Department Deleted successfully']);
-  
 
-      
+		  $dep->delete();
+
+
+		  return redirect()->route('dipartment.manage')->with(['message' => 'Department Deleted successfully']);
+
+
+
     }
-	
-    
-	
+
+
+
 
     public function createworkorderection(Request $request)
     {
-        
+
          if (!empty(workordersection::where('section_name',$request['sec_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Workorder Section already exist']);
         }
 
         $wsection = new workordersection();
         $wsection->section_name = ($request['sec_name']);
-       
+
         $wsection->save();
 
         return redirect()->route('section.manage')->with(['message' => 'Work order Section added successfully']);
@@ -399,7 +400,7 @@ class DirectorateController extends Controller
 
     public function createiowzone(Request $request)
     {
-        
+
          if (!empty(iowzone::where('zonename',$request['zonename'])->first())){
             return redirect()->back()->withErrors(['message' => 'IoW Zone already exist']);
         }
@@ -412,16 +413,16 @@ class DirectorateController extends Controller
 
         return redirect()->route('manage.IoWZones')->with(['message' => 'IoW Zone added successfully']);
     }
-    
+
 
      public function createiowzonelocation(Request $request , $id , $zone)
     {
-        
+
          if (!empty(iowzonelocation::where('location',$request['location'])->first())){
             return redirect()->back()->withErrors(['message' => 'location already exist']);
         }
         $zoneid = iowzone::where('zonename',$zone)->first();
-        $iowzone = new iowzonelocation();  
+        $iowzone = new iowzonelocation();
         $iowzone->location = $request['location' ];
         $iowzone->iow_id = $id;
         $iowzone->iowzone_id = $zoneid['id'];
@@ -429,7 +430,7 @@ class DirectorateController extends Controller
 
         return redirect()->route('view.location', [$id , $zone] )->with(['message' => 'location added successfully']);
     }
-	
+
 
 	public function editworkorderSection(Request $request)
     {
@@ -437,16 +438,16 @@ class DirectorateController extends Controller
           if (!empty(workordersection::where('section_name',$request['sec_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Workorder Section already exist']);
         }
-        
+
        $p=$request['esecid'];
-        
-		
+
+
         $wsec = workordersection::where('id',$p)->first();
-		
+
 		$wsec->section_name = $request['sec_name' ];
-       
+
         $wsec->save();
-        
+
         //$directoratee->campus_id = 1;
         $wsec->save();
 
@@ -461,17 +462,17 @@ class DirectorateController extends Controller
           if (!empty(iowzone::where('zonename',$request['sec_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Zone already exist']);
         }
-        
+
        $p=$request['esecid'];
-        
-        
+
+
         $wsec = iowzone::where('id',$p)->first();
-        
+
         $wsec->zonename = $request['sec_name' ];
-       
+
         $wsec->save();
-        
-       
+
+
 
         return redirect()->route('manage.IoWZones')->with(['message' => 'Zone edited successfully']);
     }
@@ -483,29 +484,29 @@ class DirectorateController extends Controller
           if (!empty(iowzonelocation::where('location',$request['location'])->first())){
             return redirect()->back()->withErrors(['message' => 'Zone location already exist']);
         }
-        
+
          $p=$request['esecid'];
-  
+
         $wsec = iowzonelocation::where('id',$p)->first();
-        
+
         $wsec->location = $request['location' ];
-       
+
         $wsec->save();
-     
+
         return redirect()->back()->with(['message' => 'Zone location edited successfully']);
     }
-	
+
 
 	public function deleteWorkorderSection($id)
     {
 
           $sec=workordersection::where('id', $id)->first();
-		
+
 		  $sec->delete();
-		  
-		  
+
+
 		  return redirect()->route('section.manage')->with(['message' => 'Workorder Section Deleted successfully']);
-      
+
     }
 
 
@@ -513,26 +514,26 @@ class DirectorateController extends Controller
     {
 
           $zone=iowzone::where('id', $id)->first();
-        
-          $zone->delete();
-          
-          
-          return redirect()->route('manage.IoWZones')->with(['message' => 'Zone deleted successfully']);
-  
 
-      
+          $zone->delete();
+
+
+          return redirect()->route('manage.IoWZones')->with(['message' => 'Zone deleted successfully']);
+
+
+
     }
 
      public function deleteiowzonelocation($id)
     {
 
           $zone=iowzonelocation::where('id', $id)->first();
-        
+
           $zone->delete();
-          
-          
+
+
           return redirect()->back()->with(['message' => 'Zone Location deleted successfully']);
 
     }
-	
+
 }

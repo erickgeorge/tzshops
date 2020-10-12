@@ -15,7 +15,7 @@ Assessment form
           <h5 ><b style="text-transform: capitalize;">OnProgress Assessment forms</b></h5>
           @else
             <h5 ><b style="text-transform: capitalize;">assessment forms which needs approval</b></h5>
-         @endif   
+         @endif
 
         </div>
 
@@ -61,13 +61,13 @@ Assessment form
 
     </div>
 
- 
+
   @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
 
  <a href="{{route('assessmentform.view.second')}}"><button  style="max-height: 40px; " type="button" class="btn btn-primary" >
                  Assessment forms for paid companies
                 </button></a>
-               
+
  @else
 
  <a href="{{route('assessmentform.view.second')}}"><button  style="max-height: 40px; " type="button" class="btn btn-primary" >
@@ -198,8 +198,8 @@ Assessment form
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
 </form>
@@ -653,7 +653,7 @@ Assessment form
                              <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
                                @elseif($assesment->status == 6)
                              <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
-                           
+
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -682,13 +682,13 @@ Assessment form
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
-                        
+
                              @if($assesment->status == 4)
                              <td><span class="badge badge-primary">Approved by Estates Officer , <br>Waiting for your approval</span></td>
                               @elseif($assesment->status == 11)
                              <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
                              @endif
-                            
+
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
                                            data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>
@@ -713,11 +713,11 @@ Assessment form
                              <td>{{ date('F Y', strtotime($assesment->assessment_month))}}</td>
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
-                        
+
                              @if($assesment->status == 5)
                              <td><span class="badge badge-primary">Approved by Estates Director , <br>Waiting for payment processes</span></td>
                              @endif
-                            
+
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
                                            data-toggle="tooltip" title="View"><i class="fas fa-eye"></i></a>

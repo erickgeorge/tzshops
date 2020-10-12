@@ -63,15 +63,15 @@ foreach ($hoos as $hous) {
           }
 
           if(substr($hotype,0,4) == 'HOS '){
-            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new Technician</button></a> ';
 
           }
           elseif($hotype == 'Maintenance coordinator'){
-            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new Technician</button></a> ';
 
           }elseif($role['user_role']['role_id'] == 1){
             $niyeye = '1';
-            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new technician</button></a> ';
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new Technician</button></a> ';
 
           }else {
             $techs= Technician::where('status',0)->orderby('fname')->get();
@@ -103,28 +103,6 @@ foreach ($hoos as $hous) {
         </button>
       </div>
 
-    <div class="modal-body">
-      <div class="row">
-        <div class="col">
-          <select name="name" class="form-control mr-sm-2">
-
-           <option value="" selected="selected">All Technicians</option>
-@foreach($rle as $tech)
-    @if(($role['user_role']['role_id'] == 1))
-        <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
-    @elseif($maintenance_coordinator == 1)
-        <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
-    @else
-        @if(strtolower($tech->type) == strtolower($placed))
-
-        <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} </option>
-        @endif
-    @endif
-@endforeach
-            </select>
-      </div>
-      </div>
-  </div>
 
   <div class="modal-body">
       <div class="row">
@@ -161,12 +139,34 @@ foreach ($hoos as $hous) {
           </div>
       </div>
       </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <select name="name" class="form-control mr-sm-2">
+
+             <option value="" selected="selected">All Technicians</option>
+  @foreach($rle as $tech)
+      @if(($role['user_role']['role_id'] == 1))
+          <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
+      @elseif($maintenance_coordinator == 1)
+          <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ $tech->type }}</option>
+      @else
+          @if(strtolower($tech->type) == strtolower($placed))
+
+          <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} </option>
+          @endif
+      @endif
+  @endforeach
+              </select>
+        </div>
+        </div>
+    </div>
 
       <input type="text" name="change"
       value="technician" hidden>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -180,8 +180,8 @@ foreach ($hoos as $hous) {
        <tr style="color: white;">
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
-            <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
+            <th scope="col">Email</th>
             @if($role['user_role']['role_id'] != 1)
             @else
             <th scope="col">Section</th>@endif
@@ -215,7 +215,6 @@ foreach ($hoos as $hous) {
             <tr>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
-                <td>{{ $tech->email }}</td>
                 <td>
 
       <?php $phonenumber = $tech->phone;
@@ -227,6 +226,7 @@ foreach ($hoos as $hous) {
         }else { echo $tech->phone;}
 
       ?></td>
+                <td>{{ $tech->email }}</td>
              @if($role['user_role']['role_id'] != 1)  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
                 @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
 

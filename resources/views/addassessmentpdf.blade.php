@@ -12,7 +12,7 @@
 <title>assessment Sheet details</title>
 <div style="margin-top: 20px" align="center">
 
-    <p><h2>University of Dar es salaam</h2> <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
+    <p><h2>University of Dar es Salaam</h2> <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm"> <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
 </div>
 <style>

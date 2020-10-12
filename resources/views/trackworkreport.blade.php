@@ -56,7 +56,7 @@ td, th {
 </style>
  <div class="container">
 
-    <div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+    <div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>Directorate of Estates Services</h5></p><p><b style="text-transform: uppercase;"><?php
      echo $header;
@@ -88,18 +88,18 @@ td, th {
             <td>On : <b>{{ date('d F Y', strtotime($wo->created_at)) }}</b> </td>
             <td>Problem Type: <b style="text-transform: capitalize;">{{ ucwords(strtolower($wo->problem_type)) }}</b> </td>
         </tr>
-        
-          @if(empty($wo->room_id)) 
+
+          @if(empty($wo->room_id))
           <tr>
             <td colspan="4">Location : <b>{{ $wo->location }} </b></td> </tr>
-           
+
          @else
 
          <tr>
                    {{ $wo['room']['block']->location_of_block }}
             </b> </td>
             <td colspan="2">Area : <b>
-                        
+
                    {{ $wo['room']['block']['area']->name_of_area }}
                           </b></td>
             <td>Block : <b>
@@ -110,7 +110,7 @@ td, th {
              </b></td>
        </tr>
               @endif
-        
+
         <tr>
             <td colspan="4">Description of the problem: <b style="text-transform: capitalize;">{{ $wo->details }}</b> </td>
         </tr>
@@ -162,13 +162,13 @@ td, th {
     <h4><b>{{ count($techforms) }} Assigned Technicians for Inspection  </b></h4>
     @endif
 
-  
+
 
 <table style="width:100%">
 
     <thead style=" background-color: #376ad3; color: white; ">
   <tr>
- 
+
   <th>Full Name</th>
      <th>Status </th>
     <th>Date Assigned </th>
@@ -242,7 +242,7 @@ td, th {
  <h4><b>Transport Description for Inspection</b></h4>
 
 <table style=" width:100%">
- 
+
      <thead style="background-color: #376ad3;color: white;">
        <tr>
     <th>Date of Transport</th>
@@ -312,7 +312,7 @@ td, th {
         <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
                   id="comment" disabled>{{ $iformb->description }}</textarea>
     </div>
-  
+
 
   <br>
     <hr>
@@ -353,7 +353,7 @@ td, th {
 <table style="width:100%">
 
 
- <thead style="background-color: #376ad3;color: white;">    
+ <thead style="background-color: #376ad3;color: white;">
   <tr>
     <th>Full Name</th>
   <th>Status</th>
@@ -455,7 +455,7 @@ td, th {
 
   <br>
 
- 
+
 
 
     @endif
@@ -470,7 +470,7 @@ td, th {
 
   <br>
   @if(auth()->user()->type != 'CLIENT')
-  
+
   @if(empty($wo['work_order_material']->id))
 
 
@@ -490,7 +490,7 @@ td, th {
     <h4><b>{{ count($matforms) }} Materials Requested  </b></h4>
     @endif
 
-   
+
 
 <table style="width:100%">
 
@@ -549,10 +549,10 @@ td, th {
 
 
    @elseif(auth()->user()->type == 'CLIENT')
-     
+
   @if(empty($wo['work_order_material']->id))
      <!--   <p class="text-primary">No Material have been requested</p>-->
-      
+
     @else
 
     <?php
@@ -620,12 +620,12 @@ td, th {
 
 
 
-    
+
   @if(empty($wo['work_order_material']->id))
         <!--<p >No Material Used for this Works order</p>-->
     @else
 
-   
+
     <?php
 
   $idw=$wo->id;
@@ -669,7 +669,7 @@ td, th {
 
     <hr>
     @endif
-  
+
 
   <!--MATERIALS-->
 

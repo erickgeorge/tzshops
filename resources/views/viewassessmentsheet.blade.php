@@ -126,7 +126,7 @@ Assessment Sheet
          </td>
 
 
-      @endif   
+      @endif
 
  </tr>
 
@@ -190,6 +190,7 @@ Assessment Sheet
 
                                                         <button  type="submit" class="btn btn-primary">Save
                                                         </button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                       </div>
 
 

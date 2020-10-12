@@ -3300,6 +3300,30 @@ $v5=$type[4];
     public function roomreportView()
     {
 
+        if(request()->has('start') && request()->has('end') )  {
+
+
+            $from=request('start');
+            $to=request('end');
+
+            if(request('start')>request('end')){
+                $to=request('start');
+            $from=request('end');
+            }
+
+            $wo_room = WorkOrder::
+            select(DB::raw('count(id) as total_room,count(location) as total_location, location,loc_id'))
+
+            ->whereBetween('created_at', [$from, $to])->groupBy('loc_id')
+            ->groupBy('location')
+            ->get();
+
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('roomreport', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+
+            }
+
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,count(location) as total_location, location,loc_id'))
 
@@ -4163,6 +4187,29 @@ $v5=$type[4];
    public function anonymousroomreport()
     {
 
+        if(request()->has('start') && request()->has('end') )  {
+
+
+            $from=request('start');
+            $to=request('end');
+
+            if(request('start')>request('end')){
+                $to=request('start');
+            $from=request('end');
+            }
+            $wo_room = WorkOrder::
+            select(DB::raw('count(id) as total_room,area_id'))-> whereBetween('created_at', [$from, $to])
+
+            ->groupBy('area_id')
+            ->where('loc_id',$_GET['room'])
+            ->get();
+
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('anonymousroom', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+
+            }
+
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,area_id'))
 
@@ -4180,6 +4227,31 @@ $v5=$type[4];
    }
    public function anonymousroomreportextended()
     {
+
+
+        if(request()->has('start') && request()->has('end') )  {
+
+
+            $from=request('start');
+            $to=request('end');
+
+            if(request('start')>request('end')){
+                $to=request('start');
+            $from=request('end');
+            }
+
+            $wo_room = WorkOrder::
+            select(DB::raw('count(id) as total_room,block_id'))-> whereBetween('created_at', [$from, $to])
+
+            ->groupBy('block_id')
+            ->where('area_id',$_GET['room'])
+            ->get();
+
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('anonymousroomextended', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+
+            }
 
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,block_id'))
@@ -4199,6 +4271,30 @@ $v5=$type[4];
     public function inroomreportextendedwithrooms()
     {
 
+        if(request()->has('start') && request()->has('end') )  {
+
+
+            $from=request('start');
+            $to=request('end');
+
+            if(request('start')>request('end')){
+                $to=request('start');
+            $from=request('end');
+            }
+
+
+            $wo_room = WorkOrder::
+            select(DB::raw('count(id) as total_room,room_id'))-> whereBetween('created_at', [$from, $to])
+
+            ->groupBy('room_id')
+            ->where('block_id',$_GET['room'])
+            ->get();
+            
+            $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+            return view('foundrooms', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+
+            }
         $wo_room = WorkOrder::
                      select(DB::raw('count(id) as total_room,room_id'))
 
@@ -4216,6 +4312,29 @@ $v5=$type[4];
    }
    public function knownroomreport()
     {
+
+        if(request()->has('start') && request()->has('end') )  {
+
+
+            $from=request('start');
+            $to=request('end');
+
+            if(request('start')>request('end')){
+                $to=request('start');
+            $from=request('end');
+            }
+
+
+         $wo_room = WorkOrder::whereBetween('created_at', [$from, $to])->where('location',$_GET['workorders'])->OrWhere('room_id',$_GET['workorders'])->get();
+
+
+
+
+
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+         return view('knownroom', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
+            }
 
         $wo_room = WorkOrder::where('location',$_GET['workorders'])->OrWhere('room_id',$_GET['workorders'])->get();
 

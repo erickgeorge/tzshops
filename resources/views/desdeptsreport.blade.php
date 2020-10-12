@@ -1,4 +1,4 @@
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+<div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
@@ -17,9 +17,7 @@ td, th {
   text-align: left;
   padding: 8px;
 }
-.nameee{
-    text-transform:uppercase;
-}
+
 
 tr:nth-child(even) {
   background-color: #dddddd;
@@ -45,7 +43,7 @@ tr:nth-child(even) {
                         <tr>
                        <?php $i++;?>
                         <td>{{$i}}</td>
-                       <td class="nameee"> {{$sect->section_name}}</td>
+                       <td style="text-transform: capitalize;"> {{strtolower($sect->section_name)}}</td>
                        </tr>
                         @endforeach
                 </tbody>

@@ -859,7 +859,7 @@
   </div>
 
 
-   <a  href="{{ url('/alliow')}}">Inspectors of works</a>
+   <a  href="{{ url('/alliow')}}">Inspectors of Works</a>
 
 
    <button  class="dropdown-btn">store

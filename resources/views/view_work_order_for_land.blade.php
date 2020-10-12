@@ -122,6 +122,7 @@
                         <textarea name="reason" required maxlength="100" class="form-control"  rows="5" id="reason"></textarea>
                         <br>
                         <button type="submit" class="btn btn-danger">Reject</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </form>
                 </div>
                 <div class="modal-footer">

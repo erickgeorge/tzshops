@@ -1,7 +1,7 @@
 <title><?php
     echo $header;
     ?></title>
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+<div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
@@ -101,14 +101,14 @@ tr:nth-child(even) {
                               <td><span class="badge badge-info">post implementation</span></td>
                             @elseif($work->status == 7)
 
-                              <td><span class="badge badge-info">material requested</span>
+                              <td><span class="badge badge-info">Material(s) requested</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                             @elseif($work->status == 40)
 
-                              <td><span class="badge badge-info">Material Requested Approved Succesifully</span>
+                              <td><span class="badge badge-info">Material(s) Requested Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -141,7 +141,7 @@ tr:nth-child(even) {
                                 @endif
                            @elseif($work->status == 8)
                                   @if(auth()->user()->type == 'CLIENT')
-                              <td><span class="badge badge-warning">  Material requested on progress</span>
+                              <td><span class="badge badge-warning">  Material(s) requested on progress</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-danger">Emergency</span></td>
@@ -163,35 +163,35 @@ tr:nth-child(even) {
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                @else
-                               <td><span class="badge badge-primary">  Material received from store!</span></td>
+                               <td><span class="badge badge-primary">  Material(s) received from store!</span></td>
                                                              @endif
 
                              @elseif($work->status == 19)
                                @if(auth()->user()->type != 'CLIENT')
-                              <td><span class="badge badge-info">Material missing in store also DES notified</span>  <br>
+                              <td><span class="badge badge-info">Material(s) missing in store also DES notified</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                               @else
-                               <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                               <td><span class="badge badge-warning">  Material(s) requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-danger">Emergency</span></td>
                                 @endif
                                                              @endif
                                @elseif($work->status == 15)
-                                                            <td><span class="badge badge-info">Material Accepted by IoW</span>  <br>
+                                                            <td><span class="badge badge-info">Material(s) Accepted by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
 
                                 @elseif($work->status == 55)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Some of Material Rejected</span>  <br>
+                                                            <td><span class="badge badge-danger">Some of Material(s) Rejected</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">Material on Check by IoW</span>  <br>
+                                                             <td><span class="badge badge-warning">Material(s) on Check by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
@@ -199,12 +199,12 @@ tr:nth-child(even) {
 
                                 @elseif($work->status == 57)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-primary">Material Requested Again</span>  <br>
+                                                            <td><span class="badge badge-primary">Material(s) Requested Again</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">Material on Check by IoW and HoS</span>  <br>
+                                                             <td><span class="badge badge-warning">Material(s) on Check by IoW and HoS</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
@@ -212,12 +212,12 @@ tr:nth-child(even) {
 
                                 @elseif($work->status == 16)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span class="badge badge-danger">Material rejected by IoW</span>  <br>
+                                                            <td><span class="badge badge-danger">Material(s) rejected by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span class="badge badge-warning">  Material requested on progress please wait!</span>  <br>
+                                                             <td><span class="badge badge-warning">  Material(s) requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
                                 @endif

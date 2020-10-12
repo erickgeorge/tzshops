@@ -142,8 +142,8 @@ use App\WorkOrder;
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -194,7 +194,7 @@ use App\WorkOrder;
                             @elseif($work->status == 6)
                                                             <td><span class="badge badge-info">post implementation</span></td>
                             @elseif($work->status == 7)
-                                                            <td><span class="badge badge-info">material requested</span></td>
+                                                            <td><span class="badge badge-info">Material(s) requested</span></td>
                             @else
                                 <td><span class="badge badge-success">procurement stage</span></td>
                             @endif

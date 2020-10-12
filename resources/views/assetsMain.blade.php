@@ -882,7 +882,13 @@ use App\assetsworkinprogress;
                 </p>
             </div>
         </div>
-<hr>
+<br>
+<br>
+    <div class="card">
+        <div class="card-header">
+          Assets Groups
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <p class="card-text">
@@ -919,7 +925,7 @@ $workinprogress = assetsworkinprogress::get();
                                 <td>1</td>
                                 <td>Building Assets</td>
                                 <td style="text-align:right;">
-                                    @php $total1 = 0; @endphp
+                                    @php $overall = 0; $total1 = 0; @endphp
                                     @foreach ($building as $buildings)
                                      @php   $total1 = $total1 +1; @endphp
                                     @endforeach
@@ -928,7 +934,9 @@ $workinprogress = assetsworkinprogress::get();
                                 <td  style="text-align:right;">
                                     @php $total2 = 0; @endphp
                                     @foreach ($building as $buildingd)
-                                    @php $total2 =  $total2 +$buildingd->Cost; @endphp
+                                    @php $total2 =  $total2 +$buildingd->Cost;
+$overall = $overall + $total2;
+                                    @endphp
                                     @endforeach
                                     @php echo number_format($total2); @endphp
                                 </td>
@@ -947,11 +955,13 @@ $workinprogress = assetsworkinprogress::get();
                                     @php echo $total1; @endphp
                                 </td>
                                 <td  style="text-align:right;">
-                                    @php $total2 = 0; @endphp
+                                    @php $total23 = 0; @endphp
                                     @foreach ($computerequipment as $computerequipment)
-                                    @php $total2 = $total2 +$computerequipment->Cost; @endphp
+                                    @php $total23 = $total23 +$computerequipment->Cost;
+$overall = $overall + $total23;
+                                    @endphp
                                     @endforeach
-                                    @php echo number_format($total2); @endphp
+                                    @php echo number_format($total23); @endphp
                                 </td>
                                 <td>
                                 <a style="margin-left: 50%" class="btn btn-primary" title="view" href="{{route('assetsComputerEquipment')}}"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
@@ -970,7 +980,9 @@ $workinprogress = assetsworkinprogress::get();
                                 <td  style="text-align:right;">
                                     @php $total3 = 0; @endphp
                                     @foreach ($equipment as $equipmentd)
-                                    @php $total3 =  $total3+$equipmentd->Cost; @endphp
+                                    @php $total3 =  $total3+$equipmentd->Cost;
+$overall = $overall +$total3;
+                                    @endphp
                                     @endforeach
                                     @php echo number_format($total3); @endphp
                                 </td>
@@ -986,7 +998,9 @@ $workinprogress = assetsworkinprogress::get();
                                     @php $total4 = 0; @endphp
                                     @foreach ($furniture as $furnitures)
                                      @php   $total1 =  1+$total1; @endphp
-                                     @php $total4 =$total4  +$furnitures->Cost; @endphp
+                                     @php $total4 =$total4  +$furnitures->Cost;
+$overall = $overall +$total4;
+                                     @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
                                 </td>
@@ -1005,7 +1019,9 @@ $workinprogress = assetsworkinprogress::get();
                                     @php $total5 = 0; @endphp
                                     @foreach ($intangible as $intangibles)
                                      @php   $total1 =  1+$total1; @endphp
-                                     @php $total5 = $total5 +$intangibles->Cost; @endphp
+                                     @php $total5 = $total5 +$intangibles->Cost;
+$overall = $overall + $total5;
+                                     @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
                                 </td>
@@ -1024,7 +1040,9 @@ $workinprogress = assetsworkinprogress::get();
                                     @php $total6 = 0; @endphp
                                     @foreach ($land as $land)
                                      @php   $total1 =  1+$total1; @endphp
-                                     @php $total6 = $total6 +$land->Cost; @endphp
+                                     @php $total6 = $total6 +$land->Cost;
+$overall = $overall + $total6;
+                                     @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
                                 </td>
@@ -1043,7 +1061,9 @@ $workinprogress = assetsworkinprogress::get();
                                     @php $total7 = 0; @endphp
                                     @foreach ($motorvehicle as $motorvehicle)
                                      @php   $total1 =  1+$total1; @endphp
-                                     @php $total7 = $total7 +$motorvehicle->Cost; @endphp
+                                     @php $total7 = $total7 +$motorvehicle->Cost;
+$overall = $overall + $total7;
+                                     @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
                                 </td>
@@ -1062,7 +1082,9 @@ $workinprogress = assetsworkinprogress::get();
                                     @php $total8 = 0; @endphp
                                     @foreach ($plantmachinery as $plantmachinery)
                                      @php   $total1 =  1+$total1; @endphp
-                                     @php $total8 =  $total8+$plantmachinery->Cost; @endphp
+                                     @php $total8 =  $total8+$plantmachinery->Cost;
+$overall = $overall + $total8;
+                                     @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
                                 </td>
@@ -1081,7 +1103,9 @@ $workinprogress = assetsworkinprogress::get();
                                     @php $total9 = 0; @endphp
                                     @foreach ($workinprogress as $workinprogress)
                                      @php   $total1 =  1+$total1; @endphp
-                                     @php $total9 = $total9  +$workinprogress->Cost; @endphp
+                                     @php $total9 = $total9  +$workinprogress->Cost;
+$overall = $overall + $total9;
+                                     @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
                                 </td>
@@ -1095,12 +1119,13 @@ $workinprogress = assetsworkinprogress::get();
                         </tbody>
                         <tfoot>
                             <tr class="text-right thead-light text-bold">
-                                <th>TOTAL</th>
+
                                 <th></th>
+                                <th style='text-align:right;'>TOTAL</th>
                                 <th id="totalhere"></th>
                                 <th  style="text-align:right;">
                                     @php
-                                        $total10 = $total1+$total2+$total3+$total4+$total5+$total6+$total7+$total8+$total9;
+                                        $total10 = $overall;
 
                                         echo number_format($total10);
                                     @endphp   </th>

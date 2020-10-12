@@ -150,11 +150,11 @@
           <div class="col">
               <select name="type" class="form-control mr-sm-2">
                 <option value='' selected="selected">Select type of contract</option>
-                
+
                 <option value="Interior">Interior</option>
                 <option value="Exterior">Exterior</option>
 
-            
+
               </select>
           </div>
       </div>
@@ -164,8 +164,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Export</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>
@@ -355,7 +355,7 @@
                                   @if(auth()->user()->type != 'DVC Admin')
                                    @if(auth()->user()->type != 'Estates Director')
                                     @if(auth()->user()->type != 'Estates officer')
-                                      
+
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
                                           action="{{ route('cleaning.company.delete', [$house->id]) }}">
@@ -368,7 +368,7 @@
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
                                     </form> &nbsp;
- @endif @endif @endif 
+ @endif @endif @endif
 
                 @if($now1 >= $next30days)
                    @if((auth()->user()->type == 'Supervisor Landscaping')||($role['user_role']['role_id'] == 1)||(auth()->user()->type == 'USAB') || (auth()->user()->type == 'Administrative officer'))
@@ -555,7 +555,7 @@
                                                      @if(auth()->user()->type != 'DVC Admin')
                                    @if(auth()->user()->type != 'Estates Director')
                                     @if(auth()->user()->type != 'Estates officer')
-                                   
+
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
                                           action="{{ route('cleaning.company.delete', [$house->id]) }}">
@@ -568,7 +568,7 @@
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
                                     </form> &nbsp;
-                                    @endif @endif @endif  
+                                    @endif @endif @endif
 
 
                 @if($now1 >= $next30days)
@@ -755,7 +755,7 @@
                @if( $house->status == 2)
 
 
-                                   
+
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
                                           action="{{ route('cleaning.company.delete', [$house->id]) }}">
@@ -768,7 +768,7 @@
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
                                     </form> &nbsp;
-                                 
+
 
 
                 @if($now1 >= $next30days)
@@ -955,7 +955,7 @@
                                    @if(auth()->user()->type != 'DVC Admin')
                                    @if(auth()->user()->type != 'Estates Director')
                                     @if(auth()->user()->type != 'Estates officer')
-                                     
+
 
                                     <form method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this tender completely? ')"
@@ -969,8 +969,8 @@
                                                         class="fas fa-trash-alt"></i></a>
                                         </button>
                                      </form> &nbsp;
-                                  @endif @endif @endif 
- 
+                                  @endif @endif @endif
+
                                     @if(($role['user_role']['role_id'] != 1))
 
                                   <span  class="badge badge-primary">Active <br>Contract </span>

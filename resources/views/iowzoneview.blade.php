@@ -118,7 +118,7 @@ IoW Zones
                     </div>
 
 
-                        <button type="submit" class="btn btn-primary">save
+                        <button type="submit" class="btn btn-primary">Save
                         </button>
                         <a href="/Manage/IoWZones" class="btn btn-danger">Cancel
                     </a>

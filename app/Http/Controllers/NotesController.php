@@ -1087,7 +1087,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }elseif($_GET['change']=='iow')
             {
                  $data['fetch'] = user::where('type','like','%'.$_GET['type'].'%')->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
- $data['header'] = 'All Inspectors of work Details';
+ $data['header'] = 'All Inspectors of works Details';
  $data['section'] ='0';
             }else
             {
@@ -1125,7 +1125,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }elseif($_GET['change']=='iow')
             {
                  $data['fetch'] = user::where('id',$_GET['name'])->OrderBy('fname','asc')->where('id',$_GET['name'])->get();
-                $data['header'] = 'Inspector of work Details';
+                $data['header'] = 'Inspector of works Details';
                 $data['section'] ='0';
             }else
             {
@@ -1144,7 +1144,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }elseif($_GET['change']=='iow')
             {
                  $data['fetch'] = user::OrderBy('type','asc')->OrderBy('fname','asc')->get();
- $data['header'] = 'All Inspectors of work Details';
+ $data['header'] = 'All Inspectors of works Details';
  $data['section'] ='0';
             }else
             {
@@ -1232,7 +1232,8 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
      if($_GET['college']!='')
      {
         $data['catch'] = directorate::where('id',$_GET['college'])->orderby('name','ASC')->get();
-        $data['header'] = 'Colleges/Directorates/Institute/Schools Details';
+        $namert = directorate::where('id',$_GET['college'])->first();
+        $data['header'] = $namert['name'].' Details';
 
      }
 

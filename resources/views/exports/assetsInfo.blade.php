@@ -17,7 +17,7 @@ tr:nth-child(even) {
 </style>
 <center>
 
-    <h1>University of Dar es salaam</h1>
+    <h1>University of Dar es Salaam</h1>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <h3>Directorate of Estates Services</h3>
 </center>

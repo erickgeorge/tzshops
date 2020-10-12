@@ -31,7 +31,7 @@ IoW Zones
  @if(count($iowzone)>0)
   @foreach($iowzone as $zone)
   @endforeach
-                <h5 style="text-transform: capitalize;">List of locations available for {{ $zone['iow']->fname.' '.$zone['iow']->lname }} </h5>
+                <h5 style="text-transform: capitalize;">List of locations available for {{$zoneyake}}</h5>
 
 
             <hr class="container">
@@ -119,7 +119,7 @@ IoW Zones
                     </div>
 
 
-                        <button type="submit" class="btn btn-primary">save
+                        <button type="submit" class="btn btn-primary">Save
                         </button>
                         <a href="{{route('view.location', [$userid->id , $userzone->zone])}}" class="btn btn-danger">Cancel
                     </a>

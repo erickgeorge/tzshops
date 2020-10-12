@@ -50,7 +50,7 @@ Edit Furniture Asset
 
                                 <label for="my-input">Site Location <sup class="text-danger">*</sup></label>
                                 <select id="location" required class="form-control" type="text" name="SiteLocation">
-                                    <option value="" selected style="color: red;">Choose...</option>
+                                    <option value="{{$item->assetLocation}}" selected style="color: red;">{{$item->assetLocation}}</option>
 
                                  @php
                                      $option = assetsidentifiedlocation::orderBy('abbreviation','ASC')->get();

@@ -86,7 +86,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>By signing this note you prove that Material for this procurement are received</p>
+                    <p>By signing this note you prove that Material(s) for this procurement are received</p>
                     <form method="POST" action="{{ route('procurement.grn',['id'=>$item->work_order_id]) }}">
                         @csrf
 <label>   Supplier <sup style="color: red;">*</sup></label>

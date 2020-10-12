@@ -91,7 +91,7 @@
                     <td>
                    @if($item->newstock == ($item->quantity - $item->reserved_material))
 
-                  
+
 
                       <a href="{{ route('store.material.afterpurchase', [$item->id]) }}" data-toggle="tooltip" title="Send to Head of Section"><i class="far fa-check-circle"></i></a>
 
@@ -181,7 +181,7 @@
             </div>-->
 
             <div>
-             <label style="width: 777px;" >Add Material in Quantity</label>
+             <label style="width: 777px;" >Add Material(s) in Quantity</label>
             <div class="input-group mb-3">
                 <input style="width: 565px;" oninput="totalitem()" style="color: black" required type="number" min="1"  class="form-control"
                        aria-describedby="emailHelp" id="kstock"  placeholder="Add Material in Quantity" >
@@ -189,7 +189,7 @@
             </div>
 
             <div>
-             <label style="width: 777px; "   ><b style="color: black;">Tottal Material Purchased</b></label>
+             <label style="width: 777px; "   ><b style="color: black;">Total Material(s) Purchased</b></label>
 
              <div class="input-group mb-3">
 
@@ -274,7 +274,7 @@
 
                     <div class="modal-header ">
                      <div>
-                        <h5  style="width: 360px;" align="center" ><b>Add Material in Store.</b></h5>
+                        <h5  style="width: 360px;" align="center" ><b>Add Material(s) in Store.</b></h5>
                         <hr  >
                     </div>
                   </div>
@@ -311,7 +311,7 @@
             </div>
 
              <div>
-             <label style="width: 777px;" >Add Material in Quantity</label>
+             <label style="width: 777px;" >Add Material(s) in Quantity</label>
             <div class="input-group mb-3">
                 <input style="width: 565px;" oninput="totalitem2()" style="color: black" required type="number" min="1"  class="form-control"
                        aria-describedby="emailHelp" id="astock"  placeholder="Add Material in Quantity" >
@@ -319,7 +319,7 @@
             </div>
 
                <div>
-             <label style="width: 777px; "   ><b style="color: black;">Tottal Material Purchased</b></label>
+             <label style="width: 777px; "   ><b style="color: black;">Total Material(s) Purchased</b></label>
 
              <div class="input-group mb-3">
 
@@ -404,7 +404,7 @@
 
 
     @else
-    <div align="center" style="padding-top: 250px;"> <h1>No Material Purchased Yet</h1></div>
+    <div align="center" style="padding-top: 250px;"> <h1>No Material(s) Purchased Yet</h1></div>
 
     @endif
 

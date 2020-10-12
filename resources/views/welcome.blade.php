@@ -75,7 +75,7 @@
 
                     </div>
                     <div class="col" style="padding-top: 25px;">
-                        <h1><b style="color:  #fff;">University of Dar es salaam</b></h1>
+                        <h1><b style="color:  #fff;">University of Dar es Salaam</b></h1>
                 <h3 ><b style="color:  #fff;">Estates Services Management Information System</b></h3>
 
                     </div>

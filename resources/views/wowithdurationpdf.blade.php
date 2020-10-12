@@ -2,7 +2,7 @@
     echo $header;
     ?></title>
 
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+<div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>Directorate of Estates Services</h5></p><p><b><?php
      echo $header;

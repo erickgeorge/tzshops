@@ -22,7 +22,25 @@
         <div class="col-lg-12">
            <h5 style=" " class="container"><b style="text-transform: capitalize;">Available Technicians Completed their works orders</b></h5>
         </div>
+        @if(count($wo) > 0)
+        <div class="col-md-6">
+            <form method="GET" action="" class="form-inline my-2 my-lg-0">
+                From <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
+            </form>
+        </div>
 
+@endif
 
 
 

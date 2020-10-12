@@ -329,7 +329,7 @@ var total=2;
 <br>
 <div class="row">
    <div class="col">
-<p>Please download Works order inspection so as Head of Section and Lead Technician to sign.</p>
+<p>Please download the Works Order Inspection Form for Head of Section and Lead Technician to sign.</p>
 </div>
 <div >
   <a href="{{ url('techforreport/'.$wo->id) }}" ><button class="btn btn-primary">
@@ -1730,7 +1730,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
@@ -1820,7 +1820,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
              </form>
@@ -1900,7 +1900,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                         <br>
 
 
-                        <button style="color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style="color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -1956,7 +1956,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -2062,7 +2062,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </script>
 <!--script for checkbox-->
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -2142,7 +2142,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -2646,7 +2646,7 @@ Requesting material again after crosschecking-->
 </table>
 
 
-    <button class="btn btn-success" > <a  style="color: white" href="/send/material_again/{{$wo->id}}"   > Request Material(s) </a></button>
+    <button class="btn btn-primary" > <a  style="color: white" href="/send/material_again/{{$wo->id}}"   > Request Material(s) </a></button>
 
 
 
@@ -2699,7 +2699,7 @@ Requesting material again after crosschecking-->
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
                                                     <div>
-                                                       <button style=" color: white; width: 205px;" type="submit" class="btn btn-success">Save
+                                                       <button style=" color: white; width: 205px;" type="submit" class="btn btn-primary">Save
                                                        </button>
                                                     </div>
 
@@ -2765,11 +2765,11 @@ Requesting material again after crosschecking-->
                         </div>
                     <input type="hidden" id="totalmaterials" value="2"  name="totalmaterials" ></input>
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save Material</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save Material</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
 
                 </form>
-                    <button style="background-color: blue; color: white" onclick="newmaterialproc()" class="btn btn-success">New Material</button>
+                    <button style="background-color: blue; color: white" onclick="newmaterialproc()" class="btn btn-primary">New Material</button>
 
 
                 </div>
@@ -2971,7 +2971,7 @@ Requesting material again after crosschecking-->
 
 
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -3019,7 +3019,7 @@ Requesting material again after crosschecking-->
                         <br>
 
 
-                        <button style="color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style="color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>
@@ -3072,7 +3072,7 @@ Requesting material again after crosschecking-->
 
 
 
-                        <button style=" color: white" type="submit" class="btn btn-success">Save</button>
+                        <button style=" color: white" type="submit" class="btn btn-primary">Save</button>
                         <a href="#" onclick="closeTab()"><button type="button" style="background-color: #bb321f; color: white" class="btn btn-danger">Cancel</button></a>
                     </div>
                 </form>

@@ -9,9 +9,29 @@
 <div class="container">
     <br>
     <div class="row container-fluid" >
-        <div class="col-lg-12">
+        <div class="col">
             <h5 style="text-transform: capitalize;" ><b style="text-transform: uppercase;">Room report - Area/College/Directorate</b></h5>
         </div>
+
+        @if(count($wo) > 0)
+        <div class="col-md-6">
+            <form method="GET" action="" class="form-inline my-2 my-lg-0">
+                From <input name="start" value="<?php
+                if (request()->has('start')) {
+                    echo $_GET['start'];
+                } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
+                               max="<?php echo date('Y-m-d'); ?>">
+                To <input value="<?php
+                if (request()->has('end')) {
+                    echo $_GET['end'];
+                } ?>"
+                             name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
+                             max="<?php echo date('Y-m-d'); ?>">
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
+            </form>
+        </div>
+
+@endif
 
 
     </div>
@@ -67,6 +87,10 @@
 								<td>
                                     {{ $work->total_room }}  </td>
                                     <td><form method="get" style="text-transform: capitalize;" action="inroomreportextended">
+                                        @if (request()->has('start')&&request()->has('end'))
+                                 <input type="text" value="{{request('start')}}" name="start" hidden>
+                                 <input type="text" value="{{request('end')}}" name="end" hidden>
+                                    @endif
                                         <button class="btn btn-primary" name="room" value="{{ $work->area_id }}"><i class="fa fa-eye"></i> view</button></form></td>
 
 

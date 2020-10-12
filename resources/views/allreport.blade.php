@@ -2,12 +2,13 @@
     echo $header;
     ?></title>
 <div style="margin-top: 20px" align="center">
-    <h2>University of Dar es salaam</h2>
+    <h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;"><?php
+    <p><h4>Directorate of Estates Services</h4></p>
+    <p><b style="text-transform: uppercase;"><?php
      echo $header;
      ?></b></p>
 </div><br>
@@ -36,8 +37,8 @@ tr:nth-child(even) {
         <tr>
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
-            <th scope="col">Email</th>
             <th title="phone" scope="col">Phone</th>
+            <th scope="col">Email</th>
           @if($section!='0') @else <th scope="col">Section/type</th>@endif
         </tr>
         </thead>
@@ -53,7 +54,6 @@ tr:nth-child(even) {
                      <tr>
                         <th scope="row">{{ $i++ }}</th>
                         <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
-                        <td>{{ $tech->email }}</td>
                         <td>
 
               <?php $phonenumber = $tech->phone;
@@ -65,6 +65,7 @@ tr:nth-child(even) {
                 }else { echo $tech->phone;}
 
               ?></td>
+                        <td>{{ $tech->email }}</td>
                         @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
 
                     </tr>
@@ -74,7 +75,6 @@ tr:nth-child(even) {
                          <tr>
                             <th scope="row">{{ $i++ }}</th>
                             <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
-                            <td>{{ $tech->email }}</td>
                             <td>
 
                   <?php $phonenumber = $tech->phone;
@@ -86,6 +86,7 @@ tr:nth-child(even) {
                     }else { echo $tech->phone;}
 
                   ?></td>
+                            <td>{{ $tech->email }}</td>
                             @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
 
                         </tr>
@@ -94,7 +95,6 @@ tr:nth-child(even) {
                 <tr>
                     <th scope="row">{{ $i++ }}</th>
                     <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
-                    <td>{{ $tech->email }}</td>
                     <td>
 
           <?php $phonenumber = $tech->phone;
@@ -106,6 +106,7 @@ tr:nth-child(even) {
             }else { echo $tech->phone;}
 
           ?></td>
+                    <td>{{ $tech->email }}</td>
                     @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
 
                 </tr>

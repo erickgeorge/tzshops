@@ -123,7 +123,7 @@
                         <div style="width:600px;">
                                                 <div style="float: left; width: 130px">
 
-                                                        <button  type="submit" class="btn btn-primary">Save Changes
+                                                        <button  type="submit" class="btn btn-primary">Save
                                                         </button>
 
 

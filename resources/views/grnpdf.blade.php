@@ -1,5 +1,5 @@
 <title>GOODS RECEIVED NOTE</title>
-<div style="margin-top: 20px" align="center"><h2>University of Dar es salaam</h2>
+<div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
     <p><b><u>GOODS RECEIVED NOTE</u></b></p>
@@ -105,7 +105,7 @@ tr:nth-child(even) {
 
 
     <div class="container-name">
-     <div class="div1">Material Purchased By: <u style="padding-left: 12px;"> {{ $item['user']->fname.' '.$item['user']->mid_name.' '.$item['user']->lname }}</u></div>
+     <div class="div1">Material(s) Purchased By: <u style="padding-left: 12px;"> {{ $item['user']->fname.' '.$item['user']->mid_name.' '.$item['user']->lname }}</u></div>
     <div class="div2"> Store Manager:<u style="padding-left: 40px;"> {{ Auth::user()->fname }} {{ Auth::user()->mid_name }}  {{ Auth::user()->lname }}  </u> </div>
    </div>
 <br>

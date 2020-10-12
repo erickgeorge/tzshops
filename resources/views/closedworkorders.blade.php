@@ -224,7 +224,7 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 6)
       {echo"<option value='".$statusname->status."'>Post implementation</option>";}
      elseif($statusname->status == 7)
-      {echo"<option value='".$statusname->status."'>Material requested</option>";}
+      {echo"<option value='".$statusname->status."'>Material(s) requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
      elseif($statusname->status == 9)
@@ -366,14 +366,14 @@ foreach($userwithid as $userwithid)
                               <td><span>post implementation</span></td>
                             @elseif($work->status == 7)
 
-                              <td><span>material requested</span>
+                              <td><span>Material(s) requested</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                             @elseif($work->status == 40)
 
-                              <td><span>Material Requested <br>Approved Succesifully</span>
+                              <td><span>Material(s) Requested <br>Approved Succesifully</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
@@ -402,7 +402,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                            @elseif($work->status == 8)
                                   @if(auth()->user()->type == 'CLIENT')
-                              <td><span>  Material requested on progress</span>
+                              <td><span>  Material(s) requested on progress</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
@@ -424,35 +424,35 @@ foreach($userwithid as $userwithid)
                                 <span>Emergency</span></td>
                                 @endif
                                @else
-                               <td><span>  Material received from store!</span></td>
+                               <td><span>  Material(s) received from store!</span></td>
                                                              @endif
 
                              @elseif($work->status == 19)
                                @if(auth()->user()->type != 'CLIENT')
-                              <td><span>Material missing in store, <br>Head Procurement  notified</span>  <br>
+                              <td><span>Material(s) missing in store, <br>Head Procurement  notified</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                               @else
-                               <td><span>  Material requested on progress <br> please wait!</span>  <br>
+                               <td><span>  Material(s) requested on progress <br> please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                              @endif
                                @elseif($work->status == 15)
-                                                            <td><span>Material Accepted by IoW</span>  <br>
+                                                            <td><span>Material(s) Accepted by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
 
                                 @elseif($work->status == 55)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Some of Material Rejected</span>  <br>
+                                                            <td><span>Some of Material(s) Rejected</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span>Material on Check by IoW</span>  <br>
+                                                             <td><span>Material(s) on Check by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
@@ -460,12 +460,12 @@ foreach($userwithid as $userwithid)
 
                                 @elseif($work->status == 57)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Material Requested Again</span>  <br>
+                                                            <td><span>Material(s) Requested Again</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span>Material on Check by IoW and HoS</span>  <br>
+                                                             <td><span>Material(s) on Check by IoW and HoS</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
@@ -473,12 +473,12 @@ foreach($userwithid as $userwithid)
 
                                 @elseif($work->status == 16)
                                                           @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Material rejected by IoW</span>  <br>
+                                                            <td><span>Material(s) rejected by IoW</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
                                                             @else
-                                                             <td><span>  Material requested on progress please wait!</span>  <br>
+                                                             <td><span>  Material(s) requested on progress please wait!</span>  <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
                                 @endif
@@ -607,8 +607,8 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
       </div>
       <input type="text" name="work" hidden value="{{ $work->id }}">
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-primary">Send</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 </form>

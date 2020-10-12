@@ -401,7 +401,8 @@
 
                         <button type="submit" class="btn bg-primary btn-primary">Save
                         </button>
-                        <button type='submit' value="cancel" class="btn btn-danger">Cancel</button>
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 
                     </div>
                 </form>
@@ -466,7 +467,7 @@
                                    name="edepname" placeholder="Enter Department abbreviation">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">save
+                        <button type="submit" class="btn btn-primary">Save
                         </button>
                         <button type='submit' value="cancel" class="btn btn-danger">Cancel</button>
 
@@ -520,7 +521,7 @@
                             <input id="esecid" name="esecid" hidden>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">save
+                        <button type="submit" class="btn btn-primary">Save
                         </button>
                         <button type='submit' value="cancel" class="btn btn-danger">Cancel</button>
 

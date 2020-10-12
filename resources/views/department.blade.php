@@ -57,18 +57,7 @@ use app\department;
                         </div>
                         <form method="GET" action="{{url('depgenerate')}}">
                             @csrf
-                        <div class="modal-body">
-                            <label>Choose Department</label><br>
-                          <select class="form-control" name="department">
-                            <option value="">All Departments</option>
-                            <?php
-                            $dept = department::get();                            ?>
 
-                          @foreach ($dept as $dept)
-                              <option value="{{ $dept->id }}">{{ $dept->description }} - {{$dept->name}}</option>
-                          @endforeach
-                          </select>
-                        </div>
                         <div class="modal-body">
                             <label>Choose College</label>
                             <select class="form-control" name="college">
@@ -81,10 +70,22 @@ use app\department;
                           @endforeach
                             </select>
                           </div>
+                          <div class="modal-body">
+                            <label>Choose Department</label><br>
+                          <select class="form-control" name="department">
+                            <option value="">All Departments</option>
+                            <?php
+                            $dept = department::get();                            ?>
+
+                          @foreach ($dept as $dept)
+                              <option value="{{ $dept->id }}">{{ $dept->description }} - {{$dept->name}}</option>
+                          @endforeach
+                          </select>
+                        </div>
 
                         <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Export</button>
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary">Generate</button>
                         </div>
                         </form>
                       </div>
@@ -96,9 +97,9 @@ use app\department;
                     <thead >
                   <tr style="color: white;">
                         <th scope="col">#</th>
+                        <th scope="col">College/Directorate</th>
                         <th scope="col">Name</th>
                         <th scope="col">Abbreviation</th>
-                        <th scope="col">College/Directorate</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -108,9 +109,9 @@ use app\department;
                         <?php $i++; ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
+                            <td>{{ $dep['directorate']->name }}</td>
                             <td>{{ $dep->description }}</td>
                             <td>{{ $dep->name }}</td>
-                            <td>{{ $dep['directorate']->name }}</td>
                             <td>
                                 <div class="row">
                                     <a style="color: green;"

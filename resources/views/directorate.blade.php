@@ -67,8 +67,8 @@ Directorate
                           </div>
 
                         <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Export</button>
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary">Generate</button>
                         </div>
                         </form>
                       </div>
