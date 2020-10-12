@@ -267,7 +267,7 @@ foreach($userwithid as $userwithid)
       { echo "<option value='".$statusname->status."'>Material on check by IoW by HoS</option>";}
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
-    
+
  }
      ?>
               </select>
@@ -300,7 +300,7 @@ foreach($userwithid as $userwithid)
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">
             @if(count($locations) > 0)
-            <table class="table table-striped display" id="myTable" style="width:100%">
+            <table class="table table-responsive table-striped display" id="myTable" style="width:100%">
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
@@ -458,7 +458,7 @@ foreach($userwithid as $userwithid)
                                   <br>
                                 @if($work->emergency == 1)
                                 <span>Emergency</span></td>
-                                @endif    
+                                @endif
 
                           @elseif($work->status == 25)
 

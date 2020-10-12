@@ -283,13 +283,8 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         }
 
         if ($wO->emergency == 0) {
-<<<<<<< HEAD
-
-                $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $wO->created_at, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
-=======
-            
+      
                 $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $createddate, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
->>>>>>> 56f5bba7208640f59ac1946c93822a459ea3d9b7
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
                 );
