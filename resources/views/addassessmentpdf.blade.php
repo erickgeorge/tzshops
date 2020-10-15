@@ -93,7 +93,7 @@ tr:nth-child(even) {
 
    <div class="container-name">
      <div class="div1">Company Name:&nbsp;&nbsp;  &nbsp; <b>{{$companyname['compantwo']->company_name}}</b></div>
-    <div class="div2"> Assessment Period:<b> <?php  $dnext = strtotime($companyiii->nextmonth); ?> {{ date('d F Y', strtotime($companyiii->nextmonth))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
+    <div class="div2"> Assessment Period:<b> <br><?php  $dnext = strtotime($companyiii->nextmonth); ?> {{ date('d F Y', strtotime($companyiii->nextmonth))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
    </div>
     <hr>
 

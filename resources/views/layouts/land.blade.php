@@ -407,7 +407,7 @@
                    @if(auth()->user()->type == 'Inspector Of Works')
 
                     <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders</a>
                     </li>
 
                     <li class="nav-item">
@@ -529,11 +529,14 @@
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+             <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
 
 
         </div>
@@ -547,10 +550,10 @@
 
 
 
-            <li class="nav-item">
+           <!-- <li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-            </li>
+            </li> -->
 
 
 

@@ -199,8 +199,12 @@
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+           <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
 
@@ -213,15 +217,15 @@
 
 
 
-                                  <li class="nav-item">
+                     <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                     </li>
 
 
-                    <li class="nav-item">
+              <!--      <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-                    </li>
+                    </li>-->
 
 
                       <li class="nav-item">
@@ -402,9 +406,13 @@
               @endif
 
                 @if ((auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin')||(auth()->user()->type == 'Bursar')||(auth()->user()->type == 'Assets Officer'))
+                                        <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
+                    </li>
+                    
                 <li class="nav-item">
                     <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
-        </li>
+                 </li>
                 @endif
 
                  @if(auth()->user()->type == 'Head Procurement')
@@ -527,13 +535,13 @@
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
-
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
-
+                 <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
         </div>
        </li>
 
@@ -596,8 +604,12 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+              <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
 

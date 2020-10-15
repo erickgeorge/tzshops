@@ -13,7 +13,14 @@ Assessment form
       <div class="col">
 
         @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
-          <h5 ><b >Assessment Form for Paid Companies</b></h5>
+
+
+          <h5 ><b style="text-transform: capitalize;">Assessment Forms for Paid Companies</b></h5>
+
+          @elseif((auth()->user()->type == 'Dvc Accountant')||(auth()->user()->type == 'DVC Admin')) 
+
+            <h5 ><b style="text-transform: capitalize;">Assessment forms for Paid companies</b></h5>
+
          @else
              <h5 ><b style="text-transform: capitalize;">Approved Assessment Forms </b></h5>
 
@@ -68,6 +75,12 @@ Assessment form
 
 
               @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
+              
+               <a href="{{route('assessmentform.view')}}"><button style="max-height: 40px; " type="button" class="btn btn-primary" >
+                  Onprogress assessments
+                </button></a>
+      
+               @elseif((auth()->user()->type == 'Dvc Accountant')||(auth()->user()->type == 'DVC Admin')) 
                 <a href="{{route('assessmentform.view')}}"><button style="max-height: 40px; " type="button" class="btn btn-primary" >
                   Onprogress assessments
                 </button></a>

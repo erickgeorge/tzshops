@@ -699,10 +699,6 @@ class LandscapingController extends Controller
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
 
-
-
-
-
             $satisfied = landassessmentactivityform::where('assessment_id', $id)->where('companynew',$company)->where('assessment_sheet' , $sheet)->where('month' , $month)->get();
 
             foreach ($satisfied as  $sat) {
@@ -1600,11 +1596,9 @@ class LandscapingController extends Controller
            $pndo->save();
             }
 
-
-
-
        return redirect()->back()->with(['message' => 'Assessment for payment updated succesifully ']);
     }
+
 
 
 

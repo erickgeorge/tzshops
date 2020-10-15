@@ -35,6 +35,7 @@ tr:nth-child(even) {
                     <th>#</th>
                       <th scope="col">Name of Block</th>
                         <th scope="col">Name of Area</th>
+                         <th scope="col">Name of Location</th>
 
     </tr>
  </thead>
@@ -47,6 +48,7 @@ tr:nth-child(even) {
                         <td>{{$i}}</td>
                      <td><?php echo ucwords(strtolower( $dep->name_of_block )); ?></td>
                              <td><?php echo ucwords(strtolower( $dep['area']->name_of_area )); ?></td>
+                             <td><?php echo ucwords(strtolower( $dep->location_of_block )); ?></td>
                          
                        </tr>
                         @endforeach

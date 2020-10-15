@@ -238,11 +238,14 @@ foreach ($woclo as $woclo) {
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
 
 
         </div>
@@ -280,12 +283,14 @@ foreach ($woclo as $woclo) {
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+              <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorates</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
 
 
 
@@ -470,11 +475,14 @@ foreach ($woclo as $woclo) {
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorates</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
 
 
 
@@ -839,9 +847,6 @@ use App\Section;
               <option value="{{ $directorate->id }}">{{ $directorate->name . $directorate->directorate_description }}</option>
               @endforeach
             </select>
-
-
-
 
             </div>
         </div>

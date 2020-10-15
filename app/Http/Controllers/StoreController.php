@@ -15,6 +15,8 @@ use App\Procurement;
 use App\WorkOrderMaterial;
 use App\Storehistory;
 use App\zoneinspector;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class StoreController extends Controller
 {
@@ -200,7 +202,7 @@ class StoreController extends Controller
 
 
 
-     public function Materialacceptedwithrejected($id)
+     public function Materialacceptedwithrejected($id , $hosid)
     {
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('status',9)->get();
 
@@ -209,6 +211,53 @@ class StoreController extends Controller
 		   $wo_m->status = 17;
 		   $wo_m->save();
 		    }
+
+
+             //emailandnotification
+
+      $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+
+         $emailReceiver = User::where('id', $hosid)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+    
+     $datenow = Carbon::now();
+     $createddate = date('d F Y', strtotime($datenow));
+
+     $data = array('name'=>$userName, "body" => "Your materials sent to Inspector of Works on  $createddate has been REJECTED. Please login in the system so as to resubmit your materials request.",
+
+                  "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('MATERIAL(S) REJECTION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+     
+
+        $notify = new Notification();
+        $notify->sender_id = auth()->user()->id;
+        $notify->receiver_id = $hosid;
+        $notify->type = 'mat_rejected';
+        $notify->status = 0;
+        $notify->message = 'Your Materials sent to Inspector of Works has been rejected on ' . $createddate . ' Please login in the system so as to resubmit your materials request.';
+        $notify->save();
+
+
+     //emailandnotification 
+
 		 
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
@@ -365,7 +414,7 @@ class StoreController extends Controller
 
 
 	
-	public function rejectMaterial(request $request, $id)
+	public function rejectMaterial(request $request, $id , $hosid)
     {  
 
       $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1));   
@@ -378,7 +427,52 @@ class StoreController extends Controller
     $wo_m->accepted_by = auth()->user()->id;
 		$wo_m->reason = $request['reason'];
 		$wo_m->save();
-		 }  
+		 } 
+
+     //emailandnotification
+
+      $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+
+         $emailReceiver = User::where('id', $hosid)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+    
+     $datenow = Carbon::now();
+     $createddate = date('d F Y', strtotime($datenow));
+
+     $data = array('name'=>$userName, "body" => "Your materials sent to Inspector of Works on  $createddate has been REJECTED. Please login in the system so as to resubmit your materials request.",
+
+                  "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('MATERIAL(S) REJECTION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+     
+
+        $notify = new Notification();
+        $notify->sender_id = auth()->user()->id;
+        $notify->receiver_id = $hosid;
+        $notify->type = 'mat_rejected';
+        $notify->status = 0;
+        $notify->message = 'Your Materials sent to Inspector of Works has been rejected on ' . $createddate . ' Please login in the system so as to resubmit your materials request.';
+        $notify->save();
+
+
+     //emailandnotification 
 
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();

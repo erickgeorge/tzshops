@@ -189,10 +189,11 @@ class DirectorateController extends Controller
 
         public function createblockss(Request $request)
     {
-
+     
+         $location = Location::where('id', $request['Location'])->first();
          $wsection = new Block();
          $wsection->name_of_block = $request['name_of_block'];
-         $wsection->location_of_block = $request['Location'];
+         $wsection->location_of_block = $location->name;
          $wsection->area_id = $request['Area'];
          $wsection->save();
 

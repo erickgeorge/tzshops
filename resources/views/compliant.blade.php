@@ -73,7 +73,7 @@
                 </table>
  </div>
  @else
- <td><h3 style="padding-top: 200px;" align="center">Currently no compliant submitted</h3></td>
+ <td><h3 style="padding-top: 200px;" align="center">Currently no complaints submitted</h3></td>
  @endif
 
  @endsection

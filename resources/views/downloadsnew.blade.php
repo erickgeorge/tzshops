@@ -31,7 +31,7 @@
             </ul>
         </div>
     @endif
-</div>
+
 <div class="card">
     <div class="card-body">
         <p class="card-text">
@@ -52,5 +52,7 @@
             </form>
         </p>
     </div>
+</div>
+
 </div>
 @endsection

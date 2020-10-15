@@ -1213,12 +1213,10 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 
 
-
-
         public function techforreport (Request $request, $id)
     {
     $data['wo'] = WorkOrder::where('id', $id)->with('work_order_inspection')->first();
-    $data['header'] = 'Works Order Inspection (WO#'.$id.')';
+    $data['header'] = 'Works Order Inspection Form (WO#'.$id.')';
 ///////////////////////////////////////////////
 
     $pdf = PDF::loadView('techforreport', $data);

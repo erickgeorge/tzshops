@@ -112,11 +112,11 @@
                         <select style="width: 500px" required class="custom-select" name="p_type">
                            <option selected value="" >Choose problem type</option>
                                 @foreach($sections as $section)
-                                  <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
+                                  <option value="{{ $section->section_name }}">{{ ucwords(strtolower($section->section_name)) }}</option>
                                 @endforeach
                         </select>
       </div>
-         <button type="submit" class="btn btn-primary">Save</button>
+         <button type="submit" class="btn btn-primary">Submit</button>
  </form>  
   @endif
 
@@ -124,8 +124,7 @@
   @else
  
 
-
- <h4>Wrong problem type?</h4>
+ <h5>Click the button "Send to Maintenance Coordinator" if works order submited to wrong problem type.</h5>
     <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
         @csrf
         <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
@@ -153,14 +152,14 @@ function autoSubmit()
     <br>
      <div class="row">
         <div>
-
+ @if($wo->problem_type != 'Others') 
         <button type="submit" class="btn btn-primary">Accept</button>
             </form>
         </div>
         <p> &nbsp;&nbsp;</p>
         <div>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Reject</button>
-            <a class="btn btn-info" href="/home" role="button">Cancel</a>
+@endif  <a class="btn btn-info" href="/home" role="button">Cancel</a>
         </div>
     </div>
     <br>

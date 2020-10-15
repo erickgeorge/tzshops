@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    store
+   Materials Needed for Works order
     @endSection
 
 @section('body')
@@ -111,7 +111,7 @@
 
               @if($item->check_return != NULL)
 
-               <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
+               <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id , $item->hos_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
                    </span></h5>
                    @endif
 
@@ -136,7 +136,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Please provide reason as to why you want to reject all material requested by Head of Section.</p>
-                    <form method="POST"  action ="{{ route('store.materialreject', [$item->work_order_id]) }}"  >
+                    <form method="POST"  action ="{{ route('store.materialreject', [$item->work_order_id , $item->hos_id]) }}"  >
                         @csrf
                         <textarea name="reason" required maxlength="400" class="form-control"  rows="5" id="reason" placeholder="Enter Reason for rejecting all material... "></textarea>
                         <br>
@@ -352,7 +352,7 @@
 
               @if($item->check_return != NULL)
 
-               <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
+               <h5 style="padding-left: 600px;"> Return to HoS with accepted and rejected Material <span > <a style="color: green;" href="{{ route('store.materialaccept.reject', [$item->work_order_id , $item->hos_id]) }}"  data-toggle="tooltip" title="Return to HoS"><i class="fas fa-times-circle" style="color: red"></i></a>
                    </span></h5>
 
               @endif
@@ -382,7 +382,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Please provide reason as to why you want to reject all material requested by Head of Section.</p>
-                    <form method="POST"  action ="{{ route('store.materialreject', [$item->work_order_id]) }}"  >
+                    <form method="POST"  action ="{{ route('store.materialreject', [$item->work_order_id , $item->hos_id]) }}"  >
                         @csrf
                         <textarea name="reason" required maxlength="400" class="form-control"  rows="5" id="reason" placeholder="Enter Reason for rejecting all material... "></textarea>
                         <br>

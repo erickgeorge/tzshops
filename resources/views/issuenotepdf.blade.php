@@ -1,8 +1,8 @@
 <title>ISSUE NOTE</title>
 <div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
-    <p><h5>DIRECTORATE OF ESTATE SERVICES</h5></p>
-    <p><b style="text-transform: uppercase;"><u>ISSUE NOTE</u></b></p>
+    <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
+    <p><b style="text-transform: uppercase;">ISSUE NOTE</b></p>
 </div>
 <style>
     body { /* background-image:  url('/images/essuenote.jpg');*/
@@ -116,8 +116,8 @@ tr:nth-child(even) {
 
       <br>
 
-     <div  style="color: blue"> Status: <span class="badge badge-info">  Received</span>
-                    </div><br>
+    <!-- <div  style="color: blue"> Status: <span class="badge badge-info">  Received</span>
+                    </div><br>-->
 
 
     <div class="container-name">

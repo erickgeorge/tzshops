@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -245,12 +242,14 @@ foreach ($woclo as $woclo) {
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+              <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
 
         </div>
        </li>
@@ -286,12 +285,14 @@ foreach ($woclo as $woclo) {
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+  <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorates</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
 
 
 
@@ -477,13 +478,14 @@ foreach ($woclo as $woclo) {
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorates</a>
+               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
-
 
 
         </div>
@@ -873,8 +875,8 @@ use App\Section;
         <div class="row">
             <div class="col">
                 <select name="directorate" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select Directorate</option>
-                    <option value="">All Directorates</option>
+                    
+                    <option selected value="">All Directorates</option>
                     <?php
 
                     $directoras = directorate::orderBy('name','ASC')->get();
@@ -975,7 +977,7 @@ else {
       ?></td>
 
       @if( $user->type == "Inspector Of Works")
-      <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+      <td>Inspector of Works  ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
 
       @else
          @if(strpos( $user->type, "HOS") !== false)

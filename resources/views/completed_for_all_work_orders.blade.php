@@ -214,8 +214,10 @@ foreach($userwithid as $userwithid)
     <?php $statusago = WorkOrder::select('status')->distinct()->get();
     foreach ($statusago as $statusname) {
 
+
      if($statusname->status == 30)
       { echo "<option value='".$statusname->status."'>Completely Closed</option>";}
+    
 
  }
      ?>
@@ -277,14 +279,13 @@ foreach($userwithid as $userwithid)
                               </td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                          <!--  @if($work->status == 30)
+                        <!--  @if($work->status == 30)
                                 <td><span class="badge badge-warning">Completely Closed</span>
                                 <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
-                                @endif
-
-                              @endif -->
+                                @endif 
+                            @endif   --> 
 
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
