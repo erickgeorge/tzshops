@@ -60,7 +60,7 @@ IoW Zones
                         <tr>
                             <th scope="row">{{ $i }}</th>
 
-                            <td><?php echo strtoupper( $iow->zone ); ?></td>
+                            <td><?php echo ucwords(strtolower( $iow->zone )); ?></td>
                             <td> @php
                                $him = User::where('zone', $iow->zone)->get();
                             @endphp @foreach ($him as $him)

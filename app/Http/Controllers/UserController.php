@@ -156,7 +156,7 @@ class UserController extends Controller
           $user->save();
         $users = User::where('status', 1)->get();
         return redirect()->route('users.view')->with([
-            'message' => 'User deleted successfully',
+            'message' => 'User deactivated successfully',
             'display_users' => $users
         ]);
     }
