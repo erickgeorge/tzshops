@@ -63,18 +63,18 @@ foreach ($hoos as $hous) {
           }
 
           if(substr($hotype,0,4) == 'HOS '){
-            echo '<a style="margin-left: 2%;" href="alltechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Active Technicians</button></a> ';
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add New Technicians</button></a> ';
             echo '<a style="margin-left: 2%;" href="deactivatedtechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-info">Deactivated Technicians</button></a> ';
 
           }
           elseif($hotype == 'Maintenance coordinator'){
-            echo '<a style="margin-left: 2%;" href="alltechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Active Technicians</button></a> ';
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add New Technicians</button></a> ';
             echo '<a style="margin-left: 2%;" href="deactivatedtechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-info">Deactivated Technicians</button></a> ';
 
 
           }elseif($role['user_role']['role_id'] == 1){
             $niyeye = '1';
-            echo '<a style="margin-left: 2%;" href="alltechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Active Technicians</button></a> ';
+            echo '<a style="margin-left: 2%;" href="add/technician">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add New Technicians</button></a> ';
             echo '<a style="margin-left: 2%;" href="deactivatedtechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-info">Deactivated Technicians</button></a> ';
 
           }else {
