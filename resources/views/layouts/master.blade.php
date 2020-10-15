@@ -823,7 +823,7 @@
 
 
                  <!--    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('completed_work_orders')}}">Completed Work-orders</a>
+                        <a class="nav-link" style="color:white" href="{{ url('completed_works_orders')}}">Completed Work-orders</a>
                     </li>
 
 
@@ -839,7 +839,7 @@
   </button>
   <div class="dropdown-container">
     <a class="btn" href="{{ url('/unattended_work_orders')}}">Unattended <br> Works Orders</a>
-    <a class="btn" href="{{ url('/completed_work_orders')}}">Completed <br> Works Orders</a>
+    <a class="btn" href="{{url('completed_works_order')}}">Completed <br> Works Orders</a>
     <!--<a class="btn" href="{{ url('/woduration')}}"><h6>Works orders Duration</h6></a>-->
 
 

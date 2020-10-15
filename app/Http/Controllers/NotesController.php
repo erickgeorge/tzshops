@@ -86,6 +86,8 @@ class NotesController extends Controller
     $statusvalue = 'Material Accepted by IoW';
   }elseif($status == 16){
     $statusvalue = 'Material rejected by IoW';
+  }elseif($status == 30){
+    $statusvalue = 'Closed';
   }
   else{
      $statusvalue = 'Closed - not satisfied by client';
@@ -1460,7 +1462,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
          if($request['start'] and $request['end']){
 
 
-      
+
             $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
             $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
@@ -1469,7 +1471,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
         $to=$nextday;
         if(request('start')>request('end')){
-           
+
         $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
         $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
@@ -1738,7 +1740,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
            if($request['start'] and $request['end'])  { //date filter
 
 
-       
+
             $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
             $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
@@ -1747,7 +1749,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
         $to=$nextday;
         if(request('start')>request('end')){
-           
+
         $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
         $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
@@ -2407,7 +2409,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
            if($request['start'] and $request['end'])  { //date filter
 
 
-       
+
             $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
             $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
@@ -2415,7 +2417,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
         $to=$nextday;
         if(request('start')>request('end')){
-           
+
         $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
         $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end

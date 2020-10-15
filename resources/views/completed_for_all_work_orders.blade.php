@@ -210,7 +210,6 @@ foreach($userwithid as $userwithid)
       <div class="row">
           <div class="col">
               <select name="status" class="form-control mr-sm-2">
-                <option value='' selected="selected">Select status</option>
     <?php $statusago = WorkOrder::select('status')->distinct()->get();
     foreach ($statusago as $statusname) {
 
