@@ -738,9 +738,7 @@ use App\Section;
 
 <!-- SOMETHING STRANGE HERE -->
 
-<div class="col">
-    <a href="" data-toggle="modal" class="btn btn-primary mb-2" data-target="#exampleModals"> Filter Users</a>
- </div>
+
  {{--  --}}
  <div class="modal fade" id="exampleModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

@@ -1237,7 +1237,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
      {
         $data['catch'] = directorate::where('id',$_GET['college'])->orderby('name','ASC')->get();
         $namert = directorate::where('id',$_GET['college'])->first();
-        $data['header'] = $namert['name'].' Details';
+        $data['header'] = $namert['directorate_description'].' Details';
 
      }
 

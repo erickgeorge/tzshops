@@ -935,7 +935,7 @@ $workinprogress = assetsworkinprogress::get();
                                     @php $total2 = 0; @endphp
                                     @foreach ($building as $buildingd)
                                     @php $total2 =  $total2 +$buildingd->Cost;
-$overall = $overall + $total2;
+$overall = $overall+$buildingd->Cost;
                                     @endphp
                                     @endforeach
                                     @php echo number_format($total2); @endphp
@@ -958,7 +958,7 @@ $overall = $overall + $total2;
                                     @php $total23 = 0; @endphp
                                     @foreach ($computerequipment as $computerequipment)
                                     @php $total23 = $total23 +$computerequipment->Cost;
-$overall = $overall + $total23;
+$overall = $overall +$computerequipment->Cost;
                                     @endphp
                                     @endforeach
                                     @php echo number_format($total23); @endphp
@@ -981,7 +981,7 @@ $overall = $overall + $total23;
                                     @php $total3 = 0; @endphp
                                     @foreach ($equipment as $equipmentd)
                                     @php $total3 =  $total3+$equipmentd->Cost;
-$overall = $overall +$total3;
+$overall = $overall +$equipmentd->Cost;
                                     @endphp
                                     @endforeach
                                     @php echo number_format($total3); @endphp
@@ -999,7 +999,7 @@ $overall = $overall +$total3;
                                     @foreach ($furniture as $furnitures)
                                      @php   $total1 =  1+$total1; @endphp
                                      @php $total4 =$total4  +$furnitures->Cost;
-$overall = $overall +$total4;
+$overall = $overall +$furnitures->Cost;
                                      @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
@@ -1020,7 +1020,7 @@ $overall = $overall +$total4;
                                     @foreach ($intangible as $intangibles)
                                      @php   $total1 =  1+$total1; @endphp
                                      @php $total5 = $total5 +$intangibles->Cost;
-$overall = $overall + $total5;
+$overall = $overall +$intangibles->Cost;
                                      @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
@@ -1041,7 +1041,7 @@ $overall = $overall + $total5;
                                     @foreach ($land as $land)
                                      @php   $total1 =  1+$total1; @endphp
                                      @php $total6 = $total6 +$land->Cost;
-$overall = $overall + $total6;
+$overall = $overall +$land->Cost;
                                      @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
@@ -1062,7 +1062,7 @@ $overall = $overall + $total6;
                                     @foreach ($motorvehicle as $motorvehicle)
                                      @php   $total1 =  1+$total1; @endphp
                                      @php $total7 = $total7 +$motorvehicle->Cost;
-$overall = $overall + $total7;
+$overall = $overall +$motorvehicle->Cost;
                                      @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
@@ -1083,7 +1083,7 @@ $overall = $overall + $total7;
                                     @foreach ($plantmachinery as $plantmachinery)
                                      @php   $total1 =  1+$total1; @endphp
                                      @php $total8 =  $total8+$plantmachinery->Cost;
-$overall = $overall + $total8;
+$overall = $overall +$plantmachinery->Cost;
                                      @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
@@ -1104,7 +1104,7 @@ $overall = $overall + $total8;
                                     @foreach ($workinprogress as $workinprogress)
                                      @php   $total1 =  1+$total1; @endphp
                                      @php $total9 = $total9  +$workinprogress->Cost;
-$overall = $overall + $total9;
+$overall = $overall + +$workinprogress->Cost;
                                      @endphp
                                     @endforeach
                                     @php echo $total1; @endphp
@@ -1120,9 +1120,9 @@ $overall = $overall + $total9;
                         <tfoot>
                             <tr class="text-right thead-light text-bold">
 
-                                <th></th>
-                                <th style='text-align:right;'>TOTAL</th>
-                                <th id="totalhere"></th>
+                               
+                                <th colspan="3"  style='text-align:right;'>TOTAL VALUE</th>
+                               
                                 <th  style="text-align:right;">
                                     @php
                                         $total10 = $overall;
