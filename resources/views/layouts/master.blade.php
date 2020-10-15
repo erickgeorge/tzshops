@@ -787,7 +787,7 @@
   </button>
   <div class="dropdown-container">
     <a  href="{{ url('/allhos')}}">All Heads of sections Details</a>
-    <a  href="{{ url('hoscount')}}">HoS with Completed Works Orders</a>
+    <a  href="{{ url('hoscount')}}">HoS with Completed WO</a>
   </div>
 
    <a  href="{{ url('/alliow')}}">Inspectors of Works</a>

@@ -40,11 +40,12 @@ tr:nth-child(even) {
         <tr>
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
+            @if($_GET['change']=='iow')  <th>Assigned Zone</th> @endif
             <th title="phone" scope="col">Phone</th>
             <th scope="col">Email</th>
-          @if($section!='0') @elseif($_GET['change']=='iow') @php
+          @if($section!='0') @elseif($_GET['change']=='iow')  @php
               $dopef = 1;
-          @endphp @else <th scope="col">Section/type</th>@endif
+          @endphp @else <th scope="col">Section</th>@endif
         </tr>
         </thead>
         <tbody>
@@ -59,6 +60,7 @@ tr:nth-child(even) {
                      <tr>
                         <th scope="row">{{ $i++ }}</th>
                         <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
+                        @if($_GET['change']=='iow') <td>  {{$tech->zone}} </td> @endif
                         <td>
 
               <?php $phonenumber = $tech->phone;
@@ -80,6 +82,7 @@ tr:nth-child(even) {
                          <tr>
                             <th scope="row">{{ $i++ }}</th>
                             <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
+                            @if($_GET['change']=='iow') <td>  {{$tech->zone}} </td> @endif
                             <td>
 
                   <?php $phonenumber = $tech->phone;
@@ -100,6 +103,7 @@ tr:nth-child(even) {
                 <tr>
                     <th scope="row">{{ $i++ }}</th>
                     <td>{{ $tech->fname . ' ' . $tech->lname }}</td>
+                    @if($_GET['change']=='iow') <td>  {{$tech->zone}} </td> @endif
                     <td>
 
           <?php $phonenumber = $tech->phone;

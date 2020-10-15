@@ -71,7 +71,7 @@
                 <thead >
                <tr style="color: white;">
                 <th style="width: 10px;">#</th>
-					<th>HOS name</th>
+					<th>HoS name</th>
                     <th>Total Works Orders Completed</th>
                     <th colspan="" rowspan="" headers="" scope="">Action</th>
 

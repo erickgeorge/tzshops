@@ -124,7 +124,7 @@ Area
                     </div>
 
 
-                        <button type="submit" class="btn btn-primary">save
+                        <button type="submit" class="btn btn-primary">Save
                         </button>
                         <a href="/Manage/Areas" class="btn btn-danger">Cancel
                     </a>

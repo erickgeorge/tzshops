@@ -32,8 +32,9 @@
     @endif
 </div>
 <div class="container">
-    <div class="col-lg-12">
         <form method="POST" action="{{ route('tech.create') }}">
+
+    <div class="container">
             @csrf
             <div class="row">
                 <div class="col">
@@ -144,14 +145,14 @@ $roleofuser =1;
             @endif
 
                 </div>
-            </div>
-
-
-         <div align="center">
-
-            <button type="submit" class="btn btn-primary">Save</button>
+<div class="row">
+    <div class="col-md-5">
+        <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-danger" href="/technicians" role="button">Cancel </a>
-        </div>
+    </div>
+</div>
+         
+</div>
         </form>
     </div>
     <br>
