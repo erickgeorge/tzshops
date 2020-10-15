@@ -71,7 +71,7 @@ IoW Zones
                                                 class="fas fa-edit"></i></a>
                                     <p>&nbsp;</p>
                                     <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this zone completely? \n\n {{   $iow->zonename }} \n\n')"
+                                          onsubmit="return confirm('Are you sure you want to delete Zone with name  {{   $iow->zonename }} ? ')"
                                           action="{{ route('iowzone.delete', [$iow->id]) }}">
                                         {{csrf_field()}}
                                         <button style="width:20px;height:20px;padding:0px;color:red" type="submit"

@@ -417,10 +417,10 @@
 
 
                 @if(auth()->user()->type == 'STORE')
-                  <!--  <li class="nav-item">
+                  <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-                    </li> -->
+                    </li> 
 
                 @endif
 
@@ -548,7 +548,8 @@
 
         <li>
 
-             @if($role['user_role']['role_id'] == 1)
+            @if((auth()->user()->type == 'Estates Director')||@(auth()->user()->type == 'DVC Admin')||($role['user_role']['role_id'] == 1))
+
                     <li class="nav-item">
                         <a class="nav-link" style="color:white " href="{{ url('usersoptions')}}">Users</a>
                     </li>

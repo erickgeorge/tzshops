@@ -696,7 +696,7 @@ use App\Section;
 
  <?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>
 
- @if($role['user_role']['role_id'] == 1)
+ @if((auth()->user()->type == 'Estates Director')||@(auth()->user()->type == 'DVC Admin')||($role['user_role']['role_id'] == 1))
 <br>
 <div class="row container-fluid" >
   <div class="col">
@@ -935,7 +935,9 @@ use App\Section;
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
       <!--<th scope="col">Section</th>-->
+         @if(($role['user_role']['role_id'] == 1))
       <th scope="col">Actions</th>
+      @endif
     </tr>
   </thead>
   <tbody>
@@ -991,6 +993,7 @@ else {
 
          <td>{{ $user['department']['directorate']->name }}</td>
         <td>{{ $user['department']->name }}</td>
+     @if(($role['user_role']['role_id'] == 1))
         <td>
         <div class="row"> &nbsp; &nbsp; &nbsp;
         <a style="color: green;" href="{{ route('user.edit.view', [$user->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp;
@@ -1006,7 +1009,8 @@ else {
        </button>
      </form>
    </div>
-      </td>
+      </td> 
+      @endif
     </tr>
     @else
     @endif
