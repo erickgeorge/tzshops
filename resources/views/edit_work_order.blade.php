@@ -1564,6 +1564,23 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 <div>
 
+<!--comaprison-->
+      <?php
+
+  $idw=$wo->id;
+  $received = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
+?>  
+
+
+ <?php
+
+  $idwo=$wo->id;
+  $requested = WorkOrderMaterial::where('work_order_id',$idwo)->get();
+    ?>
+
+<!--comaprison-->
+@if(count($requested) == count($received))
+
 <!--after material corrected from store-->
 
 
@@ -1773,7 +1790,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 <!--after material corrected from store-->
+@endif
 
+<!--comaparison-->
 
 
 
