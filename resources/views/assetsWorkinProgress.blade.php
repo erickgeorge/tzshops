@@ -8,6 +8,7 @@ Work in Progress
 @php
     use App\assetsworkinprogress;
 @endphp
+<div class="container">
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
@@ -36,7 +37,6 @@ Work in Progress
         </div>
 
 </div>
-<div class="container">
     <div class="row">
         @if (($role['user_role']['role_id'] == 1)||(auth()->user()->type =='Assets Officer'))
 
@@ -193,7 +193,7 @@ Work in Progress
           </div>
         </div>
       </div>
-    </div>
+
     <br>
     @if (count($land)>0)
     <table class="table table-responsive  table-striped display text-center" id="myTable" style="width:100%">
@@ -237,5 +237,6 @@ Work in Progress
         <h4 class="alert-heading">No Assets Found!</h4>
     </div>
     @endif
+</div>
 </div>
 @endSection

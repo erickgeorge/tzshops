@@ -25,15 +25,12 @@
 
     <!-- code mpya -->
 
+ <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
 
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-    <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
 </head>
@@ -236,19 +233,13 @@
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
-
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-
-
-
-
-
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
         </div>
        </li>
 
@@ -282,10 +273,10 @@
 
  @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
 
-                    <li class="nav-item">
+                 <!--   <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-                    </li>
+                    </li> -->
 
  @endif
 
@@ -426,10 +417,10 @@
 
 
                 @if(auth()->user()->type == 'STORE')
-                    <li class="nav-item">
+                  <!--  <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-                    </li>
+                    </li> -->
 
                 @endif
 
@@ -449,7 +440,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorates</a>
+               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorates</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
@@ -465,10 +456,10 @@
                     </li>
 
 
-            <li class="nav-item">
+            <!--<li class="nav-item">
                         <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-            </li>
+            </li>-->
 
 
              <li class="nav-item">
@@ -812,7 +803,7 @@
     <a  href="{{ url('work_order_material_needed')}}">
         Works Order needs materials <span
                                     class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
-    <a  class="dropdown-item" style="color:white" href="{{ url('wo_material_accepted')}}">
+    <a   href="{{ url('wo_material_accepted')}}">
         Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
      <a  href="{{ url('material_rejected_with_workorder')}}">Rejected Materials
                         <span
@@ -869,8 +860,8 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="{{ url('/alltechnicians')}}">All Technicians details</a>
-    <a href="{{ url('/techniciancount')}}">Technicians on Work(duty)</a>
+    <a href="{{ url('/alltechnicians')}}">All technicians details</a>
+    <a href="{{ url('/techniciancount')}}">Technicians with WO on Progress</a>
     <a href="{{ url('/techniciancountcomp')}}">Technicians completed work</a>
   </div>
 

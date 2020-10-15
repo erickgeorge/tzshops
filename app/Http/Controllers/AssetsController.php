@@ -566,7 +566,6 @@ class AssetsController extends Controller
          }
 
 
-
         public function cleaningcompanynew(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();

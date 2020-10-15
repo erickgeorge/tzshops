@@ -126,8 +126,8 @@ td, th {
             <td colspan="2" style="text-transform: capitalize;">
                 @if($wo->status == 0)rejected@elseif($wo->status == 1) accepted @else processed  by : @endif <b>{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</b>
             </td>
-            <td> Mobile Number :  <b>{{ $wo['user']->phone }}</b></td>
-            <td>Email : <b> {{ $wo['user']->email }} </b></td>
+            <td> Mobile Number :  <b>{{ $wo['hos']->phone }}</b></td>
+            <td>Email : <b> {{ $wo['hos']->email }} </b></td>
         </tr>
     </tbody>
 </table>

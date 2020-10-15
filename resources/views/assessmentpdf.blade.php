@@ -133,7 +133,7 @@ tr:nth-child(even) {
   <div class="row container-fluid">
         <div class="col-lg-12">
 
-           <u> <h5 align="center" style="text-transform: capitalize; color: black;"><b>  assessment Sheet details</b></h5></u>
+           <u> <h4 align="center" style="text-transform: capitalize; color: black;"><b>  assessment Sheet details</b></h4></u>
         </div>
     </div>
 
@@ -142,8 +142,8 @@ tr:nth-child(even) {
 
 
    <div class="container-name">
-     <div class="div1">Company Name:&nbsp;&nbsp; <b>{{$company['companyname']['compantwo']->company_name}}</b></div>
-    <div class="div2">Assessment Period:<b><br><?php  $dnext = strtotime($company->enddate); ?> {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</b></div>
+     <div class="div1"><b>Company Name:</b>&nbsp;&nbsp; <b><u>{{$company['companyname']['compantwo']->company_name}}</u></b></div>
+    <div class="div2"><b>Assessment Period:</b><b><br><u><?php  $dnext = strtotime($company->enddate); ?> {{ date('d F Y', strtotime($company->enddate))}} -  {{ date('d F Y', strtotime('+1 month', $dnext)) }}</u></b></div>
    </div>
     <hr>
 
@@ -168,14 +168,14 @@ tr:nth-child(even) {
     <div class="row container-fluid">
         <div class="col-lg-12">
 
-            <p><h5><b><u>Sheet No:0{{$ii}}</u></b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b><u>sheet name:  &nbsp; {{$company->assessment_name}}</u></b></h5></u>
+            <p><h4  style="text-transform: capitalize; color: black;"><b>sheet name: <u> &nbsp; {{$company->assessment_name}}</u></b></h4></u>
         </div>
     </div>
    <br>
 
 
 
-     Area Name:<b><u> {{$company['areaname']->cleaning_name}} </u> </b>
+    <b>Area Name:</b> &nbsp;  <b><u> {{$company['areaname']->cleaning_name}} </u> </b>
 
 <br><br>
 
@@ -236,7 +236,7 @@ tr:nth-child(even) {
 
    <table>
   <thead style=" background-color: #376ad3; color: white;">
-  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
+  <tr style="color:white;"><th>Area Name</th><th>Total Score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
  </thead>
 
 
@@ -277,7 +277,7 @@ tr:nth-child(even) {
 
 
 
-<br><br><br>
+<br>
 
 
 <table>
@@ -306,14 +306,14 @@ tr:nth-child(even) {
 
 
 
-<br><br>
+<br>
 
   @if(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
 
 
 
 
-     <br>
+  
 
     <div class="container-name">
      <div class="div1">Name of Assessor:&nbsp;  &nbsp;<b>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</b><u style="padding-left: 12px;"> </u></div>
@@ -359,7 +359,6 @@ tr:nth-child(even) {
 
 
 
-<br>
 
        <div class="container-name">
      <div class="div1">Approved by Estate Officer :&nbsp;  &nbsp;<b>{{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} </b><u style="padding-left: 12px;"> </u></div>

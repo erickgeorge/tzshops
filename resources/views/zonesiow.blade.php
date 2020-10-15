@@ -214,7 +214,7 @@ foreach($userwithid as $userwithid)
     <?php $statusago = WorkOrder::select('status')->distinct()->orderBy('id','DESC')->get();
     foreach ($statusago as $statusname) {
 
-     if($statusname->status == -1)
+    if($statusname->status == -1)
       { echo "<option value='".$statusname->status."'>New</option>";}
      elseif($statusname->status == 1)
       {echo "<option value='".$statusname->status."'>Accepted</option>";}
@@ -223,7 +223,7 @@ foreach($userwithid as $userwithid)
      elseif($statusname->status == 2)
       {echo"<option value='".$statusname->status."'>Closed</option>";}
      elseif($statusname->status == 3)
-      {echo"<option value='".$statusname->status."'>Technician assigned</option>";}
+      {echo"<option value='".$statusname->status."'>Technician assigned for work</option>";}
      elseif($statusname->status == 4)
       {echo"<option value='".$statusname->status."'>Transportation stage</option>";}
      elseif($statusname->status == 5)
@@ -234,9 +234,31 @@ foreach($userwithid as $userwithid)
       {echo"<option value='".$statusname->status."'>Material(s) requested</option>";}
      elseif($statusname->status == 8)
       {echo"<option value='".$statusname->status."'>Procurement stage</option>";}
+    elseif($statusname->status == 30)
+      { echo "<option value='".$statusname->status."'>Completly Closed</option>";}
+     elseif($statusname->status == 70)
+      { echo "<option value='".$statusname->status."'>Technician assigned for Inspection</option>";}
+     elseif($statusname->status == 40)
+      { echo "<option value='".$statusname->status."'>Material Requested Approved Succesifully</option>";}
+     elseif($statusname->status == 52)
+      { echo "<option value='".$statusname->status."'>Iow is checking for works done</option>";}
+     elseif($statusname->status == 53)
+      { echo "<option value='".$statusname->status."'>Works Order is not approved by IoW</option>";}
+     elseif($statusname->status == 25)
+      { echo "<option value='".$statusname->status."'>Succesifully approved by IoW</option>";}
+     elseif($statusname->status == 18)
+      { echo "<option value='".$statusname->status."'>Correct your Material</option>";}
+     elseif($statusname->status == 19)
+      { echo "<option value='".$statusname->status."'>Material missing in store</option>";}
+     elseif($statusname->status == 15)
+      { echo "<option value='".$statusname->status."'>Material accepted by IoW</option>";}
+     elseif($statusname->status == 55)
+      { echo "<option value='".$statusname->status."'>Materia on check by IoW</option>";}
+     elseif($statusname->status == 57)
+      { echo "<option value='".$statusname->status."'>Material on check by IoW by HoS</option>";}
      elseif($statusname->status == 9)
       {echo"<option value='".$statusname->status."'>Closed - SATISFIED BY CLIENT</option>";}
-     else {echo"<option value='10'>Closed - NOT SATISFIED BY CLIENT</option>";}
+
  }
      ?>
               </select>
@@ -345,180 +367,189 @@ foreach($userwithid as $userwithid)
                             <td id="wo-details">{{ $work->details }}</td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                          @if($work->status == -1)
-                                <td><span>new</span>
-                                <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                            @elseif($work->status == 1)
-                                <td><span>Accepted</span>
+                           @if($work->status == -1)
+                                  <td><span>New</span>
                                   <br>
-                                @if($work->emergency == 1)
-                                <span">Emergency</span></td>
-                                @endif
-                            @elseif($work->status == 0)
-                                <td><span>Rejected</span></td>
-                            @elseif($work->status == 2)
-                                <td><span>Waiting response from client</span></td>
+                                  @if($work->emergency == 1)
+                                   <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+           
+                              @elseif($work->status == 1)
+                                  <td><span>Accepted</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                              @elseif($work->status == 0)
+                                  <td><span>Rejected</span></td>
+                              @elseif($work->status == 2)
+                                  <td><span>Waiting for client to close works order</span></td>
 
-                            @elseif($work->status == 30)
-                                <td><span>Completely Closed</span></td>
-                            @elseif($work->status == 3)
-                                <td><span>technician assigned for work</span>
+                              @elseif($work->status == 30)
+                                  <td><span>Completely closed</span></td>
+                              @elseif($work->status == 3)
+                                  <td><span>Technician assigned for work</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                               @elseif($work->status == 70)
+                                  <td><span>Technician assigned <br> for inspection</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+
+                              @elseif($work->status == 4)
+                                  <td><span>Transportation stage for inspection</span>
+                                   <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+
+                               @elseif($work->status == 101)
+                                  <td><span>Transportation stage for work</span>
+                                   <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                              @elseif($work->status == 5)
+                                <td><span>Pre-implementation</span></td>
+                              @elseif($work->status == 6)
+                                <td><span>post implementation</span></td>
+                              @elseif($work->status == 7)
+
+                                <td><span>Material(s) requested</span>
                                   <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                             @elseif($work->status == 70)
-                                <td><span>technician assigned <br> for inspection</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                              @elseif($work->status == 40)
 
-                            @elseif($work->status == 4)
-                                <td><span>transportation stage for inspection</span>
-                                 <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
+                                <td><span>Material(s) requested <br>approved succesifully</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                             @elseif($work->status == 52)
 
-                             @elseif($work->status == 101)
-                                <td><span>transportation stage for work</span>
-                                 <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                            @elseif($work->status == 5)
-                              <td><span>pre-implementation</span></td>
-                            @elseif($work->status == 6)
-                              <td><span>post implementation</span></td>
-                            @elseif($work->status == 7)
+                                <td><span>IoW is checking for works done</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                             @elseif(($work->status == 53) and ($work->iowreject != 3))
 
-                              <td><span>Material(s) requested</span>
-                                <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                            @elseif($work->status == 40)
+                                <td><span>Works Order not  approved by IoW</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                              @elseif(($work->status == 53) and ($work->iowreject == 3))
 
-                              <td><span>Material(s) Requested <br>Approved Succesifully</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                           @elseif($work->status == 52)
+                                <td><span>IoW is checking for works done</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
 
-                              <td><span>IoW is checking for Works Order</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                           @elseif($work->status == 53)
+                            @elseif($work->status == 25)
 
-                              <td><span>Works Order not  approved by IoW</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
+                                <td><span>Works done Succesifully <br> approved by IoW</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                             @elseif($work->status == 8)
+                                    @if(auth()->user()->type == 'CLIENT')
+                                <td><span>Material(s) requested on progress</span>
+                                    <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                    @else
+                                <td><span>Procurement stage</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
                                 @endif
+                              @elseif($work->status == 9)
+                                <td><span>Closed Satisfied by client</span></td>
 
-                          @elseif($work->status == 25)
+                              @elseif($work->status == 18)
+                                @if(auth()->user()->type != 'CLIENT')
 
-                              <td><span>Works Order Succesifully <br> approved by IoW</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                           @elseif($work->status == 8)
-                                  @if(auth()->user()->type == 'CLIENT')
-                              <td><span>  Material(s) requested on progress</span>
-                                  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                  @else
-                              <td><span>procurement stage</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                              @endif
-                            @elseif($work->status == 9)
-                              <td><span>Closed Satisfied by Client</span></td>
+                                 <td><span>Please collect your material(s)</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                 @else
+                                 <td><span>Material(s) received from store!</span></td>
+                                                               @endif
 
-                            @elseif($work->status == 18)
-                              @if(auth()->user()->type != 'CLIENT')
+                               @elseif($work->status == 19)
+                                 @if(auth()->user()->type != 'CLIENT')
+                                <td><span>Material(s) missing in store, <br>Head Procurement  notified</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                @else
+                                 <td><span> Material(s) requested on progress <br> please wait!</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                                               @endif
+                                 @elseif($work->status == 15)
+                                                              <td><span>Material(s) Accepted by IoW</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
 
-                               <td><span>Please correct your material</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                               @else
-                               <td><span>  Material(s) received from store!</span></td>
-                                                             @endif
+                                  @elseif($work->status == 55)
+                                                            @if(auth()->user()->type != 'CLIENT')
+                                                              <td><span>Some of Material(s) Rejected</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                                              @else
+                                                               <td><span>Material(s) on Check by IoW</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                                               @endif
 
-                             @elseif($work->status == 19)
-                               @if(auth()->user()->type != 'CLIENT')
-                              <td><span>Material(s) missing in store, <br>Head Procurement  notified</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                              @else
-                               <td><span>  Material(s) requested on progress <br> please wait!</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                                             @endif
-                               @elseif($work->status == 15)
-                                                            <td><span>Material(s) Accepted by IoW</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
+                                  @elseif($work->status == 57)
+                                                            @if(auth()->user()->type != 'CLIENT')
+                                                              <td><span>Material(s) Requested Again</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                                              @else
+                                                               <td><span>Material(s) on Check by IoW and HoS</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                                               @endif
 
-                                @elseif($work->status == 55)
-                                                          @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Some of Material(s) Rejected</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                                            @else
-                                                             <td><span>Material(s) on Check by IoW</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                                             @endif
-
-                                @elseif($work->status == 57)
-                                                          @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Material(s) Requested Again</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                                            @else
-                                                             <td><span>Material(s) on Check by IoW and HoS</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                                             @endif
-
-                                @elseif($work->status == 16)
-                                                          @if(auth()->user()->type != 'CLIENT')
-                                                            <td><span>Material(s) rejected by IoW</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                                            @else
-                                                             <td><span>  Material(s) requested on progress please wait!</span>  <br>
-                                @if($work->emergency == 1)
-                                <span>Emergency</span></td>
-                                @endif
-                                                             @endif
+                                  @elseif($work->status == 16)
+                                                            @if(auth()->user()->type != 'CLIENT')
+                                                              <td><span>Material(s) rejected by IoW</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                                              @else
+                                                               <td><span> Material(s) requested on progress please wait!</span>  <br>
+                                  @if($work->emergency == 1)
+                                  <span class="badge btn-danger">Emergency</span></td>
+                                  @endif
+                                                               @endif
 
 
 
-                              @else
-                                <td><span>Closed NOT SATISFIED BY CLIENT</span></td>
-                              @endif
+                                @else
+                                  <td><span>Closed not satisfied by client</span></td>
+                                @endif
+
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
                             <td>

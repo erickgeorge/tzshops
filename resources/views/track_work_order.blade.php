@@ -40,8 +40,9 @@
     @endif
     <div class="row">
         <div class="col">
-            <h5>Submitted by  <span
-                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5>
+             <h5>Submited by  <span
+                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span><h5>Submited on <span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5><h5> <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span>
+                  <h5> Email: <span style=" font-weight: bold;"> {{ $wo['user']->email }} </span></h5>
 
 
 
@@ -49,8 +50,8 @@
         <div class="col">
         <h5>  @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
                 style=" font-weight: bold;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
-             <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span> <br>
-              Email: <span style=" font-weight: bold;"> {{ $wo['user']->email }} </span></h5>
+             <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['hos']->phone }}</span> <br>
+              Email: <span style=" font-weight: bold;"> {{ $wo['hos']->email }} </span></h5>
         </div>
     </div>
 
@@ -202,9 +203,9 @@
 ?>
 
   @if(count($techforms) == 1)
-    <h4><b>1 Assigned Technician for Inspection </b></h4>
+    <h4><b>1 Technician assigned for Inspection </b></h4>
     @else
-    <h4><b>{{ count($techforms) }} Assigned Technicians for Inspection  </b></h4>
+    <h4><b>{{ count($techforms) }} Technicians assigned for Inspection  </b></h4>
     @endif
 
 
@@ -356,7 +357,7 @@
   @foreach($iformsbefore as $iformb)
   @endforeach
 
- <h4><b>Inspection Report Before Work , Reported on: {{ date('d F Y', strtotime($iformb->date_inspected )) }} </b></h4>
+ <h4><b>Inspection Report Before Work , Prepared on: {{ date('d F Y', strtotime($iformb->date_inspected )) }} </b></h4>
 
     <div class="form-group ">
         <label for="">Description:</label>
@@ -605,9 +606,9 @@
 @if($status->status5 == 22)
 
   @if(count($techforms) == 1)
-    <h4><b>1 Assigned Technician for Work </b></h4>
+    <h4><b>1 Technician assigned for Work </b></h4>
     @else
-    <h4><b>{{ count($techforms) }} Assigned Technicians for Work  </b></h4>
+    <h4><b>{{ count($techforms) }} Technicians assigned for Work  </b></h4>
     @endif
 
 <table class="table table-striped  display" style="width:100%">  <tr>
@@ -751,7 +752,7 @@
   @foreach($iforms as $iform)
   @endforeach
 
- <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
+ <h4><b>Report after Work , Prepared on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
 
  <div class="form-group ">
         <label for="">Description:</label>
@@ -776,7 +777,7 @@
    @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30) or ($wo->status == 12) or ($wo->status == 53) )
             <div>
 
-<h5><b>Closing Works Order</b></h5>
+<h5><b>Closing works done</b></h5>
              <table class="table table-striped  display" style="width:100%">
                 <tr>
                   <thead style="color: white;">
@@ -790,7 +791,7 @@
                 </tr>
                 <tbody>
                   <tr>
-                    <td>Intetion to close</td>
+                    <td>Intention to close</td>
                     <td> {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}}</td>
                   @if(strpos( $wo['hoscloses']->type, "HOS") !== false)
                 <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hoscloses']->type), 4, 14)?> </td>
@@ -854,15 +855,15 @@
 
         @elseif($wo->status == 2)
             <div>
-                <h4 align="center" style="padding: 20px">Works order is Provisional closed!</h4>
+                <h4 align="center" style="padding: 20px">Works order is provisionally closed</h4>
             </div>
         @elseif($wo->status == 52)
             <div>
-              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done!</h4>
+              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done</h4>
             </div>
         @elseif($wo->status == 53)
             <div>
-               <h4 align="center" style="padding: 20px">Works order is not approved by IoW!</h4>
+               <h4 align="center" style="padding: 20px">Works order is not approved by IoW</h4>
             </div>
 
         @elseif($wo->status == 9)
@@ -918,9 +919,9 @@
   @else
 
   @if(count($techwork) == 1)
-    <h4><b>1 Assigned Technician for Work </b></h4>
+    <h4><b>1 Technician assigned for Work </b></h4>
     @else
-    <h4><b>{{ count($techwork) }} Assigned Technicians for Work  </b></h4>
+    <h4><b>{{ count($techwork) }} Technicians assigned for Work  </b></h4>
     @endif
 
  <table class="table table-striped  display" style="width:100%">  <tr>
@@ -1055,7 +1056,7 @@
   @foreach($report as $rp)
   @endforeach
 
- <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($rp->date_inspected )) }} </b></h4>
+ <h4><b>Report after Work , Prepared on: {{ date('d F Y', strtotime($rp->date_inspected )) }} </b></h4>
 
  <div class="form-group ">
         <label for="">Description:</label>
@@ -1081,7 +1082,7 @@
      @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30) or ($wo->status == 12) or ($wo->status == 53)  or ($wo->status == 30)  )
             <div>
 
-<h5><b>Closing Works Order</b></h5>
+<h5><b>Closing works done</b></h5>
              <table class="table table-striped  display" style="width:100%">
                 <tr>
                   <thead style="color: white;">
@@ -1095,7 +1096,7 @@
                 </tr>
                 <tbody>
                   <tr>
-                    <td>Intetion to close</td>
+                    <td>Intention to close</td>
                     <td> {{$wo['hos2close']->fname.' '.$wo['hos2close']->lname}}</td>
                   @if(strpos( $wo['hos2close']->type, "HOS") !== false)
                 <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hos2close']->type), 4, 14)?> </td>
@@ -1170,26 +1171,6 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-          @if($wo->status == 30)
-            <div>
-                <h4 align="center">Works order completely closed!</h4>
-            </div>
-
-        @elseif($wo->status == 2)
-            <div>
-                <h4 align="center" style="padding: 20px">Works order is Provisional closed!</h4>
-            </div>
-        @elseif($wo->status == 52)
-            <div>
-              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done!</h4>
-            </div>
-        @elseif($wo->status == 53)
-            <div>
-               <h4 align="center" style="padding: 20px">Works order is not approved by IoW!</h4>
-            </div>
-
-
-        @endif
 
  @if(strpos(auth()->user()->type, "HOS") !== false)
 

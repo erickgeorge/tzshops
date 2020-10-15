@@ -11,6 +11,6 @@ class Room extends Model
     }
 
       public function area(){
-        return $this->belongsTo('App\Area', 'area_id');
+        return $this->belongsTo('App\area', 'area_id');
     }
 }

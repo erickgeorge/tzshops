@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Block extends Model
+class block extends Model
 {
 	
-	public function area(){
-        return $this->belongsTo('App\Area', 'area_id');
+	public function areas(){
+        return $this->belongsTo('App\area', 'area_id');
     }
     //
 }

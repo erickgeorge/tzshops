@@ -51,28 +51,18 @@ Company Registrartion
                        @endif -->
 
 
-<div class="jumbotron" style="width: 700px;">
-     <table>
-      <tr>
-     <thead style="color: white;">
-        <th style="width: 29px"></th>
-        <th style="width: 270px">Area <sup style="color: red;">*</sup></th>
-        <th style="width: 250px">Assessment sheet <sup style="color: red;">*</sup></th>
-        <th style="width: 250px">Monthly payment <sup style="color: red;">*</sup></th>
-
-     </thead>
-      </tr>
-
-     </table>
 
 
+   
 
-       <TABLE id="dataTable" width="350px" border="1">
-        <TR>
-            <TD><INPUT type="checkbox" name="chk"/></TD>
-            <TD  >
+                    <div  class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
 
-                            <select style="color: black; width:  200px;" required class="custom-select"  name="area[]"  required >
+
+                          <label style="width:150px;" class="input-group-text" for="directorate">Area Name <sup style="color: red;">*</sup></label>
+
+                        </div>
+                       <select style="color: black; width:  200px;" required class="custom-select"  name="area[]"  required >
                              <option value="" selected>Choose area...
                             </option>
 
@@ -85,12 +75,18 @@ Company Registrartion
 
                          @endif
                
-                            </select>
+                      </select>
+                     </div>
 
-              </TD>
 
-            <TD>
-                         <select style="color: black; width:  200px;" required class="custom-select"  name="sheets[]"  required >
+                      <div  class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
+
+
+                          <label style="width:150px;" class="input-group-text" for="directorate">Assessment Sheet <sup style="color: red;">*</sup></label>
+
+                        </div>
+                      <select style="color: black; width:  200px;" required class="custom-select"  name="sheets[]"  required >
                              <option value="" selected>Choose assessment sheet...
                             </option>
 
@@ -130,19 +126,24 @@ Company Registrartion
                                 @endif
                                 @endforeach
                         </select>
-           </TD>
-           <TD>  <input style="color: black; width:  200px;"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  style="color: black" type="number" required class="form-control" id="type"
-                               name="payment[]" placeholder="Enter monthly payment" value="{{ old('payment') }}" max="100000000"></TD>
+                     </div>
 
 
-        </TR>
-     </TABLE>
 
-    <div style="padding-left: 300px;">  <INPUT  class="btn btn-primary" type="button" value="Add" onclick="addRow('dataTable')" />
 
-    <INPUT  id="deleterowbutton" style="display: none;" class="btn btn-danger" type="button" value="Delete " onclick="deleteRow('dataTable')" /></div>
+                    <div  class="input-group mb-3 col-lg-6">
+                        <div class="input-group-prepend">
 
-  </div>
+
+                          <label style="width:150px;" class="input-group-text" for="directorate">Monthly Payment <sup style="color: red;">*</sup></label>
+
+                        </div>
+                      <input style="color: black; width:  200px;"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  style="color: black" type="number" required class="form-control" id="type"
+                               name="payment[]" placeholder="Enter monthly payment" value="{{ old('payment') }}" max="100000000">
+                     </div>
+
+
+
 
 
 

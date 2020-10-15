@@ -80,7 +80,8 @@ var total=2;
     <div class="row">
         <div class="col">
             <h5>Submited by  <span
-                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span> On <h5><span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5>
+                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span><h5>Submited on <span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5><h5> <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span>
+                  <h5> Email: <span style=" font-weight: bold;"> {{ $wo['user']->email }} </span></h5>
 
 
 
@@ -88,8 +89,8 @@ var total=2;
         <div class="col">
         <h5>  @if($wo->status == 0)Rejected@elseif($wo->status == 1) Accepted @else Processed @endif by <span
                 style=" font-weight: bold;">{{ $wo['hos']->fname.' '.$wo['hos']->lname }}</span></h5>
-             <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span> <br>
-              Email: <span style=" font-weight: bold;"> {{ $wo['user']->email }} </span></h5>
+             <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['hos']->phone }}</span> <br>
+              Email: <span style=" font-weight: bold;"> {{ $wo['hos']->email }} </span></h5>
         </div>
     </div>
 
@@ -864,7 +865,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 </tr>
                 <tbody>
                   <tr>
-                    <td>Intetion to close</td>
+                    <td>Intention to close</td>
                     <td> {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}}</td>
                   @if(strpos( $wo['hoscloses']->type, "HOS") !== false)
                 <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hoscloses']->type), 4, 14)?> </td>
@@ -923,20 +924,20 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
           @if($wo->status == 30)
             <div>
-                <h4 align="center">Works order completely closed!</h4>
+                <h4 align="center">Works order completely closed</h4>
             </div>
 
         @elseif($wo->status == 2)
             <div>
-                <h4 align="center" style="padding: 20px">Works order is Provisional closed!</h4>
+                <h4 align="center" style="padding: 20px">Works order is provisionally closed</h4>
             </div>
         @elseif($wo->status == 52)
             <div>
-              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done!</h4>
+              <h4 align="center" style="padding: 20px">Waiting Approval for IoW after checking the work done</h4>
             </div>
         @elseif($wo->status == 53)
             <div>
-               <h4 align="center" style="padding: 20px">Works order is not approved by IoW!</h4>
+               <h4 align="center" style="padding: 20px">Works order is not approved by IoW</h4>
             </div>
 
         @elseif($wo->status == 9)
@@ -1172,7 +1173,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 </tr>
                 <tbody>
                   <tr>
-                    <td>Intetion to close</td>
+                    <td>Intention to close</td>
                     <td> {{$wo['hos2close']->fname.' '.$wo['hos2close']->lname}}</td>
                   @if(strpos( $wo['hos2close']->type, "HOS") !== false)
                 <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hos2close']->type), 4, 14)?> </td>
@@ -1910,7 +1911,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
            <div class="red box">
 
-                     <form method="POST" action="{{ route('work.transport', [$wo->id]) }}">
+                     <form method="POST" onsubmit="return confirm('Are you sure you have signed works order inspection form? ')" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
                    @if($wo->statusmform != 1)
@@ -1956,7 +1957,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
              <div class="green box">
 
-           <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+           <form method="POST" onsubmit="return confirm('Are you sure you have signed works order inspection form? ')" action="{{ route('work.inspection', [$wo->id]) }}">
                @csrf
                         <div class="row">
                             <div class="col-md-6">

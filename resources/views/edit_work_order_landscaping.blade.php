@@ -59,7 +59,7 @@ var total=2;
   <div class="row">
 <div class="col"><h6 ><b>Assessment sheet for tender number: {{$assesment->company}} is initiated by:</b></h6></div>
 <div class="col"><h6 >
-<table>
+ <table class="table table-striped  display" style="width:100%">
   <tr>
     <th>Full name</th>
       <th>{{ $assesment['initiated']->fname .' ' . $assesment['initiated']->lname }}</th>
@@ -152,7 +152,7 @@ var total=2;
     <div class="row container-fluid">
         <div class="col-lg-12">
 
-            <h5><b>Sheet No:0{{$ii}}</b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b>  sheet name: {{$company->assessment_name}}</b></h5>
+            <h5><b><!--Sheet No:0{{$ii}}--></b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b>  sheet name: {{$company->assessment_name}}</b></h5>
         </div>
     </div>
     <hr>
@@ -406,7 +406,7 @@ var total=2;
  <!--crosscheck-->
 
 
-<table class="table table-striped">
+ <table class="table table-striped  display" style="width:100%">
       <tr>
          <thead style="color: white;">
         <th style="width:20px" >#</th>
@@ -457,9 +457,9 @@ var total=2;
 
 
 
-<table>
+ <table class="table table-striped  display" style="width:100%">
   <thead>
-  <tr style="color:white;"><th>Area Name</th><th>Average score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
+  <tr style="color:white;"><th>Area name</th><th>Total score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
  </thead>
 
 
@@ -671,7 +671,7 @@ var total=2;
     <?php $tender = Crypt::encrypt($assesment->company); ?>
 
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></a>
+                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
            @else
   <?php $tender = Crypt::encrypt($assesment->company); ?>
@@ -686,17 +686,25 @@ var total=2;
  <br>
   <br>
      @if(auth()->user()->type == 'Dvc Accountant')
-  @if($assesment->status == 3)
-   <?php $tender = Crypt::encrypt($assesment->company); ?>
-  <b style="padding-left: 750px;">Company is paid<a href="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}" title="please proceed if company is already paid "><i style="color: blue;" class="far fa-check-circle"></i> </a></b><br> <b style="padding-left: 750px;">
+     @if($assesment->status == 3)
+           <?php $tender = Crypt::encrypt($assesment->company); ?>
+             <form method="GET"
+                    onsubmit="return confirm('Are you sure company is paid? ')"
+                    action="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}">
+                  {{csrf_field()}}
+                  Company is Paid
+                  <button style="width:20px;height:20px;padding:0px;" type="submit"
+                          title="Tick if Company is Paid" style="color: blue;" data-toggle="tooltip">
+                        <i style="color: blue;" class="far fa-check-circle"></i> </button>
+              </form>
+     @endif
+     @endif
 
-  @endif
-  @endif
 <br>
 
 @if(auth()->user()->type != 'Dvc Accountant')
  <?php $tender = Crypt::encrypt($assesment->company); ?>
-      <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
+                <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                  <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 

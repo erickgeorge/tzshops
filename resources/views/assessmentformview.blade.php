@@ -12,9 +12,11 @@ Assessment form
      <div class="row">
       <div class="col">
          @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'USAB'))
-          <h5 ><b style="text-transform: capitalize;">OnProgress Assessment forms</b></h5>
+          <h5 ><b style="text-transform: capitalize;">OnProgress assessment forms</b></h5>
+          @elseif((auth()->user()->type == 'Dvc Accountant')||(auth()->user()->type == 'DVC Admin'))
+           <h5 ><b style="text-transform: capitalize;">Assessment forms which needs payment processes</b></h5>
           @else
-            <h5 ><b style="text-transform: capitalize;">assessment forms which needs approval</b></h5>
+            <h5 ><b style="text-transform: capitalize;">Assessment forms which needs approval</b></h5>
          @endif
 
         </div>
@@ -67,6 +69,11 @@ Assessment form
  <a href="{{route('assessmentform.view.second')}}"><button  style="max-height: 40px; " type="button" class="btn btn-primary" >
                  Assessment forms for paid companies
                 </button></a>
+
+ @elseif((auth()->user()->type == 'Dvc Accountant')||(auth()->user()->type == 'DVC Admin')) 
+  <a href="{{route('assessmentform.view.second')}}"><button  style="max-height: 40px; " type="button" class="btn btn-primary" >
+                 Assessment forms for paid companies
+                </button></a>             
 
  @else
 
@@ -239,35 +246,35 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                                                         @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             <td><span >No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             <td><span >Crosscheck assessment form</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estates Officer<br> for approval</span></td>
+                             <td><span >Submitted to Estates Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Students<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Students<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estates Officer , <br>fowarded to Estate director for approval</span></td>
+                             <td><span >Approved by Estates Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estates Director , <br>fowarded to DVC Accountant</span></td>
+                             <td><span >Approved by Estates Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estates Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estates Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
+                             <td><span >Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estates Officer</span></td>
+                             <td><span >Rejected by Estates Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estates Director</span></td>
+                             <td><span >Rejected by Estates Director</span></td>
                              @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
+                             <td><span >Rejected</span></td>
                               @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Students </span></td>
+                             <td><span >Rejected by Dean of Students </span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             <td><span >Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
+                             <td><span >Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -294,35 +301,35 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                                                         @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             <td><span>No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             <td><span >Crosscheck assessment form</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estates Officer<br> for approval</span></td>
+                             <td><span >Submitted to Estates Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Students<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Students<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estates Officer , <br>fowarded to Estate director for approval</span></td>
+                             <td><span >Approved by Estates Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estates Director , <br>fowarded to DVC Accountant</span></td>
+                             <td><span >Approved by Estates Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estates Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estates Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
+                             <td><span >Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estates Officer</span></td>
+                             <td><span >Rejected by Estates Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estates Director</span></td>
+                             <td><span >Rejected by Estates Director</span></td>
                              @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
+                             <td><span >Rejected</span></td>
                               @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Students </span></td>
+                             <td><span >Rejected by Dean of Students </span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             <td><span >Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
+                             <td><span >Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -351,35 +358,35 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             <td><span >No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             <td><span >Crosscheck assessment form</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
+                             <td><span >Submitted to Estate Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
+                             <td><span >Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
+                             <td><span >Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
+                             <td><span >Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
+                             <td><span >Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
+                             <td><span >Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
+                             <td><span >Rejected</span></td>
                               @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Student </span></td>
+                             <td><span >Rejected by Dean of Student </span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             <td><span >Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
+                             <td><span >Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -409,35 +416,35 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             <td><span >No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             <td><span >Crosscheck assessment form</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
+                             <td><span>Submitted to Estate Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
+                             <td><span >Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
+                             <td><span >Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
+                             <td><span >Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
+                             <td><span >Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
+                             <td><span >Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
+                             <td><span >Rejected</span></td>
                               @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Student </span></td>
+                             <td><span >Rejected by Dean of Student </span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             <td><span >Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
+                             <td><span >Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -467,35 +474,35 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             <td><span >No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             <td><span >Crosscheck assessment form</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
+                             <td><span >Submitted to Estate Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
+                             <td><span >Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
+                             <td><span >Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
+                             <td><span >Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
+                             <td><span >Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
+                             <td><span >Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
+                             <td><span >Rejected</span></td>
                               @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Student </span></td>
+                             <td><span >Rejected by Dean of Student </span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             <td><span >Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
+                             <td><span >Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -524,35 +531,35 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             <td><span >No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             <td><span >Crosscheck assessment form</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
+                             <td><span >Submitted to Estate Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
+                             <td><span >Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
+                             <td><span >Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
+                             <td><span >Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
+                             <td><span >Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
+                             <td><span >Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
+                             <td><span >Rejected</span></td>
                               @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Student </span></td>
+                             <td><span >Rejected by Dean of Student </span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             <td><span >Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
+                             <td><span >Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -585,35 +592,35 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if($assesment->status == 1)
-                             <td><span class="badge badge-danger">No assessment form submitted yet</span></td>
+                             <td><span >No assessment form submitted yet</span></td>
                              @elseif($assesment->status == 2)
-                             <td><span class="badge badge-primary">Crosscheck assessment form</span></td>
+                             <td><span >Crosscheck assessment form</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estate Officer<br> for approval</span></td>
+                             <td><span >Submitted to Estate Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Student<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Student<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                              @elseif($assesment->status == 4)
-                             <td><span class="badge badge-primary">Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
+                             <td><span >Approved by Estate Officer , <br>fowarded to Estate director for approval</span></td>
                              @elseif($assesment->status == 5)
-                             <td><span class="badge badge-primary">Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
+                             <td><span >Approved by Estate Director , <br>fowarded to DVC Accountant</span></td>
                              @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estate Officer <br>for approval</span></td>
                              @elseif($assesment->status == 7)
-                             <td><span class="badge badge-danger">Closed</span></td>
+                             <td><span >Closed</span></td>
                              @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
+                             <td><span >Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
+                             <td><span >Rejected by Estate Director</span></td>
                              @elseif($assesment->status == 12)
-                             <td><span class="badge badge-danger">Rejected</span></td>
+                             <td><span >Rejected</span></td>
                               @elseif($assesment->status == 30)
-                             <td><span class="badge badge-danger">Rejected by Dean of Student </span></td>
+                             <td><span >Rejected by Dean of Student </span></td>
                              @elseif($assesment->status == 13)
-                             <td><span class="badge badge-primary">Approved by DVC Admin </span></td>
+                             <td><span >Approved by DVC Admin </span></td>
                              @elseif($assesment->status == 25)
-                             <td><span class="badge badge-success">Company paid </span></td>
+                             <td><span >Company paid </span></td>
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
                              <td align="center"> <a style="color: green;" href="{{ url('edit/assessmentform/landscaping', [$assesment->id  , $tender , $assesment->assessment_month ]) }}"
@@ -642,17 +649,17 @@ Assessment form
                               <td>{{$assesment->type}}</td>
                               <td>{{$assesment->assessment_name}}</td>
                              @if(($assesment->status == 3) and ($assesment->status5 == 1) )
-                             <td><span class="badge badge-warning">Submitted to Estates Officer<br> for approval</span></td>
+                             <td><span >Submitted to Estates Officer<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 2) )
-                             <td><span class="badge badge-warning">Submitted to Dean of Students<br> for approval</span></td>
+                             <td><span >Submitted to Dean of Students<br> for approval</span></td>
                              @elseif(($assesment->status == 3) and ($assesment->status5 == 3) )
-                             <td><span class="badge badge-warning">Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
+                             <td><span >Submitted to Principal/Dean/<br> Directorates Director for approval</span></td>
                                @elseif($assesment->status == 10)
-                             <td><span class="badge badge-danger">Rejected by Estate Officer</span></td>
+                             <td><span >Rejected by Estate Officer</span></td>
                              @elseif($assesment->status == 11)
-                             <td><span class="badge badge-danger">Rejected by Estate Director</span></td>
+                             <td><span >Rejected by Estate Director</span></td>
                                @elseif($assesment->status == 6)
-                             <td><span class="badge badge-primary">Submitted to Estate Officer <br>for approval</span></td>
+                             <td><span >Submitted to Estate Officer <br>for approval</span></td>
 
                              @endif
                                <?php $tender = Crypt::encrypt($assesment->company); ?>
