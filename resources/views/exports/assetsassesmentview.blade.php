@@ -18,7 +18,7 @@ use App\assetsplantandmachinery;
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h4 style="text-transform: capitalize;">
+            <h4 >
                 All @php
 
             if( $_GET['asset']=='PlantMachinery')
@@ -29,7 +29,7 @@ echo 'Plant and Machinery';
 echo 'Motor Vehicle';
             }else if( $_GET['asset']=='ComputerEquipment')
             {
-echo 'Computer Equipments';
+echo 'Computer Equipment';
             }else{
                 echo $_GET['asset'];
             }

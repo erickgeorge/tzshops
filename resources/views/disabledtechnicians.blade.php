@@ -7,7 +7,7 @@
 <br>
     <div class="container" >
         <div class="col-lg-12">
-             <h5 style="text-transform: capitalize;">All Technicians Details @if(((substr(auth()->user()->type,0,4) == 'HOS ')&&($role['user_role']['role_id'] != 1))) - {{ substr(auth()->user()->type,4,12) }} Section @endif</h5>
+             <h5 style="text-transform: capitalize;">Deactivated Technicians Details @if(((substr(auth()->user()->type,0,4) == 'HOS ')&&($role['user_role']['role_id'] != 1))) - {{ substr(auth()->user()->type,4,12) }} Section @endif</h5>
         </div>
     </div>
     <div class="container">
@@ -42,7 +42,7 @@ use App\Section;
 use App\WorkOrder;
 use Carbon\Carbon;
 
-$rle = Technician::where('status',0)->get();
+$rle = Technician::where('status',1)->get();
 $head = 'All Technicians Details';
 
  ?>
@@ -64,21 +64,18 @@ foreach ($hoos as $hous) {
 
           if(substr($hotype,0,4) == 'HOS '){
             echo '<a style="margin-left: 2%;" href="alltechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Active Technicians</button></a> ';
-            echo '<a style="margin-left: 2%;" href="deactivatedtechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-info">Deactivated Technicians</button></a> ';
 
           }
           elseif($hotype == 'Maintenance coordinator'){
             echo '<a style="margin-left: 2%;" href="alltechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Active Technicians</button></a> ';
-            echo '<a style="margin-left: 2%;" href="deactivatedtechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-info">Deactivated Technicians</button></a> ';
 
 
           }elseif($role['user_role']['role_id'] == 1){
             $niyeye = '1';
             echo '<a style="margin-left: 2%;" href="alltechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Active Technicians</button></a> ';
-            echo '<a style="margin-left: 2%;" href="deactivatedtechnicians">  <button  style="margin-bottom: 20px" type="button" class="btn btn-info">Deactivated Technicians</button></a> ';
 
           }else {
-            $techs= Technician::where('status',0)->orderby('fname')->get();
+            $techs= Technician::where('status',1)->orderby('fname')->get();
             $niyeye = '1';
           }
 }
@@ -98,7 +95,7 @@ foreach ($hoos as $hous) {
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form method="GET" action="{{ url('allpdf') }}">
+    <form method="GET" action="{{ url('exportdeactivatedtechs') }}">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Export To   PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h5>
@@ -117,7 +114,7 @@ foreach ($hoos as $hous) {
 
 <option value="" selected="">All Sections</option>
  @if($head == 'All Technicians Details')
-<?php $to = Technician::where('status',0)->select('type')->distinct()->get(); $v='technician';
+<?php $to = Technician::select('type')->where('status',1)->distinct()->get(); $v='technician';
 ?>
 @endif
 @foreach($to as $too)
@@ -126,14 +123,14 @@ foreach ($hoos as $hous) {
  @elseif($maintenance_coordinator == 1)
   <option value="" selected="">All Sections</option>
  @if($head == 'All Technicians Details')
-<?php $to = Technician::where('status',0)->select('type')->distinct()->get(); $v='technician';
+<?php $to = Technician::select('type')->where('status',1)->distinct()->get(); $v='technician';
 ?>@endif
 @foreach($to as $too)
 <option value="{{ $too->type }}">{{ ucwords(strtolower($too->type)) }}</option>
 @endforeach
  @else
 @if($head == 'All Technicians Details')
-<?php $to = Technician::where('status',0)->select('type')->distinct()->where('type','like','%'.$placed.'%')->get(); $v='technician';
+<?php $to = Technician::select('type')->where('status',1)->distinct()->where('type','like','%'.$placed.'%')->get(); $v='technician';
 ?>
 @endif
 @foreach($to as $too)
@@ -238,9 +235,9 @@ foreach ($hoos as $hous) {
                     <div class="row">
                         <a style="color: green;" href="{{ route('tech.edit.view', [$tech->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
 
-                        <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this Technician?')" action="{{ route('tech.delete', $tech->id) }}" >
+                        <form  method="get" onsubmit="return confirm('This technician will be activated')" action="{{ route('activatetechnician', $tech->id) }}" >
                             {{csrf_field()}}
-                            <button type="submit" data-toggle="tooltip" title="Delete"> <a style="color: red;" href="" data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a></button>
+                            <button class="text-primary" type="submit" data-toggle="tooltip" title="Activate"> <i class="fa fa-recycle" aria-hidden="true"></i> </button>
                         </form>
                     </div>
                 </td>
@@ -255,6 +252,8 @@ foreach ($hoos as $hous) {
 
         </table>
     </div>
+    @else
+    <h2 style="text-align: center">No Deactivated Technicans Found</h2>
     @endif
     <script>
         $(document).ready(function(){

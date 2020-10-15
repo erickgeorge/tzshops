@@ -13,7 +13,7 @@
 
     <div>
         <div>
-            <h5 style="text-transform: capitalize;"><b style="text-transform: capitalize;">Release Material(s) for the works order</b></h5>
+            <h5  ><b  >Release Material(s) for the Works Order</b></h5>
         </div>
 
     </div>

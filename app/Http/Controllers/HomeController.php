@@ -4286,7 +4286,7 @@ $v5=$type[4];
             ->groupBy('room_id')
             ->where('block_id',$_GET['room'])
             ->get();
-            
+
             $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
             $role = User::where('id', auth()->user()->id)->with('user_role')->first();
             return view('foundrooms', ['role' => $role, 'wo' =>$wo_room,'notifications' => $notifications]);
@@ -4519,6 +4519,48 @@ $v5=$type[4];
         }
 
    }
+
+   public function activateuser($id)
+   {
+$user = User::where('id',$id)->first();
+$user->status = 1;
+$user->save();
+
+return redirect()->back()->with(['message'=>'User Activated Successfully!']);
+   }
+
+   public function activatetechnician($id)
+   {
+$data  = Technician::where('id',$id)->first();
+$data -> status = 0;
+$data->save();
+return redirect()->back()->with(['message'=>'Technician Activated Successfully!']);
+
+}
+
+   public function deactivatedtechnicians()
+   {
+    $techs = Technician::where('status','1')->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    
+    $head = 'Deactivated Technicians Details';
+    return view('disabledtechnicians', 
+    ['role' => $role,
+    'head'=>$head,
+    'techs' => $techs,
+    'notifications' => $notifications, ]);
+
+   }
+   public function deactivatedusers()
+   {
+       $user = User::where('status','0')->get();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    return view('disabledusers', ['role' => $role, 'user' => $user,'notifications' => $notifications]);
+
+   }
+
 
 }
 

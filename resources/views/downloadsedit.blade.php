@@ -48,7 +48,7 @@
                   <input required type="file" name="file" accept="application/pdf" id="" class="form-control" placeholder="" aria-describedby="helpId"></textarea>
                   <small id="helpId" class="text-danger">Required, File should only be in PDF format</small>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Save</button>
                 <a class="btn btn-danger" href="{{route('downloads')}}" role="button"> Cancel </a>
             </form>
         </p>

@@ -27,8 +27,8 @@ Directorate
     @endif
 <?php use App\Directorate; ?>
   @if(count($directorates)>0)
-                <h5 style="text-transform: capitalize;"
-                   class="btn btn-default">List of College/Directorates</h5>
+                <h5 
+                   class="btn btn-default">List of Colleges/Directorates</h5>
 
 
 

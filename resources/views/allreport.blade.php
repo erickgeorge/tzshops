@@ -33,13 +33,18 @@ tr:nth-child(even) {
 @page {margin:20px 30px 40px 50px;}
 </style>
 <table>
+    @php
+        $dopef = 0;
+    @endphp
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Full Name</th>
             <th title="phone" scope="col">Phone</th>
             <th scope="col">Email</th>
-          @if($section!='0') @else <th scope="col">Section/type</th>@endif
+          @if($section!='0') @elseif($_GET['change']=='iow') @php
+              $dopef = 1;
+          @endphp @else <th scope="col">Section/type</th>@endif
         </tr>
         </thead>
         <tbody>
@@ -66,7 +71,7 @@ tr:nth-child(even) {
 
               ?></td>
                         <td>{{ $tech->email }}</td>
-                        @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+                        @if($section!='0') @elseif($dopef == 1) @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
 
                     </tr>
                 <?php } }else if($_GET['change']=='iow')
@@ -87,7 +92,7 @@ tr:nth-child(even) {
 
                   ?></td>
                             <td>{{ $tech->email }}</td>
-                            @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+                            @if($section!='0') @elseif($dopef == 1) @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
 
                         </tr>
                 <?php } } else if($_GET['change']=='technician')
@@ -107,7 +112,7 @@ tr:nth-child(even) {
 
           ?></td>
                     <td>{{ $tech->email }}</td>
-                    @if($section!='0') @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+                    @if($section!='0') @elseif($dopef == 1) @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
 
                 </tr>
                 <?php  } ?>

@@ -24,7 +24,7 @@ Cleaning company report
         </div>
     @endif
 
-     <h5 style="  " ><b style="text-transform: capitalize;">LIST OF AREAS ASSIGNED TO THIS COMPANY </b></h5>
+     <h5 style="  " ><b  >List of Areas Assigned to This Company </b></h5>
               <hr>
 
                    <br><br>

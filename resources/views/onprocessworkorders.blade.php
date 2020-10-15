@@ -17,7 +17,7 @@
     <br>
     <div class="row container" style=" margin-left: 4%; margin-right: 4%;">
          <div class="col">
-            <h5 style="text-transform: capitalize;"><b>On Progress works order in  @if(auth()->user()->type == 'Maintenance coordinator')
+            <h5 ><b>On Progress works Order in  @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
 <?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
@@ -289,8 +289,8 @@ foreach($userwithid as $userwithid)
     <div class="bs-example">
         <div class=" row nav nav-tabs text-center">
             <a class="col btn-info nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('myzone') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>All </b></a>
-             <a class="col btn btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On Progress</b></a>
-             <a class="col btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed </b></a>
+             <a class="col btn btn-primary nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('onprocessworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>On Progress</b></a>
+             <a class="col btn-success nav-link" style="padding: 3px; margin-left: 3px;" href="{{ route('completedworkorders') }}@if(auth()->user()->type == 'Maintenance coordinator')?zone={{ $_GET['zone'] }}@endif"><b>Completed </b></a>
         </div>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="All" style="background-color: white; color: black;">

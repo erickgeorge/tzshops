@@ -27,7 +27,8 @@ IoW Zones
         </div>
     @endif
            <br>
-                <h5 style="text-transform: capitalize;">List of available IoW zones</h5>
+                <h5>List of Zones
+                </h5>
 
 
 
@@ -35,7 +36,7 @@ IoW Zones
             <hr class="container">
 
             <a href="Add/iowzone" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new zone for IoW</a>
+                   class="btn btn-primary">Add New Zone</a>
                    <a href="{{ url('iowonlyzones')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 

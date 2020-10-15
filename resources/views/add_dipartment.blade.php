@@ -26,13 +26,13 @@
     @endif
                 <h5 style="text-transform: capitalize;"  id="new_dep" >Add new department</h5>
                 <hr>
-                <form method="POST" action="{{ route('department.save') }}" class="col-md-6">
+                <form method="POST" action="{{ route('department.save') }}" class="col-md-8">
                     @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label style="height: 28px;" class="input-group-text" for="directorate">Directorate/College <sup style="color: red;">*</sup></label>
                         </div>
-                        <select required class="custom-select" name="directorate" id="directoratee">
+                        <select required class="custom-select" name="directorate" id="des">
                             <option value="">Choose...</option>
                             @foreach($directorates as $directorate)
                                 <option value="{{ $directorate->id }}">{{ $directorate->directorate_description }}</option>

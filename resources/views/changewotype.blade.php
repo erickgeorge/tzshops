@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="text-transform: capitalize;" >CHANGE PROBLEM TYPE :</h5>
+            <h5 style="text-transform: capitalize;" >Change Problem Type :</h5>
         </div>
     </div>
     <hr>

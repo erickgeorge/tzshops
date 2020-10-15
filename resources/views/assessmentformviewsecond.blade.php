@@ -15,14 +15,14 @@ Assessment form
         @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
 
 
-          <h5 ><b style="text-transform: capitalize;">Assessment forms for Paid companies</b></h5>
+          <h5 ><b style="text-transform: capitalize;">Assessment Forms for Paid Companies</b></h5>
 
           @elseif((auth()->user()->type == 'Dvc Accountant')||(auth()->user()->type == 'DVC Admin')) 
 
             <h5 ><b style="text-transform: capitalize;">Assessment forms for Paid companies</b></h5>
 
          @else
-             <h5 ><b style="text-transform: capitalize;">Approved assessment forms </b></h5>
+             <h5 ><b style="text-transform: capitalize;">Approved Assessment Forms </b></h5>
 
          @endif
 

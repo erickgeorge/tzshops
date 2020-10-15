@@ -564,7 +564,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
 
     public function userspdf(){
-
+$data['nexted'] = 0;
      $data['title'] = 'Notes List';
      ///////////////////////////////////////
      if($_GET['college']!=''){
@@ -632,6 +632,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         Where('id',$_GET['college'])->
         Where('type',$_GET['type'])->orderBy('fname','asc')->get();
     }
+
 
     if (($_GET['type']=='')&&($_GET['college']=='')&&($_GET['directorate']=='')&&($_GET['department']!='')) {
 
@@ -878,8 +879,9 @@ return $pdf->stream(''.$data['header'].' -  '.date('d-m-Y Hi').'.pdf');
             if(request()->has('start') && request()->has('end') )  {
 
 
-        $_GET['userid']=request('start');
-        $to=request('end');
+
+                $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+                $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
         if(request('start')>request('end')){
             $to=request('start');
@@ -1458,16 +1460,18 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
          if($request['start'] and $request['end']){
 
 
-        $from=request('start');
-        $to=request('end');
+      
+            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
+           
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
 
 
@@ -1734,16 +1738,18 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
            if($request['start'] and $request['end'])  { //date filter
 
 
-        $from=request('start');
-        $to=request('end');
+       
+            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
+           
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
 
 
@@ -2401,15 +2407,17 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
            if($request['start'] and $request['end'])  { //date filter
 
 
-        $from=request('start');
-        $to=request('end');
+       
+            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
+           
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
 
 
@@ -2770,9 +2778,93 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 }
 
 
+public function exportdeactivatedtechs()
+{
+    if((request()->has('name'))&&(request()->has('type')))
+    {
+// name, type
+        if(($_GET['name']!='')&&($_GET['type']!=''))
+        {
+            $data['fetch'] = Technician::where('status',1)->where('type',$_GET['type'])->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+            $data['header'] = 'Technicians Details - Deactivated';
+            $data['section'] ='0';
+        }
+        if(($_GET['name']=='')&&($_GET['type']!=''))
+        {
+            $data['fetch'] = Technician::where('status',1)->where('type',$_GET['type'])->OrderBy('fname','asc')->get();
+            $data['header'] = 'All '.$_GET['type'].'  Technicians Details - Deactivated';
+            $data['section'] = $_GET['type'];
+        }
+        if(($_GET['name']!='')&&($_GET['type']==''))
+        {
+            $data['fetch'] = Technician::where('status',1)->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
+            $data['header'] = 'Technician Details - Deactivated';
+            $data['section'] ='0';
+        }
+        if(($_GET['name']=='')&&($_GET['type']==''))
+        {
+            $data['fetch'] = Technician::where('status',1)->OrderBy('type','asc')->OrderBy('fname','asc')->get();
+
+            $data['header'] = 'Deactivated Technicians Details';
+             $data['section'] ='0';
+        }
+
+       if($data['fetch'] ->isEmpty()){
+
+        return redirect()->back()->withErrors(['message' => 'No data Found Matching your Filter ']);
+        }else{
+
+        $pdf = PDF::loadView('allreport', $data);
+        return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
+            }
+
+    } else {
+        return redirect()->back();
+    }
+}
 
 
+public function exportdeactivatedusers()
+{
+    if((request()->has('name'))&&(request()->has('type')))
+    {
+        if(($_GET['name']!='')&&($_GET['type']!=''))
+        {
+            $data['display_users'] =  user::where('type',$_GET['type'])->where('id',$_GET['name'])->where('status','0')->orderBy('fname','asc')->get();
+            $data['header'] = 'User Details - Deactivated';
+        }
+        if(($_GET['name']=='')&&($_GET['type']!=''))
+        {
+            $data['display_users'] =  user::where('type',$_GET['type'])->where('status','0')->orderBy('fname','asc')->get();
+            $data['header'] = 'All '.$_GET['type'].'  Technicians Details - Deactivated';
+        }
+        if(($_GET['name']!='')&&($_GET['type']==''))
+        {
+            $data['display_users'] =  user::where('id',$_GET['name'])->where('status','0')->orderBy('fname','asc')->get();
+            $data['header'] = ucwords(strtoupper($_GET['type'])).' Users Details - Deactivated';
+        }
+        if(($_GET['name']=='')&&($_GET['type']==''))
+        {
+            $data['display_users'] =  user::where('status','0')->orderBy('fname','asc')->get();
 
+            $data['header'] = 'All Deactivated Users Details';
+        }
+
+        if($data['display_users'] ->isEmpty()){
+
+            return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
+
+           }else{
+
+           $pdf = PDF::loadView('users_pdf', $data);
+
+           return $pdf->stream(''.$data['header'].' '.date('d-m-Y Hi').'.pdf');
+               }
+
+    }else {
+        return redirect()->back();
+    }
+}
 
 
 }

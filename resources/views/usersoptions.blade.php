@@ -694,13 +694,13 @@ use App\Department;
 use App\Section;
  ?>
 
- <?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>  
+ <?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>
 
  @if($role['user_role']['role_id'] == 1)
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5 style=" text-transform: capitalize;">Available Registered Users - <b> Directorate of Estates Services</b></h5>
+    <h5  >Available Registered Users - <b> Directorate of Estates Services</b></h5>
 
 
   </div>
@@ -737,11 +737,11 @@ use App\Section;
 
 
   <div class="row">
-     <div class="col-md-5">
+     <div class="col-md-3">
     <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add New User</button></a>
   </div>
-  <div class="col-md-3" align="right">
-
+  <div class="col-md-6">
+<a href="{{route('deactivatedusers')}}" class="btn btn-info">Deactivated Users</a>
 
 </div>
 @if(!$display_users->isEmpty())
@@ -881,8 +881,8 @@ use App\Section;
 
                     $directoras = directorate::orderBy('name','ASC')->get();
                     foreach($directoras as $directoras){?>
-            <option value=" {{ $directoras->id }}">{{ $directoras->name }}</option>
-                    <?php }
+              <option value="{{ $directorate->id }}">{{ $directorate->name . $directorate->directorate_description }}</option>
+              <?php }
                                ?>
 
                 </select>
@@ -1643,7 +1643,7 @@ for (i = 0; i < dropdown.length; i++) {
 
 
 <script type="text/javascript">
-  
+
 
 var selecteddep = null;
 var selectedsection = null;

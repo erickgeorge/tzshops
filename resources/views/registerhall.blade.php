@@ -26,7 +26,7 @@ Campus Registration
 
 <div class="container">
 
-                <h5 style="text-transform: capitalize;"  id="Add New campus">Register New Hall of Resdence</h5>
+                <h5   id="Add New campus">Register New Hall of Residence</h5>
                 <hr>
                 <p align="center" style="color: red">All fields are compulsory</p>
 

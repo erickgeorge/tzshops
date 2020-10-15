@@ -7,7 +7,7 @@ Company report
 <br>
 @foreach($assessmmentcompany as $company)
 @endforeach
-<h5 style="text-transform: capitalize;"><B>SCORES FOR {{$company->month}}'{{$company['companyname']['compantwo']->company_name}}' ON {{ date('F Y', strtotime($company->assessment_month))}}</B></h5>
+<h5 ><B>Scores for {{$company->month}}'{{$company['companyname']['compantwo']->company_name}}' on {{ date('F Y', strtotime($company->assessment_month))}}</B></h5>
 <hr>
 
 <div class="container">

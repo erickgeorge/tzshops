@@ -21,7 +21,7 @@ Add New Procured Material
 <br>
 <div class="container" >
   <div class="col-lg-4">
-    <h5 style="text-transform: capitalize;" >Add New Procured Material</h5>
+    <h5 style="text-transform: capitalize;" >Add New Procured Materials</h5>
   </div>
   @if(Session::has('message'))
     <br>
@@ -40,7 +40,7 @@ Add New Procured Material
 
 <hr>
 <div style="margin: 1.5%;">
-	<p style="color: red;"> all fields are compulsory</p>
+	<p style="color: red;"> All fields are compulsory</p>
 	<div class="row">
 <div class="col-sm-2">
 

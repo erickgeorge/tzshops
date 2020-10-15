@@ -97,9 +97,9 @@
                             <td id="wo-details">{{ $material->total_materials }}
 
                                 @if($material->incremented == 'new')
-                                <b class="badge badge-success">new entry</b>
+                                <b  >new entry</b>
                                 @else
-                                <b class="badge badge-primary">Incremetal entry</b>
+                                <b  >Incremetal entry</b>
 
                                 @endif
 

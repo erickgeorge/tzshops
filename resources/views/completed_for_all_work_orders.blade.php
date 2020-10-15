@@ -64,19 +64,19 @@
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-primary">Create New Works Order</button>
+                <button style="margin-bottom: 20px; text-transform:capitalize;" type="button" class="btn btn-primary">Create new works order</button>
             </a>
         </div>
          <div class="col">
             <a href="{{url('work_order')}} ">
-                <button  type="button" class="btn btn-success">On Progress Works Orders
+                <button style=" text-transform:capitalize;" type="button" class="btn btn-success">On progress works orders
                 </button>
             </a>
         </div>
 
         <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">Rejected Works Orders
+                <button style="margin-bottom: 20px  text-transform:capitalize;" type="button" class="btn btn-danger">Rejected works orders
                 </button>
             </a>
         </div>

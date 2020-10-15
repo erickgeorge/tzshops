@@ -9,7 +9,7 @@
     <div class="container">
     <div class="row" style="margin-top: 6%;">
         <div class="col-lg-12" >
-            <h5 style="text-transform: capitalize;" >Add Material(s) in Store</h5>
+            <h5  >Add Material(s) in Store</h5>
         </div>
     </div>
     <hr>

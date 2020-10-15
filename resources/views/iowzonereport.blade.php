@@ -4,7 +4,7 @@
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of zones assigned to Inspector of Work</b></p>
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of Inspectors of Works for each Zone</b></p>
 </div><br>
 @php
     use App\User;
