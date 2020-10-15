@@ -40,7 +40,7 @@ use app\department;
             <hr class="container">
 
             <a href="Add/department" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new Department</a>
+                   class="btn btn-primary">Add New Department</a>
                    <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 

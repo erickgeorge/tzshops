@@ -1519,6 +1519,15 @@ for (i = 0; i < dropdown.length; i++) {
         });
 </script>
 
+
+<script type="text/javascript">
+
+      $("#directoratee5").select2({
+            placeholder: "Choose directorate...",
+            allowClear: true
+        });
+</script>
+
 <script type="text/javascript">
 
       $("#type").select2({
