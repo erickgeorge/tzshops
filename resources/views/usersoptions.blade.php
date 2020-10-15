@@ -735,11 +735,11 @@ use App\Section;
 
 
   <div class="row">
-     <div class="col-md-5">
-    <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
+     <div class="col-md-3">
+    <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add New User</button></a>
   </div>
-  <div class="col-md-3" align="right">
-
+  <div class="col-md-6">
+<a href="{{route('deactivatedusers')}}" class="btn btn-info">Deactivated Users</a>
 
 </div>
 @if(!$display_users->isEmpty())

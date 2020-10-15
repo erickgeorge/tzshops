@@ -954,3 +954,13 @@ Route::post('work_order/require/material/{id}', 'WorkOrderController@requiremate
 Route::get('filterhos','HomeController@filterhos')->name('filterhos')->middleware('auth');
 Route::POST('deleteprofilepicture','UserController@deleteprofilepicture')->name('deleteprofilepicture')->middleware('auth');
 
+Route::get('deactivatedusers','HomeController@deactivatedusers')->name('deactivatedusers')->middleware('auth');
+Route::get('activateuser/{id}','HomeController@activateuser')->name('activateuser')->middleware('auth');
+
+Route::get('deactivatedtechnicians','HomeController@deactivatedtechnicians')->name('deactivatedtechnicians')->middleware('auth');
+Route::get('activatetechnician/{id}','HomeController@activatetechnician')->name('activatetechnician')->middleware('auth');
+
+Route::get('exportdeactivatedtechs','NotesController@exportdeactivatedtechs')->name('exportdeactivatedtechs')->middleware('auth');
+Route::get('exportdeactivatedusers','NotesController@exportdeactivatedusers')->name('exportdeactivatedusers')->middleware('auth');
+
+//
