@@ -700,7 +700,7 @@ use App\Section;
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5  >Available Registered Users - <b> Directorate of Estates Services</b></h5>
+    <h5  >Registered Users - <b> Directorate of Estates Services</b></h5>
 
 
   </div>
