@@ -362,7 +362,7 @@ Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('stor
 
 Route::get('accept/material/mc/{id}/{zoneid}', 'StoreController@acceptMaterialiow')->name('store.materialacceptmc')->middleware('auth');
 
-Route::get('accept/material/with/rejected/{id}', 'StoreController@Materialacceptedwithrejected')->name('store.materialaccept.reject')->middleware('auth');
+Route::get('accept/material/with/rejected/{id}/{hosid}', 'StoreController@Materialacceptedwithrejected')->name('store.materialaccept.reject')->middleware('auth');
 
 
 
@@ -372,7 +372,7 @@ Route::get('return/material/{id}', 'StoreController@returnMaterialHOS')->name('s
 
 Route::get('accept/material/independently/{id}', 'StoreController@acceptMaterialonebyone')->name('store.materialacceptonebyone')->middleware('auth');
 
-Route::post('reject/material/{id}', 'StoreController@rejectMaterial')->name('store.materialreject')->middleware('auth');
+Route::post('reject/material/{id}/{hosid}', 'StoreController@rejectMaterial')->name('store.materialreject')->middleware('auth');
 Route::post('reject/material/independent/{id}', 'StoreController@rejectMaterialonebyone')->name('store.materialrejectonebyone')->middleware('auth');
 
 Route::get('store/material_request/{id}','StoreController@material_request_hos')->name('material_request_hos')->middleware('auth');

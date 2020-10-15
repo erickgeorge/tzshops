@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -741,7 +738,7 @@ use App\Section;
 
   <div class="row">
      <div class="col-md-5">
-    <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add new user</button></a>
+    <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add New User</button></a>
   </div>
   <div class="col-md-3" align="right">
 
@@ -878,8 +875,8 @@ use App\Section;
         <div class="row">
             <div class="col">
                 <select name="directorate" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select Directorate</option>
-                    <option value="">All Directorates</option>
+                    
+                    <option selected value="">All Directorates</option>
                     <?php
 
                     $directoras = directorate::orderBy('name','ASC')->get();
@@ -980,7 +977,7 @@ else {
       ?></td>
 
       @if( $user->type == "Inspector Of Works")
-      <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+      <td>Inspector of Works  ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
 
       @else
          @if(strpos( $user->type, "HOS") !== false)

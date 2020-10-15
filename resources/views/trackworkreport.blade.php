@@ -169,7 +169,7 @@ td, th {
 
     <thead style=" background-color: #376ad3; color: white; ">
   <tr>
-
+ <th>#</th>
   <th>Full Name</th>
      <th>Status </th>
     <th>Date Assigned </th>
@@ -182,9 +182,11 @@ td, th {
 </thead>
 
   <tbody>
+    <?php $i=0; ?>
     @foreach($techforms as $techform)
+      <?php $i++  ; ?>
   <tr>
-
+<td>{{$i}}</td>
      @if($techform['technician_assigned_for_inspection'] != null)
     <td>{{$techform['technician_assigned_for_inspection']->lname.' '.$techform['technician_assigned_for_inspection']->fname}}</td>
    <td >@if($techform->status==1) Completed  @else  On Progress   @endif</td>
@@ -360,6 +362,7 @@ td, th {
 
     <thead style="background-color: #376ad3;color: white;">
   <tr>
+    <th>#</th>
     <th>Materials Name</th>
 
   <th>Type</th>
@@ -373,9 +376,11 @@ td, th {
        </thead>
 
 <tbody>
+   <?php $mf=0; ?>
     @foreach($matforms as $matform)
+     <?php $mf++; ?>
   <tr>
-
+<td>{{$mf}}</td>
     <td>{{$matform['material']->name }}</td>
 
     <td>{{$matform['material']->type }}</td>
@@ -438,6 +443,7 @@ td, th {
 
 <table style="width:100%">
  <thead style="background-color: #376ad3;color: white;">    <tr>
+  <th>#</th>
     <th>Material Name</th>
     <th>Material Description</th>
     <th>Type</th>
@@ -449,9 +455,11 @@ td, th {
 </thead>
 
   <tbody>
+     <?php $mk=0; ?>
     @foreach($matforms as $matform)
+     <?php $mk++; ?>
   <tr>
-
+<td>{{$mk}}</td>
     <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
@@ -497,15 +505,15 @@ td, th {
 ?>
 
  @if(count($matforms) == 1)
-    <h4><b>1 Material Used and Approved </b></h4>
+    <h4><b>1 Material Received</b></h4>
     @else
-    <h4><b>{{ count($matforms) }} Materials Used and Approved  </b></h4>
+    <h4><b>{{ count($matforms) }} Materials Received  </b></h4>
     @endif
 
 <table style="width:100%">
  <thead style="background-color: #376ad3;color: white;">
     <tr>
-
+<th>#</th>
     <th>Material Name</th>
     <th>Material Description</th>
      <th>Type</th>
@@ -514,8 +522,11 @@ td, th {
   </thead>
 
   <tbody>
+     <?php $mm=0; ?>
     @foreach($matforms as $matform)
+     <?php $mm++; ?>
   <tr>
+   <td>{{$mm}}</td>
    <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
    <td>{{$matform['material']->type }}</td>
@@ -568,6 +579,7 @@ td, th {
 
  <thead style="background-color: #376ad3;color: white;">
   <tr>
+    <th>#</th>
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
@@ -581,10 +593,11 @@ td, th {
   </tr>
 </thead>
 <tbody>
+    <?php $iii=0; ?>
     @foreach($techforms as $techform)
-
+  <?php $iii++; ?>
   <tr>
-
+<td>{{$iii}}</td>
      @if($techform['technician_assigned'] != null)
     <td>{{$techform['technician_assigned']->lname.' '.$techform['technician_assigned']->fname}}</td>
    <td >@if($techform->status==1) Completed   @else  On Progress   @endif</td>
@@ -749,11 +762,12 @@ td, th {
    @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30) or ($wo->status == 12) or ($wo->status == 53) )
             <div>
 
-<h5><b>Closing Works done</b></h5>
+<h5><b>Closing Works Order</b></h5>
              <table class="table table-striped  display" style="width:100%">
 
                 <thead style="background-color: #376ad3;color: white;">
                      <tr>
+                  <th>#</th>
                   <th>Status</th>
                   <th>Full Name</th>
                   <th>Type</th>
@@ -765,6 +779,8 @@ td, th {
 
                 <tbody>
                   <tr>
+
+                    <td>1</td>
                     <td>Intention to close</td>
                     <td> {{$wo['hoscloses']->fname.' '.$wo['hoscloses']->lname}}</td>
                   @if(strpos( $wo['hoscloses']->type, "HOS") !== false)
@@ -779,6 +795,7 @@ td, th {
                    @if($wo->hosclose2date == null)<!--if rejected by iow-->
                   @if($wo->iowclosedate != null)
                   <tr>
+                     <td>2</td>
                     <td>Approved by</td>
                     <td>{{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}}</td>
                      @if(strpos( $wo['iowcloses']->type, "HOS") !== false)
@@ -796,6 +813,7 @@ td, th {
                 @if($wo->hosclose2date == null)<!--if rejected by iow-->
                  @if($wo->clientclosedate != null)
                   <tr>
+                     <td>3</td>
                     <td>Closed Completely</td>
                     <td>{{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}}</td>
                      @if(strpos( $wo['clientcloses']->type, "HOS") !== false)
@@ -821,44 +839,6 @@ td, th {
 
 
 
-
-          @if($wo->status == 30)
-            <div>
-            <!--    <h4 align="center">Works order completely closed!</h4>-->
-            </div>
-
-        @elseif($wo->status == 2)
-            <div>
-                <h4 align="center" style="padding: 20px">Works order is provisionally closed</h4>
-            </div>
-        @elseif($wo->status == 52)
-            <div>
-              <h4 align="center" style="padding: 20px">Waiting approval for IoW after checking the work done</h4>
-            </div>
-        @elseif($wo->status == 53)
-            <div>
-               <h4 align="center" style="padding: 20px">Works order is not approved by IoW</h4>
-            </div>
-
-        @elseif($wo->status == 9)
-             <!-- <div>
-                <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Close works order completely</button>
-                </form>
-            </div>-->
-        @elseif($wo->status == 25)
-          <!--  <div>
-                <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Provisional Close</button>
-                </form>
-            </div>-->
-        @else
-
-
-
-        @endif
 
 <!--works order first closing-->
 
@@ -899,6 +879,7 @@ td, th {
 
  <thead style="background-color: #376ad3;color: white;">
    <tr>
+    <th>#</th>
     <th>Full Name</th>
   <th>Status</th>
     <th>Date Assigned</th>
@@ -908,10 +889,12 @@ td, th {
 </thead>
 
   <tbody>
+      <?php $ii=0; ?>
     @foreach($techwork as $techworks)
+      <?php $ii++; ?>
 <tr>
 
-
+  <td>{{$ii}}</td>
      @if($techworks['technician_work'] != null)
     <td>{{$techworks['technician_work']->fname.' '.$techworks['technician_work']->lname}}</td>
    <td >@if($techworks->status==1) Completed   @else  On Progress   @endif</td>
@@ -1056,11 +1039,12 @@ td, th {
      @if(($wo->status == 52) or ($wo->status == 2) or ($wo->status == 30) or ($wo->status == 12) or ($wo->status == 53)  or ($wo->status == 30)  )
             <div>
 
-<h5><b>Closing Works done</b></h5>
+<h5><b>Closing Works Order</b></h5>
              <table class="table table-striped  display" style="width:100%">
 
                 <thead style="background-color: #376ad3;color: white;">
                      <tr>
+                      <th>#</th>
                   <th>Status</th>
                   <th>Full Name</th>
                   <th>Type</th>
@@ -1072,12 +1056,17 @@ td, th {
 
                 <tbody>
                   <tr>
+                     <td>1</td>
                     <td>Intention to close</td>
                     <td> {{$wo['hos2close']->fname.' '.$wo['hos2close']->lname}}</td>
                   @if(strpos( $wo['hos2close']->type, "HOS") !== false)
                 <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['hos2close']->type), 4, 14)?> </td>
                   @else
-                <td style="text-transform: capitalize;">{{strtolower( $wo['hoscloses']->type) }} </td>
+                @if($wo['hos2close']->type == 'Inspector Of Works' )
+                <td>Inspector of Works</td>
+                    @else
+                <td style="text-transform: capitalize;">{{strtolower( $wo['hos2close']->type) }} </td>
+                    @endif
                  @endif
                        <td>{{$wo['hos2close']->phone}}</td>
                        <td>{{$wo['hos2close']->email}}</td>
@@ -1085,12 +1074,17 @@ td, th {
                   </tr>
                   @if($wo->iowclosedate != null)
                   <tr>
+                     <td>2</td>
                     <td>Approved by</td>
                     <td>{{$wo['iowcloses']->fname.' '.$wo['iowcloses']->lname}}</td>
                      @if(strpos( $wo['iowcloses']->type, "HOS") !== false)
                 <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['iowcloses']->type), 4, 14)?> </td>
                   @else
+                  @if($wo['iowcloses']->type == 'Inspector Of Works' )
+                <td>Inspector of Works</td>
+                    @else
                 <td style="text-transform: capitalize;">{{strtolower( $wo['iowcloses']->type) }} </td>
+                    @endif
                  @endif
                       <td>{{$wo['iowcloses']->phone}}</td>
                     <td>{{$wo['iowcloses']->email}}</td>
@@ -1101,12 +1095,17 @@ td, th {
 
                  @if($wo->clientclosedate != null)
                   <tr>
+                     <td>3</td>
                     <td>Closed Completely</td>
                     <td>{{$wo['clientcloses']->fname.' '.$wo['clientcloses']->lname}}</td>
                      @if(strpos( $wo['clientcloses']->type, "HOS") !== false)
                 <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($wo['clientcloses']->type), 4, 14)?> </td>
                   @else
+                 @if($wo['clientcloses']->type == 'Inspector Of Works' )
+                <td>Inspector of Works</td>
+                    @else
                 <td style="text-transform: capitalize;">{{strtolower( $wo['clientcloses']->type) }} </td>
+                    @endif
                  @endif
                      <td>{{$wo['clientcloses']->phone}}</td>
                       <td>{{$wo['clientcloses']->email}}</td>
@@ -1127,6 +1126,48 @@ td, th {
 
 
   <!--tracking after work rejected-->
+
+  <!--statusess-->
+
+
+          @if($wo->status == 30)
+            <div>
+            <!--    <h4 align="center">Works order completely closed!</h4>-->
+            </div>
+
+        @elseif($wo->status == 2)
+            <div>
+                <h4 align="center" style="padding: 20px">Works order is provisionally closed</h4>
+            </div>
+        @elseif($wo->status == 52)
+            <div>
+              <h4 align="center" style="padding: 20px">Waiting approval of IoW after checking the work done</h4>
+            </div>
+        @elseif($wo->status == 53)
+            <div>
+               <h4 align="center" style="padding: 20px">Works order is not approved by IoW</h4>
+            </div>
+
+        @elseif($wo->status == 9)
+             <!-- <div>
+                <form method="POST" action="{{ route('workorder.close.complete', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Close works order completely</button>
+                </form>
+            </div>-->
+        @elseif($wo->status == 25)
+          <!--  <div>
+                <form method="POST" action="{{ route('workorder.close', [$wo->id, $wo->client_id]) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Provisional Close</button>
+                </form>
+            </div>-->
+        @else
+
+
+
+        @endif
+
 
 
           @if($wo->status == 30)

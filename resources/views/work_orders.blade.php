@@ -493,7 +493,7 @@ foreach($userwithid as $userwithid)
                               @endif
 
 
-                            <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
+                            <td>{{ date('d F Y', strtotime($work->created_at)) }} </td>
                             <td>
 
                                 @if($work->location ==null)
@@ -1292,7 +1292,7 @@ foreach($userwithid as $userwithid)
 
 
 
-                            <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>
+                            <td>{{ date('d F Y', strtotime($work->created_at)) }}</td>
                             <td>
 
                                 @if($work->location ==null)
