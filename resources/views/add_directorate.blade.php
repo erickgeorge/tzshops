@@ -23,7 +23,7 @@
             </ul>
         </div>
     @endif
-                <h5 style="text-transform: capitalize;" >Add new college/Directorate</h5>
+                <h5 style="text-transform: capitalize;" >Add New College/Directorate</h5>
                 <hr >
                 <form method="POST" action="{{ route('directorate.save') }}" class="col-md-6">
                     @csrf

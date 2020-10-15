@@ -13,9 +13,9 @@ Assessment form
       <div class="col">
 
         @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB'))
-          <h5 ><b style="text-transform: capitalize;">Assessment form for Paid companies</b></h5>
+          <h5 ><b >Assessment Form for Paid Companies</b></h5>
          @else
-             <h5 ><b style="text-transform: capitalize;">Approved assessment forms </b></h5>
+             <h5 ><b style="text-transform: capitalize;">Approved Assessment Forms </b></h5>
 
          @endif
 

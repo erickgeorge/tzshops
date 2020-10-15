@@ -17,7 +17,7 @@
     <br>
     <div class="row container-fluid" style=" margin-left: 4%; margin-right: 4%;">
          <div class="container">
-            <h5 style="text-transform: capitalize;"><b>Accepted works order in  @if(auth()->user()->type == 'Maintenance coordinator')
+            <h5 ><b>Accepted Works Order in  @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
 <?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
@@ -749,7 +749,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                 <div class="modal-footer">
                 </div>
 
-         <button style="text-transform: capitalize;" type="submit" class="btn btn-primary ">Send to Head of Section</button>
+         <button type="submit" class="btn btn-primary ">Send to Head of Section</button>
     </form>
             </div>
         </div>

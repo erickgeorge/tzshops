@@ -29,7 +29,7 @@ Area
 
     <div>
 <br><br>
-                <h4 
+                <h4
                     >List of Available Areas</h4></div>
 
 
@@ -62,7 +62,7 @@ Area
                         <tr>
                             <th scope="row">{{ $i }}</th>
 
-                            <td><?php echo ucwords(strtolower( $dep->name_of_area )); ?></td>
+                            <td><?php echo $dep->name_of_area; ?></td>
                             <td><?php echo ucwords(strtolower( $dep['location']->name )); ?></td>
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;
@@ -105,7 +105,7 @@ Area
 
                 </div>
 
-               
+
                     <div class="modal-body">
                          <form method="POST" action="edit/Areass" class="col">
 
@@ -132,7 +132,7 @@ Area
                           </form>
 
                     </div>
-          
+
 
 
                 <div class="modal-footer">

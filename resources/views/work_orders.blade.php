@@ -74,7 +74,7 @@ use Carbon\Carbon;
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-primary">Create new works order</button>
+                <button style="margin-bottom: 20px" type="button" class="btn btn-primary">Create New Works Order</button>
             </a>
         </div>
 
@@ -847,19 +847,19 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         <div class="row ">
         <div class="col">
             <a href="{{url('createworkorders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-primary">Create new works order</button>
+                <button style="margin-bottom: 20px" type="button" class="btn btn-primary">Create New Works Order</button>
             </a>
         </div>
          <div class="col">
             <a href="{{url('completed_works_order')}} ">
-                <button  type="button" class="btn btn-success">Completed works orders
+                <button  type="button" class="btn btn-success">Completed Works Orders
                 </button>
             </a>
         </div>
 
         <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">Rejected works orders
+                <button style="margin-bottom: 20px; text-transform:capitalize;" type="button" class="btn btn-danger">Rejected works orders
                 </button>
             </a>
         </div>

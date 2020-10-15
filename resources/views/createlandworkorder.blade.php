@@ -8,7 +8,7 @@
     <br>
     <div class="row" style=" margin-left:2%; margin-right:2%;">
         <div class="col-md-8">
-            <h5 style="text-transform: capitalize;" >Create new works order for landscaping</h5>
+            <h5  >Create New Works Order for Landscaping</h5>
         </div>
     </div>
     <hr>

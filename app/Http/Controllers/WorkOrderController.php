@@ -283,7 +283,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         }
 
         if ($wO->emergency == 0) {
-      
+
                 $data = array('name'=>$userName, "body" => "Your works order sent to Directorate of Estates Services on $createddate, of  Problem Type $wO->problem_type has been ACCEPTED as NOT EMERGENCY, and  given identification number 00$wO->id. Please login in the system so as to know the progress of your works order .",
 
                     "footer"=>"Thanks", "footer1"=>" $sender " , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
@@ -1619,8 +1619,9 @@ session::flash('message', ' Your workorder have been closed successfully');
         if(request()->has('start') && request()->has('end') )  {
 
 
-            $from=request('start');
-            $to=request('end');
+
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
             if(request('start')>request('end')){
                 $to=request('start');

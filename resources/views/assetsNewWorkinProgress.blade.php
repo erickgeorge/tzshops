@@ -8,7 +8,7 @@ New Work in Progress Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: capitalize;">Add New Work in Progress Asset</b></h5>
+            <h5><b >Add New Work in Progress Asset</b></h5>
         </div>
     </div>
     <hr class="container">

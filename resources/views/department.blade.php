@@ -31,8 +31,7 @@ use app\department;
     @endif
 
        @if(count($directorates)>0)
-               <h5 style="text-transform: capitalize;"
-                   class="btn btn-default">List of Departments</h5>
+               <h5  class="btn btn-default">List of Departments</h5>
 
 
 

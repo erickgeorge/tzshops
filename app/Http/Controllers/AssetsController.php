@@ -341,8 +341,9 @@ class AssetsController extends Controller
             if(request()->has('start'))  { //date filter
 
 
-        $from=request('start');
-        $to=request('end');
+
+                $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+                $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
@@ -375,7 +376,7 @@ class AssetsController extends Controller
 
           ]);
 
-         
+
 
          }
          else{
@@ -415,8 +416,9 @@ class AssetsController extends Controller
             if(request()->has('start'))  { //date filter
 
 
-        $from=request('start');
-        $to=request('end');
+
+                $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+                $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
@@ -497,8 +499,9 @@ class AssetsController extends Controller
 
         $to=$nextday;
         if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
+
         }// start> end
 
 

@@ -9,7 +9,7 @@
     <br>
     <div >
         <div class="container">
-            <h5 style=" " ><b style="text-transform: capitalize;">List of zones and total locations with works order  </b></h5>
+            <h5 style=" " ><b >List of Zones and Total Locations with Works Order  </b></h5>
         </div>
 
 

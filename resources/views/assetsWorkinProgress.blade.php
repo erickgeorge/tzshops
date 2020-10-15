@@ -11,7 +11,7 @@ Work in Progress
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col-md-6">
-            <h5><b style="text-transform: capitalize;">Works in Progress</b></h5>
+            <h5><b>Works in Progress</b></h5>
         </div>
     </div>
     <hr class="container">

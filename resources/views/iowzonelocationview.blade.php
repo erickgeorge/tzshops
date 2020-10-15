@@ -31,7 +31,7 @@ IoW Zones
  @if(count($iowzone)>0)
   @foreach($iowzone as $zone)
   @endforeach
-                <h5 style="text-transform: capitalize;">List of locations available for {{$zoneyake}}</h5>
+                <h5  >List of Locations Available for {{$zoneyake}}</h5>
 
 
             <hr class="container">

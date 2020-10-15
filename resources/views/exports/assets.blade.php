@@ -26,8 +26,8 @@ tr:nth-child(even) {
         </tr>
         <tr>
             <th colspan="12">
-                <h1 style="text-transform: capitalize;">
-                    DIRECTORATE OF ESTATES SERVICES
+                <h1 >
+                    Directorate of Estates Services
                 </h1>
             </th>
         </tr>

@@ -10,7 +10,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5 style="text-transform: capitalize;" ><b style="text-transform: uppercase;">Room report - Area/College/Directorate</b></h5>
+            <h5 style="text-transform: capitalize;" ><b style="text-transform: uppercase;">Room Report - Area/College/Directorate</b></h5>
         </div>
 
         @if(count($wo) > 0)

@@ -20,7 +20,7 @@
     <br>
     <div >
         <div class="col-lg-12">
-            <h5 style=" "  class="container"><b style="text-transform: capitalize;">Technicians with Works Order on Progress</b></h5>
+            <h5 style=" "  class="container"><b  >Technicians With Works Order on Progress</b></h5>
         </div>
 
         <!--<div class="col-md-6" align="right">

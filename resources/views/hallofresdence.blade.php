@@ -18,7 +18,7 @@
 
 
 
-        <h5 style="text-transform: capitalize;" ><b style="text-transform: capitalize;">Available Hall of Resdences </b></h5>
+        <h5 ><b >Available Hall of Residences </b></h5>
                   <hr>
                 <a href="{{ route('registerhall') }}"
                    class="btn btn-primary">Add new Hall of Resdence</a>

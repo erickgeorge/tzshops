@@ -1141,7 +1141,7 @@ td, th {
 @if ($wo->systemclosed!=0)
 <br>
 
-            <h4 style="text-transform: capitalize;">This Works Order Was Closed Automatically by a system due to a Customer delay of closing for 7 days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </h4>
+            <h4  >This Works Order Was Closed Automatically by a System Due to a Customer Delay of Closing for 7 Days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </h4>
 
 @elseif($wo->status == 30)
 <br>

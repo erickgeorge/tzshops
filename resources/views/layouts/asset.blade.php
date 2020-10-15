@@ -822,7 +822,7 @@
     <a  href="{{ url('assetsBuilding')}}">Buildings</a>
     <a  href="{{ url('assetsPlantMachinery')}}">Plant & Machinery</a>
     <a  href="{{ url('assetsMotorVehicle')}}"> Motor Vehicles</a>
-    <a  href="{{ url('assetsComputerEquipment')}}">Computer Equipments</a>
+    <a  href="{{ url('assetsComputerEquipment')}}">Computer Equipment</a>
     <a  href="{{ url('assetsEquipment')}}">Equipment</a>
     <a  href="{{ url('assetsFurniture')}}">Furniture</a>
     <a  href="{{ url('assetsWorkinProgress')}}">Work in Progress</a>

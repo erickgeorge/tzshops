@@ -14,7 +14,7 @@
 
 <div id="div_print">
      <div class="container">
-            <h5 style=" "><b style="text-transform: capitalize;">Available Materials in Store </b></h5>
+            <h5 style=" "><b  >Available Materials in Store </b></h5>
              <hr>
         </div>
     <br>

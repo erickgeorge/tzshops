@@ -825,7 +825,7 @@ use App\Section;
                 <div class="form-group">
                     <label for="my-input">Filter By Department</label>
                   <select  style="color: black;"  class="custom-select" name="dep" id="department"  value="{{ old('department') }}">
-                 <option selected value="" >All Directorates</option>
+                 <option selected value="" >All Departments</option>
             </select>
                 </div>
                 <div class="form-group">

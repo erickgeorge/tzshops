@@ -27,8 +27,8 @@ Maintainance section
         </div>
     @endif
 
-                <h5 style="  margin-bottom: 20px; text-transform: capitalize;"
-                   class="btn btn-default" >List of available Sections</h5>
+                <h5 style="  margin-bottom: 20px;  "
+                   class="btn btn-default" >List of Available Sections</h5>
 
 
 

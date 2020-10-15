@@ -59,6 +59,7 @@ else {
 
    ?>
     @foreach($display_users as $user)
+  
     <tr>
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>

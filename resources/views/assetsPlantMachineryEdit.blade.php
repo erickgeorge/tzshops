@@ -11,7 +11,7 @@ Edit Plant And Machinery Asset
 <div class="container"><br>
     <div class="row container-fluid" >
         <div class="col">
-            <h5><b style="text-transform: capitalize;">Edit Plant And Machinery Asset</b></h5>
+            <h5><b >Edit Plant and Machinery Asset</b></h5>
         </div>
     </div>
     <hr class="container">

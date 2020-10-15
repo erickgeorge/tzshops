@@ -5,7 +5,7 @@ Company report
 @section('body')
 <br>
 <div class="container">
-<h5 style="text-transform: capitalize;"><b>Trending Score For "{{$compa}}" With Different Months </B>
+<h5 ><b>Trending Score For "{{$compa}}" With Different Months </B>
  </h5>
 <hr>
 

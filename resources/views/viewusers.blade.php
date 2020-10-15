@@ -685,7 +685,7 @@ use App\Department;
 use App\Section;
  ?>
 
-<?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>  
+<?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>
 
  @if($role['user_role']['role_id'] == 1)
 <br>
@@ -733,7 +733,7 @@ use App\Section;
       </div>
       <div class="col-md-6">
     <a href="{{route('deactivatedusers')}}" class="btn btn-info">Deactivated Users</a>
-    
+
     </div>
 @if(!$display_users->isEmpty())
 
@@ -829,14 +829,14 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-               
+
 
 
             <select  style="color: black; " class="custom-select" name="directorate" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
                 <option selected="selected" value="">Select Directorate</option>
                 <option selected value="" >All Directorates</option>
               @foreach($directoratenew as $directorate)
-              <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+              <option value="{{ $directorate->id }}">{{ $directorate->name . $directorate->directorate_description }}</option>
               @endforeach
             </select>
 
@@ -850,9 +850,22 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-              <select  style="color: black;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
-                 <option selected value="" >All Directorates</option>
-            </select>
+             <select name="department" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select Department</option>
+                    <option value="">All Departments</option>
+                    <?php
+                    $departmen  = department::orderBy('name','ASC')->get();
+    foreach($departmen  as $departm )
+    {
+
+        $director  = directorate::where('id',$departm ->directorate_id)->get();
+        foreach($director  as $director ){?>
+<option value="{{ $departm ->id }} ">  {{ $departm ->description }} - {{ $director ->name }}</option>
+        <?php }
+    }
+                   ?>
+
+                </select>
             </div>
         </div>
       </div>
@@ -1633,7 +1646,7 @@ for (i = 0; i < dropdown.length; i++) {
 
 
 <script type="text/javascript">
-  
+
 
 var selecteddep = null;
 var selectedsection = null;

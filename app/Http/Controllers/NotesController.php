@@ -564,7 +564,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
 
 
     public function userspdf(){
-
+$data['nexted'] = 0;
      $data['title'] = 'Notes List';
      ///////////////////////////////////////
      if($_GET['college']!=''){
@@ -632,6 +632,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         Where('id',$_GET['college'])->
         Where('type',$_GET['type'])->orderBy('fname','asc')->get();
     }
+
 
     if (($_GET['type']=='')&&($_GET['college']=='')&&($_GET['directorate']=='')&&($_GET['department']!='')) {
 
@@ -878,8 +879,9 @@ return $pdf->stream(''.$data['header'].' -  '.date('d-m-Y Hi').'.pdf');
             if(request()->has('start') && request()->has('end') )  {
 
 
-        $_GET['userid']=request('start');
-        $to=request('end');
+
+                $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+                $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
         if(request('start')>request('end')){
             $to=request('start');
@@ -1460,16 +1462,18 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
          if($request['start'] and $request['end']){
 
 
-        $from=request('start');
-        $to=request('end');
+      
+            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
+           
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
 
 
@@ -1736,16 +1740,18 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
            if($request['start'] and $request['end'])  { //date filter
 
 
-        $from=request('start');
-        $to=request('end');
+       
+            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
+           
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
 
 
@@ -2403,15 +2409,17 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
            if($request['start'] and $request['end'])  { //date filter
 
 
-        $from=request('start');
-        $to=request('end');
+       
+            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
+           
+        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
+        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
         }// start> end
 
 
@@ -2807,11 +2815,11 @@ public function exportdeactivatedtechs()
 
         return redirect()->back()->withErrors(['message' => 'No data Found Matching your Filter ']);
         }else{
-        
+
         $pdf = PDF::loadView('allreport', $data);
         return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }
-        
+
     } else {
         return redirect()->back();
     }
@@ -2847,14 +2855,14 @@ public function exportdeactivatedusers()
         if($data['display_users'] ->isEmpty()){
 
             return redirect()->back()->withErrors(['message' => 'No data Found For Your Search :'.$data['header'].'']);
-           
+
            }else{
-           
+
            $pdf = PDF::loadView('users_pdf', $data);
-           
+
            return $pdf->stream(''.$data['header'].' '.date('d-m-Y Hi').'.pdf');
                }
-        
+
     }else {
         return redirect()->back();
     }
