@@ -417,12 +417,6 @@ class UserController extends Controller
        }
 
 
-
-
-
-
-
-
         $user = User::find(auth()->user()->id);
         if (Hash::check($request['old-pass'], Auth::User()->password)){
             $user->password = bcrypt($request['new-pass']);

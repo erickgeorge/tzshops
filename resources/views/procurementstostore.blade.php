@@ -61,7 +61,7 @@ Add New Procured Material
         <div class="row">
 
 			<div class="col">
-				<button id="bt" type="submit" class="btn btn-primary" disabled>Submit</button>&nbsp;<a href="{{ url('ProcurementHistory') }}" class="btn btn-danger">Cancel</a>
+				<button id="bt" type="submit" class="btn btn-primary" disabled>Save</button>&nbsp;<a href="{{ url('ProcurementHistory') }}" class="btn btn-danger">Cancel</a>
 			</div>
 		</div>
     </p>

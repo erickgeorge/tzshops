@@ -212,7 +212,7 @@ var total=2;
                    <div class="input-group-prepend">
                        <label style="height: 28px;" class="input-group-text" for="inputGroupSelect01">Zone, Location</label>
                    </div>
-                   <select style="width: 350px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
+                   <select style="width: 550px;" required class="custom-select" id="iowzone" name="location" @if($wo->zone_location != null) disabled @endif>
 
                      @if($wo->zonelocationtwo != null) <?php
                            $zonelocation = iowzonelocation::where('id',$wo->zonelocationtwo)->first();
@@ -442,7 +442,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @foreach($iformsbefore as $iformb)
   @endforeach
 
- <h4><b>Inspection Report Before Work , Reported on: {{ date('d F Y', strtotime($iformb->date_inspected )) }} </b></h4>
+ <h4><b>Inspection Report Before Work , Prepared on: {{ date('d F Y', strtotime($iformb->date_inspected )) }} </b></h4>
 
     <div class="form-group ">
         <label for="">Description:</label>
@@ -833,7 +833,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @foreach($iforms as $iform)
   @endforeach
 
- <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
+ <h4><b>Report after Work , Prepared on: {{ date('d F Y', strtotime($iform->date_inspected )) }} </b></h4>
 
  <div class="form-group ">
         <label for="">Description:</label>
@@ -1128,7 +1128,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   @foreach($report as $rp)
   @endforeach
 
- <h4><b>Report after Work , Reported on: {{ date('d F Y', strtotime($rp->date_inspected )) }} </b></h4>
+ <h4><b>Report after Work , Prepared on: {{ date('d F Y', strtotime($rp->date_inspected )) }} </b></h4>
 
  <div class="form-group ">
         <label for="">Description:</label>

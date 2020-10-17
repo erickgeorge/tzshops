@@ -892,7 +892,7 @@ use App\Section;
         <div class="row">
             <div class="col">
                  <select  style="color: black;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
-                 <option selected value="" >All Directorates</option>
+                 <option selected value="" >All Departments</option>
             </select>
             </div>
         </div>

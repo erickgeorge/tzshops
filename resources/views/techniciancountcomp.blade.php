@@ -11,19 +11,20 @@
 
     </style>
 @section('title')
-    works orders vs Technician count
+    works orders vs technician count
     @endSection
 
 @section('body')
 
  @if(count($wo) > 0)
     <br>
-    <div class="row container-fluid ">
-        <div class="col-lg-12">
-           <h5 style=" " class="container"><b style="text-transform: capitalize;">Available Technicians Completed their works orders</b></h5>
+    <div class="container">
+    <div class="row ">
+        <div class="coL">
+           <h5 style=" " class="container"><b>List of Technicians with completed Works Orders</b></h5>
         </div>
         @if(count($wo) > 0)
-        <div class="col-md-6">
+        <div class="col">
             <form method="GET" action="" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
@@ -73,7 +74,7 @@
                 <thead >
                <tr style="color: white;">
 
-					<th>Technician name</th>
+					<th>Technician Name</th>
                     <th>Total Works orders Completed</th>
 
                 </tr>

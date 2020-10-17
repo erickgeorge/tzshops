@@ -14,7 +14,7 @@
 
     <div class="row container-fluid" style="margin-top: 6%;">
         <div class="col-lg-12">
-            <h5 style="text-transform: capitalize;" ><b >Its your first time to log in into the system please change your password</b></h5>
+            <h5 ><b >Please Change Your Password as It is Your First Time To log In.</b></h5>
         </div>
     </div>
     <hr>
@@ -37,7 +37,7 @@
 
 
         <div style="text-align: center" >
-        <p style="color: red">All fields are compulsory</p>
+        <!--<p style="color: red">All fields are compulsory</p>-->
 
         <form action="{{ route('password.change') }}" method="POST">
             @csrf
@@ -48,34 +48,39 @@
                <span class="input-group-text " id="basic-addon1" style="width: 180px">Old Password <sup style="color: red;">*</sup></span>
            </div>
                <input type="password" required class="form-control col-md-4" id="old-pass" name="old-pass"
-                       placeholder="Enter old password" value="{{ old('old-pass') }}">
+                       placeholder="Enter old Password" value="{{ old('old-pass') }}">
            </div>
 
 
            <div class="input-group mb-3">
            <div class="input-group-prepend">
-               <span class="input-group-text" id="basic-addon1" style="width: 180px;">New password <sup style="color: red;">*</sup></span>
+               <span class="input-group-text" id="basic-addon1" style="width: 180px;">New Password <sup style="color: red;">*</sup></span>
            </div>
               <input type="password" required class="form-control col-md-4" id="new-pass" name="new-pass"
-                        value="{{ old('new-pass') }}"  maxlength="15"  minlength="8" placeholder="Must 8 characters minimum">
+                        value="{{ old('new-pass') }}"  maxlength="15"  minlength="8" placeholder="Enter new Password. (Min 8 Chars) ">
            </div>
 
 
            <div class="input-group mb-3">
            <div class="input-group-prepend">
-               <span class="input-group-text" id="basic-addon1" style="width: 180px">Confirm password <sup style="color: red;">*</sup></span>
+               <span class="input-group-text" id="basic-addon1" style="width: 180px">Confirm Password <sup style="color: red;">*</sup></span>
            </div>
              <input  type="password" required class="form-control col-md-4" id="confirm-pass" name="confirm-pass"
-                      value="{{ old('confirm-pass') }}" maxlength="15"  minlength="8" placeholder=" Must 8 characters minimum" >
+                      value="{{ old('confirm-pass') }}" maxlength="15"  minlength="8" placeholder="Confirm Password.  (Min 8 Chars)   " >
            </div>
 
+  </div>
 
-            <button type="submit" class="btn btn-primary">Change password</button>
+</div>
+             <div style="padding-left: 300px;">
+            <button  type="submit" class="btn btn-primary">Change Password</button>
+            </div>
+
 
             <!--<a href="{{ url('/') }}" style="background-color:#F9B100;border-color:#F9B100;" class="btn btn-danger">Cancel</a>-->
 
         </form>
-        </div>
+      
 
 
 

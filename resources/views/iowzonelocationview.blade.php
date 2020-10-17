@@ -37,7 +37,7 @@ IoW Zones
             <hr class="container">
 
             <a href="{{ route('add.iowzone.location',[$userid->id , $userzone->zone])}}" style="margin-bottom: 20px;"
-                   class="btn btn-primary">Add new Location</a>
+                   class="btn btn-primary">Add New Location</a>
 
                    <a href="{{ url('iowwithlocation',[$userid->id])}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
