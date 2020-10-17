@@ -65,7 +65,7 @@ Rooms
 
                             <td><?php echo ucwords(strtolower( $dep->name_of_room)); ?></td>
                              <td><?php echo ucwords(strtolower( $dep['block']->name_of_block)); ?></td>
-                               <td><?php echo ucwords(strtolower( $dep['area']->name_of_area)); ?></td>
+                               <td>{{ $dep['area']->name_of_area }}</td>
 
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;

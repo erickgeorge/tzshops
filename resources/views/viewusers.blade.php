@@ -700,7 +700,7 @@ use App\Section;
 <br>
 <div class="row container-fluid" >
   <div class="col">
-    <h5 style=" text-transform: capitalize;">Available Registered Users - <b> All Users</b></h5>
+    <h5 style=" text-transform: capitalize;">Registered Users - <b> All Users</b></h5>
 
 
   </div>

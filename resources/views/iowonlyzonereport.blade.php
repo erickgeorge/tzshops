@@ -4,7 +4,7 @@
     <div style="background-image: url('img_girl.jpg');">
 
 
-    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of zones available at ESTATE</b></p>
+    <p><h4>Directorate of Estates Services</h4></p><p><b style="text-transform: uppercase;">List of zones available at ESTATES</b></p>
 </div><br>
 
 <style>

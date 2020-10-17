@@ -32,7 +32,7 @@
 
        <div class="row">
       <div class="col">
-            <h5 ><b >Tenders with Days Reached for Assessment</b></h5>
+            <h5 ><b >Tenders Due for Assessment</b></h5>
 
         </div>
 

@@ -22,7 +22,6 @@ User Registration
 
 		}
 
-
  </style>
 <br>
 <div class="container">

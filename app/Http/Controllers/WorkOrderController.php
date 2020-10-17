@@ -1696,7 +1696,7 @@ session::flash('message', ' Your workorder have been closed successfully');
     else{
         $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
-
+   
 
        return view('onprocessworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
 

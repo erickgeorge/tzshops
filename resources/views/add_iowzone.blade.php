@@ -23,13 +23,13 @@
             </ul>
         </div>
     @endif
-                <h5 style="text-transform: capitalize;"  id="new_dep">Add new iow zone</h5>
+                <h5 style="text-transform: capitalize;"  id="new_dep">Add new Zone</h5>
                 <hr>
                 <form method="POST" action="{{ route('iowzone.save') }}" class="col-md-6">
                     @csrf
 
                     <div class="form-group ">
-                        <label for="dep_name" style="color: black;">IoW zone Name</label>
+                        <label for="dep_name" style="color: black;">Zone Name</label>
                         <input style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "30"
                                name="zonename" placeholder="Enter Zone Name ">
                     </div>

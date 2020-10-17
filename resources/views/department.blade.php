@@ -8,7 +8,10 @@ Department
 <?php
 use app\directorate;
 use app\department;
+ $directorate = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get();
 ?>
+
+
 
 <div class="container" >
 
@@ -41,7 +44,7 @@ use app\department;
             <a href="Add/department" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add New Department</a>
                    <a href="" data-toggle="modal" data-target="#exampleModal" style="margin-bottom: 20px; float:right;"
-                   class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                   class="btn btn-primary">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
 
@@ -59,27 +62,19 @@ use app\department;
 
                         <div class="modal-body">
                             <label>Choose College</label>
-                            <select class="form-control" name="college">
-                                <option value="">All Colleges</option>
-                                <?php
-                                $colle = directorate::get();
-                                ?>
-                                @foreach ($colle as $colle)
-                              <option value="{{ $colle->id }}">{{ $colle->directorate_description }} - {{$colle->name}}</option>
-                          @endforeach
-                            </select>
+                            <br>
+                               <select   style="color: black; " class="custom-select" name="college" id="irectorate" onchange="getDepartmentss()" value="{{ old('directorate') }}">
+                <option selected value="" >Choose...</option>
+              @foreach($directorates as $directorate)
+              <option value="{{ $directorate->id }}">{{ '('.$directorate->name . ') ' . $directorate->directorate_description }}</option>
+              @endforeach
+            </select>
                           </div>
                           <div class="modal-body">
                             <label>Choose Department</label><br>
-                          <select class="form-control" name="department">
-                            <option value="">All Departments</option>
-                            <?php
-                            $dept = department::get();                            ?>
-
-                          @foreach ($dept as $dept)
-                              <option value="{{ $dept->id }}">{{ $dept->description }} - {{$dept->name}}</option>
-                          @endforeach
-                          </select>
+                         <select style="color: black;"  class="custom-select" name="department" id="epartment"  value="{{ old('department') }}">
+                          <option selected value="" >Choose...</option>
+                         </select>
                         </div>
 
                         <div class="modal-footer">
@@ -275,38 +270,45 @@ use app\department;
 
 
 
-		var selecteddep = null;
+
+    </script>
+
+
+    <script type="text/javascript">
+      
+      var selecteddep = null;
 var selectedsection = null;
-function getDepartments(){
-	selecteddep = document.getElementById('directoratte').value;
 
-    console.log('ID: '+selecteddep);
-	$.ajax({
-		method: 'GET',
-		url: 'departments/',
-		data: {id: selecteddep}
-	})
-	.done(function(msg){
-        console.log(msg['departments']);
-		var object = JSON.parse(JSON.stringify(msg['departments']));
-		$('#department').empty();
+function getDepartmentss() {
+    selecteddep = document.getElementById('irectorate').value;
 
-		var option = document.createElement('option');
-			option.innerHTML = 'Choose...';
-			option.value = '';
-			document.getElementById('department').appendChild(option);
+    console.log('ID: ' + selecteddep);
+    $.ajax({
+            method: 'GET',
+            url: 'departments/',
+            data: { id: selecteddep }
+        })
+        .done(function(msg) {
+            console.log(msg['departments']);
+            var object = JSON.parse(JSON.stringify(msg['departments']));
+            $('#epartment').empty();
+
+            var option = document.createElement('option');
+            option.innerHTML = 'Choose...';
+            option.value = '';
+            document.getElementById('epartment').appendChild(option);
 
 
 
-		for (var i = 0; i < object.length; i++) {
-			var option = document.createElement('option');
-			option.innerHTML = object[i].description;
-			option.value = object[i].id;
-			document.getElementById('department').appendChild(option);
-		}
-	});
+
+            for (var i = 0; i < object.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = object[i].description;
+                option.value = object[i].id;
+                document.getElementById('epartment').appendChild(option);
+            }
+        });
 }
-
 
     </script>
 

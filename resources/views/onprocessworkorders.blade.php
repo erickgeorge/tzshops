@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    On Process Work Orders
+    On Progress Works Orders
     @endSection
 <?php
 	use App\iowzonelocation;
@@ -17,13 +17,13 @@
     <br>
     <div class="row container" style=" margin-left: 4%; margin-right: 4%;">
          <div class="col">
-            <h5 ><b>On Progress works Order in  @if(auth()->user()->type == 'Maintenance coordinator')
+            <h5 ><b>On Progress Works Orders in  @if(auth()->user()->type == 'Maintenance coordinator')
 <?php $locname = iowzone::where('id',$_GET['zone'])->first(); echo $locname['zonename']; ?> @else
 <?php $locname = iowzone::where('id',$workszon['zone'])->first(); echo $locname['zonename']; ?> @endif</b></h5>
         </div>
 @if(count($locations) > 0)
         <div class="col-md-6">
-            <form method="GET" action="" class="form-inline my-2 my-lg-0">
+            <form method="GET" action="onprocessworkorders" class="form-inline my-2 my-lg-0">
                 From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];

@@ -234,7 +234,7 @@
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
+               <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
@@ -441,7 +441,7 @@
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
 
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorates</a>
-               <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
+               <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
@@ -861,7 +861,7 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="{{ url('/alltechnicians')}}">All technicians details</a>
+    <a href="{{ url('/alltechnicians')}}">All Technicians Details</a>
     <a href="{{ url('/techniciancount')}}">Technicians with WO on Progress</a>
     <a href="{{ url('/techniciancountcomp')}}">Technicians completed work</a>
   </div>

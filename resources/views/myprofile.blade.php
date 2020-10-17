@@ -134,10 +134,9 @@ padding: 20 20 20 20;
 
 
 	 <div>
-        <br>
-        <br>
-        <br>
-			<a href="/changeprofile"  class="btn btn-primary">Edit profile</a>
+
+    
+			<a href="/changeprofile"  class="btn btn-primary">Edit Profile</a>
 
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
         </form>

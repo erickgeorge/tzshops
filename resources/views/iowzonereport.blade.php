@@ -20,9 +20,7 @@ td, th {
   text-align: left;
   padding: 8px;
 }
-.nameee{
-    text-transform:uppercase;
-}
+
 
 tr:nth-child(even) {
   background-color: #dddddd;
@@ -37,7 +35,7 @@ tr:nth-child(even) {
     <tr>
                     <th>#</th>
                     <th>Name of zone</th>
-                    <th>Inspector of work</th>
+                    <th>Inspector of works</th>
 
 
     </tr>
@@ -49,7 +47,7 @@ tr:nth-child(even) {
                         <tr>
                        <?php $i++;?>
                         <td>{{$i}}</td>
-                       <td class="nameee"> {{$sect->zone}}</td>
+                       <td class="nameee">{{ ucwords(strtolower($sect->zone)) }}</td>
                             <td> @php
                                 $him = User::where('zone', $sect->zone)->get();
                              @endphp @foreach ($him as $him)

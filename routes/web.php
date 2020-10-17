@@ -137,7 +137,7 @@ Route::get('rooms', 'UserController@getRooms')->name('rooms.view')->middleware('
 Route::get('sections', 'UserController@getSections')->name('departments.view')->middleware('auth');
 Route::get('edit/user/view/{id}', 'UserController@editUserView')->name('user.edit.view')->middleware('auth');
 Route::get('assign/iow/zone/{id}', 'UserController@assigniowzoneview')->name('iow.assign.zone')->middleware('auth');
-Route::get('Manage/department', 'DirectorateController@departmentsView')->name('dipartment.manage')->middleware('auth');
+Route::get('/Manage_departments', 'DirectorateController@departmentsView')->name('dipartment.manage')->middleware('auth');
 Route::get('Manage/locations', 'DirectorateController@LocationView')->name('location.manage')->middleware('auth');
 Route::get('Manage/Blocks', 'DirectorateController@BlocksView')->name('Blocks.manage')->middleware('auth');
 Route::get('Manage/Areas', 'DirectorateController@AreasView')->name('Areas.manage')->middleware('auth');

@@ -9,7 +9,7 @@
 
     <p><h4>Directorate of Estates Services</h4></p>
     <p><b style="text-transform: uppercase;">
-        List of available location for {{ $iow['iow']->zone  }} </b></p>
+        List of available locations for {{ $iow['iow']->zone  }} </b></p>
 </div><br>
 
 <style>
@@ -23,9 +23,7 @@ td, th {
   text-align: left;
   padding: 8px;
 }
-.nameee{
-    text-transform:uppercase;
-}
+
 
 tr:nth-child(even) {
   background-color: #dddddd;
@@ -52,7 +50,7 @@ tr:nth-child(even) {
                         <tr>
                        <?php $i++;?>
                         <td>{{$i}}</td>
-                       <td class="nameee"> {{$sect->location}}</td>
+                       <td class="nameee"><?php echo ucwords(strtolower( $sect->location )); ?></td>
 
                        </tr>
                         @endforeach

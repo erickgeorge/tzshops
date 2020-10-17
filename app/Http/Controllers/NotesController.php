@@ -577,7 +577,7 @@ $data['nexted'] = 0;
         if ( $usedid['id']==$_GET['college'])
         {$username = $usedid['fname'].' '.$usedid['lname']; }
       }
-      }else{$username = 'All';}
+      }else{$username = ' ';}
       if($_GET['type']!=''){$type=' '.$_GET['type'].' Details Report';}else{$type=' User Report';}
       //////////////////////////////////////////
      $data['header'] = $username.''.$type;
@@ -1233,7 +1233,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
      if($_GET['college']=='')
      {
         $data['catch'] = directorate::orderby('name','ASC')->get();
-        $data['header'] = 'All Colleges/Directorates/Institute/Schools Details';
+        $data['header'] = 'All Colleges/Directorates/Institutes/Schools Details';
      }
      if($_GET['college']!='')
      {

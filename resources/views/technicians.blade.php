@@ -238,9 +238,9 @@ foreach ($hoos as $hous) {
                     <div class="row">
                         <a style="color: green;" href="{{ route('tech.edit.view', [$tech->id]) }}"  data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
 
-                        <form  method="POST" onsubmit="return confirm('Are you sure you want to delete this Technician?')" action="{{ route('tech.delete', $tech->id) }}" >
+                        <form  method="POST" onsubmit="return confirm('Are you sure you want to deactivate this Technician?')" action="{{ route('tech.delete', $tech->id) }}" >
                             {{csrf_field()}}
-                            <button type="submit" data-toggle="tooltip" title="Delete"> <a style="color: red;" href="" data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a></button>
+                            <button type="submit" data-toggle="tooltip" title="Deactivate"> <a style="color: red;" href="" data-toggle="tooltip" ><i class="fas fa-trash-alt"></i></a></button>
                         </form>
                     </div>
                 </td>

@@ -53,7 +53,7 @@
                     <label style="width:200px;" class="input-group-text" for="Email">New password <sup style="color: red;">*</sup> </label>
                   </div>
                   <input type="password" required class="form-control" id="new-pass" name="new-pass"
-                  placeholder="Enter new password">
+                  placeholder="Enter new password.  (Min 8 Chars) ">
                   </div>
                 </div>
 
@@ -63,14 +63,19 @@
                     <label style="width:200px;" class="input-group-text" for="Email">Confirm New password <sup style="color: red;">*</sup> </label>
                   </div>
                   <input type="password" required class="form-control" id="confirm-pass" name="confirm-pass"
-                       placeholder="Confirm password">
+                       placeholder="Confirm password.  (Min 8 Chars)   ">
                   </div>
                 </div>
+
+       </div>    
+       <div style="padding-left: 290px;">      
 
             <button type="submit" class="btn btn-primary">Change</button>
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
 
+        </div>     
+
         </form>
-    </div>
+  
     </div>
     @endSection
