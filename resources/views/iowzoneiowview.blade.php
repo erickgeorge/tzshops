@@ -62,6 +62,7 @@ IoW Zones
 
                             <td><?php echo ucwords(strtolower( $iow->zone )); ?></td>
                             <td> @php
+                                $hieim = User::where('zone', $iow->zone)->first();
                                $him = User::where('zone', $iow->zone)->get();
                             @endphp @foreach ($him as $him)
                                         {{$him->fname}} {{$him->mid_name}} {{$him->lname}} <br>
@@ -69,7 +70,7 @@ IoW Zones
                                             $gfd = $him->id;
                                         @endphp
                             @endforeach </td>
-                            <td><a class="btn btn-primary" href="{{route('view.location', [$gfd , $iow->zone])}}" >view</a></td>
+                            <td><a class="btn btn-primary" href="{{route('view.location', [$hieim['id'] , $iow->zone])}}" >view</a></td>
 
 
                         </tr>

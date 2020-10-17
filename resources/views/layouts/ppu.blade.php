@@ -230,7 +230,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
@@ -548,8 +548,8 @@ input[type="date"]::-webkit-datetime-edit-day-field{
 
 
 
-               @if(auth()->user()->type == 'CLIENT')
-                             <li class="nav-item">
+                @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
+                <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Work orders  </a>
                     </li>
                @endif
@@ -596,7 +596,7 @@ input[type="date"]::-webkit-datetime-edit-day-field{
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
