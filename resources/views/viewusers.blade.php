@@ -242,7 +242,7 @@ foreach ($woclo as $woclo) {
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
@@ -287,7 +287,7 @@ foreach ($woclo as $woclo) {
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
@@ -479,7 +479,7 @@ foreach ($woclo as $woclo) {
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
@@ -835,20 +835,22 @@ use App\Section;
 
 
 
+
       <div class="modal-body">
         <div class="row">
             <div class="col">
+                <select name="directorate" class="form-control mr-sm-2">
 
+                    <option selected value="">All Directorates</option>
+                    <?php
 
+                    $directoras = directorate::orderBy('name','ASC')->get();
+                    foreach($directoras as $directoras){?>
+              <option value="{{ $directoras->id }}">{{ '('.$directoras->name . ') ' . $directoras->directorate_description }}</option>
+              <?php }
+                               ?>
 
-            <select  style="color: black; " class="custom-select" name="directorate" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
-                <option selected="selected" value="">Select Directorate</option>
-                <option selected value="" >All Directorates</option>
-              @foreach($directoratenew as $directorate)
-              <option value="{{ $directorate->id }}">{{ $directorate->name . $directorate->directorate_description }}</option>
-              @endforeach
-            </select>
-
+                </select>
             </div>
         </div>
       </div>
@@ -856,7 +858,7 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-             <select name="department" class="form-control mr-sm-2">
+                <select name="department" class="form-control mr-sm-2">
                     <option selected="selected" value="">Select Department</option>
                     <option value="">All Departments</option>
                     <?php
@@ -875,58 +877,6 @@ use App\Section;
             </div>
         </div>
       </div>
-
-        <div class="modal-body">
-        <div class="row">
-            <div class="col">
-                <select name="college" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select name</option>
-                    <option value="">All users</option>
-        <?php
-  $userfetch = user::get();
-  foreach($userfetch as $userfetch)
-  {
-
-
-
-      $departmentor = department::where('id',$userfetch->section_id)->get();
-      foreach($departmentor as $departmentor)
-      {
-
-          $directora = directorate::where('id',$departmentor->directorate_id)->get();
-          foreach($directora as $directora){?>
-<option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->mid_name }} {{ $userfetch->lname }} - ( {{ $departmentor->name }}, {{ $directora->name }})</option>
-          <?php }
-      }
-
-
-  }
-        ?>
-
-
-                </select>
-            </div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-            <div class="col">
-                <select name="type" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select Type</option>
-                    <option value="">All Types</option>
-                    <?php
-                    $type = User::select('type')->distinct()->get();
-                    foreach ($type as $typed) {
-                      echo " <option  value='".$typed->type."'>".$typed->type."</option>";
-                    }
-                   ?>
-
-                </select>
-            </div>
-        </div>
-      </div>
-
-
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Export</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

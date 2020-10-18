@@ -1,5 +1,11 @@
 <title><?php
+
+use App\User;
+use App\Directorate;
+use App\Department;
+use App\Section;
     echo $header;
+    $dirsf = '';
      ?></title>
 <div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
@@ -45,6 +51,12 @@ tr:nth-child(even) {
   <tbody align="center">
   <?php
 
+if($_GET['directorate']!='')
+        {
+            $directora = Directorate::where('id',$_GET['directorate'])->first();
+            $dirsf = $directora->name;
+        }
+
  if (isset($_GET['page'])){
 if ($_GET['page']==1){
 
@@ -58,8 +70,9 @@ else {
  $i=1;
 
    ?>
-    @foreach($display_users as $user)
-  
+    @foreach($load as $user)
+    @if ($_GET['directorate']!='')
+    @if ( $user['department']['directorate']->name == $dirsf)
     <tr>
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
@@ -100,6 +113,49 @@ else {
 
       </td>
     </tr>
+    @endif
+    @else
+    <tr>
+        <th scope="row">{{ $i++ }}</th>
+        <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
+
+        <td><a style="color: #000;" href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
+
+
+
+         <td>
+
+        <?php $phonenumber = $user->phone;
+          if(substr($phonenumber,0,1) == '0'){
+
+            $phonreplaced = ltrim($phonenumber,'0');
+            echo '+255'.$phonreplaced;
+
+          }else { echo $user->phone;}
+
+        ?></td>
+
+        @if( $user->type == "Inspector Of Works")
+        <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
+
+        @else
+           @if(strpos( $user->type, "HOS") !== false)
+               <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>
+               @else
+                 <td style="text-transform: capitalize;">{{strtolower( $user->type) }} </td>
+               @endif
+
+        @endif
+
+
+
+           <td>{{ $user['department']['directorate']->name }}</td>
+          <td>{{ $user['department']->name }}</td>
+
+
+        </td>
+      </tr>
+    @endif
     @endforeach
   </tbody>
 

@@ -248,7 +248,7 @@ foreach ($woclo as $woclo) {
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
@@ -292,7 +292,7 @@ foreach ($woclo as $woclo) {
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
@@ -485,7 +485,7 @@ foreach ($woclo as $woclo) {
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
 
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
@@ -698,8 +698,8 @@ use App\Department;
 use App\Section;
  ?>
 
- <?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>  
- 
+ <?php  $directoratenew = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get(); ?>
+
  @if((auth()->user()->type == 'Estates Director')||@(auth()->user()->type == 'DVC Admin')||($role['user_role']['role_id'] == 1))
 <br>
 <div class="row container-fluid" >
@@ -793,7 +793,7 @@ use App\Section;
       </div>
       <div class="col-md-6">
     <a href="{{route('deactivatedusers')}}" class="btn btn-info">Deactivated Users</a>
-    
+
     </div>
 @if(!$display_users->isEmpty())
 
@@ -891,63 +891,25 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                 <select  style="color: black;"  class="custom-select" name="department" id="department"  value="{{ old('department') }}">
-                 <option selected value="" >All Departments</option>
-            </select>
-            </div>
-        </div>
-      </div>
-
-        <div class="modal-body">
-        <div class="row">
-            <div class="col">
-                <select name="college" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select name</option>
-                    <option value="">All users</option>
-        <?php
-                 $userfetch = user::get();
-  foreach($userfetch as $userfetch)
-  {
-
-
-
-      $departmentor = department::where('id',$userfetch->section_id)->get();
-      foreach($departmentor as $departmentor)
-      {
-
-          $directora = directorate::where('id',$departmentor->directorate_id)->get();
-          foreach($directora as $directora){?>
-<option value="{{ $userfetch->id }}">{{ $userfetch->fname }} {{ $userfetch->mid_name }} {{ $userfetch->lname }} - ( {{ $departmentor->name }}, {{ $directora->name }})</option>
-          <?php }
-      }
-
-
-  }
-        ?>
-
-
-                </select>
-            </div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-            <div class="col">
-                <select name="type" class="form-control mr-sm-2">
-                    <option selected="selected" value="">Select Type</option>
-                    <option value="">All Types</option>
+                <select name="department" class="form-control mr-sm-2">
+                    <option selected="selected" value="">Select Department</option>
+                    <option value="">All Departments</option>
                     <?php
-                    $type = User::select('type')->distinct()->get();
-                    foreach ($type as $typed) {
-                      echo " <option  value='".$typed->type."'>".$typed->type."</option>";
-                    }
+                    $departmen  = department::orderBy('name','ASC')->get();
+    foreach($departmen  as $departm )
+    {
+
+        $director  = directorate::where('id',$departm ->directorate_id)->get();
+        foreach($director  as $director ){?>
+<option value="{{ $departm ->id }} ">  {{ $departm ->description }} - {{ $director ->name }}</option>
+        <?php }
+    }
                    ?>
 
                 </select>
             </div>
         </div>
       </div>
-
 
 
       <div class="modal-footer">
@@ -1738,7 +1700,7 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 
 <script type="text/javascript">
-  
+
 
 var selecteddep = null;
 var selectedsection = null;
