@@ -1225,6 +1225,16 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </div>
 @endif
 
+    @if(auth()->user()->type == 'Inspector Of Works')
+
+    <div style="padding: 1em;">
+  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+</button></a>
+</div>
+
+    @endif
+
 
       
 

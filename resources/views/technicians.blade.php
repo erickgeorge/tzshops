@@ -186,6 +186,9 @@ foreach ($hoos as $hous) {
             <th scope="col">Full Name</th>
             <th title="phone" scope="col">Phone</th>
             <th scope="col">Email</th>
+            @if((auth()->user()->type == 'Estates Director'))
+              <th scope="col">Section</th>
+            @endif
             @if($role['user_role']['role_id'] != 1)
             @else
             <th scope="col">Section</th>@endif
@@ -231,6 +234,9 @@ foreach ($hoos as $hous) {
 
       ?></td>
                 <td>{{ $tech->email }}</td>
+               @if((auth()->user()->type == 'Estates Director'))
+              <td>{{ ucwords(strtolower($tech->type)) }}</td>
+            @endif
              @if($role['user_role']['role_id'] != 1)  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
                 @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
 

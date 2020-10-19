@@ -870,7 +870,7 @@
    <a  href="{{ url('/alliow')}}">Inspectors of Works</a>
 
 
-   <button  class="dropdown-btn">store
+   <button  class="dropdown-btn">Store
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">

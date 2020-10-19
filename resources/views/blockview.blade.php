@@ -63,7 +63,7 @@ Blocks
                             <th scope="row">{{ $i }}</th>
 
                             <td><?php echo ucwords(strtolower( $dep->name_of_block )); ?></td>
-                             <td><?php echo ucwords(strtolower( $dep['areas']->name_of_area )); ?></td>
+                             <td>{{ $dep['area']->name_of_area }}</td>
                                <td><?php echo ucwords(strtolower( $dep->location_of_block )); ?></td>
                          
                             <td>
