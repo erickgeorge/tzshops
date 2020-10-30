@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Material;
@@ -17,7 +17,7 @@ use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
 use App\Note;
 use App\MinuteSheet;
-
+use App\comment;
 use Redirect;
 use PDF;
 
@@ -35,7 +35,7 @@ class MinuteController extends Controller
             'notifications' => $notifications,
           ]);
     }
-        
+
 
 
 
@@ -68,7 +68,7 @@ $sheet = MinuteSheet::select('Woid')->distinct()->Where('Woid','<>',null)->Disti
         $conversation=MinuteSheet::where('Woid', $id)->get();
         $worked=MinuteSheet::Select('Woid')->distinct()->where('Woid', $id)->get();
         $last = MinuteSheet::where('Woid',$id)->OrderBy('id','DESC')->Limit(1)->get();
-        
+
         return view('conversation', [
             'notifications' => $notifications,
             'conversatt' => $conversation,
@@ -98,15 +98,15 @@ $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy
 $conversation=MinuteSheet::where('Woid', $request['id'])->get();
 $worked=MinuteSheet::Select('Woid')->distinct()->where('Woid', $request['id'])->get();
 $last = MinuteSheet::where('Woid',$request['id'])->OrderBy('id','DESC')->Limit(1)->get();
-        
+
         return view('conversation', ['notifications' => $notifications,'conversatt' => $conversation,'last'=>$last,'worked'=>$worked,'role' => $role,'message' => 'MinuteSheet created succesfully!'
         ]);
 
-       
+
     }
 
 
-    
+
 public function sminutesheet(){
     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
@@ -115,18 +115,42 @@ $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy
 'role' => $role]);
     }
 
-   /* public function closeminute($id)
-    {
-        $minute=MinuteSheet::Where('status',1)->where('Woid', $id)->get();
-        foreach( $minute as $minute )
-        { 
-            $minute->status ='2'; 
-            $minute->save();
-        }
-		  
-    }*/
+  public function readcomments()
+  {
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+$data = comment::orderBy('id','desc')->get();
+return view('sendcomments',['data'=>$data,'notifications' => $notifications,
+'role' => $role]);
+  }
+  public function viewcomments($id)
+  {
 
+  }
+  public function sendcomment(Request $request)
+  {
+      $data = new comment();
+      $data->sender = auth()->user()->id;
+      $data->comment = $request['message'];
+      $data->status = 0;
+      $data->save();
+
+      return redirect()->route('sendcomments')->with(['message'=>'We Have Received Your Comment/Feedback, Thankyou!']);
+  }
+  public function sendcomments()
+  {
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+$data = comment::where('sender',auth()->user()->id)->orderBy('id','desc')->get();
+return view('sendcomments',['data'=>$data,'notifications' => $notifications,
+'role' => $role]);
+  }
+  public function readcomment($id)
+  {
+
+  }
     }
 
 
 ?>
+

@@ -963,4 +963,7 @@ Route::get('activatetechnician/{id}','HomeController@activatetechnician')->name(
 Route::get('exportdeactivatedtechs','NotesController@exportdeactivatedtechs')->name('exportdeactivatedtechs')->middleware('auth');
 Route::get('exportdeactivatedusers','NotesController@exportdeactivatedusers')->name('exportdeactivatedusers')->middleware('auth');
 
+Route::get('readcomments','MinuteController@readcomments')->name('readcomments')->middleware('auth');
+Route::get('sendcomments','MinuteController@sendcomments')->name('sendcomments')->middleware('auth');
+Route::post('sendcomment','MinuteController@sendcomment')->name('sendcomment')->middleware('auth');
 //

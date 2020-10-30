@@ -237,7 +237,7 @@
                <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
         </div>
@@ -420,7 +420,7 @@
                   <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-                    </li> 
+                    </li>
 
                 @endif
 
@@ -540,7 +540,21 @@
              @endif
 
              @endforeach
+             <li class="nav-item">
+                <a @if ($role['user_role']['role_id'] == 1)
+                title="View Sent Comments"
+@else
+title="Send feedback/comment"
+                @endif  class="nav-link text-light"
 
+                @if ($role['user_role']['role_id'] == 1)
+                href="{{route('readcomments')}}"
+
+                @else
+                href="{{route('sendcomments')}}"
+                @endif
+               > <i class="fa fa-comment" aria-hidden="true"></i> </a>
+                </li>
 
              <li class="nav-item">
                 <a class="nav-link text-light" href="{{route('downloads')}}">  Documents </a>
@@ -1376,6 +1390,13 @@ for (i = 0; i < dropdown.length; i++) {
     $('#myTable').DataTable();
     $('#myTablee').DataTable();
     $('#myTableee').DataTable();
+
+    $('#myTableproc').DataTable({
+        dom: 'Bfrtip',
+        buttons: [{
+            extend:'excel',
+            text:'Export <i class="fa fa-file-excel-o"></i>'}]
+    });
 </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 

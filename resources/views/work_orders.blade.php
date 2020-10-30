@@ -15,7 +15,7 @@ use App\WorkOrder;
 use Carbon\Carbon;
  ?>
 @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
-<!--  -->
+<!-- client here -->
 <br>
     <div class="container">
     <div class="row container-fluid" >
@@ -294,7 +294,6 @@ foreach($userwithid as $userwithid)
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
-                    @if($work->status !== 0)
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -516,6 +515,33 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                             </td>
 
                             <td>
+
+                                   {{--  --}} @if($work->status == 0)
+                            <a ><span data-toggle="modal" data-target="#viewReason{{$i}}"
+                                    class="badge badge-success">View reason</span></a>
+
+                                    <div class="modal fade" id="viewReason{{$i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                   <div class="modal-dialog" role="document">
+                                       <div class="modal-content">
+                                           <div class="modal-header">
+                                               <h5 class="modal-title" id="exampleModalLabel">Reason for rejecting work order</h5>
+                                               <div></div>
+
+                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                   <span aria-hidden="true">&times;</span>
+                                               </button>
+                                           </div>
+                                           <div class="modal-body">
+{{$work->reason}}
+                                         </div>
+                                           <div class="modal-footer">
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               @endif
+                               {{--  --}}
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
 
@@ -656,8 +682,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                        data-toggle="modal" data-target="#exampleModo"><i
                                   class="fas fa-recycle"  data-toggle="tooltip" data-placement="right" title="Redirect to Head of Section" style="color: blue"></i></a>
 
-                                                                         @endif
-                                          @endif
+
+
+                                  @endif
 
 
                                                 @elseif($work->status == 12)
@@ -684,6 +711,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                    @endif
                                    @endif
+
                                 <br>
 
                             </td>
@@ -788,7 +816,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
     @endforeach
 @else
-
+{{-- differentiation starts here --}}
     <br>
     <div class="container">
     <div class="row container-fluid" >
@@ -1479,7 +1507,6 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                          @endif
                                          @endif
-
 
                                                 @elseif($work->status == 12)
                                          <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
