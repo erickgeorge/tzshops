@@ -71,16 +71,16 @@ use Illuminate\Support\Facades\DB;
                     <tbody>
                         <tr>
                             @php
-                            $build = assetsbuilding::where('_condition','New')->get();
-                            $build2 = assetsbuilding::where('_condition','Good')->get();
-                            $build3 = assetsbuilding::where('_condition','Fair')->get();
-                            $build4 = assetsbuilding::where('_condition','Poor')->get();
-                            $build5 = assetsbuilding::where('_condition','Very Poor')->get();
-                            $build6 = assetsbuilding::where('_condition','Obsolete')->get();
-                            $build7 = assetsbuilding::where('_condition','Disposed')->get();
-                            $build8 = assetsbuilding::where('_condition','Sold')->get();
-                            $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
-                            $build10 = assetsbuilding::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
+                            $build = assetsbuilding::where('_condition','New')->where('woip',0)->get();
+                            $build2 = assetsbuilding::where('_condition','Good')->where('woip',0)->get();
+                            $build3 = assetsbuilding::where('_condition','Fair')->where('woip',0)->get();
+                            $build4 = assetsbuilding::where('_condition','Poor')->where('woip',0)->get();
+                            $build5 = assetsbuilding::where('_condition','Very Poor')->where('woip',0)->get();
+                            $build6 = assetsbuilding::where('_condition','Obsolete')->where('woip',0)->get();
+                            $build7 = assetsbuilding::where('_condition','Disposed')->where('woip',0)->get();
+                            $build8 = assetsbuilding::where('_condition','Sold')->where('woip',0)->get();
+                            $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('woip',0)->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                            $build10 = assetsbuilding::select('assetEndingDepreciationDate')->where('woip',0)->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
 
                         @endphp
                         <td>
@@ -126,7 +126,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build6)>0)
                                 {{count($build6)}}
-                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build6)}}
                         @endif
@@ -171,11 +171,17 @@ use Illuminate\Support\Facades\DB;
     </div>
     <br>
     <div class="row">
-        <div class="col">
+
+        <div class="col-md-8">
 
         </div>
-        <div class="col-md-3 text-right">
-            <button class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
+        <div class="col-md-2 text-right">
+
+                <a href='{{route('assessingroup')}}?asset=building' class="btn btn-primary" title="assess all furniture assets"> Assess </a>
+
+        </div>
+        <div class="col-md-2 text-right">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
     </div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -217,7 +223,7 @@ use Illuminate\Support\Facades\DB;
                             <label for="my-input">Asset Number</label>
                             <select class="form-control" name="assetNumber" id="">
                                 @php
-$assetNumber=assetsbuilding::select('assetNumber')->distinct()->orderBy('assetNumber','ASC')->get();
+$assetNumber=assetsbuilding::select('assetNumber')->where('woip',0)->distinct()->orderBy('assetNumber','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($assetNumber as $number)
@@ -230,7 +236,7 @@ $assetNumber=assetsbuilding::select('assetNumber')->distinct()->orderBy('assetNu
                             <label for="my-input">Asset Location</label>
                             <select class="form-control" name="AssetLocation" id="">
                                 @php
-$assetLocation=assetsbuilding::select('assetLocation')->distinct()->orderBy('assetLocation','ASC')->get();
+$assetLocation=assetsbuilding::select('assetLocation')->where('woip',0)->distinct()->orderBy('assetLocation','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($assetLocation as $location)
@@ -243,7 +249,7 @@ $assetLocation=assetsbuilding::select('assetLocation')->distinct()->orderBy('ass
                             <label for="my-input">Cost</label>
                             <select class="form-control" name="cost" id="">
                                 @php
-$Cost=assetsbuilding::select('Cost')->distinct()->orderBy('Cost','ASC')->get();
+$Cost=assetsbuilding::select('Cost')->where('woip',0)->distinct()->orderBy('Cost','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($Cost as $cost)
@@ -255,7 +261,7 @@ $Cost=assetsbuilding::select('Cost')->distinct()->orderBy('Cost','ASC')->get();
                             <label for="my-input">Condition</label>
                             <select class="form-control" name="condition" id="">
                                 @php
-$Condition=assetsbuilding::select('_condition')->distinct()->orderBy('_condition','ASC')->get();
+$Condition=assetsbuilding::select('_condition')->where('woip',0)->distinct()->orderBy('_condition','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($Condition as $condition)
@@ -268,7 +274,7 @@ $Condition=assetsbuilding::select('_condition')->distinct()->orderBy('_condition
                             <label for="my-input">Date of Acquisition</label>
                             <select class="form-control" name="DateofAcquisition" id="">
                                @php
-$assetAcquisitionDate=assetsbuilding::select('assetAcquisitionDate')->distinct()->orderBy('assetAcquisitionDate','ASC')->get();
+$assetAcquisitionDate=assetsbuilding::select('assetAcquisitionDate')->where('woip',0)->distinct()->orderBy('assetAcquisitionDate','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($assetAcquisitionDate as $assetAcquisitionDate)
@@ -281,7 +287,7 @@ $assetAcquisitionDate=assetsbuilding::select('assetAcquisitionDate')->distinct()
                             <label for="my-input">Date in Use</label>
                             <select class="form-control" name="assetDateinUse" id="">
                                @php
-$assetDateinUse=assetsbuilding::select('assetDateinUse')->distinct()->orderBy('assetDateinUse','ASC')->get();
+$assetDateinUse=assetsbuilding::select('assetDateinUse')->where('woip',0)->distinct()->orderBy('assetDateinUse','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($assetDateinUse as $assetDateinUse)
@@ -294,7 +300,7 @@ $assetDateinUse=assetsbuilding::select('assetDateinUse')->distinct()->orderBy('a
                             <label for="my-input">Ending Depreciation Date</label>
                             <select class="form-control" name="EndingDepreciationDate" id="">
                                @php
-$assetEndingDepreciationDate=assetsbuilding::select('assetEndingDepreciationDate')->distinct()->orderBy('assetEndingDepreciationDate','ASC')->get();
+$assetEndingDepreciationDate=assetsbuilding::select('assetEndingDepreciationDate')->where('woip',0)->distinct()->orderBy('assetEndingDepreciationDate','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($assetEndingDepreciationDate as $assetEndingDepreciationDate)
@@ -307,7 +313,7 @@ $assetEndingDepreciationDate=assetsbuilding::select('assetEndingDepreciationDate
                             <label for="my-input">Quantity</label>
                             <select class="form-control" name="Quantity" id="">
                                @php
-$assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('assetQuantity','ASC')->get();
+$assetsquantity=assetsbuilding::select('assetQuantity')->where('woip',0)->distinct()->orderBy('assetQuantity','ASC')->get();
                                 @endphp
                                     <option value="" selected>Not filtered</option>
                                 @foreach ($assetsquantity as $quantity)
@@ -472,7 +478,7 @@ $assetsquantity=assetsbuilding::select('assetQuantity')->distinct()->orderBy('as
                 <tr>
                     <td>{{$u}}</td>
                     @php
-                        $assetid = assetsbuilding::where('id',$asses->assetID)->first();
+                        $assetid = assetsbuilding::where('id',$asses->assetID)->where('woip',0)->first();
                         $asseted = assetsassesbuilding::orderBy('assesmentYear','Desc') ->where('assetID',$asses->assetID)->first();
 
                     @endphp

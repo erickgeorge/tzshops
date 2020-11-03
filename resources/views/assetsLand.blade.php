@@ -127,7 +127,7 @@ Land Assets
                             <td>
                                 @if (count($land6)>0)
                                     {{count($land6)}}
-                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land6)}}
                             @endif

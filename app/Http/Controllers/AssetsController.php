@@ -28,7 +28,6 @@ use App\assetsintangible;
 use App\assetsmotorvehicle;
 use App\assetsplantandmachinery;
 use App\assetsworkinprogress;
-
 use App\assetsassesbuilding;
 use App\assetsassescomputerequipment;
 use App\assetsassesequipment;
@@ -1196,7 +1195,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -1248,7 +1247,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetLocation = $request['SiteLocation'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity =1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -1281,285 +1280,36 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland = new assetsplantandmachinery();
-        $assetland->_condition = $request['AssetCondition'];
-        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
-        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $b = $request['AssetNumber3'] + $request['Quantity'];
 
-                    //
-                    if($request['SiteLocation']=='CoICT')
-                    {
+        for ($x = $request['AssetNumber3']; $x < $b; $x++)
+        {
+            $assetland = new assetsplantandmachinery();
+            $assetland->_condition = $request['AssetCondition'];
+            $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+            $assetland->usefulLife = $request['AssetUsefulLife'];
+            $assetland->location = $request['SiteLocation2'];
 
-                    $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'College of Information and Communication Technologies';
+            $loc = Directorate::where('id',$request['SiteLocation'])->first();
 
-                    }else  if($request['SiteLocation']=='CoET')
-                    {
+            $assetland->assetNumber = $loc['name'].'*'.$request['AssetNumber2'].'*'.$x;
 
-                    $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'College of Engineering and Technology';
+            $assetland->assetLocation = $loc['directorate_description'];
 
-                    }else if($request['SiteLocation']=='CoAF')
-                    {
+            $assetland->assetDescription = $request['AssetDescription'];
+            $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+            $assetland->assetQuantity = 1;
+            $assetland->assetDateinUse = $request['DateinUse'];
+            $assetland->Cost = $request['cost'];
 
-                    $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+            $end = $request['DateinUse'];
 
-                    }else  if($request['SiteLocation']=='CoSS')
-                    {
+            $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
 
-                    $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'College of Social science';
+            $assetland->addedBy = auth()->user()->id;
+            $assetland->save();
 
-                    }else if($request['SiteLocation']=='SJMC')
-                    {
-
-                    $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'School of Journalism and Mass Communication';
-
-                    }else  if($request['SiteLocation']=='UDBS')
-                    {
-
-                    $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'University of Dar es Salaam Business School';
-
-                    }else if($request['SiteLocation']=='CoHU')
-                    {
-
-                    $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'College of Humanities';
-
-                    }else if($request['SiteLocation']=='CONAS')
-                    {
-
-                    $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'College of Natural and Applied Sciences';
-
-                    }else if($request['SiteLocation']=='SoED')
-                    {
-
-                    $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'School of Education';
-
-                    }else if($request['SiteLocation']=='UDSoL')
-                    {
-
-                    $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'University of Dar es salaam School of Law';
-
-                    }else if($request['SiteLocation']=='IDS')
-                    {
-
-                    $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Institute of Development Studies';
-
-                    }else if($request['SiteLocation']=='IKS')
-                    {
-
-                    $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Institute of Kiswahili Studies';
-
-                    }else if($request['SiteLocation']=='IRA')
-                    {
-
-                    $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Institute of Resource Assesment';
-
-                    }else if($request['SiteLocation']=='IMS')
-                    {
-
-                    $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Institute of Marine Sciences';
-
-                    }else if($request['SiteLocation']=='CIUDSM')
-                    {
-
-                    $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Confucius Institute';
-
-                    }else if($request['SiteLocation']=='IGS')
-                    {
-
-                    $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Institute of Gender Studies';
-
-                    }else if($request['SiteLocation']=='MCHS')
-                    {
-
-                    $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Mbeya college of health and allied sciences';
-
-                    }else if($request['SiteLocation']=='DES')
-                    {
-
-                    $assetland->assetNumber = 'DES'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Directorate of Estates Services';
-
-                    }else if($request['SiteLocation']=='ULB')
-                    {
-
-                    $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'University Library';
-
-                    }else if($request['SiteLocation']=='VC')
-                    {
-
-                    $assetland->assetNumber = 'VC'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Vice Chancelor\'s Office';
-
-                    }else if($request['SiteLocation']=='CCC')
-                    {
-
-                    $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Center for Climate Change Studies';
-
-                    }else if($request['SiteLocation']=='MHL')
-                    {
-
-                    $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Mabibo Hostel';
-
-                    }else if($request['SiteLocation']=='MNS')
-                    {
-
-                    $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Mlimani Nursery School';
-
-                    }else if($request['SiteLocation']=='ADM')
-                    {
-
-                    $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Administration Block';
-
-                    }else if($request['SiteLocation']=='DRP')
-                    {
-
-                    $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Directorate of Research and Publication';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Kijitonyama Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Lecture Room';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Magufuli Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Hall 1 Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Hall 2 Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Hall 3 Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Hall 4 Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Hall 5 Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Hall 6 Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Hall 7 Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Mikocheni Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Seminar Room';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'THR'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Theater Room';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Ubungo Hostel';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Directorate of Post Graduate Studies';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Michaud Library';
-
-                    }else if($request['SiteLocation']=='CoICT')
-                    {
-
-                    $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
-                    $assetland->assetLocation = 'Water Resources Houses';
-
-                    }else
-                    {
-
-                    $assetland->assetNumber = $request['AssetNumber'];
-                    $assetland->assetLocation = $request['SiteLocation'];
-                    }
-                    //
-
-        $assetland->location = $request['SiteLocation2'];
-        $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
-        $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->Cost = $request['cost'];
-
-        $end = $request['DateinUse'];
-
-        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
-
-        $assetland->addedBy = auth()->user()->id;
-        $assetland->save();
+             }
 
         return redirect()->route('assetsPlantMachinery')->with(['message' => 'New Asset Added Succesfully']);
      }
@@ -1862,7 +1612,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->location = $request['SiteLocation2'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -1906,7 +1656,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetLocation = $request['SiteLocation'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -1957,7 +1707,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetLocation = $request['SiteLocation'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->Cost = $request['cost'];
         $assetland->assetDateinUse = $request['DateinUse'];
 
@@ -2002,7 +1752,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->location = $request['SiteLocation2'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -2054,7 +1804,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->location = $request['SiteLocation2'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -2090,284 +1840,38 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland = new assetsfurniture();
-        $assetland->_condition = $request['AssetCondition'];
-        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
-        $assetland->usefulLife = $request['AssetUsefulLife'];
+        $b = $request['AssetNumber3'] + $request['Quantity'];
 
-                        //
-                        if($request['SiteLocation']=='CoICT')
-                        {
+        for ($x = $request['AssetNumber3']; $x < $b; $x++)
+        {
+            $assetland = new assetsfurniture();
+            $assetland->_condition = $request['AssetCondition'];
+            $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+            $assetland->usefulLife = $request['AssetUsefulLife'];
 
-                        $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Information and Communication Technologies';
+            $loc = Directorate::where('id',$request['SiteLocation'])->first();
 
-                        }else  if($request['SiteLocation']=='CoET')
-                        {
+            $assetland->assetNumber = $loc['name'].'*'.$request['AssetNumber2'].'*'.$x;
 
-                        $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Engineering and Technology';
+            $assetland->assetLocation = $loc['directorate_description'];
 
-                        }else if($request['SiteLocation']=='CoAF')
-                        {
+            $assetland->assetDescription = $request['AssetDescription'];
+            $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+            $assetland->assetQuantity = 1;
+            $assetland->assetDateinUse = $request['DateinUse'];
+            $assetland->Cost = $request['cost'];
 
-                        $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+            $end = $request['DateinUse'];
 
-                        }else  if($request['SiteLocation']=='CoSS')
-                        {
+            $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
 
-                        $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Social science';
+            $assetland->addedBy = auth()->user()->id;
+            $assetland->save();
 
-                        }else if($request['SiteLocation']=='SJMC')
-                        {
+             }
 
-                        $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'School of Journalism and Mass Communication';
 
-                        }else  if($request['SiteLocation']=='UDBS')
-                        {
 
-                        $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'University of Dar es Salaam Business School';
-
-                        }else if($request['SiteLocation']=='CoHU')
-                        {
-
-                        $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Humanities';
-
-                        }else if($request['SiteLocation']=='CONAS')
-                        {
-
-                        $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Natural and Applied Sciences';
-
-                        }else if($request['SiteLocation']=='SoED')
-                        {
-
-                        $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'School of Education';
-
-                        }else if($request['SiteLocation']=='UDSoL')
-                        {
-
-                        $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'University of Dar es salaam School of Law';
-
-                        }else if($request['SiteLocation']=='IDS')
-                        {
-
-                        $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Development Studies';
-
-                        }else if($request['SiteLocation']=='IKS')
-                        {
-
-                        $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Kiswahili Studies';
-
-                        }else if($request['SiteLocation']=='IRA')
-                        {
-
-                        $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Resource Assesment';
-
-                        }else if($request['SiteLocation']=='IMS')
-                        {
-
-                        $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Marine Sciences';
-
-                        }else if($request['SiteLocation']=='CIUDSM')
-                        {
-
-                        $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Confucius Institute';
-
-                        }else if($request['SiteLocation']=='IGS')
-                        {
-
-                        $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Gender Studies';
-
-                        }else if($request['SiteLocation']=='MCHS')
-                        {
-
-                        $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mbeya college of health and allied sciences';
-
-                        }else if($request['SiteLocation']=='DES')
-                        {
-
-                        $assetland->assetNumber = 'DES'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Directorate of Estates Services';
-
-                        }else if($request['SiteLocation']=='ULB')
-                        {
-
-                        $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'University Library';
-
-                        }else if($request['SiteLocation']=='VC')
-                        {
-
-                        $assetland->assetNumber = 'VC'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Vice Chancelor\'s Office';
-
-                        }else if($request['SiteLocation']=='CCC')
-                        {
-
-                        $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Center for Climate Change Studies';
-
-                        }else if($request['SiteLocation']=='MHL')
-                        {
-
-                        $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mabibo Hostel';
-
-                        }else if($request['SiteLocation']=='MNS')
-                        {
-
-                        $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mlimani Nursery School';
-
-                        }else if($request['SiteLocation']=='ADM')
-                        {
-
-                        $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Administration Block';
-
-                        }else if($request['SiteLocation']=='DRP')
-                        {
-
-                        $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Directorate of Research and Publication';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Kijitonyama Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Lecture Room';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Magufuli Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 1 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 2 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 3 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 4 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 5 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 6 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 7 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mikocheni Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Seminar Room';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'THR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Theater Room';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Ubungo Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Directorate of Post Graduate Studies';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Michaud Library';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Water Resources Houses';
-
-                        }else
-                        {
-
-                        $assetland->assetNumber = $request['AssetNumber'];
-                        $assetland->assetLocation = $request['SiteLocation'];
-                        }
-                        //
-
-        $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
-        $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->Cost = $request['cost'];
-
-        $end = $request['DateinUse'];
-
-        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
-
-        $assetland->addedBy = auth()->user()->id;
-        $assetland->save();
 
         return redirect()->route('assetsFurniture')->with(['message' => 'New Asset Added Succesfully']);
      }
@@ -2404,7 +1908,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland =  assetsfurniture::where('id',$request['id'])->first();
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->_condition = $request['AssetCondition'];
 
                         //
@@ -2705,285 +2209,37 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland = new assetsequipment();
-        $assetland->_condition = $request['AssetCondition'];
-        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
-        $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->location = $request['SiteLocation2'];
+        $b = $request['AssetNumber3'] + $request['Quantity'];
 
-                        //
-                        if($request['SiteLocation']=='CoICT')
-                        {
+        for ($x = $request['AssetNumber3']; $x < $b; $x++)
+        {
+            $assetland = new assetsequipment();
+            $assetland->_condition = $request['AssetCondition'];
+            $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+            $assetland->usefulLife = $request['AssetUsefulLife'];
+            $assetland->location = $request['SiteLocation2'];
 
-                        $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Information and Communication Technologies';
+            $loc = Directorate::where('id',$request['SiteLocation'])->first();
 
-                        }else  if($request['SiteLocation']=='CoET')
-                        {
+            $assetland->assetNumber = $loc['name'].'*'.$request['AssetNumber2'].'*'.$x;
 
-                        $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Engineering and Technology';
+            $assetland->assetLocation = $loc['directorate_description'];
 
-                        }else if($request['SiteLocation']=='CoAF')
-                        {
+            $assetland->assetDescription = $request['AssetDescription'];
+            $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+            $assetland->assetQuantity = 1;
+            $assetland->assetDateinUse = $request['DateinUse'];
+            $assetland->Cost = $request['cost'];
 
-                        $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+            $end = $request['DateinUse'];
 
-                        }else  if($request['SiteLocation']=='CoSS')
-                        {
+            $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
 
-                        $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Social science';
+            $assetland->addedBy = auth()->user()->id;
+            $assetland->save();
 
-                        }else if($request['SiteLocation']=='SJMC')
-                        {
+             }
 
-                        $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'School of Journalism and Mass Communication';
-
-                        }else  if($request['SiteLocation']=='UDBS')
-                        {
-
-                        $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'University of Dar es Salaam Business School';
-
-                        }else if($request['SiteLocation']=='CoHU')
-                        {
-
-                        $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Humanities';
-
-                        }else if($request['SiteLocation']=='CONAS')
-                        {
-
-                        $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'College of Natural and Applied Sciences';
-
-                        }else if($request['SiteLocation']=='SoED')
-                        {
-
-                        $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'School of Education';
-
-                        }else if($request['SiteLocation']=='UDSoL')
-                        {
-
-                        $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'University of Dar es salaam School of Law';
-
-                        }else if($request['SiteLocation']=='IDS')
-                        {
-
-                        $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Development Studies';
-
-                        }else if($request['SiteLocation']=='IKS')
-                        {
-
-                        $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Kiswahili Studies';
-
-                        }else if($request['SiteLocation']=='IRA')
-                        {
-
-                        $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Resource Assesment';
-
-                        }else if($request['SiteLocation']=='IMS')
-                        {
-
-                        $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Marine Sciences';
-
-                        }else if($request['SiteLocation']=='CIUDSM')
-                        {
-
-                        $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Confucius Institute';
-
-                        }else if($request['SiteLocation']=='IGS')
-                        {
-
-                        $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Institute of Gender Studies';
-
-                        }else if($request['SiteLocation']=='MCHS')
-                        {
-
-                        $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mbeya college of health and allied sciences';
-
-                        }else if($request['SiteLocation']=='DES')
-                        {
-
-                        $assetland->assetNumber = 'DES'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Directorate of Estates Services';
-
-                        }else if($request['SiteLocation']=='ULB')
-                        {
-
-                        $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'University Library';
-
-                        }else if($request['SiteLocation']=='VC')
-                        {
-
-                        $assetland->assetNumber = 'VC'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Vice Chancelor\'s Office';
-
-                        }else if($request['SiteLocation']=='CCC')
-                        {
-
-                        $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Center for Climate Change Studies';
-
-                        }else if($request['SiteLocation']=='MHL')
-                        {
-
-                        $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mabibo Hostel';
-
-                        }else if($request['SiteLocation']=='MNS')
-                        {
-
-                        $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mlimani Nursery School';
-
-                        }else if($request['SiteLocation']=='ADM')
-                        {
-
-                        $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Administration Block';
-
-                        }else if($request['SiteLocation']=='DRP')
-                        {
-
-                        $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Directorate of Research and Publication';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Kijitonyama Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Lecture Room';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Magufuli Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 1 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 2 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 3 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 4 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 5 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 6 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Hall 7 Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Mikocheni Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Seminar Room';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'THR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Theater Room';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Ubungo Hostel';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Directorate of Post Graduate Studies';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Michaud Library';
-
-                        }else if($request['SiteLocation']=='CoICT')
-                        {
-
-                        $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
-                        $assetland->assetLocation = 'Water Resources Houses';
-
-                        }else
-                        {
-
-                        $assetland->assetNumber = $request['AssetNumber'];
-                        $assetland->assetLocation = $request['SiteLocation'];
-                        }
-                        //
-
-        $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
-        $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->Cost = $request['cost'];
-
-        $end = $request['DateinUse'];
-
-        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
-
-        $assetland->addedBy = auth()->user()->id;
-        $assetland->save();
 
         return redirect()->route('assetsEquipment')->with(['message' => 'New Asset Added Succesfully']);
      }
@@ -3286,7 +2542,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -3322,285 +2578,37 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland = new assetscomputerequipment();
-        $assetland->_condition = $request['AssetCondition'];
-        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
-        $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->location = $request['SiteLocation2'];
+        $b = $request['AssetNumber3'] + $request['Quantity'];
 
-                 //
-                 if($request['SiteLocation']=='CoICT')
-                 {
+        for ($x = $request['AssetNumber3']; $x < $b; $x++)
+        {
+            $assetland = new assetscomputerequipment();
+            $assetland->_condition = $request['AssetCondition'];
+            $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+            $assetland->usefulLife = $request['AssetUsefulLife'];
+            $assetland->location = $request['SiteLocation2'];
 
-                 $assetland->assetNumber = 'CoICT'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'College of Information and Communication Technologies';
+            $loc = Directorate::where('id',$request['SiteLocation'])->first();
 
-                 }else  if($request['SiteLocation']=='CoET')
-                 {
+            $assetland->assetNumber = $loc['name'].'*'.$request['AssetNumber2'].'*'.$x;
 
-                 $assetland->assetNumber = 'CoET'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'College of Engineering and Technology';
+            $assetland->assetLocation = $loc['directorate_description'];
 
-                 }else if($request['SiteLocation']=='CoAF')
-                 {
+            $assetland->assetDescription = $request['AssetDescription'];
+            $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+            $assetland->assetQuantity = 1;
+            $assetland->assetDateinUse = $request['DateinUse'];
+            $assetland->Cost = $request['cost'];
 
-                 $assetland->assetNumber = 'CoAF'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'College of Agricultural Science and Fisheries Technology';
+            $end = $request['DateinUse'];
 
-                 }else  if($request['SiteLocation']=='CoSS')
-                 {
+            $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+5 Years'));
 
-                 $assetland->assetNumber = 'CoSS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'College of Social science';
+            $assetland->addedBy = auth()->user()->id;
+            $assetland->save();
 
-                 }else if($request['SiteLocation']=='SJMC')
-                 {
+             }
 
-                 $assetland->assetNumber = 'SJMC'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'School of Journalism and Mass Communication';
-
-                 }else  if($request['SiteLocation']=='UDBS')
-                 {
-
-                 $assetland->assetNumber = 'UDBS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'University of Dar es Salaam Business School';
-
-                 }else if($request['SiteLocation']=='CoHU')
-                 {
-
-                 $assetland->assetNumber = 'CoHU'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'College of Humanities';
-
-                 }else if($request['SiteLocation']=='CONAS')
-                 {
-
-                 $assetland->assetNumber = 'CONAS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'College of Natural and Applied Sciences';
-
-                 }else if($request['SiteLocation']=='SoED')
-                 {
-
-                 $assetland->assetNumber = 'SoED'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'School of Education';
-
-                 }else if($request['SiteLocation']=='UDSoL')
-                 {
-
-                 $assetland->assetNumber = 'UDSoL'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'University of Dar es salaam School of Law';
-
-                 }else if($request['SiteLocation']=='IDS')
-                 {
-
-                 $assetland->assetNumber = 'IDS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Institute of Development Studies';
-
-                 }else if($request['SiteLocation']=='IKS')
-                 {
-
-                 $assetland->assetNumber = 'IKS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Institute of Kiswahili Studies';
-
-                 }else if($request['SiteLocation']=='IRA')
-                 {
-
-                 $assetland->assetNumber = 'IRA'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Institute of Resource Assesment';
-
-                 }else if($request['SiteLocation']=='IMS')
-                 {
-
-                 $assetland->assetNumber = 'IMS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Institute of Marine Sciences';
-
-                 }else if($request['SiteLocation']=='CIUDSM')
-                 {
-
-                 $assetland->assetNumber = 'CIUDSM'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Confucius Institute';
-
-                 }else if($request['SiteLocation']=='IGS')
-                 {
-
-                 $assetland->assetNumber = 'IGS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Institute of Gender Studies';
-
-                 }else if($request['SiteLocation']=='MCHS')
-                 {
-
-                 $assetland->assetNumber = 'MCHS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Mbeya college of health and allied sciences';
-
-                 }else if($request['SiteLocation']=='DES')
-                 {
-
-                 $assetland->assetNumber = 'DES'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Directorate of Estates Services';
-
-                 }else if($request['SiteLocation']=='ULB')
-                 {
-
-                 $assetland->assetNumber = 'ULB'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'University Library';
-
-                 }else if($request['SiteLocation']=='VC')
-                 {
-
-                 $assetland->assetNumber = 'VC'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Vice Chancelor\'s Office';
-
-                 }else if($request['SiteLocation']=='CCC')
-                 {
-
-                 $assetland->assetNumber = 'CCC'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Center for Climate Change Studies';
-
-                 }else if($request['SiteLocation']=='MHL')
-                 {
-
-                 $assetland->assetNumber = 'MHL'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Mabibo Hostel';
-
-                 }else if($request['SiteLocation']=='MNS')
-                 {
-
-                 $assetland->assetNumber = 'MNS'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Mlimani Nursery School';
-
-                 }else if($request['SiteLocation']=='ADM')
-                 {
-
-                 $assetland->assetNumber = 'ADM'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Administration Block';
-
-                 }else if($request['SiteLocation']=='DRP')
-                 {
-
-                 $assetland->assetNumber = 'DRP'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Directorate of Research and Publication';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'KHL'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Kijitonyama Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'LCR'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Lecture Room';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'MSH'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Magufuli Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'HL1'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Hall 1 Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'HL2'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Hall 2 Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'HL3'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Hall 3 Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'HL4'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Hall 4 Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'HL5'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Hall 5 Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'HL6'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Hall 6 Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'HL7'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Hall 7 Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'MKH'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Mikocheni Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'SMR'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Seminar Room';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'THR'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Theater Room';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'UBH'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Ubungo Hostel';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'DOP'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Directorate of Post Graduate Studies';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'MCLB'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Michaud Library';
-
-                 }else if($request['SiteLocation']=='CoICT')
-                 {
-
-                 $assetland->assetNumber = 'WHR'.$request['AssetNumber'];
-                 $assetland->assetLocation = 'Water Resources Houses';
-
-                 }else
-                 {
-
-                 $assetland->assetNumber = $request['AssetNumber'];
-                 $assetland->assetLocation = $request['SiteLocation'];
-                 }
-                 //
-
-        $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
-        $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->Cost = $request['cost'];
-
-        $end = $request['DateinUse'];
-
-        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+3 Years'));
-
-        $assetland->addedBy = auth()->user()->id;
-        $assetland->save();
 
         return redirect()->route('assetsComputerEquipment')->with(['message' => 'New Asset Added Succesfully']);
      }
@@ -3904,7 +2912,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->assetDateinUse = $request['DateinUse'];
         $assetland->Cost = $request['cost'];
 
@@ -3941,24 +2949,33 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland = new assetsbuilding();
-        $assetland->assetNumber = $request['AssetNumber'];
-        $assetland->_condition = $request['AssetCondition'];
-        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
-        $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
-        $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
-        $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->Cost = $request['cost'];
 
-        $end = $request['DateinUse'];
+        // echo   $request['AssetNumber1'].'/'.$request['AssetNumber2'].'/'.$request['AssetNumber3'].'<br>';
 
-        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+        $b = $request['AssetNumber3'] + $request['Quantity'];
 
-        $assetland->addedBy = auth()->user()->id;
-        $assetland->save();
+        for ($x = $request['AssetNumber3']; $x < $b; $x++)
+        {
+                $assetland = new assetsbuilding();
+                $assetland->assetNumber = $request['AssetNumber1'].'/'.$request['AssetNumber2'].'/'.$x;
+                $assetland->_condition = $request['AssetCondition'];
+                $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+                $assetland->usefulLife = $request['AssetUsefulLife'];
+                $assetland->assetLocation = $request['SiteLocation'];
+                $assetland->assetDescription = $request['AssetDescription'];
+                $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+                $assetland->assetQuantity = 1;
+                $assetland->assetDateinUse = $request['DateinUse'];
+                $assetland->Cost = $request['cost'];
+
+                $end = $request['DateinUse'];
+
+                $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+
+                $assetland->addedBy = auth()->user()->id;
+                $assetland->save();
+             }
+
 
         return redirect()->route('assetsBuilding')->with(['message' => 'New Asset Added Succesfully']);
      }
@@ -3967,14 +2984,14 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $land = assetsbuilding::get();
+        $land = assetsbuilding::where('woip',0)->get();
         return view('assetsBuilding',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
      public function assetsBuildingView($id)
      {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $land = assetsbuilding::where('id',$id)->get();
+        $land = assetsbuilding::where('id',$id)->where('woip',0)->get();
         $asses = assetsassesbuilding::where('assetID',$id)->get();
         return view('assetsBuildingView',['asses'=>$asses,'land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
@@ -3983,7 +3000,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        $land = assetsbuilding::where('id',$id)->get();
+        $land = assetsbuilding::where('id',$id)->where('woip',0)->get();
         return view('assetsBuildingEdit',['land'=>$land,'role'=>$role,'notifications'=>$notifications]);
      }
 
@@ -3992,7 +3009,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland =  assetsbuilding::where('id',$request['id'])->first();
+        $assetland =  assetsbuilding::where('id',$request['id'])->where('woip',0)->first();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->_condition = $request['AssetCondition'];
         $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
@@ -4000,7 +3017,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetLocation = $request['SiteLocation'];
         $assetland->assetDescription = $request['AssetDescription'];
         $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->Cost = $request['cost'];
         $assetland->assetDateinUse = $request['DateinUse'];
 
@@ -4038,7 +3055,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->assetLocation = $request['SiteLocation'];
         $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->Cost = $request['cost'];
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
@@ -4078,7 +3095,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetland->assetNumber = $request['AssetNumber'];
         $assetland->assetLocation = $request['SiteLocation'];
         $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetQuantity = $request['Quantity'];
+        $assetland->assetQuantity = 1;
         $assetland->Cost = $request['cost'];
         $assetland->addedBy = auth()->user()->id;
         $assetland->save();
@@ -4099,34 +3116,65 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      {
         $request->validate([
             'SiteLocation'=>'required',
-            'Quantity'=>'required',
+
         ]);
         if( $request['DateofAcquisition'] > $request['DateinUse'] )
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland = new assetsbuilding();
-        $assetland->assetNumber = $request['AssetNumber'];
-        $assetland->_condition = $request['AssetCondition'];
-        $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
-        $assetland->usefulLife = $request['AssetUsefulLife'];
-        $assetland->assetLocation = $request['SiteLocation'];
-        $assetland->assetDescription = $request['AssetDescription'];
-        $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
-        $assetland->assetQuantity = $request['Quantity'];
-        $assetland->assetDateinUse = $request['DateinUse'];
-        $assetland->Cost = $request['cost'];
+        $b = $request['AssetNumber3'] + $request['Quantity'];
+        if($request['bld']!=0)
+        {
 
-        $end = $request['DateinUse'];
+            $assetland = assetsbuilding::where('id',$request['bld'])->first();
+            $assetland->assetNumber = $request['AssetNumber1'].'/'.$request['AssetNumber2'].'/'.$request['AssetNumber3'];
+            $assetland->_condition = $request['AssetCondition'];
+            $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+            $assetland->usefulLife = $request['AssetUsefulLife'];
+            $assetland->assetLocation = $request['SiteLocation'];
+            $assetland->assetDescription = $request['AssetDescription'];
+            $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+            $assetland->assetQuantity = 1;
+            $assetland->assetDateinUse = $request['DateinUse'];
+            $assetland->Cost = $request['cost'];
+            $assetland->woip = 0;
 
-        $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+            $end = $request['DateinUse'];
 
-        $assetland->addedBy = auth()->user()->id;
-        $assetland->save();
+            $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
 
-        $assetwip =  assetsworkinprogress::where('id',$request['id'])->first();
-        $assetwip->_status = 1;
-        $assetwip->save();
+            $assetland->addedBy = auth()->user()->id;
+            $assetland->save();
+        }else{
+        for ($x = $request['AssetNumber3']; $x < $b; $x++)
+        {
+        //    echo $request['bld'].'-';
+                $assetland = new assetsbuilding();
+                $assetland->assetNumber = $request['AssetNumber1'].'/'.$request['AssetNumber2'].'/'.$x;
+                $assetland->_condition = $request['AssetCondition'];
+                $assetland->depreciationRate = 100/$request['AssetUsefulLife'];
+                $assetland->usefulLife = $request['AssetUsefulLife'];
+                $assetland->assetLocation = $request['SiteLocation'];
+                $assetland->assetDescription = $request['AssetDescription'];
+                $assetland->assetAcquisitionDate = $request['DateofAcquisition'];
+                $assetland->assetQuantity = 1;
+                $assetland->assetDateinUse = $request['DateinUse'];
+                $assetland->Cost = $request['cost'];
+
+                $end = $request['DateinUse'];
+
+                $assetland->assetEndingDepreciationDate = date('Y-m-d',strtotime($end.'+25 Years'));
+
+                $assetland->addedBy = auth()->user()->id;
+                $assetland->save();
+            }
+
+
+
+             }
+             $assetwip =  assetsworkinprogress::where('id',$request['id'])->first();
+             $assetwip->_status = 1;
+             $assetwip->save();
 
         return redirect()->route('assetsBuilding')->with(['message' => 'New Asset Added Succesfully']);
      }
@@ -4137,7 +3185,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         {
             return redirect()->back()->withErrors(['message' => 'Date in use should be greater than or equal to date of acquisition ']);
         }
-        $assetland =  assetsbuilding::where('id',$request['id'])->first();
+        $assetland =  assetsbuilding::where('id',$request['id'])->where('woip',0)->first();
         $assetland->_condition = $request['AssetCondition'];
         $assetland->save();
 
@@ -4161,7 +3209,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
         $assetdep->accumulatedDepreciation = $amount*$totalyears;
         $assetdep->save();
 
-        return redirect()->route('assetsBuildingView',[$request["id"]])->with(['message' => 'Asesments Saved Succesfully']);
+        return redirect()->route('assetsBuildingView',[$request["id"]])->with(['message' => 'Assessments Saved Succesfully']);
 
      }
      //
@@ -4418,7 +3466,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
         if($type=='building')
         {
-            $land=assetsbuilding::where('id',$id)->get();
+            $land=assetsbuilding::where('id',$id)->where('woip',0)->get();
         }else if($type=='land')
         {
             $land=assetsland::where('id',$id)->get();
@@ -4454,7 +3502,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
      {
         if($_GET['type']=='building')
         {
-            $land = assetsbuilding::where('id',$type)->get();
+            $land = assetsbuilding::where('id',$type)->where('woip',0)->get();
 
         }else if($_GET['type']=='land')
         {
@@ -4751,6 +3799,385 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
 
     }
     return view('assetsYearlyBuilding',['role'=>$role,'notifications'=>$notifications,'asset'=>$asset,'year'=>$year]);
+
+   }
+
+   public function transfertoWIP($id)
+   {
+
+    $data = assetsbuilding::where('id',$id)->first();
+    $assetland = new assetsworkinprogress();
+    $assetland->assetNumber = $data['assetNumber'];
+    $assetland->assetLocation = $data['assetLocation'];
+    $assetland->assetDescription = $data['assetDescription'];
+    $assetland->assetQuantity = 1;
+    $assetland->Cost = $data['Cost'];
+    $assetland->addedBy = auth()->user()->id;
+    $assetland->bld = $id;
+    $assetland->save();
+
+    $data->woip = 1;
+    $data->save();
+
+    return redirect()->route('assetsWorkinProgress')->with(['message' => 'Asset Redirected Succesfully']);
+
+   }
+
+   public function assessingroup()
+   {
+
+
+       if($_GET['asset'] == 'building'){
+
+        $assetcount = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+        if(count($assetcount)>0)
+        {
+           $kubwa = assetsbuilding::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','desc')->first();
+           $ndogo = assetsbuilding::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','asc')->first();
+
+            $n = $ndogo['id'];
+            $k = $kubwa['id'];
+              for ($x = $n; $x <= $k; $x++)
+           {
+
+                $assetcheck = assetsbuilding::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+                if(count($assetcheck)>0)
+                {
+                    $data = assetsbuilding::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->first();
+
+                    $assetdep = new assetsassesbuilding();
+                    $assetdep->assetID = $x;
+                    $assetdep->assesedBy = auth()->user()->id;
+                    $assetdep->assesmentYear =  date('Y-m-d');
+                    $assetdep->disposalCost = 0;
+                    $assetdep->impairmentLoss = 0;
+                      $time = strtotime($data['assetAcquisitionDate']);
+                      $percent = $data['depreciationRate'];
+                      $cost = $data['Cost'];
+                      $amount = abs(($percent/100)*$cost);
+                      $timed = strtotime($data['depreciationDate']);
+                      $catch =  $time;
+                      $catched = $timed;
+                      $totalyearsc = abs($catched-$catch);
+                      $ds = floor($totalyearsc/(365*60*60*24));
+                      $totalyears = $ds;
+                    $assetdep->totalDepreciatedYears = $totalyears ;
+                    $assetdep->accumulatedDepreciation = $amount*$totalyears;
+                    $assetdep->save();
+
+
+
+                }
+           }
+          return redirect()->route('assetsBuilding')->with(['message' => 'Assets Assessed Successfully!']);
+
+        }else {
+            return redirect()->back()->withErrors(['message' => 'No Assets Found Eligible for Assessment!']);
+        }
+
+
+       }
+       if($_GET['asset'] == 'plantmachinery'){
+
+
+        $assetcount = assetsplantandmachinery::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+        if(count($assetcount)>0)
+        {
+           $kubwa = assetsplantandmachinery::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','desc')->first();
+           $ndogo = assetsplantandmachinery::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','asc')->first();
+
+            $n = $ndogo['id'];
+            $k = $kubwa['id'];
+              for ($x = $n; $x <= $k; $x++)
+           {
+
+                $assetcheck = assetsplantandmachinery::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+                if(count($assetcheck)>0)
+                {
+                    $data = assetsplantandmachinery::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->first();
+
+                    $assetdep = new assetsassesplantandmachinery();
+                    $assetdep->assetID = $x;
+                    $assetdep->assesedBy = auth()->user()->id;
+                    $assetdep->assesmentYear =  date('Y-m-d');
+                    $assetdep->disposalCost = 0;
+                    $assetdep->impairmentLoss = 0;
+                      $time = strtotime($data['assetAcquisitionDate']);
+                      $percent = $data['depreciationRate'];
+                      $cost = $data['Cost'];
+                      $amount = abs(($percent/100)*$cost);
+                      $timed = strtotime($data['depreciationDate']);
+                      $catch =  $time;
+                      $catched = $timed;
+                      $totalyearsc = abs($catched-$catch);
+                      $ds = floor($totalyearsc/(365*60*60*24));
+                      $totalyears = $ds;
+                    $assetdep->totalDepreciatedYears = $totalyears ;
+                    $assetdep->accumulatedDepreciation = $amount*$totalyears;
+                    $assetdep->save();
+
+
+
+                }
+           }
+          return redirect()->route('assetsPlantMachinery')->with(['message' => 'Assets Assessed Successfully!']);
+
+        }else {
+            return redirect()->back()->withErrors(['message' => 'No Assets Found Eligible for Assessment!']);
+        }
+
+    }
+       if($_GET['asset'] == 'motorvehicle'){
+
+
+        $assetcount = assetsmotorvehicle::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+        if(count($assetcount)>0)
+        {
+           $kubwa = assetsmotorvehicle::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','desc')->first();
+           $ndogo = assetsmotorvehicle::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','asc')->first();
+
+            $n = $ndogo['id'];
+            $k = $kubwa['id'];
+              for ($x = $n; $x <= $k; $x++)
+           {
+
+                $assetcheck = assetsmotorvehicle::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+                if(count($assetcheck)>0)
+                {
+                    $data = assetsmotorvehicle::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->first();
+
+                    $assetdep = new assetsassesmotorvehicle();
+                    $assetdep->assetID = $x;
+                    $assetdep->assesedBy = auth()->user()->id;
+                    $assetdep->assesmentYear =  date('Y-m-d');
+                    $assetdep->disposalCost = 0;
+                    $assetdep->impairmentLoss = 0;
+                      $time = strtotime($data['assetAcquisitionDate']);
+                      $percent = $data['depreciationRate'];
+                      $cost = $data['Cost'];
+                      $amount = abs(($percent/100)*$cost);
+                      $timed = strtotime($data['depreciationDate']);
+                      $catch =  $time;
+                      $catched = $timed;
+                      $totalyearsc = abs($catched-$catch);
+                      $ds = floor($totalyearsc/(365*60*60*24));
+                      $totalyears = $ds;
+                    $assetdep->totalDepreciatedYears = $totalyears ;
+                    $assetdep->accumulatedDepreciation = $amount*$totalyears;
+                    $assetdep->save();
+
+
+
+                }
+           }
+          return redirect()->route('assetsMotorVehicle')->with(['message' => 'Assets Assessed Successfully!']);
+
+        }else {
+            return redirect()->back()->withErrors(['message' => 'No Assets Found Eligible for Assessment!']);
+        }
+
+
+           }
+       if($_GET['asset'] == 'computer'){
+
+
+        $assetcount = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+        if(count($assetcount)>0)
+        {
+           $kubwa = assetscomputerequipment::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','desc')->first();
+           $ndogo = assetscomputerequipment::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','asc')->first();
+
+            $n = $ndogo['id'];
+            $k = $kubwa['id'];
+              for ($x = $n; $x <= $k; $x++)
+           {
+
+                $assetcheck = assetscomputerequipment::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+                if(count($assetcheck)>0)
+                {
+                    $data = assetscomputerequipment::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->first();
+
+                    $assetdep = new assetsassescomputerequipment();
+                    $assetdep->assetID = $x;
+                    $assetdep->assesedBy = auth()->user()->id;
+                    $assetdep->assesmentYear =  date('Y-m-d');
+                    $assetdep->disposalCost = 0;
+                    $assetdep->impairmentLoss = 0;
+                      $time = strtotime($data['assetAcquisitionDate']);
+                      $percent = $data['depreciationRate'];
+                      $cost = $data['Cost'];
+                      $amount = abs(($percent/100)*$cost);
+                      $timed = strtotime($data['depreciationDate']);
+                      $catch =  $time;
+                      $catched = $timed;
+                      $totalyearsc = abs($catched-$catch);
+                      $ds = floor($totalyearsc/(365*60*60*24));
+                      $totalyears = $ds;
+                    $assetdep->totalDepreciatedYears = $totalyears ;
+                    $assetdep->accumulatedDepreciation = $amount*$totalyears;
+                    $assetdep->save();
+
+
+
+                }
+           }
+          return redirect()->route('assetsComputerEquipment')->with(['message' => 'Assets Assessed Successfully!']);
+
+        }else {
+            return redirect()->back()->withErrors(['message' => 'No Assets Found Eligible for Assessment!']);
+        }
+
+           }
+       if($_GET['asset'] == 'equipment'){
+
+
+        $assetcount = assetsequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+        if(count($assetcount)>0)
+        {
+           $kubwa = assetsequipment::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','desc')->first();
+           $ndogo = assetsequipment::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','asc')->first();
+
+            $n = $ndogo['id'];
+            $k = $kubwa['id'];
+              for ($x = $n; $x <= $k; $x++)
+           {
+
+                $assetcheck = assetsequipment::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+                if(count($assetcheck)>0)
+                {
+                    $data = assetsequipment::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->first();
+
+                    $assetdep = new assetsassesequipment();
+                    $assetdep->assetID = $x;
+                    $assetdep->assesedBy = auth()->user()->id;
+                    $assetdep->assesmentYear =  date('Y-m-d');
+                    $assetdep->disposalCost = 0;
+                    $assetdep->impairmentLoss = 0;
+                      $time = strtotime($data['assetAcquisitionDate']);
+                      $percent = $data['depreciationRate'];
+                      $cost = $data['Cost'];
+                      $amount = abs(($percent/100)*$cost);
+                      $timed = strtotime($data['depreciationDate']);
+                      $catch =  $time;
+                      $catched = $timed;
+                      $totalyearsc = abs($catched-$catch);
+                      $ds = floor($totalyearsc/(365*60*60*24));
+                      $totalyears = $ds;
+                    $assetdep->totalDepreciatedYears = $totalyears ;
+                    $assetdep->accumulatedDepreciation = $amount*$totalyears;
+                    $assetdep->save();
+
+
+
+                }
+           }
+          return redirect()->route('assetsEquipment')->with(['message' => 'Assets Assessed Successfully!']);
+
+        }else {
+            return redirect()->back()->withErrors(['message' => 'No Assets Found Eligible for Assessment!']);
+        }
+
+
+           }
+       if($_GET['asset'] == 'furniture'){
+
+        $assetcount = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+        if(count($assetcount)>0)
+        {
+           $kubwa = assetsfurniture::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','desc')->first();
+           $ndogo = assetsfurniture::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','asc')->first();
+
+$n = $ndogo['id'];
+$k = $kubwa['id'];
+              for ($x = $n; $x <= $k; $x++)
+           {
+
+                $assetcheck = assetsfurniture::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+                if(count($assetcheck)>0)
+                {
+                    $data = assetsfurniture::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->first();
+
+                    $assetdep = new assetsassesfurniture();
+                    $assetdep->assetID = $x;
+                    $assetdep->assesedBy = auth()->user()->id;
+                    $assetdep->assesmentYear =  date('Y-m-d');
+                    $assetdep->disposalCost = 0;
+                    $assetdep->impairmentLoss = 0;
+                      $time = strtotime($data['assetAcquisitionDate']);
+                      $percent = $data['depreciationRate'];
+                      $cost = $data['Cost'];
+                      $amount = abs(($percent/100)*$cost);
+                      $timed = strtotime($data['depreciationDate']);
+                      $catch =  $time;
+                      $catched = $timed;
+                      $totalyearsc = abs($catched-$catch);
+                      $ds = floor($totalyearsc/(365*60*60*24));
+                      $totalyears = $ds;
+                    $assetdep->totalDepreciatedYears = $totalyears ;
+                    $assetdep->accumulatedDepreciation = $amount*$totalyears;
+                    $assetdep->save();
+
+
+
+                }
+           }
+          return redirect()->route('assetsFurniture')->with(['message' => 'Assets Assessed Successfully!']);
+
+        }else {
+            return redirect()->back()->withErrors(['message' => 'No Assets Found Eligible for Assessment!']);
+        }
+           }
+       if($_GET['asset'] == 'intangible'){
+
+
+        $assetcount = assetsintangible::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+        if(count($assetcount)>0)
+        {
+           $kubwa = assetsintangible::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','desc')->first();
+           $ndogo = assetsintangible::select('id')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->orderBy('id','asc')->first();
+
+            $n = $ndogo['id'];
+            $k = $kubwa['id'];
+              for ($x = $n; $x <= $k; $x++)
+           {
+
+                $assetcheck = assetsintangible::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
+                if(count($assetcheck)>0)
+                {
+                    $data = assetsintangible::where('id',$x)->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->first();
+
+                    $assetdep = new assetsassesintangible();
+                    $assetdep->assetID = $x;
+                    $assetdep->assesedBy = auth()->user()->id;
+                    $assetdep->assesmentYear =  date('Y-m-d');
+                    $assetdep->disposalCost = 0;
+                    $assetdep->impairmentLoss = 0;
+                      $time = strtotime($data['assetAcquisitionDate']);
+                      $percent = $data['depreciationRate'];
+                      $cost = $data['Cost'];
+                      $amount = abs(($percent/100)*$cost);
+                      $timed = strtotime($data['depreciationDate']);
+                      $catch =  $time;
+                      $catched = $timed;
+                      $totalyearsc = abs($catched-$catch);
+                      $ds = floor($totalyearsc/(365*60*60*24));
+                      $totalyears = $ds;
+                    $assetdep->totalDepreciatedYears = $totalyears ;
+                    $assetdep->accumulatedDepreciation = $amount*$totalyears;
+                    $assetdep->save();
+
+
+
+                }
+           }
+          return redirect()->route('assetsIntangible')->with(['message' => 'Assets Assessed Successfully!']);
+
+        }else {
+            return redirect()->back()->withErrors(['message' => 'No Assets Found Eligible for Assessment!']);
+        }
+
+
+    }
 
    }
 //

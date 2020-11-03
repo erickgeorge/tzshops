@@ -100,7 +100,7 @@
             if ($tofautihii > 6) {
                 $wokioda = WorkOrder::where('id',$woclo->id)->first();
                 $wokioda->status = 30;
-                $wokioda->systemclosed = date('Y-m-d');
+                $wokioda->systemclosed = 1;
                 $wokioda->save();
             }
         }

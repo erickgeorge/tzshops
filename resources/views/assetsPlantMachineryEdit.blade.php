@@ -87,17 +87,15 @@ Edit Plant And Machinery Asset
                                     <label for="my-input">Cost/Repairing Cost <sup class="text-danger">*</sup></label>
                                     <input id="quantity" value="{{$item->Cost}}" required min="1" class="form-control" value="1" type="number" name="cost">
                                 </div>
-                                <div class="form-group col">
-                                    <label for="my-input">Quantity <sup class="text-danger">*</sup></label>
-                                    <input id="quantity" value="{{$item->assetQuantity}}" required min="1" class="form-control" value="1" type="number" name="Quantity">
-                                </div>
-                            </div>
-                            <div class="row">
+                                    <input id="quantity" hidden  value="{{$item->assetQuantity}}" required min="1" class="form-control" value="1" type="number" name="Quantity">
+
+
                                 <div class="form-group col">
                                     <label for="my-input">Date of Acquisition <sup class="text-danger">*</sup></label>
                                     <input id="acdate"  value="{{$item->assetAcquisitionDate}}" max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date of Acquisition" type="date" name="DateofAcquisition">
-                                </div>
-                                <div class="form-group col">
+                                </div> </div>
+                                <div class="row">
+                                <div class="form-group col-md-6">
                                     <label for="my-input">Date in Use <sup class="text-danger">*</sup></label>
                                     <input id="usedate" required value="{{$item->assetDateinUse}}"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">
                                 </div>
@@ -110,14 +108,13 @@ Edit Plant And Machinery Asset
             <br>
             <br>
             <div class="row">
-                <div class="form-group col-md-2">
-                    <button id="newcard" class="form-control btn btn-primary" name="newcard">Save</button>
-                </div>
-                <div class="form-group col-md-2">
-                    <a href="{{route('assetsPlantMachineryView',[$item->id])}}" class="form-control btn btn-danger" name="newcard">Cancel</a>
-                </div>
+                    <button id="newcard" class=" btn btn-primary" name="newcard">Save</button>
+                    &nbsp;
+                    <a href="{{route('assetsPlantMachineryView',[$item->id])}}" class=" btn btn-danger" name="newcard">Cancel</a>
+
             </div>
         </form>
+        <br>
         @endforeach
 
 

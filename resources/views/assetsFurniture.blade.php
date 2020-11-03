@@ -126,7 +126,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture6)>0)
                                         {{count($furniture6)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture6)}}
                                 @endif
@@ -171,10 +171,15 @@ Furniture Assets
     </div>
     <br>
     <div class="row">
-        <div class="col">
+        <div class="col-md-8">
 
         </div>
-        <div class="col-md-3 text-right">
+        <div class="col-md-2 text-right">
+
+                <a href='{{route('assessingroup')}}?asset=furniture' class="btn btn-primary" title="assess all furniture assets"> Assess </a>
+
+        </div>
+        <div class="col-md-2 text-right">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
         </div>

@@ -171,10 +171,16 @@ use App\assetsassesmotorvehicle;
     </div>
     <br>
     <div class="row">
-        <div class="col">
+
+        <div class="col-md-8">
 
         </div>
-        <div class="col-md-3 text-right">
+        <div class="col-md-2 text-right">
+
+                <a href='{{route('assessingroup')}}?asset=motorvehicle' class="btn btn-primary" title="assess all furniture assets"> Assess </a>
+
+        </div>
+        <div class="col-md-2 text-right">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
         </div>

@@ -99,7 +99,7 @@ tr:nth-child(even) {
                 $data = assetsplantandmachinery::where('id',$items->assetID)->first();
             }else if($_GET['asset']=='Building')
             {
-                $data = assetsbuilding::where('id',$items->assetID)->first();
+                $data = assetsbuilding::where('id',$items->assetID)->where('woip',0)->first();
             }else if($_GET['asset']=='Land')
             {
                 $data = assetsland::where('id',$items->assetID)->first();

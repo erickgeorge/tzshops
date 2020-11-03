@@ -147,7 +147,7 @@ tr:nth-child(even) {
 
             }else if($_GET['asset']=='Building')
             {
-            $data = assetsbuilding::where('id',$items->assetID)->first();
+            $data = assetsbuilding::where('id',$items->assetID)->where('woip',0)->first();
             $asseted = assetsassesbuilding::orderBy('assesmentYear','Desc') ->where('assetID',$data->assetID)->first();
 
             }else if($_GET['asset']=='Land')

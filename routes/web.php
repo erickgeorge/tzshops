@@ -966,4 +966,7 @@ Route::get('exportdeactivatedusers','NotesController@exportdeactivatedusers')->n
 Route::get('readcomments','MinuteController@readcomments')->name('readcomments')->middleware('auth');
 Route::get('sendcomments','MinuteController@sendcomments')->name('sendcomments')->middleware('auth');
 Route::post('sendcomment','MinuteController@sendcomment')->name('sendcomment')->middleware('auth');
+Route::get('transfertoWIP/{id}','AssetsController@transfertoWIP')->name('transfertoWIP')->middleware('auth');
+
+Route::get('assessingroup','AssetsController@assessingroup')->name('assessingroup')->middleware('auth');
 //

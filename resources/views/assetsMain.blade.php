@@ -111,16 +111,16 @@ use App\assetsworkinprogress;
                                 <td>1</td>
                                 <td>Building Assets</td>
                                 @php
-                                    $build = assetsbuilding::where('_condition','New')->get();
-                                    $build2 = assetsbuilding::where('_condition','Good')->get();
-                                    $build3 = assetsbuilding::where('_condition','Fair')->get();
-                                    $build4 = assetsbuilding::where('_condition','Poor')->get();
-                                    $build5 = assetsbuilding::where('_condition','Very Poor')->get();
-                                    $build6 = assetsbuilding::where('_condition','Obsolete')->get();
-                                    $build7 = assetsbuilding::where('_condition','Disposed')->get();
-                                    $build8 = assetsbuilding::where('_condition','Sold')->get();
-                                    $build10 = assetsbuilding::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
-                                    $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                                    $build = assetsbuilding::where('_condition','New')->where('woip',0)->get();
+                                    $build2 = assetsbuilding::where('_condition','Good')->where('woip',0)->get();
+                                    $build3 = assetsbuilding::where('_condition','Fair')->where('woip',0)->get();
+                                    $build4 = assetsbuilding::where('_condition','Poor')->where('woip',0)->get();
+                                    $build5 = assetsbuilding::where('_condition','Very Poor')->where('woip',0)->get();
+                                    $build6 = assetsbuilding::where('_condition','Obsolete')->where('woip',0)->get();
+                                    $build7 = assetsbuilding::where('_condition','Disposed')->where('woip',0)->get();
+                                    $build8 = assetsbuilding::where('_condition','Sold')->where('woip',0)->get();
+                                    $build10 = assetsbuilding::select('assetEndingDepreciationDate')->where('woip',0)->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
+                                    $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('woip',0)->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
 
                                 @endphp
                                 <td>
@@ -166,7 +166,7 @@ use App\assetsworkinprogress;
                                 <td>
                                     @if (count($build6)>0)
                                         {{count($build6)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($build6)}}
                                 @endif
@@ -263,7 +263,7 @@ use App\assetsworkinprogress;
                                     <td>
                                         @if (count($computerequipment6)>0)
                                             {{count($computerequipment6)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment6)}}
                                     @endif
@@ -359,7 +359,7 @@ use App\assetsworkinprogress;
                                 <td>
                                     @if (count($equipment6)>0)
                                         {{count($equipment6)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=equipments&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($equipment6)}}
                                 @endif
@@ -455,7 +455,7 @@ use App\assetsworkinprogress;
                                 <td>
                                     @if (count($furniture6)>0)
                                         {{count($furniture6)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture6)}}
                                 @endif
@@ -551,7 +551,7 @@ use App\assetsworkinprogress;
                                 <td>
                                     @if (count($intangible6)>0)
                                         {{count($intangible6)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=intangible&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($intangible6)}}
                                 @endif
@@ -647,7 +647,7 @@ use App\assetsworkinprogress;
                                 <td>
                                     @if (count($land6)>0)
                                         {{count($land6)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($land6)}}
                                 @endif
@@ -743,7 +743,7 @@ use App\assetsworkinprogress;
                                 <td>
                                     @if (count($motorvehicle6)>0)
                                         {{count($motorvehicle6)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=motorvehicle&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=motorvehicle&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($motorvehicle6)}}
                                 @endif
@@ -839,7 +839,7 @@ use App\assetsworkinprogress;
                                 <td>
                                     @if (count($plantandmachinery6)>0)
                                         {{count($plantandmachinery6)}}
-                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=plantandmachinery&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($plantandmachinery6)}}
                                 @endif
@@ -911,7 +911,7 @@ use App\assetsworkinprogress;
                         @php
 
 $land = assetsland::get();
-$building = assetsbuilding::get();
+$building = assetsbuilding::where('woip',0)->get();
 $computerequipment = assetscomputerequipment::get();
 $equipment = assetsequipment::get();
 $furniture = assetsfurniture::get();
@@ -1120,9 +1120,9 @@ $overall = $overall + +$workinprogress->Cost;
                         <tfoot>
                             <tr class="text-right thead-light text-bold">
 
-                               
+
                                 <th colspan="3"  style='text-align:right;'>TOTAL VALUE</th>
-                               
+
                                 <th  style="text-align:right;">
                                     @php
                                         $total10 = $overall;
