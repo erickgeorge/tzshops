@@ -71,22 +71,22 @@ use Illuminate\Support\Facades\DB;
                     <tbody>
                         <tr>
                             @php
-                            $build = assetsbuilding::where('_condition','New')->where('woip',0)->get();
-                            $build2 = assetsbuilding::where('_condition','Good')->where('woip',0)->get();
-                            $build3 = assetsbuilding::where('_condition','Fair')->where('woip',0)->get();
-                            $build4 = assetsbuilding::where('_condition','Poor')->where('woip',0)->get();
-                            $build5 = assetsbuilding::where('_condition','Very Poor')->where('woip',0)->get();
-                            $build6 = assetsbuilding::where('_condition','Obsolete')->where('woip',0)->get();
-                            $build7 = assetsbuilding::where('_condition','Disposed')->where('woip',0)->get();
-                            $build8 = assetsbuilding::where('_condition','Sold')->where('woip',0)->get();
-                            $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('woip',0)->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
+                            $build = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','New')->where('woip',0)->get();
+                            $build2 = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Good')->where('woip',0)->get();
+                            $build3 = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Fair')->where('woip',0)->get();
+                            $build4 = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Poor')->where('woip',0)->get();
+                            $build5 = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Very Poor')->where('woip',0)->get();
+                            $build6 = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Obsolete')->where('woip',0)->get();
+                            $build7 = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Disposed')->where('woip',0)->get();
+                            $build8 = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Sold')->where('woip',0)->get();
+                            $build9 = assetsbuilding::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('woip',0)->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             $build10 = assetsbuilding::select('assetEndingDepreciationDate')->where('woip',0)->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
 
                         @endphp
                         <td>
                         @if (count($build)>0)
                                 {{count($build)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build)}}
                         @endif
@@ -94,7 +94,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build2)>0)
                                 {{count($build2)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build2)}}
                         @endif
@@ -102,7 +102,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build3)>0)
                                 {{count($build3)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build3)}}
                         @endif
@@ -110,7 +110,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build4)>0)
                                 {{count($build4)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build4)}}
                         @endif
@@ -118,7 +118,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build5)>0)
                                 {{count($build5)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build5)}}
                         @endif
@@ -126,7 +126,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build6)>0)
                                 {{count($build6)}}
-                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build6)}}
                         @endif
@@ -134,7 +134,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build7)>0)
                                 {{count($build7)}}
-                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build7)}}
                         @endif
@@ -142,7 +142,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build8)>0)
                                 {{count($build8)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build8)}}
                         @endif
@@ -150,7 +150,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build10)>0)
                                 {{count($build10)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build10)}}
                         @endif
@@ -158,7 +158,7 @@ use Illuminate\Support\Facades\DB;
                         <td>
                             @if (count($build9)>0)
                                 {{count($build9)}}
-                                &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=building&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                             @else
                                 {{count($build9)}}
                         @endif

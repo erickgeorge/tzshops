@@ -72,21 +72,21 @@ Furniture Assets
                     <tbody>
                         <tr>
                             @php
-                                $furniture = assetsfurniture::where('_condition','New')->get();
-                                $furniture2 = assetsfurniture::where('_condition','Good')->get();
-                                $furniture3 = assetsfurniture::where('_condition','Fair')->get();
-                                $furniture4 = assetsfurniture::where('_condition','Poor')->get();
-                                $furniture5 = assetsfurniture::where('_condition','Very Poor')->get();
-                                $furniture6 = assetsfurniture::where('_condition','Obsolete')->get();
-                                $furniture7 = assetsfurniture::where('_condition','Disposed')->get();
-                                $furniture8 = assetsfurniture::where('_condition','Sold')->get();
-                            $furniture10 = assetsfurniture::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
+                                $furniture = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','New')->get();
+                                $furniture2 = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Good')->get();
+                                $furniture3 = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Fair')->get();
+                                $furniture4 = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Poor')->get();
+                                $furniture5 = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Very Poor')->get();
+                                $furniture6 = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Obsolete')->get();
+                                $furniture7 = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Disposed')->get();
+                                $furniture8 = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Sold')->get();
+                            $furniture10 = assetsfurniture::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $furniture9 = assetsfurniture::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                                                <td>
                                 @if (count($furniture)>0)
                                         {{count($furniture)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture)}}
                                 @endif
@@ -94,7 +94,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture2)>0)
                                         {{count($furniture2)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture2)}}
                                 @endif
@@ -102,7 +102,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture3)>0)
                                         {{count($furniture3)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture3)}}
                                 @endif
@@ -110,7 +110,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture4)>0)
                                         {{count($furniture4)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture4)}}
                                 @endif
@@ -118,7 +118,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture5)>0)
                                         {{count($furniture5)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture5)}}
                                 @endif
@@ -126,7 +126,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture6)>0)
                                         {{count($furniture6)}}
-                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture6)}}
                                 @endif
@@ -134,7 +134,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture7)>0)
                                         {{count($furniture7)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture7)}}
                                 @endif
@@ -142,7 +142,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture8)>0)
                                         {{count($furniture8)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture8)}}
                                 @endif
@@ -150,7 +150,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture10)>0)
                                         {{count($furniture10)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture10)}}
                                 @endif
@@ -158,7 +158,7 @@ Furniture Assets
                                 <td>
                                     @if (count($furniture9)>0)
                                         {{count($furniture9)}}
-                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                        &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=furniture&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                     @else
                                         {{count($furniture9)}}
                                 @endif

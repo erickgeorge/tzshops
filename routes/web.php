@@ -910,6 +910,8 @@ Route::POST('assetsAssesLandSave','AssetsController@assetsAssesLandSave')->name(
 
 //export assets - in format
 Route::get('assetExcel/export/','ExcelController@export')->name('assetExcel/export/')->middleware('auth');
+Route::get('assetExcel/bexport/','ExcelController@bexport')->name('assetExcel/bexport/')->middleware('auth');
+
 Route::get('assetinfo/export/{id}/{type}','AssetsController@exportinfo')->name('assetinfo/export/')->middleware('auth');
 Route::get('asset/assesment/export/{type}','AssetsController@assesExport')->name('asset/assesment/export/')->middleware('auth');
 Route::get('assetssummaryall','AssetsController@assetssummaryall')->name('assetssummaryall')->middleware('auth');

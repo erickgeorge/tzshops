@@ -3980,7 +3980,7 @@ $areaaa = Block::select('name_of_block')->where('id',$_GET['location'])->get();
            }
        if($_GET['asset'] == 'computer'){
 
-
+ 
         $assetcount = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','<>','Sold')->where('_condition','<>','Disposed')->get();
         if(count($assetcount)>0)
         {
