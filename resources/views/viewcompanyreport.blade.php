@@ -60,7 +60,7 @@ Company report
                <div class="col"> From <input name="start" value="<?php
                 if (request()->has('start')) {
                     echo $_GET['start'];
-                } ?>"  class="form-control mr-sm-2"type="month" placeholder="Start Month"
+                } ?>"  class="form-control mr-sm-2" type="month" placeholder="Start Month"
                                max="<?php echo date('Y-m'); ?>">
                 </div>
 

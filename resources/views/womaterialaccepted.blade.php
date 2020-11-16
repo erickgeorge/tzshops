@@ -59,10 +59,10 @@
 
                 <tr> <td>{{$i++}}</td>
                     <td>00{{ $item->work_order_id }}</td>
-                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{ $item['usermaterial']->fname.' '.$item['usermaterial']->lname }}</td>
 
                     <td>{{ $item['workorder']->details }}</td>
-                    <td>{{ $item['acceptedby']->name }}</td>
+                    <td>{{ $item['acceptedby']->fname.' '.$item['acceptedby']->lname}}</td>
 
                     <td>
 

@@ -86,7 +86,8 @@
         use Carbon\Carbon;
         use App\Notification;
 
-               $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+      
+          $notifications = Notification::where('status','<>',10)->where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
 
         // closing work order by default
@@ -198,7 +199,7 @@
 
                        @endif
 
-                     @if(auth()->user()->type == 'Dvc Accountant')
+                     @if((auth()->user()->type == 'Dvc Accountant') || (auth()->user()->type == 'Warden'))
                          <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
                   </li>
@@ -230,7 +231,7 @@
 
               @endif
 
-                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principal')||(auth()->user()->type == 'Directorate Director'))
+                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principal')||(auth()->user()->type == 'Directorate Director') ||(auth()->user()->type == 'Dean'))
 
 
                <li class="nav-item">
@@ -243,7 +244,7 @@
 
 
 
-                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping'))
+                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Deputy Manager Mabibo')||(auth()->user()->type == 'Deputy Manager Magufuli')||(auth()->user()->type == 'Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi'))
 
                         <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
@@ -594,8 +595,9 @@
                         <i class="fa fa-bell"></i>
                          <span class="badge badge-light">{{ count($notifications) }}</span></a>
                     <div class="dropdown-menu dropdown-menu-right" style="background-color: #376ad3; color: white;" aria-labelledby="navbarDropdown">
-                        @foreach($notifications as $notification)
-                            @if($notification->type == 'wo_rejected')
+                    
+                     @foreach($notifications as $notification)
+                           
                                 <a class="dropdown-item"
                                    onclick="event.preventDefault();
                                            document.getElementById('{{ 'reject-'.$notification->id }}').submit();">
@@ -603,23 +605,12 @@
                                 </a>
 
                                 <form id="{{ 'reject-'.$notification->id }}"
-                                      action="{{ route('notify.read', [$notification->id, 'reject']) }}" method="POST"
+                                      action="{{ route('notify.read', [$notification->id]) }}" method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>
-                            @else
-                                <a class="dropdown-item"
-                                   onclick="event.preventDefault();
-                                           document.getElementById('{{ 'accept-'.$notification->id }}').submit();">
-                                    {{ $notification->message }}
-                                </a>
-
-                                <form id="{{ 'accept-'.$notification->id }}"
-                                      action="{{ route('notify.read', [$notification->id, 'accept']) }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            @endif
+                    
+                     
                         @endforeach
                         {{--<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Clear notifications</a>--}}
@@ -786,7 +777,7 @@
         Cleaning Areas
     </a>
 @endif
-     @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'USAB'))
+     @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Supervisor Landscaping')|| (auth()->user()->type == 'Warden') )
 
     <a  href="{{ url('tender')}}">
         Tenders
@@ -794,8 +785,7 @@
 
      @endif
 
-      @if(auth()->user()->type != 'Dvc Accounta
-      nt')
+      @if(auth()->user()->type != 'Dvc Accountant')
      <a href="{{ url('assessmentsheet')}}">Assessment Sheets
     </a>
 

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    works orders
+Rejected Material(s)
     @endSection
 
 @section('body')
@@ -16,15 +16,11 @@
     <br>
      @if(count($items) > 0)
     <div class="row container-fluid">
-       @if(auth()->user()->type != 'Inspector Of Works')
+    
         <div class="col-lg-12">
-            <h5 style=" "  ><b  >Material Rejected by Inspector of Works  </b></h5>
+            <h5 style=" "  ><b  >Rejected Material(s)</b></h5>
         </div>
-        @else
-        <div class="col-lg-12">
-            <h5 align="center"><b>REJECTED MATERIAL </b></h5>
-        </div>
-        @endif
+       
 
     </div>
     <br>
@@ -184,16 +180,14 @@
      <div class="modal fade" id="exampleModali" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
          <div >
-         <div class="modal-dialog" style="padding-right: 655px; background-color: white" role="document">
+         <div class="modal-dialog"  background-color: white" role="document">
          <div class="modal-content">
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-left:600px; ">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+              
 
                     <div class="modal-header ">
                      <div>
-                        <h5  style="width: 600px;" id="exampleModalLabel">Request material again.</h5>
+                        <h5  style="width: 450px;" id="exampleModalLabel">Request material again.</h5>
                         <hr>
                     </div>
                   </div>
@@ -207,11 +201,11 @@
 
 
                        <div class="form-group">
-                            <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
+                            <select  required class="custom-select"  id="materialedit" name="material" style="width: 440px">
                                 <option   selected value=" @foreach($items as $item)
-  {{ $item['material']->id }}"> {{$item['material']->name }}, Description: ({{ $item['material']->description }}), Value: ({{ $item['material']->brand }}), Type: ({{ $item['material']->type }})@endforeach</option>
+  {{ $item['material']->id }}"> {{$item['material']->name }}, {{ $item['material']->description }},   {{ $item['material']->brand }},   {{ $item['material']->type }} @endforeach</option>
                                 @foreach($materials as $material)
-                                   <option value="{{ $material->id }}">{{ $material->name.', Description:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
+                                   <option value="{{ $material->id }}">{{ $material->name.',  '.$material->description.' ,  '.$material->brand.'  ,   '.$material->type.' ' }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -219,15 +213,20 @@
 
                          <div class="form-group">
                             <label for="name_of_house">Quantity  </label>
-                            <input style="color: black;width:550px" type="number" required class="form-control"      id="editmaterial"
-                                   name="quantity" placeholder="Enter quantity again">
+                            <input style="color: black;width:440px" type="number" required class="form-control"      id="editmaterial"
+                                   name="quantity" placeholder="Enter quantity again" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
                             <input id="edit_mat" name="edit_mat" hidden>
                          </div>
-                                                    <div>
-                                                       <button style=" width: 205px;" type="submit" class="btn btn-primary">Save
-                                                       </button>
 
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                    <div class="row">
+                                                      <div class="col">
+                                                       <button type="submit" class="btn btn-primary">Save
+                                                       </button>
+                                                       </div>
+                                                         <div class="col">
+                                                       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                     </div>
                                                     </div>
 
                                             </form>
@@ -255,7 +254,7 @@
 
 
     @else
-            <h4 class="text-center" style="margin-top: 150px ; text-transform: uppercase;">no material rejected by Inspector of Works</h4>
+            <h4 class="text-center" style="margin-top: 150px ;">No Materials Rejected by Inspector of Works</h4>
         @endif
     <!-- End Modals-->
 

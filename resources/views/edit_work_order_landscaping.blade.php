@@ -459,7 +459,7 @@ var total=2;
 
  <table class="table table-striped  display" style="width:100%">
   <thead>
-  <tr style="color:white;"><th>Area name</th><th>Total score</th><th>Monthly payment</th><th>Ammount to be paid</th></tr>
+  <tr style="color:white;"><th>Area name</th><th>Total score</th><th>Monthly payment</th><th>Amount to be paid</th></tr>
  </thead>
 
 
@@ -534,16 +534,8 @@ var total=2;
 
 
 
-
-
-
-
  <!-- begin of assessment activity -->
-
-
  @if(count($crosscheckassessmmentactivity) > 0)
-
-
   @if(($assesment->a_rejected_by != null))
   <b>Rejected by Estates Officer : {{ $assesment['rejection']->fname .' ' . $assesment['rejection']->lname }}  on:  {{ date('d F Y', strtotime($assesment->rejected_on))}}   <td> <a onclick="myfunc5('{{$assesment->reason}}')"><span data-toggle="modal" data-target="#viewreason"
                                                                          class="badge badge-danger">View Reason</span></a></td></b><br>@endif
@@ -551,40 +543,48 @@ var total=2;
    @if(($assesment->es_rejected_by != null))
 
   <b>Rejected by Estates Director : {{ $assesment['rejectionestate']->fname .' ' . $assesment['rejectionestate']->lname }}  on: {{ date('d F Y', strtotime($assesment->esrejected_on)) }}     <td> <a onclick="myfunc6('{{$assesment->reasonestate}}')"><span data-toggle="modal" data-target="#viewreasonestate"
-                                                                         class="badge badge-danger">View Reason</span></a></td></b> @endif
+                                                                         class="badge badge-danger">View Reason</span></a></td></b>
+                                                                          <br> @endif
 
 
-  <br>
-
+ 
 
 
    @if(($assesment->dvc_rejected_by != null))
 
   <b>Rejected by {{$assesment['rejectiondvc']->type}} : {{ $assesment['rejectiondvc']->fname .' ' . $assesment['rejectiondvc']->lname }}  on: {{ date('d F Y', strtotime($assesment->dvcrejected_on)) }}     <td> <a onclick="myfunc7('{{$assesment->reasondvc}}')"><span data-toggle="modal" data-target="#viewreasondean"
-                                                                         class="badge badge-danger">View Reason</span></a></td></b> @endif
+                                                                         class="badge badge-danger">View Reason</span></a></td></b> 
+                                                                         <br>@endif
 
 
-  <br>
-  <br>
+  
+  
 
 
      @if(($assesment->dean_rejected_by != null))
 
   <b>Rejected by {{$assesment['deanreject']->type}} : {{ $assesment['deanreject']->fname .' ' . $assesment['deanreject']->lname }}  on: {{ date('d F Y', strtotime($assesment->deanrejected_on)) }}     <td> <a onclick="myfunc8('{{$assesment->reasondean}}')"><span data-toggle="modal" data-target="#viewreasondeanonly"
                                                                          class="badge badge-danger">View Reason</span></a></td></b> @endif
-
-
 <br>
 <br>
+
+
+
+  @if(($assesment->status == 50)||($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 2)||($assesment->status2 == 50))
+
+  <b>Approved by {{ $assesment['deputyuser']->type }} : {{ $assesment['deputyuser']->fname .' ' . $assesment['deputyuser']->lname }} on:  {{ date('d F Y', strtotime($assesment->deputy_date))}}  </b>
+  <br>
+  <br>
+  @endif
 
 
   @if(($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 2))
 
-  <b>Approved by Dean of Student : {{ $assesment['deanstudent']->fname .' ' . $assesment['deanstudent']->lname }} on:  {{ date('d F Y', strtotime($assesment->dean_date))}}  </b> <br>
+  <b>Approved by {{ $assesment['deanstudent']->type }} : {{ $assesment['deanstudent']->fname .' ' . $assesment['deanstudent']->lname }} on:  {{ date('d F Y', strtotime($assesment->dean_date))}}  </b> <br><br>
 
    @elseif(($assesment->status == 1)||($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5) and ($assesment->status2 == 4))
 
-  <b>Approved by {{ $assesment['principles']->type }} : {{ $assesment['principles']->fname .' ' . $assesment['principles']->lname }} on:  {{ date('d F Y', strtotime($assesment->principle_date))}}  </b> <br>
+  <b>Approved by {{ $assesment['principles']->type }} : {{ $assesment['principles']->fname .' ' . $assesment['principles']->lname }} on:  {{ date('d F Y', strtotime($assesment->principle_date))}}  </b> <br><br>
 
   @else
    @if((auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'USAB') || (auth()->user()->type == 'Administrative officer'))
@@ -593,14 +593,48 @@ var total=2;
   @endif
 
 
+
   @if(($assesment->status == 2)||($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
   <b>Approved by Estates Officer : {{ $assesment['approval']->fname .' ' . $assesment['approval']->lname }} on:  {{ date('d F Y', strtotime($assesment->accepted_on))}}  </b>
   @endif
-  <br>
+  <br><br>
 
 
-  @if(auth()->user()->type == 'Dean of Student')
+  @if(auth()->user()->type == 'Deputy Manager Mabibo')
   @if(($assesment->status == 1) and ($assesment->status2 == 1) )
+  <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 800px;">Approve <a href="{{route('approveassessmentdeputy', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
+     <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#deanonly"
+                                                            style="color: green;"
+                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
+ @endif
+ @endif
+
+
+  @if(auth()->user()->type == 'Deputy Manager Magufuli')
+  @if(($assesment->status == 1) and ($assesment->status2 == 1) )
+  <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 800px;">Approve <a href="{{route('approveassessmentdeputy', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
+     <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#deanonly"
+                                                            style="color: green;"
+                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
+  @endif
+  @endif
+
+
+  @if(auth()->user()->type == 'Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi')
+  @if(($assesment->status == 1) and ($assesment->status2 == 1) )
+  <?php $tender = Crypt::encrypt($assesment->company); ?>
+  <b style="padding-left: 800px;">Approve <a href="{{route('approveassessmentdeputy', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
+     <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#deanonly"
+                                                            style="color: green;"
+                                           data-toggle="tooltip" title="Reject assessment form with reason "><i  class="fas fa-times-circle" style="color: red" ></i></a> </b>
+  @endif
+  @endif
+
+
+  @if(auth()->user()->type == 'USAB')
+  @if(($assesment->status == 50) and ($assesment->status2 == 50) )
   <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 800px;">Approve <a href="{{route('approveassessmentdean', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
      <b style="padding-left: 800px;">Reject <a data-toggle="modal" data-target="#deanonly"
@@ -610,7 +644,8 @@ var total=2;
  @endif
 
 
- @if((auth()->user()->type == 'Principal') || (auth()->user()->type == 'Directorate Director') || (auth()->user()->type == 'Dean of Student'))
+
+ @if((auth()->user()->type == 'Principal') || (auth()->user()->type == 'Estates Director') || (auth()->user()->type == 'Dean'))
   @if(($assesment->status == 1) and ($assesment->status2 == 3) )
   <?php $tender = Crypt::encrypt($assesment->company); ?>
   <b style="padding-left: 800px;">Approve <a href="{{route('approveassessmentprinciple', [$assesment->assessment_id , $tender , $assesment->month])}}" title="Approve assessment form  "><i style="color: blue;" class="far fa-check-circle"></i> </a></b> <br>
@@ -643,6 +678,7 @@ var total=2;
 
   @if(($assesment->status == 3)||($assesment->status == 4)||($assesment->status == 5))
   <b>Approved by Estates Director : {{ $assesment['approvalpayment']->fname .' ' . $assesment['approvalpayment']->lname }}  on: {{ date('d F Y', strtotime($assesment->approved_on))}}</b>
+  <br>
   <br>
  @endif
 

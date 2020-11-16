@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    store
+  Works Orders Needs Material(s)
     @endSection
 
 @section('body')
@@ -15,7 +15,7 @@
    <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5><b >Works Order Needs Material(s) </b></h5>
+            <h5><b >Works Orders Needs Material(s) </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -91,7 +91,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-          <h5><b >Works Order Needs Material(s) </b></h5>
+          <h5><b >Works Orders Needs Material(s) </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">

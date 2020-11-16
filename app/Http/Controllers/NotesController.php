@@ -1336,27 +1336,30 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 
 
+
+
           public function trendingscorereport(request $request ,$tender , $company){
          $tenders = Crypt::decrypt($tender);
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
+     
          if($request['start'] and $request['end']){
 
 
-
-            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
-            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
+        $from=request('start');
+        $to=request('end');
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-
-        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
-        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
+            $to=request('start');
+        $from=request('end');
         }// start> end
+
+
 
 
            $data = [
@@ -1379,7 +1382,8 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
               }
 
               else{
-                if($request['start']==''){
+
+         if($request['start']==''){
 
            $data = [
             'notifications' => $notifications,
@@ -1391,18 +1395,21 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                     ->groupBy('area')->get()
                ];
           }
-            if($request['start']){
+          if($request['start']){
+
+              $from= $request['start'];
+              $to= Carbon::now();
 
            $data = [
             'notifications' => $notifications,
             'role' => $role,
-             'assessmmentcompanyname' => landcrosschecklandassessmentactivity::where('company', $tenders)->where('month', $request['start'])->select(DB::raw('sum(score) as erick , month'))
+             'assessmmentcompanyname' => landcrosschecklandassessmentactivity::where('company', $tenders)->whereBetween('month', [$from, $to])->select(DB::raw('sum(score) as erick , month'))
                     ->groupBy('month')->orderby('month','DESC')->get(),
                     'compa'=>$company,
-            'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tenders)->where('month', $request['start'])->select(DB::raw('area'))
+             'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tenders)->whereBetween('month', [$from, $to])->select(DB::raw('area'))
                     ->groupBy('area')->get()
-               ];
-
+              
+              ];
           }
 
           if($data['assessmmentcompanyname'] ->isEmpty()) {
@@ -1410,7 +1417,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             else{
                  $pdf = PDF::loadView('trendingscorereport', $data);
 
-        return $pdf->stream('trending_month_score - '.date('d-m-Y Hi').'.pdf');
+             return $pdf->stream('trending_month_score - '.date('d-m-Y Hi').'.pdf');
             }
 
               }
@@ -1622,18 +1629,16 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
            if($request['start'] and $request['end'])  { //date filter
 
 
-
-            $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
-            $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
+        $from=request('start');
+        $to=request('end');
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
         if(request('start')>request('end')){
-
-        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
-        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
+            $to=request('start');
+        $from=request('end');
         }// start> end
 
 

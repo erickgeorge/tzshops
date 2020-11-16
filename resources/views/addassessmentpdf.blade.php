@@ -112,18 +112,18 @@ tr:nth-child(even) {
    @foreach($company as $companyiii)
    <?php $ii++; ?>
 
-    <div class="row container-fluid">
-        <div class="col-lg-12">
+   <div class="row">
 
-            <h5><b>Sheet No: {{$ii}}</b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b> <u> Sheet name: &nbsp; {{ $companyiii->sheet  }}</u></b></h5>
+    <div class="input-group mb-3 col">
+
+             Sheet name: &nbsp;<b><u> {{ $companyiii->sheet  }}</u></b>
         </div>
     </div>
 
+<br>
 
 
 
-
-    <br>
      <div class="row">
 
 
@@ -131,7 +131,7 @@ tr:nth-child(even) {
 
     <div class="input-group mb-3 col">
 
-     Area Name:<b><u> {{$companyiii['are_a']->cleaning_name }}</u> </b>
+     Area Name: &nbsp;<b><u> {{$companyiii['are_a']->cleaning_name }}</u> </b>
 
     </div>
 

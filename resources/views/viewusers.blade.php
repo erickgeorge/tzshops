@@ -942,7 +942,8 @@ else {
 
       @if( $user->type == "Inspector Of Works")
       <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
-
+      @elseif( $user->type == "Warden")
+      <td style="text-transform: capitalize;">{{ $user->type }}   @if(( $user->hostel == "Magufuli")||( $user->hostel == "Mabibo")) <h7 style="color: green;" >{{ $user->hostel }} - {{ $user->block }}</h7>@else <h7 style="color: green;" >{{ $user->hostel }}</h7> @endif</td>
       @else
          @if(strpos( $user->type, "HOS") !== false)
              <td style="text-transform: capitalize;"> HoS <?php echo substr(strtolower($user->type), 4, 14)?> </td>

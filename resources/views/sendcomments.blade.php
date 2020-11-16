@@ -6,6 +6,8 @@ Comments/ Feedback    @endSection
 @php
     use App\User;
 @endphp
+
+<br>
 <div class="container">
     <div class="row">
         <div class="col-lg-12" >
@@ -37,7 +39,7 @@ Comments/ Feedback    @endSection
             @if(count($data)>0)
             @foreach ($data as $item)
 
-            <div class="card"  style=" background-color:#8080807a;">
+            <div class="card">
 
                 <div class="card-body">
                     <p class="card-text">
@@ -51,6 +53,7 @@ Comments/ Feedback    @endSection
 $userf  = User::where('id',$item->sender)->first();
             @endphp <b> {{$userf['fname']}} {{$userf['mid_name']}} {{$userf['lname']}} </b> @endif
 
+            <br>
             <br>
             @endforeach
             @else

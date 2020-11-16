@@ -76,6 +76,31 @@ class UserController extends Controller
         }
 
 
+        if ($request['type'] == 'Warden') {
+         
+         if (($request['hostel'] == 'Mabibo')||($request['hostel'] == 'Magufuli')){
+            $user->hostel = $request['hostel'];
+            $user->block = $request['block']; 
+
+            $request->validate([
+            'block' => 'required',
+             'hostel' => 'required'
+
+               ]);
+          }
+
+          elseif(($request['halls'] != 'Mabibo') and ($request['halls'] != 'Magufuli')){
+            $user->hostel = $request['halls'];
+
+               $request->validate([
+            'halls' => 'required'
+               ]);
+
+          }
+
+        }
+
+
 
         $user->section_id = $request['department'];
         $user->password = bcrypt($request['name'].'@esmis');
@@ -432,25 +457,10 @@ class UserController extends Controller
 
 
          public function changeProfile(Request $request){
-            if ($request->Image!='') {
-        $request->validate(['Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
-            }
-        $request->validate([
-            'email' => 'required',
-            'phone' => 'required',
-
-
-        ]);
-        $user = User::find(auth()->user()->id);
-
-         $user->email = $request['email'];
-        $user->phone = $request['phone'];
-            $user->save();
-
 
 
         $user = Auth::user();
-        if ($request->Image!='') {
+       
         $cover = $request->file('Image');
         $extension = $cover->getClientOriginalExtension();
         Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
@@ -458,7 +468,7 @@ class UserController extends Controller
         $user->avatar = $cover->getFilename().'.'.$extension;
         $user->save();
 
-}
+
 
 
 return redirect()->route('myprofile')->with(['message' => 'Profile updated successfully']);

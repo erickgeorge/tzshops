@@ -227,6 +227,7 @@ Route::post('save/iowzone/location/{id}/{zone}', 'DirectorateController@createio
 
 
 Route::post('', 'UserController@changeProfile')->name('profile.change')->middleware('auth');
+
 Route::get('track/work_order/{id}', 'WorkOrderController@trackWO')->name('workOrder.track')->middleware('auth');
 Route::post('close/work/order/{id}/{receiver_id}', 'WorkOrderController@closeWorkOrder')->name('workorder.close')->middleware('auth');
 
@@ -254,7 +255,7 @@ Route::get('received/materials/from_store/{id}', 'WorkOrderController@receivedma
 
 
 
-Route::post('read/notification/{id}/{type}', 'NotificationController@readNotification')->name('notify.read')->middleware('auth');
+Route::post('read/notification/{id}', 'NotificationController@readNotification')->name('notify.read')->middleware('auth');
 
 Route::post('/myprofile', 'UserController@update_avatar')->middleware('auth');
 
@@ -281,6 +282,9 @@ Route::get('technicians', 'HomeController@alltechnicians')->name('technicians')-
 
 Route::get('work_order_material_needed', 'HomeController@workOrderNeedMaterialView')->name('wo.materialneededyi')->middleware('auth');
 
+Route::get('work_order_material_needed_for_des', 'HomeController@workOrderNeedMaterialViewfordes')->name('wo.des')->middleware('auth');
+
+
 
 Route::get('material_rejected_with_workorder', 'HomeController@workOrderMaterialRejected')->middleware('auth');
 
@@ -293,6 +297,8 @@ Route::get('rejected/materials/{id}', 'WorkOrderController@rejectedmaterialview'
 
 Route::get('work_order_material_purchased', 'HomeController@MaterialpurchasedView')->name('wo.materialneededy')->middleware('auth');
 
+
+Route::get('work_order_material_desd/{id}/{zoneid}' , 'HomeController@workOrderMaterialInspectionViewdes')->middleware('auth');
 
 Route::get('work_order_material_iow/{id}/{zoneid}' , 'HomeController@workOrderMaterialInspectionView')->name('material.inspection.view')->middleware('auth');
 
@@ -362,7 +368,12 @@ Route::get('accept/material/{id}', 'StoreController@acceptMaterial')->name('stor
 
 Route::get('accept/material/mc/{id}/{zoneid}', 'StoreController@acceptMaterialiow')->name('store.materialacceptmc')->middleware('auth');
 
+Route::get('accept/material/des/{id}/{zoneid}', 'StoreController@acceptMaterialdes')->name('store.materialacceptdes')->middleware('auth');
+
 Route::get('accept/material/with/rejected/{id}/{hosid}', 'StoreController@Materialacceptedwithrejected')->name('store.materialaccept.reject')->middleware('auth');
+
+
+Route::get('accept/material/des/rejected/{id}/{hosid}', 'StoreController@Materialacceptedwithrejecteddes')->name('store.materialaccept.reject.des')->middleware('auth');
 
 
 
@@ -373,6 +384,8 @@ Route::get('return/material/{id}', 'StoreController@returnMaterialHOS')->name('s
 Route::get('accept/material/independently/{id}', 'StoreController@acceptMaterialonebyone')->name('store.materialacceptonebyone')->middleware('auth');
 
 Route::post('reject/material/{id}/{hosid}', 'StoreController@rejectMaterial')->name('store.materialreject')->middleware('auth');
+Route::post('reject/des/material/{id}/{hosid}', 'StoreController@rejectMaterialdes')->name('store.materialreject.des')->middleware('auth');
+
 Route::post('reject/material/independent/{id}', 'StoreController@rejectMaterialonebyone')->name('store.materialrejectonebyone')->middleware('auth');
 
 Route::get('store/material_request/{id}','StoreController@material_request_hos')->name('material_request_hos')->middleware('auth');
@@ -574,6 +587,10 @@ Route::POST('work_order_material_purchased/edit2/Material/{id}', 'StoreControlle
 
 Route::POST('work_order_material_iow/reject/Material/{id}', 'StoreController@materialrejectonebyone')->name('material_onebyone')->middleware('auth');
 
+
+Route::POST('work_order_material_dess/reject/Material/{id}', 'StoreController@materialrejectonebyonedes')->name('material_onebyone_des')->middleware('auth');
+
+
 Route::POST('rwork_order_material_iow/reject/Material/{id}', 'StoreController@redirecttohos')->name('redirect.workorder')->middleware('auth');
 
 
@@ -726,6 +743,8 @@ Route::post('eddited/assessment/activity/form/{id}/{tender}/{month}', 'Landscapi
 Route::get('approveassessmentifpaid/{id}/{tender}/{month}', 'LandscapingController@approveassessmentifpaid')->name('approveassessmentifpaid')->middleware('auth');
 Route::get('approveassessmentform/{id}/{tender}/{month}', 'LandscapingController@approveassessment')->name('approveassessment')->middleware('auth');
 Route::get('approveassessmentformdean/{id}/{tender}/{month}', 'LandscapingController@approveassessmentdean')->name('approveassessmentdean')->middleware('auth');
+Route::get('approveassessmentfordeputymanager/{id}/{tender}/{month}', 'LandscapingController@approveassessmentdeputymanager')->name('approveassessmentdeputy')->middleware('auth');
+
 Route::get('approveassessmentformprinciple/{id}/{tender}/{month}', 'LandscapingController@approveassessmentprinciple')->name('approveassessmentprinciple')->middleware('auth');
 Route::get('approveassessmentforpayment/{id}/{tender}/{month}', 'LandscapingController@approveassessmentforpayment')->name('approveassessmentforpayment')->middleware('auth');
 Route::get('approveassessmentformbydvc/{id}/{tender}/{month}', 'LandscapingController@approveassessmentformbydvc')->name('approveassessmentformbydvc')->middleware('auth');
@@ -964,10 +983,6 @@ Route::get('activatetechnician/{id}','HomeController@activatetechnician')->name(
 
 Route::get('exportdeactivatedtechs','NotesController@exportdeactivatedtechs')->name('exportdeactivatedtechs')->middleware('auth');
 Route::get('exportdeactivatedusers','NotesController@exportdeactivatedusers')->name('exportdeactivatedusers')->middleware('auth');
-
-Route::get('readcomments','MinuteController@readcomments')->name('readcomments')->middleware('auth');
-Route::get('sendcomments','MinuteController@sendcomments')->name('sendcomments')->middleware('auth');
-Route::post('sendcomment','MinuteController@sendcomment')->name('sendcomment')->middleware('auth');
 Route::get('transfertoWIP/{id}','AssetsController@transfertoWIP')->name('transfertoWIP')->middleware('auth');
 
 Route::get('assessingroup','AssetsController@assessingroup')->name('assessingroup')->middleware('auth');
@@ -981,5 +996,12 @@ Route::get('gethossect','UserController@gethossect')->name('gethossect')->middle
 Route::get('getnameMAT','StoreController@getnameMAT')->name('getnameMAT')->middleware('auth');
 Route::get('getdescriptionMAT','StoreController@getdescriptionMAT')->name('getdescriptionMAT')->middleware('auth');
 Route::get('getbrandMAT','StoreController@getbrandMAT')->name('getbrandMAT')->middleware('auth');
+
+
+
+
+Route::get('readcomments','MinuteController@readcomments')->name('readcomments')->middleware('auth');
+Route::get('sendcomments','MinuteController@sendcomments')->name('sendcomments')->middleware('auth');
+Route::post('sendcomment','MinuteController@sendcomment')->name('sendcomment')->middleware('auth');
 
 //

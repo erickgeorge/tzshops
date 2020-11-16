@@ -228,7 +228,9 @@
 
                       <option @if (in_array('Director DPI',$str_array)) { selected="selected" } @else{} @endif  value="Director DPI">Director DPI</option>
 
-                       <option @if (in_array('Dean of Student',$str_array)) { selected="selected" } @else{} @endif  value="Dean of Student">Dean of Student</option>
+                       <option @if (in_array('Dean',$str_array)) { selected="selected" } @else{} @endif  value="Dean">Dean</option>
+
+                       <option @if (in_array('Dean of Student',$str_array)) { selected="selected" } @else{} @endif  value="Dean of Student">Dean of Students</option>
 
                           <option @if (in_array('DVC Accountant',$str_array)) { selected="selected" } @else{} @endif  value="DVC Accountant">DVC Accountant</option>
 
@@ -319,6 +321,8 @@
 
 
                       <option @if (in_array('CLIENT',$strarray)) { selected="selected" } @else{} @endif  value="CLIENT">Client</option>
+
+                      <option @if (in_array('Dean',$strarray)) { selected="selected" } @else{} @endif  value="Dean">Dean</option>
 
                       <option @if (in_array('Dean of Student',$strarray)) { selected="selected" } @else{} @endif  value="Dean of Student">Dean of Student</option>
 

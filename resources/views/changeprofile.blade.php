@@ -143,10 +143,6 @@ padding: 20 20 20 20;
 </div>
 
 
-
-
-
-
       <div class="form-group">
 
                     <label for="Image" align="left">Profile Picture</label>

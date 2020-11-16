@@ -12,15 +12,11 @@ class NotificationController extends Controller
         return $this->middleware('auth');
     }
 
-    function readNotification($id, $type){
+    function readNotification($id){
         $not = Notification::where('id', $id)->first();
-        $not->status = 1;
+        $not->status = 10;
         $not->save();
-
-        if ($type == 'reject'){
-            return redirect()->route('rejected.view.wo');
-        }
-
+        
         return redirect()->route('work_order');
     }
 }
