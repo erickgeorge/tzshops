@@ -29,7 +29,7 @@ IoW Zones
         </div>
     @endif
  <br>
-                <h5 >List of Zones assigned to Inspectors of Works</h5>
+                <h5 >List of Zones Assigned to Inspectors of Works</h5>
 
 
             <hr class="container">
