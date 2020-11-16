@@ -38,9 +38,9 @@ tr:nth-child(even) {
     <tr>
       <th scope="col">#</th>
       <th scope="col">Full Name</th>
+      <th title="phone" scope="col">Phone</th>
 
       <th scope="col">Email</th>
-      <th title="phone" scope="col">Phone</th>
       <th scope="col">Type</th>
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
@@ -77,21 +77,21 @@ else {
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
 
+      <td>
+
+        <?php $phonenumber = $user->phone;
+          if(substr($phonenumber,0,1) == '0'){
+
+            $phonreplaced = ltrim($phonenumber,'0');
+            echo '+255'.$phonreplaced;
+
+          }else { echo $user->phone;}
+
+        ?></td>
       <td><a style="color: #000;" href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
 
 
 
-       <td>
-
-      <?php $phonenumber = $user->phone;
-        if(substr($phonenumber,0,1) == '0'){
-
-          $phonreplaced = ltrim($phonenumber,'0');
-          echo '+255'.$phonreplaced;
-
-        }else { echo $user->phone;}
-
-      ?></td>
 
       @if( $user->type == "Inspector Of Works")
       <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>

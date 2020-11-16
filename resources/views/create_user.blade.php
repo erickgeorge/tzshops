@@ -90,37 +90,16 @@ User Registration
 	</div>
     </div>
 </div>
+
+
 <div class="row">
-	<div class="col">
+	<div class="col-md-6">
         <div class="form-group ">
             <label for="phone">Email  <sup class="text-danger">*</sup></label>
             <input style="color: black;"  required type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="45" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
         </div>
 	</div>
-    <div class="col">
-        <div class="form-group ">
-            <label for="phone">Username  <sup class="text-danger">*</sup></label>
-            <input style="color: black;"  required required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
-        </div>
-	</div>
 </div>
-<div class="row">
-
-    <div class="col-md-6">
-        <div class="form-group ">
-            <label for="phone">Role  <sup class="text-danger">*</sup></label>
-            <select style="color: black;" required class="custom-select" name="role" id="role">
-                <option value="" selected>Choose...</option>
-                <option value="1">Admin</option>
-                <option value="2">Staff</option>
-              </select>        </div>
-	</div>
-
-</div>
-
-
-
-
 <div class="row">
 
     <div class="col-md-6">
@@ -145,6 +124,30 @@ User Registration
 
 
 </div>
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="form-group ">
+            <label for="phone">Role  <sup class="text-danger">*</sup></label>
+            <select style="color: black;" required class="custom-select" name="role" id="role">
+                <option value="" selected>Choose...</option>
+                <option value="1">Admin</option>
+                <option value="2">Staff</option>
+              </select>        </div>
+    </div>
+
+    <div class="col">
+        <div class="form-group ">
+            <label for="phone">Username  <sup class="text-danger">*</sup></label>
+            <input style="color: black;"  required required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+        </div>
+	</div>
+
+</div>
+
+
+
+
 
 
 
@@ -154,7 +157,7 @@ User Registration
 
 <div class="row">
     <div class="col">
-        Type of User  <sup class="text-danger">*</sup>
+    First type of User  <sup class="text-danger">*</sup>
 
     </div>
 
@@ -162,7 +165,7 @@ User Registration
 
 	  <div class="row">
 	  <div class="col">
-            <div >
+            <div id="inafichwaIfNotDES">
                  <div class="checkbox">
             <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
                 Inspector of Works</label>
@@ -172,42 +175,42 @@ User Registration
 
               <div id="locationdiv" >
                <select  required style="width: 500px;" class="custom-select" name="type" id="type">
-	                  <option value="" selected>Choose...</option>
-	                  <option value="Accountant">Accountant</option>
-	                  <option value="Administrative officer">Administrative officer</option>
-	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
-                      <option value="Assets Officer">Assets Officer</option>
-                      <option value="Bursar">Bursar</option>
-                      <option value="CLIENT">Client</option>
-                       <option value="Dean of Student">Dean of Student</option>
-	                  <option value="DVC Admin">DVC Admin</option>
-	                  <option value="Directorate Director">Directorate Director</option>
-	                   <option value="Dvc Accountant">Dvc Accountant</option>
-	                  <option value="Estates officer">Estates officer</option>
-	                  <option value="Estates Director">Estates Director</option>
-	                  <option value="Head Procurement">Head of Procurement</option>
+	                  <option disabled='false' value="" selected>Choose...</option>
+	                  <option disabled='false'  value="Accountant">Accountant</option>
+	                  <option  disabled='false' value="Administrative officer">Administrative officer</option>
+	                  <option  disabled='false' value="Architect & Draftsman">Architect & Draftsman</option>
+                      <option  disabled='false' value="Assets Officer">Assets Officer</option>
+                      <option  disabled='false' value="Bursar">Bursar</option>
+                      <option  disabled='false' value="CLIENT">Client</option>
+                       <option  disabled='false' value="Dean of Student">Dean of Student</option>
+	                  <option  disabled='false' value="DVC Admin">DVC Admin</option>
+	                  <option  disabled='false' value="Directorate Director">Directorate Director</option>
+	                   <option disabled='false'  value="Dvc Accountant">Dvc Accountant</option>
+	                  <option disabled='false'  value="Estates officer">Estates officer</option>
+	                  <option disabled='false'  value="Estates Director">Estates Director</option>
+	                  <option disabled='false'  value="Head Procurement">Head of Procurement</option>
 
 
 	                  @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
+                           <option  disabled='false'  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 
-	                  <option value="Head PPU">Head PPU</option>
-                      <option value="Housing Officer">Housing Officer</option>
+	                  <option disabled='false'  value="Head PPU">Head PPU</option>
+                      <option disabled='false'  value="Housing Officer">Housing Officer</option>
 
-                      <option value="Maintenance coordinator">Maintenance Coordinator</option>
-                      <option value="Principal">Principal</option>
-                      <option value="Quality Surveyor">Quality Surveyor</option>
-	                  <option value="STORE">Store Manager</option>
+                      <option disabled='false'  value="Maintenance coordinator">Maintenance Coordinator</option>
+                      <option  disabled='false' value="Principal">Principal</option>
+                      <option  disabled='false' value="Quality Surveyor">Quality Surveyor</option>
+	                  <option  disabled='false' value="STORE">Store Manager</option>
 
-	                  <option value="Secretary to Council">Secretary to Council</option>
+	                  <option disabled='false'  value="Secretary to Council">Secretary to Council</option>
 
-	                  <option value="Supervisor Landscaping">Supervisor Landscaping</option>
+	                  <option disabled='false'  value="Supervisor Landscaping">Supervisor Landscaping</option>
 
-                      <option value="Transport Officer">Transport Officer</option>
-                      <option value="USAB">USAB</option>
+                      <option  disabled='false' value="Transport Officer">Transport Officer</option>
+                      <option  disabled='false' value="USAB">USAB</option>
 
 	           </select>
 	           </div>

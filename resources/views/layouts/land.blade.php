@@ -528,7 +528,9 @@
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
+@if($role['user_role']['role_id'] == 1)
+ {{-- <a class="dropdown-item" style="color:white" href="{{route('manageusertype')}}">User Types</a> --}}
+@endif
              <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>

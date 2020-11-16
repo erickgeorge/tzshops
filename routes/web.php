@@ -971,4 +971,15 @@ Route::post('sendcomment','MinuteController@sendcomment')->name('sendcomment')->
 Route::get('transfertoWIP/{id}','AssetsController@transfertoWIP')->name('transfertoWIP')->middleware('auth');
 
 Route::get('assessingroup','AssetsController@assessingroup')->name('assessingroup')->middleware('auth');
+// Route::get('manageusertype','UserController@manageusertype')->name('manageusertype')->middleware('auth');
+// Route::post('saveusertype','UserController@saveusertype')->name('saveusertype')->middleware('auth');
+// Route::post('editsaveusertype','UserController@editsaveusertype')->name('editsaveusertype')->middleware('auth');
+// auto refresh on selection
+Route::get('getTechSec1','TechnicianController@getTechSec1')->name('getTechSec1')->middleware('auth');
+Route::get('gethossect','UserController@gethossect')->name('gethossect')->middleware('auth');
+
+Route::get('getnameMAT','StoreController@getnameMAT')->name('getnameMAT')->middleware('auth');
+Route::get('getdescriptionMAT','StoreController@getdescriptionMAT')->name('getdescriptionMAT')->middleware('auth');
+Route::get('getbrandMAT','StoreController@getbrandMAT')->name('getbrandMAT')->middleware('auth');
+
 //

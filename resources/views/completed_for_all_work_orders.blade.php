@@ -165,7 +165,7 @@ use Carbon\Carbon;
       <div class="row">
           <div class="col">
             <select name="userid" class="form-control mr-sm-2">
-              @if(auth()->user()->type == 'CLIENT')
+              @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
               <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
               @else
               <option value="">Select name</option>
@@ -216,7 +216,7 @@ foreach($userwithid as $userwithid)
 
      if($statusname->status == 30)
       { echo "<option value='".$statusname->status."'>Completely Closed</option>";}
-    
+
 
  }
      ?>
@@ -283,8 +283,8 @@ foreach($userwithid as $userwithid)
                                 <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
-                                @endif 
-                            @endif   --> 
+                                @endif
+                            @endif   -->
 
 
                             <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?> </td>

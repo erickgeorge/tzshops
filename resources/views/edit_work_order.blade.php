@@ -542,7 +542,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-   @elseif(auth()->user()->type == 'CLIENT')
+   @elseif((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
 
   @if(empty($wo['work_order_material']->id))
 

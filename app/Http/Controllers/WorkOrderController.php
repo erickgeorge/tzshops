@@ -37,6 +37,24 @@ class WorkOrderController extends Controller
         $request->validate([
             'details' => 'required',
         ]);
+            $code = '';
+        if ($request['p_type'] == 'Carpentry') {
+            $code = 'CA';
+        } else if ($request['p_type'] == 'Electrical') {
+            $code = 'EL';
+        } else if ($request['p_type'] == 'Mechanical') {
+            $code = 'ME';
+        } else if ($request['p_type'] == 'Plumbing') {
+            $code = 'PL';
+        } else{
+            $code = 'MA';
+        }
+
+        $date = date('d/m/Y');
+        $lastThere = WorkOrder::where('problem_type',$request['p_type'])->whereDate('created_at',date('Y-m-d'))->get();
+        $lastThere = count($lastThere)+1;
+
+        $finalCode = $code.'/'.$date.'/'.$lastThere;
 
 
         if ($request['p_type'] == 'Choose...') {
@@ -72,6 +90,7 @@ class WorkOrderController extends Controller
         } else {
             $work_order->emergency = 0;
         }
+        $work_order->woCode =  $finalCode;
 
         $work_order->year_ = date('y');
         $work_order->month_ = date('m');
@@ -1696,7 +1715,7 @@ session::flash('message', ' Your workorder have been closed successfully');
     else{
         $inspectorzone = zoneinspector::where('inspector',auth()->user()->id)->first();
     }
-   
+
 
        return view('onprocessworkorders', [ 'role' => $role, 'notifications' => $notifications, 'workszon' => $inspectorzone]);
 

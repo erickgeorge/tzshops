@@ -100,7 +100,7 @@ foreach ($hoos as $hous) {
         <div class="row">
             <div class="col">
               @if($v == 'iow') <input name="type" value="" type="text" hidden>  @else
-                <select name="type" class="form-control mr-sm-2">
+                <select name="type" id="hossect" onchange="gethossect()" class="form-control mr-sm-2">
                   @if($v == 'iow')  @else  <option value='' selected="selected">Select section</option>
                   <option value="">All sections</option> @endif
 
@@ -116,7 +116,7 @@ foreach ($hoos as $hous) {
     <div class="modal-body">
       <div class="row">
         <div class="col">
-          <select name="name" class="form-control mr-sm-2">
+          <select name="name" id="hops" class="form-control mr-sm-2">
                 <option value="" selected="selected">select Name</option>
                 <option value="">All <?php
                 if($v == 'technician'){ echo 'Technicians';}

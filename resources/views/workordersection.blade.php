@@ -39,7 +39,7 @@ Workorder Section
 
             <a href="Add/section" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add New Section</a>
-                   <a href="{{ url('desdepts')}}" style="margin-bottom: 20px; float:right;"
+                   <a href="{{ url('desdepts')}}"  target="_blank"  style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
@@ -103,7 +103,7 @@ Workorder Section
 
                 </div>
 
-             
+
                     <div class="modal-body">
 
    <form method="POST" action="edit/workordersection" class="col">
@@ -127,7 +127,7 @@ Workorder Section
                     </a>
       </form>
                     </div>
-          
+
 
 
                 <div class="modal-footer">

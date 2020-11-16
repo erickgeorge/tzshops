@@ -894,7 +894,7 @@ use App\assetsworkinprogress;
             <p class="card-text">
                 <div class="row">
                     <div class="col text-right">
-                        <a href="{{route('assetssummaryall')}}" class="btn btn-primary text-right" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                        <a  target="_blank" href="{{route('assetssummaryall')}}" class="btn btn-primary text-right" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
                     </div>
                 </div><br>

@@ -39,7 +39,7 @@ IoW Zones
             <a href="{{ route('add.iowzone.location',[$userid->id , $userzone->zone])}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add New Location</a>
 
-                   <a href="{{ url('iowwithlocation',[$userid->id])}}" style="margin-bottom: 20px; float:right;"
+                   <a  target="_blank"  href="{{ url('iowwithlocation',[$userid->id])}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
                 <table id="myTablee" class="table table-striped">

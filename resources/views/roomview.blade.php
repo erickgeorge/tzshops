@@ -29,7 +29,7 @@ Rooms
 
     <div>
 <br><br>
-                <h4 
+                <h4
                     >List of Available Rooms</h4></div>
 
 
@@ -39,7 +39,7 @@ Rooms
 
             <a href="{{route('managerooms')}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add New Room</a>
-                   <a href="{{ url('roomspdf')}}" style="margin-bottom: 20px; float:right;"
+                   <a href="{{ url('roomspdf')}}" target="_blank"  style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
@@ -108,7 +108,7 @@ Rooms
 
                 </div>
 
-              
+
                     <div class="modal-body">
                           <form method="POST" action="edit/rooms" class="col">
 
@@ -133,7 +133,7 @@ Rooms
                     </a>
                                   </form>
                     </div>
-      
+
 
 
                 <div class="modal-footer">

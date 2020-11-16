@@ -21,29 +21,29 @@ use Illuminate\Support\Facades\Mail;
 class StoreController extends Controller
 {
     //
-	
+
 	public function addmaterialView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         return view('addmaterial', [
-           
+
             'role' => $role,
             'notifications' => $notifications
         ]);
     }
-	
+
 	public function incrementmaterialView($id)
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 		$item= Material::where('id',$id)->first();
-        
+
         return view('incrementmaterial', [
-           
+
             'role' => $role,
             'notifications' => $notifications,
 			'item' => $item
@@ -55,9 +55,9 @@ class StoreController extends Controller
 
 
      public function incrementmaterialmodal(Request $request, $id )
-    {   
+    {
 
-       
+
 
        $p=$request['istock'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
@@ -71,59 +71,59 @@ class StoreController extends Controller
         }
 
         else{
-          $matir->save(); 
+          $matir->save();
           return redirect()->back()->with(['message' => 'Respective Material added succefully in store']);
 
         }
-  
+
         }
 
-  
-       
+
+
 
 
         public function incrementmaterialmodal2(Request $request, $id )
-    {   
+    {
        $p=$request['estock'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
       // $matir->checkreserve = 1;
-      
+
        $matir->newstock = $request['pstock'];
-       
-      
+
+
         if ( ($matir->newstock) > ($matir->quantity - $matir->reserved_material) ) {
             return redirect()->back()->withErrors(['message' => ' Quantity Purchased for  '.$matir['material']->name. '  is: '.($matir->quantity - $matir->reserved_material).' .Please add '.$matir['material']->name. ' up to total Purchased, If Purchased '.$matir['material']->name. ' is greater than Requested '.$matir['material']->name. ' Please go to Store add excessed  '.$matir['material']->name. ' for the other worksorders, Thanks   '   ]);
         }
-        else{ 
-          $matir->save(); 
+        else{
+          $matir->save();
           return redirect()->back()->with(['message' => 'Respective Material added succefully in store']);
 
         }
-        
 
-       
+
+
         }
-  
-    
- 
 
 
 
-	
-	
+
+
+
+
+
 	public function incrementmaterial(Request $request)
     {
-            
+
     	   $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
            $role = User::where('id', auth()->user()->id)->with('user_role')->first();
            $material =Material::where('id', $request['nameid'])->first();;
 
-		
+
 		 $material->stock = $request['tstock'];
         $material->save();
 
-        
+
           $historysave = new Storehistory();
           $historysave->material_name = $material->name;
           $historysave->material_description = $material->description;
@@ -135,33 +135,33 @@ class StoreController extends Controller
           $historysave->incremented = 'incremented';
           $historysave->save();
 
-       
+
 
          return redirect()->route('store')->with(['role' => $role, 'notifications' => $notifications,
             'notifications' => $notifications,'role' => $role,
-			 'message' => 'Materials succesfully added in Store'] );    
-           
+			 'message' => 'Materials succesfully added in Store'] );
+
     }
 
 
 
-	
+
 	 public function addnewmaterail(Request $request)
     {
-       
+
 //here
 
       $y=1;
     $totmat=$request['totalinputs']/5;
-   
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        
+
       $z=1;
       $tag = date("Y-m-d H:i:s");
       for ($x = 1; $x <= $totmat; $x++) {
-        
+
       $_material = new  Storehistory();
       $material = new Material();
 
@@ -175,7 +175,7 @@ class StoreController extends Controller
             $z=$z+1;
             $_material->type = $request[$z];
             $material->type = $request[$z];
-            
+
               $z=$z+1;
             $_material->unit_measure = $request[$z];
             $material->brand = $request[$z];
@@ -183,20 +183,20 @@ class StoreController extends Controller
               $z=$z+1;
             $_material->total_input = $request[$z];
              $material->stock = $request[$z];
-              
 
-            $_material->tag_ = $tag; //differentiating from different inputs 
+
+            $_material->tag_ = $tag; //differentiating from different inputs
             $_material->added_by = auth()->user()->id;
               $z++;
             $_material->save();
              $material->save();
-       
+
     }
 
      return redirect()->route('store')->with(['message' => 'New material successfully added']);
 
   }
-   
+
 
 
 
@@ -207,7 +207,7 @@ class StoreController extends Controller
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('status',9)->get();
 
 		   foreach($wo_materials as $wo_material) {
-		   $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		   $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
 		   $wo_m->status = 17;
 		   $wo_m->save();
 		    }
@@ -229,7 +229,7 @@ class StoreController extends Controller
         $senderl=auth()->user()->lname;
         $sender=$senderf.' '.$senderl;
         $section=auth()->user()->type;
-    
+
      $datenow = Carbon::now();
      $createddate = date('d F Y', strtotime($datenow));
 
@@ -245,7 +245,7 @@ class StoreController extends Controller
        $message->from('udsmestates@gmail.com',$sender);
        });
 
-     
+
 
         $notify = new Notification();
         $notify->sender_id = auth()->user()->id;
@@ -256,20 +256,20 @@ class StoreController extends Controller
         $notify->save();
 
 
-     //emailandnotification 
+     //emailandnotification
 
-		 
+
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
              $mForm->status = 55;
-			
+
              $mForm->save();
        return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Rejected successfully with others Accepted']);
     }
 
 
 
-    
+
 
     public function materialtoreserveonebyone( $id )
     {
@@ -280,12 +280,12 @@ class StoreController extends Controller
             $mat->copyforeaccepted = 1;
 
             $material_id=$mat->material_id;
-		
+
 		        $material=Material::where('id', $material_id)->first();
 		        $mat->reserved_material = $material->stock;
-		   
+
 		        $material->stock= 0;
-         
+
 		        $material->save();
             $mat->save();
 
@@ -302,14 +302,14 @@ class StoreController extends Controller
 			$mat = WorkOrderMaterial::where('id', $id)->first();
             $mat->status = 3;
 
-          
+
             $mat->save();
 
 
        return redirect()->back()->with(['message' => 'Material Sent  successfully to Head of Section']);
     }
 
- 
+
 
 
 
@@ -334,8 +334,8 @@ class StoreController extends Controller
        return redirect()->back()->with(['message' => 'Material Sent  successfully to Head of Section']);
     }
 
- 
-  
+
+
 
 
 
@@ -344,20 +344,20 @@ class StoreController extends Controller
     {
 
       $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
-      
+
      $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->where('zone', $iozone->zone)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
 		 $wo_m->status = 1;
      $wo_m->accepted_by = auth()->user()->id;
 	   $wo_m->save();
 		 }
-		 
+
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
              $mForm->status = 15;
-			
+
              $mForm->save();
        return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Accepted successfully ']);
     }
@@ -371,16 +371,16 @@ class StoreController extends Controller
      $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('zone', $zoneid)->where('status',0)->get();
 
      foreach($wo_materials as $wo_material) {
-     $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();   
+     $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
      $wo_m->status = 1;
      $wo_m->accepted_by = auth()->user()->id;
      $wo_m->save();
      }
-     
+
      //status field of work order
       $mForm = WorkOrder::where('id', $id)->first();
              $mForm->status = 15;
-      
+
              $mForm->save();
        return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Accepted successfully ']);
     }
@@ -399,9 +399,9 @@ class StoreController extends Controller
             'notifications' => $notifications,
             'wo_materials' =>WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get(),
             'wo' => WorkOrder::where('id', $id)->first()
-            
-              
-           
+
+
+
           ]);
      }
 
@@ -409,25 +409,25 @@ class StoreController extends Controller
 
 
 
-	
 
 
 
-	
+
+
 	public function rejectMaterial(request $request, $id , $hosid)
-    {  
+    {
 
-      $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1));   
-       
+      $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1));
+
           $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('work_order_id', $id)->where('status',9)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
 		$wo_m->status = -1;
     $wo_m->accepted_by = auth()->user()->id;
 		$wo_m->reason = $request['reason'];
 		$wo_m->save();
-		 } 
+		 }
 
      //emailandnotification
 
@@ -445,7 +445,7 @@ class StoreController extends Controller
         $senderl=auth()->user()->lname;
         $sender=$senderf.' '.$senderl;
         $section=auth()->user()->type;
-    
+
      $datenow = Carbon::now();
      $createddate = date('d F Y', strtotime($datenow));
 
@@ -461,7 +461,7 @@ class StoreController extends Controller
        $message->from('udsmestates@gmail.com',$sender);
        });
 
-     
+
 
         $notify = new Notification();
         $notify->sender_id = auth()->user()->id;
@@ -472,18 +472,18 @@ class StoreController extends Controller
         $notify->save();
 
 
-     //emailandnotification 
+     //emailandnotification
 
 		 //status field of work order
 			$mForm = WorkOrder::where('id', $id)->first();
              $mForm->status = 16;
-			
+
              $mForm->save();
         return redirect()->route('wo.materialneededyi')->with(['message' => 'All materials Rejected successfully ']);
     }
-	
-	
-  
+
+
+
 
       public function redirecttohos(Request $request, $id )
     {
@@ -493,11 +493,11 @@ class StoreController extends Controller
 
        $p=$request['edit_mat'];
        $matir = WorkOrder::where('id',$p)->first();
-      
+
        $matir->problem_type = $request['p_type'];
-      
+
        $matir->save();
-  
+
         return redirect()->back()->with(['message' => 'Respective material Rejected successfully ']);
     }
 
@@ -506,13 +506,13 @@ class StoreController extends Controller
 
      public function redirectworkordertohos(Request $request ,$id )
     {
-  
+
        $matir = WorkOrder::where('id',$id)->first();
        $matir->problem_type = $request['p_type'];
        $matir->redirectwo = 1 ;
        //$matir->details = $request['details'];
        $matir->save();
-  
+
         return redirect()->back()->with(['message' => 'Respective Workorder Redirected successfully ']);
     }
 
@@ -522,39 +522,39 @@ class StoreController extends Controller
 
       public function materialrejectonebyone(Request $request, $id )
     {
-       $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1)); 
+       $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1));
 
        $p=$request['edit_mat'];
        $matir = WorkOrderMaterial::where('id',$p)->first();
-      
+
        $matir->reason = $request['reason'];
-       $matir->status = 9; 
+       $matir->status = 9;
        $matir->save();
 
 
-  
+
         return redirect()->back()->with(['message' => 'Respective material Rejected successfully ']);
     }
 
-	
- 
-	
+
+
+
 		public function material_request_hos($id)
     {
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-	
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
           $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
 		  $wo_m->status = 3;//status for material available in store
-		 
+
 		  $wo_m->save();
 		 }
 
 		 foreach($wo_materials as $wo_material){
-		   
+
 		$material_id=$wo_material->material_id;
 		$material_quantity=$wo_material->quantity;
 		$material=Material::where('id', $material_id)->first();
@@ -562,8 +562,8 @@ class StoreController extends Controller
 		$rem=$stock-$material_quantity;
 		$material->stock=$rem;
 		 $material->save();
-			}  
-       
+			}
+
 
          foreach($wo_materials as $wo_material){
         $item = WorkOrderMaterial::where('id', $wo_material->id)->first();
@@ -582,27 +582,27 @@ class StoreController extends Controller
              $mForm->status = 18;  //material available in store then status change for workorder
 			 $mForm->save();
 
-		 
+
          $staff=WorkOrderStaff::where('work_order_id', $id)->get();
          return redirect()->route('wo_material_accepted_by_iow')->with([
-         		
-         	'message' => 'Material Released from store to HoS and Notication sent successfully to HoS.' 
-         
+
+         	'message' => 'Material Released from store to HoS and Notication sent successfully to HoS.'
+
          ]);
- 
+
 		}
-	
+
 
 
 		public function ReserveMaterial($id)
     {
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-	
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
           $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
 		  $wo_m->status = 5; //status for material missing
       $wo_m->newstock =0;
       $wo_m->copyforeaccepted = 1;
@@ -625,16 +625,16 @@ class StoreController extends Controller
 		 return redirect()->route('wo_material_accepted_by_iow')->with(['message' => 'Material reserved and  sent to Director of Estate be purchased Successfully.']);
 
 		}
-	
 
 
-	
+
+
 
 	public function releaseMaterial($id)
     {
-       
+
         $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 3)->get();
-		
+
 		$wo_materials = WorkOrderMaterial::
                      select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
                      ->where('status',3)
@@ -643,7 +643,7 @@ class StoreController extends Controller
 					 ->groupBy('work_order_id')
                      ->get();
 		   foreach($wo_materials as $wo_material){
-		   
+
 		$material_id=$wo_material->material_id;
 		$material_quantity=$wo_material->quantity;
 		$material=Material::where('id', $material_id)->first();
@@ -652,25 +652,25 @@ class StoreController extends Controller
 		$material->stock=$rem;
 		 $material->save();
 			}
-			
+
 		foreach($wochange_status as $wochange_state){
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
 		$wochange->status=2;
 		$wochange->save();
-		
+
 		}
-       
+
         return redirect()->route('work_order_approved_material')->with(['message' => 'Material has been released successfully ']);
     }
-  
+
 
 
 
 	public function releaseMaterialafterpurchased($id)
     {
-       
+
         $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 5)->get();
-		
+
 		$wo_materials = WorkOrderMaterial::
                      select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
                      ->where('status',5)
@@ -678,7 +678,7 @@ class StoreController extends Controller
                      ->groupBy('material_id')
 					 ->groupBy('work_order_id')
                      ->get();
-		
+
 		foreach($wochange_status as $wochange_state){
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
 		     $wochange->status=15; //status after release material from head of procurement
@@ -686,9 +686,9 @@ class StoreController extends Controller
 		     $wochange->sender_id = auth()->user()->id;
          $wochange->currentaddedmat = 1;
 		     $wochange->save();
-		
+
 		}
-       
+
         return redirect()->route('work_order_with_missing_material')->with(['message' => 'notification sent to Store Manager so as to assign Good Receiving Note ']);
     }
 
@@ -696,9 +696,9 @@ class StoreController extends Controller
 
     public function insufficientmaterial($id)
     {
-       
+
         $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 3)->get();
-			
+
 
 
 
@@ -706,17 +706,17 @@ class StoreController extends Controller
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
 		$wochange->status=10;
 		$wochange->save();
-		
+
 		}
-        
+
         return redirect()->route('work_order_approved_material')->with(['message' => 'Message has been sent successfully ']);
     }
-	
+
 
 
 public function deletematerial($id , $woid)
-       {   
-          $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $woid)->where('status', 17)->update(array('check_return' =>null));   
+       {
+          $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $woid)->where('status', 17)->update(array('check_return' =>null));
 
            $matrialdelete=WorkOrderMaterial::where('id', $id)->first();
            $matrialdelete->delete();
@@ -728,27 +728,27 @@ public function deletematerial($id , $woid)
        	public function materialaddagain($id)
     {
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-	
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',20)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		  $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
 		  $wo_m->status = 0; //status for material correct sent again to IoW
 		  $wo_m->receiver_id = auth()->User()->id;
 		  $wo_m->save();
 		 }
 
-       
+
 
        $mForm = WorkOrder::where('id', $id)->first();
        $mForm->status = 7;  //material requested status
 	   $mForm->save();
 
-       
+
 		 return redirect()->back()->with(['message' => 'Materials sent successfully to Inspector of Works']);
 
-		
+
 }
 
 
@@ -758,29 +758,29 @@ public function deletematerial($id , $woid)
        	public function materialrejectedaddagain($id)
     {
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-	
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',-1)->orwhere('work_order_id', $id)->where('status',44)->orwhere('work_order_id', $id)->where('status',17)->get();
 
 		 foreach($wo_materials as $wo_material) {
-		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
+		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
 		 $wo_m->status = 0; //status for material correct sent again to IoW
 		  $wo_m->save();
 		 }
 
-       
+
 
        $mForm = WorkOrder::where('id', $id)->first();
        $mForm->status = 57;  //material requested status
 	     $mForm->save();
 
-       
+
 		 return redirect()->back()->with(['message' => 'Materials sent again successfully to Inspector of Work']);
-	
+
 }
     public function procurementAddMaterial()
     {
-      
+
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
  return view('procurementstostore', [ 'notifications' => $notifications, 'role' => $role ]);
@@ -791,15 +791,15 @@ public function deletematerial($id , $woid)
     {
         $y=1;
         $totmat=$request['totalinputs']/6;
-   
+
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        
+
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        
+
       $z=1;
       $tag = date("Y-m-d H:i:s");
       for ($x = 1; $x <= $totmat; $x++) {
-        
+
       $procure_material = new  Procurement();
 
             $procure_material->material_name = $request[$z];
@@ -814,9 +814,9 @@ public function deletematerial($id , $woid)
             $procure_material->total_input = $request[$z];
               $z=$z+1;
             $procure_material->price_tag = $request[$z];
-              
 
-            $procure_material->tag_ = $tag; //differentiating from different inputs 
+
+            $procure_material->tag_ = $tag; //differentiating from different inputs
             $procure_material->procured_by = auth()->user()->id;
             $procure_material->store_received = 0;
               $z++;
@@ -832,12 +832,12 @@ public function deletematerial($id , $woid)
       $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
      if(request()->has('start'))  { //date filter
-        
-        
+
+
         $from=request('start');
         $to=request('end');
-        
-        
+
+
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
 
         $to=$nextday;
@@ -868,7 +868,7 @@ $procured = Procurement::
 
 }
 
-      return view('procurementhistory', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$procured]); 
+      return view('procurementhistory', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$procured]);
   }
 
   public function procuredMaterials($id)
@@ -877,7 +877,7 @@ $procured = Procurement::
       $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
       $material = Procurement::where('tag_',$id)->orderBy('material_name','Asc')->OrderBy('type','Asc')->get();
 
-return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
+return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]);
   }
 
   public function AcceptProcuredMaterial(Request $request)
@@ -888,7 +888,7 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
     where('tag_',$request['tag_'])->
     where('store_received',$request['store_received'])->get();
 
-    foreach ($catch_materials as $check_material) 
+    foreach ($catch_materials as $check_material)
     {
       $fetch_store = Material::
       where('name','LIKE','%'.$check_material->material_name.'%')->
@@ -904,7 +904,7 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
         $material->description = $check_material->material_description;
         $material->brand = $check_material->unit_measure;
         $material->type = $check_material->type;
-    
+
         $material->stock = $check_material->total_input;
         $material->save();
 
@@ -927,9 +927,9 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
         }
       }
 
-      
+
     }
-  
+
   return redirect()->back()->with(['message' => 'Material successfully added in the stock!']);
 
   }
@@ -942,12 +942,12 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
     where('store_received',$request['store_received'])->get();
 
     foreach($catch_materials as $procured_stored)
-    { 
+    {
             $update_procurement = Procurement::where('id',$procured_stored->id)->first();
             $update_procurement->store_received = auth()->user()->id;
             $update_procurement->save();
     }
-    
+
    return redirect()->back()->with(['message' => 'Material Accepted Successfully!']);
   }
 
@@ -964,7 +964,7 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
             ->orderBy('created_at','Desc')
             ->get();
 
-return view('materialEntryHistory', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
+return view('materialEntryHistory', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]);
   }
 
   public function materialEntry($id)
@@ -973,7 +973,7 @@ return view('materialEntryHistory', [ 'notifications' => $notifications, 'role' 
       $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
       $material = Storehistory::where('tag_',$id)->orderBy('material_name','Asc')->OrderBy('type','Asc')->get();
 
-return view('materialEntry', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]); 
+return view('materialEntry', [ 'notifications' => $notifications, 'role' => $role ,'procured'=>$material]);
   }
 
 
@@ -981,8 +981,8 @@ return view('materialEntry', [ 'notifications' => $notifications, 'role' => $rol
     public function materialtoreserveinstore( $id , $woid)
     {
 
-    
-      $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $woid)->update(array('status2' =>2));   
+
+      $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $woid)->update(array('status2' =>2));
 
 
       $mat = WorkOrderMaterial::where('id', $id)->first();
@@ -1001,5 +1001,22 @@ return view('materialEntry', [ 'notifications' => $notifications, 'role' => $rol
        return redirect()->back()->with(['message' => 'Material Reserved Succesifully']);
     }
 
+    public function getnameMAT(Request $request)
+{
+    return response()->json(['description' => Material::where('name','like',$request->get('id'))->orderby('description','ASC')->get()]);
 
 }
+
+public function getdescriptionMAT(Request $request)
+{
+    return response()->json(['description' => Material::where('description','like',$request->get('id'))->orderby('description','ASC')->get()]);
+
+}
+
+public function getbrandMAT(Request $request)
+{
+
+}
+
+}
+

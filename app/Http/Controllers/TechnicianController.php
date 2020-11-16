@@ -106,7 +106,13 @@ class TechnicianController extends Controller
 		$user= Technician::where('status',0)->where('id',($id))->first()->toArray();
 
 		 return response()->json(array('workorderstaff'=>$tech,'technician'=>$user));
-	 }
+     }
+
+     public function getTechSec1(Request $request)
+     {
+        return response()->json(['getTechSec1' => Technician::where('type', $request->get('id'))->where('status',0)->orderby('fname','ASC')->get()]);
+
+     }
 
 
 }

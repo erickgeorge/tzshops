@@ -20,6 +20,7 @@ use App\zoneinspector;
 use App\iowzone;
 use App\usertype;
 use App\tendernumber;
+use App\selection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -586,6 +587,51 @@ public function deleteprofilepicture(Request $request)
     return redirect()->route('myprofile')->with(['message' => 'Profile Picture Deleted successfully']);
 
 
+}
+
+public function gethossect(Request $request)
+{
+    return response()->json(['user' => User::where('type','like',$request->get('id'))->orderby('fname','ASC')->get()]);
+}
+
+public function manageusertype()
+{
+    $data = selection::orderBy('type')->get();
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+$notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+    return view('usertypesmanage',['role' => $role,'notifications' => $notifications,'usertype'=>$data]);
+}
+
+public function saveusertype(Request $request)
+{
+    $request->validate([
+        'group' => 'required',
+        'type' => 'required',
+
+    ]);
+
+    $data = new selection();
+    $data->type = $request['type'];
+    $data->directorate = $request['group'];
+    $data->save();
+
+    return redirect()->route('manageusertype')->with(['message'=>'User Type Added Successfully!']);
+}
+
+public function editsaveusertype(Request $request)
+{
+    $request->validate([
+        'group' => 'required',
+        'type' => 'required',
+
+    ]);
+
+    $data =selection::where('id',$request['hidden'])->first();
+    $data->type = $request['type'];
+    $data->directorate = $request['group'];
+    $data->save();
+
+    return redirect()->route('manageusertype')->with(['message'=>'User Type Edited Successfully!']);
 }
 
 }

@@ -123,7 +123,7 @@ use Carbon\Carbon;
 
       <div class="row">
         <div class="col">
-            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2" onchange="getlocation1()">
+            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2" >
                 <option value="" selected="selected">Select Problem Type</option>
                 <?php
                   $prob = WorkOrder::select('problem_type')->where('client_id',auth()->user()->id)->distinct()->get();
@@ -155,7 +155,7 @@ use Carbon\Carbon;
       <div class="row">
           <div class="col">
             <select name="userid" id="nameselector1" class="form-control mr-sm-2">
-              @if(auth()->user()->type == 'CLIENT')
+              @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
               <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
               @else
               <option value="">Select name</option>
@@ -937,7 +937,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
       <div class="row">
         <div class="col">
-            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2" onchange="getlocation1()">
+            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2">
                 <option value="" selected="selected">Select Problem Type</option>
                 <?php
                   $prob = WorkOrder::select('problem_type')->distinct()->get();
@@ -969,7 +969,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
       <div class="row">
           <div class="col">
             <select name="userid" id="nameselector1" class="form-control mr-sm-2">
-              @if(auth()->user()->type == 'CLIENT')
+              @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
               <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
               @else
               <option value="">Select name</option>
@@ -1089,7 +1089,7 @@ foreach($userwithid as $userwithid)
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
-          <th>ID</th>
+          <th style="width: 100%;">ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
@@ -1112,7 +1112,7 @@ foreach($userwithid as $userwithid)
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td id="wo-id">00{{ $work->id }}</td>
+                            <td style="width: 100%;">{{ $work->woCode }}</td>
 
                             <td id="wo-details">  <?php if (strlen($work->details) > 20) {
                              echo substr($work->details, 0, 20); echo "...";

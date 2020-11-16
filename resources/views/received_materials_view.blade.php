@@ -119,7 +119,7 @@
           @if($item->secondstatus == 1)
 
           <h5  style="     color: #733703;"><b> Please download Issue Note for material(s) requested so as Head of Section to Sign.</b></h5>
-         <a class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>   @endif
+         <a  target="_blank" class="btn btn-primary btn-sm"  href="issuenotepdf/{{$item->work_order_id}}" role="button">Print Issue Note</a>   @endif
          @else
          @if(($item->status == 3))
          <h5  style="     color: #733703;"><b>  Please confirm if you have received Material(s).</b></h5>

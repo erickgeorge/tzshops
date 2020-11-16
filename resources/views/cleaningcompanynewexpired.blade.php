@@ -39,7 +39,7 @@ Companies
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                 <a href="{{route('landscapingcleaningcompanyreportexpired')}}"
-
+                target="_blank" 
                                          style="color: white;"  data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
@@ -73,7 +73,7 @@ Companies
                     <tbody>
                     <?php $i = 0; ?>
 
-      @if(auth()->user()->type == 'Supervisor Landscaping')  
+      @if(auth()->user()->type == 'Supervisor Landscaping')
 
                     @foreach($cleangcompany as $house)
 
@@ -232,7 +232,7 @@ Companies
 
                     @endforeach
 
- @endif     
+ @endif
 
 
 
@@ -396,7 +396,7 @@ Companies
 
                     @endforeach
 
- @endif                   
+ @endif
 
 
 
@@ -555,11 +555,11 @@ Companies
              @endif
           <!--expired contract-->
 
-               
+
 
                     @endforeach
 
- @endif                   
+ @endif
 
 
                     </tbody>

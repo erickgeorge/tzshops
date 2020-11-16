@@ -56,7 +56,7 @@
                             	@else<div class="badge badge-success">@if(auth()->user()->type == 'Head Procurement') Received by store @else Received @endif</div>
                             	@endif
                             </div><div class="col-lg-2">
-    		<a href="{{ url('exportProcure',$tag_) }}" class="btn btn-primary"> Export <i class="fa fa-file-pdf-o"></i> </a>
+    		<a target="_blank"  href="{{ url('exportProcure',$tag_) }}" class="btn btn-primary"> Export <i class="fa fa-file-pdf-o"></i> </a>
     	</div>
     </div>
 </div>
@@ -72,7 +72,7 @@
                     <th>Total</th>
                     <th>Unit Measure</th>
                     <th>Price</th>
-    
+
                 </tr>
                 </thead>
 

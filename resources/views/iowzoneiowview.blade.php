@@ -36,7 +36,7 @@ IoW Zones
 
             <a href="{{route('manage.IoWZones')}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Manage Zones</a>
-                   <a href="{{ url('iowwithzones')}}" style="margin-bottom: 20px; float:right;"
+                   <a  target="_blank"  href="{{ url('iowwithzones')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 

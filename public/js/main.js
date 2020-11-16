@@ -60,12 +60,37 @@ function ShowwHideDiv(checkdiv) {
 }
 
 
+// function inafichwaIfNotDESHere(checkdiv) {
+//     var dvPassport = document.getElementById("locationdiv");
+//     locationdiv.style.display = checkdiv.checked ? "block" : "none";
+// }
+
+
+
 
 var selecteddep = null;
 var selectedsection = null;
 
 function getDepartments() {
     selecteddep = document.getElementById('directorate').value;
+
+
+
+    var sel = document.getElementById("directorate");
+    var text= sel.options[sel.selectedIndex].text;
+        var sendSelectedLink = $("#inafichwaIfNotDES");
+        console.log(text);
+        if(text == '(DES) Directorate of Estates Services' )
+        {
+          sendSelectedLink.show();
+
+            
+        }else
+        {
+          sendSelectedLink.hide();
+            }
+
+
 
     console.log('ID: ' + selecteddep);
     $.ajax({

@@ -232,7 +232,9 @@
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
+@if($role['user_role']['role_id'] == 1)
+ <a class="dropdown-item" style="color:white" href="">User Types</a>
+@endif
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
@@ -439,7 +441,9 @@
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
+@if($role['user_role']['role_id'] == 1)
+ {{-- <a class="dropdown-item" style="color:white" href="{{route('manageusertype')}}">User Types</a> --}}
+@endif
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorates</a>
                <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
@@ -1417,6 +1421,13 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 <script type="text/javascript">
 
+      $("#inafilterusertype").select2({
+            placeholder: "Choose...",
+            allowClear: true
+        });
+</script>
+<script type="text/javascript">
+
       $("#nameid").select2({
             placeholder: "Choose type of problem...",
             allowClear: true
@@ -1641,7 +1652,84 @@ for (i = 0; i < dropdown.length; i++) {
           allowClear: true
       });
    </script>
+<script type="text/javascript">
 
+
+
+
+    function getTechniciansSection1() {
+      var  selecteddep = document.getElementById('getTechSec1').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'getTechSec1',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(msg['getTechSec1']);
+                var object = JSON.parse(JSON.stringify(msg['getTechSec1']));
+                $('#techs').empty();
+
+                var option = document.createElement('option');
+                option.innerHTML = 'Choose...';
+                option.value = '';
+                document.getElementById('techs').appendChild(option);
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].fname + ' ' + object[i].lname;
+                    option.value = object[i].id;
+                    document.getElementById('techs').appendChild(option);
+                }
+            });
+    }
+
+
+
+    </script>
+    <script type="text/javascript">
+
+
+
+
+        function gethossect() {
+          var  selecteddep = document.getElementById('hossect').value;
+
+            console.log('ID: ' + selecteddep);
+            $.ajax({
+                    method: 'GET',
+                    url: 'gethossect',
+                    data: { id: selecteddep }
+                })
+                .done(function(msg) {
+                    console.log(msg['user']);
+                    var object = JSON.parse(JSON.stringify(msg['user']));
+                    $('#hops').empty();
+
+                    var option = document.createElement('option');
+                    option.innerHTML = 'Choose...';
+                    option.value = '';
+                    document.getElementById('hops').appendChild(option);
+
+
+
+
+                    for (var i = 0; i < object.length; i++) {
+                        var option = document.createElement('option');
+                        option.innerHTML = object[i].fname + ' ' + object[i].lname;
+                        option.value = object[i].id;
+                        document.getElementById('hops').appendChild(option);
+                    }
+                });
+        }
+
+
+
+        </script>
 <script type="text/javascript">
 
     $(".materialsselect").select2({
@@ -1776,8 +1864,118 @@ for (i = 0; i < dropdown.length; i++) {
    </script>
 
 
+{{--  store refresh --}}
+
+<script type="text/javascript">
 
 
 
+
+    function getnameMAT() {
+      var  selecteddep = document.getElementById('nameMAT').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'descriptionMAT',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(msg['description']);
+                var object = JSON.parse(JSON.stringify(msg['description']));
+                //
+                $('#descriptionMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].description;
+                    option.value = object[i].id;
+                    document.getElementById('descriptionMAT').appendChild(option);
+                }
+                //
+                $('#brandMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].brand;
+                    option.value = object[i].id;
+                    document.getElementById('brandMAT').appendChild(option);
+                }
+                //
+                $('#typeMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].type;
+                    option.value = object[i].id;
+                    document.getElementById('typeMAT').appendChild(option);
+                }
+                            });
+    }
+
+    function getdescriptionMAT() {
+      var  selecteddep = document.getElementById('descriptionMAT').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'getdescriptionMAT',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(msg['description']);
+                var object = JSON.parse(JSON.stringify(msg['description']));
+                //
+                $('#nameMAT').empty();
+
+                // nameMAT
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].name;
+                    option.value = object[i].id;
+                    document.getElementById('nameMAT').appendChild(option);
+                }
+                //
+                $('#brandMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].brand;
+                    option.value = object[i].id;
+                    document.getElementById('brandMAT').appendChild(option);
+                }
+                //
+                $('#typeMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].type;
+                    option.value = object[i].id;
+                    document.getElementById('typeMAT').appendChild(option);
+                }
+                            });
+    }
+
+
+
+    </script>
+{{-- store refresh --}}
 </body>
 </html>

@@ -972,7 +972,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             if ($_GET['change']=='hos')
             {
                  $data['fetch'] = user::where('type','like','%'.$_GET['type'].'%')->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
- $data['header'] = 'All Heads of Sections Details';
+ $data['header'] = 'Head of Section Details';
  $data['section'] ='0';
             }elseif($_GET['change']=='iow')
             {
@@ -982,7 +982,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
             }else
             {
                  $data['fetch'] = Technician::where('type',0)->where('type',$_GET['type'])->where('id',$_GET['name'])->OrderBy('fname','asc')->get();
-             $data['header'] = 'All Technicians Details';
+             $data['header'] = 'Technician Details';
              $data['section'] ='0';
             }
         }
@@ -1088,7 +1088,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     public function trackreport (Request $request, $id)
     {
     $data['wo'] = WorkOrder::where('id', $id)->with('work_order_inspection')->first();
-    $data['header'] = 'Works Order Report (WO#'.$id.')';
+    $data['header'] = 'Works Order Report';
 ///////////////////////////////////////////////
 
      $pdf = PDF::loadView('trackworkreport', $data);

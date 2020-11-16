@@ -660,7 +660,7 @@ foreach ($woclo as $woclo) {
       </li>
     </ul>
     </span>
-           
+
         </div>
     </nav>
     <div>
@@ -771,7 +771,7 @@ use App\Section;
             </select>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" hidden >
                     <label for="my-input">Filter By User Type</label>
                     <select id="my-select" class="custom-select" name="typ">
                         <option value="">All Types</option>
@@ -917,8 +917,8 @@ use App\Section;
       <th scope="col">#</th>
       <th scope="col">Full Name</th>
       <th scope="col">Username</th>
-      <th scope="col">Email</th>
       <th title="phone" scope="col">Phone</th>
+      <th scope="col">Email</th>
       <th scope="col">Type</th>
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
@@ -951,7 +951,6 @@ else {
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
       <td>{{ $user->name }}</td>
-      <td>{{ $user->email }}</td>
       <td>
 
       <?php $phonenumber = $user->phone;
@@ -963,6 +962,7 @@ else {
         }else { echo $user->phone;}
 
       ?></td>
+      <td>{{ $user->email }}</td>
 
       @if( $user->type == "Inspector Of Works")
       <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>

@@ -39,7 +39,7 @@ Area
 
             <a href="Add/Areass" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add New Area</a>
-                   <a href="{{ url('areapdf')}}" style="margin-bottom: 20px; float:right;"
+                   <a  target="_blank"  href="{{ url('areapdf')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 

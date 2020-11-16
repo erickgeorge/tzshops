@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-           <a style="text-transform: uppercase;" href="{{ url('pdf') }}" class="btn btn-primary mb-2">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+           <a target="_blank"  style="text-transform: uppercase;" href="{{ url('pdf') }}" class="btn btn-primary mb-2">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
           <table class="table table-bordered" id="laravel_crud">
            <thead>
               <tr>

@@ -671,13 +671,13 @@ var total=2;
     <?php $tender = Crypt::encrypt($assesment->company); ?>
 
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                 <a target="_blank"   target="_blank" style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
            @else
   <?php $tender = Crypt::encrypt($assesment->company); ?>
 
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Download for Signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                 <a target="_blank"   target="_blank" style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Download for Signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
             @endif
    @endif
@@ -705,7 +705,7 @@ var total=2;
 @if(auth()->user()->type != 'Dvc Accountant')
  <?php $tender = Crypt::encrypt($assesment->company); ?>
                 <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                 <a target="_blank"  style="color: white;" href="{{route('assessmentpdfform', [$assesment->id,$tender, $assesment->month ])}}" title="Assessment sheet pdf"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
                 <br>

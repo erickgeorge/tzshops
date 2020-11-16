@@ -237,8 +237,9 @@ foreach ($woclo as $woclo) {
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
-                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
+@if($role['user_role']['role_id'] == 1)
+ {{-- <a class="dropdown-item" style="color:white" href="{{route('manageusertype')}}">User Types</a> --}}
+@endif         <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
@@ -795,7 +796,7 @@ use App\Section;
                        ?>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label for="my-input">Filter By User Type</label>
                     <select id="my-select" class="custom-select" name="typ">
                         <option value="">All Types</option>
@@ -839,7 +840,7 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="directorate" class="form-control mr-sm-2">
+                <select name="directorate"  onchange="getDepartments34()" id="directorate34" class="form-control mr-sm-2">
 
                     <option selected value="">All Directorates</option>
                     <?php
@@ -858,7 +859,7 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="department" class="form-control mr-sm-2">
+                <select name="department" id="department34" class="form-control mr-sm-2">
                     <option selected="selected" value="">Select Department</option>
                     <option value="">All Departments</option>
                     <?php
@@ -894,8 +895,8 @@ use App\Section;
       <th scope="col">#</th>
       <th scope="col">Full Name</th>
       <th scope="col">Username</th>
-      <th scope="col">Email</th>
       <th title="phone" scope="col">Phone</th>
+      <th scope="col">Email</th>
       <th scope="col">Type</th>
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
@@ -926,7 +927,6 @@ else {
       <th scope="row">{{ $i++ }}</th>
       <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
       <td>{{ $user->name }}</td>
-      <td>{{ $user->email }}</td>
       <td>
 
       <?php $phonenumber = $user->phone;
@@ -938,6 +938,7 @@ else {
         }else { echo $user->phone;}
 
       ?></td>
+      <td>{{ $user->email }}</td>
 
       @if( $user->type == "Inspector Of Works")
       <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
@@ -1645,6 +1646,49 @@ function getDepartments() {
 
 
 </script>
+{{--  --}}
+
+<script type="text/javascript">
+
+
+
+
+    function getDepartments34() {
+      var  selecteddep = document.getElementById('directorate34').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'departments/',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(selecteddep);
+                console.log(msg['departments']);
+                var object = JSON.parse(JSON.stringify(msg['departments']));
+                $('#department34').empty();
+
+                var option = document.createElement('option');
+                option.innerHTML = 'Choose...';
+                option.value = '';
+                document.getElementById('department34').appendChild(option);
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].description;
+                    option.value = object[i].id;
+                    document.getElementById('department34').appendChild(option);
+                }
+            });
+    }
+
+
+
+    </script>
+{{--  --}}
 <script type="text/javascript">
     (function( $ ) {
 

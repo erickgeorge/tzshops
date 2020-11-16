@@ -46,7 +46,7 @@ Furniture Asset
                      Asset Summary
                     </div>
                     <div class="col text-right">
-                        <a href="{{route('assetinfo/export/',[$landinfo->id,'furniture'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                        <a href="{{route('assetinfo/export/',[$landinfo->id,'furniture'])}}"  target="_blank" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
                     </div>
                 </div>
@@ -223,7 +223,7 @@ Furniture Asset
         <h4>Assessment Records</h4><hr>
         <div class="row text-right">
             <div class="col">
-                <a href="{{route('asset/assesment/export/',[$type])}}?type=furniture" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                <a href="{{route('asset/assesment/export/',[$type])}}?type=furniture" class="btn btn-primary"  target="_blank" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
             </div>
         </div><br>
         <table class="table table-striped table-responsive  display text-center" id="myTable" style="width:100%">
