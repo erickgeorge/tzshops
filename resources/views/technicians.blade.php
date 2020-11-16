@@ -88,9 +88,9 @@ foreach ($hoos as $hous) {
  <br>
 <!-- SOMETHING STRANGE HERE -->
  @if(!$techs->isEmpty())
-<div align="right" style="margin-top: -60px;">
+<div align="right">
 
-          <button style="max-height: 40px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
    Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button>
 </div>
@@ -111,7 +111,7 @@ foreach ($hoos as $hous) {
   <div class="modal-body">
       <div class="row">
           <div class="col">
-              <select name="type" class="form-control mr-sm-2">
+              <select name="type" id="getTechSec1"  onchange="getTechniciansSection1()"  class="form-control mr-sm-2">
 
  @if(($role['user_role']['role_id'] == 1))
 
@@ -146,21 +146,10 @@ foreach ($hoos as $hous) {
       <div class="modal-body">
         <div class="row">
           <div class="col">
-            <select name="name" class="form-control mr-sm-2">
+            <select name="name" id="techs" class="form-control mr-sm-2">
 
              <option value="" selected="selected">All Technicians</option>
-  @foreach($rle as $tech)
-      @if(($role['user_role']['role_id'] == 1))
-          <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ ucwords(strtolower($tech->type)) }}</option>
-      @elseif($maintenance_coordinator == 1)
-          <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} - {{ ucwords(strtolower($tech->type)) }}</option>
-      @else
-          @if(strtolower($tech->type) == strtolower($placed))
 
-          <option value="{{ $tech->id }}">{{ $tech->fname . ' ' . $tech->lname }} </option>
-          @endif
-      @endif
-  @endforeach
               </select>
         </div>
         </div>
@@ -186,12 +175,10 @@ foreach ($hoos as $hous) {
             <th scope="col">Full Name</th>
             <th title="phone" scope="col">Phone</th>
             <th scope="col">Email</th>
-            @if((auth()->user()->type == 'Estates Director'))
+            @if((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1)||(auth()->user()->type =='DVC Admin'))
               <th scope="col">Section</th>
             @endif
-            @if($role['user_role']['role_id'] != 1)
-            @else
-            <th scope="col">Section</th>@endif
+
         @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
 
          <th scope="col">Actions</th>
@@ -234,10 +221,10 @@ foreach ($hoos as $hous) {
 
       ?></td>
                 <td>{{ $tech->email }}</td>
-               @if((auth()->user()->type == 'Estates Director'))
+               @if((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1)||(auth()->user()->type =='DVC Admin'))
               <td>{{ ucwords(strtolower($tech->type)) }}</td>
             @endif
-             @if($role['user_role']['role_id'] != 1)  @else <td>{{ ucwords(strtolower($tech->type)) }}</td>@endif
+
                 @if((substr(auth()->user()->type,0,4) == 'HOS ')||(auth()->user()->type == 'Maintenance coordinator')||($role['user_role']['role_id'] == 1))
 
                 <td class="text-center">

@@ -67,12 +67,10 @@ New Work in Progress Asset
             <br>
             <br>
             <div class="row">
-                <div class="form-group col-md-2">
                     <button id="newcard" class=" btn btn-primary" name="newcard">Save</button>
-                </div>
-                <div class="form-group col-md-2">
+                    &nbsp;
                     <a href="{{route('assetsWorkinProgress')}}" id="newcard" class=" btn btn-danger text-light" name="newcard">Cancel</a>
-                </div>
+                
             </div>
         </form>
         <br>

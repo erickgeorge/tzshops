@@ -120,7 +120,7 @@
 
 
          <h4> Please assign Good Receiving Note for received material(s).</h4>
-         <a class="btn btn-primary btn-sm"  href="grnpdf/{{$item->work_order_id}}" role="button">Assign GRN</a>
+         <a class="btn btn-primary btn-sm"  target="_blank"  href="grnpdf/{{$item->work_order_id}}" role="button">Assign GRN</a>
 
 
 

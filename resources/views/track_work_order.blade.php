@@ -1205,7 +1205,7 @@
 
     <!--statussesss-->
 
-    
+
           @if($wo->status == 30)
             <div>
             <!--    <h4 align="center">Works order completely closed!</h4>-->
@@ -1255,20 +1255,20 @@
 
 
 
-<!--statusess-->  
+<!--statusess-->
 
 
 
 @if(auth()->user()->type == 'Estates Director')
 <div style="padding: 1em;">
-  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+  <a href="{{ url('trackreport/'.$wo->id) }}"  target="_blank" ><button class="btn btn-primary">
 PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
 @endif
 @if(auth()->user()->type == "CLIENT")
 <div style="padding: 1em;">
-  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+  <a href="{{ url('trackreport/'.$wo->id) }}"  target="_blank" ><button class="btn btn-primary">
 PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
@@ -1277,7 +1277,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @if(auth()->user()->type == 'Inspector Of Works')
 
     <div style="padding: 1em;">
-  <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+  <a href="{{ url('trackreport/'.$wo->id) }}"  target="_blank" ><button class="btn btn-primary">
 PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 </button></a>
 </div>
@@ -1285,14 +1285,14 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     @endif
 
 
-      
+
 
 
 
  @if(strpos(auth()->user()->type, "HOS") !== false)
 
         <div style="padding: 1em;">
-         <a href="{{ url('trackreport/'.$wo->id) }}" ><button class="btn btn-primary">
+         <a href="{{ url('trackreport/'.$wo->id) }}"  target="_blank" ><button class="btn btn-primary">
     PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   </button></a>
         </div>

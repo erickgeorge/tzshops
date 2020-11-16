@@ -29,7 +29,7 @@ Blocks
 
     <div>
 <br><br>
-                <h4 
+                <h4
                     >List of Available Blocks</h4></div>
 
 
@@ -39,7 +39,7 @@ Blocks
 
             <a href="{{route('manageblocks')}}" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add New Block</a>
-                   <a href="{{ url('blockpdf')}}" style="margin-bottom: 20px; float:right;"
+                   <a  target="_blank" href="{{ url('blockpdf')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
@@ -65,7 +65,7 @@ Blocks
                             <td><?php echo ucwords(strtolower( $dep->name_of_block )); ?></td>
                              <td>{{ $dep['areas']->name_of_area }}</td>
                                <td><?php echo ucwords(strtolower( $dep->location_of_block )); ?></td>
-                         
+
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;
                                     <a style="color: green;"
@@ -107,7 +107,7 @@ Blocks
 
                 </div>
 
-               
+
                     <div class="modal-body">
                     <form method="POST" action="edit/Blocks" class="col">
 
@@ -131,7 +131,7 @@ Blocks
                     </a>
                   </form>
                     </div>
-              
+
 
 
                 <div class="modal-footer">

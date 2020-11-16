@@ -81,6 +81,7 @@ Reallocate Work in Progress to Assets
                     <div class="card">
                         <div class="card-body">
                             <div class="card-text">
+                                <input type="text" name="bld" value="{{$landinfo->bld}}" hidden>
                                    <div class="form-group">
                                        <label for="my-textarea">Asset Description <sup class="text-danger">*</sup></label>
                                        <textarea id="description" class="form-control" name="AssetDescription" rows="3" required>{{$landinfo->assetDescription}}</textarea>
@@ -92,14 +93,24 @@ Reallocate Work in Progress to Assets
                                        </div>
                                        <div class="form-group col">
                                            <label for="my-input">Asset Number <sup class="text-danger">*</sup></label>
-                                           <input id="assetnumber" value="{{$landinfo->assetNumber}}" required class="form-control" placeholder="Asset Number" type="text" name="AssetNumber">
-                                       </div>
+                                           <div class="row">
+                                            <div class="col">
+                                             <input id="assetnumber" required class="form-control"  placeholder="UDSM" type="text" name="AssetNumber1">
+                                            </div> <b style="font-size: 30px">/</b>
+                                            <div class="col">
+                                             <input id="assetnumber" required class="form-control"  placeholder="BLD" type="text" name="AssetNumber2">
+                                            </div><b style="font-size: 30px">/</b>
+                                            <div class="col">
+                                             <input id="assetnumber" required class="form-control" min="1"  placeholder="0001" type="number" name="AssetNumber3">
+                                            </div>
+                                        </div>                                       </div>
                                     </div>
                                     <div class="row">
-                                       <div class="form-group col">
-                                           <label for="my-input">Quantity <sup class="text-danger">*</sup></label>
-                                           <input id="quantity" required min="1" class="form-control" value="{{$landinfo->assetQuantity}}" type="number" name="Quantity">
-                                       </div>
+                                        @if($landinfo->bld == 0)  <div class="form-group col ">
+                                            <label for="my-input">Quantity <sup class="text-danger">*</sup></label>
+                                            <input id="quantity"  required min="1"  class="form-control" value="{{$landinfo->assetQuantity}}" type="number" name="Quantity">
+                                        </div> @else  @endif
+
                                         <div class="form-group col">
                                             <label for="my-input">Asset Condition <sup class="text-danger">*</sup></label>
                                             <select id="assetnumber" required class="form-control" name="AssetCondition">
@@ -111,18 +122,28 @@ Reallocate Work in Progress to Assets
                                                 <option value="Absolute">Absolute</option>
                                             </select>
                                         </div>
+                                        @if($landinfo->bld == 0)
                                     </div>
                                     <div class="row">
+                                         @else   @endif
+
                                         <div class="form-group col">
                                             <label for="my-input">Cost/Rep. Cost <sup class="text-danger">*</sup></label>
-                                            <input id="quantity" required min="1" class="form-control" value="1" type="number" name="cost">
+                                            <input id="quantity" required min="1" class="form-control" value="{{$landinfo->Cost}}" type="number" name="cost">
                                         </div>
+                                        @if($landinfo->bld == 0)
+
+                                        @else  </div>
+                                        <div class="row">  @endif
                                        <div class="form-group col">
                                            <label for="my-input">Date of Acquisition <sup class="text-danger">*</sup></label>
                                            <input id="acdate" required value="{{$landinfo->assetAcquisitionDate}}" max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date of Acquisition" type="date" name="DateofAcquisition">
                                        </div>
+
+                                       @if($landinfo->bld == 0)
                                     </div>
                                     <div class="row">
+                                       @else  @endif
                                        <div class="form-group col-md-6">
                                            <label for="my-input">Date in Use <sup class="text-danger">*</sup></label>
                                            <input id="usedate" required value="{{$landinfo->assetDateinUse}}'"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">

@@ -72,21 +72,21 @@ Computer Equipment Assets
                     <tbody>
                         <tr>
                             @php
-                                $computerequipment = assetscomputerequipment::where('_condition','New')->get();
-                                $computerequipment2 = assetscomputerequipment::where('_condition','Good')->get();
-                                $computerequipment3 = assetscomputerequipment::where('_condition','Fair')->get();
-                                $computerequipment4 = assetscomputerequipment::where('_condition','Poor')->get();
-                                $computerequipment5 = assetscomputerequipment::where('_condition','Very Poor')->get();
-                                $computerequipment6 = assetscomputerequipment::where('_condition','Obsolete')->get();
-                                $computerequipment7 = assetscomputerequipment::where('_condition','Disposed')->get();
-                                $computerequipment8 = assetscomputerequipment::where('_condition','Sold')->get();
-                            $computerequipment10 = assetscomputerequipment::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
+                                $computerequipment = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','New')->get();
+                                $computerequipment2 = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Good')->get();
+                                $computerequipment3 = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Fair')->get();
+                                $computerequipment4 = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Poor')->get();
+                                $computerequipment5 = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Very Poor')->get();
+                                $computerequipment6 = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Obsolete')->get();
+                                $computerequipment7 = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Disposed')->get();
+                                $computerequipment8 = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Sold')->get();
+                            $computerequipment10 = assetscomputerequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                                 $computerequipment9 = assetscomputerequipment::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                             @endphp
                                    <td>
                                     @if (count($computerequipment)>0)
                                             {{count($computerequipment)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment)}}
                                     @endif
@@ -94,7 +94,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment2)>0)
                                             {{count($computerequipment2)}}
-                                            &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment2)}}
                                     @endif
@@ -102,7 +102,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment3)>0)
                                             {{count($computerequipment3)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment3)}}
                                     @endif
@@ -110,7 +110,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment4)>0)
                                             {{count($computerequipment4)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment4)}}
                                     @endif
@@ -118,7 +118,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment5)>0)
                                             {{count($computerequipment5)}}
-                                            &nbsp;<a href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment5)}}
                                     @endif
@@ -126,7 +126,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment6)>0)
                                             {{count($computerequipment6)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment6)}}
                                     @endif
@@ -134,7 +134,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment7)>0)
                                             {{count($computerequipment7)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment7)}}
                                     @endif
@@ -142,7 +142,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment8)>0)
                                             {{count($computerequipment8)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment8)}}
                                     @endif
@@ -150,7 +150,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment10)>0)
                                             {{count($computerequipment10)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment10)}}
                                     @endif
@@ -158,7 +158,7 @@ Computer Equipment Assets
                                     <td>
                                         @if (count($computerequipment9)>0)
                                             {{count($computerequipment9)}}
-                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                            &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=computerequipments&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                         @else
                                             {{count($computerequipment9)}}
                                     @endif
@@ -171,10 +171,16 @@ Computer Equipment Assets
     </div>
     <br>
     <div class="row">
-        <div class="col">
+
+        <div class="col-md-8">
 
         </div>
-        <div class="col-md-3 text-right">
+        <div class="col-md-2 text-right">
+
+                <a href='{{route('assessingroup')}}?asset=computer' class="btn btn-primary" title="assess all furniture assets"> Assess </a>
+
+        </div>
+        <div class="col-md-2 text-right">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-file-excel-o" aria-hidden="true"></i> </button>
         </div>
         </div>

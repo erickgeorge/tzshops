@@ -95,7 +95,7 @@ echo 'Computer Equipment';
                     $assetid = assetsplantandmachinery::where('id',$asses->assetID)->first();
 
                 }else if ($_GET['asset']=='Building') {
-                    $assetid = assetsbuilding::where('id',$asses->assetID)->first();
+                    $assetid = assetsbuilding::where('id',$asses->assetID)->where('woip',0)->first();
 
                 }else if ($_GET['asset']=='Land') {
                     $assetid = assetsland::where('id',$asses->assetID)->first();

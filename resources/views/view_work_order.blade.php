@@ -99,13 +99,13 @@
 
 <br>
  @if(auth()->user()->type == 'Maintenance coordinator')
-  @if($wo->problem_type == 'Others')  
+  @if($wo->problem_type == 'Others')
   <p>Choose  problem type if you want to redirect to right section</p>
 
    <form method="POST" action="{{route('redirect_wo',[$wo->id])}}"
                   class="col-md-6">
                         @csrf
-     
+
        <div class="form-group ">
                         <label for="dep_name">Problem Type</label>
                         <br>
@@ -117,12 +117,12 @@
                         </select>
       </div>
          <button type="submit" class="btn btn-primary">Submit</button>
- </form>  
+ </form>
   @endif
 
-  
+
   @else
- 
+
 
  <h5>Click the button "Send to Maintenance Coordinator" if works order submited to wrong problem type.</h5>
     <form method="POST" action="{{ route('to.secretary.workorder', [$wo->id]) }}">
@@ -130,8 +130,8 @@
         <button type="submit" class="btn btn-primary">Send to Maintenance Coordinator</button>
     </form>
     <br>
-   @endif 
-  
+   @endif
+
 <br>
 
 <script>
@@ -152,7 +152,7 @@ function autoSubmit()
     <br>
      <div class="row">
         <div>
- @if($wo->problem_type != 'Others') 
+ @if($wo->problem_type != 'Others')
         <button type="submit" class="btn btn-primary">Accept</button>
             </form>
         </div>
@@ -163,7 +163,7 @@ function autoSubmit()
         </div>
     </div>
     <br>
-   
+
 
 
     <!-- Modal -->
@@ -180,7 +180,7 @@ function autoSubmit()
                     <p>Please provide reason as to why you want to reject this works order.</p>
                     <form method="POST" action="{{ route('workorder.reject',['id'=>$wo->id]) }}">
                         @csrf
-                        <textarea name="reason" required maxlength="100" class="form-control"  rows="5" id="reason"></textarea>
+                        <textarea name="reason" required class="form-control"  rows="5" id="reason"></textarea>
                         <br>
                         <button type="submit" class="btn btn-danger">Reject</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

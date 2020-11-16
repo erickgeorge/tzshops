@@ -6,7 +6,7 @@ New Furniture Asset
 
 @section('body')
 @php
-    use App\assetsidentifiedlocation;
+    use App\Directorate;
 @endphp
 <div class="container"><br>
     <div class="row container-fluid" >
@@ -52,16 +52,24 @@ New Furniture Asset
                                     <option value="" selected style="color: red;">Choose...</option>
 
                                 @php
-                                     $option = assetsidentifiedlocation::orderBy('abbreviation','ASC')->get();
+                                     $option = Directorate::orderBy('directorate_description','ASC')->get();
                                  @endphp
                                  @foreach ($option as $opt)
-                                     <option value="{{$opt->name}}">{{$opt->abbreviation}}</option>
+                                     <option value="{{$opt->id}}">{{$opt->directorate_description}}</option>
                                  @endforeach
                              </select>
                                </div>
                                <div class="form-group col">
                                    <label for="my-input">Asset Number <sup class="text-danger">*</sup></label>
-                                   <input id="assetnumber" required class="form-control" placeholder="Asset Number" type="text" name="AssetNumber">
+                                   <div class="row">
+                                        <b style="font-size: 30px">*</b>
+                                       <div class="col-md-4">
+                                        <input id="assetnumber" required class="form-control"  placeholder="06" type="text" name="AssetNumber2">
+                                       </div><b style="font-size: 30px">*</b>
+                                       <div class="col">
+                                        <input id="assetnumber" required class="form-control" min="1"  placeholder="0001" type="number" name="AssetNumber3">
+                                       </div>
+                                   </div>
                                </div>
                             </div>
                             <div class="row">
@@ -104,12 +112,11 @@ New Furniture Asset
             <br>
             <br>
             <div class="row">
-                <div class="form-group col-md-2">
+
                     <button id="newcard" class=" btn btn-primary" name="newcard">Save</button>
-                </div>
-                <div class="form-group col-md-2">
+                    &nbsp;
                     <a href="{{route('assetsFurniture')}}" id="newcard" class=" btn btn-danger text-light" name="newcard">Cancel</a>
-                </div>
+               
             </div>
         </form>
         <br>

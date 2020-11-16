@@ -124,7 +124,7 @@
     <div class="col">
         <div class="form-group ">
                 <label for="phone">Email <sup style="color: red;">*</sup></label>
-                <input  style="color: black" required required type="email" maxlength="25" class="form-control" id="email" aria-describedby="emailHelp"
+                <input  style="color: black" required required type="email" maxlength="45" class="form-control" id="email" aria-describedby="emailHelp"
                 name="email" onblur="validateEmail(this);" placeholder="Enter email address" value="{{ $user->email }}">
             </div>
     </div>

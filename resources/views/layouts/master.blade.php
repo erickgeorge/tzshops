@@ -84,7 +84,7 @@
                 use App\WorkOrder;
                 use App\ppuproject;
                  use App\iowzone;
-                
+
 
 
         use App\zoneinspector;
@@ -125,17 +125,17 @@
                 $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
                 $iozonename = iowzone::where('id',$iozone['zone'])->first();
                  $woMaterialAcceptediow = WorkOrderMaterial::where('zone', $iozone['zone'])->select(DB::raw('work_order_id'))->where('status',1)->orwhere('status',1012)->where('zone', $iozone['zone'])->orwhere('copyforeaccepted' , 1)->where('zone', $iozone['zone'])
-                    ->groupBy('work_order_id')->get();    
+                    ->groupBy('work_order_id')->get();
 
                 $woMaterialrejected = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',-1)->orwhere('status',17)->orwhere('status', 44)
                     ->groupBy('work_order_id')->get();
 
                     $woMaterialrejectedhos = WorkOrderMaterial::where('hos_id', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',-1)->orwhere('hos_id', auth()->user()->id)->where('status',17)->orwhere('hos_id', auth()->user()->id)->where('status',44)
-                    ->groupBy('work_order_id')->get();    
+                    ->groupBy('work_order_id')->get();
 
 
                 $woMaterialrejectediow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('zone', $iozone['zone'])->where('status',-1)->orwhere('zone', $iozone['zone'])->where('status',17)
-                    ->groupBy('work_order_id')->get();   
+                    ->groupBy('work_order_id')->get();
 
                $woMaterialreserved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->orwhere('status',100)
                     ->groupBy('work_order_id')->get();
@@ -183,7 +183,7 @@
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
                      ->groupBy('zone')
-                     ->get();   
+                     ->get();
 
 
                  $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
@@ -258,7 +258,9 @@
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
+@if($role['user_role']['role_id'] == 1)
+ <a class="dropdown-item" style="color:white" href="">User Types</a>
+@endif
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
@@ -465,7 +467,9 @@
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-
+@if($role['user_role']['role_id'] == 1)
+ {{-- <a class="dropdown-item" style="color:white" href="{{route('manageusertype')}}">User Types</a> --}}
+@endif
                <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorates</a>
                <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
@@ -596,7 +600,7 @@ title="Send feedback/comment"
                          <span class="badge badge-light">{{ count($notifications) }}</span></a>
                     <div class="dropdown-menu dropdown-menu-right" style="background-color: #376ad3; color: white;"  aria-labelledby="navbarDropdown">
                      @foreach($notifications as $notification)
-                           
+
                                 <a class="dropdown-item"
                                    onclick="event.preventDefault();
                                            document.getElementById('{{ 'reject-'.$notification->id }}').submit();">
@@ -608,8 +612,8 @@ title="Send feedback/comment"
                                       style="display: none;">
                                     @csrf
                                 </form>
-                    
-                     
+
+
                         @endforeach
                         {{--<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Clear notifications</a>--}}
@@ -781,7 +785,7 @@ title="Send feedback/comment"
  <a  href="{{ url('technicians') }}">Technicians</a>
  @endif
 
- 
+
  <button class="dropdown-btn">Materials Update
     <i class="fa fa-caret-down"></i>
   </button>
@@ -1440,6 +1444,13 @@ for (i = 0; i < dropdown.length; i++) {
 </script>
 <script type="text/javascript">
 
+      $("#inafilterusertype").select2({
+            placeholder: "Choose...",
+            allowClear: true
+        });
+</script>
+<script type="text/javascript">
+
       $("#nameid").select2({
             placeholder: "Choose type of problem...",
             allowClear: true
@@ -1664,18 +1675,330 @@ for (i = 0; i < dropdown.length; i++) {
           allowClear: true
       });
    </script>
+<script type="text/javascript">
 
+
+
+
+    function getTechniciansSection1() {
+      var  selecteddep = document.getElementById('getTechSec1').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'getTechSec1',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(msg['getTechSec1']);
+                var object = JSON.parse(JSON.stringify(msg['getTechSec1']));
+                $('#techs').empty();
+
+                var option = document.createElement('option');
+                option.innerHTML = 'Choose...';
+                option.value = '';
+                document.getElementById('techs').appendChild(option);
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].fname + ' ' + object[i].lname;
+                    option.value = object[i].id;
+                    document.getElementById('techs').appendChild(option);
+                }
+            });
+    }
+
+
+
+    </script>
+    <script type="text/javascript">
+
+
+
+
+        function gethossect() {
+          var  selecteddep = document.getElementById('hossect').value;
+
+            console.log('ID: ' + selecteddep);
+            $.ajax({
+                    method: 'GET',
+                    url: 'gethossect',
+                    data: { id: selecteddep }
+                })
+                .done(function(msg) {
+                    console.log(msg['user']);
+                    var object = JSON.parse(JSON.stringify(msg['user']));
+                    $('#hops').empty();
+
+                    var option = document.createElement('option');
+                    option.innerHTML = 'Choose...';
+                    option.value = '';
+                    document.getElementById('hops').appendChild(option);
+
+
+
+
+                    for (var i = 0; i < object.length; i++) {
+                        var option = document.createElement('option');
+                        option.innerHTML = object[i].fname + ' ' + object[i].lname;
+                        option.value = object[i].id;
+                        document.getElementById('hops').appendChild(option);
+                    }
+                });
+        }
+
+
+
+        </script>
 <script type="text/javascript">
 
     $(".materialsselect").select2({
           placeholder: "Choose material..",
           allowClear: true
       });
+      (function( $ ) {
+
+ 	jQuery.fn.doubleScroll = function(userOptions) {
+
+		// Default options
+		var options = {
+			contentElement: undefined, // Widest element, if not specified first child element will be used
+			scrollCss: {
+				'overflow-x': 'auto',
+				'overflow-y': 'hidden',
+				'height': '20px'
+			},
+			contentCss: {
+				'overflow-x': 'auto',
+				'overflow-y': 'hidden'
+			},
+			onlyIfScroll: true, // top scrollbar is not shown if the bottom one is not present
+			resetOnWindowResize: false, // recompute the top ScrollBar requirements when the window is resized
+			timeToWaitForResize: 30 // wait for the last update event (usefull when browser fire resize event constantly during ressing)
+		};
+
+		$.extend(true, options, userOptions);
+
+		// do not modify
+		// internal stuff
+		$.extend(options, {
+			topScrollBarMarkup: '<div class="doubleScroll-scroll-wrapper"><div class="doubleScroll-scroll"></div></div>',
+			topScrollBarWrapperSelector: '.doubleScroll-scroll-wrapper',
+			topScrollBarInnerSelector: '.doubleScroll-scroll'
+		});
+
+		var _showScrollBar = function($self, options) {
+
+			if (options.onlyIfScroll && $self.get(0).scrollWidth <= $self.width()) {
+				// content doesn't scroll
+				// remove any existing occurrence...
+				$self.prev(options.topScrollBarWrapperSelector).remove();
+				return;
+			}
+
+			// add div that will act as an upper scroll only if not already added to the DOM
+			var $topScrollBar = $self.prev(options.topScrollBarWrapperSelector);
+
+			if ($topScrollBar.length == 0) {
+
+				// creating the scrollbar
+				// added before in the DOM
+				$topScrollBar = $(options.topScrollBarMarkup);
+				$self.before($topScrollBar);
+
+				// apply the css
+				$topScrollBar.css(options.scrollCss);
+				$(options.topScrollBarInnerSelector).css("height", "20px");
+				$self.css(options.contentCss);
+
+				var scrolling = false;
+
+				// bind upper scroll to bottom scroll
+				$topScrollBar.bind('scroll.doubleScroll', function() {
+					if (scrolling) {
+						scrolling = false;
+						return;
+					}
+					scrolling = true;
+					$self.scrollLeft($topScrollBar.scrollLeft());
+				});
+
+				// bind bottom scroll to upper scroll
+				var selfScrollHandler = function() {
+					if (scrolling) {
+						scrolling = false;
+						return;
+					}
+					scrolling = true;
+					$topScrollBar.scrollLeft($self.scrollLeft());
+				};
+				$self.bind('scroll.doubleScroll', selfScrollHandler);
+			}
+
+			// find the content element (should be the widest one)
+			var $contentElement;
+
+			if (options.contentElement !== undefined && $self.find(options.contentElement).length !== 0) {
+				$contentElement = $self.find(options.contentElement);
+			} else {
+				$contentElement = $self.find('>:first-child');
+			}
+
+			// set the width of the wrappers
+			$(options.topScrollBarInnerSelector, $topScrollBar).width($contentElement.outerWidth());
+			$topScrollBar.width($self.width());
+			$topScrollBar.scrollLeft($self.scrollLeft());
+
+		}
+
+		return this.each(function() {
+
+			var $self = $(this);
+
+			_showScrollBar($self, options);
+
+			// bind the resize handler
+			// do it once
+			if (options.resetOnWindowResize) {
+
+				var id;
+				var handler = function(e) {
+					_showScrollBar($self, options);
+				};
+
+				$(window).bind('resize.doubleScroll', function() {
+					// adding/removing/replacing the scrollbar might resize the window
+					// so the resizing flag will avoid the infinite loop here...
+					clearTimeout(id);
+					id = setTimeout(handler, options.timeToWaitForResize);
+				});
+
+			}
+
+		});
+
+	}
+
+}( jQuery ));
+  $('.table').doubleScroll();
    </script>
 
 
+{{--  store refresh --}}
+
+<script type="text/javascript">
 
 
 
+
+    function getnameMAT() {
+      var  selecteddep = document.getElementById('nameMAT').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'descriptionMAT',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(msg['description']);
+                var object = JSON.parse(JSON.stringify(msg['description']));
+                //
+                $('#descriptionMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].description;
+                    option.value = object[i].id;
+                    document.getElementById('descriptionMAT').appendChild(option);
+                }
+                //
+                $('#brandMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].brand;
+                    option.value = object[i].id;
+                    document.getElementById('brandMAT').appendChild(option);
+                }
+                //
+                $('#typeMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].type;
+                    option.value = object[i].id;
+                    document.getElementById('typeMAT').appendChild(option);
+                }
+                            });
+    }
+
+    function getdescriptionMAT() {
+      var  selecteddep = document.getElementById('descriptionMAT').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'getdescriptionMAT',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(msg['description']);
+                var object = JSON.parse(JSON.stringify(msg['description']));
+                //
+                $('#nameMAT').empty();
+
+                // nameMAT
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].name;
+                    option.value = object[i].id;
+                    document.getElementById('nameMAT').appendChild(option);
+                }
+                //
+                $('#brandMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].brand;
+                    option.value = object[i].id;
+                    document.getElementById('brandMAT').appendChild(option);
+                }
+                //
+                $('#typeMAT').empty();
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].type;
+                    option.value = object[i].id;
+                    document.getElementById('typeMAT').appendChild(option);
+                }
+                            });
+    }
+
+
+
+    </script>
+{{-- store refresh --}}
 </body>
 </html>

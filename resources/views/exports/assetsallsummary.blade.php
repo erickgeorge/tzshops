@@ -11,7 +11,7 @@ use App\assetsplantandmachinery;
 use App\assetsworkinprogress;
 
 $land = assetsland::get();
-$building = assetsbuilding::get();
+$building = assetsbuilding::where('woip',0)->get();
 $computerequipment = assetscomputerequipment::get();
 $equipment = assetsequipment::get();
 $furniture = assetsfurniture::get();

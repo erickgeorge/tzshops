@@ -46,7 +46,7 @@ Building Asset
                     Asset Summary
                    </div>
                    <div class="col text-right">
-                    <a href="{{route('assetinfo/export/',[$landinfo->id,'building'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
+                    <a  target="_blank"  href="{{route('assetinfo/export/',[$landinfo->id,'building'])}}" class="btn btn-primary" type="button">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
 
                    </div>
                </div>
@@ -115,6 +115,7 @@ Building Asset
                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>  Assess
                  </button>
+                 <a href="{{route('transfertoWIP',[$landinfo->id])}}" title="transfer to works in progress" class="btn btn-primary"> <i class="fa fa-share" aria-hidden="true"></i> WIP </a>
                @endif
                <a href="{{route('assetsBuildingEdit',[$landinfo->id])}}" class="btn btn-primary" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
 
@@ -223,7 +224,7 @@ Building Asset
         <h4>Assessment Records</h4><hr>
         <div class="row text-right">
             <div class="col">
-                <a href="{{route('asset/assesment/export/',[$type])}}?type=building" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                <a target="_blank"  href="{{route('asset/assesment/export/',[$type])}}?type=building" class="btn btn-primary" id="btnExport" > Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
             </div>
         </div><br>
         <table class="table table-striped display table-responsive  text-center" id="myTable" style="width:100%">

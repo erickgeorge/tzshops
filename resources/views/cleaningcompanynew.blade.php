@@ -39,7 +39,7 @@ Companies
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                 <a href="{{route('landscapingcleaningcompanyreport')}}"
-
+                target="_blank" 
                                           style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
@@ -73,7 +73,7 @@ Companies
                     <tbody>
                     <?php $i = 0; ?>
 
-@if(auth()->user()->type == 'Supervisor Landscaping')  
+@if(auth()->user()->type == 'Supervisor Landscaping')
 
                @foreach($cleangcompany as $house)
                         <?php $i++; ?>
@@ -190,7 +190,7 @@ Companies
 
 
                             @else
-                          
+
                             @if($role['user_role']['role_id'] == 1)
                             <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
@@ -213,7 +213,7 @@ Companies
                                      </td>
                                      @else
                                      <td></td>
-                                  @endif   
+                                  @endif
                             @endif
 
 
@@ -377,7 +377,7 @@ Companies
                                      </td>
                                      @else
                                      <td></td>
-                                 @endif    
+                                 @endif
                             @endif
 
 
@@ -516,7 +516,7 @@ Companies
 
 
                             @else
-                      
+
                         @if($role['user_role']['role_id'] == 1)
                             <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
                                        onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
@@ -539,7 +539,7 @@ Companies
                                      </td>
                                      @else
                                      <td></td>
-                                 @endif    
+                                 @endif
                             @endif
 
 
@@ -557,11 +557,11 @@ Companies
                     @endforeach
 
   @endif
-  
 
-  
 
-  
+
+
+
 
 
 

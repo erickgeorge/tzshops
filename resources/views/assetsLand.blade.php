@@ -73,21 +73,21 @@ Land Assets
                     <tbody>
                         <tr>
                             @php
-                            $land0 = assetsland::where('_condition','New')->get();
-                            $land2 = assetsland::where('_condition','Good')->get();
-                            $land3 = assetsland::where('_condition','Fair')->get();
-                            $land4 = assetsland::where('_condition','Poor')->get();
-                            $land5 = assetsland::where('_condition','Very Poor')->get();
-                            $land6 = assetsland::where('_condition','Obsolete')->get();
-                            $land7 = assetsland::where('_condition','Disposed')->get();
-                            $land8 = assetsland::where('_condition','Sold')->get();
-                            $land10 = assetsland::select('assetEndingDepreciationDate')->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
+                            $land0 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','New')->get();
+                            $land2 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Good')->get();
+                            $land3 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Fair')->get();
+                            $land4 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Poor')->get();
+                            $land5 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Very Poor')->get();
+                            $land6 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Obsolete')->get();
+                            $land7 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Disposed')->get();
+                            $land8 = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->where('_condition','Sold')->get();
+                            $land10 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','>',date('Y-m-d'))->whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->get();
                             $land9 = assetsland::select('assetEndingDepreciationDate')->where('assetEndingDepreciationDate','<',date('Y-m-d'))->get();
                         @endphp
                                                             <td>
                             @if (count($land0)>0)
                                     {{count($land0)}}
-                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=New&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land0)}}
                             @endif
@@ -95,7 +95,7 @@ Land Assets
                             <td>
                                 @if (count($land2)>0)
                                     {{count($land2)}}
-                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Good&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land2)}}
                             @endif
@@ -103,7 +103,7 @@ Land Assets
                             <td>
                                 @if (count($land3)>0)
                                     {{count($land3)}}
-                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Fair&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land3)}}
                             @endif
@@ -111,7 +111,7 @@ Land Assets
                             <td>
                                 @if (count($land4)>0)
                                     {{count($land4)}}
-                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land4)}}
                             @endif
@@ -119,7 +119,7 @@ Land Assets
                             <td>
                                 @if (count($land5)>0)
                                     {{count($land5)}}
-                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Very+Poor&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land5)}}
                             @endif
@@ -127,7 +127,7 @@ Land Assets
                             <td>
                                 @if (count($land6)>0)
                                     {{count($land6)}}
-                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Absolette&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Obsolete&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land6)}}
                             @endif
@@ -135,7 +135,7 @@ Land Assets
                             <td>
                                 @if (count($land7)>0)
                                     {{count($land7)}}
-                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Disposed&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land7)}}
                             @endif
@@ -143,7 +143,7 @@ Land Assets
                             <td>
                                 @if (count($land8)>0)
                                     {{count($landd8)}}
-                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a  title="View Details"  href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=Sold&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity="> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land8)}}
                             @endif
@@ -151,7 +151,7 @@ Land Assets
                             <td>
                                 @if (count($land10)>0)
                                     {{count($land10)}}
-                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=aboutto"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land10)}}
                             @endif
@@ -159,7 +159,7 @@ Land Assets
                             <td>
                                 @if (count($land9)>0)
                                     {{count($land9)}}
-                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/export/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                    &nbsp;<a   title="View Details" href="{{route('assetExcel/bexport/')}}?type=Excel&asset=land&assetNumber=&AssetLocation=&cost=&condition=&DateofAcquisition=&assetDateinUse=&EndingDepreciationDate=&Quantity=&expired=expired"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
                                 @else
                                     {{count($land9)}}
                             @endif

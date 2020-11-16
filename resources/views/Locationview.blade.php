@@ -29,7 +29,7 @@ Locations
 
     <div>
 <br><br>
-                <h4 
+                <h4
                     >List of Available Locations</h4></div>
 
 
@@ -39,7 +39,7 @@ Locations
 
             <a href="Add/locations" style="margin-bottom: 20px;"
                    class="btn btn-primary">Add New Location</a>
-                   <a href="{{ url('locationpdf')}}" style="margin-bottom: 20px; float:right;"
+                   <a target="_blank"  href="{{ url('locationpdf')}}" style="margin-bottom: 20px; float:right;"
                    class="btn btn-primary">  Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 
@@ -103,7 +103,7 @@ Locations
 
                 </div>
 
-              
+
                     <div class="modal-body">
 
          <form method="POST" action="edit/locationn" class="col">
@@ -123,7 +123,7 @@ Locations
                     </a>
           </form>
                     </div>
-      
+
 
 
                 <div class="modal-footer">

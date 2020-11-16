@@ -25308,6 +25308,314 @@ class ExcelController extends Controller
 
 
     }
+    //
+    public function bexport()
+    {
+
+        if (
+            ($_GET['assetNumber']=='')&&
+            ($_GET['AssetLocation']=='')&&
+            ($_GET['cost']=='')&&
+            ($_GET['DateofAcquisition']=='')&&
+            ($_GET['assetDateinUse']=='')&&
+            ($_GET['EndingDepreciationDate']=='')&&
+            ($_GET['Quantity']=='')&&
+            ($_GET['condition']!='')
+        ) {
+
+                {
+                    if ($_GET['asset']=='building') {
+
+                        $assetdata = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                        where('_condition',$_GET['condition'])->
+                        get();
+                }else if ($_GET['asset']=='computerequipments') {
+
+                    $assetdata = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }else if ($_GET['asset']=='equipments') {
+
+                    $assetdata = assetsequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }else if ($_GET['asset']=='furniture') {
+
+                    $assetdata = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }else if ($_GET['asset']=='intangible') {
+
+                    $assetdata = assetsintangible::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }else if ($_GET['asset']=='land') {
+
+                    $assetdata = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }else if ($_GET['asset']=='motorvehicle') {
+
+                    $assetdata = assetsmotorvehicle::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }else if ($_GET['asset']=='plantandmachinery') {
+
+                    $assetdata = assetsplantandmachinery::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }else{
+
+                    $assetdata = assetsworkinprogress::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+            Where('_status','0')->
+                    where('_condition',$_GET['condition'])->
+                    get();
+                }
+
+
+            }
+        }else if (
+                ($_GET['assetNumber']=='')&&
+                ($_GET['AssetLocation']=='')&&
+                ($_GET['cost']=='')&&
+                ($_GET['DateofAcquisition']=='')&&
+                ($_GET['assetDateinUse']=='')&&
+                ($_GET['EndingDepreciationDate']=='')&&
+                ($_GET['Quantity']=='')&&
+                ($_GET['condition']=='')&&
+                ($_GET['expired']!='')
+            ) {
+                if($_GET['expired']=='aboutto')
+                {
+
+
+                if ($_GET['asset']=='building') {//
+
+                    $assetdata = assetsbuilding::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                get();
+
+                }else if ($_GET['asset']=='computerequipments') {//
+
+                    $assetdata = assetscomputerequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='equipments') {//
+
+                    $assetdata = assetsequipment::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+
+                } else if ($_GET['asset']=='furniture') {//
+
+                    $assetdata = assetsfurniture::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+
+                }else if ($_GET['asset']=='intangible') {//
+
+                    $assetdata = assetsintangible::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='land') {//
+
+                    $assetdata = assetsland::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='motorvehicle') {//
+
+                    $assetdata = assetsmotorvehicle::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='plantandmachinery') {//
+
+                    $assetdata = assetsplantandmachinery::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+
+                    whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='workinprogress') {//
+
+                    $assetdata = assetsworkinprogress::where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                Where('_status','0')->
+
+                whereYear('assetEndingDepreciationDate',date('Y'))->where('assetEndingDepreciationDate','>',date('Y-m-d'))->
+                    get();
+
+
+                }
+                }else
+                {
+
+
+
+                if ($_GET['asset']=='building') {//
+
+                    $assetdata = assetsbuilding::
+
+                where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                get();
+
+                }else if ($_GET['asset']=='computerequipments') {//
+
+                    $assetdata = assetscomputerequipment::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='equipments') {//
+
+                    $assetdata = assetsequipment::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+
+                } else if ($_GET['asset']=='furniture') {//
+
+                    $assetdata = assetsfurniture::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+
+                }else if ($_GET['asset']=='intangible') {//
+
+                    $assetdata = assetsintangible::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='land') {//
+
+                    $assetdata = assetsland::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='motorvehicle') {//
+
+                    $assetdata = assetsmotorvehicle::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='plantandmachinery') {//
+
+                    $assetdata = assetsplantandmachinery::
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+                }else if ($_GET['asset']=='workinprogress') {//
+
+                    $assetdata = assetsworkinprogress::
+                Where('_status','0')->
+
+                    where('assetEndingDepreciationDate','<',date('Y-m-d'))->
+                    get();
+
+
+                }
+                }
+
+            ///////fg////////////////////////////
+            }else if (
+                ($_GET['assetNumber']=='')&&
+                ($_GET['AssetLocation']=='')&&
+                ($_GET['cost']=='')&&
+                ($_GET['DateofAcquisition']=='')&&
+                ($_GET['assetDateinUse']=='')&&
+                ($_GET['EndingDepreciationDate']=='')&&
+                ($_GET['Quantity']=='')&&
+                ($_GET['condition']=='')
+            ) {
+                        if ($_GET['asset']=='building') {
+
+                            $assetdata = assetsbuilding::
+
+                            get();
+                    }else if ($_GET['asset']=='computerequipments') {
+
+                        $assetdata = assetscomputerequipment::
+
+                        get();
+                    }else if ($_GET['asset']=='equipments') {
+
+                        $assetdata = assetsequipment::
+
+                        get();
+                    }else if ($_GET['asset']=='furniture') {
+
+                        $assetdata = assetsfurniture::
+
+                        get();
+                    }else if ($_GET['asset']=='intangible') {
+
+                        $assetdata = assetsintangible::
+
+                        get();
+                    }else if ($_GET['asset']=='land') {
+
+                        $assetdata = assetsland::
+
+                        get();
+                    }else if ($_GET['asset']=='motorvehicle') {
+
+                        $assetdata = assetsmotorvehicle::
+
+                        get();
+                    }else if ($_GET['asset']=='plantandmachinery') {
+
+                        $assetdata = assetsplantandmachinery::
+
+                        get();
+                    }else{
+
+                        $assetdata = assetsworkinprogress::
+                Where('_status','0')->
+
+                        get();
+                    }
+            }
+
+
+        if (count($assetdata)<1) {
+          return redirect()->back()->withErrors(['message' => 'No data Found Matching your Filter']);
+        } else {
+            if($_GET['type']=='Pdf'){
+
+                $pdf = PDF::loadView('exports.assetsPDF', ['assetdata' => $assetdata])->setPaper('a3', 'landscape');
+            return $pdf->stream(''.$_GET['asset'].' - asset '.date('d-m-Y H-i').'.pdf');
+
+
+            }else{
+                $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+                $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+                return view('exports.preview', [
+                    'assetdata' => $assetdata,  'role' => $role,
+                    'notifications' => $notifications
+                ]);            }
+
+        }
+
+
+    }
+    //
 
     public function assetreportfromsummary()
     {

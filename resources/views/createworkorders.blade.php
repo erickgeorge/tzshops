@@ -138,7 +138,7 @@
             <label for="comment">Description of the Problem <sup style="color: red;">*</sup>
             </label>
             <br>
-            <textarea style="width: 500px;" name="details" value="{{ old('details') }}" required maxlength="100" class="form-control" rows="5"
+            <textarea style="width: 500px;" name="details" value="{{ old('details') }}" required class="form-control" rows="5"
                       id="comment"></textarea>
         </div>
         <div >

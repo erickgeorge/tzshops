@@ -75,7 +75,7 @@ use App\Material;?>
   <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="name" class="form-control mr-sm-2">
+                <select name="name" id="nameMAT" onchange="getnameMAT()"  class="form-control mr-sm-2">
                     <option selected="selected" value="">Item ID</option>
                     <?php $name = Material::select('name')->distinct()->get();
                     foreach ($name as $named) {
@@ -88,7 +88,7 @@ use App\Material;?>
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="description" class="form-control mr-sm-2">
+                <select name="description" onchange="getdescriptionMAT()"   id="descriptionMAT" class="form-control mr-sm-2">
                     <option selected="selected" value=""> Material Description</option>
                     <?php $brand = Material::select('description')->distinct()->get();
                     foreach ($brand as $branded) {
@@ -101,7 +101,7 @@ use App\Material;?>
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="brand" class="form-control mr-sm-2">
+                <select name="brand" id="brandMAT" onchange="getbrandMAT()" class="form-control mr-sm-2">
                     <option selected="selected" value=""> Unit Measure</option>
                     <?php $brand = Material::select('brand')->distinct()->get();
                     foreach ($brand as $item) {
@@ -114,7 +114,7 @@ use App\Material;?>
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="type" class="form-control mr-sm-2">
+                <select name="type" id="typeMAT" onchange="gettypeMAT()" class="form-control mr-sm-2">
                     <option value="">Material Type</option>
                     <?php $type = Material::select('type')->distinct()->get();
                     foreach ($type as $typed) {

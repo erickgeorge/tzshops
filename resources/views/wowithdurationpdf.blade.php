@@ -32,6 +32,7 @@ tr:nth-child(even) {
 
     <tr>
                     <th>#</th>
+                    <th>ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
@@ -51,6 +52,7 @@ tr:nth-child(even) {
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
+                            <th> {{$work->woCode}} </th>
                             <td id="wo-details">{{ $work->details }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>

@@ -244,6 +244,9 @@ foreach ($woclo as $woclo) {
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
+          @if($role['user_role']['role_id'] == 1)
+ <a class="dropdown-item" style="color:white" href="">User Types</a>
+@endif
   <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorate</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
@@ -288,6 +291,9 @@ foreach ($woclo as $woclo) {
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
+          @if($role['user_role']['role_id'] == 1)
+ {{-- <a class="dropdown-item" style="color:white" href="{{route('manageusertype')}}">User Types</a> --}}
+@endif
               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">College/Directorates</a>
                <a style="color:white" class="dropdown-item" href="{{ url('Manage/department')}}">Departments</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
@@ -834,7 +840,7 @@ use App\Section;
                  <option selected value="" >All Departments</option>
             </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label for="my-input">Filter By User Type</label>
                     <select id="my-select" class="custom-select" name="typ">
                         <option value="">All Types</option>
@@ -877,7 +883,7 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select  style="color: black; " class="custom-select" name="directorate" id="directorate" onchange="getDepartments()" value="{{ old('directorate') }}">
+                <select  style="color: black; " class="custom-select" name="directorate" id="directorate34" onchange="getDepartments34()" value="{{ old('directorate') }}">
                 <option selected="selected" value="">Select Directorate</option>
                 <option selected value="" >All Directorates</option>
               @foreach($directoratenew as $directorate)
@@ -891,7 +897,7 @@ use App\Section;
       <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="department" class="form-control mr-sm-2">
+                <select name="department" id="department34" class="form-control mr-sm-2">
                     <option selected="selected" value="">Select Department</option>
                     <option value="">All Departments</option>
                     <?php
@@ -929,8 +935,8 @@ use App\Section;
       <th scope="col">#</th>
       <th scope="col">Full Name</th>
       <th scope="col">Username</th>
-      <th scope="col">Email</th>
       <th title="phone" scope="col">Phone</th>
+      <th scope="col">Email</th>
       <th scope="col">Type</th>
     <th scope="col">Directorate</th>
       <th scope="col">Department</th>
@@ -964,7 +970,6 @@ else {
         <th scope="row">{{ $i++ }}</th>
         <td>{{ $user->fname . ' '.$user->mid_name.' ' . $user->lname }}</td>
         <td>{{ $user->name }}</td>
-        <td>{{ $user->email }}</td>
         <td>
 
         <?php $phonenumber = $user->phone;
@@ -976,6 +981,7 @@ else {
           }else { echo $user->phone;}
 
         ?></td>
+        <td>{{ $user->email }}</td>
 
         @if( $user->type == "Inspector Of Works")
         <td style="text-transform: capitalize;">{{ $user->type }} ,  @if( $user->IoW == 2) <h7 style="color: green;" >{{ $user->zone }}</h7>@elseif( $user->IoW == 1 ) <h7 style="color: red;" >{{ $user->zone }}</h7> @endif</td>
@@ -1739,3 +1745,176 @@ function getDepartments() {
 
 
 </script>
+
+{{--  --}}
+
+<script type="text/javascript">
+
+
+
+
+    function getDepartments34() {
+      var  selecteddep = document.getElementById('directorate34').value;
+
+        console.log('ID: ' + selecteddep);
+        $.ajax({
+                method: 'GET',
+                url: 'departments/',
+                data: { id: selecteddep }
+            })
+            .done(function(msg) {
+                console.log(selecteddep);
+                console.log(msg['departments']);
+                var object = JSON.parse(JSON.stringify(msg['departments']));
+                $('#department34').empty();
+
+                var option = document.createElement('option');
+                option.innerHTML = 'Choose...';
+                option.value = '';
+                document.getElementById('department34').appendChild(option);
+
+
+
+
+                for (var i = 0; i < object.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = object[i].description;
+                    option.value = object[i].id;
+                    document.getElementById('department34').appendChild(option);
+                }
+            });
+    }
+
+
+
+    </script>
+{{--  --}}
+
+<script type="text/javascript">
+    (function( $ ) {
+
+        jQuery.fn.doubleScroll = function(userOptions) {
+
+           // Default options
+           var options = {
+               contentElement: undefined, // Widest element, if not specified first child element will be used
+               scrollCss: {
+                   'overflow-x': 'auto',
+                   'overflow-y': 'hidden',
+                   'height': '20px'
+               },
+               contentCss: {
+                   'overflow-x': 'auto',
+                   'overflow-y': 'hidden'
+               },
+               onlyIfScroll: true, // top scrollbar is not shown if the bottom one is not present
+               resetOnWindowResize: false, // recompute the top ScrollBar requirements when the window is resized
+               timeToWaitForResize: 30 // wait for the last update event (usefull when browser fire resize event constantly during ressing)
+           };
+
+           $.extend(true, options, userOptions);
+
+           // do not modify
+           // internal stuff
+           $.extend(options, {
+               topScrollBarMarkup: '<div class="doubleScroll-scroll-wrapper"><div class="doubleScroll-scroll"></div></div>',
+               topScrollBarWrapperSelector: '.doubleScroll-scroll-wrapper',
+               topScrollBarInnerSelector: '.doubleScroll-scroll'
+           });
+
+           var _showScrollBar = function($self, options) {
+
+               if (options.onlyIfScroll && $self.get(0).scrollWidth <= $self.width()) {
+                   // content doesn't scroll
+                   // remove any existing occurrence...
+                   $self.prev(options.topScrollBarWrapperSelector).remove();
+                   return;
+               }
+
+               // add div that will act as an upper scroll only if not already added to the DOM
+               var $topScrollBar = $self.prev(options.topScrollBarWrapperSelector);
+
+               if ($topScrollBar.length == 0) {
+
+                   // creating the scrollbar
+                   // added before in the DOM
+                   $topScrollBar = $(options.topScrollBarMarkup);
+                   $self.before($topScrollBar);
+
+                   // apply the css
+                   $topScrollBar.css(options.scrollCss);
+                   $(options.topScrollBarInnerSelector).css("height", "20px");
+                   $self.css(options.contentCss);
+
+                   var scrolling = false;
+
+                   // bind upper scroll to bottom scroll
+                   $topScrollBar.bind('scroll.doubleScroll', function() {
+                       if (scrolling) {
+                           scrolling = false;
+                           return;
+                       }
+                       scrolling = true;
+                       $self.scrollLeft($topScrollBar.scrollLeft());
+                   });
+
+                   // bind bottom scroll to upper scroll
+                   var selfScrollHandler = function() {
+                       if (scrolling) {
+                           scrolling = false;
+                           return;
+                       }
+                       scrolling = true;
+                       $topScrollBar.scrollLeft($self.scrollLeft());
+                   };
+                   $self.bind('scroll.doubleScroll', selfScrollHandler);
+               }
+
+               // find the content element (should be the widest one)
+               var $contentElement;
+
+               if (options.contentElement !== undefined && $self.find(options.contentElement).length !== 0) {
+                   $contentElement = $self.find(options.contentElement);
+               } else {
+                   $contentElement = $self.find('>:first-child');
+               }
+
+               // set the width of the wrappers
+               $(options.topScrollBarInnerSelector, $topScrollBar).width($contentElement.outerWidth());
+               $topScrollBar.width($self.width());
+               $topScrollBar.scrollLeft($self.scrollLeft());
+
+           }
+
+           return this.each(function() {
+
+               var $self = $(this);
+
+               _showScrollBar($self, options);
+
+               // bind the resize handler
+               // do it once
+               if (options.resetOnWindowResize) {
+
+                   var id;
+                   var handler = function(e) {
+                       _showScrollBar($self, options);
+                   };
+
+                   $(window).bind('resize.doubleScroll', function() {
+                       // adding/removing/replacing the scrollbar might resize the window
+                       // so the resizing flag will avoid the infinite loop here...
+                       clearTimeout(id);
+                       id = setTimeout(handler, options.timeToWaitForResize);
+                   });
+
+               }
+
+           });
+
+       }
+
+   }( jQuery ));
+     $('.table').doubleScroll();
+     </script>
+

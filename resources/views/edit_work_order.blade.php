@@ -189,7 +189,7 @@ var total=2;
                 Location - Zone : &nbsp; <b> {{ $zonelocation->location }} - {{ $zoned->zonename }}</b>
                 @else
              @endif
-         @endif     
+         @endif
 
         </div>
    </div>
@@ -540,9 +540,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
 
-  
 
-   @elseif(auth()->user()->type == 'CLIENT')
+
+   @elseif((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
 
   @if(empty($wo['work_order_material']->id))
 
@@ -808,7 +808,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   </table>
   <br>
      <hr>
-     
+
 
 
 
@@ -940,7 +940,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 </tbody>
               </table>
-            
+
            <hr>
             </div>
 
@@ -948,7 +948,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
    @endif
 
 
-       
+
 <!--works order first closing-->
 
 
@@ -1240,7 +1240,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                 </tbody>
               </table>
-            
+
            <hr>
             </div>
 
@@ -1252,10 +1252,10 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <!--tracking after work rejected-->
 
   <!--statusesss-->
- 
+
   <!--statusess-->
 
-  
+
 
 
 
@@ -1582,7 +1582,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   $idw=$wo->id;
   $received = WorkOrderMaterial::where('work_order_id',$idw)->where('status',3)->get();
-?>  
+?>
 
 
  <?php
@@ -2583,7 +2583,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 {
                     var ele = document.createElement('input');
                         ele.setAttribute('name','quantity[]');
-                        ele.setAttribute('max','100');
+                        ele.setAttribute('max','500');
                         ele.setAttribute('min','1');
                         ele.setAttribute('class', 'form-control');
                         ele.setAttribute('type', 'number');
@@ -2685,7 +2685,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 {
                     var ele = document.createElement('input');
                         ele.setAttribute('name','quantity[]');
-                        ele.setAttribute('max','100');
+                        ele.setAttribute('max','500');
                         ele.setAttribute('min','1');
                         ele.setAttribute('class', 'form-control');
                         ele.setAttribute('type', 'number');
@@ -3092,7 +3092,7 @@ Requesting material again after crosschecking-->
 
 
   <div>
-           
+
              <div class="row">
                             <div class="col-md-6">
                                 <p>ASSIGN TECHNICIAN(S) WORK</p>

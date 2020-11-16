@@ -52,10 +52,8 @@ New Intangible Asset
                                </div>
                             </div>
                             <div class="row">
-                               <div class="form-group col">
-                                   <label for="my-input">Quantity <sup class="text-danger">*</sup></label>
-                                   <input id="quantity" required min="1" class="form-control" type="number" name="Quantity">
-                               </div>
+                                   <input id="quantity"  hidden value="1"  required min="1" class="form-control" type="number" name="Quantity">
+
                             <div class="form-group col">
                                 <label for="my-input">Asset Condition <sup class="text-danger">*</sup></label>
                                 <select id="assetnumber" required class="form-control" name="AssetCondition">
@@ -67,18 +65,16 @@ New Intangible Asset
                                     <option value="Obsolete">Obsolete</option> --}}
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="form-group col">
                                 <label for="my-input">Cost/Repairing Cost <sup class="text-danger">*</sup></label>
                                 <input id="quantity" required min="1" class="form-control" type="number" name="cost">
                             </div>
+                        </div>
+                        <div class="row">
                                 <div class="form-group col">
                                     <label for="my-input">Date of Acquisition <sup class="text-danger">*</sup></label>
                                     <input id="acdate" max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date of Acquisition" type="date" name="DateofAcquisition">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="my-input">Date in Use <sup class="text-danger">*</sup></label>
                                     <input id="usedate"  max="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date in Use" type="date" name="DateinUse">
@@ -91,12 +87,11 @@ New Intangible Asset
             <br>
             <br>
             <div class="row">
-                <div class="form-group col-md-2">
+
                     <button id="newcard" class=" btn btn-primary" name="newcard">Save</button>
-                </div>
-                <div class="form-group col-md-2">
+                    &nbsp;
                     <a href="{{route('assetsIntangible')}}" id="newcard" class=" btn btn-danger text-light" name="newcard">Cancel</a>
-                </div>
+               
             </div>
         </form>
         <br>

@@ -25,7 +25,7 @@
 
                             <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
                 <a href="{{route('landscapingcleaningarea')}}"
-
+                target="_blank" 
                                           style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 

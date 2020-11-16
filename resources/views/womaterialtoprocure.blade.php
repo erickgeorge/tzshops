@@ -56,7 +56,7 @@
 
 
                 <tr> <td>{{$i++}}</td>
-                    <td>00{{ $item->work_order_id }}</td>
+                    <td>woCode{{ $item->woCode }}</td>
                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     <td>{{ $item['workorder']->details }}</td>
 

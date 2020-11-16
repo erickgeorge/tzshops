@@ -126,7 +126,7 @@ padding: 20 20 20 20;
     <div class="col">
         <div class="form-group">
         <label for="email">Email Address </label>
-        <input disabled style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="25" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+        <input disabled style="color: black" required value="{{ auth()->user()->email }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  maxlength="45" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
     </div>
     </div>
 </div>
@@ -135,7 +135,7 @@ padding: 20 20 20 20;
 
 	 <div>
 
-    
+
 			<a href="/changeprofile"  class="btn btn-primary">Edit Profile</a>
 
             <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>

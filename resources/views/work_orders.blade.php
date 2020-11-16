@@ -15,7 +15,7 @@ use App\WorkOrder;
 use Carbon\Carbon;
  ?>
 @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
-<!--  -->
+<!-- client here -->
 <br>
     <div class="container">
     <div class="row container-fluid" >
@@ -123,7 +123,7 @@ use Carbon\Carbon;
 
       <div class="row">
         <div class="col">
-            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2" onchange="getlocation1()">
+            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2" >
                 <option value="" selected="selected">Select Problem Type</option>
                 <?php
                   $prob = WorkOrder::select('problem_type')->where('client_id',auth()->user()->id)->distinct()->get();
@@ -155,7 +155,7 @@ use Carbon\Carbon;
       <div class="row">
           <div class="col">
             <select name="userid" id="nameselector1" class="form-control mr-sm-2">
-              @if(auth()->user()->type == 'CLIENT')
+              @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
               <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
               @else
               <option value="">Select name</option>
@@ -294,7 +294,6 @@ foreach($userwithid as $userwithid)
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
-                    @if($work->status !== 0)
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
@@ -516,6 +515,33 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                             </td>
 
                             <td>
+
+                                   {{--  --}} @if($work->status == 0)
+                            <a ><span data-toggle="modal" data-target="#viewReason{{$i}}"
+                                    class="badge badge-success">View reason</span></a>
+
+                                    <div class="modal fade" id="viewReason{{$i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                   <div class="modal-dialog" role="document">
+                                       <div class="modal-content">
+                                           <div class="modal-header">
+                                               <h5 class="modal-title" id="exampleModalLabel">Reason for rejecting work order</h5>
+                                               <div></div>
+
+                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                   <span aria-hidden="true">&times;</span>
+                                               </button>
+                                           </div>
+                                           <div class="modal-body">
+{{$work->reason}}
+                                         </div>
+                                           <div class="modal-footer">
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               @endif
+                               {{--  --}}
                                 @if(strpos(auth()->user()->type, "HOS") !== false)
 
 
@@ -656,8 +682,9 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                        data-toggle="modal" data-target="#exampleModo"><i
                                   class="fas fa-recycle"  data-toggle="tooltip" data-placement="right" title="Redirect to Head of Section" style="color: blue"></i></a>
 
-                                                                         @endif
-                                          @endif
+
+
+                                  @endif
 
 
                                                 @elseif($work->status == 12)
@@ -684,6 +711,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                    @endif
                                    @endif
+
                                 <br>
 
                             </td>
@@ -788,7 +816,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
     @endforeach
 @else
-
+{{-- differentiation starts here --}}
     <br>
     <div class="container">
     <div class="row container-fluid" >
@@ -909,7 +937,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
       <div class="row">
         <div class="col">
-            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2" onchange="getlocation1()">
+            <select id="typeselector1" name="problem_type" class="form-control mr-sm-2">
                 <option value="" selected="selected">Select Problem Type</option>
                 <?php
                   $prob = WorkOrder::select('problem_type')->distinct()->get();
@@ -941,7 +969,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
       <div class="row">
           <div class="col">
             <select name="userid" id="nameselector1" class="form-control mr-sm-2">
-              @if(auth()->user()->type == 'CLIENT')
+              @if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
               <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
               @else
               <option value="">Select name</option>
@@ -1061,7 +1089,7 @@ foreach($userwithid as $userwithid)
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
-          <th>ID</th>
+          <th style="width: 100%;">ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
@@ -1084,7 +1112,7 @@ foreach($userwithid as $userwithid)
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
-                            <td id="wo-id">00{{ $work->id }}</td>
+                            <td style="width: 100%;">{{ $work->woCode }}</td>
 
                             <td id="wo-details">  <?php if (strlen($work->details) > 20) {
                              echo substr($work->details, 0, 20); echo "...";
@@ -1479,7 +1507,6 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                          @endif
                                          @endif
-
 
                                                 @elseif($work->status == 12)
                                          <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i

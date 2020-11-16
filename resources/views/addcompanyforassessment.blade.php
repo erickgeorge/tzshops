@@ -484,7 +484,7 @@
 
 
       <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                 <a style="color: white;" href="{{route('addassessmentpdfform', [$companyname->id, $cmp ])}}" title="Assessment sheet pdf"> Download for signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                 <a  target="_blank"  style="color: white;" href="{{route('addassessmentpdfform', [$companyname->id, $cmp ])}}" title="Assessment sheet pdf"> Download for signature <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                 </button>
 
 @endif

@@ -9,11 +9,11 @@ User Registration
 
 <style>
     .box{
-       
+
         display: none;
-    
+
     }
-  
+
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
@@ -22,14 +22,14 @@ $(document).ready(function(){
         $(this).find("option:selected").each(function(){
             var optionValue = $(this).attr("value");
             if(optionValue=='Warden'){
-              $('.MYWarden').show(); 
-               $('#hallhostel').attr('required', '');  
-              } 
+              $('.MYWarden').show();
+               $('#hallhostel').attr('required', '');
+              }
             else{
-                $('.MYWarden').hide(); 
-                $('.MyHalls').hide();  
-                $('.MyHostel').hide(); 
-                 $('.MyBlocks').hide(); 
+                $('.MYWarden').hide();
+                $('.MyHalls').hide();
+                $('.MyHostel').hide();
+                 $('.MyBlocks').hide();
             }
         });
     }).change();
@@ -43,18 +43,18 @@ $(document).ready(function(){
         $(this).find("option:selected").each(function(){
             var optionValue = $(this).attr("value");
             if(optionValue=='Hall'){
-              $('.MyHalls').show();  
-              $('.MyBlocks').hide(); 
-              $('.MyHostel').hide(); 
-             // $('#hostels').attr('required', ''); 
+              $('.MyHalls').show();
+              $('.MyBlocks').hide();
+              $('.MyHostel').hide();
+             // $('#hostels').attr('required', '');
 
             }
             else if(optionValue=='Hostel'){
-              $('.MyHostel').show();  
-                $('.MyHalls').hide();  
-              //$('#hostels').attr('required', ''); 
+              $('.MyHostel').show();
+                $('.MyHalls').hide();
+              //$('#hostels').attr('required', '');
             }
-            
+
         });
     }).change();
 });
@@ -67,12 +67,12 @@ $(document).ready(function(){
         $(this).find("option:selected").each(function(){
             var optionValue = $(this).attr("value");
             if(optionValue=='Mabibo'){
-              $('.MyBlocks').show(); 
-              // $('#reqblock').attr('required', '');  
-              } 
+              $('.MyBlocks').show();
+              // $('#reqblock').attr('required', '');
+              }
             else if(optionValue=='Magufuli'){
-                $('.MyBlocks').show(); 
-              //  $('#reqblock').attr('required', '');  
+                $('.MyBlocks').show();
+              //  $('#reqblock').attr('required', '');
             }
         });
     }).change();
@@ -161,37 +161,16 @@ $(document).ready(function(){
 	</div>
     </div>
 </div>
+
+
 <div class="row">
-	<div class="col">
+	<div class="col-md-6">
         <div class="form-group ">
             <label for="phone">Email  <sup class="text-danger">*</sup></label>
-            <input style="color: black;"  required type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="29" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
-        </div>
-	</div>
-    <div class="col">
-        <div class="form-group ">
-            <label for="phone">Username  <sup class="text-danger">*</sup></label>
-            <input style="color: black;"  required required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+            <input style="color: black;"  required type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onblur="validateEmail(this);"  maxlength="45" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter email address" value="{{ old('email') }}">
         </div>
 	</div>
 </div>
-<div class="row">
-
-    <div class="col-md-6">
-        <div class="form-group ">
-            <label for="phone">Role  <sup class="text-danger">*</sup></label>
-            <select style="color: black;" required class="custom-select" name="role" id="role">
-                <option value="" selected>Choose...</option>
-                <option value="1">Admin</option>
-                <option value="2">Staff</option>
-              </select>        </div>
-	</div>
-
-</div>
-
-
-
-
 <div class="row">
 
     <div class="col-md-6">
@@ -216,6 +195,30 @@ $(document).ready(function(){
 
 
 </div>
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="form-group ">
+            <label for="phone">Role  <sup class="text-danger">*</sup></label>
+            <select style="color: black;" required class="custom-select" name="role" id="role">
+                <option value="" selected>Choose...</option>
+                <option value="1">Admin</option>
+                <option value="2">Staff</option>
+              </select>        </div>
+    </div>
+
+    <div class="col">
+        <div class="form-group ">
+            <label for="phone">Username  <sup class="text-danger">*</sup></label>
+            <input style="color: black;"  required required  maxlength="20" type="text" class="form-control" id="uname" aria-describedby="emailHelp" name="name" placeholder="Enter username" value="{{ old('name') }}">
+        </div>
+	</div>
+
+</div>
+
+
+
+
 
 
 
@@ -225,7 +228,7 @@ $(document).ready(function(){
 
 <div class="row">
     <div class="col">
-        Type of User  <sup class="text-danger">*</sup>
+    First type of User  <sup class="text-danger">*</sup>
 
     </div>
 
@@ -233,7 +236,7 @@ $(document).ready(function(){
 
 	  <div class="row">
 	  <div class="col">
-            <div >
+            <div id="inafichwaIfNotDES">
                  <div class="checkbox">
             <label><input id="checkdiv" name="checkdiv" type="checkbox" value="yesmanual" onclick="ShowHideDiv(this)">
                 Inspector of Works</label>
@@ -265,19 +268,19 @@ $(document).ready(function(){
 
 	                  @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
+                           <option  disabled='false'  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
                        @endforeach
 
-	                  <option value="Head PPU">Head PPU</option>
-                      <option value="Housing Officer">Housing Officer</option>
+	                  <option disabled='false'  value="Head PPU">Head PPU</option>
+                      <option disabled='false'  value="Housing Officer">Housing Officer</option>
 
-                      <option value="Maintenance coordinator">Maintenance Coordinator</option>
-                      <option value="Principal">Principal</option>
-                      <option value="Quality Surveyor">Quality Surveyor</option>
-	                  <option value="STORE">Store Manager</option>
+                      <option disabled='false'  value="Maintenance coordinator">Maintenance Coordinator</option>
+                      <option  disabled='false' value="Principal">Principal</option>
+                      <option  disabled='false' value="Quality Surveyor">Quality Surveyor</option>
+	                  <option  disabled='false' value="STORE">Store Manager</option>
 
-	                  <option value="Secretary to Council">Secretary to Council</option>
+	                  <option disabled='false'  value="Secretary to Council">Secretary to Council</option>
 
 	                  <option value="Supervisor Landscaping">Supervisor Landscaping</option>
                      <option value="Warden"> Warden</option>
@@ -418,7 +421,7 @@ $(document).ready(function(){
                 <option value="Block D">Block D</option>
                 <option value="Block E">Block E</option>
                 <option value="Block F">Block F</option>
-           
+
             </select>
         </div>
   </div>

@@ -60,7 +60,7 @@
                         <td>{{$f}}</td>
                         <td> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{$item->name}}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{route('viewdownloads',[$item->id])}}" role="button"> <i class="fa fa-eye" aria-hidden="true"></i> View </a>
+                            <a  target="_blank"  class="btn btn-primary" href="{{route('viewdownloads',[$item->id])}}" role="button"> <i class="fa fa-eye" aria-hidden="true"></i> View </a>
                             @if($role['user_role']['role_id'] == 1)
                             &nbsp;
                             <a href="{{route('editdownloads',[$item->id])  }}" class="btn btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>

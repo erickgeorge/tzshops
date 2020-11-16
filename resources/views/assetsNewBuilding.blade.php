@@ -48,7 +48,18 @@ New Building Asset
                                </div>
                                <div class="form-group col">
                                    <label for="my-input">Asset Number <sup class="text-danger">*</sup></label>
-                                   <input id="assetnumber" required class="form-control" placeholder="Asset Number" type="text" name="AssetNumber">
+                                   <div class="row">
+                                       <div class="col">
+                                        <input id="assetnumber" required class="form-control"  placeholder="UDSM" type="text" name="AssetNumber1">
+                                       </div> <b style="font-size: 30px">/</b>
+                                       <div class="col">
+                                        <input id="assetnumber" required class="form-control"  placeholder="BLD" type="text" name="AssetNumber2">
+                                       </div><b style="font-size: 30px">/</b>
+                                       <div class="col">
+                                        <input id="assetnumber" required class="form-control" min="1"  placeholder="0001" type="number" name="AssetNumber3">
+                                       </div>
+                                   </div>
+
                                </div>
                             </div>
                             <div class="row">
@@ -91,12 +102,11 @@ New Building Asset
             <br>
             <br>
             <div class="row">
-                <div class="form-group col-md-2">
+
                     <button id="newcard" class=" btn btn-primary" name="newcard">Save</button>
-                </div>
-                <div class="form-group col-md-2">
+                    &nbsp;
                     <a href="{{route('assetsBuilding')}}" id="newcard" class=" btn btn-danger text-light" name="newcard">Cancel</a>
-                </div>
+               
             </div>
         </form>
         <br>

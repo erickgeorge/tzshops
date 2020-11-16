@@ -929,6 +929,8 @@ Route::POST('assetsAssesLandSave','AssetsController@assetsAssesLandSave')->name(
 
 //export assets - in format
 Route::get('assetExcel/export/','ExcelController@export')->name('assetExcel/export/')->middleware('auth');
+Route::get('assetExcel/bexport/','ExcelController@bexport')->name('assetExcel/bexport/')->middleware('auth');
+
 Route::get('assetinfo/export/{id}/{type}','AssetsController@exportinfo')->name('assetinfo/export/')->middleware('auth');
 Route::get('asset/assesment/export/{type}','AssetsController@assesExport')->name('asset/assesment/export/')->middleware('auth');
 Route::get('assetssummaryall','AssetsController@assetssummaryall')->name('assetssummaryall')->middleware('auth');
@@ -981,7 +983,19 @@ Route::get('activatetechnician/{id}','HomeController@activatetechnician')->name(
 
 Route::get('exportdeactivatedtechs','NotesController@exportdeactivatedtechs')->name('exportdeactivatedtechs')->middleware('auth');
 Route::get('exportdeactivatedusers','NotesController@exportdeactivatedusers')->name('exportdeactivatedusers')->middleware('auth');
+Route::get('transfertoWIP/{id}','AssetsController@transfertoWIP')->name('transfertoWIP')->middleware('auth');
 
+Route::get('assessingroup','AssetsController@assessingroup')->name('assessingroup')->middleware('auth');
+// Route::get('manageusertype','UserController@manageusertype')->name('manageusertype')->middleware('auth');
+// Route::post('saveusertype','UserController@saveusertype')->name('saveusertype')->middleware('auth');
+// Route::post('editsaveusertype','UserController@editsaveusertype')->name('editsaveusertype')->middleware('auth');
+// auto refresh on selection
+Route::get('getTechSec1','TechnicianController@getTechSec1')->name('getTechSec1')->middleware('auth');
+Route::get('gethossect','UserController@gethossect')->name('gethossect')->middleware('auth');
+
+Route::get('getnameMAT','StoreController@getnameMAT')->name('getnameMAT')->middleware('auth');
+Route::get('getdescriptionMAT','StoreController@getdescriptionMAT')->name('getdescriptionMAT')->middleware('auth');
+Route::get('getbrandMAT','StoreController@getbrandMAT')->name('getbrandMAT')->middleware('auth');
 
 
 
