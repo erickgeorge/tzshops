@@ -5,6 +5,84 @@ User Registration
 @endSection
 
 @section('body')
+@if($role['user_role']['role_id'] == 1)
+
+<style>
+    .box{
+       
+        display: none;
+    
+    }
+  
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#type").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue=='Warden'){
+              $('.MYWarden').show(); 
+               $('#hallhostel').attr('required', '');  
+              } 
+            else{
+                $('.MYWarden').hide(); 
+                $('.MyHalls').hide();  
+                $('.MyHostel').hide(); 
+                 $('.MyBlocks').hide(); 
+            }
+        });
+    }).change();
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $("#hallhostel").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue=='Hall'){
+              $('.MyHalls').show();  
+              $('.MyBlocks').hide(); 
+              $('.MyHostel').hide(); 
+             // $('#hostels').attr('required', ''); 
+
+            }
+            else if(optionValue=='Hostel'){
+              $('.MyHostel').show();  
+                $('.MyHalls').hide();  
+              //$('#hostels').attr('required', ''); 
+            }
+            
+        });
+    }).change();
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $("#mabimagu").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue=='Mabibo'){
+              $('.MyBlocks').show(); 
+              // $('#reqblock').attr('required', '');  
+              } 
+            else if(optionValue=='Magufuli'){
+                $('.MyBlocks').show(); 
+              //  $('#reqblock').attr('required', '');  
+            }
+        });
+    }).change();
+});
+</script>
+
+
+
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script src=
@@ -17,18 +95,14 @@ User Registration
 
 .selectt {
 
-
 			display: none;
-
 		}
 
  </style>
 <br>
 <div class="container">
 
-		<h4 style="text-transform: capitalize;" >Create new user</h4>
-
-
+	<h4 style="text-transform: capitalize;" >Create new user</h4>
 	<!-- <div class="col-md-4">
 		<a href="{{ url('viewusers') }}" > <button type="" class="btn btn-primary">View all users</button></a>
 	</div> -->
@@ -53,9 +127,6 @@ User Registration
 </div>
 @endif
 <div class="col-lg-12">
-
-
-
 <form id="world" name="world" method="POST" action="{{ route('user.create') }}"  enctype="multipart/form-data">
                         @csrf
 <div class="row">
@@ -179,9 +250,13 @@ User Registration
                       <option value="Assets Officer">Assets Officer</option>
                       <option value="Bursar">Bursar</option>
                       <option value="CLIENT">Client</option>
-                       <option value="Dean of Student">Dean of Student</option>
+                      <option value="Dean">Dean</option>
+                       <option value="Dean of Student">Dean of Students</option>
+                        <option value="Deputy Manager Mabibo">Deputy Manager Mabibo</option>
+                         <option value="Deputy Manager Magufuli">Deputy Manager Magufuli</option>
+                          <option value="Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi">Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi</option>
 	                  <option value="DVC Admin">DVC Admin</option>
-	                  <option value="Directorate Director">Directorate Director</option>
+	                  <!--<option value="Directorate Director">Directorate Director</option>-->
 	                   <option value="Dvc Accountant">Dvc Accountant</option>
 	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
@@ -205,9 +280,10 @@ User Registration
 	                  <option value="Secretary to Council">Secretary to Council</option>
 
 	                  <option value="Supervisor Landscaping">Supervisor Landscaping</option>
+                     <option value="Warden"> Warden</option>
 
                       <option value="Transport Officer">Transport Officer</option>
-                      <option value="USAB">USAB</option>
+                      <option value="USAB">Usab Manager</option>
 
 	           </select>
 	           </div>
@@ -232,7 +308,7 @@ User Registration
 	<div class="align-content-center">
 		<div class="input-group mb-3">
 	          <div class="contacts">
-                      Second type of user
+                      Second Type of User
 
               	<br>
 
@@ -242,19 +318,20 @@ User Registration
 	                  <option value="Accountant">Accountant</option>
 	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
 	                  <option value="CLIENT">Client</option>
-                      <option value="Dean of Student">Dean of Student</option>
+                    <option value="Dean">Dean</option>
+                    <option value="Dean of Student">Dean of Students</option>
 	                  <option value="DVC Admin">DVC Admin</option>
-	                  <option value="Directorate Director">Directorate Director</option>
+	              <!--    <option value="Directorate Director">Directorate Director</option>-->
 	                  <option value="Director DPI">Director DPI</option>
 	                  <option value="Estates officer">Estates officer</option>
 	                  <option value="Estates Director">Estates Director</option>
 	                  <option value="Head Procurement">Head of Procurement</option>
 
-	                  @foreach($worksec as $dep)
+	                    @foreach($worksec as $dep)
 
                            <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
-                       @endforeach
+                      @endforeach
 
 	                  <option value="Head PPU">Head PPU</option>
 
@@ -276,6 +353,80 @@ User Registration
 
 
 </div>
+
+
+ <div>
+   <br>
+
+
+    <div  style="display: none;" class="MYWarden">
+        <div class="form-group ">
+            <label for="phone">Hostels/Halls<sup class="text-danger">*</sup></label>
+            <br>
+             <select  style="width: 500px;"  style="color: black; " class="custom-select" id="hallhostel" >
+                  <option selected value="" >Choose...</option>
+                  <option value="Hall">Hall</option>
+                  <option value="Hostel">Hostel</option>
+            </select>
+        </div>
+    </div>
+
+
+
+  <div style="display: none;" class="MyHalls">
+        <div class="form-group ">
+            <label for="phone">Halls<sup class="text-danger">*</sup></label>
+            <br>
+             <select name="halls" style=" width: 500px; color: black; " class="custom-select" id="hostels" >
+                  <option selected value="" >Choose...</option>
+                  <option value="CoICT">CoICT</option>
+                  <option value="Hall 1">Hall 1</option>
+                  <option value="Hall 2">Hall 2</option>
+                  <option value="Hall 3">Hall 3</option>
+                  <option value="Hall 4">Hall 4</option>
+                  <option value="Hall 5">Hall 5</option>
+                  <option value="Hall 6">Hall 6</option>
+                  <option value="Hall 7">Hall 7</option>
+                  <option value="Kunduchi">Kunduchi</option>
+                  <option value="Ubungo">Ubungo</option>
+            </select>
+        </div>
+  </div>
+
+
+  <div style="display: none;" class="MyHostel">
+        <div class="form-group ">
+            <label for="phone">Hostels<sup class="text-danger">*</sup></label>
+            <br>
+             <select name="hostel" style=" width: 500px; color: black; " class="custom-select" id="mabimagu" >
+                  <option selected value="" >Choose...</option>
+                  <option value="Mabibo">Mabibo</option>
+                  <option value="Magufuli">Magufuli</option>
+            </select>
+        </div>
+  </div>
+
+    <div  style="display: none;"  class="MyBlocks">
+        <div class="form-group ">
+            <label for="phone">Blocks<sup class="text-danger">*</sup></label>
+            <br>
+           <select  style=" width: 500px; color: black; " class="custom-select" name="block" id="reqblock" >
+                <option selected value="" >Choose...</option>
+                <option value="Block A">Block A</option>
+                <option value="Block B">Block B</option>
+                <option value="Block C">Block C</option>
+                <option value="Block D">Block D</option>
+                <option value="Block E">Block E</option>
+                <option value="Block F">Block F</option>
+           
+            </select>
+        </div>
+  </div>
+
+
+
+ </div>
+    <br>
 
 
     <div align="center">
@@ -375,4 +526,7 @@ User Registration
 
 
 
+
+
+@endif
 @endSection

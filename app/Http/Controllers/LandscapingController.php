@@ -462,9 +462,7 @@ class LandscapingController extends Controller
          $companysd = Crypt::decrypt($companys);
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-
-
-
+   
 
             $score = $request['score'];
             $remark = $request['remark'];
@@ -476,6 +474,11 @@ class LandscapingController extends Controller
 
            foreach($score as $a => $b){
 
+       $ibnempty = landassessmentbeforesignature::where('activity', $activity[$a])->where('companynew', $companysd)->where('month', $request['assessmment'])->first();
+
+       if (empty($ibnempty)) {
+
+      
 
             $matr = new landassessmentbeforesignature();
 
@@ -491,9 +494,8 @@ class LandscapingController extends Controller
 
             $matr->status = 1;
             $matr->save();
-            }
-
-
+            } 
+}
 
 
         return redirect()->back()->with([
@@ -503,6 +505,8 @@ class LandscapingController extends Controller
             'wo' => landworkorders::where('id', $id)->first()
         ]);
     }
+
+
 
 
 
@@ -749,7 +753,11 @@ class LandscapingController extends Controller
              $sum += $perce[$a];
              $summ += $scor[$a];
 
+        $ibnempty = landassessmentactivityform::where('activity', $txtbox[$a])->where('companynew', $company)->where('month', $request['assessmment'])->first();
 
+       if (empty($ibnempty)) {
+           
+    
 
             $matr =new landassessmentactivityform();
             $matr->activity = $txtbox[$a] ;
@@ -769,6 +777,7 @@ class LandscapingController extends Controller
             $matr->status = 1;
 
             $matr->save(); }
+ } 
 
 
 
@@ -872,7 +881,7 @@ class LandscapingController extends Controller
               }
                    else {
 
-        return redirect()->back()->withErrors(['message' => 'The selected month already exists please select another month']);
+        return redirect()->route('assessmentform.view')->withErrors(['message' => 'The selected month already exists please select another month']);
        }
 
 
@@ -1042,7 +1051,7 @@ class LandscapingController extends Controller
               }
                    else {
 
-        return redirect()->back()->withErrors(['message' => 'The selected month already exists please select another month']);
+        return redirect()->route('assessmentform.view')->withErrors(['message' => 'The selected month already exists please select another month']);
        }
 
 
@@ -1135,8 +1144,6 @@ class LandscapingController extends Controller
       //forfirstadding month
          $tenderfetch = company::where('tender', $company)->get();
 
-
-
             $areas = $request['myarea'];
             $sheet = $request['mysheet'];
             $tenders = $request['mytender'];
@@ -1177,7 +1184,6 @@ class LandscapingController extends Controller
 
              foreach ($tenderfetch as $tender) {
 
-
                  if ($status == 1) {
 
            $comp = company::where('id',  $tender->id)->first();
@@ -1188,8 +1194,6 @@ class LandscapingController extends Controller
             $comp->nextmonth = $newDate;
              $comp->status =  1 ;
             $comp->save();
-
-
 
             }
 
@@ -1206,15 +1210,13 @@ class LandscapingController extends Controller
             }
 
 
-
-
             $comp->save(); }
 
             $form->save();
               }
                    else {
 
-        return redirect()->back()->withErrors(['message' => 'The selected month already exists please select another month']);
+        return redirect()->route('assessmentform.view')->withErrors(['message' => 'The selected month already exists please select another month']);
        }
 
 
@@ -1421,8 +1423,7 @@ class LandscapingController extends Controller
             $matr->status = 1; }
 
             $matr->save();
-
-         }
+            }
 
 
 
@@ -1477,13 +1478,43 @@ class LandscapingController extends Controller
 
 
 
+         public function approveassessmentdeputymanager($id , $tender , $month)
+    {
+
+     $tenders = Crypt::decrypt($tender);
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
+
+     foreach($assessment_approve as $wo_assessment) {
+     $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
+     $assessment->status = 50;
+     $assessment->status2 = 50;
+     $assessment->deputy = auth()->user()->id;
+     $assessment->deputy_date = Carbon::now();
+     $assessment->save();
+       }
+
+
+
+           $erick =landassessmentform::where('company', $tenders)->where('assessment_month', $month)->get();
+           foreach($erick as $asympt) {
+           $pndo =landassessmentform::where('id', $asympt->id)->first();
+           $pndo->status = 3;
+           $pndo->status5 = 50;
+           $pndo->status6 = 50;
+           $pndo->save();
+            }
+            
+       return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
+    }
+
+
 
 
       public function approveassessmentdean($id , $tender , $month)
     {
 
      $tenders = Crypt::decrypt($tender);
-     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->get();
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',50)->get();
 
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
@@ -1492,7 +1523,7 @@ class LandscapingController extends Controller
      $assessment->dean = auth()->user()->id;
      $assessment->dean_date = Carbon::now();
      $assessment->save();
-     }
+       }
 
 
 
@@ -1504,7 +1535,6 @@ class LandscapingController extends Controller
            $pndo->status6 = 2;
            $pndo->save();
             }
-
 
        return redirect()->back()->with(['message' => 'Assessment form approved succesifully ']);
     }
@@ -1660,7 +1690,7 @@ class LandscapingController extends Controller
     public function rejectassessmentwithreason(Request $request , $id , $tender , $month)
     {
       $tender = Crypt::decrypt($tender);
-     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->where('assessment_id', $id)->get();
 
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
@@ -1691,7 +1721,7 @@ class LandscapingController extends Controller
     {
 
       $tender = Crypt::decrypt($tender);
-     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',4)->orwhere('status', 2)->get();
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',4)->orwhere('status', 2)->where('assessment_id', $id)->get();
 
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
@@ -1722,7 +1752,7 @@ class LandscapingController extends Controller
     {
 
      $tender = Crypt::decrypt($tender);
-     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->where('assessment_id', $id)->get();
 
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
@@ -1753,7 +1783,7 @@ class LandscapingController extends Controller
     {
 
      $tender = Crypt::decrypt($tender);
-     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->get();
+     $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',1)->orwhere('status', 2)->where('assessment_id', $id)->get();
 
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
@@ -1849,9 +1879,9 @@ class LandscapingController extends Controller
 
             'assessmmentcompanydean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('type', 'Interior')->where('college', auth()->user()->college)->where('status5', 3)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
             'assessmmentcompanyestatedirector' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'ASC')->get(),
           
@@ -1859,8 +1889,7 @@ class LandscapingController extends Controller
 
              'dean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
-
-
+              'assessmmentcompanydeputy' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 50)->orwhere('status6', 50)->OrderBy('created_at', 'DESC')->get(),
         ]);
 
             }
@@ -1893,7 +1922,9 @@ class LandscapingController extends Controller
 
             'assessmmentcompanydean' => landassessmentform::where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
 
-            'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanydeputy' => landassessmentform::where('status5', 50)->orwhere('status6', 50)->OrderBy('created_at', 'DESC')->get(),
+
+            'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
 
             'assessmmentcompanyestatedirector' => landassessmentform::OrderBy('created_at', 'ASC')->get(),
@@ -1902,7 +1933,7 @@ class LandscapingController extends Controller
             'assessmmentcompanydvcaccountant' => landassessmentform::OrderBy('created_at', 'ASC')->get(),
 
 
-            'assessmmentcompanyprincipal' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanyprincipal' => landassessmentform::where('status5', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
                 'dean' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
@@ -1968,15 +1999,15 @@ class LandscapingController extends Controller
 
                'assessmmentcompanydvcaccountant' => landassessmentform::whereBetween('created_at', [$from, $to])->OrderBy('created_at', 'DESC')->get(),
 
-                 'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+                 'assessmmentcompanyprincipal' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
               
-            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanyadofficer' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
 
             'dean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
-              'assessmmentcompanydean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
+              'assessmmentcompanydean' => landassessmentform::whereBetween('created_at', [$from, $to])->where('status5', 50)->orwhere('status6', 50)->OrderBy('created_at', 'DESC')->get(),
 
 
         ]);
@@ -2005,23 +2036,21 @@ class LandscapingController extends Controller
 
             'assessmmentcompanyusab' => landassessmentform::where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
-              'assessmmentcompanyestatedirector' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
+             'assessmmentcompanyestatedirector' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
 
-               'assessmmentcompanydvcaccountant' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanydvcaccountant' => landassessmentform::OrderBy('created_at', 'DESC')->get(),
 
             'assessmmentcompanyestateofficer' => landassessmentform::where('status5', 1)->OrderBy('created_at', 'DESC')->get(),
 
-              'assessmmentcompanyprincipal' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+            'assessmmentcompanyprincipal' => landassessmentform::where('status5', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
 
-            'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
+             'assessmmentcompanyadofficer' => landassessmentform::where('status5', 3)->where('type', 'Interior')->where('college', auth()->user()->college)->orwhere('status6', 3)->where('college', auth()->user()->college)->OrderBy('created_at', 'DESC')->get(),
 
 
-            'dean' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
+              'dean' => landassessmentform::where('status5', 3)->orwhere('status6', 3)->where('type', 'Interior')->OrderBy('created_at', 'DESC')->get(),
 
-                 'assessmmentcompanydean' => landassessmentform::where('status5', 2)->orwhere('status6', 2)->OrderBy('created_at', 'DESC')->get(),
-
-
+                 'assessmmentcompanydean' => landassessmentform::where('status5', 50)->orwhere('status6', 50)->orwhere('status', 4)->orwhere('status5', 1)->orwhere('status6', 2)->orwhere('status', 5)->orwhere('status', 25)->OrderBy('created_at', 'DESC')->get(),
 
         ]);
     } }

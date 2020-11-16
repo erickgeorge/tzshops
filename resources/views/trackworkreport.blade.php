@@ -844,12 +844,48 @@ td, th {
 
 
 <!--tracking after work rejected-->
+
+  @if(($wo->status == 53) and ($wo->iowreject == 0))
+              <h5><b>This works order has been rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }}.</b></h5>
+              <hr>
+
+   <br>
+
+ <div class="form-group ">
+        <label for="">Reason for rejection by Inpector of Work:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{$wo->notsatisfiedreason}}</textarea>
+    </div>
+
+  <br>
+    <hr>
+      <br>
+
+  <br>
+
+  @endif
+
 <br>
 
   @if((($wo->status == 53) or ($wo->status == 30)) and ($wo->iowreject != 0))
   <h5 align="center"><b>Works order processes after being rejected by {{ $wo['iowrejected']->type }} {{$wo['iowrejected']->fname.' '.$wo['iowrejected']->lname}} on {{ date('d F Y', strtotime($wo->iowdate)) }} .</b></h5>
   <hr>
   <br>
+
+  <!--reason for rejection by IoW-->
+
+ <div class="form-group ">
+        <label for="">Reason for rejection by Inpector of Work:</label>
+        <textarea style="color: black" name="details" required maxlength="100" class="form-control" rows="5"
+                  id="comment" disabled>{{$wo->notsatisfiedreason}}</textarea>
+    </div>
+
+  <br>
+    <hr>
+      <br>
+
+
+  <!--reason for rejection by IoW-->
   @endif
 
 

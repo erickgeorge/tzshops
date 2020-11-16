@@ -82,16 +82,19 @@
                     <td>{{ $item['material']->type }}</td>
 					  <td>{{ $item->quantity }}</td>
                       @if($item->status == 5)
-                      <td><span class="badge badge-warning">On Procurement Stage</span>
+                      <td><span >On Procurement Stage</span>
                        </td>
                        @elseif($item->status == 3)
-                       <td><span class="badge badge-primary">Sent From Store to HoS</span>
+                       <td><span >Sent From Store to HoS</span>
                        </td>
                        @elseif($item->status == 15)
-                       <td><span class="badge badge-warning"> Purchased</span>
+                       <td><span> Purchased</span>
+                       </td>
+                        @elseif($item->status == 1012)
+                       <td><span > Accepted by IoW</span>
                        </td>
                        @else
-                        <td><span class="badge badge-primary"> ACCEPTED</span>
+                        <td><span > Accepted by Director</span>
                        </td>
 
                        @endif

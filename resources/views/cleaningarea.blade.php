@@ -30,9 +30,9 @@
                 </button>
 
 
-               @if($role['user_role']['role_id'] == 1)
+                          @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'USAB'))
                 <a href="{{ route('Registercleaningarea') }}"
-                   class="btn btn-primary">Add new cleaning area</a>
+                   class="btn btn-primary">Add New Cleaning Area</a>
                    <br><br>@endif
 
 
@@ -107,7 +107,7 @@
 
 
 
-                     @if((auth()->user()->type == 'Administrative officer') || (auth()->user()->type == 'Principal'))
+                     @if((auth()->user()->type == 'Administrative officer') || (auth()->user()->type == 'Principal') || (auth()->user()->type == 'Dean'))
                     @foreach($cleanareainterior as $clean_area)
                         <?php $i++; ?>
                         <tr>

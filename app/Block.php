@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class block extends Model
 {
 	
-	public function areas(){
+	public function area(){
         return $this->belongsTo('App\area', 'area_id');
     }
     //

@@ -873,7 +873,7 @@ class AssetsController extends Controller
         $editnewzone->type = $request['type'];
         $editnewzone->save();
 
-        return redirect()->route('register.cleanningzone')->with(['message' => 'Respective zone Edited successfully']);
+        return redirect()->route('register.cleanningzone')->with(['message' => 'Respective Zone Edited Successfully']);
     }
 
 
@@ -882,13 +882,34 @@ class AssetsController extends Controller
     {
 
         $cleanarea = new cleaningarea();
+        $cleanarea->hostel = $request['hostel'];
+        if ( $cleanarea->hostel == 1) {
+            if (($request['hallblock'] == 'Mabibo')||($request['hallblock'] == 'Magufuli')) {
+         $cleanarea->cleaning_name = $request['hallblock'].' - '.$request['block'];
+         $cleanarea->block = $request['block'];
+         $cleanarea->name = $request['hallblock'];
+         $cleanarea->zone_id = $request['zones'];
+         $cleanarea->type = 'Interior';
+            }
+            else {
+         $cleanarea->cleaning_name = $request['hallblock'];
+         $cleanarea->name = 'Other';
+         $cleanarea->zone_id = $request['zones'];
+         $cleanarea->type = 'Interior';
+             }
+        }
+
+        else{
+
         $cleanarea->cleaning_name = $request['cleaning_name'];
         $cleanarea->zone_id = $request['zone'];
         $cleanarea->college = $request['college'];
-        $cleanarea->hostel = $request['hostel'];
         $cleanarea->type = $request['areatype'];
+
+        }
+        
         $cleanarea->save();
-        return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area registered successfully']);
+        return redirect()->route('register.cleaningareas')->with(['message' => 'New Cleaning Area Registered Successfully']);
     }
 
 

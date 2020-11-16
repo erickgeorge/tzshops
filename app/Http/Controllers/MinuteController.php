@@ -17,6 +17,7 @@ use App\WorkOrderMaterial;
 use App\WorkOrderTransport;
 use App\Note;
 use App\MinuteSheet;
+use App\comment;
 
 use Redirect;
 use PDF;
@@ -114,6 +115,44 @@ $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy
     return view('minutesheetsignature',['notifications' => $notifications,
 'role' => $role]);
     }
+
+
+
+
+public function readcomments()
+  {
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+$data = comment::orderBy('id','desc')->get();
+return view('sendcomments',['data'=>$data,'notifications' => $notifications,
+'role' => $role]);
+  }
+
+
+  public function sendcomment(Request $request)
+  {
+     $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+      $data = new comment();
+      $data->sender = auth()->user()->id;
+      $data->comment = $request['message'];
+      $data->status = 0;
+      $data->save();
+if($role['user_role']['role_id'] == 1){
+return redirect()->route('readcomments')->with(['message'=>'We Have Received Your Comment/Feedback, Thankyou!']);
+}else{
+    return redirect()->route('sendcomments')->with(['message'=>'We Have Received Your Comment/Feedback, Thankyou!']);
+}
+      
+  }
+  public function sendcomments()
+  {
+    $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+    $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+$data = comment::where('sender',auth()->user()->id)->orderBy('id','desc')->get();
+return view('sendcomments',['data'=>$data,'notifications' => $notifications,
+'role' => $role]);
+  }
+
 
    /* public function closeminute($id)
     {

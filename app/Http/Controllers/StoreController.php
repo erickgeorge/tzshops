@@ -204,7 +204,7 @@ class StoreController extends Controller
 
      public function Materialacceptedwithrejected($id , $hosid)
     {
-        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('status',9)->get();
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('work_order_id', $id)->where('status',9)->get();
 
 		   foreach($wo_materials as $wo_material) {
 		   $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
@@ -269,6 +269,70 @@ class StoreController extends Controller
 
 
 
+         public function Materialacceptedwithrejecteddes($id , $hosid)
+    {
+        $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1012)->orwhere('work_order_id', $id)->where('status',9)->get();
+
+       foreach($wo_materials as $wo_material) {
+       $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();   
+       $wo_m->status = 17;
+       $wo_m->save();
+        }
+
+
+             //emailandnotification
+
+      $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+
+         $emailReceiver = User::where('id', $hosid)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+    
+     $datenow = Carbon::now();
+     $createddate = date('d F Y', strtotime($datenow));
+
+     $data = array('name'=>$userName, "body" => "Your materials sent to Inspector of Works on  $createddate has been REJECTED. Please login in the system so as to resubmit your materials request.",
+
+                  "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('MATERIAL(S) REJECTION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+     
+
+        $notify = new Notification();
+        $notify->sender_id = auth()->user()->id;
+        $notify->receiver_id = $hosid;
+        $notify->type = 'mat_rejected';
+        $notify->status = 0;
+        $notify->message = 'Your Materials sent to Inspector of Works has been rejected on ' . $createddate . ' Please login in the system so as to resubmit your materials request.';
+        $notify->save();
+
+
+     //emailandnotification 
+
+     
+     //status field of work order
+      $mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status = 55;
+      
+             $mForm->save();
+       return redirect()->route('wo.materialneededyi')->with(['message' => 'Material Rejected successfully with others Accepted']);
+    }
     
 
     public function materialtoreserveonebyone( $id )
@@ -338,8 +402,6 @@ class StoreController extends Controller
   
 
 
-
-
 	public function acceptMaterial($id)
     {
 
@@ -349,7 +411,7 @@ class StoreController extends Controller
 
 		 foreach($wo_materials as $wo_material) {
 		 $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
-		 $wo_m->status = 1;
+		 $wo_m->status = 1012;
      $wo_m->accepted_by = auth()->user()->id;
 	   $wo_m->save();
 		 }
@@ -386,7 +448,24 @@ class StoreController extends Controller
     }
 
 
+      public function acceptMaterialdes($id , $zoneid)
+    {
+     $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('zone', $zoneid)->where('status',1012)->get();
 
+     foreach($wo_materials as $wo_material) {
+     $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();   
+     $wo_m->status = 1;
+     $wo_m->accepted_by = auth()->user()->id;
+     $wo_m->save();
+     }
+     
+     //status field of work order accepted by DES
+      $mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status = 102;
+      
+             $mForm->save();
+       return redirect()->route('wo.des')->with(['message' => 'Material Accepted successfully ']);
+    }
 
 
 
@@ -409,17 +488,84 @@ class StoreController extends Controller
 
 
 
-	
-
-
-
-	
-	public function rejectMaterial(request $request, $id , $hosid)
+	 public function rejectMaterial(request $request, $id , $hosid)
     {  
 
-      $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1));   
+   $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1));   
        
-          $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('work_order_id', $id)->where('status',9)->get();
+   $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',0)->orwhere('work_order_id', $id)->where('status',9)->get();
+
+     foreach($wo_materials as $wo_material) {
+    $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();  
+    $wo_m->status = -1;
+    $wo_m->accepted_by = auth()->user()->id;
+    $wo_m->reason = $request['reason'];
+    $wo_m->save();
+     } 
+
+     //emailandnotification
+
+       $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+
+         $emailReceiver = User::where('id', $hosid)->first();
+
+        $toEmail = $emailReceiver->email;
+        $fuserName=$emailReceiver->fname;
+        $luserName=$emailReceiver->lname;
+        $userName=$fuserName.' '.$luserName;
+
+        $senderf=auth()->user()->fname;
+        $senderl=auth()->user()->lname;
+        $sender=$senderf.' '.$senderl;
+        $section=auth()->user()->type;
+    
+     $datenow = Carbon::now();
+     $createddate = date('d F Y', strtotime($datenow));
+
+     $data = array('name'=>$userName, "body" => "Your materials sent to Inspector of Works on  $createddate has been REJECTED. Please login in the system so as to resubmit your materials request.",
+
+                  "footer"=>"Thanks", "footer1"=>" $sender" , "footer3"=>" $section ", "footer2"=>"Directorate  of Estates Services"
+                );
+
+       Mail::send('email', $data, function($message) use ($toEmail,$sender,$userName) {
+
+       $message->to($toEmail,$userName)
+            ->subject('MATERIAL(S) REJECTION.');
+       $message->from('udsmestates@gmail.com',$sender);
+       });
+
+     
+
+        $notify = new Notification();
+        $notify->sender_id = auth()->user()->id;
+        $notify->receiver_id = $hosid;
+        $notify->type = 'mat_rejected';
+        $notify->status = 0;
+        $notify->message = 'Your Materials sent to Inspector of Works has been rejected on ' . $createddate . ' Please login in the system so as to resubmit your materials request.';
+        $notify->save();
+
+
+     //emailandnotification 
+
+     //status field of work order
+      $mForm = WorkOrder::where('id', $id)->first();
+             $mForm->status = 16;
+      
+             $mForm->save();
+        return redirect()->route('wo.materialneededyi')->with(['message' => 'All materials Rejected successfully ']);
+    }
+  
+
+
+
+	
+	public function rejectMaterialdes(request $request, $id , $hosid)
+    {  
+
+   $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 1012)->update(array('check_return' =>1));   
+       
+   $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',1012)->orwhere('work_order_id', $id)->where('status',9)->get();
 
 		 foreach($wo_materials as $wo_material) {
 		$wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();	 
@@ -431,7 +577,7 @@ class StoreController extends Controller
 
      //emailandnotification
 
-      $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+       $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
          $emailReceiver = User::where('id', $hosid)->first();
@@ -479,7 +625,7 @@ class StoreController extends Controller
              $mForm->status = 16;
 			
              $mForm->save();
-        return redirect()->route('wo.materialneededyi')->with(['message' => 'All materials Rejected successfully ']);
+        return redirect()->route('wo.des')->with(['message' => 'All materials rejected successfully ']);
     }
 	
 	
@@ -523,6 +669,23 @@ class StoreController extends Controller
       public function materialrejectonebyone(Request $request, $id )
     {
        $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 0)->update(array('check_return' =>1)); 
+
+       $p=$request['edit_mat'];
+       $matir = WorkOrderMaterial::where('id',$p)->first();
+      
+       $matir->reason = $request['reason'];
+       $matir->status = 9; 
+       $matir->save();
+
+
+  
+        return redirect()->back()->with(['message' => 'Respective material Rejected successfully ']);
+    }
+
+
+      public function materialrejectonebyonedes(Request $request, $id )
+    {
+       $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 1012)->update(array('check_return' =>1)); 
 
        $p=$request['edit_mat'];
        $matir = WorkOrderMaterial::where('id',$p)->first();

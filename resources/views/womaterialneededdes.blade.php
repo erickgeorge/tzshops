@@ -1,21 +1,20 @@
 @extends('layouts.master')
 
 @section('title')
-    store
+   Works orders needs material(s)
     @endSection
 
 @section('body')
-   @if(count($items) > 0)
 
-    <br>
+
+@if(count($mcitems) > 0)
+
+<div class="container">
+
+   <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            @if(auth()->user()->type =='STORE')
-            <h5 class="container" ><b>Works Orders With Material(s) Available and Required by Head of Section</b></h5>
-            @else
-            <h5 class="container"><b> Works Orders with Material(s) Received From Store</b></h5>
-            @endif
-
+            <h5><b >Works Orders Needs Material(s) </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -27,6 +26,7 @@
     <br>
     <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
+        <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -34,16 +34,18 @@
             </ul>
         </div>
     @endif
+     </div>
+
 
     <div class="container " >
-
         <table class="table table-striped display" id="myTable"  style="width:100%">
             <thead >
-           <tr style="color: white;">
+          <tr style="color: white;">
                 <th >#</th>
 
                 <th >Works order ID</th>
-                <th >Head of Section</th>
+                <th >HoS Name</th>
+                <th >IoW Zone</th>
                 <th >Action</th>
 
             </tr>
@@ -52,7 +54,7 @@
             <tbody>
 
             <?php $i=0;  ?>
-            @foreach($items as $item)
+            @foreach($mcitems as $item)
 
                 <?php $i++ ?>
                 <tr>
@@ -60,25 +62,28 @@
 
                     <td>00{{ $item->work_order_id }}</td>
 
-                    <td>Mr .{{ $item['userreceiver']->lname.' '.$item['userreceiver']->fname }}</td>
+                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+
+                    <td>{{ $item['iowzone']->zonename }}</td>
 
 
-                      <td>  <a style="color: green;" href="received/materials/from_store/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">View Materials</a>&nbsp;
+                      <td>  <a style="color: green;" href="work_order_material_desd/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">View Materials</a>&nbsp;
                         </td>
                     </tr>
                     @endforeach
             </tbody>
         </table>
-        @elseif(auth()->user()->type =='STORE')
-            <h3 class="text-center" style="margin-top: 350px">You have no Works order with Material(s) taken from store</h3>
-        @else
-
-         <h3 class="text-center" style="margin-top: 350px">You have no Works order with Material(s) rejected by Inspector of Work</h3>
-        @endif
-
-
-
-
     </div>
 </div>
+ @else
+               <div class="container" align="center">
+
+                   <br><div> <h3 style="padding-top: 300px;">Currently no works order needs Material</h3></div>
+
+            </div>
+@endif
+
+
+
+
     @endSection

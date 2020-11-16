@@ -36,6 +36,7 @@
     use App\landassessmentbeforesignature;
     use App\landcrosschecklandassessmentactivity;
     use App\company;
+    use Carbon\Carbon;
 
  ?>
 
@@ -44,6 +45,11 @@
 
    @foreach($company as $companyiii)
    @endforeach
+
+<?php
+    $now =  Carbon::now();
+    $dnext = Carbon::parse($companyiii->nextmonth); ?>
+   <!--now-->  @if($now >= $dnext)
 
 <div class="container">
 
@@ -95,7 +101,7 @@
     <div class="row container-fluid">
         <div class="col-lg-12">
 
-            <h5><b>Sheet No: {{$ii}}</b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b>  Sheet name: &nbsp; {{ $companyiii->sheet  }}</b></h5>
+            <h5><b><!--Sheet No: {{$ii}}--></b></h5><h5 align="center" style="text-transform: capitalize; color: black;"><b>  Sheet name: &nbsp; {{ $companyiii->sheet  }}</b></h5>
         </div>
     </div>
     <hr>
@@ -153,7 +159,7 @@
 
           <?php $cmp = Crypt::encrypt($companyiii->tender); ?>
 
-    <form method="POST" action="{{ route('work.assessment.activity.landscaping', [$companyiii->id , $cmp ]) }}">
+    <form autocomplete="off" method="POST" action="{{ route('work.assessment.activity.landscaping', [$companyiii->id , $cmp ]) }}">
                     @csrf
 
         <TR>
@@ -173,7 +179,7 @@
              <TD><input style=" text-align: center;" class="form-control" type="number"   name="percentage[]" placeholder="{{$assess->percentage}}" value="{{$assess->percentage}}" readonly="readonly"></TD>
 
 
-            <TD>  <input placeholder="score" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  name="score[]" id="txthour{{$i}}" onkeypress="return isNumberKey(event);  function isNumberKey(e)
+            <TD> <input placeholder="score" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeypress="return isNumberKey(event);  function isNumberKey(e)
                         {
                             var exString = $('#txthour{{$i}}').val();
                             var newString = exString + String.fromCharCode(e.keyCode);
@@ -187,7 +193,7 @@
                             {
                                 e.preventDefault();
                             }
-                        }"></TD>
+                        }"   name="score[]" id="txthour{{$i}}" ></TD>
 
 
            <TD><textarea   class="form-control" type="text" name="remark[]" placeholder="Remark"  ></textarea></TD>
@@ -210,7 +216,7 @@
 
 
    <?php $cmp = Crypt::encrypt($companyiii->tender); ?>
-     <form method="POST" action="{{ route('croscheck.assessment.activity.landscaping.beforesignature', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
+     <form autocomplete="off" method="POST" action="{{ route('croscheck.assessment.activity.landscaping.beforesignature', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
                     @csrf
 
      <input  name="mytender[]"  value="{{$companyiii->tender}}" hidden>
@@ -293,10 +299,15 @@
                     @csrf
     @endif
 
-    @if(auth()->user()->type == 'USAB')
+    @if((auth()->user()->type == 'Warden') and ((auth()->user()->hostel == 'Magufuli')||(auth()->user()->hostel == 'Mabibo')))
      <form method="POST" action="{{ route('croscheck.assessment.activity.usab', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
                     @csrf
     @endif
+
+       @if((auth()->user()->type == 'Warden') and ((auth()->user()->hostel != 'Mabibo')||(auth()->user()->hostel != 'Magufuli')))
+      <form method="POST" action="{{ route('croscheck.assessment.activity.usab', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
+                    @csrf
+       @endif
 
     @if(auth()->user()->type == 'Administrative officer')
      <form method="POST" action="{{ route('croscheck.assessment.activity.adoficer', [$companyiii->id  , $companyiii->type , $cmp , $companyiii->datecontract , $companyiii->status , $companyiii->nextmonth ]) }}">
@@ -395,27 +406,35 @@
             <a href="{{route('cleaningcompany')}}" onclick="closeTab()"><button type="button"
                          class="btn btn-danger">Cancel</button></a>
 
- <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>
+    <a href="#" onclick="closeTab()"><button type="button"  class="btn btn-warning">Scroll up</button></a>
 
      @endif
 
     @if(count($assessmmentactivity) > 0)
 
-    @if($assesment->status2 == 2)
+        @if($assesment->status2 == 2)
 
-      <p style="color: blue;" align="center">Company Supervisor is satisfied with the scores given you can now forward to Estates Officer for the further processes.</p>
+      <p style="color: blue;" align="center">Company Supervisor is satisfied with the scores given you can now forward for the further processes.</p>
         @if(auth()->user()->type == 'Supervisor Landscaping')
-      <button id="bt" type="submit" class="btn btn-primary">Foward to Estates Officer</button>
+      <button id="bt" type="submit" class="btn btn-primary">Forward to Estates Officer</button>
         @endif
 
-        @if(auth()->user()->type == 'USAB')
-      <button id="bt" type="submit" class="btn btn-primary">Foward to Dean of Student</button>
+        @if(auth()->user()->type == 'Administrative officer')
+      <button id="bt" type="submit" class="btn btn-primary">Forward to Principal/Dean/Directorate Director</button>
         @endif
 
+         @if((auth()->user()->type == 'Warden') and (auth()->user()->hostel == 'Magufuli'))
+      <button id="bt" type="submit" class="btn btn-primary">Forward to Deputy Manager Magufuli</button>
+         @endif
 
-       @if(auth()->user()->type == 'Administrative officer')
-      <button id="bt" type="submit" class="btn btn-primary">Foward to Principal/Dean/Directorates Director</button>
-        @endif
+       @if((auth()->user()->type == 'Warden') and (auth()->user()->hostel == 'Mabibo'))
+      <button id="bt" type="submit" class="btn btn-primary">Forward to Deputy Manager Mabibo</button>
+         @endif
+
+       @if((auth()->user()->type == 'Warden') and ((auth()->user()->hostel != 'Mabibo')||(auth()->user()->hostel != 'Magufuli')))
+            <button id="bt" type="submit" class="btn btn-primary">Forward  to Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni , Kunduchi</button>
+       @endif
+
 
 
 
@@ -475,4 +494,6 @@
 <br>
 
 
+
+  <!--now-->   @endif
     @endSection

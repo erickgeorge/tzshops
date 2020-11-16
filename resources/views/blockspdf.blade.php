@@ -47,7 +47,7 @@ tr:nth-child(even) {
                        <?php $i++;?>
                         <td>{{$i}}</td>
                      <td><?php echo ucwords(strtolower( $dep->name_of_block )); ?></td>
-                             <td><?php echo ucwords(strtolower( $dep['area']->name_of_area )); ?></td>
+                             <td><?php echo ucwords(strtolower( $dep['areas']->name_of_area )); ?></td>
                              <td><?php echo ucwords(strtolower( $dep->location_of_block )); ?></td>
                          
                        </tr>

@@ -138,9 +138,9 @@ use App\Material;?>
             <thead >
           <tr style="color: white;">
                <th >#</th>
-                <th >ItemID</th>
-                <th >Description</th>
-                <th >Value/Capacity</th>
+                <th >Item ID</th>
+                <th >Material Description</th>
+                <th >Unit of Measure</th>
                 <th >Type</th>
                 <th >Current Stock</th>
                 <th >Stock updated on</th>
@@ -162,7 +162,7 @@ use App\Material;?>
                     <td>{{ ucwords(strtolower($item->name)) }}</td>
                     <td id="wo-details">{{ ucwords(strtolower($item->description)) }}</td>
                      <td>{{ ucwords(strtolower($item->brand)) }}</td>
-                    <td>{{ $item->type }}</td>
+                    <td>{{  ucwords(strtolower($item->type)) }}</td>
 
 
                     <td><?php echo  number_format($item->stock); ?></td>

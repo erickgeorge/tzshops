@@ -50,11 +50,6 @@ Company Registrartion
 
                        @endif -->
 
-
-
-
-   
-
                     <div  class="input-group mb-3 col-lg-6">
                         <div class="input-group-prepend">
 
@@ -66,14 +61,14 @@ Company Registrartion
                              <option value="" selected>Choose area...
                             </option>
 
-                         @if($role['user_role']['role_id'] == 1)
+            
 
                            @foreach($careaadmin as $carea)
                                     <option value="{{ $carea->id }}">{{ $carea->cleaning_name}}
                                     </option>
                            @endforeach
 
-                         @endif
+                       
                
                       </select>
                      </div>

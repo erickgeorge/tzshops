@@ -86,9 +86,8 @@
                 use App\WorkOrder;
         use Carbon\Carbon;
         use App\Notification;
-
-               $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
-
+     
+          $notifications = Notification::where('status','<>',10)->where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
         // closing work order by default
         $woclo = WorkOrder::where('status',2)->get();
@@ -101,7 +100,7 @@
             if ($tofautihii > 6) {
                 $wokioda = WorkOrder::where('id',$woclo->id)->first();
                 $wokioda->status = 30;
-                $wokioda->systemclosed = date('Y-m-d');
+                $wokioda->systemclosed = 1;
                 $wokioda->save();
             }
         }
@@ -641,8 +640,9 @@
                         <i class="fa fa-bell"></i>
                          <span class="badge badge-light">{{ count($notifications) }}</span></a>
                     <div class="dropdown-menu dropdown-menu-right" style="background-color: #376ad3; color: white;"  aria-labelledby="navbarDropdown">
-                        @foreach($notifications as $notification)
-                            @if($notification->type == 'wo_rejected')
+                      
+                     @foreach($notifications as $notification)
+                           
                                 <a class="dropdown-item"
                                    onclick="event.preventDefault();
                                            document.getElementById('{{ 'reject-'.$notification->id }}').submit();">
@@ -650,24 +650,13 @@
                                 </a>
 
                                 <form id="{{ 'reject-'.$notification->id }}"
-                                      action="{{ route('notify.read', [$notification->id, 'reject']) }}" method="POST"
+                                      action="{{ route('notify.read', [$notification->id]) }}" method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>
-                            @else
-                                <a class="dropdown-item"
-                                   onclick="event.preventDefault();
-                                           document.getElementById('{{ 'accept-'.$notification->id }}').submit();">
-                                    {{ $notification->message }}
-                                </a>
-
-                                <form id="{{ 'accept-'.$notification->id }}"
-                                      action="{{ route('notify.read', [$notification->id, 'accept']) }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            @endif
+                    
                         @endforeach
+                    
                         {{--<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Clear notifications</a>--}}
                         @if(count($notifications) <= 0)

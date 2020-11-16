@@ -83,6 +83,8 @@
                 use App\Material;
                 use App\WorkOrder;
                 use App\ppuproject;
+                 use App\iowzone;
+                
 
 
         use App\zoneinspector;
@@ -90,7 +92,8 @@
 
         use App\Notification;
 
-               $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+             $notifications = Notification::where('status','<>',10)->where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+
 
         // closing work order by default
         $woclo = WorkOrder::where('status',2)->get();
@@ -103,7 +106,7 @@
             if ($tofautihii > 6) {
                 $wokioda = WorkOrder::where('id',$woclo->id)->first();
                 $wokioda->status = 30;
-                $wokioda->systemclosed = date('Y-m-d');
+                $wokioda->systemclosed = 1;
                 $wokioda->save();
             }
         }
@@ -116,11 +119,23 @@
 
                 $wo_material_reservedd = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',55)->orwhere('reservestatus', 1)->groupBy('work_order_id')->get();
 
-                $woMaterialAccepted = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->orwhere('copyforeaccepted' , 1)
+                $woMaterialAccepted = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->orwhere('status',1012)->orwhere('copyforeaccepted' , 1)
                     ->groupBy('work_order_id')->get();
 
-                $woMaterialrejected = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',-1)->orwhere('status',17)
+                $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
+                $iozonename = iowzone::where('id',$iozone['zone'])->first();
+                 $woMaterialAcceptediow = WorkOrderMaterial::where('zone', $iozone['zone'])->select(DB::raw('work_order_id'))->where('status',1)->orwhere('status',1012)->where('zone', $iozone['zone'])->orwhere('copyforeaccepted' , 1)->where('zone', $iozone['zone'])
+                    ->groupBy('work_order_id')->get();    
+
+                $woMaterialrejected = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',-1)->orwhere('status',17)->orwhere('status', 44)
                     ->groupBy('work_order_id')->get();
+
+                    $woMaterialrejectedhos = WorkOrderMaterial::where('hos_id', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',-1)->orwhere('hos_id', auth()->user()->id)->where('status',17)->orwhere('hos_id', auth()->user()->id)->where('status',44)
+                    ->groupBy('work_order_id')->get();    
+
+
+                $woMaterialrejectediow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('zone', $iozone['zone'])->where('status',-1)->orwhere('zone', $iozone['zone'])->where('status',17)
+                    ->groupBy('work_order_id')->get();   
 
                $woMaterialreserved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->orwhere('status',100)
                     ->groupBy('work_order_id')->get();
@@ -139,7 +154,7 @@
                 $material_requests = WorkOrderMaterial::where('zone', $iozone['zone'])->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
 
 
-                 $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
+                $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
                 $material_requests = WorkOrderMaterial::where('zone', $iozone['zone'])->
                        select(DB::raw('work_order_id'),'hos_id' )
                      ->where('status',0)
@@ -158,6 +173,17 @@
                      ->groupBy('hos_id')
                      ->groupBy('zone')
                      ->get();
+
+
+
+                 $material_requestsdes = WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'hos_id' , 'zone')
+                     ->where('status',1012)
+                 //    ->orwhere('status', 9)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     ->groupBy('zone')
+                     ->get();   
 
 
                  $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
@@ -237,7 +263,7 @@
                <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Department</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>   
+                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
                  <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
         </div>
@@ -401,7 +427,7 @@
 
 
 
-                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping'))
+                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Deputy Manager Mabibo')|| (auth()->user()->type == 'Deputy Manager Magufuli')||(auth()->user()->type == 'Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi'))
 
                     <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
@@ -420,7 +446,7 @@
                   <li class="nav-item">
                         <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
                                     class="badge badge-light">{{ count($m) }}</span></a>
-                    </li> 
+                    </li>
 
                 @endif
 
@@ -478,7 +504,7 @@
                  @endif
 
 
-                @if(auth()->user()->type == 'Accountant')
+                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean'))
                 <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                 </li>
@@ -487,17 +513,11 @@
 
 
 
-                            @if(auth()->user()->type == 'USAB')
-
-
-
-
+             @if((auth()->user()->type == 'USAB')||(auth()->user()->type == 'Warden'))
 
                 <li class="nav-item">
                         <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
                 </li>
-
-
 
               @endif
 
@@ -540,7 +560,21 @@
              @endif
 
              @endforeach
+             <li class="nav-item">
+                <a @if ($role['user_role']['role_id'] == 1)
+                title="View Sent Comments"
+@else
+title="Send feedback/comment"
+                @endif  class="nav-link text-light"
 
+                @if ($role['user_role']['role_id'] == 1)
+                href="{{route('readcomments')}}"
+
+                @else
+                href="{{route('sendcomments')}}"
+                @endif
+               > <i class="fa fa-comment" aria-hidden="true"></i> </a>
+                </li>
 
              <li class="nav-item">
                 <a class="nav-link text-light" href="{{route('downloads')}}">  Documents </a>
@@ -561,8 +595,8 @@
                         <i class="fa fa-bell"></i>
                          <span class="badge badge-light">{{ count($notifications) }}</span></a>
                     <div class="dropdown-menu dropdown-menu-right" style="background-color: #376ad3; color: white;"  aria-labelledby="navbarDropdown">
-                        @foreach($notifications as $notification)
-                            @if($notification->type == 'wo_rejected')
+                     @foreach($notifications as $notification)
+                           
                                 <a class="dropdown-item"
                                    onclick="event.preventDefault();
                                            document.getElementById('{{ 'reject-'.$notification->id }}').submit();">
@@ -570,23 +604,12 @@
                                 </a>
 
                                 <form id="{{ 'reject-'.$notification->id }}"
-                                      action="{{ route('notify.read', [$notification->id, 'reject']) }}" method="POST"
+                                      action="{{ route('notify.read', [$notification->id]) }}" method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>
-                            @else
-                                <a class="dropdown-item"
-                                   onclick="event.preventDefault();
-                                           document.getElementById('{{ 'accept-'.$notification->id }}').submit();">
-                                    {{ $notification->message }}
-                                </a>
-
-                                <form id="{{ 'accept-'.$notification->id }}"
-                                      action="{{ route('notify.read', [$notification->id, 'accept']) }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            @endif
+                    
+                     
                         @endforeach
                         {{--<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Clear notifications</a>--}}
@@ -750,21 +773,21 @@
 <div class="sidenav" style="padding-top:90px;">
   <a  href="{{ url('work_order')}}" >Works Orders </a>
  @if($role['user_role']['role_id'] == 1)
-
-
    <a  href="{{ url('Manage/section')}}">DES Sections</a>
  @endif
 
- @if(strpos(auth()->user()->type, "HOS") !== false )
+@if(strpos(auth()->user()->type, "HOS") !== false )
   @if($role['user_role']['role_id'] != 1)
  <a  href="{{ url('technicians') }}">Technicians</a>
  @endif
+
+ 
  <button class="dropdown-btn">Materials Update
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
     <a  href="{{ url('material_rejected_with_workorder')}}">Rejected Materials <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
+                                    class="badge badge-light">{{ count($woMaterialrejectedhos) }}</span></a>
     <a  href="{{ url('material_received_with_workorder')}}">Received Materials from Store<span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
 
   </div>
@@ -802,7 +825,7 @@
   </button>
   <div class="dropdown-container">
     <a  href="{{ url('work_order_material_needed')}}">
-        Works Order needs materials <span
+        Works orders needs materials <span
                                     class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
     <a   href="{{ url('wo_material_accepted')}}">
         Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
@@ -903,6 +926,20 @@
 
     @endif
 
+     @if(auth()->user()->type == 'Estates Director')
+
+                               <a  href="{{ url('work_order_material_needed_for_des')}}">
+                            Works orders needs materials<span
+                                    class="badge badge-light">{{ count($material_requestsdes) }}</span>
+                                </a>
+
+
+                        <a  href="{{ url('material_rejected_with_workorder')}}">
+                            Rejected Materials
+                        <span
+                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span>
+                                </a>
+     @endif
 
 
     @if(auth()->user()->type == 'STORE')
@@ -932,7 +969,7 @@
 
 
 
-                        <a  href="{{ url('wo_material_accepted_by_iow')}}">
+                            <a  href="{{ url('wo_material_accepted_by_iow')}}">
                             Materials Requests<span
                                     class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span>
                                 </a>
@@ -1048,7 +1085,7 @@
 
                         <a href="{{ url('wo_material_accepted')}}">
                             Accepted Materials<span
-                                    class="badge badge-light">{{ count($woMaterialAccepted) }}</span>
+                                    class="badge badge-light">{{ count($woMaterialAcceptediow) }}</span>
                                 </a>
 
 
@@ -1056,7 +1093,7 @@
                         <a  href="{{ url('material_rejected_with_workorder')}}">
                             Rejected Materials
                         <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span>
+                                    class="badge badge-light">{{ count($woMaterialrejectediow) }}</span>
                                 </a>
 
 
@@ -1376,6 +1413,13 @@ for (i = 0; i < dropdown.length; i++) {
     $('#myTable').DataTable();
     $('#myTablee').DataTable();
     $('#myTableee').DataTable();
+
+    $('#myTableproc').DataTable({
+        dom: 'Bfrtip',
+        buttons: [{
+            extend:'excel',
+            text:'Export <i class="fa fa-file-excel-o"></i>'}]
+    });
 </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 

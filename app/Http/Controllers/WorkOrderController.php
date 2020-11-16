@@ -316,7 +316,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 //        return response()->json(WorkOrder::where('id', $id)->first());
 
-
         $staff=WorkOrderStaff::where('work_order_id', $id)->get();
 
         $techswork = Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->where('woid','<>',$id)->get();
@@ -886,7 +885,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
             public function editmaterial(Request $request, $id )
     {
-        $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 17)->orwhere('status', -1)->update(array('check_return' =>null));
+        $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $id)->where('status', 17)->orwhere('work_order_id', $id)->where('status', -1)->update(array('check_return' =>null));
 
        $p=$request['edit_mat'];
        $matir = WorkOrderMaterial::where('id',$p)->first();

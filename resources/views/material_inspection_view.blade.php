@@ -14,7 +14,7 @@
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5  ><b>Materials Needed For Works Order </b></h5>
+            <h5  ><b>Material(s) Needed For Works Order </b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -338,7 +338,7 @@
 
                   @if($item->check_return == NULL)
 
-                     <h5>Accept and send to Store Manager <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to store Manager"><i class="far fa-check-circle"></i></a>
+                     <h5>Accept and send to Estates Director <span> <a style="color: green;" href="{{ route('store.materialaccept', [$item->work_order_id]) }}"  data-toggle="tooltip" title="Send to Estates Director"><i class="far fa-check-circle"></i></a>
                    </span>
 
 

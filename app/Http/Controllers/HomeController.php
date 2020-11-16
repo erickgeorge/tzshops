@@ -70,7 +70,7 @@ class HomeController extends Controller
 
              $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-            if((auth()->user()->type == 'Supervisor Landscaping' )||(auth()->user()->type == 'USAB' ))
+            if((auth()->user()->type == 'Supervisor Landscaping' )||(auth()->user()->type == 'USAB' ) ||(auth()->user()->type == 'Administrative officer' )||(auth()->user()->type == 'Dean of Student' ) ||(auth()->user()->type == 'Principal' ) ||(auth()->user()->type == 'Dvc Accountant' ) || (auth()->user()->type == 'Estates officer'))
             {
                  return redirect()->route('assessmentform.view');
             }
@@ -277,10 +277,6 @@ class HomeController extends Controller
 }
 
 
-
-
-
-
     public function WorkorderView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -343,7 +339,6 @@ if((auth()->user()->type == 'CLIENT')&&($role['user_role']['role_id'] != 1))
         }//if role=1
 
         else { //role role not 1
-
 
 
                 $type=explode(",",auth()->user()->type);
@@ -2064,6 +2059,7 @@ $v5=$type[4];
         $directorate = Directorate::where('name','<>',null)->OrderBy('name','ASC')->get();
         $des = Des::where('name','<>',null)->OrderBy('name','ASC')->get();
         $departments = Department::where('directorate_id', 1)->get();
+        
 
         $desp = desdepartment::all();
         return view('create_user', [
@@ -2732,7 +2728,10 @@ $v5=$type[4];
    }
 
 //
-    public function workOrderNeedMaterialView()
+
+   
+
+       public function workOrderNeedMaterialView()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -2762,6 +2761,27 @@ $v5=$type[4];
     }
 
 
+    public function workOrderNeedMaterialViewfordes()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
+        $iozonename = iowzone::where('id',$iozone['zone'])->first();
+
+        $mc_material=   WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'hos_id' , 'zone')
+                     ->where('status',1012)
+                   //  ->orwhere('status', 9)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                     ->groupBy('zone')
+                     ->get();
+
+        return view('womaterialneededdes', ['role' => $role, 'mcitems' => $mc_material,'notifications' => $notifications]);
+    }
+
+
 
      public function workOrderMaterialRejected()
     {
@@ -2772,26 +2792,43 @@ $v5=$type[4];
         $iozonename = iowzone::where('id',$iozone['zone'])->first();
 
         $wo_materialed=   WorkOrderMaterial::where('zone', $iozone['zone'])->
-                       select(DB::raw('work_order_id'),'hos_id')
+                       select(DB::raw('work_order_id'),'hos_id' ,'accepted_by' )
                      ->where('status',-1)
                      ->orwhere('status',17)
                      ->orwhere('status', 44)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
+                     ->groupBy('accepted_by')
                      ->get();
+
+        $wo_materialhos=   WorkOrderMaterial::where('hos_id', auth()->user()->id)->
+                       select(DB::raw('work_order_id'),'hos_id' , 'accepted_by')
+                     ->where('status',-1)
+                     ->orwhere('hos_id', auth()->user()->id)
+                     ->where('status',17)
+                      ->orwhere('hos_id', auth()->user()->id)
+                     ->where('status', 44)
+                     ->groupBy('work_order_id')
+                     ->groupBy('hos_id')
+                      ->groupBy('accepted_by')
+                     ->get();
+             
 
         $wo_material=   WorkOrderMaterial::
-                       select(DB::raw('work_order_id'),'hos_id')
+                       select(DB::raw('work_order_id'),'hos_id' , 'accepted_by')
                      ->where('status',-1)
                      ->orwhere('status',17)
                      ->orwhere('status', 44)
                      ->groupBy('work_order_id')
                      ->groupBy('hos_id')
+                      ->groupBy('accepted_by')
                      ->get();
 
 
-        return view('rejectedmaterialwith_wo', ['role' => $role, 'materialed' => $wo_materialed,'items' => $wo_material,'notifications' => $notifications]);
+        return view('rejectedmaterialwith_wo', ['role' => $role, 'materialed' => $wo_materialed, 'materialhos' => $wo_materialhos, 'items' => $wo_material,'notifications' => $notifications]);
     }
+
+
 
       public function MaterialReceivewithWo()
     {
@@ -2864,6 +2901,23 @@ $v5=$type[4];
 
 
         return view('material_inspection_view', ['role' => $role, 'items' => $wo_material, 'mcitems' => $mc_material,'notifications' => $notifications ,  'wo' => WorkOrder::where('id', $id)->first(),]);
+    }
+
+
+
+     public function workOrderMaterialInspectionViewdes($id , $zoneid)
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
+
+        $mc_material=   WorkOrderMaterial::
+                     where('work_order_id',$id)->where('zone',$zoneid)->where('status',1012)->orwhere('work_order_id',$id)->where('zone',$zoneid)->where('status',9)
+                     ->get();
+
+
+
+        return view('material_inspection_view_des', ['role' => $role, 'mcitems' => $mc_material,'notifications' => $notifications ,  'wo' => WorkOrder::where('id', $id)->first(),]);
     }
 
 
@@ -2999,23 +3053,20 @@ $v5=$type[4];
 
         $wo_materiald=   WorkOrderMaterial::where('zone', $iozone['zone'])->
                        select(DB::raw('work_order_id'),'hos_id','accepted_by')
-                     ->where('status',1)->orwhere('copyforeaccepted' , 1)
+                    ->where('status',1)->orwhere('status',1012)->where('zone', $iozone['zone'])->orwhere('copyforeaccepted' , 1)->where('zone', $iozone['zone'])
 
                     ->groupBy('work_order_id')
                     ->groupBy('hos_id')
                     ->groupBy('accepted_by')
-
-                     ->get();
+                    ->get();
 
         $wo_material=   WorkOrderMaterial::
                      select(DB::raw('work_order_id'),'hos_id','accepted_by')
-                     ->where('status',1)->orwhere('copyforeaccepted' , 1)
+                     ->where('status',1)->orwhere('status',1012)->orwhere('copyforeaccepted' , 1)
 
                      ->groupBy('work_order_id')
                       ->groupBy('hos_id')
                       ->groupBy('accepted_by')
-
-
                      ->get();
                //
         return view('womaterialaccepted', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications,'materls' => $wo_materiald]);
@@ -3179,27 +3230,9 @@ $v5=$type[4];
     public function woMaterialAcceptedView($id)
     {
 
-        if(request()->has('start') && request()->has('end') )  {
-
-
-        $from=request('start');
-        $to=request('end');
-
-        if(request('start')>request('end')){
-            $to=request('start');
-        $from=request('end');
-        }
-        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
-        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->whereBetween('updated_at', [$from, $to])->get(),'notifications' => $notifications]);
-
-        }
-
-
-
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
-        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->get(),'notifications' => $notifications]);
+        return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->orwhere('work_order_id',$id)->where('status' , 1012)->get(),'notifications' => $notifications]);
    }
 
 
@@ -3560,6 +3593,7 @@ public function techniciancountcomp()
          $wo_material = WorkOrderMaterial::
 
                      where('status',5) //status for material to procure
+                     ->where('work_order_id',$id)
 
                      ->get();
 
