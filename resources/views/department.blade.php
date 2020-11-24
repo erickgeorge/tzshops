@@ -92,7 +92,7 @@ use app\department;
                   <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">College/Directorate</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Department Name</th>
                         <th scope="col">Abbreviation</th>
                         <th scope="col">Actions</th>
                     </tr>

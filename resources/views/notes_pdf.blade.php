@@ -231,7 +231,7 @@ tr:nth-child(even) {
                             <td>
 
                                 @if($work->location ==null)
-                                    {{ $work['room']['block']->location_of_block }}
+                                    {{ $work['room']->location_of_block }}
                             @else
 
                                 {{ $work->location }}
@@ -242,6 +242,8 @@ tr:nth-child(even) {
                         </tr>
                         @endforeach
                 </tbody>
+
+                0654983195
 </table>
 <div id='footer'>
     <p class="page">Page-</p>

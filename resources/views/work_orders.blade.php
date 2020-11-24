@@ -79,10 +79,6 @@ use Carbon\Carbon;
         </div>
 
 
-
-
-
-
 <!-- SOMETHING STRANGE HERE -->
 @if(count($wo) > 0)
           @if(auth()->user()->type == 'CLIENT')
@@ -496,7 +492,7 @@ foreach($userwithid as $userwithid)
                             <td>
 
                                 @if($work->location ==null)
-                                    {{ $work['room']['block']->location_of_block }}</td>
+                                    {{ $work['room']->location_of_block }}</td>
                             @else
 
                                 {{ $work->location }}
@@ -1089,7 +1085,7 @@ foreach($userwithid as $userwithid)
                 <thead >
                 <tr style="color: white;">
                     <th>#</th>
-          <th style="width: 100%;">ID</th>
+                    <th style="width: 100%;">ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
@@ -1104,7 +1100,7 @@ foreach($userwithid as $userwithid)
 
                 <tbody>
 
-                {{-- CREATE A CLASS WITH DEFINED W.O STASTUS FROM 1-7 THAT WILL CHECK HE STATUS NUMBER AND RETURN STATUS WORDS --}}
+             
                 <?php $i = 0;  ?>
                 @foreach($wo as $work)
 
@@ -1123,7 +1119,15 @@ foreach($userwithid as $userwithid)
 
                               </td>
                             <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
-                            <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
+
+                           @if($work->onbehalf == null) 
+                           <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
+                           @else
+                            <td>{{ $work['user']->fname.' '.$work['user']->lname }}
+                              Initiated by: {{ $work['onbehalfs']->fname.' '.$work['onbehalfs']->lname }}</td>
+                           @endif
+
+
                           @if($work->status == -1)
                                 <td><span>New</span> <br>
                                @if(auth()->user()->type == 'Maintenance coordinator')
@@ -1324,7 +1328,7 @@ foreach($userwithid as $userwithid)
                             <td>
 
                                 @if($work->location ==null)
-                                    {{ $work['room']['block']->location_of_block }}</td>
+                                    {{ $work['room']->location_of_block }}</td>
                             @else
 
                                 {{ $work->location }}
@@ -1343,17 +1347,15 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                             </td>
 
                             <td>
-                               @if(auth()->user()->type == 'Maintenance coordinator')
+                              @if((auth()->user()->type == 'Maintenance coordinator')||(auth()->user()->type == 'Estates Director'))
                                @if(($work->status != -1) and ($work->status != 53) )
                                 <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                                @endif
                                @endif
-                                @if(strpos(auth()->user()->type, "HOS") !== false)
 
-
+             <!--director-->  @if((auth()->user()->type == 'Estates Director'))
                                         @if($work->status == -1)
-
                                          @if($work->client_id == auth()->user()->id )
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
                                          @else
@@ -1362,10 +1364,28 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                                     class="badge badge-success">View</span></a>
 
                                          @endif
+                                         @endif
+
+                                 @endif   <!--director--> 
+
+
+                                @if(strpos(auth()->user()->type, "HOS") !== false)
+
+
+                                        @if($work->status == -1)
+
+                                         @if(($work->client_id == auth()->user()->id ) and ($work->onbehalf == NULL ))
+                                        <a href="#"><span class="badge badge-success">Waiting...</span></a>
+                                         @else
+
+                                        <a href=" {{ route('workOrder.view', [$work->id]) }} "><span
+                                                    class="badge badge-success">View</span></a>
+                                          @endif
+
 
                                @elseif($work->status == 2)
 
-                               @if($work->client_id != auth()->user()->id )
+                          @if(($work->client_id != auth()->user()->id ) || ($work->onbehalf != NULL ) )
 
                      <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
@@ -1375,7 +1395,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                                     class="fas fa-tasks"></i></a>
                                                         @elseif($work->status == 12)
 
-                                                         @if($work->client_id != auth()->user()->id )
+                                         @if(($work->client_id != auth()->user()->id ) || ($work->onbehalf != NULL ) )
                                          <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
 
@@ -1386,7 +1406,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                                                          class="badge badge-success">View reason</span></a>
                                                        @elseif($work->status == 53)
 
-                                                        @if($work->client_id != auth()->user()->id )
+                                           @if(($work->client_id != auth()->user()->id ) || ($work->onbehalf != NULL ) )
                                          <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                                            &nbsp; @endif
@@ -1407,7 +1427,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
                                       @else
 
 
-                                           @if($work->client_id != auth()->user()->id )
+                                           @if(($work->client_id != auth()->user()->id ) || ($work->onbehalf != NULL ) )
                                         <a style="color: green;" href="{{ url('edit/work_order/view', [$work->id]) }}"
                                            data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>  &nbsp; @endif
                                         <a style="color: black;" href="{{ route('workOrder.track', [$work->id]) }}" data-toggle="tooltip" title="Track"><i
@@ -1417,7 +1437,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
 
                                 @else
                                     @if($work->status == -1)
-                                      @if(auth()->user()->type != 'Maintenance coordinator')
+                                      @if((auth()->user()->type != 'Maintenance coordinator') and (auth()->user()->type != 'Estates Director'))
                                         <a href="#"><span class="badge badge-success">Waiting...</span></a>
                                      @endif
                                         @if($diff > 6)

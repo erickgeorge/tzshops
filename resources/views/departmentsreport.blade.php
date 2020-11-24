@@ -62,5 +62,5 @@ use App\Directorate;
                     </tbody>
     </table>
     <div id='footer'>
-        <p class="page">Page-</p>
+        <p class="page"></p>
     </div>

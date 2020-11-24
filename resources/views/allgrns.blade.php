@@ -1,17 +1,22 @@
 @extends('layouts.master')
 
 @section('title')
-    Work order with missing material
+    All Good Received Notes
     @endSection
 
 @section('body')
+<?php 
+use App\WorkOrderMaterial;
+?>
 
 @if(count($items)> 0)
+
+
 
     <br>
     <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 class="container" ><b>Works Order with Missing Materials</b></h5>
+            <h5 class="container" ><b>Good Received Notes</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -33,20 +38,28 @@
     @endif
       </div>
 
+<?php 
+
+
+            $grn_number =WorkOrderMaterial::where('grn_today',date('d/m/Y'))->select(DB::raw('grn_time'))->groupBy('grn_time')->get();
+      $mynumber = count($grn_number) + 1;
+      echo "$mynumber";
+
+?>
+
+
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
+            
             <thead >
            <tr style="color: white;">
 
-
                 <th > # </th>
-				<th > Wo ID </th>
-                <th>HoS Name</th>
-				<th >Works order Detail</th>
-
+                <th>Date</th>
+                  <th>GRN Number</th>
 				<th >Action</th>
 
-            </tr>
+           </tr>
             </thead>
 
           <tbody>
@@ -55,30 +68,26 @@
             @foreach($items as $item)
 
 
-                <tr> <td>{{$i++}}</td>
-                    <td>woCode{{ $item->woCode }}</td>
-                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
-                    <td>{{ $item['workorder']->details }}</td>
-
+                <tr>
+                    <td>{{$i++}}</td>
+                    <td>{{ date('d F Y', strtotime($item->grn_time))}}</td>
+                     <td>{{ sprintf('%08d',$item->grn_number)}}</td>
                     <td>
 
-					 <a class="btn btn-primary btn-sm" href="{{ route('store.material_to_procure_view', [$item->work_order_id]) }}" role="button">View Materials</a></td>
+					 <a class="btn btn-primary btn-sm" href ="{{route('allgrnss',[$item->grn_time])}}" role="button">View <i class="fas fa-eye"></i></a></td>
 
 
                     </tr>
                     @endforeach
             </tbody>
         </table>
-        <br>
-          @if(auth()->user()->type == 'Head Procurement')
-            <a class="btn btn-primary btn-sm" href="{{ route('material_to_purchase') }}" role="button">View All Materials</a>
-          @endif
+     
     </div>
 </div>
 
 @else
 
-<div style="padding-top: 300px;" align="center"><h3> No Works order with material(s) to be purchased.</h3></div>
+<div style="padding-top: 300px;" align="center"><h3> Currently No Available Goods Received Note.</h3></div>
 
 @endif
     @endSection

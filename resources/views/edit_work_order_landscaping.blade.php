@@ -346,7 +346,7 @@ var total=2;
   <?php $i++; $summ += $assesment->score; ?>
 
    <?php $tender = Crypt::encrypt($company->company); ?>
-     <form method="POST" action="{{ route('edited.assessment.activity.landscaping', [$assesment->assessment_id , $tender , $company->assessment_month]) }}">
+     <form autocomplete="off" method="POST" action="{{ route('edited.assessment.activity.landscaping', [$assesment->assessment_id , $tender , $company->assessment_month]) }}">
                     @csrf
 
 
@@ -459,7 +459,7 @@ var total=2;
 
  <table class="table table-striped  display" style="width:100%">
   <thead>
-  <tr style="color:white;"><th>Area name</th><th>Total score</th><th>Monthly payment</th><th>Amount to be paid</th></tr>
+  <tr style="color:white;"><th>Area name</th><th>Total score</th><th>Monthly payment</th><th>Amount to be paid</th> @if($assesment->payment != NULL) <th>Deducted amount</th> <th>Amount paid after deduction</th> @endif</tr>
  </thead>
 
 
@@ -483,6 +483,22 @@ var total=2;
 @endif</td>
 
 
+@if($assesment->payment != NULL)
+<td><?php echo number_format($assesment->payment) ?> Tshs</td>
+<td>@if($summ >= 90)
+<?php $payall=$company->paymentone; echo number_format($payall - $assesment->payment ); ?> Tshs
+@elseif($summ >= 80 )
+<?php $pay9=$company->paymentone*0.9;  echo number_format($pay9 - $assesment->payment); ?> Tshs
+@elseif($summ >= 70 )
+<?php  $pay8=$company->paymentone*0.8;  echo number_format($pay8 - $assesment->payment);?> Tshs
+@elseif($summ >= 65 )
+<?php $pay7=$company->paymentone*0.7;  echo number_format($pay7 - $assesment->payment);?> Tshs
+@elseif($summ >= 50 )
+<?php $pay5=$company->paymentone*0.5;  echo number_format($pay5 - $assesment->payment);?>  Tshs
+@elseif($summ < 50)
+<?php $pay0=$company->paymentone*0;  echo number_format($pay0);?> Tshs
+@endif</td>
+@endif
 
 
 </tr>
@@ -492,6 +508,12 @@ var total=2;
 </table>
 
 <br>
+@if($assesment->payment != NULL)
+<label>Deduction Reason:</label>
+  <textarea disabled style="color: black" type="text"  class="form-control"
+                                placeholder="{{$assesment->deductionreason}}"  ></textarea>
+                               <br>    
+@endif    
 <hr>
 
 
@@ -723,16 +745,13 @@ var total=2;
   <br>
      @if(auth()->user()->type == 'Dvc Accountant')
      @if($assesment->status == 3)
-           <?php $tender = Crypt::encrypt($assesment->company); ?>
-             <form method="GET"
-                    onsubmit="return confirm('Are you sure company is paid? ')"
-                    action="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}">
-                  {{csrf_field()}}
-                  Company is Paid
-                  <button style="width:20px;height:20px;padding:0px;" type="submit"
-                          title="Tick if Company is Paid" style="color: blue;" data-toggle="tooltip">
-                        <i style="color: blue;" class="far fa-check-circle"></i> </button>
-              </form>
+           
+             
+              <b style="width:20px;height:20px;padding:0px;" >Company is Paid <a data-toggle="modal" data-target="#payment"
+                                                            style="color: green;"
+                                           data-toggle="tooltip" title="Update payment"> <i style="color: blue;" class="far fa-check-circle"></i> </a> </b>
+
+
      @endif
      @endif
 
@@ -749,6 +768,26 @@ var total=2;
 @endif
 
 
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('input[type="radio"]').click(function(){
+        var inputValue = $(this).attr("value");
+        if(inputValue=='greeno'){
+              $('.MYWarden').show();
+               $('#pay').attr('required', '');
+               $('#reason').attr('required', '');
+              }
+         else{
+            $('.MYWarden').hide();
+             $('#pay').removeAttr('required', '');
+             $('#reason').removeAttr('required', '');
+         }     
+    });
+});
+</script>
 
 
 
@@ -769,16 +808,145 @@ var total=2;
                 </div>
                 <div class="modal-body">
 
-                   <form method="POST" action="{{route('updatepayment', [$assesment->assessment_id])}}">
+                  <p>Does the monthly payment to be paid for this company reduced?</p>
+
+                  
+
+                  <?php $tender = Crypt::encrypt($assesment->company); ?>
+                  
+                  <form autocomplete="off" method="POST"   action="{{route('approveassessmentifpaid', [$assesment->assessment_id , $tender , $assesment->month])}}">
                              @csrf
 
-                        <input style="color: black" type="number" required class="form-control"   maxlength = "30"
-                               name="payment" placeholder="Update Payment ..." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+
+                   <div align="center">
+                     <label><input type="radio" name="colorRadio" value="greeno"> Yes</label> &nbsp;
+                     <label><input checked type="radio" name="colorRadio" value="redo"> No</label>
+                   </div>         
+                 
+                  <div class="MYWarden" style="display: none;">
+              
+
+   @if($summ >= 90)
+                     <input name="payment" id="pay"  class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"    onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#pay').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+
+                            }
+
+                            if (newString > {{$payall}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="Deducted amount" >
+
+@elseif($summ >= 80 )
+                   <input name="payment" id="pay"  class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"    onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#pay').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+
+                            }
+
+                            if (newString > {{$pay9}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="Deducted amount" >
+@elseif($summ >= 70 )
+
+                   <input name="payment" id="pay"  class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"    onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#pay').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+
+                            }
+
+                            if (newString > {{$pay8}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="Deducted amount" >
+@elseif($summ >= 65 )
+                   <input name="payment" id="pay"  class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"    onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#pay').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+
+                            }
+
+                            if (newString > {{$pay7}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="Deducted amount" >
+@elseif($summ >= 50 )
+
+                      <input name="payment" id="pay"  class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"    onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#pay').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+
+                            }
+
+                            if (newString > {{$pay5}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="Deducted amount" >
+
+@elseif($summ < 50)
+                        <input name="payment" id="pay"  class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"    onkeypress="return isNumberKey(event);  function isNumberKey(e)
+                        {
+                            var exString = $('#pay').val();
+                            var newString = exString + String.fromCharCode(e.keyCode);
+
+                            if (isNaN(newString))
+                            {
+
+                            }
+
+                            if (newString > {{$pay0}})
+                            {
+                                e.preventDefault();
+                            }
+                        }"  placeholder="Deducted amount" >
+
+@endif
+
+                        <br>
+                          
+                          <textarea id="reason" style="color: black" type="text"  class="form-control"
+                               name="dreason" placeholder="Give reason for deduction ..."  ></textarea>
+                               <br>        
+                   </div>
+
+
+
+
                                <br>
-
-
                                <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
+                        <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                  </form>
+
+                </div>
 
 
                 </div>
@@ -1044,9 +1212,9 @@ var total=2;
 
 
  @else
-    @if(auth()->user()->type != 'Supervisor Landscaping')
+   <!-- @if(auth()->user()->type != 'Supervisor Landscaping')
 <p style="color: red;">No assessment form submitted yet</p>
-     @endif
+     @endif--->
   @endif
     <br>
 

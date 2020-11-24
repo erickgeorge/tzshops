@@ -52,6 +52,7 @@
             </div>
 
         <?php
+        use App\User;
         use App\Location;
         $location = Location::where('status', 1)->where('name','<>',null)->orderby('name')->get();
         ?>
@@ -110,24 +111,48 @@
                     <div class="form-group ">
                             <label  for="inputGroupSelect01">Block <sup style="color: red;">*</sup></label>
                             <br>
-                            <select  style="width: 500px;" required class="custom-select" id="block" name="block" onchange="getRooms()">
+                            <select  style="width: 500px;" required class="custom-select" id="block" name="room" onchange="getRooms()">
                                 <!-- <option selected>Choose...</option> -->
                             </select>
                         </div>
                 </div>
             </div>
-            <div class="row">
+         <!--   <div class="row">
                 <div class="col">
                     <div class="form-group ">
                             <label  for="inputGroupSelect01">Room <sup style="color: red;">*</sup></label>
                             <br>
                             <select style="width: 500px;" required class="custom-select" id="room" name="room">
-                                <!-- <option selected>Choose...</option> -->
+                    
+                            </select>
+                        </div>
+                </div>
+            </div>-->
+    </div>
+
+           @if(strpos(auth()->user()->type, "HOS") !== false )
+            <div class="row">
+                <div class="col">
+                    <div class="form-group ">
+                            <label  for="inputGroupSelect01">Choose user who initiated this works order</label>
+                            <br>
+                            <select style="width: 500px;"  class="custom-select" name="onbehalf">
+                                <option value="" selected>Choose...
+                                </option>
+                
+                  <?php $users = user::where('type', 'Estates Director')->orwhere('type', 'DVC Admin')->get(); ?>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->type. '  -  ' .$user->name }}</option>
+                                @endforeach
+
                             </select>
                         </div>
                 </div>
             </div>
-    </div>
+           @endif            
+
+
+
      <br>
       <div style="color: red;">
       <input type="checkbox" name="emergency" >This Works Order Is Emergency <i style="color: red;" class="fa fa-exclamation-triangle"></i>

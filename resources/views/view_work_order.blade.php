@@ -66,29 +66,23 @@
             <label class="input-group-text">Location</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="location not defined" name="location"
-               aria-describedby="emailHelp" value="{{ $wo['room']['block']->location_of_block }}" disabled>
+               aria-describedby="emailHelp" value="{{ $wo['room']->location_of_block }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Area</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
-               value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
+               value="{{ $wo['room']['area']->name_of_area }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
-               value="{{ $wo['room']['block']->name_of_block }}" disabled>
+               value="{{ $wo['room']->name_of_block }}" disabled>
     </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Room</label>
-        </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
-               value="{{ $wo['room']->name_of_room }}" disabled>
-    </div>
+
 
          @endif
     <div class="form-group ">

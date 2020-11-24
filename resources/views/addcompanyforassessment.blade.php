@@ -431,7 +431,7 @@
       <button id="bt" type="submit" class="btn btn-primary">Forward to Deputy Manager Mabibo</button>
          @endif
 
-       @if((auth()->user()->type == 'Warden') and ((auth()->user()->hostel != 'Mabibo')||(auth()->user()->hostel != 'Magufuli')))
+       @if((auth()->user()->type == 'Warden') and (auth()->user()->hostel != 'Mabibo') and (auth()->user()->hostel != 'Magufuli'))
             <button id="bt" type="submit" class="btn btn-primary">Forward  to Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni , Kunduchi</button>
        @endif
 

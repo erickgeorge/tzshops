@@ -129,29 +129,23 @@ var total=2;
 
 
         <input style="color: black" type="text" required class="form-control" placeholder="location" name="location"
-               aria-describedby="emailHelp" value="{{ $wo['room']['block']['area']['location']->name }}" disabled>
+               aria-describedby="emailHelp" value="{{ $wo['room']['area']['location']->name }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Area</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="area" name="area" aria-describedby="emailHelp"
-               value="{{ $wo['room']['block']['area']->name_of_area }}" disabled>
+               value="{{ $wo['room']['area']->name_of_area }}" disabled>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">Block</label>
         </div>
         <input style="color: black" type="text" required class="form-control" placeholder="block" name="block" aria-describedby="emailHelp"
-               value="{{ $wo['room']['block']->name_of_block }}" disabled>
+               value="{{ $wo['room']->name_of_block }}" disabled>
     </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text">Room</label>
-        </div>
-        <input style="color: black" type="text" required class="form-control" placeholder="room" name="room" aria-describedby="emailHelp"
-               value="{{ $wo['room']->name_of_room }}" disabled>
-    </div>
+  
 
     @endif
 
@@ -1485,7 +1479,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                <?php
                 $p=-1;
       ?>
-
+                              @if(strpos(auth()->user()->type, "HOS") !== false ) 
                                 @foreach($techswork as $tech)
                                 <?php
 
@@ -1512,10 +1506,41 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                               $cwo[$p]=$t;
 
                               ?>
-
-
-
                                 @endforeach
+
+                          @endif 
+
+                          @if((auth()->user()->type == 'Maintenance coordinator')||(auth()->user()->type == 'Estates Director'))
+
+                                                                  @foreach($techsworkall as $tech)
+                                <?php
+
+                                   $wo_technician_count = WorkOrderStaff::
+                                   select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                                   ->where('status',0)
+                                   ->where('staff_id',$tech->id)
+                                   ->groupBy('staff_id')
+                                   ->first();
+
+                               ?>
+                               @if(empty($wo_technician_count->total_wo))
+                                   <?php $t=0;?>
+
+                               @else
+                                    <?php $t=$wo_technician_count->total_wo;?>
+
+                                @endif
+
+                              <?php
+                             $p++;
+                              $name[$p]=$tech->fname.' '.$tech->lname;
+                              $ident[$p]=$tech->id;
+                              $cwo[$p]=$t;
+
+                              ?>
+                                @endforeach
+
+                                  @endif
                                 <?php
                                 for($i=0;$i<=$p-1;$i++){
                                     for($j=$i+1 ;$j<=$p;$j++){
@@ -1722,8 +1747,8 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
                                <?php
                 $p=-1;
-      ?>
-
+      ?>           
+                  @if(strpos(auth()->user()->type, "HOS") !== false )         
                                 @foreach($techswork as $tech)
                                 <?php
 
@@ -1754,6 +1779,43 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
 
                                 @endforeach
+
+                       @endif
+
+                       @if((auth()->user()->type == 'Maintenance coordinator')||(auth()->user()->type == 'Estates Director'))
+                              @foreach($techsworkall as $tech)
+                                <?php
+
+                                $wo_technician_count = WorkOrderStaff::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',0)
+                     ->where('staff_id',$tech->id)
+                     ->groupBy('staff_id')
+                     ->first();
+
+                               ?>
+                               @if(empty($wo_technician_count->total_wo))
+                                   <?php $t=0;?>
+
+                               @else
+                                    <?php $t=$wo_technician_count->total_wo;?>
+
+                                @endif
+
+                              <?php
+                             $p++;
+                              $name[$p]=$tech->fname.' '.$tech->lname;
+                              $ident[$p]=$tech->id;
+                              $cwo[$p]=$t;
+
+                              ?>
+
+
+
+                                @endforeach
+
+                         @endif
+
                                 <?php
                                 for($i=0;$i<=$p-1;$i++){
                                     for($j=$i+1 ;$j<=$p;$j++){
@@ -1851,8 +1913,10 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                <?php
                 $p=-1;
             ?>
-
+                        @if(strpos(auth()->user()->type, "HOS") !== false )
                                 @foreach($techs as $tech)
+                              
+
                                 <?php
 
                                 $wo_technician_count = techasigned::
@@ -1880,6 +1944,42 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                               ?>
 
                                 @endforeach
+
+                            @endif  
+
+                          @if((auth()->user()->type == 'Maintenance coordinator')||(auth()->user()->type == 'Estates Director'))
+                                @foreach($techall as $tech)
+                              
+
+                                <?php
+
+                                $wo_technician_count = techasigned::
+                     select(DB::raw('count(work_order_id) as total_wo,staff_id as staff_id'))
+                     ->where('status',0)
+                     ->where('staff_id',$tech->id)
+                     ->groupBy('staff_id')
+                     ->first();
+
+                               ?>
+                               @if(empty($wo_technician_count->total_wo))
+                                   <?php $t=0;?>
+
+                               @else
+                                    <?php $t=$wo_technician_count->total_wo;?>
+
+                                @endif
+
+                              <?php
+                             $p++;
+                              $name[$p]=$tech->fname.' '.$tech->lname;
+                              $ident[$p]=$tech->id;
+                              $cwo[$p]=$t;
+
+                              ?>
+
+                                @endforeach
+
+                            @endif  
                                 <?php
                                 for($i=0;$i<=$p-1;$i++){
                                     for($j=$i+1 ;$j<=$p;$j++){

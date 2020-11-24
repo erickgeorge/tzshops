@@ -1493,8 +1493,6 @@ class LandscapingController extends Controller
      $assessment->save();
        }
 
-
-
            $erick =landassessmentform::where('company', $tenders)->where('assessment_month', $month)->get();
            foreach($erick as $asympt) {
            $pndo =landassessmentform::where('id', $asympt->id)->first();
@@ -1605,7 +1603,7 @@ class LandscapingController extends Controller
 
 
 
-      public function approveassessmentifpaid($id , $tender , $month)
+      public function approveassessmentifpaid(Request $request ,$id , $tender , $month)
     {
      $tender = Crypt::decrypt($tender);
      $assessment_approve =landcrosschecklandassessmentactivity::where('assessment_id', $id)->where('status',3)->get();
@@ -1613,6 +1611,11 @@ class LandscapingController extends Controller
      foreach($assessment_approve as $wo_assessment) {
      $assessment =landcrosschecklandassessmentactivity::where('id', $wo_assessment->id)->first();
      $assessment->status = 5;
+     if ($request['colorRadio'] == "greeno") {
+        $assessment->payment = $request['payment'];
+        $assessment->deductionreason = $request['dreason'];
+     }
+
      $assessment->payment_by = auth()->user()->id;
      $assessment->payment_on = Carbon::now();
      $assessment->save();

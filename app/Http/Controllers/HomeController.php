@@ -2987,6 +2987,23 @@ $v5=$type[4];
 
 
 
+
+       public function allgrns()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        $wo_material=   WorkOrderMaterial::
+                     select(DB::raw('grn_time'),'grn_number')
+                     ->where('grn',2)
+                     ->groupBy('grn_time')
+                     ->groupBy('grn_number')
+                     ->get();
+
+        return view('allgrns', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+
+
        public function workorderwithmissingmaterial()
     {
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -3584,6 +3601,22 @@ public function techniciancountcomp()
         return view('womaterialView', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
     }
 
+
+
+
+    public function all_wo_materials()
+
+    {
+         $wo_material = WorkOrderMaterial::
+                     where('status',5) //status for material to procure
+                     //->where('work_order_id',$id)
+                     ->get();
+
+
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('allworksordersmaterials', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
 
 
 
