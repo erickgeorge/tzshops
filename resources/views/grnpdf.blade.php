@@ -3,6 +3,9 @@
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
     <p><b><u>GOODS RECEIVED NOTE</u></b></p>
+     @foreach($items as $item)
+     @endforeach
+     <p><b><u>GRN NUMBER: {{$item->grn_number}}</u></b></p>
     </div>
 <p>This is to confirm that we have today received the following goods in good condition</p>
 <p>UNLESS OTHERWISE STATED IN THE "REMARKS" COLUMN from (NAME OF SUPPLIER)___________________________________</p>
@@ -65,6 +68,7 @@ tr:nth-child(even) {
       <table border = "2" cellpadding = "5" cellspacing = "5">
           <tr>
               <th>#</th>
+              <th>WO ID</th>
               <th>QUANTITY</th>
               <th>UNIT OF QUANTITY</th>
               <th>DESCRIPTION OF GOODS</th>
@@ -83,6 +87,7 @@ tr:nth-child(even) {
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
+                    <th>{{ $item['workorder']->woCode}}</th>
                     <td>{{ $item->quantity - $item->reserved_material }}</td>
                     <td style="'min-width:20px;"></td>
                     <td>{{ $item['material']->description }}</td>
@@ -118,7 +123,7 @@ tr:nth-child(even) {
 <br>
 
      <div class="container-name">
-     <div  class="div1" > Works Order No:<u style="padding-left: 65px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
+     <div  class="div1" >  </div>
 
 
          <div class="div2">Date:<i style="padding-left: 100px; width: 80px">...........................</i>   </div>

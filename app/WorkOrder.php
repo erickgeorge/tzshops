@@ -9,12 +9,16 @@ class WorkOrder extends Model
     public function user(){
         return $this->belongsTo('App\User', 'client_id');
     }
+
+     public function onbehalfs(){
+        return $this->belongsTo('App\User', 'onbehalf');
+    }
 	
 	 public function hos(){
         return $this->belongsTo('App\User', 'staff_id');
     }
     public function room(){
-        return $this->belongsTo('App\Room');
+        return $this->belongsTo('App\Block');
     }
     public function inspectionForm(){
         return $this->hasOne('App\WorkOrderInspectionForm');

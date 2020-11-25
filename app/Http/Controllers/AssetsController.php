@@ -73,9 +73,27 @@ class AssetsController extends Controller
 
 
 
-      public function Registercompany(Request $request)
+
+  public function Renewtender(Request $request , $id)
     {
 
+        $company =  company::where('id',$id)->first();
+        $company->endcontract = $request['datecontract'];
+        $company->save();
+
+
+         $extendtender =  tendernumber::where('company' , $company->company_name)->where('tender' ,  $company->tender)->first();
+         $extendtender->endcontract = $request['datecontract'];
+         $extendtender->save();
+       
+         return redirect()->route('cleaningcompany')->with(['message' => 'Tender extended successfully']);
+
+           }
+
+
+
+      public function Registercompany(Request $request)
+    {
 
     $checktender = company::where('tender', $request['tendern'])->where('company_name', $request['companyid'])->first();
 
@@ -149,11 +167,7 @@ class AssetsController extends Controller
      $companynew->endcontract =  date('Y-m-d' , strtotime("+$dura year" , $durass));
      $companynew->status = 1;
      $companynew->save();
-
-
-
-
-
+   
 
       $company->save();
          }
@@ -161,9 +175,7 @@ class AssetsController extends Controller
            return redirect()->route('cleaningcompany')->with(['message' => 'New tender registered successfully']);
 
 
-}
-
-
+   }
 
    else {
 
@@ -403,7 +415,6 @@ class AssetsController extends Controller
          }
 
        }
-
 
 
 
@@ -985,6 +996,16 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
              'carea' =>cleaningarea::all()
+          ]);
+     }
+
+      public function Renewtendercontract($id){
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+        return view('renewtenderscontract', [
+            'role' => $role,
+            'notifications' => $notifications,
+             'comp' =>company::where('id', $id)->first()
           ]);
      }
 

@@ -998,7 +998,14 @@ title="Send feedback/comment"
                       <a href="{{ url('ProcurementHistory') }}">
                         Procurement
                     </a>
+                  
+                     <a href="{{ url('ProcurementHistory') }}">
+                        Good Received Note
+                    </a>
 
+                      <a href="{{ url('ProcurementHistory') }}">
+                        Issue Note
+                    </a>
 
            <!--
            <li class="nav-item">
@@ -1044,6 +1051,14 @@ title="Send feedback/comment"
 
 
   </div>
+
+                    <a href="{{ url('all_grns') }}">
+                        Good Received Note
+                    </a>
+
+                      <a href="{{ url('work_order_with_missing_material') }}">
+                        Issue Note
+                    </a>
 
 
 

@@ -52,9 +52,11 @@ class WorkOrderController extends Controller
         $date = date('d/m/Y');
         $lastThere = WorkOrder::where('problem_type',$request['p_type'])->whereDate('created_at',date('Y-m-d'))->get();
         $lastThere = count($lastThere)+1;
+        $last = sprintf('%03d',$lastThere);
+        $finalCode = $code.'/'.$date.'/'.$last;
 
-        $finalCode = $code.'/'.$date.'/'.$lastThere;
 
+        
 
         if ($request['p_type'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Problem Type required ']);
@@ -91,12 +93,17 @@ class WorkOrderController extends Controller
         }
         $work_order->woCode =  $finalCode;
 
+
+        $work_order->onbehalf =  $request['onbehalf'];
         $work_order->year_ = date('y');
         $work_order->month_ = date('m');
         $work_order->save();
 
         return redirect()->route('work_order')->with(['message' => 'Works order successfully sent to DES']);
     }
+
+
+
 
     public function rejectWO(Request $request, $id)
     {
@@ -328,6 +335,8 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         ]);
     }
 
+   
+
     public function   editWOView($id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -338,9 +347,15 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
         $techswork = Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->where('woid','<>',$id)->get();
 
+         $techsworkall = Technician::where('status', 0)->where('woid','<>',$id)->get();
+
         return view('edit_work_order', [
             'techs' => Technician::where('type', substr(strstr(auth()->user()->type, " "), 1))->where('status', 0)->get(),
+
+            'techall' => Technician::where('status', 0)->get(),
+
             'notifications' => $notifications,
+            'techsworkall' =>  $techsworkall,
             'techswork' => $techswork,
             'staff' => $staff,
             'role' => $role, 'wo' => WorkOrder::where('id', $id)->first(),

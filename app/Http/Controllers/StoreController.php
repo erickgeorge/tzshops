@@ -849,18 +849,20 @@ class StoreController extends Controller
 
 
 
-	public function releaseMaterialafterpurchased($id)
+	public function releaseMaterialafterpurchased()
     {
 
-        $wochange_status =WorkOrderMaterial::where('work_order_id', $id)->where('status', 5)->get();
+    $wochange_status =WorkOrderMaterial::where('status', 5)->get();
+    foreach($wochange_status as $wochange_state){
+      $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
+      $wochange->grn_today = date('d/m/Y');
+      $wochange->save();
+    }
 
-		$wo_materials = WorkOrderMaterial::
-                     select(DB::raw('work_order_id,material_id,sum(quantity) as quantity'))
-                     ->where('status',5)
-					 ->where('work_order_id',$id)
-                     ->groupBy('material_id')
-					 ->groupBy('work_order_id')
-                     ->get();
+      $grn_number =WorkOrderMaterial::where('grn_today',date('d/m/Y'))->select(DB::raw('grn_time'))->groupBy('grn_time')->get();
+      $gnumber = sprintf('%03d',count($grn_number));
+      $mynumber =  'GRN'.'/'.$wochange->grn_today.'/'.$gnumber; 
+
 
 		foreach($wochange_status as $wochange_state){
 			 $wochange =WorkOrderMaterial::where('id', $wochange_state->id)->first();
@@ -868,6 +870,9 @@ class StoreController extends Controller
          $wochange->reservestatus = 1;
 		     $wochange->sender_id = auth()->user()->id;
          $wochange->currentaddedmat = 1;
+         $wochange->grn = 2;
+         $wochange->grn_time =  $wochange->updated_at; 
+         $wochange->grn_number = $mynumber;
 		     $wochange->save();
 
 		}

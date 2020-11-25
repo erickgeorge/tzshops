@@ -70,7 +70,7 @@ use App\MinuteSheet; ?>
             </tbody>
         </table>
 
-         @if(auth()->user()->type == 'Head Procurement')
+       {{--  @if(auth()->user()->type == 'Head Procurement')
 
         <h4> Notify Store Manager to assign good receiving note about material(s) purchased.</h4>
 
@@ -78,7 +78,7 @@ use App\MinuteSheet; ?>
          <a class="btn btn-primary btn-sm" href="{{ route('store.materialafterpurchase', [$item->work_order_id]) }}" role="button">Notify Store Manager</a>
 
 
-         @endif
+         @endif --}}
 <?php
 $checkes = Minutesheet::where('Woid',$item->work_order_id)->get();
  ?>

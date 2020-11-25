@@ -316,11 +316,14 @@ Route::get('work_order_approved_material', 'HomeController@workOrderApprovedMate
 Route::get('work_order_with_missing_material', 'HomeController@workorderwithmissingmaterial')->name('work_order_with_missing_material')->middleware('auth');
 
 
+Route::get('all_grns', 'HomeController@allgrns')->name('allgrn')->middleware('auth');
 
 
 Route::get('wo_material/{id}', 'HomeController@wo_materialView')->name('store.materialview')->middleware('auth');
 
 Route::get('wo_material_to_procure/{id}', 'HomeController@wo_material_to_purchaseView')->name('store.material_to_procure_view')->middleware('auth');
+
+Route::get('all_wo_materials_to_purchases', 'HomeController@all_wo_materials')->name('material_to_purchase')->middleware('auth');
 
 Route::get('/wo_material_reserved_from_store/{id}', 'HomeController@wo_material_to_purchaseViewbystore')->name('wo.reserved.material')->middleware('auth');
 
@@ -406,7 +409,7 @@ Route::get('send/material_rejected_again/{id}','StoreController@materialrejected
 
 Route::get('release/material/{id}', 'StoreController@releaseMaterial')->name('store.materialrelease')->middleware('auth');
 
-Route::get('notify/store/material/{id}', 'StoreController@releaseMaterialafterpurchased')->name('store.materialafterpurchase')->middleware('auth');
+Route::get('notify/store/material/', 'StoreController@releaseMaterialafterpurchased')->name('store.materialafterpurchase')->middleware('auth');
 
 
 
@@ -440,7 +443,7 @@ Route::get('allpdf','NotesController@allpdf')->name('allpdf')->middleware('auth'
  Route::get('hosCountpdf','NotesController@hosCountpdf')->middleware('auth');
  Route::get('unattendedwopdf','NotesController@unattendedwopdf')->middleware('auth');
  Route::get('completewopdf','NotesController@completewopdf')->middleware('auth');
- Route::get('work_order_material_purchased/grnpdf/{id}','NotesController@grnotepdf')->middleware('auth');
+ Route::get('grnpdf/{id}','NotesController@grnotepdf')->name('allgrnss')->middleware('auth');
  Route::get('received/materials/from_store/issuenotepdf/{id}','NotesController@issuenotepdf')->middleware('auth');
 
 // iow myzone ////////
@@ -516,6 +519,7 @@ Route::post('/changewoType', 'WorkOrderController@changewoType')->name('change_w
 
 Route::post('HouseRegistration', 'AssetsController@RegisterHouse')->name('house.save')->middleware('auth');
 Route::post('CompanyRegistration', 'AssetsController@Registercompany')->name('company.save')->middleware('auth');
+Route::post('Renewcompanytender/{id}', 'AssetsController@Renewtender')->name('companyrenewcontract')->middleware('auth');
 Route::post('Company_registration', 'AssetsController@Renewcompany')->name('company.save.renew')->middleware('auth');
 Route::post('Addnewsheet', 'AssetsController@addnewsheetc')->name('addnew.sheet')->middleware('auth');
 Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete')->middleware('auth');
@@ -525,6 +529,7 @@ Route::get('Register_Staffhouse', 'AssetsController@Registerstaffhouseview')->na
 
 Route::get('Register_tender', 'AssetsController@Registercompanyview')->name('registercompany')->middleware('auth');
 Route::get('Add_new_company', 'AssetsController@Renewcompanycontract')->name('renew_company_contract')->middleware('auth');
+Route::get('Renew_tender_contract/{ids}', 'AssetsController@Renewtendercontract')->name('renew_contract')->middleware('auth');
 Route::get('add_new_sheet', 'AssetsController@addnewsheet')->name('add_new_sheet')->middleware('auth');
 
 
@@ -740,7 +745,7 @@ Route::post('eddited/assessment/activity/form/{id}/{tender}/{month}', 'Landscapi
 
 
 
-Route::get('approveassessmentifpaid/{id}/{tender}/{month}', 'LandscapingController@approveassessmentifpaid')->name('approveassessmentifpaid')->middleware('auth');
+Route::post('approveassessmentifpaid/{id}/{tender}/{month}', 'LandscapingController@approveassessmentifpaid')->name('approveassessmentifpaid')->middleware('auth');
 Route::get('approveassessmentform/{id}/{tender}/{month}', 'LandscapingController@approveassessment')->name('approveassessment')->middleware('auth');
 Route::get('approveassessmentformdean/{id}/{tender}/{month}', 'LandscapingController@approveassessmentdean')->name('approveassessmentdean')->middleware('auth');
 Route::get('approveassessmentfordeputymanager/{id}/{tender}/{month}', 'LandscapingController@approveassessmentdeputymanager')->name('approveassessmentdeputy')->middleware('auth');

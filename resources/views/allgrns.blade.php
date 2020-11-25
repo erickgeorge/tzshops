@@ -1,15 +1,19 @@
 @extends('layouts.master')
 
 @section('title')
-    store
+    All Good Received Notes
     @endSection
 
 @section('body')
 
+@if(count($items)> 0)
+
+
+
     <br>
-    <div class="row container-fluid" >
+    <div class="row container-fluid">
         <div class="col-lg-12">
-            <h5 class="container" ><b>Works Order with Material(s) Purchased</b></h5>
+            <h5 class="container" ><b>Good Received Notes</b></h5>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -21,6 +25,7 @@
     <br>
     <hr class="container">
     <div style="margin-right: 2%; margin-left: 2%;">
+        <div class="container">
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -28,41 +33,51 @@
             </ul>
         </div>
     @endif
+      </div>
+
+
+
 
     <div class="container " >
         <table class="table table-striped display" id="myTable"  style="width:100%">
+            
             <thead >
            <tr style="color: white;">
-                <th >No</th>
 
-				<th >Works order ID</th>
-				<th >HOS name</th>
+                <th > # </th>
+                <th>Date</th>
+                  <th>GRN Number</th>
 				<th >Action</th>
 
-            </tr>
+           </tr>
             </thead>
 
-            <tbody>
+          <tbody>
 
-            <?php $i=0;  ?>
+           <?php $i= 1; ?>
             @foreach($items as $item)
 
-                <?php $i++ ?>
+
                 <tr>
-                    <th scope="row">{{ $i }}</th>
+                    <td>{{$i++}}</td>
+                    <td>{{ date('d F Y', strtotime($item->grn_time))}}</td>
+                     <td>{{$item->grn_number}}</td>
+                    <td>
 
-                    <td>00{{ $item->work_order_id }}</td>
-
-                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+					 <a class="btn btn-primary btn-sm" href ="{{route('allgrnss',[$item->grn_time])}}" role="button">View <i class="fas fa-eye"></i></a></td>
 
 
-                      <td>  <a style="color: green;" href="work_order_material_purchased/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">
-                      View Materials</a>&nbsp;
-                        </td>
                     </tr>
                     @endforeach
             </tbody>
         </table>
+     
     </div>
 </div>
+
+@else
+
+<div style="padding-top: 300px;" align="center"><h3> Currently No Available Goods Received Note.</h3></div>
+
+@endif
     @endSection

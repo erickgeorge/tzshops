@@ -97,20 +97,18 @@ td, th {
 
          @else
 
-         <tr><td> Location: <b>
-                   {{ $wo['room']['block']->location_of_block }}
+         <tr><td colspan="2"> Location: <b>
+                   {{ $wo['room']->location_of_block }}
             </b> </td>
             <td >Area : <b>
 
-                   {{ $wo['room']['block']['area']->name_of_area }}
+                   {{ $wo['room']['area']->name_of_area }}
                           </b></td>
             <td>Block : <b>
-                   {{ $wo['room']['block']->location_of_block }}
+                   {{ $wo['room']->location_of_block }}
                 </b> </td>
-            <td>Room : <b>
-                  {{ $wo['room']->name_of_room }}
-             </b></td>
-       </tr>
+           
+          </tr>
               @endif
         <tr>
             <td colspan="4">Description of the problem: <b style="text-transform: capitalize;">{{ $wo->details }}</b> </td>

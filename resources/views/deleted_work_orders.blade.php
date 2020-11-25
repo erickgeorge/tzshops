@@ -52,7 +52,7 @@
                     <td><?php $time = strtotime($work->created_at); echo date('d/m/Y',$time);  ?></td>
                     <td>
                         @if($work->location ==null)
-                            {{ $work['room']['block']->location_of_block }}
+                            {{ $work['room']->location_of_block }}
                     @else
 
                             {{ $work->location }}

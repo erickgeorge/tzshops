@@ -57,18 +57,22 @@
 
                 <tr> <td>{{$i++}}</td>
                     <td>woCode{{ $item->woCode }}</td>
-                    <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
                     <td>{{ $item['workorder']->details }}</td>
 
                     <td>
 
-					 <a class="btn btn-primary btn-sm" href="{{ route('store.material_to_procure_view', [$item->work_order_id]) }}" role="button">View Material</a></td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('store.material_to_procure_view', [$item->work_order_id]) }}" role="button">View Materials</a></td>
 
 
                     </tr>
                     @endforeach
             </tbody>
         </table>
+        <br>
+          @if(auth()->user()->type == 'Head Procurement')
+            <a class="btn btn-primary btn-sm" href="{{ route('material_to_purchase') }}" role="button">View All Materials</a>
+          @endif
     </div>
 </div>
 
