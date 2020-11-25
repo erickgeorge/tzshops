@@ -5,9 +5,6 @@
     @endSection
 
 @section('body')
-<?php 
-use App\WorkOrderMaterial;
-?>
 
 @if(count($items)> 0)
 
@@ -38,14 +35,7 @@ use App\WorkOrderMaterial;
     @endif
       </div>
 
-<?php 
 
-
-            $grn_number =WorkOrderMaterial::where('grn_today',date('d/m/Y'))->select(DB::raw('grn_time'))->groupBy('grn_time')->get();
-      $mynumber = count($grn_number) + 1;
-      echo "$mynumber";
-
-?>
 
 
     <div class="container " >
@@ -71,7 +61,7 @@ use App\WorkOrderMaterial;
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{{ date('d F Y', strtotime($item->grn_time))}}</td>
-                     <td>{{ sprintf('%08d',$item->grn_number)}}</td>
+                     <td>{{$item->grn_number}}</td>
                     <td>
 
 					 <a class="btn btn-primary btn-sm" href ="{{route('allgrnss',[$item->grn_time])}}" role="button">View <i class="fas fa-eye"></i></a></td>

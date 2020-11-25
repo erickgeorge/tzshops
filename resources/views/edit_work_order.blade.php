@@ -59,6 +59,9 @@ var total=2;
         </div>
     </div>
     <hr>
+
+
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="alert alert-danger">
@@ -76,6 +79,13 @@ var total=2;
             </ul>
         </div>
     @endif
+
+
+          @if($wo->onbehalf != null) 
+               <p align="center">This works order was submitted on behalf of {{$wo['onbehalfs']->type}} : {{ $wo['onbehalfs']->fname.' '.$wo['onbehalfs']->lname }}</p>
+           @endif
+
+<br>
     <div style="margin-right: 2%; margin-left: 2%;">
     <div class="row">
         <div class="col">

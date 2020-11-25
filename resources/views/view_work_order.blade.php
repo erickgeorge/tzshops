@@ -20,6 +20,12 @@
         </div>
     </div>
     <hr>
+          @if($wo->onbehalf != null) 
+               <p align="center">This works order was submitted on behalf of {{$wo['onbehalfs']->type}} : {{ $wo['onbehalfs']->fname.' '.$wo['onbehalfs']->lname }}</p>
+           @endif
+
+   
+
     <div style="margin-right: 2%; margin-left: 2%;">
     @if(Session::has('message'))
         <div class="alert alert-success">

@@ -840,7 +840,8 @@ class StoreController extends Controller
     }
 
       $grn_number =WorkOrderMaterial::where('grn_today',date('d/m/Y'))->select(DB::raw('grn_time'))->groupBy('grn_time')->get();
-      $mynumber = count($grn_number) + 1;
+      $gnumber = sprintf('%03d',count($grn_number));
+      $mynumber =  'GRN'.'/'.$wochange->grn_today.'/'.$gnumber; 
 
 
 		foreach($wochange_status as $wochange_state){

@@ -53,8 +53,8 @@ class WorkOrderController extends Controller
         $date = date('d/m/Y');
         $lastThere = WorkOrder::where('problem_type',$request['p_type'])->whereDate('created_at',date('Y-m-d'))->get();
         $lastThere = count($lastThere)+1;
-
-        $finalCode = $code.'/'.$date.'/'.$lastThere;
+        $last = sprintf('%03d',$lastThere);
+        $finalCode = $code.'/'.$date.'/'.$last;
 
 
         

@@ -3,7 +3,9 @@
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
     <p><b><u>GOODS RECEIVED NOTE</u></b></p>
-     <p><b><u>GRN NUMBER: ---</u></b></p>
+     @foreach($items as $item)
+     @endforeach
+     <p><b><u>GRN NUMBER: {{$item->grn_number}}</u></b></p>
     </div>
 <p>This is to confirm that we have today received the following goods in good condition</p>
 <p>UNLESS OTHERWISE STATED IN THE "REMARKS" COLUMN from (NAME OF SUPPLIER)___________________________________</p>
