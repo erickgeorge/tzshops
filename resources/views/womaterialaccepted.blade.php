@@ -1,11 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-    Work order that needs material
+    Works order that needs material
     @endSection
 
 @section('body')
-
+@php
+    use App\WorkOrder;
+@endphp
 @if(count($items)>0)
 <div class="container">
 
@@ -58,7 +60,10 @@
 
 
                 <tr> <td>{{$i++}}</td>
-                    <td>00{{ $item->work_order_id }}</td>
+                    @php
+                        $fgt = WorkOrder::where('id',$item->work_order_id)->first();
+                    @endphp
+                    <td>00{{ $fgt['woCode'] }}</td>
                     <td>{{ $item['usermaterial']->fname.' '.$item['usermaterial']->lname }}</td>
 
                     <td>{{ $item['workorder']->details }}</td>

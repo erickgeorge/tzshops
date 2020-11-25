@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')
@@ -266,7 +266,7 @@ use App\WorkOrder;
 
 function printdiv(printpage)
 {
-var headstr = "<html><head><title></title></head><body><h1> Work orders Duration list </h1>";
+var headstr = "<html><head><title></title></head><body><h1> Works orders Duration list </h1>";
 var footstr = "</body>";
 var newstr = document.all.item(printpage).innerHTML;
 //var exclude = document.getElementByid('exclude').innerHTML;

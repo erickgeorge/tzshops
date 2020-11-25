@@ -35,10 +35,16 @@ tr:nth-child(even) {
 
     <tr>
                     <th>#</th>
+                    <th>ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
+                    @if ($_GET['status']!='')
+
+                    @else
                     <th>Status</th>
+                    @endif
+
 
                     <th>Location</th>
 
@@ -54,9 +60,13 @@ tr:nth-child(even) {
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
+                            <th> {{$work->woCode}} </th>
                             <td id="wo-details">{{ $work->details }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
+                            @if ($_GET['status']!='')
+
+                    @else
                   @if($work->status == -1)
                                 <td><span class="badge badge-warning">new</span>
                                 <br>
@@ -227,6 +237,7 @@ tr:nth-child(even) {
 
                               @else
                                 <td><span class="badge badge-danger">Closed NOT SATISFIED BY CLIENT</span></td>
+                              @endif
                               @endif
                             <td>
 

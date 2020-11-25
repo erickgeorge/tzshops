@@ -419,6 +419,7 @@
 
      <th>Type</th>
      <th>Quantity</th>
+     <th>Units  of Measure</th>
    <!--<th>IoW</th>-->
      <th>Approved By</th>
     <th>Status</th>
@@ -436,7 +437,7 @@
 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-  <!-- <td>{{$matform['iowzone']->name }}</td>-->
+  <td>{{$matform['material']->brand }}</td>
        <td>
        @if($matform->accepted_by == NULL)
       <span class="badge badge-warning">Not accepted Yet.</span>
@@ -499,6 +500,7 @@
     <th>Material Description</th>
     <th>Type</th>
     <th>Quantity</th>
+    <th>Unit of Measure</th>
     <th>Status</th>
     <th>Date Requested</th>
     <th>Date Updated</th>
@@ -512,6 +514,8 @@
     <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
+    <td>{{$matform['material']->brand }}</td>
+
    <td>{{$matform->quantity }}</td>
   <td >@if($matform->status==0)<span> Waiting for Approval </span> @elseif($matform->status== 1)<span >Approved by IoW </span> @elseif($matform->status== 2) <span>Released from Store </span> @elseif($matform->status==20) <span>Requested to store</span> @elseif($matform->status==17) <span>Some of material rejected </span> @elseif($matform->status== 5)<span>Material on Procurement Stage</span> @elseif($matform->status== 3)<span>Material taken from store</span>  @elseif($matform->status == -1)<span >
     Rejected by IOW</span>@elseif($matform->status== 15)<span>Material Purchased</span>
@@ -567,6 +571,7 @@
     <th>Material Name</th>
     <th>Material Description</th>
      <th>Type</th>
+     <th>Unit of Measure</th>
      <th>Quantity</th>
   </thead>
   </tr>
@@ -578,6 +583,8 @@
    <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
    <td>{{$matform['material']->type }}</td>
+    <td>{{$matform['material']->brand }}</td>
+
    <td>{{$matform->quantity }}</td>
   </tr>
 
@@ -882,7 +889,7 @@
 
 <br><br>
 
-  
+
 
 
 
@@ -1246,18 +1253,24 @@
 
 
         @if ($wo->systemclosed!=0)
-    
 
-            <h4 >This Works Order Was Closed Automatically by a System Due to a Customer Delay of Closing for 7 Days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </h4>
-          <hr>  
 
-        @endif    
+            <h4 >This Works Order Was Closed Automatically by System Due to a Customer Delay of Closing for 7 Days on : {{ date('d F Y', strtotime($wo->updated_at))  }} </h4>
+          <hr>
+
+        @endif
 
 
 
 <!--statusess-->
 
-
+@if(auth()->user()->type == 'DVC Admin')
+<div style="padding: 1em;">
+  <a href="{{ url('trackreport/'.$wo->id) }}"  target="_blank" ><button class="btn btn-primary">
+PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+</button></a>
+</div>
+@endif
 
 @if(auth()->user()->type == 'Estates Director')
 <div style="padding: 1em;">
@@ -1373,7 +1386,7 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     <p>Please provide reason as to why you are not satisfied with inspection for this works order.</p>
                     <form method="POST" action="{{ route('workorder.notsatisfiedbyiow', [$wo->id]) }}">
                         @csrf
-                        <textarea name="notsatisfiedreason" required maxlength="400" class="form-control"  rows="5" id="notsatisfiedreason"></textarea>
+                        <textarea name="notsatisfiedreason" required  class="form-control"  rows="5" id="notsatisfiedreason"></textarea>
                         <br>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -1494,11 +1507,35 @@ PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         <div style="padding-left:  800px;">
         <div class="row">
                  <div class="row">
-                    <form method="POST" action="{{ route('workorder.iowapprove', [$wo->id]) }}">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Approve</button>
-                    </form>
+                     {{-- pop up --}}
+
+                        <button data-toggle="modal" data-target="#iowapprovalcomments" class="btn btn-primary">Approve</button>
+
                      </div>
+                     <div class="modal fade" id="iowapprovalcomments" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"> Works order Approval</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Comments.</p>
+                                    <form method="POST" action="{{ route('workorder.iowapprove', [$wo->id]) }}">
+                                        @csrf
+                                        <textarea name="comment" required  class="form-control"  rows="5" id="notsatisfiedreason"></textarea>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary">Approve</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                      &nbsp;&nbsp;&nbsp;&nbsp;
                      <div class="col">
                      <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#iowapproval">Not satisfied</button>

@@ -53,7 +53,7 @@
 
                     <button type="submit" class="btn btn-primary">Save
                     </button>
-                    <a href="/Manage/department" class="btn btn-danger">Cancel
+                    <a href="{{route('dipartment.manage')}}" class="btn btn-danger">Cancel
                     </a>
                 </form>
             </div>

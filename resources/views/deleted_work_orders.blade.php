@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 @section('body')
 <?php use App\workorder; ?>
@@ -83,7 +83,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Reason for rejecting work order</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Reason for rejecting works order</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

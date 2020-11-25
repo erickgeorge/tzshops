@@ -99,7 +99,7 @@
                 </tbody>
             </table>
         @else
-            <h1 class="text-center" style="margin-top: 150px">Currently no room reported for work order.</h1>
+            <h1 class="text-center" style="margin-top: 150px">Currently no room reported for works order.</h1>
         @endif
     </div>
     </div>

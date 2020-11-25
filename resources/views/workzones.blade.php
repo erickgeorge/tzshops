@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work Zones
+    works Zones
     @endSection
 
 @section('body')

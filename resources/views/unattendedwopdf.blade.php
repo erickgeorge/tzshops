@@ -31,12 +31,13 @@ tr:nth-child(even) {
 
     <tr>
                     <th>#</th>
+                    <th>ID</th>
                     <th>Details</th>
                     <th>Type</th>
                     <th>From</th>
-                    <th>Status</th>
 
                     <th>Location</th>
+                    <th>Date Created</th>
 
 
     </tr>
@@ -50,29 +51,11 @@ tr:nth-child(even) {
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{ $i }}</th>
+                            <td> {{$work->woCode}} </td>
                             <td id="wo-details">{{ $work->details }}</td>
                             <td>{{ $work->problem_type }}</td>
                             <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
-                            @if($work->status == -1)
-                                <td><span class="badge badge-warning">new</span></td>
-                            @elseif($work->status == 1)
-                                <td><span class="badge badge-success">accepted</span></td>
 
-              @elseif($work->status == 2)
-                                <td><span class="badge badge-success">CLOSED</span></td>
-              @elseif($work->status == 3)
-                                <td><span class="badge badge-info">technician assigned</span></td>
-              @elseif($work->status == 4)
-                                <td><span class="badge badge-info">transportation stage</span></td>
-              @elseif($work->status == 5)
-                              <td><span class="badge badge-info">pre-implementation</span></td>
-              @elseif($work->status == 6)
-                              <td><span class="badge badge-info">post=implementation</span></td>
-              @elseif($work->status == 7)
-                              <td><span class="badge badge-info">material requested</span></td>
-              @else
-                                <td><span class="badge badge-success">procurement stage</span></td>
-                            @endif
 
                             <td>
 
@@ -83,6 +66,8 @@ tr:nth-child(even) {
                                 {{ $work->location }}
                             @endif
                             </td>
+                                <td>{{ date('d/m/Y', strtotime($work->created_at)) }} </td>
+
 
                                 @endif
                         </tr>

@@ -74,7 +74,7 @@ Add New Procured Material
 <script>
     // ARRAY FOR HEADER.
     var arrHead = new Array();
-    arrHead = ['','Material ID', 'Description','Type', 'Unit Measure','Total','Price', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+    arrHead = ['','Material ID', 'Description','Type', 'Unit Measure','Total','Price(Single)','Total Price' ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
 
     // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
     // ADD THE TABLE TO YOUR WEB PAGE.
@@ -165,10 +165,18 @@ Add New Procured Material
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('min', '1');
                     ele.setAttribute('style','width:90px;');
+                    ele.setAttribute('onChange','total_click1(this.id)');
                 } else
                  if(c==6){
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('min', '1');
+                    ele.setAttribute('style','width:120px;');
+                    ele.setAttribute('onChange','price_click1(this.id)');
+                } else
+                if(c==7){
+                    ele.setAttribute('type', 'number');
+                    ele.setAttribute('min', '1');
+                    ele.setAttribute('onChange', 'p_click1(this.id)');
                     ele.setAttribute('style','width:120px;');
                 }
                 else{
@@ -186,7 +194,7 @@ Add New Procured Material
 
                 ele.setAttribute('required', '');
                 ele.setAttribute('class', 'form-control');
-                ele.setAttribute('name',c);
+
                 if(c==2){
                     ele.setAttribute('onClick','reply_click1(this.id)');
                 }
@@ -284,12 +292,20 @@ Add New Procured Material
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('min', '1');
                     ele.setAttribute('style','width:90px;');
+                    ele.setAttribute('onChange','total_click1(this.id)');
                 } else
                  if(c==6){
                     ele.setAttribute('type', 'number');
                     ele.setAttribute('min', '1');
                     ele.setAttribute('style','width:120px;');
-                }
+                    ele.setAttribute('onChange','price_click1(this.id)');
+                } else
+                if(c==7){
+                    ele.setAttribute('type', 'number');
+                    ele.setAttribute('min', '1');
+                    ele.setAttribute('onChange', 'p_click1(this.id)');
+                    ele.setAttribute('style','width:120px;');
+                         }
                 else{
                     ele.setAttribute('type', 'text');
                 }
@@ -305,7 +321,6 @@ Add New Procured Material
 
                 ele.setAttribute('required', '');
                 ele.setAttribute('class', 'form-control');
-                ele.setAttribute('name',c);
                 if(c==2){
                     ele.setAttribute('onClick','reply_click1(this.id)');
                 }
@@ -358,7 +373,7 @@ Add New Procured Material
         var empTab = document.getElementById('MatForm');
     var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
-    --value; --value; --value; --value; --value; --value;
+    --value; --value; --value; --value; --value; --value; --value;
     document.getElementById('totalmaterials').value = value;
         empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);
 
@@ -398,10 +413,18 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
 
 
 </script>
+
 <script>
+    var nextitem = '';
+    //  auto trigger starts here
 function reply_click(clicked_id)
   {
       var clicked = clicked_id;
+      console.log(clicked);
+
+
+        nextitem = clicked;
+        console.log(++nextitem);
 
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -428,7 +451,7 @@ function autocomplete(inp, arr) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML = "<strong id='"+i+"'>" + arr[i].substr(0, val.length) + "</strong>";
           b.innerHTML += arr[i].substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -436,6 +459,45 @@ function autocomplete(inp, arr) {
           b.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
+              console.log(inp.value);
+
+             var selectedsection = inp.value;
+              console.log(selectedsection);
+
+              $.ajax({
+            method: 'GET',
+            url: 'descmaterials/',
+            data: { id: selectedsection }
+        })
+        .done(function(msg) {
+            var object = JSON.parse(JSON.stringify(msg['materials']));
+            console.log(object);
+
+            var option = document.getElementById(nextitem);
+            for (var i = 0; i < object.length; i++) {
+                console.log(object[i].description);
+            option.value = object[i].description;
+            }
+
+            $('#'+ ++nextitem).empty();
+            var optionf = document.getElementById(nextitem);
+            for (var j = 0; j < object.length; j++) {
+               var optionf = document.createElement('option');
+            optionf.innerHTML = object[j].type;
+            optionf.value = object[j].type;
+            console.log(object[j].Type);
+            document.getElementById(nextitem).appendChild(optionf);
+            }
+
+            var optiong = document.getElementById(++nextitem);
+            for (var k = 0; k < object.length; k++) {
+                console.log(object[k].brand);
+            optiong.value = object[k].brand;
+            }
+        });
+
+
+
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
               closeAllLists();
@@ -515,6 +577,11 @@ autocomplete(document.getElementById(clicked), materials);
 function reply_click1(clicked_id)
   {
       var clicked = clicked_id;
+      console.log(clicked);
+
+
+nextitem = clicked;
+console.log(--nextitem);
 
 function autocomplete1(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -541,7 +608,7 @@ function autocomplete1(inp, arr) {
           /*create a DIV element for each matching element:*/
           y = document.createElement("DIV");
           /*make the matching letters bold:*/
-          y.innerHTML = "<strong>" + arr[z].substr(0, bal.length) + "</strong>";
+          y.innerHTML = "<strong id='"+z+"'>" + arr[z].substr(0, bal.length) + "</strong>";
           y.innerHTML += arr[z].substr(bal.length);
           /*insert a input field that will hold the current array item's value:*/
           y.innerHTML += "<input type='hidden' value='" + arr[z] + "'>";
@@ -549,6 +616,45 @@ function autocomplete1(inp, arr) {
           y.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
+              console.log(inp.value);
+
+             var selectedsection = inp.value;
+              console.log(selectedsection);
+
+              $.ajax({
+            method: 'GET',
+            url: 'namematerials/',
+            data: { id: selectedsection },
+        })
+        .done(function(msg) {
+            var object = JSON.parse(JSON.stringify(msg['name']));
+            console.log(object);
+
+            var option = document.getElementById(nextitem);
+            for (var i = 0; i < object.length; i++) {
+            option.value = object[i].name;
+            }
+
+            ++nextitem;
+
+            $('#'+ ++nextitem).empty();
+            var optionf = document.getElementById(nextitem);
+            for (var j = 0; j < object.length; j++) {
+               var optionf = document.createElement('option');
+            optionf.innerHTML = object[j].type;
+            optionf.value = object[j].type;
+            console.log(object[j].Type);
+            document.getElementById(nextitem).appendChild(optionf);
+            }
+
+            var optiong = document.getElementById(++nextitem);
+            for (var k = 0; k < object.length; k++) {
+                console.log(object[k].brand);
+            optiong.value = object[k].brand;
+            }
+
+        });
+
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
               closeAllLists();
@@ -585,7 +691,7 @@ function autocomplete1(inp, arr) {
   function addActive(s) {
     /*a function to classify an item as "active":*/
     if (!s) return false;
-    /*start by removing the "active" class on all items:*/
+    /*start by removing the "active" class on alllift shaft items:*/
     removeActive(s);
     if (currentFocus >= s.length) currentFocus = 0;
     if (currentFocus < 0) currentFocus = (s.length - 1);
@@ -622,5 +728,107 @@ var items = [@foreach($description as $mater)"{{ $mater->description }}",@endfor
 autocomplete1(document.getElementById(clicked), items);
 }
 </script>
+    <script>
+        function total_click1(this_id)
+{
+    var clickedd = this_id;
 
+    var total1 = clickedd;
+    var price1 = ++clickedd;
+    var next = ++clickedd;
+
+    console.log(total1);
+    console.log(price1);
+    console.log(next);
+
+    var total = document.getElementById(total1).value;
+    var price = document.getElementById(price1).value;
+
+    var inc = '';
+    if((total!='')&&(price!=''))
+    {
+        inc = total*price;
+    }
+
+    console.log(total);
+    console.log(price);
+    console.log(inc);
+
+    var option = document.getElementById(next);
+
+    option.value = inc;
+
+
+
+}
+
+function price_click1(this_id)
+{
+    var clickedd = this_id;
+
+    var price1 = clickedd;
+    var total1 = --clickedd;
+    var next = ++clickedd;
+    next = ++next;
+
+    console.log(total1);
+    console.log(price1);
+    console.log(next);
+
+    var total = document.getElementById(total1).value;
+    var price = document.getElementById(price1).value;
+
+    var inc = '';
+    if((total!='')&&(price!=''))
+    {
+        inc = total*price;
+    }
+
+    console.log(total);
+    console.log(price);
+    console.log(inc);
+
+var option = document.getElementById(next);
+
+option.value = inc;
+
+
+
+}
+
+
+function p_click1(this_id)
+{
+    var clickedd = this_id;
+
+    var next = clickedd;
+    var price1 = --clickedd;
+    var total1 = --clickedd;
+
+
+    console.log(total1);
+    console.log(price1);
+    console.log(next);
+
+    var total = document.getElementById(total1).value;
+    var price = document.getElementById(price1).value;
+
+    var inc = '';
+    if((total!='')&&(price!=''))
+    {
+        inc = total*price;
+    }
+
+    console.log(total);
+    console.log(price);
+    console.log(inc);
+
+var option = document.getElementById(next);
+
+option.value = inc;
+
+
+
+}
+    </script>
 @endsection

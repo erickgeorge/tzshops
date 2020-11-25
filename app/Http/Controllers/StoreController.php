@@ -17,6 +17,7 @@ use App\Storehistory;
 use App\zoneinspector;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use App\workordersection;
 
 class StoreController extends Controller
 {
@@ -656,6 +657,25 @@ class StoreController extends Controller
        $matir = WorkOrder::where('id',$id)->first();
        $matir->problem_type = $request['p_type'];
        $matir->redirectwo = 1 ;
+
+       $check_if = workordersection::where('section_name',$request['p_type'])->get();
+            $code = '';
+        if (count($check_if)>0) {
+            foreach($check_if as $item)
+            {
+                $code = $check_if->abbreviation;
+            }
+            $code = $code;
+        }else {
+            $code = 'OT';
+        }
+       $date = date('d/m/Y');
+       $lastThere = WorkOrder::where('problem_type',$request['p_type'])->whereDate('created_at',date('Y-m-d'))->get();
+       $lastThere = count($lastThere)+1;
+       $finalCode = $code.'/'.$date.'/'.$lastThere;
+
+       $matir->woCode =  $finalCode;
+
        //$matir->details = $request['details'];
        $matir->save();
 
@@ -883,6 +903,9 @@ public function deletematerial($id , $woid)
 
            $matrialdelete=WorkOrderMaterial::where('id', $id)->first();
            $matrialdelete->delete();
+
+
+
            return redirect()->back()->with(['message' => 'Respective material deleted successfully']);
        }
 
@@ -953,7 +976,7 @@ public function deletematerial($id , $woid)
     public function procuredmaterialsadding(Request $request)
     {
         $y=1;
-        $totmat=$request['totalinputs']/6;
+        $totmat=$request['totalinputs']/7;
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
@@ -978,6 +1001,8 @@ public function deletematerial($id , $woid)
               $z=$z+1;
             $procure_material->price_tag = $request[$z];
 
+            $z=$z+1;
+            $procure_material->totalprice = $request[$z];
 
             $procure_material->tag_ = $tag; //differentiating from different inputs
             $procure_material->procured_by = auth()->user()->id;
@@ -1057,6 +1082,7 @@ return view('procuredmaterial', [ 'notifications' => $notifications, 'role' => $
       where('name','LIKE','%'.$check_material->material_name.'%')->
       where('description','LIKE','%'.$check_material->material_description.'%')->
       where('brand','LIKE','%'.$check_material->unit_measure.'%')->
+    //   uje uchange hapa itafute spaces fofo;
       where('type','LIKE','%'.$check_material->type.'%')->get();
 
       if(count($fetch_store)<1)
@@ -1172,12 +1198,30 @@ return view('materialEntry', [ 'notifications' => $notifications, 'role' => $rol
 
 public function getdescriptionMAT(Request $request)
 {
-    return response()->json(['description' => Material::where('description','like',$request->get('id'))->orderby('description','ASC')->get()]);
+    return response()->json(['description' => Material::where('description','like','%'.$request->get('id').'%')->orderby('description','ASC')->get()]);
 
 }
 
-public function getbrandMAT(Request $request)
+
+
+
+public function descmaterials(Request $request)
 {
+//     $char =  Material::select('description')->where('name','like',$request->get('id'))->orderby('description','ASC')->value('description');
+// echo $char;
+
+return response()->json(['materials' => Material::where('description','like',$request->get('id'))->orderby('description','ASC')->get()]);
+
+
+}
+
+
+
+public function namematerials(Request $request)
+{
+//     $char =  Material::select('name')->where('description','like',$request->get('id'))->orderby('description','ASC')->value('name');
+// echo $char;
+return response()->json(['name' => Material::where('description','like',$request->get('id'))->orderby('description','ASC')->get()]);
 
 }
 

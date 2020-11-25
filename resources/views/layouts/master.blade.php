@@ -95,7 +95,7 @@
              $notifications = Notification::where('status','<>',10)->where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
 
-        // closing work order by default
+        // closing works order by default
         $woclo = WorkOrder::where('status',2)->get();
         $leohii = Carbon::now();
 
@@ -1900,7 +1900,7 @@ for (i = 0; i < dropdown.length; i++) {
         console.log('ID: ' + selecteddep);
         $.ajax({
                 method: 'GET',
-                url: 'descriptionMAT',
+                url: 'getnameMAT',
                 data: { id: selecteddep }
             })
             .done(function(msg) {
@@ -1916,6 +1916,8 @@ for (i = 0; i < dropdown.length; i++) {
                     var option = document.createElement('option');
                     option.innerHTML = object[i].description;
                     option.value = object[i].id;
+                    console.log(object[i].description);
+
                     document.getElementById('descriptionMAT').appendChild(option);
                 }
                 //
@@ -1928,6 +1930,8 @@ for (i = 0; i < dropdown.length; i++) {
                     var option = document.createElement('option');
                     option.innerHTML = object[i].brand;
                     option.value = object[i].id;
+                    console.log(object[i].brand);
+
                     document.getElementById('brandMAT').appendChild(option);
                 }
                 //
@@ -1940,6 +1944,8 @@ for (i = 0; i < dropdown.length; i++) {
                     var option = document.createElement('option');
                     option.innerHTML = object[i].type;
                     option.value = object[i].id;
+                    console.log(object[i].type);
+
                     document.getElementById('typeMAT').appendChild(option);
                 }
                             });
@@ -1967,6 +1973,8 @@ for (i = 0; i < dropdown.length; i++) {
                     var option = document.createElement('option');
                     option.innerHTML = object[i].name;
                     option.value = object[i].id;
+                    console.log(object[i].name);
+
                     document.getElementById('nameMAT').appendChild(option);
                 }
                 //
@@ -1979,6 +1987,8 @@ for (i = 0; i < dropdown.length; i++) {
                     var option = document.createElement('option');
                     option.innerHTML = object[i].brand;
                     option.value = object[i].id;
+                    console.log(object[i].brand);
+
                     document.getElementById('brandMAT').appendChild(option);
                 }
                 //
@@ -1991,6 +2001,8 @@ for (i = 0; i < dropdown.length; i++) {
                     var option = document.createElement('option');
                     option.innerHTML = object[i].type;
                     option.value = object[i].id;
+                    console.log(object[i].type);
+
                     document.getElementById('typeMAT').appendChild(option);
                 }
                             });
@@ -1999,6 +2011,8 @@ for (i = 0; i < dropdown.length; i++) {
 
 
     </script>
+
 {{-- store refresh --}}
+
 </body>
 </html>

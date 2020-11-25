@@ -94,7 +94,7 @@ class NotesController extends Controller
   }
 }
 if($_GET['problem_type']!= ''){$probleme = 'All '.$_GET['problem_type'];}else{$probleme='All ';}
-if($_GET['userid']!=''){$usere = ' Works Orders From '.$username;}else{$usere =' WorkOrders ';}
+if($_GET['userid']!=''){$usere = ' Works Orders From '.$username;}else{$usere =' Works Orders ';}
 if($_GET['start']!=''){$starte = ' <date> from'.$_GET['start'];}else{$starte ='<date>';}
 if($_GET['end']!=''){$ende = ' to '.$_GET['end'].'</date>';}else{$ende ='</date>';}
 if($_GET['status']!= ''){$statuse = '<br> status :'.$statusvalue;} else{$statuse ='';}
@@ -1343,7 +1343,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
-     
+
          if($request['start'] and $request['end']){
 
 
@@ -1408,7 +1408,7 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
                     'compa'=>$company,
              'crosscheckassessmmentactivitygroupbyarea' => landcrosschecklandassessmentactivity::where('company', $tenders)->whereBetween('month', [$from, $to])->select(DB::raw('area'))
                     ->groupBy('area')->get()
-              
+
               ];
           }
 

@@ -295,7 +295,7 @@ $(document).ready(function(){
                <div id="divmanual">
                <select  required style="width: 500px;" class="custom-select" name="zone" id="zone">
 	                  @foreach($zone as $zone)
-                       <option  value="{{$zone->zonename}}"  ><?php echo strtoupper( $zone->zonename ); ?></option>
+                       <option  value="{{$zone->zonename}}"  ><?php echo ucwords( $zone->zonename ); ?></option>
                       @endforeach
 
 	           </select>
@@ -352,7 +352,7 @@ $(document).ready(function(){
 	 </div>
 	</div>
 	</div>
-
+    <br>
 
 
 </div>

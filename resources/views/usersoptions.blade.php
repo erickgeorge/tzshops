@@ -743,10 +743,14 @@ use App\Section;
 
   <div class="row">
      <div class="col-md-3">
+      @if($role['user_role']['role_id'] == 1)
     <a style="margin-left: 2%;" href="{{ route('createUserView') }}">  <button  style="margin-bottom: 20px" type="button" class="btn btn-primary">Add New User</button></a>
+    @endif
   </div>
   <div class="col-md-6">
+    @if($role['user_role']['role_id'] == 1)
 <a href="{{route('deactivatedusers')}}" class="btn btn-info">Deactivated Users</a>
+@endif
 
 </div>
 @if(!$display_users->isEmpty())

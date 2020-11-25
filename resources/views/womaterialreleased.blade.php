@@ -9,7 +9,7 @@
     <br>
     <div class="row container-fluid" >
         <div class="col-lg-12">
-            <h5 style=" "  ><b  >Material(s) Released to Work Orders</b></h5>
+            <h5 style=" "  ><b  >Material(s) Released to Works Orders</b></h5>
         </div>
 
     </div>

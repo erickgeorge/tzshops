@@ -1,7 +1,7 @@
 @extends('layouts.land')
 
 @section('title')
-    Create Work Orders
+    Create Works Orders
     @endSection
 
 @section('body')

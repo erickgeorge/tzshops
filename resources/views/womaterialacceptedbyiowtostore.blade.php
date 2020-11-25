@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Work order that needs material
+    Works order that needs material
     @endSection
 
 @section('body')

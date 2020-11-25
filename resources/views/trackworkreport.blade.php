@@ -367,6 +367,7 @@ td, th {
 
   <th>Type</th>
    <th>Quantity</th>
+   <th>Unit of Measure</th>
    <!--<th>IoW</th>-->
    <th>Approved By</th>
     <th>Status</th>
@@ -385,7 +386,7 @@ td, th {
 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-  <!-- <td>{{$matform['iowzone']->name }}</td>-->
+  <td>{{$matform['material']->brand }}</td>
        <td>
        @if($matform->accepted_by == NULL)
       <span class="badge badge-warning">Not accepted Yet.</span>
@@ -448,6 +449,7 @@ td, th {
     <th>Material Description</th>
     <th>Type</th>
     <th>Quantity</th>
+    <th>Unit of Measure</th>
     <th>Status</th>
     <th>Date Requested</th>
     <th>Date Updated</th>
@@ -464,6 +466,8 @@ td, th {
    <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
+   <td>{{$matform['material']->brand }}</td>
+
   <td >@if($matform->status==0)<span> Waiting for Approval </span> @elseif($matform->status== 1)<span >Approved by IoW </span> @elseif($matform->status== 2) <span>Released from Store </span> @elseif($matform->status==20) <span>Requested to store</span> @elseif($matform->status==17) <span>Some of material rejected </span> @elseif($matform->status== 5)<span>Material on Procurement Stage</span> @elseif($matform->status== 3)<span>Material taken from store</span>  @elseif($matform->status == -1)<span >
     Rejected by IOW</span>@elseif($matform->status== 15)<span>Material Purchased</span>
        @endif</td>
@@ -518,6 +522,7 @@ td, th {
     <th>Material Description</th>
      <th>Type</th>
      <th>Quantity</th>
+     <th>Unit of Measure</th>
        </tr>
   </thead>
 
@@ -531,6 +536,8 @@ td, th {
    <td>{{$matform['material']->description }}</td>
    <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
+   <td>{{$matform['material']->brand }}</td>
+
   </tr>
 
   @endforeach

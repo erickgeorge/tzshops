@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    work orders
+    works orders
     @endSection
 
 @section('body')

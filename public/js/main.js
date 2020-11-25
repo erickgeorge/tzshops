@@ -84,7 +84,7 @@ function getDepartments() {
         {
           sendSelectedLink.show();
 
-            
+
         }else
         {
           sendSelectedLink.hide();
@@ -144,6 +144,10 @@ function getSections() {
             }
         });
 }
+
+
+
+
 
 var selectedLoc = null;
 var selectedArea = null;

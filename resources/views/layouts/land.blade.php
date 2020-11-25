@@ -90,7 +90,7 @@
           $notifications = Notification::where('status','<>',10)->where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
 
 
-        // closing work order by default
+        // closing works order by default
         $woclo = WorkOrder::where('status',2)->get();
         $leohii = Carbon::now();
 

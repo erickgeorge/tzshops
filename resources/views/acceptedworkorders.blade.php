@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Accepted Work Orders
+    Accepted Works Orders
     @endSection
 <?php
 	use App\iowzonelocation;
@@ -72,7 +72,7 @@
         </div>
            <!-- <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected work orders
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected works orders
                 </button>
             </a>
         </div> -->
@@ -373,7 +373,7 @@ foreach($userwithid as $userwithid)
                                 @endif
                            @elseif($work->status == 52)
 
-                              <td><span class="badge badge-info">IoW is checking for Work Order</span>
+                              <td><span class="badge badge-info">IoW is checking for Works Order</span>
                                   <br>
                                 @if($work->emergency == 1)
                                 <span class="badge badge-warning">Emergency</span></td>
@@ -688,7 +688,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended work order.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended works order.</h5>
                     <div></div>
 
                     <button style="text-transform: capitalize;" type="button" class="close" data-dismiss="modal" aria-label="Close">

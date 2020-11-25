@@ -37,17 +37,16 @@ class WorkOrderController extends Controller
         $request->validate([
             'details' => 'required',
         ]);
+        $check_if = workordersection::where('section_name',$request['p_type'])->get();
             $code = '';
-        if ($request['p_type'] == 'Carpentry') {
-            $code = 'CA';
-        } else if ($request['p_type'] == 'Electrical') {
-            $code = 'EL';
-        } else if ($request['p_type'] == 'Mechanical') {
-            $code = 'ME';
-        } else if ($request['p_type'] == 'Plumbing') {
-            $code = 'PL';
-        } else{
-            $code = 'MA';
+        if (count($check_if)>0) {
+            foreach($check_if as $item)
+            {
+                $code = $check_if->abbreviation;
+            }
+            $code = $code;
+        }else {
+            $code = 'OT';
         }
 
         $date = date('d/m/Y');
@@ -1136,7 +1135,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
 
-
+//
 
      public function redirectToSecretary($id)
     {
@@ -1145,6 +1144,16 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $wo = WorkOrder::where('id', $id)->first();
         $wo->problem_type = 'Others';
         $wo->redirectedhos = auth()->user()->id;
+
+
+
+        $code = 'OT';
+        $date = date('d/m/Y');
+        $lastThere = WorkOrder::where('problem_type','Others')->whereDate('created_at',date('Y-m-d'))->get();
+        $lastThere = count($lastThere)+1;
+        $finalCode = $code.'/'.$date.'/'.$lastThere;
+
+        $wo->woCode =  $finalCode;
         $wo->save();
         return redirect()->route('work_order')->with([
             'role' => $role,
@@ -1326,7 +1335,7 @@ session::flash('message', ' Your workorder have been closed successfully');
 
 
 
-    public function WOapproveIoW($id)
+    public function WOapproveIoW(Request $request, $id)
     {
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
@@ -1334,6 +1343,7 @@ session::flash('message', ' Your workorder have been closed successfully');
         $wo = WorkOrder::find($id);
         $wo->status = 2;
         $wo->iowclose = auth()->user()->id;
+        $wo->iowcomment = $request['comment'];
         $wo->iowclosedate = Carbon::now();
        //i updated iow to bypass hos to client closing works order.
         $wo->save();

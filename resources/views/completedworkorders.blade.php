@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Completed Work Orders
+    Completed Works Orders
     @endSection
 <?php
 	use App\iowzonelocation;
@@ -74,7 +74,7 @@
         </div>
            <!-- <div class="col">
             <a href="{{url('rejected/work/orders')}} ">
-                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected work orders
+                <button style="margin-bottom: 20px" type="button" class="btn btn-danger">rejected works orders
                 </button>
             </a>
         </div> -->
@@ -333,8 +333,15 @@ foreach($userwithid as $userwithid)
                             <?php $i++ ?>
                             <tr>
                                 <th scope="row">{{ $i }}</th>
-                                <td id="wo-id">00{{ $work->id }}</td>
-                                <td id="wo-details">{{ $work->details }}</td>
+                                <td id="wo-id">{{ $work->woCode }}</td>
+                                <td id="wo-details">
+                                    <?php if (strlen($work->details) > 20) {
+                                        echo substr($work->details, 0, 20); echo "...";
+                                       }
+                                         else{
+                                           echo $work->details;
+                                         } ?>
+                                </td>
                                 <td>{{ ucwords(strtolower($work->problem_type)) }}</td>
                                 <td>{{ $work['user']->fname.' '.$work['user']->lname }}</td>
 
@@ -546,7 +553,7 @@ foreach($userwithid as $userwithid)
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended work order.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended works order.</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

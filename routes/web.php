@@ -128,7 +128,7 @@ Route::post('savesign','UserController@savesign')->name('savesign')->middleware(
 ///////////////////////////////////////////////////////////////
 
 Route::post('redirect/workorder/{id}', 'WorkOrderController@redirectToSecretary')->name('to.secretary.workorder')->middleware('auth');
-Route::get('direct_torate/{id}', 'UserController@getdepedit')->name('get_depa')->middleware('auth');
+Route::get('direct_torate', 'UserController@getdepedit')->name('get_depa')->middleware('auth');
 Route::get('departments', 'UserController@getDepartments')->name('departments.view')->middleware('auth');
 Route::get('companytender', 'UserController@getcompany')->name('companyies.view')->middleware('auth');
 Route::get('areas', 'UserController@getAreas')->name('areas.view')->middleware('auth');
@@ -997,11 +997,11 @@ Route::get('getnameMAT','StoreController@getnameMAT')->name('getnameMAT')->middl
 Route::get('getdescriptionMAT','StoreController@getdescriptionMAT')->name('getdescriptionMAT')->middleware('auth');
 Route::get('getbrandMAT','StoreController@getbrandMAT')->name('getbrandMAT')->middleware('auth');
 
-
-
+Route::get('descmaterials','StoreController@descmaterials')->name('descmaterials')->middleware('auth');
+Route::get('namematerials','StoreController@namematerials')->name('namematerials')->middleware('auth');
 
 Route::get('readcomments','MinuteController@readcomments')->name('readcomments')->middleware('auth');
 Route::get('sendcomments','MinuteController@sendcomments')->name('sendcomments')->middleware('auth');
 Route::post('sendcomment','MinuteController@sendcomment')->name('sendcomment')->middleware('auth');
-
+Route::get('depDirects','UserController@depDirects')->name('depDirects')->middleware('auth');
 //

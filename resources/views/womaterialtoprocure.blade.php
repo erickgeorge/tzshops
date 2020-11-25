@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Work order with missing material
+    Works order with missing material
     @endSection
 
 @section('body')

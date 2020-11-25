@@ -77,10 +77,10 @@ class UserController extends Controller
 
 
         if ($request['type'] == 'Warden') {
-         
+
          if (($request['hostel'] == 'Mabibo')||($request['hostel'] == 'Magufuli')){
             $user->hostel = $request['hostel'];
-            $user->block = $request['block']; 
+            $user->block = $request['block'];
 
             $request->validate([
             'block' => 'required',
@@ -152,7 +152,7 @@ class UserController extends Controller
 
 
 
-    public function createuseriow(Request $request )
+    public function createuseriow(Request $request, $id)
     {
         $iow=User::where('id', $id)->first();
         $iow->zone = $request['zone'];
@@ -197,11 +197,17 @@ class UserController extends Controller
 
     public function getDepartments(Request $request)
     {
-        return response()->json(['departments' => Department::where('directorate_id', $request->get('id'))->orderby('name','ASC')->get()]);
+        return response()->json(['departments' => Department::where('directorate_id','like' ,'%'.$request->get('id').'%')->orderby('name','ASC')->get()]);
     }
 
 
-
+public function depDirects(Request $request)
+{
+    //     $char =  Material::select('name')->where('description','like',$request->get('id'))->orderby('description','ASC')->value('name');
+// echo $char;
+    dd($request->get('id'));
+    //return response()->json(['dept'=>Department::where('directorate_id',$request->get('id'))->get()]);
+}
 
     public function getAreas(Request $request)
     {
@@ -240,7 +246,7 @@ class UserController extends Controller
 
 
 
-    public function getdepedit(Request $request , $id)
+    public function getdepedit(Request $request)
     {
         return response()->json(['direct_torate' => Department::where('directorate_id', $request->get('id'))->orderby('name','ASC')->get()]);
     }
@@ -460,7 +466,7 @@ class UserController extends Controller
 
 
         $user = Auth::user();
-       
+
         $cover = $request->file('Image');
         $extension = $cover->getClientOriginalExtension();
         Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));

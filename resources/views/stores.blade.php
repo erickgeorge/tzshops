@@ -75,7 +75,7 @@ use App\Material;?>
   <div class="modal-body">
         <div class="row">
             <div class="col">
-                <select name="name" id="nameMAT" onchange="getnameMAT()"  class="form-control mr-sm-2">
+                <select name="name" id="nameMAT" onchange="getnameMAT(this.id)"  class="form-control mr-sm-2">
                     <option selected="selected" value="">Item ID</option>
                     <?php $name = Material::select('name')->distinct()->get();
                     foreach ($name as $named) {
@@ -180,5 +180,15 @@ use App\Material;?>
         </table>
     </div>
 </div>
+<script>
+    function getnameMAT(this_id)
+    {
+        var clicked = this_id;
+      console.log(clicked);
 
+
+        nextitem = document.getElementById('descriptionMAT');
+        console.log(nextitem);
+    }
+</script>
     @endSection

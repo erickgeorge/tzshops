@@ -71,7 +71,8 @@
                     <th>Type</th>
                     <th>Total</th>
                     <th>Unit Measure</th>
-                    <th>Price</th>
+                    <th>Price(Single)</th>
+                    <th>Total Price</th>
 
                 </tr>
                 </thead>
@@ -89,7 +90,8 @@
                             <td>{{ $material->type }}</td>
                             <td> {{ number_format($material->total_input) }}</td>
                             <td>{{ $material->unit_measure }}</td>
- 							<td>{{ number_format($material->price_tag) }}</td>
+                             <td>{{ number_format($material->price_tag) }}</td>
+                             <td> {{number_format($material->totalprice)}} </td>
 
                         </tr>
                         @endforeach

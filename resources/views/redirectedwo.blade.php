@@ -645,7 +645,7 @@ $diff = $date->diffInDays($now);  echo $diff." Day(s)"; ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended work order.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Reason as why Client not Satisfied with attended works order.</h5>
                     <div></div>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
