@@ -342,10 +342,11 @@ class AssetsController extends Controller
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-            if(request()->has('start'))  { //date filter
+            if(request()->has('start'))   { //date filter
 
-                $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
-                $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
+
+        $from=request('start');
+        $to=request('end');
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
@@ -361,19 +362,19 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-             'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+             'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->where('terminat',1)->orderby('created_at','DESC')->get(),
 
-             'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+             'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->where('terminat',1)->orderby('created_at','DESC')->get(),
 
-            'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+            'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->where('terminat',1)->orderby('created_at','DESC')->get(),
 
 
-             'assessmmentcompany' => company::select(DB::raw('company_name'))
+             'assessmmentcompany' => company::where('terminat',1)->select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),
-            'assessmmenttender' => company::select(DB::raw('tender'))
+            'assessmmenttender' => company::where('terminat',1)->select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
-            'assessmmentareas' => company::select(DB::raw('area'))
+            'assessmmentareas' => company::where('terminat',1)->select(DB::raw('area'))
                     ->groupBy('area')->get(),
 
           ]);
@@ -387,18 +388,18 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-             'cleangcompanylandscaping' => company::where('type','Exterior')->orderby('created_at','DESC')->get(),
+             'cleangcompanylandscaping' => company::where('terminat',1)->where('type','Exterior')->orderby('created_at','DESC')->get(),
 
-             'cleangcompanyusab' => company::where('type','Interior')->orderby('created_at','DESC')->get(),
+             'cleangcompanyusab' => company::where('terminat',1)->where('type','Interior')->orderby('created_at','DESC')->get(),
 
-             'cleangcompanyadmin' => company::orderby('created_at','DESC')->get(),
+             'cleangcompanyadmin' => company::where('terminat',1)->orderby('created_at','DESC')->get(),
 
-             'assessmmentcompany' => company::select(DB::raw('company_name'))
+             'assessmmentcompany' => company::where('terminat',1)->select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),
-            'assessmmenttender' => company::select(DB::raw('tender'))
+            'assessmmenttender' => company::where('terminat',1)->select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
-            'assessmmentareas' => company::select(DB::raw('area'))
+            'assessmmentareas' => company::where('terminat',1)->select(DB::raw('area'))
                     ->groupBy('area')->get(),
 
           ]);
@@ -414,12 +415,11 @@ class AssetsController extends Controller
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-            if(request()->has('start'))  { //date filter
+            if(request()->has('start'))   { //date filter
 
 
-
-                $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
-                $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
+        $from=request('start');
+        $to=request('end');
 
 
         $nextday = date("Y-m-d", strtotime("$to +1 day"));
@@ -489,7 +489,7 @@ class AssetsController extends Controller
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-            if(request()->has('start'))  { //date filter
+            if(request()->has('start'))   { //date filter
 
 
         $from=request('start');
@@ -500,9 +500,8 @@ class AssetsController extends Controller
 
         $to=$nextday;
         if(request('start')>request('end')){
-        $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
-        $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
-
+            $to=request('start');
+        $from=request('end');
         }// start> end
 
 
@@ -569,7 +568,6 @@ class AssetsController extends Controller
 
          }
 
-
         public function cleaningcompanynew(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -578,12 +576,10 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-             'cleangcompany' => tendernumber::all()
+             'cleangcompany' => tendernumber::where('terminat',1)->get()
 
           ]);
          }
-
-
 
         public function cleaningcompanyreport(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
@@ -717,6 +713,29 @@ class AssetsController extends Controller
 
         return redirect()->route('register.house')->with(['message' => 'House Edited successfully']);
     }
+
+
+
+      public function terminatecompany(Request $request)
+    {
+           $p=$request['terminate_id'];
+           $company = tendernumber::where('id',$p)->first();
+           $company->terminat = 2;
+           $company->ter_reason = $request['reason'];
+
+           $term = company::where('tender',$company->tender)->get();
+           foreach ($term as $t) {
+
+           $terminate = company::where('id', $t->id)->first();
+           $terminate->terminat = 2;
+           $terminate->ter_reason = $request['reason'];
+           $terminate->save();
+       }
+
+           $company->save();
+
+             return redirect()->back()->with(['message' => 'Company Terminated Successfully']);
+         }
 
 
 

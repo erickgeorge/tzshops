@@ -636,7 +636,7 @@ Companies
                     <h5 class="modal-title" id="exampleModalLabel">Terminate Contract</h5>
                 </div>
 
-                <form method="POST" action="edit/company" class="col-md-6">
+                <form method="POST" action="terminate/company" class="col-md-6">
                     <div class="modal-body">
 
                         @csrf
@@ -644,8 +644,8 @@ Companies
                             <label for="name_of_house">Termination Reason </label>
                             <textarea style="color: black;width:430px" type="text" required class="form-control"
                                    id="edit_name"
-                                   name="tender" placeholder="Please provide reason as why you want to terminate this contract"></textarea>
-                            <input id="edit_id" name="edit_id" hidden>
+                                   name="reason" placeholder="Please provide reason as why you want to terminate this contract"></textarea>
+                            <input id="terminate_id" name="terminate_id" hidden>
                         </div>
 
                          <div style="width:600px;">
@@ -744,7 +744,7 @@ Companies
 
            function myfunc2(A, B, C, D, E , F , G, H) {
 
-            document.getElementById("edit_id").value = A;
+            document.getElementById("terminate_id").value = A;
 
             document.getElementById("edit_name").value = B;
 

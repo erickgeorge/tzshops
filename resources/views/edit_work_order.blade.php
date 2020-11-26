@@ -76,7 +76,7 @@ var total=2;
             </ul>
         </div>
     @endif
-<<<<<<< HEAD
+
 
 
           @if($wo->onbehalf != null)
@@ -84,8 +84,7 @@ var total=2;
            @endif
 
 <br>
-=======
->>>>>>> 1e62ff3b8785df29709a6a51f5905cb45f362b76
+
     <div style="margin-right: 2%; margin-left: 2%;">
     <div class="row">
         <div class="col">
@@ -3373,12 +3372,8 @@ var value = parseInt(document.getElementById('totalmaterialse').value, 10);
 
 
 
-                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col-md-6">
+                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}">
                         @csrf
-
-Requesting material again after crosschecking-->
-
-
                         <div class="form-group">
                             <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
                                 <option   selected value="" >Choose...</option>
