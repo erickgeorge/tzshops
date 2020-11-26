@@ -76,7 +76,6 @@ var total=2;
             </ul>
         </div>
     @endif
-<<<<<<< HEAD
 
 
           @if($wo->onbehalf != null)
@@ -84,8 +83,6 @@ var total=2;
            @endif
 
 <br>
-=======
->>>>>>> 1e62ff3b8785df29709a6a51f5905cb45f362b76
     <div style="margin-right: 2%; margin-left: 2%;">
     <div class="row">
         <div class="col">
