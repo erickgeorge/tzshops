@@ -86,9 +86,7 @@ tr:nth-child(even) {
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>
-            <td>{{ $item->quantity }}</td>
-
-
+                    <td>{{ $item->quantity }}</td>
 
                     </tr>
                     @endforeach

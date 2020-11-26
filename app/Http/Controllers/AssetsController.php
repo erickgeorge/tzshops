@@ -191,10 +191,6 @@ class AssetsController extends Controller
 
       public function Renewcompany(Request $request )
     {
-
-
-
-
         $company = new companywitharea();
         $company->company_name = $request['company_name'];
         $company->type = $request['type'];
@@ -230,9 +226,6 @@ class AssetsController extends Controller
         return redirect()->route('cleaning_company')->with(['message' => 'Company registered successfully']);
 
       }
-
-
-
 
 
 
@@ -350,8 +343,6 @@ class AssetsController extends Controller
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
             if(request()->has('start'))  { //date filter
-
-
 
                 $to=date('Y-m-d', strtotime("+1 day", strtotime(request('start'))));
                 $from=date('Y-m-d', strtotime("-1 day", strtotime(request('end'))));
@@ -590,7 +581,6 @@ class AssetsController extends Controller
              'cleangcompany' => tendernumber::all()
 
           ]);
-
          }
 
 

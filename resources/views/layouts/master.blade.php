@@ -502,9 +502,6 @@
             </li>
 
 
-
-
-
                  @endif
 
 
@@ -515,8 +512,6 @@
                 @endif
 
 
-
-
              @if((auth()->user()->type == 'USAB')||(auth()->user()->type == 'Warden'))
 
                 <li class="nav-item">
@@ -524,12 +519,6 @@
                 </li>
 
               @endif
-
-
-
-
-
-
 
 
             </ul>

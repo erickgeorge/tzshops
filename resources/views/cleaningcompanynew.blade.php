@@ -43,7 +43,7 @@ Companies
                                           style="color: white;" data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
 
-                        @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'USAB'))
+                        @if((auth()->user()->type == 'Administrative officer') || ($role['user_role']['role_id'] == 1) || (auth()->user()->type == 'Supervisor Landscaping') || (auth()->user()->type == 'Warden'))
                    <div class="row"><div class="col">
                   <a href="{{ route('renew_company_contract') }}"
                    class="btn btn-primary" >Add New Company</a> @endif <a href="{{ route('cleaning_company_expired') }}"
@@ -234,7 +234,7 @@ Companies
 
 
 
-@if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB')||(auth()->user()->type == 'Principal'))
+@if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'Warden')||(auth()->user()->type == 'Principal'))
 
                     @foreach($cleangcompany as $house)
 
@@ -398,7 +398,7 @@ Companies
 
 
 
-  @if((auth()->user()->type != 'Supervisor Landscaping') and (auth()->user()->type != 'Administrative officer') and (auth()->user()->type != 'USAB') and (auth()->user()->type != 'Principal'))
+  @if((auth()->user()->type != 'Supervisor Landscaping') and (auth()->user()->type != 'Administrative officer') and (auth()->user()->type != 'Warden') and (auth()->user()->type != 'Principal'))
 
                     @foreach($cleangcompany as $house)
                         <?php $i++; ?>
@@ -510,7 +510,12 @@ Companies
                            <td><?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
                                                     class="fas fa-eye"></i></a>&nbsp;&nbsp;
-</td>
+                                                     <a style="color: green;"
+                                       onclick="myfunc2('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
+                                       data-toggle="modal" data-target="#terminate
+                                       " title="Terminate Contract"><i
+                                                class="fas fa-close"></i></a>
+                            </td>
                              @endif
 
 
@@ -557,31 +562,17 @@ Companies
                     @endforeach
 
   @endif
-
-
-
-
-
-
-
-
                     </tbody>
 
                 </table>
                 <br>
 
-
-
-
-
-
             </div>
           </div>
 
 
-
-
- <div class="modal fade" id="editHouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  
+  <div class="modal fade" id="editHouse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -595,7 +586,7 @@ Companies
                         @csrf
                         <div class="form-group">
                             <label for="name_of_house">Tender Number </label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
+                            <input style="color: black;width:430px" type="text" required class="form-control"
                                    id="edit_name"
                                    name="tender" placeholder="Enter Company tender number">
                             <input id="edit_id" name="edit_id" hidden>
@@ -622,7 +613,7 @@ Companies
                                                <div">
 
 
-                                                  <a class="btn btn-danger" href="/cleaningcompany" role="button">Cancel </a>
+                                                  <a class="btn btn-danger" style="color: white;" role="button"  data-dismiss="modal" aria-label="Close" >Cancel </a>
 
                                                        </div>
                                             </div>
@@ -633,6 +624,55 @@ Companies
             </div>
         </div>
     </div>
+
+
+  <!--terminate company contract-->
+
+   <div class="modal fade" id="terminate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Terminate Contract</h5>
+                </div>
+
+                <form method="POST" action="edit/company" class="col-md-6">
+                    <div class="modal-body">
+
+                        @csrf
+                        <div class="form-group">
+                            <label for="name_of_house">Termination Reason </label>
+                            <textarea style="color: black;width:430px" type="text" required class="form-control"
+                                   id="edit_name"
+                                   name="tender" placeholder="Please provide reason as why you want to terminate this contract"></textarea>
+                            <input id="edit_id" name="edit_id" hidden>
+                        </div>
+
+                         <div style="width:600px;">
+                                <div style="float: left;">
+
+                                        <button  type="submit" class="btn btn-primary">Save
+                                        </button>
+
+
+                               </div>
+                               &nbsp;
+                               <div">
+
+
+                                  <a class="btn btn-danger" style="color: white;" role="button"  data-dismiss="modal" aria-label="Close" >Cancel </a>
+
+                        </div>
+                                            </div>
+                                                </div>
+                </form>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!--terminate company contract-->
 
 
 
@@ -663,6 +703,10 @@ Companies
 
 
 
+
+
+
+
     <script>
         window.onload = function () {
             //write your function code here.
@@ -688,6 +732,17 @@ Companies
 
 
         function myfunc(A, B, C, D, E , F , G, H) {
+
+            document.getElementById("edit_id").value = A;
+
+            document.getElementById("edit_name").value = B;
+
+           document.getElementById("edit_type").value = C;
+
+       }
+
+
+           function myfunc2(A, B, C, D, E , F , G, H) {
 
             document.getElementById("edit_id").value = A;
 
