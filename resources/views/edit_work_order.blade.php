@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-  Edit Works order
+  Edit Work order
     @endSection
 
 @section('body')
@@ -59,9 +59,6 @@ var total=2;
         </div>
     </div>
     <hr>
-
-
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="alert alert-danger">
@@ -79,20 +76,11 @@ var total=2;
             </ul>
         </div>
     @endif
-
-
-          @if($wo->onbehalf != null) 
-               <p align="center">This works order was submitted on behalf of {{$wo['onbehalfs']->type}} : {{ $wo['onbehalfs']->fname.' '.$wo['onbehalfs']->lname }}</p>
-           @endif
-
-<br>
     <div style="margin-right: 2%; margin-left: 2%;">
     <div class="row">
         <div class="col">
             <h5>Submited by  <span
-                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>
-                <h5>Submited on <span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5>
-                <h5> <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span>
+                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span><h5>Submited on <span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5><h5> <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span>
                   <h5> Email: <span style=" font-weight: bold;"> {{ $wo['user']->email }} </span></h5>
 
 
@@ -298,7 +286,7 @@ var total=2;
 
 
  <table class="table table-striped  display" style="width:100%">
-  <tr>technician
+  <tr>
      <thead style="color: white;">
       <th>#</th>
     <th>Full Name</th>
@@ -500,7 +488,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   <th>Type</th>
    <th>Quantity</th>
-   <th>Unit of Measure</th>
    <th>Approved By</th>
     <th>Status</th>
      <th>Date Requested</th>
@@ -517,8 +504,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td>{{$matform['material']->brand }}</td>
-
        <td>
        @if($matform->accepted_by == NULL)
       <span >Not accepted Yet.</span>
@@ -570,7 +555,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <th>Material Name</th>
 
   <th>Type</th>
-  <th>Unit of Measure</th>
    <th>Quantity</th>
    <th>IoW</th>
    <th>Approved By</th>
@@ -588,8 +572,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <td>{{$matform['material']->name }}</td>
 
     <td>{{$matform['material']->type }}</td>
-    <td>{{$matform['material']->brand }}</td>
-
    <td>{{$matform->quantity }}</td>
    <td>{{$matform['iowzone']->name }}</td>
        <td>
@@ -650,7 +632,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <th>Name</th>
     <th> Description</th>
      <th>Type</th>
-     <th>Unit of Measure</th>
      <th>Quantity</th>
    </thead>
   </tr>
@@ -662,8 +643,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
    <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
    <td>{{$matform['material']->type }}</td>
-   <td>{{$matform['material']->brand }}</td>
-
    <td>{{$matform->quantity }}</td>
   </tr>
 
@@ -2073,12 +2052,12 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
           <h5 style="color: blue"><b> Does this works order need transport for inspection? </b></h5>
 
-         <label><input type="radio" onclick="return confirm('Are you sure you have signed works order inspection form? ')" name="colorRadio" value="red">Yes</label> &nbsp;
-         <label><input type="radio" onclick="return confirm('Are you sure you have signed works order inspection form? ')" name="colorRadio" value="green"> No</label>
+         <label><input type="radio" name="colorRadio" value="red">Yes</label> &nbsp;
+         <label><input type="radio" name="colorRadio" value="green"> No</label>
 
            <div class="red box">
 
-                     <form method="POST"  action="{{ route('work.transport', [$wo->id]) }}">
+                     <form method="POST" onsubmit="return confirm('Are you sure you have signed works order inspection form? ')" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
                    @if($wo->statusmform != 1)
@@ -2124,7 +2103,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
              <div class="green box">
 
-           <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+           <form method="POST" onsubmit="return confirm('Are you sure you have signed works order inspection form? ')" action="{{ route('work.inspection', [$wo->id]) }}">
                @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -2871,7 +2850,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
         var empTab = document.getElementById('dataTablemat');
     var value = parseInt(document.getElementById('totalmaterials').value, 10);
     value = isNaN(value) ? 0 : value;
-    --value; --value;
+    --value; --value; --value; --value; --value; --value;
     document.getElementById('totalmaterials').value = value;
         empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);
 
@@ -2937,12 +2916,35 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
 
                          @if(COUNT($wo_materials)!=0)
 
+      <br>
 
 
+<!--Requesting material again after crosschecking
+        <div id="cont">
 
+    </div>
+    <input id="totalmaterials" type="text" name="totalinputs" value="" hidden>
+    <p>
+        <div class="row">
+            <div class="col">
+                <a id="addRow" onclick="addRow()" class="btn btn-outline-info"><i class="fa fa-plus"></i> Add New Row</a>
+            </div>
+        </div><br>
+        <div class="row">
+
+      <div class="col">
+        <button id="bt" type="submit" class="btn btn-primary" disabled>Save</button>&nbsp;<a href="#" onclick="closeTab()"></a>
+      </div>
+    </div>
+    </p>
+
+Requesting material again after crosschecking-->
+
+
+        <br>
 
                 <div class="row">
-
+        <br>
                                 <p>CROSSCHECK MATERIAL(S) BEFORE REQUESTING TO STORE</p>
 
                  </div>
@@ -2955,7 +2957,6 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
     <th>Material Name</th>
     <th>Description</th>
     <th>Type</th>
-    <th>Unit of Measure</th>
     <th>Quantity Requested</th>
     <th>Action</th>
     </thead>
@@ -2972,8 +2973,6 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
     <td>{{$matform['material']->name }}</td>
     <td>{{$matform['material']->description }}</td>
     <td>{{$matform['material']->type }}</td>
-    <td>{{$matform['material']->brand }}</td>
-
     <td>{{$matform->quantity }}</td>
 
       <td>
@@ -3014,352 +3013,6 @@ var value = parseInt(document.getElementById('totalmaterials').value, 10);
 
 </div>
 
-<br>
-<div class="container">
-   <div >
-                <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
-                    @csrf
-
-
-
-                        <?php
-                         $materials = Material::orderby('description', 'ASC')->get();
-                        ?>
-
-                    @if($wo->status == 5)
-
-                         @if(($wo->statusmform == 3))
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>ADD MATERIAL(S) REQUEST</p>
-                            </div>
-                        </div>
-<input type="text" name="zone" value="{{ $zoned->id }}" hidden>
-
-<div id="customatedtablee">
-
-
-
-
-  <div id="conte">
-
-        </div>
-    <input id="totalmaterialse" type="text" name="totalinputs" value="" hidden>
-    <p>
-        <div class="row">
-            <div class="col">
-                <a id="addRowe" onclick="addRowe()" class="btn btn-outline-info"><i class="fa fa-plus"></i> Add New Row</a>
-            </div>
-        </div><br>
-        <div class="row">
-
-      <div class="col">
-        <button id="bte" type="submit" class="btn btn-primary" disabled>Save</button>&nbsp;<a href="#" onclick="closeTabe()"><button type="button" class="btn btn-danger">Cancel</button></a>
-      </div>
-    </div>
-    </p>
-
-                        </div>
-                     </form>
-
-<script>
-    // ARRAY FOR HEADER.
-    var arrHead = new Array();
-    arrHead = ['','Material', 'Quantity', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
-
-    // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
-    // ADD THE TABLE TO YOUR WEB PAGE.
-    function createTable() {
-        var MatForm = document.createElement('table');
-        MatForm.setAttribute('id', 'dataTablemate');
-        MatForm.setAttribute('class', 'table');
-        MatForm.setAttribute('align', 'center');                     // SET THE TABLE ID.
-
-        var tr = MatForm.insertRow(-1);
-
-        for (var h = 0; h < arrHead.length; h++) {
-            var th = document.createElement('th');
-
-
-            if(h==0){
-                  th.setAttribute('style','width:5px;');
-                }
-
-
-                if(h==1){
-                  th.setAttribute('style','width:300px;');
-                }
-
-                if(h ==2){
-                    th.setAttribute('style','width:100px;');
-                }
-
-                     // TABLE HEADER.
-            th.innerHTML = arrHead[h];
-            tr.appendChild(th);
-        }
-
-        var div = document.getElementById('conte');
-        div.appendChild(MatForm);    // ADD THE TABLE TO YOUR WEB PAGE.
-
-        var empTab = document.getElementById('dataTablemate');
-
-        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
-        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
-        tr = empTab.insertRow(rowCnt);
-
-        for (var c = 0; c < arrHead.length; c++) {
-            var td = document.createElement('td');          // TABLE DEFINITION.
-            td = tr.insertCell(c);
-
-            if (c == 0) {           // FIRST COLUMN.
-                 // ADD A BUTTON.
-                var button = document.createElement('button');
-
-                // SET INPUT ATTRIBUTE.
-                button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger');
-                if(c==0)
-                {
-                    button.setAttribute('disabled', 'true');
-
-                }
-                // ADD THE BUTTON's 'onclick' EVENT.
-                button.setAttribute('onclick', 'removeRow(this)');
-
-                td.appendChild(button);
-
-                var i = document.createElement('i');
-                  i.setAttribute('class', 'fa fa-trash');
-                  button.appendChild(i);
-            }
-            else {
-                // CREATE AND ADD TEXTBOX IN EACH CELL.
-               if(c==1)
-                {
-                        var ele = document.createElement('select');
-                        ele.setAttribute('name','material[]');
-                        ele.setAttribute('class','custom-select');
-                        ele.setAttribute('style','width:100%;');
-                }else
-                {
-                    var ele = document.createElement('input');
-                        ele.setAttribute('name','quantity[]');
-                        ele.setAttribute('max','500');
-                        ele.setAttribute('min','1');
-                        ele.setAttribute('class', 'form-control');
-                        ele.setAttribute('type', 'number');
-                }
-
-                ele.setAttribute('required', '');
-
-
-
-
-    var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('totalmaterialse').value = value;
-
-    var hide = document.getElementById('bte');
-        if (value > 1) {
-            hide.disabled = false;
-        }
-        else {
-            hide.disabled = true;
-        }
-
-            // ele.setAttribute('value', '');
-            // ele.setAttribute('name',value);
-            ele.setAttribute('id',value);
-            td.appendChild(ele);
-
-
-            if(c==1)
-                {
-                    var option = document.getElementById(value);
-
-                    var optionse = document.createElement('option');
-                    optionse.setAttribute('value','');
-                    optionse.setAttribute('selected','selected');
-                    optionse.text = "Choose Material...";
-                    option.appendChild(optionse);
-
-                    var option1 = document.getElementById(value);
-                    @foreach($materials as $materialsg)
-                    var options = document.createElement('option');
-                    options.setAttribute('value','{{$materialsg->id}}');
-                    options.text = "{{ucwords(strtolower($materialsg->description))}}, [ {{ ' Description : '.ucwords(strtolower($materialsg->brand))}}, {{ ' Type : '.ucwords(strtolower($materialsg->type))}} ]";
-
-                    option1.appendChild(options);
-                    @endforeach
-                    $(".custom-select").select2({
-                        placeholder: "Choose material..",
-                        allowClear: true
-                    });
-                }
-
-
-            }
-        }
-
-
-    }
-
-    // ADD A NEW ROW TO THE TABLE.s
-    function addRowe() {
-        var empTab = document.getElementById('dataTablemate');
-
-        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
-        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
-        tr = empTab.insertRow(rowCnt);
-
-        for (var c = 0; c < arrHead.length; c++) {
-            var td = document.createElement('td');          // TABLE DEFINITION.
-            td = tr.insertCell(c);
-
-            if (c == 0) {           // FIRST COLUMN.
-                // ADD A BUTTON.
-                var button = document.createElement('button');
-
-                // SET INPUT ATTRIBUTE.
-                button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger');
-
-                // ADD THE BUTTON's 'onclick' EVENT.
-                button.setAttribute('onclick', 'removeRow(this)');
-
-                td.appendChild(button);
-
-                var i = document.createElement('i');
-                  i.setAttribute('class', 'fa fa-trash');
-                  button.appendChild(i);
-            }
-   else {
-                // CREATE AND ADD TEXTBOX IN EACH CELL.
-               if(c==1)
-                {
-                        var ele = document.createElement('select');
-                        ele.setAttribute('name','material[]');
-                        ele.setAttribute('class','custom-select');
-                        ele.setAttribute('style','width:100%;');
-                }else
-                {
-                    var ele = document.createElement('input');
-                        ele.setAttribute('name','quantity[]');
-                        ele.setAttribute('max','500');
-                        ele.setAttribute('min','1');
-                        ele.setAttribute('class', 'form-control');
-                        ele.setAttribute('type', 'number');
-                }
-
-                ele.setAttribute('required', '');
-
-
-
-
-    var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('totalmaterialse').value = value;
-
-    var hide = document.getElementById('bt');
-        if (value > 1) {
-            hide.disabled = false;
-        }
-        else {
-            hide.disabled = true;
-        }
-
-            // ele.setAttribute('value', '');
-            // ele.setAttribute('name',value);
-            ele.setAttribute('id',value);
-            td.appendChild(ele);
-
-
-            if(c==1)
-                {
-                    var option = document.getElementById(value);
-
-                    var optionse = document.createElement('option');
-                    optionse.setAttribute('value','');
-                    optionse.setAttribute('selected','selected');
-                    optionse.text = "Choose Material...";
-                    option.appendChild(optionse);
-
-                    var option1 = document.getElementById(value);
-
-                    @foreach($materials as $materialsf)
-                    var options = document.createElement('option');
-                    options.setAttribute('value','{{$materialsf->id}}');
-                    options.text = "{{ucwords(strtolower($materialsf->description))}}, [ {{ ' Description : '.ucwords(strtolower($materialsf->brand))}}, {{ ' Type : '.ucwords(strtolower($materialsf->type))}} ]";
-                    option1.appendChild(options);
-                    @endforeach
-
-                    $(".custom-select").select2({
-                        placeholder: "Choose material..",
-                        allowClear: true
-                    });
-                }
-            }
-        }
-
-
-    }
-
-    // DELETE TABLE ROW.
-    function removeRow(oButton) {
-        var empTab = document.getElementById('dataTablemate');
-    var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-    --value; --value;
-    document.getElementById('totalmaterialse').value = value;
-        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);
-
-var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-
-    var hide = document.getElementById('bte');
-        if (value > 1) {
-            hide.disabled = false;
-        }
-        else {
-            hide.disabled = true;
-        }
-              // BUTTON -> TD -> TR.
-    }
-
-    // EXTRACT AND SUBMIT TABLE DATA.
-    function submit() {
-        var myTab = document.getElementById('dataTablemate');
-        var values = new Array();
-
-        // LOOP THROUGH EACH ROW OF THE TABLE.
-        for (row = 1; row < myTab.rows.length - 1; row++) {
-            for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
-
-                var element = myTab.rows.item(row).cells[c];
-                if (element.childNodes[0].getAttribute('type') == 'text') {
-                    values.push("'" + element.childNodes[0].value + "'");
-                }
-            }
-        }
-
-        // SHOW THE RESULT IN THE CONSOLE WINDOW.
-        console.log(values);
-    }
-
-
-
-</script>
-
-                @else
-               <div align="center" style="color: red;"></div>
-                @endif
-
-                 @endif
-                 </div>
 </div>
 
 <!--modal for edit --->
@@ -3433,356 +3086,6 @@ var value = parseInt(document.getElementById('totalmaterialse').value, 10);
         </div>
         </div>
     </div>
-    @else
-
-
-    <br>
-<div class="container">
-   <div >
-                <form method="POST"  action="{{ route('work.materialadd', [$wo->id]) }}" >
-                    @csrf
-
-
-
-                        <?php
-                         $materials = Material::orderby('description', 'ASC')->get();
-                        ?>
-
-                    @if($wo->status == 5)
-
-                         @if(($wo->statusmform == 3))
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>REQUEST AGAIN</p>
-                            </div>
-                        </div>
-<input type="text" name="zone" value="{{ $zoned->id }}" hidden>
-
-<div id="customatedtablee">
-
-
-
-
-  <div id="conte">
-
-        </div>
-    <input id="totalmaterialse" type="text" name="totalinputs" value="" hidden>
-    <p>
-        <div class="row">
-            <div class="col">
-                <a id="addRowe" onclick="addRowe()" class="btn btn-outline-info"><i class="fa fa-plus"></i> Add New Row</a>
-            </div>
-        </div><br>
-        <div class="row">
-
-      <div class="col">
-        <button id="bte" type="submit" class="btn btn-primary" disabled>Save</button>&nbsp;<a href="#" onclick="closeTabe()"><button type="button" class="btn btn-danger">Cancel</button></a>
-      </div>
-    </div>
-    </p>
-
-                        </div>
-                     </form>
-
-<script>
-    // ARRAY FOR HEADER.
-    var arrHead = new Array();
-    arrHead = ['','Material', 'Quantity', ];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
-
-    // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
-    // ADD THE TABLE TO YOUR WEB PAGE.
-    function createTable() {
-        var MatForm = document.createElement('table');
-        MatForm.setAttribute('id', 'dataTablemate');
-        MatForm.setAttribute('class', 'table');
-        MatForm.setAttribute('align', 'center');                     // SET THE TABLE ID.
-
-        var tr = MatForm.insertRow(-1);
-
-        for (var h = 0; h < arrHead.length; h++) {
-            var th = document.createElement('th');
-
-
-            if(h==0){
-                  th.setAttribute('style','width:5px;');
-                }
-
-
-                if(h==1){
-                  th.setAttribute('style','width:300px;');
-                }
-
-                if(h ==2){
-                    th.setAttribute('style','width:100px;');
-                }
-
-                     // TABLE HEADER.
-            th.innerHTML = arrHead[h];
-            tr.appendChild(th);
-        }
-
-        var div = document.getElementById('conte');
-        div.appendChild(MatForm);    // ADD THE TABLE TO YOUR WEB PAGE.
-
-        var empTab = document.getElementById('dataTablemate');
-
-        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
-        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
-        tr = empTab.insertRow(rowCnt);
-
-        for (var c = 0; c < arrHead.length; c++) {
-            var td = document.createElement('td');          // TABLE DEFINITION.
-            td = tr.insertCell(c);
-
-            if (c == 0) {           // FIRST COLUMN.
-                 // ADD A BUTTON.
-                var button = document.createElement('button');
-
-                // SET INPUT ATTRIBUTE.
-                button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger');
-                if(c==0)
-                {
-                    button.setAttribute('disabled', 'true');
-
-                }
-                // ADD THE BUTTON's 'onclick' EVENT.
-                button.setAttribute('onclick', 'removeRow(this)');
-
-                td.appendChild(button);
-
-                var i = document.createElement('i');
-                  i.setAttribute('class', 'fa fa-trash');
-                  button.appendChild(i);
-            }
-            else {
-                // CREATE AND ADD TEXTBOX IN EACH CELL.
-               if(c==1)
-                {
-                        var ele = document.createElement('select');
-                        ele.setAttribute('name','material[]');
-                        ele.setAttribute('class','custom-select');
-                        ele.setAttribute('style','width:100%;');
-                }else
-                {
-                    var ele = document.createElement('input');
-                        ele.setAttribute('name','quantity[]');
-                        ele.setAttribute('max','500');
-                        ele.setAttribute('min','1');
-                        ele.setAttribute('class', 'form-control');
-                        ele.setAttribute('type', 'number');
-                }
-
-                ele.setAttribute('required', '');
-
-
-
-
-    var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('totalmaterialse').value = value;
-
-    var hide = document.getElementById('bte');
-        if (value > 1) {
-            hide.disabled = false;
-        }
-        else {
-            hide.disabled = true;
-        }
-
-            // ele.setAttribute('value', '');
-            // ele.setAttribute('name',value);
-            ele.setAttribute('id',value);
-            td.appendChild(ele);
-
-
-            if(c==1)
-                {
-                    var option = document.getElementById(value);
-
-                    var optionse = document.createElement('option');
-                    optionse.setAttribute('value','');
-                    optionse.setAttribute('selected','selected');
-                    optionse.text = "Choose Material...";
-                    option.appendChild(optionse);
-
-                    var option1 = document.getElementById(value);
-                    @foreach($materials as $materialsg)
-                    var options = document.createElement('option');
-                    options.setAttribute('value','{{$materialsg->id}}');
-                    options.text = "{{ucwords(strtolower($materialsg->description))}}, [ {{ ' Description : '.ucwords(strtolower($materialsg->brand))}}, {{ ' Type : '.ucwords(strtolower($materialsg->type))}} ]";
-
-                    option1.appendChild(options);
-                    @endforeach
-                    $(".custom-select").select2({
-                        placeholder: "Choose material..",
-                        allowClear: true
-                    });
-                }
-
-
-            }
-        }
-
-
-    }
-
-    // ADD A NEW ROW TO THE TABLE.s
-    function addRowe() {
-        var empTab = document.getElementById('dataTablemate');
-
-        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
-        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
-        tr = empTab.insertRow(rowCnt);
-
-        for (var c = 0; c < arrHead.length; c++) {
-            var td = document.createElement('td');          // TABLE DEFINITION.
-            td = tr.insertCell(c);
-
-            if (c == 0) {           // FIRST COLUMN.
-                // ADD A BUTTON.
-                var button = document.createElement('button');
-
-                // SET INPUT ATTRIBUTE.
-                button.setAttribute('type', 'button');
-                button.setAttribute('class', 'btn btn-danger');
-
-                // ADD THE BUTTON's 'onclick' EVENT.
-                button.setAttribute('onclick', 'removeRow(this)');
-
-                td.appendChild(button);
-
-                var i = document.createElement('i');
-                  i.setAttribute('class', 'fa fa-trash');
-                  button.appendChild(i);
-            }
-   else {
-                // CREATE AND ADD TEXTBOX IN EACH CELL.
-               if(c==1)
-                {
-                        var ele = document.createElement('select');
-                        ele.setAttribute('name','material[]');
-                        ele.setAttribute('class','custom-select');
-                        ele.setAttribute('style','width:100%;');
-                }else
-                {
-                    var ele = document.createElement('input');
-                        ele.setAttribute('name','quantity[]');
-                        ele.setAttribute('max','500');
-                        ele.setAttribute('min','1');
-                        ele.setAttribute('class', 'form-control');
-                        ele.setAttribute('type', 'number');
-                }
-
-                ele.setAttribute('required', '');
-
-
-
-
-    var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-    value++;
-    document.getElementById('totalmaterialse').value = value;
-
-    var hide = document.getElementById('bt');
-        if (value > 1) {
-            hide.disabled = false;
-        }
-        else {
-            hide.disabled = true;
-        }
-
-            // ele.setAttribute('value', '');
-            // ele.setAttribute('name',value);
-            ele.setAttribute('id',value);
-            td.appendChild(ele);
-
-
-            if(c==1)
-                {
-                    var option = document.getElementById(value);
-
-                    var optionse = document.createElement('option');
-                    optionse.setAttribute('value','');
-                    optionse.setAttribute('selected','selected');
-                    optionse.text = "Choose Material...";
-                    option.appendChild(optionse);
-
-                    var option1 = document.getElementById(value);
-
-                    @foreach($materials as $materialsf)
-                    var options = document.createElement('option');
-                    options.setAttribute('value','{{$materialsf->id}}');
-                    options.text = "{{ucwords(strtolower($materialsf->description))}}, [ {{ ' Description : '.ucwords(strtolower($materialsf->brand))}}, {{ ' Type : '.ucwords(strtolower($materialsf->type))}} ]";
-                    option1.appendChild(options);
-                    @endforeach
-
-                    $(".custom-select").select2({
-                        placeholder: "Choose material..",
-                        allowClear: true
-                    });
-                }
-            }
-        }
-
-
-    }
-
-    // DELETE TABLE ROW.
-    function removeRow(oButton) {
-        var empTab = document.getElementById('dataTablemate');
-    var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-    --value; --value;
-    document.getElementById('totalmaterialse').value = value;
-        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);
-
-var value = parseInt(document.getElementById('totalmaterialse').value, 10);
-    value = isNaN(value) ? 0 : value;
-
-    var hide = document.getElementById('bte');
-        if (value > 1) {
-            hide.disabled = false;
-        }
-        else {
-            hide.disabled = true;
-        }
-              // BUTTON -> TD -> TR.
-    }
-
-    // EXTRACT AND SUBMIT TABLE DATA.
-    function submit() {
-        var myTab = document.getElementById('dataTablemate');
-        var values = new Array();
-
-        // LOOP THROUGH EACH ROW OF THE TABLE.
-        for (row = 1; row < myTab.rows.length - 1; row++) {
-            for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
-
-                var element = myTab.rows.item(row).cells[c];
-                if (element.childNodes[0].getAttribute('type') == 'text') {
-                    values.push("'" + element.childNodes[0].value + "'");
-                }
-            }
-        }
-
-        // SHOW THE RESULT IN THE CONSOLE WINDOW.
-        console.log(values);
-    }
-
-
-
-</script>
-
-                @else
-               <div align="center" style="color: red;"></div>
-                @endif
-
-                 @endif
-                 </div>
-</div>
      @endif
 
     <!--end modal for edit --->

@@ -1064,6 +1064,19 @@ return $pdf->stream(''.$data['header'].'- '.date('d-m-Y Hi').'.pdf');
     }
 ///////////////// prints from hos /\ up ////////////////////////
 
+
+
+    public function allissuenotepdf($id){
+
+           $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('isn_time',$id)->where('isn',2)
+                    ->get()];
+         $pdf = PDF::loadView('issuenotepdf', $data);
+
+     return $pdf->stream('Issue Note - '.$id.'- '.date('d-m-Y Hi').'.pdf');
+    }
+
+
+
     public function grnotepdf($id){
 
            $data = ['title' => 'Notes List' , 'items' => WorkOrderMaterial::where('grn_time',$id)->where('grn',2)

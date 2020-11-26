@@ -318,6 +318,8 @@ Route::get('work_order_with_missing_material', 'HomeController@workorderwithmiss
 
 Route::get('all_grns', 'HomeController@allgrns')->name('allgrn')->middleware('auth');
 
+Route::get('all_isse_note', 'HomeController@allissuenote')->name('allissnote')->middleware('auth');
+
 
 Route::get('wo_material/{id}', 'HomeController@wo_materialView')->name('store.materialview')->middleware('auth');
 
@@ -444,6 +446,7 @@ Route::get('allpdf','NotesController@allpdf')->name('allpdf')->middleware('auth'
  Route::get('unattendedwopdf','NotesController@unattendedwopdf')->middleware('auth');
  Route::get('completewopdf','NotesController@completewopdf')->middleware('auth');
  Route::get('grnpdf/{id}','NotesController@grnotepdf')->name('allgrnss')->middleware('auth');
+  Route::get('allissuenotes/{id}','NotesController@allissuenotepdf')->name('allissuenote')->middleware('auth');
  Route::get('received/materials/from_store/issuenotepdf/{id}','NotesController@issuenotepdf')->middleware('auth');
 
 // iow myzone ////////

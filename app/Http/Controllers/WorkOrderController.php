@@ -42,7 +42,7 @@ class WorkOrderController extends Controller
         if (count($check_if)>0) {
             foreach($check_if as $item)
             {
-                $code = $check_if->abbreviation;
+                $code = $item->abbreviation;
             }
             $code = $code;
         }else {
@@ -1126,16 +1126,43 @@ session::flash('message', ' Your workorder have been accepted successfully ');
          $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
 
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        $wo_isnumber =WorkOrderMaterial::where('work_order_id', $id)->where('status',3)->where('isn_today',null)->get();
+
+          foreach($wo_isnumber as $wo_isn) {
+          $wo_m =WorkOrderMaterial::where('id', $wo_isn->id)->first();
+          $wo_m->isn_today = date('d/m/Y');
+          $wo_m->save();
+          }
+
+
+          $isn_number =WorkOrderMaterial::where('isn_today',date('d/m/Y'))->select(DB::raw('isn_time'))->groupBy('isn_time')->get();
+          $inumber = sprintf('%03d',count($isn_number));
+          $mynumber =  'ISN'.'/'.$wo_m->isn_today.'/'.$inumber; 
+
+         
         $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',3)->get();
 
          foreach($wo_materials as $wo_material) {
         $wo_m =WorkOrderMaterial::where('id', $wo_material->id)->first();
          $wo_m->status = 3; //status for material ticked after placing sign for both sides
          $wo_m->secondstatus = 1;
-          $wo_m->save();
+         $wo_m->save();
+         }
+
+        $wo_today =WorkOrderMaterial::where('work_order_id', $id)->where('status',3)->where('isn_today',date('d/m/Y'))->get();
+
+         foreach($wo_today as $wo_tdy) {
+        $wo_m =WorkOrderMaterial::where('id', $wo_tdy->id)->first();
+         $wo_m->isn = 2;  //issue note copy
+         $wo_m->isn_time = $wo_m->updated_at;
+         $wo_m->isn_number = $mynumber;
+         $wo_m->save();
          }
 
 
+
+  
 
        $mForm = WorkOrder::where('id', $id)->first();
        $mForm->status = 40;  //status for Hos approval for receiving material
@@ -1143,7 +1170,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
 
          return redirect()->back()->with(['message' => 'Material Approved and  Received Successfully From Store']);
-
 
 }
 

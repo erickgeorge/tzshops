@@ -2,7 +2,10 @@
 <div style="margin-top: 20px" align="center"><h2>University of Dar es Salaam</h2>
     <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">
     <p><h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
-    <p><b style="text-transform: uppercase;">ISSUE NOTE</b></p>
+    <p><u><b style="text-transform: uppercase;">ISSUE NOTE</b></u></p>
+     @foreach($items as $item)
+     @endforeach
+      <p><u><b style="text-transform: uppercase;">ISSUE NOTE NUMBER: {{ $item->isn_number}}</b></u></p>
 </div>
 <style>
     body { /* background-image:  url('/images/essuenote.jpg');*/
@@ -56,10 +59,9 @@ tr:nth-child(even) {
 </style>
 
 
-
    <body>
 
-        <table class="table table-striped display" id="myTable"  style="width:100%">
+        <table  border = "2" cellpadding = "5" cellspacing = "5" class="table table-striped display" id="myTable"  style="width:100%">
             <thead class="thead-dark">
             <tr>
         <th >No</th>
@@ -96,21 +98,23 @@ tr:nth-child(even) {
 
 <div >
     <br>
-
-
-
-
-
+    <br>
 
      <div class="container-name">
-     <div  class="div1" > Works Order No:<u style="padding-left: 100px; width: 45px"> 00{{ $item->work_order_id }}</u> </div>
+     <div  class="div1" > Works Order No:<u style="padding-left: 100px; width: 45px"> 00{{ $item['workorder']->woCode }}</u> </div>
 
 
      <div class="div2">Date Received From Store:<u style="padding-left: 40px; width: 80px">    <?php $time = strtotime($item['material']->updated_at); echo date('d/m/Y',$time);  ?> </u> </div>
     </div>
 
 
-     <div  class="div1" > Works Order Details:<u style="padding-left: 60px; width: 45px"> {{ $item['workorder']->details }}</u> </div>
+     <div  class="div1" > Works Order location:<u style="padding-left: 60px; width: 45px"> 
+                                @if($item['workorder']->location ==null)
+                                    {{ $item['workorder']['room']->location_of_block }}</td>
+                            @else
+
+                                {{ $work->location }}
+                            @endif</u> </div>
 
 
 
