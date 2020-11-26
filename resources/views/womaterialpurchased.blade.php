@@ -51,7 +51,7 @@
                 <tr>
                     <th scope="row">{{ $i }}</th>
 
-                    <td>00{{ $item->work_order_id }}</td>
+                    <td>{{ $item['workorder']->woCode }}</td>
 
                     <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
 

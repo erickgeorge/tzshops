@@ -60,10 +60,8 @@
 
 
                 <tr> <td>{{$i++}}</td>
-                    @php
-                        $fgt = WorkOrder::where('id',$item->work_order_id)->first();
-                    @endphp
-                    <td>00{{ $fgt['woCode'] }}</td>
+                    <td>{{ $item['workorder']->woCode }}</td>
+
                     <td>{{ $item['usermaterial']->fname.' '.$item['usermaterial']->lname }}</td>
 
                     <td>{{ $item['workorder']->details }}</td>

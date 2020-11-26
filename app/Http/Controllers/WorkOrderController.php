@@ -56,7 +56,7 @@ class WorkOrderController extends Controller
         $finalCode = $code.'/'.$date.'/'.$last;
 
 
-        
+
 
         if ($request['p_type'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Problem Type required ']);
@@ -335,7 +335,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         ]);
     }
 
-   
+
 
     public function   editWOView($id)
     {

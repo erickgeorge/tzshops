@@ -205,7 +205,7 @@ use App\WorkOrder;
 
                         <tr>
 
-                            <td id="wo-details"> {{ $work->woCode }}</td>
+                            <td>{{ $item['workorder']->woCode }}</td>
                             <td>{{ str_limit($work->details, 10) }}  </td>
                             <td>{{ $work->problem_type }}  </td>
 

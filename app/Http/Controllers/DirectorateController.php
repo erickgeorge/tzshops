@@ -189,7 +189,7 @@ class DirectorateController extends Controller
 
         public function createblockss(Request $request)
     {
-     
+
          $location = Location::where('id', $request['Location'])->first();
          $wsection = new Block();
          $wsection->name_of_block = $request['name_of_block'];
@@ -684,6 +684,8 @@ class DirectorateController extends Controller
 
         $wsection = new workordersection();
         $wsection->section_name = ($request['sec_name']);
+        $wsection->abbreviation = ($request['abbreviation']);
+
 
         $wsection->save();
 
@@ -739,7 +741,8 @@ class DirectorateController extends Controller
 
         $wsec = workordersection::where('id',$p)->first();
 
-		$wsec->section_name = $request['sec_name' ];
+        $wsec->section_name = $request['sec_name' ];
+        $wsec->abbreviation = $request['abbreviation' ];
 
         $wsec->save();
 
@@ -757,7 +760,7 @@ class DirectorateController extends Controller
           if (!empty(iowzone::where('zonename',$request['sec_name'])->first())){
             return redirect()->back()->withErrors(['message' => 'Zone already exist']);
         }
-  
+
          $p=$request['esecid'];
 
 

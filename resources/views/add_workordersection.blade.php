@@ -36,6 +36,12 @@
                     </div>
 
 
+                    <div class="form-group ">
+                        <label for="dep_name">Section Abbreviation</label>
+                        <input style="color: black" type="text" required class="form-control"    maxlength = "15"
+                               name="abbreviation" placeholder="EL, CA, PL">
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Save
                     </button>
                     <a href="/Manage/section" class="btn btn-danger">Cancel
