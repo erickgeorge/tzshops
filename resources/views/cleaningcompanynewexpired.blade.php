@@ -237,7 +237,7 @@ Companies
 
 
 
-@if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'USAB')||(auth()->user()->type == 'Principal'))
+@if((auth()->user()->type == 'Administrative officer')||(auth()->user()->type == 'Warden')||(auth()->user()->type == 'Principal'))
 
                     @foreach($cleangcompany as $house)
 
@@ -401,7 +401,7 @@ Companies
 
 
 
-  @if((auth()->user()->type != 'Supervisor Landscaping') and (auth()->user()->type != 'Administrative officer') and (auth()->user()->type != 'USAB') and (auth()->user()->type != 'Principal'))
+  @if((auth()->user()->type != 'Supervisor Landscaping') and (auth()->user()->type != 'Administrative officer') and (auth()->user()->type != 'Warden') and (auth()->user()->type != 'Principal'))
 
                     @foreach($cleangcompany as $house)
 

@@ -480,11 +480,6 @@ class AssetsController extends Controller
        }
 
 
-
-
-
-
-
        public function cleaningcompanyreached(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -509,18 +504,18 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-            'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+            'cleangcompanylandscaping' => company::where('type','Exterior')->whereBetween('created_at', [$from, $to])->where('terminat',1)->orderby('created_at','DESC')->get(),
 
-             'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+             'cleangcompanyusab' => company::where('type','Interior')->whereBetween('created_at', [$from, $to])->where('terminat',1)->orderby('created_at','DESC')->get(),
 
-            'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->orderby('created_at','DESC')->get(),
+            'cleangcompanyadmin' => company::whereBetween('created_at', [$from, $to])->where('terminat',1)->orderby('created_at','DESC')->get(),
 
-             'assessmmentcompany' => company::select(DB::raw('company_name'))
+             'assessmmentcompany' => company::where('terminat',1)->select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),
-            'assessmmenttender' => company::select(DB::raw('tender'))
+            'assessmmenttender' => company::where('terminat',1)->select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
-            'assessmmentareas' => company::select(DB::raw('area'))
+            'assessmmentareas' => company::where('terminat',1)->select(DB::raw('area'))
                     ->groupBy('area')->get(),
 
           ]);
@@ -532,18 +527,18 @@ class AssetsController extends Controller
             'role' => $role,
             'notifications' => $notifications,
 
-            'cleangcompanylandscaping' => company::where('type','Exterior')->orderby('created_at','DESC')->get(),
+            'cleangcompanylandscaping' => company::where('terminat',1)->where('type','Exterior')->orderby('created_at','DESC')->get(),
 
-             'cleangcompanyusab' => company::where('type','Interior')->orderby('created_at','DESC')->get(),
+             'cleangcompanyusab' => company::where('terminat',1)->where('type','Interior')->orderby('created_at','DESC')->get(),
 
-             'cleangcompanyadmin' => company::orderby('created_at','DESC')->get(),
+             'cleangcompanyadmin' => company::where('terminat',1)->orderby('created_at','DESC')->get(),
 
-             'assessmmentcompany' => company::select(DB::raw('company_name'))
+             'assessmmentcompany' => company::where('terminat',1)->select(DB::raw('company_name'))
                     ->groupBy('company_name')->get(),
-            'assessmmenttender' => company::select(DB::raw('tender'))
+            'assessmmenttender' => company::where('terminat',1)->select(DB::raw('tender'))
                     ->groupBy('tender')->get(),
 
-            'assessmmentareas' => company::select(DB::raw('area'))
+            'assessmmentareas' => company::where('terminat',1)->select(DB::raw('area'))
                     ->groupBy('area')->get(),
 
           ]);

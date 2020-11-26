@@ -78,7 +78,6 @@ var total=2;
     @endif
 
 
-
           @if($wo->onbehalf != null)
                <p align="center">This works order was submitted on behalf of {{$wo['onbehalfs']->type}} : {{ $wo['onbehalfs']->fname.' '.$wo['onbehalfs']->lname }}</p>
            @endif
