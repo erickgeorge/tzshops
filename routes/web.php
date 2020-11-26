@@ -528,6 +528,7 @@ Route::post('Addnewsheet', 'AssetsController@addnewsheetc')->name('addnew.sheet'
 Route::post('delete/House/{id}', 'AssetsController@deleteHouse')->name('house.delete')->middleware('auth');
 Route::POST('edit/House', 'AssetsController@editHouse')->name('house.edit')->middleware('auth');
 Route::POST('edit/company', 'AssetsController@editcompany')->name('company.edit')->middleware('auth');
+Route::POST('terminate/company', 'AssetsController@terminatecompany')->name('company.terminate')->middleware('auth');
 Route::get('Register_Staffhouse', 'AssetsController@Registerstaffhouseview')->name('registerstaffhouse')->middleware('auth');
 
 Route::get('Register_tender', 'AssetsController@Registercompanyview')->name('registercompany')->middleware('auth');

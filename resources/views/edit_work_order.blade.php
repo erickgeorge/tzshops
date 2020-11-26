@@ -83,6 +83,7 @@ var total=2;
            @endif
 
 <br>
+
     <div style="margin-right: 2%; margin-left: 2%;">
     <div class="row">
         <div class="col">
@@ -3370,7 +3371,7 @@ var value = parseInt(document.getElementById('totalmaterialse').value, 10);
 
 
 
-                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col-md-6">
+                      <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}">
                         @csrf
 
 <p>Requesting material again after crosschecking
