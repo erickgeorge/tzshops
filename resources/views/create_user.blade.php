@@ -246,24 +246,24 @@ $(document).ready(function(){
 
               <div id="locationdiv" >
                <select  required style="width: 500px;" class="custom-select" name="type" id="type">
-	                  <option value="" selected>Choose...</option>
-	                  <option value="Accountant">Accountant</option>
-	                  <option value="Administrative officer">Administrative officer</option>
-	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
-                      <option value="Assets Officer">Assets Officer</option>
-                      <option value="Bursar">Bursar</option>
-                      <option value="CLIENT">Client</option>
-                      <option value="Dean">Dean</option>
-                       <option value="Dean of Student">Dean of Students</option>
-                        <option value="Deputy Manager Mabibo">Deputy Manager Mabibo</option>
-                         <option value="Deputy Manager Magufuli">Deputy Manager Magufuli</option>
-                          <option value="Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi">Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi</option>
-	                  <option value="DVC Admin">DVC Admin</option>
+	                  <option  disabled='false'  value="" selected>Choose...</option>
+	                  <option  disabled='false'  value="Accountant">Accountant</option>
+	                  <option disabled='false'  value="Administrative officer">Administrative officer</option>
+	                  <option disabled='false'  value="Architect & Draftsman">Architect & Draftsman</option>
+                      <option disabled='false'  value="Assets Officer">Assets Officer</option>
+                      <option disabled='false'  value="Bursar">Bursar</option>
+                      <option disabled='false'  value="CLIENT">Client</option>
+                      <option disabled='false'  value="Dean">Dean</option>
+                       <option  disabled='false' value="Dean of Student">Dean of Students</option>
+                        <option disabled='false'  value="Deputy Manager Mabibo">Deputy Manager Mabibo</option>
+                         <option disabled='false'  value="Deputy Manager Magufuli">Deputy Manager Magufuli</option>
+                          <option disabled='false'  value="Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi">Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi</option>
+	                  <option disabled='false'  value="DVC Admin">DVC Admin</option>
 	                  <!--<option value="Directorate Director">Directorate Director</option>-->
-	                   <option value="Dvc Accountant">Dvc Accountant</option>
-	                  <option value="Estates officer">Estates officer</option>
-	                  <option value="Estates Director">Estates Director</option>
-	                  <option value="Head Procurement">Head of Procurement</option>
+	                   <option disabled='false'  value="Dvc Accountant">Dvc Accountant</option>
+	                  <option disabled='false'  value="Estates officer">Estates officer</option>
+	                  <option  disabled='false' value="Estates Director">Estates Director</option>
+	                  <option disabled='false'  value="Head Procurement">Head of Procurement</option>
 
 
 	                  @foreach($worksec as $dep)
@@ -282,11 +282,11 @@ $(document).ready(function(){
 
 	                  <option disabled='false'  value="Secretary to Council">Secretary to Council</option>
 
-	                  <option value="Supervisor Landscaping">Supervisor Landscaping</option>
-                     <option value="Warden"> Warden</option>
+	                  <option disabled='false'  value="Supervisor Landscaping">Supervisor Landscaping</option>
+                     <option disabled='false'  value="Warden"> Warden</option>
 
-                      <option value="Transport Officer">Transport Officer</option>
-                      <option value="USAB">Usab Manager</option>
+                      <option disabled='false'  value="Transport Officer">Transport Officer</option>
+                      <option disabled='false'  value="USAB">Usab Manager</option>
 
 	           </select>
 	           </div>
@@ -316,36 +316,36 @@ $(document).ready(function(){
               	<br>
 
                 <select   style="width: 500px;" class="custom-select" name="secondtype" id="secondtype">
-	                  <option value="" selected>Choose...</option>
-	                  <option value="Administrative officer">Administrative officer</option>
-	                  <option value="Accountant">Accountant</option>
-	                  <option value="Architect & Draftsman">Architect & Draftsman</option>
-	                  <option value="CLIENT">Client</option>
-                    <option value="Dean">Dean</option>
-                    <option value="Dean of Student">Dean of Students</option>
-	                  <option value="DVC Admin">DVC Admin</option>
-	              <!--    <option value="Directorate Director">Directorate Director</option>-->
-	                  <option value="Director DPI">Director DPI</option>
-	                  <option value="Estates officer">Estates officer</option>
-	                  <option value="Estates Director">Estates Director</option>
-	                  <option value="Head Procurement">Head of Procurement</option>
+	                  <option  disabled='false' value="" selected>Choose...</option>
+	                  <option disabled='false'  value="Administrative officer">Administrative officer</option>
+	                  <option  disabled='false' value="Accountant">Accountant</option>
+	                  <option  disabled='false' value="Architect & Draftsman">Architect & Draftsman</option>
+	                  <option  disabled='false' value="CLIENT">Client</option>
+                    <option  disabled='false' value="Dean">Dean</option>
+                    <option  disabled='false' value="Dean of Student">Dean of Students</option>
+	                  <option  disabled='false' value="DVC Admin">DVC Admin</option>
+	              <!--    <option  disabled='false' value="Directorate Director">Directorate Director</option>-->
+	                  <option disabled='false'  value="Director DPI">Director DPI</option>
+	                  <option disabled='false'  value="Estates officer">Estates officer</option>
+	                  <option disabled='false'  value="Estates Director">Estates Director</option>
+	                  <option disabled='false'  value="Head Procurement">Head of Procurement</option>
 
 	                    @foreach($worksec as $dep)
 
-                           <option  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
+                           <option  disabled='false'  value="HOS {{$dep->section_name}}"  >Head of section <?php echo ucfirst( $dep->section_name ); ?></option>
 
                       @endforeach
 
-	                  <option value="Head PPU">Head PPU</option>
+	                  <option disabled='false'  value="Head PPU">Head PPU</option>
 
 
-	                  <option value="Maintenance coordinator">Maintenance Coordinator</option>
-	                  <option value="Principal">Principal</option>
-	                  <option value="STORE">Store Manager</option>
+	                  <option disabled='false'  value="Maintenance coordinator">Maintenance Coordinator</option>
+	                  <option disabled='false'  value="Principal">Principal</option>
+	                  <option disabled='false'  value="STORE">Store Manager</option>
 
-	                  <option value="Secretary to Council">Secretary to Council</option>
-                      <option value="Supervisor Landscaping">Supervisor Landscaping</option>
-	                  <option value="Transport Officer">Transport Officer</option>
+	                  <option disabled='false'  value="Secretary to Council">Secretary to Council</option>
+                      <option disabled='false'  value="Supervisor Landscaping">Supervisor Landscaping</option>
+	                  <option disabled='false'  value="Transport Officer">Transport Officer</option>
 
 	           </select>
              </div>

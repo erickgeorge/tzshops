@@ -54,7 +54,8 @@
 				?>
                 <tr>
                     <th scope="row"></th>
-                    <td>  @if($t==$c)  @else  00{{ $item->work_order_id  }} @endif </td>
+                    <td>  @if($t==$c)  @else                      <td>{{ $item['workorder']->woCode }}</td>
+                    @endif </td>
 
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>

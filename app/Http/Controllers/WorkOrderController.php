@@ -42,7 +42,7 @@ class WorkOrderController extends Controller
         if (count($check_if)>0) {
             foreach($check_if as $item)
             {
-                $code = $check_if->abbreviation;
+                $code = $item->abbreviation;
             }
             $code = $code;
         }else {
@@ -56,7 +56,7 @@ class WorkOrderController extends Controller
         $finalCode = $code.'/'.$date.'/'.$last;
 
 
-        
+
 
         if ($request['p_type'] == 'Choose...') {
             return redirect()->back()->withErrors(['message' => 'Problem Type required ']);
@@ -335,7 +335,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         ]);
     }
 
-   
+
 
     public function   editWOView($id)
     {

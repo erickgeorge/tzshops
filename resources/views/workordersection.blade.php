@@ -48,7 +48,7 @@ Workorder Section
                     <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name of Section</th>
-
+<th>Abbreviation</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -62,6 +62,7 @@ Workorder Section
                             <th scope="row">{{ $i }}</th>
 
                             <td><?php echo ucwords(strtolower( $dep->section_name )); ?></td>
+                            <td> {{$dep->abbreviation}} </td>
                             <td>
                                  <div class="row">&nbsp;&nbsp;&nbsp;
                                     <a style="color: green;"
@@ -117,7 +118,8 @@ Workorder Section
                         <label for="dep_name">Section Name</label>
                         <input id="sname" style="color: black" type="text" required class="form-control" id="dep_name"   maxlength = "15"
                                name="sec_name" placeholder="Enter Section Name, Example: ELECTRICAL, MECANICAL etc." >
-                                 <input id="esecid" name="esecid" hidden>
+                                 <input id="esecid" name="esecid" hidden> <br>
+                                 <input type="text" name="abbreviation" class="form-control"  maxlength="10">
                     </div>
 
 

@@ -34,7 +34,6 @@
 
 
 </head>
-<body  onload="createTable()">
 <style type="text/css">
     .nav-item:hover{
         background-color:#0acb;
@@ -772,7 +771,7 @@ title="Send feedback/comment"
 }
 </style>
 </head>
-<body>
+<body  onload="createTable()">
 
 <div class="sidenav" style="padding-top:90px;">
   <a  href="{{ url('work_order')}}" >Works Orders </a>
@@ -998,7 +997,7 @@ title="Send feedback/comment"
                       <a href="{{ url('ProcurementHistory') }}">
                         Procurement
                     </a>
-                  
+
                      <a href="{{ url('ProcurementHistory') }}">
                         Good Received Note
                     </a>

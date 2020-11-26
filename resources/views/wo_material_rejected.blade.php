@@ -78,7 +78,7 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                   <td>WO {{ $item->work_order_id }}</td>
+                    <td>{{ $item['workorder']->woCode }}</td>
 
                     <td>{{ $item['workorder']->details }}</td>
                     <td>{{$item['material']->name }}</td>
