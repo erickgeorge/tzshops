@@ -998,11 +998,11 @@ title="Send feedback/comment"
                         Procurement
                     </a>
 
-                     <a href="{{ url('ProcurementHistory') }}">
+                     <a href="{{ url('all_grns') }}">
                         Good Received Note
                     </a>
 
-                      <a href="{{ url('ProcurementHistory') }}">
+                      <a href="{{ url('all_isse_note') }}">
                         Issue Note
                     </a>
 
@@ -1055,7 +1055,7 @@ title="Send feedback/comment"
                         Good Received Note
                     </a>
 
-                      <a href="{{ url('work_order_with_missing_material') }}">
+                      <a href="{{ url('all_isse_note') }}">
                         Issue Note
                     </a>
 

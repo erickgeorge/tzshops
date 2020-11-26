@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-  Edit Works order
+  Edit Work order
     @endSection
 
 @section('body')
@@ -59,9 +59,6 @@ var total=2;
         </div>
     </div>
     <hr>
-
-
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="alert alert-danger">
@@ -79,6 +76,7 @@ var total=2;
             </ul>
         </div>
     @endif
+<<<<<<< HEAD
 
 
           @if($wo->onbehalf != null)
@@ -86,13 +84,13 @@ var total=2;
            @endif
 
 <br>
+=======
+>>>>>>> 1e62ff3b8785df29709a6a51f5905cb45f362b76
     <div style="margin-right: 2%; margin-left: 2%;">
     <div class="row">
         <div class="col">
             <h5>Submited by  <span
-                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span>
-                <h5>Submited on <span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5>
-                <h5> <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span>
+                style=" font-weight: bold;">{{ $wo['user']->fname.' '.$wo['user']->lname }}</span><h5>Submited on <span style=" font-weight: bold;">{{ date('d F Y', strtotime($wo->created_at)) }}</span></h5><h5> <h5 style="color: black">Mobile number: <span style=" font-weight: bold;">{{ $wo['user']->phone }}</span>
                   <h5> Email: <span style=" font-weight: bold;"> {{ $wo['user']->email }} </span></h5>
 
 
@@ -298,7 +296,7 @@ var total=2;
 
 
  <table class="table table-striped  display" style="width:100%">
-  <tr>technician
+  <tr>
      <thead style="color: white;">
       <th>#</th>
     <th>Full Name</th>
@@ -500,7 +498,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
   <th>Type</th>
    <th>Quantity</th>
-   <th>Unit of Measure</th>
    <th>Approved By</th>
     <th>Status</th>
      <th>Date Requested</th>
@@ -517,8 +514,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
     <td>{{$matform['material']->type }}</td>
    <td>{{$matform->quantity }}</td>
-   <td>{{$matform['material']->brand }}</td>
-
        <td>
        @if($matform->accepted_by == NULL)
       <span >Not accepted Yet.</span>
@@ -570,7 +565,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <th>Material Name</th>
 
   <th>Type</th>
-  <th>Unit of Measure</th>
    <th>Quantity</th>
    <th>IoW</th>
    <th>Approved By</th>
@@ -588,8 +582,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <td>{{$matform['material']->name }}</td>
 
     <td>{{$matform['material']->type }}</td>
-    <td>{{$matform['material']->brand }}</td>
-
    <td>{{$matform->quantity }}</td>
    <td>{{$matform['iowzone']->name }}</td>
        <td>
@@ -650,7 +642,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <th>Name</th>
     <th> Description</th>
      <th>Type</th>
-     <th>Unit of Measure</th>
      <th>Quantity</th>
    </thead>
   </tr>
@@ -662,8 +653,6 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
    <td>{{$matform['material']->name }}</td>
    <td>{{$matform['material']->description }}</td>
    <td>{{$matform['material']->type }}</td>
-   <td>{{$matform['material']->brand }}</td>
-
    <td>{{$matform->quantity }}</td>
   </tr>
 
@@ -2073,12 +2062,12 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
           <h5 style="color: blue"><b> Does this works order need transport for inspection? </b></h5>
 
-         <label><input type="radio" onclick="return confirm('Are you sure you have signed works order inspection form? ')" name="colorRadio" value="red">Yes</label> &nbsp;
-         <label><input type="radio" onclick="return confirm('Are you sure you have signed works order inspection form? ')" name="colorRadio" value="green"> No</label>
+         <label><input type="radio" name="colorRadio" value="red">Yes</label> &nbsp;
+         <label><input type="radio" name="colorRadio" value="green"> No</label>
 
            <div class="red box">
 
-                     <form method="POST"  action="{{ route('work.transport', [$wo->id]) }}">
+                     <form method="POST" onsubmit="return confirm('Are you sure you have signed works order inspection form? ')" action="{{ route('work.transport', [$wo->id]) }}">
                     @csrf
                     <div >
                    @if($wo->statusmform != 1)
@@ -2124,7 +2113,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
              <div class="green box">
 
-           <form method="POST" action="{{ route('work.inspection', [$wo->id]) }}">
+           <form method="POST" onsubmit="return confirm('Are you sure you have signed works order inspection form? ')" action="{{ route('work.inspection', [$wo->id]) }}">
                @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -3387,6 +3376,7 @@ var value = parseInt(document.getElementById('totalmaterialse').value, 10);
                       <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}" class="col-md-6">
                         @csrf
 
+Requesting material again after crosschecking-->
 
 
                         <div class="form-group">

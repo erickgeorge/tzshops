@@ -61,7 +61,7 @@
            <tr style="color: white;">
         <th >No</th>
 
-        <th >Works order Details</th>
+        <th >Wo ID</th>
         <th >Material Name</th>
         <th >Material Description</th>
         <th >Type</th>
@@ -81,7 +81,7 @@
                 <?php $i++ ?>
                 <tr>
                     <th scope="row">{{ $i }}</th>
-                    <td>{{ $item['workorder']->details }}</td>
+                    <td>{{ $item['workorder']->woCode }}</td>
                     <td>{{$item['material']->name }}</td>
                     <td>{{ $item['material']->description }}</td>
                     <td>{{ $item['material']->type }}</td>

@@ -58,9 +58,9 @@
                 <tr>
                     <th scope="row">{{ $i }}</th>
 
-                    <td>00{{ $item->work_order_id }}</td>
+                    <td>{{ $item['workorder']->woCode }}</td>
 
-                    <td>Mr .{{ $item['userreceiver']->lname.' '.$item['userreceiver']->fname }}</td>
+                    <td>{{ $item['userreceiver']->lname.' '.$item['userreceiver']->fname }}</td>
 
 
                       <td>  <a style="color: green;" href="received/materials/from_store/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">View Materials</a>&nbsp;

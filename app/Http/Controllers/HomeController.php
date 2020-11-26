@@ -2986,6 +2986,21 @@ $v5=$type[4];
 
 
 
+       public function allissuenote()
+    {
+        $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
+        $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+        $wo_material=   WorkOrderMaterial::
+                     select(DB::raw('isn_time'),'isn_number')
+                     ->where('isn',2)
+                     ->groupBy('isn_time')
+                     ->groupBy('isn_number')
+                     ->get();
+
+        return view('allissuenotes', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+    }
+
 
 
        public function allgrns()
