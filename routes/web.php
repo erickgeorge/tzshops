@@ -665,6 +665,10 @@ Route::get('cleaningcompany','AssetsController@cleaningcompanynew')->name('clean
 
 Route::get('cleaningcompanyexpired','AssetsController@cleaningcompanyexpired')->name('cleaning_company_expired')->middleware('auth');
 
+
+Route::get('cleaningcompanyterminated','AssetsController@cleaningcompanyterminated')->name('cleaning_company_terminated')->middleware('auth');
+
+
 Route::get('cleaningcompanyreport','AssetsController@cleaningcompanyreport')->name('cleaningcompanyreport')->middleware('auth');
 
 Route::get('assessmentsheet','AssetsController@assessmentsheet')->name('assessment_sheet')->middleware('auth');
@@ -816,6 +820,8 @@ Route::post('viewtrendingscorereport/{tender}/{company}','NotesController@trendi
 Route::get('viewtrendingscorereportforcompany/{tender}/{month}','NotesController@trendingscorereportcompany')->name('trendingscore_report_company')->middleware('auth');
 Route::get('cleaning_company_report','NotesController@landcleaningcompanyreport')->name('landscapingcleaningcompanyreport')->middleware('auth');
 Route::get('cleaning_company_report_expired','NotesController@landcleaningcompanyreportexpired')->name('landscapingcleaningcompanyreportexpired')->middleware('auth');
+
+Route::get('cleaning_company_report_terminated','NotesController@landcleaningcompanyreportterminated')->name('landscapingcleaningcompanyreportterminated')->middleware('auth');
 
 Route::get('cleaning_area_report','NotesController@landcleaningareareport')->name('landscapingcleaningarea')->middleware('auth');
 

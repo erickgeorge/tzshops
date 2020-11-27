@@ -549,6 +549,23 @@ class AssetsController extends Controller
 
 
 
+
+             public function cleaningcompanyterminated(){
+         $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
+         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
+
+         return view('cleaningcompanyterminated', [
+            'role' => $role,
+            'notifications' => $notifications,
+
+             'cleangcompany' => tendernumber::where('terminat',2)->get()
+
+          ]);
+
+         }
+
+
+
              public function cleaningcompanyexpired(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
          $role = User::where('id', auth()->user()->id)->with('user_role')->first();
@@ -562,6 +579,8 @@ class AssetsController extends Controller
           ]);
 
          }
+
+
 
         public function cleaningcompanynew(){
          $notifications = Notification::where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
