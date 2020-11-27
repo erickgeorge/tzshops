@@ -2060,8 +2060,8 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
           <h5 style="color: blue"><b> Does this works order need transport for inspection? </b></h5>
 
-         <label><input type="radio" name="colorRadio" value="red">Yes</label> &nbsp;
-         <label><input type="radio" name="colorRadio" value="green"> No</label>
+         <label><input type="radio" name="colorRadio" onclick="return confirm('Are you sure you have signed works order inspection form? ')" value="red">Yes</label> &nbsp;
+         <label><input type="radio" name="colorRadio" onclick="return confirm('Are you sure you have signed works order inspection form? ')" value="green"> No</label>
 
            <div class="red box">
 
@@ -2111,7 +2111,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 
              <div class="green box">
 
-           <form method="POST" onsubmit="return confirm('Are you sure you have signed works order inspection form? ')" action="{{ route('work.inspection', [$wo->id]) }}">
+           <form method="POST"  action="{{ route('work.inspection', [$wo->id]) }}">
                @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -3373,6 +3373,10 @@ var value = parseInt(document.getElementById('totalmaterialse').value, 10);
 
                       <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}">
                         @csrf
+
+<p>Requesting material again after crosschecking
+</p>
+
                         <div class="form-group">
                             <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
                                 <option   selected value="" >Choose...</option>
