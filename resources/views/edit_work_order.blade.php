@@ -252,9 +252,6 @@ var total=2;
 
 
 
-
-
-
        <!--  <form method="POST" action="{{ route('workOrder.edit', [$wo->id]) }}">
             @csrf
 
@@ -269,8 +266,6 @@ var total=2;
 
             <button type="submit" class="btn btn-primary">Save</button>
           </form>-->
-
-
 
 
 
@@ -492,9 +487,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <tr>
      <thead style="color: white;">
 <th>#</th>
-    <th>Name</th>
+    <th>Item ID</th>
 
-  <th>Type</th>
+  <th>Description</th>
    <th>Quantity</th>
    <th>Approved By</th>
     <th>Status</th>
@@ -510,7 +505,7 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <td>{{$m}}</td>
     <td>{{$matform['material']->name }}</td>
 
-    <td>{{$matform['material']->type }}</td>
+    <td>{{$matform['material']->description }}</td>
    <td>{{$matform->quantity }}</td>
        <td>
        @if($matform->accepted_by == NULL)

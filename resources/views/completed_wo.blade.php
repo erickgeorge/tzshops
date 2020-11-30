@@ -203,7 +203,7 @@ use App\WorkOrder;
                             <td>
 
                                 @if($work->location ==null)
-                                    {{ $work['room']['block']->location_of_block }}</td>
+                                    {{ $work['room']->location_of_block }}</td>
                             @else
 
                                 {{ $work->location }}
