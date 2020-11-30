@@ -4,7 +4,7 @@
     <p><h2>University of Dar es Salaam</h2>
      <img src="{{ public_path('/images/logo_ud.png') }}" height="100px" style="margin-top: 5px;" alt="udsm">  <h5>DIRECTORATE OF ESTATES SERVICES</h5></p>
 
-<p style="text-align: center;"><B> Companies with Expired Contracts </B>
+<p style="text-align: center;"><B> Companies with Terminated Contracts </B>
  </p>
 </div>
 <style>
@@ -88,11 +88,12 @@ tr:nth-child(even) {
                    <tr style="color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Tender Number</th>
+                         <th scope="col">Type of Contract</th>
                         <th scope="col">Company Name</th>
 
 
                         <th scope="col">Contract Duration</th>
-                        <!--<th scope="col">Status</th>-->
+                        <th scope="col">Reason</th>
 
                     </tr>
                     </thead>
@@ -108,10 +109,7 @@ tr:nth-child(even) {
 
 
 
-                            @if($now1 > $endcont)
-                           
-                           
-
+            
 
                         <?php $i++; ?>
 
@@ -120,6 +118,7 @@ tr:nth-child(even) {
                         <tr>
                             <th scope="row">{{ $i }}</th>
                             <td>{{ $house->tender }}</td>
+                            <td>{{ $house['tendercompany']->type }}</td>
                             <td>{{ $house['tendercompany']->company_name }}</td>
 
 
@@ -168,36 +167,13 @@ tr:nth-child(even) {
                             <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
                             @endif
 
-
-                          <!--   @if($house->status == 1)
-
-                             <?php $now1 =  Carbon::now();
-
-                             $endcont = Carbon::parse($house->endcontract);?>
+                            <td> <textarea disabled="">{{ $house->ter_reason }}</textarea></td>
 
 
-
-                            @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
-                             @else
-                           <td><span class="badge badge-success">Active Contract </span></td>
-                             @endif
-
-
-
-                            @else
-                            <td> <span class="badge badge-primary"> New</span> </td>
-                            @endif -->
 
 
 
                         </tr>
-
-
-
-
-  @endif
-
 
                     @endforeach
                     </tbody>
@@ -207,14 +183,6 @@ tr:nth-child(even) {
 
 
 </div>
-
-
-
-
-
-
-
-
 
    </body>
 

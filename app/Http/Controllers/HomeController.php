@@ -2835,7 +2835,7 @@ $v5=$type[4];
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
-        $wo_material=   WorkOrderMaterial::
+        $wo_material=   WorkOrderMaterial::where('hos_id',auth()->user()->id)->
                        select(DB::raw('work_order_id'),'receiver_id')
                      ->where('status',3)
                      ->groupBy('work_order_id')

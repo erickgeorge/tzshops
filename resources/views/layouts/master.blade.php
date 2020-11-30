@@ -187,7 +187,7 @@
 
                  $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
 
-                $wo_materialreceive=   WorkOrderMaterial::
+                $wo_materialreceive=   WorkOrderMaterial::where('hos_id',auth()->user()->id)->
                        select(DB::raw('work_order_id'),'receiver_id')
                      ->where('status',3)
                      ->groupBy('work_order_id')

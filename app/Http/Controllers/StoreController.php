@@ -906,9 +906,17 @@ public function deletematerial($id , $woid)
        {
           $wo_status_check_return =WorkOrderMaterial::where('work_order_id', $woid)->where('status', 17)->update(array('check_return' =>null));
 
+            $deleteallmat=WorkOrderMaterial::where('work_order_id', $woid)->where('status', 20)->get();
+
+            if (count($deleteallmat) == 1) {
+               $wo_oder=WorkOrder::where('id', $woid)->first();
+               $wo_oder->requirematerial = null;
+               $wo_oder->save();
+            }
+
            $matrialdelete=WorkOrderMaterial::where('id', $id)->first();
            $matrialdelete->delete();
-
+            
 
 
            return redirect()->back()->with(['message' => 'Respective material deleted successfully']);

@@ -33,12 +33,12 @@ Companies
 
     </div>
 
-                  <h4 ><b >Companies with Expired Contracts</b></h4>
+                  <h4 ><b >Companies with Terminated Contracts</b></h4>
 
                   <hr>
 
                        <button style="max-height: 40px; float:right;" type="button" class="btn btn-primary" >
-                <a href="{{route('landscapingcleaningcompanyreportexpired')}}"
+                <a href="{{route('landscapingcleaningcompanyreportterminated')}}"
                 target="_blank" 
                                          style="color: white;"  data-toggle="tooltip" title="Print report"> Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i> </a>
                 </button>
@@ -64,7 +64,7 @@ Companies
                        <!-- <th scope="col">Monthly Payment (Tshs)</th>-->
                         <th scope="col">Contract Type</th>
                         <th scope="col">Contract Duration</th>
-                        <th scope="col">Status</th>
+                       
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -90,9 +90,6 @@ Companies
 
                  $endcont = Carbon::parse($house->endcontract);?>
 
-          <!--expired contract-->
-             @if($now1 > $endcont)
-          <!--expired contract-->
 
 
                         <tr>
@@ -147,92 +144,34 @@ Companies
                             @else
                             <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
                             @endif
+                
 
-
-                            @if($house->status == 1)
-
-                             <?php $now1 =  Carbon::now();
-
-                             $endcont = Carbon::parse($house->endcontract);?>
-
-
-
-                             @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
-                             @else
-                           <td><span class="badge badge-success">Active Contract </span></td>
-                             @endif
-
-
-
-                            @else
-                            <td> <span class="badge badge-primary"> New</span> </td>
-                            @endif
-
-                            @if($house->status == 1)
-
-
-
-
-                             @if($now1 > $endcont)
-                           <td>
-
-
-
-                            <?php $tender = Crypt::encrypt($house->tender ); ?>
-                          <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
-
-
-
-
-                           </td>
-                             @else
                            <td><?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
-</td>
-                             @endif
+                                                    class="fa fa-bar-chart"></i></a>&nbsp;&nbsp;
+                          <a style="color: green;"
+                                       onclick="myfunc('{{ $house->id }}','{{ $house->ter_reason }}','{{ $house['tendercompany']->company_name }}' )"
+                                       data-toggle="modal" data-target="#editHouse" title="Reason For Termination"><i
+                                                class="fas fa-eye"></i></a>
+                          </td>
+                          
 
 
+                         
 
-                            @else
-
-                            <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
-                                       onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
-                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
-                                                class="fas fa-edit"></i></a>
-
-                                      <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this company Completely? ')"
-                                          action="{{ route('company.delete', [$house->id]) }}">
-                                        {{csrf_field()}}
-
-
-                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
-                                                                                        data-toggle="tooltip"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                        </button>
-                                    </form> </div>
-
-                                     </td>
-                            @endif
 
 
                         </tr>
 
 
 
-     <!--expired contract-->
-             @endif
-          <!--expired contract-->
 
                 @endif
 
                     @endforeach
 
  @endif
+
 
 
 
@@ -253,9 +192,7 @@ Companies
 
                  $endcont = Carbon::parse($house->endcontract);?>
 
-          <!--expired contract-->
-             @if($now1 > $endcont)
-          <!--expired contract-->
+ 
 
 
                         <tr>
@@ -312,85 +249,19 @@ Companies
                             @endif
 
 
-                            @if($house->status == 1)
-
-                             <?php $now1 =  Carbon::now();
-
-                             $endcont = Carbon::parse($house->endcontract);?>
-
-
-
-                             @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
-                             @else
-                           <td><span class="badge badge-success">Active Contract </span></td>
-                             @endif
-
-
-
-                            @else
-                            <td> <span class="badge badge-primary"> New</span> </td>
-                            @endif
-
-                            @if($house->status == 1)
-
-
-
-
-                             @if($now1 > $endcont)
-                           <td>
-
-
-
-                            <?php $tender = Crypt::encrypt($house->tender ); ?>
-                          <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
-
-
-
-
-                           </td>
-                             @else
                            <td><?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
-</td>
-                             @endif
+                                                    class="fa fa-bar-chart"></i></a>&nbsp;&nbsp;
+                          <a style="color: green;"
+                                       onclick="myfunc('{{ $house->id }}','{{ $house->ter_reason }}','{{ $house['tendercompany']->company_name }}' )"
+                                       data-toggle="modal" data-target="#editHouse" title="Reason For Termination"><i
+                                                class="fas fa-eye"></i></a>
+                          </td>
+                          
 
 
 
-                            @else
-
-                            <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
-                                       onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
-                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
-                                                class="fas fa-edit"></i></a>
-
-                                      <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this company Completely? ')"
-                                          action="{{ route('company.delete', [$house->id]) }}">
-                                        {{csrf_field()}}
-
-
-                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
-                                                                                        data-toggle="tooltip"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                        </button>
-                                    </form> </div>
-
-                                     </td>
-                            @endif
-
-
-                        </tr>
-
-
-
-     <!--expired contract-->
-             @endif
-          <!--expired contract-->
-
+                         </tr>
                 @endif
 
                     @endforeach
@@ -416,9 +287,7 @@ Companies
 
                  $endcont = Carbon::parse($house->endcontract);?>
 
-          <!--expired contract-->
-             @if($now1 > $endcont)
-          <!--expired contract-->
+
 
 
                         <tr>
@@ -467,94 +336,25 @@ Companies
                   @endif
 
 
-
-
-
                             @else
                             <td> <span class="badge badge-warning"> Not yet Updated</span> </td>
                             @endif
 
-
-                            @if($house->status == 1)
-
-                             <?php $now1 =  Carbon::now();
-
-                             $endcont = Carbon::parse($house->endcontract);?>
-
-
-
-                             @if($now1 > $endcont)
-                           <td><span class="badge badge-danger">Contract expired </span></td>
-                             @else
-                           <td><span class="badge badge-success">Active Contract </span></td>
-                             @endif
-
-
-
-                            @else
-                            <td> <span class="badge badge-primary"> New</span> </td>
-                            @endif
-
-                            @if($house->status == 1)
-
-
-
-
-                             @if($now1 > $endcont)
-                           <td>
-
-
-
-                            <?php $tender = Crypt::encrypt($house->tender ); ?>
-                          <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
-
-
-
-
-                           </td>
-                             @else
+                          
+                     
+                          
                            <td><?php $tender = Crypt::encrypt($house->tender ); ?>
                           <a style="color: green;"  href="{{route('view_company_report_for_company' , [ $tender,  $house['tendercompany']->company_name ])}}" data-toggle="tooltip" title="View report"><i
-                                                    class="fas fa-eye"></i></a>&nbsp;&nbsp;
-</td>
-                             @endif
-
-
-
-                            @else
-
-                            <td> <div class="row">  &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: green;"
-                                       onclick="myfunc('{{ $house->id }}','{{ $house->tender }}','{{ $house['tendercompany']->company_name }}' )"
-                                       data-toggle="modal" data-target="#editHouse" title="Edit"><i
-                                                class="fas fa-edit"></i></a>
-
-                                      <form method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this company Completely? ')"
-                                          action="{{ route('company.delete', [$house->id]) }}">
-                                        {{csrf_field()}}
-
-
-                                        <button style="width:20px;height:20px;padding:0px;color:red" type="submit"
-                                                data-toggle="tooltip" title="Delete"><a style="color: red;"
-                                                                                        data-toggle="tooltip"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                        </button>
-                                    </form> </div>
-
-                                     </td>
-                            @endif
+                                                    class="fa fa-bar-chart"></i></a>&nbsp;&nbsp;
+                          <a style="color: green;"
+                                       onclick="myfunc('{{ $house->id }}','{{ $house->ter_reason }}','{{ $house['tendercompany']->company_name }}' )"
+                                       data-toggle="modal" data-target="#editHouse" title="Reason For Termination"><i
+                                                class="fas fa-eye"></i></a>
+                          </td>
+                          
 
 
                         </tr>
-
-
-
-     <!--expired contract-->
-             @endif
-          <!--expired contract-->
-
-
 
                     @endforeach
 
@@ -581,47 +381,28 @@ Companies
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Cleaning Company</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Reason for Termination</h5>
                 </div>
 
-                <form method="POST" action="edit/company" class="col-md-6">
+               
                     <div class="modal-body">
 
-                        @csrf
+                  
                         <div class="form-group">
-                            <label for="name_of_house">Tender Number </label>
-                            <input style="color: black;width:430px" type="text" required class="form-control"
+                            <label for="name_of_house">Reason </label>
+                            <textarea disabled style="color: black;width:430px" type="text" required class="form-control"
                                    id="edit_name"
-                                   name="tender" placeholder="Enter Company tender number">
+                                   name="tender" placeholder="Enter Company tender number"></textarea>
                             <input id="edit_id" name="edit_id" hidden>
                         </div>
-
-
-                        <!--<div class="form-group">
-                            <label for="name_of_house">Company Name </label>
-                            <input style="color: black;width:350px" type="text" required class="form-control"
-                                   id="edit_type"
-                                   name="company" placeholder="Enter Company Name">
-
-                        </div>-->
-
-                         <div style="width:600px;">
-                                                <div style="float: left;">
-
-                                                        <button  type="submit" class="btn btn-primary">Save
-                                                        </button>
-
-
-                                               </div>
                                                &nbsp;
                                                <div">
 
 
-                                              <a class="btn btn-danger" style="color: white;" role="button"  data-dismiss="modal" aria-label="Close" >Cancel </a>
-                                                       </div>
-                                            </div>
-                                                </div>
-                </form>
+                                                 <a class="btn btn-danger" style="color: white;" role="button"  data-dismiss="modal" aria-label="Close" >Cancel </a>
+
+                </div>                          
+    
                 <div class="modal-footer">
                 </div>
             </div>

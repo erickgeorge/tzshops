@@ -855,8 +855,6 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
     public function materialaddforwork(Request $request,$id)
     {
-
-
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
 
         $notifications = Notification::where('receiver_id', auth()->user()->id)->where('status', 0)->get();
