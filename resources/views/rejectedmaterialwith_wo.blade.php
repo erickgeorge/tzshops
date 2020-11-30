@@ -11,8 +11,11 @@
      @if(count($items) > 0)
 <div class="container">
     <div class="row container-fluid">
-        <div class="col-lg-12">
+        <div class="col">
             <h5 style="  " ><b>Works orders with Material(s) Rejected</b></h5>
+        </div>
+        <div class="col-md-4">
+            <a href="" class="btn btn-primary"> PDF <i class="fa fa-file-pdf" aria-hidden="true"></i> </a>
         </div>
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -69,8 +72,8 @@
                         </td>
                     </tr>
                     @endforeach
-      @elseif(strpos(auth()->user()->type, "HOS") !== false )      
-       <?php $iii=0;  ?>       
+      @elseif(strpos(auth()->user()->type, "HOS") !== false )
+       <?php $iii=0;  ?>
                @foreach($materialhos as $item)
 
                 <?php $iii++ ?>
