@@ -31,8 +31,9 @@
                 <thead >
   <tr style="color: white;">
     <th>No</th>
-    <th>Material Name</th>
-    <th>Material Description</th>
+    <th>Item ID</th>
+    <th>Description</th>
+     <th>Unit of Measure</th>
     <th>Type</th>
      <th>Quantity Requested</th>
       <th>Quantity in Store</th>
@@ -70,8 +71,9 @@ foreach($wo_materials as $matmissing){
      <tr>
     <td>{{$k}}</td>
     <td>{{$matform['material']->name }}</td>
-     <td>{{$matform['material']->description }}</td>
-    <td>{{$matform['material']->type }}</td>
+     <td>{{ucwords(strtolower($matform['material']->description)) }}</td>
+      <td>{{ucwords(strtolower($matform['material']->brand)) }}</td>
+    <td>{{ucwords(strtolower($matform['material']->type)) }}</td>
      <td>{{number_format($matform->quantity) }}</td>
     <?php  $x=$matform['material']->stock - $matform['material']->quantity_reserved; ?>
      @if($x<=0)

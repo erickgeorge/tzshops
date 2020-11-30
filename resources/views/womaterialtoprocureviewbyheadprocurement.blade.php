@@ -53,9 +53,9 @@
            <tr style="color: white;">
                 <th >#</th>
 
-                <th >Material Name</th>
-                <th >Material Description</th>
-                <th >Value/Capacity</th>
+                <th >Item ID</th>
+                <th >Description</th>
+                <th >Unit of Measure</th>
                 <th >Type</th>
                 <th>Quntity Requested</th>
                 <th>Quantity Reserved</th>
@@ -80,9 +80,9 @@
                     <th scope="row">{{ $i }}</th>
 
                     <td>{{ $item['material']->name }}</td>
-                    <td>{{ $item['material']->description }}</td>
-                    <td>{{ $item['material']->brand }}</td>
-                    <td>{{ $item['material']->type }}</td>
+                    <td>{{ ucwords(strtolower($item['material']->description)) }}</td>
+                    <td>{{ ucwords(strtolower($item['material']->brand)) }}</td>
+                    <td>{{ ucwords(strtolower($item['material']->type)) }}</td>
                     <td>{{$item->quantity}}</td>
                     <td>{{$item->reserved_material}}</td>
 

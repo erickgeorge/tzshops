@@ -490,6 +490,8 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     <th>Item ID</th>
 
   <th>Description</th>
+   <th>Unit of Measure</th>
+    <th>Type</th>
    <th>Quantity</th>
    <th>Approved By</th>
     <th>Status</th>
@@ -505,8 +507,10 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 <td>{{$m}}</td>
     <td>{{$matform['material']->name }}</td>
 
-    <td>{{$matform['material']->description }}</td>
-   <td>{{$matform->quantity }}</td>
+    <td>{{ucwords(strtolower($matform['material']->description)) }}</td>
+     <td>{{ucwords(strtolower($matform['material']->brand)) }}</td>
+      <td>{{ucwords(strtolower($matform['material']->type)) }}</td>
+      <td>{{$matform->quantity }}</td>
        <td>
        @if($matform->accepted_by == NULL)
       <span >Not accepted Yet.</span>
@@ -632,8 +636,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <tr>
      <thead style="color: white;">
 <th>#</th>
-    <th>Name</th>
+    <th>Item ID</th>
     <th> Description</th>
+    <th> Unit of Measure</th>
      <th>Type</th>
      <th>Quantity</th>
    </thead>
@@ -644,8 +649,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <tr>
     <td>{{$i}}</td>
    <td>{{$matform['material']->name }}</td>
-   <td>{{$matform['material']->description }}</td>
-   <td>{{$matform['material']->type }}</td>
+   <td>{{ucwords(strtolower($matform['material']->description ))}}</td>
+    <td>{{ucwords(strtolower($matform['material']->brand ))}}</td>
+   <td>{{ucwords(strtolower($matform['material']->type ))}}</td>
    <td>{{$matform->quantity }}</td>
   </tr>
 
@@ -2933,10 +2939,10 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <tr>
     <thead style="color: white;">
     <th>No</th>
-    <th>Material Name</th>
+    <th>Item ID</th>
     <th>Description</th>
-    <th>Type</th>
     <th>Unit of Measure</th>
+    <th>Type</th>
     <th>Quantity Requested</th>
     <th>Action</th>
     </thead>
@@ -2951,9 +2957,9 @@ Download <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
   <tr>
     <td>{{$i++}}</td>
     <td>{{$matform['material']->name }}</td>
-    <td>{{$matform['material']->description }}</td>
-    <td>{{$matform['material']->type }}</td>
-    <td>{{$matform['material']->brand }}</td>
+    <td>{{ucwords(strtolower($matform['material']->description)) }}</td>
+    <td>{{ucwords(strtolower($matform['material']->brand ))}}</td>
+     <td>{{ucwords(strtolower($matform['material']->type)) }}</td>
 
     <td>{{$matform->quantity }}</td>
 
@@ -3369,14 +3375,13 @@ var value = parseInt(document.getElementById('totalmaterialse').value, 10);
                       <form method="POST" action="edit/Material_hos/{{ $matform->work_order_id }}">
                         @csrf
 
-<p>Requesting material again after crosschecking
-</p>
 
                         <div class="form-group">
-                            <select  required class="custom-select"  id="materialedit" name="material" style="width: 550px">
+                           <label for="name_of_house">Material </label>
+                            <select  required class="custom-select" name="material" style="width: 550px">
                                 <option   selected value="" >Choose...</option>
                                 @foreach($materials as $material)
-                                   <option value="{{ $material->id }}">{{ $material->name.', Brand:('.$material->description.') ,Value:( '.$material->brand.' ) ,Type:( '.$material->type.' )' }}</option>
+                                   <option value="{{ $material->id }}">{{ $material->name.', '.$material->description.' , '.$material->type.' ' }}</option>
                                 @endforeach
                             </select>
                         </div>

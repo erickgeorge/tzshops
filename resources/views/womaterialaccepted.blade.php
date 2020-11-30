@@ -62,10 +62,10 @@
                 <tr> <td>{{$i++}}</td>
                     <td>{{ $item['workorder']->woCode }}</td>
 
-                    <td>{{ $item['usermaterial']->fname.' '.$item['usermaterial']->lname }}</td>
+                    <td>{{ ucwords(strtolower($item['usermaterial']->fname.' '.$item['usermaterial']->lname)) }}</td>
 
                     <td>{{ $item['workorder']->details }}</td>
-                    <td>{{ $item['acceptedby']->fname.' '.$item['acceptedby']->lname}}</td>
+                    <td>{{ ucwords(strtolower($item['acceptedby']->fname.' '.$item['acceptedby']->lname))}}</td>
 
                     <td>
 

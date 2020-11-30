@@ -54,12 +54,12 @@
 
                 <tr> <td>{{$i++}}</td>
                     <td>{{ $item['workorder']->woCode }}</td>
-                     <td>Mr .{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                     <td>{{  ucwords(strtolower($item['usermaterial']->lname.' '.$item['usermaterial']->fname)) }}</td>
                     <td>{{ $item['workorder']->details }}</td>
 
                     <td>
 
-					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View materials</a></td>
+					 <a class="btn btn-primary btn-sm" href="{{ route('store.materia_accepte_by_iow', [$item->work_order_id]) }}" role="button">View Materials</a></td>
 
 
                     </tr>
