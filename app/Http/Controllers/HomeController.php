@@ -2842,8 +2842,16 @@ $v5=$type[4];
                      ->groupBy('receiver_id')
                      ->get();
 
+      $wo_material_store=   WorkOrderMaterial::
+                       select(DB::raw('work_order_id'),'receiver_id')
+                     ->where('status',3)
+                     ->groupBy('work_order_id')
+                     ->groupBy('receiver_id')
+                     ->get();
+               
 
-        return view('receivedmaterialwith_wo', ['role' => $role, 'items' => $wo_material,'notifications' => $notifications]);
+
+        return view('receivedmaterialwith_wo', ['role' => $role, 'itemsstore' => $wo_material_store,'items' => $wo_material,'notifications' => $notifications]);
     }
 
 
@@ -3266,8 +3274,6 @@ $v5=$type[4];
         $role = User::where('id', auth()->user()->id)->with('user_role')->first();
         return view('wo_material_accepted', ['role' => $role, 'items' => WorkOrderMaterial::where('work_order_id',$id)->where('status', 1)->orwhere('work_order_id',$id)->where('copyforeaccepted' , 1)->orwhere('work_order_id',$id)->where('status' , 1012)->get(),'notifications' => $notifications]);
    }
-
-
 
 
 

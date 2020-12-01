@@ -16,23 +16,6 @@
             @endif
         </div>
 
-      <!--<div class="col-md-6" align="left">
-            <form method="GET" action="work_order_material_accepted" class="form-inline my-2 my-lg-0">
-                From <input name="start" value="<?php
-                //if (request()->has('start')) {
-                   // echo $_GET['start'];
-               // } ?>" required class="form-control mr-sm-2" type="date" placeholder="Start Month"
-                               max="<?php // echo date('Y-m-d'); ?>">
-                To <input value=" <?php
-                //if (request()->has('end')) {
-                    //echo $_GET['end'];
-               // } ?>"
-                            // name="end" required class="form-control mr-sm-2" type="date" placeholder="End Month"
-                             //max="<?php //echo date('Y-m-d'); ?>">
-                <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
-            </form>
-        </div>-->
-
 
         {{--<div class="col-md-4">
           <form class="form-inline my-2 my-lg-0">
@@ -62,7 +45,8 @@
         <th >No</th>
 
         <th >Wo ID</th>
-        <th >Material Name</th>
+        <th >Item ID</th>
+        <th >Unit of Measure</th>
         <th >Material Description</th>
         <th >Type</th>
         <th>Quantity</th>
@@ -82,9 +66,10 @@
                 <tr>
                     <th scope="row">{{ $i }}</th>
                     <td>{{ $item['workorder']->woCode }}</td>
-                    <td>{{$item['material']->name }}</td>
-                    <td>{{ $item['material']->description }}</td>
-                    <td>{{ $item['material']->type }}</td>
+                    <td>{{ $item['material']->name }}</td>
+                    <td>{{ ucwords(strtolower($item['material']->description ))}}</td>
+                    <td>{{ ucwords(strtolower($item['material']->brand ))}}</td>
+                    <td>{{ ucwords(strtolower($item['material']->type)) }}</td>
                     <td>{{ $item->quantity }}</td>
 
                      <!--  @if($item->checkreserve == 1)

@@ -62,9 +62,9 @@
 
                     <td>{{ $item['workorder']->woCode }}</td>
 
-                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{ ucwords(strtolower($item['usermaterial']->lname.' '.$item['usermaterial']->fname)) }}</td>
 
-                    <td>{{ $item['iowzone']->zonename }}</td>
+                    <td>{{ucwords(strtolower( $item['iowzone']->zonename ))}}</td>
 
 
                       <td>  <a style="color: green;" href="work_order_material_desd/{{$item->work_order_id}}/{{$item->zone}}"  data-toggle="tooltip" title="View Material">View Materials</a>&nbsp;

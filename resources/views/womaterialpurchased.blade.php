@@ -53,7 +53,7 @@
 
                     <td>{{ $item['workorder']->woCode }}</td>
 
-                    <td>{{ $item['usermaterial']->lname.' '.$item['usermaterial']->fname }}</td>
+                    <td>{{ ucwords(strtolower($item['usermaterial']->lname.' '.$item['usermaterial']->fname)) }}</td>
 
 
                       <td>  <a style="color: green;" href="work_order_material_purchased/{{$item->work_order_id}}"  data-toggle="tooltip" title="View Material">
