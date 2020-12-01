@@ -1019,4 +1019,6 @@ Route::get('readcomments','MinuteController@readcomments')->name('readcomments')
 Route::get('sendcomments','MinuteController@sendcomments')->name('sendcomments')->middleware('auth');
 Route::post('sendcomment','MinuteController@sendcomment')->name('sendcomment')->middleware('auth');
 Route::get('depDirects','UserController@depDirects')->name('depDirects')->middleware('auth');
+
+Route::get('printrejected/{id}','WorkOrderController@printrejected')->name('printrejected')->middleware('auth');
 //

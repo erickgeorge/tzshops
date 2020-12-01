@@ -71,7 +71,7 @@
 
 </div>
  @if(empty($wo->room_id) )
-
+ 
 
      <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -124,7 +124,7 @@
     </div>
   </div>
 
- 
+
 </div>
 
     @endif

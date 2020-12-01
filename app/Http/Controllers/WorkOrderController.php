@@ -29,6 +29,8 @@ use App\WoInspectionForm;
 use Carbon\Carbon;
 use App\workordersection;
 
+use PDF;
+
 
 class WorkOrderController extends Controller
 {
@@ -1077,6 +1079,16 @@ session::flash('message', ' Your workorder have been accepted successfully ');
     }
 
 
+    public function printrejected($id)
+    {
+        $data['header'] = 'Rejected Materials';
+        $data['wo'] = WorkOrder::where('id', $id)->first();
+        $data['materials'] = WorkOrderMaterial:: where('work_order_id',$id)->where('status',-1)->orwhere('work_order_id',$id)->where('status',17)->orwhere('work_order_id',$id)->where('status',44)->get();
+        $pdf = PDF::loadView('materialsrejectedpdf', $data);
+        return $pdf->stream('Rejected Materials- '.$id.'- '.date('d-m-Y Hi').'.pdf');
+
+
+    }
 
 
      public function receivedmaterialview($id)
@@ -1128,7 +1140,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
         $wo_isnumber =WorkOrderMaterial::where('work_order_id', $id)->where('status',3)->where('isn_today',null)->get();
 
          if (count($wo_isnumber) > 0) {
-            
+
 
           foreach($wo_isnumber as $wo_isn) {
           $wo_m =WorkOrderMaterial::where('id', $wo_isn->id)->first();
@@ -1138,9 +1150,9 @@ session::flash('message', ' Your workorder have been accepted successfully ');
 
           $isn_number =WorkOrderMaterial::where('isn_today',date('d/m/Y'))->select(DB::raw('isn_time'))->groupBy('isn_time')->get();
           $inumber = sprintf('%03d',count($isn_number));
-          $mynumber =  'ISN'.'/'.$wo_m->isn_today.'/'.$inumber; 
+          $mynumber =  'ISN'.'/'.$wo_m->isn_today.'/'.$inumber;
 
-         
+
         $wo_today =WorkOrderMaterial::where('work_order_id', $id)->where('status',3)->where('isn_today',date('d/m/Y'))->get();
 
          foreach($wo_today as $wo_tdy) {
@@ -1150,7 +1162,7 @@ session::flash('message', ' Your workorder have been accepted successfully ');
          $wo_m->isn_number = $mynumber;
          $wo_m->save();
          }
-  
+
       }
 
           $wo_materials =WorkOrderMaterial::where('work_order_id', $id)->where('status',3)->get();

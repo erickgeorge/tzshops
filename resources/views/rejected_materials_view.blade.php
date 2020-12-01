@@ -16,16 +16,24 @@ Rejected Material(s)
     <br>
      @if(count($items) > 0)
     <div class="row container-fluid">
-    
+
         <div class="col-lg-12">
             <h5 style=" "  ><b  >Rejected Material(s)</b></h5>
         </div>
-       
+
 
     </div>
     <br>
     <hr class="container">
     <div class="container">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col-md-3">
+                <a href=" {{route('printrejected',[$wo['id']])}} " class="btn btn-primary" title="Print rejected materials to pdf"> PDF <i class="fa fa-file-pdf" aria-hidden="true"></i> </a>
+            </div>
+        </div>
     @if(Session::has('message'))
         <div class="alert alert-success">
             <ul>
@@ -183,7 +191,7 @@ Rejected Material(s)
          <div class="modal-dialog"  background-color: white" role="document">
          <div class="modal-content">
 
-              
+
 
                     <div class="modal-header ">
                      <div>
