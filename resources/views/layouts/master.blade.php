@@ -1,2021 +1,942 @@
-    <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MY SHOP | @yield('title')</title>
 
-    <title>ESMIS - @yield('title')</title>
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-     <link rel="icon" type="image/png" href="{{ url('/images/index.jpg') }}"/>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/fontawesome/css/all.css') }}">
-    <!-- code mpya -->
-    <link rel="stylesheet" href="{{asset('/tables/datatables.css')}}">
-    <!-- code mpya -->
-
-    <link rel="stylesheet" type="text/css" href="{{asset('/tables/Bootstrap-4-4.1.1/css/bootstrap.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('/tables/DataTables-1.10.21/css/dataTables.bootstrap4.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('/tables/Buttons-1.6.2/css/buttons.bootstrap4.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('/tables/SearchPanes-1.1.1/css/searchPanes.bootstrap4.css')}}"/>
-
-
-    <!-- code mpya -->
-
- <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
-
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+   <!-- Select2 -->
+  <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 </head>
-<style type="text/css">
-    .nav-item:hover{
-        background-color:#0acb;
-    }
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
 
-        .tablinks:hover{
-            background-color:#4d6788;
-        }
-        div{
-            font-weight: bold;
-        }
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
 
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Messages Dropdown Menu -->
 
-        label{
-            font-weight: bold;
-            color: #000;
-        }
-    </style>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ucfirst(auth()->user()->name)}} </a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="#" class="dropdown-item">Change Password</a></li>
 
+              <li class="dropdown-divider"></li>
 
+              <!-- Level two dropdown-->
+              <li class="dropdown-submenu dropdown-hover">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+             onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Log Out</a>
 
-
-
-
-<div>
-     <nav class="navbar fixed-top navbar-expand-lg "  style="border-bottom: #ebe9e6 8px solid; background-color: #376ad3;">
-
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto text-center">
-              <li class="nav-item" style="margin-top: -10px;">
-
-                <a class="nav-link" style="color:white" >
-                    <img src="{{ asset('images/logo_ud.png') }}" style="height: 45px; width: 45px;"></a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                      style="display: none;">
+                    @csrf
+                </form>
               </li>
-
-<?php
-                use App\WorkOrderMaterial;
-        use App\PurchasingOrder;
-                use App\WorkOrderTransport;
-                use App\Material;
-                use App\WorkOrder;
-                use App\ppuproject;
-                 use App\iowzone;
-
-
-
-        use App\zoneinspector;
-        use Carbon\Carbon;
-
-        use App\Notification;
-
-             $notifications = Notification::where('status','<>',10)->where('receiver_id', auth()->user()->id)->orderBy('id','Desc')->get();
-
-
-        // closing works order by default
-        $woclo = WorkOrder::where('status',2)->get();
-        $leohii = Carbon::now();
-
-        foreach ($woclo as $woclo) {
-            $sikuhii = Carbon::parse($woclo->updated_at);
-            $tofautihii = $sikuhii->diffInDays($leohii);
-
-            if ($tofautihii > 6) {
-                $wokioda = WorkOrder::where('id',$woclo->id)->first();
-                $wokioda->status = 30;
-                $wokioda->systemclosed = 1;
-                $wokioda->save();
-            }
-        }
-        //
-        $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
-
-                $w = WorkOrder::select(DB::raw('id'))->get();
-
-                $m = Material::select(DB::raw('name'))->get();
-
-                $wo_material_reservedd = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',55)->orwhere('reservestatus', 1)->groupBy('work_order_id')->get();
-
-                $woMaterialAccepted = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->orwhere('status',1012)->orwhere('copyforeaccepted' , 1)
-                    ->groupBy('work_order_id')->get();
-
-                $iozone =  zoneinspector::where('inspector',auth()->user()->id)->first();
-                $iozonename = iowzone::where('id',$iozone['zone'])->first();
-                 $woMaterialAcceptediow = WorkOrderMaterial::where('zone', $iozone['zone'])->select(DB::raw('work_order_id'))->where('status',1)->orwhere('status',1012)->where('zone', $iozone['zone'])->orwhere('copyforeaccepted' , 1)->where('zone', $iozone['zone'])
-                    ->groupBy('work_order_id')->get();
-
-                $woMaterialrejected = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',-1)->orwhere('status',17)->orwhere('status', 44)
-                    ->groupBy('work_order_id')->get();
-
-                    $woMaterialrejectedhos = WorkOrderMaterial::where('hos_id', auth()->user()->id)->select(DB::raw('work_order_id'))->where('status',-1)->orwhere('hos_id', auth()->user()->id)->where('status',17)->orwhere('hos_id', auth()->user()->id)->where('status',44)
-                    ->groupBy('work_order_id')->get();
-
-
-                $woMaterialrejectediow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('zone', $iozone['zone'])->where('status',-1)->orwhere('zone', $iozone['zone'])->where('status',17)
-                    ->groupBy('work_order_id')->get();
-
-               $woMaterialreserved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->orwhere('status',100)
-                    ->groupBy('work_order_id')->get();
-
-
-
-                $wo_material_procured_by_iow = WorkOrderMaterial::select(DB::raw('material_id'))->where('status',15)->groupBy('material_id')->get();
-
-                $material_to_estatedirector = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',5)->groupBy('work_order_id')->get();
-
-                $material_to_purchased = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',15)->groupBy('work_order_id')->get();
-
-                 $material_used = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();
-
-
-                $material_requests = WorkOrderMaterial::where('zone', $iozone['zone'])->select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-
-
-                $material_requestsmc = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-                $material_requests = WorkOrderMaterial::where('zone', $iozone['zone'])->
-                       select(DB::raw('work_order_id'),'hos_id' )
-                     ->where('status',0)
-                     ->orwhere('status', 9)
-                     ->groupBy('work_order_id')
-                     ->groupBy('hos_id')
-
-                     ->get();
-
-
-                 $material_requestsmc = WorkOrderMaterial::
-                       select(DB::raw('work_order_id'),'hos_id' , 'zone')
-                     ->where('status',0)
-                     ->orwhere('status', 9)
-                     ->groupBy('work_order_id')
-                     ->groupBy('hos_id')
-                     ->groupBy('zone')
-                     ->get();
-
-
-
-                 $material_requestsdes = WorkOrderMaterial::
-                       select(DB::raw('work_order_id'),'hos_id' , 'zone')
-                     ->where('status',1012)
-                 //    ->orwhere('status', 9)
-                     ->groupBy('work_order_id')
-                     ->groupBy('hos_id')
-                     ->groupBy('zone')
-                     ->get();
-
-
-                 $wo_material_accepted_iow = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
-
-                $wo_materialreceive=   WorkOrderMaterial::where('hos_id',auth()->user()->id)->
-                       select(DB::raw('work_order_id'),'receiver_id')
-                     ->where('status',3)
-                     ->groupBy('work_order_id')
-                     ->groupBy('receiver_id')
-                     ->get();
-
-
-
-                $wo_material_needed = WorkOrderMaterial::where('status', 0)->get();
-
-                $wo_material_approved = WorkOrderMaterial::select(DB::raw('work_order_id'))->where('status',3)->groupBy('work_order_id')->get();;
-        $procurement_request = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',0)->groupBy('work_order_id')->get();
-                $procurement_request_acceptedbyiow = PurchasingOrder::select(DB::raw('work_order_id'))->where('status',1)->groupBy('work_order_id')->get();
-
-                $wo_transport = WorkOrderTransport::where('status',0)->get();
-
-                ?>
-
-
-
-@if(($role['user_role']['role_id'] != 1) and (auth()->user()->type != 'Maintenance coordinator') and (auth()->user()->type != 'DVC Admin') and (auth()->user()->type != 'Estates Director'))
-                  <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
-                    </li>
-@endif
-
-
-   @if(auth()->user()->type == 'Estates Director')
-
-    <li style="width: 80px;">
-
-                    </li>
-
-
-
-<li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
-                    </li>
-
-
-  <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
-                    </li>
-
-
-
-
-                    @endif
-
-
-
-
-
-
-  @if((auth()->user()->type == 'Maintenance coordinator'))
-
-
-
-               <li style="width: 80px;">
-
-                    </li>
-
-                      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-@if($role['user_role']['role_id'] == 1)
- <a class="dropdown-item" style="color:white" href="">User Types</a>
-@endif
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorate</a>
-               <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Department</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-        </div>
-       </li>
-
-
-       <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
-                    </li>
-
-
-       @endif
-
-
-
-         @if((auth()->user()->type == 'DVC Admin'))
-
-         <li style="width: 80px;">
-
-                    </li>
-
-
-       <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
-                    </li>
-
-
-       @endif
-
-
-
-
-
- @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Estates Director'))
-
-                 <!--   <li class="nav-item">
-                        <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
-                                    class="badge badge-light">{{ count($m) }}</span></a>
-                    </li> -->
-
- @endif
-
-
-@if ((auth()->user()->type =='Maintenance coordinator')||(auth()->user()->type =='Housing Officer')||(auth()->user()->type =='USAB')||(auth()->user()->type =='DVC Admin')||(auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'Bursar')||(auth()->user()->type == 'Assets Officer'))
-<li class="nav-item">
-    <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
-</li>
-@endif
-
-@if(((auth()->user()->type == 'Estates Director')||(auth()->user()->type == 'DVC Admin')||auth()->user()->type == 'Director DPI')||(auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Architect & Draftsman')||(auth()->user()->type == 'Quality Surveyor'))
-
-<!--<li class="nav-item">
-    <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">
-        Planning
-        <span class="badge badge-light">
-            @if(auth()->user()->type == 'Estates Director')
-                @php
-                    $statusPPU = ppuproject::where('status','10')->orwhere('status','7')->orwhere('status','11')->orwhere('status','2')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'DVC Admin')
-                @php
-                    $statusPPU = ppuproject::where('status','1')->orwhere('status','6')->orwhere('status','13')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'Director DPI')
-                @php
-                    $statusPPU = ppuproject::where('status','0')->orwhere('status','-1')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'Estates officer')
-                @php
-                    $statusPPU = ppuproject::where('status','3')->orwhere('status','5')->orwhere('status','12')->orwhere('status','9')->get();
-                @endphp
-            @elseif(auth()->user()->type == 'Architect & Draftsman')
-                @php
-                    $statusPPU = ppuproject::where('status','4')->get();
-                @endphp
-            @else
-                @php
-                    $statusPPU = ppuproject::where('status','8')->get();
-                @endphp
-            @endif
-            {{ count($statusPPU) }}
-        </span>
-    </a>
-  </li>-->
- @endif
-
-
-
-
-
-
-                @if(auth()->user()->type == 'Acountant')
-                <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('minutesheets')}}">Minutesheets</a>
-                    </li>
-                @endif
-
-
-
-
-
-
-                 @if(auth()->user()->type == 'Head Procurement')
-                   <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white">Materials to be purchased <span
-                                    class="badge badge-light"></span></a>
-                    </li>-->
-
-
-                     <!--
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
-                    </li>
-
-                     <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
-                    </li>
-                    -->
-
-                @endif
-
-
-
-           @if(auth()->user()->type == 'Procurement and Supplies Officer')
-             <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_procurement_request')}}">Procurement Requests <span
-                                    class="badge badge-light">{{ count($procurement_request_acceptedbyiow) }}</span></a>
-                    </li>
-
-
-
-                 @endif
-
-
-
-
-
-                     @if((auth()->user()->type == 'DVC Admin')||(auth()->user()->type == 'Dean of Student')||(auth()->user()->type == 'Administrative officer') ||(auth()->user()->type == 'Principal') ||(auth()->user()->type == 'Directorate Director'))
-
-                      <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-                       </li>-->
-
-                        <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
-                    </li>
-                       @endif
-
-
-
-                   @if(auth()->user()->type == 'Dvc Accountant')
-
-                      <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('infrastructureproject')}}">Planning</a>
-                       </li>-->
-
-                        <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
-                    </li>
-                       @endif
-
-
-
-                    @if((auth()->user()->type == 'Estates officer')||(auth()->user()->type == 'Supervisor Landscaping')||(auth()->user()->type == 'Deputy Manager Mabibo')|| (auth()->user()->type == 'Deputy Manager Magufuli')||(auth()->user()->type == 'Deputy Manager Main Campus Halls , Ubungo, CoICT, Mikocheni and Kunduchi'))
-
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
-                    </li>
-
-                    @endif
-
-
-
-
-
-
-
-
-                @if(auth()->user()->type == 'STORE')
-                  <li class="nav-item">
-                        <a class="nav-link" style="color:white;" href="{{ url('stores')}}">Store <span
-                                    class="badge badge-light">{{ count($m) }}</span></a>
-                    </li>
-
-                @endif
-
-
-              @if($role['user_role']['role_id'] == 1)
-
-               <li style="width: 80px;">
-
-                    </li>
-
-
-                      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu dropdown-menu-left top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;">
-@if($role['user_role']['role_id'] == 1)
- {{-- <a class="dropdown-item" style="color:white" href="{{route('manageusertype')}}">User Types</a> --}}
-@endif
-               <a class="dropdown-item" style="color:white" href="{{ url('Manage/directorate')}}">Colleges/Directorates</a>
-               <a style="color:white" class="dropdown-item" href="{{ route('dipartment.manage')}}">Departments</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/locations')}}">Locations</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Areas')}}">Areas</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Blocks')}}">Blocks</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/Rooms')}}">Rooms</a>
-                 <a style="color:white" class="dropdown-item" href="{{ url('Manage/IoWZones/with/iow')}}">Zones</a>
-        </div>
-       </li>
-
-
-        <li class="nav-item">
-                    <a class="nav-link" style="color:white" href="{{ url('work_order')}}">Maintenance</a>
-                    </li>
-
-
-            <!--<li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('stores')}}">Store<span
-                                    class="badge badge-light">{{ count($m) }}</span></a>
-            </li>-->
-
-
-             <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('assetsManager')}}">Assets</a>
-            </li>
-
-
-             <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
-            </li>
-
-
-                 @endif
-
-
-                @if((auth()->user()->type == 'Accountant')||(auth()->user()->type == 'Dean'))
-                <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
-                </li>
-                @endif
-
-
-             @if((auth()->user()->type == 'USAB')||(auth()->user()->type == 'Warden'))
-
-                <li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('Assessment/form')}}">Cleaning Services</a>
-                </li>
-
-              @endif
-
-
+              <!-- End Level two -->
             </ul>
+          </li>
+
+      <!-- Notifications Dropdown Menu -->
+     
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+
+   <!--Models-->
+      <?php  use App\shop;
+             use App\user;
+      
+      ?>
+   <!--Models-->
 
 
 
-    <span class="navbar-text">
-      <ul class="navbar-nav mr-auto">
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">MY SHOP</span>
+    </a>
 
-        <?php use App\usertype;
-         $usertypes = usertype::where('user_id', auth()->user()->id)->get();
+    <!-- Sidebar -->
+    <div class="sidebar">
+    
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
 
-        $check = auth()->user()->id; ?>
-           @foreach($usertypes as $type)
+@if(auth()->user()->type != 'shopkeeper')
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+       
+          <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+           @if(!empty($shop))
+            <li class="nav-item">
+              
+              <a href="{{route('shopsadmin')}}" class="nav-link">
+                <i class="fas fa-circle nav-icon"></i>
+                <p>Shop</p>
+              </a>
+            </li>
 
-            @if($type->type2 == NULL)
-            @else
 
-              <form action="{{route('changeusertype' , [$check])}}" method="POST">
-                   @csrf
-             <div >
-              @foreach($usertypes as $type)
-               <select style="background-color: #376ad3; color: white;font-weight:bold;margin-top: 8px; " name="usertype" onchange="this.form.submit();">
-                 <option>Role</option>
-                 <option value="{{$type->type}}"> {{$type->type}}</option>
-                 <option value="{{$type->type2}}">{{$type->type2}}</option>
-                </select>
-              @endforeach
-             </div>
-             </form>
+ @else
+ 
+           <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Shops
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('shops',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('shops',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>{{$sp->name}}</p>
+                    </a>
+                  </li>
+                  @endforeach
 
              @endif
 
-             @endforeach
-             <li class="nav-item">
-                <a @if ($role['user_role']['role_id'] == 1)
-                title="View Sent Comments"
-@else
-title="Send feedback/comment"
-                @endif  class="nav-link text-light"
-
-                @if ($role['user_role']['role_id'] == 1)
-                href="{{route('readcomments')}}"
-
-                @else
-                href="{{route('sendcomments')}}"
-                @endif
-               > <i class="fa fa-comment" aria-hidden="true"></i> </a>
-                </li>
-
-             <li class="nav-item">
-                <a class="nav-link text-light" href="{{route('downloads')}}">  Documents </a>
-                </li>
-
-        <li>
-
-            @if((auth()->user()->type == 'Estates Director')||@(auth()->user()->type == 'DVC Admin')||($role['user_role']['role_id'] == 1))
-
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white " href="{{ url('usersoptions')}}">Users</a>
-                    </li>
-               @endif
-               </li>
-        <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" style="color:white;" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
-                         <span class="badge badge-light">{{ count($notifications) }}</span></a>
-                    <div class="dropdown-menu dropdown-menu-right" style="background-color: #376ad3; color: white;"  aria-labelledby="navbarDropdown">
-                     @foreach($notifications as $notification)
-
-                                <a class="dropdown-item"
-                                   onclick="event.preventDefault();
-                                           document.getElementById('{{ 'reject-'.$notification->id }}').submit();">
-                                    {{ $notification->message }}
-                                </a>
-
-                                <form id="{{ 'reject-'.$notification->id }}"
-                                      action="{{ route('notify.read', [$notification->id]) }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-
-
-                        @endforeach
-                        {{--<div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Clear notifications</a>--}}
-                        @if(count($notifications) <= 0)
-                            <p class="dropdown-item"> No new notification</p>
-                        @endif
-                    </div>
-                </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
-          {{ Auth::user()->name }}
-        </a>
-        <div class="dropdown-menu dropdown-menu-right top-dropdown" aria-labelledby="navbarDropdown" style="background-color: #376ad3;" >
-           <!--SETTING AND CHANGE PASSWORD
-          <a class="dropdown-item" style="color:white" href="{{ url('settings')}}">Settings</a>-->
-
-               <a class="dropdown-item" style="color:white" href="{{ url('myprofile')}}">My Profile</a>
-          <a class="dropdown-item" style="color:white"  href="{{ url('password')}}">Change Password</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" style="color:white"  href="{{ route('logout') }}"
-             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        @csrf
-                                    </form>
-
-        </div>
-      </li>
-    </ul>
-    </span>
-            <!-- <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> -->
-        </div>
-    </nav>
-    <div>
-    <div style="padding-top:78px;">
-
-
-
-<style>
-
-
-/* Fixed sidenav, full height */
-.sidenav {
-  height: 100%;
-  width: 180px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #e5e5e5;
-  overflow-x: hidden;
-  padding-top: 20px;
-  border-right: #ebe9e6 8px solid
-}
 
-/* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
-  padding: 4px 6px 4px 10px;
-  text-decoration: none;
-  color: #818181;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
-
-
-
-
-
-}
-
-.sidenav button{
-  color: white;
-}
-
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
-   background: #046475;
-}
-
-
-
-.sidenav a {
-  background-color: #c2bebe;
-  color: white;
-
-}
-
-.sidenav a, .dropdown-btn, .sidenav button {
-  color: black;
-
-   background: #e5e5e5;
-    margin-top: 2px;
-
-    border-bottom: 2px solid #bdb8d7;
-  border-bottom: 2px solid rgba(0,0,0,0.05);
-  border-top: 2px solid rgba(255,255,255,0.05);
-
-   border: 2px solid white;
-}
-
-
-/* Main content */
-.main {
-  margin-left: 150px; /* Same as the width of the sidenav */
-
-  padding: 0px 10px;
-}
-
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: #046475;
-  color: white;
-
-  border: 2px solid white;
-
-
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: white;
-
-
-
-}
-
-.dropdown-container a {
-  background-color: white;
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
-}
-
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-</head>
-<body  onload="createTable()">
-
-<div class="sidenav" style="padding-top:90px;">
-  <a  href="{{ url('work_order')}}" >Works Orders </a>
- @if($role['user_role']['role_id'] == 1)
-   <a  href="{{ url('Manage/section')}}">DES Sections</a>
- @endif
-
-@if(strpos(auth()->user()->type, "HOS") !== false )
-  @if($role['user_role']['role_id'] != 1)
- <a  href="{{ url('technicians') }}">Technicians</a>
- @endif
-
-
- <button class="dropdown-btn">Materials Update
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a  href="{{ url('material_rejected_with_workorder')}}">Rejected Materials <span
-                                    class="badge badge-light">{{ count($woMaterialrejectedhos) }}</span></a>
-    <a  href="{{ url('material_received_with_workorder')}}">Received Materials from Store<span class="badge badge-light">{{ count($wo_materialreceive) }}</span></a>
-
-  </div>
-
- @endif
-
-
- @if(auth()->user()->type == 'Maintenance coordinator')
-
-  <a  href="{{ url('redirected_work_order')}}">Redirected Works Order</a>
-
-  <a  href="{{ url('roomreport')}}">Room Report</a>
-
-   <a  href="{{ url('comp') }}" >
-    Complaints <i style="color: yellow;" class="fa fa-exclamation-triangle"></i></a>
-
-      <button
-
-  class="dropdown-btn">Heads of Sections
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a  href="{{ url('/allhos')}}">All Heads of sections Details</a>
-    <a  href="{{ url('hoscount')}}">HoS with Completed WO</a>
-  </div>
-
-   <a  href="{{ url('/alliow')}}">Inspectors of Works</a>
-
-
-   <a  href="{{ url('technicians') }}">Technicians</a>
-   <a  href="{{ url('workzones')}}">Zones</a>
-
-    <button  class="dropdown-btn">Materials Requests Update
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a  href="{{ url('work_order_material_needed')}}">
-        Works orders needs materials <span
-                                    class="badge badge-light">{{ count($material_requestsmc) }}</span></a>
-    <a   href="{{ url('wo_material_accepted')}}">
-        Accepted Materials<br><span class="badge badge-light">{{ count($woMaterialAccepted) }}</span></a>
-     <a  href="{{ url('material_rejected_with_workorder')}}">Rejected Materials
-                        <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span></a>
-
-
-  </div>
-
-
-
-  @endif
-
-
-
-                @if((auth()->user()->type == 'Estates Director')||@(auth()->user()->type == 'DVC Admin')||($role['user_role']['role_id'] == 1))
-
-
-
-                 <!--    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('completed_works_orders')}}">Completed Work-orders</a>
-                    </li>
-
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('woduration')}}">WO Duration</a>
-                    </li>
-                    -->
-
-
-  <button  class="dropdown-btn">Works orders Reports
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a class="btn" href="{{ url('/unattended_work_orders')}}">Unattended <br> Works Orders</a>
-    <a class="btn" href="{{url('completed_works_order')}}">Completed <br> Works Orders</a>
-    <!--<a class="btn" href="{{ url('/woduration')}}"><h6>Works orders Duration</h6></a>-->
-
-
-  </div>
-
-  <button
-
-  class="dropdown-btn">Heads of Sections
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a  href="{{ url('/allhos')}}">All Heads of sections Details</a>
-    <a  href="{{ url('hoscount')}}">HoS with completed Works Orders</a>
-  </div>
-
-
-   <button class="dropdown-btn">Technicians
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="{{ url('/alltechnicians')}}">All Technicians Details</a>
-    <a href="{{ url('/techniciancount')}}">Technicians with WO on Progress</a>
-    <a href="{{ url('/techniciancountcomp')}}">Technicians completed work</a>
-  </div>
-
-
-   <a  href="{{ url('/alliow')}}">Inspectors of Works</a>
-
-
-   <button  class="dropdown-btn">Store
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="{{ url('stores')}}">All Materials in Store<span
-                            class="badge badge-light">{{ count($m) }}</span></a>
-    <a href="{{ url('work_order_with_missing_material')}}">
-        Materials to be purchased <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span></a>
-  </div>
-
-
-
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('techniciancountcomp')}}">Technician Report</a>
-                    </li>-->
-
-
-
-                        <a  href="{{ url('roomreport')}}">Room Report</a>
-
-
-                        <!--<a href="{{ url('minutesheets')}}"><h6>Minutesheets</h6></a>-->
-
-     <a href="{{ url('comp') }}" title="Complaints" style="color:black;" >
-        Complaints<i style="color: yellow;" class="fa fa-exclamation-triangle"></i>
-    </a>
-
-
+              <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Dairy Used Issues
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('allissuesgroup',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('allissuesgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Dairy Used Issues</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+
+
+                    <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Shop Keepers
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('shopkeeper',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('shopkeeper',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Shop Keepers</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+
+
+           
+                    <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Bought Issues
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('boughtissuesgroup',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('boughtissuesgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Bought Issues</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+
+
+                 <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Sales
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('salesissuesgroup',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('salesissuesgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Sales</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+
+
+
+
+                 <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Amount Added
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('ammountaddedgroup',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('ammountaddedgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Amount Added</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+
+
+                 <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Transactions
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('transactionsgroup',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('transactionsgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Transactions</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+
+
+
+
+                 <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Voucher
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('vouchergroup',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('vouchergroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Voucher</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+
+
+
+
+
+                 <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
+             @if(count($shop) != 1)
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-circle"></i>
+                      <p>
+                        Summary
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    @foreach($shop as $sp)
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <?php $spid = Crypt::encrypt($sp->id); ?> 
+                        <a href="{{route('summarygroup',[$spid])}}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>{{$sp->name}}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    @endforeach
+                  </li>
+             @else
+                  @foreach($shop as $sp)
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($sp->id); ?> 
+                    <a href="{{route('summarygroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Summary</p>
+                    </a>
+                  </li>
+                  @endforeach
+
+             @endif
+               </ul>
+             @endif
 
     @endif
 
-     @if(auth()->user()->type == 'Estates Director')
 
-                               <a  href="{{ url('work_order_material_needed_for_des')}}">
-                            Works orders needs materials<span
-                                    class="badge badge-light">{{ count($material_requestsdes) }}</span>
-                                </a>
+       @if(auth()->user()->type == 'shopkeeper')
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+       
 
+              <?php $shop = auth()->user()->shop_id; ?>
 
-                        <a  href="{{ url('material_rejected_with_workorder')}}">
-                            Rejected Materials
-                        <span
-                                    class="badge badge-light">{{ count($woMaterialrejected) }}</span>
-                                </a>
-     @endif
-
-
-    @if(auth()->user()->type == 'STORE')
-
-
-
-                   <!-- <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_approved_material')}}">Materials needed <span
-                                    class="badge badge-light">{{ count($wo_material_approved) }}</span></a>
-                    </li>-->
-
-                    <!--<li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_released_material')}}">All Requests </a>
-                    </li>-->
-
-
-                        <a  href="{{ url('material_received_with_workorder')}}" >
-                            Materials Taken From Store <span
-                                    class="badge badge-light">{{ count($material_used) }}</span>
-                                </a>
-
-
-                        <a href="{{ url('wo_material_reserved') }}" >
-                            Reserved Materials <span
-                                    class="badge badge-light">{{ count($woMaterialreserved) }}</span>
-                                </a>
-
-
-
-                            <a  href="{{ url('wo_material_accepted_by_iow')}}">
-                            Materials Requests<span
-                                    class="badge badge-light">{{ count($wo_material_accepted_iow) }}</span>
-                                </a>
-
-
-
-
-
-                    <!--<li class="nav-item">
-                        <a class="nav-link" style="color:white"  href="{{ url('wo_material_purchased_by_head_of_procurement') }}" >Material Purchased <span
-                                    class="badge badge-light">{{ count($wo_material_procured_by_iow) }}</span></a>
-                    </li>-->
-
-
-
-                        <a href="{{ url('work_order_material_purchased') }}" >
-                            Materials Purchased <span
-                                    class="badge badge-light">{{ count($material_to_purchased) }}</span>
-                                </a>
-
-
-                      <a href="{{ url('ProcurementHistory') }}">
-                        Procurement
+           
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('allissuesgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Dairy Used Issues</p>
                     </a>
-
-                     <a href="{{ url('all_grns') }}">
-                        Good Received Note
+                  </li>
+       
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('shopkeeper',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Shop Keepers</p>
                     </a>
-
-                      <a href="{{ url('all_isse_note') }}">
-                        Issue Note
+                  </li>
+                 <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('boughtissuesgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Bought Issues</p>
                     </a>
+                  </li>
+              
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('salesissuesgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Sales</p>
+                    </a>
+                  </li>
+       
 
-           <!--
-           <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_grn')}}">Sign GRN For PO </a>
-                    </li>
 
-           <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('wo_release_grn')}}">Release Procured Material </a>
-                    </li>
-          -->
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('ammountaddedgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Amount Added</p>
+                    </a>
+                  </li>
+               
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('transactionsgroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Transactions</p>
+                    </a>
+                  </li>
+             
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('vouchergroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Voucher</p>
+                    </a>
+                  </li>
+              
+                  
+                  <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('summarygroup',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Summary</p>
+                    </a>
+                  </li>
+              
+               </ul>
+
                @endif
-
-
-
-
-
-
-  @if(auth()->user()->type == 'Head Procurement')
-
-<a href="{{ url('work_order_with_missing_material')}}">
-    Materials to purchase <span
-                                    class="badge badge-light">{{ count($material_to_estatedirector) }}</span>
-                                </a>
-<!--<a href="{{ url('minutesheets')}}"><h6>Minutesheets</h6></a>-->
-
-<a href="{{ url('stores')}}">
-    Store
-</a>
-
-  <button  class="dropdown-btn">
-      Procurement
-    <i class="fa fa-caret-down">
-
-    </i>
-  </button>
-  <div class="dropdown-container">
-    <a href=" {{ url('procurementAddMaterial') }}">
-        Add new procurement list
-    </a>
-    <a href="{{ url('ProcurementHistory') }}">
-        View Procurement History
-    </a>
-
-
-  </div>
-
-                    <a href="{{ url('all_grns') }}">
-                        Good Received Note
-                    </a>
-
-                      <a href="{{ url('all_isse_note') }}">
-                        Issue Note
-                    </a>
-
-
-
-   @endif
-
-
-       @if(auth()->user()->type == 'Transport Officer')
-
-                        <a  href="{{ url('wo_transport_request')}}">
-                            Transport Requests <span
-                                    class="badge badge-light">{{ count($wo_transport) }}
-
-
-                        <a href="{{ url('wo_transport_request_accepted')}}">
-                            Accepted Transports
-                        </a>
-
-
-                        <a href="{{ url('wo_transport_request_rejected')}}">
-                            Rejected Transports
-                        </a>
-
-
-
-                @endif
-
-
-
-    @if(auth()->user()->type == 'Inspector Of Works')
-
-     <a href="{{ route('onprocessworkorders')}}">
-        My Zone
-    </a>
-
-
-                        <a href="{{ url('work_order_material_needed')}}">
-                            Works orders needs Materials <span
-                                    class="badge badge-light">{{ count($material_requests) }}</span>
-                                </a>
-
-
-
-
-                        <a href="{{ url('wo_material_accepted')}}">
-                            Accepted Materials<span
-                                    class="badge badge-light">{{ count($woMaterialAcceptediow) }}</span>
-                                </a>
-
-
-
-                        <a  href="{{ url('material_rejected_with_workorder')}}">
-                            Rejected Materials
-                        <span
-                                    class="badge badge-light">{{ count($woMaterialrejectediow) }}</span>
-                                </a>
-
-
-
-                    <!--
-           <li class="nav-item">
-                        <a class="nav-link" style="color:white" href="{{ url('work_order_purchasing_request')}}">Procurement Requests <span
-                                    class="badge badge-light">{{ count($procurement_request) }}</span></a>
-                    </li>
-                    -->
-
-                @endif
-
-
-
-
-
-
-</div>
-
-
-<div class="main">
-     @if(auth()->user()->change_password == 2)
-        @yield('body')
-
-     @endif
-
-
-</div>
-
-
-
-<style type="text/css">
-    html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .form-control{
-
-
-                font-weight: bold;
-            }
-
-
-            .custom-select{
-
-
-                font-weight: bold;
-            }
-
-
-            td{
-                font-weight: bold;
-
-            }
-
-
-
-}
-
-            .dataTables_filter {
-
-     padding: 0;
-          margin: 0px;
-          width:999px;
-           align-items: right;
-
-}
-
-
-
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-
-.top-dropdown{
-    background-color: #676464;
-}
-
-
-.dropdown-item:hover{
-    background-color: #046475;
-}
-
-.navbar-nav > .nav-item > .nav-link:hover{
-    color: white;
-}
-
-#login-view{
-    background-color: rgba(66, 62, 62, 0.79);
-    border-radius: 10px;
-    padding: 20px;
-    color: white;
-    position: absolute;
-    right: 33%;
-    bottom: 25%;
-}
-
-#login-viewold{
-    background-color: #423e3e;
-    padding: 20px;
-    color: white;
-    position: absolute;
-    right: 33%;
-    bottom: 25%;
-    border-radius: 10px;
-}
-
-.estate-title{
-    position: absolute;
-    right: 6%;
-    top: 10%;
-    font-size: 50px;
-}
-
-
-hr {
-  margin-top: 0rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 5px solid rgb(169,169,169);
-}
-
-/* Style the tab */
-div.tab {
-    overflow: hidden;
-}
-
-.tab-group{
-    border-bottom: 1px solid #cccccc;
-}
-
-/* Style the buttons inside the tab */
-div.tab button {
-    background-color: inherit;
-    outline: none;
-    cursor: pointer;
-    width: 240px;
-    padding: 14px 16px;
-    transition: 0.3s;
-    color: #cccccc;
-    border: none;
-    font-weight: bold;
-    font-size: small;
-}
-
-/* Change background color of buttons on hover */
-div.tab button:hover {
-    color: black;
-}
-
-/* Create an active/current tablink class */
-div.tab button.active {
-    color: black;
-    border-bottom: 2px solid #cccccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    margin-top: 50px;
-}
-
-.tabcontent {
-    -webkit-animation: fadeEffect 1s;
-    animation: fadeEffect 1s; /* Fading effect takes 1 second */
-}
-
-.dataTables_filter {
-   width: 80%;
-   float: right;
-padding: 20px 60px;
-   text-align: right;
-}
-
-#wo-details{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    /*line-height: 16px;     !* fallback *!*/
-    /*max-height: 32px;      !* fallback *!*/
-    -webkit-line-clamp: 3; /* number of lines to show */
-}
-
-
-
-
-    table {
-
-            font: 17px Calibri;
-        }
-        table, th, td {
-            border: solid 1px #DDD;
-            border-collapse: collapse;
-            padding: 2px 3px;
-
-        }
-
-tr {
- width:12px;
-}
-
-thead{
-      background-color: #376ad3;
-}
-tr{
-
-
-
-}
-
-img {
-  object-fit: cover;
-  width:250px;
-  height:250px;
-}
-
-</style>
-
-<script>
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-  this.classList.toggle("active");
-  var dropdownContent = this.nextElementSibling;
-  if (dropdownContent.style.display === "block") {
-  dropdownContent.style.display = "none";
-  } else {
-  dropdownContent.style.display = "block";
-  }
-  });
-}
-</script>
-
-
-
-
-
-
-
+            
+        
+
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-</div><!--
-<footer class="py-3 bg-dark" style="margin-bottom: 0;">
-    <div class="container">
-    <p class="m-0 text-center text-white"> ESMIS &copy; <?php echo date('Y'); ?>, All rights reserved</div>
-</footer>-->
+    <!-- /.sidebar -->
+  </aside>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
 
-<script type="text/javascript" src="{{asset('/tables/jQuery-3.3.1/jquery-3.3.1.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/Bootstrap-4-4.1.1/js/bootstrap.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/JSZip-2.5.0/jszip.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/pdfmake-0.1.36/pdfmake.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/pdfmake-0.1.36/vfs_fonts.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/DataTables-1.10.21/js/jquery.dataTables.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/DataTables-1.10.21/js/dataTables.bootstrap4.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/Buttons-1.6.2/js/dataTables.buttons.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/Buttons-1.6.2/js/buttons.bootstrap4.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/Buttons-1.6.2/js/buttons.html5.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/Buttons-1.6.2/js/buttons.print.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/SearchPanes-1.1.1/js/dataTables.searchPanes.js')}}"></script>
-<script type="text/javascript" src="{{asset('/tables/SearchPanes-1.1.1/js/searchPanes.bootstrap4.js')}}"></script>
-<script src="{{ asset('/js/main.js') }}"></script>
 
-<script>
-    $('#myTable').DataTable();
-    $('#myTablee').DataTable();
-    $('#myTableee').DataTable();
+    <!-- Main content -->
+   <div class="main">
 
-    $('#myTableproc').DataTable({
-        dom: 'Bfrtip',
-        buttons: [{
-            extend:'excel',
-            text:'Export <i class="fa fa-file-excel-o"></i>'}]
+   @if ($errors->any())
+                <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if(Session::has('message'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+    @endif
+        @yield('body')
+   </div>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!--<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0-rc
+    </div>
+    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>-->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- Page specific script -->
+
+<script type="text/javascript">
+    $(function () {
+
+       //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+     // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
     });
+  });
+
 </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+  $(function () {
+    /*
+     * Flot Interactive Chart
+     * -----------------------
+     */
+    // We use an inline data source in the example, usually data would
+    // be fetched from a server
+    var data        = [],
+        totalPoints = 100
 
+    function getRandomData() {
 
-<script type="text/javascript">
-    function validateEmail(emailField){
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+      if (data.length > 0) {
+        data = data.slice(1)
+      }
 
-        if (reg.test(emailField.value) == false)
+      // Do a random walk
+      while (data.length < totalPoints) {
+
+        var prev = data.length > 0 ? data[data.length - 1] : 50,
+            y    = prev + Math.random() * 10 - 5
+
+        if (y < 0) {
+          y = 0
+        } else if (y > 100) {
+          y = 100
+        }
+
+        data.push(y)
+      }
+
+      // Zip the generated y values with the x values
+      var res = []
+      for (var i = 0; i < data.length; ++i) {
+        res.push([i, data[i]])
+      }
+
+      return res
+    }
+
+    var interactive_plot = $.plot('#interactive', [
         {
-            alert('Invalid Email Address');
-            return false;
+          data: getRandomData(),
         }
-
-        return true;
-
-}
-</script>
-<script type="text/javascript">
-
-      $("#inafilterusertype").select2({
-            placeholder: "Choose...",
-            allowClear: true
-        });
-</script>
-<script type="text/javascript">
-
-      $("#nameid").select2({
-            placeholder: "Choose type of problem...",
-            allowClear: true
-        });
-</script>
-
-
-<script type="text/javascript">
-
-      $("#p_type").select2({
-            placeholder: "Choose type of problem...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#area").select2({
-            placeholder: "Choose Area...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#location").select2({
-            placeholder: "Choose Location...",
-            allowClear: true
-        });
-</script>
-
-
-<script type="text/javascript">
-
-      $("#block").select2({
-            placeholder: "Choose Block...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#room").select2({
-            placeholder: "Choose Room...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#materialreq").select2({
-            placeholder: "Choose material...",
-            allowClear: true
-        });
-</script>
-
-
-
-
-<script type="text/javascript">
-
-      $("#totalmaterials").select2({
-            placeholder: "Choose material...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#directorate").select2({
-            placeholder: "Choose College...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#section").select2({
-            placeholder: "Choose Section...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#department").select2({
-            placeholder: "Choose Department...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#role").select2({
-            placeholder: "Choose role...",
-            allowClear: true
-        });
-</script>
-
-
-<script type="text/javascript">
-
-      $("#techid").select2({
-            placeholder: "Choose technician for work...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#typetechadmin").select2({
-            placeholder: "Choose Section...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#directoratee").select2({
-            placeholder: "Choose Section...",
-            allowClear: true
-        });
-</script>
-
-
-<script type="text/javascript">
-
-      $("#directoratee5").select2({
-            placeholder: "Choose directorate...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#type").select2({
-            placeholder: "Choose user type...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#des").select2({
-            placeholder: "Choose Directorate...",
-            allowClear: true
-        });
-</script>
-
-
-<script type="text/javascript">
-
-      $("#desp").select2({
-            placeholder: "Choose department...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#typeudsm").select2({
-            placeholder: "Choose user type...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#techidforinspection").select2({
-            placeholder: "Choose Technician...",
-            allowClear: true
-        });
-</script>
-
-
-<script type="text/javascript">
-
-      $("#zone").select2({
-            placeholder: "Choose IoW Zone...",
-            allowClear: true
-        });
-</script>
-
-
-<script type="text/javascript">
-
-      $("#iow").select2({
-            placeholder: "Choose Inspector of Work...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#iowzone").select2({
-            placeholder: "Choose zone Location...",
-            allowClear: true
-        });
-</script>
-
-<script type="text/javascript">
-
-      $("#secondtype").select2({
-            placeholder: "Choose second user type...",
-            allowClear: true
-        });
-</script>
-
-
-     <script type="text/javascript">
-
-      $("#materialedit").select2({
-            placeholder: "Choose material..",
-            allowClear: true
-        });
-     </script>
-
-<script type="text/javascript">
-
-    $("#materialsselect").select2({
-          placeholder: "Choose material..",
-          allowClear: true
-      });
-   </script>
-<script type="text/javascript">
-
-
-
-
-    function getTechniciansSection1() {
-      var  selecteddep = document.getElementById('getTechSec1').value;
-
-        console.log('ID: ' + selecteddep);
-        $.ajax({
-                method: 'GET',
-                url: 'getTechSec1',
-                data: { id: selecteddep }
-            })
-            .done(function(msg) {
-                console.log(msg['getTechSec1']);
-                var object = JSON.parse(JSON.stringify(msg['getTechSec1']));
-                $('#techs').empty();
-
-                var option = document.createElement('option');
-                option.innerHTML = 'Choose...';
-                option.value = '';
-                document.getElementById('techs').appendChild(option);
-
-
-
-
-                for (var i = 0; i < object.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = object[i].fname + ' ' + object[i].lname;
-                    option.value = object[i].id;
-                    document.getElementById('techs').appendChild(option);
-                }
-            });
-    }
-
-
-
-    </script>
-    <script type="text/javascript">
-
-
-
-
-        function gethossect() {
-          var  selecteddep = document.getElementById('hossect').value;
-
-            console.log('ID: ' + selecteddep);
-            $.ajax({
-                    method: 'GET',
-                    url: 'gethossect',
-                    data: { id: selecteddep }
-                })
-                .done(function(msg) {
-                    console.log(msg['user']);
-                    var object = JSON.parse(JSON.stringify(msg['user']));
-                    $('#hops').empty();
-
-                    var option = document.createElement('option');
-                    option.innerHTML = 'Choose...';
-                    option.value = '';
-                    document.getElementById('hops').appendChild(option);
-
-
-
-
-                    for (var i = 0; i < object.length; i++) {
-                        var option = document.createElement('option');
-                        option.innerHTML = object[i].fname + ' ' + object[i].lname;
-                        option.value = object[i].id;
-                        document.getElementById('hops').appendChild(option);
-                    }
-                });
+      ],
+      {
+        grid: {
+          borderColor: '#f3f3f3',
+          borderWidth: 1,
+          tickColor: '#f3f3f3'
+        },
+        series: {
+          color: '#3c8dbc',
+          lines: {
+            lineWidth: 2,
+            show: true,
+            fill: true,
+          },
+        },
+        yaxis: {
+          min: 0,
+          max: 100,
+          show: true
+        },
+        xaxis: {
+          show: true
         }
+      }
+    )
 
+    var updateInterval = 500 //Fetch data ever x milliseconds
+    var realtime       = 'on' //If == to on then fetch data every x seconds. else stop fetching
+    function update() {
 
+      interactive_plot.setData([getRandomData()])
 
-        </script>
-<script type="text/javascript">
-
-    $(".materialsselect").select2({
-          placeholder: "Choose material..",
-          allowClear: true
-      });
-      (function( $ ) {
-
- 	jQuery.fn.doubleScroll = function(userOptions) {
-
-		// Default options
-		var options = {
-			contentElement: undefined, // Widest element, if not specified first child element will be used
-			scrollCss: {
-				'overflow-x': 'auto',
-				'overflow-y': 'hidden',
-				'height': '20px'
-			},
-			contentCss: {
-				'overflow-x': 'auto',
-				'overflow-y': 'hidden'
-			},
-			onlyIfScroll: true, // top scrollbar is not shown if the bottom one is not present
-			resetOnWindowResize: false, // recompute the top ScrollBar requirements when the window is resized
-			timeToWaitForResize: 30 // wait for the last update event (usefull when browser fire resize event constantly during ressing)
-		};
-
-		$.extend(true, options, userOptions);
-
-		// do not modify
-		// internal stuff
-		$.extend(options, {
-			topScrollBarMarkup: '<div class="doubleScroll-scroll-wrapper"><div class="doubleScroll-scroll"></div></div>',
-			topScrollBarWrapperSelector: '.doubleScroll-scroll-wrapper',
-			topScrollBarInnerSelector: '.doubleScroll-scroll'
-		});
-
-		var _showScrollBar = function($self, options) {
-
-			if (options.onlyIfScroll && $self.get(0).scrollWidth <= $self.width()) {
-				// content doesn't scroll
-				// remove any existing occurrence...
-				$self.prev(options.topScrollBarWrapperSelector).remove();
-				return;
-			}
-
-			// add div that will act as an upper scroll only if not already added to the DOM
-			var $topScrollBar = $self.prev(options.topScrollBarWrapperSelector);
-
-			if ($topScrollBar.length == 0) {
-
-				// creating the scrollbar
-				// added before in the DOM
-				$topScrollBar = $(options.topScrollBarMarkup);
-				$self.before($topScrollBar);
-
-				// apply the css
-				$topScrollBar.css(options.scrollCss);
-				$(options.topScrollBarInnerSelector).css("height", "20px");
-				$self.css(options.contentCss);
-
-				var scrolling = false;
-
-				// bind upper scroll to bottom scroll
-				$topScrollBar.bind('scroll.doubleScroll', function() {
-					if (scrolling) {
-						scrolling = false;
-						return;
-					}
-					scrolling = true;
-					$self.scrollLeft($topScrollBar.scrollLeft());
-				});
-
-				// bind bottom scroll to upper scroll
-				var selfScrollHandler = function() {
-					if (scrolling) {
-						scrolling = false;
-						return;
-					}
-					scrolling = true;
-					$topScrollBar.scrollLeft($self.scrollLeft());
-				};
-				$self.bind('scroll.doubleScroll', selfScrollHandler);
-			}
-
-			// find the content element (should be the widest one)
-			var $contentElement;
-
-			if (options.contentElement !== undefined && $self.find(options.contentElement).length !== 0) {
-				$contentElement = $self.find(options.contentElement);
-			} else {
-				$contentElement = $self.find('>:first-child');
-			}
-
-			// set the width of the wrappers
-			$(options.topScrollBarInnerSelector, $topScrollBar).width($contentElement.outerWidth());
-			$topScrollBar.width($self.width());
-			$topScrollBar.scrollLeft($self.scrollLeft());
-
-		}
-
-		return this.each(function() {
-
-			var $self = $(this);
-
-			_showScrollBar($self, options);
-
-			// bind the resize handler
-			// do it once
-			if (options.resetOnWindowResize) {
-
-				var id;
-				var handler = function(e) {
-					_showScrollBar($self, options);
-				};
-
-				$(window).bind('resize.doubleScroll', function() {
-					// adding/removing/replacing the scrollbar might resize the window
-					// so the resizing flag will avoid the infinite loop here...
-					clearTimeout(id);
-					id = setTimeout(handler, options.timeToWaitForResize);
-				});
-
-			}
-
-		});
-
-	}
-
-}( jQuery ));
-  $('.table').doubleScroll();
-   </script>
-
-
-{{--  store refresh --}}
-
-<script type="text/javascript">
-
-
-
-
-    function getnameMAT() {
-      var  selecteddep = document.getElementById('nameMAT').value;
-
-        console.log('ID: ' + selecteddep);
-        $.ajax({
-                method: 'GET',
-                url: 'getnameMAT',
-                data: { id: selecteddep }
-            })
-            .done(function(msg) {
-                console.log(msg['description']);
-                var object = JSON.parse(JSON.stringify(msg['description']));
-                //
-                $('#descriptionMAT').empty();
-
-
-
-
-                for (var i = 0; i < object.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = object[i].description;
-                    option.value = object[i].id;
-                    console.log(object[i].description);
-
-                    document.getElementById('descriptionMAT').appendChild(option);
-                }
-                //
-                $('#brandMAT').empty();
-
-
-
-
-                for (var i = 0; i < object.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = object[i].brand;
-                    option.value = object[i].id;
-                    console.log(object[i].brand);
-
-                    document.getElementById('brandMAT').appendChild(option);
-                }
-                //
-                $('#typeMAT').empty();
-
-
-
-
-                for (var i = 0; i < object.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = object[i].type;
-                    option.value = object[i].id;
-                    console.log(object[i].type);
-
-                    document.getElementById('typeMAT').appendChild(option);
-                }
-                            });
+      // Since the axes don't change, we don't need to call plot.setupGrid()
+      interactive_plot.draw()
+      if (realtime === 'on') {
+        setTimeout(update, updateInterval)
+      }
     }
 
-    function getdescriptionMAT() {
-      var  selecteddep = document.getElementById('descriptionMAT').value;
-
-        console.log('ID: ' + selecteddep);
-        $.ajax({
-                method: 'GET',
-                url: 'getdescriptionMAT',
-                data: { id: selecteddep }
-            })
-            .done(function(msg) {
-                console.log(msg['description']);
-                var object = JSON.parse(JSON.stringify(msg['description']));
-                //
-                $('#nameMAT').empty();
-
-                // nameMAT
-
-
-                for (var i = 0; i < object.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = object[i].name;
-                    option.value = object[i].id;
-                    console.log(object[i].name);
-
-                    document.getElementById('nameMAT').appendChild(option);
-                }
-                //
-                $('#brandMAT').empty();
-
-
-
-
-                for (var i = 0; i < object.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = object[i].brand;
-                    option.value = object[i].id;
-                    console.log(object[i].brand);
-
-                    document.getElementById('brandMAT').appendChild(option);
-                }
-                //
-                $('#typeMAT').empty();
-
-
-
-
-                for (var i = 0; i < object.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = object[i].type;
-                    option.value = object[i].id;
-                    console.log(object[i].type);
-
-                    document.getElementById('typeMAT').appendChild(option);
-                }
-                            });
+    //INITIALIZE REALTIME DATA FETCHING
+    if (realtime === 'on') {
+      update()
     }
+    //REALTIME TOGGLE
+    $('#realtime .btn').click(function () {
+      if ($(this).data('toggle') === 'on') {
+        realtime = 'on'
+      }
+      else {
+        realtime = 'off'
+      }
+      update()
+    })
+    /*
+     * END INTERACTIVE CHART
+     */
 
 
+    /*
+     * LINE CHART
+     * ----------
+     */
+    //LINE randomly generated data
 
-    </script>
+    var sin = [],
+        cos = []
+    for (var i = 0; i < 14; i += 0.5) {
+      sin.push([i, Math.sin(i)])
+      cos.push([i, Math.cos(i)])
+    }
+    var line_data1 = {
+      data : sin,
+      color: '#3c8dbc'
+    }
+    var line_data2 = {
+      data : cos,
+      color: '#00c0ef'
+    }
+    $.plot('#line-chart', [line_data1, line_data2], {
+      grid  : {
+        hoverable  : true,
+        borderColor: '#f3f3f3',
+        borderWidth: 1,
+        tickColor  : '#f3f3f3'
+      },
+      series: {
+        shadowSize: 0,
+        lines     : {
+          show: true
+        },
+        points    : {
+          show: true
+        }
+      },
+      lines : {
+        fill : false,
+        color: ['#3c8dbc', '#f56954']
+      },
+      yaxis : {
+        show: true
+      },
+      xaxis : {
+        show: true
+      }
+    })
+    //Initialize tooltip on hover
+    $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
+      position: 'absolute',
+      display : 'none',
+      opacity : 0.8
+    }).appendTo('body')
+    $('#line-chart').bind('plothover', function (event, pos, item) {
 
-{{-- store refresh --}}
+      if (item) {
+        var x = item.datapoint[0].toFixed(2),
+            y = item.datapoint[1].toFixed(2)
 
+        $('#line-chart-tooltip').html(item.series.label + ' of ' + x + ' = ' + y)
+          .css({
+            top : item.pageY + 5,
+            left: item.pageX + 5
+          })
+          .fadeIn(200)
+      } else {
+        $('#line-chart-tooltip').hide()
+      }
+
+    })
+    /* END LINE CHART */
+
+    /*
+     * FULL WIDTH STATIC AREA CHART
+     * -----------------
+     */
+    var areaData = [[2, 88.0], [3, 93.3], [4, 102.0], [5, 108.5], [6, 115.7], [7, 115.6],
+      [8, 124.6], [9, 130.3], [10, 134.3], [11, 141.4], [12, 146.5], [13, 151.7], [14, 159.9],
+      [15, 165.4], [16, 167.8], [17, 168.7], [18, 169.5], [19, 168.0]]
+    $.plot('#area-chart', [areaData], {
+      grid  : {
+        borderWidth: 0
+      },
+      series: {
+        shadowSize: 0, // Drawing is faster without shadows
+        color     : '#00c0ef',
+        lines : {
+          fill: true //Converts the line chart to area chart
+        },
+      },
+      yaxis : {
+        show: false
+      },
+      xaxis : {
+        show: false
+      }
+    })
+
+    /* END AREA CHART */
+
+    /*
+     * BAR CHART
+     * ---------
+     */
+
+    var bar_data = {
+      data : [[1,10], [2,8], [3,4], [4,13], [5,17], [6,9]],
+      bars: { show: true }
+    }
+    $.plot('#bar-chart', [bar_data], {
+      grid  : {
+        borderWidth: 1,
+        borderColor: '#f3f3f3',
+        tickColor  : '#f3f3f3'
+      },
+      series: {
+         bars: {
+          show: true, barWidth: 0.5, align: 'center',
+        },
+      },
+      colors: ['#3c8dbc'],
+      xaxis : {
+        ticks: [[1,'January'], [2,'February'], [3,'March'], [4,'April'], [5,'May'], [6,'June']]
+      }
+    })
+    /* END BAR CHART */
+
+    /*
+     * DONUT CHART
+     * -----------
+     */
+
+    var donutData = [
+      {
+        label: 'Series2',
+        data : 30,
+        color: '#3c8dbc'
+      },
+      {
+        label: 'Series3',
+        data : 20,
+        color: '#0073b7'
+      },
+      {
+        label: 'Series4',
+        data : 50,
+        color: '#00c0ef'
+      }
+    ]
+    $.plot('#donut-chart', donutData, {
+      series: {
+        pie: {
+          show       : true,
+          radius     : 1,
+          innerRadius: 0.5,
+          label      : {
+            show     : true,
+            radius   : 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: false
+      }
+    })
+    /*
+     * END DONUT CHART
+     */
+
+  })
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+      + label
+      + '<br>'
+      + Math.round(series.percent) + '%</div>'
+  }
+</script>
 </body>
 </html>
