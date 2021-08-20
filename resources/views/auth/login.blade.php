@@ -52,10 +52,11 @@
   </div>
   <!-- /.login-logo -->
   <div class="card">
+       @guest
     <div class="card-body login-card-body">
       <p class="login-box-msg">Login in to start your session</p>
 
-       @guest
+    
        <form method="POST" action="{{ route('login')}}" class="" autocomplete="off">
         @csrf
 
@@ -97,7 +98,7 @@
         </div>
       </form>
     
-  @endguest
+
 
 
       <p class="mb-1">
@@ -108,6 +109,24 @@
       </p> -->
     </div>
     <!-- /.login-card-body -->
+@else
+
+
+          <div class="card-body login-card-body">
+     
+     
+         
+          <div >
+            <a href="{{route('dashboard')}}" type="submit" class="btn btn-primary btn-block">Dashboard</a>
+          </div>
+    
+   
+
+          </div>
+    <!-- /.login-card-body -->
+
+
+      @endguest
   </div>
 </div>
 <!-- /.login-box -->
