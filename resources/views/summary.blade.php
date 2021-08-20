@@ -113,7 +113,7 @@
                   <tr>
                    
                     <th>Available on {{$date}}</th>
-                    <th>{{$sum + $sum3 + $sum4 + $sum5 - $sum1 -$sum2}} Tshs</th>
+                    <th>{{number_format($sum + $sum3 + $sum4 + $sum5 - $sum1 -$sum2)}} Tshs</th>
 
                   </tr>
              
