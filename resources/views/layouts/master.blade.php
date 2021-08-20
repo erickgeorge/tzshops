@@ -473,7 +473,16 @@
 
               <?php $shop = auth()->user()->shop_id; ?>
 
-           
+                  
+                   <li class="nav-item">
+                      <?php $spid = Crypt::encrypt($shop); ?> 
+                    <a href="{{route('shops',[$spid])}}" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Dashboard</p>
+                    </a>
+                  </li>
+
+
                   <li class="nav-item">
                       <?php $spid = Crypt::encrypt($shop); ?> 
                     <a href="{{route('allissuesgroup',[$spid])}}" class="nav-link">
