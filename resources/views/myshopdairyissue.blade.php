@@ -60,7 +60,7 @@
         <TR>
             <TD><INPUT type="checkbox" name="chk"/></TD>
             <TD> <select style="color: black;" required class="custom-select" name="keeper[]" >
-                <option value="" selected>Choose...</option>
+                <option value="" selected>Used by..</option>
                 @foreach($shopkeeper as $kp)
                 <option value="{{$kp->id}}">{{$kp->name}}</option>
                 @endforeach

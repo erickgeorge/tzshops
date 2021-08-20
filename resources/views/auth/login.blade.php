@@ -120,8 +120,7 @@
             <a href="{{route('dashboard')}}" type="submit" class="btn btn-primary btn-block">Dashboard</a>
           </div>
     
-   
-
+  
           </div>
     <!-- /.login-card-body -->
 

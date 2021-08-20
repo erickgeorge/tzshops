@@ -51,27 +51,28 @@
                         <tr>
                         
                             <td>{{$shops->name}}</td>
+
                           <td> <a style="color: green;" data-toggle="modal" data-target="#modal-sm"  title="Edit Name"><i
                                                     class="fas fa-edit"></i></a> </td>
 
-   <!-- /.modal-dialog -->            
+          
                             <div class="modal fade" id="modal-sm">
                               <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h4 class="modal-title">Edit used issue</h4>
+                                    <h4 class="modal-title">Edit Shop Name</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
-                                  <form method="POST">
+                                   <?php $shopid = Crypt::encrypt($shops->id); ?> 
+                                  <form method="POST" action="{{route('editshop',[$shopid])}}">
+                                    @csrf
                                   <div class="modal-body">
                                  
-                                     <input required="" class="form-control form-control-lg" type="text" placeholder="Used  issue">
+                                     <input required="" class="form-control form-control-lg" type="text" placeholder="Shop Name" value="{{$shops->name}}" name="shop">
                                       <br>
-                                     <input required="" class="form-control form-control-lg" type="number" placeholder="Price" min="0">
-                                      <br>
- 
+                                    
                                   </div>
                                   <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -84,7 +85,7 @@
                               <!-- /.modal-dialog -->
                             </div>
 
- <!-- /.modal-dialog -->
+
               
                      </tr>
                        </tbody>

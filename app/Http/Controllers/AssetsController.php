@@ -6,47 +6,12 @@ use Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\house;
-use App\hall;
-use App\Notification;
-use App\user;
 
-use App\zone;
-use App\cleaningarea;
-use App\NonBuildingAsset;
-
-use App\Room;
-use App\Block;
-use App\Location;
-use App\company;
-use App\assetsland;
-use App\assetsbuilding;
-use App\assetscomputerequipment;
-use App\assetsequipment;
-use App\assetsfurniture;
-use App\assetsintangible;
-use App\assetsmotorvehicle;
-use App\assetsplantandmachinery;
-use App\assetsworkinprogress;
-use App\assetsassesbuilding;
-use App\assetsassescomputerequipment;
-use App\assetsassesequipment;
-use App\assetsassesfurniture;
-use App\assetsassesintangible;
-
-use App\assetsassesmotorvehicle;
-use App\assetsassesplantandmachinery;
 use Illuminate\Support\Carbon;
 
 use PDF;
 
-use App\landassessmentform;
-use App\iowzone;
-use App\companywitharea;
-
-use App\Directorate;
-use App\tendernumber;
-
+use App\user;
 
 use App\usse;
 use App\shop;
@@ -324,6 +289,7 @@ class AssetsController extends Controller
          return view('myshopuseslist', [
              'usses' => usse::where('shop_id',$ids)->where('month',$date)->get(), 
              'idz'=>$ids,
+              'shopkeeper' => user::where('shop_id',$ids)->get(),  
 
           ]);
 
@@ -669,6 +635,36 @@ class AssetsController extends Controller
              'date' => $date,
           ]);
          }
+
+
+
+             public function editshop(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $sp = shop::where('id',$ids)->first();
+          $sp->name = $request['shop'];
+          $sp->save();   
+
+            return redirect()->back()->with(['message' => 'Shop Edited']);
+
+       }
+
+             public function editusses(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $us = usse::where('id',$ids)->first();
+          $us->issue = $request['issue'];
+          $us->price = $request['price'];
+          $us->date = $request['date'];
+          $us->keeper = $request['keeper'];
+          $us->month = date('F Y', strtotime($us->date));
+          $us->updated = auth()->user()->id;
+          $us->save(); 
+
+            return redirect()->back()->with(['message' => 'Used Issue Edited']);
+
+       }
+
 
 
 }

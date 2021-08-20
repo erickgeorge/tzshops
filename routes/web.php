@@ -53,3 +53,6 @@ Route::post('updateamounts/{id}', 'AssetsController@updatemyamount')->name('upda
 Route::post('updatevouchers{id}', 'AssetsController@updatevoucherass')->name('updatevoucheradd')->middleware('auth');
 
 
+Route::post('editshop{id}', 'AssetsController@editshop')->name('editshop')->middleware('auth');
+Route::post('editusses{id}', 'AssetsController@editusses')->name('editusses')->middleware('auth');
+

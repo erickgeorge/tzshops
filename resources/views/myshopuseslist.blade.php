@@ -64,28 +64,40 @@
                               <td align="right">{{ number_format($house->price) }} Tshs </td>
                             
                               <td>{{$house['up']->name}}</td>
-                          <td> <a style="color: green;" data-toggle="modal" data-target="#modal-sm"  title="Edit issue"><i
+                          <td> <a style="color: green;" data-toggle="modal" data-target="#modal-sm{{$i}}"  title="Edit issue"><i
                                                     class="fas fa-edit"></i></a> </td>
-
-                        
-
-
+                    
    <!-- /.modal-dialog -->            
-                            <div class="modal fade" id="modal-sm">
+                            <div class="modal fade" id="modal-sm{{$i}}">
                               <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h4 class="modal-title">Edit used issue</h4>
+                                    <h4 class="modal-title">Edit Used Issue</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
-                                  <form method="POST">
+                                  <?php $isssueid = Crypt::encrypt($house->id); ?> 
+                                  <form method="POST" action="{{route('editusses',[$isssueid])}}">
+                                    @csrf
                                   <div class="modal-body">
                                  
-                                     <input required="" class="form-control form-control-lg" type="text" placeholder="Used  issue">
+                                     <input required="" class="form-control form-control-lg" type="date" name="date" value="{{$house->date}}">
                                       <br>
-                                     <input required="" class="form-control form-control-lg" type="number" placeholder="Price" min="0">
+                                     <input required="" class="form-control form-control-lg" type="text" placeholder="Used  issue" name="issue" value="{{ $house->issue}}">
+                                      <br>
+
+                                      <select style="color: black;" required class="custom-select" name="keeper" >
+                                      <option value="{{ $house->keeper}}" selected>{{ $house['us']->name}}</option>
+                                        @foreach($shopkeeper as $kp)
+                                        <option value="{{$kp->id}}">{{$kp->name}}</option>
+                                        @endforeach
+                                      </select> 
+
+                                    
+                                      <br>
+                                      <br>
+                                     <input required="" class="form-control form-control-lg" type="number" placeholder="Price" min="0" value="{{$house->price}}" name="price">
                                       <br>
  
                                   </div>
