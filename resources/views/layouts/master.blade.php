@@ -117,18 +117,17 @@
 @if(auth()->user()->type != 'shopkeeper')
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
        
-          <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
-           @if(!empty($shop))
+          <?php $shops = shop::where('user_id',auth()->user()->id)->get(); ?>
+           @if(count($shops) == 0)
             <li class="nav-item">
               
               <a href="{{route('shopsadmin')}}" class="nav-link">
                 <i class="fas fa-circle nav-icon"></i>
-                <p>Shop</p>
+                <p>Shop </p>
               </a>
             </li>
-
-
- @else
+         
+            @else
  
            <?php $shop = shop::where('user_id',auth()->user()->id)->get(); ?>
              @if(count($shop) != 1)
@@ -136,7 +135,7 @@
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-circle"></i>
                       <p>
-                        Shops
+                        Shops 
                         <i class="right fas fa-angle-left"></i>
                       </p>
                     </a>
@@ -461,12 +460,14 @@
 
              @endif
                </ul>
-             @endif
+       @endif
 
     @endif
 
 
-       @if(auth()->user()->type == 'shopkeeper')
+      
+
+     @if(auth()->user()->type == 'shopkeeper')
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
        
 
