@@ -51,8 +51,22 @@ Route::get('update_transaction/{id}','AssetsController@updatetransaction')->name
 Route::get('update_voucher/{id}','AssetsController@updatevoucher')->name('updatevoucher')->middleware('auth');
 Route::post('updateamounts/{id}', 'AssetsController@updatemyamount')->name('updateammount')->middleware('auth');
 Route::post('updatevouchers{id}', 'AssetsController@updatevoucherass')->name('updatevoucheradd')->middleware('auth');
+Route::get('users','AssetsController@users')->name('users')->middleware('auth');
 
 
-Route::post('editshop{id}', 'AssetsController@editshop')->name('editshop')->middleware('auth');
-Route::post('editusses{id}', 'AssetsController@editusses')->name('editusses')->middleware('auth');
+Route::post('editshop/{id}', 'AssetsController@editshop')->name('editshop')->middleware('auth');
+Route::post('editusses/{id}', 'AssetsController@editusses')->name('editusses')->middleware('auth');
+Route::post('editboughts/{id}', 'AssetsController@editboughts')->name('editbought')->middleware('auth');
+Route::post('editvoucher/{id}', 'AssetsController@editvoucher')->name('editvoucher')->middleware('auth');
+Route::post('edittransaction/{id}', 'AssetsController@edittransactions')->name('edittransaction')->middleware('auth');
+Route::post('editshopkeeper/{id}', 'AssetsController@editshopkeeper')->name('editshopkeeper')->middleware('auth');
+Route::post('editammount{id}', 'AssetsController@editammount')->name('editammount')->middleware('auth');
+Route::post('editsales/{id}', 'AssetsController@editsales')->name('editsales')->middleware('auth');
+Route::post('deletesused/{id}', 'AssetsController@deleteused')->name('deleteused')->middleware('auth');
+Route::post('deletebought/{id}', 'AssetsController@deletebought')->name('deletebought')->middleware('auth');
+Route::post('deletekeeper/{id}', 'AssetsController@deletekeeper')->name('deletekeeper')->middleware('auth');
+Route::post('deletesales/{id}', 'AssetsController@deletesales')->name('deletesales')->middleware('auth');
+Route::post('deleteammount/{id}', 'AssetsController@deleteammount')->name('deleteammount')->middleware('auth');
+Route::post('deletevoucher/{id}', 'AssetsController@deletevoucher')->name('deletevoucher')->middleware('auth');
+Route::post('deletetransaction/{id}', 'AssetsController@deletetransaction')->name('deletetransaction')->middleware('auth');
 

@@ -71,11 +71,6 @@ class AssetsController extends Controller
          public function postshopkeepers(Request $request ,$id)
     {
          
-            $request->validate([
-            'name' => 'required|unique:users',
-        ]);
-
-
 
          $ids = Crypt::decrypt($id);
 
@@ -83,6 +78,10 @@ class AssetsController extends Controller
             $prices = $request['price'];
            
             foreach($name as $a => $b){
+
+       $checkemptyname = user::where('name', $name[$a])->first();
+
+       if (empty($checkemptyname)) {
   
         $user = new user();
         $user->name = $name[$a];
@@ -93,6 +92,11 @@ class AssetsController extends Controller
         $user->save(); 
 
             }
+         else {
+
+        return redirect()->back()->withErrors(['message' => 'Name already taken']);
+       } 
+     }
 
             return redirect()->back()->with(['message' => 'New shopkeeper updated']);
 
@@ -286,7 +290,7 @@ class AssetsController extends Controller
       public function allissueslist($id ,$date){
          $ids = Crypt::decrypt($id);
  
-         return view('myshopuseslist', [
+         return view('useslist', [
              'usses' => usse::where('shop_id',$ids)->where('month',$date)->get(), 
              'idz'=>$ids,
               'shopkeeper' => user::where('shop_id',$ids)->get(),  
@@ -302,7 +306,7 @@ class AssetsController extends Controller
  
          return view('shopkeepers', [
 
-             'shopkeeper' => user::where('shop_id',$ids)->get(), 
+             'shopkeeper' => user::where('shop_id',$ids)->where('status',1)->get(), 
              'idz'=>$ids,
 
           ]);
@@ -390,7 +394,7 @@ class AssetsController extends Controller
              public function biughtissueslist($id , $date){
        
           $ids = Crypt::decrypt($id);
-         return view('myshopboughtissue', [
+         return view('boughtissue', [
              'bought' => bought::where('shop_id',$ids)->where('month',$date)->get(),
              'idz'=>$ids,
           ]);
@@ -401,7 +405,7 @@ class AssetsController extends Controller
             public function alltransactions($id , $date){
        
                  $ids = Crypt::decrypt($id);
-         return view('myshoptransactions', [
+         return view('transactions', [
             
 
              'transaction' => transaction::where('shop_id',$ids)->where('month',$date)->get(), 
@@ -434,7 +438,7 @@ class AssetsController extends Controller
                 public function vouchers($id ,$date){
             $ids = Crypt::decrypt($id);
 
-         return view('myshopvoucher', [
+         return view('voucher', [
         
              'voucher' => voucher::where('shop_id',$ids)->where('month',$date)->get(),
                'idz'=>$ids,
@@ -478,7 +482,7 @@ class AssetsController extends Controller
 
         public function salesissueslist($id , $date){
          $ids = Crypt::decrypt($id);
-         return view('myshopsalesissue', [
+         return view('salesissue', [
            
              'sales' => sale::where('shop_id',$ids)->where('month',$date)->get(),
               'idz'=>$ids,
@@ -491,7 +495,7 @@ class AssetsController extends Controller
           
            public function ammountadded($id , $date){
          $ids = Crypt::decrypt($id);
-         return view('myshopamountadded', [
+         return view('amountadded', [
           
              'ammounts' => ammountadded::where('shop_id',$ids)->where('month',$date)->get(),
               'idz' => $ids,
@@ -637,6 +641,16 @@ class AssetsController extends Controller
          }
 
 
+       public function users(){
+             $user = user::where('status',1)->get();
+         return view('users', [
+          
+         'users' => $user,
+          ]);
+
+         }
+
+
 
              public function editshop(Request $request ,$id)
     {
@@ -666,5 +680,175 @@ class AssetsController extends Controller
        }
 
 
+         public function editboughts(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $bt = bought::where('id',$ids)->first();
+          $bt->issue = $request['issue'];
+          $bt->price = $request['price'];
+          $bt->date = $request['date'];
+          $bt->month = date('F Y', strtotime($bt->date));
+          $bt->updated = auth()->user()->id;
+          $bt->save(); 
+
+            return redirect()->back()->with(['message' => 'Bought Issue Edited']);
+
+       }
+
+
+                public function editvoucher(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $vc = voucher::where('id',$ids)->first();
+          $vc->value = $request['value'];
+          $vc->price = $request['price'];
+          $vc->date = $request['date'];
+          $vc->month = date('F Y', strtotime($vc->date));
+          $vc->updated = auth()->user()->id;
+          $vc->save(); 
+
+            return redirect()->back()->with(['message' => 'Voucher Edited']);
+
+       }
+
+                public function edittransactions(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $tra = transaction::where('id',$ids)->first();
+          $tra->price = $request['price'];
+          $tra->date = $request['dates'];
+          $tra->month = date('F Y', strtotime($tra->date));
+          $tra->updated = auth()->user()->id;
+          $tra->save(); 
+
+            return redirect()->back()->with(['message' => 'Transaction Edited']);
+
+       }
+
+
+
+           public function editammount(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $am = ammountadded::where('id',$ids)->first();
+          $am->price = $request['price'];
+          $am->date = $request['date'];
+          $am->month = date('F Y', strtotime($am->date));
+          $am->updated = auth()->user()->id;
+          $am->save(); 
+
+            return redirect()->back()->with(['message' => 'Amount Edited']);
+
+       }
+
+
+
+         public function editsales(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $sl = sale::where('id',$ids)->first();
+          $sl->price = $request['price'];
+          $sl->date = $request['date'];
+          $sl->month = date('F Y', strtotime($sl->date));
+          $sl->updated = auth()->user()->id;
+          $sl->save(); 
+
+            return redirect()->back()->with(['message' => 'Sales Issue Edited']);
+
+       }
+
+
+
+             public function editshopkeeper(Request $request ,$id)
+    {
+          $ids = Crypt::decrypt($id);
+          $kp = user::where('id',$ids)->first();
+          $kp->name = $request['name'];
+          $kp->price = $request['price'];
+          $kp->save(); 
+
+            return redirect()->back()->with(['message' => 'Shop Keeper Edited']);
+
+       }
+
+     
+       public function deleteused($id)
+    {
+          
+          $us = usse::where('id',$id)->first();
+          $us->delete(); 
+
+        return redirect()->back()->with(['message' => 'Used Issue Deleted']);
+
+       }
+
+
+           public function deletebought($id)
+    {
+          
+          $bt = bought::where('id',$id)->first();
+          $bt->delete(); 
+
+            return redirect()->back()->with(['message' => 'Bought Issue Deleted']);
+
+       }
+
+
+       public function deletekeeper($id)
+    {
+          
+          $us = user::where('id',$id)->first();
+          $us->status = 2;
+          $us->save(); 
+
+            return redirect()->back()->with(['message' => 'User Deleted']);
+
+       }
+
+
+        public function deletesales($id)
+    {
+          
+          $sl = sale::where('id',$id)->first();
+          $sl->delete(); 
+
+            return redirect()->back()->with(['message' => 'Sale Deleted']);
+
+       }
+
+
+
+        public function deleteammount($id)
+    {
+          
+          $sl = ammountadded::where('id',$id)->first();
+          $sl->delete(); 
+
+            return redirect()->back()->with(['message' => 'Amount Deleted']);
+
+       }
+
+
+               public function deletevoucher($id)
+    {
+          
+          $vc = voucher::where('id',$id)->first();
+          $vc->delete(); 
+
+            return redirect()->back()->with(['message' => 'Voucher Deleted']);
+
+       }
+
+    public function deletetransaction($id)
+    {
+          
+          $tra = transaction::where('id',$id)->first();
+          $tra->delete(); 
+
+            return redirect()->back()->with(['message' => 'Transaction Deleted']);
+
+       }
+
+       
 
 }

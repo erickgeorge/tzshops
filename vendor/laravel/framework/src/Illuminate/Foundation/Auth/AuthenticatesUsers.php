@@ -20,10 +20,7 @@ trait AuthenticatesUsers
         return view('auth.login');
     }
 
-        public function housesview()
-    {
-        return view('houses');
-    }
+
 
     /**
      * Handle a login request to the application.

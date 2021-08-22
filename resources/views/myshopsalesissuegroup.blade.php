@@ -38,7 +38,7 @@
             
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+               <table class="table table-responsive  table-striped" id="myTable" >
                   <thead>
                   <tr>
                     <th>S/N</th>
@@ -64,7 +64,7 @@
                      </tr>
                        </tbody>
 
-                        <tr><td colspan="2" align="center">Total</td><td align="right">{{$summ}} Tshs</td></tr>
+                        <tr><td colspan="2" align="center">Total</td><td align="right">{{number_format($summ)}} Tshs</td></tr>
                   
            
                 </table>

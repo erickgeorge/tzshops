@@ -37,7 +37,7 @@
             
               <!-- /.card-header -->
               <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
+                 <table class="table table-responsive  table-striped" id="myTable" >
                   <thead>
                   <tr>
                     <th>S/N</th>
@@ -57,27 +57,36 @@
                             <td>{{ $shop->name}}</td>
                             <td align="right">{{ number_format($shop->price) }} Tshs </td>
 
-                            <td> <a style="color: green;" data-toggle="modal" data-target="#modal-sm"  title="Edit issue"><i class="fas fa-edit"></i></a> </td>
+                            <td> <div class="row"><a style="color: green;" data-toggle="modal" data-target="#modal-sm{{$i}}"  title="Edit Shopkeeper"><i class="fas fa-edit"></i></a> &nbsp;
+                             <form method="POST"
+                                          onsubmit="return confirm('Are you sure you want to delete this?')" action="{{ route('deletekeeper', [$shop->id]) }}" >
+                                        {{csrf_field()}}
+                                        <button type="submit"
+                                                title="Delete" style="color: red;" ><i
+                                                    class="fas fa-trash-alt"></i></button>
+                                    </form></div></td>
 
-                        
+
 
 
    <!-- /.modal-dialog -->            
-                            <div class="modal fade" id="modal-sm">
+                            <div class="modal fade" id="modal-sm{{$i}}">
                               <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h4 class="modal-title">Edit used issue</h4>
+                                    <h4 class="modal-title">Edit Shopkeeper</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
-                                  <form method="POST">
+                                 <?php $shopid = Crypt::encrypt($shop->id); ?> 
+                                  <form method="POST" action="{{route('editshopkeeper',[$shopid])}}">
+                                    @csrf
                                   <div class="modal-body">
                                  
-                                     <input required="" class="form-control form-control-lg" type="text" placeholder="Used  issue">
+                                     <input required="" class="form-control form-control-lg" type="text" placeholder="Name" value="{{ $shop->name}}" name="name">
                                       <br>
-                                     <input required="" class="form-control form-control-lg" type="number" placeholder="Price" min="0">
+                                     <input required="" class="form-control form-control-lg" type="number" placeholder="Price" min="0"  value="{{ $shop->price}}" name="price" >
                                       <br>
  
                                   </div>

@@ -37,7 +37,7 @@
             
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                  <table class="table table-responsive  table-striped" id="myTable" >
                   <thead>
                   <tr>
                     <th>S/N</th>
