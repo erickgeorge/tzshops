@@ -381,6 +381,7 @@ class AssetsController extends Controller
         $bought = bought::select(DB::raw('month,sum(price) as price'))
                      ->where('shop_id',$ids)
                      ->groupBy('month')
+                     ->orderBy('created_at','Asc')
                      ->get(); 
 
         $ids = Crypt::decrypt($id);
@@ -424,6 +425,7 @@ class AssetsController extends Controller
                   $transaction = transaction::select(DB::raw('month,sum(price) as price'))
                      ->where('shop_id',$ids)
                      ->groupBy('month')
+                     ->orderBy('created_at','Asc')
                      ->get(); 
 
           return view('myshoptransactionsgroup', [
@@ -453,6 +455,7 @@ class AssetsController extends Controller
             $voucher = voucher::select(DB::raw('month,sum(price) as price,sum(value) as value'))
                      ->where('shop_id',$ids)
                      ->groupBy('month')
+                     ->orderBy('created_at','Asc')
                      ->get(); 
          return view('myshopvouchergroup', [
         
@@ -469,6 +472,7 @@ class AssetsController extends Controller
          $sales = sale::select(DB::raw('month,sum(price) as price'))
                      ->where('shop_id',$ids)
                      ->groupBy('month')
+                     ->orderBy('created_at','Asc')
                      ->get(); 
          return view('myshopsalesissuegroup', [
            
@@ -510,6 +514,7 @@ class AssetsController extends Controller
          $ammount = ammountadded::select(DB::raw('month,sum(price) as price'))
                      ->where('shop_id',$ids)
                      ->groupBy('month')
+                     ->orderBy('created_at','Asc')
                      ->get(); 
 
          return view('myshopamountaddedgroup', [
@@ -601,6 +606,7 @@ class AssetsController extends Controller
           $summary = summary::select(DB::raw('month'))
                      ->groupBy('month')
                      ->where('shop_id',$ids)
+                     ->orderBy('created_at','Asc')
                      ->get(); 
 
          return view('summarygroup', [
